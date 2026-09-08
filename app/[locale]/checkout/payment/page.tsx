@@ -18,7 +18,9 @@ import {
   Tag,
   AlertCircle,
   FileText,
-  Printer
+  Printer,
+  MessageCircle,
+  Award
 } from 'lucide-react';
 import Image from 'next/image';
 import { TravelVoucherModal } from '@/components/booking/TravelVoucherModal';
@@ -499,6 +501,44 @@ export default function CheckoutPaymentPage() {
                       </>
                     )}
                   </button>
+
+                  {/* WhatsApp VIP Concierge Assist */}
+                  <div className="pt-2 text-center space-y-2">
+                    <p className="text-[11px] text-zinc-400">
+                      ¿Tienes alguna duda o prefieres asistencia personalizada antes de pagar?
+                    </p>
+                    <a
+                      href={`https://wa.me/593994048458?text=${encodeURIComponent(
+                        `Hola, estoy en el checkout del tour "${tourTitle}" (Ref: ${ref || 'Web'}). Deseo asistencia personalizada para completar mi reserva.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border border-emerald-500/40 bg-emerald-950/40 hover:bg-emerald-900/60 text-emerald-300 font-bold text-xs transition-all hover:scale-[1.01] active:scale-95 shadow-sm"
+                    >
+                      <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <span>Hablar con un Diseñador de Viajes por WhatsApp (24/7)</span>
+                    </a>
+                  </div>
+
+                  {/* Trust Signals */}
+                  <div className="grid grid-cols-2 gap-2.5 pt-4 border-t border-zinc-800/80 text-[10px] text-zinc-400">
+                    <div className="flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Pago 100% Encriptado por Stripe</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Agencia Oficial RUC 1711992808001</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>TripAdvisor Travelers' Choice 2026</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Garantía y flexibilidad en fechas</span>
+                    </div>
+                  </div>
                 </div>
               )}
 
