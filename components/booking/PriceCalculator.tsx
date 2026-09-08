@@ -11,6 +11,7 @@ interface PriceCalculatorProps {
   tours: Tour[];
   pricing: PricingDetails;
   date: string | null;
+  contactInfo?: { name: string; email: string; phone?: string; notes?: string };
   onContinue: () => void;
   canContinue: boolean;
   step: number;
@@ -21,6 +22,7 @@ export function PriceCalculator({
   tours,
   pricing,
   date,
+  contactInfo,
   onContinue,
   canContinue,
   step,
@@ -131,12 +133,30 @@ export function PriceCalculator({
         </div>
       </div>
 
+      {!canContinue && (
+        <div className="mb-4 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/25 text-xs space-y-1.5 animate-in fade-in">
+          <p className="font-bold text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
+            <Info className="w-4 h-4 text-amber-500 shrink-0" /> Pasos pendientes para reservar:
+          </p>
+          <ul className="text-zinc-600 dark:text-zinc-300 text-[11px] space-y-1 ml-5 list-disc">
+            {!date && <li><strong>Paso 2:</strong> Selecciona tu fecha de viaje</li>}
+            {(!contactInfo?.name?.trim() || !contactInfo?.email?.trim()) && (
+              <li><strong>Paso 4:</strong> Ingresa tu nombre y correo</li>
+            )}
+          </ul>
+        </div>
+      )}
+
       <button
+        type="button"
         onClick={onContinue}
-        disabled={!canContinue}
-        className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-[1.02] active:scale-95 group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 cursor-pointer border-none"
+        className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-95 group cursor-pointer border-none ${
+          canContinue
+            ? 'bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white shadow-emerald-900/30'
+            : 'bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-amber-500/40 shadow-zinc-950/40'
+        }`}
       >
-        <span>Proceder al Pago Seguro</span>
+        <span>{canContinue ? 'Proceder al Pago Seguro' : 'Completar Datos Requeridos'}</span>
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </button>
 

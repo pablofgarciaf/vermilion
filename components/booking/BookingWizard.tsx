@@ -138,7 +138,29 @@ export function BookingWizard() {
   };
 
   const handleCheckout = () => {
-    if (selectedTours.length === 0) return;
+    if (selectedTours.length === 0) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (!date) {
+      if (dateRef.current) {
+        dateRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+    if (!contactInfo.name.trim() || !contactInfo.email.trim()) {
+      if (contactRef.current) {
+        contactRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => {
+          const inputToFocus = !contactInfo.name.trim() 
+            ? document.getElementById('booking-name') 
+            : document.getElementById('booking-email');
+          if (inputToFocus) inputToFocus.focus();
+        }, 300);
+      }
+      return;
+    }
+
     saveStoredUserProfile(contactInfo);
     const tourTitleStr = selectedTours.map(t => typeof t.title === 'string' ? t.title : (t.title?.es || t.title?.en || 'Tour')).join(' + ');
     const queryParams = new URLSearchParams({
@@ -154,13 +176,13 @@ export function BookingWizard() {
     window.location.href = `/${locale}/checkout/payment?${queryParams.toString()}`;
   };
 
-  const isFormComplete = () => selectedTours.length > 0 && date !== '' && adults > 0 && contactInfo.name !== '' && contactInfo.email !== '';
+  const isFormComplete = () => selectedTours.length > 0 && date !== '' && adults > 0 && contactInfo.name.trim() !== '' && contactInfo.email.trim() !== '';
 
   type CTAState = { label: string; ref: React.RefObject<HTMLDivElement> | null; ready: boolean };
   const getMobileCTA = (): CTAState => {
     if (selectedTours.length === 0) return { label: 'Selecciona un tour arriba', ref: null, ready: false };
-    if (!date) return { label: 'Falta elegir tu fecha de viaje', ref: dateRef, ready: false };
-    if (!contactInfo.name || !contactInfo.email) return { label: 'Completa tus datos de contacto', ref: contactRef, ready: false };
+    if (!date) return { label: 'Paso 2: Elige tu fecha de viaje', ref: dateRef, ready: false };
+    if (!contactInfo.name.trim() || !contactInfo.email.trim()) return { label: 'Paso 4: Completa tus datos de contacto', ref: contactRef, ready: false };
     return { label: `Proceder al Pago - $${pricing.total.toLocaleString('en-US')} USD`, ref: null, ready: true };
   };
   const mobileCTA = getMobileCTA();
@@ -386,7 +408,7 @@ export function BookingWizard() {
         </div>
 
         <div className="lg:col-span-4 sticky top-24 self-start">
-          <PriceCalculator tours={selectedTours} pricing={pricing} date={date} step={3} onContinue={handleCheckout} canContinue={isFormComplete() && !isProcessing} affiliateRef={affiliateRef} />
+          <PriceCalculator tours={selectedTours} pricing={pricing} date={date} contactInfo={contactInfo} step={3} onContinue={handleCheckout} canContinue={isFormComplete() && !isProcessing} affiliateRef={affiliateRef} />
         </div>
       </div>
 

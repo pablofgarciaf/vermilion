@@ -453,10 +453,18 @@ export default function CheckoutPaymentPage() {
                     <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs space-y-3 animate-fade-in">
                       <div className="flex items-start gap-2.5">
                         <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-                        <div className="space-y-1">
-                          <p className="font-bold text-amber-300">Pasarela Stripe Pendiente en Servidor</p>
+                        <div className="space-y-1.5">
+                          <p className="font-bold text-amber-300">Configuración de Stripe Pendiente en el Servidor (Vercel)</p>
                           <p className="text-[11px] text-zinc-300 leading-relaxed">
-                            {stripeNotice} Para recibir cobros reales, añade tu <code className="bg-black/50 text-amber-300 px-1 py-0.5 rounded">STRIPE_SECRET_KEY=sk_test_...</code> en el archivo <code className="bg-black/50 text-amber-300 px-1 py-0.5 rounded">.env</code>.
+                            Para activar los cobros con tarjeta en vivo, agrega tu clave en el panel de Vercel:
+                          </p>
+                          <div className="bg-black/60 p-2.5 rounded-xl text-[11px] font-mono text-amber-200 border border-amber-500/20 space-y-0.5">
+                            <p><strong>Paso en Vercel:</strong> Settings &rarr; Environment Variables</p>
+                            <p><strong>Key:</strong> STRIPE_SECRET_KEY</p>
+                            <p><strong>Value:</strong> sk_test_... (o sk_live_...)</p>
+                          </div>
+                          <p className="text-[10px] text-zinc-400">
+                            Una vez guardada en Vercel, el botón abrirá la pasarela segura de Stripe al instante.
                           </p>
                         </div>
                       </div>
