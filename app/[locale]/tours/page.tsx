@@ -147,16 +147,16 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
 
             {/* Quick anchors - MOVED DOWN */}
             <div className="flex flex-wrap justify-center gap-3 pt-8">
-              <a href="#galapagos" className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+              <a href="#galapagos" aria-label={isEs ? 'Explorar expediciones en Islas Galápagos' : 'Explore Galapagos Islands expeditions'} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
                 🐢 {isEs ? 'Islas Galápagos (3)' : 'Galapagos Islands (3)'}
               </a>
-              <a href="#continental" className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+              <a href="#continental" aria-label={isEs ? 'Explorar tours en Ecuador Continental' : 'Explore Mainland Ecuador tours'} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
                 🏔️ {isEs ? 'Ecuador Continental (4)' : 'Mainland Ecuador (4)'}
               </a>
-              <a href="#combinados" className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+              <a href="#combinados" aria-label={isEs ? 'Explorar viajes combinados' : 'Explore Combined journeys'} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
                 ✨ {isEs ? 'Viajes Combinados (2)' : 'Combined Journeys (2)'}
               </a>
-              <a href="#diarios" className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+              <a href="#diarios" aria-label={isEs ? 'Explorar excursiones full day' : 'Explore Full-day excursions'} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
                 ☀️ {isEs ? 'Excursiones Full Day' : 'Full-Day Tours'}
               </a>
             </div>
@@ -180,7 +180,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 {isEs ? 'Expediciones en Galápagos' : 'Galapagos Expeditions'}
               </h2>
             </div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1 max-w-xl">
+            <p className="text-sm text-zinc-700 dark:text-zinc-300 mt-1 max-w-xl">
                 {isEs
                   ? 'Hoteles boutique frente al mar, navegación entre islas deshabitadas y encuentros con fauna única en el planeta.'
                   : 'Boutique oceanfront stays, uninhabited island yacht hops, and intimate wildlife encounters.'}
@@ -230,7 +230,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       <h3 className="font-serif text-xl font-bold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
                         {title}
                       </h3>
-                      <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-3 mt-2 leading-relaxed">
+                      <p className="text-xs text-zinc-700 dark:text-zinc-300 line-clamp-3 mt-2 leading-relaxed">
                         {desc}
                       </p>
                     </div>
@@ -238,12 +238,14 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                     <div className="pt-4 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between gap-3">
                       <Link
                         href={`/${locale}/tours/${tour.id}`}
+                        aria-label={`${isEs ? 'Ver itinerario de' : 'View itinerary for'} ${title}`}
                         className="flex-1 py-3 px-4 rounded-2xl border-2 border-emerald-500/30 bg-transparent text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:border-emerald-500 font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md text-center flex items-center justify-center group"
                       >
                         <span className="group-hover:scale-105 transition-transform">{isEs ? 'Ver Itinerario' : 'View Itinerary'}</span>
                       </Link>
                       <Link
                         href={`/${locale}/booking?tourId=${tour.id}`}
+                        aria-label={`${isEs ? 'Reservar tour' : 'Book tour'} ${title}`}
                         className="flex-1 py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
                         {isEs ? 'Reservar' : 'Book Now'}
@@ -267,7 +269,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 {isEs ? 'Ecuador Continental' : 'Mainland Ecuador'}
               </h2>
             </div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1 max-w-xl">
+            <p className="text-sm text-zinc-700 dark:text-zinc-300 mt-1 max-w-xl">
                 {isEs
                   ? 'Avenida de los Volcanes, lagunas de cráter, haciendas coloniales y la exuberante selva del Amazonas.'
                   : 'Avenue of Volcanoes, crater lakes, colonial haciendas, and dense Amazon rainforest.'}
@@ -308,19 +310,21 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         {title}
                       </h3>
                       <p className="font-serif text-xl font-bold text-emerald-700 dark:text-emerald-400 mt-2">
-                        ${price.toLocaleString()} <span className="text-xs font-normal text-zinc-500 dark:text-zinc-400">USD</span>
+                        ${price.toLocaleString()} <span className="text-xs font-normal text-zinc-600 dark:text-zinc-300">USD</span>
                       </p>
                     </div>
 
                     <div className="pt-3 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between gap-2">
                       <Link
                         href={`/${locale}/tours/${tour.id}`}
+                        aria-label={`${isEs ? 'Ver detalles de' : 'View details for'} ${title}`}
                         className="flex-1 py-2.5 px-3 rounded-xl border-2 border-emerald-500/30 bg-transparent text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:border-emerald-500 font-bold text-[11px] uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md text-center flex items-center justify-center group"
                       >
                         <span className="group-hover:scale-105 transition-transform">{isEs ? 'Detalles' : 'Details'}</span>
                       </Link>
                       <Link
                         href={`/${locale}/booking?tourId=${tour.id}`}
+                        aria-label={`${isEs ? 'Reservar tour' : 'Book tour'} ${title}`}
                         className="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-[11px] uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
                         {isEs ? 'Reservar' : 'Book'}
@@ -344,7 +348,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 {isEs ? 'Viajes Combinados' : 'Combined Journeys'}
               </h2>
             </div>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1 max-w-xl">
+            <p className="text-sm text-zinc-700 dark:text-zinc-300 mt-1 max-w-xl">
                 {isEs
                   ? 'Lo mejor de dos mundos en un solo viaje: la majestuosidad de los Andes y la magia de las Islas Galápagos.'
                   : 'The best of both worlds in a single seamless itinerary: the Andean highlands and the Galápagos Islands.'}
@@ -393,7 +397,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       <h3 className="font-serif text-2xl font-bold text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {title}
                       </h3>
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-3 leading-relaxed line-clamp-3">
+                      <p className="text-sm text-zinc-700 dark:text-zinc-300 mt-3 leading-relaxed line-clamp-3">
                         {desc}
                       </p>
                     </div>
@@ -401,12 +405,14 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                     <div className="pt-6 border-t border-zinc-200 dark:border-white/5 flex items-center justify-between gap-4">
                       <Link
                         href={`/${locale}/tours/${tour.id}`}
+                        aria-label={`${isEs ? 'Ver itinerario completo de' : 'View full itinerary for'} ${title}`}
                         className="flex-1 py-3.5 px-4 rounded-2xl border-2 border-emerald-500/30 bg-transparent text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:border-emerald-500 font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md text-center flex items-center justify-center group"
                       >
                         <span className="group-hover:scale-105 transition-transform">{isEs ? 'Ver Itinerario Completo' : 'Full Itinerary'}</span>
                       </Link>
                       <Link
                         href={`/${locale}/booking?tourId=${tour.id}`}
+                        aria-label={`${isEs ? 'Reservar expedición' : 'Book expedition'} ${title}`}
                         className="flex-1 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
                         {isEs ? 'Reservar Expedición' : 'Book Expedition'}
@@ -428,7 +434,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
             <h2 className="font-serif text-3xl sm:text-5xl font-light text-zinc-900 dark:text-white">
               {isEs ? 'Excursiones Full Day' : 'Full-Day Excursions'}
             </h2>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="text-sm text-zinc-700 dark:text-zinc-300">
               {isEs
                 ? 'Escapadas de un día desde Quito a los destinos más icónicos del Ecuador.'
                 : 'One-day getaways departing from Quito to Ecuador\'s most iconic landscapes.'}

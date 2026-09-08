@@ -54,6 +54,17 @@ function getLazyAuth(): Auth {
 
 auth = new Proxy({} as Auth, {
   get(target, prop) {
+    if (prop === 'then' || prop === 'toJSON' || typeof prop === 'symbol') {
+      return undefined;
+    }
+    // Prevent initializing Firebase Auth iframe on public pages unless an actual auth operation is triggered
+    if (typeof window !== 'undefined') {
+      const p = window.location.pathname;
+      const isInternal = p.includes('/admin') || p.includes('/cpanel') || p.includes('/affiliates') || p.includes('/operator') || p.includes('/auth');
+      if (!isInternal && (prop === 'currentUser' || prop === 'name' || prop === 'config')) {
+        return null;
+      }
+    }
     const realAuth = getLazyAuth();
     const val = (realAuth as any)[prop];
     if (typeof val === 'function') {

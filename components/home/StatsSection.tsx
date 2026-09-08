@@ -96,7 +96,7 @@ export function StatsSection() {
             <div className="text-zinc-900 dark:text-white font-oswald font-bold text-base sm:text-lg leading-none mb-1">
               {getLocalizedText(settings?.about?.metric2Val, locale) || '+15 Yrs'}
             </div>
-            <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wider leading-none">
+            <p className="text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-300 font-medium uppercase tracking-wider leading-none">
               {getLabel(settings?.about?.metric2Lbl, 1)}
             </p>
           </div>
@@ -114,7 +114,7 @@ export function StatsSection() {
             <div className="text-zinc-900 dark:text-white font-oswald font-bold text-base sm:text-lg leading-none mb-1">
               {getLocalizedText(settings?.about?.metric4Val, locale) || '24/7'}
             </div>
-            <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wider leading-none">
+            <p className="text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-300 font-medium uppercase tracking-wider leading-none">
               {locale === 'es' ? 'Expediciones a Medida' : 'Bespoke Journeys Care'}
             </p>
           </div>
@@ -129,7 +129,7 @@ export function StatsSection() {
             <div className="text-zinc-900 dark:text-white font-oswald font-bold text-base sm:text-lg leading-none mb-1">
               {getLocalizedText(settings?.about?.metric1Val, locale) || '100%'}
             </div>
-            <p className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wider leading-none">
+            <p className="text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-300 font-medium uppercase tracking-wider leading-none">
               {getLabel(settings?.about?.metric1Lbl, 0)}
             </p>
           </div>
