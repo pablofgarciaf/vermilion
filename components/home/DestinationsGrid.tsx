@@ -143,6 +143,10 @@ export function DestinationsGrid() {
               {/* Dynamic Layered Images with Seamless Crossfade & Subtle Ken Burns Zoom */}
               {pool.map((imgSrc, imgIdx) => {
                 const isCurrent = imgIdx === activeIndex;
+                const nextIndex = (activeIndex + 1) % pool.length;
+                const isNext = imgIdx === nextIndex;
+                if (!isCurrent && !isNext) return null;
+
                 return (
                   <div
                     key={`${dest.id}-img-${imgIdx}-${imgSrc}`}
@@ -181,9 +185,9 @@ export function DestinationsGrid() {
                     {pool.map((_, dotIdx) => (
                       <span
                         key={`dot-${dotIdx}`}
-                        className={`w-1.5 h-1.5 rounded-full transition-all duration-500 ${
+                        className={`w-1.5 h-1.5 rounded-full transition-transform duration-500 ${
                           dotIdx === activeIndex
-                            ? 'bg-emerald-400 w-3'
+                            ? 'bg-emerald-400 scale-x-150'
                             : 'bg-white/40'
                         }`}
                       />

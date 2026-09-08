@@ -17,7 +17,7 @@ service cloud.firestore {
 
     // Destinations: lectura pública, escritura solo admin
     match /destinations/{destId} {
-      allow read: if true;
+      allow read: if true;  
       allow write: if isAdmin();
     }
 

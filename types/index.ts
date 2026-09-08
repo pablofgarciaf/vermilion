@@ -21,6 +21,7 @@ export interface ItineraryDay {
 
 export interface Tour {
   id: string;
+  code?: string;
   title: LocalizedString;
   titleEs?: string;
   destination: string;
@@ -30,6 +31,10 @@ export interface Tour {
   price: number;
   price3Star?: number;
   price4Star?: number;
+  inversionPremium?: number;
+  inversionLuxury?: number;
+  valorPremium?: number;
+  valorLuxury?: number;
   priceFromUSD?: number;
   imageUrl: string;
   desktopImage?: string;

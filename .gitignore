@@ -41,8 +41,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# IDE
+# IDE & Skills
 .vscode/
 .idea/
 scratch/
-
+.agents/
+skills-lock.json

@@ -20,7 +20,7 @@ export default function AffiliateRegistration() {
             <h2 className="text-4xl md:text-5xl font-serif font-light text-white mb-4 tracking-tight">
               Embajadores <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-500">Vermilion</span>
             </h2>
-            <p className="text-base text-zinc-400 max-w-2xl mx-auto">
+            <p className="text-base text-zinc-300 max-w-2xl mx-auto">
               El programa de comisiones y participaciones globales más justo de Sudamérica.
             </p>
           </div>
@@ -33,8 +33,8 @@ export default function AffiliateRegistration() {
               <div className="w-12 h-12 mx-auto rounded-2xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mb-4">
                 <Percent className="w-6 h-6 text-emerald-400" />
               </div>
-              <h4 className="text-lg font-bold text-white mb-2">10% OFF a Clientes</h4>
-              <p className="text-sm text-zinc-400 leading-relaxed">
+              <h3 className="text-lg font-bold text-white mb-2">10% OFF a Clientes</h3>
+              <p className="text-sm text-zinc-300 leading-relaxed">
                 Tus referidos obtienen automáticamente un 10% de descuento en todos los tours con tu código.
               </p>
             </div>
@@ -44,8 +44,8 @@ export default function AffiliateRegistration() {
               <div className="w-12 h-12 mx-auto rounded-2xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 mb-4">
                 <Sparkles className="w-6 h-6 text-amber-400" />
               </div>
-              <h4 className="text-lg font-bold text-white mb-2">10% de Comisión</h4>
-              <p className="text-sm text-zinc-400 leading-relaxed">
+              <h3 className="text-lg font-bold text-white mb-2">10% de Comisión</h3>
+              <p className="text-sm text-zinc-300 leading-relaxed">
                 Ganas el 10% en efectivo por cada venta directa. Sin topes, en dólares.
               </p>
             </div>
@@ -55,8 +55,8 @@ export default function AffiliateRegistration() {
               <div className="w-12 h-12 mx-auto rounded-2xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 mb-4">
                 <Award className="w-6 h-6 text-blue-400" />
               </div>
-              <h4 className="text-lg font-bold text-white mb-2">Fondo Global (6%)</h4>
-              <p className="text-sm text-zinc-400 leading-relaxed">
+              <h3 className="text-lg font-bold text-white mb-2">Fondo Global (6%)</h3>
+              <p className="text-sm text-zinc-300 leading-relaxed">
                 Recibe acciones acumulables de las ventas globales de la empresa ($3k, $7k y $15k).
               </p>
             </div>

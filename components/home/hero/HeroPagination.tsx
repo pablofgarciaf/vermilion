@@ -29,12 +29,12 @@ export function HeroPagination({ totalSlides }: HeroPaginationProps) {
 
       <div className="w-[300px] md:w-[400px] lg:w-[500px] h-[42px] flex items-center">
         <div className="w-full h-[3px] bg-white/20 relative rounded-full overflow-hidden">
-          <div className="progress-sub-foreground absolute top-0 left-0 h-full w-full bg-white rounded-full origin-left" />
+          <div className="progress-sub-foreground absolute top-0 left-0 h-full w-full bg-white rounded-full origin-left will-change-transform" />
         </div>
       </div>
 
       <div className="absolute right-0 top-1/2 -translate-y-1/2 overflow-hidden h-[50px] w-14 hidden md:block">
-        <div className="indicator absolute right-0 top-0 h-full bg-white/20 w-screen" />
+        <div className="indicator absolute right-0 top-0 h-full bg-white/20 w-screen will-change-transform" />
         <div id="hero-slide-counter" className="relative z-10 flex items-center justify-end h-full pr-2 text-xs font-mono font-bold text-white/80">
           01 / {totalSlides < 10 ? `0${totalSlides}` : totalSlides}
         </div>

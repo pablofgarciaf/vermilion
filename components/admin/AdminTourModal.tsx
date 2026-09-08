@@ -135,10 +135,17 @@ export function AdminTourModal({
     try {
       const fullTour: Tour = {
         id: formData.id,
+        code: formData.code,
         title: formData.title,
         destination: formData.destination || 'Ecuador',
         duration: formData.duration || '7 Days',
         price: Number(formData.price) || 1500,
+        price3Star: formData.price3Star !== undefined ? Number(formData.price3Star) : undefined,
+        price4Star: formData.price4Star !== undefined ? Number(formData.price4Star) : undefined,
+        inversionPremium: formData.inversionPremium !== undefined ? Number(formData.inversionPremium) : undefined,
+        inversionLuxury: formData.inversionLuxury !== undefined ? Number(formData.inversionLuxury) : undefined,
+        valorPremium: formData.valorPremium !== undefined ? Number(formData.valorPremium) : undefined,
+        valorLuxury: formData.valorLuxury !== undefined ? Number(formData.valorLuxury) : undefined,
         imageUrl:
           formData.imageUrl ||
           'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
@@ -194,7 +201,20 @@ export function AdminTourModal({
         <div className="flex-1 overflow-y-auto p-6" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
           <style dangerouslySetInnerHTML={{ __html: `div::-webkit-scrollbar { display: none; }` }} />
           <form id="tour-form" onSubmit={handleSubmit} className="space-y-8 text-sm">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="space-y-1">
+                <label className="block text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider">
+                  Código del Tour
+                </label>
+                <input
+                  type="text"
+                  value={formData.code || ''}
+                  onChange={(e) => setFormData({ ...formData, code: e.target.value })}
+                  placeholder="e.g. 1.1, 2.1, 4.1"
+                  className="w-full p-2.5 glass-input rounded-xl font-mono focus:border-emerald-500 focus:outline-none"
+                />
+              </div>
+
               <div className="space-y-1">
                 <label className="block text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider">
                   Tour ID / Slug *
@@ -277,6 +297,63 @@ export function AdminTourModal({
                   placeholder="Premium Expedition"
                   className="w-full p-2.5 glass-input rounded-xl focus:border-emerald-500 focus:outline-none"
                 />
+              </div>
+            </div>
+
+            {/* PRECIOS Y NIVELES DE INVERSIÓN */}
+            <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+                Niveles de Inversión y Valores Oficiales (USD)
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="space-y-1">
+                  <label className="block text-[10px] text-zinc-500 font-semibold uppercase">
+                    Inversión Premium
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.inversionPremium ?? ''}
+                    onChange={(e) => setFormData({ ...formData, inversionPremium: e.target.value ? Number(e.target.value) : undefined })}
+                    placeholder="650"
+                    className="w-full p-2 glass-input rounded-xl font-mono text-xs focus:border-emerald-500 focus:outline-none"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="block text-[10px] text-zinc-500 font-semibold uppercase">
+                    Inversión Luxury
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.inversionLuxury ?? ''}
+                    onChange={(e) => setFormData({ ...formData, inversionLuxury: e.target.value ? Number(e.target.value) : undefined })}
+                    placeholder="750"
+                    className="w-full p-2 glass-input rounded-xl font-mono text-xs focus:border-emerald-500 focus:outline-none"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="block text-[10px] text-zinc-500 font-semibold uppercase">
+                    Valor Premium
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.valorPremium ?? ''}
+                    onChange={(e) => setFormData({ ...formData, valorPremium: e.target.value ? Number(e.target.value) : undefined })}
+                    placeholder="1050"
+                    className="w-full p-2 glass-input rounded-xl font-mono text-xs focus:border-emerald-500 focus:outline-none"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="block text-[10px] text-zinc-500 font-semibold uppercase">
+                    Valor Luxury
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.valorLuxury ?? ''}
+                    onChange={(e) => setFormData({ ...formData, valorLuxury: e.target.value ? Number(e.target.value) : undefined })}
+                    placeholder="1190"
+                    className="w-full p-2 glass-input rounded-xl font-mono text-xs focus:border-emerald-500 focus:outline-none"
+                  />
+                </div>
               </div>
             </div>
 

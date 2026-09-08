@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import {
@@ -20,6 +20,7 @@ import {
 import { useSettings } from '@/hooks/useSettings';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
 const TRANSLATIONS: Record<string, Record<string, string>> = {
   en: {
@@ -94,6 +95,12 @@ export function Footer() {
   const { settings } = useSettings();
   const locale = useLocale();
   const t = TRANSLATIONS[locale] || TRANSLATIONS['en'];
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+
+  useEffect(() => {
+    const stored = getStoredUserProfile();
+    if (stored.email) setNewsletterEmail(stored.email);
+  }, []);
 
   return (
     <footer className="bg-gradient-to-b from-emerald-950 via-[#032118] to-[#021812] dark:from-black dark:via-zinc-950 dark:to-black text-zinc-100 pt-16 pb-8 border-t border-emerald-900/80 dark:border-zinc-900">
@@ -267,7 +274,16 @@ export function Footer() {
             <p className="text-xs text-zinc-300 leading-relaxed">
               {t.subscribeText}
             </p>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-2">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (newsletterEmail.trim()) {
+                  saveStoredUserProfile({ email: newsletterEmail.trim() });
+                  alert(locale === 'es' ? '¡Gracias! Has sido registrado como Cliente Premium. Pronto recibirás nuestras mejores ofertas.' : 'Thank you! You have been registered as a Premium Client. You will receive our best offers soon.');
+                }
+              }}
+              className="space-y-2"
+            >
               <div className="relative">
                 <label htmlFor="footer-newsletter-email" className="sr-only">
                   {t.emailPlaceholder || "Email"}
@@ -276,6 +292,13 @@ export function Footer() {
                   type="email"
                   id="footer-newsletter-email"
                   name="email"
+                  autoComplete="email"
+                  inputMode="email"
+                  value={newsletterEmail}
+                  onChange={(e) => {
+                    setNewsletterEmail(e.target.value);
+                    saveStoredUserProfile({ email: e.target.value });
+                  }}
                   aria-label={t.emailPlaceholder || "Email"}
                   placeholder={t.emailPlaceholder}
                   suppressHydrationWarning
@@ -284,12 +307,8 @@ export function Footer() {
               </div>
               <button 
                 type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-105 active:scale-95 group"
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer"
                 suppressHydrationWarning
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert(locale === 'es' ? '¡Gracias! Has sido registrado como Cliente Premium. Pronto recibirás nuestras mejores ofertas.' : 'Thank you! You have been registered as a Premium Client. You will receive our best offers soon.');
-                }}
               >
                 <Send className="w-3.5 h-3.5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
                 <span>{t.subscribeBtn}</span>

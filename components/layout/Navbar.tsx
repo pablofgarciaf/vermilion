@@ -50,14 +50,14 @@ export function Navbar() {
   const { theme, setTheme } = useTheme();
 
   const LOCALES = [
-    { code: 'en', label: 'English', flagUrl: 'https://flagcdn.com/us.svg' },
-    { code: 'es', label: 'Español', flagUrl: 'https://flagcdn.com/es.svg' },
-    { code: 'fr', label: 'Français', flagUrl: 'https://flagcdn.com/fr.svg' },
-    { code: 'de', label: 'Deutsch', flagUrl: 'https://flagcdn.com/de.svg' },
-    { code: 'zh', label: '中文', flagUrl: 'https://flagcdn.com/cn.svg' },
-    { code: 'it', label: 'Italiano', flagUrl: 'https://flagcdn.com/it.svg' },
-    { code: 'pt', label: 'Português', flagUrl: 'https://flagcdn.com/pt.svg' },
-    { code: 'ja', label: '日本語', flagUrl: 'https://flagcdn.com/jp.svg' },
+    { code: 'en', label: 'English', flagUrl: '/flags/us.svg' },
+    { code: 'es', label: 'Español', flagUrl: '/flags/es.svg' },
+    { code: 'fr', label: 'Français', flagUrl: '/flags/fr.svg' },
+    { code: 'de', label: 'Deutsch', flagUrl: '/flags/de.svg' },
+    { code: 'zh', label: '中文', flagUrl: '/flags/cn.svg' },
+    { code: 'it', label: 'Italiano', flagUrl: '/flags/it.svg' },
+    { code: 'pt', label: 'Português', flagUrl: '/flags/pt.svg' },
+    { code: 'ja', label: '日本語', flagUrl: '/flags/jp.svg' },
   ];
 
   const changeLanguage = (newLocale: string) => {
@@ -293,7 +293,7 @@ export function Navbar() {
                     title="Cambiar idioma / Change language"
                   >
                     <img
-                      src={LOCALES.find((l) => l.code === locale)?.flagUrl || 'https://flagcdn.com/es.svg'}
+                      src={LOCALES.find((l) => l.code === locale)?.flagUrl || '/flags/es.svg'}
                       alt=""
                       aria-hidden="true"
                       className="w-4 h-3 object-cover rounded-xs shadow-xs"
@@ -410,7 +410,7 @@ export function Navbar() {
                     className="flex items-center gap-1.5 p-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 rounded-xl cursor-pointer transition-colors"
                   >
                     <img
-                      src={LOCALES.find((l) => l.code === locale)?.flagUrl || 'https://flagcdn.com/es.svg'}
+                      src={LOCALES.find((l) => l.code === locale)?.flagUrl || '/flags/es.svg'}
                       alt=""
                       aria-hidden="true"
                       className="w-4 h-3 object-cover rounded-xs shadow-xs"

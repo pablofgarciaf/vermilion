@@ -212,6 +212,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
 
       (window as any).triggerNextSlide = () => {
         if (!transitioning) {
+          (window as any).__loadAllHeroThumbnails?.();
           playSlideSound();
           if (loopTimeline) loopTimeline.kill();
           step('next').then(() => {
@@ -222,6 +223,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
 
       (window as any).triggerPrevSlide = () => {
         if (!transitioning) {
+          (window as any).__loadAllHeroThumbnails?.();
           playSlideSound();
           if (loopTimeline) loopTimeline.kill();
           step('prev').then(() => {
@@ -233,6 +235,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
       (window as any).jumpToSlide = (targetIdx: number) => {
         if (transitioning) return;
         if (order[0] === targetIdx) return;
+        (window as any).__loadAllHeroThumbnails?.();
         playSlideSound();
         if (loopTimeline) loopTimeline.kill();
 

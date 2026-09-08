@@ -32,11 +32,8 @@ export const verifyToken = (token: string) => {
 };
 
 export const sendVerificationEmail = async (toEmail: string, name: string, token: string) => {
-  const verifyUrl = `http://localhost:3000/es/affiliates/verify?token=${token}`;
-  
-  // NOTE: En producción reemplazar localhost:3000 por el dominio real
-  const prodUrl = `https://www.vermilionroutes.com/es/affiliates/verify?token=${token}`;
-  const finalUrl = process.env.NODE_ENV === 'production' ? prodUrl : verifyUrl;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://www.vermilionroutes.com' : 'http://localhost:3005');
+  const finalUrl = `${baseUrl}/es/affiliates/verify?token=${token}`;
 
   const htmlTemplate = `
     <div style="font-family: 'Times New Roman', serif; max-width: 600px; margin: 0 auto; background-color: #09090b; color: #ffffff; padding: 40px; border-radius: 8px; border: 1px solid #27272a;">
@@ -102,9 +99,8 @@ export const verifyNewsletterToken = (token: string) => {
 };
 
 export const sendNewsletterVerificationEmail = async (toEmail: string, token: string) => {
-  const verifyUrl = `http://localhost:3000/es/verify-newsletter?token=${token}`;
-  const prodUrl = `https://www.vermilionroutes.com/es/verify-newsletter?token=${token}`;
-  const finalUrl = process.env.NODE_ENV === 'production' ? prodUrl : verifyUrl;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://www.vermilionroutes.com' : 'http://localhost:3005');
+  const finalUrl = `${baseUrl}/es/verify-newsletter?token=${token}`;
 
   const htmlTemplate = `
     <div style="font-family: 'Times New Roman', serif; max-width: 600px; margin: 0 auto; background-color: #052e16; color: #ffffff; padding: 40px; border-radius: 8px; border: 1px solid #064e3b;">

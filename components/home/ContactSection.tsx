@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { createBookingInFirestore } from '@/lib/bookings';
 import { filterPhoneInput, isValidEmail, isValidPhone, sanitizeText } from '@/lib/validation';
+import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 import { useTranslations } from 'next-intl';
 import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle } from 'lucide-react';
 
@@ -19,6 +20,18 @@ export function ContactSection() {
     travelers: '2 Travelers',
     message: '',
   });
+
+  useEffect(() => {
+    const stored = getStoredUserProfile();
+    if (stored.name || stored.email || stored.phone) {
+      setFormData((prev) => ({
+        ...prev,
+        name: prev.name || stored.name || '',
+        email: prev.email || stored.email || '',
+        phone: prev.phone || stored.phone || '',
+      }));
+    }
+  }, []);
 
   const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; submit?: string }>({});
 
@@ -76,6 +89,11 @@ export function ContactSection() {
         throw new Error(data.error || 'Failed to submit request.');
       }
 
+      saveStoredUserProfile({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+      });
       setSubmitted(true);
     } catch (err: any) {
       console.warn('API /api/leads contact submission failed, falling back to direct Firestore:', err);
@@ -219,12 +237,16 @@ export function ContactSection() {
                   <label htmlFor="contact-name" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">{t('name')} *</label>
                   <input
                     id="contact-name"
+                    name="name"
                     type="text"
+                    autoComplete="name"
+                    autoCapitalize="words"
                     required
                     placeholder="e.g. Eleanor Vance"
                     value={formData.name}
                     onChange={(e) => {
                       setFormData({ ...formData, name: e.target.value });
+                      saveStoredUserProfile({ name: e.target.value });
                       if (errors.name) setErrors((prev) => ({ ...prev, name: undefined }));
                     }}
                     suppressHydrationWarning
@@ -241,12 +263,16 @@ export function ContactSection() {
                   <label htmlFor="contact-email" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">{t('email')} *</label>
                   <input
                     id="contact-email"
+                    name="email"
                     type="email"
+                    autoComplete="email"
+                    inputMode="email"
                     required
                     placeholder="eleanor@example.com"
                     value={formData.email}
                     onChange={(e) => {
                       setFormData({ ...formData, email: e.target.value });
+                      saveStoredUserProfile({ email: e.target.value });
                       if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
                     }}
                     suppressHydrationWarning
@@ -265,10 +291,16 @@ export function ContactSection() {
                   <label htmlFor="contact-phone" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">{t('phone')}</label>
                   <input
                     id="contact-phone"
+                    name="phone"
                     type="tel"
+                    autoComplete="tel"
+                    inputMode="tel"
                     placeholder="+1 (555) 000-0000"
                     value={formData.phone}
-                    onChange={handlePhoneChange}
+                    onChange={(e) => {
+                      handlePhoneChange(e);
+                      saveStoredUserProfile({ phone: e.target.value });
+                    }}
                     suppressHydrationWarning
                     className={`w-full bg-zinc-50 dark:bg-zinc-900/50 border rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white focus:outline-none transition-colors ${
                       errors.phone

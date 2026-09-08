@@ -157,6 +157,10 @@ export const checkoutSchema = z.object({
   customLinkId: z.string().optional(),
   amount: z.number().optional(),
   paymentType: z.enum(['deposit', 'full', 'custom']).optional(),
+  affiliateCode: z.string().optional(),
+  travelDate: z.string().optional(),
+  guestsCount: z.string().optional(),
+  locale: z.string().optional(),
 });
 
 export type CheckoutInput = z.infer<typeof checkoutSchema>;

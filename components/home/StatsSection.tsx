@@ -57,6 +57,7 @@ export function StatsSection() {
           href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="TripAdvisor reviews for Vermilion Routes - Rated 5.0 out of 5"
           className="col-span-2 md:col-span-1 order-1 md:order-3 flex items-center justify-between sm:justify-start gap-3 p-3 rounded-2xl bg-gradient-to-r from-emerald-500/20 via-teal-500/15 to-emerald-500/25 dark:from-emerald-500/25 dark:via-teal-500/20 dark:to-emerald-500/30 border border-emerald-500/50 hover:border-emerald-400 shadow-md shadow-emerald-950/20 transition-all hover:scale-102 group cursor-pointer"
         >
           <div className="flex items-center gap-3">

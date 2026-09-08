@@ -26,18 +26,28 @@ import { mockTours } from '@/data/mock';
 import { createBookingInFirestore } from '@/lib/bookings';
 import { calculateAndDistributeCommissions, getAffiliateByCode } from '@/lib/affiliates';
 import { getStoredAffiliateRef } from '@/components/affiliates/AffiliateTracker';
+import { useLocale } from 'next-intl';
+import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
 export default function CheckoutPaymentPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const locale = useLocale();
 
   const tourId = searchParams.get('tourId') || 'custom';
   const tourTitle = searchParams.get('tourTitle') || 'Vermilion Routes Expedition';
-  const email = searchParams.get('email') || 'client@vermilionroutes.com';
+  const [email, setEmail] = useState(searchParams.get('email') || '');
+  const [clientName, setClientName] = useState(searchParams.get('name') || '');
   const amountStr = searchParams.get('amount') || '500';
   const type = searchParams.get('type') || 'deposit';
   const ref = searchParams.get('ref') || `VR-${Date.now().toString().slice(-6)}`;
   const travelDate = searchParams.get('date') || '';
+
+  useEffect(() => {
+    const stored = getStoredUserProfile();
+    if (!email && stored.email) setEmail(stored.email);
+    if (!clientName && stored.name) setClientName(stored.name);
+  }, []);
 
   const initialAmount = Number(amountStr) || 500;
 
@@ -46,6 +56,8 @@ export default function CheckoutPaymentPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
   const [voucherOpen, setVoucherOpen] = useState(false);
+  const [stripeNotice, setStripeNotice] = useState<string | null>(null);
+  const [demoUrl, setDemoUrl] = useState<string | null>(null);
 
   const matchedTour = mockTours.find((t) => t.id === tourId || t.title.en === tourTitle) || mockTours[0];
 
@@ -119,6 +131,8 @@ export default function CheckoutPaymentPage() {
 
   const handleCompleteCardPayment = async () => {
     setIsProcessing(true);
+    setStripeNotice(null);
+    setDemoUrl(null);
     try {
       const res = await fetch('/api/checkout/session', {
         method: 'POST',
@@ -131,13 +145,22 @@ export default function CheckoutPaymentPage() {
           paymentType: type,
           customLinkId: ref,
           affiliateCode: discountApplied ? discountCode : undefined,
+          travelDate: travelDate || undefined,
+          guestsCount: '2 Travelers',
+          locale: locale || 'en',
         }),
       });
       const data = await res.json();
       if (data.url) {
         window.location.href = data.url;
+      } else if (data.error === 'STRIPE_NOT_CONFIGURED' || !data.configured) {
+        setIsProcessing(false);
+        setDemoUrl(data.demoUrl || null);
+        setStripeNotice(
+          'Las credenciales de Stripe (STRIPE_SECRET_KEY) aún no están configuradas en el archivo .env del servidor.'
+        );
       } else {
-        alert('Error connecting to Stripe.');
+        alert(data.message || data.error || 'Error connecting to Stripe.');
         setIsProcessing(false);
       }
     } catch (err) {
@@ -418,13 +441,37 @@ export default function CheckoutPaymentPage() {
                         <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">Visa</span>
                         <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">MasterCard</span>
                         <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">Amex</span>
-                        <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">PayPal</span>
+                        <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">Apple Pay</span>
                       </div>
                     </div>
                     <p className="text-[11px] text-zinc-400 leading-relaxed">
-                      Confirmación inmediata. Procesamiento con encriptación bancaria de extremo a extremo mediante Stripe.
+                      Confirmación inmediata con encriptación bancaria de extremo a extremo mediante Stripe. Al presionar pagar, se abre la pasarela oficial protegida de Stripe para ingresar tu tarjeta de forma 100% segura.
                     </p>
                   </div>
+
+                  {stripeNotice && (
+                    <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs space-y-3 animate-fade-in">
+                      <div className="flex items-start gap-2.5">
+                        <AlertCircle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                        <div className="space-y-1">
+                          <p className="font-bold text-amber-300">Pasarela Stripe Pendiente en Servidor</p>
+                          <p className="text-[11px] text-zinc-300 leading-relaxed">
+                            {stripeNotice} Para recibir cobros reales, añade tu <code className="bg-black/50 text-amber-300 px-1 py-0.5 rounded">STRIPE_SECRET_KEY=sk_test_...</code> en el archivo <code className="bg-black/50 text-amber-300 px-1 py-0.5 rounded">.env</code>.
+                          </p>
+                        </div>
+                      </div>
+                      {demoUrl && (
+                        <a
+                          href={demoUrl}
+                          className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md active:scale-95 text-center no-underline"
+                        >
+                          <Sparkles className="w-4 h-4" />
+                          <span>Simular Confirmación de Pago (Modo Demo)</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      )}
+                    </div>
+                  )}
 
                   <button
                     onClick={handleCompleteCardPayment}
@@ -434,12 +481,12 @@ export default function CheckoutPaymentPage() {
                     {isProcessing ? (
                       <>
                         <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        <span>Conectando...</span>
+                        <span>Conectando con Stripe...</span>
                       </>
                     ) : (
                       <>
                         <Lock className="w-4 h-4 shrink-0 group-hover:-translate-y-0.5 transition-transform" />
-                        <span suppressHydrationWarning>Pagar ${finalAmount.toLocaleString('en-US')}</span>
+                        <span suppressHydrationWarning>Pagar ${finalAmount.toLocaleString('en-US')} USD</span>
                         <ArrowRight className="w-4 h-4 hidden sm:block shrink-0 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}

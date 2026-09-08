@@ -6,6 +6,7 @@ import { X, Mail, User, Loader2, Download } from 'lucide-react';
 import { Tour } from '@/types';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp, doc, updateDoc, increment } from 'firebase/firestore';
+import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
 interface LeadCaptureModalProps {
   isOpen: boolean;
@@ -24,6 +25,9 @@ export function LeadCaptureModal({ isOpen, onClose, onSuccess, tour, locale }: L
 
   useEffect(() => {
     setMounted(true);
+    const stored = getStoredUserProfile();
+    if (stored.name) setName(stored.name);
+    if (stored.email) setEmail(stored.email);
   }, []);
 
   if (!isOpen || !mounted) return null;
@@ -57,6 +61,7 @@ export function LeadCaptureModal({ isOpen, onClose, onSuccess, tour, locale }: L
         console.warn('Could not increment downloads count, tour doc might not exist yet.');
       }
 
+      saveStoredUserProfile({ name, email });
       onSuccess();
     } catch (err: any) {
       console.error('Error saving lead:', err);
@@ -120,10 +125,17 @@ export function LeadCaptureModal({ isOpen, onClose, onSuccess, tour, locale }: L
                 <span>{t.namePlaceholder} *</span>
               </label>
               <input
+                id="lead-name"
+                name="name"
                 type="text"
+                autoComplete="name"
+                autoCapitalize="words"
                 required
                 value={name}
-                onChange={e => setName(e.target.value)}
+                onChange={e => {
+                  setName(e.target.value);
+                  saveStoredUserProfile({ name: e.target.value });
+                }}
                 className="w-full px-4 py-3 bg-gray-50 dark:bg-stone-800/50 border border-gray-200 dark:border-stone-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
                 placeholder="e.g. John Doe"
               />
@@ -135,10 +147,17 @@ export function LeadCaptureModal({ isOpen, onClose, onSuccess, tour, locale }: L
                 <span>{t.emailPlaceholder} *</span>
               </label>
               <input
+                id="lead-email"
+                name="email"
                 type="email"
+                autoComplete="email"
+                inputMode="email"
                 required
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={e => {
+                  setEmail(e.target.value);
+                  saveStoredUserProfile({ email: e.target.value });
+                }}
                 className="w-full px-4 py-3 bg-gray-50 dark:bg-stone-800/50 border border-gray-200 dark:border-stone-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
                 placeholder="name@example.com"
               />

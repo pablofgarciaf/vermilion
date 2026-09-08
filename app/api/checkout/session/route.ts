@@ -3,31 +3,58 @@ import Stripe from 'stripe';
 import { withValidation } from '@/lib/apiHandler';
 import { checkoutSchema } from '@/lib/validation';
 
-export const POST = withValidation(checkoutSchema, async (_request, _ctx, data) => {
-  const { tourId, tourTitle, clientEmail, customLinkId, amount, paymentType } = data;
+export const POST = withValidation(checkoutSchema, async (request, _ctx, data) => {
+  const {
+    tourId,
+    tourTitle,
+    clientEmail,
+    customLinkId,
+    amount,
+    paymentType,
+    affiliateCode,
+    travelDate,
+    guestsCount,
+    locale,
+  } = data;
+
   const rawTitle = tourTitle as any;
   const resolvedTitle: string = typeof rawTitle === 'string'
     ? rawTitle
     : (rawTitle && typeof rawTitle === 'object' && (rawTitle.en || rawTitle.es))
       ? String(rawTitle.en || rawTitle.es)
-      : 'Vermilion Routes - Itinerary Payment';
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-  const finalAmountUSD = amount && amount > 0 ? amount : 500;
-  const stripeKey = process.env.STRIPE_SECRET_KEY;
+      : 'Vermilion Routes - Bespoke Expedition';
 
-  // 1. If valid Stripe key is present, create Stripe Checkout Session
-  if (stripeKey && !stripeKey.includes('fake') && (stripeKey.startsWith('sk_test_') || stripeKey.startsWith('sk_live_'))) {
+  // Dynamically resolve baseUrl from current request host
+  const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
+  const proto = request.headers.get('x-forwarded-proto') || (host?.includes('localhost') ? 'http' : 'https');
+  const detectedOrigin = host ? `${proto}://${host}` : 'http://localhost:3005';
+  const baseUrl = (process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_BASE_URL)
+    ? process.env.NEXT_PUBLIC_BASE_URL
+    : (process.env.NEXT_PUBLIC_BASE_URL || detectedOrigin);
+
+  const finalAmountUSD = amount && amount > 0 ? amount : 500;
+  const targetLocale = (locale && ['es', 'en', 'fr', 'de', 'it', 'pt', 'ja', 'zh'].includes(locale)) ? locale : 'en';
+  const bookingRef = customLinkId || `VR-${Date.now().toString().slice(-6)}`;
+
+  const stripeKey = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_RESTRICTED_KEY;
+
+  // 1. If valid Stripe key is present, create Stripe Checkout Session with Dynamic Payment Methods
+  if (stripeKey && !stripeKey.includes('fake') && (stripeKey.startsWith('sk_') || stripeKey.startsWith('rk_'))) {
     try {
-      const stripe = new Stripe(stripeKey, { apiVersion: '2026-07-29.dahlia' as any });
+      const stripe = new Stripe(stripeKey, {
+        apiVersion: '2026-08-26.dahlia' as any,
+      });
+
       const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
+        // Stripe Best Practice: Omit payment_method_types to enable Dynamic Payment Methods (Apple Pay, Google Pay, Cards, Link)
         line_items: [
           {
             price_data: {
               currency: 'usd',
               product_data: {
                 name: resolvedTitle,
-                description: `${paymentType === 'full' ? 'Full Tour Payment' : 'Deposit Reservation'} for ${clientEmail}`,
+                description: `${paymentType === 'full' ? 'Full Expedition Payment' : 'Expedition Reservation Deposit'} • Ref: ${bookingRef}`,
+                images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'],
               },
               unit_amount: Math.round(finalAmountUSD * 100),
             },
@@ -36,39 +63,40 @@ export const POST = withValidation(checkoutSchema, async (_request, _ctx, data) 
         ],
         mode: 'payment',
         customer_email: clientEmail,
-        success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${baseUrl}/tours/${tourId || ''}`,
+        billing_address_collection: 'auto',
+        locale: targetLocale === 'es' ? 'es' : 'auto',
+        success_url: `${baseUrl}/${targetLocale}/checkout/success?session_id={CHECKOUT_SESSION_ID}&tourId=${tourId || 'custom'}&tourTitle=${encodeURIComponent(resolvedTitle)}&ref=${bookingRef}`,
+        cancel_url: `${baseUrl}/${targetLocale}/checkout/payment?tourId=${tourId || 'custom'}&tourTitle=${encodeURIComponent(resolvedTitle)}&amount=${finalAmountUSD}&ref=${bookingRef}&email=${encodeURIComponent(clientEmail)}`,
         metadata: {
           tourId: tourId || 'custom-itinerary',
-          customLinkId: customLinkId || 'direct-web',
+          tourTitle: resolvedTitle,
+          clientEmail,
+          customLinkId: bookingRef,
           paymentType: paymentType || 'deposit',
+          affiliateCode: affiliateCode || '',
+          travelDate: travelDate || '',
+          guestsCount: guestsCount || '2 Travelers',
+          locale: targetLocale,
         },
       });
 
       return NextResponse.json({ sessionId: session.id, url: session.url });
     } catch (stripeErr: any) {
-      console.error('Stripe checkout creation failed:', stripeErr.message);
+      console.error('Stripe checkout session creation failed:', stripeErr.message);
       return NextResponse.json(
-        { error: 'Payment session could not be created' },
+        { error: stripeErr.message || 'Payment session could not be created' },
         { status: 500 }
       );
     }
   }
 
-  // 2. Direct Payment Link fallback for instant processing & VIP reservation links
-  const queryParams = new URLSearchParams({
-    tourId: tourId || 'custom',
-    tourTitle: resolvedTitle,
-    email: clientEmail,
-    amount: String(finalAmountUSD),
-    type: paymentType || 'deposit',
-    ref: customLinkId || `ref-${Date.now()}`
-  });
-
-  const paymentUrl = `${baseUrl}/checkout/payment?${queryParams.toString()}`;
+  // 2. Direct Fallback when Stripe keys are not yet configured in environment
+  const demoSuccessUrl = `${baseUrl}/${targetLocale}/checkout/success?session_id=demo_${Date.now()}&tourId=${tourId || 'custom'}&tourTitle=${encodeURIComponent(resolvedTitle)}&ref=${bookingRef}`;
 
   return NextResponse.json({
-    sessionId: `session_${Date.now()}`,
-    url: paymentUrl
+    configured: false,
+    error: 'STRIPE_NOT_CONFIGURED',
+    message: 'Stripe API keys are not configured in .env. Please set STRIPE_SECRET_KEY to enable live checkout.',
+    demoUrl: demoSuccessUrl,
   });
 });

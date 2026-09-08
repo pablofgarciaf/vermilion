@@ -5,9 +5,10 @@ const multiDayTours: Tour[] = [
   // Tour 1: Galapagos 4 Days
   {
     id: 'galapagos-4days',
+    code: '1.1',
     title: { 
       en: 'Galapagos Encounter: 4 Days Of Wonder', 
-      es: 'Encuentro Galápagos: 4 Días De Magia', 
+      es: 'Encuentro Galápagos: 4 Días De Magia',
       fr: 'Rencontre aux Galápagos: 4 Jours Merveilleux', 
       de: 'Galapagos Entdeckung: 4 Tage Magie', 
       it: 'Incontro alle Galapagos: 4 Giorni di Magia', 
@@ -27,9 +28,13 @@ const multiDayTours: Tour[] = [
       zh: '4天 / 3晚' 
     },
     durationDays: 4,
-    price: 1590,
-    price3Star: 1590,
-    price4Star: 1899,
+    price: 1,
+    price3Star: 1,
+    price4Star: 1,
+    inversionPremium: 650,
+    inversionLuxury: 750,
+    valorPremium: 1050,
+    valorLuxury: 1190,
     imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
     mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.jpg',
     desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
@@ -58,7 +63,7 @@ const multiDayTours: Tour[] = [
     },
     description: {
       en: 'Experience the wonders of the Galápagos on this 4-day itinerary featuring Santa Cruz highlands, giant tortoises at Primicias Ranch, full-day boat excursion to Isabela Island with Tintoreras snorkeling and flamingo lagoon, and coastal exploration at La Lobería, Punta Estrada and Las Grietas.',
-      es: 'Experimenta las maravillas de Galápagos en este itinerario de 4 días explorando las tierras altas de Santa Cruz, tortugas gigantes en Rancho Primicias, excursión de día completo a Isla Isabela con snorkel en Tintoreras y laguna de flamingos, y visitas costeras a La Lobería, Punta Estrada y Las Grietas.',
+      es: 'Explora Santa Cruz y sus tortugas gigantes en Rancho Primicias, excursión en yate a Isla Isabela con snorkel en Tintoreras y relax en Las Grietas.',
       zh: '加拉帕戈斯4日精选探险，游览巴尔特拉岛、双子坑、普里米西亚巨龟保护区、伊莎贝拉岛快艇游览、火烈鸟泻湖、蒂恩托雷拉斯石礁潜水、拉洛贝里亚海狮滩与拉斯格里塔斯火山峡谷。'
     },
     highlights: [
@@ -151,9 +156,10 @@ const multiDayTours: Tour[] = [
   // Tour 2: Galapagos 5 Days
   {
     id: 'galapagos-5days',
+    code: '1.2',
     title: { 
       en: 'Galapagos Explorer: The 5-Day Expedition', 
-      es: 'Expedición Galápagos: El Viaje De 5 Días', 
+      es: 'Expedición Galápagos: El Viaje De 5 Días',
       fr: 'Expédition Galápagos: L\'aventure de 5 Jours', 
       de: 'Galapagos Expedition: 5 Tage Abenteuer', 
       it: 'Spedizione Galapagos: L\'avventura di 5 Giorni', 
@@ -173,9 +179,13 @@ const multiDayTours: Tour[] = [
       zh: '5天 / 4晚' 
     },
     durationDays: 5,
-    price: 1850,
-    price3Star: 1850,
-    price4Star: 2099,
+    price: 1250,
+    price3Star: 1250,
+    price4Star: 1390,
+    inversionPremium: 800,
+    inversionLuxury: 900,
+    valorPremium: 1250,
+    valorLuxury: 1390,
     imageUrl: '/images/tours/16-9/santa-fe-island-16-9.jpg',
     mobileImage: '/images/tours/9-16/santa-fe-island-9-16.jpg',
     desktopImage: '/images/tours/16-9/santa-fe-island-16-9.jpg',
@@ -204,7 +214,7 @@ const multiDayTours: Tour[] = [
     },
     description: {
       en: 'Comprehensive 5-day Galápagos journey connecting Santa Cruz highlands, overnight stay on Isabela Island with Tintoreras Islet and flamingo lagoon, Las Grietas volcanic canyon, and a full-day navigable yacht excursion to Santa Fe or Pinzón Island.',
-      es: 'Itinerario integral de 5 días conectando las tierras altas de Santa Cruz, noche en Isla Isabela con Islote Tintoreras y flamingos, cañón Las Grietas y navegación de día completo en yate hacia Isla Santa Fe o Isla Pinzón.',
+      es: 'Aventura de 5 días visitando Santa Cruz, noche en Isla Isabela con Islote Tintoreras y navegación de día completo en yate hacia Santa Fe o Pinzón.',
       zh: '加拉帕戈斯5日全面行程，包含圣克鲁斯高地、伊莎贝拉岛过夜、蒂恩托雷拉斯石礁潜水、拉斯格里塔斯峡谷，以及前往圣菲岛或平松岛的日间游艇巡航。'
     },
     highlights: [
@@ -302,9 +312,10 @@ const multiDayTours: Tour[] = [
   // Tour 3: Galapagos 6 Days
   {
     id: 'galapagos-6days',
+    code: '1.3',
     title: { 
       en: 'Galapagos Enchanted Journey', 
-      es: 'Viaje Encantado A Galápagos', 
+      es: 'Galápagos Completo: La Gran Odisea De 6 Días',
       fr: 'Voyage Enchanté aux Galápagos', 
       de: 'Verzauberte Reise nach Galapagos', 
       it: 'Viaggio Incantato alle Galapagos', 
@@ -324,9 +335,13 @@ const multiDayTours: Tour[] = [
       zh: '6天 / 5晚' 
     },
     durationDays: 6,
-    price: 2199,
-    price3Star: 2199,
-    price4Star: 2499,
+    price: 1550,
+    price3Star: 1550,
+    price4Star: 1690,
+    inversionPremium: 1000,
+    inversionLuxury: 1100,
+    valorPremium: 1550,
+    valorLuxury: 1690,
     imageUrl: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
     mobileImage: '/images/tours/9-16/tijeretas-hill-9-16.jpg',
     desktopImage: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
@@ -355,7 +370,7 @@ const multiDayTours: Tour[] = [
     },
     description: {
       en: 'Ultimate 6-day Galápagos expedition exploring 3 major islands: Santa Cruz highlands & giant tortoises, Isabela Island with Tintoreras & flamingos, Las Grietas volcanic canyon, navigable yacht cruise to Santa Fe or Pinzón Island, and San Cristóbal Island with Interpretation Center, Tijeretas Hill and La Lobería.',
-      es: 'Expedición definitiva de 6 días en Galápagos explorando 3 islas principales: tierras altas y tortugas en Santa Cruz, Isabela con Tintoreras y flamingos, cañón Las Grietas, navegación a Santa Fe o Pinzón, y San Cristóbal con Centro de Interpretación, Cerro Tijeretas y La Lobería.',
+      es: 'Expedición de 6 días explorando 3 islas: Santa Cruz, Isabela y San Cristóbal, con fauna endémica, snorkel en yate y paisajes volcánicos únicos.',
       zh: '加拉帕戈斯6日大周游，涵盖圣克鲁斯高地、伊莎贝拉岛、蒂恩托雷拉斯、拉斯格里塔斯、圣菲/平松游艇巡航，以及圣克里斯托巴尔岛（解读中心、军舰鸟丘与拉洛贝里亚）。'
     },
     highlights: [
@@ -459,9 +474,10 @@ const multiDayTours: Tour[] = [
   // Tour 5: Volcanoes & Rivers (8 Days)
   {
     id: 'volcanoes-rivers-8days',
+    code: '2.1',
     title: { 
       en: 'Andes To Amazon: Volcanoes & Rivers', 
-      es: 'De Los Andes A La Amazonía: Volcanes Y Ríos', 
+      es: 'Volcanes, Ríos Y Selva: La Ruta De La Aventura',
       fr: 'Des Andes à l\'Amazonie: Volcans et Rivières', 
       de: 'Von den Anden zum Amazonas: Vulkane & Flüsse', 
       it: 'Dalle Ande all\'Amazzonia: Vulcani e Fiumi', 
@@ -481,9 +497,13 @@ const multiDayTours: Tour[] = [
       zh: '8天 / 7晚' 
     },
     durationDays: 8,
-    price: 1380,
-    price3Star: 1380,
-    price4Star: 1650,
+    price: 1550,
+    price3Star: 1550,
+    price4Star: 1990,
+    inversionPremium: 1090,
+    inversionLuxury: 1400,
+    valorPremium: 1550,
+    valorLuxury: 1990,
     imageUrl: '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
     mobileImage: '/images/tours/9-16/pailon-diablo-9-16.jpg',
     desktopImage: '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
@@ -512,7 +532,7 @@ const multiDayTours: Tour[] = [
     },
     description: {
       en: '8-day overland journey connecting Quito Historic Center, Equator Line, Papallacta thermal springs, Tena Amazon lodge with motorized canoe, Yanacocha rescue biopark, Baños waterfalls & Pailón del Diablo (Devil\'s Cauldron), and Quilotoa Crater Lake.',
-      es: 'Travesía de 8 días conectando Quito colonial, Mitad del Mundo, Termas de Papallacta, lodge en la selva amazónica de Tena en canoa motorizada, bioparque Yanacocha en Puyo, cascada Pailón del Diablo (Devil\'s Cauldron) en Baños y cráter de Quilotoa.',
+      es: 'Travesía de 8 días que conecta el Quito colonial, aguas termales de Papallacta, selva amazónica de Tena, cascadas de Baños y el cráter Quilotoa.',
       zh: '8日私人全景之旅，涵盖基多历史中心、赤道纪念碑、帕帕亚克塔温泉、特纳亚马逊雨林精品木屋、动力木舟、普约亚纳科查生物公园、巴尼奥斯恶魔之咽瀑布与基洛托阿火山湖。'
     },
     highlights: [
@@ -646,9 +666,10 @@ const multiDayTours: Tour[] = [
   // Tour 6: Andes & Amazon Rainforest (7 Days)
   {
     id: 'andes-amazon-7days',
+    code: '2.2',
     title: { 
       en: 'Mystic Andes & Amazon Rainforest', 
-      es: 'Andes Místicos Y Selva Amazónica', 
+      es: 'El Latido De Los Andes Y La Amazonía',
       fr: 'Andes Mystiques et Forêt Amazonienne', 
       de: 'Mystische Anden & Amazonas Regenwald', 
       it: 'Ande Mistiche e Foresta Amazzonica', 
@@ -668,9 +689,13 @@ const multiDayTours: Tour[] = [
       zh: '7天 / 6晚' 
     },
     durationDays: 7,
-    price: 1250,
-    price3Star: 1250,
-    price4Star: 1490,
+    price: 1190,
+    price3Star: 1190,
+    price4Star: 1750,
+    inversionPremium: 850,
+    inversionLuxury: 1230,
+    valorPremium: 1190,
+    valorLuxury: 1750,
     imageUrl: '/images/tours/16-9/amazon-cuyabeno-16-9.jpg',
     mobileImage: '/images/tours/9-16/amazon-waterfull-9-16.jpg',
     desktopImage: '/images/tours/16-9/amazon-cuyabeno-16-9.jpg',
@@ -698,7 +723,7 @@ const multiDayTours: Tour[] = [
     },
     description: {
       en: '7-day immersive journey uniting Quito colonial heritage, Equator line, Papallacta thermal springs, Tena jungle lodge, motorized canoe expeditions, Kichwa cultural encounter, and Paikawe Amazon reserve giant fish lagoon.',
-      es: 'Inmersión de 7 días combinando el patrimonio colonial de Quito, la Mitad del Mundo, Termas de Papallacta, lodge en la selva de Tena, expedición en canoa, vivencia cultural Kichwa y los peces gigantes de la Reserva Paikawe.',
+      es: 'Inmersión de 7 días entre el patrimonio histórico de Quito, relajación en Papallacta, expedición en la selva de Tena y fauna de la Reserva Paikawe.',
       zh: '7日沉浸式探险，结合基多殖民文化遗产、赤道线、帕帕亚克塔温泉、特纳雨林木屋、动力木舟、奇瓦文化体验、派卡韦亚马逊保护区巨型鱼类观赏。'
     },
     highlights: [
@@ -823,9 +848,10 @@ const multiDayTours: Tour[] = [
   // Tour 7: Snow-Capped Volcanoes & Waterfalls (6 Days)
   {
     id: 'snow-volcanoes-6days',
+    code: '2.3',
     title: { 
       en: 'Avenue Of The Volcanoes Expedition', 
-      es: 'Expedición Avenida De Los Volcanes', 
+      es: 'Nieve, Volcanes Y Manantiales: Expedición Andina',
       fr: 'Expédition sur l\'Avenue des Volcans', 
       de: 'Expedition auf der Straße der Vulkane', 
       it: 'Spedizione lungo il Viale dei Vulcani', 
@@ -845,9 +871,13 @@ const multiDayTours: Tour[] = [
       zh: '6天 / 5晚' 
     },
     durationDays: 6,
-    price: 1100,
-    price3Star: 1100,
-    price4Star: 1350,
+    price: 950,
+    price3Star: 950,
+    price4Star: 1390,
+    inversionPremium: 650,
+    inversionLuxury: 990,
+    valorPremium: 950,
+    valorLuxury: 1390,
     imageUrl: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
     mobileImage: '/images/tours/9-16/chimborazo-9-16.jpg',
     desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
@@ -875,7 +905,7 @@ const multiDayTours: Tour[] = [
     },
     description: {
       en: '6-day overland journey traversing the Avenue of the Volcanoes, adventure town of Baños, Pailón del Diablo (Devil\'s Cauldron) waterfall, Pastaza canyon, Puyo rainforest biopark, and Quilotoa turquoise crater lake.',
-      es: 'Recorrido de 6 días por la Avenida de los Volcanes, Baños de Agua Santa, la cascada Pailón del Diablo (Devil\'s Cauldron), el cañón del Pastaza, el bioparque de selva en Puyo y el lago de cráter Quilotoa.',
+      es: 'Recorrido de 6 días por la Avenida de los Volcanes, Baños de Agua Santa, la cascada Pailón del Diablo, bioparque en Puyo y el cráter Quilotoa.',
       zh: '6日陆地景观之旅，沿着火山大道前进，游览冒险小镇巴尼奥斯、恶魔之咽瀑布、帕斯塔萨峡谷、普约雨林公园与基洛托阿翡翠火山湖。'
     },
     highlights: [
@@ -980,9 +1010,10 @@ const multiDayTours: Tour[] = [
   // Tour 8: Ecuador Fantastic (8 Days)
   {
     id: 'ecuador-fantastic-8days',
+    code: '2.4',
     title: { 
       en: 'Fantastic Ecuador: The Complete Circuit', 
-      es: 'Ecuador Fantástico: El Circuito Completo', 
+      es: 'Ecuador Fantástico: La Gran Ruta De Los Andes',
       fr: 'Équateur Fantastique: Le Circuit Complet', 
       de: 'Fantastisches Ecuador: Die komplette Route', 
       it: 'Ecuador Fantastico: Il Circuito Completo', 
@@ -1002,9 +1033,13 @@ const multiDayTours: Tour[] = [
       zh: '8天 / 7晚' 
     },
     durationDays: 8,
-    price: 1512,
-    price3Star: 1512,
-    price4Star: 1799,
+    price: 1490,
+    price3Star: 1490,
+    price4Star: 2090,
+    inversionPremium: 1050,
+    inversionLuxury: 1450,
+    valorPremium: 1490,
+    valorLuxury: 2090,
     imageUrl: '/images/tours/16-9/quito-colonial-16-9.jpg',
     mobileImage: '/images/tours/9-16/quito-centro-historico.jpg',
     desktopImage: '/images/tours/16-9/quito-colonial-16-9.jpg',
@@ -1033,7 +1068,7 @@ const multiDayTours: Tour[] = [
     },
     description: {
       en: 'Discover the Best of Ecuador in 8 Days: Quito Historic Center, Otavalo market, Cuicocha lake, Mitad del Mundo, Baños waterfalls & Pailón del Diablo (Devil\'s Cauldron), Chimborazo Volcano (6,310m), Ingapirca Inca ruins, Colonial Cuenca, Cajas National Park lakes, and finishing in coastal Guayaquil.',
-      es: 'Descubre lo mejor de Ecuador en 8 días: Quito colonial, mercado de Otavalo, laguna de Cuicocha, Mitad del Mundo, cascadas de Baños y Pailón del Diablo (Devil\'s Cauldron), Volcán Chimborazo (6,310 m), ruinas incas de Ingapirca, Cuenca colonial, Parque Nacional Cajas y final en Guayaquil.',
+      es: 'El gran circuito ecuatoriano de 8 días: Quito colonial, mercado de Otavalo, cascadas de Baños, Chimborazo, Ingapirca, Cuenca colonial y Guayaquil.',
       zh: '8日厄瓜多尔陆地旗舰探险，连接基多、奥塔瓦洛印第安集市、库伊科查湖、巴尼奥斯恶魔之咽、钦博拉索火山（6310米）、因加皮尔卡印加遗址、昆卡世界遗产城、卡哈斯国家公园与瓜亚基尔港。'
     },
     highlights: [
@@ -1169,9 +1204,10 @@ const multiDayTours: Tour[] = [
   // Tour 9: Ecuador & Galapagos 12 Days
   {
     id: 'ecuador-galapagos-12days',
+    code: '3.1',
     title: { 
       en: 'The Ultimate Ecuador & Galapagos Odyssey', 
-      es: 'La Gran Odisea: Ecuador Continental Y Galápagos', 
+      es: 'De Los Andes Al Encanto De Galápagos',
       fr: 'L\'Odyssée Ultime: Équateur et Galápagos', 
       de: 'Die ultimative Ecuador & Galapagos Odyssee', 
       it: 'L\'Odissea Definitiva: Ecuador e Galapagos', 
@@ -1191,9 +1227,13 @@ const multiDayTours: Tour[] = [
       zh: '12天 / 11晚' 
     },
     durationDays: 12,
-    price: 2797,
-    price3Star: 2797,
-    price4Star: 3190,
+    price: 2590,
+    price3Star: 2590,
+    price4Star: 2750,
+    inversionPremium: 1731,
+    inversionLuxury: 1831,
+    valorPremium: 2590,
+    valorLuxury: 2750,
     imageUrl: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.jpg',
     mobileImage: '/images/tours/9-16/galapagos-piquero-patas-azules-9-16.jpg',
     desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.jpg',
@@ -1222,7 +1262,7 @@ const multiDayTours: Tour[] = [
     },
     description: {
       en: '12-day flagship expedition: Quito colonial city & Equator, Papallacta thermal springs, Tena Amazon lodge with motorized canoe & caiman lagoon, Paikawe giant fish reserve, Santa Cruz highlands & giant tortoises, Isabela Island flamingo lagoon & Tintoreras snorkeling, Las Grietas, and full-day yacht cruise to Santa Fe or Pinzón Island.',
-      es: 'Expedición insignia de 12 días: Quito colonial y Mitad del Mundo, Termas de Papallacta, lodge en la Amazonía de Tena con canoa motorizada y caimanes, Reserva Paikawe, tierras altas de Santa Cruz, Isla Isabela con flamingos y snorkel en Tintoreras, Las Grietas y crucero en yate a Santa Fe o Pinzón.',
+      es: 'Expedición insignia de 12 días: combina Quito colonial y Amazonía de Tena con 6 días de exploración insular, fauna y playas en Galápagos.',
       zh: '12日顶级奢华联合探险，涵盖基多历史名城、赤道线、帕帕亚克塔温泉、特纳亚马逊木屋、派卡韦保护区巨鱼、加拉帕戈斯圣克鲁斯、伊莎贝拉岛、蒂恩托雷拉斯石礁、拉斯格里塔斯及圣菲岛/平松岛全天游艇巡航。'
     },
     highlights: [
@@ -1416,9 +1456,10 @@ const multiDayTours: Tour[] = [
   // Tour 10: Ecuador & Galapagos 11 Days
   {
     id: 'ecuador-galapagos-11days',
+    code: '3.2',
     title: { 
       en: 'Master Journey: Mainland Ecuador To Galapagos', 
-      es: 'Travesía Maestra: Del Ecuador Continental A Galápagos', 
+      es: 'Ecuador Y Galápagos En Breve: Magia Y Aventura',
       fr: 'Voyage Maître: De l\'Équateur Continental aux Galápagos', 
       de: 'Meisterreise: Vom Festland Ecuadors nach Galapagos', 
       it: 'Viaggio Maestro: Dall\'Ecuador Continentale alle Galapagos', 
@@ -1438,9 +1479,13 @@ const multiDayTours: Tour[] = [
       zh: '11天 / 10晚' 
     },
     durationDays: 11,
-    price: 2437,
-    price3Star: 2437,
-    price4Star: 2790,
+    price: 2290,
+    price3Star: 2290,
+    price4Star: 2450,
+    inversionPremium: 1540,
+    inversionLuxury: 1640,
+    valorPremium: 2290,
+    valorLuxury: 2450,
     imageUrl: '/images/tours/16-9/galapagos-snorkeling-16-9.jpg',
     mobileImage: '/images/tours/9-16/galapagos-snorkeling-9-16.jpg',
     desktopImage: '/images/tours/16-9/galapagos-snorkeling-16-9.jpg',
@@ -1469,7 +1514,7 @@ const multiDayTours: Tour[] = [
     },
     description: {
       en: '11-day master journey connecting mainland Ecuador (Quito, Avenue of Volcanoes, Baños Pailón del Diablo (Devil\'s Cauldron), Puyo Amazon Rainforest, Quilotoa Crater Lake) with Galápagos Islands (Santa Cruz highlands, giant tortoises, Isabela full-day with Tintoreras & flamingos, La Lobería and Las Grietas canyon).',
-      es: 'Travesía maestra de 11 días uniendo Ecuador continental (Quito, Avenida de los Volcanes, Baños Pailón del Diablo (Devil\'s Cauldron), selva amazónica de Puyo, cráter de Quilotoa) con las Islas Galápagos (tierras altas de Santa Cruz, tortugas gigantes, Isabela con Tintoreras y flamingos, La Lobería y Las Grietas).',
+      es: 'Travesía de 11 días conectando los Andes, Baños, la Amazonía y Quilotoa con las maravillas volcánicas, tortugas gigantes y playas de Galápagos.',
       zh: '11日经典联合行程，将厄瓜多尔大陆（基多、巴尼奥斯恶魔之咽、普约亚马逊、基洛托阿）与加拉帕戈斯群岛（圣克鲁斯、伊莎贝拉、蒂恩托雷拉斯、拉斯格里塔斯）完美融合。'
     },
     highlights: [

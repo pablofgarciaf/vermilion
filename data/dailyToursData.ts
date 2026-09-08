@@ -4,9 +4,10 @@ export const dailyTours: Tour[] = [
   // 1.1 Quito City Tour & Middle of the World ($89 USD)
   {
     id: 'quito-city-middle-of-the-world',
+    code: '4.1',
     title: { 
       en: 'Quito City Tour & Middle Of The World', 
-      es: 'Quito City Tour Y Mitad Del Mundo',
+      es: 'Quito Colonial Y Mitad Del Mundo',
       fr: 'VISITE DE QUITO ET MILIEU DU MONDE',
       de: 'QUITO CITY TOUR & MITTE DER WELT',
       it: 'CITY TOUR DI QUITO E METÀ DEL MONDO',
@@ -54,7 +55,7 @@ export const dailyTours: Tour[] = [
     },
     description: {
       en: 'Discover the history, culture, architecture, and flavors of Quito on a fascinating tour through the city’s historic center and the famous Middle of the World. Our tour begins at Plaza Grande, the heart of Quito’s historic center, exploring surrounding colonial architecture, Convent of La Concepción, Church of El Sagrario, the Archbishop’s Palace, and La Compañía de Jesús with its gold leaf Baroque interior. Enjoy a special Yumbos chocolate tasting before visiting the iconic Plaza and Church of San Francisco. In the afternoon, journey to the Middle of the World to explore the equatorial monument and interactive Intiñan Museum.',
-      es: 'Descubre la historia, cultura, arquitectura y sabores de Quito en un fascinante recorrido por su centro histórico (Patrimonio UNESCO) y la famosa Mitad del Mundo. Visita Plaza Grande, Convento de La Concepción, Iglesia de El Sagrario, Palacio Arzobispal y los imponentes retablos dorados de La Compañía de Jesús. Disfruta de una cata de chocolate ecuatoriano fino en Yumbos y visita el complejo de San Francisco. Por la tarde, explora el monumento ecuatorial y los experimentos ancestrales del Museo Intiñan.',
+      es: 'Recorrido por el centro colonial de Quito (Patrimonio UNESCO), cata de chocolate fino en Yumbos y visita a la línea ecuatorial con Museo Intiñan.',
       fr: 'Découvrez l’histoire, la culture et l’architecture de Quito dans son centre historique classé par l’UNESCO et au Milieu du Monde. Visitez la Plaza Grande, La Compañía de Jesús recouverte d’or, dégustez du chocolat chez Yumbos, visitez San Francisco et explorez le musée interactif Intiñan.',
       de: 'Entdecken Sie das UNESCO-Welterbe der Altstadt von Quito und die berühmte Mitte der Welt. Besuchen Sie die Plaza Grande, die goldverzierte Kirche La Compañía, genießen Sie eine Schokoladenverkostung bei Yumbos und erkunden Sie das interaktive Intiñan-Museum.',
       it: 'Scopri la storia e l’architettura coloniale di Quito e la famosa Metà del Mondo. Visita Plaza Grande, la Chiesa dorata de La Compañía, degusta il cioccolato Yumbos, visita San Francisco e l’interattivo Museo Intiñan.',
@@ -101,9 +102,10 @@ export const dailyTours: Tour[] = [
   // 1.2 Otavalo Artisan Market, Peguche & Cotacachi ($92 USD)
   {
     id: 'otavalo-indigenous-market',
+    code: '4.2',
     title: { 
       en: 'Otavalo Artisan Market & Cotacachi', 
-      es: 'Plaza de Ponchos (Mercado Artesanal) De Otavalo Y Cotacachi',
+      es: 'Plaza De Ponchos (Mercado Artesanal) De Otavalo Y Cotacachi',
       fr: 'MARCHÉ INDIGÈNE D’OTAVALO ET COTACACHI',
       de: 'INDIGENER MARKT VON OTAVALO & COTACACHI',
       it: 'MERCATO INDIGENO DI OTAVALO E COTACACHI',
@@ -151,7 +153,7 @@ export const dailyTours: Tour[] = [
     },
     description: {
       en: 'Discover the vibrant indigenous culture, traditions, music, handicrafts, and landscapes of northern Ecuador on a memorable journey from Quito to Otavalo, Peguche, and Cotacachi. Explore Plaza de los Ponchos—the famous South American artisan market with colorful textiles and handmade crafts. In the Kichwa Community of Peguche, enjoy a traditional lunch, participate in a special Mindalae cultural experience, and visit a master workshop where traditional Andean instruments like panpipes and flutes are handcrafted. Finally, explore Cotacachi, the renowned leather capital of Ecuador.',
-      es: 'Descubre la vibrante cultura indígena, música, artesanías y paisajes del norte andino de Ecuador viajando de Quito a Otavalo, Peguche y Cotacachi. Visita la Plaza de los Ponchos, el mercado artesanal más célebre de Sudamérica. En Peguche disfruta de un almuerzo tradicional, participa en la actividad cultural Mindalae y conoce un taller de instrumentos musicales andinos autóctonos. Culmina explorando Cotacachi, la capital ecuatoriana del cuero artesanal.',
+      es: 'Excursión cultural al mercado artesanal más célebre de Sudamérica en Otavalo, música en Peguche y finas artesanías de cuero en Cotacachi.',
       fr: 'Découvrez la culture indigène et l’artisanat d’Otavalo, le village de Peguche avec musique traditionnelle et la ville du cuir de Cotacachi.',
       de: 'Erleben Sie den farbenfrohen Kunsthandwerksmarkt in Otavalo, traditionelle Andenmusik in Peguche und hochwertige Lederwaren in Cotacachi.',
       it: 'Esplora il famoso mercato di Otavalo a Plaza de los Ponchos, la cultura di Peguche con musica andina e la capitale del cuoio a Cotacachi.',
@@ -197,6 +199,7 @@ export const dailyTours: Tour[] = [
   // 1.3 Papallacta Hot Springs ($108 USD)
   {
     id: 'papallacta-hot-springs',
+    code: '4.3',
     title: { 
       en: 'Papallacta Thermal Springs & Andean Cloud Forest', 
       es: 'Termas De Papallacta Y Bosque Nublado Andino',
@@ -247,7 +250,7 @@ export const dailyTours: Tour[] = [
     },
     description: {
       en: 'Journey approximately two hours east of Quito along the historic cinnamon route to Papallacta Hot Springs. Cross the high Eastern Andes pass at 4,100 meters (13,451 ft) before descending into the dramatic transition zone between the Andes and the Amazon Rainforest. Relax in volcanic naturally heated thermal pools with different temperatures while enjoying views of Antisana Volcano (5,704 m / 18,714 ft). Enjoy an optional scenic nature hike along mountain river trails and take time for wellness and rejuvenation.',
-      es: 'Viaja hacia el este de Quito por la histórica ruta de la canela hacia las Termas de Papallacta. Cruza el paso de la cordillera oriental a 4.100 metros de altitud antes de descender al mágico ecotono entre los Andes y la Amazonía. Relájate en piscinas de aguas termales volcánicas de distintas temperaturas con vistas panorámicas al Volcán Antisana (5.704 m). Disfruta de un almuerzo incluido y caminatas escénicas en senderos ecológicos.',
+      es: 'Día de bienestar y relajación en piscinas de aguas termales volcánicas medicinales con senderos ecológicos y vista al volcán Antisana.',
       fr: 'Détendez-vous dans les sources thermales de Papallacta au pied du volcan Antisana, après avoir franchi un col andin à 4 100 mètres.',
       de: 'Entspannen Sie in den natürlichen Thermalbädern von Papallacta mit Blick auf den schneebedeckten Vulkan Antisana.',
       it: 'Rigenerati nelle acque termali vulcaniche di Papallacta con vista sull’imponente Vulcano Antisana.',
@@ -293,6 +296,7 @@ export const dailyTours: Tour[] = [
   // 1.4 Mindo Cloud Forest & Canopy Adventure ($117 USD)
   {
     id: 'mindo-cloud-forest',
+    code: '4.4',
     title: { 
       en: 'Mindo Cloud Forest, Waterfalls & Chocolate', 
       es: 'Bosque Nuboso De Mindo, Cascadas Y Chocolate',
@@ -343,7 +347,7 @@ export const dailyTours: Tour[] = [
     },
     description: {
       en: 'Escape the city and discover the breathtaking natural beauty of Mindo, in the heart of Ecuador’s lush cloud forest approximately two hours northwest of Quito. Visit a world-famous hummingbird sanctuary observing dozens of iridescent hummingbird species up close. Hike through the Mindo-Nambillo Ecological Reserve to discover beautiful waterfalls, and get your adrenaline flowing on an exciting 3-line canopy zip-line adventure soaring above the cloud forest canopy.',
-      es: 'Escápate al corazón del exuberante bosque nuboso de Mindo, uno de los ecosistemas con mayor biodiversidad del planeta. Visita un santuario de colibríes donde observarás decenas de especies multicolores de cerca. Realiza una caminata por la Reserva Ecológica Mindo-Nambillo hasta hermosas cascadas y siente la adrenalina con un circuito de 3 líneas de canopy (tirolesa) volando sobre las copas de los árboles.',
+      es: 'Aventura ecológica en el bosque nublado de Mindo: observación de colibríes exóticos, caminata hacia cascadas naturales y tirolesas canopy.',
       fr: 'Explorez la forêt tropicale de Mindo: sanctuaire de colibris, cascade Mindo-Nambillo et descente en tyrolienne (canopy 3 lignes) au-dessus de la canopée.',
       de: 'Erleben Sie die Artenvielfalt von Mindo: Kolibri-Schutzgebiet, Wasserfallwanderung und aufregendes Canopy-Ziplining über den Baumkronen.',
       it: 'Scopri la lussureggiante foresta di Mindo: santuario dei colibrì, cascata Mindo-Nambillo e un’emozionante esperienza di zipline canopy a 3 linee.',
@@ -390,6 +394,7 @@ export const dailyTours: Tour[] = [
   // 1.5 Antisana National Park & La Mica Lagoon ($96 USD)
   {
     id: 'antisana-national-park',
+    code: '4.5',
     title: { 
       en: 'Antisana Ecological Reserve & Condor Sanctuary', 
       es: 'Reserva Ecológica Antisana Y Santuario Del Cóndor',
@@ -440,7 +445,7 @@ export const dailyTours: Tour[] = [
     },
     description: {
       en: 'Located southeast of Quito, Antisana National Park is one of Ecuador’s most pristine protected areas and premier destinations for high-altitude wildlife observation. Travel through Valle de los Chillos and Pintag ascending into the wild páramo ecosystem. Admire the colossal Antisana Volcano (5,758 m / 18,885 ft) with its glacier-covered peaks and ancient lava flows. Antisana is Ecuador’s prime sanctuary to spot the majestic wild Andean condor with its 3-meter wingspan, along with wild llamas, deer, and foxes. Enjoy a scenic hike around La Mica Lagoon with panoramic mountain vistas.',
-      es: 'Ubicado al sureste de Quito, el Parque Nacional Antisana es una de las áreas naturales protegidas más vírgenes y espectaculares de Ecuador. Atraviesa el Valle de los Chillos y Pintag ascendiendo al páramo andino. Admira el imponente Volcán Antisana (5.758 m) con sus glaciares y extensos flujos de lava petrificada. Antisana es el principal refugio del cóndor andino, con posibilidades de avistar cóndores en libertad, venados, lobos de páramo y aves de altura. Realiza una caminata escénica en la Laguna La Mica.',
+      es: 'Expedición de alta montaña al páramo del Antisana para avistar cóndores en libertad, fauna silvestre andina y caminata en la Laguna La Mica.',
       fr: 'Explorez le parc national Antisana: sanctuaire du condor des Andes, paysages volcaniques glaciaires et randonnée à la lagune La Mica.',
       de: 'Besuchen Sie den Antisana-Nationalpark, den besten Ort Ecuadors zur Beobachtung des Andenkondors, mit Wanderung an der Mica-Lagune.',
       it: 'Ammira il Vulcano Antisana e osserva il maestoso condor andino nel suo habitat naturale durante un trekking alla Laguna La Mica.',
@@ -485,6 +490,7 @@ export const dailyTours: Tour[] = [
   // 1.6 Cotopaxi National Park & Volcano Hike ($96 USD)
   {
     id: 'cotopaxi-national-park',
+    code: '4.6',
     title: { 
       en: 'Cotopaxi National Park & Limpiopungo Lagoon', 
       es: 'Parque Nacional Cotopaxi Y Laguna De Limpiopungo',
@@ -535,7 +541,7 @@ export const dailyTours: Tour[] = [
     },
     description: {
       en: 'Discover Cotopaxi Volcano (5,897 m / 19,347 ft), one of the world’s highest active volcanoes and Ecuador’s most iconic natural landmark. Travel south from Quito along the scenic Avenue of the Volcanoes into Cotopaxi National Park. Explore the Interpretation Center, observe wild horses and páramo flora, and undertake the exciting hike from the parking area at 4,500 m (14,764 ft) up to the José Rivas Mountain Refuge at 4,800 m (15,748 ft), with optional extension toward the glacier viewpoint depending on weather and group physical condition.',
-      es: 'Descubre el imponente Volcán Cotopaxi (5.897 m), uno de los volcanes activos más altos del mundo y símbolo natural de Ecuador. Viaja hacia el sur por la legendaria Avenida de los Volcanes hasta el Parque Nacional Cotopaxi. Visita el Centro de Interpretación y la Laguna de Limpiopungo, observa caballos salvajes y realiza la emblemática caminata desde el parqueadero (4.500 m) hasta el Refugio José Rivas a 4.800 metros de altitud.',
+      es: 'Aventura en el Parque Nacional Cotopaxi explorando la Laguna de Limpiopungo y realizando el ascenso a pie al Refugio José Rivas a 4.800 m.',
       fr: 'Randonnez sur les pentes du volcan Cotopaxi (5 897 m): ascension vers le refuge José Rivas à 4 800 mètres et lagune de Limpiopungo.',
       de: 'Besteigen Sie die Hänge des aktiven Vulkans Cotopaxi (5.897 m) bis zur José-Rivas-Schutzhütte auf 4.800 Metern Höhe.',
       it: 'Vivi l’emozione di salire sul Vulcano Cotopaxi fino al Rifugio José Rivas a 4.800 metri di quota lungo la Via dei Vulcani.',
@@ -581,6 +587,7 @@ export const dailyTours: Tour[] = [
   // 1.7 Quilotoa Crater Lake, Tigua & Guinea Pig Farm ($97 USD)
   {
     id: 'quilotoa-crater-lake',
+    code: '4.7',
     title: { 
       en: 'Quilotoa Crater Cruise & Toachi Canyon', 
       es: 'Laguna Del Quilotoa Y Cañón Del Toachi',
@@ -631,7 +638,7 @@ export const dailyTours: Tour[] = [
     },
     description: {
       en: 'Depart early from Quito traveling southwest through breathtaking Andean landscapes to Quilotoa Crater Lake, inside the Ilinizas Ecological Reserve. Marvel at the dramatic 3-km wide volcanic caldera and its sparkling turquoise-green lake at 3,900 m (12,800 ft). Hikers can descend to the lake shore or enjoy the panoramic cliff-edge viewpoints. Along the scenic route, stop in Tigua to meet indigenous artists famed for their vibrant sheepskin paintings, and visit an authentic traditional guinea pig (cuy) farm learning about centuries-old Andean agrarian customs.',
-      es: 'Salida desde Quito hacia el suroeste a través de sobrecogedores paisajes andinos hasta la Laguna del Cráter de Quilotoa en la Reserva Ilinizas. Admira el mirador panorámico con vistas a la caldera volcánica y su agua verde esmeralda turquesa a 3.900 metros de altitud. Opción de caminata hacia la orilla del lago. En el camino, parada en la comunidad de Tigua para conocer a los pintores de arte andino en cuero de oveja y visita a una granja tradicional de cuyes.',
+      es: 'Visita a la impresionante laguna turquesa en el cráter del volcán Quilotoa, con paradas en el cañón del Toachi y pintores indígenas de Tigua.',
       fr: 'Visitez la caldeira émeraude du lac Quilotoa (3 900 m), rencontrez les peintres naïfs de Tigua et visitez un élevage traditionnel de cochons d’Inde (cuy).',
       de: 'Bestaunen Sie den smaragdgrünen Quilotoa-Kratersee auf 3.900 m, traditionelle Tigua-Malereien und eine lokale Meerschweinchenzucht.',
       it: 'Ammira le splendide acque turchesi del cratere di Quilotoa, l’arte di Tigua e una tradizionale fattoria di porcellini d’India (cuy).',

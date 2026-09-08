@@ -39,8 +39,9 @@ export function AdminTourTable({
   const filteredTours = tours.filter((t) => {
     const titleStr = getSafeString(t.title, locale).toLowerCase();
     const destStr = getSafeString(t.destination, locale).toLowerCase();
+    const codeStr = (t.code || '').toLowerCase();
     const search = searchTerm.toLowerCase();
-    return titleStr.includes(search) || destStr.includes(search);
+    return titleStr.includes(search) || destStr.includes(search) || codeStr.includes(search);
   });
 
   return (
@@ -94,6 +95,7 @@ export function AdminTourTable({
             {filteredTours.map((tour) => (
               <BaseTourCard
                 key={tour.id}
+                code={tour.code}
                 title={getSafeString(tour.title, locale)}
                 price={tour.price || tour.price3Star || tour.price4Star || 0}
                 isAdmin={true}

@@ -7,12 +7,12 @@ import { mockTours } from '@/data/mock';
 import { calculateTourPrice, PricingDetails } from '@/lib/pricing';
 import { PriceCalculator } from './PriceCalculator';
 import { TravelDatePicker } from './TravelDatePicker';
-import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ExternalLink, Lock, ArrowRight } from 'lucide-react';
+import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ExternalLink, Lock, ArrowRight, Sparkles, Loader2 } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getStoredAffiliateRef } from '@/components/affiliates/AffiliateTracker';
-import { Sparkles, Loader2 } from 'lucide-react';
 import { getAffiliateByCode, AffiliateAccount } from '@/lib/affiliates';
+import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
 const CATEGORIES = [
   { id: 'all', label: 'Todas las Expediciones' },
@@ -72,6 +72,31 @@ export function BookingWizard() {
   const [contactInfo, setContactInfo] = useState({ name: '', email: '', phone: '', notes: '' });
   const [isProcessing, setIsProcessing] = useState(false);
 
+  // Auto-fill from localStorage (synchronized across all forms) or URL search parameters
+  useEffect(() => {
+    const stored = getStoredUserProfile();
+    const urlEmail = searchParams.get('email');
+    const urlName = searchParams.get('name');
+    const urlPhone = searchParams.get('phone');
+    if (stored.name || stored.email || stored.phone || urlEmail || urlName || urlPhone) {
+      setContactInfo((prev) => ({
+        ...prev,
+        name: prev.name || urlName || stored.name || '',
+        email: prev.email || urlEmail || stored.email || '',
+        phone: prev.phone || urlPhone || stored.phone || '',
+        notes: prev.notes || stored.notes || '',
+      }));
+    }
+  }, [searchParams]);
+
+  const handleContactChange = (field: 'name' | 'email' | 'phone' | 'notes', value: string) => {
+    setContactInfo((prev) => {
+      const next = { ...prev, [field]: value };
+      saveStoredUserProfile(next);
+      return next;
+    });
+  };
+
   const [pricing, setPricing] = useState<PricingDetails>({
     basePricePerAdult: 0, basePricePerChild: 0, adultsCount: 0, childrenCount: 0,
     adultsTotal: 0, childrenTotal: 0, subtotal: 0, groupDiscountPercentage: 0,
@@ -114,11 +139,13 @@ export function BookingWizard() {
 
   const handleCheckout = () => {
     if (selectedTours.length === 0) return;
+    saveStoredUserProfile(contactInfo);
     const tourTitleStr = selectedTours.map(t => typeof t.title === 'string' ? t.title : (t.title?.es || t.title?.en || 'Tour')).join(' + ');
     const queryParams = new URLSearchParams({
       tourId: selectedTours.map(t => t.id).join(','),
       tourTitle: tourTitleStr,
       email: contactInfo.email,
+      name: contactInfo.name,
       amount: String(pricing.total),
       type: 'full',
       ref: affiliateRef || `VR-${Date.now()}`,
@@ -312,16 +339,44 @@ export function BookingWizard() {
                   </h3>
                   <div className="grid grid-cols-1 gap-3">
                     <div className="space-y-1">
-                      <label className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Nombre Completo</label>
-                      <input type="text" value={contactInfo.name} onChange={(e) => setContactInfo({...contactInfo, name: e.target.value})} placeholder="Tu nombre completo" className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+                      <label htmlFor="booking-name" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Nombre Completo</label>
+                      <input
+                        id="booking-name"
+                        name="name"
+                        type="text"
+                        autoComplete="name"
+                        autoCapitalize="words"
+                        value={contactInfo.name}
+                        onChange={(e) => handleContactChange('name', e.target.value)}
+                        placeholder="Tu nombre completo"
+                        className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Email</label>
-                      <input type="email" value={contactInfo.email} onChange={(e) => setContactInfo({...contactInfo, email: e.target.value})} placeholder="tu@email.com" className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500" />
+                      <label htmlFor="booking-email" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Email</label>
+                      <input
+                        id="booking-email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        inputMode="email"
+                        value={contactInfo.email}
+                        onChange={(e) => handleContactChange('email', e.target.value)}
+                        placeholder="tu@email.com"
+                        className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Peticiones Especiales (Opcional)</label>
-                      <textarea rows={2} value={contactInfo.notes} onChange={(e) => setContactInfo({...contactInfo, notes: e.target.value})} placeholder="Alergias, necesidades especiales..." className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none" />
+                      <label htmlFor="booking-notes" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Peticiones Especiales (Opcional)</label>
+                      <textarea
+                        id="booking-notes"
+                        name="notes"
+                        rows={2}
+                        value={contactInfo.notes}
+                        onChange={(e) => handleContactChange('notes', e.target.value)}
+                        placeholder="Alergias, necesidades especiales..."
+                        className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+                      />
                     </div>
                   </div>
                 </div>

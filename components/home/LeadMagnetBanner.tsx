@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { Mail, CheckCircle2, AlertCircle, Download } from 'lucide-react';
+import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
 export function LeadMagnetBanner() {
   const locale = useLocale();
@@ -10,6 +11,11 @@ export function LeadMagnetBanner() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+
+  useEffect(() => {
+    const stored = getStoredUserProfile();
+    if (stored.email) setEmail(stored.email);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +29,7 @@ export function LeadMagnetBanner() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
+        saveStoredUserProfile({ email: email.trim() });
         setStatus('success');
       } else {
         setErrorMsg(data.error || (isEs ? 'Error al enviar. Intentalo de nuevo.' : 'Error sending. Please try again.'));
@@ -75,9 +82,17 @@ export function LeadMagnetBanner() {
               <div className="relative flex-1">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-400 pointer-events-none" />
                 <input
+                  id="lead-magnet-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
+                  inputMode="email"
                   value={email}
-                  onChange={(e) => { setEmail(e.target.value); if (status === 'error') setStatus('idle'); }}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    saveStoredUserProfile({ email: e.target.value });
+                    if (status === 'error') setStatus('idle');
+                  }}
                   placeholder={isEs ? 'tu@correo.com' : 'your@email.com'}
                   required
                   className="w-full pl-11 pr-4 py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent transition-all"

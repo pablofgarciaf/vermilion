@@ -173,7 +173,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         <section id="galapagos" className="scroll-mt-24 space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200 dark:border-white/10 pb-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
                 <span>🐢</span> {isEs ? 'Archipiélago Encantado' : 'Enchanted Archipelago'}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-light text-zinc-900 dark:text-white">
@@ -204,6 +204,8 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       src={tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'}
                       alt={title}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      loading="lazy"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
@@ -258,7 +260,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         <section id="continental" className="scroll-mt-24 space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200 dark:border-white/10 pb-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
                 <span>🏔️</span> {isEs ? 'Andes & Amazonía' : 'Andes & Amazon'}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-light text-zinc-900 dark:text-white">
@@ -288,6 +290,8 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       src={tour.imageUrl || '/images/tours/16-9/cotopaxi-volcano-16-9.jpg'}
                       alt={title}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      loading="lazy"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
@@ -303,7 +307,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       <h3 className="font-serif text-base font-bold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
                         {title}
                       </h3>
-                      <p className="font-serif text-xl font-bold text-emerald-600 dark:text-emerald-400 mt-2">
+                      <p className="font-serif text-xl font-bold text-emerald-700 dark:text-emerald-400 mt-2">
                         ${price.toLocaleString()} <span className="text-xs font-normal text-zinc-500 dark:text-zinc-400">USD</span>
                       </p>
                     </div>
@@ -333,7 +337,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         <section id="combinados" className="scroll-mt-24 space-y-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200 dark:border-white/10 pb-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
                 <span>✨</span> {isEs ? 'La Experiencia Definitiva' : 'The Ultimate Experience'}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-light text-zinc-900 dark:text-white">
@@ -364,6 +368,8 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       src={tour.imageUrl || '/images/tours/16-9/galapagos-snorkeling-16-9.jpg'}
                       alt={title}
                       fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      loading="lazy"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
@@ -376,8 +382,8 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       <span className="text-xs text-blue-300 font-semibold bg-black/60 px-3 py-1 rounded-full">
                         Andes + Galápagos VIP
                       </span>
-                      <p className="font-serif text-3xl font-bold text-zinc-900 dark:text-white">
-                        ${price.toLocaleString()} <span className="text-sm font-normal text-zinc-500 dark:text-zinc-400">USD</span>
+                      <p className="font-serif text-3xl font-bold text-white">
+                        ${price.toLocaleString()} <span className="text-sm font-normal text-zinc-300">USD</span>
                       </p>
                     </div>
                   </div>
@@ -416,13 +422,13 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         {/* ── SECCIÓN 4: EXCURSIONES FULL DAY / DIARIAS (3D CAROUSEL) ──────── */}
         <section id="diarios" className="scroll-mt-24 space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-emerald-400 flex items-center justify-center gap-1.5">
+            <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 flex items-center justify-center gap-1.5">
               <span>☀️</span> {isEs ? 'Salidas Diarias' : 'Daily Departures'}
             </span>
-            <h2 className="font-serif text-3xl sm:text-5xl font-light text-white">
+            <h2 className="font-serif text-3xl sm:text-5xl font-light text-zinc-900 dark:text-white">
               {isEs ? 'Excursiones Full Day' : 'Full-Day Excursions'}
             </h2>
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">
               {isEs
                 ? 'Escapadas de un día desde Quito a los destinos más icónicos del Ecuador.'
                 : 'One-day getaways departing from Quito to Ecuador\'s most iconic landscapes.'}

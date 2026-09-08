@@ -234,7 +234,9 @@ export function TourCarousel({ tours }: TourCarouselProps) {
                 <div
                   key={tour.id}
                   onClick={() => !isCurrent && goTo(idx)}
-                  className={`absolute top-0 left-1/2 -ml-[160px] lg:-ml-[175px] w-[320px] lg:w-[350px] transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                  aria-hidden={!isCurrent ? 'true' : undefined}
+                  tabIndex={!isCurrent ? -1 : undefined}
+                  className={`absolute top-0 left-1/2 -ml-[160px] lg:-ml-[175px] w-[320px] lg:w-[350px] transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${
                     !isCurrent ? 'cursor-pointer group' : ''
                   }`}
                   style={{
@@ -261,6 +263,8 @@ export function TourCarousel({ tours }: TourCarouselProps) {
             const isCurrent = idx === currentIndex;
             const isPrev = idx === prevIdx;
             const isNext = idx === nextIdx;
+            if (!isCurrent && !isPrev && !isNext) return null;
+
             let cls = 'translate-x-[150%] opacity-0 z-0 scale-90 pointer-events-none';
             if (isCurrent) cls = 'translate-x-0 opacity-100 z-20 scale-100';
             else if (isPrev) cls = '-translate-x-[115%] opacity-70 z-10 scale-95 pointer-events-none';
@@ -268,6 +272,8 @@ export function TourCarousel({ tours }: TourCarouselProps) {
             return (
               <div
                 key={`${tour.id}-${idx}`}
+                aria-hidden={!isCurrent ? 'true' : undefined}
+                tabIndex={!isCurrent ? -1 : undefined}
                 className={`absolute top-0 left-0 w-full h-full transform transition-[transform,opacity] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${cls}`}
               >
                 <TourCard tour={tour} className="h-full" priority={false} />

@@ -89,8 +89,10 @@ export async function POST(req: NextRequest) {
     // Auto-generate Stripe Payment Link if AI detected a payment intent
     if (conciergeResponse.paymentIntent && conciergeResponse.paymentIntent.clientEmail) {
       try {
-        const { tourId, clientEmail, customerName } = conciergeResponse.paymentIntent;
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+        const { tourId, clientEmail } = conciergeResponse.paymentIntent;
+        const host = req.headers.get('x-forwarded-host') || req.headers.get('host') || 'localhost:3005';
+        const proto = req.headers.get('x-forwarded-proto') || (host.includes('localhost') ? 'http' : 'https');
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${proto}://${host}`;
         
         const session = await stripe.checkout.sessions.create({
           payment_method_types: ['card'],

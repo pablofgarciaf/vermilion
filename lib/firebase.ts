@@ -34,15 +34,43 @@ let auth: Auth | any;
 let db: Firestore | any;
 let storage: FirebaseStorage | any;
 
+let _auth: Auth | null = null;
+function getLazyAuth(): Auth {
+  if (!_auth) {
+    if (!app) {
+      app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+    }
+    _auth = getAuth(app);
+    if (typeof window !== 'undefined') {
+      import('firebase/auth').then(({ setPersistence, browserLocalPersistence }) => {
+        if (_auth) {
+          setPersistence(_auth, browserLocalPersistence).catch(() => {});
+        }
+      });
+    }
+  }
+  return _auth;
+}
+
+auth = new Proxy({} as Auth, {
+  get(target, prop) {
+    const realAuth = getLazyAuth();
+    const val = (realAuth as any)[prop];
+    if (typeof val === 'function') {
+      return val.bind(realAuth);
+    }
+    return val;
+  },
+  set(target, prop, val) {
+    const realAuth = getLazyAuth();
+    (realAuth as any)[prop] = val;
+    return true;
+  }
+});
+
 try {
   app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
   if (firebaseConfig.apiKey) {
-    auth = getAuth(app);
-    if (typeof window !== 'undefined') {
-      import('firebase/auth').then(({ setPersistence, browserLocalPersistence }) => {
-        setPersistence(auth, browserLocalPersistence).catch(() => {});
-      });
-    }
     db = getFirestore(app, databaseId);
     storage = getStorage(app);
   } else {

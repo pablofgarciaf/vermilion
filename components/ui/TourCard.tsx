@@ -37,7 +37,8 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
   return (
     <Link
       href={`/${locale}/tours/${tour.id}`}
-      className={`group relative block w-full h-full min-h-[460px] md:min-h-[500px] rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5 border border-zinc-200/60 dark:border-zinc-800/80 select-none ${className}`}
+      aria-label={title}
+      className={`group relative block w-full h-full min-h-[460px] md:min-h-[500px] bg-zinc-950 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5 border border-zinc-200/60 dark:border-zinc-800/80 select-none ${className}`}
       suppressHydrationWarning
     >
       {/* 🖼️ FOTO PRINCIPAL DE FONDO (Optimizada a tamaño de tarjeta, súper liviana) */}
@@ -57,13 +58,20 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
 
       {/* 🏷️ BADGES SUPERIORES (Destino + Bestseller) */}
       <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-10">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-black/40 backdrop-blur-md text-white shadow-sm border border-white/20">
-          <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-          <span>{destination}</span>
-        </span>
+        <div className="flex items-center gap-1.5">
+          {tour.code && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-950/85 text-emerald-300 shadow-sm border border-emerald-500/50">
+              #{tour.code}
+            </span>
+          )}
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-black/75 backdrop-blur-md text-white shadow-sm border border-white/20">
+            <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+            <span>{destination}</span>
+          </span>
+        </div>
         {tour.isPopular && (
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-emerald-900 text-white shadow-sm border border-emerald-500/40">
-            <Sparkles className="w-3 h-3 text-emerald-300" />
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-zinc-950/95 text-white shadow-sm border border-emerald-400/60">
+            <Sparkles className="w-3 h-3 text-emerald-400" />
             <span>Best Seller</span>
           </span>
         )}
@@ -108,7 +116,7 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-900 hover:bg-emerald-800 text-white text-xs font-bold shadow-lg shadow-emerald-950/60 transition-all group-hover:scale-105 border border-emerald-500/40">
+          <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold shadow-lg shadow-emerald-950/60 transition-all group-hover:scale-105 border border-emerald-400/40">
             <span>{t('card.view') || 'View Details'}</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </div>

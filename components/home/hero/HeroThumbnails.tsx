@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { SlideData } from '@/types';
@@ -12,9 +12,35 @@ interface HeroThumbnailsProps {
 }
 
 export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsProps) {
+  const [canLoadSecondary, setCanLoadSecondary] = useState(false);
+
+  useEffect(() => {
+    const loadAll = () => setCanLoadSecondary(true);
+    (window as any).__loadAllHeroThumbnails = loadAll;
+
+    let idleId: any;
+    let timerId: any;
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      idleId = (window as any).requestIdleCallback(loadAll, { timeout: 1500 });
+    } else {
+      timerId = setTimeout(loadAll, 1200);
+    }
+
+    return () => {
+      if (idleId && typeof window !== 'undefined' && 'cancelIdleCallback' in window) {
+        (window as any).cancelIdleCallback(idleId);
+      }
+      if (timerId) clearTimeout(timerId);
+      delete (window as any).__loadAllHeroThumbnails;
+    };
+  }, []);
+
   return (
     <>
       {slidesData.map((slide: any, idx: number) => {
+        const shouldRenderImages = idx === 0 || canLoadSecondary;
+
         return (
           <div key={`card-wrap-${idx}`}>
             <div
@@ -23,7 +49,7 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
                 : 'w-[180px] h-[260px] opacity-0'
                 }`}
             >
-              {slide.mobileImage && (
+              {shouldRenderImages && slide.mobileImage && (
                 <Image
                   src={slide.mobileImage}
                   alt={getLocalizedText(slide.place, locale) || 'Vermilion Routes'}
@@ -37,6 +63,7 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
               )}
 
               {/* 💻 FOTO HORIZONTAL 16:9 PARA PANTALLAS GRANDES */}
+              {shouldRenderImages && (
                 <Image
                   src={slide.desktopImage || slide.image || slide.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'}
                   alt={getLocalizedText(slide.place, locale) || 'Vermilion Routes'}
@@ -47,6 +74,7 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
                   className={`object-cover object-top ${slide.mobileImage ? 'hidden md:block' : 'block'}`}
                   sizes={idx === 0 ? "100vw" : "60vw"}
                 />
+              )}
 
               <div className="card-overlay absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none transition-opacity duration-300" />
 
