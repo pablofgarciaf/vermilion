@@ -50,9 +50,9 @@ export function AdminTourTable({
         <div>
           <h2 className="font-serif text-xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
             <Database className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-            <span>Tour Package Management</span>
+            <span>Tour Table</span>
           </h2>
-          <p className="text-xs text-zinc-600 dark:text-zinc-400">Create, edit, or remove itinerary packages stored in Firestore.</p>
+          <p className="text-xs text-zinc-600 dark:text-zinc-400">Manage itineraries and update sale prices stored in Firestore.</p>
         </div>
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -98,7 +98,7 @@ export function AdminTourTable({
                 code={tour.code}
                 title={getSafeString(tour.title, locale)}
                 price={tour.price || tour.price3Star || tour.price4Star || 0}
-                isAdmin={true}
+                isTourTable={true}
                 imageNode={
                   tour.imageUrl ? (
                     <Image src={tour.imageUrl} alt={getSafeString(tour.title, locale)} fill sizes="(max-width: 768px) 100vw, 360px" className="object-cover" />

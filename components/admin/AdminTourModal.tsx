@@ -142,10 +142,6 @@ export function AdminTourModal({
         price: Number(formData.price) || 1500,
         price3Star: formData.price3Star !== undefined ? Number(formData.price3Star) : undefined,
         price4Star: formData.price4Star !== undefined ? Number(formData.price4Star) : undefined,
-        inversionPremium: formData.inversionPremium !== undefined ? Number(formData.inversionPremium) : undefined,
-        inversionLuxury: formData.inversionLuxury !== undefined ? Number(formData.inversionLuxury) : undefined,
-        valorPremium: formData.valorPremium !== undefined ? Number(formData.valorPremium) : undefined,
-        valorLuxury: formData.valorLuxury !== undefined ? Number(formData.valorLuxury) : undefined,
         imageUrl:
           formData.imageUrl ||
           'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
@@ -176,7 +172,7 @@ export function AdminTourModal({
         <div className="flex-none flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 p-4 sm:p-6">
           <h3 className="font-serif text-xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-emerald-400" />
-            <span>{formData.id ? 'Edit Tour Package' : 'Create Tour Package'}</span>
+            <span>{formData.id ? 'Editar Tour • Tour Table' : 'Nuevo Tour • Tour Table'}</span>
           </h3>
           <button
             onClick={onClose}
@@ -275,20 +271,7 @@ export function AdminTourModal({
 
               <div className="space-y-1">
                 <label className="block text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider">
-                  Price (USD) *
-                </label>
-                <input
-                  type="number"
-                  required
-                  value={formData.price || 0}
-                  onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                  className="w-full p-2.5 glass-input rounded-xl font-bold focus:border-emerald-500 focus:outline-none"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="block text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider">
-                  Category
+                  Categoría
                 </label>
                 <input
                   type="text"
@@ -300,59 +283,59 @@ export function AdminTourModal({
               </div>
             </div>
 
-            {/* PRECIOS Y NIVELES DE INVERSIÓN */}
+            {/* PRECIOS DE VENTA (EDITABLES DESDE TOUR TABLE / CPANEL) */}
             <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
-                Niveles de Inversión y Valores Oficiales (USD)
-              </h4>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+                  Precios de Venta Oficiales (USD)
+                </h4>
+                <span className="text-[10px] text-zinc-500">Editables en tiempo real</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1">
-                  <label className="block text-[10px] text-zinc-500 font-semibold uppercase">
-                    Inversión Premium
+                  <label className="block text-[11px] text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider">
+                    Precio Venta Base / General ($) *
                   </label>
                   <input
                     type="number"
-                    value={formData.inversionPremium ?? ''}
-                    onChange={(e) => setFormData({ ...formData, inversionPremium: e.target.value ? Number(e.target.value) : undefined })}
-                    placeholder="650"
-                    className="w-full p-2 glass-input rounded-xl font-mono text-xs focus:border-emerald-500 focus:outline-none"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="block text-[10px] text-zinc-500 font-semibold uppercase">
-                    Inversión Luxury
-                  </label>
-                  <input
-                    type="number"
-                    value={formData.inversionLuxury ?? ''}
-                    onChange={(e) => setFormData({ ...formData, inversionLuxury: e.target.value ? Number(e.target.value) : undefined })}
-                    placeholder="750"
-                    className="w-full p-2 glass-input rounded-xl font-mono text-xs focus:border-emerald-500 focus:outline-none"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="block text-[10px] text-zinc-500 font-semibold uppercase">
-                    Valor Premium
-                  </label>
-                  <input
-                    type="number"
-                    value={formData.valorPremium ?? ''}
-                    onChange={(e) => setFormData({ ...formData, valorPremium: e.target.value ? Number(e.target.value) : undefined })}
+                    required
+                    value={formData.price ?? 0}
+                    onChange={(e) => {
+                      const val = Number(e.target.value);
+                      setFormData({ ...formData, price: val });
+                    }}
                     placeholder="1050"
-                    className="w-full p-2 glass-input rounded-xl font-mono text-xs focus:border-emerald-500 focus:outline-none"
+                    className="w-full p-2.5 glass-input rounded-xl font-bold font-mono focus:border-emerald-500 focus:outline-none"
                   />
+                  <span className="text-[10px] text-zinc-500">Precio base cobrado en el checkout</span>
                 </div>
+
                 <div className="space-y-1">
-                  <label className="block text-[10px] text-zinc-500 font-semibold uppercase">
-                    Valor Luxury
+                  <label className="block text-[11px] text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider">
+                    Precio Venta 3★ / Premium ($)
                   </label>
                   <input
                     type="number"
-                    value={formData.valorLuxury ?? ''}
-                    onChange={(e) => setFormData({ ...formData, valorLuxury: e.target.value ? Number(e.target.value) : undefined })}
-                    placeholder="1190"
-                    className="w-full p-2 glass-input rounded-xl font-mono text-xs focus:border-emerald-500 focus:outline-none"
+                    value={formData.price3Star ?? ''}
+                    onChange={(e) => setFormData({ ...formData, price3Star: e.target.value ? Number(e.target.value) : undefined })}
+                    placeholder="1050"
+                    className="w-full p-2.5 glass-input rounded-xl font-mono text-sm font-semibold focus:border-emerald-500 focus:outline-none"
                   />
+                  <span className="text-[10px] text-zinc-500">Precio para categoría Premium</span>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="block text-[11px] text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider">
+                    Precio Venta 4★ / Luxury ($)
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.price4Star ?? ''}
+                    onChange={(e) => setFormData({ ...formData, price4Star: e.target.value ? Number(e.target.value) : undefined })}
+                    placeholder="1190"
+                    className="w-full p-2.5 glass-input rounded-xl font-mono text-sm font-semibold focus:border-emerald-500 focus:outline-none"
+                  />
+                  <span className="text-[10px] text-zinc-500">Precio para categoría Luxury</span>
                 </div>
               </div>
             </div>

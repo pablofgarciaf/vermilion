@@ -31,10 +31,6 @@ export interface Tour {
   price: number;
   price3Star?: number;
   price4Star?: number;
-  inversionPremium?: number;
-  inversionLuxury?: number;
-  valorPremium?: number;
-  valorLuxury?: number;
   priceFromUSD?: number;
   imageUrl: string;
   desktopImage?: string;

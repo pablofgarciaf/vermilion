@@ -59,7 +59,7 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
   const navItems = [
     {
       id: 'tours' as const,
-      label: isEs ? `PAQUETES DE TOURS (${toursCount})` : `TOUR PACKAGES (${toursCount})`,
+      label: isEs ? `TABLA DE TOURS (${toursCount})` : `TOUR TABLE (${toursCount})`,
       icon: Database
     },
     {
