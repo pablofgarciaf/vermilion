@@ -235,15 +235,9 @@ export default function FluidBackgroundCursor() {
         ref={cursorRef}
         className="fixed top-0 left-0 w-4 h-4 z-[100] pointer-events-none -translate-x-1/2 -translate-y-1/2 drop-shadow-md select-none"
       >
-        <img
-          src="/cursor-icon.png"
-          alt=""
-          aria-hidden="true"
-          width={16}
-          height={16}
-          className="w-full h-full object-contain pointer-events-none"
-          draggable={false}
-        />
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full object-contain pointer-events-none drop-shadow">
+          <circle cx="8" cy="8" r="6" fill="#10B981" stroke="white" strokeWidth="2" />
+        </svg>
       </div>
 
       {/* WebGL Background — Lazy loaded on desktop idle */}

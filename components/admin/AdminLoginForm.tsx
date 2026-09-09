@@ -241,7 +241,7 @@ export function AdminLoginForm() {
         </form>
 
         <div className="text-center pt-2">
-          <Link href="/" className="text-xs text-zinc-500 hover:text-emerald-400 transition-colors inline-flex items-center gap-1">
+          <Link href={`/${locale}`} className="text-xs text-zinc-500 hover:text-emerald-400 transition-colors inline-flex items-center gap-1">
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>{isEs ? 'Volver al Sitio Web' : 'Back to Public Website'}</span>
           </Link>

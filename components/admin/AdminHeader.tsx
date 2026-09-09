@@ -79,7 +79,7 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-4">
-            <Link href="/" aria-label="Vermilion Routes Inicio" className="relative w-[160px] h-[40px] sm:w-[180px] sm:h-[45px] shrink-0">
+            <Link href={`/${locale}`} aria-label="Vermilion Routes Inicio" className="relative w-[160px] h-[40px] sm:w-[180px] sm:h-[45px] shrink-0">
               <Image
                 src="/logo_inicio.png"
                 alt="Vermilion Routes"

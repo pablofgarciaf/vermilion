@@ -158,7 +158,7 @@ export default function AffiliatesSidebar() {
           {/* Brand Logo */}
           <Link href={`/${locale}/affiliates/dashboard`} className="flex items-center gap-3 group">
             <div className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center shrink-0">
-              <img src="/favicon.ico" alt="Vermilion" width={24} height={24} className="w-6 h-6 object-contain" />
+              <img src="/icon.png" alt="Vermilion" width={24} height={24} className="w-6 h-6 object-contain" />
             </div>
             <div>
               <span className="font-serif text-base font-bold text-zinc-900 dark:text-white tracking-wide block">
@@ -300,7 +300,7 @@ export default function AffiliatesSidebar() {
       {/* ── MOBILE TOP BAR (Hidden on lg) ─────────────────────────────────── */}
       <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border-b border-zinc-200 dark:border-white/10 z-50 px-4 flex items-center justify-between">
         <Link href={`/${locale}/affiliates/dashboard`} className="flex items-center gap-2">
-          <img src="/favicon.ico" alt="Vermilion" width={28} height={28} className="w-7 h-7 object-contain" />
+          <img src="/icon.png" alt="Vermilion" width={28} height={28} className="w-7 h-7 object-contain" />
           <span className="font-serif text-sm font-bold text-zinc-900 dark:text-white">
             Vermilion <span className="text-amber-500 font-medium">Afiliados</span>
           </span>
