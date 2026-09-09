@@ -281,8 +281,12 @@ export function BookingWizard() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-8 pb-28 lg:pb-8">
       <div className="mb-5">
-        <h1 className="font-serif text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-white mb-1">Reserva tu Expedicion</h1>
-        <p className="text-sm text-zinc-500">Completa los datos a continuacion para asegurar tu lugar.</p>
+        <h2 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1">
+          {locale === 'es' ? 'Configuración de Expedición y Reserva' : 'Expedition Setup & Reservation'}
+        </h2>
+        <p className="text-sm text-zinc-500">
+          {locale === 'es' ? 'Completa los datos a continuación para asegurar tu lugar.' : 'Fill in the details below to secure your bespoke expedition.'}
+        </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">

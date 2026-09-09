@@ -291,3 +291,14 @@ html {
     line-height: 1.5rem !important;
   }
 }
+
+/* Google Translate Frame Suppression - Prevents DOM Layout Thrashing & CPU Lock */
+.goog-te-banner-frame, .skiptranslate > iframe {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
+body {
+  top: 0px !important;
+}
+

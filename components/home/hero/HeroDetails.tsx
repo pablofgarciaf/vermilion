@@ -193,7 +193,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                 <div className="welcome-logo-card relative w-[230px] h-[78px] sm:w-[290px] sm:h-[98px] md:w-[340px] md:h-[112px] mb-3 bg-gradient-to-r from-emerald-950/45 via-cyan-900/35 to-emerald-950/45 backdrop-blur-lg rounded-full p-2.5 sm:p-3 border border-white/35 shadow-[0_12px_40px_rgba(0,0,0,0.75)] flex items-center justify-center mx-auto md:mx-0 md:ml-[82px] lg:ml-[95px] xl:ml-[105px]">
                   <div className="relative w-full h-full flex items-center justify-center">
                     <Image
-                      src="/logo_inicio.png"
+                      src="/logo_blanco.png"
                       alt="Vermilion Routes"
                       fill
                       sizes="(max-width: 640px) 230px, (max-width: 768px) 290px, 340px"

@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       : 'Vermilion Routes | Wildlife & Photography Expeditions',
     description: isEs
       ? 'Expediciones privadas para fotógrafos y amantes de la fauna en Galápagos y la Amazonía con guías naturalistas dedicados y soporte exclusivo 24/7.'
-      : 'Private wildlife expeditions for photographers in Galapagos & the Amazon with expert naturalist guides, prime vantage points and dedicated 24/7 support.',
+      : 'Private wildlife expeditions in Galapagos and the Amazon with expert naturalist guides, prime photo spots and dedicated 24/7 bespoke travel support.',
     keywords: ['wildlife photography Galapagos', 'Galapagos photography tour', 'Ecuador wildlife expedition'],
     alternates: getSeoAlternates('/wildlife-photography-expeditions', locale),
   };

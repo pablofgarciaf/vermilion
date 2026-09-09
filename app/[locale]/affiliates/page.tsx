@@ -1,22 +1,19 @@
-'use client';
+import type { Metadata } from 'next';
+import { AffiliatesRedirectClient } from '@/components/affiliates/AffiliatesRedirectClient';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+export const metadata: Metadata = {
+  title: 'Vermilion Routes | Portal de Embajadores',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function AffiliatesRootPage() {
-  const router = useRouter();
-  const locale = useLocale();
-
-  useEffect(() => {
-    // Si el usuario llega a la raíz de /affiliates y pasó el guard del layout,
-    // significa que está logueado. Lo mandamos directo a su dashboard.
-    router.replace(`/${locale}/affiliates/dashboard`);
-  }, [router, locale]);
-
   return (
-    <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center">
-      <div className="w-10 h-10 border-2 border-[#C9A84C] border-t-transparent rounded-full animate-spin" />
-    </div>
+    <main className="min-h-screen bg-[#0A0A0F] flex flex-col items-center justify-center gap-4">
+      <h1 className="text-white text-lg font-serif">Redirigiendo al portal de embajadores...</h1>
+      <AffiliatesRedirectClient />
+    </main>
   );
 }

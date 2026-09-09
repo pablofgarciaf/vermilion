@@ -189,12 +189,22 @@ export function Navbar() {
           {/* Logo */}
           <Link href={`/${locale}`} aria-label="Vermilion Routes Inicio" className="flex items-center gap-3 relative z-10 group notranslate">
             <div className="relative w-[165px] h-[40px] sm:w-[180px] sm:h-[45px] md:w-[220px] md:h-[55px] shrink-0">
+              {/* Light Mode Logo (dark letters for light background) */}
               <Image
                 src="/logo_inicio.png"
                 alt="Vermilion Routes"
-                fill
-                sizes="(max-width: 640px) 180px, 220px"
-                className="object-contain transition-transform group-hover:scale-105"
+                width={220}
+                height={55}
+                className="w-auto h-full object-contain transition-transform group-hover:scale-105 block dark:hidden"
+                priority
+              />
+              {/* Dark Mode Logo (white letters for dark background) */}
+              <Image
+                src="/logo_blanco.png"
+                alt="Vermilion Routes"
+                width={220}
+                height={55}
+                className="w-auto h-full object-contain transition-transform group-hover:scale-105 hidden dark:block"
                 priority
               />
             </div>

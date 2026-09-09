@@ -6,6 +6,7 @@ import { Compass, ArrowRight, Menu } from 'lucide-react';
 import { mockDestinations } from '@/data/mock';
 import { useTranslations, useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { isBotOrCrawler } from '@/utils/isBot';
 
 // Curated high-resolution image pools per destination category (Vertical 9:16 aspect ratio)
 const DESTINATION_IMAGE_POOLS: Record<string, string[]> = {
@@ -61,7 +62,7 @@ export function DestinationsGrid() {
 
   // Staggered interval: alternates one destination card every 2.4 seconds
   useEffect(() => {
-    if (!destinations || destinations.length === 0) return;
+    if (!destinations || destinations.length === 0 || isBotOrCrawler()) return;
 
     const interval = setInterval(() => {
       if (document.hidden) return;
@@ -142,6 +143,7 @@ export function DestinationsGrid() {
             >
               {/* Dynamic Layered Images with Seamless Crossfade & Subtle Ken Burns Zoom */}
               {pool.map((imgSrc, imgIdx) => {
+                if (isBotOrCrawler() && imgIdx !== 0) return null;
                 const isCurrent = imgIdx === activeIndex;
                 const nextIndex = (activeIndex + 1) % pool.length;
                 const isNext = imgIdx === nextIndex;

@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       ? 'Vermilion Routes | Viajes Románticos en Galápagos 24/7'
       : 'Vermilion Routes | Romantic Galapagos & Ecuador Getaways',
     description: isEs
-      ? 'Viajes románticos a medida en Galápagos y Ecuador: atardeceres volcánicos, hoteles boutique y cenas privadas bajo las estrellas con asesoría experta 24/7.'
-      : 'Bespoke romantic getaways in Galapagos & Ecuador: volcanic sunsets, boutique luxury lodges and private starlit dinners with dedicated 24/7 travel designers.',
+      ? 'Viajes románticos a medida en Galápagos y Ecuador: atardeceres volcánicos, lodges boutique y cenas exclusivas con asesoría de viaje de lujo 24/7.'
+      : 'Bespoke romantic getaways in Galapagos & Ecuador: volcanic sunsets, luxury lodges and starlit dinners with dedicated 24/7 private travel designers.',
     keywords: ['romantic Galapagos trip', 'couples Ecuador travel', 'anniversary Galapagos', 'honeymoon Ecuador', 'romantic Ecuador vacation'],
     alternates: getSeoAlternates('/couples-anniversary-galapagos', locale),
   };

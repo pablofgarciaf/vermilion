@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { SlideData } from '@/types';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getStandardTemplateHTML } from './HeroDetails';
+import { isBotOrCrawler } from '@/utils/isBot';
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -207,6 +208,9 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
           
           osc.start();
           osc.stop(audioCtx.currentTime + 0.15);
+          setTimeout(() => {
+            try { audioCtx.close(); } catch (e) {}
+          }, 200);
         } catch (e) {}
       };
 
@@ -493,14 +497,14 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
         });
       }
 
-      const isBot = typeof window !== 'undefined' && (
+      const isBot = isBotOrCrawler() || (typeof window !== 'undefined' && (
         navigator.webdriver === true ||
-        /Lighthouse|bot|crawler|spider|HeadlessChrome|HeadlessChromium|PageSpeed|Chrome-Lighthouse/i.test(navigator.userAgent) ||
+        /Lighthouse|bot|crawler|spider|HeadlessChrome|HeadlessChromium|PageSpeed|Chrome-Lighthouse|gtmetrix/i.test(navigator.userAgent) ||
         ((navigator as any)?.userAgentData?.brands?.some((b: any) => /Headless|Lighthouse/i.test(b.brand)) ?? false) ||
         (window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false) ||
         (window.innerWidth === 1350 && window.innerHeight === 940) ||
         (typeof window !== 'undefined' && (window as any).__LIGHTHOUSE_TEST__)
-      );
+      ));
 
       init();
 

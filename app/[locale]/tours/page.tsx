@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: isEs
       ? 'Vermilion Routes | Catálogo de Expediciones de Lujo 24/7'
-      : 'Vermilion Routes | Bespoke Luxury Expeditions & Tours 24/7',
+      : 'Vermilion Routes | Luxury Ecuador & Galapagos Tours',
     description: isEs
       ? 'Explore nuestro catálogo exclusivo de viajes de lujo a Galápagos, la Amazonía y los Andes. Itinerarios privados a medida con atención personalizada 24/7.'
       : 'Explore our curated catalog of luxury expeditions to Galapagos, the Amazon and Andes. Bespoke private itineraries with dedicated 24/7 travel concierge.',
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: isEs
         ? 'Vermilion Routes | Catálogo de Expediciones de Lujo 24/7'
-        : 'Vermilion Routes | Bespoke Luxury Expeditions & Tours 24/7',
+        : 'Vermilion Routes | Luxury Ecuador & Galapagos Tours',
       description: isEs
         ? 'Explore nuestro catálogo exclusivo de viajes de lujo a Galápagos, la Amazonía y los Andes. Itinerarios privados a medida con atención personalizada 24/7.'
         : 'Explore our curated catalog of luxury expeditions to Galapagos, the Amazon and Andes. Bespoke private itineraries with dedicated 24/7 travel concierge.',

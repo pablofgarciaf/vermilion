@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, Compass, ChevronDown } from 'lucide-react';
 
 import { useTranslations, useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { isBotOrCrawler } from '@/utils/isBot';
 
 interface TourCarouselProps {
   tours: Tour[];
@@ -73,7 +74,7 @@ export function TourCarousel({ tours }: TourCarouselProps) {
 
   // Auto-play
   useEffect(() => {
-    if (total <= 1) return;
+    if (total <= 1 || isBotOrCrawler()) return;
     autoPlayRef.current = setInterval(() => {
       if (!document.hidden) handleNext();
     }, 3300);

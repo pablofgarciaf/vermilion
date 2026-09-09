@@ -13,10 +13,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title: isEs
       ? 'Vermilion Routes | Aventuras Familiares en Ecuador 24/7'
-      : 'Vermilion Routes | Family Adventures in Ecuador & Galapagos',
+      : 'Vermilion Routes | Family Travel Ecuador & Galapagos',
     description: isEs
-      ? 'Expediciones familiares en Galápagos y Ecuador: tortugas gigantes, snorkel y selva amazónica. Viajes seguros e inolvidables con atención personalizada 24/7.'
-      : 'Bespoke luxury family adventures in Galapagos and Ecuador: giant tortoises, sea-lion snorkeling and Amazon jungle lodges with 24/7 dedicated concierge service.',
+      ? 'Expediciones familiares en Galápagos y Ecuador: tortugas gigantes, snorkel y selva amazónica. Viajes seguros con atención personalizada 24/7.'
+      : 'Bespoke family adventures in Galapagos & Ecuador: giant tortoises, snorkeling and Amazon lodges with dedicated 24/7 concierge assistance.',
     keywords: ['family Galapagos trip', 'family Ecuador vacation', 'Galapagos with kids', 'Ecuador family adventure', 'family-friendly Galapagos'],
     alternates: getSeoAlternates('/family-friendly-ecuador', locale),
   };

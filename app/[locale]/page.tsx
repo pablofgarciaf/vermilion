@@ -10,6 +10,7 @@ import { HomeBlogSection } from '@/components/home/HomeBlogSection';
 import { AlsoAskedFaq } from '@/components/home/AlsoAskedFaq';
 import { ContactSection } from '@/components/home/ContactSection';
 import AffiliateRegistration from '@/components/home/AffiliateRegistration';
+import { LazySection } from '@/components/ui/LazySection';
 import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -18,11 +19,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const title = isEs
     ? 'Vermilion Routes | Viajes de Lujo y Naturaleza en Ecuador'
-    : 'Vermilion Routes | Bespoke Ecuador & Galapagos Luxury Journeys';
+    : 'Vermilion Routes | Bespoke Ecuador & Galapagos Tours';
 
   const description = isEs
     ? 'Descubra Ecuador y Galápagos con viajes de lujo a medida, cruceros exclusivos, lodges en la Amazonía y volcanes andinos. Reserve con guías expertos 24/7.'
-    : 'Experience Ecuador & Galapagos with bespoke travel itineraries, Galapagos nature & comfort cruises, Amazon rainforest lodges, and Andean volcanic treks.';
+    : 'Experience Ecuador and Galapagos with bespoke travel itineraries, nature and comfort cruises, Amazon lodges, and Andean volcanic treks 24/7.';
 
   return {
     title,
@@ -75,23 +76,35 @@ export default function Home() {
       {/* 2. Top Destinations Grid (Direct SSR - 0.00 CLS) */}
       <DestinationsGrid />
 
-      {/* 3. Combined Trust & Expertise Section (Direct SSR - 0.00 CLS) */}
-      <CombinedExperienceSection />
+      {/* 3. Combined Trust & Expertise Section (Lazy Section) */}
+      <LazySection minHeightClass="min-h-[420px]">
+        <CombinedExperienceSection />
+      </LazySection>
 
-      {/* 4. Featured Tours Carousel (Direct SSR - 0.00 CLS) */}
-      <FeaturedTours />
+      {/* 4. Featured Tours Carousel (Lazy Section) */}
+      <LazySection minHeightClass="min-h-[580px]">
+        <FeaturedTours />
+      </LazySection>
 
-      {/* 5. Travel Blog & Video Expeditions (Direct SSR - 0.00 CLS) */}
-      <HomeBlogSection />
+      {/* 5. Travel Blog & Video Expeditions (Lazy Section) */}
+      <LazySection minHeightClass="min-h-[450px]">
+        <HomeBlogSection />
+      </LazySection>
 
-      {/* 6. Frequently Asked Questions (Direct SSR - 0.00 CLS) */}
-      <AlsoAskedFaq />
+      {/* 6. Frequently Asked Questions (Lazy Section) */}
+      <LazySection minHeightClass="min-h-[400px]">
+        <AlsoAskedFaq />
+      </LazySection>
 
-      {/* Join the Team / Affiliate Program */}
-      <AffiliateRegistration />
+      {/* Join the Team / Affiliate Program (Lazy Section) */}
+      <LazySection minHeightClass="min-h-[320px]">
+        <AffiliateRegistration />
+      </LazySection>
 
-      {/* 7. Contact & Tailor-Made Quotation Form (Direct SSR - 0.00 CLS) */}
-      <ContactSection />
+      {/* 7. Contact & Tailor-Made Quotation Form (Lazy Section) */}
+      <LazySection minHeightClass="min-h-[550px]">
+        <ContactSection />
+      </LazySection>
     </div>
   );
 }

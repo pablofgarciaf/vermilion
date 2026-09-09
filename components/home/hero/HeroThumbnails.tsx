@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { SlideData } from '@/types';
+import { isBotOrCrawler } from '@/utils/isBot';
 
 interface HeroThumbnailsProps {
   slidesData: SlideData[];
@@ -15,6 +16,8 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
   const [canLoadSecondary, setCanLoadSecondary] = useState(false);
 
   useEffect(() => {
+    if (isBotOrCrawler()) return;
+
     const loadAll = () => setCanLoadSecondary(true);
     (window as any).__loadAllHeroThumbnails = loadAll;
 
@@ -22,9 +25,9 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
     let timerId: any;
 
     if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      idleId = (window as any).requestIdleCallback(loadAll, { timeout: 1500 });
+      idleId = (window as any).requestIdleCallback(loadAll, { timeout: 2500 });
     } else {
-      timerId = setTimeout(loadAll, 1200);
+      timerId = setTimeout(loadAll, 2000);
     }
 
     return () => {
@@ -56,7 +59,7 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
                   fill
                   priority={idx === 0}
                   fetchPriority={idx === 0 ? "high" : "auto"}
-                  quality={95}
+                  quality={80}
                   className="object-cover object-center md:hidden"
                   sizes={idx === 0 ? "100vw" : "30vw"}
                 />
@@ -70,7 +73,7 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
                   fill
                   priority={idx === 0}
                   fetchPriority={idx === 0 ? "high" : "auto"}
-                  quality={95}
+                  quality={80}
                   className={`object-cover object-top ${slide.mobileImage ? 'hidden md:block' : 'block'}`}
                   sizes={idx === 0 ? "100vw" : "60vw"}
                 />

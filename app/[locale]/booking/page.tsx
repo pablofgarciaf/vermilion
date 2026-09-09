@@ -17,12 +17,27 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default function BookingPage() {
+export default async function BookingPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const isEs = locale === 'es';
+
   return (
     <main className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] relative -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px] pt-[100px] sm:pt-[120px] lg:pt-[150px] transition-colors duration-300">
       <div className="absolute top-0 left-0 w-full h-[70vh] bg-gradient-to-b from-emerald-900/15 via-emerald-900/5 to-transparent -z-10 pointer-events-none" />
-      <div className="pb-16 relative z-10">
-        <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh] text-emerald-700 font-semibold animate-pulse">Iniciando cotizador premium...</div>}>
+      <div className="pb-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Static SSR H1 Header - Guarantees H1 is first heading in DOM */}
+        <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-zinc-900 dark:text-white tracking-tight">
+            {isEs ? 'Reserva tu Expedición de Lujo a Medida' : 'Book Your Bespoke Luxury Expedition'}
+          </h1>
+          <p className="text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm max-w-xl mx-auto">
+            {isEs
+              ? 'Planifique su viaje exclusivo por Galápagos y Ecuador con asistencia personalizada 24/7.'
+              : 'Customize your private journey across Galapagos & Ecuador with 24/7 dedicated travel designers.'}
+          </p>
+        </div>
+
+        <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh] text-emerald-700 font-semibold animate-pulse">{isEs ? 'Iniciando cotizador premium...' : 'Loading booking wizard...'}</div>}>
           <BookingWizard />
         </Suspense>
       </div>

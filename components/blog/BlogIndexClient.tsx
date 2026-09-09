@@ -16,7 +16,11 @@ import {
   Send,
 } from 'lucide-react';
 
-export function BlogIndexClient() {
+interface BlogIndexClientProps {
+  hideHeader?: boolean;
+}
+
+export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
   const locale = useLocale();
   const searchParams = useSearchParams();
   const affiliateId = searchParams.get('ref');
@@ -58,11 +62,9 @@ export function BlogIndexClient() {
     .filter((post) => post.id !== featuredPost.id)
     .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
-  return (
-    <div className="relative min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100 -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px] pt-[146px] pb-20 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
-      <div className="max-w-7xl mx-auto space-y-8">
-
-        {/* Hero Header */}
+  const content = (
+    <div className="space-y-8">
+      {!hideHeader && (
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-300 text-[10px] sm:text-xs font-bold uppercase tracking-wider shadow-sm">
             <BookOpen className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
@@ -77,12 +79,13 @@ export function BlogIndexClient() {
               : 'Curated articles, expedition guides, wildlife calendars, and insider tips to explore Ecuador and the Galapagos Islands.'}
           </p>
         </div>
+      )}
 
-        {/* Featured Hero Article */}
-        {featuredPost && (
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-200 dark:border-emerald-900/40 bg-white dark:bg-zinc-900/90 shadow-lg group">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
-              <div className="lg:col-span-7 relative h-56 sm:h-64 lg:h-[320px] overflow-hidden">
+      {/* Featured Hero Article */}
+      {featuredPost && (
+        <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-200 dark:border-emerald-900/40 bg-white dark:bg-zinc-900/90 shadow-lg group">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 items-center">
+            <div className="lg:col-span-7 relative h-56 sm:h-64 lg:h-[320px] overflow-hidden">
                 <Image
                   src={featuredPost.imageUrl}
                   alt={getLocalizedText(featuredPost.title, locale)}
@@ -307,7 +310,17 @@ export function BlogIndexClient() {
             </button>
           </form>
         </div>
+      </div>
+  );
 
+  if (hideHeader) {
+    return content;
+  }
+
+  return (
+    <div className="relative min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100 -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px] pt-[146px] pb-20 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
+      <div className="max-w-7xl mx-auto">
+        {content}
       </div>
     </div>
   );

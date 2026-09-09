@@ -112,11 +112,11 @@ export function Footer() {
             <a href={`/${locale}`} aria-label="Vermilion Routes Home" className="flex items-center gap-3">
               <div className="relative w-[160px] h-[40px] md:w-[220px] md:h-[55px] shrink-0">
                 <Image
-                  src="/logo_inicio.png"
+                  src="/logo_blanco.png"
                   alt="Vermilion Routes"
-                  fill
-                  sizes="220px"
-                  className="object-contain drop-shadow-md"
+                  width={220}
+                  height={55}
+                  className="w-auto h-full object-contain drop-shadow-md"
                 />
               </div>
             </a>

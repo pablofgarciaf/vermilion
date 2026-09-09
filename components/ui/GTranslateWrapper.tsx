@@ -45,28 +45,6 @@ export default function GTranslateWrapper() {
       window.location.reload();
     };
 
-    const hideGoogleTranslateBar = () => {
-      const frames = document.querySelectorAll('.goog-te-banner-frame');
-      frames.forEach((el) => {
-        (el as HTMLElement).style.display = 'none';
-        (el as HTMLElement).style.visibility = 'hidden';
-        (el as HTMLElement).style.height = '0';
-      });
-      document.body.style.top = '0px';
-      document.documentElement.style.marginTop = '0px';
-    };
-
-    const observer = new MutationObserver(hideGoogleTranslateBar);
-    observer.observe(document.body, { childList: true, subtree: true, attributes: true });
-
-    // Also run periodically for the first few seconds
-    const interval = setInterval(hideGoogleTranslateBar, 500);
-    setTimeout(() => clearInterval(interval), 5000);
-
-    return () => {
-      observer.disconnect();
-      clearInterval(interval);
-    };
   }, []);
 
   return (

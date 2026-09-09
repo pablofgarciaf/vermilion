@@ -18,7 +18,8 @@ import { locales } from './i18n/request';
 const intlMiddleware = createMiddleware({
   locales,
   defaultLocale: 'en',
-  localePrefix: 'always'
+  localePrefix: 'always',
+  alternateLinks: false, // Prevents duplicate HTTP Link headers; HTML <link rel="alternate"> in <head> has full control
 });
 
 /**
@@ -131,6 +132,18 @@ export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const host = req.headers.get('host') || '';
   const hostname = host.split(':')[0].toLowerCase();
+  const proto = req.headers.get('x-forwarded-proto') || 'https';
+
+  // 0. Redirección canónica de dominio e idioma en un solo salto (Evita "Multiple page redirects" en GTmetrix)
+  if (hostname === 'vermilionroutes.com' || (proto === 'http' && !hostname.includes('localhost') && !hostname.includes('127.0.0.1'))) {
+    const targetPath = pathname === '/' ? '/en' : pathname;
+    const search = req.nextUrl.search || '';
+    return NextResponse.redirect(`https://www.vermilionroutes.com${targetPath}${search}`, 301);
+  }
+
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/en', req.url), 301);
+  }
 
   // Rutas canónicas de afiliados y administración permitidas en todos los dominios autorizados
 

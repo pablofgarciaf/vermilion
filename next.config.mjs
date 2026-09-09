@@ -24,6 +24,10 @@ const nextConfig = {
   },
   // Conditionally disable on Vercel to prevent ENOENT errors with next-server.js.nft.json
   output: process.env.VERCEL ? undefined : 'standalone',
+  compress: true,
+  experimental: {
+    optimizePackageImports: ['three', 'gsap', 'lucide-react', '@react-three/fiber', '@react-three/drei'],
+  },
   transpilePackages: ['motion', 'framer-motion', 'motion-dom'],
   images: {
     unoptimized: true,
@@ -159,7 +163,7 @@ const nextConfig = {
           },
           {
             key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin',
+            value: 'same-origin-allow-popups',
           },
         ],
       },

@@ -36,10 +36,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEs = locale === 'es';
   const defaultTitle = isEs
     ? 'Vermilion Routes | Viajes de Lujo a Medida 24/7 en Ecuador'
-    : 'Vermilion Routes | Bespoke Ecuador & Galapagos Luxury Travel';
+    : 'Vermilion Routes | Bespoke Ecuador & Galapagos Tours';
   const defaultDescription = isEs
-    ? 'Agencia de viajes de lujo boutique especializada en expediciones a medida en Galápagos, la Amazonía y los Andes. Reserve su viaje exclusivo con expertos 24/7.'
-    : 'Expert-guided bespoke tours to the Galapagos Islands, Amazon Rainforest, Avenue of Volcanoes & colonial cities. Ecuador\'s premier luxury boutique travel agency.';
+    ? 'Agencia boutique de lujo para expediciones a medida en Galápagos, la Amazonía y los Andes ecuatorianos. Reserve con expertos locales 24/7.'
+    : 'Expert-guided bespoke tours to the Galapagos Islands, Amazon Rainforest and Andean volcanoes. Ecuador premier luxury boutique travel agency 24/7.';
 
   return {
     title: t('title') || defaultTitle,
@@ -181,9 +181,6 @@ export default async function RootLayout({
           'https://www.instagram.com/vermilionsouthamericanroutes/',
           'https://www.tiktok.com/@vermilionsaroutes',
           'https://www.facebook.com/VermilionSouthAmericanRoutes',
-          'https://www.linkedin.com/company/vermilionroutes',
-          'https://www.youtube.com/@vermilionroutes',
-          'https://x.com/vermilionroutes',
         ],
       },
       {
@@ -196,7 +193,7 @@ export default async function RootLayout({
         },
         potentialAction: {
           '@type': 'SearchAction',
-          target: 'https://www.vermilionroutes.com/search?q={search_term_string}',
+          target: `https://www.vermilionroutes.com/${locale}/tours?search={search_term_string}`,
           'query-input': 'required name=search_term_string',
         },
       },

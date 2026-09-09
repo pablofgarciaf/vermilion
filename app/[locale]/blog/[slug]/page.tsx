@@ -39,12 +39,21 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const rawTitle = getLocalizedText(post.title, locale);
-  let title = `${rawTitle} | Vermilion Routes`;
+  const cleanTitle = rawTitle.replace(/&/g, 'and').replace(/\s+/g, ' ').trim();
+  let title = `${cleanTitle} | Vermilion Routes`;
   if (title.length < 50) {
-    title = `${rawTitle} - Luxury Travel Guide | Vermilion Routes`;
+    title = `${cleanTitle} - Luxury Travel Guide | Vermilion Routes`;
   }
   if (title.length > 60) {
-    title = `${rawTitle.slice(0, 60 - 19).trim()} | Vermilion Routes`;
+    const available = 60 - ' | Vermilion Routes'.length; // 41
+    const truncated = cleanTitle.slice(0, available);
+    const lastSpace = truncated.lastIndexOf(' ');
+    let safeWord = (lastSpace > 15 ? truncated.slice(0, lastSpace) : truncated).trim();
+    safeWord = safeWord.replace(/\s+(and|or|y|de|the|in|a|en|el|la|los|las|del|por|para|of)$/i, '').trim();
+    title = `${safeWord} | Vermilion Routes`;
+    if (title.length < 50) {
+      title = `${safeWord} - Guide | Vermilion Routes`;
+    }
   }
 
   const rawDesc = getLocalizedText(post.excerpt, locale);

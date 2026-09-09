@@ -145,6 +145,9 @@ export default function AffiliatesLayout({ children }: { children: React.ReactNo
   if (loading) {
     return (
       <div className="min-h-screen bg-[#07110B] flex flex-col items-center justify-center space-y-4">
+        <h1 className="text-sm font-serif text-amber-400 font-bold tracking-wider">
+          {isEs ? 'Portal de Embajadores Vermilion Routes' : 'Vermilion Routes Ambassador Portal'}
+        </h1>
         <div className="w-10 h-10 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
         <p className="text-[10px] uppercase tracking-[0.25em] font-sans text-amber-400 font-semibold">
           {isEs ? 'Verificando Sesión de Embajador...' : 'Verifying Ambassador Session...'}

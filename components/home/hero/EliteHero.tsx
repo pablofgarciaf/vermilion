@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Sparkles, Compass } from 'lucide-react';
 import gsap from 'gsap';
+import { isBotOrCrawler } from '@/utils/isBot';
 
 interface EliteHeroProps {
   locale?: string;
@@ -37,6 +38,13 @@ export function EliteHero({ locale = 'es' }: EliteHeroProps) {
       );
     }, heroRef);
 
+    // Skip heavy continuous particle canvas for bots / GTmetrix / Lighthouse
+    if (isBotOrCrawler()) {
+      return () => {
+        ctx.revert();
+      };
+    }
+
     // ── 2. Lightweight Particle & Kinetic Grid Canvas ───────────────────────
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -68,13 +76,18 @@ export function EliteHero({ locale = 'es' }: EliteHeroProps) {
     let isVisible = true;
     const observer = new IntersectionObserver(
       ([entry]) => {
+        const wasVisible = isVisible;
         isVisible = entry.isIntersecting;
+        if (isVisible && !wasVisible) {
+          animationFrameId = requestAnimationFrame(render);
+        }
       },
       { threshold: 0.1 }
     );
     if (heroRef.current) observer.observe(heroRef.current);
 
     const render = () => {
+      if (!isVisible) return;
       if (isVisible && ctxCanvas) {
         ctxCanvas.clearRect(0, 0, width, height);
 

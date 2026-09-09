@@ -422,11 +422,11 @@ function AffiliatesAuthContent() {
             <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center mx-auto p-2.5 shadow-lg shadow-amber-500/10">
               <Image src="/icon.png" alt="Vermilion Icon" width={36} height={36} className="object-contain" />
             </div>
-            <h2 className="font-serif text-2xl font-bold text-white tracking-tight">
+            <h1 className="font-serif text-2xl font-bold text-white tracking-tight">
               {tab === 'login' && (isEs ? 'Acceso de Embajadores' : 'Ambassador Sign In')}
               {tab === 'register' && (isEs ? 'Únete como Embajador' : 'Become an Ambassador')}
               {tab === 'forgot' && (isEs ? 'Recuperar Contraseña' : 'Reset Password')}
-            </h2>
+            </h1>
             <p className="text-xs text-zinc-400 leading-relaxed">
               {tab === 'login' && (isEs ? 'Ingresa tus credenciales para acceder a tu panel y comisiones.' : 'Sign in to access your commission dashboard.')}
               {tab === 'register' && (isEs ? 'Sin contraseña inicial. Tu cédula será tu clave temporal.' : 'Your national ID will be your temporary password.')}

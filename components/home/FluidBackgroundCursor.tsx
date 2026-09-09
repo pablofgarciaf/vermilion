@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useTheme } from 'next-themes';
+import { isBotOrCrawler } from '@/utils/isBot';
 
 // Three.js Canvas is only loaded dynamically on desktop to keep mobile bundle lightweight
 const WebGLCanvas = dynamic(() => import('./WebGLCanvas'), {
@@ -23,6 +24,12 @@ export default function FluidBackgroundCursor() {
   const isDark = resolvedTheme === 'dark';
 
   useEffect(() => {
+    if (isBotOrCrawler()) {
+      setIsTouchDevice(true);
+      setMounted(false);
+      return;
+    }
+
     const isTouch =
       'ontouchstart' in window ||
       navigator.maxTouchPoints > 0 ||
@@ -85,6 +92,15 @@ export default function FluidBackgroundCursor() {
       ? ['#E4E4E7', '#D4D4D8', '#A1A1AA', '#71717A', '#FFFFFF']
       : ['#DC2626', '#EA580C', '#F59E0B', '#EF4444', '#FECDD3'];
 
+    let isRunning = false;
+
+    const startAnimation = () => {
+      if (!isRunning) {
+        isRunning = true;
+        animId = requestAnimationFrame(render);
+      }
+    };
+
     const onMouseMove = (e: MouseEvent) => {
       const now = performance.now();
       trail.push({ x: e.clientX, y: e.clientY, time: now });
@@ -101,6 +117,7 @@ export default function FluidBackgroundCursor() {
           sparkle: Math.random() * Math.PI,
         });
       }
+      startAnimation();
     };
     window.addEventListener('mousemove', onMouseMove, { passive: true });
 
@@ -164,10 +181,14 @@ export default function FluidBackgroundCursor() {
         ctx.restore();
       }
 
+      if (trail.length === 0 && particles.length === 0) {
+        isRunning = false;
+        ctx.clearRect(0, 0, width, height);
+        return;
+      }
+
       animId = requestAnimationFrame(render);
     };
-
-    render();
 
     return () => {
       window.removeEventListener('resize', onResize);
