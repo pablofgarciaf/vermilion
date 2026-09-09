@@ -72,6 +72,45 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/:locale/about',
+        destination: '/:locale#experience',
+        permanent: true,
+      },
+      {
+        source: '/:locale/contact',
+        destination: '/:locale#contact',
+        permanent: true,
+      },
+      {
+        source: '/about',
+        destination: '/en#experience',
+        permanent: true,
+      },
+      {
+        source: '/contact',
+        destination: '/en#contact',
+        permanent: true,
+      },
+      {
+        source: '/terms',
+        destination: '/en/terms',
+        permanent: true,
+      },
+      {
+        source: '/privacy-policy',
+        destination: '/en/privacy-policy',
+        permanent: true,
+      },
+      {
+        source: '/dashboard',
+        destination: '/en/dashboard',
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
@@ -103,8 +142,16 @@ const nextConfig = {
             value: 'nosniff',
           },
           {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://js.stripe.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.youtube.com https://www.google.com; connect-src 'self' https: wss:; object-src 'none'; base-uri 'self';",
           },
           {
             key: 'Permissions-Policy',

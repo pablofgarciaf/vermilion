@@ -40,10 +40,33 @@ Disallow: /
 
 # General Crawlers & Private Route Protection
 User-agent: *
-Allow: /
+Disallow: /admin
 Disallow: /admin/
+Disallow: /cpanel
 Disallow: /cpanel/
+Disallow: /auth
 Disallow: /auth/
+Disallow: /api
 Disallow: /api/
+Disallow: /*/admin
+Disallow: /*/admin/*
+Disallow: /*/cpanel
+Disallow: /*/cpanel/*
+Disallow: /*/auth
+Disallow: /*/auth/*
+Disallow: /*/affiliates/dashboard
+Disallow: /*/affiliates/earnings
+Disallow: /*/affiliates/network
+Disallow: /*/affiliates/profile
+Disallow: /*/affiliates/resources
+Disallow: /*/affiliates/withdrawals
+Disallow: /*/affiliates/verify
+Disallow: /*/checkout
+Disallow: /*/checkout/*
+Disallow: /*?*tourId=*
+Disallow: /*?*tourid=*
+Disallow: /*?*token=*
+Disallow: /*?*vid=*
+Disallow: /*?*ref=*
 
 Sitemap: https://www.vermilionroutes.com/sitemap.xml

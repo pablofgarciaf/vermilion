@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Camera, Binoculars, Star, Clock, MessageCircle, ArrowRight } from 'lucide-react';
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       ? 'Expediciones privadas para fotógrafos y amantes de la fauna en Galápagos y la Amazonía con guías naturalistas dedicados y soporte exclusivo 24/7.'
       : 'Private wildlife expeditions for photographers in Galapagos & the Amazon with expert naturalist guides, prime vantage points and dedicated 24/7 support.',
     keywords: ['wildlife photography Galapagos', 'Galapagos photography tour', 'Ecuador wildlife expedition'],
-    alternates: { canonical: "https://vermilionroutes.com/" + locale + "/wildlife-photography-expeditions" },
+    alternates: getSeoAlternates('/wildlife-photography-expeditions', locale),
   };
 }
 

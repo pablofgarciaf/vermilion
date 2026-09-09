@@ -103,7 +103,7 @@ export default function AffiliatesNav() {
 
           {/* Logo */}
           <Link href={`/${locale}`} className="flex items-center gap-2 shrink-0">
-            <img src="/favicon.ico" alt="Vermilion" className="w-8 h-8 rounded-md object-contain" />
+            <img src="/favicon.ico" alt="Vermilion" width={32} height={32} className="w-8 h-8 rounded-md object-contain" />
             <span className="font-serif text-zinc-900 dark:text-white font-light tracking-tight hidden sm:block">
               Vermilion <span className="text-amber-500 font-medium">Afiliados</span>
             </span>

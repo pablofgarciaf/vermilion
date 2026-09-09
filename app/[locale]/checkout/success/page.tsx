@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -19,6 +20,7 @@ import {
 import { mockTours } from '@/data/mock';
 import { TravelVoucherModal } from '@/components/booking/TravelVoucherModal';
 import { useLocale } from 'next-intl';
+import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
 export default function CheckoutSuccessPage() {
   const searchParams = useSearchParams();
@@ -29,9 +31,77 @@ export default function CheckoutSuccessPage() {
   const refParam = searchParams.get('ref') || (sessionId ? `VR-${sessionId.slice(-6).toUpperCase()}` : `VR-${Date.now().toString().slice(-6)}`);
   const tourTitleParam = searchParams.get('tourTitle') || 'Vermilion Routes Expedition';
   const tourIdParam = searchParams.get('tourId') || 'custom';
+  const nameParam = searchParams.get('name') || '';
+  const emailParam = searchParams.get('email') || '';
+  const dateParam = searchParams.get('date') || '';
+  const amountParam = searchParams.get('amount') || '';
+  const guestsParam = searchParams.get('guests') || '';
 
   const [copied, setCopied] = useState(false);
   const [voucherOpen, setVoucherOpen] = useState(false);
+
+  const [clientDetails, setClientDetails] = useState({
+    name: nameParam,
+    email: emailParam,
+    date: dateParam || (isEs ? 'Por confirmar' : 'To be confirmed'),
+    amount: Number(amountParam) || 0,
+    guests: guestsParam || (isEs ? '2 Viajeros' : '2 Travelers'),
+    ref: refParam,
+  });
+
+  useEffect(() => {
+    const stored = getStoredUserProfile();
+    const initialName = nameParam || stored.name || '';
+    const initialEmail = emailParam || stored.email || '';
+
+    setClientDetails((prev) => ({
+      ...prev,
+      name: initialName || prev.name,
+      email: initialEmail || prev.email,
+    }));
+
+    if (sessionId) {
+      fetch('/api/checkout/verify-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId,
+          ref: refParam,
+          tourId: tourIdParam,
+          tourTitle: tourTitleParam,
+          clientName: initialName,
+          clientEmail: initialEmail,
+          amount: Number(amountParam) || undefined,
+          travelDate: dateParam,
+          guestsCount: guestsParam,
+          locale,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.booking) {
+            const b = data.booking;
+            setClientDetails({
+              name: b.customerName || initialName || 'Viajero Vermilion',
+              email: b.customerEmail || initialEmail,
+              date: b.travelDate || dateParam || (isEs ? 'Por confirmar' : 'To be confirmed'),
+              amount: b.amountPaid || Number(amountParam) || 0,
+              guests: b.guestsCount || guestsParam || (isEs ? '2 Viajeros' : '2 Travelers'),
+              ref: b.refCode || refParam,
+            });
+            if (b.customerName || b.customerEmail) {
+              saveStoredUserProfile({
+                name: b.customerName,
+                email: b.customerEmail,
+                phone: b.customerPhone,
+              });
+            }
+          }
+        })
+        .catch((e) => console.warn('[checkout/success] verify-session notice:', e));
+    }
+  }, [sessionId, refParam]);
+
 
   const matchedTour = mockTours.find((t) => t.id === tourIdParam || t.title.en === tourTitleParam) || mockTours[0];
 
@@ -205,14 +275,14 @@ export default function CheckoutSuccessPage() {
           onClose={() => setVoucherOpen(false)}
           tour={matchedTour}
           clientInfo={{
-            name: 'Valued Traveler',
-            email: 'client@vermilionroutes.com',
+            name: clientDetails.name || (isEs ? 'Viajero Distinguido' : 'Valued Guest'),
+            email: clientDetails.email || 'info@vermilionroutes.com',
             phone: '',
-            date: 'To be confirmed',
+            date: clientDetails.date || (isEs ? 'Por confirmar' : 'To be confirmed'),
             adults: 2,
             children: 0,
-            refCode: refParam,
-            amountPaid: 500,
+            refCode: clientDetails.ref || refParam,
+            amountPaid: clientDetails.amount,
             isConfirmed: true,
           }}
           locale={locale}

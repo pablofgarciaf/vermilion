@@ -25,9 +25,9 @@ import {
 import Image from 'next/image';
 import { TravelVoucherModal } from '@/components/booking/TravelVoucherModal';
 import { mockTours } from '@/data/mock';
-import { createBookingInFirestore } from '@/lib/bookings';
+import { createBookingInFirestore, generateBookingCode } from '@/lib/bookings';
 import { calculateAndDistributeCommissions, getAffiliateByCode } from '@/lib/affiliates';
-import { getStoredAffiliateRef } from '@/components/affiliates/AffiliateTracker';
+import { getStoredAffiliateRef, isBookingCode } from '@/components/affiliates/AffiliateTracker';
 import { useLocale } from 'next-intl';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
@@ -36,20 +36,34 @@ export default function CheckoutPaymentPage() {
   const router = useRouter();
   const locale = useLocale();
 
-  const tourId = searchParams.get('tourId') || 'custom';
+  const tourId = searchParams.get('tourid') || searchParams.get('tourId') || 'custom';
   const tourTitle = searchParams.get('tourTitle') || 'Vermilion Routes Expedition';
   const [email, setEmail] = useState(searchParams.get('email') || '');
   const [clientName, setClientName] = useState(searchParams.get('name') || '');
   const amountStr = searchParams.get('amount') || '500';
   const type = searchParams.get('type') || 'deposit';
-  const ref = searchParams.get('ref') || `VR-${Date.now().toString().slice(-6)}`;
+  const initialRef = searchParams.get('ref') || '';
+  const [ref, setRef] = useState(initialRef);
   const travelDate = searchParams.get('date') || '';
+
+  // Discount code & Automatic 10% Referral Discount
+  const [discountCode, setDiscountCode] = useState('');
+  const [discountApplied, setDiscountApplied] = useState(searchParams.get('discountApplied') === 'true');
+  const [discountError, setDiscountError] = useState('');
 
   useEffect(() => {
     const stored = getStoredUserProfile();
     if (!email && stored.email) setEmail(stored.email);
     if (!clientName && stored.name) setClientName(stored.name);
-  }, []);
+
+    // Guarantee ref format [tourCode]-[year]-[number]
+    if (!ref || ref.startsWith('VR-')) {
+      const affCode = searchParams.get('affiliateCode') || searchParams.get('vid') || getStoredAffiliateRef();
+      generateBookingCode(tourId, affCode || undefined).then((newCode) => {
+        setRef(newCode);
+      });
+    }
+  }, [tourId, ref, searchParams]);
 
   const initialAmount = Number(amountStr) || 500;
 
@@ -63,21 +77,30 @@ export default function CheckoutPaymentPage() {
 
   const matchedTour = mockTours.find((t) => t.id === tourId || t.title.en === tourTitle) || mockTours[0];
 
-  // Discount code & Automatic 10% Referral Discount
-  const [discountCode, setDiscountCode] = useState('');
-  const [discountApplied, setDiscountApplied] = useState(false);
-  const [discountError, setDiscountError] = useState('');
-
-  // Auto-detect affiliate referral code from URL or Storage/Cookie (ignoring generated order IDs like VR-123456)
+  // Auto-detect affiliate referral code from URL or Storage/Cookie (ignoring generated order IDs like 1.1-2026-0001)
   useEffect(() => {
-    const refParam = searchParams.get('affiliate') || searchParams.get('vid') || searchParams.get('code') || searchParams.get('ref');
-    if (refParam && !/^vr-\d+$/i.test(refParam.trim()) && !discountApplied) {
-      const cleanCode = refParam.trim().toLowerCase();
+    const explicitAffiliate = searchParams.get('affiliateCode') || searchParams.get('affiliate') || searchParams.get('vid') || searchParams.get('code');
+    const refParam = searchParams.get('ref');
+    const paramDiscountApplied = searchParams.get('discountApplied') === 'true';
+
+    let detectedAffiliate = explicitAffiliate;
+    if (!detectedAffiliate && refParam && !isBookingCode(refParam)) {
+      detectedAffiliate = refParam;
+    }
+
+    if (detectedAffiliate) {
+      const cleanCode = detectedAffiliate.trim().toLowerCase();
       setDiscountCode(cleanCode);
       setDiscountApplied(true);
+    } else if (paramDiscountApplied) {
+      setDiscountApplied(true);
+      const stored = getStoredAffiliateRef();
+      if (stored && !isBookingCode(stored)) {
+        setDiscountCode(stored);
+      }
     } else if (!discountApplied) {
       const stored = getStoredAffiliateRef();
-      if (stored && !/^vr-\d+$/i.test(stored)) {
+      if (stored && !isBookingCode(stored)) {
         setDiscountCode(stored);
         setDiscountApplied(true);
       }
@@ -91,8 +114,14 @@ export default function CheckoutPaymentPage() {
   const [receiptSubmitted, setReceiptSubmitted] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
-  const finalAmount = discountApplied ? Math.round(initialAmount * 0.9) : initialAmount;
-  const discountSavings = discountApplied ? initialAmount - finalAmount : 0;
+  const finalAmount = discountApplied ? Number((initialAmount * 0.9).toFixed(2)) : initialAmount;
+  const discountSavings = discountApplied ? Number((initialAmount - finalAmount).toFixed(2)) : 0;
+
+  const formatPrice = (val: number) => {
+    return (val % 1 !== 0 || val < 10)
+      ? val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+      : val.toLocaleString('en-US');
+  };
 
   const handleApplyDiscount = async () => {
     const code = discountCode.trim().toUpperCase();
@@ -135,6 +164,8 @@ export default function CheckoutPaymentPage() {
     setIsProcessing(true);
     setStripeNotice(null);
     setDemoUrl(null);
+    const safeName = clientName || email.split('@')[0] || 'Valued Traveler';
+    const activeRef = ref || (await generateBookingCode(tourId, discountApplied ? discountCode : undefined));
     try {
       const res = await fetch('/api/checkout/session', {
         method: 'POST',
@@ -142,10 +173,12 @@ export default function CheckoutPaymentPage() {
         body: JSON.stringify({
           tourId,
           tourTitle,
+          clientName: safeName,
           clientEmail: email,
+          clientPhone: '',
           amount: finalAmount,
           paymentType: type,
-          customLinkId: ref,
+          customLinkId: activeRef,
           affiliateCode: discountApplied ? discountCode : undefined,
           travelDate: travelDate || undefined,
           guestsCount: '2 Travelers',
@@ -158,6 +191,7 @@ export default function CheckoutPaymentPage() {
       } else if (data.error === 'STRIPE_NOT_CONFIGURED' || !data.configured) {
         setIsProcessing(false);
         setDemoUrl(data.demoUrl || null);
+
         setStripeNotice(
           'Las credenciales de Stripe (STRIPE_SECRET_KEY) aún no están configuradas en el archivo .env del servidor.'
         );
@@ -184,11 +218,15 @@ export default function CheckoutPaymentPage() {
         ? (typeof matchedTour.destination === 'string' ? matchedTour.destination : (matchedTour.destination as any).en || 'Ecuador') 
         : 'Ecuador';
 
+      const buyerName = clientName || email.split('@')[0] || 'Viajero Vermilion';
+      const activeRef = ref || (await generateBookingCode(tourId, discountApplied ? discountCode : undefined));
+
       await createBookingInFirestore({
-        refCode: ref,
+        refCode: activeRef,
+        bookingCode: activeRef,
         tourId,
         tourTitle,
-        customerName: email.split('@')[0],
+        customerName: buyerName,
         customerEmail: email,
         customerPhone: '',
         travelDates: travelDate || 'To be confirmed',
@@ -203,14 +241,25 @@ export default function CheckoutPaymentPage() {
         status: 'pending'
       });
 
-      // Distribute affiliate commission if affiliate code was applied
-      if (discountApplied && discountCode) {
-        calculateAndDistributeCommissions({
-          bookingId: ref,
-          saleAmount: finalAmount,
-          affiliateCode: discountCode
-        }).catch((cErr) => console.warn('Commission credit notice:', cErr));
-      }
+      // Dispatch confirmation email and sync booking/commissions via verify-session
+      await fetch('/api/checkout/verify-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: `wire_${activeRef}`,
+          ref: activeRef,
+          tourId,
+          tourTitle,
+          clientName: buyerName,
+          clientEmail: email,
+          amount: finalAmount,
+          travelDate,
+          guestsCount: '2 Travelers',
+          locale: locale || 'es',
+          affiliateCode: discountApplied ? discountCode : undefined,
+          paymentMethod: 'bank_wire',
+        }),
+      }).catch((e) => console.warn('Wire email notification notice:', e));
 
       setReceiptSubmitted(true);
       setIsPaid(true);
@@ -222,6 +271,7 @@ export default function CheckoutPaymentPage() {
       setIsProcessing(false);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-[#07130C] text-white flex items-center justify-center pt-8 sm:pt-14 pb-12 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white">
@@ -259,9 +309,9 @@ export default function CheckoutPaymentPage() {
             <div className="w-16 h-16 bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 rounded-full flex items-center justify-center mx-auto shadow-lg shadow-emerald-900/50">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h2 className="text-2xl font-bold font-serif text-white">
+            <h1 className="text-2xl font-bold font-serif text-white">
               {receiptSubmitted ? '¡Comprobante Recibido!' : '¡Pago Confirmado!'}
-            </h2>
+            </h1>
             <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed" suppressHydrationWarning>
               {receiptSubmitted
                 ? 'Hemos registrado tu comprobante de transferencia. Nuestro equipo de contabilidad verificará los fondos y te enviaremos la confirmación oficial.'
@@ -292,7 +342,7 @@ export default function CheckoutPaymentPage() {
                 <span>Notificar por WhatsApp</span>
               </a>
               <button
-                onClick={() => router.push('/')}
+                onClick={() => router.push(`/${locale}`)}
                 className="px-5 py-3 bg-transparent border-2 border-emerald-500/30 hover:border-emerald-500/60 hover:bg-zinc-800 text-zinc-200 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-95 group"
               >
                 <span>Volver al Inicio</span>
@@ -345,7 +395,7 @@ export default function CheckoutPaymentPage() {
               {/* Row 2: Large Total Amount */}
               <div className="text-center py-2 relative z-10">
                 <span className="text-5xl sm:text-6xl font-extrabold font-serif text-emerald-400 drop-shadow-md" suppressHydrationWarning>
-                  ${finalAmount.toLocaleString('en-US')}
+                  ${formatPrice(finalAmount)}
                 </span>
                 <span className="text-sm text-emerald-400/80 font-medium ml-2">USD</span>
               </div>
@@ -358,7 +408,7 @@ export default function CheckoutPaymentPage() {
                     <span>Descuento VIP Aplicado:</span>
                   </span>
                   <span className="font-bold font-mono text-sm" suppressHydrationWarning>
-                    -${discountSavings.toLocaleString('en-US')} USD
+                    -${formatPrice(discountSavings)} USD
                   </span>
                 </div>
               )}
@@ -550,48 +600,42 @@ export default function CheckoutPaymentPage() {
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {/* TD BANK Card */}
+                    {/* CITIBANK Card */}
                     <div className="p-3.5 bg-zinc-950 border border-emerald-500/30 rounded-2xl space-y-2 relative">
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">
-                          USA (USD)
+                          USA (USD) • Florida
                         </span>
-                        <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-[9px] font-bold text-emerald-300">Zelle / Wire</span>
+                        <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-[9px] font-bold text-emerald-300">Zelle / Wire / ACH</span>
                       </div>
-                      <p className="font-bold text-white text-xs">TD BANK (USA)</p>
+                      <p className="font-bold text-white text-xs">CITIBANK (USA)</p>
                       <div className="space-y-1 font-mono text-[11px] text-zinc-300">
                         <p className="flex justify-between">
-                          <span className="text-zinc-500">Checking:</span>
+                          <span className="text-zinc-500">Checking Account:</span>
                           <button
                             type="button"
-                            onClick={() => handleCopy('4441352252', 'td_acc')}
+                            onClick={() => handleCopy('9119836186', 'citi_acc')}
                             className="text-emerald-400 font-bold hover:underline flex items-center gap-1"
                           >
-                            4441352252 {copiedKey === 'td_acc' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
+                            9119836186 {copiedKey === 'citi_acc' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
                           </button>
                         </p>
                         <p className="flex justify-between">
-                          <span className="text-zinc-500">Routing:</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopy('054001725', 'td_rout')}
-                            className="text-white hover:underline flex items-center gap-1"
-                          >
-                            054001725 {copiedKey === 'td_rout' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
-                          </button>
+                          <span className="text-zinc-500">Titular / Holder:</span>
+                          <span className="text-white font-sans text-[11px] font-medium">Medardo Sanchez</span>
                         </p>
                         <p className="flex justify-between">
-                          <span className="text-zinc-500">Titular:</span>
-                          <span className="text-white font-sans text-[11px]">Jhayro Ludena</span>
+                          <span className="text-zinc-500">Ubicación / State:</span>
+                          <span className="text-white font-sans text-[11px]">Florida, USA</span>
                         </p>
                         <p className="flex justify-between">
-                          <span className="text-zinc-500">Zelle:</span>
+                          <span className="text-zinc-500">Zelle Transfer:</span>
                           <button
                             type="button"
-                            onClick={() => handleCopy('jhayroludena@gmail.com', 'td_zelle')}
+                            onClick={() => handleCopy('gsanchez@plustelesmart.com.ec', 'citi_zelle')}
                             className="text-amber-300 font-bold hover:underline flex items-center gap-1 font-sans text-[11px]"
                           >
-                            jhayroludena@gmail.com {copiedKey === 'td_zelle' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
+                            <span>gsanchez</span><span className="text-amber-400 font-bold">&#64;</span><span>plustelesmart.com.ec</span> {copiedKey === 'citi_zelle' ? <Check className="w-3 h-3 text-emerald-400 shrink-0" /> : <Copy className="w-3 h-3 text-zinc-500 shrink-0" />}
                           </button>
                         </p>
                       </div>
@@ -708,8 +752,8 @@ export default function CheckoutPaymentPage() {
 
             <p className="text-[10px] text-zinc-500 text-center leading-relaxed pt-2 border-t border-white/5">
               Al confirmar el pago, autorizas a Agencia de Viajes Vermilion a procesar tu reserva bajo nuestros{' '}
-              <a href="/terms" target="_blank" className="text-emerald-400 underline">Términos</a> y{' '}
-              <a href="/privacy-policy" target="_blank" className="text-emerald-400 underline">Políticas de Privacidad</a>.
+              <a href={`/${locale}/terms`} target="_blank" className="text-emerald-400 underline">Términos</a> y{' '}
+              <a href={`/${locale}/privacy-policy`} target="_blank" className="text-emerald-400 underline">Políticas de Privacidad</a>.
             </p>
           </div>
         )}
@@ -721,9 +765,10 @@ export default function CheckoutPaymentPage() {
         onClose={() => setVoucherOpen(false)}
         tour={matchedTour}
         clientInfo={{
-          name: email.split('@')[0],
+          name: clientName || email.split('@')[0] || 'Viajero Vermilion',
           email: email,
-          date: travelDate,
+          phone: '',
+          date: travelDate || (locale === 'es' ? 'Por confirmar' : 'To be confirmed'),
           adults: 2,
           children: 0,
           refCode: ref,
@@ -731,7 +776,7 @@ export default function CheckoutPaymentPage() {
           amountPaid: finalAmount,
           isConfirmed: isPaid
         }}
-        locale="en"
+        locale={locale || 'es'}
       />
     </div>
   );

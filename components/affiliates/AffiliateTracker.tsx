@@ -40,6 +40,12 @@ export function setStoredAffiliateRef(ref: string) {
   }
 }
 
+export function isBookingCode(val: string): boolean {
+  if (!val) return false;
+  const clean = val.trim();
+  return /^vr-/i.test(clean) || /^\d+(\.\d+)?-\d{4}-\d+/i.test(clean);
+}
+
 /**
  * Global component that captures ?vid= (Vermilion ID) in the URL,
  * saves it to storage (localStorage + 30-day cookie), and shows a VIP discount notice.
@@ -54,23 +60,29 @@ export function AffiliateTracker() {
 
   useEffect(() => {
     // 1. Check URL params — vid= is the canonical param, affiliate/code are fallbacks
-    const refParam = searchParams.get('vid') || searchParams.get('affiliate') || searchParams.get('code') || searchParams.get('ref');
+    const explicitAffiliate = searchParams.get('vid') || searchParams.get('affiliate') || searchParams.get('code') || searchParams.get('affiliateCode');
+    const refParam = searchParams.get('ref');
     
-    // Ignore internal order/booking reference codes like VR-1788232281883
-    if (refParam && !/^vr-\d+$/i.test(refParam.trim())) {
-      const clean = refParam.toLowerCase().trim();
+    let candidateRef = explicitAffiliate;
+    if (!candidateRef && refParam && !isBookingCode(refParam)) {
+      candidateRef = refParam;
+    }
+    
+    // Ignore internal order/booking reference codes like VR-... or 1.1-2026-0001
+    if (candidateRef && !isBookingCode(candidateRef)) {
+      const clean = candidateRef.toLowerCase().trim();
       setStoredAffiliateRef(clean);
       setActiveRef(clean);
       setBannerVisible(true);
       return;
     }
 
-    // 2. Check existing storage (also verify it's not a legacy saved vr- timestamp)
+    // 2. Check existing storage (also verify it's not a legacy saved booking code)
     const stored = getStoredAffiliateRef();
-    if (stored && !/^vr-\d+$/i.test(stored)) {
+    if (stored && !isBookingCode(stored)) {
       setActiveRef(stored);
-    } else if (stored && /^vr-\d+$/i.test(stored)) {
-      // Clear invalid timestamp from localStorage/cookie
+    } else if (stored && isBookingCode(stored)) {
+      // Clear invalid booking code from localStorage/cookie
       try {
         localStorage.removeItem(AFFILIATE_STORAGE_KEY);
         document.cookie = `${AFFILIATE_STORAGE_KEY}=; path=/; max-age=0`;

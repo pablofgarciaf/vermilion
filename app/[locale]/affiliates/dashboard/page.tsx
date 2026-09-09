@@ -47,6 +47,7 @@ export default function DashboardPage() {
   const [mounted, setMounted] = useState(false);
 
   const [affiliate, setAffiliate] = useState<AffiliateAccount | null>(null);
+  const [recentTransactions, setRecentTransactions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => { setMounted(true); }, []);
@@ -58,7 +59,20 @@ export default function DashboardPage() {
         try {
           const aff = await getAffiliateByEmail(user.email);
           setAffiliate(aff);
-        } catch { /* ignore */ }
+          if (aff && db) {
+            const { collection, query, where, getDocs } = await import('firebase/firestore');
+            const q = query(
+              collection(db, 'affiliate_commissions'),
+              where('affiliateUsername', '==', aff.username)
+            );
+            const snap = await getDocs(q);
+            const txs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+            txs.sort((a: any, b: any) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime());
+            setRecentTransactions(txs);
+          }
+        } catch (e) {
+          console.warn('[affiliates/dashboard] Data load notice:', e);
+        }
       }
       setLoading(false);
     });
@@ -166,19 +180,50 @@ export default function DashboardPage() {
             {isEs ? 'Actividad Reciente' : 'Recent Activity'}
           </span>
         </div>
-        <div className="text-center py-10">
-          <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mx-auto mb-4">
-            <TrendingUp className="w-5 h-5 text-[#4A4A4A]" />
+        {recentTransactions.length > 0 ? (
+          <div className="divide-y divide-white/5">
+            {recentTransactions.map((tx) => (
+              <div key={tx.id} className="py-3.5 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-[#C9A84C]/10 border border-[#C9A84C]/20 flex items-center justify-center text-[#C9A84C] text-xs font-mono font-bold">
+                    VR
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-white">
+                      {tx.bookingId}
+                    </p>
+                    <p className="text-xs text-[#A9A9A9]">
+                      {tx.role || (isEs ? 'Venta Directa' : 'Direct Sale')} · {tx.createdAt ? new Date(tx.createdAt).toLocaleDateString() : '2026-09-08'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="text-right">
+                  <p className="text-sm font-serif font-bold text-[#C9A84C]">
+                    +${Number(tx.commissionAmount || 0).toFixed(2)} USD
+                  </p>
+                  <p className="text-[11px] text-emerald-400 font-medium">
+                    {isEs ? 'Acreditada (10%)' : 'Credited (10%)'}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-          <p className="text-sm text-[#6B6B6B]">
-            {isEs ? 'Aún no hay ventas registradas.' : 'No sales recorded yet.'}
-          </p>
-          <p className="text-xs text-[#4A4A4A] mt-1">
-            {isEs
-              ? 'Comparte tus enlaces para generar tu primera comisión.'
-              : 'Share your links to generate your first commission.'}
-          </p>
-        </div>
+        ) : (
+          <div className="text-center py-10">
+            <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mx-auto mb-4">
+              <TrendingUp className="w-5 h-5 text-[#4A4A4A]" />
+            </div>
+            <p className="text-sm text-[#6B6B6B]">
+              {isEs ? 'Aún no hay ventas registradas.' : 'No sales recorded yet.'}
+            </p>
+            <p className="text-xs text-[#4A4A4A] mt-1">
+              {isEs
+                ? 'Comparte tus enlaces para generar tu primera comisión.'
+                : 'Share your links to generate your first commission.'}
+            </p>
+          </div>
+        )}
       </div>
 
     </div>

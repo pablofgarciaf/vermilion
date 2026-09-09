@@ -296,6 +296,8 @@ export function Navbar() {
                       src={LOCALES.find((l) => l.code === locale)?.flagUrl || '/flags/es.svg'}
                       alt=""
                       aria-hidden="true"
+                      width={16}
+                      height={12}
                       className="w-4 h-3 object-cover rounded-xs shadow-xs"
                     />
                     <span className="font-bold uppercase tracking-wider">{locale}</span>
@@ -313,7 +315,7 @@ export function Navbar() {
                               : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                               }`}
                           >
-                            <img src={l.flagUrl} alt="" aria-hidden="true" className="w-5 h-auto rounded-[2px] shadow-sm" />
+                            <img src={l.flagUrl} alt="" aria-hidden="true" width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
                             <span>{l.label}</span>
                           </button>
                         ))}
@@ -413,6 +415,8 @@ export function Navbar() {
                       src={LOCALES.find((l) => l.code === locale)?.flagUrl || '/flags/es.svg'}
                       alt=""
                       aria-hidden="true"
+                      width={16}
+                      height={12}
                       className="w-4 h-3 object-cover rounded-xs shadow-xs"
                     />
                     <span className="font-bold uppercase">{locale}</span>
@@ -430,7 +434,7 @@ export function Navbar() {
                               : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                               }`}
                           >
-                            <img src={l.flagUrl} alt={l.code} className="w-5 h-auto rounded-[2px] shadow-sm" />
+                            <img src={l.flagUrl} alt={l.code} width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
                             <span>{l.label}</span>
                           </button>
                         ))}

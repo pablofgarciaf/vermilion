@@ -42,10 +42,16 @@ export function PriceCalculator({
     );
   }
 
-  // 10% affiliate discount calculation
+  // 10% affiliate discount calculation (exact to 2 decimals)
   const hasAffiliateDiscount = !!affiliateRef;
-  const affiliateDiscountAmount = hasAffiliateDiscount ? Math.round(pricing.total * 0.10) : 0;
-  const finalPayableTotal = pricing.total - affiliateDiscountAmount;
+  const affiliateDiscountAmount = hasAffiliateDiscount ? Number((pricing.total * 0.10).toFixed(2)) : 0;
+  const finalPayableTotal = Number((pricing.total - affiliateDiscountAmount).toFixed(2));
+
+  const formatAmount = (val: number) => {
+    return (val % 1 !== 0 || val < 10)
+      ? val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+      : val.toLocaleString('en-US');
+  };
 
   return (
     <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 sm:p-8 border border-zinc-200/90 dark:border-zinc-800 shadow-xl sticky top-28">
@@ -57,13 +63,13 @@ export function PriceCalculator({
         {tours.map(t => (
           <div key={t.id} className="flex gap-4 items-start bg-zinc-50 dark:bg-zinc-800/30 p-2.5 rounded-2xl border border-zinc-100 dark:border-zinc-800">
             <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
-              <img src={t.imageUrl} alt={getLocalizedText(t.title, locale)} className="w-full h-full object-cover" />
+              <img src={t.imageUrl} alt={getLocalizedText(t.title, locale)} width={56} height={56} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1">
               <h4 className="font-bold text-sm text-zinc-900 dark:text-white line-clamp-1">{getLocalizedText(t.title, locale)}</h4>
               <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 flex items-center justify-between">
                 <span>{getLocalizedText(t.duration, locale)}</span>
-                <span className="font-semibold text-zinc-900 dark:text-white">${t.price.toLocaleString('en-US')}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white">${formatAmount(t.price)}</span>
               </p>
             </div>
           </div>
@@ -82,21 +88,21 @@ export function PriceCalculator({
       <div className="space-y-3 pt-6 border-t border-zinc-100 dark:border-zinc-800/80 mb-6" suppressHydrationWarning>
         {pricing.adultsCount > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-zinc-500 dark:text-zinc-400">Adultos ({pricing.adultsCount} x ${pricing.basePricePerAdult})</span>
-            <span className="font-medium text-zinc-900 dark:text-white">${pricing.adultsTotal.toLocaleString('en-US')}</span>
+            <span className="text-zinc-500 dark:text-zinc-400">Adultos ({pricing.adultsCount} x ${formatAmount(pricing.basePricePerAdult)})</span>
+            <span className="font-medium text-zinc-900 dark:text-white">${formatAmount(pricing.adultsTotal)}</span>
           </div>
         )}
         
         {pricing.childrenCount > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-zinc-500 dark:text-zinc-400">Niños ({pricing.childrenCount} x ${pricing.basePricePerChild})</span>
-            <span className="font-medium text-zinc-900 dark:text-white">${pricing.childrenTotal.toLocaleString('en-US')}</span>
+            <span className="text-zinc-500 dark:text-zinc-400">Niños ({pricing.childrenCount} x ${formatAmount(pricing.basePricePerChild)})</span>
+            <span className="font-medium text-zinc-900 dark:text-white">${formatAmount(pricing.childrenTotal)}</span>
           </div>
         )}
 
         <div className="flex justify-between text-sm pt-2">
           <span className="text-zinc-900 dark:text-white font-medium">Subtotal</span>
-          <span className="font-medium text-zinc-900 dark:text-white">${pricing.subtotal.toLocaleString('en-US')}</span>
+          <span className="font-medium text-zinc-900 dark:text-white">${formatAmount(pricing.subtotal)}</span>
         </div>
 
         {pricing.groupDiscountAmount > 0 && (
@@ -105,7 +111,7 @@ export function PriceCalculator({
               <Ticket className="w-3.5 h-3.5" /> 
               Descuento Grupo ({(pricing.groupDiscountPercentage * 100).toFixed(0)}%)
             </span>
-            <span>-${pricing.groupDiscountAmount.toLocaleString('en-US')}</span>
+            <span>-${formatAmount(pricing.groupDiscountAmount)}</span>
           </div>
         )}
 
@@ -116,7 +122,7 @@ export function PriceCalculator({
               <Sparkles className="w-3.5 h-3.5 text-amber-500" />
               Descuento Embajador (@{affiliateRef}) 10% OFF
             </span>
-            <span>-${affiliateDiscountAmount.toLocaleString('en-US')}</span>
+            <span>-${formatAmount(affiliateDiscountAmount)}</span>
           </div>
         )}
       </div>
@@ -127,7 +133,7 @@ export function PriceCalculator({
           <div className="flex items-center gap-1">
             <span className="text-sm font-semibold text-zinc-400">USD</span>
             <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
-              ${finalPayableTotal.toLocaleString('en-US')}
+              ${formatAmount(finalPayableTotal)}
             </span>
           </div>
         </div>

@@ -44,7 +44,9 @@ import {
   CreditCard,
   Percent,
   Sliders,
-  Share2
+  Share2,
+  Menu,
+  X
 } from 'lucide-react';
 import { auth, db } from '@/lib/firebase';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
@@ -97,6 +99,18 @@ export function AdminCrmDashboard() {
     tabParam === 'finance' ? 'finance' :
     tabParam === 'amenities' ? 'amenities' : 'overview'
   );
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  const tabLabels: Record<CrmTab, string> = {
+    overview: 'Tablero Ejecutivo (BI)',
+    sales: 'Ventas & Pipeline',
+    operations: 'Operaciones & Run-Sheet',
+    amenities: 'Amenities VIP Pakari',
+    finance: 'Finanzas & Liquidaciones',
+    genealogy: 'Red MLM & Piscinas',
+    concierge: 'WhatsApp Concierge',
+    team: 'Equipo & Roles',
+  };
 
   // Filters & Search
   const [searchQuery, setSearchQuery] = useState('');
@@ -217,19 +231,277 @@ export function AdminCrmDashboard() {
   };
 
   // Financial Summary Aggregations
-  const totalGMV = bookings.reduce((acc, b) => acc + b.totalAmount, 0);
-  const totalCollected = bookings.reduce((acc, b) => acc + b.paidAmount, 0);
-  const totalCosts = bookings.reduce((acc, b) => acc + (b.directCosts || b.totalAmount * 0.58), 0);
+  const totalGMV = bookings.reduce((acc, b) => acc + (b.totalAmount || b.paidAmount || 0), 0);
+  const totalCollected = bookings.reduce((acc, b) => acc + (b.paidAmount || b.totalAmount || 0), 0);
+  const totalCosts = bookings.reduce((acc, b) => acc + (b.directCosts || (b.totalAmount || b.paidAmount || 0) * 0.58), 0);
   const totalAffiliateCommissions = bookings.reduce((acc, b) => acc + (b.affiliateCommissionAmount || 0), 0);
   const totalOperatorCommissions = bookings.reduce((acc, b) => acc + (b.operatorCommissionAmount || 0), 0);
   const netOperatingProfit = totalGMV - totalCosts - totalAffiliateCommissions - totalOperatorCommissions;
   const avgMargin = Math.round((netOperatingProfit / (totalGMV || 1)) * 100);
 
+
   return (
     <div className="min-h-screen bg-[#07110B] text-zinc-100 flex flex-col md:flex-row">
       
-      {/* ── 1. SIDEBAR DE NAVEGACIÓN DINÁMICO RBAC ──────────────────────────── */}
-      <aside className="w-full md:w-72 bg-[#060D08] border-r border-emerald-950/60 p-5 flex flex-col justify-between shrink-0 shadow-2xl z-20">
+      {/* ── MOBILE TOP BAR (< md) ──────────────────────────── */}
+      <header className="flex md:hidden items-center justify-between px-4 py-3 bg-[#060D08] border-b border-emerald-950/80 sticky top-0 z-30 shadow-xl">
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-sm">
+            <div className="w-full h-full bg-[#07130C] rounded-[10px] flex items-center justify-center">
+              <Image src="/icon.png" alt="Vermilion" width={20} height={20} className="object-contain" />
+            </div>
+          </div>
+          <div>
+            <span className="font-serif text-xs font-bold text-white block leading-tight">
+              VERMILION <span className="text-[#C9A84C] font-normal">ENTERPRISE</span>
+            </span>
+            <span className="text-[10px] text-emerald-400 font-mono tracking-wider flex items-center gap-1">
+              <span className="text-emerald-500">●</span> {tabLabels[activeTab]}
+            </span>
+          </div>
+        </div>
+
+        <button
+          onClick={() => setMobileNavOpen(!mobileNavOpen)}
+          className="p-2 text-zinc-300 hover:text-white bg-emerald-950/50 hover:bg-emerald-900/60 border border-emerald-900/60 rounded-xl transition-all cursor-pointer"
+          aria-label="Abrir menú de navegación"
+        >
+          {mobileNavOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </header>
+
+      {/* ── MOBILE DRAWER MODAL (< md) ──────────────────────────── */}
+      {mobileNavOpen && (
+        <div className="fixed inset-0 z-50 md:hidden bg-[#060D08]/98 backdrop-blur-2xl flex flex-col p-5 overflow-y-auto">
+          <div className="flex items-center justify-between pb-4 border-b border-emerald-950/80">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-sm">
+                <div className="w-full h-full bg-[#07130C] rounded-[10px] flex items-center justify-center">
+                  <Image src="/icon.png" alt="Vermilion" width={20} height={20} className="object-contain" />
+                </div>
+              </div>
+              <div>
+                <span className="font-serif text-sm font-bold text-white block">
+                  VERMILION <span className="text-[#C9A84C] font-normal">ENTERPRISE</span>
+                </span>
+                <span className="text-[9px] text-zinc-400 uppercase tracking-widest block font-mono">
+                  Master Command CRM
+                </span>
+              </div>
+            </div>
+            <button
+              onClick={() => setMobileNavOpen(false)}
+              className="p-2 text-zinc-400 hover:text-white bg-white/5 rounded-xl transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="mt-4 p-3 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] text-zinc-400 font-mono uppercase tracking-wider">Tu Rol Autorizado</span>
+              <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider ${
+                userRole === 'super' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+                userRole === 'admin' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
+                userRole === 'operator' ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30' :
+                'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+              }`}>
+                {userRole}
+              </span>
+            </div>
+            <p className="text-xs font-semibold text-white truncate">
+              {currentUser?.email || 'pablofgarciaf@gmail.com'}
+            </p>
+            {userRole === 'super' && (
+              <div className="pt-2 border-t border-emerald-950/60">
+                <label className="text-[9px] text-zinc-500 uppercase tracking-widest block mb-1">
+                  👁️ Simular Vista de Rol:
+                </label>
+                <select
+                  value={activeRoleView}
+                  onChange={(e) => setActiveRoleView(e.target.value as UserRole)}
+                  className="w-full bg-[#0B1A12] border border-emerald-800/50 rounded-lg text-[10px] text-zinc-300 py-1.5 px-2 focus:outline-none focus:border-amber-500"
+                >
+                  <option value="super">Super Admin (Todas las 8 Áreas)</option>
+                  <option value="admin">Admin Operativo (Gestión Total)</option>
+                  <option value="operator">Operador / Guía (Run-Sheet & Amenities)</option>
+                  <option value="sales">Comercial / Ventas (Pipeline & Cotizador)</option>
+                  <option value="financial">Finanzas (P&L & Dispersión de Pagos)</option>
+                  <option value="concierge">Concierge (Pakari & WhatsApp)</option>
+                </select>
+              </div>
+            )}
+          </div>
+
+          <nav className="mt-5 space-y-1.5 flex-1">
+            <span className="text-[9px] font-mono uppercase tracking-widest text-zinc-500 px-3 block mb-2">
+              Módulos Departamentales
+            </span>
+
+            {canAccess('overview') && (
+              <button
+                onClick={() => { setActiveTab('overview'); setMobileNavOpen(false); }}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'overview'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <TrendingUp className="w-4 h-4" />
+                  <span>Tablero Ejecutivo (BI)</span>
+                </div>
+                <span className="text-[10px] font-mono opacity-80">${Math.round(totalGMV / 1000)}k</span>
+              </button>
+            )}
+
+            {canAccess('sales') && (
+              <button
+                onClick={() => { setActiveTab('sales'); setMobileNavOpen(false); }}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'sales'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Briefcase className="w-4 h-4" />
+                  <span>Ventas & Pipeline</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold">
+                  {leads.length}
+                </span>
+              </button>
+            )}
+
+            {canAccess('operations') && (
+              <button
+                onClick={() => { setActiveTab('operations'); setMobileNavOpen(false); }}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'operations'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Compass className="w-4 h-4" />
+                  <span>Operaciones & Run-Sheet</span>
+                </div>
+                <span className="px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-400 text-[10px] font-bold">
+                  {bookings.filter(b => b.status === 'in_operation').length} en ruta
+                </span>
+              </button>
+            )}
+
+            {canAccess('amenities') && (
+              <button
+                onClick={() => { setActiveTab('amenities'); setMobileNavOpen(false); }}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'amenities'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Gift className="w-4 h-4" />
+                  <span>Amenities VIP Pakari</span>
+                </div>
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              </button>
+            )}
+
+            {canAccess('finance') && (
+              <button
+                onClick={() => { setActiveTab('finance'); setMobileNavOpen(false); }}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'finance'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <DollarSign className="w-4 h-4" />
+                  <span>Finanzas & Liquidaciones</span>
+                </div>
+                {bookings.some(b => b.affiliateCommissionStatus === 'ready_for_review') && (
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                )}
+              </button>
+            )}
+
+            {canAccess('genealogy') && (
+              <button
+                onClick={() => { setActiveTab('genealogy'); setMobileNavOpen(false); }}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'genealogy'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Network className="w-4 h-4" />
+                  <span>Red MLM & Piscinas</span>
+                </div>
+                <span className="text-[10px] text-zinc-500 font-mono">10-3-2</span>
+              </button>
+            )}
+
+            {canAccess('concierge') && (
+              <button
+                onClick={() => { setActiveTab('concierge'); setMobileNavOpen(false); }}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'concierge'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <MessageSquare className="w-4 h-4" />
+                  <span>WhatsApp Concierge</span>
+                </div>
+                <span className="text-[10px] text-emerald-400 font-bold font-mono">1-Clic</span>
+              </button>
+            )}
+
+            {canAccess('team') && (
+              <button
+                onClick={() => { setActiveTab('team'); setMobileNavOpen(false); }}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'team'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Users className="w-4 h-4" />
+                  <span>Equipo & Roles</span>
+                </div>
+                <span className="text-[10px] text-zinc-500 font-mono">{users.length}</span>
+              </button>
+            )}
+          </nav>
+
+          <div className="pt-4 border-t border-emerald-950/80 space-y-2 mt-6">
+            <Link
+              href={`/${locale}`}
+              className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-zinc-300 flex items-center justify-between"
+            >
+              <span>Ver Sitio Web</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="w-full py-2.5 px-3 rounded-xl bg-rose-950/40 hover:bg-rose-900/50 text-xs text-rose-400 flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Cerrar Sesión</span>
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── 1. SIDEBAR DE NAVEGACIÓN DINÁMICO RBAC (DESKTOP) ──────────────────────────── */}
+      <aside className="hidden md:flex md:w-72 bg-[#060D08] border-r border-emerald-950/60 p-5 flex-col justify-between shrink-0 shadow-2xl z-20">
         <div className="space-y-6">
           
           {/* Brand Header */}
@@ -553,8 +825,8 @@ export function AdminCrmDashboard() {
                 </div>
 
                 <div className="space-y-3">
-                  {bookings.map((b) => (
-                    <div key={b.id} className="p-4 rounded-2xl bg-black/40 border border-emerald-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  {bookings.map((b, idx) => (
+                    <div key={`${b.id || b.bookingCode || 'b'}-${idx}`} className="p-4 rounded-2xl bg-black/40 border border-emerald-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div>
                         <div className="flex items-center gap-2">
                           <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold">
@@ -569,7 +841,7 @@ export function AdminCrmDashboard() {
                       </div>
 
                       <div className="text-right shrink-0">
-                        <span className="text-sm font-extrabold text-white block">${b.totalAmount.toLocaleString('en-US')} USD</span>
+                        <span className="text-sm font-extrabold text-white block">${(b.totalAmount || b.paidAmount || 0).toLocaleString('en-US')} USD</span>
                         <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full inline-block mt-1 ${
                           b.status === 'in_operation' ? 'bg-teal-500/20 text-teal-300' : 'bg-amber-500/20 text-amber-300'
                         }`}>
@@ -591,31 +863,35 @@ export function AdminCrmDashboard() {
                 <div className="space-y-3">
                   <div className="p-3.5 rounded-2xl bg-black/40 border border-amber-500/20 flex items-center justify-between">
                     <div>
-                      <span className="text-xs font-bold text-white block">@pablo.g (Founder)</span>
-                      <span className="text-[10px] text-zinc-400">6 reservas generadas</span>
+                      <span className="text-xs font-bold text-white block">@{genealogy.username} (Founder)</span>
+                      <span className="text-[10px] text-zinc-400">{bookings.filter(b => b.affiliateId === genealogy.username || (b as any).affiliateCode === genealogy.username).length} reservas generadas</span>
                     </div>
-                    <span className="text-sm font-mono font-extrabold text-[#D4AF37]">$21,904 USD</span>
+                    <span className="text-sm font-mono font-extrabold text-[#D4AF37]">
+                      ${bookings.filter(b => b.affiliateId === genealogy.username || (b as any).affiliateCode === genealogy.username).reduce((acc, b) => acc + (b.totalAmount || b.paidAmount || 0), 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD
+                    </span>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-black/40 border border-emerald-900/20 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs font-bold text-white block">@maria.luxury</span>
-                      <span className="text-[10px] text-zinc-400">4 reservas generadas</span>
-                    </div>
-                    <span className="text-sm font-mono font-bold text-white">$14,500 USD</span>
-                  </div>
-
-                  <div className="p-3.5 rounded-2xl bg-black/40 border border-emerald-900/20 flex items-center justify-between">
-                    <div>
-                      <span className="text-xs font-bold text-white block">@andres.advisor</span>
-                      <span className="text-[10px] text-zinc-400">2 reservas generadas</span>
-                    </div>
-                    <span className="text-sm font-mono font-bold text-white">$8,200 USD</span>
-                  </div>
+                  {genealogy.children && genealogy.children.length > 0 ? (
+                    genealogy.children.map((c) => {
+                      const childSales = bookings.filter(b => b.affiliateId === c.username || (b as any).affiliateCode === c.username);
+                      const childVolume = childSales.reduce((acc, b) => acc + (b.totalAmount || b.paidAmount || 0), 0);
+                      return (
+                        <div key={c.username} className="p-3.5 rounded-2xl bg-black/40 border border-emerald-900/20 flex items-center justify-between">
+                          <div>
+                            <span className="text-xs font-bold text-white block">@{c.username}</span>
+                            <span className="text-[10px] text-zinc-400">{childSales.length} reservas generadas</span>
+                          </div>
+                          <span className="text-sm font-mono font-bold text-white">
+                            ${childVolume.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD
+                          </span>
+                        </div>
+                      );
+                    })
+                  ) : null}
                 </div>
 
                 <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-[11px] text-amber-300 leading-snug">
-                  ✨ Las 3 Piscinas Globales de utilidades acumulan <strong>$1,314 USD</strong> listos para ser distribuidos este mes.
+                  ✨ Las 3 Piscinas Globales de utilidades acumulan <strong>${(totalGMV * 0.06).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD</strong> (6% de volumen de venta) para el fondo global.
                 </div>
               </div>
             </div>
@@ -794,8 +1070,8 @@ export function AdminCrmDashboard() {
             </div>
 
             <div className="space-y-4">
-              {bookings.map((booking) => (
-                <div key={booking.id} className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
+              {bookings.map((booking, idx) => (
+                <div key={`${booking.id || booking.bookingCode || 'op'}-${idx}`} className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-emerald-950">
                     <div>
                       <div className="flex items-center gap-2">
@@ -892,8 +1168,8 @@ export function AdminCrmDashboard() {
               <h4 className="font-serif text-base font-bold text-white">Órdenes de Amenidad por Despachar</h4>
 
               <div className="space-y-3">
-                {bookings.map((booking) => (
-                  <div key={booking.id} className="p-4 rounded-2xl bg-black/40 border border-emerald-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                {bookings.map((booking, idx) => (
+                  <div key={`${booking.id || booking.bookingCode || 'am'}-${idx}`} className="p-4 rounded-2xl bg-black/40 border border-emerald-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <span className="text-[10px] font-mono text-amber-400">{booking.bookingCode} · {booking.destination}</span>
                       <h4 className="text-sm font-bold text-white mt-0.5">{booking.customerName}</h4>
@@ -944,18 +1220,19 @@ export function AdminCrmDashboard() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-emerald-950/60 font-mono">
-                    {bookings.map((b) => {
-                      const cost = b.directCosts || (b.totalAmount * 0.58);
+                    {bookings.map((b, idx) => {
+                      const bAmount = b.totalAmount || b.paidAmount || 0;
+                      const cost = b.directCosts || (bAmount * 0.58);
                       const affCom = b.affiliateCommissionAmount || 0;
                       const opCom = b.operatorCommissionAmount || 0;
-                      const net = b.totalAmount - cost - affCom - opCom;
-                      const margin = Math.round((net / b.totalAmount) * 100);
+                      const net = bAmount - cost - affCom - opCom;
+                      const margin = Math.round((net / (bAmount || 1)) * 100);
 
                       return (
-                        <tr key={b.id} className="hover:bg-white/5">
+                        <tr key={`${b.id || b.bookingCode || 'fin'}-${idx}`} className="hover:bg-white/5">
                           <td className="p-3 font-bold text-amber-400">{b.bookingCode}</td>
                           <td className="p-3 text-white font-sans">{b.customerName}</td>
-                          <td className="p-3 text-right text-white font-bold">${b.totalAmount.toLocaleString('en-US')}</td>
+                          <td className="p-3 text-right text-white font-bold">${bAmount.toLocaleString('en-US')}</td>
                           <td className="p-3 text-right text-rose-400">-${cost.toLocaleString('en-US')}</td>
                           <td className="p-3 text-right text-amber-400">
                             -${affCom.toLocaleString('en-US')}

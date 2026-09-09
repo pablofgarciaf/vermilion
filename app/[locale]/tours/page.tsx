@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
+import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -34,9 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEs
       ? 'Explore nuestro catálogo exclusivo de viajes de lujo a Galápagos, la Amazonía y los Andes. Itinerarios privados a medida con atención personalizada 24/7.'
       : 'Explore our curated catalog of luxury expeditions to Galapagos, the Amazon and Andes. Bespoke private itineraries with dedicated 24/7 travel concierge.',
-    alternates: {
-      canonical: `https://www.vermilionroutes.com/${locale}/tours`,
-    },
+    alternates: getSeoAlternates('/tours', locale),
     openGraph: {
       title: isEs
         ? 'Vermilion Routes | Catálogo de Expediciones de Lujo 24/7'
@@ -244,7 +243,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <span className="group-hover:scale-105 transition-transform">{isEs ? 'Ver Itinerario' : 'View Itinerary'}</span>
                       </Link>
                       <Link
-                        href={`/${locale}/booking?tourId=${tour.id}`}
+                        href={`/${locale}/booking?tourid=${tour.id}`}
                         aria-label={`${isEs ? 'Reservar tour' : 'Book tour'} ${title}`}
                         className="flex-1 py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
@@ -323,7 +322,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <span className="group-hover:scale-105 transition-transform">{isEs ? 'Detalles' : 'Details'}</span>
                       </Link>
                       <Link
-                        href={`/${locale}/booking?tourId=${tour.id}`}
+                        href={`/${locale}/booking?tourid=${tour.id}`}
                         aria-label={`${isEs ? 'Reservar tour' : 'Book tour'} ${title}`}
                         className="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-[11px] uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
@@ -411,7 +410,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <span className="group-hover:scale-105 transition-transform">{isEs ? 'Ver Itinerario Completo' : 'Full Itinerary'}</span>
                       </Link>
                       <Link
-                        href={`/${locale}/booking?tourId=${tour.id}`}
+                        href={`/${locale}/booking?tourid=${tour.id}`}
                         aria-label={`${isEs ? 'Reservar expedición' : 'Book expedition'} ${title}`}
                         className="flex-1 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >

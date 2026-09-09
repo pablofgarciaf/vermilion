@@ -26,7 +26,7 @@ const INITIAL_USERS: SystemUser[] = [
     authUid: 'DmwBje9JwvVJKbe5rr8ExCS823S2',
     phone: '+593983992549',
     cedula: '1721790721',
-    address: 'Ecuador',
+    address: 'Quito, Ecuador',
     isActive: true,
     assignedLeadsCount: 4,
     assignedBookingsCount: 3,
@@ -35,37 +35,27 @@ const INITIAL_USERS: SystemUser[] = [
   {
     id: 'info@vermilionroutes.com',
     email: 'info@vermilionroutes.com',
-    name: 'Vermilion Operations Lead',
-    role: 'super',
-    roles: ['super', 'admin', 'operator', 'editor'],
+    name: 'Jairo Ludeña (Operaciones & Concierge)',
+    role: 'admin',
+    roles: ['admin', 'operator', 'concierge'],
     phone: '+593994048458',
+    address: 'Calle Seco 3, 28007 Madrid, España / Coral Tour Quito',
     isActive: true,
     assignedLeadsCount: 6,
     assignedBookingsCount: 5,
     createdAt: '2026-08-31T00:00:00.000Z',
   },
   {
-    id: 'carlos.guia@vermilionroutes.com',
-    email: 'carlos.guia@vermilionroutes.com',
-    name: 'Carlos Mendoza (Senior Naturalist)',
-    role: 'operator',
-    roles: ['operator'],
-    phone: '+593987654321',
+    id: 'gsanchez@plustelesmart.com.ec',
+    email: 'gsanchez@plustelesmart.com.ec',
+    name: 'Medardo Sánchez (Dirección Financiera)',
+    role: 'financial',
+    roles: ['financial', 'admin'],
+    phone: '+1 (786) 555-0199',
+    address: 'Florida, USA (Citibank Checking 9119836186)',
     isActive: true,
-    assignedLeadsCount: 3,
+    assignedLeadsCount: 2,
     assignedBookingsCount: 4,
-    createdAt: '2026-09-01T00:00:00.000Z',
-  },
-  {
-    id: 'sofia.sales@vermilionroutes.com',
-    email: 'sofia.sales@vermilionroutes.com',
-    name: 'Sofía Valdivieso (Travel Designer)',
-    role: 'sales',
-    roles: ['sales'],
-    phone: '+593981122334',
-    isActive: true,
-    assignedLeadsCount: 5,
-    assignedBookingsCount: 2,
     createdAt: '2026-09-01T00:00:00.000Z',
   },
 ];
@@ -73,218 +63,78 @@ const INITIAL_USERS: SystemUser[] = [
 const INITIAL_LEADS: CrmLead[] = [
   {
     id: 'lead-101',
-    customerName: 'Alexander Wright',
-    customerEmail: 'a.wright@luxvoyage.com',
-    customerPhone: '+1 (415) 890-2341',
-    country: 'United States',
+    customerName: 'Pablo Fabricio García Flores',
+    customerEmail: 'pablofgarciaf@gmail.com',
+    customerPhone: '+593 98 399 2549',
+    country: 'Ecuador',
     destination: 'Galapagos',
-    passengersCount: 4,
-    estimatedBudget: 14500,
-    travelDates: '15 Oct - 22 Oct 2026',
+    passengersCount: 2,
+    estimatedBudget: 1500,
+    travelDates: '18 Sep - 22 Sep 2026',
     status: 'negotiation',
-    assignedOperatorId: 'sofia.sales@vermilionroutes.com',
-    assignedOperatorName: 'Sofía Valdivieso',
-    notes: 'Interesados en Yate Privado y avistamiento de pingüinos. Requieren suite VIP.',
+    assignedOperatorId: 'info@vermilionroutes.com',
+    assignedOperatorName: 'Jairo Ludeña',
+    notes: 'Reserva confirmada en web. Interés en tour Galápagos Magia 4 Días + extensión.',
     source: 'affiliate_referral',
     affiliateReferralCode: 'pablo.g',
     passengerDetails: {
-      fullName: 'Alexander Wright',
-      passportNumber: 'US-98234102',
-      nationality: 'American',
-      dietaryRestrictions: 'Sin mariscos (alergia severa)',
-      fitnessLevel: 'moderado',
+      fullName: 'Pablo Fabricio García Flores',
+      passportNumber: '1721790721',
+      nationality: 'Ecuatoriana',
+      dietaryRestrictions: 'Ninguna',
+      fitnessLevel: 'activo',
       hatSize: '58 (M)',
     },
-    createdAt: '2026-09-01T14:30:00.000Z',
-    updatedAt: '2026-09-02T10:00:00.000Z',
+    createdAt: '2026-09-08T10:00:00.000Z',
+    updatedAt: '2026-09-08T14:00:00.000Z',
   },
   {
     id: 'lead-102',
-    customerName: 'Dr. Evelyn Dubois',
-    customerEmail: 'e.dubois@sorbonne.fr',
-    customerPhone: '+33 6 12 34 56 78',
-    country: 'France',
-    destination: 'Amazon & Andes',
-    passengersCount: 2,
-    estimatedBudget: 8200,
-    travelDates: '05 Nov - 14 Nov 2026',
+    customerName: 'Jairo Ludeña / Coral Tour Madrid',
+    customerEmail: 'info@vermilionroutes.com',
+    customerPhone: '+593 99 404 8458',
+    country: 'España',
+    destination: 'Galapagos & Andes',
+    passengersCount: 4,
+    estimatedBudget: 4760,
+    travelDates: '05 Oct - 17 Oct 2026',
     status: 'itinerary_sent',
-    assignedOperatorId: 'carlos.guia@vermilionroutes.com',
-    assignedOperatorName: 'Carlos Mendoza',
-    notes: 'Bióloga interesada en expedición de avistamiento de aves y flora endémica.',
+    assignedOperatorId: 'info@vermilionroutes.com',
+    assignedOperatorName: 'Jairo Ludeña',
+    notes: 'Expedición privada Grand Tour 12 días para grupo VIP desde Madrid.',
     source: 'landing_popup',
     passengerDetails: {
-      fullName: 'Dr. Evelyn Dubois',
-      nationality: 'French',
-      dietaryRestrictions: 'Vegetariana',
+      fullName: 'Jairo Ludeña',
+      nationality: 'Española / Ecuatoriana',
+      dietaryRestrictions: 'Ninguna',
       fitnessLevel: 'activo',
-      hatSize: '56 (S)',
+      hatSize: '58 (M)',
     },
-    createdAt: '2026-09-02T08:15:00.000Z',
-    updatedAt: '2026-09-02T12:00:00.000Z',
+    createdAt: '2026-09-07T08:15:00.000Z',
+    updatedAt: '2026-09-08T12:00:00.000Z',
   },
   {
     id: 'lead-103',
-    customerName: 'Marcus von Berg',
-    customerEmail: 'm.berg@munich-wealth.de',
-    customerPhone: '+49 89 2314 990',
-    country: 'Germany',
-    destination: 'Galapagos & Choco Andino',
+    customerName: 'Medardo Sánchez',
+    customerEmail: 'gsanchez@plustelesmart.com.ec',
+    customerPhone: '+1 (786) 555-0199',
+    country: 'Estados Unidos',
+    destination: 'Andes & Volcanes Luxury',
     passengersCount: 2,
-    estimatedBudget: 19800,
-    travelDates: '12 Dec - 23 Dec 2026',
+    estimatedBudget: 2400,
+    travelDates: '15 Nov - 22 Nov 2026',
     status: 'new',
-    assignedOperatorId: 'sofia.sales@vermilionroutes.com',
-    assignedOperatorName: 'Sofía Valdivieso',
-    notes: 'Solicitó cotización con chárter aéreo privado entre Quito y Baltra.',
+    assignedOperatorId: 'info@vermilionroutes.com',
+    assignedOperatorName: 'Jairo Ludeña',
+    notes: 'Coordinando pago vía transferencia bancaria Citibank USA / Zelle.',
     source: 'affiliate_referral',
-    affiliateReferralCode: 'pablo.g',
-    createdAt: '2026-09-03T09:00:00.000Z',
-    updatedAt: '2026-09-03T09:00:00.000Z',
+    affiliateReferralCode: 'ing.pablo',
+    createdAt: '2026-09-08T09:00:00.000Z',
+    updatedAt: '2026-09-08T09:00:00.000Z',
   },
 ];
 
-const INITIAL_BOOKINGS: CrmBooking[] = [
-  {
-    id: 'book-501',
-    bookingCode: 'VR-2026-089',
-    tourTitle: 'Galapagos Luxury Island Hopping & Private Yacht',
-    destination: 'Galapagos Islands',
-    customerName: 'Lord & Lady Harrington',
-    customerEmail: 'harrington@monor-holdings.co.uk',
-    customerPhone: '+44 20 7946 0912',
-    passengersCount: 2,
-    totalAmount: 11800,
-    paidAmount: 5000,
-    directCosts: 6800, // Margen $5,000 bruto
-    status: 'deposit_confirmed',
-    travelStartDate: '2026-10-10',
-    travelEndDate: '2026-10-18',
-    assignedOperatorId: 'sofia.sales@vermilionroutes.com',
-    assignedOperatorName: 'Sofía Valdivieso',
-    affiliateId: 'pablo.g',
-    affiliateCommissionAmount: 1180, // 10%
-    affiliateCommissionStatus: 'ready_for_review',
-    operatorCommissionAmount: 250,
-    operatorCommissionStatus: 'pending',
-    paymentReference: 'STRIPE_DEP_9921',
-    vipGiftAssigned: 'Pakari Imperial Edition & Sombrero Montecristi',
-    vipGiftDelivered: false,
-    notes: 'Depósito confirmado vía Stripe. Saldo restante vence el 25 de septiembre.',
-    passengersList: [
-      {
-        fullName: 'Arthur Harrington',
-        passportNumber: 'GB-77123984',
-        nationality: 'British',
-        dietaryRestrictions: 'Ninguna',
-        fitnessLevel: 'moderado',
-        hatSize: '59 (L)',
-      },
-      {
-        fullName: 'Eleanor Harrington',
-        passportNumber: 'GB-77123985',
-        nationality: 'British',
-        dietaryRestrictions: 'Celiaco (Gluten Free estricto)',
-        fitnessLevel: 'relax',
-        hatSize: '56 (S)',
-      },
-    ],
-    runSheet: [
-      {
-        dayNumber: 1,
-        date: '2026-10-10',
-        title: 'Arribo a Baltra & Transfer VIP a Santa Cruz',
-        pickupTime: '11:45 AM (Vuelo AV-1632)',
-        driverName: 'Joffre Tenelema',
-        driverPhone: '+593 99 123 4567',
-        vehiclePlate: 'GAL-1022',
-        hotelName: 'Finch Bay Galapagos Hotel',
-        hotelConfirmation: 'FB-9923-VIP',
-        guideName: 'Carlos Mendoza',
-        guidePhone: '+593 98 765 4321',
-        activitiesSummary: 'Recepción VIP en sala Baltra, cruce de canal de Itabaca y almuerzo gourmet en Los Gemelos.',
-        status: 'pending',
-      },
-      {
-        dayNumber: 2,
-        date: '2026-10-11',
-        title: 'Navegación Exclusiva a Isla Bartolomé',
-        pickupTime: '06:00 AM',
-        guideName: 'Carlos Mendoza',
-        activitiesSummary: 'Pinnacle Rock, snorkel con pingüinos de Galápagos y tiburones de arrecife.',
-        status: 'pending',
-      },
-    ],
-    createdAt: '2026-08-30T10:00:00.000Z',
-    updatedAt: '2026-09-02T14:00:00.000Z',
-  },
-  {
-    id: 'book-502',
-    bookingCode: 'VR-2026-043',
-    tourTitle: 'Ecuador Avenue of the Volcanoes & Colonial Haciendas',
-    destination: 'Quito, Cotopaxi & Baños',
-    customerName: 'Beatriz & Fernando Moreira',
-    customerEmail: 'f.moreira@gruposantos.br',
-    customerPhone: '+55 11 98765-4321',
-    passengersCount: 4,
-    totalAmount: 10104,
-    paidAmount: 10104,
-    directCosts: 5900,
-    status: 'in_operation',
-    travelStartDate: '2026-09-01',
-    travelEndDate: '2026-09-10',
-    assignedOperatorId: 'carlos.guia@vermilionroutes.com',
-    assignedOperatorName: 'Carlos Mendoza',
-    affiliateId: 'pablo.g',
-    affiliateCommissionAmount: 1010,
-    affiliateCommissionStatus: 'paid',
-    operatorCommissionAmount: 300,
-    operatorCommissionStatus: 'ready_for_review',
-    paymentReference: 'WIRE_TRANS_PICHINCHA_8821',
-    vipGiftAssigned: 'Caja Regalo Premium Pakari 100% Cacao Fino de Aroma',
-    vipGiftDelivered: true,
-    vipGiftDeliveredAt: '2026-09-01T15:30:00Z',
-    notes: 'Pago 100% verificado en Banco Pichincha. En curso por Cotopaxi.',
-    passengersList: [
-      {
-        fullName: 'Fernando Moreira',
-        nationality: 'Brazilian',
-        dietaryRestrictions: 'Ninguna',
-        fitnessLevel: 'activo',
-        hatSize: '58 (M)',
-      },
-    ],
-    runSheet: [
-      {
-        dayNumber: 1,
-        date: '2026-09-01',
-        title: 'Pick-up en Aeropuerto Mariscal Sucre (UIO)',
-        pickupTime: '14:20 PM',
-        driverName: 'Fausto Guaygua',
-        driverPhone: '+593 99 888 7777',
-        vehiclePlate: 'PBY-4432',
-        hotelName: 'Casa Gangotena Relais & Châteaux',
-        hotelConfirmation: 'CG-8812',
-        guideName: 'Carlos Mendoza',
-        activitiesSummary: 'Pick-up VIP y entrega de Kit Pakari de bienvenida. Cena maridaje en Centro Histórico.',
-        status: 'completed',
-      },
-      {
-        dayNumber: 2,
-        date: '2026-09-02',
-        title: 'Ascenso a Volcán Cotopaxi & Hacienda San Agustín',
-        pickupTime: '08:00 AM',
-        driverName: 'Fausto Guaygua',
-        hotelName: 'Hacienda San Agustín de Callo',
-        guideName: 'Carlos Mendoza',
-        activitiesSummary: 'Caminata a Refugio José Rivas 4,864m y almuerzo andino entre muros incásicos.',
-        status: 'in_progress',
-      },
-    ],
-    createdAt: '2026-08-28T12:00:00.000Z',
-    updatedAt: '2026-09-01T18:00:00.000Z',
-  },
-];
+const INITIAL_BOOKINGS: CrmBooking[] = [];
 
 const INITIAL_WHATSAPP_TEMPLATES: WhatsAppTemplate[] = [
   {
@@ -319,47 +169,14 @@ const INITIAL_WHATSAPP_TEMPLATES: WhatsAppTemplate[] = [
 
 const INITIAL_GENEALOGY: GenealogyNode = {
   username: 'pablo.g',
-  name: 'Pablo Fabricio García (Founder)',
+  name: 'Pablo Fabricio García Flores (Founder)',
   email: 'pablofgarciaf@gmail.com',
   level: 0,
   rank: 'Founder & Root',
-  totalSales: 32000,
-  recruitsCount: 4,
+  totalSales: 0,
+  recruitsCount: 0,
   status: 'active',
-  children: [
-    {
-      username: 'maria.luxury',
-      name: 'María Alejandra Gómez',
-      email: 'maria.lux@travelpartners.com',
-      level: 1,
-      rank: 'Empresario',
-      totalSales: 18400,
-      recruitsCount: 2,
-      status: 'active',
-      children: [
-        {
-          username: 'juan.tours',
-          name: 'Juan Carlos Rivas',
-          email: 'jc.rivas@expeditions.ec',
-          level: 2,
-          rank: 'Ejecutivo',
-          totalSales: 9200,
-          recruitsCount: 0,
-          status: 'active',
-        },
-      ],
-    },
-    {
-      username: 'andres.advisor',
-      name: 'Andrés Villacís',
-      email: 'andres@andesroutes.com',
-      level: 1,
-      rank: 'Líder',
-      totalSales: 7500,
-      recruitsCount: 1,
-      status: 'active',
-    },
-  ],
+  children: [],
 };
 
 export function useCrmData() {
@@ -367,17 +184,64 @@ export function useCrmData() {
   const [leads, setLeads] = useState<CrmLead[]>(INITIAL_LEADS);
   const [bookings, setBookings] = useState<CrmBooking[]>(INITIAL_BOOKINGS);
   const [waTemplates] = useState<WhatsAppTemplate[]>(INITIAL_WHATSAPP_TEMPLATES);
-  const [genealogy] = useState<GenealogyNode>(INITIAL_GENEALOGY);
+  const [genealogy, setGenealogy] = useState<GenealogyNode>(INITIAL_GENEALOGY);
   const [loading, setLoading] = useState(false);
 
-  // Firestore Synchronization
+  // Firestore & API Synchronization
   useEffect(() => {
+    // 1. Fetch persistent server-side bookings
+    fetch('/api/crm/bookings')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.success && Array.isArray(data.bookings)) {
+          setBookings(data.bookings);
+        }
+      })
+      .catch((err) => console.warn('[useCrmData] API sync notice:', err));
+
     let unsubscribeUsers: (() => void) | undefined;
     let unsubscribeLeads: (() => void) | undefined;
     let unsubscribeBookings: (() => void) | undefined;
+    let unsubscribeAffiliates: (() => void) | undefined;
 
     try {
       if (db) {
+        const affCol = collection(db, 'affiliates');
+        unsubscribeAffiliates = onSnapshot(affCol, (snap) => {
+          if (!snap.empty) {
+            const affList: any[] = [];
+            snap.forEach((d) => affList.push({ id: d.id, ...d.data() }));
+            const root = affList.find((a) => a.username === 'pablo.g') || affList[0];
+            if (root) {
+              const children = affList
+                .filter((a) => a.parentId === root.username && a.username !== root.username)
+                .map((c) => ({
+                  username: c.username,
+                  name: c.name || c.username,
+                  email: c.email || '',
+                  level: 1,
+                  rank: c.rank || 'Standard',
+                  totalSales: Number(c.monthlyVolume || c.salesCount || 0),
+                  recruitsCount: 0,
+                  status: (c.isActive ? 'active' : 'inactive') as 'active' | 'inactive',
+                  children: [],
+                }));
+
+              setGenealogy({
+                username: root.username,
+                name: root.name || 'Pablo Fabricio García Flores (Founder)',
+                email: root.email || 'pablofgarciaf@gmail.com',
+                level: 0,
+                rank: 'Founder & Root',
+                totalSales: Number(root.salesCount || root.monthlyVolume || 0),
+                recruitsCount: children.length,
+                status: 'active',
+                children,
+              });
+            }
+          }
+        }, (err) => console.warn('[useCrmData] affiliates genealogy notice:', err.message));
+
         const usersCol = collection(db, 'usuarios');
         unsubscribeUsers = onSnapshot(usersCol, (snap) => {
           if (!snap.empty) {
@@ -400,10 +264,78 @@ export function useCrmData() {
         unsubscribeBookings = onSnapshot(bookingsCol, (snap) => {
           if (!snap.empty) {
             const list: CrmBooking[] = [];
-            snap.forEach((d) => list.push({ ...(d.data() as CrmBooking), id: d.id }));
-            setBookings(list);
+            const seenCodes = new Set<string>();
+
+            snap.forEach((d) => {
+              const raw = d.data() as any;
+              const refCode = String(raw.bookingCode || raw.refCode || `VR-${d.id.slice(-6)}`).trim();
+
+              // Auto-purge dummy test records
+              const isTest =
+                d.id.toUpperCase().includes('TEST') ||
+                refCode.toUpperCase().includes('TEST') ||
+                String(raw.customerName || '').toLowerCase().includes('test customer');
+
+              if (isTest) {
+                import('firebase/firestore').then(({ deleteDoc, doc: fDoc }) => {
+                  deleteDoc(fDoc(db, 'bookings', d.id)).catch(() => {});
+                });
+                return;
+              }
+
+              // Deduplicate so duplicate documents with same refCode don't collide
+              if (seenCodes.has(refCode)) {
+                import('firebase/firestore').then(({ deleteDoc, doc: fDoc }) => {
+                  deleteDoc(fDoc(db, 'bookings', d.id)).catch(() => {});
+                });
+                return;
+              }
+              seenCodes.add(refCode);
+
+              const amount = Number(raw.paidAmount || raw.amountPaid || raw.totalAmount || 0);
+              const pax = Number(raw.passengersCount) || (typeof raw.guestsCount === 'string' ? parseInt(raw.guestsCount) : 2) || 2;
+              const dates = raw.travelStartDate || raw.travelDates || 'Por coordinar';
+
+              const normalized: CrmBooking = {
+                id: d.id,
+                bookingCode: refCode,
+                tourTitle: raw.tourTitle || 'Expedición Vermilion',
+                destination: raw.destination || 'Galapagos & Andes',
+                customerName: raw.customerName || 'Viajero Vermilion',
+                customerEmail: raw.customerEmail || '',
+                customerPhone: raw.customerPhone || '',
+                passengersCount: pax,
+                totalAmount: Number(raw.totalAmount || amount || 0),
+                paidAmount: amount,
+                directCosts: Number(raw.directCosts || amount * 0.55),
+                status: (raw.status === 'confirmed' ? 'deposit_confirmed' : (raw.status || 'deposit_confirmed')),
+                travelStartDate: dates,
+                travelEndDate: raw.travelEndDate || dates,
+                assignedOperatorId: raw.assignedOperatorId || '',
+                assignedOperatorName: raw.assignedOperatorName || '',
+                affiliateId: raw.affiliateCode || raw.affiliateId || '',
+                affiliateCommissionAmount: raw.affiliateCommissionAmount || (raw.affiliateCode ? Math.round(amount * 0.1) : 0),
+                affiliateCommissionStatus: raw.affiliateCommissionStatus || (raw.affiliateCode ? 'ready_for_review' : 'pending'),
+                operatorCommissionAmount: raw.operatorCommissionAmount || 250,
+                operatorCommissionStatus: raw.operatorCommissionStatus || 'pending',
+                paymentReference: raw.transferRef || raw.paymentReference || refCode,
+                vipGiftAssigned: raw.vipGiftAssigned || 'Pakari Imperial Edition & Sombrero Montecristi',
+                vipGiftDelivered: !!raw.vipGiftDelivered,
+                runSheet: raw.runSheet || [],
+                passengersList: raw.passengersList || [],
+                createdAt: raw.createdAt || new Date().toISOString(),
+                updatedAt: raw.updatedAt || new Date().toISOString(),
+                ...raw,
+              };
+              list.push(normalized);
+            });
+            list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+            if (list.length > 0) {
+              setBookings(list);
+            }
           }
         }, (err) => console.warn('[useCrmData] bookings notice:', err.message));
+
       }
     } catch (e) {
       console.warn('[useCrmData] Firestore init notice:', e);
@@ -413,6 +345,7 @@ export function useCrmData() {
       if (unsubscribeUsers) unsubscribeUsers();
       if (unsubscribeLeads) unsubscribeLeads();
       if (unsubscribeBookings) unsubscribeBookings();
+      if (unsubscribeAffiliates) unsubscribeAffiliates();
     };
   }, []);
 
@@ -432,16 +365,18 @@ export function useCrmData() {
 
   // Assign Operator to Booking
   const assignOperatorToBooking = useCallback(async (bookingId: string, operatorEmail: string, operatorName: string) => {
+    const updates = { assignedOperatorId: operatorEmail, assignedOperatorName: operatorName, updatedAt: new Date().toISOString() };
     setBookings((prev) =>
-      prev.map((b) => (b.id === bookingId ? { ...b, assignedOperatorId: operatorEmail, assignedOperatorName: operatorName, updatedAt: new Date().toISOString() } : b))
+      prev.map((b) => (b.id === bookingId ? { ...b, ...updates } : b))
     );
+    fetch('/api/crm/bookings', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: bookingId, updates }),
+    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
-        await updateDoc(doc(db, 'bookings', bookingId), {
-          assignedOperatorId: operatorEmail,
-          assignedOperatorName: operatorName,
-          updatedAt: new Date().toISOString(),
-        });
+        await updateDoc(doc(db, 'bookings', bookingId), updates);
       } catch (err) {
         console.warn('Could not sync operator assignment to firestore:', err);
       }
@@ -450,22 +385,26 @@ export function useCrmData() {
 
   // Operator Signals Trip Completed
   const signalTripCompleted = useCallback(async (bookingId: string, operatorName: string) => {
+    const updates = {
+      status: 'completed' as const,
+      operatorCommissionStatus: 'ready_for_review' as const,
+      updatedAt: new Date().toISOString(),
+    };
     setBookings((prev) =>
       prev.map((b) => (b.id === bookingId ? {
         ...b,
-        status: 'completed',
-        operatorCommissionStatus: 'ready_for_review',
+        ...updates,
         affiliateCommissionStatus: b.affiliateCommissionStatus === 'paid' ? 'paid' : 'ready_for_review',
-        updatedAt: new Date().toISOString(),
       } : b))
     );
+    fetch('/api/crm/bookings', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: bookingId, updates }),
+    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
-        await updateDoc(doc(db, 'bookings', bookingId), {
-          status: 'completed',
-          operatorCommissionStatus: 'ready_for_review',
-          updatedAt: new Date().toISOString(),
-        });
+        await updateDoc(doc(db, 'bookings', bookingId), updates);
       } catch (err) {
         console.warn('Could not sync trip completion to firestore:', err);
       }
@@ -478,26 +417,29 @@ export function useCrmData() {
     beneficiaryType: 'affiliate' | 'operator',
     paymentRef: string
   ) => {
+    const updatePayload: any = {
+      paymentReference: paymentRef,
+      updatedAt: new Date().toISOString(),
+    };
+    if (beneficiaryType === 'affiliate') updatePayload.affiliateCommissionStatus = 'paid';
+    if (beneficiaryType === 'operator') updatePayload.operatorCommissionStatus = 'paid';
+
     setBookings((prev) =>
       prev.map((b) => {
         if (b.id !== bookingId) return b;
         return {
           ...b,
-          affiliateCommissionStatus: beneficiaryType === 'affiliate' ? 'paid' : b.affiliateCommissionStatus,
-          operatorCommissionStatus: beneficiaryType === 'operator' ? 'paid' : b.operatorCommissionStatus,
-          paymentReference: paymentRef,
-          updatedAt: new Date().toISOString(),
+          ...updatePayload,
         };
       })
     );
+    fetch('/api/crm/bookings', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: bookingId, updates: updatePayload }),
+    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
-        const updatePayload: any = {
-          paymentReference: paymentRef,
-          updatedAt: new Date().toISOString(),
-        };
-        if (beneficiaryType === 'affiliate') updatePayload.affiliateCommissionStatus = 'paid';
-        if (beneficiaryType === 'operator') updatePayload.operatorCommissionStatus = 'paid';
         await updateDoc(doc(db, 'bookings', bookingId), updatePayload);
       } catch (err) {
         console.warn('Could not sync commission payment to firestore:', err);
@@ -508,18 +450,20 @@ export function useCrmData() {
   // Mark Pakari Amenity Delivered
   const markPakariDelivered = useCallback(async (bookingId: string, operatorName: string) => {
     const now = new Date().toISOString();
+    const updates = { vipGiftDelivered: true, vipGiftDeliveredAt: now, updatedAt: now };
     setBookings((prev) =>
       prev.map((b) =>
-        b.id === bookingId ? { ...b, vipGiftDelivered: true, vipGiftDeliveredAt: now, updatedAt: now } : b
+        b.id === bookingId ? { ...b, ...updates } : b
       )
     );
+    fetch('/api/crm/bookings', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: bookingId, updates }),
+    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
-        await updateDoc(doc(db, 'bookings', bookingId), {
-          vipGiftDelivered: true,
-          vipGiftDeliveredAt: now,
-          updatedAt: now,
-        });
+        await updateDoc(doc(db, 'bookings', bookingId), updates);
       } catch (err) {
         console.warn('Could not sync amenity delivery to firestore:', err);
       }
@@ -566,12 +510,18 @@ export function useCrmData() {
 
   // Update Booking Status
   const updateBookingStatus = useCallback(async (bookingId: string, newStatus: CrmBooking['status']) => {
+    const updates = { status: newStatus, updatedAt: new Date().toISOString() };
     setBookings((prev) =>
-      prev.map((b) => (b.id === bookingId ? { ...b, status: newStatus, updatedAt: new Date().toISOString() } : b))
+      prev.map((b) => (b.id === bookingId ? { ...b, ...updates } : b))
     );
+    fetch('/api/crm/bookings', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: bookingId, updates }),
+    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
-        await updateDoc(doc(db, 'bookings', bookingId), { status: newStatus, updatedAt: new Date().toISOString() });
+        await updateDoc(doc(db, 'bookings', bookingId), updates);
       } catch (err) {
         console.warn('Could not sync booking status to firestore:', err);
       }

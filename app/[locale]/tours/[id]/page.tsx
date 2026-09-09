@@ -40,6 +40,7 @@ interface TourDetailPageProps {
 
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { getSeoAlternates } from '@/utils/seoHelper';
 
 // Allow dynamic params so new tours can be loaded, and revalidate every 60 seconds
 // to fetch fresh prices from Firestore.
@@ -68,40 +69,54 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
     };
   }
 
-  const title = getLocalizedText(tour.title, resolvedParams.locale);
-  const description = getLocalizedText(tour.description || tour.shortDescription, resolvedParams.locale);
-  const days = getLocalizedText(tour.durationDays || tour.duration, resolvedParams.locale);
+  const rawTitle = getLocalizedText(tour.title, resolvedParams.locale) || 'Bespoke Tour';
+  let title = `${rawTitle} | Vermilion Routes`;
+  if (title.length < 50) {
+    title = `${rawTitle} Luxury Tour | Vermilion Routes`;
+  }
+  if (title.length > 60) {
+    title = `${rawTitle.slice(0, 60 - 19).trim()} | Vermilion Routes`;
+  }
+
+  const rawDesc = getLocalizedText(tour.description || tour.shortDescription, resolvedParams.locale) || '';
+  let description = rawDesc.replace(/\s+/g, ' ').trim();
+  if (description.length > 155) {
+    description = description.slice(0, 152).trim() + '...';
+  } else if (description.length < 120) {
+    const cta = resolvedParams.locale === 'es'
+      ? ' Reserve su expedición de lujo con guías expertos y atención VIP 24/7.'
+      : ' Book your bespoke luxury journey with expert naturalist guides and 24/7 VIP support.';
+    description = (description + cta).slice(0, 154);
+  }
+
   const dest = getLocalizedText(tour.destination, resolvedParams.locale);
+  const alternates = getSeoAlternates(`/tours/${tour.id}`, resolvedParams.locale);
 
   return {
-    title: `${title} (${days}) | Vermilion Routes`,
-    description: typeof description === 'string' ? description.slice(0, 160) : '',
+    title,
+    description,
     openGraph: {
-      title: `${title} - ${dest}`,
-      description: typeof description === 'string' ? description.slice(0, 160) : '',
+      title: `${rawTitle} - ${dest}`,
+      description,
+      url: alternates.canonical,
       images: [
         {
           url: tour.mainImage || tour.imageUrl,
           width: 1200,
           height: 630,
-          alt: title,
+          alt: rawTitle,
         },
       ],
     },
-    alternates: {
-      canonical: `https://vermilionroutes.com/tours/${tour.id}`,
-      languages: {
-        'en-US': `https://vermilionroutes.com/en/tours/${tour.id}`,
-        'es-EC': `https://vermilionroutes.com/es/tours/${tour.id}`,
-      },
-    },
+    alternates,
   };
 }
 
 export default async function TourDetailPage({ params }: TourDetailPageProps) {
   const resolvedParams = await params;
-  const { locale, id } = resolvedParams;
-  const tour = await getTourByIdFromFirestore(id);
+  const locale = resolvedParams.locale;
+  const rawTour = mockTours.find((t) => t.id === resolvedParams.id);
+  const tour = await getTourByIdFromFirestore(resolvedParams.id, rawTour);
 
   if (!tour) {
     return (
@@ -115,7 +130,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
         <p className="text-zinc-600 text-sm leading-relaxed">
           The requested travel itinerary could not be found. We invite you to explore our curated selection of exclusive journeys through Ecuador and Galapagos.
         </p>
-        <Link href="/">
+        <Link href={`/${resolvedParams.locale}`}>
           <Button variant="primary" className="gap-2">
             <ArrowLeft className="w-4 h-4" />
             <span>Return to Home</span>
@@ -153,13 +168,13 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
       price: Number((tour.priceFromUSD || tour.price || 1000).toString().replace(/[^0-9.]/g, '')),
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
-      url: `https://vermilionroutes.com/tours/${tour.id}`,
+      url: `https://www.vermilionroutes.com/${locale}/tours/${tour.id}`,
       validFrom: '2026-01-01',
     },
     provider: {
       '@type': 'TravelAgency',
       name: 'Vermilion Routes',
-      url: 'https://vermilionroutes.com',
+      url: 'https://www.vermilionroutes.com',
     },
     aggregateRating: {
       '@type': 'AggregateRating',

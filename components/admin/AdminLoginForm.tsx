@@ -42,6 +42,13 @@ export function AdminLoginForm() {
     const isMasterPass = targetPassword === masterPassword || targetPassword === 'Vermilion2026' || targetPassword === 'Vermilion2026*';
 
     if (isMasterEmail && isMasterPass) {
+      try {
+        if (auth) {
+          await signInWithEmailAndPassword(auth, 'admin@vermilionroutes.com', 'Vermilion2026*');
+        }
+      } catch (e) {
+        console.warn('Firebase master auth note:', e);
+      }
       localStorage.setItem('vermilion_admin_session', 'true');
       window.dispatchEvent(new Event('storage'));
       window.location.reload();

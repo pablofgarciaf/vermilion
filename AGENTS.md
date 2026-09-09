@@ -1,4 +1,4 @@
-﻿<!-- BEGIN:nextjs-agent-rules -->
+<!-- BEGIN:nextjs-agent-rules -->
 
 # This is NOT the Next.js you know
 
@@ -32,3 +32,43 @@ Eres un agente de revisión de código. Tu único propósito es auditar las deci
 4. PROHIBIDA LA SUPERPOSICIÓN DE CLASES DE ANIMACIÓN: Si una pantalla no debe ser animada por un motor externo (como GSAP), NO le pongas las clases CSS que el motor busca (ej. .title-1). Esto evita textos duplicados e inyecciones no deseadas.
 5. PROHIBIDAS LAS VARIABLES FANTASMAS: Nunca uses una variable dentro de un contexto de animación sin asegurarte de que ha sido declarada explícitamente en el scope superior. Un error de referencia (ReferenceError) crasheará el servidor SSR de Next.js.
 6. PROHIBIDA LA EJECUCIÓN A CIEGAS: Si la lógica involucra el cruce entre React y un motor de manipulación directa del DOM, está prohibido ejecutar código o comandos sin antes explicar la arquitectura exacta al usuario y recibir su aprobación.
+
+---
+
+# 🛡️ PROTOCOLO DE AUDITORÍA SCREAMING FROG Y SEO TÉCNICO A+
+(Reglas mandatorias para todos los agentes de desarrollo, arquitectura y SEO antes de cualquier commit o despliegue)
+
+Todo agente que agregue, edite o revise páginas, rutas o componentes en este proyecto debe cumplir rigurosamente estos 7 Mandamientos Técnicos para garantizar un crawl de 0 errores en Screaming Frog SEO Spider:
+
+### 1. SEGURIDAD Y ENCABEZADOS HTTP (`next.config.mjs`)
+- **Content-Security-Policy (CSP):** Obligatorio en todos los endpoints públicos y assets.
+- **Referrer-Policy:** Estrictamente `strict-origin-when-cross-origin` (NUNCA usar `origin-when-cross-origin` pues Screaming Frog y OWASP lo reportan como vulnerabilidad de fuga de URLs).
+- **Protecciones XSS y Mime:** `X-Content-Type-Options: nosniff` y `X-XSS-Protection: 1; mode=block` siempre activos.
+
+### 2. JERARQUÍA Y LONGITUD DE ENCABEZADOS (H1, H2, H3)
+- **Exactamente UN SOLO `<h1>` por página:** Prohibido páginas sin H1 o con múltiples H1s.
+- **Longitud estricta del `<h1>`:** Entre **45 y 65 caracteres** (máximo absoluto 70).
+- **Secuencialidad del DOM:** El `<h1>` DEBE ser el primer encabezado en el orden de lectura del DOM. Ningún `<h2>`, `<h3>` o elemento con `role="heading"` (como barras secundarias en Portals) puede preceder al `<h1>`.
+- **Tipografía Decorativa:** Si el H1 contiene letras o palabras estilizadas en spans flex (ej. "ALL YOU NEED IS"), dichos spans deben tener `aria-hidden="true"` y el texto semántico debe residir en un `<span className="sr-only">`. Esto previene textos concatenados sin espacio como `ALLYOUNEEDIS...`.
+- **Prohibido saltarse niveles:** Nunca saltar de `<h1>` directo a `<h3>` sin un `<h2>` intermedio (evita el error `H2: Falta`).
+
+### 3. METADATOS Y DESCRIPCIONES (TITLE & META DESCRIPTION)
+- **Title Tag:** Estrictamente entre **50 y 60 caracteres** con branding al final (`Vermilion Routes`).
+- **Meta Description:** Estrictamente entre **120 y 155 caracteres** (máximo 155 para evitar truncado en Google y advertencias en Screaming Frog). Prohibido textos genéricos de relleno.
+
+### 4. URLS Y ENLACES INTERNOS (CERO 4XX, CERO 3XX)
+- **URLs estrictamente en MINÚSCULAS:** Prohibido usar parámetros o paths con mayúsculas (`?tourId=`, `?Ref=`). Usar siempre minúsculas (`?tourid=`, `?ref=`, `?vid=`).
+- **Prefijo de Locale Obligatorio:** Enlaces internos DEBEN llevar el prefijo del idioma actual: `/${locale}/terms`, `/${locale}/privacy-policy`, `/${locale}/tours`. Prohibido usar enlaces ciegos como `/terms` o `/privacy-policy` que causen 404 o 308.
+- **Enlaces Públicos Seguros:** Prohibido enlazar desde la web pública a rutas de login o áreas protegidas que hagan client-side redirects (ej. en el Footer usar `/${locale}#affiliate` en lugar de `/${locale}/affiliates`).
+
+### 5. DIMENSIONES DE IMÁGENES (PREVENCIÓN DE CLS)
+- **Atributos de tamaño obligatorios:** Todo tag `<img>` o `<Image>` DEBE contener atributos explícitos `width` y `height` (o `fill` con contenedor dimensional).
+- **Banderas e iconos:** Ninguna bandera de idioma (`w-4 h-3`) o favicon puede carecer de `width` y `height` nativos.
+
+### 6. CANÓNICAS, HREFLANG Y SITEMAP
+- **Canónica auto-referencial:** Toda página indexable debe tener una URL canónica absoluta que responda código 200 directo (sin trailing slash redirects ni 301s).
+- **Hreflang simétrico:** 8 idiomas soportados (`en`, `es`, `fr`, `de`, `zh`, `it`, `pt`, `ja`) + `x-default`, todos apuntando a páginas canónicas indexables.
+- **Sitemap limpio:** Prohibido incluir en `sitemap.ts` URLs que redirijan (como `/about` o `/contact`) o que estén bloqueadas por `robots.txt`.
+
+### 7. VERIFICACIÓN PRE-FLIGHT LOCAL
+- Todo cambio antes de ser presentado al usuario o preparado para commit debe superar `npm run build` con Turbopack (145/145 páginas generadas con código de salida `0`).

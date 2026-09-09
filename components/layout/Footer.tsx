@@ -244,7 +244,7 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm text-zinc-300">
               <li>
-                <a href={`/${locale}/about`} className="hover:text-white transition-colors">
+                <a href={`/${locale}#experience`} className="hover:text-white transition-colors">
                   {t.about}
                 </a>
               </li>
@@ -259,7 +259,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={`/${locale}/contact`} className="hover:text-white transition-colors">
+                <a href={`/${locale}#contact`} className="hover:text-white transition-colors">
                   {t.contact}
                 </a>
               </li>
@@ -327,8 +327,17 @@ export function Footer() {
                   <span>vermilionroutes.com</span>
                 </span>
               </p>
-              <p className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400" /> {getLocalizedText(settings?.contact?.address, locale) || 'Simón Bolívar oe1-120 y Juan León Mera, Quito, Ecuador'}
+              <p className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <span>
+                  <strong className="text-white">Quito:</strong> CORAL TOUR, Quito, Ecuador
+                </span>
+              </p>
+              <p className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <span>
+                  <strong className="text-white">Madrid:</strong> Calle Seco 3, 28007 Madrid, España
+                </span>
               </p>
             </div>
           </div>
@@ -346,12 +355,20 @@ export function Footer() {
                 Secure Checkout &amp; Encrypted Payments
               </h3>
               <p className="text-xs text-zinc-300 max-w-2xl mt-1">
-                We accept secure online payments via Stripe (Credit/Debit Card) and PayPal. Direct Bank Wire and Zelle transfers are available upon request after contacting our travel designers. We will never ask you to send funds to unverified accounts.
+                {locale === 'es'
+                  ? 'Aceptamos pagos directos y encriptados con tarjeta mediante Stripe, transferencias oficiales vía Citibank (EE.UU.), transferencias Zelle y Banco Produbanco. Garantía oficial y comprobantes certificados.'
+                  : 'We accept secure encrypted card payments via Stripe, official Citibank (USA) wire transfers, Zelle payments, and Banco Produbanco. Official guarantee and certified travel vouchers.'}
               </p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
+              <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300">
+                Stripe Payments
+              </span>
+              <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300">
+                Citibank USA &amp; Zelle
+              </span>
               <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300 dark:text-amber-400">
-                SSL Secured
+                SSL 256-Bit Encrypted
               </span>
             </div>
           </div>
@@ -386,7 +403,7 @@ export function Footer() {
             <a href={`/${locale}/terms`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
               {t.terms}
             </a>
-            <a href={`/${locale}/affiliates`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
+            <a href={`/${locale}#affiliate`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
               {locale === 'es' ? 'Programa de Afiliados' : 'Affiliate Program'}
             </a>
           </div>

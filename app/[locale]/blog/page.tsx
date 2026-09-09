@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { BlogIndexClient } from '@/components/blog/BlogIndexClient';
+import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -14,9 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEs
       ? 'Guías de viaje expertas y consejos exclusivos para explorar Galápagos, los Andes y la Amazonía ecuatoriana con la asesoría de lujo de Vermilion Routes 24/7.'
       : 'Expert luxury travel guides, wildlife insights and expedition tips for Galapagos, the Amazon and Ecuador. Plan your bespoke adventure with local experts 24/7.',
-    alternates: {
-      canonical: `https://www.vermilionroutes.com/${locale}/blog`,
-    },
+    alternates: getSeoAlternates('/blog', locale),
     openGraph: {
       title: isEs
         ? 'Vermilion Routes | Guías de Viaje y Expediciones de Lujo'

@@ -65,6 +65,17 @@ const SPLASH_TEXTS: Record<string, {
   }
 };
 
+const H1_HEADLINES: Record<string, string> = {
+  es: 'Vermilion Routes | Tours de Lujo en Ecuador & Galápagos',
+  en: 'Vermilion Routes | Luxury Tours in Ecuador & Galapagos',
+  fr: 'Vermilion Routes | Voyages de Luxe en Équateur & Galapagos',
+  de: 'Vermilion Routes | Luxusreisen in Ecuador & Galapagos',
+  it: 'Vermilion Routes | Tour di Lusso in Ecuador e Galapagos',
+  pt: 'Vermilion Routes | Viagens de Luxo no Equador & Galápagos',
+  ja: 'Vermilion Routes | エクアドル＆ガラパゴス 高級ツアー',
+  zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯定制奢华游',
+};
+
 export function getStandardTemplateHTML(slide: SlideData, locale: string): string {
   const place = getLocalizedText(slide.place, locale);
   const title = getLocalizedText(slide.title, locale);
@@ -122,6 +133,7 @@ export function getStandardTemplateHTML(slide: SlideData, locale: string): strin
 
 export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
   const welcomeText = SPLASH_TEXTS[locale] || SPLASH_TEXTS.en;
+  const h1Text = H1_HEADLINES[locale] || H1_HEADLINES.en;
 
   return (
     <>
@@ -150,9 +162,9 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                   <span className="tracking-wide">{welcomeText.rating}</span>
                 </div>
 
-                {/* "ALL YOU NEED IS" Vibrant Oswald H1 - Larger & High-Contrast NEED */}
+                {/* "ALL YOU NEED IS" Vibrant Oswald H1 - Semantic 50-60 char H1 for SEO */}
                 <h1 className="welcome-title flex flex-col items-center justify-center md:items-start mb-2.5">
-                  <span className="flex gap-2 sm:gap-3 md:gap-4 font-oswald font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[68px] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] [text-shadow:0_3px_10px_rgba(0,0,0,0.9)]">
+                  <span aria-hidden="true" className="flex gap-2 sm:gap-3 md:gap-4 font-oswald font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[68px] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] [text-shadow:0_3px_10px_rgba(0,0,0,0.9)]">
                     <span className="flex">
                       <span className="text-[#FDB913]">A</span>
                       <span className="text-[#F58220]">L</span>
@@ -174,7 +186,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                       <span className="text-[#29B6F6]">S</span>
                     </span>
                   </span>
-                  <span className="sr-only">Vermilion Routes — {welcomeText.headline}</span>
+                  <span className="sr-only">{h1Text}</span>
                 </h1>
 
                 {/* Logo Glass Card - Centered under ALL YOU NEED IS */}

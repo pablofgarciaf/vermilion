@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import { BLOG_POSTS, BlogPost } from '@/data/blogData';
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { getSeoAlternates } from '@/utils/seoHelper';
 import { LeadMagnetBanner } from '@/components/home/LeadMagnetBanner';
 import {
   Calendar,
@@ -37,15 +38,35 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     return { title: 'Article Not Found | Vermilion Routes' };
   }
 
-  const title = getLocalizedText(post.title, locale);
-  const description = getLocalizedText(post.excerpt, locale);
+  const rawTitle = getLocalizedText(post.title, locale);
+  let title = `${rawTitle} | Vermilion Routes`;
+  if (title.length < 50) {
+    title = `${rawTitle} - Luxury Travel Guide | Vermilion Routes`;
+  }
+  if (title.length > 60) {
+    title = `${rawTitle.slice(0, 60 - 19).trim()} | Vermilion Routes`;
+  }
+
+  const rawDesc = getLocalizedText(post.excerpt, locale);
+  let description = rawDesc.replace(/\s+/g, ' ').trim();
+  if (description.length > 155) {
+    description = description.slice(0, 152).trim() + '...';
+  } else if (description.length < 120) {
+    const cta = locale === 'es'
+      ? ' Descubra la asesoría de viaje de lujo 24/7 con Vermilion Routes.'
+      : ' Discover bespoke luxury travel planning 24/7 with Vermilion Routes.';
+    description = (description + cta).slice(0, 158);
+  }
+
+  const alternates = getSeoAlternates(`/blog/${slug}`, locale);
 
   return {
-    title: `${title} | Vermilion Routes Travel Insights`,
+    title,
     description,
     openGraph: {
-      title,
+      title: `${rawTitle} | Vermilion Routes`,
       description,
+      url: alternates.canonical,
       images: [{ url: post.imageUrl }],
       type: 'article',
       publishedTime: post.publishedAt,
@@ -57,6 +78,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       description,
       images: [post.imageUrl],
     },
+    alternates,
   };
 }
 
@@ -79,7 +101,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     '@type': 'BlogPosting',
     headline: getLocalizedText(post.title, locale),
     description: getLocalizedText(post.excerpt, locale),
-    image: `https://vermilionroutes.com${post.imageUrl}`,
+    image: `https://www.vermilionroutes.com${post.imageUrl}`,
     author: {
       '@type': 'Person',
       name: post.author.name,
@@ -90,12 +112,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       name: 'Vermilion Routes',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://vermilionroutes.com/logo.png',
+        url: 'https://www.vermilionroutes.com/logo.png',
       },
     },
     datePublished: post.publishedAt,
     dateModified: post.publishedAt,
-    mainEntityOfPage: `https://vermilionroutes.com/${locale}/blog/${post.slug}`,
+    mainEntityOfPage: `https://www.vermilionroutes.com/${locale}/blog/${post.slug}`,
   };
 
   const backLabel = locale === 'es' ? 'Volver a todas las Guías' : 'Back to All Travel Guides';
@@ -162,7 +184,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
               <span className="font-semibold text-zinc-700 dark:text-zinc-300">{shareLabel}</span>
               <a
-                href={`https://wa.me/?text=${encodeURIComponent(getLocalizedText(post.title, locale))} - https://vermilionroutes.com/${locale}/blog/${post.slug}`}
+                href={`https://wa.me/?text=${encodeURIComponent(getLocalizedText(post.title, locale))} - https://www.vermilionroutes.com/${locale}/blog/${post.slug}`}
                 target="_blank"
                 rel="noreferrer"
                 className="px-3 py-1.5 rounded-xl bg-white dark:bg-zinc-900 hover:bg-emerald-50 dark:hover:bg-emerald-950 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-emerald-700 dark:hover:text-emerald-300 transition-all font-medium shadow-sm flex items-center gap-1.5"
@@ -172,7 +194,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <span>WhatsApp</span>
               </a>
               <a
-                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(getLocalizedText(post.title, locale))}&url=https://vermilionroutes.com/${locale}/blog/${post.slug}`}
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(getLocalizedText(post.title, locale))}&url=https://www.vermilionroutes.com/${locale}/blog/${post.slug}`}
                 target="_blank"
                 rel="noreferrer"
                 className="px-3 py-1.5 rounded-xl bg-white dark:bg-zinc-900 hover:bg-emerald-50 dark:hover:bg-emerald-950 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:text-emerald-700 dark:hover:text-emerald-300 transition-all font-medium shadow-sm"
@@ -370,7 +392,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   <span>→</span>
                 </Link>
                 <Link
-                  href={`/${locale}/booking?tourId=${relatedTour.id}`}
+                  href={`/${locale}/booking?tourid=${relatedTour.id}`}
                   className="flex-1 sm:flex-initial px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-emerald-950/60 flex items-center justify-center gap-2"
                 >
                   <span>{bookLabel}</span>

@@ -62,20 +62,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     creator: 'Vermilion Routes',
     publisher: 'Vermilion Routes',
     metadataBase: new URL('https://www.vermilionroutes.com'),
-    alternates: {
-      canonical: `https://www.vermilionroutes.com/${locale}`,
-      languages: {
-        'x-default': 'https://www.vermilionroutes.com/en',
-        'en': 'https://www.vermilionroutes.com/en',
-        'es': 'https://www.vermilionroutes.com/es',
-        'fr': 'https://www.vermilionroutes.com/fr',
-        'de': 'https://www.vermilionroutes.com/de',
-        'zh': 'https://www.vermilionroutes.com/zh',
-        'it': 'https://www.vermilionroutes.com/it',
-        'pt': 'https://www.vermilionroutes.com/pt',
-        'ja': 'https://www.vermilionroutes.com/ja',
-      },
-    },
     openGraph: {
       title: t('title') || defaultTitle,
       description: t('description') || defaultDescription,
@@ -146,14 +132,24 @@ export default async function RootLayout({
         email: 'info@vermilionroutes.com',
         priceRange: '$$$$',
         openingHours: 'Mo,Tu,We,Th,Fr 09:00-18:00',
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: 'Simón Bolívar oe1-120 y Juan León Mera',
-          addressLocality: 'Quito',
-          addressRegion: 'Pichincha',
-          postalCode: '170150',
-          addressCountry: 'EC',
-        },
+        address: [
+          {
+            '@type': 'PostalAddress',
+            streetAddress: 'CORAL TOUR',
+            addressLocality: 'Quito',
+            addressRegion: 'Pichincha',
+            postalCode: '170150',
+            addressCountry: 'EC',
+          },
+          {
+            '@type': 'PostalAddress',
+            streetAddress: 'Calle Seco 3',
+            addressLocality: 'Madrid',
+            addressRegion: 'Madrid',
+            postalCode: '28007',
+            addressCountry: 'ES',
+          },
+        ],
         geo: {
           '@type': 'GeoCoordinates',
           latitude: '-0.3015',

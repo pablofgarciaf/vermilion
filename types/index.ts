@@ -117,7 +117,15 @@ export interface BookingRequest {
   receiptUrl?: string;
   status: 'pending' | 'contacted' | 'confirmed' | 'cancelled';
   createdAt: string;
+  // CRM unified fields
+  bookingCode?: string;
+  totalAmount?: number;
+  paidAmount?: number;
+  travelStartDate?: string;
+  travelEndDate?: string;
+  passengersCount?: number;
 }
+
 
 export type DestinationInfo = Destination;
 export type SiteSettings = Record<string, any>;

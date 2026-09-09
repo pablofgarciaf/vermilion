@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Star, Clock, MessageCircle, ArrowRight, Users, ShieldCheck, Smile } from 'lucide-react';
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       ? 'Expediciones familiares en Galápagos y Ecuador: tortugas gigantes, snorkel y selva amazónica. Viajes seguros e inolvidables con atención personalizada 24/7.'
       : 'Bespoke luxury family adventures in Galapagos and Ecuador: giant tortoises, sea-lion snorkeling and Amazon jungle lodges with 24/7 dedicated concierge service.',
     keywords: ['family Galapagos trip', 'family Ecuador vacation', 'Galapagos with kids', 'Ecuador family adventure', 'family-friendly Galapagos'],
-    alternates: { canonical: "https://vermilionroutes.com/" + locale + "/family-friendly-ecuador" },
+    alternates: getSeoAlternates('/family-friendly-ecuador', locale),
   };
 }
 

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createBookingInFirestore } from '@/lib/bookings';
 import { calculateAndDistributeCommissions } from '@/lib/affiliates';
+import { sendBookingConfirmationEmail } from '@/lib/email';
+
 
 export const runtime = 'nodejs';
 
@@ -137,4 +139,22 @@ async function processSuccessfulCheckout(session: Stripe.Checkout.Session) {
       console.error(`[Stripe Webhook] Error distributing commission for ${affiliateCode}:`, commErr);
     }
   }
+
+  // Send official confirmation email
+  try {
+    await sendBookingConfirmationEmail({
+      toEmail: customerEmail,
+      customerName,
+      tourTitle,
+      bookingRef: refCode,
+      amountPaid,
+      paymentMethod: 'card',
+      travelDate,
+      guestsCount,
+      locale: metadata.locale || 'es',
+    });
+  } catch (emailErr: any) {
+    console.error('[Stripe Webhook] Email dispatch error:', emailErr);
+  }
 }
+

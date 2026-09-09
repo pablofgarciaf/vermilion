@@ -1,11 +1,24 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { getSeoAlternates } from '@/utils/seoHelper';
 import { ShieldCheck, Mail, Phone, MapPin, Building, Lock, FileText, CheckCircle2 } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | Vermilion Routes - Luxury & Bespoke Travel',
-  description: 'Official Privacy Policy and Personal Data Protection terms of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador.',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isEs = locale === 'es';
+  const title = isEs
+    ? 'Vermilion Routes | Política de Privacidad y Datos 24/7'
+    : 'Vermilion Routes | Privacy Policy & Data Protection 24/7';
+  const description = isEs
+    ? 'Política de Privacidad oficial de Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Protección de datos personales y reservas seguras 24/7.'
+    : 'Official Privacy Policy of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Transparent personal data protection and secure travel 24/7.';
+
+  return {
+    title,
+    description,
+    alternates: getSeoAlternates('/privacy-policy', locale),
+  };
+}
 
 export default function PrivacyPolicyPage() {
   return (
@@ -37,10 +50,16 @@ export default function PrivacyPolicyPage() {
             <div className="space-y-2">
               <p><strong className="text-white">Company Name:</strong> Agencia de Viajes Vermilion</p>
               <p><strong className="text-white">Tax ID (RUC):</strong> 1711992808001</p>
-              <p className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-1" />
-                <span>Alangasí Oe 1 – 210 Simón Bolívar and Juan León Mera, Quito – Ecuador</span>
-              </p>
+              <div className="space-y-1.5 text-xs text-zinc-300">
+                <p className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong className="text-white">Quito:</strong> CORAL TOUR, Quito, Ecuador</span>
+                </p>
+                <p className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong className="text-white">Madrid:</strong> Calle Seco 3, 28007 Madrid, España</span>
+                </p>
+              </div>
             </div>
             <div className="space-y-2">
               <p className="flex items-center gap-2">

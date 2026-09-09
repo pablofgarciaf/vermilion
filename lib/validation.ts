@@ -151,9 +151,11 @@ export type LeadInput = z.infer<typeof leadSchema>;
 export const checkoutSchema = z.object({
   tourId: z.string().nullable().optional(),
   tourTitle: z.union([z.string(), z.record(z.string(), z.any())]).optional(),
+  clientName: z.string().optional(),
   clientEmail: z.string().min(3).refine((email) => isValidEmail(email), {
     message: 'A valid email address is required.',
   }),
+  clientPhone: z.string().optional(),
   customLinkId: z.string().optional(),
   amount: z.number().optional(),
   paymentType: z.enum(['deposit', 'full', 'custom']).optional(),
@@ -164,3 +166,4 @@ export const checkoutSchema = z.object({
 });
 
 export type CheckoutInput = z.infer<typeof checkoutSchema>;
+

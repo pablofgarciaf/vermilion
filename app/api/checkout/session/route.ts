@@ -7,7 +7,9 @@ export const POST = withValidation(checkoutSchema, async (request, _ctx, data) =
   const {
     tourId,
     tourTitle,
+    clientName,
     clientEmail,
+    clientPhone,
     customLinkId,
     amount,
     paymentType,
@@ -35,6 +37,7 @@ export const POST = withValidation(checkoutSchema, async (request, _ctx, data) =
   const finalAmountUSD = amount && amount > 0 ? amount : 500;
   const targetLocale = (locale && ['es', 'en', 'fr', 'de', 'it', 'pt', 'ja', 'zh'].includes(locale)) ? locale : 'en';
   const bookingRef = customLinkId || `VR-${Date.now().toString().slice(-6)}`;
+  const safeClientName = clientName ? clientName.trim() : '';
 
   const stripeKey = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_RESTRICTED_KEY;
 
@@ -65,17 +68,20 @@ export const POST = withValidation(checkoutSchema, async (request, _ctx, data) =
         customer_email: clientEmail,
         billing_address_collection: 'auto',
         locale: targetLocale === 'es' ? 'es' : 'auto',
-        success_url: `${baseUrl}/${targetLocale}/checkout/success?session_id={CHECKOUT_SESSION_ID}&tourId=${tourId || 'custom'}&tourTitle=${encodeURIComponent(resolvedTitle)}&ref=${bookingRef}`,
-        cancel_url: `${baseUrl}/${targetLocale}/checkout/payment?tourId=${tourId || 'custom'}&tourTitle=${encodeURIComponent(resolvedTitle)}&amount=${finalAmountUSD}&ref=${bookingRef}&email=${encodeURIComponent(clientEmail)}`,
+        success_url: `${baseUrl}/${targetLocale}/checkout/success?session_id={CHECKOUT_SESSION_ID}&tourId=${tourId || 'custom'}&tourTitle=${encodeURIComponent(resolvedTitle)}&ref=${bookingRef}&name=${encodeURIComponent(safeClientName)}&email=${encodeURIComponent(clientEmail)}&amount=${finalAmountUSD}&date=${encodeURIComponent(travelDate || '')}&guests=${encodeURIComponent(guestsCount || '2')}`,
+        cancel_url: `${baseUrl}/${targetLocale}/checkout/payment?tourId=${tourId || 'custom'}&tourTitle=${encodeURIComponent(resolvedTitle)}&amount=${finalAmountUSD}&ref=${bookingRef}&email=${encodeURIComponent(clientEmail)}&name=${encodeURIComponent(safeClientName)}`,
         metadata: {
           tourId: tourId || 'custom-itinerary',
           tourTitle: resolvedTitle,
+          clientName: safeClientName,
           clientEmail,
+          clientPhone: clientPhone || '',
           customLinkId: bookingRef,
           paymentType: paymentType || 'deposit',
           affiliateCode: affiliateCode || '',
           travelDate: travelDate || '',
           guestsCount: guestsCount || '2 Travelers',
+          amountPaid: String(finalAmountUSD),
           locale: targetLocale,
         },
       });
@@ -91,7 +97,7 @@ export const POST = withValidation(checkoutSchema, async (request, _ctx, data) =
   }
 
   // 2. Direct Fallback when Stripe keys are not yet configured in environment
-  const demoSuccessUrl = `${baseUrl}/${targetLocale}/checkout/success?session_id=demo_${Date.now()}&tourId=${tourId || 'custom'}&tourTitle=${encodeURIComponent(resolvedTitle)}&ref=${bookingRef}`;
+  const demoSuccessUrl = `${baseUrl}/${targetLocale}/checkout/success?session_id=demo_${Date.now()}&tourId=${tourId || 'custom'}&tourTitle=${encodeURIComponent(resolvedTitle)}&ref=${bookingRef}&name=${encodeURIComponent(safeClientName)}&email=${encodeURIComponent(clientEmail)}&amount=${finalAmountUSD}&date=${encodeURIComponent(travelDate || '')}&guests=${encodeURIComponent(guestsCount || '2')}`;
 
   return NextResponse.json({
     configured: false,

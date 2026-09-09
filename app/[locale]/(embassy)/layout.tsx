@@ -9,11 +9,15 @@ export const metadata: Metadata = {
   robots: 'noindex, nofollow',
 };
 
-export default function EmbassyLayout({
+export default async function EmbassyLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-amber-500/30 selection:text-amber-200">
       <div className="min-h-screen flex flex-col">
@@ -21,7 +25,7 @@ export default function EmbassyLayout({
         <header className="sticky top-0 z-40 border-b border-zinc-800/80 bg-zinc-950/80 backdrop-blur-xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/dashboard" className="flex items-center gap-2.5 group">
+              <Link href={`/${locale}/dashboard`} className="flex items-center gap-2.5 group">
                 <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-emerald-500 p-0.5 shadow-lg shadow-amber-500/20">
                   <div className="w-full h-full bg-zinc-950 rounded-[10px] flex items-center justify-center">
                     <Shield className="w-5 h-5 text-amber-400 group-hover:scale-110 transition-transform" />

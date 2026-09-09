@@ -211,3 +211,222 @@ export const sendLeadMagnetEmail = async (toEmail: string, locale: string = 'es'
   }
 };
 
+export interface BookingConfirmationEmailParams {
+  toEmail: string;
+  customerName: string;
+  tourTitle: string;
+  bookingRef: string;
+  amountPaid: number;
+  paymentMethod: string;
+  travelDate?: string;
+  guestsCount?: string;
+  locale?: string;
+}
+
+export const sendBookingConfirmationEmail = async (params: BookingConfirmationEmailParams) => {
+  const {
+    toEmail,
+    customerName,
+    tourTitle,
+    bookingRef,
+    amountPaid,
+    paymentMethod,
+    travelDate = 'Por confirmar / To be confirmed',
+    guestsCount = '2 Viajeros / Travelers',
+    locale = 'es'
+  } = params;
+
+  const isEs = locale === 'es';
+  const methodLabel = paymentMethod === 'card' 
+    ? (isEs ? 'Tarjeta de Crédito / Débito (Stripe)' : 'Credit / Debit Card (Stripe)')
+    : (paymentMethod === 'bank_wire' ? (isEs ? 'Transferencia Bancaria / Zelle' : 'Bank Wire / Zelle') : paymentMethod);
+
+  const formattedAmount = `$${amountPaid.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`;
+
+  const htmlTemplate = `
+    <!DOCTYPE html>
+    <html lang="${isEs ? 'es' : 'en'}">
+    <head>
+      <meta charset="UTF-8">
+      <title>${isEs ? 'Confirmación Oficial de Reserva' : 'Official Booking Confirmation'}</title>
+    </head>
+    <body style="margin: 0; padding: 0; background-color: #05140b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: #f4f4f5;">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #05140b; padding: 30px 10px;">
+        <tr>
+          <td align="center">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 640px; background-color: #0b2014; border: 1px solid #14532d; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+              
+              <!-- Header -->
+              <tr>
+                <td align="center" style="padding: 40px 30px 20px 30px; border-bottom: 1px solid #14532d; background: linear-gradient(180deg, #071a10 0%, #0b2014 100%);">
+                  <h1 style="margin: 0; color: #34d399; font-size: 26px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;">
+                    VERMILION ROUTES
+                  </h1>
+                  <p style="margin: 6px 0 0 0; color: #a7f3d0; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">
+                    ${isEs ? 'Agencia de Viajes Vermilion Cia. Ltda. • Expediciones de Lujo' : 'Bespoke Expeditions & Luxury Travel'}
+                  </p>
+                  
+                  <div style="margin-top: 25px; display: inline-block; background-color: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; border-radius: 30px; padding: 8px 20px;">
+                    <span style="color: #6ee7b7; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">
+                      ✓ ${isEs ? 'Reserva & Pago Confirmado' : 'Reservation & Payment Confirmed'}
+                    </span>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Greeting & Reference -->
+              <tr>
+                <td style="padding: 35px 35px 20px 35px;">
+                  <h2 style="margin: 0 0 15px 0; color: #ffffff; font-size: 20px; font-weight: 600;">
+                    ${isEs ? `Estimado/a ${customerName},` : `Dear ${customerName},`}
+                  </h2>
+                  <p style="margin: 0; color: #d1fae5; font-size: 14px; line-height: 1.6;">
+                    ${isEs
+                      ? 'Es un honor confirmar la recepción de tu pago y la reserva oficial de tu plaza para tu expedición en Ecuador y las Islas Galápagos. A continuación detallamos los pormenores de tu comprobante:'
+                      : 'It is our utmost pleasure to confirm the receipt of your payment and your official reservation for your expedition across Ecuador and the Galápagos Islands. Here are your booking details:'}
+                  </p>
+                </td>
+              </tr>
+
+              <!-- Booking Details Card -->
+              <tr>
+                <td style="padding: 0 35px 25px 35px;">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #06180e; border: 1px solid #166534; border-radius: 12px; padding: 20px;">
+                    <tr>
+                      <td style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #86efac; font-size: 12px; text-transform: uppercase; font-weight: bold;">
+                        ${isEs ? 'Código de Referencia:' : 'Booking Reference:'}
+                      </td>
+                      <td align="right" style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #fbbf24; font-family: monospace; font-size: 16px; font-weight: bold;">
+                        ${bookingRef}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #86efac; font-size: 12px; text-transform: uppercase; font-weight: bold;">
+                        ${isEs ? 'Expedición:' : 'Expedition:'}
+                      </td>
+                      <td align="right" style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #ffffff; font-size: 13px; font-weight: 600;">
+                        ${tourTitle}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #86efac; font-size: 12px; text-transform: uppercase; font-weight: bold;">
+                        ${isEs ? 'Fecha de Salida:' : 'Departure Date:'}
+                      </td>
+                      <td align="right" style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #ffffff; font-size: 13px;">
+                        ${travelDate}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #86efac; font-size: 12px; text-transform: uppercase; font-weight: bold;">
+                        ${isEs ? 'Pasajeros:' : 'Travelers:'}
+                      </td>
+                      <td align="right" style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #ffffff; font-size: 13px;">
+                        ${guestsCount}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #86efac; font-size: 12px; text-transform: uppercase; font-weight: bold;">
+                        ${isEs ? 'Método de Pago:' : 'Payment Method:'}
+                      </td>
+                      <td align="right" style="padding: 8px 0; border-bottom: 1px solid rgba(22, 101, 52, 0.5); color: #ffffff; font-size: 13px;">
+                        ${methodLabel}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 12px 0 4px 0; color: #86efac; font-size: 13px; text-transform: uppercase; font-weight: bold;">
+                        ${isEs ? 'Monto Recibido:' : 'Amount Paid:'}
+                      </td>
+                      <td align="right" style="padding: 12px 0 4px 0; color: #34d399; font-size: 20px; font-weight: bold; font-family: monospace;">
+                        ${formattedAmount}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- Inclusions & Next Steps -->
+              <tr>
+                <td style="padding: 0 35px 25px 35px;">
+                  <h3 style="margin: 0 0 10px 0; color: #ffffff; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">
+                    ${isEs ? 'Próximos Pasos de tu Concierge' : 'Your Concierge Next Steps'}
+                  </h3>
+                  <ul style="margin: 0; padding-left: 20px; color: #a7f3d0; font-size: 13px; line-height: 1.7;">
+                    <li>${isEs ? 'Tu Travel Concierge asignado te contactará por WhatsApp en menos de 24 horas.' : 'Your dedicated Travel Concierge will reach out via WhatsApp within 24 hours.'}</li>
+                    <li>${isEs ? 'Coordinaremos requerimientos dietéticos, tallas para el equipo de snorkel y vuelos internos.' : 'We will coordinate dietary preferences, snorkel equipment sizes and domestic flights.'}</li>
+                    <li>${isEs ? 'Recibirás el dossier oficial de expedición con recomendaciones de equipaje y clima.' : 'You will receive the complete packing dossier and climate advisory for the Galápagos and Andes.'}</li>
+                  </ul>
+                </td>
+              </tr>
+
+              <!-- Concierge Direct Box -->
+              <tr>
+                <td style="padding: 0 35px 35px 35px;">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #072a18; border: 1px solid #059669; border-radius: 10px; padding: 18px;">
+                    <tr>
+                      <td>
+                        <p style="margin: 0; color: #ffffff; font-size: 13px; font-weight: bold;">
+                          ${isEs ? '¿Tienes alguna duda inmediata sobre tu viaje?' : 'Need immediate trip assistance?'}
+                        </p>
+                        <p style="margin: 6px 0 0 0; color: #a7f3d0; font-size: 12px;">
+                          ${isEs ? 'Línea de Asistencia & WhatsApp 24/7:' : '24/7 WhatsApp & Concierge Hotline:'} 
+                          <strong style="color: #34d399;">+593 99 404 8458</strong> • 
+                          <strong style="color: #34d399;">info@vermilionroutes.com</strong>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- Footer -->
+              <tr>
+                <td align="center" style="padding: 25px 30px; border-top: 1px solid #14532d; background-color: #07170e; color: #6ee7b7; font-size: 11px; line-height: 1.5;">
+                  <p style="margin: 0 0 4px 0;">
+                    <strong>Agencia de Viajes Vermilion Cia. Ltda.</strong> • RUC: 1711992808001
+                  </p>
+                  <p style="margin: 0 0 4px 0;">
+                    CORAL TOUR, Quito, Ecuador • Calle Seco 3, 28007 Madrid, España
+                  </p>
+                  <p style="margin: 0; color: #059669;">
+                    © ${new Date().getFullYear()} Vermilion Routes. ${isEs ? 'Todos los derechos reservados.' : 'All rights reserved.'}
+                  </p>
+                </td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+
+  try {
+    if (!SMTP_PASSWORD) {
+      console.warn('⚠️ SMTP_PASSWORD no configurado en .env - Simulando envío de confirmación de reserva a ' + toEmail);
+      console.log(`[SIMULACIÓN CORREO] Reserva ${bookingRef} - Cliente: ${customerName} (${toEmail}) - Monto: ${formattedAmount}`);
+      return true;
+    }
+
+    const bccList = [SMTP_EMAIL, 'pablofgarciaf@gmail.com'].filter(Boolean);
+
+    await transporter.sendMail({
+      from: `"Vermilion Expeditions" <${SMTP_EMAIL}>`,
+      to: toEmail,
+      bcc: bccList,
+      subject: isEs
+        ? `✨ Reserva Confirmada: ${tourTitle} | Ref: ${bookingRef}`
+        : `✨ Booking Confirmed: ${tourTitle} | Ref: ${bookingRef}`,
+      html: htmlTemplate,
+    });
+
+    console.log(`[Email] Booking confirmation email dispatched successfully to ${toEmail} (BCC: ${bccList.join(', ')})`);
+    return true;
+  } catch (error) {
+    console.error('Error enviando correo de confirmación de reserva:', error);
+    // Do not throw so fulfillment process does not break if SMTP has transient issues
+    return false;
+  }
+};
+
+

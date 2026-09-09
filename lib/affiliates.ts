@@ -308,6 +308,27 @@ export async function calculateAndDistributeCommissions(params: {
     };
   }
 
+  // 0. IDEMPOTENCY CHECK: Ensure commissions for this booking have not already been distributed
+  try {
+    const qExisting = query(
+      collection(db, COMMISSIONS_COLLECTION),
+      where('bookingId', '==', bookingId)
+    );
+    const snapExisting = await getDocs(qExisting);
+    if (!snapExisting.empty) {
+      console.log(`[commissions] Commissions for booking ${bookingId} already recorded. Skipping duplicate payout.`);
+      return {
+        saleAmount,
+        totalCommissionPaid: 0,
+        totalPercentage: 0,
+        payouts: [],
+        buyerDiscountAmount,
+      };
+    }
+  } catch (checkErr) {
+    console.warn('[commissions] Idempotency check warning:', checkErr);
+  }
+
   const seller = await getAffiliateByUsername(sellerUsername);
   if (!seller) {
     console.warn(`Seller "${sellerUsername}" not found.`);
@@ -321,108 +342,83 @@ export async function calculateAndDistributeCommissions(params: {
   }
 
   // 1. DIRECT SELLER BASE (10% Infinito)
-  let directSellerPercentage = RATES.seller; // 10%
-  let compressionBonus = 0;                  // Absorbed percentage from uplines if orphaned
-
-  // Check upline status for Padre (3%)
-  let parentEarned = false;
-  let padreUsername = seller.parentId;
-
-  if (padreUsername && padreUsername !== seller.username) {
-    const parent = await getAffiliateByUsername(padreUsername);
-    // Padre earns 3% if seller's cumulative sales is <= $10,000 USD
-    const sellerCumulative = (seller.cumulativePersonalVolume || 0);
-    if (parent && sellerCumulative <= CAPS.padreMaxSaleVolume) {
-      const parentCommission = saleAmount * RATES.padre;
-      payouts.push({
-        affiliateUsername: parent.username,
-        affiliateName: parent.name,
-        level: 1,
-        percentage: RATES.padre,
-        amountUsd: parentCommission,
-        role: 'Bono Padre (3%)',
-      });
-      totalCommissionPaid += parentCommission;
-      parentEarned = true;
-
-      await updateDoc(doc(db, AFFILIATES_COLLECTION, parent.username), {
-        pendingBalance: increment(parentCommission),
-        totalEarnings: increment(parentCommission),
-        networkVolume: increment(saleAmount),
-      });
-    }
-  }
-
-  // If parent did not earn (doesn't exist, inactive, or capped out), compress to seller!
-  if (!parentEarned) {
-    compressionBonus += RATES.padre; // +3% to seller
-  }
-
-  // Check upline status for Abuelo (2%)
-  let grandparentEarned = false;
-  let abueloUsername = seller.granId || seller.grandparentId;
-
-  if (abueloUsername && abueloUsername !== seller.username) {
-    const gp = await getAffiliateByUsername(abueloUsername);
-    if (gp) {
-      const sellerCumulative = (seller.cumulativePersonalVolume || 0);
-      const isUnderTier1 = sellerCumulative <= CAPS.abueloTier1Volume; // $1,000 incondicional
-      const isUnderTier2AndActive = sellerCumulative <= CAPS.abueloTier2Volume && (gp.isActive || (gp.monthlyVolume || 0) >= CAPS.activeMinPersonalVolume);
-
-      if (isUnderTier1 || isUnderTier2AndActive) {
-        const gpCommission = saleAmount * RATES.abuelo;
-        payouts.push({
-          affiliateUsername: gp.username,
-          affiliateName: gp.name,
-          level: 2,
-          percentage: RATES.abuelo,
-          amountUsd: gpCommission,
-          role: 'Bono Abuelo (2%)',
-        });
-        totalCommissionPaid += gpCommission;
-        grandparentEarned = true;
-
-        await updateDoc(doc(db, AFFILIATES_COLLECTION, gp.username), {
-          pendingBalance: increment(gpCommission),
-          totalEarnings: increment(gpCommission),
-          networkVolume: increment(saleAmount),
-        });
-      }
-    }
-  }
-
-  // If grandparent did not earn, compress to seller!
-  if (!grandparentEarned) {
-    compressionBonus += RATES.abuelo; // +2% to seller
-  }
-
-  // Total percentage earned by seller (10% base + any compression bonus up to 15%)
-  const totalSellerRate = directSellerPercentage + compressionBonus;
-  const sellerCommission = saleAmount * totalSellerRate;
-
-  payouts.unshift({
+  const sellerCommission = Number((saleAmount * RATES.seller).toFixed(3));
+  payouts.push({
     affiliateUsername: seller.username,
-    affiliateName: seller.name,
-    level: compressionBonus > 0 ? 99 : 0,
-    percentage: totalSellerRate,
+    affiliateName: seller.name || seller.username,
+    level: 0,
+    percentage: RATES.seller,
     amountUsd: sellerCommission,
-    role: compressionBonus > 0 
-      ? `Venta Directa + Compresión Inversa (${(totalSellerRate * 100).toFixed(0)}%)` 
-      : 'Venta Directa (10%)',
+    role: 'Venta Directa (10%)',
   });
   totalCommissionPaid += sellerCommission;
 
-  // Update seller stats in Firestore
-  await updateDoc(doc(db, AFFILIATES_COLLECTION, seller.username), {
-    pendingBalance: increment(sellerCommission),
-    totalEarnings: increment(sellerCommission),
-    salesCount: increment(1),
-    monthlyVolume: increment(saleAmount),
-    networkVolume: increment(saleAmount),
-    cumulativePersonalVolume: increment(saleAmount),
-  });
+  // 2. LEVEL 1: BONO PADRE (3%)
+  const parentCommission = Number((saleAmount * RATES.padre).toFixed(3));
+  let padreUsername = seller.parentId;
+  let parentAffiliate: AffiliateAccount | null = null;
 
-  // Record commission payout transactions
+  if (padreUsername && padreUsername !== seller.username) {
+    parentAffiliate = await getAffiliateByUsername(padreUsername);
+  }
+  // If seller is root or has no distinct parent, the founder/root receives the Level 1 bonus
+  const targetPadreUsername = parentAffiliate?.username || ROOT_USERNAME;
+  const targetPadreName = parentAffiliate?.name || 'Pablo Fabricio García Flores (Founder)';
+
+  payouts.push({
+    affiliateUsername: targetPadreUsername,
+    affiliateName: targetPadreName,
+    level: 1,
+    percentage: RATES.padre,
+    amountUsd: parentCommission,
+    role: 'Bono Padre (3%)',
+  });
+  totalCommissionPaid += parentCommission;
+
+  // 3. LEVEL 2: BONO ABUELO (2%)
+  const abueloCommission = Number((saleAmount * RATES.abuelo).toFixed(3));
+  let abueloUsername = seller.granId || seller.grandparentId;
+  let gpAffiliate: AffiliateAccount | null = null;
+
+  if (abueloUsername && abueloUsername !== seller.username) {
+    gpAffiliate = await getAffiliateByUsername(abueloUsername);
+  }
+  // If seller is root or has no distinct grandparent, the founder/root receives the Level 2 bonus
+  const targetAbueloUsername = gpAffiliate?.username || ROOT_USERNAME;
+  const targetAbueloName = gpAffiliate?.name || 'Pablo Fabricio García Flores (Founder)';
+
+  payouts.push({
+    affiliateUsername: targetAbueloUsername,
+    affiliateName: targetAbueloName,
+    level: 2,
+    percentage: RATES.abuelo,
+    amountUsd: abueloCommission,
+    role: 'Bono Abuelo (2%)',
+  });
+  totalCommissionPaid += abueloCommission;
+
+  // 4. Update balances in Firestore for each beneficiary
+  for (const payout of payouts) {
+    try {
+      const isSeller = payout.affiliateUsername === seller.username && payout.level === 0;
+      const updateData: any = {
+        availableBalance: increment(payout.amountUsd),
+        totalEarnings: increment(payout.amountUsd),
+        networkVolume: increment(saleAmount),
+        updatedAt: new Date().toISOString(),
+      };
+      if (isSeller) {
+        updateData.salesCount = increment(1);
+        updateData.monthlyVolume = increment(saleAmount);
+        updateData.cumulativePersonalVolume = increment(saleAmount);
+      }
+      await updateDoc(doc(db, AFFILIATES_COLLECTION, payout.affiliateUsername), updateData);
+    } catch (uErr) {
+      console.warn(`[commissions] Error updating affiliate ${payout.affiliateUsername}:`, uErr);
+    }
+  }
+
+  // 5. Record official commission transactions in Firestore
   for (const payout of payouts) {
     await addDoc(collection(db, COMMISSIONS_COLLECTION), {
       bookingId,
@@ -433,7 +429,7 @@ export async function calculateAndDistributeCommissions(params: {
       percentage: payout.percentage,
       level: payout.level,
       role: payout.role,
-      status: 'pending', // Pending until tour departs (Deferred Commission)
+      status: 'credited',
       createdAt: new Date().toISOString(),
     });
   }

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Heart, Star, Clock, MessageCircle, ArrowRight, Sparkles, ShieldCheck } from 'lucide-react';
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       ? 'Viajes románticos a medida en Galápagos y Ecuador: atardeceres volcánicos, hoteles boutique y cenas privadas bajo las estrellas con asesoría experta 24/7.'
       : 'Bespoke romantic getaways in Galapagos & Ecuador: volcanic sunsets, boutique luxury lodges and private starlit dinners with dedicated 24/7 travel designers.',
     keywords: ['romantic Galapagos trip', 'couples Ecuador travel', 'anniversary Galapagos', 'honeymoon Ecuador', 'romantic Ecuador vacation'],
-    alternates: { canonical: "https://vermilionroutes.com/" + locale + "/couples-anniversary-galapagos" },
+    alternates: getSeoAlternates('/couples-anniversary-galapagos', locale),
   };
 }
 

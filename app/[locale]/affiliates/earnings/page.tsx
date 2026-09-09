@@ -58,9 +58,9 @@ export default function EarningsPage() {
 
   const totalEarned = affiliate?.totalEarnings || 0;
   
-  // A rough estimate separation for display purposes
-  const directCommission = transactions.filter(t => t.role === 'direct').reduce((acc, t) => acc + t.commissionAmount, 0);
-  const networkCommission = transactions.filter(t => t.role !== 'direct').reduce((acc, t) => acc + t.commissionAmount, 0);
+  // Commission separation for display purposes
+  const directCommission = transactions.filter(t => t.role?.toLowerCase().includes('direct')).reduce((acc, t) => acc + Number(t.commissionAmount || 0), 0);
+  const networkCommission = transactions.filter(t => !t.role?.toLowerCase().includes('direct')).reduce((acc, t) => acc + Number(t.commissionAmount || 0), 0);
 
   if (loading) {
     return (

@@ -23,7 +23,7 @@ interface LinkGeneratorProps {
 export function LinkGenerator({ username }: LinkGeneratorProps) {
   const locale = useLocale();
   const isEs = locale === 'es';
-  const BASE = 'https://vermilionroutes.com';
+  const BASE = 'https://www.vermilionroutes.com';
 
   const [linkType, setLinkType] = useState<LinkType>('booking');
   const [selectedTour, setSelectedTour] = useState(TOURS_LIST[0]?.id || '');
@@ -34,7 +34,7 @@ export function LinkGenerator({ username }: LinkGeneratorProps) {
       case 'home':    return `${BASE}/${locale}?vid=${username}`;
       case 'tours':   return `${BASE}/${locale}/tours?vid=${username}`;
       case 'booking': return `${BASE}/${locale}/booking?vid=${username}`;
-      case 'tour':    return `${BASE}/${locale}/booking?tourId=${selectedTour}&vid=${username}`;
+      case 'tour':    return `${BASE}/${locale}/booking?tourid=${selectedTour}&vid=${username}`;
     }
   })();
 

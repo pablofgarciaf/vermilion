@@ -1,11 +1,24 @@
 import React from 'react';
 import { Metadata } from 'next';
+import { getSeoAlternates } from '@/utils/seoHelper';
 import { ShieldCheck, FileCheck, MapPin, Mail, Phone, Clock, AlertTriangle, Gift, CreditCard } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Vermilion Routes | Terms & Conditions of Bespoke Travel',
-  description: 'Official Terms and Conditions, booking policies, cancellations, and referral program of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador.',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isEs = locale === 'es';
+  const title = isEs
+    ? 'Vermilion Routes | Términos y Condiciones de Viaje 24/7'
+    : 'Vermilion Routes | Terms & Conditions of Bespoke Travel';
+  const description = isEs
+    ? 'Términos y condiciones oficiales, políticas de reserva, cancelaciones y lealtad de Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador 24/7.'
+    : 'Official Terms and Conditions, booking policies, cancellations, and referral program of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador.';
+
+  return {
+    title,
+    description,
+    alternates: getSeoAlternates('/terms', locale),
+  };
+}
 
 export default function TermsAndConditionsPage() {
   return (
@@ -36,10 +49,16 @@ export default function TermsAndConditionsPage() {
               <p><strong className="text-white">Entity:</strong> Agencia de Viajes Vermilion Cia. Ltda.</p>
               <p><strong className="text-white">Activity:</strong> Retail Travel Agency &amp; Tour Operator</p>
               <p><strong className="text-white">Tax ID (RUC):</strong> 1711992808001</p>
-              <p className="flex items-start gap-1.5 text-xs text-zinc-400">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                <span>Alangasí Oe 1 – 210 Simón Bolívar and Juan León Mera, Quito – Ecuador</span>
-              </p>
+              <div className="space-y-1 text-xs text-zinc-400 pt-1">
+                <p className="flex items-start gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong className="text-white">Quito:</strong> CORAL TOUR, Quito, Ecuador</span>
+                </p>
+                <p className="flex items-start gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span><strong className="text-white">Madrid:</strong> Calle Seco 3, 28007 Madrid, España</span>
+                </p>
+              </div>
             </div>
             <div className="space-y-1.5">
               <p className="flex items-center gap-2">
@@ -96,7 +115,7 @@ export default function TermsAndConditionsPage() {
               <li><strong>Reservation Deposit:</strong> A deposit is required at the time of reservation to block private berths, yachts, flight slots, and naturalist guides.</li>
               <li><strong>Final Balance:</strong> The remaining total agreed price must be settled in full no later than <strong>60 days prior</strong> to the expedition start date.</li>
               <li><strong>Last-Minute Bookings:</strong> Reservations made 60 days or less prior to departure require 100% full payment upon booking.</li>
-              <li><strong>Accepted Payment Methods:</strong> Credit Card (Visa, Mastercard, American Express), PayPal, and Official Bank Transfers (TD Bank USA / Produbanco Ecuador / Zelle).</li>
+              <li><strong>Accepted Payment Methods:</strong> Direct encrypted Credit/Debit Card via Stripe, Official Wire Transfers to Citibank USA (Checking Account: 9119836186, Holder: Medardo Sanchez, Florida USA), Zelle (<span>gsanchez</span><span className="text-emerald-400 font-bold">&#64;</span><span>plustelesmart.com.ec</span>), and Banco Produbanco Ecuador.</li>
             </ul>
           </section>
 

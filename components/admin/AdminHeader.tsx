@@ -110,13 +110,13 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
           </nav>
 
           {/* Right Actions */}
-          <div className="hidden sm:flex items-center gap-3 ml-auto">
+          <div className="flex items-center gap-2 sm:gap-3 ml-auto">
             
             {/* Theme Toggle */}
             <button
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               suppressHydrationWarning
-              className="p-2.5 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 rounded-xl cursor-pointer transition-colors"
+              className="p-2 sm:p-2.5 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 rounded-xl cursor-pointer transition-colors"
               aria-label="Toggle Theme"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -127,19 +127,21 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
               <button
                 onClick={() => setLangOpen(!langOpen)}
                 suppressHydrationWarning
-                className="flex items-center gap-2 p-2.5 text-xs font-bold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 rounded-xl cursor-pointer transition-colors"
+                className="flex items-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 text-xs font-bold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 rounded-xl cursor-pointer transition-colors"
               >
                 <img
                   src={LOCALES.find((l) => l.code === locale)?.flagUrl || 'https://flagcdn.com/es.svg'}
                   alt=""
                   aria-hidden="true"
-                  className="w-5 h-auto rounded-xs shadow-xs"
+                  width={18}
+                  height={13}
+                  className="w-4 sm:w-5 h-auto rounded-xs shadow-xs"
                 />
-                <span className="uppercase">{locale}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-zinc-400 transition-transform duration-200 ${langOpen ? 'rotate-180 text-emerald-600' : ''}`} />
+                <span className="uppercase text-[11px] sm:text-xs">{locale}</span>
+                <ChevronDown className={`w-3 h-3 sm:w-3.5 sm:h-3.5 text-zinc-400 transition-transform duration-200 ${langOpen ? 'rotate-180 text-emerald-600' : ''}`} />
               </button>
               
-              <div className={`absolute top-full right-0 pt-2 w-48 z-50 notranslate ${langOpen ? 'block' : 'hidden'}`}>
+              <div className={`absolute top-full right-0 pt-2 w-44 sm:w-48 z-50 notranslate ${langOpen ? 'block' : 'hidden'}`}>
                 <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-2 shadow-2xl border border-zinc-200/90 dark:border-zinc-800">
                   <div className="flex flex-col gap-1">
                     {LOCALES.map((l) => (
@@ -152,7 +154,7 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
                             : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                         }`}
                       >
-                        <img src={l.flagUrl} alt="" className="w-5 h-auto rounded-xs" />
+                        <img src={l.flagUrl} alt="" width={20} height={15} className="w-5 h-auto rounded-xs" />
                         {l.name}
                       </button>
                     ))}
@@ -166,7 +168,7 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
               onClick={onSignOut}
               variant="outline"
               size="sm"
-              className="h-10 px-4 text-xs font-bold gap-2 bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-600 hover:text-red-600 hover:bg-red-50 dark:text-zinc-300 dark:hover:bg-red-950/30 rounded-xl"
+              className="hidden sm:flex h-10 px-4 text-xs font-bold gap-2 bg-zinc-50 dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-600 hover:text-red-600 hover:bg-red-50 dark:text-zinc-300 dark:hover:bg-red-950/30 rounded-xl"
             >
               <LogOut className="w-4 h-4" />
               {isEs ? 'SALIR' : 'LOG OUT'}

@@ -218,6 +218,8 @@ export default function FluidBackgroundCursor() {
           src="/cursor-icon.png"
           alt=""
           aria-hidden="true"
+          width={16}
+          height={16}
           className="w-full h-full object-contain pointer-events-none"
           draggable={false}
         />

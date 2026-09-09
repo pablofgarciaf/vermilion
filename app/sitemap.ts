@@ -6,17 +6,31 @@ const BASE_URL = 'https://www.vermilionroutes.com';
 const LOCALES = ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPages = ['', '/blog', '/privacy-policy', '/terms', '/booking'];
+  const staticPages = [
+    '',
+    '/tours',
+    '/blog',
+    '/booking',
+    '/couples-anniversary-galapagos',
+    '/family-friendly-ecuador',
+    '/wildlife-photography-expeditions',
+    '/privacy-policy',
+    '/terms',
+  ];
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
   // 1. Static Pages for all locales
   for (const page of staticPages) {
     for (const locale of LOCALES) {
+      const isHome = page === '';
+      const isCatalogOrBlog = page === '/tours' || page === '/blog';
+      const isLegal = page === '/privacy-policy' || page === '/terms';
+
       sitemapEntries.push({
         url: `${BASE_URL}/${locale}${page}`,
         lastModified: new Date(),
-        changeFrequency: page === '' ? 'daily' : 'weekly',
-        priority: page === '' ? 1.0 : page === '/blog' ? 0.9 : 0.7,
+        changeFrequency: isHome ? 'daily' : isCatalogOrBlog ? 'daily' : isLegal ? 'monthly' : 'weekly',
+        priority: isHome ? 1.0 : isCatalogOrBlog ? 0.9 : isLegal ? 0.5 : 0.8,
       });
     }
   }

@@ -13,6 +13,7 @@ import { getLocalizedText } from '@/utils/i18nHelper';
 import { getStoredAffiliateRef } from '@/components/affiliates/AffiliateTracker';
 import { getAffiliateByCode, AffiliateAccount } from '@/lib/affiliates';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
+import { generateBookingCode } from '@/lib/bookings';
 
 const CATEGORIES = [
   { id: 'all', label: 'Todas las Expediciones' },
@@ -37,10 +38,67 @@ function filterTours(tours: Tour[], activeFilter: string): Tour[] {
   });
 }
 
+function getComplementarySuggestions(primaryTour: Tour, allTours: Tour[]): { tour: Tour; badge: string; reason: string }[] {
+  if (!primaryTour) return [];
+  const pid = (primaryTour.id || '').toLowerCase();
+  
+  if (pid.includes('galapagos')) {
+    // Si viene por Galápagos (ej. 5 o 4 días) -> Complementario 1: Ecuador Continental (Andes/Volcanes) + Complementario 2: Grand Tour Completo 12 Días
+    const continental = allTours.find(t => t.id === 'volcanoes-rivers-8days') || allTours.find(t => t.id === 'andes-amazon-7days') || allTours[3];
+    const grandTour = allTours.find(t => t.id === 'ecuador-galapagos-12days') || allTours.find(t => t.id === 'ecuador-galapagos-11days') || allTours[7];
+
+    return [
+      {
+        tour: continental,
+        badge: '🏔️ Extensión Recomendada (Andes)',
+        reason: 'Combina las Islas Encantadas con la Avenida de los Volcanes y la Amazonía sin duplicar vuelos',
+      },
+      {
+        tour: grandTour,
+        badge: '👑 Upgrade VIP Todo Incluido (12 Días)',
+        reason: 'La gran expedición insignia definitiva que une lo mejor de los Andes y Galápagos',
+      },
+    ].filter(item => item.tour && item.tour.id !== primaryTour.id);
+  } else if (pid.includes('ecuador-galapagos') || pid.includes('12days') || pid.includes('11days')) {
+    // Si ya tiene el Gran Tour Combinado -> Sugerir experiencia boutique de Galápagos y Ruta de Nieve
+    const galapagosSpec = allTours.find(t => t.id === 'galapagos-5days') || allTours[1];
+    const andesSpec = allTours.find(t => t.id === 'snow-volcanoes-6days') || allTours[5];
+    return [
+      {
+        tour: galapagosSpec,
+        badge: '🐢 Enfoque Galápagos Exclusivo (5 Días)',
+        reason: 'Dedicado exclusivamente a la fauna endémica marina y navegación entre islotes',
+      },
+      {
+        tour: andesSpec,
+        badge: '🌋 Enfoque Andes & Volcanes (6 Días)',
+        reason: 'Expedición de alta montaña por volcanes activos y haciendas coloniales',
+      },
+    ].filter(item => item.tour && item.tour.id !== primaryTour.id);
+  } else {
+    // Tour continental -> Complementario 1: Galápagos 5 días + Complementario 2: Grand Tour 12 Días
+    const galapagos = allTours.find(t => t.id === 'galapagos-5days') || allTours.find(t => t.id === 'galapagos-4days') || allTours[1];
+    const grandTour = allTours.find(t => t.id === 'ecuador-galapagos-12days') || allTours[7];
+    return [
+      {
+        tour: galapagos,
+        badge: '🐢 Extensión Galápagos Imprescindible',
+        reason: 'Suma las Islas Galápagos a tu recorrido andino para vivir el viaje completo',
+      },
+      {
+        tour: grandTour,
+        badge: '👑 Upgrade VIP Todo Incluido (12 Días)',
+        reason: 'Expedición combinada con toda la logística y conexiones aéreas resueltas',
+      },
+    ].filter(item => item.tour && item.tour.id !== primaryTour.id);
+  }
+}
+
 export function BookingWizard() {
   const locale = useLocale();
+  const isEs = locale === 'es';
   const searchParams = useSearchParams();
-  const addTourId = searchParams.get('addTour') || searchParams.get('tourId');
+  const addTourId = searchParams.get('addTour') || searchParams.get('tourid') || searchParams.get('tourId');
 
   const [selectedTours, setSelectedTours] = useState<Tour[]>([]);
   const [affiliateRef, setAffiliateRef] = useState<string | null>(null);
@@ -48,6 +106,7 @@ export function BookingWizard() {
   const [isValidatingAffiliate, setIsValidatingAffiliate] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [showFullCatalog, setShowFullCatalog] = useState(false);
 
   const dateRef = useRef<HTMLDivElement>(null);
   const passengersRef = useRef<HTMLDivElement>(null);
@@ -107,10 +166,33 @@ export function BookingWizard() {
     if (addTourId) {
       const tour = mockTours.find(t => t.id === addTourId);
       if (tour) {
-        setSelectedTours(prev => prev.some(t => t.id === tour.id) ? prev : [...prev, tour]);
+        setSelectedTours(prev => prev.some(t => t.id === tour.id) ? prev : [tour, ...prev]);
+        return;
       }
     }
+    if (selectedTours.length === 0 && mockTours.length > 0) {
+      const defaultTour = mockTours.find(t => t.id === 'galapagos-5days') || mockTours[0];
+      setSelectedTours([defaultTour]);
+    }
   }, [addTourId]);
+
+  const primaryTour: Tour = selectedTours[0] || (addTourId ? mockTours.find(t => t.id === addTourId) : null) || mockTours.find(t => t.id === 'galapagos-5days') || mockTours[0];
+  const complementarySuggestions = getComplementarySuggestions(primaryTour, mockTours);
+
+  const replacePrimaryTour = (newTour: Tour) => {
+    setSelectedTours(prev => [newTour, ...prev.filter(t => t.id !== newTour.id && t.id !== primaryTour?.id)]);
+  };
+
+  const toggleTour = (tour: Tour) => {
+    setSelectedTours(prev => {
+      const exists = prev.some(t => t.id === tour.id);
+      if (exists) {
+        if (prev.length <= 1) return prev;
+        return prev.filter(t => t.id !== tour.id);
+      }
+      return [...prev, tour];
+    });
+  };
 
   useEffect(() => {
     if (selectedTours.length > 0) {
@@ -133,11 +215,7 @@ export function BookingWizard() {
     }
   }, [selectedTours, adults, children, date]);
 
-  const toggleTour = (tour: Tour) => {
-    setSelectedTours(prev => prev.some(t => t.id === tour.id) ? prev.filter(t => t.id !== tour.id) : [...prev, tour]);
-  };
-
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (selectedTours.length === 0) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -161,8 +239,18 @@ export function BookingWizard() {
       return;
     }
 
+    setIsProcessing(true);
     saveStoredUserProfile(contactInfo);
     const tourTitleStr = selectedTours.map(t => typeof t.title === 'string' ? t.title : (t.title?.es || t.title?.en || 'Tour')).join(' + ');
+
+    let bookingRef = '';
+    try {
+      bookingRef = await generateBookingCode(selectedTours[0]?.id, affiliateRef || undefined);
+    } catch (e) {
+      console.warn('Booking code generation fallback:', e);
+      bookingRef = `1.1-${new Date().getFullYear()}-0001`;
+    }
+
     const queryParams = new URLSearchParams({
       tourId: selectedTours.map(t => t.id).join(','),
       tourTitle: tourTitleStr,
@@ -170,7 +258,9 @@ export function BookingWizard() {
       name: contactInfo.name,
       amount: String(pricing.total),
       type: 'full',
-      ref: affiliateRef || `VR-${Date.now()}`,
+      ref: bookingRef,
+      affiliateCode: affiliateRef || '',
+      discountApplied: affiliateRef ? 'true' : 'false',
       date: date
     });
     window.location.href = `/${locale}/checkout/payment?${queryParams.toString()}`;
@@ -217,125 +307,180 @@ export function BookingWizard() {
             )}
 
             <div>
-              <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
-                <Map className="w-5 h-5 text-emerald-600" /> 1. Selecciona tu Tour
-              </h3>
-              <div className="hidden md:flex flex-wrap items-center gap-2 mb-4">
-                {CATEGORIES.map((cat) => (
-                  <button key={cat.id} onClick={() => setActiveFilter(cat.id)} suppressHydrationWarning
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer border ${activeFilter === cat.id ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25 scale-105 border-emerald-600' : 'bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-700 border-zinc-200 dark:border-zinc-700 hover:border-emerald-400'}`}>
-                    {cat.label}
-                  </button>
-                ))}
-              </div>
-              <div className="md:hidden relative w-full mb-3">
-                <button onClick={() => setDropdownOpen(!dropdownOpen)} className="w-full flex items-center justify-between bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 py-3 px-4 rounded-xl text-sm font-bold shadow-sm">
-                  <span>{CATEGORIES.find(c => c.id === activeFilter)?.label || 'Todas las Expediciones'}</span>
-                  <ChevronDown className={`w-4 h-4 text-emerald-600 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {dropdownOpen && (
-                  <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-xl z-50 overflow-hidden">
-                    {CATEGORIES.map((cat) => (
-                      <button key={cat.id} onClick={() => { setActiveFilter(cat.id); setDropdownOpen(false); }}
-                        className={`w-full text-left px-4 py-3 text-sm transition-colors border-b border-zinc-100 dark:border-zinc-800 last:border-0 ${activeFilter === cat.id ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 font-bold' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800'}`}>
-                        {cat.label}
-                      </button>
-                    ))}
-                  </div>
+              <div className="flex items-center justify-between mb-3">
+                <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+                  <Map className="w-5 h-5 text-emerald-600" /> 1. {isEs ? 'Tu Expedición Principal' : 'Your Primary Expedition'}
+                </h2>
+                {selectedTours.length > 1 && (
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs">
+                    {selectedTours.length} {isEs ? 'expediciones seleccionadas' : 'expeditions selected'}
+                  </span>
                 )}
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {filteredTours.length === 0 && <div className="sm:col-span-2 text-center py-8 text-zinc-400 text-sm">No hay tours en esta categoría.</div>}
-                {filteredTours.map((t) => {
-                  const isSelected = selectedTours.some(st => st.id === t.id);
-                  return (
-                    <div
-                      key={t.id}
-                      className={`border rounded-2xl p-4 transition-all flex flex-col justify-between gap-3 group ${
-                        isSelected
-                          ? 'border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/30 shadow-md ring-1 ring-emerald-500'
-                          : 'border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/40 bg-white dark:bg-zinc-900/60'
-                      }`}
-                    >
-                      {/* Top Row: Image + Title + Price */}
-                      <div className="flex items-start gap-3.5">
-                        <div
-                          className="w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-zinc-200 dark:border-zinc-800 cursor-pointer"
-                          onClick={() => toggleTour(t)}
-                        >
-                          <img
-                            src={t.imageUrl}
-                            alt={getLocalizedText(t.title, locale)}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0 cursor-pointer" onClick={() => toggleTour(t)}>
-                          <h4 className={`font-bold text-xs sm:text-sm line-clamp-2 leading-snug ${
-                            isSelected ? 'text-emerald-900 dark:text-emerald-300' : 'text-zinc-900 dark:text-white'
-                          }`}>
-                            {getLocalizedText(t.title, locale)}
-                          </h4>
-                          <div className="flex flex-wrap items-center gap-2 mt-1">
-                            <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400" suppressHydrationWarning>
-                              Desde ${t.price.toLocaleString('en-US')} USD
-                            </span>
-                            <span className="text-[10px] text-zinc-400">&bull;</span>
-                            <span className="text-[11px] text-zinc-500 font-medium">
-                              {getLocalizedText(t.duration, locale)}
-                            </span>
-                          </div>
-                        </div>
+
+              {/* Tarjeta Principal Seleccionada */}
+              {primaryTour && (
+                <div className="border-2 border-emerald-500 bg-gradient-to-br from-emerald-50/90 to-teal-50/40 dark:from-emerald-950/40 dark:to-zinc-900/80 rounded-2xl p-4 sm:p-5 shadow-md ring-1 ring-emerald-500/30 space-y-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div className="w-full sm:w-28 h-32 sm:h-24 rounded-xl overflow-hidden shrink-0 border border-emerald-200 dark:border-emerald-800 shadow-xs relative">
+                      <img
+                        src={primaryTour.imageUrl}
+                        alt={getLocalizedText(primaryTour.title, locale)}
+                        width={112}
+                        height={96}
+                        className="w-full h-full object-cover"
+                      />
+                      <span className="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-emerald-600 text-white font-bold text-[9px] uppercase tracking-wider shadow-sm">
+                        {isEs ? 'Principal' : 'Primary'}
+                      </span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-600/15 text-emerald-700 dark:text-emerald-300 font-bold text-[10px] uppercase tracking-wider">
+                          ⭐ {isEs ? 'Selección Confirmada' : 'Confirmed Choice'}
+                        </span>
+                        <span className="text-xs text-zinc-400">&bull;</span>
+                        <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">
+                          {getLocalizedText(primaryTour.duration, locale)}
+                        </span>
                       </div>
+                      <h4 className="font-bold text-base sm:text-lg text-zinc-900 dark:text-white leading-snug">
+                        {getLocalizedText(primaryTour.title, locale)}
+                      </h4>
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2">
+                        {getLocalizedText(primaryTour.description, locale)}
+                      </p>
+                    </div>
+                    <div className="sm:text-right shrink-0">
+                      <span className="text-[10px] text-zinc-400 block uppercase tracking-wider">{isEs ? 'Inversión desde' : 'Starting from'}</span>
+                      <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 dark:text-emerald-400" suppressHydrationWarning>
+                        ${primaryTour.price.toLocaleString('en-US')} USD
+                      </span>
+                      <span className="text-[10px] text-zinc-400 block">{isEs ? 'por viajero' : 'per traveler'}</span>
+                    </div>
+                  </div>
 
-                      {/* Action Row: Ver Detalles + Reservar / Seleccionar */}
-                      <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between gap-2.5">
-                        <a
-                          href={`/${locale}/tours/${t.id}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 py-2 px-3 rounded-xl border border-emerald-500/30 bg-transparent text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 font-bold text-xs text-center transition-all shadow-sm"
-                        >
-                          Ver Detalles
-                        </a>
+                  <div className="pt-3 border-t border-emerald-200/60 dark:border-emerald-800/40 flex flex-wrap items-center justify-between gap-2">
+                    <a
+                      href={`/${locale}/tours/${primaryTour.id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1"
+                    >
+                      <span>{isEs ? 'Ver Itinerario Completo día por día' : 'View Full Day-by-Day Itinerary'}</span>
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setShowFullCatalog(true)}
+                      className="text-xs font-semibold text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors cursor-pointer"
+                    >
+                      {isEs ? 'Cambiar por otro tour del catálogo ↓' : 'Change for another tour ↓'}
+                    </button>
+                  </div>
+                </div>
+              )}
 
-                        <button
-                          type="button"
-                          onClick={() => toggleTour(t)}
-                          className={`flex-1 py-2 px-3 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer ${
-                            isSelected
-                              ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-900/30 ring-2 ring-emerald-500 ring-offset-1 ring-offset-white dark:ring-offset-zinc-900'
-                              : 'bg-zinc-800 hover:bg-zinc-700 text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-zinc-900'
+              {/* 2 SUGERENCIAS COMPLEMENTARIAS INTELIGENTES */}
+              {complementarySuggestions.length > 0 && (
+                <div className="mt-5 space-y-3">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-amber-500" />
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+                      {isEs ? 'Complementos & Upgrades Recomendados para tu Expedición' : 'Recommended Complements & Upgrades for your Expedition'}
+                    </h4>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {complementarySuggestions.map(({ tour: sugTour, badge, reason }) => {
+                      const isAdded = selectedTours.some(st => st.id === sugTour.id);
+                      return (
+                        <div
+                          key={sugTour.id}
+                          className={`rounded-2xl p-4 border transition-all flex flex-col justify-between gap-3 ${
+                            isAdded
+                              ? 'border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/30 shadow-md ring-1 ring-emerald-500'
+                              : 'border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/40 hover:border-amber-400/60'
                           }`}
                         >
-                          {isSelected ? (
-                            <>
-                              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
-                              <span>Seleccionado</span>
-                            </>
-                          ) : (
-                            <span>Reservar</span>
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                          <div>
+                            <div className="flex items-center justify-between gap-2 mb-2">
+                              <span className="px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-800 dark:text-amber-300 font-bold text-[10px] tracking-tight">
+                                {badge}
+                              </span>
+                              <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400">
+                                +${sugTour.price.toLocaleString('en-US')} USD
+                              </span>
+                            </div>
+
+                            <div className="flex items-start gap-3">
+                              <img
+                                src={sugTour.imageUrl}
+                                alt={getLocalizedText(sugTour.title, locale)}
+                                width={56}
+                                height={56}
+                                className="w-14 h-14 rounded-xl object-cover shrink-0 border border-zinc-200 dark:border-zinc-700"
+                              />
+                              <div className="min-w-0">
+                                <h5 className="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white line-clamp-1 leading-snug">
+                                  {getLocalizedText(sugTour.title, locale)}
+                                </h5>
+                                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2 mt-0.5">
+                                  {reason}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="pt-2.5 border-t border-zinc-200/60 dark:border-zinc-800 flex items-center justify-between gap-2">
+                            <button
+                              type="button"
+                              onClick={() => replacePrimaryTour(sugTour)}
+                              className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer"
+                            >
+                              {isEs ? 'Cambiar a este' : 'Switch to this'}
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => toggleTour(sugTour)}
+                              className={`py-1.5 px-3 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer ${
+                                isAdded
+                                  ? 'bg-emerald-600 text-white shadow-sm'
+                                  : 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:opacity-90'
+                              }`}
+                            >
+                              {isAdded ? (
+                                <>
+                                  <CheckCircle2 className="w-3.5 h-3.5" />
+                                  <span>{isEs ? 'Añadido' : 'Added'}</span>
+                                </>
+                              ) : (
+                                <span>{isEs ? '+ Añadir Extensión' : '+ Add Extension'}</span>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             <hr className="border-zinc-100 dark:border-zinc-800" />
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
               <div ref={dateRef} className="md:col-span-7">
-                <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
+                <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
                   <CalendarDays className="w-5 h-5 text-emerald-600" /> 2. Cuando viajas?
-                </h3>
+                </h2>
                 <TravelDatePicker selectedDate={date} onDateSelect={(d) => setDate(d)} durationDays={selectedTours.reduce((max, t) => Math.max(max, t.durationDays || 1), 1)} />
               </div>
               <div ref={passengersRef} className="md:col-span-5">
-                <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
+                <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
                   <Users className="w-5 h-5 text-emerald-600" /> 3. Quienes viajan?
-                </h3>
+                </h2>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 border border-zinc-200 dark:border-zinc-800 rounded-xl">
                     <h4 className="font-semibold text-sm text-zinc-900 dark:text-white">Adultos</h4>
@@ -356,9 +501,9 @@ export function BookingWizard() {
                 </div>
                 <hr className="border-zinc-100 dark:border-zinc-800 my-5" />
                 <div ref={contactRef}>
-                  <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
+                  <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600" /> 4. Tus Datos
-                  </h3>
+                  </h2>
                   <div className="grid grid-cols-1 gap-3">
                     <div className="space-y-1">
                       <label htmlFor="booking-name" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Nombre Completo</label>
@@ -403,6 +548,115 @@ export function BookingWizard() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* DESPLEGABLE CON EL RESTO DE TOURS DEL CATÁLOGO (AL FONDO PARA EVITAR SOBRECARGA) */}
+            <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800">
+              <button
+                type="button"
+                onClick={() => setShowFullCatalog(!showFullCatalog)}
+                className="w-full py-3.5 px-4 rounded-2xl bg-zinc-50 hover:bg-zinc-100 dark:bg-zinc-800/60 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-between transition-all cursor-pointer group"
+              >
+                <div className="flex items-center gap-2.5 text-left">
+                  <Map className="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform" />
+                  <div>
+                    <p className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white">
+                      {isEs ? '¿Deseas explorar otros tours de nuestro catálogo privado?' : 'Would you like to explore other tours from our private catalog?'}
+                    </p>
+                    <p className="text-[11px] text-zinc-500">
+                      {isEs ? 'Haz clic para desplegar todas las expediciones y excursiones' : 'Click to display all expeditions and day tours'}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                    {showFullCatalog ? (isEs ? 'Ocultar catálogo' : 'Hide catalog') : (isEs ? 'Ver todos los tours' : 'View all tours')}
+                  </span>
+                  <ChevronDown className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${showFullCatalog ? 'rotate-180 text-emerald-600' : ''}`} />
+                </div>
+              </button>
+
+              {showFullCatalog && (
+                <div className="mt-4 space-y-4 animate-fadeIn">
+                  <div className="hidden md:flex flex-wrap items-center gap-2 mb-2">
+                    {CATEGORIES.map((cat) => (
+                      <button
+                        key={cat.id}
+                        type="button"
+                        onClick={() => setActiveFilter(cat.id)}
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer border ${
+                          activeFilter === cat.id
+                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                            : 'bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700'
+                        }`}
+                      >
+                        {cat.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {filteredTours.map((t) => {
+                      const isSelected = selectedTours.some(st => st.id === t.id);
+                      return (
+                        <div
+                          key={t.id}
+                          className={`border rounded-2xl p-3.5 transition-all flex flex-col justify-between gap-2.5 ${
+                            isSelected
+                              ? 'border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/30 shadow-md ring-1 ring-emerald-500'
+                              : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60'
+                          }`}
+                        >
+                          <div className="flex items-start gap-3">
+                            <img
+                              src={t.imageUrl}
+                              alt={getLocalizedText(t.title, locale)}
+                              width={56}
+                              height={56}
+                              className="w-14 h-14 rounded-xl object-cover shrink-0 border border-zinc-200 dark:border-zinc-800"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-bold text-xs text-zinc-900 dark:text-white line-clamp-1">
+                                {getLocalizedText(t.title, locale)}
+                              </h4>
+                              <div className="flex items-center gap-2 mt-1">
+                                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                                  ${t.price.toLocaleString('en-US')} USD
+                                </span>
+                                <span className="text-[10px] text-zinc-400">&bull;</span>
+                                <span className="text-[10px] text-zinc-500">
+                                  {getLocalizedText(t.duration, locale)}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2">
+                            <button
+                              type="button"
+                              onClick={() => replacePrimaryTour(t)}
+                              className="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 hover:underline cursor-pointer"
+                            >
+                              {isEs ? 'Elegir como Principal' : 'Set as Primary'}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => toggleTour(t)}
+                              className={`py-1.5 px-3 rounded-xl font-bold text-xs transition-all cursor-pointer ${
+                                isSelected
+                                  ? 'bg-emerald-600 text-white shadow-sm'
+                                  : 'bg-zinc-800 text-white dark:bg-white dark:text-zinc-900'
+                              }`}
+                            >
+                              {isSelected ? (isEs ? 'Añadido ✓' : 'Added ✓') : (isEs ? '+ Añadir' : '+ Add')}
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

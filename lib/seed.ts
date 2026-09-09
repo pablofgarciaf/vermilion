@@ -6,7 +6,8 @@ export const defaultSettings = {
   contact: {
     phone: "+593 99 404 8458",
     email: "info@vermilionroutes.com",
-    address: "Alangasí Oe 1 – 210 Simón Bolívar and Juan León Mera, Quito, Ecuador",
+    address: "CORAL TOUR, Quito, Ecuador",
+    addressSpain: "Calle Seco 3, 28007 Madrid, España",
     whatsappUrl: "https://wa.me/593994048458",
     facebook: "https://facebook.com/vermilionroutes",
     instagram: "https://instagram.com/vermilionroutes",

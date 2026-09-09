@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { BookingWizard } from '@/components/booking/BookingWizard';
+import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -12,9 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: isEs
       ? 'Reserve su expedición de lujo a medida en Galápagos y Ecuador con Vermilion Routes. Asesoría de viaje personalizada 24/7 y cotizaciones exclusivas.'
       : 'Book your bespoke luxury expedition to the Galapagos Islands & Ecuador with Vermilion Routes. Dedicated 24/7 travel designers & custom quotes.',
-    alternates: {
-      canonical: `https://www.vermilionroutes.com/${locale}/booking`,
-    },
+    alternates: getSeoAlternates('/booking', locale),
   };
 }
 

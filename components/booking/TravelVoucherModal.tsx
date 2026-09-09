@@ -56,6 +56,7 @@ export function TravelVoucherModal({
 
   const tourTitle = getLocalizedText(tour.title, locale);
   const duration = getLocalizedText(tour.duration, locale);
+  const isEs = locale === 'es';
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto font-sans">
@@ -66,7 +67,7 @@ export function TravelVoucherModal({
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-5 h-5 text-emerald-400" />
             <span className="text-xs font-bold uppercase tracking-wider text-zinc-200">
-              Official Expedition Voucher &amp; Itinerary
+              {isEs ? 'Comprobante Oficial de Expedición & Itinerario' : 'Official Expedition Voucher & Itinerary'}
             </span>
           </div>
 
@@ -76,11 +77,12 @@ export function TravelVoucherModal({
               className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-md cursor-pointer"
             >
               <Printer className="w-4 h-4" />
-              <span>Print / Save PDF</span>
+              <span>{isEs ? 'Imprimir / Guardar PDF' : 'Print / Save PDF'}</span>
             </button>
             <button
               onClick={onClose}
               className="p-2 rounded-xl hover:bg-zinc-800 text-zinc-400 hover:text-white transition-all cursor-pointer"
+              aria-label={isEs ? 'Cerrar' : 'Close'}
             >
               <X className="w-5 h-5" />
             </button>
@@ -106,20 +108,20 @@ export function TravelVoucherModal({
                 Agencia de Viajes Vermilion Cia. Ltda. • RUC: 1711992808001
               </p>
               <p className="text-[10px] text-zinc-500 print:text-zinc-500">
-                Alangasí Oe 1 – 210 Simón Bolívar and Juan León Mera, Quito – Ecuador
+                CORAL TOUR, Quito, Ecuador • Calle Seco 3, 28007 Madrid, España
               </p>
             </div>
 
             <div className="text-left sm:text-right bg-emerald-950/60 print:bg-emerald-50 p-3 rounded-2xl border border-emerald-800/60 print:border-emerald-200">
               <span className="text-[10px] uppercase font-bold text-emerald-400 print:text-emerald-700 block">
-                Booking Reference Code
+                {isEs ? 'Código de Referencia de Reserva' : 'Booking Reference Code'}
               </span>
               <span className="font-mono text-lg font-bold text-white print:text-black tracking-wider">
                 {clientInfo.refCode || `VR-${Date.now().toString().slice(-6)}`}
               </span>
               <div className="flex items-center gap-1 text-[11px] text-emerald-300 print:text-emerald-800 mt-0.5 justify-start sm:justify-end">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>Confirmed &amp; Guaranteed</span>
+                <span>{isEs ? 'Confirmado & Garantizado' : 'Confirmed & Guaranteed'}</span>
               </div>
             </div>
           </div>
@@ -128,20 +130,23 @@ export function TravelVoucherModal({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-zinc-900/80 print:bg-zinc-100 p-5 rounded-2xl border border-zinc-800 print:border-zinc-300 text-xs">
             <div className="space-y-2">
               <p className="text-[11px] uppercase font-bold text-emerald-400 print:text-emerald-800">
-                Lead Passenger
+                {isEs ? 'Pasajero Principal' : 'Lead Passenger'}
               </p>
-              <p><strong className="text-white print:text-black">Full Name:</strong> {clientInfo.name || 'Valued Guest'}</p>
-              <p><strong className="text-white print:text-black">Email:</strong> {clientInfo.email || 'client@vermilionroutes.com'}</p>
-              <p><strong className="text-white print:text-black">Travelers:</strong> {clientInfo.adults} Adults {clientInfo.children > 0 ? `• ${clientInfo.children} Children` : ''}</p>
+              <p><strong className="text-white print:text-black">{isEs ? 'Nombre Completo:' : 'Full Name:'}</strong> {clientInfo.name || (isEs ? 'Viajero Distinguido' : 'Valued Guest')}</p>
+              <p><strong className="text-white print:text-black">{isEs ? 'Correo Electrónico:' : 'Email:'}</strong> {clientInfo.email || 'info@vermilionroutes.com'}</p>
+              <p><strong className="text-white print:text-black">{isEs ? 'Viajeros:' : 'Travelers:'}</strong> {clientInfo.adults} {isEs ? 'Adultos' : 'Adults'} {clientInfo.children > 0 ? `• ${clientInfo.children} ${isEs ? 'Niños' : 'Children'}` : ''}</p>
+              {clientInfo.amountPaid !== undefined && clientInfo.amountPaid > 0 && (
+                <p><strong className="text-white print:text-black">{isEs ? 'Monto Recibido:' : 'Amount Paid:'}</strong> <span className="font-mono text-emerald-400 print:text-emerald-700 font-bold">${clientInfo.amountPaid.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD</span></p>
+              )}
             </div>
 
             <div className="space-y-2">
               <p className="text-[11px] uppercase font-bold text-emerald-400 print:text-emerald-800">
-                Expedition Dates &amp; Service Tier
+                {isEs ? 'Fechas de Expedición & Categoría' : 'Expedition Dates & Service Tier'}
               </p>
-              <p><strong className="text-white print:text-black">Departure Date:</strong> {clientInfo.date || 'To be confirmed'}</p>
-              <p><strong className="text-white print:text-black">Duration:</strong> {duration}</p>
-              <p><strong className="text-white print:text-black">Service Level:</strong> {clientInfo.hotelTier || 'Luxury 4-Star & Boutique'}</p>
+              <p><strong className="text-white print:text-black">{isEs ? 'Fecha de Salida:' : 'Departure Date:'}</strong> {clientInfo.date || (isEs ? 'Por confirmar' : 'To be confirmed')}</p>
+              <p><strong className="text-white print:text-black">{isEs ? 'Duración:' : 'Duration:'}</strong> {duration}</p>
+              <p><strong className="text-white print:text-black">{isEs ? 'Nivel de Servicio:' : 'Service Level:'}</strong> {clientInfo.hotelTier || (isEs ? 'Lujo Boutique 4/5 Estrellas' : 'Luxury 4-Star & Boutique')}</p>
             </div>
           </div>
 
@@ -159,7 +164,7 @@ export function TravelVoucherModal({
           {tour.itinerary && tour.itinerary.length > 0 && (
             <div className="space-y-3 pt-2">
               <h3 className="text-xs uppercase font-bold text-emerald-400 print:text-emerald-800 tracking-wider">
-                Confirmed Itinerary Schedule
+                {isEs ? 'Cronograma Confirmado de Itinerario' : 'Confirmed Itinerary Schedule'}
               </h3>
               <div className="space-y-2 text-xs">
                 {tour.itinerary.map((day) => (
@@ -168,7 +173,7 @@ export function TravelVoucherModal({
                     className="p-3 bg-zinc-900/40 print:bg-zinc-50 border border-zinc-800/60 print:border-zinc-200 rounded-xl space-y-1"
                   >
                     <div className="flex justify-between font-bold text-white print:text-black">
-                      <span>Day {day.day}: {getLocalizedText(day.title, locale)}</span>
+                      <span>{isEs ? `Día ${day.day}:` : `Day ${day.day}:`} {getLocalizedText(day.title, locale)}</span>
                       {day.meals && <span className="text-[11px] text-emerald-400 print:text-emerald-700">{getLocalizedText(day.meals, locale)}</span>}
                     </div>
                     <p className="text-zinc-400 print:text-zinc-600 text-[11px] leading-relaxed">
@@ -183,27 +188,29 @@ export function TravelVoucherModal({
           {/* Inclusions & Guarantees */}
           <div className="p-4 bg-emerald-950/40 print:bg-emerald-50 border border-emerald-900/50 print:border-emerald-200 rounded-2xl text-xs space-y-2">
             <p className="font-bold text-emerald-300 print:text-emerald-900">
-              Included with your Vermilion Routes Expedition:
+              {isEs ? 'Incluido con tu Expedición Vermilion Routes:' : 'Included with your Vermilion Routes Expedition:'}
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-zinc-300 print:text-zinc-700 text-[11px] list-disc list-inside">
-              <li>Certified Bilingual Galapagos &amp; National Park Naturalist Guides</li>
-              <li>All VIP private ground and maritime transfers</li>
-              <li>Boutique luxury accommodations as specified</li>
-              <li>Excursions, snorkeling gear &amp; private permits</li>
-              <li>24/7 Dedicated Concierge Support en route</li>
+              <li>{isEs ? 'Guías Naturalistas bilingües certificados de Galápagos y Parque Nacional' : 'Certified Bilingual Galapagos & National Park Naturalist Guides'}</li>
+              <li>{isEs ? 'Todos los traslados VIP terrestres y marítimos privados' : 'All VIP private ground and maritime transfers'}</li>
+              <li>{isEs ? 'Alojamientos boutique de lujo según especificación' : 'Boutique luxury accommodations as specified'}</li>
+              <li>{isEs ? 'Excursiones, equipo de snorkel de alta gama y permisos privados' : 'Excursions, snorkeling gear & private permits'}</li>
+              <li>{isEs ? 'Asistencia y Concierge dedicado 24/7 en ruta' : '24/7 Dedicated Concierge Support en route'}</li>
             </ul>
           </div>
 
           {/* Footer & Emergency Concierge Hotline */}
           <div className="pt-4 border-t border-zinc-800 print:border-zinc-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-zinc-400 print:text-zinc-600">
             <div>
-              <p className="font-semibold text-white print:text-black">24/7 Concierge &amp; WhatsApp Emergency Assistance:</p>
+              <p className="font-semibold text-white print:text-black">
+                {isEs ? 'Asistencia y Concierge 24/7 WhatsApp:' : '24/7 Concierge & WhatsApp Emergency Assistance:'}
+              </p>
               <p className="text-emerald-400 print:text-emerald-700 font-mono">+593-994-048-458 &bull; <span>info</span>&#64;<span>vermilionroutes.com</span></p>
             </div>
 
             <div className="text-right text-[10px] text-zinc-500">
               <p>© {new Date().getFullYear()} Agencia de Viajes Vermilion Cia. Ltda.</p>
-              <p>Issued under official Terms &amp; Conditions.</p>
+              <p>{isEs ? 'Emitido bajo Términos y Condiciones oficiales.' : 'Issued under official Terms & Conditions.'}</p>
             </div>
           </div>
 
@@ -213,3 +220,4 @@ export function TravelVoucherModal({
     </div>
   );
 }
+

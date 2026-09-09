@@ -528,11 +528,11 @@ export function AffiliateClubModal({ isOpen, onClose, onApplyDiscount }: Affilia
                     />
                     <span>
                       {t.termsPre}{' '}
-                      <a href="/terms" target="_blank" className="text-emerald-400 underline hover:text-emerald-300">
+                      <a href={`/${locale}/terms`} target="_blank" className="text-emerald-400 underline hover:text-emerald-300">
                         {t.termsLink}
                       </a>{' '}
                       &amp;{' '}
-                      <a href="/privacy-policy" target="_blank" className="text-emerald-400 underline hover:text-emerald-300">
+                      <a href={`/${locale}/privacy-policy`} target="_blank" className="text-emerald-400 underline hover:text-emerald-300">
                         {t.privacyLink}
                       </a>{' '}
                       {t.termsPost}

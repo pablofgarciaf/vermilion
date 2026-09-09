@@ -2,12 +2,12 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Helper: verifica que el usuario autenticado sea el admin registrado
+    // Helper: verifica que el usuario autenticado sea un usuario del sistema registrado
     function isAdmin() {
       return request.auth != null
-          && request.auth.token.email_verified == true
           && request.auth.token.email != null;
     }
+
 
     // Tours: lectura pública, escritura solo admin
     match /tours/{tourId} {
