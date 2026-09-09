@@ -9,8 +9,8 @@ export const defaultSettings = {
     address: "CORAL TOUR, Quito, Ecuador",
     addressSpain: "Calle Seco 3, 28007 Madrid, España",
     whatsappUrl: "https://wa.me/593994048458",
-    facebook: "https://facebook.com/vermilionroutes",
-    instagram: "https://instagram.com/vermilionroutes",
+    facebook: "https://www.facebook.com/VermilionSouthAmericanRoutes",
+    instagram: "https://www.instagram.com/vermilionsouthamericanroutes/",
     tiktok: "https://www.tiktok.com/@vermilionsaroutes",
     tripadvisor: "https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
   },
