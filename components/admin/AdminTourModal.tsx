@@ -416,6 +416,8 @@ export function AdminTourModal({
                     <img
                       src={formData.imageUrl}
                       alt="Hero Preview"
+                      width={64}
+                      height={48}
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         (e.target as HTMLImageElement).src =
@@ -514,7 +516,7 @@ export function AdminTourModal({
                         key={`${imgUrl}-${idx}`} 
                         className={`relative group rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 ${isFeatured ? 'col-span-2 row-span-2 aspect-square' : 'aspect-square'}`}
                       >
-                        <img src={imgUrl} alt={`Gallery ${idx + 1}`} className="w-full h-full object-cover" />
+                        <img src={imgUrl} alt={`Gallery ${idx + 1}`} width={300} height={200} className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-start justify-end p-2 backdrop-blur-sm pointer-events-none">
                           <button
                             type="button"

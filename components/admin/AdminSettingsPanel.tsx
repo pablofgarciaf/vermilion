@@ -258,7 +258,7 @@ export function AdminSettingsPanel() {
                     {/* Header Image Preview with Delete Button */}
                     <div className="relative aspect-[16/9] w-full bg-zinc-100 dark:bg-zinc-800 overflow-hidden border-b border-zinc-200 dark:border-zinc-800">
                       {slide.image ? (
-                        <img src={slide.image} alt={slide.place || "Slide preview"} className="w-full h-full object-cover" />
+                        <img src={slide.image} alt={slide.place || "Slide preview"} width={160} height={90} className="w-full h-full object-cover" />
                       ) : (
                         <div className="w-full h-full flex flex-col items-center justify-center text-zinc-400 gap-1.5 p-4">
                           <Upload className="w-6 h-6 text-zinc-400" />
@@ -573,7 +573,7 @@ export function AdminSettingsPanel() {
                 </div>
                 {localSettings.about?.imageUrl && (
                   <div className="h-16 w-full relative rounded-lg overflow-hidden border border-zinc-800 bg-zinc-900 flex items-center justify-center">
-                    <img src={localSettings.about.imageUrl} alt="Preview" className="h-full w-full object-cover" />
+                    <img src={localSettings.about.imageUrl} alt="Preview" width={400} height={400} className="h-full w-full object-cover" />
                   </div>
                 )}
               </div>

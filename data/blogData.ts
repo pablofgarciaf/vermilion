@@ -188,7 +188,7 @@ This route was famously named by the German naturalist and geographer **Alexande
 
 The highest summit in Ecuador and the **closest point on Earth to the Sun** (furthest from Earth's center due to the equatorial bulge). Located within the *Chimborazo Fauna Production Reserve*, its glacier slopes are home to wild herds of vicuñas, Andean wolves, and rare paramo flora.
 
-![Chimborazo Volcano: Closest Point on Earth to the Sun](/images/tours/16-9/chimborazo-volcano-16-9.1.jpg)
+![Chimborazo Volcano: Closest Point on Earth to the Sun](/images/tours/16-9/chimborazo-volcano-16-9.jpg)
 
 #### 2. Cotopaxi Volcano (19,347 ft / 5,897 m)
 
@@ -227,7 +227,7 @@ Bautizada por el célebre geógrafo alemán **Alexander von Humboldt en el siglo
 
 La montaña más alta del Ecuador y el **punto más cercano de la Tierra al Sol** (el más alejado del centro del planeta debido al ensanchamiento ecuatorial). Protegido dentro de la *Reserva de Producción de Fauna Chimborazo*, en sus faldas pastan manadas de vicuñas silvestres entre pajonales y bosques de polylepis.
 
-![Volcán Chimborazo: La Cumbre Más Cercana al Sol (6.268 msnm)](/images/tours/16-9/chimborazo-volcano-16-9.1.jpg)
+![Volcán Chimborazo: La Cumbre Más Cercana al Sol (6.268 msnm)](/images/tours/16-9/chimborazo-volcano-16-9.jpg)
 
 #### 2. Volcán Cotopaxi (5.897 msnm)
 
