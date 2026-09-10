@@ -141,7 +141,9 @@ export const defaultSettings = {
         fr: "Quel niveau d'exclusivité et de personnalisation puis-je attendre?", 
         de: "Welches Maß an Exklusivität und Personalisierung kann ich erwarten?", 
         it: "Quale livello di esclusività e personalizzazione posso aspettarmi?", 
-        pt: "Que nível de exclusividade e personalização posso esperar?" 
+        pt: "Que nível de exclusividade e personalização posso esperar?",
+        ja: "どのような特別感やオーダーメイド対応を期待できますか？",
+        zh: "我可以期待怎样的尊享专属服务与个性化定制？"
       },
       answer: { 
         en: "Every Vermilion Routes journey is entirely bespoke. We limit our guest intake to ensure our dedicated concierges can craft meticulously tailored itineraries. From private yacht charters in the Galapagos to hand-picked luxury eco-lodges, every detail is curated to your exact preferences.", 
@@ -149,7 +151,9 @@ export const defaultSettings = {
         fr: "Chaque voyage avec Vermilion Routes est entièrement sur mesure. Nous limitons notre accueil pour garantir un service dédié. Des yachts privés aux Galápagos aux éco-lodges de luxe, chaque détail est adapté à vos préférences.", 
         de: "Jede Reise mit Vermilion Routes ist komplett maßgeschneidert. Wir begrenzen unsere Gästezahl, um einen engagierten Concierge-Service zu gewährleisten.", 
         it: "Ogni viaggio con Vermilion Routes è completamente su misura. Limitiamo il numero di ospiti per garantire un servizio concierge dedicato.", 
-        pt: "Cada viagem com a Vermilion Routes é totalmente sob medida. Limitamos nosso volume de hóspedes para garantir um serviço de concierge dedicado." 
+        pt: "Cada viagem com a Vermilion Routes é totalmente sob medida. Limitamos nosso volume de hóspedes para garantir um serviço de concierge dedicado.",
+        ja: "Vermilion Routesの旅はすべて完全オーダーメイドです。専任コンシェルジュが細部まで綿密に旅程を仕立てるため、お迎えするお客様の組数を限定しております。ガラパゴス諸島のプライベートヨットクルーズから厳選されたラグジュアリーエコロッジまで、お客様のご要望を100%反映します。",
+        zh: "Vermilion Routes 的每一次旅程都完全量身定制。我们严格限制接待的贵宾人数，以确保专属礼宾管家能精心打磨每一个行程细节。从加拉帕戈斯群岛的私人包船巡航到严选的奢华生态度假村，一切细节均依照您的确切偏好悉心打造。"
       }
     },
     {
@@ -159,7 +163,9 @@ export const defaultSettings = {
         fr: "Vos expéditions aux Galápagos sont-elles guidées par des naturalistes certifiés?", 
         de: "Werden Ihre Galapagos-Expeditionen von zertifizierten Naturforschern geführt?", 
         it: "Le vostre spedizioni alle Galapagos sono guidate da naturalisti certificati?", 
-        pt: "Suas expedições em Galápagos são guiadas por naturalistas certificados?" 
+        pt: "Suas expedições em Galápagos são guiadas por naturalistas certificados?",
+        ja: "ガラパゴス諸島の探検ツアーには認定ナチュラリストガイドが同行しますか？",
+        zh: "加拉帕戈斯探险是否由持证专业博物学家全程陪同讲解？"
       },
       answer: { 
         en: "Absolutely. We exclusively partner with Level 3 Certified Naturalist Guides—the highest tier recognized by the Galapagos National Park. Their profound expertise in evolutionary biology and local ecosystems ensures a truly transformative and educational wildlife experience.", 
@@ -167,7 +173,9 @@ export const defaultSettings = {
         fr: "Absolument. Nous travaillons exclusivement avec des guides naturalistes certifiés de niveau 3, le plus haut niveau reconnu par le parc national des Galápagos.", 
         de: "Absolut. Wir arbeiten ausschließlich mit zertifizierten Naturführern der Stufe 3 zusammen, der höchsten vom Galapagos-Nationalpark anerkannten Stufe.", 
         it: "Assolutamente. Collaboriamo esclusivamente con Guide Naturalistiche Certificate di Livello 3, il livello più alto riconosciuto dal Parco Nazionale delle Galapagos.", 
-        pt: "Absolutamente. Fazemos parceria exclusivamente com Guias Naturalistas Certificados de Nível 3, o nível mais alto reconhecido pelo Parque Nacional de Galápagos." 
+        pt: "Absolutamente. Fazemos parceria exclusivamente com Guias Naturalistas Certificados de Nível 3, o nível mais alto reconhecido pelo Parque Nacional de Galápagos.",
+        ja: "はい、もちろんです。ガラパゴス国立公園によって認定された最高位である「レベル3認定ナチュラリストガイド」のみと独占的に提携しています。進化生物学と生態系に関する深い専門知識により、知的好奇心を満たす感動的な野生動物体験をお届けします。",
+        zh: "当然。我们仅与加拉帕戈斯国家公园认证的最高级别——三级资深博物学家向导独家合作。他们凭借在演化生物学与本土生态系统方面的深厚造诣，确保为您呈现一场真正兼具启迪性与震撼力的原生态野生动物探险。"
       }
     },
     {
@@ -177,7 +185,9 @@ export const defaultSettings = {
         fr: "Comment gérez-vous la logistique interne et les transferts en Équateur?", 
         de: "Wie handhaben Sie die interne Logistik und Transfers in Ecuador?", 
         it: "Come gestite la logistica interna e i trasferimenti in Ecuador?", 
-        pt: "Como vocês lidam com a logística interna e os traslados no Equador?" 
+        pt: "Como vocês lidam com a logística interna e os traslados no Equador?",
+        ja: "エクアドル国内の移動や送迎などのロジスティクスはどのように手配されますか？",
+        zh: "你们如何安排厄瓜多尔境内的交通衔接与接送物流？"
       },
       answer: { 
         en: "We provide end-to-end seamless logistics. From the moment you land in Quito or Guayaquil, our private VIP transport and bilingual hosts take over. All domestic flights, private transfers, and inter-island navigations are orchestrated meticulously so you simply relax and enjoy.", 
@@ -185,7 +195,9 @@ export const defaultSettings = {
         fr: "Nous fournissons une logistique fluide de bout en bout. Dès votre atterrissage, nos transports VIP privés et nos hôtes bilingues prennent le relais. Tous les vols et transferts sont méticuleusement orchestrés.", 
         de: "Wir bieten eine nahtlose End-to-End-Logistik. Ab Ihrer Landung übernehmen unsere privaten VIP-Transfers und zweisprachigen Gastgeber.", 
         it: "Forniamo una logistica senza interruzioni da un capo all'altro. Dal momento in cui atterri, i nostri trasporti VIP privati e i padroni di casa bilingui prendono il sopravvento.", 
-        pt: "Fornecemos logística contínua de ponta a ponta. Desde o momento em que você pousa, nosso transporte VIP privado e anfitriões bilíngues assumem o controle." 
+        pt: "Fornecemos logística contínua de ponta a ponta. Desde o momento em que você pousa, nosso transporte VIP privado e anfitriões bilíngues assumem o controle.",
+        ja: "空港到着からご帰国まで、一切のストレスがない完全シームレスなロジスティクスを提供します。キトまたはグアヤキル到着の瞬間から、専用VIP車両とバイリンガルホストがご案内。国内線フライト、プライベート送迎、島間移動のすべてを綿密にコーディネートします。",
+        zh: "我们提供端到端全程无缝的尊享物流保障。自您抵达基多或瓜亚基尔起，私人贵宾专车与双语接待团队即刻为您服务。所有厄瓜多尔国内航班、私人接送与岛际航行均经过严谨编排，让您只需尽情放松并享受旅途。"
       }
     }
   ],

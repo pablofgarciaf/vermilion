@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-20 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white">
       <div className="max-w-4xl mx-auto space-y-10">
-        
+
         {/* Header */}
         <div className="space-y-4 text-center sm:text-left border-b border-zinc-800 pb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
@@ -53,11 +53,11 @@ export default function PrivacyPolicyPage() {
               <div className="space-y-1.5 text-xs text-zinc-300">
                 <p className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Quito:</strong> CORAL TOUR, Quito, Ecuador</span>
+                  <span><strong className="text-white">Ecuador:</strong> CORAL TOUR, Quito</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Madrid:</strong> Calle Seco 3, 28007 Madrid, España</span>
+                  <span><strong className="text-white">Spain:</strong> Calle Seco 3, 28007 Madrid</span>
                 </p>
               </div>
             </div>
@@ -83,7 +83,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Content Sections */}
         <div className="space-y-8 text-zinc-300 text-sm sm:text-base leading-relaxed">
-          
+
           {/* Section 1 */}
           <section className="space-y-3 bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-6">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">

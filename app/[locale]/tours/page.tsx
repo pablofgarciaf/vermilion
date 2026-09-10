@@ -27,22 +27,37 @@ import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isEs = locale === 'es';
+  const titles: Record<string, string> = {
+    es: 'Vermilion Routes | Catálogo de Expediciones de Lujo 24/7',
+    en: 'Vermilion Routes | Luxury Ecuador & Galapagos Tours',
+    fr: 'Vermilion Routes | Circuits de Luxe Équateur et Galápagos',
+    de: 'Vermilion Routes | Luxusreisen nach Ecuador & Galápagos',
+    it: 'Vermilion Routes | Viaggi di Lusso in Ecuador e Galápagos',
+    pt: 'Vermilion Routes | Expedições de Luxo no Equador e Galápagos',
+    ja: 'Vermilion Routes | ガラパゴス＆エクアドル豪華遠征ツアー',
+    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯顶级奢华探险之旅',
+  };
+  const descriptions: Record<string, string> = {
+    es: 'Explore nuestro catálogo exclusivo de viajes de lujo a Galápagos, la Amazonía y los Andes. Itinerarios privados a medida con atención personalizada 24/7.',
+    en: 'Explore our curated catalog of luxury expeditions to Galapagos, the Amazon and Andes. Bespoke private itineraries with dedicated 24/7 travel concierge.',
+    fr: 'Découvrez notre catalogue exclusif d’expéditions de luxe aux Galápagos, en Amazonie et dans les Andes. Itinéraires privés sur mesure avec conciergerie 24/7.',
+    de: 'Entdecken Sie unseren exklusiven Katalog für Luxusexpeditionen nach Galápagos, ins Amazonasgebiet und in die Anden. 24/7 Concierge-Service.',
+    it: 'Esplora il nostro catalogo esclusivo di viaggi di lusso alle Galápagos, in Amazzonia e nelle Ande. Itinerari privati personalizzati con concierge 24/7.',
+    pt: 'Explore nosso catálogo exclusivo de expedições de luxo para Galápagos, Amazônia e Andes. Roteiros privativos sob medida com concierge 24/7.',
+    ja: 'ガラパゴス、アマゾン、アンデス山脈を巡る厳選ラグジュアリー遠征ツアー。専任コンシェルジュが24時間年中無休でご案内いたします。',
+    zh: '探索我们精选的加拉帕戈斯、亚马逊与安第斯山脉奢华探险行程。私人订制路线，配备专属24/7全天候旅行管家。',
+  };
+
+  const title = titles[locale] || titles['en'];
+  const description = descriptions[locale] || descriptions['en'];
+
   return {
-    title: isEs
-      ? 'Vermilion Routes | Catálogo de Expediciones de Lujo 24/7'
-      : 'Vermilion Routes | Luxury Ecuador & Galapagos Tours',
-    description: isEs
-      ? 'Explore nuestro catálogo exclusivo de viajes de lujo a Galápagos, la Amazonía y los Andes. Itinerarios privados a medida con atención personalizada 24/7.'
-      : 'Explore our curated catalog of luxury expeditions to Galapagos, the Amazon and Andes. Bespoke private itineraries with dedicated 24/7 travel concierge.',
+    title,
+    description,
     alternates: getSeoAlternates('/tours', locale),
     openGraph: {
-      title: isEs
-        ? 'Vermilion Routes | Catálogo de Expediciones de Lujo 24/7'
-        : 'Vermilion Routes | Luxury Ecuador & Galapagos Tours',
-      description: isEs
-        ? 'Explore nuestro catálogo exclusivo de viajes de lujo a Galápagos, la Amazonía y los Andes. Itinerarios privados a medida con atención personalizada 24/7.'
-        : 'Explore our curated catalog of luxury expeditions to Galapagos, the Amazon and Andes. Bespoke private itineraries with dedicated 24/7 travel concierge.',
+      title,
+      description,
       url: `https://www.vermilionroutes.com/${locale}/tours`,
       images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'],
     },
@@ -51,29 +66,300 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ToursPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const isEs = locale === 'es';
+
+  const toursI18n: Record<string, {
+    schemaName: string;
+    schemaDesc: string;
+    heroBadge: string;
+    heroTitleP1: string;
+    heroTitleP2: string;
+    heroDesc: string;
+    anchorGala: string;
+    anchorCont: string;
+    anchorComb: string;
+    anchorDaily: string;
+    s1Badge: string;
+    s1Title: string;
+    s1Desc: string;
+    s2Badge: string;
+    s2Title: string;
+    s2Desc: string;
+    s3Badge: string;
+    s3Title: string;
+    s3Desc: string;
+    s4Badge: string;
+    s4Title: string;
+    s4Desc: string;
+    viewItinerary: string;
+    viewFullItinerary: string;
+    details: string;
+    book: string;
+    bookExpedition: string;
+    combinedTag: string;
+  }> = {
+    es: {
+      schemaName: 'Catálogo de Expediciones de Lujo',
+      schemaDesc: 'Catálogo de tours y expediciones boutique en Galápagos y Ecuador continental.',
+      heroBadge: 'Catálogo de Expediciones Exclusivas',
+      heroTitleP1: 'Colección de ',
+      heroTitleP2: 'Viajes Boutique',
+      heroDesc: 'Itinerarios de autor diseñados a medida por guías naturalistas en Ecuador y Galápagos. Descubre tu próxima aventura inolvidable.',
+      anchorGala: '🐢 Islas Galápagos (3)',
+      anchorCont: '🏔️ Ecuador Continental (4)',
+      anchorComb: '✨ Viajes Combinados (2)',
+      anchorDaily: '☀️ Excursiones Full Day',
+      s1Badge: 'Archipiélago Encantado',
+      s1Title: 'Expediciones en Galápagos',
+      s1Desc: 'Hoteles boutique frente al mar, navegación entre islas deshabitadas y encuentros con fauna única en el planeta.',
+      s2Badge: 'Andes & Amazonía',
+      s2Title: 'Ecuador Continental',
+      s2Desc: 'Avenida de los Volcanes, lagunas de cráter, haciendas coloniales y la exuberante selva del Amazonas.',
+      s3Badge: 'La Experiencia Definitiva',
+      s3Title: 'Viajes Combinados',
+      s3Desc: 'Lo mejor de dos mundos en un solo viaje: la majestuosidad de los Andes y la magia de las Islas Galápagos.',
+      s4Badge: 'Salidas Diarias',
+      s4Title: 'Excursiones Full Day',
+      s4Desc: 'Escapadas de un día desde Quito a los destinos más icónicos del Ecuador.',
+      viewItinerary: 'Ver Itinerario',
+      viewFullItinerary: 'Ver Itinerario Completo',
+      details: 'Detalles',
+      book: 'Reservar',
+      bookExpedition: 'Reservar Expedición',
+      combinedTag: 'Andes + Galápagos VIP',
+    },
+    en: {
+      schemaName: 'Curated Luxury Expeditions Catalog',
+      schemaDesc: 'Portfolio of luxury bespoke tours and expeditions across Galapagos and mainland Ecuador.',
+      heroBadge: 'Exclusive Expedition Catalog',
+      heroTitleP1: 'Bespoke ',
+      heroTitleP2: 'Expeditions',
+      heroDesc: 'Bespoke naturalist-crafted journeys across Ecuador and the Galápagos Archipelago. Discover your next unforgettable journey.',
+      anchorGala: '🐢 Galapagos Islands (3)',
+      anchorCont: '🏔️ Mainland Ecuador (4)',
+      anchorComb: '✨ Combined Journeys (2)',
+      anchorDaily: '☀️ Full-Day Tours',
+      s1Badge: 'Enchanted Archipelago',
+      s1Title: 'Galapagos Expeditions',
+      s1Desc: 'Boutique oceanfront stays, uninhabited island yacht hops, and intimate wildlife encounters.',
+      s2Badge: 'Andes & Amazon',
+      s2Title: 'Mainland Ecuador',
+      s2Desc: 'Avenue of Volcanoes, crater lakes, colonial haciendas, and dense Amazon rainforest.',
+      s3Badge: 'The Ultimate Experience',
+      s3Title: 'Combined Journeys',
+      s3Desc: 'The best of both worlds in a single seamless itinerary: the Andean highlands and the Galápagos Islands.',
+      s4Badge: 'Daily Departures',
+      s4Title: 'Full-Day Excursions',
+      s4Desc: 'One-day getaways departing from Quito to Ecuador\'s most iconic landscapes.',
+      viewItinerary: 'View Itinerary',
+      viewFullItinerary: 'Full Itinerary',
+      details: 'Details',
+      book: 'Book Now',
+      bookExpedition: 'Book Expedition',
+      combinedTag: 'Andes + Galapagos VIP',
+    },
+    fr: {
+      schemaName: 'Catalogue d’Expéditions d’Exception',
+      schemaDesc: 'Collection de circuits privés et d’expéditions de luxe aux Galápagos et en Équateur continental.',
+      heroBadge: 'Catalogue d’Expéditions Exclusives',
+      heroTitleP1: 'Collection de ',
+      heroTitleP2: 'Voyages d’Exception',
+      heroDesc: 'Itinéraires exclusifs conçus sur mesure par nos guides naturalistes en Équateur et aux îles Galápagos.',
+      anchorGala: '🐢 Îles Galápagos (3)',
+      anchorCont: '🏔️ Équateur Continental (4)',
+      anchorComb: '✨ Voyages Combinés (2)',
+      anchorDaily: '☀️ Excursions d’une Journée',
+      s1Badge: 'Archipel Enchanté',
+      s1Title: 'Expéditions aux Galápagos',
+      s1Desc: 'Hôtels de charme en front de mer, navigation vers des îles inhabitées et faune endémique fascinante.',
+      s2Badge: 'Andes & Amazonie',
+      s2Title: 'Équateur Continental',
+      s2Desc: 'Allée des Volcans, lacs de cratère, haciendas historiques et forêt amazonienne sauvage.',
+      s3Badge: 'L’Expérience Ultime',
+      s3Title: 'Voyages Combinés',
+      s3Desc: 'Le meilleur des deux mondes en un voyage fluide : la splendeur des Andes et la magie des îles Galápagos.',
+      s4Badge: 'Départs Quotidiens',
+      s4Title: 'Excursions d’une Journée',
+      s4Desc: 'Escapades immersives d’un jour au départ de Quito vers les plus beaux sites d’Équateur.',
+      viewItinerary: 'Voir l’itinéraire',
+      viewFullItinerary: 'Itinéraire complet',
+      details: 'Détails',
+      book: 'Réserver',
+      bookExpedition: 'Réserver l’expédition',
+      combinedTag: 'Andes + Galápagos VIP',
+    },
+    de: {
+      schemaName: 'Katalog für Luxusexpeditionen',
+      schemaDesc: 'Ausgewählte Boutique-Reisen und Luxusexpeditionen auf Galápagos und im Festland-Ecuador.',
+      heroBadge: 'Exklusiver Expeditionskatalog',
+      heroTitleP1: 'Kollektion ',
+      heroTitleP2: 'Maßgeschneiderter Reisen',
+      heroDesc: 'Von Naturführern individuell gestaltete Reiserouten in Ecuador und auf den Galápagos-Inseln.',
+      anchorGala: '🐢 Galápagos-Inseln (3)',
+      anchorCont: '🏔️ Festland-Ecuador (4)',
+      anchorComb: '✨ Kombinationsreisen (2)',
+      anchorDaily: '☀️ Tagestouren',
+      s1Badge: 'Verzauberter Archipel',
+      s1Title: 'Galápagos-Expeditionen',
+      s1Desc: 'Boutique-Hotels am Meer, Yachtausflüge zu unbewohnten Inseln und hautnahe Tierbegegnungen.',
+      s2Badge: 'Anden & Amazonas',
+      s2Title: 'Festland-Ecuador',
+      s2Desc: 'Straße der Vulkane, Kraterseen, Kolonial-Haciendas und der dichte Amazonas-Regenwald.',
+      s3Badge: 'Das Ultimative Erlebnis',
+      s3Title: 'Kombinationsreisen',
+      s3Desc: 'Das Beste aus zwei Welten in einer Reise: Das majestätische Andenhochland und die Magie von Galápagos.',
+      s4Badge: 'Tägliche Abfahrten',
+      s4Title: 'Ganztagesausflüge',
+      s4Desc: 'Eintägige Ausflüge ab Quito zu Ecuadors spektakulärsten Natur- und Kulturzielen.',
+      viewItinerary: 'Reiseroute ansehen',
+      viewFullItinerary: 'Gesamte Reiseroute',
+      details: 'Details',
+      book: 'Buchen',
+      bookExpedition: 'Expedition buchen',
+      combinedTag: 'Anden + Galápagos VIP',
+    },
+    it: {
+      schemaName: 'Catalogo di Spedizioni di Lusso',
+      schemaDesc: 'Collezione di tour privati ed esclusive spedizioni alle Galápagos e in Ecuador continentale.',
+      heroBadge: 'Catalogo Spedizioni Esclusive',
+      heroTitleP1: 'Collezione di ',
+      heroTitleP2: 'Viaggi Boutique',
+      heroDesc: 'Itinerari d’autore disegnati su misura da guide naturaliste in Ecuador e nelle Isole Galápagos.',
+      anchorGala: '🐢 Isole Galápagos (3)',
+      anchorCont: '🏔️ Ecuador Continentale (4)',
+      anchorComb: '✨ Viaggi Combinati (2)',
+      anchorDaily: '☀️ Escursioni Giornaliere',
+      s1Badge: 'Arcipelago Incantato',
+      s1Title: 'Spedizioni alle Galápagos',
+      s1Desc: 'Hotel boutique sul mare, navigazione verso isole disabitate e incontri ravvicinati con specie uniche.',
+      s2Badge: 'Ande & Amazzonia',
+      s2Title: 'Ecuador Continentale',
+      s2Desc: 'Viale dei Vulcani, lagune nei crateri, antiche haciendas coloniali e la foresta amazzonica.',
+      s3Badge: 'L’Esperienza Definitiva',
+      s3Title: 'Viaggi Combinati',
+      s3Desc: 'Il meglio di due mondi in un unico viaggio: la maestosità delle Ande e l’incanto delle Galápagos.',
+      s4Badge: 'Partenze Giornaliere',
+      s4Title: 'Escursioni di una Giornata',
+      s4Desc: 'Gite di un giorno con partenza da Quito verso i paesaggi più suggestivi dell’Ecuador.',
+      viewItinerary: 'Vedi itinerario',
+      viewFullItinerary: 'Itinerario completo',
+      details: 'Dettagli',
+      book: 'Prenota',
+      bookExpedition: 'Prenota Spedizione',
+      combinedTag: 'Ande + Galápagos VIP',
+    },
+    pt: {
+      schemaName: 'Catálogo de Expedições de Luxo',
+      schemaDesc: 'Catálogo de roteiros exclusivos e expedições boutique em Galápagos e no Equador continental.',
+      heroBadge: 'Catálogo de Expedições Exclusivas',
+      heroTitleP1: 'Coleção de ',
+      heroTitleP2: 'Viagens Boutique',
+      heroDesc: 'Roteiros autorais desenhados sob medida por guias naturalistas no Equador e em Galápagos.',
+      anchorGala: '🐢 Ilhas Galápagos (3)',
+      anchorCont: '🏔️ Equador Continental (4)',
+      anchorComb: '✨ Viagens Combinadas (2)',
+      anchorDaily: '☀️ Excursões de Um Dia',
+      s1Badge: 'Arquipélago Encantado',
+      s1Title: 'Expedições em Galápagos',
+      s1Desc: 'Hotéis boutique à beira-mar, navegação entre ilhas desertas e encontros com fauna única no mundo.',
+      s2Badge: 'Andes & Amazônia',
+      s2Title: 'Equador Continental',
+      s2Desc: 'Avenida dos Vulcões, lagoas de cratera, fazendas coloniais históricas e a densa selva amazônica.',
+      s3Badge: 'A Experiência Definitiva',
+      s3Title: 'Viagens Combinadas',
+      s3Desc: 'O melhor de dois mundos em uma só viagem: a grandiosidade dos Andes e a magia de Galápagos.',
+      s4Badge: 'Saídas Diárias',
+      s4Title: 'Excursões de Dia Inteiro',
+      s4Desc: 'Escapadas de um dia saindo de Quito para os destinos mais emblemáticos do Equador.',
+      viewItinerary: 'Ver Itinerário',
+      viewFullItinerary: 'Ver Itinerário Completo',
+      details: 'Detalhes',
+      book: 'Reservar',
+      bookExpedition: 'Reservar Expedição',
+      combinedTag: 'Andes + Galápagos VIP',
+    },
+    ja: {
+      schemaName: 'ラグジュアリー遠征ツアーカタログ',
+      schemaDesc: 'ガラパゴス諸島およびエクアドル本土を巡るプライベート遠征ツアーの特別コレクション。',
+      heroBadge: 'エクスクルーシブ遠征カタログ',
+      heroTitleP1: '極上の ',
+      heroTitleP2: 'ブティック旅行コレクション',
+      heroDesc: '専任ナチュラリストガイドが監修したオーダーメイドの旅。一生心に残る冒険の旅へ。',
+      anchorGala: '🐢 ガラパゴス諸島 (3)',
+      anchorCont: '🏔️ エクアドル本土 (4)',
+      anchorComb: '✨ コンビネーションツアー (2)',
+      anchorDaily: '☀️ 日帰りエクスカーション',
+      s1Badge: '魅惑の諸島',
+      s1Title: 'ガラパゴス遠征ツアー',
+      s1Desc: 'オーシャンフロントの厳選ホテル、無人島を巡る専用クルーズ、ここでしか出会えない固有種との遭遇。',
+      s2Badge: 'アンデス山脈＆アマゾン',
+      s2Title: 'エクアドル本土ツアー',
+      s2Desc: '火山の道、エメラルドに輝くカルデラ湖、歴史あるコロニアル・ハシエンダ、生命溢れるアマゾン熱帯雨林。',
+      s3Badge: '究極の旅体験',
+      s3Title: 'コンビネーションツアー',
+      s3Desc: 'アンデス高地の壮大な自然とガラパゴスの奇跡、ふたつの世界を一度に堪能する最高の旅。',
+      s4Badge: '毎日出発',
+      s4Title: '日帰りエクスカーション',
+      s4Desc: 'キト発、エクアドルの息を呑む絶景と文化を凝縮して楽しむワンデイトリップ。',
+      viewItinerary: '日程を見る',
+      viewFullItinerary: '詳細日程を見る',
+      details: '詳細',
+      book: '予約する',
+      bookExpedition: '遠征ツアーを予約',
+      combinedTag: 'アンデス + ガラパゴス VIP',
+    },
+    zh: {
+      schemaName: '顶级奢华探险行程目录',
+      schemaDesc: '加拉帕戈斯群岛与厄瓜多尔本土专属精品旅行与私人探险行程目录。',
+      heroBadge: '独家探险行程精选',
+      heroTitleP1: '尊享典藏 ',
+      heroTitleP2: '精品探险之旅',
+      heroDesc: '由资深自然学家量身设计的专属旅行路线，带您领略厄瓜多尔与加拉帕戈斯的无尽魅力。',
+      anchorGala: '🐢 加拉帕戈斯群岛 (3)',
+      anchorCont: '🏔️ 厄瓜多尔本土 (4)',
+      anchorComb: '✨ 经典联游路线 (2)',
+      anchorDaily: '☀️ 一日游精品短途',
+      s1Badge: '奇迹之岛',
+      s1Title: '加拉帕戈斯探险之旅',
+      s1Desc: '奢华海滨精品酒店、无人荒岛游艇巡航，与全球独一无二的野生生灵亲密接触。',
+      s2Badge: '安第斯与亚马逊',
+      s2Title: '厄瓜多尔本土巡礼',
+      s2Desc: '火山大道、壮丽火山口湖、殖民风情百年庄园以及生机勃勃的亚马逊热带雨林。',
+      s3Badge: '终极南美体验',
+      s3Title: '双重风光联游之旅',
+      s3Desc: '兼得安第斯高地之壮丽与加拉帕戈斯群岛之魔幻，一趟旅程尽览南美两大奇迹。',
+      s4Badge: '每日发团',
+      s4Title: '一日游精选行程',
+      s4Desc: '从基多出发，探访厄瓜多尔最具代表性的自然与文化圣地。',
+      viewItinerary: '查看行程',
+      viewFullItinerary: '查看完整行程',
+      details: '详情',
+      book: '立即预订',
+      bookExpedition: '预订探险之旅',
+      combinedTag: '安第斯 + 加拉帕戈斯 VIP',
+    }
+  };
+
+  const t = toursI18n[locale] || toursI18n['en'];
 
   const toursSchema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
-    name: isEs ? 'Catálogo de Expediciones de Lujo' : 'Curated Luxury Expeditions Catalog',
-    description: isEs
-      ? 'Catálogo de tours y expediciones boutique en Galápagos y Ecuador continental.'
-      : 'Portfolio of luxury bespoke tours and expeditions across Galapagos and mainland Ecuador.',
+    name: t.schemaName,
+    description: t.schemaDesc,
     url: `https://www.vermilionroutes.com/${locale}/tours`,
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: mockTours.map((t, idx) => ({
+      itemListElement: mockTours.map((tour, idx) => ({
         '@type': 'ListItem',
         position: idx + 1,
         item: {
           '@type': 'TouristTrip',
-          name: getLocalizedText(t.title, locale),
-          url: `https://www.vermilionroutes.com/${locale}/tours/${t.id}`,
-          image: t.mainImage || t.imageUrl,
+          name: getLocalizedText(tour.title, locale),
+          url: `https://www.vermilionroutes.com/${locale}/tours/${tour.id}`,
+          image: tour.mainImage || tour.imageUrl,
           offers: {
             '@type': 'Offer',
-            price: Number((t.priceFromUSD || t.price || 1000).toString().replace(/[^0-9.]/g, '')),
+            price: Number((tour.price3Star || tour.price || 1000).toString().replace(/[^0-9.]/g, '')),
             priceCurrency: 'USD',
           },
         },
@@ -127,36 +413,30 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
           <div className="text-center max-w-3xl mx-auto space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 backdrop-blur-md border border-white/10 text-emerald-300 text-xs font-bold uppercase tracking-widest shadow-xl">
               <Compass className="w-3.5 h-3.5" />
-              <span>{isEs ? 'Catálogo de Expediciones Exclusivas' : 'Exclusive Expedition Catalog'}</span>
+              <span>{t.heroBadge}</span>
             </div>
 
             <h1 className="font-serif text-5xl sm:text-7xl font-light text-white tracking-tight leading-tight drop-shadow-xl">
-              {isEs ? (
-                <>Colección de <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">Viajes Boutique</span></>
-              ) : (
-                <>Bespoke <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">Expeditions</span></>
-              )}
+              {t.heroTitleP1}<span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">{t.heroTitleP2}</span>
             </h1>
 
             <p className="text-lg text-zinc-200 leading-relaxed max-w-2xl mx-auto drop-shadow-lg font-medium">
-              {isEs
-                ? 'Itinerarios de autor diseñados a medida por guías naturalistas en Ecuador y Galápagos. Descubre tu próxima aventura inolvidable.'
-                : 'Bespoke naturalist-crafted journeys across Ecuador and the Galápagos Archipelago. Discover your next unforgettable journey.'}
+              {t.heroDesc}
             </p>
 
             {/* Quick anchors - MOVED DOWN */}
             <div className="flex flex-wrap justify-center gap-3 pt-8">
-              <a href="#galapagos" aria-label={isEs ? 'Explorar expediciones en Islas Galápagos' : 'Explore Galapagos Islands expeditions'} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
-                🐢 {isEs ? 'Islas Galápagos (3)' : 'Galapagos Islands (3)'}
+              <a href="#galapagos" aria-label={t.s1Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+                {t.anchorGala}
               </a>
-              <a href="#continental" aria-label={isEs ? 'Explorar tours en Ecuador Continental' : 'Explore Mainland Ecuador tours'} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
-                🏔️ {isEs ? 'Ecuador Continental (4)' : 'Mainland Ecuador (4)'}
+              <a href="#continental" aria-label={t.s2Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+                {t.anchorCont}
               </a>
-              <a href="#combinados" aria-label={isEs ? 'Explorar viajes combinados' : 'Explore Combined journeys'} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
-                ✨ {isEs ? 'Viajes Combinados (2)' : 'Combined Journeys (2)'}
+              <a href="#combinados" aria-label={t.s3Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+                {t.anchorComb}
               </a>
-              <a href="#diarios" aria-label={isEs ? 'Explorar excursiones full day' : 'Explore Full-day excursions'} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
-                ☀️ {isEs ? 'Excursiones Full Day' : 'Full-Day Tours'}
+              <a href="#diarios" aria-label={t.s4Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+                {t.anchorDaily}
               </a>
             </div>
           </div>
@@ -173,16 +453,14 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200 dark:border-white/10 pb-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
-                <span>🐢</span> {isEs ? 'Archipiélago Encantado' : 'Enchanted Archipelago'}
+                <span>🐢</span> {t.s1Badge}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-light text-zinc-900 dark:text-white">
-                {isEs ? 'Expediciones en Galápagos' : 'Galapagos Expeditions'}
+                {t.s1Title}
               </h2>
             </div>
             <p className="text-sm text-zinc-700 dark:text-zinc-300 mt-1 max-w-xl">
-                {isEs
-                  ? 'Hoteles boutique frente al mar, navegación entre islas deshabitadas y encuentros con fauna única en el planeta.'
-                  : 'Boutique oceanfront stays, uninhabited island yacht hops, and intimate wildlife encounters.'}
+              {t.s1Desc}
             </p>
           </div>
 
@@ -237,17 +515,17 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                     <div className="pt-4 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between gap-3">
                       <Link
                         href={`/${locale}/tours/${tour.id}`}
-                        aria-label={`${isEs ? 'Ver itinerario de' : 'View itinerary for'} ${title}`}
+                        aria-label={`${t.viewItinerary} - ${title}`}
                         className="flex-1 py-3 px-4 rounded-2xl border-2 border-emerald-500/30 bg-transparent text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:border-emerald-500 font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md text-center flex items-center justify-center group"
                       >
-                        <span className="group-hover:scale-105 transition-transform">{isEs ? 'Ver Itinerario' : 'View Itinerary'}</span>
+                        <span className="group-hover:scale-105 transition-transform">{t.viewItinerary}</span>
                       </Link>
                       <Link
                         href={`/${locale}/booking?tourid=${tour.id}`}
-                        aria-label={`${isEs ? 'Reservar tour' : 'Book tour'} ${title}`}
+                        aria-label={`${t.book} - ${title}`}
                         className="flex-1 py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
-                        {isEs ? 'Reservar' : 'Book Now'}
+                        {t.book}
                       </Link>
                     </div>
                   </div>
@@ -262,16 +540,14 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200 dark:border-white/10 pb-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
-                <span>🏔️</span> {isEs ? 'Andes & Amazonía' : 'Andes & Amazon'}
+                <span>🏔️</span> {t.s2Badge}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-light text-zinc-900 dark:text-white">
-                {isEs ? 'Ecuador Continental' : 'Mainland Ecuador'}
+                {t.s2Title}
               </h2>
             </div>
             <p className="text-sm text-zinc-700 dark:text-zinc-300 mt-1 max-w-xl">
-                {isEs
-                  ? 'Avenida de los Volcanes, lagunas de cráter, haciendas coloniales y la exuberante selva del Amazonas.'
-                  : 'Avenue of Volcanoes, crater lakes, colonial haciendas, and dense Amazon rainforest.'}
+              {t.s2Desc}
             </p>
           </div>
 
@@ -316,17 +592,17 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                     <div className="pt-3 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between gap-2">
                       <Link
                         href={`/${locale}/tours/${tour.id}`}
-                        aria-label={`${isEs ? 'Ver detalles de' : 'View details for'} ${title}`}
+                        aria-label={`${t.details} - ${title}`}
                         className="flex-1 py-2.5 px-3 rounded-xl border-2 border-emerald-500/30 bg-transparent text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:border-emerald-500 font-bold text-[11px] uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md text-center flex items-center justify-center group"
                       >
-                        <span className="group-hover:scale-105 transition-transform">{isEs ? 'Detalles' : 'Details'}</span>
+                        <span className="group-hover:scale-105 transition-transform">{t.details}</span>
                       </Link>
                       <Link
                         href={`/${locale}/booking?tourid=${tour.id}`}
-                        aria-label={`${isEs ? 'Reservar tour' : 'Book tour'} ${title}`}
+                        aria-label={`${t.book} - ${title}`}
                         className="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-[11px] uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
-                        {isEs ? 'Reservar' : 'Book'}
+                        {t.book}
                       </Link>
                     </div>
                   </div>
@@ -341,16 +617,14 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-zinc-200 dark:border-white/10 pb-6">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5 mb-2">
-                <span>✨</span> {isEs ? 'La Experiencia Definitiva' : 'The Ultimate Experience'}
+                <span>✨</span> {t.s3Badge}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-light text-zinc-900 dark:text-white">
-                {isEs ? 'Viajes Combinados' : 'Combined Journeys'}
+                {t.s3Title}
               </h2>
             </div>
             <p className="text-sm text-zinc-700 dark:text-zinc-300 mt-1 max-w-xl">
-                {isEs
-                  ? 'Lo mejor de dos mundos en un solo viaje: la majestuosidad de los Andes y la magia de las Islas Galápagos.'
-                  : 'The best of both worlds in a single seamless itinerary: the Andean highlands and the Galápagos Islands.'}
+              {t.s3Desc}
             </p>
           </div>
 
@@ -383,7 +657,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                     </div>
                     <div className="absolute bottom-4 left-6 right-6 flex items-center justify-between">
                       <span className="text-xs text-blue-300 font-semibold bg-black/60 px-3 py-1 rounded-full">
-                        Andes + Galápagos VIP
+                        {t.combinedTag}
                       </span>
                       <p className="font-serif text-3xl font-bold text-white">
                         ${price.toLocaleString()} <span className="text-sm font-normal text-zinc-300">USD</span>
@@ -404,17 +678,17 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                     <div className="pt-6 border-t border-zinc-200 dark:border-white/5 flex items-center justify-between gap-4">
                       <Link
                         href={`/${locale}/tours/${tour.id}`}
-                        aria-label={`${isEs ? 'Ver itinerario completo de' : 'View full itinerary for'} ${title}`}
+                        aria-label={`${t.viewFullItinerary} - ${title}`}
                         className="flex-1 py-3.5 px-4 rounded-2xl border-2 border-emerald-500/30 bg-transparent text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:border-emerald-500 font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md text-center flex items-center justify-center group"
                       >
-                        <span className="group-hover:scale-105 transition-transform">{isEs ? 'Ver Itinerario Completo' : 'Full Itinerary'}</span>
+                        <span className="group-hover:scale-105 transition-transform">{t.viewFullItinerary}</span>
                       </Link>
                       <Link
                         href={`/${locale}/booking?tourid=${tour.id}`}
-                        aria-label={`${isEs ? 'Reservar expedición' : 'Book expedition'} ${title}`}
+                        aria-label={`${t.bookExpedition} - ${title}`}
                         className="flex-1 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
-                        {isEs ? 'Reservar Expedición' : 'Book Expedition'}
+                        {t.bookExpedition}
                       </Link>
                     </div>
                   </div>
@@ -428,15 +702,13 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         <section id="diarios" className="scroll-mt-24 space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-xs font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 flex items-center justify-center gap-1.5">
-              <span>☀️</span> {isEs ? 'Salidas Diarias' : 'Daily Departures'}
+              <span>☀️</span> {t.s4Badge}
             </span>
             <h2 className="font-serif text-3xl sm:text-5xl font-light text-zinc-900 dark:text-white">
-              {isEs ? 'Excursiones Full Day' : 'Full-Day Excursions'}
+              {t.s4Title}
             </h2>
             <p className="text-sm text-zinc-700 dark:text-zinc-300">
-              {isEs
-                ? 'Escapadas de un día desde Quito a los destinos más icónicos del Ecuador.'
-                : 'One-day getaways departing from Quito to Ecuador\'s most iconic landscapes.'}
+              {t.s4Desc}
             </p>
           </div>
 

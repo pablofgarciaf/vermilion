@@ -39,7 +39,7 @@ export function FeaturedTours() {
           href={`/${locale}/tours`}
           className="inline-flex items-center gap-2.5 px-8 py-4 bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold uppercase tracking-wider text-xs sm:text-sm rounded-2xl transition-all duration-300 shadow-xl shadow-emerald-900/30 hover:scale-[1.02] active:scale-95 group border-none"
         >
-          <span>Ver Todos los Tours</span>
+          <span>{getLocalizedText('View All Tours', locale)}</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>

@@ -30,19 +30,43 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'live-galapagos-and-discover-its-wonders',
     title: {
       en: 'Live Galapagos and Discover Its Natural Wonders',
-      es: 'Vive Galápagos y Descubre sus Maravillas Naturales'
+      es: 'Vive Galápagos y Descubre sus Maravillas Naturales',
+      fr: 'Vivez les Galápagos et découvrez leurs merveilles naturelles',
+      de: 'Erleben Sie Galápagos und entdecken Sie seine Naturwunder',
+      it: 'Vivi le Galápagos e scopri le sue meraviglie naturali',
+      pt: 'Viva Galápagos e descubra suas maravilhas naturais',
+      ja: 'ガラパゴスを体感：進化の驚異と大自然の神秘を発見する旅',
+      zh: '亲临加拉帕戈斯群岛：探索大自然演化奇迹与秘境生灵',
     },
     subtitle: {
       en: 'Explore Santa Cruz, Isabela, San Cristóbal, Tortuga Bay, and Las Grietas in the living evolutionary sanctuary that inspired Charles Darwin.',
-      es: 'Explora Santa Cruz, Isabela, San Cristóbal, Tortuga Bay y Las Grietas en el santuario evolutivo que inspiró a Charles Darwin.'
+      es: 'Explora Santa Cruz, Isabela, San Cristóbal, Tortuga Bay y Las Grietas en el santuario evolutivo que inspiró a Charles Darwin.',
+      fr: 'Explorez Santa Cruz, Isabela, San Cristóbal, Tortuga Bay et Las Grietas dans le sanctuaire qui a inspiré Charles Darwin.',
+      de: 'Erkunden Sie Santa Cruz, Isabela, San Cristóbal, Tortuga Bay und Las Grietas im Naturparadies von Charles Darwin.',
+      it: 'Esplora Santa Cruz, Isabela, San Cristóbal, Tortuga Bay e Las Grietas nel santuario evolutivo che ispirò Charles Darwin.',
+      pt: 'Explore Santa Cruz, Isabela, San Cristóbal, Tortuga Bay e Las Grietas no santuário evolutivo que inspirou Charles Darwin.',
+      ja: 'サンタ・クルス、イサベラ、サン・クリストバル、トルトゥーガ・ベイ、ラス・グリエタスなど、ダーウィンを魅了した進化の聖地を巡る。',
+      zh: '探访圣克鲁斯、伊莎贝拉、圣克里斯托瓦尔、海龟湾与拉斯格列塔斯，深入启发达尔文进化论的生命演化圣地。',
     },
     excerpt: {
       en: 'Declared a UNESCO World Heritage Site in 1978, the Galapagos Islands shelter over 2,900 marine species, giant tortoises, and endemic wildlife found nowhere else on Earth.',
-      es: 'Declaradas Patrimonio de la Humanidad por la UNESCO en 1978, las Islas Galápagos albergan más de 2.900 especies marinas, tortugas gigantes y fauna endémica única en el planeta.'
+      es: 'Declaradas Patrimonio de la Humanidad por la UNESCO en 1978, las Islas Galápagos albergan más de 2.900 especies marinas, tortugas gigantes y fauna endémica única en el planeta.',
+      fr: 'Classées au patrimoine mondial de l’UNESCO, les Galápagos abritent plus de 2 900 espèces marines, des tortues géantes et une faune endémique unique au monde.',
+      de: 'Das UNESCO-Weltnaturerbe Galápagos beherbergt über 2.900 Meeresarten, Riesenschildkröten und eine einzigartige Tierwelt.',
+      it: 'Dichiarate Patrimonio dell’Umanità dall’UNESCO nel 1978, le Isole Galápagos ospitano oltre 2.900 specie marine, tartarughe giganti e fauna endemica.',
+      pt: 'Declaradas Patrimônio Mundial pela UNESCO em 1978, as Ilhas Galápagos abrigam mais de 2.900 espécies marinhas, tartarugas gigantes e fauna endêmica única.',
+      ja: '1978年にユネスコ世界自然遺産第1号に登録されたガラパゴス諸島。2,900種以上の海洋生物、固有種のゾウガメやイグアナが共生する奇跡の楽園。',
+      zh: '1978年被列为联合国教科文组织首批世界自然遗产，加拉帕戈斯栖息着超过2,900种海洋生物、加拉帕戈斯象龟及地球独一无二的特有珍稀物种。',
     },
     category: {
       en: 'Galapagos Expeditions',
-      es: 'Expediciones Galápagos'
+      es: 'Expediciones Galápagos',
+      fr: 'Expéditions Galápagos',
+      de: 'Galápagos-Expeditionen',
+      it: 'Spedizioni Galápagos',
+      pt: 'Expedições Galápagos',
+      ja: 'ガラパゴス遠征',
+      zh: '加拉帕戈斯群岛探险',
     },
     author: {
       name: 'Jhayro Ludeña',
@@ -147,19 +171,43 @@ De acuerdo con la UNESCO, más de **45 especies de aves endémicas, 42 reptiles,
     slug: 'the-avenue-of-the-volcanoes',
     title: {
       en: 'The Avenue of the Volcanoes: Complete Expedition Guide',
-      es: 'La Avenida de los Volcanes: Guía Completa de Expedición'
+      es: 'La Avenida de los Volcanes: Guía Completa de Expedición',
+      fr: 'L’Avenue des Volcans : Guide Complet d’Expédition',
+      de: 'Die Straße der Vulkane: Vollständiger Expeditionsleitfaden',
+      it: 'La Strada dei Vulcani: Guida Completa alla Spedizione',
+      pt: 'A Avenida dos Vulcões: Guia Completo de Expedição',
+      ja: '火山の道：アンデス山脈の巨大火山群を巡る完全遠征ガイド',
+      zh: '火山大道完全探险指南：穿越安第斯雪峰壮丽走廊',
     },
     subtitle: {
       en: 'Discover Chimborazo, Cotopaxi, Quilotoa, and Antisana along Alexander von Humboldt’s iconic 200-mile Andean corridor.',
-      es: 'Descubre el Chimborazo, Cotopaxi, Quilotoa y Antisana a lo largo del legendario corredor andino de Alexander von Humboldt.'
+      es: 'Descubre el Chimborazo, Cotopaxi, Quilotoa y Antisana a lo largo del legendario corredor andino de Alexander von Humboldt.',
+      fr: 'Découvrez le Chimborazo, le Cotopaxi, le Quilotoa et l’Antisana le long du légendaire couloir andin d’Alexander von Humboldt.',
+      de: 'Entdecken Sie Chimborazo, Cotopaxi, Quilotoa und Antisana entlang von Humboldts berühmter Andenroute.',
+      it: 'Scopri Chimborazo, Cotopaxi, Quilotoa e Antisana lungo il leggendario corridoio andino di Alexander von Humboldt.',
+      pt: 'Descubra o Chimborazo, Cotopaxi, Quilotoa e Antisana ao longo do lendário corredor andino de Alexander von Humboldt.',
+      ja: 'チンボラソ、コトパクシ、キロトア、アンティサナ。フンボルトが絶賛したアンデス回廊を巡る。',
+      zh: '探秘钦博拉索、科托帕希、基洛托阿与安蒂萨纳，重走洪堡笔下壮美传奇的安第斯走廊。',
     },
     excerpt: {
       en: 'For adventure lovers, the Avenue of the Volcanoes offers world-class trekking, climbing, mountain biking, horseback riding, and breathtaking high-altitude Andean landscapes.',
-      es: 'Para los amantes de la aventura, la Avenida de los Volcanes ofrece trekking, montañismo, ciclismo, cabalgatas y paisajes andinos de ensueño.'
+      es: 'Para los amantes de la aventura, la Avenida de los Volcanes ofrece trekking, montañismo, ciclismo, cabalgatas y paisajes andinos de ensueño.',
+      fr: 'Pour les amateurs d’aventure, l’Avenue des Volcans offre trekking, alpinisme, VTT, équitation et panoramas andins spectaculaires.',
+      de: 'Für Abenteuerlustige bietet die Straße der Vulkane erstklassiges Trekking, Bergsteigen, Reiten und atemberaubende Andenpanoramen.',
+      it: 'Per gli amanti dell’avventura, la Strada dei Vulcani offre trekking d’alta quota, alpinismo, passeggiate a cavallo e paesaggi andini mozzafiato.',
+      pt: 'Para os amantes da aventura, a Avenida dos Vulcões oferece trekking, montanhismo, cavalgadas e paisagens andinas de tirar o fôlego.',
+      ja: 'アドベンチャーを愛する旅人へ。世界最高峰のトレッキング、登山、乗馬、そして高地パラモの絶景が広がる火山の道。',
+      zh: '专为冒险家打造：世界顶级高原徒步、高山攀登、骑马探索以及壮丽非凡的安第斯高原帕拉莫风光。',
     },
     category: {
       en: 'Andean Adventures',
-      es: 'Aventuras Andinas'
+      es: 'Aventuras Andinas',
+      fr: 'Aventures Andines',
+      de: 'Anden-Abenteuer',
+      it: 'Avventure Andine',
+      pt: 'Aventuras Andinas',
+      ja: 'アンデス冒険の旅',
+      zh: '安第斯山脉冒险',
     },
     author: {
       name: 'Jhayro Ludeña',
@@ -258,19 +306,43 @@ Conocido ancestralmente como la *"Garganta de Fuego"*, este coloso vigila la tra
     slug: 'quito-best-destination-south-america',
     title: {
       en: 'Quito: World Cultural Heritage & Leading City in South America',
-      es: 'Quito: Joya Patrimonial y Mejor Destino de Sudamérica'
+      es: 'Quito: Joya Patrimonial y Mejor Destino de Sudamérica',
+      fr: 'Quito : Joyau Patrimonial et Meilleure Destination d’Amérique du Sud',
+      de: 'Quito: Weltkulturerbe & Führende Reisedestination Südamerikas',
+      it: 'Quito: Patrimonio Mondiale e Migliore Destinazione del Sud America',
+      pt: 'Quito: Joia Patrimonial e Melhor Destino da América do Sul',
+      ja: 'キト：世界遺産第1号のコロニアル都市と南米屈指の観光名所',
+      zh: '基多：世界首批文化遗产古城与南美洲领军旅游目的地',
     },
     subtitle: {
       en: 'From golden baroque basilicas to the equatorial line at Middle of the World, discover the best-preserved historic center in the Americas.',
-      es: 'Desde templos barrocos recubiertos de pan de oro hasta la línea ecuatorial en la Mitad del Mundo, descubre el centro histórico mejor conservado de América.'
+      es: 'Desde templos barrocos recubiertos de pan de oro hasta la línea ecuatorial en la Mitad del Mundo, descubre el centro histórico mejor conservado de América.',
+      fr: 'Des basiliques baroques dorées à la ligne équatoriale du Milieu du Monde, découvrez le centre colonial le mieux préservé d’Amérique.',
+      de: 'Von vergoldeten Barockkirchen bis zur Äquatorlinie in der Mitte der Welt: Entdecken Sie Amerikas besterhaltenes historisches Zentrum.',
+      it: 'Dalle basiliche barocche dorate alla linea equatoriale della Metà del Mondo, scopri il centro storico meglio conservato delle Americhe.',
+      pt: 'De basílicas barrocas folheadas a ouro à linha equatorial na Metade do Mundo, descubra o centro histórico mais bem preservado das Américas.',
+      ja: '黄金のバロック寺院から赤道直下の「世界の中心」まで。アメリカ大陸で最も美しい歴史地区を散策。',
+      zh: '从金碧辉煌的巴洛克大教堂到赤道零度“世界中心”，探访美洲保存最完整、最宏伟的历史文化名城。',
     },
     excerpt: {
       en: 'Awarded South America’s Leading Destination at the World Travel Awards, Quito boasts 32 museums, 24 colonial churches, and rich architectural treasures.',
-      es: 'Galardonada como Destino Líder de Sudamérica en los World Travel Awards, Quito deslumbra con 32 museos, 24 templos coloniales y leyendas centenarias.'
+      es: 'Galardonada como Destino Líder de Sudamérica en los World Travel Awards, Quito deslumbra con 32 museos, 24 templos coloniales y leyendas centenarias.',
+      fr: 'Élue Meilleure Destination d’Amérique du Sud aux World Travel Awards, Quito séduit par ses 32 musées et ses 24 églises coloniales somptueuses.',
+      de: 'Ausgezeichnet als Südamerikas führendes Reiseziel bei den World Travel Awards begeistert Quito mit 32 Museen und 24 Kolonialkirchen.',
+      it: 'Premiata come Miglior Destinazione del Sud America ai World Travel Awards, Quito vanta 32 musei, 24 chiese coloniali e tesori architettonici.',
+      pt: 'Eleita o Melhor Destino da América do Sul no World Travel Awards, Quito encanta com 32 museus, 24 igrejas coloniais e rica herança arquitetônica.',
+      ja: 'ワールド・トラベル・アワードで南米最優秀都市に輝いたキト。32の美術館・博物館と24の壮麗な修道院が織りなす歴史遺産。',
+      zh: '屡获世界旅游大奖“南美洲领军旅游目的地”，基多拥有32座博物馆、24座殖民时期大教堂及深厚的历史艺术底蕴。',
     },
     category: {
       en: 'Cultural Heritage',
-      es: 'Patrimonio Cultural'
+      es: 'Patrimonio Cultural',
+      fr: 'Patrimoine Culturel',
+      de: 'Kulturelles Erbe',
+      it: 'Patrimonio Culturale',
+      pt: 'Patrimônio Cultural',
+      ja: '文化遺産と歴史',
+      zh: '世界文化遗产',
     },
     author: {
       name: 'Jhayro Ludeña',
@@ -345,19 +417,43 @@ Ubicado a 0°0'0" de latitud, donde se midió la redondez de la Tierra durante l
     slug: 'meet-ecuador-heart-of-the-jungle',
     title: {
       en: 'Meet Ecuador from the Heart of the Amazon Rainforest',
-      es: 'Conoce Ecuador desde el Corazón de la Selva Amazónica'
+      es: 'Conoce Ecuador desde el Corazón de la Selva Amazónica',
+      fr: 'Découvrez l’Équateur au Cœur de la Forêt Amazonienne',
+      de: 'Ecuador Erleben aus dem Herzen des Amazonas-Regenwaldes',
+      it: 'Scopri l’Ecuador dal Cuore della Foresta Amazzonica',
+      pt: 'Conheça o Equador a partir do Coração da Floresta Amazônica',
+      ja: 'アマゾン熱帯雨林の深部から体感する、生命力あふれるエクアドルの旅',
+      zh: '深入亚马逊雨林腹地：感受厄瓜多尔未受侵扰的原始生命脉动',
     },
     subtitle: {
       en: 'Navigate the Napo River, encounter pink river dolphins, night frog concerts, and learn ancestral Kichwa plant medicine.',
-      es: 'Navega por el Río Napo, avista delfines rosados, conciertos nocturnos de ranas y aprende la medicina ancestral Kichwa.'
+      es: 'Navega por el Río Napo, avista delfines rosados, conciertos nocturnos de ranas y aprende la medicina ancestral Kichwa.',
+      fr: 'Naviguez sur le Rio Napo, rencontrez les dauphins roses et découvrez la médecine ancestrale des plantes Kichwa.',
+      de: 'Befahren Sie den Rio Napo, beobachten Sie rosa Flussdelfine und lernen Sie die Heilpflanzenkunde der Kichwa kennen.',
+      it: 'Naviga lungo il Rio Napo, avvista i delfini rosa e scopri la medicina botanica ancestrale delle comunità Kichwa.',
+      pt: 'Navegue pelo Rio Napo, aviste botos-cor-de-rosa e aprenda sobre a medicina ancestral das plantas Kichwa.',
+      ja: 'ナポ川をカヌーで進み、ピンクカワイルカや夜の蛙の大合唱、先住民族キチュワ族の薬草文化に触れる。',
+      zh: '乘舟巡游纳波河，邂逅粉红淡水豚与林中蛙鸣交响乐，领略克丘亚原住民古老草药医学智慧。',
     },
     excerpt: {
       en: 'With over 4,200 orchid species and unmatched biodiversity in Cuyabeno and Yasuní, the Ecuadorian Amazon offers immersive community ecotourism.',
-      es: 'Con más de 4.200 especies de orquídeas y la mayor biodiversidad por metro cuadrado en Cuyabeno y Yasuní, la Amazonía ecuatoriana deslumbra en ecoturismo.'
+      es: 'Con más de 4.200 especies de orquídeas y la mayor biodiversidad por metro cuadrado en Cuyabeno y Yasuní, la Amazonía ecuatoriana deslumbra en ecoturismo.',
+      fr: 'Avec plus de 4 200 espèces d’orchidées et une biodiversité exceptionnelle à Yasuní et Cuyabeno, l’Amazonie propose un écotourisme immersif.',
+      de: 'Mit über 4.200 Orchideenarten und unübertroffener Artenvielfalt in Yasuní und Cuyabeno bietet Ecuadors Amazonas immersiven Ökotourismus.',
+      it: 'Con oltre 4.200 specie di orchidee e una biodiversità record a Yasuní e Cuyabeno, l’Amazzonia ecuadoriana è un paradiso per l’ecoturismo.',
+      pt: 'Com mais de 4.200 espécies de orquídeas e biodiversidade inigualável em Cuyabeno e Yasuní, a Amazônia equatoriana deslumbra no ecoturismo.',
+      ja: '4,200種以上の野生ランとクヤベノ・ヤスニの驚異的な生物多様性。先住民族コミュニティと過ごす本物のエコツーリズム。',
+      zh: '坐拥4,200余种兰花及亚苏尼国家公园全球顶尖单位面积生物多样性，厄瓜多尔亚马逊带来沉浸式生态体验。',
     },
     category: {
       en: 'Amazon Rainforest',
-      es: 'Selva Amazónica'
+      es: 'Selva Amazónica',
+      fr: 'Forêt Amazonienne',
+      de: 'Amazonas-Regenwald',
+      it: 'Foresta Amazzonica',
+      pt: 'Floresta Amazônica',
+      ja: 'アマゾン熱帯雨林',
+      zh: '亚马逊原始雨林',
     },
     author: {
       name: 'Jhayro Ludeña',
@@ -412,19 +508,43 @@ Ecuador es además el país con mayor variedad de orquídeas del mundo, con más
     slug: 'cuenca-colonial-cajas-national-park',
     title: {
       en: 'Colonial Cuenca & Cajas National Park: Glacial Lakes & Heritage',
-      es: 'Cuenca Colonial y Parque Nacional Cajas: Lagos Glaciares e Historia'
+      es: 'Cuenca Colonial y Parque Nacional Cajas: Lagos Glaciares e Historia',
+      fr: 'Cuenca Coloniale et Parc National Cajas : Lacs Glaciaires et Patrimoine',
+      de: 'Koloniales Cuenca & Cajas-Nationalpark: Gletscherseen & Welterbe',
+      it: 'Cuenca Coloniale e Parco Nazionale Cajas: Laghi Glaciali e Storia',
+      pt: 'Cuenca Colonial e Parque Nacional Cajas: Lagos Glaciais e Patrimônio',
+      ja: 'コロニアル都市クエンカとカハス国立公園：氷河湖と世界遺産の調べ',
+      zh: '殖民名城昆卡与卡哈斯国家公园：高山冰川湖泊与世界遗产漫步',
     },
     subtitle: {
       en: 'Stroll cobblestone streets, admire the blue domes of the New Cathedral, and hike through 200 glacial lakes in the Cajas plateau.',
-      es: 'Pasea por calles empedradas, admira las cúpulas celestes de la Catedral Nueva y camina entre 200 lagunas glaciares en El Cajas.'
+      es: 'Pasea por calles empedradas, admira las cúpulas celestes de la Catedral Nueva y camina entre 200 lagunas glaciares en El Cajas.',
+      fr: 'Flânez dans les ruelles pavées, admirez les dômes bleus de la Nouvelle Cathédrale et randonnez autour des 200 lacs glaciaires du Cajas.',
+      de: 'Schlendern Sie durch kopfsteingepflasterte Gassen, bewundern Sie die blauen Kuppeln der Neuen Kathedrale und wandern Sie im Cajas-Hochland.',
+      it: 'Passeggia per le strade acciottolate, ammira le cupole celesti della Cattedrale Nuova e cammina tra i 200 laghi glaciali del Cajas.',
+      pt: 'Passeie por ruas de paralelepípedos, admire as cúpulas azuis da Nova Catedral e caminhe entre 200 lagoas glaciais em El Cajas.',
+      ja: '石畳の美しい街並み、新大聖堂の青いドーム、そしてカハス高地に広がる200以上の神秘的な氷河湖を巡る。',
+      zh: '漫步鹅卵石铺就的古老街巷，仰望新大教堂天蓝色穹顶，在卡哈斯高原200余座高山冰川湖泊间徒步。',
     },
     excerpt: {
       en: 'Recognized as Ecuador’s most charming colonial city, Cuenca pairs UNESCO world heritage architecture with the rugged glacial paramo of Cajas National Park.',
-      es: 'Reconocida como la ciudad colonial más bella del Ecuador, Cuenca combina arquitectura Patrimonio UNESCO con los lagos glaciares del Parque Nacional Cajas.'
+      es: 'Reconocida como la ciudad colonial más bella del Ecuador, Cuenca combina arquitectura Patrimonio UNESCO con los lagos glaciares del Parque Nacional Cajas.',
+      fr: 'Considérée comme la plus charmante ville coloniale d’Équateur, Cuenca associe le patrimoine mondial de l’UNESCO aux paysages glaciaires du Cajas.',
+      de: 'Als charmanteste Kolonialstadt Ecuadors verbindet Cuenca UNESCO-Weltkulturerbe mit der rauen Gletscherlandschaft des Cajas-Nationalparks.',
+      it: 'Riconosciuta come la città coloniale più affascinante dell’Ecuador, Cuenca unisce il patrimonio UNESCO ai laghi glaciali del Parco Nazionale Cajas.',
+      pt: 'Reconhecida como a cidade colonial mais charmosa do Equador, Cuenca combina arquitetura Patrimônio UNESCO com os lagos glaciais do Parque Cajas.',
+      ja: 'エクアドルで最も魅力的なコロニアル都市クエンカ。ユネスコ世界遺産の建築美とカハス国立公園の氷河湖トレッキング。',
+      zh: '被誉为厄瓜多尔最具魅力的殖民名城，昆卡将联合国教科文组织世界遗产建筑与卡哈斯国家公园的壮美冰川湖泊完美交融。',
     },
     category: {
       en: 'Heritage & Nature',
-      es: 'Patrimonio y Naturaleza'
+      es: 'Patrimonio y Naturaleza',
+      fr: 'Patrimoine et Nature',
+      de: 'Natur und Kulturerbe',
+      it: 'Patrimonio e Natura',
+      pt: 'Patrimônio e Natureza',
+      ja: '世界遺産と大自然',
+      zh: '遗产与自然风光',
     },
     author: {
       name: 'Jhayro Ludeña',
@@ -487,19 +607,43 @@ El complejo arqueológico cañari-inca más importante del Ecuador, destacando e
     slug: 'mindo-cloud-forest-and-otavalo-market',
     title: {
       en: 'Mindo Cloud Forest & Otavalo: Hummingbirds & Indigenous Traditions',
-      es: 'Mindo Bosque Nublado y Otavalo: Aves y Tradición Ancestral'
+      es: 'Mindo Bosque Nublado y Otavalo: Aves y Tradición Ancestral',
+      fr: 'Forêt Nuageuse de Mindo et Otavalo : Colibris et Traditions Indigènes',
+      de: 'Nebelwald von Mindo & Otavalo: Kolibris & Indigene Traditionen',
+      it: 'Foresta Nebbiosa di Mindo e Otavalo: Colibrì e Tradizioni Indigene',
+      pt: 'Floresta Nebulosa de Mindo e Otavalo: Beija-flores e Tradições Indígenas',
+      ja: 'ミンドの雲霧林とオタバロ：無数のハチドリとアンデス先住民族の伝統',
+      zh: '明多云雾森林与奥塔瓦洛：蜂鸟圣境与安第斯原住民织造传统',
     },
     subtitle: {
       en: 'From the hummingbird-rich Chocó Andino cloud forests to the world-famous Plaza de Ponchos artisan market.',
-      es: 'Desde los bosques nublados del Chocó Andino repletos de colibríes hasta el mundialmente famoso mercado de la Plaza de Ponchos.'
+      es: 'Desde los bosques nublados del Chocó Andino repletos de colibríes hasta el mundialmente famoso mercado de la Plaza de Ponchos.',
+      fr: 'Des forêts de nuages du Chocó Andino regorgeant de colibris au marché d’artisanat mondialement réputé de la Plaza de Ponchos.',
+      de: 'Von den kolibri-reichen Nebelwäldern des Chocó Andino bis zum weltberühmten Kunsthandwerksmarkt der Plaza de Ponchos.',
+      it: 'Dalle foreste nebbiose del Chocó Andino ricche di colibrì al celebre mercato artigianale di Plaza de Ponchos.',
+      pt: 'Das florestas nubladas do Chocó Andino repletas de beija-flores ao mundialmente famoso mercado de artesanato da Plaza de Ponchos.',
+      ja: 'ハチドリが舞うチョコ・アンディーノの雲霧林から、南米最大の民芸品市「ポンチョ広場」まで。',
+      zh: '从百鸟翔集的乔科安第斯云雾森林，到闻名遐迩的奥塔瓦洛“庞乔斯广场”手工艺市集。',
     },
     excerpt: {
       en: 'Experience the world capital of birdwatching in Mindo and immerse yourself in the vibrant textile markets and volcanic lakes of Otavalo and Cotacachi.',
-      es: 'Disfruta de la capital mundial del aviturismo en Mindo y sumérgete en los vibrantes mercados de ponchos y lagunas volcánicas de Otavalo.'
+      es: 'Disfruta de la capital mundial del aviturismo en Mindo y sumérgete en los vibrantes mercados de ponchos y lagunas volcánicas de Otavalo.',
+      fr: 'Découvrez la capitale mondiale de l’observation des oiseaux à Mindo et plongez dans les marchés textiles et lacs volcaniques d’Otavalo.',
+      de: 'Erleben Sie die Welthauptstadt der Vogelbeobachtung in Mindo und tauchen Sie ein in die farbenfrohen Textilmärkte und Kraterseen von Otavalo.',
+      it: 'Vivi l’esperienza della capitale mondiale del birdwatching a Mindo e scopri i vivaci mercati tessili e i laghi vulcanici di Otavalo.',
+      pt: 'Viva a capital mundial da observação de aves em Mindo e encante-se com os vibrantes mercados têxteis e lagoas vulcânicas de Otavalo.',
+      ja: '世界的なバードウォッチングの聖地ミンド。そして色彩豊かな織物市場と神秘的なカルデラ湖が広がるオタバロとコタカチへ。',
+      zh: '在世界观鸟胜地明多感受大自然的生机，在奥塔瓦洛与科塔卡奇体验充满活力的传统纺织品市场与火山口湖。',
     },
     category: {
       en: 'Biodiversity & Culture',
-      es: 'Biodiversidad y Cultura'
+      es: 'Biodiversidad y Cultura',
+      fr: 'Biodiversité et Culture',
+      de: 'Biodiversität und Kultur',
+      it: 'Biodiversità e Cultura',
+      pt: 'Biodiversidade e Cultura',
+      ja: '生物多様性と文化',
+      zh: '生物多样性与传统',
     },
     author: {
       name: 'Jhayro Ludeña',
@@ -566,19 +710,43 @@ Ubicado a solo dos horas al noroccidente de Quito en las estribaciones de la cor
     slug: 'el-arte-del-poncho-andino',
     title: {
       en: 'The Art of the Poncho: Andean Master Weavers',
-      es: 'El Arte del Poncho: Maestros Tejedores Andinos'
+      es: 'El Arte del Poncho: Maestros Tejedores Andinos',
+      fr: 'L’Art du Poncho : Maîtres Tisserands Andins',
+      de: 'Die Kunst des Ponchos: Andine Meisterweber',
+      it: 'L’Arte del Poncho: Maestri Tessitori Andini',
+      pt: 'A Arte do Poncho: Mestres Tecelões Andinos',
+      ja: 'アンデスの誇り「ポンチョの芸術」：オタバロ先住民族の伝統織物',
+      zh: '斗篷的艺术：安第斯织造大师与奥塔瓦洛千年非遗技艺',
     },
     subtitle: {
       en: 'Discover the history, cultural significance, and ancestral techniques behind Ecuador\'s most iconic garment at Plaza de Ponchos.',
-      es: 'Descubre la historia, el significado cultural y las técnicas ancestrales detrás de la prenda más icónica de Ecuador en la Plaza de Ponchos.'
+      es: 'Descubre la historia, el significado cultural y las técnicas ancestrales detrás de la prenda más icónica de Ecuador en la Plaza de Ponchos.',
+      fr: 'Découvrez l’histoire, la portée culturelle et les techniques ancestrales du vêtement le plus emblématique d’Équateur.',
+      de: 'Entdecken Sie Geschichte, kulturelle Bedeutung und uralte Webtechniken hinter Ecuadors berühmtestem Kleidungsstück.',
+      it: 'Scopri la storia, il valore culturale e le tecniche ancestrali dietro l’abito più iconico dell’Ecuador.',
+      pt: 'Descubra a história, o significado cultural e as técnicas ancestrais por trás da peça mais emblemática do Equador.',
+      ja: 'ポンチョ広場で受け継がれる、エクアドルを象徴する民族衣装の歴史、文化的象徴、そして腰機（地機）の伝統織り技術。',
+      zh: '探访庞乔斯广场，揭开厄瓜多尔标志性民族服饰背后的厚重历史、文化图腾与古老腰机织造技术。',
     },
     excerpt: {
       en: 'The poncho is more than just a garment; it is a symbol of Andean identity. Learn how Kichwa communities in Otavalo preserve ancient backstrap loom weaving traditions.',
-      es: 'El poncho es más que una prenda; es un símbolo de identidad andina. Conoce cómo las comunidades Kichwa en Otavalo preservan las tradiciones del telar de cintura.'
+      es: 'El poncho es más que una prenda; es un símbolo de identidad andina. Conoce cómo las comunidades Kichwa en Otavalo preservan las tradiciones del telar de cintura.',
+      fr: 'Bien plus qu’un vêtement, le poncho est l’âme de l’identité andine. Découvrez comment les Kichwas perpétuent l’art du tissage au métier à dos.',
+      de: 'Der Poncho ist mehr als nur Kleidung – er ist ein Symbol andiner Identität. Erfahren Sie, wie die Kichwa-Gemeinden alte Traditionen pflegen.',
+      it: 'Il poncho è più di un capo d’abbigliamento: è un simbolo di identità andina. Scopri come le comunità Kichwa preservano antiche tradizioni tessili.',
+      pt: 'O poncho é mais do que uma roupa; é um símbolo de identidade andina. Saiba como os Kichwa em Otavalo preservam a tecelagem ancestral.',
+      ja: '防寒着という枠を超え、アンデスの魂と誇りを象徴するポンチョ。キチュワ族の集落で大切に守り継がれる古代の織物技術を紐解く。',
+      zh: '斗篷不仅是一件御寒衣物，更是安第斯原住民灵魂与身份的象征。深入了解克丘亚族人如何代代相传古老织布技艺。',
     },
     category: {
-      en: 'Culture & Heritage',
-      es: 'Cultura y Patrimonio'
+      en: 'Cultural Heritage',
+      es: 'Patrimonio Cultural',
+      fr: 'Patrimoine Culturel',
+      de: 'Kulturelles Erbe',
+      it: 'Patrimonio Culturale',
+      pt: 'Patrimônio Cultural',
+      ja: '文化遺産と歴史',
+      zh: '世界文化遗产',
     },
     author: {
       name: 'Jhayro Ludeña',

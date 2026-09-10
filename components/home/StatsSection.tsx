@@ -76,7 +76,7 @@ export function StatsSection() {
               <div className="flex items-center gap-1.5">
                 <span className="text-[11px] text-amber-500 font-bold tracking-tight">★★★★★</span>
                 <p className="text-[10px] font-bold text-emerald-900 dark:text-emerald-200 uppercase tracking-wider leading-none">
-                  Travelers' Choice 2026 Winner
+                  {getLocalizedText("Travelers' Choice 2026 Winner", locale)}
                 </p>
               </div>
             </div>
@@ -115,7 +115,7 @@ export function StatsSection() {
               {getLocalizedText(settings?.about?.metric4Val, locale) || '24/7'}
             </div>
             <p className="text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-300 font-medium uppercase tracking-wider leading-none">
-              {locale === 'es' ? 'Expediciones a Medida' : 'Bespoke Journeys Care'}
+              {getLabel(settings?.about?.metric4Lbl, 3)}
             </p>
           </div>
         </div>

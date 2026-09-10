@@ -45,30 +45,46 @@ Todo agente que agregue, edite o revise páginas, rutas o componentes en este pr
 - **Referrer-Policy:** Estrictamente `strict-origin-when-cross-origin` (NUNCA usar `origin-when-cross-origin` pues Screaming Frog y OWASP lo reportan como vulnerabilidad de fuga de URLs).
 - **Protecciones XSS y Mime:** `X-Content-Type-Options: nosniff` y `X-XSS-Protection: 1; mode=block` siempre activos.
 
-### 2. JERARQUÍA Y LONGITUD DE ENCABEZADOS (H1, H2, H3)
+### 2. JERARQUÍA Y ESTRUCTURA DE ENCABEZADOS (H1, H2, H3 - CERO AVISOS SCREAMING FROG)
 - **Exactamente UN SOLO `<h1>` por página:** Prohibido páginas sin H1 o con múltiples H1s.
 - **Longitud estricta del `<h1>`:** Entre **45 y 65 caracteres** (máximo absoluto 70).
 - **Secuencialidad del DOM:** El `<h1>` DEBE ser el primer encabezado en el orden de lectura del DOM. Ningún `<h2>`, `<h3>` o elemento con `role="heading"` (como barras secundarias en Portals) puede preceder al `<h1>`.
+- **H2 Estrictamente Secuencial:** Prohibido saltar de `<h1>` directo a `<h3>` sin un `<h2>` intermedio. Screaming Frog reporta `H2: No secuencial` si un `<h3>` aparece antes de un `<h2>`.
+- **H2 Únicos (Prohibido H2 Duplicado):** Cada `<h2>` dentro de la misma página y entre páginas debe ser semánticamente único y descriptivo para no confundir a los motores de búsqueda (`H2: Duplicado`).
 - **Tipografía Decorativa:** Si el H1 contiene letras o palabras estilizadas en spans flex (ej. "ALL YOU NEED IS"), dichos spans deben tener `aria-hidden="true"` y el texto semántico debe residir en un `<span className="sr-only">`. Esto previene textos concatenados sin espacio como `ALLYOUNEEDIS...`.
-- **Prohibido saltarse niveles:** Nunca saltar de `<h1>` directo a `<h3>` sin un `<h2>` intermedio (evita el error `H2: Falta`).
 
 ### 3. METADATOS Y DESCRIPCIONES (TITLE & META DESCRIPTION)
 - **Title Tag:** Estrictamente entre **50 y 60 caracteres** con branding al final (`Vermilion Routes`).
 - **Meta Description:** Estrictamente entre **120 y 155 caracteres** (máximo 155 para evitar truncado en Google y advertencias en Screaming Frog). Prohibido textos genéricos de relleno.
 
-### 4. URLS Y ENLACES INTERNOS (CERO 4XX, CERO 3XX)
+### 4. URLS, PARÁMETROS Y ENLACES INTERNOS (CERO 4XX, CERO 3XX, CERO CANONICALIZADA)
 - **URLs estrictamente en MINÚSCULAS:** Prohibido usar parámetros o paths con mayúsculas (`?tourId=`, `?Ref=`). Usar siempre minúsculas (`?tourid=`, `?ref=`, `?vid=`).
-- **Prefijo de Locale Obligatorio:** Enlaces internos DEBEN llevar el prefijo del idioma actual: `/${locale}/terms`, `/${locale}/privacy-policy`, `/${locale}/tours`. Prohibido usar enlaces ciegos como `/terms` o `/privacy-policy` que causen 404 o 308.
+- **Prohibido Enlazar a URLs Parametrizadas en el Crawl Interno:** Enlaces `<Link href="/booking?tourid=...">` provocan avisos de `URL: Parámetros` y `Canonicals: Canonicalizada` en Screaming Frog. Los enlaces internos deben apuntar a la URL canónica directa (`/booking`) o utilizar componentes de navegación interactiva programática (`useRouter` / botones).
+- **Prefijo de Locale Obligatorio:** Enlaces internos DEBEN llevar el prefijo del idioma actual: `/${locale}/terms`, `/${locale}/privacy-policy`, `/${locale}/tours`. Prohibido usar enlaces ciegos como `/terms` o `/privacy-policy` que causen saltos de redirección 301/307.
 - **Enlaces Públicos Seguros:** Prohibido enlazar desde la web pública a rutas de login o áreas protegidas que hagan client-side redirects (ej. en el Footer usar `/${locale}#affiliate` en lugar de `/${locale}/affiliates`).
+- **Enlaces Externos Saludables:** Toda URL externa (TripAdvisor, YouTube, etc.) debe verificar estado 200 HTTP (`rel="noopener noreferrer"`) para evitar reportes de `Códigos de respuesta: Error de cliente externo (4xx)`.
 
-### 5. DIMENSIONES DE IMÁGENES (PREVENCIÓN DE CLS)
-- **Atributos de tamaño obligatorios:** Todo tag `<img>` o `<Image>` DEBE contener atributos explícitos `width` y `height` (o `fill` con contenedor dimensional).
-- **Banderas e iconos:** Ninguna bandera de idioma (`w-4 h-3`) o favicon puede carecer de `width` y `height` nativos.
+### 5. DIMENSIONES DE IMÁGENES (PREVENCIÓN DE CLS Y 100% LIGHTHOUSE)
+- **Atributos de tamaño obligatorios:** Todo tag `<img>` o `<Image>` DEBE contener atributos explícitos `width` y `height` (o `fill` con contenedor posicionado y `sizes` explícito).
+- **Banderas, miniaturas e iconos:** Ninguna bandera de idioma (`w-5 h-auto`), avatar o preview en modales o paneles puede carecer de `width` y `height` nativos en el HTML.
 
 ### 6. CANÓNICAS, HREFLANG Y SITEMAP
 - **Canónica auto-referencial:** Toda página indexable debe tener una URL canónica absoluta que responda código 200 directo (sin trailing slash redirects ni 301s).
 - **Hreflang simétrico:** 8 idiomas soportados (`en`, `es`, `fr`, `de`, `zh`, `it`, `pt`, `ja`) + `x-default`, todos apuntando a páginas canónicas indexables.
 - **Sitemap limpio:** Prohibido incluir en `sitemap.ts` URLs que redirijan (como `/about` o `/contact`) o que estén bloqueadas por `robots.txt`.
 
-### 7. VERIFICACIÓN PRE-FLIGHT LOCAL
-- Todo cambio antes de ser presentado al usuario o preparado para commit debe superar `npm run build` con Turbopack (145/145 páginas generadas con código de salida `0`).
+### 7. ESTÁNDAR GLOBAL DE INTERNACIONALIZACIÓN (8 IDIOMAS OBLIGATORIOS)
+- **Cero Textos Hardcodeados:** Ningún texto visible de UI, botón, contador, badge, encabezado, formulario, tarjeta de blog o modal puede estar en español o inglés fijo en componentes compartidos.
+- **Prohibido Ternario Binario `locale === 'es'`:** El uso de `locale === 'es' ? 'Texto ES' : 'Texto EN'` deja sin traducción a `fr`, `de`, `zh`, `it`, `pt` y `ja`. Todo texto debe provenir de `messages/*.json` o de `utils/i18nHelper.ts` con diccionario para los 8 idiomas soportados:
+  - `es` (Español)
+  - `en` (Inglés)
+  - `fr` (Francés)
+  - `de` (Alemán)
+  - `zh` (Chino Mandarín)
+  - `it` (Italiano)
+  - `pt` (Portugués)
+  - `ja` (Japonés)
+
+### 8. VERIFICACIÓN PRE-FLIGHT LOCAL
+- Todo cambio antes de ser presentado al usuario o preparado para commit debe superar `npm run build` con Turbopack (146/146 páginas generadas con código de salida `0`).
+

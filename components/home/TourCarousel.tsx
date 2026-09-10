@@ -340,7 +340,21 @@ export function TourCarousel({ tours }: TourCarouselProps) {
           <span className={`mx-1 ${total <= 3 ? 'md:hidden' : ''}`}>/</span>
           <span className={total <= 3 ? 'md:hidden' : ''}>{total}</span>
           <span className={`mx-2 text-zinc-300 ${total <= 3 ? 'md:hidden' : ''}`}>·</span>
-          <span>{filteredTours.length} {filteredTours.length === 1 ? 'expedition' : 'expeditions'} available</span>
+          <span>
+            {(() => {
+              const count = filteredTours.length;
+              switch (locale) {
+                case 'es': return `${count} ${count === 1 ? 'expedición disponible' : 'expediciones disponibles'}`;
+                case 'fr': return `${count} ${count === 1 ? 'expédition disponible' : 'expéditions disponibles'}`;
+                case 'de': return `${count} ${count === 1 ? 'Expedition verfügbar' : 'Expeditionen verfügbar'}`;
+                case 'it': return `${count} ${count === 1 ? 'spedizione disponibile' : 'spedizioni disponibili'}`;
+                case 'pt': return `${count} ${count === 1 ? 'expedição disponível' : 'expedições disponíveis'}`;
+                case 'ja': return `${count} 件のツアーが利用可能`;
+                case 'zh': return `${count} 条探险路线可选`;
+                default: return `${count} ${count === 1 ? 'expedition' : 'expeditions'} available`;
+              }
+            })()}
+          </span>
         </p>
       </div>
     </div>

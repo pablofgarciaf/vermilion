@@ -129,11 +129,114 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     mainEntityOfPage: `https://www.vermilionroutes.com/${locale}/blog/${post.slug}`,
   };
 
-  const backLabel = locale === 'es' ? 'Volver a todas las Guías' : 'Back to All Travel Guides';
-  const shareLabel = locale === 'es' ? 'Compartir:' : 'Share:';
-  const relatedLabel = locale === 'es' ? 'Expedición Recomendada para esta Guía' : 'Recommended Expedition for this Guide';
-  const fromLabel = locale === 'es' ? 'Desde' : 'From';
-  const bookLabel = locale === 'es' ? 'Reservar Expedición' : 'Book Expedition';
+  const labelsDict: Record<string, {
+    back: string;
+    share: string;
+    related: string;
+    from: string;
+    book: string;
+    topics: string;
+    guideComfort: string;
+    viewItinerary: string;
+    luxuryService: string;
+  }> = {
+    es: {
+      back: 'Volver a todas las Guías',
+      share: 'Compartir:',
+      related: 'Expedición Recomendada para esta Guía',
+      from: 'Desde',
+      book: 'Reservar Expedición',
+      topics: 'Temas Relacionados:',
+      guideComfort: 'Vive esta experiencia en total confort con transporte privado personalizado, asistencia VIP en aeropuertos y conserjería 24/7.',
+      viewItinerary: 'Ver Itinerario',
+      luxuryService: 'Guía Naturalista Privado · Hotelería Exclusiva'
+    },
+    en: {
+      back: 'Back to All Travel Guides',
+      share: 'Share:',
+      related: 'Recommended Expedition for this Guide',
+      from: 'From',
+      book: 'Book Expedition',
+      topics: 'Related Topics:',
+      guideComfort: 'Experience this destination in complete comfort with customized private transport, VIP airport assistance, and 24/7 concierge.',
+      viewItinerary: 'View Itinerary',
+      luxuryService: 'Private Naturalist Guide · Luxury Accommodations'
+    },
+    fr: {
+      back: 'Retour à tous les guides de voyage',
+      share: 'Partager :',
+      related: 'Expédition recommandée pour ce guide',
+      from: 'À partir de',
+      book: 'Réserver l’expédition',
+      topics: 'Thèmes associés :',
+      guideComfort: 'Vivez cette expérience dans un confort absolu avec transport privé personnalisé, assistance VIP aéroport et conciergerie 24/7.',
+      viewItinerary: 'Voir l’itinéraire',
+      luxuryService: 'Guide naturaliste privé · Hôtellerie d’exception'
+    },
+    de: {
+      back: 'Zurück zu allen Reiseleitfäden',
+      share: 'Teilen:',
+      related: 'Empfohlene Expedition zu diesem Reiseführer',
+      from: 'Ab',
+      book: 'Expedition buchen',
+      topics: 'Verwandte Themen:',
+      guideComfort: 'Erleben Sie dieses Ziel in höchstem Komfort mit privatem Transport, VIP-Flughafenservice und 24/7-Concierge.',
+      viewItinerary: 'Reiseroute ansehen',
+      luxuryService: 'Privater Naturführer · Exklusive Unterkünfte'
+    },
+    it: {
+      back: 'Torna a tutte le guide di viaggio',
+      share: 'Condividi:',
+      related: 'Spedizione consigliata per questa guida',
+      from: 'Da',
+      book: 'Prenota Spedizione',
+      topics: 'Argomenti correlati:',
+      guideComfort: 'Vivi questa esperienza nel massimo comfort con trasporto privato personalizzato, assistenza aeroportuale VIP e concierge 24/7.',
+      viewItinerary: 'Vedi itinerario',
+      luxuryService: 'Guida naturalistica privata · Ospitalità esclusiva'
+    },
+    pt: {
+      back: 'Voltar a todos os guias de viagem',
+      share: 'Compartilhar:',
+      related: 'Expedição recomendada para este guia',
+      from: 'A partir de',
+      book: 'Reservar Expedição',
+      topics: 'Tópicos relacionados:',
+      guideComfort: 'Viva esta experiência com total conforto: transporte privativo personalizado, assistência VIP em aeroportos e concierge 24/7.',
+      viewItinerary: 'Ver Itinerário',
+      luxuryService: 'Guia Naturalista Privativo · Hotelaria Exclusiva'
+    },
+    ja: {
+      back: 'すべての旅行ガイドに戻る',
+      share: 'シェアする:',
+      related: 'このガイドのおすすめ遠征ツアー',
+      from: '料金',
+      book: '遠征ツアーを予約',
+      topics: '関連トピック:',
+      guideComfort: '専用プライベート送迎、VIP空港アシスタンス、24時間年中無休のコンシェルジュで、最高峰の快適な旅をお届けします。',
+      viewItinerary: '日程詳細を見る',
+      luxuryService: '専任ナチュラリストガイド同行 · 厳選ラグジュアリーホテル'
+    },
+    zh: {
+      back: '返回所有旅行指南',
+      share: '分享：',
+      related: '本指南推荐探险行程',
+      from: '起价',
+      book: '预订专属探险',
+      topics: '相关主题：',
+      guideComfort: '尊享全行程私人订制交通、VIP机场礼宾接送及24/7全天候管家服务，享受极致奢华体验。',
+      viewItinerary: '查看行程详情',
+      luxuryService: '专属私人自然向导 · 奢华精品酒店'
+    }
+  };
+
+  const t = labelsDict[locale] || labelsDict['en'];
+
+  const backLabel = t.back;
+  const shareLabel = t.share;
+  const relatedLabel = t.related;
+  const fromLabel = t.from;
+  const bookLabel = t.book;
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100 pt-28 pb-20 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
@@ -349,7 +452,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* Tags */}
         <div className="pt-6 border-t border-zinc-200 dark:border-zinc-800 flex flex-wrap items-center gap-2 text-xs">
-          <span className="text-zinc-500 font-semibold">{locale === 'es' ? 'Temas Relacionados:' : 'Related Topics:'}</span>
+          <span className="text-zinc-500 font-semibold">{t.topics}</span>
           {post.tags.map((tag) => (
             <span
               key={tag}
@@ -373,7 +476,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   {getLocalizedText(relatedTour.title, locale)}
                 </h3>
                 <p className="text-xs text-zinc-300 mt-1">
-                  {getLocalizedText(relatedTour.duration, locale)} &bull; {locale === 'es' ? 'Guía Naturalista Privado · Hotelería Exclusiva' : 'Private Naturalist Guide · Luxury Accommodations'}
+                  {getLocalizedText(relatedTour.duration, locale)} &bull; {t.luxuryService}
                 </p>
               </div>
 
@@ -387,9 +490,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
               <p className="text-xs text-zinc-300 leading-relaxed max-w-md">
-                {locale === 'es'
-                  ? 'Vive esta experiencia en total confort con transporte privado personalizado, asistencia VIP en aeropuertos y conserjería 24/7.'
-                  : 'Experience this destination in complete comfort with customized private transport, VIP airport assistance, and 24/7 concierge.'}
+                {t.guideComfort}
               </p>
 
               <div className="flex flex-wrap gap-3 w-full sm:w-auto">
@@ -397,7 +498,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   href={`/${locale}/tours/${relatedTour.id}`}
                   className="flex-1 sm:flex-initial px-5 py-3 border-2 border-emerald-400/40 bg-emerald-950/60 hover:bg-emerald-900/80 hover:border-emerald-400 text-emerald-300 hover:text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5"
                 >
-                  <span>{locale === 'es' ? 'Ver Itinerario' : 'View Itinerary'}</span>
+                  <span>{t.viewItinerary}</span>
                   <span>→</span>
                 </Link>
                 <Link

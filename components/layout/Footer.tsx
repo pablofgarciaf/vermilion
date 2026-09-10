@@ -29,7 +29,14 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     updates: "Get Travel Updates", subscribeText: "Subscribe to receive seasonal Galapagos premium cruise promotions and curated travel guides.", emailPlaceholder: "Your email address", subscribeBtn: "Subscribe",
     licensed: "Fully Licensed & Certified Tour Operator in Ecuador & Galapagos", support: "24/7 Dedicated Trip Specialist Support En Route", secure: "Secure Bookings & 100% Satisfaction Guarantee",
     privacy: "Privacy Policy", terms: "Terms of Service",
-    footerDescription: "Premier boutique tour operator specializing in custom-crafted premium travel itineraries across Ecuador and Galapagos's most iconic wonders."
+    footerDescription: "Premier boutique tour operator specializing in custom-crafted premium travel itineraries across Ecuador and Galapagos's most iconic wonders.",
+    paymentVerified: "Verified & Secure Payment Methods",
+    paymentHeading: "Secure Checkout & Encrypted Payments",
+    paymentDesc: "We accept secure encrypted card payments via Stripe, official Citibank (USA) wire transfers, Zelle payments, and Banco Produbanco. Official guarantee and certified travel vouchers.",
+    badgeStripe: "Stripe Payments",
+    badgeCitibank: "Citibank USA & Zelle",
+    badgeSSL: "SSL 256-Bit Encrypted",
+    affiliateProgram: "Affiliate Program"
   },
   es: {
     topDestinations: "Destinos Principales", galapagos: "Islas Galápagos", ecuador: "Ecuador Continental", fullDay: "Excursiones Full Day", amazon: "Amazonía Ecuatoriana", volcanoes: "Avenida de los Volcanes",
@@ -37,7 +44,14 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     updates: "Recibe Novedades", subscribeText: "Suscríbete para recibir promociones de cruceros y guías de viaje seleccionadas.", emailPlaceholder: "Tu correo", subscribeBtn: "Suscribirse",
     licensed: "Operador Turístico Certificado en Ecuador y Galápagos", support: "Soporte Especializado 24/7 Durante el Viaje", secure: "Reservas Seguras y Satisfacción Garantizada al 100%",
     privacy: "Política de Privacidad", terms: "Términos de Servicio",
-    footerDescription: "Operador turístico boutique especializado en itinerarios de viaje premium a medida a través de las maravillas más icónicas de Ecuador y Galápagos."
+    footerDescription: "Operador turístico boutique especializado en itinerarios de viaje premium a medida a través de las maravillas más icónicas de Ecuador y Galápagos.",
+    paymentVerified: "Métodos de Pago Verificados y Seguros",
+    paymentHeading: "Pago Seguro y Encriptado",
+    paymentDesc: "Aceptamos pagos directos y encriptados con tarjeta mediante Stripe, transferencias oficiales vía Citibank (EE.UU.), transferencias Zelle y Banco Produbanco. Garantía oficial y comprobantes certificados.",
+    badgeStripe: "Pagos con Stripe",
+    badgeCitibank: "Citibank EE.UU. & Zelle",
+    badgeSSL: "Encriptación SSL de 256 Bits",
+    affiliateProgram: "Programa de Afiliados"
   },
   fr: {
     topDestinations: "Meilleures Destinations", galapagos: "Îles Galapagos", ecuador: "Équateur Continental", fullDay: "Excursions Full Day", amazon: "Amazonie Équatorienne", volcanoes: "Avenue des Volcans",
@@ -45,7 +59,14 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     updates: "Actualités", subscribeText: "Abonnez-vous pour recevoir des promotions de croisières et des guides de voyage.", emailPlaceholder: "Votre e-mail", subscribeBtn: "S'abonner",
     licensed: "Voyagiste Certifié en Équateur et aux Galapagos", support: "Assistance Spécialisée 24/7", secure: "Réservations Sécurisées et Satisfaction Garantie",
     privacy: "Confidentialité", terms: "Conditions",
-    footerDescription: "Voyagiste boutique de premier ordre spécialisé dans les itinéraires de voyage haut de gamme sur mesure à travers l'Équateur et les Galapagos."
+    footerDescription: "Voyagiste boutique de premier ordre spécialisé dans les itinéraires de voyage haut de gamme sur mesure à travers l'Équateur et les Galapagos.",
+    paymentVerified: "Moyens de Paiement Vérifiés & Sécurisés",
+    paymentHeading: "Paiement Sécurisé & Crypté",
+    paymentDesc: "Nous acceptons les paiements sécurisés par carte via Stripe, virements Citibank (USA), Zelle et Produbanco. Garantie officielle et bons de voyage certifiés.",
+    badgeStripe: "Paiements Stripe",
+    badgeCitibank: "Citibank USA & Zelle",
+    badgeSSL: "Crypté SSL 256 Bits",
+    affiliateProgram: "Programme d'Affiliation"
   },
   de: {
     topDestinations: "Top-Reiseziele", galapagos: "Galapagos-Inseln", ecuador: "Ecuador Festland", fullDay: "Tagesausflüge (Full Day)", amazon: "Ecuadorianischer Amazonas", volcanoes: "Straße der Vulkane",
@@ -53,7 +74,14 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     updates: "Reise-Updates", subscribeText: "Abonnieren Sie, um Kreuzfahrt-Angebote und Reiseführer zu erhalten.", emailPlaceholder: "Ihre E-Mail", subscribeBtn: "Abonnieren",
     licensed: "Zertifizierter Reiseveranstalter in Ecuador & Galapagos", support: "24/7 Spezialisten-Support auf der Reise", secure: "Sichere Buchungen & 100% Zufriedenheitsgarantie",
     privacy: "Datenschutzerklärung", terms: "Nutzungsbedingungen",
-    footerDescription: "Boutique-Reiseveranstalter, spezialisiert auf maßgeschneiderte Premium-Reiserouten zu den kultigsten Wunderwelten von Ecuador und Galapagos."
+    footerDescription: "Boutique-Reiseveranstalter, spezialisiert auf maßgeschneiderte Premium-Reiserouten zu den kultigsten Wunderwelten von Ecuador und Galapagos.",
+    paymentVerified: "Verifizierte & Sichere Zahlungsmethoden",
+    paymentHeading: "Sicherer & Verschlüsselter Checkout",
+    paymentDesc: "Wir akzeptieren sichere Kartenzahlungen über Stripe, offizielle Citibank (USA) Überweisungen, Zelle und Produbanco. Offizielle Garantie und Reisezertifikate.",
+    badgeStripe: "Stripe-Zahlungen",
+    badgeCitibank: "Citibank USA & Zelle",
+    badgeSSL: "SSL 256-Bit-Verschlüsselung",
+    affiliateProgram: "Partnerprogramm"
   },
   it: {
     topDestinations: "Destinazioni Top", galapagos: "Isole Galapagos", ecuador: "Ecuador Continentale", fullDay: "Escursioni Full Day", amazon: "Amazzonia Ecuadoriana", volcanoes: "Viale dei Vulcani",
@@ -61,7 +89,14 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     updates: "Aggiornamenti", subscribeText: "Iscriviti per ricevere promozioni per crociere e guide di viaggio.", emailPlaceholder: "La tua email", subscribeBtn: "Iscriviti",
     licensed: "Tour Operator Certificato in Ecuador e Galapagos", support: "Assistenza Specializzata 24/7", secure: "Prenotazioni Sicure e Soddisfazione Garantita",
     privacy: "Privacy", terms: "Termini",
-    footerDescription: "Tour operator boutique di alto livello specializzato in itinerari di viaggio premium su misura attraverso le meraviglie di Ecuador e Galapagos."
+    footerDescription: "Tour operator boutique di alto livello specializzato in itinerari di viaggio premium su misura attraverso le meraviglie di Ecuador e Galapagos.",
+    paymentVerified: "Metodi di Pagamento Verificati e Sicuri",
+    paymentHeading: "Pagamento Sicuro e Crittografato",
+    paymentDesc: "Accettiamo pagamenti sicuri con carta tramite Stripe, bonifici ufficiali Citibank (USA), Zelle e Produbanco. Garanzia ufficiale e voucher certificati.",
+    badgeStripe: "Pagamenti Stripe",
+    badgeCitibank: "Citibank USA & Zelle",
+    badgeSSL: "Crittografia SSL a 256 Bit",
+    affiliateProgram: "Programma di Affiliazione"
   },
   pt: {
     topDestinations: "Principais Destinos", galapagos: "Ilhas Galápagos", ecuador: "Equador Continental", fullDay: "Excursões Full Day", amazon: "Amazônia Equatoriana", volcanoes: "Avenida dos Vulcões",
@@ -69,7 +104,14 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     updates: "Atualizaciones", subscribeText: "Inscreva-se para receber promoções de cruzeiros e guias de viagem.", emailPlaceholder: "Seu e-mail", subscribeBtn: "Inscrever-se",
     licensed: "Operador Turístico Certificado no Equador e Galápagos", support: "Suporte Especializado 24/7", secure: "Reservas Seguras e 100% de Satisfação Garantida",
     privacy: "Privacidade", terms: "Termos",
-    footerDescription: "Operador turístico boutique especializado em itinerários de viagem premium sob medida pelas maravilhas mais icônicas do Equador e Galápagos."
+    footerDescription: "Operador turístico boutique especializado em itinerários de viagem premium sob medida pelas maravilhas mais icônicas do Equador e Galápagos.",
+    paymentVerified: "Métodos de Pagamento Verificados e Seguros",
+    paymentHeading: "Checkout Seguro e Criptografado",
+    paymentDesc: "Aceitamos pagamentos seguros com cartão via Stripe, transferências Citibank (EUA), Zelle e Produbanco. Garantia oficial e vouchers certificados.",
+    badgeStripe: "Pagamentos Stripe",
+    badgeCitibank: "Citibank EUA & Zelle",
+    badgeSSL: "Criptografia SSL de 256 Bits",
+    affiliateProgram: "Programa de Afiliados"
   },
   ja: {
     topDestinations: "人気の目的地", galapagos: "ガラパゴス諸島", ecuador: "エクアドル本土", fullDay: "日帰りツアー（Full Day）", amazon: "エクアドル・アマゾン", volcanoes: "火山の道",
@@ -77,7 +119,14 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     updates: "最新情報", subscribeText: "クルーズのプロモーションや旅行ガイドを受け取るために購読してください。", emailPlaceholder: "メールアドレス", subscribeBtn: "購読する",
     licensed: "エクアドルとガラパゴスの認定旅行会社", support: "24時間365日の専門家サポート", secure: "安全な予約と100%の満足保証",
     privacy: "プライバシーポリシー", terms: "利用規約",
-    footerDescription: "エクアドルとガラパゴスの象徴的な見どころを巡るオーダーメイドのプレミアム旅行を専門とするブティック旅行会社です。"
+    footerDescription: "エクアドルとガラパゴスの象徴的な見どころを巡るオーダーメイドのプレミアム旅行を専門とするブティック旅行会社です。",
+    paymentVerified: "認証済み安全な決済方法",
+    paymentHeading: "安全な暗号化チェックアウト＆決済",
+    paymentDesc: "Stripeによる安全な暗号化カード決済、米国Citibank公式送金、Zelle、Produbanco銀行送金に対応。公式保証および正規旅行バウチャーを発行します。",
+    badgeStripe: "Stripe カード決済",
+    badgeCitibank: "米国シティバンク & Zelle",
+    badgeSSL: "256ビット SSL 暗号化保護",
+    affiliateProgram: "アフィリエイト・プログラム"
   },
   zh: {
     topDestinations: "热门目的地", galapagos: "加拉帕戈斯群岛", ecuador: "厄瓜多尔大陆", fullDay: "全天一日游", amazon: "厄瓜多尔亚马逊", volcanoes: "火山大道",
@@ -85,7 +134,14 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     updates: "获取旅游更新", subscribeText: "订阅以接收游轮促销活动和精选旅游指南。", emailPlaceholder: "您的电子邮箱", subscribeBtn: "订阅",
     licensed: "厄瓜多尔和加拉帕戈斯的认证旅行社", support: "24/7 专业旅行支持", secure: "安全预订和100%满意保证",
     privacy: "隐私政策", terms: "服务条款",
-    footerDescription: "精品旅行社，专注于在厄瓜多尔和加拉帕戈斯群岛打造定制的尊享精品旅行行程。"
+    footerDescription: "精品旅行社，专注于在厄瓜多尔和加拉帕戈斯群岛打造定制的尊享精品旅行行程。",
+    paymentVerified: "官方权威认证安全支付方式",
+    paymentHeading: "全流程 256 位银行级安全加密支付",
+    paymentDesc: "支持通过 Stripe 进行安全银行卡支付、美国花旗银行（Citibank）官方电汇、Zelle 以及厄瓜多尔 Produbanco 银行转账。提供官方合同担保与正规旅行凭据。",
+    badgeStripe: "Stripe 国际银行卡支付",
+    badgeCitibank: "美国花旗银行 & Zelle",
+    badgeSSL: "256位 SSL 顶级加密",
+    affiliateProgram: "联盟伙伴计划"
   }
 };
 
@@ -168,10 +224,10 @@ export function Footer() {
                 title="TikTok Vermilion Routes"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
                 </svg>
               </a>
-              <a
+              {/* <a
                 href="https://www.linkedin.com/company/vermilionroutes"
                 target="_blank"
                 rel="noreferrer"
@@ -179,9 +235,9 @@ export function Footer() {
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
-              </a>
+              </a>//*/}
               <a
-                href="https://www.youtube.com/@vermilionroutes"
+                href="https://www.youtube.com/@VermilionSouthAmericanRoutes"
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
@@ -189,7 +245,7 @@ export function Footer() {
               >
                 <Youtube className="w-4 h-4" />
               </a>
-              <a
+              {/*  <a
                 href="https://x.com/vermilionroutes"
                 target="_blank"
                 rel="noreferrer"
@@ -199,7 +255,7 @@ export function Footer() {
                 <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
-              </a>
+              </a> */}
               <a
                 href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
                 target="_blank"
@@ -317,7 +373,7 @@ export function Footer() {
                   className="w-full bg-emerald-950/80 dark:bg-zinc-900/80 border border-emerald-800/80 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-emerald-400 dark:focus:border-amber-400 focus:ring-1 focus:ring-emerald-400 dark:focus:ring-amber-400"
                 />
               </div>
-              <button 
+              <button
                 type="submit"
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer"
                 suppressHydrationWarning
@@ -361,26 +417,24 @@ export function Footer() {
             <div>
               <span className="text-xs uppercase font-semibold text-emerald-400 tracking-wider flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                Verified &amp; Secure Payment Methods
+                {t.paymentVerified}
               </span>
               <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mt-1">
-                Secure Checkout &amp; Encrypted Payments
+                {t.paymentHeading}
               </h3>
               <p className="text-xs text-zinc-300 max-w-2xl mt-1">
-                {locale === 'es'
-                  ? 'Aceptamos pagos directos y encriptados con tarjeta mediante Stripe, transferencias oficiales vía Citibank (EE.UU.), transferencias Zelle y Banco Produbanco. Garantía oficial y comprobantes certificados.'
-                  : 'We accept secure encrypted card payments via Stripe, official Citibank (USA) wire transfers, Zelle payments, and Banco Produbanco. Official guarantee and certified travel vouchers.'}
+                {t.paymentDesc}
               </p>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
               <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300">
-                Stripe Payments
+                {t.badgeStripe}
               </span>
               <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300">
-                Citibank USA &amp; Zelle
+                {t.badgeCitibank}
               </span>
               <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300 dark:text-amber-400">
-                SSL 256-Bit Encrypted
+                {t.badgeSSL}
               </span>
             </div>
           </div>
@@ -416,7 +470,7 @@ export function Footer() {
               {t.terms}
             </a>
             <a href={`/${locale}#affiliate`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
-              {locale === 'es' ? 'Programa de Afiliados' : 'Affiliate Program'}
+              {t.affiliateProgram}
             </a>
           </div>
         </div>

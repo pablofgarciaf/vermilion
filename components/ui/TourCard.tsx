@@ -72,7 +72,7 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
         {tour.isPopular && (
           <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-zinc-950/95 text-white shadow-sm border border-emerald-400/60">
             <Sparkles className="w-3 h-3 text-emerald-400" />
-            <span>Best Seller</span>
+            <span>{t('card.bestseller') || 'Best Seller'}</span>
           </span>
         )}
       </div>

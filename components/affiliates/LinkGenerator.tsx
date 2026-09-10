@@ -153,33 +153,35 @@ export function LinkGenerator({ username }: LinkGeneratorProps) {
       )}
 
       {/* Generated Link */}
-      <div className="space-y-3">
+      <div className="space-y-2">
         <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-[#6B6B6B]">
           {isEs ? 'Tu enlace generado' : 'Your generated link'}
         </p>
 
-        <div className="bg-[#050508] rounded-2xl p-4 border border-[#C9A84C]/15 relative overflow-hidden">
+        <div className="flex items-center gap-2 bg-[#050508] p-1.5 pl-3.5 rounded-xl border border-[#C9A84C]/25 relative overflow-hidden focus-within:border-[#C9A84C]/60 transition-all shadow-sm">
           {/* Subtle gold shimmer */}
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/30 to-transparent" />
-          <p className="font-mono text-xs text-[#C9A84C] break-all leading-relaxed tracking-wide">{generatedUrl}</p>
-        </div>
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/40 to-transparent" />
+          
+          <div className="flex-1 min-w-0 font-mono text-xs text-[#C9A84C] truncate select-all tracking-wide">
+            {generatedUrl}
+          </div>
 
-        <div className="flex gap-2">
           <button
             onClick={handleCopy}
-            className="flex-1 py-3 bg-gradient-to-r from-[#C9A84C] via-[#F5D78A] to-[#B8860B] hover:from-[#D4AF37] hover:to-[#9A6E0A] text-[#0A0A0F] font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-[#C9A84C]/20 hover:shadow-[#C9A84C]/30"
+            className="shrink-0 px-3.5 py-2 bg-gradient-to-r from-[#C9A84C] via-[#F5D78A] to-[#B8860B] hover:from-[#D4AF37] hover:to-[#9A6E0A] text-[#0A0A0F] font-bold text-xs rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-md shadow-[#C9A84C]/20 hover:shadow-[#C9A84C]/30 active:scale-95"
           >
-            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-            <span>{copied ? (isEs ? '¡Copiado!' : 'Copied!') : (isEs ? 'Copiar Enlace' : 'Copy Link')}</span>
+            {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+            <span className="whitespace-nowrap">{copied ? (isEs ? '¡Copiado!' : 'Copied!') : (isEs ? 'Copiar Enlace' : 'Copy Link')}</span>
           </button>
+
           <a
             href={generatedUrl}
             target="_blank"
             rel="noreferrer"
-            className="p-3 rounded-xl border border-white/10 bg-white/[0.03] text-[#6B6B6B] hover:text-white hover:border-[#C9A84C]/30 transition-all"
+            className="shrink-0 p-2 rounded-lg border border-white/10 bg-white/[0.04] text-[#8E8E93] hover:text-white hover:border-[#C9A84C]/40 hover:bg-[#C9A84C]/10 transition-all flex items-center justify-center cursor-pointer"
             title={isEs ? 'Probar enlace' : 'Test link'}
           >
-            <ExternalLink className="w-4 h-4" />
+            <ExternalLink className="w-3.5 h-3.5" />
           </a>
         </div>
       </div>

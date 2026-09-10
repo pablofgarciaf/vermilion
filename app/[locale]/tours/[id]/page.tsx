@@ -243,13 +243,13 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                 {tour.isPopular && (
                   <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm">
                     <Sparkles className="w-3 h-3" />
-                    <span>Best Seller</span>
+                    <span>{getLocalizedText('Best Seller', locale)}</span>
                   </span>
                 )}
 
                 <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-zinc-700/60">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>{locale === 'es' ? 'Guía Privado Certificado' : 'Certified Private Guide'}</span>
+                  <span>{getLocalizedText('Certified Private Guide', locale)}</span>
                 </span>
               </div>
 
