@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/blog',
     '/booking',
     '/presentation',
-    '/auth/affiliates',
     '/couples-anniversary-galapagos',
     '/family-friendly-ecuador',
     '/wildlife-photography-expeditions',

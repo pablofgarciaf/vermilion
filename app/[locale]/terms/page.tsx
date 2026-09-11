@@ -5,13 +5,29 @@ import { ShieldCheck, FileCheck, MapPin, Mail, Phone, Clock, AlertTriangle, Gift
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isEs = locale === 'es';
-  const title = isEs
-    ? 'Vermilion Routes | Términos y Condiciones de Viaje 24/7'
-    : 'Vermilion Routes | Terms & Conditions of Bespoke Travel';
-  const description = isEs
-    ? 'Términos y condiciones oficiales, políticas de reserva, cancelaciones y lealtad de Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador 24/7.'
-    : 'Official Terms and Conditions, booking policies, cancellations, and referral program of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador.';
+  const titles: Record<string, string> = {
+    es: 'Vermilion Routes | Términos y Condiciones de Viaje 24/7',
+    en: 'Vermilion Routes | Terms & Conditions of Bespoke Travel',
+    fr: 'Vermilion Routes | Conditions Générales de Vente 24/7',
+    de: 'Vermilion Routes | Allgemeine Geschäftsbedingungen 24/7',
+    it: 'Vermilion Routes | Termini e Condizioni di Viaggio 24/7',
+    pt: 'Vermilion Routes | Termos e Condições Gerais de Viagem',
+    ja: 'Vermilion Routes | 公式利用規約およびツアー約款',
+    zh: 'Vermilion Routes | 官方服务条款与旅行预订合同细则',
+  };
+  const descriptions: Record<string, string> = {
+    es: 'Términos y condiciones oficiales, políticas de reserva, cancelaciones y lealtad de Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador 24/7.',
+    en: 'Official Terms and Conditions, booking policies, cancellations and loyalty terms of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador.',
+    fr: 'Conditions générales officielles, politiques de réservation et d\'annulation de l\'Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Équateur 24/7.',
+    de: 'Offizielle Geschäftsbedingungen, Buchungs- und Stornierungsrichtlinien der Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador 24/7.',
+    it: 'Termini e condizioni ufficiali, contratti di viaggio e politiche di cancellazione di Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador.',
+    pt: 'Termos e condições oficiais, políticas de reserva, pagamentos e cancelamentos da Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Equador 24/7.',
+    ja: 'Vermilion Routes（Agencia de Viajes Vermilion、キト、エクアドル）の公式旅行条件書、予約規定、キャンセル規定およびアンバサダー規約。',
+    zh: 'Vermilion Routes官方服务协议、豪华探险行程预订条款、退改签细则与大使网络规定（Agencia de Viajes Vermilion，厄瓜多尔基多）。',
+  };
+
+  const title = titles[locale] || titles['en'];
+  const description = descriptions[locale] || descriptions['en'];
 
   return {
     title,

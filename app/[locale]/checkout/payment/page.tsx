@@ -384,9 +384,9 @@ export default function CheckoutPaymentPage() {
 
               {/* Row 1: Header */}
               <div className="text-center space-y-1 pb-4 border-b border-white/10">
-                <h3 className="text-base font-bold text-white uppercase tracking-widest">
+                <h2 className="text-base font-bold text-white uppercase tracking-widest">
                   Total a Pagar
-                </h3>
+                </h2>
                 <p className="text-xs text-zinc-400">
                   Impuestos y tasas incluidos
                 </p>
@@ -685,10 +685,10 @@ export default function CheckoutPaymentPage() {
 
                   {/* Receipt Upload Form */}
                   <form onSubmit={handleSubmitReceipt} className="space-y-3 pt-2 border-t border-white/10">
-                    <h4 className="font-bold text-white text-xs flex items-center gap-1.5">
+                    <h3 className="font-bold text-white text-xs flex items-center gap-1.5">
                       <Upload className="w-3.5 h-3.5 text-emerald-400" />
                       Adjuntar Comprobante de Transferencia / Captura
-                    </h4>
+                    </h3>
 
                     <div className="border-2 border-dashed border-zinc-700 hover:border-emerald-500 rounded-2xl p-4 text-center transition-all bg-zinc-950/60 cursor-pointer relative">
                       <input

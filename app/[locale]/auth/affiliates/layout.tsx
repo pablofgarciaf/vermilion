@@ -28,7 +28,7 @@ export async function generateMetadata({
     it: 'Accedi o registrati al portale ufficiale degli ambasciatori di Vermilion Routes. Gestisci commissioni, link di riferimento e supporto VIP 24/7.',
     pt: 'Acesse ou registre-se no portal oficial de embaixadores da Vermilion Routes. Gerencie suas comissões, links de indicação e suporte VIP 24/7.',
     ja: 'Vermilion Routes公式アンバサダーポータル。コミッション管理、紹介リンクの生成、24時間VIPコンシェルジュサポートをご利用いただけます。',
-    zh: '登录或注册Vermilion Routes官方旅行大使门户。管理您的推荐佣金、专属分销链接并享受24/7全天候VIP客户支持。',
+    zh: '登录或注册Vermilion Routes官方旅行大使门户。管理您的推荐佣金、生成专属分销链接并享受24/7全天候一对一VIP客户支持。',
   };
 
   const title = titles[locale] || titles['en'];

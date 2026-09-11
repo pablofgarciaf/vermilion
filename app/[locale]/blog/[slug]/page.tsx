@@ -61,11 +61,23 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   let description = rawDesc.replace(/\s+/g, ' ').trim();
   if (description.length > 155) {
     description = description.slice(0, 152).trim() + '...';
+  } else if (locale === 'ja' || locale === 'zh') {
+    if (description.length < 70) {
+      const cta = locale === 'ja'
+        ? ' Vermilion Routesの専任トラベルコンシェルジュが24時間サポート。'
+        : ' Vermilion Routes专属私人旅行顾问为您提供24/7全天候保障。';
+      description = (description + cta).slice(0, 95);
+    }
   } else if (description.length < 120) {
-    const cta = locale === 'es'
-      ? ' Descubra la asesoría de viaje de lujo 24/7 con Vermilion Routes.'
-      : ' Discover bespoke luxury travel planning 24/7 with Vermilion Routes.';
-    description = (description + cta).slice(0, 158);
+    const ctas: Record<string, string> = {
+      es: ' Descubra la asesoría de viaje de lujo 24/7 con Vermilion Routes.',
+      en: ' Discover bespoke luxury travel planning 24/7 with Vermilion Routes.',
+      fr: ' Découvrez nos voyages de luxe sur mesure 24/7 avec Vermilion Routes.',
+      de: ' Entdecken Sie maßgeschneiderte Luxusreisen 24/7 mit Vermilion Routes.',
+      it: ' Scopri i viaggi di lusso su misura 24/7 con Vermilion Routes.',
+      pt: ' Descubra viagens de luxo sob medida 24/7 com a Vermilion Routes.',
+    };
+    description = (description + (ctas[locale] || ctas['en'])).slice(0, 155);
   }
 
   const alternates = getSeoAlternates(`/blog/${slug}`, locale);

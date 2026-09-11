@@ -9,14 +9,33 @@ import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isEs = locale === 'es';
+  const titles: Record<string, string> = {
+    es: 'Vermilion Routes | Expediciones Familiares en Ecuador 24/7',
+    en: 'Vermilion Routes | Family Travel Ecuador & Galapagos 24/7',
+    fr: 'Vermilion Routes | Voyages en Famille en Équateur 24/7',
+    de: 'Vermilion Routes | Familienreisen Ecuador & Galápagos 24/7',
+    it: 'Vermilion Routes | Viaggi per Famiglie in Ecuador 24/7',
+    pt: 'Vermilion Routes | Viagens em Família no Equador 24/7',
+    ja: 'Vermilion Routes | ガラパゴス＆エクアドル家族向け豪華遠征旅行',
+    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯亲子奢华探险',
+  };
+  const descriptions: Record<string, string> = {
+    es: 'Expediciones familiares en Galápagos y Ecuador: tortugas gigantes, snorkel y selva amazónica. Viajes seguros con atención personalizada 24/7.',
+    en: 'Bespoke family adventures in Galapagos & Ecuador: giant tortoises, snorkeling and Amazon lodges with dedicated 24/7 concierge assistance.',
+    fr: 'Expéditions familiales sur mesure aux Galápagos et en Équateur: tortues géantes, plongée et lodges amazoniens avec conciergerie dédiée 24/7.',
+    de: 'Maßgeschneiderte Familienabenteuer in Galápagos und Ecuador: Riesenschildkröten, Schnorcheln und Amazonas-Lodges mit 24/7-Reisebetreuung.',
+    it: 'Avventure familiari su misura alle Galápagos ed in Ecuador: tartarughe giganti, snorkeling e lodge nella giungla con assistenza 24/7.',
+    pt: 'Expedições em família sob medida em Galápagos e no Equador: tartarugas gigantes, snorkel e floresta amazônica com suporte exclusivo 24/7.',
+    ja: '巨大ゾウガメとの触れ合いやアマゾン熱帯雨林体験など、お子様連れでも安心・安全なガラパゴス＆エクアドル家族旅行。24時間体制の専任コンシェルジュデスク完備。',
+    zh: '专为家庭量身定制的加拉帕戈斯群岛与厄瓜多尔亲子探险之旅：亲密邂逅巨龟、海洋浮潜与亚马逊雨林科普，配备全程安全医疗保障与24/7专属私人旅行管家。',
+  };
+
+  const title = titles[locale] || titles['en'];
+  const description = descriptions[locale] || descriptions['en'];
+
   return {
-    title: isEs
-      ? 'Vermilion Routes | Aventuras Familiares en Ecuador 24/7'
-      : 'Vermilion Routes | Family Travel Ecuador & Galapagos',
-    description: isEs
-      ? 'Expediciones familiares en Galápagos y Ecuador: tortugas gigantes, snorkel y selva amazónica. Viajes seguros con atención personalizada 24/7.'
-      : 'Bespoke family adventures in Galapagos & Ecuador: giant tortoises, snorkeling and Amazon lodges with dedicated 24/7 concierge assistance.',
+    title,
+    description,
     keywords: ['family Galapagos trip', 'family Ecuador vacation', 'Galapagos with kids', 'Ecuador family adventure', 'family-friendly Galapagos'],
     alternates: getSeoAlternates('/family-friendly-ecuador', locale),
   };

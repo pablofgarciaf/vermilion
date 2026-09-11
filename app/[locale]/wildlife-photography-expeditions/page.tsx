@@ -9,14 +9,33 @@ import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isEs = locale === 'es';
+  const titles: Record<string, string> = {
+    es: 'Vermilion Routes | Expediciones de Fotografía y Fauna 24/7',
+    en: 'Vermilion Routes | Wildlife & Photo Expeditions 24/7',
+    fr: 'Vermilion Routes | Photo & Faune Sauvage en Équateur 24/7',
+    de: 'Vermilion Routes | Tierfotografie & Naturreisen 24/7',
+    it: 'Vermilion Routes | Spedizioni Fotografiche e Natura 24/7',
+    pt: 'Vermilion Routes | Expedições de Fotografia e Vida Selvagem',
+    ja: 'Vermilion Routes | ガラパゴス＆アマゾン野生動物写真撮影ツアー',
+    zh: 'Vermilion Routes | 厄瓜多尔加拉帕戈斯野生动物摄影探险',
+  };
+  const descriptions: Record<string, string> = {
+    es: 'Expediciones privadas para fotógrafos y amantes de la fauna en Galápagos y la Amazonía con guías naturalistas dedicados y soporte exclusivo 24/7.',
+    en: 'Private wildlife expeditions in Galapagos and the Amazon with expert naturalist guides, prime photo spots and dedicated 24/7 bespoke travel support.',
+    fr: 'Expéditions photo privées aux Galápagos et en Amazonie: accès exclusif à la faune emblématique, guides naturalistes experts et conciergerie 24/7.',
+    de: 'Private Fotoexpeditionen nach Galápagos und ins Amazonasgebiet: weltklasse Naturfotografie mit zertifizierten Naturführern und 24/7-Support.',
+    it: 'Spedizioni fotografiche private alle Galápagos ed in Amazzonia con guide naturalistiche esperte, spot esclusivi e supporto dedicato 24/7.',
+    pt: 'Expedições fotográficas privativas em Galápagos e na Amazônia com guias naturalistas renomados, melhores pontos de captura e suporte VIP 24/7.',
+    ja: 'ガラパゴス諸島とアマゾン熱帯雨林を巡る野生動物写真撮影プライベートツアー。専任ナチュラリストガイドが最高の撮影スポットへ24時間体制でご案内します。',
+    zh: '专为摄影爱好者量身打造的加拉帕戈斯与亚马逊生态摄影探险：特邀资深自然学向导带队，独家私享机位与黄金光影，提供24/7全天候专属行程与后勤保障。',
+  };
+
+  const title = titles[locale] || titles['en'];
+  const description = descriptions[locale] || descriptions['en'];
+
   return {
-    title: isEs
-      ? 'Vermilion Routes | Expediciones de Fotografía y Fauna'
-      : 'Vermilion Routes | Wildlife & Photography Expeditions',
-    description: isEs
-      ? 'Expediciones privadas para fotógrafos y amantes de la fauna en Galápagos y la Amazonía con guías naturalistas dedicados y soporte exclusivo 24/7.'
-      : 'Private wildlife expeditions in Galapagos and the Amazon with expert naturalist guides, prime photo spots and dedicated 24/7 bespoke travel support.',
+    title,
+    description,
     keywords: ['wildlife photography Galapagos', 'Galapagos photography tour', 'Ecuador wildlife expedition'],
     alternates: getSeoAlternates('/wildlife-photography-expeditions', locale),
   };

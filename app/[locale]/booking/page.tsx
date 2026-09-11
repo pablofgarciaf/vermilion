@@ -5,14 +5,33 @@ import { getSeoAlternates } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isEs = locale === 'es';
+  const titles: Record<string, string> = {
+    es: 'Vermilion Routes | Reserva tu Expedición de Lujo a Medida',
+    en: 'Vermilion Routes | Book Your Bespoke Luxury Vacation',
+    fr: 'Vermilion Routes | Réservez Votre Voyage de Luxe 24/7',
+    de: 'Vermilion Routes | Buchen Sie Ihre Luxusreise nach Maß',
+    it: 'Vermilion Routes | Prenota la Tua Spedizione di Lusso',
+    pt: 'Vermilion Routes | Reserve sua Viagem de Luxo sob Medida',
+    ja: 'Vermilion Routes | ガラパゴス＆エクアドル豪華旅行予約',
+    zh: 'Vermilion Routes | 预订厄瓜多尔与加拉帕戈斯私享之旅',
+  };
+  const descriptions: Record<string, string> = {
+    es: 'Reserve su expedición de lujo a medida en Galápagos y Ecuador con Vermilion Routes. Asesoría de viaje personalizada 24/7 y cotizaciones exclusivas.',
+    en: 'Book your bespoke luxury expedition to the Galapagos Islands & Ecuador with Vermilion Routes. Dedicated 24/7 travel designers & custom quotes.',
+    fr: 'Réservez votre expédition de luxe sur mesure aux Galápagos et en Équateur avec Vermilion Routes. Conseillers privés dédiés 24/7 et devis sur mesure.',
+    de: 'Buchen Sie Ihre maßgeschneiderte Luxusexpedition nach Galápagos und Ecuador mit Vermilion Routes. 24/7 persönliche Reiseberatung und VIP-Angebote.',
+    it: 'Prenota la tua spedizione di lusso su misura alle Galápagos ed in Ecuador con Vermilion Routes. Consulenti di viaggio dedicati 24/7 e preventivi VIP.',
+    pt: 'Reserve sua expedição de luxo sob medida em Galápagos e no Equador com a Vermilion Routes. Consultoria de viagem dedicada 24/7 e cotações VIP.',
+    ja: 'ガラパゴス諸島とエクアドル本土への最高峰オーダーメイド豪華旅行をご予約ください。専任トラベルデザイナーが24時間体制で見積もりを作成します。',
+    zh: '立即在线预约定制专属尊享的厄瓜多尔与加拉帕戈斯群岛顶级奢华探险行程。24/7全天候私人旅行设计师竭诚为您提供一对一专属行程规划与尊享定制报价。',
+  };
+
+  const title = titles[locale] || titles['en'];
+  const description = descriptions[locale] || descriptions['en'];
+
   return {
-    title: isEs
-      ? 'Vermilion Routes | Reserva tu Expedición de Lujo a Medida'
-      : 'Vermilion Routes | Book Your Bespoke Luxury Vacation',
-    description: isEs
-      ? 'Reserve su expedición de lujo a medida en Galápagos y Ecuador con Vermilion Routes. Asesoría de viaje personalizada 24/7 y cotizaciones exclusivas.'
-      : 'Book your bespoke luxury expedition to the Galapagos Islands & Ecuador with Vermilion Routes. Dedicated 24/7 travel designers & custom quotes.',
+    title,
+    description,
     alternates: getSeoAlternates('/booking', locale),
   };
 }

@@ -42,6 +42,7 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
   const router = useRouter();
   const pathname = usePathname();
   const [langOpen, setLangOpen] = useState(false);
+  const currentLocaleObj = LOCALES.find((l) => l.code === locale) || LOCALES[0];
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -130,9 +131,8 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
                 className="flex items-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 text-xs font-bold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 rounded-xl cursor-pointer transition-colors"
               >
                 <img
-                  src={LOCALES.find((l) => l.code === locale)?.flagUrl || 'https://flagcdn.com/es.svg'}
-                  alt=""
-                  aria-hidden="true"
+                  src={currentLocaleObj.flagUrl}
+                  alt={currentLocaleObj.name}
                   width={18}
                   height={13}
                   className="w-4 sm:w-5 h-auto rounded-xs shadow-xs"
@@ -154,7 +154,7 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
                             : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                         }`}
                       >
-                        <img src={l.flagUrl} alt="" width={20} height={15} className="w-5 h-auto rounded-xs" />
+                        <img src={l.flagUrl} alt={l.name} width={20} height={15} className="w-5 h-auto rounded-xs" />
                         {l.name}
                       </button>
                     ))}

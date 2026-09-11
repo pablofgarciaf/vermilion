@@ -177,7 +177,7 @@ function VerifyFormContent() {
             {step === 'success' && (
               <div className="py-8 text-center">
                 <CheckCircle2 className="w-16 h-16 text-emerald-400 mx-auto mb-4" />
-                <h3 className="text-xl text-white mb-2">¡Cuenta Activada!</h3>
+                <h2 className="text-xl text-white mb-2">¡Cuenta Activada!</h2>
                 <p className="text-white/60 text-sm mb-6">
                   Tus credenciales han sido guardadas. Preparando tu panel de embajador...
                 </p>

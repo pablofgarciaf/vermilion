@@ -307,7 +307,7 @@ Conocido ancestralmente como la *"Garganta de Fuego"*, este coloso vigila la tra
     title: {
       en: 'Quito: World Cultural Heritage & Leading City in South America',
       es: 'Quito: Joya Patrimonial y Mejor Destino de Sudamérica',
-      fr: 'Quito : Joyau Patrimonial et Meilleure Destination d’Amérique du Sud',
+      fr: 'Quito : Joyau Patrimonial et Meilleur Séjour Sud-Américain',
       de: 'Quito: Weltkulturerbe & Führende Reisedestination Südamerikas',
       it: 'Quito: Patrimonio Mondiale e Migliore Destinazione del Sud America',
       pt: 'Quito: Joia Patrimonial e Melhor Destino da América do Sul',
@@ -509,7 +509,7 @@ Ecuador es además el país con mayor variedad de orquídeas del mundo, con más
     title: {
       en: 'Colonial Cuenca & Cajas National Park: Glacial Lakes & Heritage',
       es: 'Cuenca Colonial y Parque Nacional Cajas: Lagos Glaciares e Historia',
-      fr: 'Cuenca Coloniale et Parc National Cajas : Lacs Glaciaires et Patrimoine',
+      fr: 'Cuenca Coloniale et Parc Cajas : Lacs Glaciaires et Patrimoine',
       de: 'Koloniales Cuenca & Cajas-Nationalpark: Gletscherseen & Welterbe',
       it: 'Cuenca Coloniale e Parco Nazionale Cajas: Laghi Glaciali e Storia',
       pt: 'Cuenca Colonial e Parque Nacional Cajas: Lagos Glaciais e Patrimônio',

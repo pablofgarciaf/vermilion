@@ -28,9 +28,9 @@ const multiDayTours: Tour[] = [
       zh: '4天 / 3晚' 
     },
     durationDays: 4,
-    price: 1,
-    price3Star: 1,
-    price4Star: 1,
+    price: 1050,
+    price3Star: 1050,
+    price4Star: 1190,
     imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
     mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.jpg',
     desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',

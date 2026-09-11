@@ -5,13 +5,29 @@ import { ShieldCheck, Mail, Phone, MapPin, Building, Lock, FileText, CheckCircle
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isEs = locale === 'es';
-  const title = isEs
-    ? 'Vermilion Routes | Política de Privacidad y Datos 24/7'
-    : 'Vermilion Routes | Privacy Policy & Data Protection 24/7';
-  const description = isEs
-    ? 'Política de Privacidad oficial de Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Protección de datos personales y reservas seguras 24/7.'
-    : 'Official Privacy Policy of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Transparent personal data protection and secure travel 24/7.';
+  const titles: Record<string, string> = {
+    es: 'Vermilion Routes | Política de Privacidad y Datos 24/7',
+    en: 'Vermilion Routes | Privacy Policy & Data Protection 24/7',
+    fr: 'Vermilion Routes | Politique de Confidentialité 24/7',
+    de: 'Vermilion Routes | Datenschutzerklärung & Schutz 24/7',
+    it: 'Vermilion Routes | Informativa sulla Privacy & Dati 24/7',
+    pt: 'Vermilion Routes | Política de Privacidade e Datos 24/7',
+    ja: 'Vermilion Routes | 公式プライバシーポリシーと個人情報保護方針',
+    zh: 'Vermilion Routes | 官方隐私政策与个人信息安全保护',
+  };
+  const descriptions: Record<string, string> = {
+    es: 'Política de Privacidad oficial de Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Protección de datos personales y reservas seguras 24/7.',
+    en: 'Official Privacy Policy of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Transparent personal data protection and secure travel 24/7.',
+    fr: 'Politique de Confidentialité officielle d\'Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Équateur. Protection des données et réservations 24/7.',
+    de: 'Offizielle Datenschutzerklärung der Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Höchster Datenschutz für sichere Buchungen 24/7.',
+    it: 'Informativa sulla Privacy di Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Protezione dei dati personali e prenotazioni sicure 24/7.',
+    pt: 'Política de Privacidade oficial da Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Equador. Proteção integral de dados e reservas seguras 24/7.',
+    ja: 'Vermilion Routes（Agencia de Viajes Vermilion、キト、エクアドル）公式プライバシーポリシー。安全な個人情報保護と厳格な予約データ管理。',
+    zh: 'Vermilion Routes官方隐私政策条款（Agencia de Viajes Vermilion，厄瓜多尔基多）。严格保护旅行者个人隐私数据与资金交易安全。',
+  };
+
+  const title = titles[locale] || titles['en'];
+  const description = descriptions[locale] || descriptions['en'];
 
   return {
     title,

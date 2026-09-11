@@ -233,8 +233,7 @@ export default function AffiliatesSidebar() {
               <div className="flex items-center gap-3">
                 <img
                   src={currentLang.flagUrl}
-                  alt=""
-                  aria-hidden="true"
+                  alt={currentLang.label}
                   width={16}
                   height={12}
                   className="w-4 h-3 object-cover rounded-xs shadow-xs"
@@ -257,7 +256,7 @@ export default function AffiliatesSidebar() {
                         : 'text-[#6B6B6B] hover:bg-white/5 hover:text-white'
                     }`}
                   >
-                    <img src={l.flagUrl} alt="" aria-hidden="true" width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
+                    <img src={l.flagUrl} alt={l.label} width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
                     <span>{l.label}</span>
                   </button>
                 ))}

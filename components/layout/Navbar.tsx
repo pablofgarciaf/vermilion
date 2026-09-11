@@ -60,6 +60,8 @@ export function Navbar() {
     { code: 'ja', label: '日本語', flagUrl: '/flags/jp.svg' },
   ];
 
+  const currentLocaleObj = LOCALES.find((l) => l.code === locale) || LOCALES[0];
+
   const changeLanguage = (newLocale: string) => {
     setLangOpen(false);
     if (newLocale === 'other') {
@@ -303,9 +305,8 @@ export function Navbar() {
                     title="Cambiar idioma / Change language"
                   >
                     <img
-                      src={LOCALES.find((l) => l.code === locale)?.flagUrl || '/flags/es.svg'}
-                      alt=""
-                      aria-hidden="true"
+                      src={currentLocaleObj.flagUrl}
+                      alt={currentLocaleObj.label}
                       width={16}
                       height={12}
                       className="w-4 h-3 object-cover rounded-xs shadow-xs"
@@ -331,7 +332,7 @@ export function Navbar() {
                                 : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                                 }`}
                             >
-                              <img src={l.flagUrl} alt="" aria-hidden="true" width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
+                              <img src={l.flagUrl} alt={l.label} width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
                               <span>{l.label}</span>
                             </a>
                           );
@@ -429,9 +430,8 @@ export function Navbar() {
                     className="flex items-center gap-1.5 p-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 rounded-xl cursor-pointer transition-colors"
                   >
                     <img
-                      src={LOCALES.find((l) => l.code === locale)?.flagUrl || '/flags/es.svg'}
-                      alt=""
-                      aria-hidden="true"
+                      src={currentLocaleObj.flagUrl}
+                      alt={currentLocaleObj.label}
                       width={16}
                       height={12}
                       className="w-4 h-3 object-cover rounded-xs shadow-xs"
@@ -457,7 +457,7 @@ export function Navbar() {
                                 : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
                                 }`}
                             >
-                              <img src={l.flagUrl} alt={l.code} width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
+                              <img src={l.flagUrl} alt={l.label} width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
                               <span>{l.label}</span>
                             </a>
                           );

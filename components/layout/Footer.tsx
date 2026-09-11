@@ -201,7 +201,7 @@ export function Footer() {
               <a
                 href={settings?.contact?.facebook || 'https://www.facebook.com/VermilionSouthAmericanRoutes'}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
                 aria-label="Facebook"
               >
@@ -210,7 +210,7 @@ export function Footer() {
               <a
                 href={settings?.contact?.instagram || 'https://www.instagram.com/vermilionsouthamericanroutes/'}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
                 aria-label="Instagram"
               >
@@ -219,7 +219,7 @@ export function Footer() {
               <a
                 href={settings?.contact?.tiktok || 'https://www.tiktok.com/@vermilionsaroutes'}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
                 aria-label="TikTok"
                 title="TikTok Vermilion Routes"
@@ -231,7 +231,7 @@ export function Footer() {
               <a
                 href="https://www.youtube.com/@VermilionSouthAmericanRoutes"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
                 aria-label="YouTube"
               >
@@ -240,7 +240,7 @@ export function Footer() {
               <a
                 href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-amber-400 transition-all hover:scale-105 active:scale-95"
                 aria-label="TripAdvisor"
                 title="TripAdvisor Vermilion Routes"
@@ -480,7 +480,7 @@ export function Footer() {
                     : 'bg-emerald-950/40 hover:bg-emerald-900/60 text-zinc-300 hover:text-white border border-emerald-800/40'
                 }`}
               >
-                <img src={lang.flag} alt="" aria-hidden="true" width={16} height={12} className="w-3.5 h-2.5 object-cover rounded-[1px]" />
+                <img src={lang.flag} alt={lang.label} width={16} height={12} className="w-3.5 h-2.5 object-cover rounded-[1px]" />
                 <span>{lang.label}</span>
               </a>
             ))}

@@ -345,9 +345,11 @@ export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
                   </div>
                   <Link
                     href={`/${locale}/blog/${featuredPost.slug}`}
+                    aria-label={`${t.readArticle}: ${getLocalizedText(featuredPost.title, locale)}`}
                     className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-md active:scale-95"
                   >
                     <span>{t.readArticle}</span>
+                    <span className="sr-only">: {getLocalizedText(featuredPost.title, locale)}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -443,9 +445,11 @@ export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
 
                   <Link
                     href={`/${locale}/blog/${post.slug}`}
+                    aria-label={`${t.read}: ${getLocalizedText(post.title, locale)}`}
                     className="text-emerald-600 dark:text-emerald-400 group-hover:text-emerald-500 dark:group-hover:text-emerald-300 font-semibold flex items-center gap-1 hover:underline active:scale-95 transition-all"
                   >
                     <span>{t.read}</span>
+                    <span className="sr-only">: {getLocalizedText(post.title, locale)}</span>
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>

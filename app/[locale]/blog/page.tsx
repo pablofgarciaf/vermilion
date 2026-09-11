@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const titles: Record<string, string> = {
     es: 'Vermilion Routes | Guías de Viaje y Expediciones de Lujo',
     en: 'Vermilion Routes | Luxury Travel Guides and Insights',
-    fr: 'Vermilion Routes | Guides de Voyage et Expéditions de Luxe',
+    fr: 'Vermilion Routes | Guides de Voyage & Expéditions Luxe',
     de: 'Vermilion Routes | Luxus-Reiseführer & Expeditionen',
     it: 'Vermilion Routes | Guide di Viaggio e Spedizioni di Lusso',
     pt: 'Vermilion Routes | Guias de Viagem e Expedições de Luxo',
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     it: 'Guide di viaggio di lusso ed approfondimenti per esplorare Galápagos, le Ande e l’Amazzonia con gli esperti di Vermilion Routes 24/7.',
     pt: 'Guias de viagem exclusivos e dicas de expedição para explorar Galápagos, os Andes e a Amazônia com a assessoria da Vermilion Routes 24/7.',
     ja: 'ガラパゴス諸島、アンデス山脈、アマゾン熱帯雨林を巡る豪華旅行ガイド。現地ナチュラリストが24時間体制でオーダーメイドの旅をご案内。',
-    zh: '精心打造的奢华旅行指南、野生动物洞察与探险建议，带您深度探索加拉帕戈斯与厄瓜多尔。本地专家24/7全天候专属定制。',
+    zh: '精心打造的顶级奢华旅行指南、野生动物洞察与探险建议，带您深度探索加拉帕戈斯与厄瓜多尔。本地自然学专家24/7全天候专属定制服务。',
   };
 
   const title = titles[locale] || titles['en'];

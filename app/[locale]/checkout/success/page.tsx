@@ -196,9 +196,9 @@ export default function CheckoutSuccessPage() {
 
           {/* Timeline of next steps */}
           <div className="space-y-3 pt-2">
-            <h3 className="font-serif font-semibold text-zinc-900 dark:text-white text-sm">
+            <h2 className="font-serif font-semibold text-zinc-900 dark:text-white text-sm">
               {isEs ? 'Próximos Pasos:' : 'What Happens Next:'}
-            </h3>
+            </h2>
             <div className="space-y-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
               <div className="flex items-start gap-3">
                 <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0 mt-0.5 text-xs">

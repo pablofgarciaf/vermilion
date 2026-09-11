@@ -44,8 +44,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Entdecken Sie unseren exklusiven Katalog für Luxusexpeditionen nach Galápagos, ins Amazonasgebiet und in die Anden. 24/7 Concierge-Service.',
     it: 'Esplora il nostro catalogo esclusivo di viaggi di lusso alle Galápagos, in Amazzonia e nelle Ande. Itinerari privati personalizzati con concierge 24/7.',
     pt: 'Explore nosso catálogo exclusivo de expedições de luxo para Galápagos, Amazônia e Andes. Roteiros privativos sob medida com concierge 24/7.',
-    ja: 'ガラパゴス、アマゾン、アンデス山脈を巡る厳選ラグジュアリー遠征ツアー。専任コンシェルジュが24時間年中無休でご案内いたします。',
-    zh: '探索我们精选的加拉帕戈斯、亚马逊与安第斯山脉奢华探险行程。私人订制路线，配备专属24/7全天候旅行管家。',
+    ja: 'ガラパゴス諸島、アマゾン熱帯雨林、アンデス山脈を巡る厳選ラグジュアリー遠征ツアー。専任コンシェルジュデスクが24時間年中無休でご案内いたします。',
+    zh: '探索我们精选的厄瓜多尔、加拉帕戈斯、亚马逊与安第斯山脉顶级奢华探险行程。量身定制私人路线，配备专属24/7全天候私人旅行管家。',
   };
 
   const title = titles[locale] || titles['en'];

@@ -82,11 +82,23 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
   let description = rawDesc.replace(/\s+/g, ' ').trim();
   if (description.length > 155) {
     description = description.slice(0, 152).trim() + '...';
+  } else if (resolvedParams.locale === 'ja' || resolvedParams.locale === 'zh') {
+    if (description.length < 70) {
+      const cta = resolvedParams.locale === 'ja'
+        ? ' 専任ナチュラリストガイドと24時間VIPコンシェルジュがご案内。'
+        : ' 配备官方认证私人自然向导与24/7全天候VIP专属管家服务。';
+      description = (description + cta).slice(0, 95);
+    }
   } else if (description.length < 120) {
-    const cta = resolvedParams.locale === 'es'
-      ? ' Reserve su expedición de lujo con guías expertos y atención VIP 24/7.'
-      : ' Book your bespoke luxury journey with expert naturalist guides and 24/7 VIP support.';
-    description = (description + cta).slice(0, 154);
+    const ctas: Record<string, string> = {
+      es: ' Reserve su expedición de lujo con guías expertos y atención VIP 24/7.',
+      en: ' Book your bespoke luxury journey with expert naturalist guides and 24/7 VIP support.',
+      fr: ' Réservez votre expédition de luxe avec guides experts et conciergerie 24/7.',
+      de: ' Buchen Sie Ihre Luxusreise mit erstklassigen Guides und 24/7 VIP-Betreuung.',
+      it: ' Prenota la tua spedizione di lusso con guide naturalistiche e supporto 24/7.',
+      pt: ' Reserve sua expedição de luxo com guias especialistas e suporte VIP 24/7.',
+    };
+    description = (description + (ctas[resolvedParams.locale] || ctas['en'])).slice(0, 154);
   }
 
   const dest = getLocalizedText(tour.destination, resolvedParams.locale);
