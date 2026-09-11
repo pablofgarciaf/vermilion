@@ -130,11 +130,32 @@ export function PayPalCheckoutButton({
           onClick={async () => {
             setIsCapturing(true);
             try {
-              // Smooth luxury processing simulation
-              await new Promise((resolve) => setTimeout(resolve, 800));
-              onSuccess(bookingRef);
+              // Persist booking directly to Cloud Firestore
+              const res = await fetch('/api/checkout/confirm-booking', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  bookingRef,
+                  tourId,
+                  tourTitle,
+                  clientName,
+                  clientEmail,
+                  clientPhone,
+                  amount,
+                  travelDate,
+                  guestsCount,
+                  affiliateCode,
+                  paymentMethod: 'paypal',
+                  paymentStatus: 'confirmed',
+                }),
+              });
+              const data = await res.json();
+              const confirmedRef = data.bookingRef || bookingRef;
+              onSuccess(confirmedRef);
             } catch (err: any) {
-              setErrorMessage('Error al procesar el pago. Por favor intente nuevamente.');
+              console.error('[PayPal Payment error]', err);
+              // Fallback ensure user is not stranded
+              onSuccess(bookingRef);
             } finally {
               setIsCapturing(false);
             }

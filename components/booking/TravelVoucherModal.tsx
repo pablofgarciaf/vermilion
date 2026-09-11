@@ -57,10 +57,6 @@ export function TravelVoucherModal({
 
   if (!isOpen || !tour) return null;
 
-  const handlePrint = () => {
-    window.print();
-  };
-
   const handleDownloadPdf = async () => {
     if (!tour || isGeneratingPdf) return;
     setIsGeneratingPdf(true);
@@ -92,51 +88,10 @@ export function TravelVoucherModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto font-sans">
-      {/* Scoped Print CSS for 1-2 Page Luxury Layout */}
-      <style jsx global>{`
-        @media print {
-          @page {
-            size: A4 portrait;
-            margin: 10mm 12mm 10mm 12mm;
-          }
-          html, body {
-            height: auto !important;
-            overflow: visible !important;
-            background: #ffffff !important;
-            color: #18181b !important;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-          body * {
-            visibility: hidden;
-          }
-          #vermilion-travel-voucher,
-          #vermilion-travel-voucher * {
-            visibility: visible;
-          }
-          #vermilion-travel-voucher {
-            position: absolute !important;
-            left: 0 !important;
-            top: 0 !important;
-            width: 100% !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            background: #ffffff !important;
-            color: #18181b !important;
-            border: none !important;
-            box-shadow: none !important;
-          }
-          .voucher-break-avoid {
-            break-inside: avoid !important;
-            page-break-inside: avoid !important;
-          }
-        }
-      `}</style>
-
       <div className="relative w-full max-w-3xl bg-zinc-900 border border-emerald-900/60 rounded-3xl shadow-2xl overflow-hidden my-6 sm:my-8 text-white">
         
-        {/* Top Actions Bar (Sticky & always visible, hidden on print) */}
-        <div className="sticky top-0 z-30 flex items-center justify-between px-6 py-4 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800 print:hidden">
+        {/* Top Actions Bar (Sticky & always visible) */}
+        <div className="sticky top-0 z-30 flex items-center justify-between px-6 py-4 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800">
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-5 h-5 text-emerald-400" />
             <span className="text-xs font-bold uppercase tracking-wider text-zinc-200">
@@ -148,17 +103,10 @@ export function TravelVoucherModal({
             <button
               onClick={handleDownloadPdf}
               disabled={isGeneratingPdf}
-              className="px-3.5 py-2 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-md cursor-pointer active:scale-95 disabled:opacity-60"
+              className="px-4 py-2 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-black rounded-xl text-xs font-bold flex items-center gap-2 transition-all shadow-md cursor-pointer active:scale-95 disabled:opacity-60"
             >
               {isGeneratingPdf ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Download className="w-3.5 h-3.5" />}
-              <span>{isEs ? 'Descargar Itinerario (PDF)' : 'Download Itinerary (PDF)'}</span>
-            </button>
-            <button
-              onClick={handlePrint}
-              className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-md cursor-pointer active:scale-95"
-            >
-              <Printer className="w-3.5 h-3.5" />
-              <span>{isEs ? 'Imprimir Comprobante' : 'Print Voucher'}</span>
+              <span>{isEs ? 'Descargar Voucher Oficial (PDF)' : 'Download Official Voucher (PDF)'}</span>
             </button>
             <button
               onClick={onClose}

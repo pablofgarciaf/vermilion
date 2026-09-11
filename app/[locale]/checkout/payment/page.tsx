@@ -17,6 +17,9 @@ import {
   Calendar,
   Tag,
   AlertCircle,
+  Download,
+  FileText,
+  Users,
   Printer,
   MessageCircle,
   Award,
@@ -451,6 +454,26 @@ export default function CheckoutPaymentPage() {
   const [isPaid, setIsPaid] = useState(false);
   const [receiptSubmitted, setReceiptSubmitted] = useState(false);
   const [voucherOpen, setVoucherOpen] = useState(false);
+  const [isGeneratingVoucherPdf, setIsGeneratingVoucherPdf] = useState(false);
+
+  const handleDownloadPdfDirect = async () => {
+    if (isGeneratingVoucherPdf) return;
+    setIsGeneratingVoucherPdf(true);
+    try {
+      const { generateTourPDF } = await import('@/lib/pdfGenerator');
+      const tourToPrint = matchedTour || mockTours[0];
+      await generateTourPDF(tourToPrint, locale, {
+        bookingCode: ref,
+        guestName: clientName || email.split('@')[0] || 'Valued Traveler',
+        travelDate: travelDate || 'To be confirmed',
+        paymentStatus: isPaid && !receiptSubmitted ? 'CONFIRMED' : 'PENDING WIRE PAYMENT',
+      });
+    } catch (err) {
+      console.error('Error generating PDF voucher:', err);
+    } finally {
+      setIsGeneratingVoucherPdf(false);
+    }
+  };
 
   // Wire Currency (USD)
   const wireCurrency = 'USD';
@@ -613,7 +636,9 @@ export default function CheckoutPaymentPage() {
         <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-amber-500/5 dark:bg-amber-500/5 rounded-full blur-[120px]" />
       </div>
 
-      <div className="max-w-xl w-full bg-white dark:bg-zinc-900/90 border border-stone-200 dark:border-emerald-500/20 rounded-3xl p-5 sm:p-8 shadow-xl shadow-stone-200/50 dark:shadow-2xl backdrop-blur-xl relative z-10 space-y-6 text-stone-900 dark:text-white">
+      <div className={`w-full bg-white dark:bg-zinc-900/90 border border-stone-200 dark:border-emerald-500/20 rounded-3xl p-5 sm:p-8 lg:p-10 shadow-xl shadow-stone-200/50 dark:shadow-2xl backdrop-blur-xl relative z-10 space-y-6 text-stone-900 dark:text-white transition-all ${
+        isPaid ? 'max-w-xl' : 'max-w-5xl'
+      }`}>
         
         {/* Top Header */}
         <div className="flex items-center justify-between border-b border-stone-200 dark:border-white/10 pb-4">
@@ -681,11 +706,16 @@ export default function CheckoutPaymentPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
               <button
                 type="button"
-                onClick={() => setVoucherOpen(true)}
-                className="px-5 py-3 bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-95 group border-none"
+                onClick={handleDownloadPdfDirect}
+                disabled={isGeneratingVoucherPdf}
+                className="px-5 py-3 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-stone-950 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-95 group border-none disabled:opacity-60"
               >
-                <Printer className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
-                <span>{t('btnVoucher')}</span>
+                {isGeneratingVoucherPdf ? (
+                  <div className="w-4 h-4 border-2 border-stone-950 border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
+                )}
+                <span>{locale === 'es' ? 'Descargar Voucher (PDF)' : 'Download Voucher (PDF)'}</span>
               </button>
 
               <a
@@ -711,110 +741,133 @@ export default function CheckoutPaymentPage() {
           </div>
         ) : (
           /* ─────────────────────────────────────────────
-             CHECKOUT FORM & METHOD SELECTOR
+             CHECKOUT 2-COLUMN VIEWPORT LAYOUT
              ───────────────────────────────────────────── */
-          <div className="space-y-5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            {/* Tour & Client Summary Card */}
-            <div className="bg-stone-50 dark:bg-zinc-950/60 border border-stone-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 space-y-3">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-[10px] uppercase font-bold tracking-wider">
-                  {type === 'full' ? t('fullTitle') : t('depositTitle')}
-                </span>
-                <span className="font-mono text-[11px] text-stone-500 dark:text-zinc-400">Ref: <strong className="text-stone-900 dark:text-zinc-200">{ref}</strong></span>
-              </div>
-
-              <h1 className="text-lg sm:text-xl font-bold font-serif text-stone-900 dark:text-white leading-snug">
-                {tourTitle}
-              </h1>
-
-              <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-stone-600 dark:text-zinc-400 pt-1 border-t border-stone-200 dark:border-white/5">
-                <span className="truncate max-w-[220px]">{t('clientLabel')}: <strong className="text-stone-900 dark:text-zinc-200">{email || 'Traveler'}</strong></span>
-                {travelDate && (
-                  <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium">
-                    <Calendar className="w-3.5 h-3.5" /> {travelDate}
+            {/* ── LEFT COLUMN (5 COLS): EXPEDITION SUMMARY & PRICE ── */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="bg-stone-50 dark:bg-zinc-950/60 border border-stone-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 space-y-3.5">
+                <div className="flex items-center justify-between gap-2.5">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-[10px] uppercase font-bold tracking-wider">
+                    {type === 'full' ? t('fullTitle') : t('depositTitle')}
                   </span>
-                )}
-              </div>
-            </div>
-
-            {/* Price Box with Invoice Breakdown */}
-            <div className="p-6 bg-stone-50/80 dark:bg-zinc-950/80 border border-emerald-600/20 dark:border-emerald-500/30 rounded-3xl space-y-5 shadow-sm dark:shadow-2xl relative overflow-hidden">
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/10 blur-3xl rounded-full pointer-events-none" />
-
-              <div className="text-center space-y-1 pb-4 border-b border-stone-200 dark:border-white/10">
-                <h2 className="text-base font-bold text-stone-900 dark:text-white uppercase tracking-widest">
-                  {t('totalToPay')}
-                </h2>
-                <p className="text-xs text-stone-500 dark:text-zinc-400">
-                  {t('taxesIncluded')}
-                </p>
-              </div>
-
-              {/* Amount In USD */}
-              <div className="text-center py-2 relative z-10">
-                <span className="text-5xl sm:text-6xl font-extrabold font-serif text-emerald-700 dark:text-emerald-400 drop-shadow-sm" suppressHydrationWarning>
-                  ${formatPrice(finalAmount)}
-                </span>
-                <span className="text-sm text-emerald-700/80 dark:text-emerald-400/80 font-medium ml-2">USD</span>
-              </div>
-
-              {/* VIP Discount Row if active */}
-              {discountApplied && (
-                <div className="flex items-center justify-between text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 px-4 py-2.5 rounded-xl font-medium mx-auto max-w-sm">
-                  <span className="flex items-center gap-2 text-xs">
-                    <Sparkles className="w-4 h-4 text-amber-500 dark:text-amber-400 shrink-0" />
-                    <span>{t('vipDiscountApplied')}</span>
-                  </span>
-                  <span className="font-bold font-mono text-sm" suppressHydrationWarning>
-                    -${formatPrice(discountSavings)} USD
-                  </span>
+                  <span className="font-mono text-[11px] text-stone-500 dark:text-zinc-400">Ref: <strong className="text-stone-900 dark:text-zinc-200">{ref}</strong></span>
                 </div>
-              )}
 
-              {/* Breakdown */}
-              <div className="pt-4 border-t border-stone-200 dark:border-white/10 flex flex-col gap-2.5 text-xs text-stone-600 dark:text-zinc-400 max-w-sm mx-auto">
-                <div className="flex justify-between items-center">
-                  <span>{t('valueWithoutTax')}</span>
-                  <span className="text-stone-800 dark:text-zinc-300 font-mono" suppressHydrationWarning>
-                    ${(finalAmount / 1.12).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD
-                  </span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>{t('taxesAndFees')}</span>
-                  <span className="text-stone-800 dark:text-zinc-300 font-mono" suppressHydrationWarning>
-                    ${(finalAmount - (finalAmount / 1.12)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD
-                  </span>
-                </div>
-              </div>
-
-              {/* Promo Code Input */}
-              {!discountApplied ? (
-                <div className="pt-4 border-t border-stone-200 dark:border-white/10 flex gap-2">
-                  <div className="relative flex-1">
-                    <Tag className="w-4 h-4 text-stone-400 dark:text-zinc-400 absolute left-3 top-2.5" />
-                    <input
-                      type="text"
-                      placeholder={t('promoPlaceholder')}
-                      value={discountCode}
-                      onChange={(e) => setDiscountCode(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2.5 bg-white dark:bg-zinc-900 border border-stone-300 dark:border-zinc-700 rounded-xl text-xs text-stone-900 dark:text-white placeholder-stone-400 dark:placeholder-zinc-500 focus:outline-none focus:border-emerald-600 dark:focus:border-emerald-500 uppercase transition-colors"
+                <div className="flex gap-3 items-start">
+                  <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-stone-200 dark:border-zinc-800">
+                    <Image
+                      src={matchedTour.imageUrl || '/images/tours/16-9/galapagos-snorkeling-16-9.jpg'}
+                      alt={tourTitle}
+                      fill
+                      className="object-cover"
                     />
                   </div>
-                  <button
-                    type="button"
-                    onClick={handleApplyDiscount}
-                    className="px-5 py-2.5 bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
-                  >
-                    {t('btnApply')}
-                  </button>
+                  <div className="flex-1 min-w-0">
+                    <h1 className="text-sm sm:text-base font-bold font-serif text-stone-900 dark:text-white leading-snug line-clamp-2">
+                      {tourTitle}
+                    </h1>
+                    <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-medium block mt-0.5">
+                      {matchedTour.duration?.en || matchedTour.duration?.es || 'Ecuador & Galápagos'}
+                    </span>
+                  </div>
                 </div>
-              ) : null}
-              {discountError && <p className="text-xs text-amber-600 dark:text-amber-400 text-center pt-1">{discountError}</p>}
+
+                <div className="space-y-1.5 text-xs text-stone-600 dark:text-zinc-400 pt-2 border-t border-stone-200 dark:border-white/5">
+                  <div className="flex justify-between items-center">
+                    <span className="text-stone-500 dark:text-zinc-500">{t('clientLabel')}:</span>
+                    <strong className="text-stone-900 dark:text-zinc-200 truncate max-w-[180px]">{email || 'Traveler'}</strong>
+                  </div>
+                  {travelDate && (
+                    <div className="flex justify-between items-center">
+                      <span className="text-stone-500 dark:text-zinc-500">{t('travelDateLabel')}:</span>
+                      <strong className="text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+                        <Calendar className="w-3.5 h-3.5" /> {travelDate}
+                      </strong>
+                    </div>
+                  )}
+                  <div className="flex justify-between items-center">
+                    <span className="text-stone-500 dark:text-zinc-500">Viajeros:</span>
+                    <strong className="text-stone-900 dark:text-zinc-200 flex items-center gap-1">
+                      <Users className="w-3.5 h-3.5" /> 2 Viajeros
+                    </strong>
+                  </div>
+                </div>
+              </div>
+
+              {/* Clean Price Box */}
+              <div className="p-4 sm:p-5 bg-stone-50/80 dark:bg-zinc-950/80 border border-emerald-600/20 dark:border-emerald-500/30 rounded-2xl space-y-3.5 shadow-sm relative overflow-hidden">
+                <div className="flex items-baseline justify-between border-b border-stone-200 dark:border-white/10 pb-3">
+                  <div>
+                    <h2 className="text-xs font-bold text-stone-900 dark:text-white uppercase tracking-widest">
+                      {t('totalToPay')}
+                    </h2>
+                    <p className="text-[10px] text-stone-500 dark:text-zinc-400">
+                      {t('taxesIncluded')}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-2xl sm:text-3xl font-extrabold font-serif text-emerald-700 dark:text-emerald-400" suppressHydrationWarning>
+                      ${formatPrice(finalAmount)}
+                    </span>
+                    <span className="text-xs text-emerald-700/80 dark:text-emerald-400/80 font-medium ml-1">USD</span>
+                  </div>
+                </div>
+
+                {/* VIP Discount Row if active */}
+                {discountApplied && (
+                  <div className="flex items-center justify-between text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 px-3 py-2 rounded-xl text-xs font-medium">
+                    <span className="flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                      <span>{t('vipDiscountApplied')}</span>
+                    </span>
+                    <span className="font-bold font-mono" suppressHydrationWarning>
+                      -${formatPrice(discountSavings)} USD
+                    </span>
+                  </div>
+                )}
+
+                {/* Promo Code Input */}
+                {!discountApplied ? (
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <Tag className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-2.5" />
+                      <input
+                        type="text"
+                        placeholder={t('promoPlaceholder')}
+                        value={discountCode}
+                        onChange={(e) => setDiscountCode(e.target.value)}
+                        className="w-full pl-8 pr-2.5 py-2 bg-white dark:bg-zinc-900 border border-stone-300 dark:border-zinc-700 rounded-xl text-xs text-stone-900 dark:text-white placeholder-stone-400 uppercase focus:outline-none focus:border-emerald-600"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleApplyDiscount}
+                      className="px-3.5 py-2 bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm cursor-pointer border-none"
+                    >
+                      {t('btnApply')}
+                    </button>
+                  </div>
+                ) : null}
+                {discountError && <p className="text-[11px] text-amber-600 text-center">{discountError}</p>}
+
+                {/* Trust Badges */}
+                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-stone-200 dark:border-white/5 text-[10px] text-stone-600 dark:text-zinc-400">
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>100% Flexible</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Award className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <span>TripAdvisor Choice</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Payment Method Switcher Tabs */}
-            <div className="space-y-4">
+            {/* ── RIGHT COLUMN (7 COLS): PAYMENT METHOD & DIRECT ACTIONS ── */}
+            <div className="lg:col-span-7 space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 bg-stone-100 dark:bg-zinc-950 border border-stone-200 dark:border-white/10 rounded-2xl text-xs font-semibold">
                 {/* Tab 1: PayPal / Card */}
                 <button
@@ -1120,13 +1173,13 @@ export default function CheckoutPaymentPage() {
                   </form>
                 </div>
               )}
-            </div>
 
             <p className="text-[10px] text-stone-500 dark:text-zinc-500 text-center leading-relaxed pt-2 border-t border-stone-200 dark:border-white/5">
               {t('termsAgreement')}
             </p>
           </div>
-        )}
+        </div>
+      )}
 
       </div>
 

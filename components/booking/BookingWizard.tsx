@@ -477,36 +477,55 @@ export function BookingWizard() {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
               <div ref={dateRef} className="md:col-span-7">
                 <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
-                  <CalendarDays className="w-5 h-5 text-emerald-600" /> 2. Cuando viajas?
+                  <CalendarDays className="w-5 h-5 text-emerald-600" /> {isEs ? '2. ¿Cuándo viajas?' : '2. When are you traveling?'}
                 </h2>
                 <TravelDatePicker selectedDate={date} onDateSelect={(d) => setDate(d)} durationDays={selectedTours.reduce((max, t) => Math.max(max, t.durationDays || 1), 1)} />
               </div>
               <div ref={passengersRef} className="md:col-span-5">
                 <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
-                  <Users className="w-5 h-5 text-emerald-600" /> 3. Quienes viajan?
+                  <Users className="w-5 h-5 text-emerald-600" /> {isEs ? '3. ¿Quiénes viajan?' : '3. Who is traveling?'}
                 </h2>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 border border-zinc-200 dark:border-zinc-800 rounded-xl">
-                    <h4 className="font-semibold text-sm text-zinc-900 dark:text-white">Adultos</h4>
+                    <div>
+                      <h4 className="font-semibold text-sm text-zinc-900 dark:text-white">
+                        {isEs ? 'Adultos' : 'Adults'}
+                      </h4>
+                      <p className="text-[10px] text-zinc-500">
+                        {isEs ? '12+ años' : '12+ years'}
+                      </p>
+                    </div>
                     <div className="flex items-center gap-3">
-                      <button onClick={() => setAdults(Math.max(1, adults - 1))} className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-lg leading-none">-</button>
+                      <button onClick={() => setAdults(Math.max(1, adults - 1))} className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-lg leading-none cursor-pointer">-</button>
                       <span className="w-5 text-center font-bold text-sm">{adults}</span>
-                      <button onClick={() => setAdults(adults + 1)} className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-lg leading-none">+</button>
+                      <button onClick={() => setAdults(adults + 1)} className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-lg leading-none cursor-pointer">+</button>
                     </div>
                   </div>
                   <div className="flex items-center justify-between p-3 border border-zinc-200 dark:border-zinc-800 rounded-xl">
-                    <div><h4 className="font-semibold text-sm text-zinc-900 dark:text-white">Ninos</h4><p className="text-[10px] text-zinc-500">2 - 11 anos</p></div>
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <h4 className="font-semibold text-sm text-zinc-900 dark:text-white">
+                          {isEs ? 'Niños' : 'Children'}
+                        </h4>
+                        <span className="px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20 text-[9px] font-bold">
+                          -20%
+                        </span>
+                      </div>
+                      <p className="text-[10px] text-zinc-500">
+                        {isEs ? '0 a 11 años (Tarifa reducida)' : '0 to 11 years (Reduced rate)'}
+                      </p>
+                    </div>
                     <div className="flex items-center gap-3">
-                      <button onClick={() => setChildren(Math.max(0, children - 1))} className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-lg leading-none">-</button>
+                      <button onClick={() => setChildren(Math.max(0, children - 1))} className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-lg leading-none cursor-pointer">-</button>
                       <span className="w-5 text-center font-bold text-sm">{children}</span>
-                      <button onClick={() => setChildren(children + 1)} className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-lg leading-none">+</button>
+                      <button onClick={() => setChildren(children + 1)} className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-lg leading-none cursor-pointer">+</button>
                     </div>
                   </div>
                 </div>
                 <hr className="border-zinc-100 dark:border-zinc-800 my-5" />
                 <div ref={contactRef}>
                   <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600" /> 4. Tus Datos
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600" /> {isEs ? '4. Tus Datos de Contacto' : '4. Contact Details'}
                   </h2>
                   <div className="grid grid-cols-1 gap-3">
                     <div className="space-y-1">
