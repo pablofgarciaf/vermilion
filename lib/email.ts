@@ -385,7 +385,7 @@ export const sendBookingConfirmationEmail = async (params: BookingConfirmationEm
                     <strong>Agencia de Viajes Vermilion Cia. Ltda.</strong> • RUC: 1711992808001
                   </p>
                   <p style="margin: 0 0 4px 0;">
-                    CORAL TOUR, Quito, Ecuador • Calle Seco 3, 28007 Madrid, España
+                    Sede Ecuador: Monteserrín, De los Lirios N45-206 y Julio Arellano, 3er Piso, Quito (CP 170503) • Sede España (Coral Tour): Calle Seco 3, 28007 Madrid, España
                   </p>
                   <p style="margin: 0; color: #059669;">
                     © ${new Date().getFullYear()} Vermilion Routes. ${isEs ? 'Todos los derechos reservados.' : 'All rights reserved.'}

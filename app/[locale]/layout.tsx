@@ -135,14 +135,16 @@ export default async function RootLayout({
         address: [
           {
             '@type': 'PostalAddress',
-            streetAddress: 'CORAL TOUR',
+            name: 'Sede Ecuador (HQ)',
+            streetAddress: 'Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso',
             addressLocality: 'Quito',
             addressRegion: 'Pichincha',
-            postalCode: '170150',
+            postalCode: '170503',
             addressCountry: 'EC',
           },
           {
             '@type': 'PostalAddress',
+            name: 'Sede España (Coral Tour)',
             streetAddress: 'Calle Seco 3',
             addressLocality: 'Madrid',
             addressRegion: 'Madrid',

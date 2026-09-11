@@ -52,11 +52,11 @@ export default function TermsAndConditionsPage() {
               <div className="space-y-1 text-xs text-zinc-400 pt-1">
                 <p className="flex items-start gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Quito:</strong> CORAL TOUR, Quito, Ecuador</span>
+                  <span><strong className="text-white">Ecuador (HQ):</strong> Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503)</span>
                 </p>
                 <p className="flex items-start gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Madrid:</strong> Calle Seco 3, 28007 Madrid, España</span>
+                  <span><strong className="text-white">España (Coral Tour):</strong> Calle Seco 3, 28007 Madrid, España</span>
                 </p>
               </div>
             </div>
@@ -170,8 +170,9 @@ export default function TermsAndConditionsPage() {
         </div>
 
         {/* Footer info */}
-        <div className="text-center pt-8 border-t border-zinc-800 text-xs text-zinc-500">
+        <div className="text-center pt-8 border-t border-zinc-800 text-xs text-zinc-500 space-y-1">
           <p>© {new Date().getFullYear()} Agencia de Viajes Vermilion Cia. Ltda. (RUC 1711992808001). All Rights Reserved.</p>
+          <p>Sede Ecuador: Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503) • Sede España (Coral Tour): Calle Seco 3, 28007 Madrid, España</p>
         </div>
 
       </div>

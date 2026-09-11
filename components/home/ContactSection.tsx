@@ -168,14 +168,28 @@ export function ContactSection() {
               </div>
             </a>
 
-            <div className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+            {/* Sede Ecuador (HQ) */}
+            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-xs text-zinc-400 font-medium block">{t('headquarters')}</span>
-                <span className="font-semibold text-zinc-900 dark:text-white text-sm">
-                  {t('address')}
+                <span className="text-xs text-zinc-400 font-medium block">{t('headquartersEcuador')}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white text-sm block leading-snug">
+                  {t('addressEcuador')}
+                </span>
+              </div>
+            </div>
+
+            {/* Sede España (Coral Tour) */}
+            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
+                <MapPin className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xs text-zinc-400 font-medium block">{t('officeSpain')}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white text-sm block leading-snug">
+                  {t('addressSpain')}
                 </span>
               </div>
             </div>

@@ -53,11 +53,11 @@ export default function PrivacyPolicyPage() {
               <div className="space-y-1.5 text-xs text-zinc-300">
                 <p className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Ecuador:</strong> CORAL TOUR, Quito</span>
+                  <span><strong className="text-white">Ecuador (HQ):</strong> Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503)</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span><strong className="text-white">Spain:</strong> Calle Seco 3, 28007 Madrid</span>
+                  <span><strong className="text-white">Spain (Coral Tour):</strong> Calle Seco 3, 28007 Madrid, España</span>
                 </p>
               </div>
             </div>

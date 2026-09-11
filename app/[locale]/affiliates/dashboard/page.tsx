@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { useTheme } from 'next-themes';
-import { auth } from '@/lib/firebase';
+import { auth, db } from '@/lib/firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { TrendingUp, DollarSign, Users, Zap, Clock, Sun, Moon } from 'lucide-react';
 import { getAffiliateByEmail, AffiliateAccount } from '@/lib/affiliates';

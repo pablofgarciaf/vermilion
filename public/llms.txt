@@ -22,7 +22,9 @@ Vermilion Routes provides bespoke luxury expeditions, Galapagos island hopping, 
 - [Ecuador: Andes and Amazon Rainforest (7 Days / 6 Nights)](https://www.vermilionroutes.com/en#tours): Historic Quito, Cotopaxi, Quilotoa, Banos waterfalls, Amazon jungle lodge.
 - [Ecuador and Galapagos Islands Master Journey (12 Days / 11 Nights)](https://www.vermilionroutes.com/en#tours): Complete luxury overland expedition and Galapagos archipelago discovery.
 
-## Direct Contact & Bookings
+## Direct Contact & Corporate Offices
+- **Ecuador HQ:** Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503), Ecuador.
+- **Spain Office (Coral Tour):** Calle Seco 3, 28007 Madrid, España.
 - [Official Website](https://www.vermilionroutes.com/en): Direct online inquiry and tour catalog.
 - [Full AI Manifest](https://www.vermilionroutes.com/llms-full.txt): Complete 16-expedition portfolio and API reference.
 - [WhatsApp Booking Support](https://wa.me/593994048458): Instant 24/7 communication with travel specialists.

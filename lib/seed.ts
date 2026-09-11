@@ -6,8 +6,8 @@ export const defaultSettings = {
   contact: {
     phone: "+593 99 404 8458",
     email: "info@vermilionroutes.com",
-    address: "CORAL TOUR, Quito, Ecuador",
-    addressSpain: "Calle Seco 3, 28007 Madrid, España",
+    address: "Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503), Ecuador",
+    addressSpain: "Calle Seco 3, 28007 Madrid, España (Coral Tour)",
     whatsappUrl: "https://wa.me/593994048458",
     facebook: "https://www.facebook.com/VermilionSouthAmericanRoutes",
     instagram: "https://www.instagram.com/vermilionsouthamericanroutes/",

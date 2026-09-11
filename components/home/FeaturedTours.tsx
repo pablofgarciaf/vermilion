@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
+import { getLocalizedText } from '@/utils/i18nHelper';
 
 export function FeaturedTours() {
   const { tours } = useToursData();

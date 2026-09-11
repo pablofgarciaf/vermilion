@@ -150,9 +150,9 @@ export async function getToursFromFirestore(): Promise<Tour[]> {
 /**
  * Fetch a single tour by ID from Firestore.
  */
-export async function getTourByIdFromFirestore(id: string): Promise<Tour | null> {
+export async function getTourByIdFromFirestore(id: string, fallbackTour?: Tour): Promise<Tour | null> {
   if (!db) {
-    const fallback = mockTours.find((t) => t.id === id);
+    const fallback = fallbackTour || mockTours.find((t) => t.id === id);
     return fallback || null;
   }
   try {
@@ -164,11 +164,11 @@ export async function getTourByIdFromFirestore(id: string): Promise<Tour | null>
     }
 
     // Fallback to local mock
-    const fallback = mockTours.find((t) => t.id === id);
+    const fallback = fallbackTour || mockTours.find((t) => t.id === id);
     return fallback || null;
   } catch (err) {
     console.warn(`Error fetching tour ${id} from Firestore, falling back:`, err);
-    const fallback = mockTours.find((t) => t.id === id);
+    const fallback = fallbackTour || mockTours.find((t) => t.id === id);
     return fallback || null;
   }
 }
