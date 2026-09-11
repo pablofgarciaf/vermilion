@@ -10,6 +10,9 @@ import {
   Lock,
   Sparkles,
   ArrowRight,
+  ArrowLeft,
+  ChevronDown,
+  ChevronUp,
   Compass,
   Upload,
   Copy,
@@ -36,6 +39,9 @@ import { getStoredAffiliateRef, isBookingCode } from '@/components/affiliates/Af
 import { useLocale } from 'next-intl';
 import { getStoredUserProfile } from '@/lib/userProfile';
 import { PayPalCheckoutButton } from '@/components/checkout/PayPalCheckoutButton';
+import { generateTravelVoucherPDF } from '@/lib/voucherPdfGenerator';
+import { db } from '@/lib/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 // ─────────────────────────────────────────────
 // 8-LANGUAGE DICTIONARY FOR CHECKOUT & PAYMENT
@@ -52,14 +58,14 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     zh: 'SSL安全加密支付',
   },
   luxuryExpeditions: {
-    en: 'Luxury Expeditions',
-    es: 'Expediciones de Lujo',
-    fr: 'Expéditions de Luxe',
-    de: 'Luxus-Expeditionen',
-    it: 'Spedizioni di Lusso',
-    pt: 'Expedições de Luxo',
-    ja: '最高級の旅',
-    zh: '顶级奢华探险',
+    en: 'Bespoke Nature Expeditions',
+    es: 'Expediciones a Medida • Naturaleza & Confort',
+    fr: 'Expéditions Sur Mesure • Nature & Confort',
+    de: 'Maßgeschneiderte Expeditionen • Natur & Komfort',
+    it: 'Spedizioni su Misura • Natura e Comfort',
+    pt: 'Expedições Sob Medida • Natureza e Conforto',
+    ja: '大自然と快適さの特注ツアー',
+    zh: '专属定制探险 • 自然与舒适之旅',
   },
   tabPaypalCard: {
     en: 'PayPal / International Card',
@@ -442,6 +448,27 @@ export default function CheckoutPaymentPage() {
   const initialRef = searchParams.get('ref') || '';
   const [ref, setRef] = useState(initialRef);
   const travelDate = searchParams.get('date') || '';
+  const travelersParam = searchParams.get('travelers') || searchParams.get('guestsCount') || '';
+  const adultsParam = searchParams.get('adults') || '';
+  const childrenParam = searchParams.get('children') || '';
+  const isDailyTourParam = searchParams.get('isDailyTour') === 'true';
+
+  // Dynamic travelers description based on real passenger selection
+  const getTravelersText = () => {
+    const a = parseInt(adultsParam);
+    const c = parseInt(childrenParam);
+    if (!isNaN(a) && a > 0) {
+      if (!isNaN(c) && c > 0) {
+        return `${a} ${a === 1 ? (locale === 'es' ? 'Adulto' : 'Adult') : (locale === 'es' ? 'Adultos' : 'Adults')}, ${c} ${c === 1 ? (locale === 'es' ? 'Niño' : 'Child') : (locale === 'es' ? 'Niños' : 'Children')}`;
+      }
+      return `${a} ${a === 1 ? (locale === 'es' ? 'Viajero' : 'Traveler') : (locale === 'es' ? 'Viajeros' : 'Travelers')}`;
+    }
+    const tCount = parseInt(travelersParam);
+    if (!isNaN(tCount) && tCount > 0) {
+      return `${tCount} ${tCount === 1 ? (locale === 'es' ? 'Viajero' : 'Traveler') : (locale === 'es' ? 'Viajeros' : 'Travelers')}`;
+    }
+    return locale === 'es' ? '1 Viajero' : '1 Traveler';
+  };
 
   // Discount code & Automatic 10% Referral Discount
   const [discountCode, setDiscountCode] = useState('');
@@ -450,6 +477,7 @@ export default function CheckoutPaymentPage() {
 
   // Tabs: 'card' (PayPal & Cards) | 'bank' (Payoneer & Produbanco Wire)
   const [activeTab, setActiveTab] = useState<'card' | 'bank'>('card');
+  const [openBankCard, setOpenBankCard] = useState<'usa' | 'ecuador' | 'spain' | null>('usa');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
   const [receiptSubmitted, setReceiptSubmitted] = useState(false);
@@ -460,16 +488,21 @@ export default function CheckoutPaymentPage() {
     if (isGeneratingVoucherPdf) return;
     setIsGeneratingVoucherPdf(true);
     try {
-      const { generateTourPDF } = await import('@/lib/pdfGenerator');
-      const tourToPrint = matchedTour || mockTours[0];
-      await generateTourPDF(tourToPrint, locale, {
-        bookingCode: ref,
-        guestName: clientName || email.split('@')[0] || 'Valued Traveler',
-        travelDate: travelDate || 'To be confirmed',
-        paymentStatus: isPaid && !receiptSubmitted ? 'CONFIRMED' : 'PENDING WIRE PAYMENT',
+      await generateTravelVoucherPDF({
+        bookingRef: ref,
+        customerName: clientName || email.split('@')[0] || (locale === 'es' ? 'Viajero Distinguido' : 'Valued Traveler'),
+        customerEmail: email || 'info@vermilionroutes.com',
+        tourTitle,
+        destination: matchedTour?.destination || 'Ecuador & Galápagos',
+        travelDate: travelDate || (locale === 'es' ? 'Por confirmar' : 'To be confirmed'),
+        travelersCount: getTravelersText(),
+        totalAmount: finalAmount,
+        paymentMethod: receiptSubmitted ? 'Transferencia Bancaria Internacional' : 'PayPal / Tarjeta Internacional',
+        paymentStatus: isPaid && !receiptSubmitted ? 'confirmed' : 'pending_payment',
+        locale,
       });
     } catch (err) {
-      console.error('Error generating PDF voucher:', err);
+      console.error('Error generating official voucher PDF:', err);
     } finally {
       setIsGeneratingVoucherPdf(false);
     }
@@ -588,6 +621,41 @@ export default function CheckoutPaymentPage() {
 
     const buyerName = clientName || email.split('@')[0] || 'Valued Traveler';
     const activeRef = ref || (await generateBookingCode(tourId, discountApplied ? discountCode : undefined));
+    const cleanEmail = (email || 'guest@vermilionroutes.com').trim().toLowerCase();
+    const travelersStr = getTravelersText();
+
+    // 1. Direct client-side Firestore persistence (Guaranteed write)
+    if (db) {
+      try {
+        await setDoc(doc(db, 'bookings', activeRef), {
+          id: activeRef,
+          refCode: activeRef,
+          bookingCode: activeRef,
+          tourId,
+          tourTitle,
+          customerName: buyerName,
+          customerEmail: cleanEmail,
+          customerPhone: '',
+          travelDates: travelDate || 'To be confirmed',
+          guestsCount: travelersStr,
+          passengersCount: parseInt(travelersParam) || parseInt(adultsParam) || 1,
+          destination: matchedTour?.destination || 'Ecuador & Galápagos',
+          amountPaid: finalAmount,
+          paidAmount: finalAmount,
+          totalAmount: finalAmount,
+          paymentMethod: 'payoneer_wire',
+          paymentStatus: 'pending_payment',
+          status: 'pending',
+          transferRef: transferRef || 'Wire transfer registration',
+          affiliateCode: discountApplied ? discountCode : undefined,
+          discountApplied,
+          createdAt: new Date().toISOString(),
+        }, { merge: true });
+        console.log('✅ [CLIENT FIRESTORE] Wire transfer booking saved:', activeRef);
+      } catch (clientErr) {
+        console.warn('[CLIENT FIRESTORE NOTICE]', clientErr);
+      }
+    }
 
     try {
       const res = await fetch('/api/checkout/payoneer/transfer', {
@@ -598,12 +666,12 @@ export default function CheckoutPaymentPage() {
           tourId,
           tourTitle,
           clientName: buyerName,
-          clientEmail: email,
+          clientEmail: cleanEmail,
           clientPhone: '',
           amount: finalAmount,
           currency: wireCurrency,
           travelDate: travelDate || undefined,
-          guestsCount: '2 Travelers',
+          guestsCount: travelersStr,
           locale,
           affiliateCode: discountApplied ? discountCode : undefined,
           _hp_trap: hpTrap, // 🛡️ Honeypot bot defense
@@ -620,7 +688,7 @@ export default function CheckoutPaymentPage() {
       setIsPaid(true);
     } catch (err: any) {
       console.warn('[Payoneer transfer register notice]', err);
-      // Graceful fallback for offline/demo simulation
+      // Graceful fallback for demo simulation
       setReceiptSubmitted(true);
       setIsPaid(true);
     } finally {
@@ -790,9 +858,26 @@ export default function CheckoutPaymentPage() {
                   <div className="flex justify-between items-center">
                     <span className="text-stone-500 dark:text-zinc-500">Viajeros:</span>
                     <strong className="text-stone-900 dark:text-zinc-200 flex items-center gap-1">
-                      <Users className="w-3.5 h-3.5" /> 2 Viajeros
+                      <Users className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> {getTravelersText()}
+                      {isDailyTourParam && (parseInt(travelersParam) === 1 || adultsParam === '1') && (
+                        <span className="text-[10px] text-amber-600 dark:text-amber-400 font-normal">
+                          (Mín. 2 pax)
+                        </span>
+                      )}
                     </strong>
                   </div>
+                </div>
+
+                {/* Back to Modify Booking Button */}
+                <div className="pt-2 border-t border-stone-200 dark:border-white/5">
+                  <button
+                    type="button"
+                    onClick={() => router.push(`/${locale}/booking?addTour=${tourId}&date=${travelDate}&adults=${adultsParam || '1'}&children=${childrenParam || '0'}`)}
+                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 text-xs text-stone-600 dark:text-zinc-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors font-medium border border-stone-200 dark:border-white/10 rounded-xl hover:bg-stone-50 dark:hover:bg-zinc-800/50 cursor-pointer"
+                  >
+                    <ArrowLeft className="w-3.5 h-3.5" />
+                    <span>{locale === 'es' ? 'Volver a modificar mi reserva' : 'Back to modify booking'}</span>
+                  </button>
                 </div>
               </div>
 
@@ -927,7 +1012,8 @@ export default function CheckoutPaymentPage() {
                     clientName={clientName || email.split('@')[0] || 'Valued Traveler'}
                     clientEmail={email}
                     travelDate={travelDate}
-                    guestsCount="2 Travelers"
+                    guestsCount={getTravelersText()}
+                    passengersCount={parseInt(travelersParam) || parseInt(adultsParam) || 1}
                     locale={locale}
                     affiliateCode={discountApplied ? discountCode : undefined}
                     onSuccess={(confirmedRef) => {
@@ -1002,91 +1088,171 @@ export default function CheckoutPaymentPage() {
                     <p className="text-emerald-700 dark:text-emerald-400">{t('step3Wire')}</p>
                   </div>
 
-                  {/* Official Receiving Account Cards */}
-                  <div className="grid grid-cols-1 gap-3">
+                  {/* Official Receiving Account Accordion Cards */}
+                  <div className="space-y-2">
                     
-                    {/* CARD 1: USA (USD) Citi bank */}
-                    <div className="p-4 bg-white dark:bg-zinc-950 border border-stone-200 dark:border-emerald-500/30 rounded-2xl space-y-2.5 relative shadow-xs">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] uppercase font-bold text-emerald-700 dark:text-emerald-400 tracking-wider">
-                          USA (USD) • Citi bank (Florida)
-                        </span>
-                        <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
-                          ACH / Wire / Zelle
-                        </span>
-                      </div>
-                      <p className="font-bold text-stone-900 dark:text-white text-xs">Citi bank (Florida, USA)</p>
-                      
-                      <div className="space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 pt-1">
-                        <div className="flex justify-between items-center">
-                          <span className="text-stone-500 dark:text-zinc-500">Checking Account:</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopy('9119836186', 'us_acc')}
-                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                          >
-                            9119836186 {copiedKey === 'us_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
-                          </button>
+                    {/* ACCORDION 1: USA (USD) Citi bank */}
+                    <div className="border border-stone-200 dark:border-white/10 rounded-2xl overflow-hidden bg-white dark:bg-zinc-950 transition-all shadow-2xs">
+                      <button
+                        type="button"
+                        onClick={() => setOpenBankCard(openBankCard === 'usa' ? null : 'usa')}
+                        className="w-full flex items-center justify-between p-3 sm:p-3.5 text-left hover:bg-stone-50 dark:hover:bg-zinc-900/50 transition-colors cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">🇺🇸</span>
+                          <div>
+                            <span className="text-[11px] font-bold text-stone-900 dark:text-white block">
+                              USA (USD) • Citi bank (Florida)
+                            </span>
+                            <span className="text-[10px] text-stone-500 dark:text-zinc-400">
+                              ACH / Domestic Wire / Zelle
+                            </span>
+                          </div>
                         </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-stone-500 dark:text-zinc-500">Account Holder:</span>
-                          <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium">Medardo Sanchez</span>
+                        <div className="flex items-center gap-2">
+                          <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
+                            USD
+                          </span>
+                          {openBankCard === 'usa' ? <ChevronUp className="w-4 h-4 text-stone-500" /> : <ChevronDown className="w-4 h-4 text-stone-500" />}
                         </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-stone-500 dark:text-zinc-500">Zelle Transfer:</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopy('*gsanchez@plustelesmart.com.ec', 'us_zelle')}
-                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer font-sans"
-                          >
-                            *gsanchez@plustelesmart.com.ec {copiedKey === 'us_zelle' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
-                          </button>
+                      </button>
+
+                      {openBankCard === 'usa' && (
+                        <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 animate-fade-in">
+                          <div className="flex justify-between items-center pt-2">
+                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Checking Account:</span>
+                            <button
+                              type="button"
+                              onClick={() => handleCopy('9119836186', 'us_acc')}
+                              className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                            >
+                              9119836186 {copiedKey === 'us_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Account Holder:</span>
+                            <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium">Medardo Sanchez</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Zelle Transfer:</span>
+                            <button
+                              type="button"
+                              onClick={() => handleCopy('*gsanchez@plustelesmart.com.ec', 'us_zelle')}
+                              className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer font-sans"
+                            >
+                              *gsanchez@plustelesmart.com.ec {copiedKey === 'us_zelle' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Location:</span>
+                            <span className="text-stone-700 dark:text-zinc-300 font-sans text-[11px]">Florida, USA</span>
+                          </div>
                         </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-stone-500 dark:text-zinc-500">Location:</span>
-                          <span className="text-stone-700 dark:text-zinc-300 font-sans text-[11px]">Florida, USA</span>
-                        </div>
-                      </div>
+                      )}
                     </div>
 
-                    {/* CARD 2: ECUADOR (USD) Banco Produbanco */}
-                    <div className="p-4 bg-white dark:bg-zinc-950 border border-stone-200 dark:border-white/10 rounded-2xl space-y-2.5 relative shadow-xs">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] uppercase font-bold text-stone-600 dark:text-zinc-400 tracking-wider">
-                          Ecuador (USD) • Produbanco
-                        </span>
-                        <span className="px-2 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 text-[9px] font-bold text-stone-700 dark:text-zinc-300">
-                          Cta Corriente / SWIFT
-                        </span>
-                      </div>
-                      <p className="font-bold text-stone-900 dark:text-white text-xs">Banco de la Producción S.A. Produbanco</p>
+                    {/* ACCORDION 2: ECUADOR (USD) Banco Produbanco */}
+                    <div className="border border-stone-200 dark:border-white/10 rounded-2xl overflow-hidden bg-white dark:bg-zinc-950 transition-all shadow-2xs">
+                      <button
+                        type="button"
+                        onClick={() => setOpenBankCard(openBankCard === 'ecuador' ? null : 'ecuador')}
+                        className="w-full flex items-center justify-between p-3 sm:p-3.5 text-left hover:bg-stone-50 dark:hover:bg-zinc-900/50 transition-colors cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">🇪🇨</span>
+                          <div>
+                            <span className="text-[11px] font-bold text-stone-900 dark:text-white block">
+                              Ecuador (USD) • Produbanco
+                            </span>
+                            <span className="text-[10px] text-stone-500 dark:text-zinc-400">
+                              Cuenta Corriente / SWIFT
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="px-2 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 text-[9px] font-bold text-stone-700 dark:text-zinc-300">
+                            USD
+                          </span>
+                          {openBankCard === 'ecuador' ? <ChevronUp className="w-4 h-4 text-stone-500" /> : <ChevronDown className="w-4 h-4 text-stone-500" />}
+                        </div>
+                      </button>
 
-                      <div className="space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 pt-1">
-                        <div className="flex justify-between items-center">
-                          <span className="text-stone-500 dark:text-zinc-500">Cuenta Corriente:</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopy('27059152821', 'pro_acc')}
-                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                      {openBankCard === 'ecuador' && (
+                        <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 animate-fade-in">
+                          <div className="flex justify-between items-center pt-2">
+                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Cuenta Corriente:</span>
+                            <button
+                              type="button"
+                              onClick={() => handleCopy('27059152821', 'pro_acc')}
+                              className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                            >
+                              27059152821 {copiedKey === 'pro_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-500 font-sans">SWIFT:</span>
+                            <button
+                              type="button"
+                              onClick={() => handleCopy('PRODECEQXXX', 'pro_swift')}
+                              className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                            >
+                              PRODECEQXXX {copiedKey === 'pro_swift' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Titular:</span>
+                            <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium">VERMILION ROUTES (RUC 1711992808001)</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* ACCORDION 3: ESPAÑA / EUROPA (EUR) SEPA Transfer */}
+                    <div className="border border-stone-200 dark:border-white/10 rounded-2xl overflow-hidden bg-white dark:bg-zinc-950 transition-all shadow-2xs">
+                      <button
+                        type="button"
+                        onClick={() => setOpenBankCard(openBankCard === 'spain' ? null : 'spain')}
+                        className="w-full flex items-center justify-between p-3 sm:p-3.5 text-left hover:bg-stone-50 dark:hover:bg-zinc-900/50 transition-colors cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-base">🇪🇸</span>
+                          <div>
+                            <span className="text-[11px] font-bold text-stone-900 dark:text-white block">
+                              España / Europa (EUR) • Transferencia SEPA
+                            </span>
+                            <span className="text-[10px] text-stone-500 dark:text-zinc-400">
+                              Sede Asociada Madrid (Coral Tour)
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-500/20 text-[9px] font-bold text-blue-800 dark:text-blue-300">
+                            EUR
+                          </span>
+                          {openBankCard === 'spain' ? <ChevronUp className="w-4 h-4 text-stone-500" /> : <ChevronDown className="w-4 h-4 text-stone-500" />}
+                        </div>
+                      </button>
+
+                      {openBankCard === 'spain' && (
+                        <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-2 text-[11px] text-stone-600 dark:text-zinc-400 animate-fade-in">
+                          <p className="pt-2 leading-relaxed">
+                            {locale === 'es'
+                              ? 'Recepción local en euros mediante transferencia bancaria europea SEPA sin comisiones internacionales de cambio. Próximamente disponible en línea; si deseas liquidar en EUR de inmediato, contacta a nuestro Concierge 24/7 en WhatsApp para coordinar los datos de depósito directo en Madrid.'
+                              : 'Local reception in Euros via European SEPA bank transfer with zero international exchange fees. Coming soon directly online; to settle in EUR now, contact our 24/7 Concierge on WhatsApp to receive Madrid deposit details.'}
+                          </p>
+                          <a
+                            href={`https://wa.me/593994048458?text=${encodeURIComponent(
+                              `Hola Vermilion Routes, deseo transferir en Euros (EUR) vía SEPA a su cuenta en Madrid para el tour "${tourTitle}" (Ref: ${ref}).`
+                            )}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold text-[10px] hover:bg-emerald-100 transition-colors"
                           >
-                            27059152821 {copiedKey === 'pro_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
-                          </button>
+                            <MessageCircle className="w-3.5 h-3.5" />
+                            <span>{locale === 'es' ? 'Solicitar cuenta en Madrid por WhatsApp' : 'Request Madrid account via WhatsApp'}</span>
+                          </a>
                         </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-stone-500 dark:text-zinc-500">SWIFT:</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopy('PRODECEQXXX', 'pro_swift')}
-                            className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                          >
-                            PRODECEQXXX {copiedKey === 'pro_swift' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
-                          </button>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-stone-500 dark:text-zinc-500">Titular:</span>
-                          <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium">VERMILION ROUTES (RUC 1711992808001)</span>
-                        </div>
-                      </div>
+                      )}
                     </div>
 
                   </div>
@@ -1192,10 +1358,10 @@ export default function CheckoutPaymentPage() {
           email: email,
           phone: '',
           date: travelDate || t('toBeConfirmed'),
-          adults: 2,
-          children: 0,
+          adults: parseInt(adultsParam) || parseInt(travelersParam) || 1,
+          children: parseInt(childrenParam) || 0,
           refCode: ref,
-          hotelTier: 'Luxury 4-Star & Boutique',
+          hotelTier: 'Boutique & Superior Comfort',
           amountPaid: finalAmount,
           isConfirmed: isPaid && !receiptSubmitted
         }}

@@ -52,14 +52,14 @@ const TITLES: Record<string, string> = {
 };
 
 const DESCRIPTIONS: Record<string, string> = {
-  es: 'Conozca la historia, guías naturalistas y filosofía boutique de Vermilion Routes. Expediciones de lujo personalizadas en Galápagos y Ecuador 24/7.',
-  en: 'Discover the heritage, naturalist guides, and bespoke luxury philosophy of Vermilion Routes. Tailor-made expeditions in Galapagos and Ecuador 24/7.',
+  es: 'Conozca la historia, guías naturalistas y filosofía boutique de Vermilion Routes. Expediciones a medida y confort en Galápagos y Ecuador 24/7.',
+  en: 'Discover the heritage, naturalist guides, and bespoke nature philosophy of Vermilion Routes. Tailor-made expeditions in Galapagos and Ecuador 24/7.',
   fr: 'Découvrez l’histoire, les guides naturalistes et la philosophie de Vermilion Routes. Expéditions sur mesure aux Galápagos et en Équateur 24/7.',
-  de: 'Erfahren Sie mehr über Vermilion Routes, unsere Naturführer und maßgeschneiderten Luxusexpeditionen auf den Galápagos-Inseln und in Ecuador 24/7.',
-  it: 'Scopri la storia, le guide naturalistiche e la filosofia su misura di Vermilion Routes. Spedizioni di lusso personalizzate alle Galápagos 24/7.',
+  de: 'Erfahren Sie mehr über Vermilion Routes, unsere Naturführer und maßgeschneiderten Naturexpeditionen auf den Galápagos-Inseln und in Ecuador 24/7.',
+  it: 'Scopri la storia, le guide naturalistiche e la filosofia su misura di Vermilion Routes. Spedizioni su misura e comfort alle Galápagos 24/7.',
   pt: 'Conheça a história, guias naturalistas e filosofia exclusiva da Vermilion Routes. Expedições sob medida em Galápagos e no Equador 24/7.',
-  ja: '2005年設立のVermilion Routes。専任ナチュラリストガイド、24時間VIPコンシェルジュによるガラパゴスとエクアドルの完全オーダーメイド豪華遠征。',
-  zh: '始于2005年的高端探险定制品牌Vermilion Routes。专属自然向导与24小时VIP管家为您打造加拉帕戈斯及厄瓜多尔顶级私享旅程。',
+  ja: '2005年設立のVermilion Routes。専任ナチュラリストガイド、24時間コンシェルジュによるガラパゴスとエクアドルの完全オーダーメイド自然遠征。',
+  zh: '始于2005年的高端探险定制品牌Vermilion Routes。专属自然向导与24小时专属管家为您打造加拉帕戈斯及厄瓜多尔顶级自然旅程。',
 };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           width: 1200,
           height: 630,
           type: 'image/jpeg',
-          alt: 'Vermilion Routes Luxury Expeditions',
+          alt: 'Vermilion Routes Bespoke Nature Expeditions',
         },
       ],
       type: 'website',
@@ -146,7 +146,7 @@ export default async function AboutPage({ params }: PageProps) {
   }> = {
     es: {
       h1: "Sobre Nosotros y Expediciones Vermilion Routes",
-      heroSubtitle: "Operador turístico boutique pionero en expediciones privadas de lujo, conservación activa y diseño de itinerarios a medida en Ecuador y las Islas Galápagos desde 2005.",
+      heroSubtitle: "Operador turístico boutique pionero en expediciones privadas de naturaleza y confort, conservación activa y diseño de itinerarios a medida en Ecuador y Galápagos desde 2005.",
       heroBadge: "Operador Boutique Certificado • Desde 2005",
       heritageHeading: "Nuestra Historia y Filosofía de Expedición",
       heritageP1: "Vermilion Routes nació con una convicción inquebrantable: los ecosistemas más extraordinarios del planeta no deben experimentarse de forma masiva ni superficial. Desde nuestro origen en Quito, hemos dedicado más de dos décadas a diseñar expediciones profundamente respetuosas con la vida silvestre, con una atención al detalle artesanal y con un ritmo verdaderamente pausado.",
@@ -175,8 +175,8 @@ export default async function AboutPage({ params }: PageProps) {
       ctaButton: "Contactar a un Diseñador de Viajes",
     },
     en: {
-      h1: "About Vermilion Routes Luxury Bespoke Expeditions",
-      heroSubtitle: "Pioneering boutique tour operator crafting bespoke private luxury expeditions, active conservation journeys, and tailor-made travel across Ecuador and the Galapagos since 2005.",
+      h1: "About Vermilion Routes Bespoke Nature Expeditions",
+      heroSubtitle: "Pioneering boutique tour operator crafting bespoke private nature expeditions, active conservation journeys, and tailor-made travel across Ecuador and the Galapagos since 2005.",
       heroBadge: "Certified Boutique Tour Operator • Since 2005",
       heritageHeading: "Our Heritage & Expedition Philosophy",
       heritageP1: "Vermilion Routes was founded on a simple conviction: the most fragile and wondrous ecosystems on Earth should never be experienced through hurried, mass tourism. Rooted in Quito, we have spent two decades perfecting private, respectful wildlife expeditions characterized by artisanal attention to detail and unhurried pacing.",
@@ -185,7 +185,7 @@ export default async function AboutPage({ params }: PageProps) {
       p1Title: "Level III Naturalist Guides",
       p1Desc: "Led exclusively by certified naturalist biologists born and raised in the islands, providing unparalleled insight into endemic wildlife behavior.",
       p2Title: "Bespoke Pacing & Private Charters",
-      p2Desc: "No crowded buses or generic schedules. Handpicked boutique catamarans, private luxury transfers, and itineraries customized to your rhythm.",
+      p2Desc: "No crowded buses or generic schedules. Handpicked boutique catamarans, private comfortable transfers, and itineraries customized to your rhythm.",
       p3Title: "Regeneration & Pakari Experience",
       p3Desc: "Every expedition features single-origin organic chocolate tastings and directly funds local artisan cooperatives and coastal conservation.",
       hubsHeading: "Our Two Global Headquarters",

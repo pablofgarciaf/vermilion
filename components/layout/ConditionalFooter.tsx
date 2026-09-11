@@ -9,7 +9,8 @@ export function ConditionalFooter() {
     pathname?.includes('/cpanel') || 
     pathname?.includes('/operator') || 
     pathname?.includes('/affiliates') || 
-    pathname?.includes('/auth')
+    pathname?.includes('/auth') ||
+    pathname?.includes('/checkout')
   ) return null;
   return <Footer />;
 }

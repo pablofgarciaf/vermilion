@@ -87,8 +87,8 @@ export function PresentationClient({ initialRef = '', initialLogin = false }: Pr
 
           <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed font-normal">
             {isEs
-              ? 'Forma parte de la comunidad más exclusiva de la industria turística. Comparte tu código, regala un 10% de descuento automático a tus clientes en expediciones de lujo y obtén un 10% de comisión directa en efectivo más participaciones en nuestro Fondo Global de utilidades.'
-              : 'Be part of the most exclusive community in the luxury travel industry. Share your code, gift a 10% automatic discount to your clients, and earn 10% direct cash commissions plus global profit pools.'}
+              ? 'Forma parte de la comunidad más exclusiva de la industria turística. Comparte tu código, regala un 10% de descuento automático a tus clientes en expediciones a medida y obtén un 10% de comisión directa en efectivo más participaciones en nuestro Fondo Global de utilidades.'
+              : 'Be part of the most exclusive community in the bespoke travel industry. Share your code, gift a 10% automatic discount to your clients, and earn 10% direct cash commissions plus global profit pools.'}
           </p>
 
           {/* 2 Action Buttons in Hero */}

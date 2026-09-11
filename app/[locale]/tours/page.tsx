@@ -28,24 +28,24 @@ import { getSeoAlternates } from '@/utils/seoHelper';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const titles: Record<string, string> = {
-    es: 'Vermilion Routes | Catálogo de Expediciones de Lujo 24/7',
-    en: 'Vermilion Routes | Luxury Ecuador & Galapagos Tours',
-    fr: 'Vermilion Routes | Circuits de Luxe Équateur et Galápagos',
-    de: 'Vermilion Routes | Luxusreisen nach Ecuador & Galápagos',
-    it: 'Vermilion Routes | Viaggi di Lusso in Ecuador e Galápagos',
-    pt: 'Vermilion Routes | Expedições de Luxo no Equador e Galápagos',
-    ja: 'Vermilion Routes | ガラパゴス＆エクアドル豪華遠征ツアー',
-    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯顶级奢华探险之旅',
+    es: 'Vermilion Routes | Catálogo de Expediciones a Medida',
+    en: 'Vermilion Routes | Bespoke Nature Expeditions Catalog',
+    fr: 'Vermilion Routes | Circuits sur Mesure en Équateur 24/7',
+    de: 'Vermilion Routes | Naturreisen nach Ecuador & Galápagos',
+    it: 'Vermilion Routes | Viaggi su Misura in Ecuador e Andes',
+    pt: 'Vermilion Routes | Expedições sob Medida no Equador 24/7',
+    ja: 'Vermilion Routes | ガラパゴス＆エクアドル自然遠征ツアー',
+    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯群岛自然探险',
   };
   const descriptions: Record<string, string> = {
-    es: 'Explore nuestro catálogo exclusivo de viajes de lujo a Galápagos, la Amazonía y los Andes. Itinerarios privados a medida con atención personalizada 24/7.',
-    en: 'Explore our curated catalog of luxury expeditions to Galapagos, the Amazon and Andes. Bespoke private itineraries with dedicated 24/7 travel concierge.',
-    fr: 'Découvrez notre catalogue exclusif d’expéditions de luxe aux Galápagos, en Amazonie et dans les Andes. Itinéraires privés sur mesure avec conciergerie 24/7.',
-    de: 'Entdecken Sie unseren exklusiven Katalog für Luxusexpeditionen nach Galápagos, ins Amazonasgebiet und in die Anden. 24/7 Concierge-Service.',
-    it: 'Esplora il nostro catalogo esclusivo di viaggi di lusso alle Galápagos, in Amazzonia e nelle Ande. Itinerari privati personalizzati con concierge 24/7.',
-    pt: 'Explore nosso catálogo exclusivo de expedições de luxo para Galápagos, Amazônia e Andes. Roteiros privativos sob medida com concierge 24/7.',
-    ja: 'ガラパゴス諸島、アマゾン熱帯雨林、アンデス山脈を巡る厳選ラグジュアリー遠征ツアー。専任コンシェルジュデスクが24時間年中無休でご案内いたします。',
-    zh: '探索我们精选的厄瓜多尔、加拉帕戈斯、亚马逊与安第斯山脉顶级奢华探险行程。量身定制私人路线，配备专属24/7全天候私人旅行管家。',
+    es: 'Explore nuestro catálogo exclusivo de viajes a medida a Galápagos, la Amazonía y los Andes. Itinerarios privados con confort y atención 24/7.',
+    en: 'Explore our curated catalog of nature expeditions to Galapagos, the Amazon and Andes. Bespoke private itineraries with dedicated 24/7 concierge.',
+    fr: 'Découvrez notre catalogue d’expéditions sur mesure aux Galápagos, en Amazonie et dans les Andes. Itinéraires privés avec conciergerie 24/7.',
+    de: 'Entdecken Sie unseren Katalog für Naturexpeditionen nach Galápagos, ins Amazonasgebiet und in die Anden. 24/7 Concierge-Service und Komfort.',
+    it: 'Esplora il catalogo di viaggi su misura alle Galápagos, in Amazzonia e nelle Ande. Itinerari privati personalizzati con concierge dedicato 24/7.',
+    pt: 'Explore nosso catálogo exclusivo de expedições para Galápagos, Amazônia e Andes. Roteiros privativos sob medida com conforto e concierge 24/7.',
+    ja: 'ガラパゴス諸島、アマゾン熱帯雨林、アンデス山脈を巡る厳選自然遠征ツアー。専任コンシェルジュデスクが24時間年中無休でご案内いたします。',
+    zh: '探索我们精选的厄瓜多尔、加拉帕戈斯、亚马逊与安第斯山脉自然探险行程。量身定制私人路线，配备专属24/7全天候私人旅行管家。',
   };
 
   const title = titles[locale] || titles['en'];
@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           width: 1200,
           height: 630,
           type: 'image/jpeg',
-          alt: 'Vermilion Routes Curated Luxury Expeditions',
+          alt: 'Vermilion Routes Curated Nature Expeditions',
         },
       ],
     },
@@ -128,7 +128,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
     combinedTag: string;
   }> = {
     es: {
-      schemaName: 'Catálogo de Expediciones de Lujo',
+      schemaName: 'Catálogo de Expediciones a Medida',
       schemaDesc: 'Catálogo de tours y expediciones boutique en Galápagos y Ecuador continental.',
       heroBadge: 'Catálogo de Expediciones Exclusivas',
       heroTitleP1: 'Colección de ',
@@ -158,8 +158,8 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       combinedTag: 'Andes + Galápagos VIP',
     },
     en: {
-      schemaName: 'Curated Luxury Expeditions Catalog',
-      schemaDesc: 'Portfolio of luxury bespoke tours and expeditions across Galapagos and mainland Ecuador.',
+      schemaName: 'Curated Nature Expeditions Catalog',
+      schemaDesc: 'Portfolio of bespoke nature and comfort tours across Galapagos and mainland Ecuador.',
       heroBadge: 'Exclusive Expedition Catalog',
       heroTitleP1: 'Bespoke ',
       heroTitleP2: 'Expeditions',

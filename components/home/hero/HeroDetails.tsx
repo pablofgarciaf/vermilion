@@ -66,14 +66,14 @@ const SPLASH_TEXTS: Record<string, {
 };
 
 const H1_HEADLINES: Record<string, string> = {
-  es: 'Vermilion Routes | Tours de Lujo en Ecuador & Galápagos',
-  en: 'Vermilion Routes | Luxury Tours in Ecuador & Galapagos',
-  fr: 'Vermilion Routes | Voyages de Luxe en Équateur & Galapagos',
-  de: 'Vermilion Routes | Luxusreisen in Ecuador & Galapagos',
-  it: 'Vermilion Routes | Tour di Lusso in Ecuador e Galapagos',
-  pt: 'Vermilion Routes | Viagens de Luxo no Equador & Galápagos',
-  ja: 'Vermilion Routes | エクアドル＆ガラパゴス 高級ツアー',
-  zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯定制奢华游',
+  es: 'Vermilion Routes | Expediciones a Medida en Ecuador',
+  en: 'Vermilion Routes | Bespoke Nature Expeditions 24/7',
+  fr: 'Vermilion Routes | Circuits sur Mesure en Équateur',
+  de: 'Vermilion Routes | Naturreisen in Ecuador & Galápagos',
+  it: 'Vermilion Routes | Tour su Misura in Ecuador e Andes',
+  pt: 'Vermilion Routes | Expedições sob Medida no Equador',
+  ja: 'Vermilion Routes | エクアドル＆ガラパゴス自然旅行 24/7',
+  zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯自然探险 24/7',
 };
 
 export function getStandardTemplateHTML(slide: SlideData, locale: string): string {

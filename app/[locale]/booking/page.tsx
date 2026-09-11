@@ -6,24 +6,24 @@ import { getSeoAlternates } from '@/utils/seoHelper';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const titles: Record<string, string> = {
-    es: 'Vermilion Routes | Reserva tu Expedición de Lujo a Medida',
-    en: 'Vermilion Routes | Book Your Bespoke Luxury Vacation',
-    fr: 'Vermilion Routes | Réservez Votre Voyage de Luxe 24/7',
-    de: 'Vermilion Routes | Buchen Sie Ihre Luxusreise nach Maß',
-    it: 'Vermilion Routes | Prenota la Tua Spedizione di Lusso',
-    pt: 'Vermilion Routes | Reserve sua Viagem de Luxo sob Medida',
-    ja: 'Vermilion Routes | ガラパゴス＆エクアドル豪華旅行予約',
-    zh: 'Vermilion Routes | 预订厄瓜多尔与加拉帕戈斯私享之旅',
+    es: 'Vermilion Routes | Reserva tu Expedición a Medida 24/7',
+    en: 'Vermilion Routes | Book Your Bespoke Nature Journey',
+    fr: 'Vermilion Routes | Réservez Votre Voyage sur Mesure',
+    de: 'Vermilion Routes | Buchen Sie Ihre Reise nach Maß',
+    it: 'Vermilion Routes | Prenota la Tua Spedizione Unica',
+    pt: 'Vermilion Routes | Reserve sua Viagem sob Medida',
+    ja: 'Vermilion Routes | ガラパゴス＆エクアドル自然旅行予約',
+    zh: 'Vermilion Routes | 预订厄瓜多尔与加拉帕戈斯自然之旅',
   };
   const descriptions: Record<string, string> = {
-    es: 'Reserve su expedición de lujo a medida en Galápagos y Ecuador con Vermilion Routes. Asesoría de viaje personalizada 24/7 y cotizaciones exclusivas.',
-    en: 'Book your bespoke luxury expedition to the Galapagos Islands & Ecuador with Vermilion Routes. Dedicated 24/7 travel designers & custom quotes.',
-    fr: 'Réservez votre expédition de luxe sur mesure aux Galápagos et en Équateur avec Vermilion Routes. Conseillers privés dédiés 24/7 et devis sur mesure.',
-    de: 'Buchen Sie Ihre maßgeschneiderte Luxusexpedition nach Galápagos und Ecuador mit Vermilion Routes. 24/7 persönliche Reiseberatung und VIP-Angebote.',
-    it: 'Prenota la tua spedizione di lusso su misura alle Galápagos ed in Ecuador con Vermilion Routes. Consulenti di viaggio dedicati 24/7 e preventivi VIP.',
-    pt: 'Reserve sua expedição de luxo sob medida em Galápagos e no Equador com a Vermilion Routes. Consultoria de viagem dedicada 24/7 e cotações VIP.',
-    ja: 'ガラパゴス諸島とエクアドル本土への最高峰オーダーメイド豪華旅行をご予約ください。専任トラベルデザイナーが24時間体制で見積もりを作成します。',
-    zh: '立即在线预约定制专属尊享的厄瓜多尔与加拉帕戈斯群岛顶级奢华探险行程。24/7全天候私人旅行设计师竭诚为您提供一对一专属行程规划与尊享定制报价。',
+    es: 'Reserve su expedición a medida en Galápagos y Ecuador con Vermilion Routes. Naturaleza, confort, asesoría 24/7 y cotizaciones exclusivas garantizadas.',
+    en: 'Book your bespoke nature and comfort expedition to Galapagos and Ecuador with Vermilion Routes. Dedicated 24/7 travel designers and custom quotes.',
+    fr: 'Réservez votre expédition sur mesure aux Galápagos et en Équateur avec Vermilion Routes. Nature, confort, conseillers dédiés 24/7 et devis exclusifs.',
+    de: 'Buchen Sie Ihre maßgeschneiderte Naturexpedition nach Galápagos und Ecuador mit Vermilion Routes. 24/7 persönliche Reiseberatung und Angebote.',
+    it: 'Prenota la tua spedizione su misura alle Galápagos ed in Ecuador con Vermilion Routes. Natura, comfort, consulenti dedicati 24/7 e preventivi diretti.',
+    pt: 'Reserve sua expedição sob medida em Galápagos e no Equador com a Vermilion Routes. Natureza, conforto, consultoria dedicada 24/7 e cotações diretas.',
+    ja: 'ガラパゴス諸島とエクアドル本土へのオーダーメイド自然体験ツアーをご予約ください。専任トラベルデザイナーが24時間体制で見積もりを作成します。',
+    zh: '在线预约定制专属的厄瓜多尔与加拉帕戈斯群岛自然探险行程。24/7全天候私人旅行设计师竭诚为您提供一对一专属行程规划与安全舒适体验。',
   };
 
   const title = titles[locale] || titles['en'];
@@ -47,7 +47,7 @@ export default async function BookingPage({ params }: { params: Promise<{ locale
         {/* Static SSR H1 Header - Guarantees H1 is first heading in DOM */}
         <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-zinc-900 dark:text-white tracking-tight">
-            {isEs ? 'Reserva tu Expedición de Lujo a Medida' : 'Book Your Bespoke Luxury Expedition'}
+            {isEs ? 'Reserva tu Expedición a Medida en Ecuador y Galápagos' : 'Book Your Bespoke Nature Expedition in Galapagos & Andes'}
           </h1>
           <p className="text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm max-w-xl mx-auto">
             {isEs

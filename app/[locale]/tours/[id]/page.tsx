@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
   const rawTitle = getLocalizedText(tour.title, resolvedParams.locale) || 'Bespoke Tour';
   let title = `${rawTitle} | Vermilion Routes`;
   if (title.length < 50) {
-    title = `${rawTitle} Luxury Tour | Vermilion Routes`;
+    title = `${rawTitle} Bespoke Tour | Vermilion Routes`;
   }
   if (title.length > 60) {
     title = `${rawTitle.slice(0, 60 - 19).trim()} | Vermilion Routes`;
@@ -91,12 +91,12 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
     }
   } else if (description.length < 120) {
     const ctas: Record<string, string> = {
-      es: ' Reserve su expedición de lujo con guías expertos y atención VIP 24/7.',
-      en: ' Book your bespoke luxury journey with expert naturalist guides and 24/7 VIP support.',
-      fr: ' Réservez votre expédition de luxe avec guides experts et conciergerie 24/7.',
-      de: ' Buchen Sie Ihre Luxusreise mit erstklassigen Guides und 24/7 VIP-Betreuung.',
-      it: ' Prenota la tua spedizione di lusso con guide naturalistiche e supporto 24/7.',
-      pt: ' Reserve sua expedição de luxo com guias especialistas e suporte VIP 24/7.',
+      es: ' Reserve su expedición a medida con guías expertos y atención personalizada 24/7.',
+      en: ' Book your bespoke nature journey with expert naturalist guides and 24/7 support.',
+      fr: ' Réservez votre expédition sur mesure avec guides experts et conciergerie 24/7.',
+      de: ' Buchen Sie Ihre Reise mit erstklassigen Natur-Guides und 24/7-Betreuung.',
+      it: ' Prenota la tua spedizione su misura con guide naturalistiche e supporto 24/7.',
+      pt: ' Reserve sua expedição sob medida com guias especialistas e suporte 24/7.',
     };
     description = (description + (ctas[resolvedParams.locale] || ctas['en'])).slice(0, 154);
   }
@@ -194,7 +194,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
     name: title,
     description: getLocalizedText(tour.description || tour.shortDescription, locale),
     image: [tour.mainImage || tour.imageUrl, ...galleryImages],
-    touristType: ['Luxury Traveler', 'Eco-Tourist', 'Family Adventure'],
+    touristType: ['Nature Traveler', 'Eco-Tourist', 'Family Adventure'],
     itinerary: tour.itinerary?.map((day) => ({
       '@type': 'City',
       name: getLocalizedText(day.title, locale),

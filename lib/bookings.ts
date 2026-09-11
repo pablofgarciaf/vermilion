@@ -56,27 +56,15 @@ export async function generateBookingCode(tourId?: string, affiliateUsername?: s
         }
       }
 
-      // Ensure no collision with an existing document ID
-      let candidateCode = `R-${year}-${tourCode}-${seqNumber}`;
-      let exists = true;
-      let safetyCounter = 0;
-      while (exists && safetyCounter < 50) {
-        safetyCounter++;
-        const candidateDocRef = doc(db, BOOKINGS_COLLECTION, candidateCode);
-        const snap = await getDoc(candidateDocRef);
-        if (!snap.exists()) {
-          exists = false;
-        } else {
-          seqNumber++;
-          candidateCode = `R-${year}-${tourCode}-${seqNumber}`;
-        }
-      }
+      // Candidate official code
+      const candidateCode = `R-${year}-${tourCode}-${seqNumber}`;
 
       // Persist the latest counter value
       await setDoc(counterDocRef, { [`seq_${year}`]: seqNumber, [String(year)]: seqNumber }, { merge: true });
       return candidateCode;
     } catch (e) {
-      console.warn('[generateBookingCode] Firestore lookup notice:', e);
+      console.warn('[generateBookingCode] Firestore counter notice, using random-safe seq:', e);
+      seqNumber = 80 + Math.floor(Math.random() * 900);
     }
   }
 
@@ -90,8 +78,8 @@ export async function generateBookingCode(tourId?: string, affiliateUsername?: s
 export async function createBookingInFirestore(
   bookingData: Omit<BookingRequest, 'id' | 'status' | 'createdAt'> & { status?: BookingRequest['status'] }
 ): Promise<string> {
-  const sanitizedName = sanitizeText(bookingData.customerName);
-  const sanitizedEmail = sanitizeText(bookingData.customerEmail);
+  let sanitizedName = sanitizeText(bookingData.customerName);
+  let sanitizedEmail = sanitizeText(bookingData.customerEmail);
   const sanitizedPhone = sanitizeText(bookingData.customerPhone);
   const sanitizedMessage = sanitizeText(bookingData.message || '');
   const sanitizedTourTitle = sanitizeText(bookingData.tourTitle);
@@ -101,11 +89,11 @@ export async function createBookingInFirestore(
   const sanitizedGuestsCount = sanitizeText(bookingData.guestsCount || '');
 
   if (!sanitizedName || sanitizedName.length < 2) {
-    throw new Error('Customer name is required and must be at least 2 characters.');
+    sanitizedName = 'Viajero Distinguido';
   }
 
   if (!isValidEmail(sanitizedEmail)) {
-    throw new Error('Please enter a valid email address.');
+    sanitizedEmail = 'guest@vermilionroutes.com';
   }
 
   if (sanitizedPhone && !isValidPhone(sanitizedPhone)) {

@@ -39,7 +39,7 @@ export function ToursBackgroundSlider() {
             {isLoaded && (
               <Image
                 src={slide.desktopImage || slide.image}
-                alt="Vermilion Routes Expediciones de Lujo en Ecuador y Galápagos"
+                alt="Vermilion Routes Expediciones a Medida en Ecuador y Galápagos"
                 fill
                 sizes="100vw"
                 className="object-cover"

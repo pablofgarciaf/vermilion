@@ -5,7 +5,7 @@ import { Shield, Sparkles, LogOut, ExternalLink } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Vermilion Embassy | Ambassador Executive Portal',
-  description: 'Exclusive affiliate and ambassador network dashboard for Vermilion Routes luxury expeditions.',
+  description: 'Exclusive affiliate and ambassador network dashboard for Vermilion Routes bespoke expeditions.',
   robots: 'noindex, nofollow',
 };
 

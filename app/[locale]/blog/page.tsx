@@ -8,24 +8,24 @@ import { getSeoAlternates } from '@/utils/seoHelper';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const titles: Record<string, string> = {
-    es: 'Vermilion Routes | Guías de Viaje y Expediciones de Lujo',
-    en: 'Vermilion Routes | Luxury Travel Guides and Insights',
-    fr: 'Vermilion Routes | Guides de Voyage & Expéditions Luxe',
-    de: 'Vermilion Routes | Luxus-Reiseführer & Expeditionen',
-    it: 'Vermilion Routes | Guide di Viaggio e Spedizioni di Lusso',
-    pt: 'Vermilion Routes | Guias de Viagem e Expedições de Luxo',
-    ja: 'Vermilion Routes | 豪華旅行ガイドとエクアドル遠征記',
-    zh: 'Vermilion Routes | 顶级旅行指南与厄瓜多尔探险纪行',
+    es: 'Vermilion Routes | Guías de Viaje y Expediciones a Medida',
+    en: 'Vermilion Routes | Nature Travel Guides and Insights',
+    fr: 'Vermilion Routes | Guides de Voyage & Circuits Nature',
+    de: 'Vermilion Routes | Reiseführer & Expeditionen nach Maß',
+    it: 'Vermilion Routes | Guide di Viaggio e Spedizioni Uniche',
+    pt: 'Vermilion Routes | Guias de Viagem e Expedições a Medida',
+    ja: 'Vermilion Routes | 自然旅行ガイドとエクアドル遠征記',
+    zh: 'Vermilion Routes | 自然旅行指南与厄瓜多尔探险纪行',
   };
   const descriptions: Record<string, string> = {
-    es: 'Guías de viaje y consejos exclusivos para explorar Galápagos, los Andes y la Amazonía ecuatoriana con la asesoría de Vermilion Routes 24/7.',
-    en: 'Curated luxury travel guides, wildlife insights and expedition tips for Galapagos and Ecuador. Plan your bespoke journey with local experts 24/7.',
-    fr: 'Guides de voyage d’exception et conseils d’experts pour explorer les Galápagos, les Andes et l’Amazonie équatorienne avec Vermilion 24/7.',
-    de: 'Exklusive Reiseführer, Tierbeobachtungstipps und Routen für Galápagos und Ecuador. Planen Sie Ihre individuelle Luxusreise 24/7.',
-    it: 'Guide di viaggio di lusso ed approfondimenti per esplorare Galápagos, le Ande e l’Amazzonia con gli esperti di Vermilion Routes 24/7.',
-    pt: 'Guias de viagem exclusivos e dicas de expedição para explorar Galápagos, os Andes e a Amazônia com a assessoria da Vermilion Routes 24/7.',
-    ja: 'ガラパゴス諸島、アンデス山脈、アマゾン熱帯雨林を巡る豪華旅行ガイド。現地ナチュラリストが24時間体制でオーダーメイドの旅をご案内。',
-    zh: '精心打造的顶级奢华旅行指南、野生动物洞察与探险建议，带您深度探索加拉帕戈斯与厄瓜多尔。本地自然学专家24/7全天候专属定制服务。',
+    es: 'Guías de viaje y consejos para explorar Galápagos, los Andes y la Amazonía ecuatoriana con la asesoría de expertos de Vermilion Routes 24/7.',
+    en: 'Curated nature travel guides, wildlife insights and expedition tips for Galapagos and Ecuador. Plan your bespoke journey with experts 24/7.',
+    fr: 'Guides de voyage et conseils d’experts pour explorer les Galápagos, les Andes et l’Amazonie équatorienne avec Vermilion Routes 24/7.',
+    de: 'Exklusive Reiseführer, Tierbeobachtungstipps und Routen für Galápagos und Ecuador. Planen Sie Ihre Reise mit lokalen Experten 24/7.',
+    it: 'Guide di viaggio ed approfondimenti per esplorare Galápagos, le Ande e l’Amazzonia con gli esperti di Vermilion Routes 24/7.',
+    pt: 'Guias de viagem e dicas de expedição para explorar Galápagos, os Andes e a Amazônia com a assessoria da Vermilion Routes 24/7.',
+    ja: 'ガラパゴス諸島、アンデス山脈、アマゾン熱帯雨林を巡る自然旅行ガイド。現地ナチュラリストが24時間体制でオーダーメイドの旅をご案内。',
+    zh: '精心打造的自然探险旅行指南、野生动物洞察与探险建议，带您深度探索加拉帕戈斯与厄瓜多尔。本地自然学专家24/7专属定制服务。',
   };
 
   const title = titles[locale] || titles['en'];
@@ -59,7 +59,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           width: 1200,
           height: 630,
           type: 'image/jpeg',
-          alt: 'Vermilion Routes Luxury Travel Guides & Expeditions',
+          alt: 'Vermilion Routes Nature Travel Guides & Expeditions',
         },
       ],
     },
@@ -98,8 +98,8 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       loading: 'Cargando guías de viaje...'
     },
     en: {
-      schemaName: 'Vermilion Luxury Travel Guides & Insights',
-      schemaDesc: 'Curated luxury travel guides, itineraries, and wildlife insights for Galapagos and Ecuador.',
+      schemaName: 'Vermilion Nature Travel Guides & Insights',
+      schemaDesc: 'Curated nature travel guides, itineraries, and wildlife insights for Galapagos and Ecuador.',
       homeBreadcrumb: 'Home',
       blogBreadcrumb: 'Travel Guides',
       badge: 'Vermilion Travel Insights & Guides',

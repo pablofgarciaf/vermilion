@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js';
 import { AlertCircle, Lock, ShieldCheck, Sparkles } from 'lucide-react';
+import { db } from '@/lib/firebase';
+import { doc, setDoc } from 'firebase/firestore';
 
 interface PayPalCheckoutButtonProps {
   amount: number;
@@ -14,6 +16,7 @@ interface PayPalCheckoutButtonProps {
   clientPhone?: string;
   travelDate?: string;
   guestsCount?: string;
+  passengersCount?: number;
   locale?: string;
   affiliateCode?: string;
   onSuccess: (bookingRef: string) => void;
@@ -30,6 +33,7 @@ export function PayPalCheckoutButton({
   clientPhone,
   travelDate,
   guestsCount,
+  passengersCount = 1,
   locale = 'en',
   affiliateCode,
   onSuccess,
@@ -79,6 +83,43 @@ export function PayPalCheckoutButton({
   const handleApprove = async (data: { orderID: string }) => {
     setIsCapturing(true);
     setErrorMessage(null);
+    const cleanName = (clientName || clientEmail.split('@')[0] || 'Viajero Distinguido').trim();
+    const finalName = cleanName.length >= 2 ? cleanName : 'Viajero Distinguido';
+    const cleanEmail = (clientEmail || 'guest@vermilionroutes.com').trim().toLowerCase();
+    const finalEmail = cleanEmail.includes('@') ? cleanEmail : 'guest@vermilionroutes.com';
+
+    // 1. Direct client-side Firestore write
+    if (db) {
+      try {
+        await setDoc(doc(db, 'bookings', bookingRef), {
+          id: bookingRef,
+          refCode: bookingRef,
+          bookingCode: bookingRef,
+          tourId: tourId || 'custom',
+          tourTitle: tourTitle || 'Vermilion Routes Expedition',
+          customerName: finalName,
+          customerEmail: finalEmail,
+          customerPhone: clientPhone || '',
+          travelDates: travelDate || 'To be confirmed',
+          guestsCount: guestsCount || '1 Viajero',
+          passengersCount: passengersCount || 1,
+          destination: 'Ecuador & Galapagos',
+          amountPaid: amount,
+          paidAmount: amount,
+          totalAmount: amount,
+          paymentMethod: 'paypal',
+          paymentStatus: 'confirmed',
+          status: 'confirmed',
+          affiliateCode: affiliateCode || undefined,
+          discountApplied: Boolean(affiliateCode),
+          createdAt: new Date().toISOString(),
+        }, { merge: true });
+        console.log('✅ [PayPal Client Firestore] Booking saved directly:', bookingRef);
+      } catch (dbErr) {
+        console.warn('[PayPal Client Firestore notice]', dbErr);
+      }
+    }
+
     try {
       const res = await fetch('/api/checkout/paypal/capture-order', {
         method: 'POST',
@@ -88,11 +129,12 @@ export function PayPalCheckoutButton({
           bookingRef,
           tourId,
           tourTitle,
-          clientName,
-          clientEmail,
+          clientName: finalName,
+          clientEmail: finalEmail,
           amount,
           travelDate,
           guestsCount,
+          passengersCount,
           locale,
           affiliateCode,
         }),
@@ -113,7 +155,7 @@ export function PayPalCheckoutButton({
     }
   };
 
-  // If PayPal client ID is in setup/fallback, provide seamless luxury payment button without technical warnings
+  // If PayPal client ID is in setup/fallback, provide seamless payment button without technical warnings
   if (!isConfigured) {
     return (
       <div className="space-y-3">
@@ -129,8 +171,45 @@ export function PayPalCheckoutButton({
           disabled={isCapturing}
           onClick={async () => {
             setIsCapturing(true);
+            const cleanName = (clientName || clientEmail.split('@')[0] || 'Viajero Distinguido').trim();
+            const finalName = cleanName.length >= 2 ? cleanName : 'Viajero Distinguido';
+            const cleanEmail = (clientEmail || 'guest@vermilionroutes.com').trim().toLowerCase();
+            const finalEmail = cleanEmail.includes('@') ? cleanEmail : 'guest@vermilionroutes.com';
+
+            // 1. Direct client-side Firestore write
+            if (db) {
+              try {
+                await setDoc(doc(db, 'bookings', bookingRef), {
+                  id: bookingRef,
+                  refCode: bookingRef,
+                  bookingCode: bookingRef,
+                  tourId: tourId || 'custom',
+                  tourTitle: tourTitle || 'Vermilion Routes Expedition',
+                  customerName: finalName,
+                  customerEmail: finalEmail,
+                  customerPhone: clientPhone || '',
+                  travelDates: travelDate || 'To be confirmed',
+                  guestsCount: guestsCount || '1 Viajero',
+                  passengersCount: passengersCount || 1,
+                  destination: 'Ecuador & Galapagos',
+                  amountPaid: amount,
+                  paidAmount: amount,
+                  totalAmount: amount,
+                  paymentMethod: 'paypal',
+                  paymentStatus: 'confirmed',
+                  status: 'confirmed',
+                  affiliateCode: affiliateCode || undefined,
+                  discountApplied: Boolean(affiliateCode),
+                  createdAt: new Date().toISOString(),
+                }, { merge: true });
+                console.log('✅ [PayPal Fallback Client Firestore] Booking saved:', bookingRef);
+              } catch (clientDbErr) {
+                console.warn('[PayPal Fallback Client Firestore notice]', clientDbErr);
+              }
+            }
+
             try {
-              // Persist booking directly to Cloud Firestore
+              // 2. Server-side persistence and email dispatch
               const res = await fetch('/api/checkout/confirm-booking', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -138,12 +217,13 @@ export function PayPalCheckoutButton({
                   bookingRef,
                   tourId,
                   tourTitle,
-                  clientName,
-                  clientEmail,
+                  clientName: finalName,
+                  clientEmail: finalEmail,
                   clientPhone,
                   amount,
                   travelDate,
                   guestsCount,
+                  passengersCount,
                   affiliateCode,
                   paymentMethod: 'paypal',
                   paymentStatus: 'confirmed',

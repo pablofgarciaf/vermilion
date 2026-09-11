@@ -61,12 +61,24 @@ export function TravelVoucherModal({
     if (!tour || isGeneratingPdf) return;
     setIsGeneratingPdf(true);
     try {
-      const { generateTourPDF } = await import('@/lib/pdfGenerator');
-      await generateTourPDF(tour, locale, {
-        bookingCode: clientInfo.refCode,
-        guestName: clientInfo.name,
+      const { generateTravelVoucherPDF } = await import('@/lib/voucherPdfGenerator');
+      const travelersCountStr = clientInfo.adults
+        ? `${clientInfo.adults} ${clientInfo.adults === 1 ? 'Adulto' : 'Adultos'}${clientInfo.children ? `, ${clientInfo.children} Niños` : ''}`
+        : '1 Viajero';
+
+      await generateTravelVoucherPDF({
+        bookingRef: clientInfo.refCode,
+        customerName: clientInfo.name,
+        customerEmail: clientInfo.email,
+        customerPhone: clientInfo.phone,
+        tourTitle: getLocalizedText(tour.title, locale),
+        destination: typeof tour.destination === 'string' ? tour.destination : 'Ecuador & Galápagos',
         travelDate: clientInfo.date,
-        paymentStatus: clientInfo.isConfirmed ? 'CONFIRMED' : 'PENDING WIRE PAYMENT',
+        travelersCount: travelersCountStr,
+        totalAmount: clientInfo.amountPaid || 0,
+        paymentMethod: clientInfo.isConfirmed ? 'PayPal / Tarjeta' : 'Transferencia Bancaria Internacional',
+        paymentStatus: clientInfo.isConfirmed ? 'confirmed' : 'pending_payment',
+        locale,
       });
     } catch (err) {
       console.error('Error generating PDF voucher:', err);
@@ -259,7 +271,7 @@ export function TravelVoucherModal({
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 text-zinc-300 print:text-zinc-700 text-[10px] list-disc list-inside">
               <li>{isEs ? 'Guías Naturalistas bilingües certificados de Galápagos y Parque Nacional' : 'Certified Bilingual Galapagos & National Park Naturalist Guides'}</li>
               <li>{isEs ? 'Todos los traslados VIP terrestres y marítimos privados' : 'All VIP private ground and maritime transfers'}</li>
-              <li>{isEs ? 'Alojamientos boutique de lujo según especificación' : 'Boutique luxury accommodations as specified'}</li>
+              <li>{isEs ? 'Alojamientos boutique de naturaleza y confort según especificación' : 'Boutique comfort & nature accommodations as specified'}</li>
               <li>{isEs ? 'Excursiones, equipo de snorkel de alta gama y permisos privados' : 'Excursions, snorkeling gear & private permits'}</li>
               <li>{isEs ? 'Asistencia y Concierge dedicado 24/7 en ruta' : '24/7 Dedicated Concierge Support en route'}</li>
             </ul>

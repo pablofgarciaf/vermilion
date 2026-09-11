@@ -16,25 +16,25 @@ import { getSeoAlternates } from '@/utils/seoHelper';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const titles: Record<string, string> = {
-    es: 'Vermilion Routes | Viajes de Lujo y Expediciones a Medida',
-    en: 'Vermilion Routes | Bespoke Ecuador & Galapagos Luxury Tours',
-    fr: 'Vermilion Routes | Voyages de Luxe & Circuits en Équateur',
-    de: 'Vermilion Routes | Luxusreisen nach Ecuador & Galápagos 24/7',
-    it: 'Vermilion Routes | Viaggi di Lusso su Misura alle Galápagos',
-    pt: 'Vermilion Routes | Viagens de Luxo no Equador e Galápagos',
-    ja: 'Vermilion Routes | ガラパゴス諸島＆エクアドル豪華オーダーメイド旅行',
-    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯群岛顶级私人定制旅行',
+    es: 'Vermilion Routes | Expediciones a Medida en Ecuador',
+    en: 'Vermilion Routes | Bespoke Nature Expeditions 24/7',
+    fr: 'Vermilion Routes | Voyages sur Mesure en Équateur 24/7',
+    de: 'Vermilion Routes | Reisen nach Ecuador & Galápagos 24/7',
+    it: 'Vermilion Routes | Viaggi su Misura alle Galápagos 24/7',
+    pt: 'Vermilion Routes | Viagens sob Medida no Equador 24/7',
+    ja: 'Vermilion Routes | ガラパゴス＆エクアドル自然旅行 24/7',
+    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯群岛自然探险',
   };
 
   const descriptions: Record<string, string> = {
-    es: 'Descubra Ecuador y Galápagos con viajes de lujo a medida, cruceros exclusivos, lodges en la Amazonía y volcanes andinos. Reserve con guías expertos 24/7.',
-    en: 'Experience Ecuador and Galapagos with bespoke private itineraries, luxury boutique cruises, Amazon lodges, and Andean volcanic treks with 24/7 concierges.',
-    fr: 'Vivez l’Équateur et les Galápagos lors de voyages de luxe sur mesure, croisières intimes, lodges amazoniens et treks andins avec conciergerie privée 24/7.',
-    de: 'Erleben Sie Ecuador und Galápagos auf maßgeschneiderten Luxusreisen, Boutique-Kreuzfahrten, Amazonas-Lodges und Anden-Vulkantreks mit 24/7-Concierge.',
-    it: 'Vivi l’Ecuador e le Galápagos con viaggi di lusso su misura, crociere boutique, lodge in Amazzonia e trekking andini assistiti da concierge dedicati 24/7.',
-    pt: 'Viva o Equador e Galápagos em viagens de luxo sob medida, cruzeiros exclusivos, lodges na Amazônia e vulcões andinos com concierges dedicados 24/7.',
-    ja: 'ガラパゴス諸島とエクアドル本土を巡る最高峰の豪華オーダーメイド旅行。専任ナチュラリストガイドと24時間体制のコンシェルジュが特別な体験をお届けします。',
-    zh: '探索厄瓜多尔与加拉帕戈斯群岛的非凡奢华探险之旅。配备官方认证私人自然学向导与24/7全天候专属礼宾管家，为您量身打造毕生难忘的私享假期。',
+    es: 'Descubra Ecuador y Galápagos con viajes a medida, confort supremo, cruceros selectos, lodges en la Amazonía y volcanes andinos. Expertos 24/7.',
+    en: 'Experience Ecuador and Galapagos with bespoke private itineraries, nature cruises, Amazon lodges, and Andean volcanic treks with 24/7 concierges.',
+    fr: 'Vivez l’Équateur et les Galápagos lors de voyages sur mesure, croisières intimes, lodges amazoniens et treks andins avec conciergerie privée 24/7.',
+    de: 'Erleben Sie Ecuador und Galápagos auf maßgeschneiderten Reisen, Naturkreuzfahrten, Amazonas-Lodges und Anden-Vulkantreks mit 24/7-Concierge.',
+    it: 'Vivi l’Ecuador e le Galápagos con viaggi su misura, crociere boutique, lodge in Amazzonia e trekking andini assistiti da concierge dedicati 24/7.',
+    pt: 'Viva o Equador e Galápagos em viagens sob medida, cruzeiros exclusivos, lodges na Amazônia e vulcões andinos com concierges dedicados 24/7.',
+    ja: 'ガラパゴス諸島とエクアドル本土を巡るオーダーメイド自然旅行。専任ナチュラリストガイドと24時間体制のコンシェルジュが特別な体験をお届けします。',
+    zh: '探索厄瓜多尔与加拉帕戈斯群岛的自然探险之旅。配备官方认证私人自然学向导与24/7全天候专属礼宾管家，为您量身打造安全舒适的私享假期。',
   };
 
   const title = titles[locale] || titles['en'];
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
           width: 1200,
           height: 630,
-          alt: 'Vermilion Routes - Bespoke Luxury Journeys',
+          alt: 'Vermilion Routes - Bespoke Nature Journeys',
         },
       ],
       locale,

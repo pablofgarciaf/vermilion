@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const cleanTitle = rawTitle.replace(/&/g, 'and').replace(/\s+/g, ' ').trim();
   let title = `${cleanTitle} | Vermilion Routes`;
   if (title.length < 50) {
-    title = `${cleanTitle} - Luxury Travel Guide | Vermilion Routes`;
+    title = `${cleanTitle} - Travel Guide | Vermilion Routes`;
   }
   if (title.length > 60) {
     const available = 60 - ' | Vermilion Routes'.length; // 41
@@ -72,12 +72,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
   } else if (description.length < 120) {
     const ctas: Record<string, string> = {
-      es: ' Descubra la asesoría de viaje de lujo 24/7 con Vermilion Routes.',
-      en: ' Discover bespoke luxury travel planning 24/7 with Vermilion Routes.',
-      fr: ' Découvrez nos voyages de luxe sur mesure 24/7 avec Vermilion Routes.',
-      de: ' Entdecken Sie maßgeschneiderte Luxusreisen 24/7 mit Vermilion Routes.',
-      it: ' Scopri i viaggi di lusso su misura 24/7 con Vermilion Routes.',
-      pt: ' Descubra viagens de luxo sob medida 24/7 com a Vermilion Routes.',
+      es: ' Descubra la asesoría de viajes a medida 24/7 con Vermilion Routes.',
+      en: ' Discover bespoke nature travel planning 24/7 with Vermilion Routes.',
+      fr: ' Découvrez nos voyages sur mesure 24/7 avec Vermilion Routes.',
+      de: ' Entdecken Sie maßgeschneiderte Reisen 24/7 mit Vermilion Routes.',
+      it: ' Scopri i viaggi su misura 24/7 con Vermilion Routes.',
+      pt: ' Descubra viagens sob medida 24/7 com a Vermilion Routes.',
     };
     description = (description + (ctas[locale] || ctas['en'])).slice(0, 155);
   }
@@ -205,7 +205,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       topics: 'Related Topics:',
       guideComfort: 'Experience this destination in complete comfort with customized private transport, VIP airport assistance, and 24/7 concierge.',
       viewItinerary: 'View Itinerary',
-      luxuryService: 'Private Naturalist Guide · Luxury Accommodations'
+      luxuryService: 'Private Naturalist Guide · Boutique Accommodations'
     },
     fr: {
       back: 'Retour à tous les guides de voyage',

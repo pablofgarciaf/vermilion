@@ -35,17 +35,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'meta' });
   const isEs = locale === 'es';
   const defaultTitle = isEs
-    ? 'Vermilion Routes | Viajes de Lujo a Medida 24/7 en Ecuador'
-    : 'Vermilion Routes | Bespoke Ecuador & Galapagos Tours';
+    ? 'Vermilion Routes | Expediciones a Medida en Ecuador'
+    : 'Vermilion Routes | Bespoke Nature Expeditions 24/7';
   const defaultDescription = isEs
-    ? 'Agencia boutique de lujo para expediciones a medida en Galápagos, la Amazonía y los Andes ecuatorianos. Reserve con expertos locales 24/7.'
-    : 'Expert-guided bespoke tours to the Galapagos Islands, Amazon Rainforest and Andean volcanoes. Ecuador premier luxury boutique travel agency 24/7.';
+    ? 'Operador boutique para expediciones a medida en Galápagos, la Amazonía y los Andes ecuatorianos. Confort, naturaleza y expertos locales 24/7.'
+    : 'Boutique tour operator for bespoke expeditions to Galapagos, the Amazon and the Ecuadorian Andes. Nature, comfort, and local experts 24/7.';
 
   return {
     title: t('title') || defaultTitle,
     description: t('description') || defaultDescription,
     keywords: [
-      'Galapagos luxury tours',
+      'Galapagos bespoke tours',
       'Galapagos island hopping',
       'Ecuador travel agency',
       'bespoke Ecuador travel',
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'Baños Pailón del Diablo (Devil\'s Cauldron)',
       'Quito colonial tour',
       'Vermilion Routes',
-      'luxury boutique travel Ecuador',
+      'nature boutique travel Ecuador',
     ],
     authors: [{ name: 'Vermilion Routes' }],
     creator: 'Vermilion Routes',
@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           width: 1200,
           height: 630,
           type: 'image/jpeg',
-          alt: 'Giant Tortoises of Galapagos – Vermilion Routes Luxury Ecuador Travel',
+          alt: 'Giant Tortoises of Galapagos – Vermilion Routes Bespoke Nature Travel',
         },
       ],
       locale: {
@@ -96,6 +96,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title: t('title') || defaultTitle,
       description: t('description') || defaultDescription,
       images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'],
+    },
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'google-site-verification-vermilion',
     },
     other: {
       ...(process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION
@@ -141,11 +144,11 @@ export default async function RootLayout({
         '@type': ['TravelAgency', 'Organization'],
         '@id': 'https://www.vermilionroutes.com/#organization',
         name: 'Vermilion Routes - Agencia de Viajes Vermilion',
-        alternateName: 'Vermilion Routes Luxury & Bespoke Travel',
+        alternateName: 'Vermilion Routes Bespoke Nature Travel',
         legalName: 'Agencia de Viajes Vermilion Cia. Ltda.',
         taxID: '1711992808001',
         description:
-          'Premier luxury boutique tour operator specializing in bespoke travel itineraries, Galapagos island cruises, Amazon lodges, and Andean expeditions in Ecuador.',
+          'Premier boutique tour operator specializing in bespoke nature and comfort itineraries, Galapagos island cruises, Amazon lodges, and Andean expeditions in Ecuador.',
         url: 'https://www.vermilionroutes.com',
         logo: 'https://www.vermilionroutes.com/logo.png',
         image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',

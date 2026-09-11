@@ -88,7 +88,14 @@ export function PriceCalculator({
       <div className="space-y-3 pt-6 border-t border-zinc-100 dark:border-zinc-800/80 mb-6" suppressHydrationWarning>
         {pricing.adultsCount > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-zinc-500 dark:text-zinc-400">Adultos ({pricing.adultsCount} x ${formatAmount(pricing.basePricePerAdult)})</span>
+            <span className="text-zinc-500 dark:text-zinc-400">
+              Adultos ({pricing.adultsCount} x ${formatAmount(pricing.basePricePerAdult)})
+              {pricing.minTwoPersonApplied && (
+                <span className="block text-[11px] text-amber-600 dark:text-amber-400 font-medium">
+                  (Mínimo operativo tour diario: 2 personas)
+                </span>
+              )}
+            </span>
             <span className="font-medium text-zinc-900 dark:text-white">${formatAmount(pricing.adultsTotal)}</span>
           </div>
         )}

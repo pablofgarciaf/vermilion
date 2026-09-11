@@ -20,12 +20,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯蜜月浪漫之旅',
   };
   const descriptions: Record<string, string> = {
-    es: 'Viajes románticos a medida en Galápagos y Ecuador: atardeceres volcánicos, lodges boutique y cenas exclusivas con asesoría de viaje de lujo 24/7.',
-    en: 'Bespoke romantic getaways in Galapagos & Ecuador: volcanic sunsets, luxury lodges and starlit dinners with dedicated 24/7 private travel designers.',
+    es: 'Viajes románticos a medida en Galápagos y Ecuador: atardeceres volcánicos, lodges boutique y cenas exclusivas con asesoría experta 24/7.',
+    en: 'Bespoke romantic getaways in Galapagos & Ecuador: volcanic sunsets, boutique lodges and starlit dinners with dedicated 24/7 private travel designers.',
     fr: 'Échappées romantiques sur mesure aux Galápagos et en Équateur: couchers de soleil volcaniques, lodges de charme et dîners étoilés avec conciergerie.',
-    de: 'Maßgeschneiderte Romantikreisen nach Galápagos und Ecuador: spektakuläre Sonnenuntergänge, Luxus-Lodges und Candle-Light-Dinner mit 24/7-Concierge.',
+    de: 'Maßgeschneiderte Romantikreisen nach Galápagos und Ecuador: spektakuläre Sonnenuntergänge, Boutique-Lodges und Candle-Light-Dinner mit 24/7-Concierge.',
     it: 'Fughe romantiche su misura alle Galápagos ed in Ecuador: tramonti vulcanici, boutique lodge e cene esclusive con assistenza di viaggio dedicata 24/7.',
-    pt: 'Viagens românticas sob medida em Galápagos e no Equador: pores do sol vulcânicos, lodges boutique e jantares exclusivos com assessoria de luxo 24/7.',
+    pt: 'Viagens românticas sob medida em Galápagos e no Equador: pores do sol vulcânicos, lodges boutique e jantares exclusivos com assessoria dedicada 24/7.',
     ja: 'ガラパゴス諸島とエクアドルで祝う特別な記念日・ハネムーン旅行。夕日を望む最高級ロッジと星空ディナーを24時間体制の専任コンシェルジュデスクが演出します。',
     zh: '为您量身定制加拉帕戈斯群岛与厄瓜多尔浪漫蜜月与周年纪念之旅：私享壮美火山日落、顶级精品生态树屋与星空晚宴，尊享24/7全天候私人专属旅行管家服务。',
   };

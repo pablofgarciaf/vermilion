@@ -197,8 +197,11 @@ export function BookingWizard() {
   useEffect(() => {
     if (selectedTours.length > 0) {
       let tAB = 0, tCB = 0, tAA = 0, tCA = 0, tSub = 0, tDisc = 0, tFinal = 0;
+      let anyMinTwo = false;
       selectedTours.forEach(tour => {
-        const p = calculateTourPrice(tour.price, adults, children, date);
+        const isDaily = tour.durationDays === 1 || (typeof tour.duration === 'object' && String(tour.duration?.en || '').includes('1 DAY'));
+        const p = calculateTourPrice(tour.price, adults, children, date, isDaily);
+        if (p.minTwoPersonApplied) anyMinTwo = true;
         tAB += p.basePricePerAdult; tCB += p.basePricePerChild;
         tAA += p.adultsTotal; tCA += p.childrenTotal;
         tSub += p.subtotal; tDisc += p.groupDiscountAmount; tFinal += p.total;
@@ -207,7 +210,9 @@ export function BookingWizard() {
         basePricePerAdult: tAB, basePricePerChild: tCB,
         adultsCount: adults, childrenCount: children,
         adultsTotal: tAA, childrenTotal: tCA, subtotal: tSub,
-        groupDiscountPercentage: adults + children >= 6 ? 5 : (adults + children >= 4 ? 2 : 0),
+        isDailyTour: selectedTours.some(t => t.durationDays === 1),
+        minTwoPersonApplied: anyMinTwo,
+        groupDiscountPercentage: adults + children >= 6 ? 0.05 : (adults + children >= 4 ? 0.02 : 0),
         groupDiscountAmount: tDisc, total: tFinal
       });
     } else {
@@ -251,6 +256,9 @@ export function BookingWizard() {
       bookingRef = `R-${new Date().getFullYear()}-1.1-80`;
     }
 
+    const totalTravelers = adults + children;
+    const isDaily = selectedTours.some(t => t.durationDays === 1 || (typeof t.duration === 'object' && String(t.duration?.en || '').includes('1 DAY')));
+
     const queryParams = new URLSearchParams({
       tourId: selectedTours.map(t => t.id).join(','),
       tourTitle: tourTitleStr,
@@ -261,7 +269,11 @@ export function BookingWizard() {
       ref: bookingRef,
       affiliateCode: affiliateRef || '',
       discountApplied: affiliateRef ? 'true' : 'false',
-      date: date
+      date: date,
+      adults: String(adults),
+      children: String(children),
+      travelers: String(totalTravelers),
+      isDailyTour: isDaily ? 'true' : 'false',
     });
     window.location.href = `/${locale}/checkout/payment?${queryParams.toString()}`;
   };

@@ -10,7 +10,8 @@ export function ConditionalNavbar() {
     pathname?.includes('/admin') || 
     pathname?.includes('/cpanel') || 
     pathname?.includes('/operator') || 
-    pathname?.includes('/auth')
+    pathname?.includes('/auth') ||
+    pathname?.includes('/checkout')
   ) return null;
   return (
     <>
