@@ -9,6 +9,7 @@ import { getLocalizedText } from '@/utils/i18nHelper';
 import { getSeoAlternates } from '@/utils/seoHelper';
 import { LeadMagnetBanner } from '@/components/home/LeadMagnetBanner';
 import { BlogTourBookingShowcase } from '@/components/blog/BlogTourBookingShowcase';
+import { BlogAuthorBio } from '@/components/blog/BlogAuthorBio';
 import { BlogGalleryButton } from '@/components/blog/BlogGalleryButton';
 import { DestinationKey } from '@/lib/destinationGallery';
 import {
@@ -183,7 +184,26 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     author: {
       '@type': 'Person',
       name: post.author.name,
-      jobTitle: post.author.role,
+      jobTitle: 'Lead Naturalist & Head of Expedition Design',
+      worksFor: {
+        '@type': 'TravelAgency',
+        name: 'Vermilion Routes',
+        url: 'https://www.vermilionroutes.com',
+      },
+      hasCredential: {
+        '@type': 'EducationalOccupationalCredential',
+        name: 'Licencia Oficial de Guía Nacional de Turismo',
+        recognizedBy: {
+          '@type': 'GovernmentOrganization',
+          name: 'Ministerio de Turismo del Ecuador',
+        },
+      },
+      knowsAbout: [
+        'Galapagos Wildlife & Marine Reserve',
+        'Andean Volcanology & High-Altitude Treks',
+        'Amazon Rainforest Biodiversity & Yasuni',
+        'Bespoke Expedition Planning in Ecuador',
+      ],
     },
     publisher: {
       '@type': 'Organization',
@@ -721,6 +741,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             'galapagos';
           return <BlogGalleryButton destination={destKey} locale={locale} />;
         })()}
+
+        {/* Author Bio & E-E-A-T Verified Authority */}
+        <BlogAuthorBio locale={locale} />
 
         {/* Interactive Blog Tour Booking Showcase */}
         <BlogTourBookingShowcase
