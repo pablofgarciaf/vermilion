@@ -103,6 +103,18 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
 
   const dest = getLocalizedText(tour.destination, resolvedParams.locale);
   const alternates = getSeoAlternates(`/tours/${tour.id}`, resolvedParams.locale);
+  const rawImg = tour.mainImage || tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg';
+  const fullImgUrl = rawImg.startsWith('http') ? rawImg : `https://www.vermilionroutes.com${rawImg}`;
+  const fbLocale = {
+    es: 'es_LA',
+    en: 'en_US',
+    fr: 'fr_FR',
+    de: 'de_DE',
+    it: 'it_IT',
+    pt: 'pt_BR',
+    ja: 'ja_JP',
+    zh: 'zh_CN',
+  }[resolvedParams.locale] || 'en_US';
 
   return {
     title,
@@ -111,14 +123,27 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
       title: `${rawTitle} - ${dest}`,
       description,
       url: alternates.canonical,
+      siteName: 'Vermilion Routes',
+      locale: fbLocale,
+      type: 'website',
       images: [
         {
-          url: tour.mainImage || tour.imageUrl,
+          url: fullImgUrl,
+          secureUrl: fullImgUrl,
           width: 1200,
           height: 630,
+          type: 'image/jpeg',
           alt: rawTitle,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@vermilionroutes',
+      creator: '@vermilionroutes',
+      title: `${rawTitle} - ${dest}`,
+      description,
+      images: [fullImgUrl],
     },
     alternates,
   };
@@ -234,7 +259,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
           </div>
 
           {/* Photo Gallery */}
-          <TourGallery images={galleryImages} title={title} />
+          <TourGallery images={galleryImages} title={title} tourId={tour.id} destination={tour.destination} />
 
           {/* Tour Overview with Category Badges */}
           {tour.description && (
@@ -266,7 +291,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
               </div>
 
               <h2 className="font-serif font-bold text-2xl text-zinc-900 dark:text-white">
-                {locale === 'es' ? `Resumen de la Expedición: ${title}` : `Expedition Overview: ${title}`}
+                {locale === 'es' ? `Resumen: ${title.split(' - ')[0].slice(0, 30).trim()}` : `Overview: ${title.split(' - ')[0].slice(0, 30).trim()}`}
               </h2>
               <p className="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:text-emerald-800 dark:first-letter:text-emerald-400 first-letter:leading-none">
                 {getLocalizedText(tour.description, locale)}
@@ -286,7 +311,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
             <div className="bg-emerald-950/5 dark:bg-emerald-950/20 p-6 sm:p-8 rounded-3xl border border-emerald-200/60 dark:border-emerald-800/40 space-y-4">
               <h2 className="font-serif font-bold text-xl text-emerald-950 dark:text-emerald-300 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                <span>{locale === 'es' ? `Puntos Destacados: ${title}` : `Key Highlights: ${title}`}</span>
+                <span>{locale === 'es' ? `Puntos Clave: ${title.split(' - ')[0].slice(0, 30).trim()}` : `Highlights: ${title.split(' - ')[0].slice(0, 30).trim()}`}</span>
               </h2>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-900 dark:text-emerald-200">
                 {tour.highlights.map((item, idx) => (

@@ -79,18 +79,13 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/:locale/about',
-        destination: '/:locale#about',
-        permanent: true,
-      },
-      {
         source: '/:locale/contact',
         destination: '/:locale#contact',
         permanent: true,
       },
       {
         source: '/about',
-        destination: '/en#about',
+        destination: '/en/about',
         permanent: true,
       },
       {

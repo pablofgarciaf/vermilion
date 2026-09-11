@@ -70,19 +70,40 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       images: [
         {
           url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
           width: 1200,
           height: 630,
+          type: 'image/jpeg',
           alt: 'Giant Tortoises of Galapagos – Vermilion Routes Luxury Ecuador Travel',
         },
       ],
-      locale,
+      locale: {
+        es: 'es_LA',
+        en: 'en_US',
+        fr: 'fr_FR',
+        de: 'de_DE',
+        it: 'it_IT',
+        pt: 'pt_BR',
+        ja: 'ja_JP',
+        zh: 'zh_CN',
+      }[locale] || 'en_US',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
+      site: '@vermilionroutes',
+      creator: '@vermilionroutes',
       title: t('title') || defaultTitle,
       description: t('description') || defaultDescription,
       images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'],
+    },
+    other: {
+      ...(process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION
+        ? { 'facebook-domain-verification': process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION }
+        : {}),
+      ...(process.env.NEXT_PUBLIC_FACEBOOK_APP_ID
+        ? { 'fb:app_id': process.env.NEXT_PUBLIC_FACEBOOK_APP_ID }
+        : {}),
     },
     robots: {
       index: true,

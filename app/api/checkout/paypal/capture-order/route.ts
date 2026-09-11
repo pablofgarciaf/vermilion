@@ -31,7 +31,7 @@ export const POST = withValidation(paypalCaptureOrderSchema, async (_req, _ctx, 
       : (data.clientName || payerEmail.split('@')[0] || 'Valued Traveler');
 
     let bookingRef = data.bookingRef;
-    if (!bookingRef || bookingRef.startsWith('VR-')) {
+    if (!bookingRef || !bookingRef.startsWith('R-')) {
       bookingRef = await generateBookingCode(data.tourId || 'custom', data.affiliateCode);
     }
 

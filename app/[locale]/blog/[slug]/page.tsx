@@ -9,6 +9,8 @@ import { getLocalizedText } from '@/utils/i18nHelper';
 import { getSeoAlternates } from '@/utils/seoHelper';
 import { LeadMagnetBanner } from '@/components/home/LeadMagnetBanner';
 import { BlogTourBookingShowcase } from '@/components/blog/BlogTourBookingShowcase';
+import { BlogGalleryButton } from '@/components/blog/BlogGalleryButton';
+import { DestinationKey } from '@/lib/destinationGallery';
 import {
   Calendar,
   Clock,
@@ -81,6 +83,19 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 
   const alternates = getSeoAlternates(`/blog/${slug}`, locale);
+  const fullImageUrl = post.imageUrl.startsWith('http')
+    ? post.imageUrl
+    : `https://www.vermilionroutes.com${post.imageUrl}`;
+  const fbLocale = {
+    es: 'es_LA',
+    en: 'en_US',
+    fr: 'fr_FR',
+    de: 'de_DE',
+    it: 'it_IT',
+    pt: 'pt_BR',
+    ja: 'ja_JP',
+    zh: 'zh_CN',
+  }[locale] || 'en_US';
 
   return {
     title,
@@ -89,16 +104,29 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
       title: `${rawTitle} | Vermilion Routes`,
       description,
       url: alternates.canonical,
-      images: [{ url: post.imageUrl }],
+      siteName: 'Vermilion Routes',
+      locale: fbLocale,
+      images: [
+        {
+          url: fullImageUrl,
+          secureUrl: fullImageUrl,
+          width: 1200,
+          height: 630,
+          type: 'image/jpeg',
+          alt: rawTitle,
+        },
+      ],
       type: 'article',
       publishedTime: post.publishedAt,
       authors: [post.author.name],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      site: '@vermilionroutes',
+      creator: '@vermilionroutes',
+      title: `${rawTitle} | Vermilion Routes`,
       description,
-      images: [post.imageUrl],
+      images: [fullImageUrl],
     },
     alternates,
   };
@@ -476,6 +504,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </span>
           ))}
         </div>
+
+        {/* Destination Photography Archive Interactive Button */}
+        {(() => {
+          const s = post.slug.toLowerCase();
+          const destKey: DestinationKey =
+            s.includes('galapagos') ? 'galapagos' :
+            s.includes('quito') ? 'quito' :
+            s.includes('volcano') ? 'cotopaxi' :
+            s.includes('amazon') ? 'amazon' :
+            s.includes('cuenca') ? 'cuenca' :
+            s.includes('mindo') || s.includes('otavalo') || s.includes('poncho') ? 'otavalo' :
+            'galapagos';
+          return <BlogGalleryButton destination={destKey} locale={locale} />;
+        })()}
 
         {/* Interactive Blog Tour Booking Showcase */}
         <BlogTourBookingShowcase

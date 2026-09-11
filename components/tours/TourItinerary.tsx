@@ -54,8 +54,8 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
             <Calendar className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
             <span>
               {tourTitle
-                ? (locale === 'es' ? `Itinerario Detallado: ${tourTitle}` : `Detailed Itinerary: ${tourTitle}`)
-                : (locale === 'es' ? 'Itinerario Detallado Día a Día' : 'Detailed Day-by-Day Expedition Itinerary')}
+                ? (locale === 'es' ? `Itinerario: ${tourTitle.split(' - ')[0].slice(0, 30).trim()}` : `Itinerary: ${tourTitle.split(' - ')[0].slice(0, 30).trim()}`)
+                : (locale === 'es' ? 'Itinerario Detallado Día a Día' : 'Detailed Day-by-Day Itinerary')}
             </span>
           </h2>
           <p className="text-xs text-stone-500 dark:text-stone-400">

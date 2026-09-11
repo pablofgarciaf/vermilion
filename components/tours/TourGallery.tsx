@@ -4,12 +4,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Camera, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 
+import { DestinationGalleryModal } from '@/components/gallery/DestinationGalleryModal';
+
 interface TourGalleryProps {
   images: string[];
   title: string;
+  tourId?: string;
+  destination?: string;
 }
 
-export function TourGallery({ images, title }: TourGalleryProps) {
+export function TourGallery({ images, title, tourId, destination }: TourGalleryProps) {
+  const [isDestinationModalOpen, setIsDestinationModalOpen] = useState(false);
+
   // De-duplicate and filter out 9-16 vertical images in the tour page gallery
   const uniqueImages = React.useMemo(() => {
     const set = new Set<string>();
@@ -140,10 +146,17 @@ export function TourGallery({ images, title }: TourGalleryProps) {
           )}
 
           {/* View Gallery Badge */}
-          <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/70 hover:bg-black/80 backdrop-blur-md px-4 py-2.5 rounded-full text-white text-xs font-bold border border-white/20 shadow-lg z-10 transition-colors">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsDestinationModalOpen(true);
+            }}
+            className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/75 hover:bg-emerald-700/90 backdrop-blur-md px-4 py-2.5 rounded-full text-white text-xs font-bold border border-white/20 shadow-lg z-10 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+          >
             <Camera className="w-4 h-4 text-emerald-400" />
             <span>+ View more photos</span>
-          </div>
+          </button>
 
           {/* Maximize Icon */}
           <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 backdrop-blur-md p-2 rounded-full text-white border border-white/20 z-10">
@@ -270,6 +283,15 @@ export function TourGallery({ images, title }: TourGalleryProps) {
           </div>
         </div>
       )}
+
+      {/* Full Destination Photography Collection Modal */}
+      <DestinationGalleryModal
+        isOpen={isDestinationModalOpen}
+        onClose={() => setIsDestinationModalOpen(false)}
+        tourId={tourId}
+        tourTitle={title}
+        destination={destination as any}
+      />
     </div>
   );
 }

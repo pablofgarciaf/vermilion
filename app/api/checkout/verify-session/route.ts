@@ -76,12 +76,12 @@ export async function POST(req: NextRequest) {
       resolvedName = resolvedEmail ? resolvedEmail.split('@')[0] : 'Viajero Distinguido';
     }
 
-    // Ensure resolvedRef follows standard format [tourCode]-[year]-[number]
-    if (!resolvedRef || resolvedRef.startsWith('VR-')) {
+    // Ensure resolvedRef follows official format R-[year]-[tourCode]-[sequential]
+    if (!resolvedRef || !resolvedRef.startsWith('R-')) {
       try {
         resolvedRef = await generateBookingCode(resolvedTourId, affiliateCode);
       } catch (e) {
-        resolvedRef = `1.1-${new Date().getFullYear()}-0001`;
+        resolvedRef = `R-${new Date().getFullYear()}-1.1-80`;
       }
     }
 

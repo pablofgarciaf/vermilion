@@ -30,6 +30,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const title = titles[locale] || titles['en'];
   const description = descriptions[locale] || descriptions['en'];
+  const fbLocale = {
+    es: 'es_LA',
+    en: 'en_US',
+    fr: 'fr_FR',
+    de: 'de_DE',
+    it: 'it_IT',
+    pt: 'pt_BR',
+    ja: 'ja_JP',
+    zh: 'zh_CN',
+  }[locale] || 'en_US';
 
   return {
     title,
@@ -39,6 +49,26 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       title,
       description,
       url: `https://www.vermilionroutes.com/${locale}/blog`,
+      siteName: 'Vermilion Routes',
+      locale: fbLocale,
+      type: 'website',
+      images: [
+        {
+          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+          width: 1200,
+          height: 630,
+          type: 'image/jpeg',
+          alt: 'Vermilion Routes Luxury Travel Guides & Expeditions',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@vermilionroutes',
+      creator: '@vermilionroutes',
+      title,
+      description,
       images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'],
     },
   };

@@ -28,6 +28,37 @@ Allow: /
 User-agent: Applebot
 Allow: /
 
+# Social Media Preview Crawlers (Facebook, Twitter, LinkedIn, WhatsApp, Pinterest)
+User-agent: FacebookExternalHit
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Facebot
+Allow: /
+
+User-agent: facebookcatalog
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+
 # Block Malicious Scraping Bots
 User-agent: HTTrack
 Disallow: /

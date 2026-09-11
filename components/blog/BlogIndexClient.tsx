@@ -424,11 +424,11 @@ export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
                     </span>
                   </div>
 
-                  <h3 className="font-serif font-bold text-lg text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
+                  <h2 className="font-serif font-bold text-lg text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
                     <Link href={`/${locale}/blog/${post.slug}`}>
                       {getLocalizedText(post.title, locale)}
                     </Link>
-                  </h3>
+                  </h2>
 
                   <p className="text-xs text-zinc-600 dark:text-zinc-300 line-clamp-3 leading-relaxed">
                     {getLocalizedText(post.excerpt, locale)}
@@ -465,9 +465,9 @@ export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
             <span className="text-xs uppercase font-bold text-emerald-400 tracking-wider">
               {t.clubBadge}
             </span>
-            <h2 className="text-2xl sm:text-4xl font-bold font-serif text-white">
+            <p className="text-2xl sm:text-4xl font-bold font-serif text-white">
               {t.clubTitle}
-            </h2>
+            </p>
             <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed">
               {t.clubDesc}
             </p>

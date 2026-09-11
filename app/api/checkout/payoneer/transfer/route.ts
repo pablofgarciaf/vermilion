@@ -18,7 +18,7 @@ export const POST = withValidation(payoneerTransferSchema, async (_req, _ctx, da
     }
 
     let bookingRef = data.bookingRef;
-    if (!bookingRef || bookingRef.startsWith('VR-')) {
+    if (!bookingRef || !bookingRef.startsWith('R-')) {
       bookingRef = await generateBookingCode(data.tourId || 'custom', data.affiliateCode);
     }
 

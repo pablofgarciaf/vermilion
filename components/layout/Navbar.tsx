@@ -98,7 +98,7 @@ export function Navbar() {
     },
     { name: tNav('tours'), href: `/${locale}/tours` },
     { name: 'Blog', href: `/${locale}/blog` },
-    { name: tNav('about'), href: `/${locale}#about` },
+    { name: tNav('about'), href: `/${locale}/about` },
     { name: tNav('contact'), href: `/${locale}#contact` },
   ];
 

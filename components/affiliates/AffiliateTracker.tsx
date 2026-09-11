@@ -43,7 +43,7 @@ export function setStoredAffiliateRef(ref: string) {
 export function isBookingCode(val: string): boolean {
   if (!val) return false;
   const clean = val.trim();
-  return /^vr-/i.test(clean) || /^\d+(\.\d+)?-\d{4}-\d+/i.test(clean);
+  return /^r-\d{4}-/i.test(clean) || /^vr-/i.test(clean) || /^\d+(\.\d+)?-\d{4}-\d+/i.test(clean);
 }
 
 /**

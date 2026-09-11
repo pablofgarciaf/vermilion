@@ -281,9 +281,9 @@ export function Footer() {
 
           {/* Destinations */}
           <div className="space-y-4">
-            <h4 className="font-serif font-semibold text-lg text-white tracking-wide">
+            <p className="font-serif font-semibold text-lg text-white tracking-wide">
               {t.topDestinations}
-            </h4>
+            </p>
             <ul className="space-y-2.5 text-sm text-zinc-300">
               <li>
                 <a href={`/${locale}/tours#galapagos`} className="hover:text-white transition-colors">
@@ -315,14 +315,13 @@ export function Footer() {
 
           {/* Company */}
           <div className="space-y-4">
-            <h4 className="font-serif font-semibold text-lg text-white tracking-wide">
+            <p className="font-serif font-semibold text-lg text-white tracking-wide">
               {t.company}
-            </h4>
+            </p>
             <ul className="space-y-2.5 text-sm text-zinc-300">
               <li>
                 <a
-                  href={`/${locale}#about`}
-                  onClick={(e) => handleAnchorClick(e, 'about', 'experience')}
+                  href={`/${locale}/about`}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
                   {t.about}
@@ -352,9 +351,9 @@ export function Footer() {
 
           {/* Newsletter / Quick Contact */}
           <div className="space-y-4">
-            <h4 className="font-serif font-semibold text-lg text-white tracking-wide">
+            <p className="font-serif font-semibold text-lg text-white tracking-wide">
               {t.updates}
-            </h4>
+            </p>
             <p className="text-xs text-zinc-300 leading-relaxed">
               {t.subscribeText}
             </p>
@@ -449,9 +448,9 @@ export function Footer() {
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 {t.paymentVerified}
               </span>
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mt-1">
+              <p className="font-serif text-xl sm:text-2xl font-bold text-white mt-1">
                 {t.paymentHeading}
-              </h3>
+              </p>
               <p className="text-xs text-zinc-300 max-w-2xl mt-1">
                 {t.paymentDesc}
               </p>

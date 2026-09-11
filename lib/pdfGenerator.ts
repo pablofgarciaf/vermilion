@@ -377,7 +377,16 @@ function drawHeaderBand(doc: jsPDF, logoBase64: string | null, pageWidth: number
 /**
  * Unified Magazine-Style PDF Generator for All Expeditions and Day Tours
  */
-export async function generateTourPDF(tour: Tour, locale: string = 'es'): Promise<void> {
+export async function generateTourPDF(
+  tour: Tour,
+  locale: string = 'es',
+  bookingMeta?: {
+    bookingCode?: string;
+    guestName?: string;
+    travelDate?: string;
+    paymentStatus?: string;
+  }
+): Promise<void> {
   if (typeof window === 'undefined' || !tour) return;
 
   const t = PDF_TRANSLATIONS[locale] || PDF_TRANSLATIONS['es'];
@@ -571,6 +580,29 @@ export async function generateTourPDF(tour: Tour, locale: string = 'es'): Promis
     doc.setTextColor(2, 44, 34);
     doc.text(title.toUpperCase(), marginX, yPos + 6);
     yPos += 14;
+  }
+
+  // 1.1 BOOKING CONFIRMATION & VOUCHER BANNER (if bookingMeta provided)
+  if (bookingMeta?.bookingCode) {
+    const bannerH = 14;
+    doc.setFillColor(7, 19, 12); // Deep Luxury Emerald #07130C
+    doc.roundedRect(marginX, yPos, contentWidth, bannerH, 2, 2, 'F');
+    doc.setDrawColor(217, 119, 6); // Amber Gold
+    doc.setLineWidth(0.4);
+    doc.roundedRect(marginX, yPos, contentWidth, bannerH, 2, 2, 'D');
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(245, 158, 11); // Amber
+    doc.text(`EXPEDITION VOUCHER & BOOKING REF: ${bookingMeta.bookingCode}`, marginX + 4, yPos + 5.5);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7);
+    doc.setTextColor(255, 255, 255);
+    const guestLine = `GUEST: ${bookingMeta.guestName || 'VIP Guest'}   •   DATE: ${bookingMeta.travelDate || 'CONFIRMED'}   •   STATUS: ${bookingMeta.paymentStatus || 'GUARANTEED'}`;
+    doc.text(guestLine, marginX + 4, yPos + 10.5);
+
+    yPos += bannerH + 4;
   }
 
   // 2. PRICING CARDS
@@ -1141,7 +1173,9 @@ export async function generateTourPDF(tour: Tour, locale: string = 'es'): Promis
 
   // File Download
   const cleanFilename = title.replace(/[^a-zA-Z0-9]/g, '-').replace(/-+/g, '-');
-  const filename = `Vermilion-Routes-${cleanFilename}.pdf`;
+  const filename = bookingMeta?.bookingCode
+    ? `Vermilion-Voucher-${bookingMeta.bookingCode}.pdf`
+    : `Vermilion-Routes-${cleanFilename}.pdf`;
 
   doc.save(filename);
 }

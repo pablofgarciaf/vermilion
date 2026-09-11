@@ -58,6 +58,16 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     ja: '最高級の旅',
     zh: '顶级奢华探险',
   },
+  tabPaypalCard: {
+    en: 'PayPal / International Card',
+    es: 'PayPal / Tarjeta Internacional',
+    fr: 'PayPal / Carte Internationale',
+    de: 'PayPal / Internationale Karte',
+    it: 'PayPal / Carta Internazionale',
+    pt: 'PayPal / Cartão Internacional',
+    ja: 'PayPal / 国際カード決済',
+    zh: 'PayPal / 国际信用卡支付',
+  },
   tabCardTitle: {
     en: 'PayPal / International Credit Card',
     es: 'PayPal / Tarjeta de Crédito Internacional',
@@ -69,24 +79,24 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     zh: 'PayPal / 国际信用卡与借记卡',
   },
   tabBankTitle: {
-    en: 'International Wire Transfer (USA / Europe) - Save fee',
-    es: 'Pago por Transferencia Bancaria Internacional (EE. UU. / Europa) - Ahorra comisión',
-    fr: 'Virement Bancaire International (USA / Europe) - Économisez les frais',
-    de: 'Internationale Banküberweisung (USA / Europa) - Gebühren sparen',
-    it: 'Bonifico Bancario Internazionale (USA / Europa) - Risparmia commissioni',
-    pt: 'Transferência Bancária Internacional (EUA / Europa) - Economize taxa',
-    ja: '国際銀行振込 (米国 / 欧州) - 手数料を節約',
-    zh: '国际银行电汇 (美国 / 欧洲) - 减免刷卡费',
+    en: 'International Wire Transfer (USA / Ecuador)',
+    es: 'Transferencia Bancaria Internacional (EE. UU. / Ecuador)',
+    fr: 'Virement Bancaire International (USA / Équateur)',
+    de: 'Internationale Banküberweisung (USA / Ecuador)',
+    it: 'Bonifico Bancario Internazionale (USA / Ecuador)',
+    pt: 'Transferência Bancária Internacional (EUA / Equador)',
+    ja: '国際銀行振込 (米国 / エクアドル)',
+    zh: '国际银行电汇 (美国 / 厄瓜多尔)',
   },
   tabBankTitleShort: {
-    en: 'Bank Wire (Save fee)',
-    es: 'Transferencia (Ahorra comisión)',
-    fr: 'Virement (Économie)',
-    de: 'Überweisung (Gebührenfrei)',
-    it: 'Bonifico (Risparmia)',
-    pt: 'Transferência (Economize)',
-    ja: '銀行振込 (手数料節約)',
-    zh: '银行电汇 (免手续费)',
+    en: 'Bank Wire Transfer',
+    es: 'Transferencia Bancaria',
+    fr: 'Virement Bancaire',
+    de: 'Banküberweisung',
+    it: 'Bonifico Bancario',
+    pt: 'Transferência Bancária',
+    ja: '銀行振込',
+    zh: '银行电汇',
   },
   depositTitle: {
     en: 'Expedition Reservation Deposit',
@@ -239,14 +249,14 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     zh: '通过 PayPal Business Ecuador (USD) 享受银行级加密与即时确认。支持使用 PayPal 账户余额或直接输入国际借记卡/信用卡支付。',
   },
   wireHeaderDesc: {
-    en: 'Save processing fees by paying via local ACH/Fedwire transfer in the USA, SEPA wire transfer in Europe (Payoneer receiving accounts), or Produbanco in Ecuador.',
-    es: 'Ahorra comisiones bancarias y de tarjeta pagando mediante transferencia local ACH/Fedwire en EE. UU., SEPA en Europa (cuentas de recepción Payoneer) o Produbanco en Ecuador.',
-    fr: 'Économisez les frais de carte en payant par virement local ACH/Fedwire aux USA, SEPA en Europe (comptes Payoneer) ou Produbanco en Équateur.',
-    de: 'Sparen Sie Kartengebühren durch lokale Überweisung via ACH/Fedwire in den USA, SEPA in Europa (Payoneer-Empfangskonten) oder Produbanco in Ecuador.',
-    it: 'Risparmia commissioni pagando tramite bonifico locale ACH/Fedwire negli USA, SEPA in Europa (conti Payoneer) o Produbanco in Ecuador.',
-    pt: 'Economize taxas de cartão pagando via transferência local ACH/Fedwire nos EUA, SEPA na Europa (contas Payoneer) ou Produbanco no Equador.',
-    ja: '米国の現地ACH/Fedwire送金、欧州のSEPA送金（Payoneer受取口座）、またはエクアドルのProdubanco口座への振込により、決済手数料を節約できます。',
-    zh: '通过美国本地 ACH/Fedwire 转账、欧洲 SEPA 本地电汇（Payoneer 专属收款账户）或厄瓜多尔 Produbanco 银行转账，尊享免除国际刷卡手续费。',
+    en: 'Official bank wire transfer details for Citibank (Florida, USA) and Produbanco (Ecuador).',
+    es: 'Cuentas bancarias oficiales de recepción en Citibank (Florida, EE. UU.) y Produbanco (Ecuador).',
+    fr: 'Comptes bancaires officiels de réception chez Citibank (Floride, USA) et Produbanco (Équateur).',
+    de: 'Offizielle Empfangskonten bei der Citibank (Florida, USA) und Produbanco (Ecuador).',
+    it: 'Coordinate bancarie ufficiali per Citibank (Florida, USA) e Produbanco (Ecuador).',
+    pt: 'Contas bancárias oficiais no Citibank (Flórida, EUA) e Produbanco (Equador).',
+    ja: 'Citibank（米国フロリダ州）およびProdubanco（エクアドル）の公式受取口座情報。',
+    zh: '花旗银行（美国佛罗里达州）与 Produbanco（厄瓜多尔）官方收款账户信息。',
   },
   step1Wire: {
     en: '1. Transfer the exact amount to one of the official accounts below.',
@@ -442,8 +452,8 @@ export default function CheckoutPaymentPage() {
   const [receiptSubmitted, setReceiptSubmitted] = useState(false);
   const [voucherOpen, setVoucherOpen] = useState(false);
 
-  // Wire Currency Selection (USD vs EUR)
-  const [wireCurrency, setWireCurrency] = useState<'USD' | 'EUR'>('USD');
+  // Wire Currency (USD)
+  const wireCurrency = 'USD';
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   // Bank Transfer Form state & 🛡️ Anti-bot honeypot
@@ -455,7 +465,6 @@ export default function CheckoutPaymentPage() {
   const initialAmount = Number(amountStr) || 500;
   const finalAmount = discountApplied ? Number((initialAmount * 0.9).toFixed(2)) : initialAmount;
   const discountSavings = discountApplied ? Number((initialAmount - finalAmount).toFixed(2)) : 0;
-  const eurEstimated = Number((finalAmount * 0.92).toFixed(2)); // ~0.92 EUR per USD reference
 
   const matchedTour = mockTours.find((t) => t.id === tourId || t.title.en === tourTitle) || mockTours[0];
 
@@ -464,8 +473,8 @@ export default function CheckoutPaymentPage() {
     if (!email && stored.email) setEmail(stored.email);
     if (!clientName && stored.name) setClientName(stored.name);
 
-    // Guarantee ref format [tourCode]-[year]-[number]
-    if (!ref || ref.startsWith('VR-')) {
+    // Guarantee ref format R-[year]-[tourCode]-[sequential] (starts at 80)
+    if (!ref || !ref.startsWith('R-2026-')) {
       const affCode = searchParams.get('affiliateCode') || searchParams.get('vid') || getStoredAffiliateRef();
       generateBookingCode(tourId, affCode || undefined).then((newCode) => {
         setRef(newCode);
@@ -597,32 +606,32 @@ export default function CheckoutPaymentPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07130C] text-white flex items-center justify-center pt-8 sm:pt-14 pb-12 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-[#FAF9F5] dark:bg-[#07130C] text-stone-900 dark:text-white flex items-center justify-center pt-8 sm:pt-14 pb-12 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
       {/* Background ambient glows */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[140px]" />
-        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[120px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 dark:bg-emerald-600/10 rounded-full blur-[140px]" />
+        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-amber-500/5 dark:bg-amber-500/5 rounded-full blur-[120px]" />
       </div>
 
-      <div className="max-w-xl w-full bg-zinc-900/90 border border-emerald-500/20 rounded-3xl p-5 sm:p-8 shadow-2xl backdrop-blur-xl relative z-10 space-y-6">
+      <div className="max-w-xl w-full bg-white dark:bg-zinc-900/90 border border-stone-200 dark:border-emerald-500/20 rounded-3xl p-5 sm:p-8 shadow-xl shadow-stone-200/50 dark:shadow-2xl backdrop-blur-xl relative z-10 space-y-6 text-stone-900 dark:text-white">
         
         {/* Top Header */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <div className="flex items-center justify-between border-b border-stone-200 dark:border-white/10 pb-4">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-              <Compass className="w-4 h-4 text-emerald-400" />
+              <Compass className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             </div>
             <div>
-              <span className="font-serif font-bold tracking-widest uppercase text-xs text-zinc-100 block">
+              <span className="font-serif font-bold tracking-widest uppercase text-xs text-stone-900 dark:text-zinc-100 block">
                 VERMILION ROUTES
               </span>
-              <span className="text-[10px] text-emerald-400/80 uppercase tracking-wider block font-medium">
+              <span className="text-[10px] text-emerald-700 dark:text-emerald-400/80 uppercase tracking-wider block font-medium">
                 {t('luxuryExpeditions')}
               </span>
             </div>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 text-[11px] font-semibold">
-            <Lock className="w-3 h-3 text-emerald-400" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-semibold">
+            <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
             <span>{t('secureSsl')}</span>
           </div>
         </div>
@@ -634,8 +643,8 @@ export default function CheckoutPaymentPage() {
           <div className="text-center py-6 space-y-5 animate-fade-in">
             <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg border ${
               receiptSubmitted
-                ? 'bg-amber-500/20 text-amber-400 border-amber-500/40 shadow-amber-900/50'
-                : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40 shadow-emerald-900/50'
+                ? 'bg-amber-50 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/40 shadow-amber-900/10'
+                : 'bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/40 shadow-emerald-900/10'
             }`}>
               {receiptSubmitted ? <Clock className="w-8 h-8" /> : <CheckCircle2 className="w-8 h-8" />}
             </div>
@@ -643,29 +652,29 @@ export default function CheckoutPaymentPage() {
             <div className="space-y-1">
               <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${
                 receiptSubmitted
-                  ? 'bg-amber-950/80 border-amber-500/40 text-amber-300'
-                  : 'bg-emerald-950/80 border-emerald-500/40 text-emerald-300'
+                  ? 'bg-amber-50 dark:bg-amber-950/80 border-amber-200 dark:border-amber-500/40 text-amber-800 dark:text-amber-300'
+                  : 'bg-emerald-50 dark:bg-emerald-950/80 border-emerald-200 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300'
               }`}>
                 {receiptSubmitted ? <Clock className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
                 <span>{receiptSubmitted ? 'Espera de pago' : 'Pago Confirmado'}</span>
               </span>
 
-              <h1 className="text-2xl font-bold font-serif text-white pt-2">
+              <h1 className="text-2xl font-bold font-serif text-stone-900 dark:text-white pt-2">
                 {receiptSubmitted ? t('statusPendingTitle') : t('statusPaidTitle')}
               </h1>
             </div>
 
-            <p className="text-sm text-zinc-300 max-w-md mx-auto leading-relaxed" suppressHydrationWarning>
+            <p className="text-sm text-stone-600 dark:text-zinc-300 max-w-md mx-auto leading-relaxed" suppressHydrationWarning>
               {receiptSubmitted ? t('pendingExplanation') : t('paidExplanation')}
             </p>
 
             {/* Booking Details Box */}
-            <div className="p-4 bg-zinc-950/80 border border-white/10 rounded-2xl text-xs text-zinc-400 space-y-2 text-left max-w-md mx-auto">
-              <p className="flex justify-between"><span className="text-zinc-500">Expedición:</span> <strong className="text-white text-right line-clamp-1">{tourTitle}</strong></p>
-              {travelDate && <p className="flex justify-between"><span className="text-zinc-500">{t('travelDateLabel')}:</span> <strong className="text-emerald-400">{travelDate}</strong></p>}
-              <p className="flex justify-between"><span className="text-zinc-500">Código de Reserva:</span> <span className="font-mono text-emerald-300 font-bold">{ref}</span></p>
-              <p className="flex justify-between"><span className="text-zinc-500">Método Registrado:</span> <span className="text-zinc-200 font-medium">{receiptSubmitted ? 'Transferencia Bancaria Internacional (Payoneer)' : 'PayPal / Tarjeta'}</span></p>
-              <p className="flex justify-between border-t border-white/10 pt-2"><span className="text-zinc-400 font-semibold">{t('totalToPay')}:</span> <span className="font-bold text-emerald-400 text-sm" suppressHydrationWarning>${formatPrice(finalAmount)} USD</span></p>
+            <div className="p-4 bg-stone-50 dark:bg-zinc-950/80 border border-stone-200 dark:border-white/10 rounded-2xl text-xs text-stone-600 dark:text-zinc-400 space-y-2 text-left max-w-md mx-auto">
+              <p className="flex justify-between"><span className="text-stone-500 dark:text-zinc-500">Expedición:</span> <strong className="text-stone-900 dark:text-white text-right line-clamp-1">{tourTitle}</strong></p>
+              {travelDate && <p className="flex justify-between"><span className="text-stone-500 dark:text-zinc-500">{t('travelDateLabel')}:</span> <strong className="text-emerald-700 dark:text-emerald-400">{travelDate}</strong></p>}
+              <p className="flex justify-between"><span className="text-stone-500 dark:text-zinc-500">Código de Reserva:</span> <span className="font-mono text-emerald-700 dark:text-emerald-300 font-bold">{ref}</span></p>
+              <p className="flex justify-between"><span className="text-stone-500 dark:text-zinc-500">Método Registrado:</span> <span className="text-stone-800 dark:text-zinc-200 font-medium">{receiptSubmitted ? 'Transferencia Bancaria Internacional' : 'PayPal / Tarjeta'}</span></p>
+              <p className="flex justify-between border-t border-stone-200 dark:border-white/10 pt-2"><span className="text-stone-700 dark:text-zinc-400 font-semibold">{t('totalToPay')}:</span> <span className="font-bold text-emerald-700 dark:text-emerald-400 text-sm" suppressHydrationWarning>${formatPrice(finalAmount)} USD</span></p>
             </div>
 
             {/* Action Buttons */}
@@ -673,7 +682,7 @@ export default function CheckoutPaymentPage() {
               <button
                 type="button"
                 onClick={() => setVoucherOpen(true)}
-                className="px-5 py-3 bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-95 group border-none"
+                className="px-5 py-3 bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-1.5 cursor-pointer hover:scale-[1.02] active:scale-95 group border-none"
               >
                 <Printer className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
                 <span>{t('btnVoucher')}</span>
@@ -681,19 +690,19 @@ export default function CheckoutPaymentPage() {
 
               <a
                 href={`https://wa.me/593994048458?text=${encodeURIComponent(
-                  `Hola Vermilion Routes, he registrado mi reserva para "${tourTitle}" (Ref: ${ref}). Método: ${receiptSubmitted ? 'Transferencia Internacional Payoneer' : 'PayPal'}.`
+                  `Hola Vermilion Routes, he registrado mi reserva para "${tourTitle}" (Ref: ${ref}). Método: ${receiptSubmitted ? 'Transferencia Bancaria Internacional' : 'PayPal'}.`
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="px-5 py-3 bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 group"
+                className="px-5 py-3 bg-stone-100 hover:bg-stone-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-stone-900 dark:text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-sm flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 group"
               >
-                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>{t('btnWhatsapp')}</span>
               </a>
 
               <button
                 onClick={() => router.push(`/${locale}`)}
-                className="px-5 py-3 bg-transparent border-2 border-emerald-500/30 hover:border-emerald-500/60 hover:bg-zinc-800 text-zinc-200 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-95 group"
+                className="px-5 py-3 bg-transparent border-2 border-stone-300 dark:border-emerald-500/30 hover:border-emerald-600 dark:hover:border-emerald-500/60 hover:bg-stone-100 dark:hover:bg-zinc-800 text-stone-700 dark:text-zinc-200 text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.02] active:scale-95 group"
               >
                 <span>{t('btnReturnHome')}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -707,22 +716,22 @@ export default function CheckoutPaymentPage() {
           <div className="space-y-5">
             
             {/* Tour & Client Summary Card */}
-            <div className="bg-zinc-950/60 border border-white/10 rounded-2xl p-4 sm:p-5 space-y-3">
+            <div className="bg-stone-50 dark:bg-zinc-950/60 border border-stone-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 space-y-3">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
-                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] uppercase font-bold tracking-wider">
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-[10px] uppercase font-bold tracking-wider">
                   {type === 'full' ? t('fullTitle') : t('depositTitle')}
                 </span>
-                <span className="font-mono text-[11px] text-zinc-400">Ref: <strong className="text-zinc-200">{ref}</strong></span>
+                <span className="font-mono text-[11px] text-stone-500 dark:text-zinc-400">Ref: <strong className="text-stone-900 dark:text-zinc-200">{ref}</strong></span>
               </div>
 
-              <h1 className="text-lg sm:text-xl font-bold font-serif text-white leading-snug">
+              <h1 className="text-lg sm:text-xl font-bold font-serif text-stone-900 dark:text-white leading-snug">
                 {tourTitle}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-zinc-400 pt-1 border-t border-white/5">
-                <span className="truncate max-w-[220px]">{t('clientLabel')}: <strong className="text-zinc-200">{email || 'Traveler'}</strong></span>
+              <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-stone-600 dark:text-zinc-400 pt-1 border-t border-stone-200 dark:border-white/5">
+                <span className="truncate max-w-[220px]">{t('clientLabel')}: <strong className="text-stone-900 dark:text-zinc-200">{email || 'Traveler'}</strong></span>
                 {travelDate && (
-                  <span className="flex items-center gap-1 text-emerald-400 font-medium">
+                  <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium">
                     <Calendar className="w-3.5 h-3.5" /> {travelDate}
                   </span>
                 )}
@@ -730,31 +739,31 @@ export default function CheckoutPaymentPage() {
             </div>
 
             {/* Price Box with Invoice Breakdown */}
-            <div className="p-6 bg-zinc-950/80 border border-emerald-500/30 rounded-3xl space-y-5 shadow-2xl relative overflow-hidden">
+            <div className="p-6 bg-stone-50/80 dark:bg-zinc-950/80 border border-emerald-600/20 dark:border-emerald-500/30 rounded-3xl space-y-5 shadow-sm dark:shadow-2xl relative overflow-hidden">
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/10 blur-3xl rounded-full pointer-events-none" />
 
-              <div className="text-center space-y-1 pb-4 border-b border-white/10">
-                <h2 className="text-base font-bold text-white uppercase tracking-widest">
+              <div className="text-center space-y-1 pb-4 border-b border-stone-200 dark:border-white/10">
+                <h2 className="text-base font-bold text-stone-900 dark:text-white uppercase tracking-widest">
                   {t('totalToPay')}
                 </h2>
-                <p className="text-xs text-zinc-400">
+                <p className="text-xs text-stone-500 dark:text-zinc-400">
                   {t('taxesIncluded')}
                 </p>
               </div>
 
               {/* Amount In USD */}
               <div className="text-center py-2 relative z-10">
-                <span className="text-5xl sm:text-6xl font-extrabold font-serif text-emerald-400 drop-shadow-md" suppressHydrationWarning>
+                <span className="text-5xl sm:text-6xl font-extrabold font-serif text-emerald-700 dark:text-emerald-400 drop-shadow-sm" suppressHydrationWarning>
                   ${formatPrice(finalAmount)}
                 </span>
-                <span className="text-sm text-emerald-400/80 font-medium ml-2">USD</span>
+                <span className="text-sm text-emerald-700/80 dark:text-emerald-400/80 font-medium ml-2">USD</span>
               </div>
 
               {/* VIP Discount Row if active */}
               {discountApplied && (
-                <div className="flex items-center justify-between text-amber-300 bg-amber-500/10 border border-amber-500/20 px-4 py-2.5 rounded-xl font-medium mx-auto max-w-sm">
+                <div className="flex items-center justify-between text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 px-4 py-2.5 rounded-xl font-medium mx-auto max-w-sm">
                   <span className="flex items-center gap-2 text-xs">
-                    <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                    <Sparkles className="w-4 h-4 text-amber-500 dark:text-amber-400 shrink-0" />
                     <span>{t('vipDiscountApplied')}</span>
                   </span>
                   <span className="font-bold font-mono text-sm" suppressHydrationWarning>
@@ -764,16 +773,16 @@ export default function CheckoutPaymentPage() {
               )}
 
               {/* Breakdown */}
-              <div className="pt-4 border-t border-white/10 flex flex-col gap-2.5 text-xs text-zinc-400 max-w-sm mx-auto">
+              <div className="pt-4 border-t border-stone-200 dark:border-white/10 flex flex-col gap-2.5 text-xs text-stone-600 dark:text-zinc-400 max-w-sm mx-auto">
                 <div className="flex justify-between items-center">
                   <span>{t('valueWithoutTax')}</span>
-                  <span className="text-zinc-300 font-mono" suppressHydrationWarning>
+                  <span className="text-stone-800 dark:text-zinc-300 font-mono" suppressHydrationWarning>
                     ${(finalAmount / 1.12).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span>{t('taxesAndFees')}</span>
-                  <span className="text-zinc-300 font-mono" suppressHydrationWarning>
+                  <span className="text-stone-800 dark:text-zinc-300 font-mono" suppressHydrationWarning>
                     ${(finalAmount - (finalAmount / 1.12)).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD
                   </span>
                 </div>
@@ -781,54 +790,54 @@ export default function CheckoutPaymentPage() {
 
               {/* Promo Code Input */}
               {!discountApplied ? (
-                <div className="pt-4 border-t border-white/10 flex gap-2">
+                <div className="pt-4 border-t border-stone-200 dark:border-white/10 flex gap-2">
                   <div className="relative flex-1">
-                    <Tag className="w-4 h-4 text-zinc-400 absolute left-3 top-2.5" />
+                    <Tag className="w-4 h-4 text-stone-400 dark:text-zinc-400 absolute left-3 top-2.5" />
                     <input
                       type="text"
                       placeholder={t('promoPlaceholder')}
                       value={discountCode}
                       onChange={(e) => setDiscountCode(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-emerald-500 uppercase transition-colors"
+                      className="w-full pl-9 pr-3 py-2.5 bg-white dark:bg-zinc-900 border border-stone-300 dark:border-zinc-700 rounded-xl text-xs text-stone-900 dark:text-white placeholder-stone-400 dark:placeholder-zinc-500 focus:outline-none focus:border-emerald-600 dark:focus:border-emerald-500 uppercase transition-colors"
                     />
                   </div>
                   <button
                     type="button"
                     onClick={handleApplyDiscount}
-                    className="px-5 py-2.5 bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
+                    className="px-5 py-2.5 bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
                   >
                     {t('btnApply')}
                   </button>
                 </div>
               ) : null}
-              {discountError && <p className="text-xs text-amber-400 text-center pt-1">{discountError}</p>}
+              {discountError && <p className="text-xs text-amber-600 dark:text-amber-400 text-center pt-1">{discountError}</p>}
             </div>
 
             {/* Payment Method Switcher Tabs */}
             <div className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 bg-zinc-950 border border-white/10 rounded-2xl text-xs font-semibold">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 bg-stone-100 dark:bg-zinc-950 border border-stone-200 dark:border-white/10 rounded-2xl text-xs font-semibold">
                 {/* Tab 1: PayPal / Card */}
                 <button
                   type="button"
                   onClick={() => setActiveTab('card')}
                   className={`py-3 px-3 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
                     activeTab === 'card'
-                      ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-950/60'
-                      : 'text-zinc-400 hover:text-white'
+                      ? 'bg-emerald-700 dark:bg-emerald-600 text-white shadow-md'
+                      : 'text-stone-600 dark:text-zinc-400 hover:text-stone-900 dark:hover:text-white'
                   }`}
                 >
                   <CreditCard className="w-4 h-4 shrink-0" />
                   <span className="font-semibold text-center leading-tight">{t('tabPaypalCard')}</span>
                 </button>
 
-                {/* Tab 2: International Wire Transfer Payoneer / Produbanco */}
+                {/* Tab 2: International Wire Transfer */}
                 <button
                   type="button"
                   onClick={() => setActiveTab('bank')}
                   className={`py-3 px-3 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
                     activeTab === 'bank'
-                      ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-950/60'
-                      : 'text-zinc-400 hover:text-white'
+                      ? 'bg-emerald-700 dark:bg-emerald-600 text-white shadow-md'
+                      : 'text-stone-600 dark:text-zinc-400 hover:text-stone-900 dark:hover:text-white'
                   }`}
                 >
                   <Building2 className="w-4 h-4 shrink-0" />
@@ -841,17 +850,17 @@ export default function CheckoutPaymentPage() {
                   ───────────────────────────────────────────── */}
               {activeTab === 'card' && (
                 <div className="space-y-4 animate-fade-in">
-                  <div className="p-4 bg-zinc-950/70 border border-white/5 rounded-2xl space-y-2.5">
-                    <div className="flex flex-wrap items-center justify-between text-xs text-zinc-300 gap-2">
-                      <span className="text-zinc-400">{t('cardsAccepted')}</span>
-                      <div className="flex items-center gap-1.5 font-semibold text-white text-[11px]">
-                        <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">PayPal</span>
-                        <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">Visa</span>
-                        <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">MasterCard</span>
-                        <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700">Amex</span>
+                  <div className="p-4 bg-stone-50 dark:bg-zinc-950/70 border border-stone-200 dark:border-white/5 rounded-2xl space-y-2.5">
+                    <div className="flex flex-wrap items-center justify-between text-xs text-stone-700 dark:text-zinc-300 gap-2">
+                      <span className="text-stone-500 dark:text-zinc-400">{t('cardsAccepted')}</span>
+                      <div className="flex items-center gap-1.5 font-semibold text-stone-800 dark:text-white text-[11px]">
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 shadow-2xs">PayPal</span>
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 shadow-2xs">Visa</span>
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 shadow-2xs">MasterCard</span>
+                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 shadow-2xs">Amex</span>
                       </div>
                     </div>
-                    <p className="text-[11px] text-zinc-400 leading-relaxed">
+                    <p className="text-[11px] text-stone-600 dark:text-zinc-400 leading-relaxed">
                       {t('paypalNotice')}
                     </p>
                   </div>
@@ -877,7 +886,7 @@ export default function CheckoutPaymentPage() {
 
                   {/* Concierge Assist */}
                   <div className="pt-2 text-center space-y-2">
-                    <p className="text-[11px] text-zinc-400">
+                    <p className="text-[11px] text-stone-500 dark:text-zinc-400">
                       {t('conciergeHelp')}
                     </p>
                     <a
@@ -886,29 +895,29 @@ export default function CheckoutPaymentPage() {
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border border-emerald-500/40 bg-emerald-950/40 hover:bg-emerald-900/60 text-emerald-300 font-bold text-xs transition-all hover:scale-[1.01] active:scale-95 shadow-sm"
+                      className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl border border-emerald-600/30 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-bold text-xs transition-all hover:scale-[1.01] active:scale-95 shadow-sm"
                     >
-                      <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                      <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span>WhatsApp Concierge (24/7)</span>
                     </a>
                   </div>
 
                   {/* Trust Signals */}
-                  <div className="grid grid-cols-2 gap-2.5 pt-4 border-t border-zinc-800/80 text-[10px] text-zinc-400">
+                  <div className="grid grid-cols-2 gap-2.5 pt-4 border-t border-stone-200 dark:border-zinc-800/80 text-[10px] text-stone-600 dark:text-zinc-400">
                     <div className="flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span>PayPal Business Ecuador</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span>RUC 1711992808001</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
                       <span>TripAdvisor Travelers Choice</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span>Garantía de Fechas</span>
                     </div>
                   </div>
@@ -916,183 +925,113 @@ export default function CheckoutPaymentPage() {
               )}
 
               {/* ─────────────────────────────────────────────
-                  TAB 2: PAYONEER WIRE TRANSFER (USA / EUROPE / ECUADOR)
+                  TAB 2: WIRE TRANSFER (CITIBANK USA & PRODUBANCO ECUADOR)
                   Leaves order in status 'Espera de pago' (pending_payment)
                   ───────────────────────────────────────────── */}
               {activeTab === 'bank' && (
                 <div className="space-y-4 animate-fade-in text-xs">
-                  <div className="p-3.5 bg-emerald-950/40 border border-emerald-500/30 rounded-2xl space-y-2">
-                    <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs">
-                      <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <div className="p-3.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-500/30 rounded-2xl space-y-2">
+                    <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-xs">
+                      <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                       <span>{t('tabBankTitle')}</span>
                     </div>
-                    <p className="text-[11px] text-zinc-300 leading-relaxed">
+                    <p className="text-[11px] text-stone-600 dark:text-zinc-300 leading-relaxed">
                       {t('wireHeaderDesc')}
                     </p>
                   </div>
 
                   {/* Steps Guide */}
-                  <div className="p-3 bg-zinc-950/90 border border-white/5 rounded-2xl space-y-1.5 text-[11px] text-zinc-300">
+                  <div className="p-3.5 bg-stone-50 dark:bg-zinc-950/90 border border-stone-200 dark:border-white/5 rounded-2xl space-y-1.5 text-[11px] text-stone-700 dark:text-zinc-300">
                     <p>{t('step1Wire')}</p>
-                    <p className="text-amber-300 font-medium">
-                      {t('step2Wire')} <span className="font-mono font-bold text-white bg-black/50 px-2 py-0.5 rounded border border-amber-500/30">{ref}</span>
+                    <p className="text-amber-800 dark:text-amber-300 font-medium">
+                      {t('step2Wire')} <span className="font-mono font-bold text-stone-900 dark:text-white bg-white dark:bg-black/50 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-500/30">{ref}</span>
                     </p>
-                    <p className="text-emerald-400">{t('step3Wire')}</p>
+                    <p className="text-emerald-700 dark:text-emerald-400">{t('step3Wire')}</p>
                   </div>
 
-                  {/* Currency Switcher for Wire */}
-                  <div className="flex items-center justify-between px-1">
-                    <span className="text-[11px] font-semibold text-zinc-400 flex items-center gap-1.5">
-                      <Globe2 className="w-3.5 h-3.5 text-emerald-400" />
-                      Moneda de Transferencia:
-                    </span>
-                    <div className="inline-flex rounded-xl bg-zinc-950 p-1 border border-zinc-800 text-[11px]">
-                      <button
-                        type="button"
-                        onClick={() => setWireCurrency('USD')}
-                        className={`px-3 py-1 rounded-lg font-bold transition-all ${
-                          wireCurrency === 'USD'
-                            ? 'bg-emerald-600 text-white shadow'
-                            : 'text-zinc-400 hover:text-white'
-                        }`}
-                      >
-                        USD ($)
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setWireCurrency('EUR')}
-                        className={`px-3 py-1 rounded-lg font-bold transition-all ${
-                          wireCurrency === 'EUR'
-                            ? 'bg-emerald-600 text-white shadow'
-                            : 'text-zinc-400 hover:text-white'
-                        }`}
-                      >
-                        EUR (€ ~{formatPrice(eurEstimated)})
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Receiving Account Cards */}
+                  {/* Official Receiving Account Cards */}
                   <div className="grid grid-cols-1 gap-3">
                     
-                    {/* CARD 1: USA (USD) Payoneer Local Account */}
-                    <div className="p-4 bg-zinc-950 border border-emerald-500/30 rounded-2xl space-y-2.5 relative">
+                    {/* CARD 1: USA (USD) Citi bank */}
+                    <div className="p-4 bg-white dark:bg-zinc-950 border border-stone-200 dark:border-emerald-500/30 rounded-2xl space-y-2.5 relative shadow-xs">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">
-                          USA (USD) • Payoneer Receiving Account
+                        <span className="text-[10px] uppercase font-bold text-emerald-700 dark:text-emerald-400 tracking-wider">
+                          USA (USD) • Citi bank (Florida)
                         </span>
-                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-[9px] font-bold text-emerald-300">
-                          ACH / Fedwire / Wire Local
+                        <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
+                          ACH / Wire / Zelle
                         </span>
                       </div>
-                      <p className="font-bold text-white text-xs">First Century Bank / Citibank N.A. (USA)</p>
+                      <p className="font-bold text-stone-900 dark:text-white text-xs">Citi bank (Florida, USA)</p>
                       
-                      <div className="space-y-1.5 font-mono text-[11px] text-zinc-300 pt-1">
+                      <div className="space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 pt-1">
                         <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">Routing (ABA):</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopy('061120084', 'us_aba')}
-                            className="text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                          >
-                            061120084 {copiedKey === 'us_aba' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
-                          </button>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">Account Number:</span>
+                          <span className="text-stone-500 dark:text-zinc-500">Checking Account:</span>
                           <button
                             type="button"
                             onClick={() => handleCopy('9119836186', 'us_acc')}
-                            className="text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
                           >
-                            9119836186 {copiedKey === 'us_acc' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
+                            9119836186 {copiedKey === 'us_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
                           </button>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">Account Type:</span>
-                          <span className="text-white font-sans text-[11px]">Checking</span>
+                          <span className="text-stone-500 dark:text-zinc-500">Account Holder:</span>
+                          <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium">Medardo Sanchez</span>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">Beneficiary:</span>
-                          <span className="text-white font-sans text-[11px] font-medium">Vermilion Routes LLC / Medardo Sanchez</span>
+                          <span className="text-stone-500 dark:text-zinc-500">Zelle Transfer:</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('*gsanchez@plustelesmart.com.ec', 'us_zelle')}
+                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer font-sans"
+                          >
+                            *gsanchez@plustelesmart.com.ec {copiedKey === 'us_zelle' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500">Location:</span>
+                          <span className="text-stone-700 dark:text-zinc-300 font-sans text-[11px]">Florida, USA</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* CARD 2: EUROPE (EUR) Payoneer SEPA Account */}
-                    <div className="p-4 bg-zinc-950 border border-teal-500/30 rounded-2xl space-y-2.5 relative">
+                    {/* CARD 2: ECUADOR (USD) Banco Produbanco */}
+                    <div className="p-4 bg-white dark:bg-zinc-950 border border-stone-200 dark:border-white/10 rounded-2xl space-y-2.5 relative shadow-xs">
                       <div className="flex items-center justify-between">
-                        <span className="text-[10px] uppercase font-bold text-teal-400 tracking-wider">
-                          EUROPA (EUR) • Payoneer Receiving Account
+                        <span className="text-[10px] uppercase font-bold text-stone-600 dark:text-zinc-400 tracking-wider">
+                          Ecuador (USD) • Produbanco
                         </span>
-                        <span className="px-2 py-0.5 rounded bg-teal-500/20 text-[9px] font-bold text-teal-300">
-                          SEPA (0% Comisión UE)
+                        <span className="px-2 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 text-[9px] font-bold text-stone-700 dark:text-zinc-300">
+                          Cta Corriente / SWIFT
                         </span>
                       </div>
-                      <p className="font-bold text-white text-xs">Citibank Europe PLC / Banking Circle S.A.</p>
-                      
-                      <div className="space-y-1.5 font-mono text-[11px] text-zinc-300 pt-1">
-                        <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">IBAN:</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopy('LU943820000012345678', 'eu_iban')}
-                            className="text-teal-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                          >
-                            LU94 3820 0000 1234 5678 {copiedKey === 'eu_iban' ? <Check className="w-3 h-3 text-teal-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
-                          </button>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">BIC / SWIFT:</span>
-                          <button
-                            type="button"
-                            onClick={() => handleCopy('CITIUS33', 'eu_bic')}
-                            className="text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                          >
-                            CITIUS33 {copiedKey === 'eu_bic' ? <Check className="w-3 h-3 text-teal-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
-                          </button>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">Beneficiario:</span>
-                          <span className="text-white font-sans text-[11px] font-medium">Vermilion Routes / Medardo Sanchez</span>
-                        </div>
-                      </div>
-                    </div>
+                      <p className="font-bold text-stone-900 dark:text-white text-xs">Banco de la Producción S.A. Produbanco</p>
 
-                    {/* CARD 3: ECUADOR (USD) Produbanco Account */}
-                    <div className="p-4 bg-zinc-950 border border-white/10 rounded-2xl space-y-2 relative">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider">
-                          Ecuador (USD) • Banco Produbanco
-                        </span>
-                        <span className="px-2 py-0.5 rounded bg-zinc-800 text-[9px] font-bold text-zinc-300">
-                          Cta Corriente
-                        </span>
-                      </div>
-                      <div className="space-y-1 font-mono text-[11px] text-zinc-300">
+                      <div className="space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 pt-1">
                         <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">Cuenta Corriente:</span>
+                          <span className="text-stone-500 dark:text-zinc-500">Cuenta Corriente:</span>
                           <button
                             type="button"
                             onClick={() => handleCopy('27059152821', 'pro_acc')}
-                            className="text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
                           >
-                            27059152821 {copiedKey === 'pro_acc' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
+                            27059152821 {copiedKey === 'pro_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
                           </button>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">SWIFT:</span>
+                          <span className="text-stone-500 dark:text-zinc-500">SWIFT:</span>
                           <button
                             type="button"
                             onClick={() => handleCopy('PRODECEQXXX', 'pro_swift')}
-                            className="text-white hover:underline flex items-center gap-1 cursor-pointer"
+                            className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
                           >
-                            PRODECEQXXX {copiedKey === 'pro_swift' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-zinc-500" />}
+                            PRODECEQXXX {copiedKey === 'pro_swift' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
                           </button>
                         </div>
                         <div className="flex justify-between items-center">
-                          <span className="text-zinc-500">Titular:</span>
-                          <span className="text-white font-sans text-[11px]">VERMILION ROUTES (RUC 1711992808001)</span>
+                          <span className="text-stone-500 dark:text-zinc-500">Titular:</span>
+                          <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium">VERMILION ROUTES (RUC 1711992808001)</span>
                         </div>
                       </div>
                     </div>
@@ -1100,7 +1039,7 @@ export default function CheckoutPaymentPage() {
                   </div>
 
                   {/* Wire Transfer Registration Form */}
-                  <form onSubmit={handleSubmitWireRegistration} className="space-y-3 pt-2 border-t border-white/10">
+                  <form onSubmit={handleSubmitWireRegistration} className="space-y-3 pt-2 border-t border-stone-200 dark:border-white/10">
                     
                     {/* 🛡️ Anti-bot honeypot field (Catches automated scripts & Python bots) */}
                     <div className="sr-only opacity-0 h-0 w-0 pointer-events-none absolute -left-[9999px]" aria-hidden="true">
@@ -1116,13 +1055,13 @@ export default function CheckoutPaymentPage() {
                       />
                     </div>
 
-                    <h3 className="font-bold text-white text-xs flex items-center gap-1.5">
-                      <Upload className="w-3.5 h-3.5 text-emerald-400" />
+                    <h3 className="font-bold text-stone-900 dark:text-white text-xs flex items-center gap-1.5">
+                      <Upload className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                       {t('uploadOptional')}
                     </h3>
 
                     {/* File Dropzone */}
-                    <div className="border-2 border-dashed border-zinc-700 hover:border-emerald-500 rounded-2xl p-4 text-center transition-all bg-zinc-950/60 cursor-pointer relative">
+                    <div className="border-2 border-dashed border-stone-300 dark:border-zinc-700 hover:border-emerald-600 dark:hover:border-emerald-500 rounded-2xl p-4 text-center transition-all bg-stone-50/60 dark:bg-zinc-950/60 cursor-pointer relative">
                       <input
                         type="file"
                         accept="image/*,.pdf"
@@ -1131,21 +1070,21 @@ export default function CheckoutPaymentPage() {
                       />
                       {previewUrl ? (
                         <div className="space-y-2">
-                          <div className="relative w-28 h-20 mx-auto rounded-lg overflow-hidden border border-zinc-700">
+                          <div className="relative w-28 h-20 mx-auto rounded-lg overflow-hidden border border-stone-300 dark:border-zinc-700">
                             <Image src={previewUrl} alt="Receipt Preview" fill className="object-cover" />
                           </div>
-                          <p className="text-emerald-400 font-medium text-xs">
+                          <p className="text-emerald-700 dark:text-emerald-400 font-medium text-xs">
                             {bankReceipt?.name} ({Math.round((bankReceipt?.size || 0) / 1024)} KB)
                           </p>
-                          <span className="text-[10px] text-zinc-500">Haz clic para cambiar archivo</span>
+                          <span className="text-[10px] text-stone-500 dark:text-zinc-500">Haz clic para cambiar archivo</span>
                         </div>
                       ) : (
                         <div className="space-y-1 py-2">
-                          <Upload className="w-6 h-6 text-emerald-500 mx-auto" />
-                          <p className="text-xs text-zinc-200 font-semibold">
+                          <Upload className="w-6 h-6 text-emerald-600 dark:text-emerald-500 mx-auto" />
+                          <p className="text-xs text-stone-800 dark:text-zinc-200 font-semibold">
                             {t('uploadDragText')}
                           </p>
-                          <p className="text-[10px] text-zinc-500">Formatos JPG, PNG, PDF hasta 10MB</p>
+                          <p className="text-[10px] text-stone-500 dark:text-zinc-500">Formatos JPG, PNG, PDF hasta 10MB</p>
                         </div>
                       )}
                     </div>
@@ -1156,14 +1095,14 @@ export default function CheckoutPaymentPage() {
                         placeholder={t('refOptionalPlaceholder')}
                         value={transferRef}
                         onChange={(e) => setTransferRef(e.target.value)}
-                        className="w-full px-3 py-2 bg-zinc-950 border border-zinc-800 rounded-xl text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-emerald-500"
+                        className="w-full px-3.5 py-2.5 bg-white dark:bg-zinc-950 border border-stone-300 dark:border-zinc-800 rounded-xl text-xs text-stone-900 dark:text-white placeholder-stone-400 dark:placeholder-zinc-600 focus:outline-none focus:border-emerald-600 dark:focus:border-emerald-500"
                       />
                     </div>
 
                     <button
                       type="submit"
                       disabled={isProcessing}
-                      className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-[1.02] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none"
+                      className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/20 transition-all duration-300 hover:scale-[1.01] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none"
                     >
                       {isProcessing ? (
                         <>
@@ -1183,7 +1122,7 @@ export default function CheckoutPaymentPage() {
               )}
             </div>
 
-            <p className="text-[10px] text-zinc-500 text-center leading-relaxed pt-2 border-t border-white/5">
+            <p className="text-[10px] text-stone-500 dark:text-zinc-500 text-center leading-relaxed pt-2 border-t border-stone-200 dark:border-white/5">
               {t('termsAgreement')}
             </p>
           </div>

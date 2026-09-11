@@ -248,7 +248,7 @@ export function BookingWizard() {
       bookingRef = await generateBookingCode(selectedTours[0]?.id, affiliateRef || undefined);
     } catch (e) {
       console.warn('Booking code generation fallback:', e);
-      bookingRef = `1.1-${new Date().getFullYear()}-0001`;
+      bookingRef = `R-${new Date().getFullYear()}-1.1-80`;
     }
 
     const queryParams = new URLSearchParams({
