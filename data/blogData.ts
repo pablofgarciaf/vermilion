@@ -1,5 +1,19 @@
 import { LocalizedString } from '@/utils/i18nHelper';
 
+export interface BlogQuickAnswer {
+  summary: LocalizedString;
+  bestSeason: LocalizedString;
+  idealDuration: LocalizedString;
+  activityLevel: LocalizedString;
+  estimatedPrice: LocalizedString;
+  keyHighlight: LocalizedString;
+}
+
+export interface BlogFaqItem {
+  question: LocalizedString;
+  answer: LocalizedString;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -18,6 +32,8 @@ export interface BlogPost {
   featured?: boolean;
   tags: string[];
   relatedTourId?: string;
+  quickAnswer?: BlogQuickAnswer;
+  faqs?: BlogFaqItem[];
   content: {
     en: string;
     es: string;
@@ -79,7 +95,67 @@ export const BLOG_POSTS: BlogPost[] = [
     featured: true,
     tags: ['Galapagos', 'Santa Cruz', 'Isabela', 'Tortuga Bay', 'Las Grietas', 'Giant Tortoises', 'Charles Darwin'],
     relatedTourId: 'galapagos-6days',
-    content: {
+        quickAnswer: {
+      summary: {
+        en: 'For a first-time Galapagos expedition, a 6 to 8-day itinerary combining Santa Cruz, Isabela, and San Cristóbal offers the optimal balance of endemic wildlife encounters, giant tortoise reserves, and iconic volcanic snorkeling without rushing.',
+        es: 'Para una primera expedición a Galápagos, un itinerario de 6 a 8 días combinando Santa Cruz, Isabela y San Cristóbal ofrece el balance óptimo de fauna endémica, reservas de tortugas gigantes y snorkeling volcánico icónico sin prisas.',
+        fr: 'Pour une première expédition aux Galápagos, un itinéraire de 6 à 8 jours combinant Santa Cruz, Isabela et San Cristóbal offre un équilibre parfait entre faune endémique et confort.',
+        de: 'Für eine erste Galápagos-Expedition bietet eine 6- bis 8-tägige Reiseroute auf Santa Cruz, Isabela und San Cristóbal die ideale Balance aus Tierbeobachtung und Erholung.',
+      },
+      bestSeason: {
+        en: 'Year-round (Dec–May: warm & calm seas; Jun–Nov: rich marine wildlife)',
+        es: 'Todo el año (Dic–May: mar cálido y calmo; Jun–Nov: máxima fauna marina)',
+      },
+      idealDuration: {
+        en: '6 – 8 Days',
+        es: '6 – 8 Días',
+      },
+      activityLevel: {
+        en: 'Moderate (Snorkeling, scenic walks on volcanic terrain)',
+        es: 'Moderado (Snorkeling, caminatas en roca volcánica)',
+      },
+      estimatedPrice: {
+        en: 'From $1,590 USD / person',
+        es: 'Desde $1,590 USD / persona',
+      },
+      keyHighlight: {
+        en: 'Giant tortoises, marine iguanas, blue-footed boobies, and playful sea lion encounters',
+        es: 'Tortugas gigantes, iguanas marinas, piqueros patas azules y nado con lobos marinos',
+      },
+    },
+    faqs: [
+      {
+        question: {
+          en: 'What is the best month to visit the Galapagos Islands?',
+          es: '¿Cuál es el mejor mes para visitar las Islas Galápagos?',
+        },
+        answer: {
+          en: 'Galapagos is exceptional year-round. December to May offers warm sunny weather (75–85°F) with calm turquoise waters ideal for snorkeling and swimming. June to November brings cooler Humboldt currents loaded with nutrients, attracting whales, penguins, and extraordinarily active marine life.',
+          es: 'Galápagos es excepcional todo el año. De diciembre a mayo el clima es cálido y soleado (24–30°C) con aguas calmas ideales para nadar y hacer snorkel. De junio a noviembre la corriente de Humboldt enfría el mar pero atrae ballenas, pingüinos y abundante vida submarina.',
+        },
+      },
+      {
+        question: {
+          en: 'Is land-based island hopping better than a liveaboard cruise?',
+          es: '¿Es mejor un tour de isla en isla (terrestre) o un crucero en Galápagos?',
+        },
+        answer: {
+          en: 'Island hopping lets you sleep comfortably in boutique hotels on land, dine in local gourmet restaurants, and explore at your personal pace with zero risk of nocturnal seasickness. Cruises reach farther uninhabited outer islands overnight. For personalized comfort, island hopping is the preferred option for families and couples.',
+          es: 'El tour de isla en isla permite descansar en hoteles boutique en tierra firme, cenar en restaurantes locales y viajar a ritmo propio sin mareos nocturnos de barco. Los cruceros llegan a islas exteriores remotas. Para confort y flexibilidad, el formato terrestre es el favorito de parejas y familias.',
+        },
+      },
+      {
+        question: {
+          en: 'Do I need a licensed naturalist guide to visit Galapagos National Park?',
+          es: '¿Es obligatorio ingresar con un guía naturalista oficial a Galápagos?',
+        },
+        answer: {
+          en: 'Yes. 98% of the Galapagos terrestrial territory is strictly protected national park. Ecuadorian environmental law mandates that all visitors be accompanied by an official Ministry of Environment certified Level II or III naturalist guide.',
+          es: 'Sí. El 98% del territorio terrestre de Galápagos es parque nacional protegido por ley. Toda visita a senderos e islotes debe realizarse con un guía naturalista oficial certificado Nivel II o III del Ministerio del Ambiente.',
+        },
+      },
+    ],
+  content: {
       en: `
 ## The Living Laboratory of Evolution
 
@@ -230,7 +306,55 @@ Para vivir esta aventura con logística privada y guías naturalistas certificad
     featured: false,
     tags: ['Avenue of Volcanoes', 'Cotopaxi', 'Chimborazo', 'Quilotoa', 'Antisana', 'Tungurahua', 'Baños'],
     relatedTourId: 'volcanoes-rivers-8days',
-    content: {
+        quickAnswer: {
+      summary: {
+        en: 'The Avenue of the Volcanoes spans over 200 miles along the Ecuadorian Andes, showcasing snow-capped Cotopaxi, Chimborazo, and the Quilotoa emerald crater lake. A 4 to 6-day private journey provides the ideal balance of high-altitude scenery and historic hacienda comfort.',
+        es: 'La Avenida de los Volcanes recorre más de 300 km por los Andes ecuatorianos uniendo el nevado Cotopaxi, el Chimborazo y la laguna esmeralda del Quilotoa. Una travesía privada de 4 a 6 días combina paisajes glaciares y estancias en haciendas coloniales.',
+      },
+      bestSeason: {
+        en: 'June to September and December to January (clearest mountain vistas)',
+        es: 'Junio a septiembre y diciembre a enero (cielos despejados para vistas de montaña)',
+      },
+      idealDuration: {
+        en: '4 – 6 Days',
+        es: '4 – 6 Días',
+      },
+      activityLevel: {
+        en: 'Easy to Moderate (Scenic drives, acclimatized nature walks)',
+        es: 'Fácil a Moderado (Rutas panorámicas y caminatas suaves)',
+      },
+      estimatedPrice: {
+        en: 'From $1,200 USD / person',
+        es: 'Desde $1,200 USD / persona',
+      },
+      keyHighlight: {
+        en: 'Cotopaxi active glacier cone, Quilotoa volcanic crater, and wild vicuñas at Chimborazo',
+        es: 'Cono glaciar del Cotopaxi, cráter volcánico del Quilotoa y vicuñas libres en Chimborazo',
+      },
+    },
+    faqs: [
+      {
+        question: {
+          en: 'How can travelers prevent altitude sickness in the Avenue of the Volcanoes?',
+          es: '¿Cómo prevenir el mal de altura en la Avenida de los Volcanes?',
+        },
+        answer: {
+          en: 'We advise spending 1–2 initial nights in Quito (2,850m) to acclimatize gently, drinking plentiful water and local herbal infusions (coca or sunfo tea), avoiding heavy meals on day one, and traveling in private heated vehicles equipped with auxiliary oxygen support.',
+          es: 'Aconsejamos pasar 1 o 2 noches iniciales en Quito (2.850 m) para aclimatarse con calma, beber abundante agua y aromáticas locales (té de coca o sunfo), evitar comidas pesadas el primer día y viajar en transporte privado equipado con oxígeno auxiliar.',
+        },
+      },
+      {
+        question: {
+          en: 'Can travelers with no mountaineering experience visit Cotopaxi and Quilotoa?',
+          es: '¿Pueden personas sin experiencia de montaña visitar Cotopaxi y Quilotoa?',
+        },
+        answer: {
+          en: 'Yes. Our private itineraries drive directly to the Limpiopungo glacial lagoon and scenic lookout points with gentle paths accessible to all fitness levels. In Quilotoa, horseback riding is readily available for the ascent back from the lake rim.',
+          es: 'Sí. Nuestros tours privados acceden por carretera hasta la laguna de Limpiopungo y miradores principales con senderos planos aptos para toda la familia. En Quilotoa hay mulas y caballos disponibles para el retorno desde el fondo del cráter.',
+        },
+      },
+    ],
+  content: {
       en: `
 ## Discovering Humboldt’s Legendary Andean Route
 
@@ -375,7 +499,55 @@ Descubre los colosos andinos con guías de montaña certificados en nuestra expe
     featured: false,
     tags: ['Quito', 'Historic Center', 'UNESCO', 'La Compañía', 'San Francisco', 'Middle of the World', 'Panecillo'],
     relatedTourId: 'quito-city-middle-of-the-world',
-    content: {
+        quickAnswer: {
+      summary: {
+        en: 'Quito was declared the first UNESCO World Cultural Heritage capital in 1978. Its Baroque historic center, gold-leaf covered cathedrals, and proximity to the Middle of the World equator line make a 2 to 3-day stay an essential cultural cornerstone.',
+        es: 'Quito fue declarada la primera capital Patrimonio Cultural de la Humanidad por la UNESCO en 1978. Su centro histórico barroco, templos revestidos de pan de oro y el monumento a la Mitad del Mundo hacen de una estancia de 2 a 3 días un paso esencial.',
+      },
+      bestSeason: {
+        en: 'June to September (dry Andean summer) and December to February',
+        es: 'Junio a septiembre (verano andino despejado) y diciembre a febrero',
+      },
+      idealDuration: {
+        en: '2 – 3 Days',
+        es: '2 – 3 Días',
+      },
+      activityLevel: {
+        en: 'Easy (Historic district walks, private vehicle transfers)',
+        es: 'Fácil (Caminatas históricas y traslados privados puerta a puerta)',
+      },
+      estimatedPrice: {
+        en: 'From $85 USD (Day Excursion) / $450 USD (3-Day Package)',
+        es: 'Desde $85 USD (Full Day) / $450 USD (Paquete 3 Días)',
+      },
+      keyHighlight: {
+        en: 'La Compañía golden temple, Panecillo virgin overlook, and Intiñan Equator Museum physics',
+        es: 'Iglesia dorada de La Compañía, mirador de El Panecillo y experimentos en el Museo Intiñan',
+      },
+    },
+    faqs: [
+      {
+        question: {
+          en: 'Is Quito safe for international travelers?',
+          es: '¿Es seguro viajar a Quito para turistas internacionales?',
+        },
+        answer: {
+          en: 'Yes, particularly when traveling with private certified transportation and licensed professional guides. Vermilion Routes provides dedicated door-to-door chauffeurs, vetted boutique hotels, and 24/7 concierge assistance throughout your stay.',
+          es: 'Sí, especialmente al contar con transporte privado certificado y guías profesionales acreditados. Vermilion Routes ofrece choferes privados de confianza, hoteles boutique céntricos y soporte de conserjería 24/7.',
+        },
+      },
+      {
+        question: {
+          en: 'What is the difference between Mitad del Mundo and Intiñan Museum?',
+          es: '¿Cuál es la diferencia entre Mitad del Mundo y el Museo Intiñan?',
+        },
+        answer: {
+          en: 'The historical Mitad del Mundo monument commemorates the 18th-century French Geodesic Mission. A few yards away, the Intiñan Solar Museum sits on the exact GPS-verified latitude 0°0\'0\", featuring interactive physical demonstrations like egg balancing and water drainage Coriolis effects.',
+          es: 'El monumento histórico conmemora la Misión Geodésica Francesa del siglo XVIII. A pocos metros, el Museo Solar Intiñan se sitúa en la latitud 0°0\'0\" verificada por GPS, con demostraciones interactivas del efecto Coriolis y equilibrio.',
+        },
+      },
+    ],
+  content: {
       en: `
 ## The First UNESCO World Cultural Heritage City
 
@@ -486,7 +658,55 @@ Ubicado a 0°0'0" de latitud, donde se midió la redondez de la Tierra durante l
     featured: false,
     tags: ['Amazon', 'Napo River', 'Cuyabeno', 'Yasuní', 'Community Tourism', 'Rainforest', 'Wildlife'],
     relatedTourId: 'andes-amazon-7days',
-    content: {
+        quickAnswer: {
+      summary: {
+        en: 'The Ecuadorian Amazon (Cuyabeno and Yasuní reserves) is one of the most biodiverse wildlife sanctuaries on Earth. A 4 to 5-day eco-lodge journey includes motorized canoe navigations, pink river dolphin encounters, and ancestral Indigenous culture.',
+        es: 'La Amazonía ecuatoriana (reservas Cuyabeno y Yasuní) es uno de los santuarios de vida silvestre más biodiversos del planeta. Un viaje de 4 a 5 días en eco-lodges de confort incluye navegación en canoa fluvial, avistamiento de delfines rosados y cultura indígena.',
+      },
+      bestSeason: {
+        en: 'Year-round (Dec–May: high waters for canoe access; Jun–Nov: dry season for forest trails)',
+        es: 'Todo el año (Dic–May: aguas altas para canoa; Jun–Nov: temporada seca para senderos)',
+      },
+      idealDuration: {
+        en: '4 – 5 Days',
+        es: '4 – 5 Días',
+      },
+      activityLevel: {
+        en: 'Moderate (Rainforest trail walks, canoe excursions, canopy tower climbs)',
+        es: 'Moderado (Caminatas en selva, navegación en canoa y torres de dosel)',
+      },
+      estimatedPrice: {
+        en: 'From $1,250 USD / person',
+        es: 'Desde $1,250 USD / persona',
+      },
+      keyHighlight: {
+        en: 'Pink river dolphins, howler monkeys, toucans, macaws, and Kichwa ancestral wisdom',
+        es: 'Delfines rosados, monos aulladores, tucanes, guacamayos y medicina ancestral kichwa',
+      },
+    },
+    faqs: [
+      {
+        question: {
+          en: 'Do I need a yellow fever vaccination for the Ecuadorian Amazon?',
+          es: '¿Es obligatoria la vacuna de fiebre amarilla para la Amazonía en Ecuador?',
+        },
+        answer: {
+          en: 'While not legally requested at airport customs, international health organizations strongly advise getting the yellow fever vaccine at least 10 days prior to visiting rainforest provinces like Napo, Orellana, and Sucumbíos.',
+          es: 'Aunque no la exigen en aduana del aeropuerto, los organismos de salud recomiendan aplicarse la vacuna de fiebre amarilla al menos 10 días antes de ingresar a provincias selváticas como Napo, Orellana y Sucumbíos.',
+        },
+      },
+      {
+        question: {
+          en: 'How do travelers reach Amazon eco-lodges from Quito?',
+          es: '¿Cómo se llega a los lodges de la Amazonía desde Quito?',
+        },
+        answer: {
+          en: 'Travelers take a short 35-minute scenic domestic flight from Quito to Coca (Puerto Francisco de Orellana), followed by a motorized covered canoe transfer down the Napo River directly to the private lodge dock.',
+          es: 'Se toma un vuelo doméstico de 35 minutos desde Quito hasta El Coca, seguido por un traslado escénico en canoa motorizada techada por el río Napo hasta el muelle del lodge.',
+        },
+      },
+    ],
+  content: {
       en: `
 ## Pristine Wilderness in the Amazon Basin
 
@@ -577,7 +797,45 @@ Ecuador es además el país con mayor variedad de orquídeas del mundo, con más
     featured: false,
     tags: ['Cuenca', 'Cajas National Park', 'Ingapirca', 'Panama Hat', 'Andes', 'Glacial Lakes'],
     relatedTourId: 'ecuador-fantastic-8days',
-    content: {
+        quickAnswer: {
+      summary: {
+        en: 'Cuenca, Ecuador\'s architectural crown, enchants visitors with cobblestone avenues, French-colonial mansions, genuine Panama toquilla hat weavers, and the glacial lakes of Cajas National Park. 3 to 4 days offer a complete cultural and nature immersion.',
+        es: 'Cuenca cautiva con calles adoquinadas, arquitectura de inspiración francesa, artesanos del auténtico sombrero de paja toquilla y las lagunas glaciares del Parque Nacional Cajas. Se recomiendan de 3 a 4 días para una experiencia completa.',
+      },
+      bestSeason: {
+        en: 'Year-round spring-like weather (October to May is especially warm and sunny)',
+        es: 'Todo el año con clima primaveral (Octubre a mayo especialmente soleado)',
+      },
+      idealDuration: {
+        en: '3 – 4 Days',
+        es: '3 – 4 Días',
+      },
+      activityLevel: {
+        en: 'Easy to Moderate (Historic strolls, highland glacial lake trails)',
+        es: 'Fácil a Moderado (Paseos urbanos y senderismo en páramo)',
+      },
+      estimatedPrice: {
+        en: 'From $850 USD / person',
+        es: 'Desde $850 USD / persona',
+      },
+      keyHighlight: {
+        en: 'Cathedral of the Immaculate Conception blue domes, toquilla hat workshops, and Cajas paper-tree forests',
+        es: 'Cúpulas celestes de la Catedral Nueva, talleres de sombreros de paja toquilla y bosques de Polylepis en Cajas',
+      },
+    },
+    faqs: [
+      {
+        question: {
+          en: 'Are Panama hats really made in Cuenca, Ecuador?',
+          es: '¿Los sombreros Panamá realmente se confeccionan en Cuenca, Ecuador?',
+        },
+        answer: {
+          en: 'Yes! Genuine Panama hats are 100% made in Ecuador from toquilla straw (Carludovica palmata). Cuenca and Montecristi are the UNESCO-recognized world capitals of hand-woven toquilla straw artistry.',
+          es: '¡Sí! Los auténticos sombreros de paja toquilla son 100% originarios de Ecuador. Cuenca y Montecristi albergan a los artesanos tejedores declarados Patrimonio Inmaterial de la Humanidad por la UNESCO.',
+        },
+      },
+    ],
+  content: {
       en: `
 ## The Architectural & Natural Masterpiece of Southern Ecuador
 
@@ -676,7 +934,45 @@ El complejo arqueológico cañari-inca más importante del Ecuador, destacando e
     featured: false,
     tags: ['Mindo', 'Cloud Forest', 'Otavalo', 'Market', 'Peguche', 'Hummingbirds', 'Chocó'],
     relatedTourId: 'otavalo-indigenous-market',
-    content: {
+        quickAnswer: {
+      summary: {
+        en: 'Located just 2 hours from Quito, Mindo features a lush cloud forest sanctuary with 500+ bird species, cascading waterfalls, and artisan chocolate, while Otavalo hosts South America\'s premier Indigenous textile market. Ideal as 1 or 2-day excursions.',
+        es: 'A solo 2 horas de Quito, Mindo alberga un bosque nuboso con más de 500 especies de aves, cascadas y chocolate artesanal, mientras Otavalo acoge el mercado textil indígena más célebre de Sudamérica. Ideales como excursiones de 1 o 2 días.',
+      },
+      bestSeason: {
+        en: 'Year-round (Saturdays in Otavalo for the grand market; mornings in Mindo for birdwatching)',
+        es: 'Todo el año (Sábados en Otavalo para la feria mayor; mañanas en Mindo para avistamiento de aves)',
+      },
+      idealDuration: {
+        en: '1 – 2 Days',
+        es: '1 – 2 Días',
+      },
+      activityLevel: {
+        en: 'Easy to Moderate (Nature walks, canopy cable cars, cultural market tours)',
+        es: 'Fácil a Moderado (Senderos de naturaleza, tarabita y ferias culturales)',
+      },
+      estimatedPrice: {
+        en: 'From $85 USD (Day Excursion)',
+        es: 'Desde $85 USD (Full Day)',
+      },
+      keyHighlight: {
+        en: 'Hummingbird sanctuaries, orchid gardens, handwoven alpaca blankets, and Peguche sacred waterfall',
+        es: 'Santuarios de colibríes, orquídeas, mantas de alpaca tejidas y la cascada sagrada de Peguche',
+      },
+    },
+    faqs: [
+      {
+        question: {
+          en: 'Can Mindo and Otavalo be visited as day trips from Quito?',
+          es: '¿Se pueden visitar Mindo y Otavalo en paseos de un solo día desde Quito?',
+        },
+        answer: {
+          en: 'Yes. Both destinations are situated within a comfortable 2-hour scenic private drive from Quito, making them the most requested full-day excursions for nature lovers and cultural travelers.',
+          es: 'Sí. Ambos destinos se ubican a solo 2 horas en auto privado desde Quito, siendo las escapadas de día completo más solicitadas por su cercanía y belleza.',
+        },
+      },
+    ],
+  content: {
       en: `
 ## Two Contrasting Jewels of Northern Ecuador
 
@@ -779,7 +1075,45 @@ Ubicado a solo dos horas al noroccidente de Quito en las estribaciones de la cor
     featured: false,
     tags: ['Otavalo', 'Plaza de Ponchos', 'Culture', 'Handicrafts', 'Textiles', 'Ecuador'],
     relatedTourId: 'otavalo-indigenous-market',
-    content: {
+        quickAnswer: {
+      summary: {
+        en: 'The Andean poncho is a living testament to pre-Columbian textile heritage, handwoven from virgin sheep and alpaca wool on ancestral backstrap looms in Otavalo and Salasaka. It embodies climatic protection, social dignity, and Andean geometry.',
+        es: 'El poncho andino es un testimonio vivo de la herencia textil prehispánica, tejido a mano con lana virgen de oveja y alpaca en telares de cintura en Otavalo y Salasaka. Representa abrigo térmico, dignidad social y cosmovisión andina.',
+      },
+      bestSeason: {
+        en: 'Year-round cultural discovery',
+        es: 'Todo el año',
+      },
+      idealDuration: {
+        en: '1 Day (Combined with Otavalo Market)',
+        es: '1 Día (Combinado con el Mercado de Otavalo)',
+      },
+      activityLevel: {
+        en: 'Easy (Artisan studio visits and weaving workshops)',
+        es: 'Fácil (Visitas a talleres familiares y telares tradicionales)',
+      },
+      estimatedPrice: {
+        en: 'From $85 USD (Day Excursion)',
+        es: 'Desde $85 USD (Full Day)',
+      },
+      keyHighlight: {
+        en: 'Live backstrap loom weaving, natural plant dyes, and genuine handcrafted wool garments',
+        es: 'Demostraciones vivas de telar de cintura, tintes botánicos naturales y prendas artesanales',
+      },
+    },
+    faqs: [
+      {
+        question: {
+          en: 'What do traditional Andean poncho colors signify?',
+          es: '¿Qué significan los colores tradicionales del poncho andino?',
+        },
+        answer: {
+          en: 'In the Otavalo tradition, deep blue symbolizes respect for the cosmos and dignity, while white reflects purity. In Salasaka, solid black ponchos symbolize historical memory, resistance, and ancestral honor.',
+          es: 'En la tradición otavaleña, el azul profundo simboliza respeto al cosmos y dignidad, y el blanco pureza. En Salasaka, los ponchos negros tupidos representan memoria histórica, dignidad y resistencia ancestral.',
+        },
+      },
+    ],
+  content: {
       en: `
 ## What is a Poncho?
 

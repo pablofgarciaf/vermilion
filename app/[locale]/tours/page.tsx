@@ -126,6 +126,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
     book: string;
     bookExpedition: string;
     combinedTag: string;
+    from: string;
   }> = {
     es: {
       schemaName: 'Catálogo de Expediciones a Medida',
@@ -156,6 +157,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       book: 'Reservar',
       bookExpedition: 'Reservar Expedición',
       combinedTag: 'Andes + Galápagos VIP',
+      from: 'Desde',
     },
     en: {
       schemaName: 'Curated Nature Expeditions Catalog',
@@ -186,6 +188,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       book: 'Book Now',
       bookExpedition: 'Book Expedition',
       combinedTag: 'Andes + Galapagos VIP',
+      from: 'From',
     },
     fr: {
       schemaName: 'Catalogue d’Expéditions d’Exception',
@@ -216,6 +219,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       book: 'Réserver',
       bookExpedition: 'Réserver l’expédition',
       combinedTag: 'Andes + Galápagos VIP',
+      from: 'À partir de',
     },
     de: {
       schemaName: 'Katalog für Luxusexpeditionen',
@@ -246,6 +250,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       book: 'Buchen',
       bookExpedition: 'Expedition buchen',
       combinedTag: 'Anden + Galápagos VIP',
+      from: 'Ab',
     },
     it: {
       schemaName: 'Catalogo di Spedizioni di Lusso',
@@ -276,6 +281,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       book: 'Prenota',
       bookExpedition: 'Prenota Spedizione',
       combinedTag: 'Ande + Galápagos VIP',
+      from: 'Da',
     },
     pt: {
       schemaName: 'Catálogo de Expedições de Luxo',
@@ -306,6 +312,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       book: 'Reservar',
       bookExpedition: 'Reservar Expedição',
       combinedTag: 'Andes + Galápagos VIP',
+      from: 'A partir de',
     },
     ja: {
       schemaName: 'ラグジュアリー遠征ツアーカタログ',
@@ -336,6 +343,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       book: '予約する',
       bookExpedition: '遠征ツアーを予約',
       combinedTag: 'アンデス + ガラパゴス VIP',
+      from: '料金',
     },
     zh: {
       schemaName: '顶级奢华探险行程目录',
@@ -366,6 +374,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       book: '立即预订',
       bookExpedition: '预订探险之旅',
       combinedTag: '安第斯 + 加拉帕戈斯 VIP',
+      from: '起价',
     }
   };
 
@@ -526,9 +535,12 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <Star className="w-3.5 h-3.5 fill-emerald-400" />
                         <span>{tour.rating || 5}.0</span>
                       </div>
-                      <p className="font-serif text-2xl font-bold text-white">
-                        ${price.toLocaleString()} <span className="text-xs font-normal text-zinc-300">USD</span>
-                      </p>
+                      <div className="text-right">
+                        <span className="text-[10px] uppercase font-semibold text-emerald-300 block">{t.from}</span>
+                        <p className="font-serif text-2xl font-bold text-white">
+                          ${price.toLocaleString()} <span className="text-xs font-normal text-zinc-300">USD</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
 
@@ -614,9 +626,12 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       <h3 className="font-serif text-base font-bold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
                         {title}
                       </h3>
-                      <p className="font-serif text-xl font-bold text-emerald-700 dark:text-emerald-400 mt-2">
-                        ${price.toLocaleString()} <span className="text-xs font-normal text-zinc-600 dark:text-zinc-300">USD</span>
-                      </p>
+                      <div className="mt-2">
+                        <span className="text-[10px] uppercase font-semibold text-emerald-700 dark:text-emerald-400 block">{t.from}</span>
+                        <p className="font-serif text-xl font-bold text-emerald-700 dark:text-emerald-400">
+                          ${price.toLocaleString()} <span className="text-xs font-normal text-zinc-600 dark:text-zinc-300">USD</span>
+                        </p>
+                      </div>
                     </div>
 
                     <div className="pt-3 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between gap-2">
@@ -689,9 +704,12 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       <span className="text-xs text-blue-300 font-semibold bg-black/60 px-3 py-1 rounded-full">
                         {t.combinedTag}
                       </span>
-                      <p className="font-serif text-3xl font-bold text-white">
-                        ${price.toLocaleString()} <span className="text-sm font-normal text-zinc-300">USD</span>
-                      </p>
+                      <div className="text-right">
+                        <span className="text-[10px] uppercase font-semibold text-blue-300 block">{t.from}</span>
+                        <p className="font-serif text-3xl font-bold text-white">
+                          ${price.toLocaleString()} <span className="text-sm font-normal text-zinc-300">USD</span>
+                        </p>
+                      </div>
                     </div>
                   </div>
 

@@ -40,11 +40,31 @@ const DESTINATION_IMAGE_POOLS: Record<string, string[]> = {
   ],
 };
 
+const DESTINATION_PRICES: Record<string, number> = {
+  ecuador: 1200,
+  galapagos: 1590,
+  combined: 2850,
+  'full-day': 85,
+};
+
+const FROM_LABELS: Record<string, string> = {
+  es: 'Desde',
+  en: 'From',
+  fr: 'À partir de',
+  de: 'Ab',
+  it: 'Da',
+  pt: 'A partir de',
+  ja: '料金',
+  zh: '起价',
+};
+
 export function DestinationsGrid() {
   const destinations = mockDestinations;
   const t = useTranslations('destinations');
   const tTour = useTranslations('tours');
   const locale = useLocale();
+
+  const fromText = FROM_LABELS[locale] || 'From';
 
   const [activeDestId, setActiveDestId] = useState<string>('all');
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -177,9 +197,14 @@ export function DestinationsGrid() {
 
               {/* Top Badge Info */}
               <div className="relative z-10 flex items-center justify-between w-full">
-                <span className="text-xs font-semibold uppercase tracking-wider text-emerald-300 bg-emerald-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-emerald-500/30 shadow-sm">
-                  {dest.toursCount} {tTour('journeys')}
-                </span>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-emerald-300 bg-emerald-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-emerald-500/30 shadow-sm">
+                    {dest.toursCount} {tTour('journeys')}
+                  </span>
+                  <span className="text-[10px] font-bold text-white bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 shadow-sm">
+                    {fromText} ${(DESTINATION_PRICES[dest.id] || 85).toLocaleString()} <span className="text-[9px] font-normal text-zinc-300">USD</span>
+                  </span>
+                </div>
 
                 <div className="flex items-center gap-1.5">
                   {/* Subtle dots showing image rotation progress */}
