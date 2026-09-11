@@ -1,4 +1,4 @@
-# Robots.txt for Vermilion Routes (Luxury Boutique Travel Agency)
+# Robots.txt for Vermilion Routes (Bespoke Nature Travel Operator)
 # Open to Generative AI & Search Engine Crawlers
 
 User-agent: Googlebot
@@ -7,10 +7,16 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 User-agent: anthropic-ai
@@ -26,6 +32,12 @@ User-agent: Google-Extended
 Allow: /
 
 User-agent: Applebot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
 Allow: /
 
 # Social Media Preview Crawlers (Facebook, Twitter, LinkedIn, WhatsApp, Pinterest)

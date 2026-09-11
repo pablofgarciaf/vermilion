@@ -86,5 +86,15 @@ Todo agente que agregue, edite o revise páginas, rutas o componentes en este pr
   - `ja` (Japonés)
 
 ### 8. VERIFICACIÓN PRE-FLIGHT LOCAL
-- Todo cambio antes de ser presentado al usuario o preparado para commit debe superar `npm run build` con Turbopack (146/146 páginas generadas con código de salida `0`).
+- Todo cambio antes de ser presentado al usuario o preparado para commit debe superar `npm run build` con Turbopack (230/230 páginas generadas con código de salida `0`).
+
+### 9. ESTÁNDAR GEO & RASTREO PARA MOTORES DE IA (CHATGPT, CLAUDE, PERPLEXITY, GEMINI)
+- **Cero Bloqueo de JS en Contenido Indexable (SSR/SSG Puro):** Prohibido envolver catálogos o artículos de blog con `<Suspense>` que muestren skeletons o textos como "Loading travel guides...". Todo contenido editorial o de producto DEBE servirse como HTML pre-renderizado en el byte 0 mediante `generateStaticParams` para los 8 idiomas soportados.
+- **Prohibido `useSearchParams()` en la Raíz de Vistas Públicas:** Si se necesita leer un parámetro opcional (como `?ref=`), extraerlo de forma segura en handlers del cliente (`typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('ref') : null`) para no de-optimizar el SSR de la página entera.
+- **Diferenciación Estricta entre `<title>` y `<h1>`:** El `<h1>` NUNCA debe duplicar el `<title>` de la marca. El `<h1>` (45-65 caracteres) debe enfocarse 100% en la intención de búsqueda comercial y transaccional del viajero (*"Tours Privados y Expediciones a Medida en Ecuador y Galápagos"*).
+- **Apertura y Paridad en `robots.txt`:** Permitir explícitamente a `OAI-SearchBot`, `CCBot`, `GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`, `Applebot`. Mantener sincronizados `app/robots.ts` y `public/robots.txt`.
+- **Esquema FAQPage en Server Components:** El JSON-LD de preguntas frecuentes debe residir en el Server Component (`page.tsx`) para aparecer en el HTML inicial, nunca condicionado a Hooks de cliente o listeners de Firebase.
+- **Coherencia NAP Estricta (Nombre, Dirección, Teléfonos):** En Schema (`layout.tsx`), registrar ambos teléfonos de la empresa en `contactPoint` (Atención al cliente / WhatsApp `+593 99 404 8458` y Reservas / Oficina `+593 98 399 2549`) para mantener paridad con Google Business Profile y TripAdvisor.
+- **Sitemap Completo & Redirecciones 301 de URLs Legacy:** Toda página pública (`/about`, `/tours`, `/blog`, etc.) debe estar en `app/sitemap.ts`. Cualquier URL histórica indexada en Google (como `/gallery/` o slugs renombrados) debe tener una redirección 301 permanente en `next.config.mjs`.
+
 

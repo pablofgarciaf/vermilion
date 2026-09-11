@@ -8,6 +8,7 @@ const LOCALES = ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'];
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     '',
+    '/about',
     '/tours',
     '/blog',
     '/booking',

@@ -12,6 +12,12 @@ import { ContactSection } from '@/components/home/ContactSection';
 import AffiliateRegistration from '@/components/home/AffiliateRegistration';
 import { LazySection } from '@/components/ui/LazySection';
 import { getSeoAlternates } from '@/utils/seoHelper';
+import { defaultSettings } from '@/lib/seed';
+import { getLocalizedText } from '@/utils/i18nHelper';
+
+export async function generateStaticParams() {
+  return ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'].map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -76,9 +82,28 @@ const FluidBackgroundCursor = dynamic(
   }
 );
 
-export default function Home() {
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: (defaultSettings.faq || []).map((item) => ({
+      '@type': 'Question',
+      name: getLocalizedText(item.question, locale),
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: getLocalizedText(item.answer, locale),
+      },
+    })),
+  };
+
   return (
     <div className="space-y-8 pb-12 relative -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       {/* Dynamic Fluid WebGL Shader Background & Custom Mouse Cursor */}
       <FluidBackgroundCursor />
 

@@ -104,6 +104,26 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/gallery',
+        destination: '/en#destinations',
+        permanent: true,
+      },
+      {
+        source: '/:locale/gallery',
+        destination: '/:locale#destinations',
+        permanent: true,
+      },
+      {
+        source: '/:locale/blog/el-arte-del-poncho-andino',
+        destination: '/:locale/blog/the-art-of-the-andean-poncho',
+        permanent: true,
+      },
+      {
+        source: '/blog/el-arte-del-poncho-andino',
+        destination: '/en/blog/the-art-of-the-andean-poncho',
+        permanent: true,
+      },
+      {
         source: '/dashboard',
         destination: '/en/dashboard',
         permanent: true,

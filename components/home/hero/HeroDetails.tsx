@@ -66,14 +66,14 @@ const SPLASH_TEXTS: Record<string, {
 };
 
 const H1_HEADLINES: Record<string, string> = {
-  es: 'Vermilion Routes | Expediciones a Medida en Ecuador',
-  en: 'Vermilion Routes | Bespoke Nature Expeditions 24/7',
-  fr: 'Vermilion Routes | Circuits sur Mesure en Équateur',
-  de: 'Vermilion Routes | Naturreisen in Ecuador & Galápagos',
-  it: 'Vermilion Routes | Tour su Misura in Ecuador e Andes',
-  pt: 'Vermilion Routes | Expedições sob Medida no Equador',
-  ja: 'Vermilion Routes | エクアドル＆ガラパゴス自然旅行 24/7',
-  zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯自然探险 24/7',
+  es: 'Tours Privados y Expediciones a Medida en Ecuador y Galápagos',
+  en: 'Private & Bespoke Tours in Ecuador & Galapagos Islands',
+  fr: 'Circuits Privés et Voyages sur Mesure en Équateur et Galápagos',
+  de: 'Private & Maßgeschneiderte Reisen nach Ecuador & Galápagos',
+  it: 'Tour Privati e Viaggi su Misura in Ecuador e Galápagos',
+  pt: 'Tours Privados e Expedições sob Medida no Equador e Galápagos',
+  ja: 'エクアドル＆ガラパゴス諸島 プライベートオーダーメイド自然旅行',
+  zh: '厄瓜多尔与加拉帕戈斯群岛私人专属定制探险之旅',
 };
 
 export function getStandardTemplateHTML(slide: SlideData, locale: string): string {

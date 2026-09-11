@@ -1,9 +1,13 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import type { Metadata } from 'next';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { BlogIndexClient } from '@/components/blog/BlogIndexClient';
 import { getSeoAlternates } from '@/utils/seoHelper';
+
+export async function generateStaticParams() {
+  return ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'].map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -235,9 +239,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
           </p>
         </div>
 
-        <Suspense fallback={<div className="min-h-[40vh] flex items-center justify-center text-emerald-700 font-semibold animate-pulse">{h.loading}</div>}>
-          <BlogIndexClient hideHeader />
-        </Suspense>
+        <BlogIndexClient hideHeader />
       </div>
     </div>
   );

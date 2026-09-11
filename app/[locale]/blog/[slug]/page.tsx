@@ -34,6 +34,17 @@ interface BlogPostPageProps {
   }>;
 }
 
+export async function generateStaticParams() {
+  const LOCALES = ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'];
+  const params: { locale: string; slug: string }[] = [];
+  for (const locale of LOCALES) {
+    for (const post of BLOG_POSTS) {
+      params.push({ locale, slug: post.slug });
+    }
+  }
+  return params;
+}
+
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = BLOG_POSTS.find((p) => p.slug === slug);
@@ -130,6 +141,18 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     },
     alternates,
   };
+}
+
+function parseMarkdown(text: string, locale: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-zinc-900 dark:text-white">$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em class="italic text-zinc-800 dark:text-zinc-200">$1</em>')
+    .replace(/\[(.*?)\]\((.*?)\)/g, (_, label, url) => {
+      const href = url.startsWith('/') && !url.startsWith(`/${locale}`) ? `/${locale}${url}` : url;
+      const isExternal = url.startsWith('http');
+      const rel = isExternal ? 'rel="noopener noreferrer" target="_blank"' : '';
+      return `<a href="${href}" ${rel} class="text-emerald-700 dark:text-emerald-400 font-semibold underline underline-offset-4 decoration-emerald-500/50 hover:text-emerald-900 dark:hover:text-emerald-200 transition-colors">${label}</a>`;
+    });
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -435,9 +458,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <p
                       className="text-zinc-600 dark:text-zinc-300 font-normal leading-relaxed pl-3.5"
                       dangerouslySetInnerHTML={{
-                        __html: restText
-                          .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-zinc-900 dark:text-white">$1</strong>')
-                          .replace(/\*(.*?)\*/g, '<em class="italic text-zinc-800 dark:text-zinc-200">$1</em>')
+                        __html: parseMarkdown(restText, locale)
                       }}
                     />
                   )}
@@ -452,9 +473,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     <li
                       key={iIdx}
                       dangerouslySetInnerHTML={{
-                        __html: it
-                          .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-zinc-900 dark:text-white">$1</strong>')
-                          .replace(/\*(.*?)\*/g, '<em class="italic text-zinc-800 dark:text-zinc-200">$1</em>')
+                        __html: parseMarkdown(it, locale)
                       }}
                     />
                   ))}
@@ -467,10 +486,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   key={idx}
                   className="space-y-2 pl-2 text-zinc-700 dark:text-zinc-300"
                   dangerouslySetInnerHTML={{
-                    __html: trimmed
-                      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-zinc-900 dark:text-white">$1</strong>')
-                      .replace(/\*(.*?)\*/g, '<em class="italic text-zinc-800 dark:text-zinc-200">$1</em>')
-                      .replace(/\n/g, '<br />')
+                    __html: parseMarkdown(trimmed.replace(/\n/g, '<br />'), locale)
                   }}
                 />
               );
@@ -483,9 +499,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 key={idx}
                 className="leading-relaxed font-normal text-zinc-600 dark:text-zinc-300"
                 dangerouslySetInnerHTML={{
-                  __html: trimmed
-                    .replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-zinc-900 dark:text-white">$1</strong>')
-                    .replace(/\*(.*?)\*/g, '<em class="italic text-zinc-800 dark:text-zinc-200">$1</em>')
+                  __html: parseMarkdown(trimmed, locale)
                 }}
               />
             );

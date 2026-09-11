@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
@@ -22,8 +21,6 @@ interface BlogIndexClientProps {
 
 export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
   const locale = useLocale();
-  const searchParams = useSearchParams();
-  const affiliateId = searchParams.get('ref');
 
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -480,6 +477,9 @@ export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
               setLoading(true);
               setStatusMessage({ type: '', text: '' });
               try {
+                const affiliateId = typeof window !== 'undefined'
+                  ? new URLSearchParams(window.location.search).get('ref')
+                  : null;
                 const res = await fetch('/api/leads/newsletter', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },

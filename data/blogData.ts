@@ -121,6 +121,11 @@ According to UNESCO records, more than **45 endemic bird species, 42 reptiles, 1
 * **Kicker Rock:** A monolithic 140-meter volcanic tuff remnant offering world-famous deep-water snorkeling alongside hammerhead sharks, eagle rays, and sea turtles.
 
 ![Volcanic Landscapes and Marine Life of the Galapagos Islands](/images/tours/16-9/galapagos-isabela-island-16-9.jpg)
+
+---
+
+### Recommended Galapagos Expeditions
+To experience these enchanted islands with private logistics and certified naturalist guides, explore our [Galapagos Encounter 4-Day Tour](/tours/galapagos-4days) or the comprehensive [Galapagos 5-Day Island Discovery](/tours/galapagos-5days).
       `,
       es: `
 ## El Laboratorio Viviente de la Evolución
@@ -163,6 +168,11 @@ De acuerdo con la UNESCO, más de **45 especies de aves endémicas, 42 reptiles,
 * **León Dormido:** Formación rocosa vertical de 140 metros de altura en medio del océano, considerado uno de los mejores puntos de buceo y snorkel del mundo para avistar tiburones martillo, rayas águila y tortugas marinas.
 
 ![Paisajes Volcánicos y Playas de Galápagos](/images/tours/16-9/galapagos-isabela-island-16-9.jpg)
+
+---
+
+### Expediciones Recomendadas en Galápagos
+Para vivir esta aventura con logística privada y guías naturalistas certificados, explore nuestro [Tour Encuentro Galápagos 4 Días](/tours/galapagos-4days) o la expedición completa [Galápagos Esencial 5 Días](/tours/galapagos-5days).
       `
     }
   },
@@ -259,6 +269,11 @@ Home to the largest glacier mass in Ecuador, fed by moisture rising from the Ama
 Known ancestrally as the *"Throat of Fire"*, Tungurahua towers over the lush cloud forest gateway to the Amazon. The nearby Route of the Waterfalls features the thunderous **Pailón del Diablo (Devil\'s Cauldron)** and relaxing thermal hot springs.
 
 ![Pailón del Diablo (Devil\'s Cauldron) Waterfall along the Route of the Waterfalls in Baños](/images/tours/16-9/pailon-del-diablo-16-9.jpg)
+
+---
+
+### Recommended Andean Expeditions
+Experience the Avenue of the Volcanoes with certified mountain guides on our [Avenue of Volcanoes & Rivers 8-Day Tour](/tours/volcanoes-rivers-8days) or the [Snow-Capped Volcanoes 6-Day Journey](/tours/snow-volcanoes-6days).
       `,
       es: `
 ## Descubriendo la Legendaria Ruta de Humboldt
@@ -298,6 +313,11 @@ Posee el glaciar más voluminoso del país, alimentado por la humedad de la cuen
 Conocido ancestralmente como la *"Garganta de Fuego"*, este coloso vigila la transición hacia la selva amazónica. En sus faldas se encuentra la famosa Ruta de las Cascadas con el imponente **Pailón del Diablo (Devil\'s Cauldron)** y balnearios de aguas termales volcánicas.
 
 ![Cascada Pailón del Diablo (Devil\'s Cauldron) en la Ruta de las Cascadas de Baños](/images/tours/16-9/pailon-del-diablo-16-9.jpg)
+
+---
+
+### Expediciones Recomendadas en los Andes
+Descubre los colosos andinos con guías de montaña certificados en nuestra expedición [Ruta de Volcanes y Ríos 8 Días](/tours/volcanoes-rivers-8days) o el recorrido de [Volcanes Nevados 6 Días](/tours/snow-volcanoes-6days).
       `
     }
   },
@@ -707,7 +727,7 @@ Ubicado a solo dos horas al noroccidente de Quito en las estribaciones de la cor
   },
   {
     id: 'post-ponchos-otavalo',
-    slug: 'el-arte-del-poncho-andino',
+    slug: 'the-art-of-the-andean-poncho',
     title: {
       en: 'The Art of the Poncho: Andean Master Weavers',
       es: 'El Arte del Poncho: Maestros Tejedores Andinos',

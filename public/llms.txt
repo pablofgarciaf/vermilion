@@ -25,6 +25,8 @@ Vermilion Routes provides bespoke nature and comfort expeditions, Galapagos isla
 ## Direct Contact & Corporate Offices
 - **Ecuador HQ:** Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503), Ecuador.
 - **Spain Office (Coral Tour):** Calle Seco 3, 28007 Madrid, España.
+- **Phone & WhatsApp (Direct):** +593 99 404 8458
+- **Phone & Reservations (Office):** +593 98 399 2549
 - [Official Website](https://www.vermilionroutes.com/en): Direct online inquiry and tour catalog.
 - [Full AI Manifest](https://www.vermilionroutes.com/llms-full.txt): Complete 16-expedition portfolio and API reference.
 - [WhatsApp Booking Support](https://wa.me/593994048458): Instant 24/7 communication with travel specialists.

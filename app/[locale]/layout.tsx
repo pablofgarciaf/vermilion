@@ -188,13 +188,22 @@ export default async function RootLayout({
           'Amazon Rainforest',
           'Andes Mountains',
         ],
-        contactPoint: {
-          '@type': 'ContactPoint',
-          telephone: '+593994048458',
-          contactType: 'customer service',
-          availableLanguage: ['English', 'Spanish', 'French', 'German', 'Italian', 'Portuguese'],
-          areaServed: ['EC', 'US', 'CA', 'GB', 'EU'],
-        },
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            telephone: '+593994048458',
+            contactType: 'customer service',
+            availableLanguage: ['English', 'Spanish', 'French', 'German', 'Italian', 'Portuguese'],
+            areaServed: ['EC', 'US', 'CA', 'GB', 'EU'],
+          },
+          {
+            '@type': 'ContactPoint',
+            telephone: '+593983992549',
+            contactType: 'reservations',
+            availableLanguage: ['English', 'Spanish', 'French', 'German', 'Italian', 'Portuguese'],
+            areaServed: ['EC', 'US', 'CA', 'GB', 'EU'],
+          },
+        ],
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '5.0',
