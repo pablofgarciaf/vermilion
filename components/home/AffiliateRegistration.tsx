@@ -111,7 +111,7 @@ export default function AffiliateRegistration() {
   const c = AFFILIATE_CONTENT[locale] || AFFILIATE_CONTENT['en'];
 
   return (
-    <section className="relative py-16 md:py-20 overflow-hidden bg-stone-950 border-t border-white/5">
+    <section id="affiliate" className="relative py-16 md:py-20 overflow-hidden bg-stone-950 border-t border-white/5 scroll-mt-20">
       {/* Background ambient light */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-amber-500/10 rounded-full blur-[120px] pointer-events-none"></div>
 

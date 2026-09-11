@@ -17,7 +17,8 @@ import {
   Phone,
   Mail,
   QrCode,
-  Sparkles
+  Sparkles,
+  Clock
 } from 'lucide-react';
 
 interface TravelVoucherModalProps {
@@ -119,9 +120,22 @@ export function TravelVoucherModal({
               <span className="font-mono text-lg font-bold text-white print:text-black tracking-wider">
                 {clientInfo.refCode || `VR-${Date.now().toString().slice(-6)}`}
               </span>
-              <div className="flex items-center gap-1 text-[11px] text-emerald-300 print:text-emerald-800 mt-0.5 justify-start sm:justify-end">
-                <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>{isEs ? 'Confirmado & Garantizado' : 'Confirmed & Guaranteed'}</span>
+              <div className={`flex items-center gap-1 text-[11px] mt-0.5 justify-start sm:justify-end ${
+                clientInfo.isConfirmed === false 
+                  ? 'text-amber-300 print:text-amber-800' 
+                  : 'text-emerald-300 print:text-emerald-800'
+              }`}>
+                {clientInfo.isConfirmed === false ? (
+                  <>
+                    <Clock className="w-3.5 h-3.5 text-amber-400 print:text-amber-700" />
+                    <span>{isEs ? 'Reserva en Espera de Pago' : 'Pending Payment Transfer'}</span>
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span>{isEs ? 'Confirmado & Garantizado' : 'Confirmed & Guaranteed'}</span>
+                  </>
+                )}
               </div>
             </div>
           </div>

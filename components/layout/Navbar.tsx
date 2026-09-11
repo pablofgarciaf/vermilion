@@ -98,7 +98,7 @@ export function Navbar() {
     },
     { name: tNav('tours'), href: `/${locale}/tours` },
     { name: 'Blog', href: `/${locale}/blog` },
-    { name: tNav('about'), href: `/${locale}#experience` },
+    { name: tNav('about'), href: `/${locale}#about` },
     { name: tNav('contact'), href: `/${locale}#contact` },
   ];
 
@@ -127,7 +127,7 @@ export function Navbar() {
         return;
       }
 
-      const el = document.getElementById(hash);
+      const el = document.getElementById(hash) || (hash === 'about' ? document.getElementById('experience') : null) || (hash === 'experience' ? document.getElementById('about') : null);
       if (el) {
         e.preventDefault();
         el.scrollIntoView({ behavior: 'smooth' });

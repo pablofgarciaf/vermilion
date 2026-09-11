@@ -6,7 +6,13 @@ import { sendLeadMagnetEmail } from '@/lib/email';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { email, locale } = body;
+    const { email, locale, _hp_trap, website_url } = body;
+
+    // 🛡️ Honeypot Trap Detection (Python Bot / Form Spammer Neutralizer)
+    if (_hp_trap || website_url) {
+      console.warn('[SECURITY] Bot trapped in lead magnet honeypot.');
+      return NextResponse.json({ success: true });
+    }
 
     if (!email || typeof email !== 'string') {
       return NextResponse.json({ error: 'Valid email is required' }, { status: 400 });

@@ -3,12 +3,21 @@ import { sendNewsletterVerificationEmail, generateNewsletterToken } from '@/lib/
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
+import { isValidEmail } from '@/lib/validation';
+
 export async function POST(request: Request) {
   try {
-    const { email, affiliateId } = await request.json();
+    const body = await request.json();
+    const { email, affiliateId, _hp_trap, website_url } = body;
 
-    if (!email) {
-      return NextResponse.json({ error: 'Falta el correo electrónico' }, { status: 400 });
+    // 🛡️ Honeypot Trap Detection (Python Bot / Form Spammer Neutralizer)
+    if (_hp_trap || website_url) {
+      console.warn('[SECURITY] Bot trapped in newsletter honeypot.');
+      return NextResponse.json({ success: true, message: 'Correo enviado' });
+    }
+
+    if (!email || !isValidEmail(email)) {
+      return NextResponse.json({ error: 'Correo electrónico inválido' }, { status: 400 });
     }
 
     // 1. Generate token

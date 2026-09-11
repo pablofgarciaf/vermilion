@@ -109,8 +109,8 @@ export interface BookingRequest {
   destination?: string;
   message?: string;
   amountPaid?: number;
-  paymentMethod?: 'card' | 'bank_wire' | 'paypal';
-  paymentStatus?: 'confirmed' | 'pending_verification';
+  paymentMethod?: 'card' | 'bank_wire' | 'paypal' | 'payoneer_wire';
+  paymentStatus?: 'confirmed' | 'pending_verification' | 'pending_payment';
   transferRef?: string;
   affiliateCode?: string;
   discountApplied?: boolean;

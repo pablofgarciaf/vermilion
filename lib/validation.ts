@@ -113,6 +113,8 @@ export const leadSchema = z.object({
   guestsCount: z.string().optional(),
   travelers: z.string().optional(),
   message: z.string().optional(),
+  _hp_trap: z.string().optional(),
+  website_url: z.string().optional(),
 }).superRefine((data, ctx) => {
   const rawName = (data.customerName || data.name || '').trim();
   const rawEmail = (data.customerEmail || data.email || '').trim();
@@ -166,4 +168,65 @@ export const checkoutSchema = z.object({
 });
 
 export type CheckoutInput = z.infer<typeof checkoutSchema>;
+
+/**
+ * 🛡️ Esquemas de validación para PayPal Checkout Oficial
+ */
+export const paypalCreateOrderSchema = z.object({
+  tourId: z.string().nullable().optional(),
+  tourTitle: z.string().optional(),
+  clientName: z.string().optional(),
+  clientEmail: z.string().min(3).refine((email) => isValidEmail(email), {
+    message: 'A valid email address is required.',
+  }),
+  clientPhone: z.string().optional(),
+  amount: z.number().positive(),
+  bookingRef: z.string().min(2),
+  affiliateCode: z.string().optional(),
+  travelDate: z.string().optional(),
+  guestsCount: z.string().optional(),
+  locale: z.string().optional(),
+});
+
+export type PaypalCreateOrderInput = z.infer<typeof paypalCreateOrderSchema>;
+
+export const paypalCaptureOrderSchema = z.object({
+  orderId: z.string().min(3),
+  bookingRef: z.string().min(2),
+  tourId: z.string().optional(),
+  tourTitle: z.string().optional(),
+  clientName: z.string().optional(),
+  clientEmail: z.string().optional(),
+  amount: z.number().optional(),
+  travelDate: z.string().optional(),
+  guestsCount: z.string().optional(),
+  locale: z.string().optional(),
+  affiliateCode: z.string().optional(),
+});
+
+export type PaypalCaptureOrderInput = z.infer<typeof paypalCaptureOrderSchema>;
+
+/**
+ * 🏦 Esquema de validación para Transferencias Internacionales Payoneer (Espera de Pago)
+ */
+export const payoneerTransferSchema = z.object({
+  bookingRef: z.string().min(2),
+  tourId: z.string().optional(),
+  tourTitle: z.string().optional(),
+  clientName: z.string().optional(),
+  clientEmail: z.string().min(3).refine((email) => isValidEmail(email), {
+    message: 'A valid email address is required.',
+  }),
+  clientPhone: z.string().optional(),
+  amount: z.number().positive(),
+  currency: z.enum(['USD', 'EUR']).default('USD'),
+  travelDate: z.string().optional(),
+  guestsCount: z.string().optional(),
+  locale: z.string().optional(),
+  affiliateCode: z.string().optional(),
+  notes: z.string().optional(),
+  _hp_trap: z.string().optional(),
+});
+
+export type PayoneerTransferInput = z.infer<typeof payoneerTransferSchema>;
 

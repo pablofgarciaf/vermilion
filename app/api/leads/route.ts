@@ -5,6 +5,12 @@ import { leadsRepository } from '@/lib/services/DatabaseService';
 import { BookingRequest } from '@/types';
 
 export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
+  // 🛡️ Honeypot Trap Detection (Python Bot / Automated Form Spammer Neutralizer)
+  if (body._hp_trap || body.website_url) {
+    console.warn('[SECURITY] Bot / Python spam script trapped via Honeypot. Request neutralised silently.');
+    return NextResponse.json({ success: true, bookingId: 'simulated_ok' }, { status: 200 });
+  }
+
   const customerName = sanitizeText(body.customerName || body.name || '');
   const customerEmail = sanitizeText(body.customerEmail || body.email || '');
   const customerPhone = sanitizeText(body.customerPhone || body.phone || '');

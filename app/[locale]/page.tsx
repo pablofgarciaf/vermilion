@@ -91,10 +91,8 @@ export default function Home() {
       {/* 2. Top Destinations Grid (Direct SSR - 0.00 CLS) */}
       <DestinationsGrid />
 
-      {/* 3. Combined Trust & Expertise Section (Lazy Section) */}
-      <LazySection minHeightClass="min-h-[420px]">
-        <CombinedExperienceSection />
-      </LazySection>
+      {/* 3. Combined Trust & Expertise Section (Direct SSR for #about / #experience) */}
+      <CombinedExperienceSection />
 
       {/* 4. Featured Tours Carousel (Lazy Section) */}
       <LazySection minHeightClass="min-h-[580px]">
@@ -116,10 +114,8 @@ export default function Home() {
         <AffiliateRegistration />
       </LazySection>
 
-      {/* 7. Contact & Tailor-Made Quotation Form (Lazy Section) */}
-      <LazySection minHeightClass="min-h-[550px]">
-        <ContactSection />
-      </LazySection>
+      {/* 7. Contact & Tailor-Made Quotation Form (Direct SSR for #contact) */}
+      <ContactSection />
     </div>
   );
 }

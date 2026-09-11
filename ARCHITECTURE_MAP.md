@@ -1,8 +1,8 @@
 # 🗺️ VERMILION ROUTES — PLANO MAESTRO ARQUITECTÓNICO (ARCHITECTURE MAP)
 
 > **Documento:** `ARCHITECTURE_MAP.md`  
-> **Versión:** `1.5.0`  
-> **Última Actualización:** 2026-09-03  
+> **Versión:** `1.6.0`  
+> **Última Actualización:** 2026-09-10  
 > **Responsable:** Arquitecto de Sistemas de Vermilion Routes  
 > **Estado:** Activo / Vigente  
 
@@ -10,12 +10,20 @@
 
 ## 1. Visión General del Ecosistema
 
-El ecosistema **Vermilion Routes** es una plataforma integral de turismo de lujo boutique para Ecuador y las Islas Galápagos. Integra una interfaz pública de alto rendimiento (Next.js App Router, SSR/CSR, diseño editorial premium) con módulos operativos consolidados y respaldados por Google Cloud / Firebase Firestore:
+El ecosistema **Vermilion Routes** es una plataforma integral de turismo de lujo boutique para Ecuador y las Islas Galápagos. Integra una interfaz pública de alto rendimiento (Next.js App Router, SSR/CSR, diseño editorial premium, pasarelas de pago de ultra-lujo y soporte para 8 idiomas) con módulos operativos consolidados y respaldados por Google Cloud / Firebase Firestore:
 
 ```mermaid
 flowchart TD
-    Public[🌐 Portal Público Vermilion Routes] -->|Reservas / Leads| Firestore[(🔥 Cloud Firestore)]
+    Public[🌐 Portal Público & Checkout Multilingüe\n8 Idiomas: ES, EN, FR, DE, ZH, IT, PT, JA] -->|Formularios protegidos por Honeypots\n_hp_trap / website_url| EdgeGuard[🛡️ Edge Middleware & Rate Limiter\ncheckRateLimit: 10-15 req/min por IP]
     
+    EdgeGuard -->|Checkout Pasarela Oficial| PayPal[💳 PayPal Checkout Oficial USD\nSDK @paypal/react-paypal-js\nSaldo PayPal + Visa/Mastercard/Amex]
+    EdgeGuard -->|Transferencia Internacional| Payoneer[🏦 Payoneer Wire Transfer\nUSA ACH/Fedwire + Europa SEPA\n+ Produbanco Ecuador · Ahorra Comisión]
+    EdgeGuard -->|Prospección / Leads| APILeads[📨 API Leads & Newsletter\nNeutralización Silenciosa Anti-Bots]
+
+    PayPal -->|Capture Order: status confirmed| Firestore[(🔥 Cloud Firestore\nColección bookings)]
+    Payoneer -->|Transfer Order: status pending_payment| Firestore
+    APILeads -->|Datos Sanitizados Zod| Firestore
+
     subgraph Modulos ["🏛️ Ecosistema Modular Vermilion Routes"]
         cPanel["📝 cPanel (CMS)\nRoles: super, editor + Pase Fundadores\nGestión Editorial & Catálogo"]
         
@@ -255,10 +263,103 @@ El archivo [`proxy.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/
 #### 2. Responsabilidades Activas en el Edge
 1. **Rate Limiting Defensivo por IP (`checkRateLimit`):**
    * `/api/concierge/*`: 15 solicitudes / minuto (defensa contra saturación de inferencia LLM e invocaciones a OpenAI/NVIDIA).
-   * `/api/checkout/*`: 10 solicitudes / minuto (mitigación de ataques de card testing y generación fraudulenta de sesiones en Stripe).
+   * `/api/checkout/*`: 10 solicitudes / minuto (mitigación de ataques de card testing, generación fraudulenta de órdenes en PayPal y sesiones en Stripe).
    * `/api/leads/*`: 10 solicitudes / minuto (protección contra spam de formularios y saturación de webhooks en n8n/Firestore).
 2. **Autorización Segura para `/api/seed`:** Validación estricta mediante Bearer Token (`process.env.SEED_SECRET`) o cookie de sesión `__session`, retornando HTTP 401 Unauthorized ante peticiones no autorizadas.
 3. **Internacionalización y Negociación de Idioma (`next-intl`):** Enrutamiento con prefijo de idioma obligatorio (`localePrefix: 'always'`) soportando `en`, `es` e `it`.
+
+---
+
+### 2.5 Módulo de Seguridad Perimetral, Sanitización y Blindaje Anti-Bots / Scripts Python
+
+Con el objetivo de neutralizar scrapers automatizados, ataques de fuerza bruta, bots de Python (`requests`, `urllib`, `aiohttp`, `scrapy`, Selenium, Playwright) y recolectores automáticos de formularios sin penalizar la experiencia del viajero distinguido ni contaminar Cloud Firestore, el sistema implementa una arquitectura defensiva multicapa:
+
+```mermaid
+flowchart TD
+    Req([Petición Externa HTTP / Form Submit]) --> RateLimit{Edge Rate Limiter\n(proxy.ts Sliding Window)}
+    RateLimit -->|Excede cuota IP (10-15 req/min)| Reject429["429 Too Many Requests\n(Cabeceras Retry-After / X-RateLimit-*)"]
+    RateLimit -->|Permitido| HOF[withValidation HOF\n(lib/apiHandler.ts)]
+    
+    HOF --> ParseJSON{¿JSON Válido?}
+    ParseJSON -->|Malformado| Err400["400 Bad Request\n'JSON payload inválido'"]
+    ParseJSON -->|Correcto| HoneypotCheck{¿Campo Honeypot activo?\n_hp_trap != '' || website_url != ''}
+    
+    HoneypotCheck -->|Sí (Script Bot detectado)| TrapCatch["🛡️ Silent Trap Catch:\n1. Log advertencia en servidor\n2. CERO escrituras en Firestore\n3. CERO correos SMTP emitidos\n4. Retorna HTTP 200 { success: true } simulado"]
+    HoneypotCheck -->|No (Usuario Legítimo)| ZodValidation{Validación de Esquema Zod\n(leadSchema / payoneerTransferSchema)}
+    
+    ZodValidation -->|Campos Inválidos| ErrZod["400 Bad Request\n(Detalle Zod formateado)"]
+    ZodValidation -->|Válido| Sanitize[Sanitización Allowlist sanitizeText\nStrip HTML, on*, pseudo-protocolos, RFC 5322]
+    Sanitize --> FirestoreSave[(🔥 Cloud Firestore Persistencia Limpia)]
+```
+
+#### 1. Trampas Honeypot Silenciosas (`_hp_trap` y `website_url`)
+* **Archivos Clave en Backend:**
+  - Lead Ingestion: [`app/api/leads/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/route.ts)
+  - Lead Magnet / Catálogos: [`app/api/leads/magnet/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/magnet/route.ts)
+  - Newsletter: [`app/api/leads/newsletter/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/newsletter/route.ts)
+  - Payoneer Wire Transfer: [`app/api/checkout/payoneer/transfer/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/checkout/payoneer/transfer/route.ts)
+  - Checkout Client UI: [`app/[locale]/checkout/payment/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/payment/page.tsx#L1105-L1117)
+* **Arquitectura de Señuelo en el DOM:**
+  En los formularios públicos se inyectan campos trampa visualmente imperceptibles e inaccesibles para el usuario humano mediante clases CSS de alto camuflaje y accesibilidad:
+  ```tsx
+  <div className="sr-only opacity-0 h-0 w-0 pointer-events-none absolute -left-[9999px]" aria-hidden="true">
+    <label htmlFor="website_url_hp">Website URL</label>
+    <input
+      id="website_url_hp"
+      type="text"
+      name="_hp_trap"
+      value={hpTrap}
+      onChange={(e) => setHpTrap(e.target.value)}
+      tabIndex={-1}
+      autoComplete="off"
+    />
+  </div>
+  ```
+* **Mecanismo de Neutralización Silenciosa (*Silent Trap Catch*):**
+  Los scrapers y scripts automatizados de Python completan ciegamente todos los `<input>` del árbol DOM. Al recibir la petición, el servidor evalúa de inmediato:
+  ```typescript
+  if (body._hp_trap || body.website_url) {
+    console.warn('[SECURITY] Bot / Python spam script trapped via Honeypot. Request neutralised silently.');
+    return NextResponse.json({ success: true, bookingId: 'simulated_ok' }, { status: 200 });
+  }
+  ```
+  **Efectos del Bloqueo:**
+  1. **Cero Polución en Firestore:** No se crea ningún documento en `leads`, `bookings` ni `clientes_destacados`.
+  2. **Cero Desperdicio SMTP:** No se envían correos transaccionales de confirmación ni guías PDF, protegiendo la reputación del remitente de la agencia.
+  3. **Falso Positivo para el Atacante:** El bot recibe un código HTTP 200 OK con payload de confirmación idéntico al de una orden legítima, por lo que el script automatizado concluye su ejecución sin mutar sus parámetros ni intentar sortear la protección.
+
+#### 2. Rate Limiting Dinámico por IP en el Edge (`proxy.ts`)
+* **Archivo:** [`proxy.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/proxy.ts)
+* **Algoritmo:** Ventana deslizante (*Sliding Window*) en memoria que trackea marcas de tiempo por combinación de `IP` + prefijo de endpoint.
+* **Política de Recolección de Basura:** Tarea de limpieza periódica (`lastCleanup`) cada 5 minutos que purga registros inactivos superiores a 120 segundos para evitar fugas de memoria en Node.js runtime.
+* **Cuotas Estrictas de Seguridad:**
+  - `/api/concierge/*`: **15 req/min** (protección financiera contra ataques de agotamiento de tokens en OpenAI y NVIDIA NIM).
+  - `/api/checkout/*`: **10 req/min** (protección crítica contra card testing fraudulento y creación masiva de órdenes PayPal/Stripe).
+  - `/api/leads/*`: **10 req/min** (prevención de spam y saturación de base de datos).
+  - Tráfico general API: **60 req/min**.
+* **Respuesta y Telemetría RFC:** Ante transgresión de cuota, despacha HTTP 429 Too Many Requests inyectando cabeceras normativas:
+  - `Retry-After`: Segundos de espera requeridos.
+  - `X-RateLimit-Limit`: Cuota asignada.
+  - `X-RateLimit-Remaining`: Peticiones remanentes (`0`).
+  - `X-RateLimit-Reset`: Época de reinicio de la ventana.
+
+#### 3. Capa Centralizada de Sanitización y Validación Estricta (`lib/validation.ts` y `lib/apiHandler.ts`)
+* **Higher-Order Function `withValidation`:**
+  - Encapsula de forma estandarizada los endpoints POST de la API.
+  - Atrapa y rechaza payloads JSON malformados o truncados (`status: 400`).
+  - Valida el payload contra esquemas tipados Zod (`leadSchema`, `paypalCreateOrderSchema`, `paypalCaptureOrderSchema`, `payoneerTransferSchema`).
+  - Estandariza la respuesta de error devolviendo el primer issue detallado.
+  - Atrapa de forma global errores no controlados del servidor devolviendo HTTP 500 sin exponer stack traces internas.
+* **Sanitización Robusta de Texto Libre (`sanitizeText`):**
+  - Aplica estrategia de allowlist radical (strip de todos los tags HTML mediante regex `<[^>]+>`).
+  - Erradica bloques íntegros de `<script>` y `<style>`.
+  - Suprime atributos de evento dinámicos (`on*="ejecutar()"`).
+  - Filtra pseudo-protocolos maliciosos (`javascript:`, `vbscript:`, `data:text/html`).
+  - Decodifica entidades HTML (`&amp;`, `&lt;`, `&gt;`, etc.) antes del strip para impedir evasión de filtros por reensamblaje de entidades.
+  - Trunca preventivamente los campos a un límite seguro de 2,000 caracteres para evitar ataques de DoS por memoria.
+* **Validación de Identidad y Contacto:**
+  - `isValidEmail`: Sintaxis conforme a RFC 5322.
+  - `isValidPhone` y `filterPhoneInput`: Restringe caracteres a números, espacios, guiones y un prefijo `+` inicial exclusivo, exigiendo longitud entre 7 y 15 dígitos numéricos reales.
 
 ---
 
@@ -419,13 +520,19 @@ export interface CrmBooking {
   assignedOperatorId?: string;   // Correo del operador/guía asignado
   assignedOperatorName?: string; // Nombre visible del operador
   
-  // Liquidación de Comisiones
+  // Liquidación de Comisiones & Pasarela de Pagos (v1.6.0)
   affiliateId?: string;          // Código de referido del embajador (ej. "pablo.g")
+  affiliateCode?: string;        // Alias de afiliado
   affiliateCommissionAmount?: number; // Monto de comisión de afiliado (10%)
   affiliateCommissionStatus?: 'pending' | 'ready_for_review' | 'paid';
   operatorCommissionAmount?: number;  // Honorario pactado del operador local
   operatorCommissionStatus?: 'pending' | 'ready_for_review' | 'paid';
   paymentReference?: string;     // Comprobante bancario o referencia de transferencia
+  paymentMethod?: 'paypal' | 'payoneer_wire' | 'stripe' | 'wire_transfer'; // Pasarela oficial empleada
+  paymentStatus?: 'confirmed' | 'pending_verification' | 'pending_payment'; // Estatus transaccional fiduciario
+  transferRef?: string;          // Identificador (ej. "PayPal Order: 8X...", "Payoneer Transfer (USD) - Espera de pago")
+  discountApplied?: boolean;     // Bandera de beneficio / descuento por referido aplicado
+  receiptUrl?: string;           // URL del comprobante de transferencia en Cloud Storage
   notes?: string;                // Notas especiales (dietas, vuelos, solicitudes)
   
   // Amenidades VIP & Bitácora de Campo
@@ -439,9 +546,13 @@ export interface CrmBooking {
 }
 ```
 
+> **🛡️ Blindaje Transaccional en `bookings`:**  
+> Los registros creados vía transferencia internacional Payoneer adoptan de forma determinista `paymentStatus: 'pending_payment'` y `status: 'pending'`. Mientras que las capturas procesadas exitosamente por el SDK oficial de PayPal se asientan con `paymentStatus: 'confirmed'` y `status: 'confirmed'`. Las trampas honeypot previenen la inserción de reservas espurias por bots.
+
 #### B. Colección `leads` (Pipeline de Prospectos y Ventas)
 > **Ruta:** `/databases/(default)/documents/leads/{leadId}`  
-> **Tipos Unificados:** [`CrmLead`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/types/crm.ts#L47-L66) en [`types/crm.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/types/crm.ts)
+> **Tipos Unificados:** [`CrmLead`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/types/crm.ts#L47-L66) en [`types/crm.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/types/crm.ts)  
+> **Blindaje Anti-Bots:** Protegido por filtro Honeypot (`_hp_trap` y `website_url`); peticiones automatizadas son neutralizadas en memoria y nunca alcanzan esta colección.
 
 ```typescript
 export type LeadStatus = 
@@ -804,6 +915,107 @@ El portal cPanel controla el catálogo editorial y la configuración pública de
   > *"Acceso denegado (403): Tu cuenta no dispone de permisos para acceder a cPanel."*
 * **Logs Diagnósticos ('Chismosos'):** Registra trazas en consola (`🕵️‍♂️ [CHISMOSO CPANEL]` y `🕵️‍♂️ [CHISMOSO ADMIN LOGIN]`) para auditar la resolución de acceso en cada intento.
 
+---
+
+### 4.7 Módulo de Checkout Transaccional, Pasarelas Oficiales & Internacionalización (v1.6.0)
+
+* **Ruta Principal de Pago:** [`app/[locale]/checkout/payment/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/payment/page.tsx)
+* **Pantalla de Confirmación Exitosa:** [`app/[locale]/checkout/success/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/success/page.tsx)
+* **Componente de Botón PayPal:** [`components/checkout/PayPalCheckoutButton.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/checkout/PayPalCheckoutButton.tsx)
+* **Servicio PayPal REST API:** [`lib/paypal.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/lib/paypal.ts)
+* **Modal Generador de Voucher PDF:** [`components/booking/TravelVoucherModal.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/booking/TravelVoucherModal.tsx)
+* **Esquemas Zod de Pagos:** [`lib/validation.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/lib/validation.ts#L173-L232)
+* **Configuración de Seguridad Edge (CSP & COOP):** [`next.config.mjs`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/next.config.mjs#L157-L168)
+
+El módulo de checkout actúa como el motor fiduciario y de conversión de ultra-lujo de Vermilion Routes, ofreciendo una experiencia sin fricciones, adaptada a las preferencias financieras de viajeros internacionales de alto poder adquisitivo.
+
+```mermaid
+flowchart TD
+    Traveler([Viajero en Checkout /checkout/payment]) --> ChooseMethod{Selección de Método de Pago}
+    
+    %% Flujo PayPal
+    ChooseMethod -->|Tab 1: PayPal / Tarjeta Internacional| PayPalFlow[PayPal Smart Buttons\nSDK @paypal/react-paypal-js]
+    PayPalFlow --> CreateOrderAPI[POST /api/checkout/paypal/create-order\nToken OAuth2 + Intent CAPTURE]
+    CreateOrderAPI --> ModalPayPal[Ventana Popup de Pago PayPal\nCOOP: same-origin-allow-popups]
+    ModalPayPal --> ApprovedPay{¿Aprobado por el Viajero?}
+    ApprovedPay -->|Sí| CaptureOrderAPI[POST /api/checkout/paypal/capture-order\nCaptura de Fondos en PayPal REST API]
+    CaptureOrderAPI --> BookingConfirmed[(🔥 Firestore 'bookings'\npaymentStatus: 'confirmed'\nstatus: 'confirmed')]
+    BookingConfirmed --> EmailSuccess[📨 Correo Confirmación con Voucher]
+    BookingConfirmed --> SuccessScreen[Redirección a /checkout/success]
+
+    %% Flujo Payoneer
+    ChooseMethod -->|Tab 2: Transferencia Internacional\nUSA / Europa / Ecuador - Ahorra Comisión| PayoneerFlow[Datos de Cuentas Receptoras:\nUSA USD ACH/Fedwire · Europa EUR SEPA · Produbanco]
+    PayoneerFlow --> FormPayoneer[Formulario con Honeypot _hp_trap\n+ Adjunto de Comprobante Opcional]
+    FormPayoneer --> SubmitPayoneer[POST /api/checkout/payoneer/transfer]
+    SubmitPayoneer --> BookingPending[(🔥 Firestore 'bookings'\npaymentStatus: 'pending_payment'\nstatus: 'pending')]
+    BookingPending --> VoucherModal[📄 Modal TravelVoucherModal\nBadge Ámbar: 'Reserva en Espera de Pago']
+    BookingPending --> WhatsAppBtn[💬 Botón Notificación WhatsApp 24/7\nConcierge con código VR preformateado]
+```
+
+#### 1. Pasarela Oficial PayPal Checkout (SDK `@paypal/react-paypal-js` & REST API v2)
+* **Conexión Institucional:** Enlazado oficialmente a **PayPal Business Ecuador** con cobro nativo y liquidación en dólares de los Estados Unidos (**USD**).
+* **Instrumentos de Pago Admitidos:**
+  1. Saldo de cuenta PayPal (fondos inmediatos).
+  2. Tarjetas de crédito y débito internacionales de alto nivel (Visa, Mastercard, American Express) procesadas de forma transparente en modalidad invitado (*Guest Checkout*) sin obligar al viajero a crear una cuenta en PayPal.
+* **Flujo Transaccional en Dos Pasos (Create & Capture):**
+  - **Fase 1: Creación de la Orden (`POST /api/checkout/paypal/create-order`):**
+    - Valida los parámetros de entrada (`amount`, `bookingRef`, `tourTitle`, `clientEmail`, `locale`) mediante `paypalCreateOrderSchema`.
+    - Genera token de acceso OAuth2 con `grant_type=client_credentials` ante `https://api-m.paypal.com/v1/oauth2/token`.
+    - Despacha la orden con `intent: 'CAPTURE'`, asociando el código de reserva boutique (`bookingRef`) como `reference_id` y `custom_id` en las unidades de compra (`purchase_units`), fijando la marca institucional *"Vermilion Routes"*.
+    - Retorna el identificador de orden (`orderId`).
+  - **Fase 2: Captura de Fondos y Registro (`POST /api/checkout/paypal/capture-order`):**
+    - Valida `paypalCaptureOrderSchema` e instruye a PayPal la captura efectiva de fondos mediante `POST /v2/checkout/orders/{orderId}/capture`.
+    - Comprueba que el estatus devuelto sea estrictamente `COMPLETED`.
+    - Asienta la reserva en Cloud Firestore a través de `createBookingInFirestore` asignando:
+      - `paymentMethod: 'paypal'`
+      - `paymentStatus: 'confirmed'`
+      - `status: 'confirmed'`
+      - `transferRef: 'PayPal Order: [orderId]'`
+    - Si la reserva proviene de un embajador (`affiliateCode`), invoca `calculateAndDistributeCommissions` registrando la comisión unilevel 10-3-2 en estatus `pending`.
+    - Despacha correo electrónico de confirmación inmediata con los detalles de la expedición mediante `sendBookingConfirmationEmail`.
+* **Ajustes de Infraestructura Edge en `next.config.mjs`:**
+  - **Content-Security-Policy (CSP):** Se integraron en lista blanca los dominios oficiales de PayPal (`https://www.paypal.com`, `https://*.paypal.com`, `https://*.paypalobjects.com`) en las directivas `script-src`, `img-src`, `frame-src` y `connect-src`, permitiendo la carga del SDK `@paypal/react-paypal-js` y de iframes de autenticación 3D Secure.
+  - **Cross-Origin-Opener-Policy (COOP):** Configurado a `same-origin-allow-popups` para garantizar que la ventana emergente de autenticación y autorización de PayPal mantenga comunicación por postMessage con la ventana madre de la aplicación sin ser bloqueada por aislamiento de origen del navegador.
+
+#### 2. Transferencia Bancaria Internacional Payoneer (EE. UU. / Europa) - Ahorra Comisión
+* **Estrategia Fiduciaria de Ultra-Lujo:**
+  Diseñada para evitar al viajero y a la agencia los elevados recargos de comisiones por procesamiento de tarjetas (típicamente del 3.5% al 5.4%). Ofrece cuentas receptoras directas en jurisdicciones clave:
+  1. **Estados Unidos (USD):** Payoneer Local Receiving Account para transferencias locales **ACH** y transferencias cableadas **Fedwire**.
+  2. **Europa (EUR):** Payoneer Local Receiving Account con código IBAN europeo para transferencias bajo el sistema **SEPA**.
+  3. **Ecuador (USD):** Cuenta corriente oficial en **Produbanco** para clientes, residentes y operadores locales.
+* **Endpoint Serverless (`POST /api/checkout/payoneer/transfer`):**
+  - Valida el payload con `payoneerTransferSchema`, incluyendo verificación contra la trampa honeypot `_hp_trap`.
+  - Registra la expedición en Firestore con los siguientes estados específicos:
+    - `paymentMethod: 'payoneer_wire'`
+    - `paymentStatus: 'pending_payment'` (*Espera de pago*)
+    - `status: 'pending'`
+    - `transferRef: 'Payoneer Transfer (USD/EUR) - Espera de pago'`
+  - Registra de forma preventiva la comisión para el embajador (`pending`), supeditada a la conciliación del abono.
+  - Despacha correo electrónico al pasajero con las instrucciones bancarias completas y el número de cuenta correspondiente a la divisa seleccionada.
+* **Voucher PDF Adaptado & Botón Concierge WhatsApp 24/7:**
+  - **Comprobante Oficial Adaptado ([`components/booking/TravelVoucherModal.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/booking/TravelVoucherModal.tsx)):** Detecta la propiedad `clientInfo.isConfirmed === false` y sustituye el sello verde por un distintivo ámbar estilizado:
+    > ⏳ **Reserva en Espera de Pago** *(Pending Payment Transfer)*
+    Desplegando el código de reserva `VR-`, desglose de pasajeros, fechas tentativas, itinerario día a día y montos fiduciarios, con capacidad de impresión y exportación en formato PDF.
+  - **Botón de Notificación WhatsApp 24/7:** Enlace directo de un clic a la línea de Concierge con mensaje codificado:
+    > *"Hola Vermilion Routes, he registrado mi reserva para '[tourTitle]' (Ref: [VR-XXXXXX]). Método: Transferencia Internacional Payoneer."*
+    Permitiendo al cliente enviar de inmediato la captura de pantalla o comprobante bancario para una acreditación acelerada por el equipo de finanzas.
+
+#### 3. Soporte Integral de Internacionalización (8 Idiomas) en Checkout
+* **Cero Cadenas Hardcodeadas:** La totalidad de las cadenas visuales de la interfaz de pago consumen el diccionario unificado `CHECKOUT_I18N` en [`app/[locale]/checkout/payment/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/payment/page.tsx).
+* **Matriz de 8 Idiomas Soportados:**
+  1. **Español (`es`)**
+  2. **Inglés (`en`)**
+  3. **Francés (`fr`)**
+  4. **Alemán (`de`)**
+  5. **Chino Simplificado (`zh`)**
+  6. **Italiano (`it`)**
+  7. **Portugués (`pt`)**
+  8. **Japonés (`ja`)**
+* **Resolución Reactiva de Idioma:** Obtiene el idioma mediante `useLocale()` de `next-intl`; si el prefijo de la URL no coincide con uno de los 8 soportados, aplica fallback seguro a inglés (`en`) o español (`es`).
+* **Alcance de Traducción:** Localización precisa de encabezados SSL, pestañas de navegación (PayPal / Tarjetas vs. Transferencia Payoneer), desgloses de tarifas y depósitos, instrucciones de cuentas bancarias (ACH/Fedwire/SEPA), advertencias de retención temporal de cupos, leyendas del comprobante PDF, modales y cláusulas de consentimiento legal y privacidad.
+
+---
+
 ## 5. Rutas en Next.js (Inventario y Módulos)
 
 El proyecto utiliza **Next.js App Router** con soporte multi-idioma a través de `next-intl` (`/[locale]/...`), soportando `en`, `es` e `it`.
@@ -840,7 +1052,9 @@ vermilion/app/
 │   │   └── affiliates/page.tsx  ← Portal oficial de autenticación unificada (Login/Registro/Forgot/Alertas Rojas 403)
 │   ├── blog/                    ← Artículos editoriales
 │   ├── booking/page.tsx         ← Formulario de reserva de tours
-│   ├── checkout/payment/page.tsx← Pasarela de pago de reservas
+│   ├── checkout/                ← Motor de Checkout Transaccional (v1.6.0)
+│   │   ├── payment/page.tsx     ← Pasarela de pago de reservas (PayPal USD + Payoneer Wire ACH/SEPA + 8 Idiomas)
+│   │   └── success/page.tsx     ← Confirmación oficial de reserva y comprobante de expedición
 │   ├── tours/                   ← Catálogo público
 │   │   ├── page.tsx             ← Explorador de tours
 │   │   └── [id]/page.tsx        ← Ficha de expedición boutique
@@ -849,11 +1063,18 @@ vermilion/app/
 └── api/                         ← Route Handlers Serverless
     ├── auth/send-verification/  ← Envío de tokens de verificación
     ├── auth/verify-token/       ← Validación de autenticación
-    ├── checkout/session/        ← Sesión de Stripe checkout
-    ├── concierge/chat/          ← Concierge virtual asistido por IA
-    ├── leads/                   ← Ingesta de prospectos generales
-    ├── leads/magnet/            ← Descarga de catálogo con captura de lead
-    └── leads/newsletter/        ← Suscripción a novedades
+    ├── checkout/                ← Pasarelas Transaccionales
+    │   ├── paypal/
+    │   │   ├── create-order/    ← Creación de orden oficial PayPal REST API (USD)
+    │   │   └── capture-order/   ← Captura de fondos PayPal, confirmación Firestore y voucher
+    │   ├── payoneer/
+    │   │   └── transfer/        ← Registro fiduciario Payoneer ACH/SEPA ('pending_payment' + Honeypot)
+    │   ├── session/             ← Sesión de Stripe checkout
+    │   └── verify-session/      ← Verificación y sincronización de sesión de pago Stripe
+    ├── concierge/chat/          ← Concierge virtual asistido por IA (Sliding Window 15 req/min)
+    ├── leads/                   ← Ingesta de prospectos con trampa Honeypot anti-bots (10 req/min)
+    ├── leads/magnet/            ← Descarga de catálogo con captura de lead y trampa Honeypot
+    └── leads/newsletter/        ← Suscripción a novedades con token y trampa Honeypot
 ```
 
 ### 5.1 Inventario Detallado de Rutas
@@ -866,7 +1087,8 @@ vermilion/app/
 | `/[locale]/blog` | Página (SSR) | Público | Público | ✅ Activa | [`app/[locale]/blog/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/blog/page.tsx) |
 | `/[locale]/blog/[slug]` | Página (SSR) | Público | Público | ✅ Activa | [`app/[locale]/blog/[slug]/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/blog/[slug]/page.tsx) |
 | `/[locale]/booking` | Página (CSR) | Público | Público | ✅ Activa | [`app/[locale]/booking/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/booking/page.tsx) |
-| `/[locale]/checkout/payment` | Página (CSR) | Público | Público | ✅ Activa | [`app/[locale]/checkout/payment/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/payment/page.tsx) |
+| `/[locale]/checkout/payment` | Página (CSR) | **Checkout** | Público | ✅ Activa (Pasarela PayPal USD + Payoneer Wire ACH/SEPA + Produbanco + 8 Idiomas) | [`app/[locale]/checkout/payment/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/payment/page.tsx) |
+| `/[locale]/checkout/success` | Página (CSR) | **Checkout** | Público | ✅ Activa (Confirmación oficial de expedición y voucher) | [`app/[locale]/checkout/success/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/success/page.tsx) |
 | `/[locale]/auth` | Página (CSR) | Autenticación | Público | ✅ Activa (Redirige a `/auth/affiliates`) | [`app/[locale]/auth/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/auth/page.tsx) |
 | `/[locale]/auth/affiliates` | Página (CSR) | **Affiliates Auth** | Público | ✅ Activa (Portal Oficial Login/Registro + Patrón EnergyEngine + Alertas 403 Confidenciales) | [`app/[locale]/auth/affiliates/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/auth/affiliates/page.tsx) |
 | `/[locale]/cpanel` | Página (CSR) | **cPanel (CMS)** | `super`, `editor` *(y Pase Fundadores)* | ✅ Activa (Validación en `usuarios` + Bypass Fundadores + Alerta 403 Confidencial) | [`app/[locale]/cpanel/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/cpanel/page.tsx)<br>[`components/admin/AdminLoginForm.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/admin/AdminLoginForm.tsx) |
@@ -879,11 +1101,15 @@ vermilion/app/
 | `/[locale]/affiliates/withdrawals`| Página (CSR) | **Affiliates** | `affiliate`, `founder` | ✅ Activa | [`app/[locale]/affiliates/withdrawals/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/affiliates/withdrawals/page.tsx) |
 | `/[locale]/affiliates/resources` | Página (CSR) | **Affiliates** | `affiliate`, `founder` | ✅ Activa | [`app/[locale]/affiliates/resources/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/affiliates/resources/page.tsx) |
 | `/[locale]/affiliates/profile` | Página (CSR) | **Affiliates** | `affiliate`, `founder` | ✅ Activa | [`app/[locale]/affiliates/profile/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/affiliates/profile/page.tsx) |
-| `/api/leads` | API Route | Lead Capture | Público | ✅ Activa | [`app/api/leads/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/route.ts) |
-| `/api/leads/magnet` | API Route | Lead Capture | Público | ✅ Activa | [`app/api/leads/magnet/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/magnet/route.ts) |
-| `/api/leads/newsletter` | API Route | Lead Capture | Público | ✅ Activa | [`app/api/leads/newsletter/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/newsletter/route.ts) |
-| `/api/checkout/session` | API Route | Pagos | Público | ✅ Activa | [`app/api/checkout/session/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/checkout/session/route.ts) |
-| `/api/concierge/chat` | API Route | AI Concierge | Público | ✅ Activa | [`app/api/concierge/chat/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/concierge/chat/route.ts) |
+| `/api/leads` | API Route | Lead Capture | Público | ✅ Activa (Validación Zod + Neutralizador Honeypot anti-bots) | [`app/api/leads/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/route.ts) |
+| `/api/leads/magnet` | API Route | Lead Capture | Público | ✅ Activa (Descarga de catálogo con trampa Honeypot) | [`app/api/leads/magnet/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/magnet/route.ts) |
+| `/api/leads/newsletter` | API Route | Lead Capture | Público | ✅ Activa (Suscripción a novedades con trampa Honeypot) | [`app/api/leads/newsletter/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/newsletter/route.ts) |
+| `/api/checkout/paypal/create-order` | API Route | Pagos | Público | ✅ Activa (Genera orden oficial en PayPal REST API en USD) | [`app/api/checkout/paypal/create-order/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/checkout/paypal/create-order/route.ts) |
+| `/api/checkout/paypal/capture-order` | API Route | Pagos | Público | ✅ Activa (Captura fondos PayPal, asienta `confirmed` y despacha voucher) | [`app/api/checkout/paypal/capture-order/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/checkout/paypal/capture-order/route.ts) |
+| `/api/checkout/payoneer/transfer` | API Route | Pagos | Público | ✅ Activa (Registra transferencia fiduciaria en `pending_payment` + Honeypot) | [`app/api/checkout/payoneer/transfer/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/checkout/payoneer/transfer/route.ts) |
+| `/api/checkout/session` | API Route | Pagos | Público | ✅ Activa (Sesión Stripe Checkout) | [`app/api/checkout/session/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/checkout/session/route.ts) |
+| `/api/checkout/verify-session` | API Route | Pagos | Público | ✅ Activa (Verificación y conciliación transaccional Stripe) | [`app/api/checkout/verify-session/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/checkout/verify-session/route.ts) |
+| `/api/concierge/chat` | API Route | AI Concierge | Público | ✅ Activa (Asistente IA con rate limit de 15 req/min) | [`app/api/concierge/chat/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/concierge/chat/route.ts) |
 
 ---
 
@@ -913,6 +1139,7 @@ Vermilion Routes implementa un modelo de comisiones de dos vertientes:
 
 | Fecha | Versión | Autor | Cambios Implementados | Próximos Pasos / Hitos |
 | :--- | :---: | :--- | :--- | :--- |
+| **2026-09-10** | `v1.6.0` | **Arquitecto de Sistemas** | • **Módulo de Seguridad Perimetral y Blindaje Anti-Bots / Scripts Python:**<br>  - *Trampas Honeypot Silenciosas (`_hp_trap`, `website_url`):* Despliegue de campos trampa invisibles (`sr-only`) en formularios de leads ([`app/api/leads/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/route.ts)), descarga de catálogos / lead magnets ([`app/api/leads/magnet/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/magnet/route.ts)), newsletter ([`app/api/leads/newsletter/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/leads/newsletter/route.ts)) y checkout transfer ([`app/api/checkout/payoneer/transfer/route.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/api/checkout/payoneer/transfer/route.ts)). Las peticiones automatizadas de scrapers y scripts de Python son neutralizadas de forma silenciosa retornando HTTP 200 `{ success: true }` simulado sin escribir en Firestore ni enviar correos SMTP.<br>  - *Rate Limiting Defensivo en el Edge ([`proxy.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/proxy.ts)):* Algoritmo de sliding window en memoria con cuotas estrictas de 15 req/min para inferencia de IA (`/api/concierge/*`), 10 req/min para pasarelas de pago (`/api/checkout/*`) y captura de leads (`/api/leads/*`), con cabeceras estándar RFC (`Retry-After`, `X-RateLimit-*`) y respuesta HTTP 429 ante abusos.<br>  - *Sanitización y Validación Estricta Zod ([`lib/validation.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/lib/validation.ts), [`lib/apiHandler.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/lib/apiHandler.ts)):* Implementación de la HOF `withValidation` para intercepción segura de JSON, sanitización allowlist en `sanitizeText` (eliminación total de etiquetas HTML, manejadores `on*`, pseudo-protocolos `javascript:` y decodificación de entidades), y validaciones estrictas con RFC 5322 para emails y regex internacional para teléfonos.<br>• **Pasarela Oficial PayPal Checkout:**<br>  - *Integración del SDK Oficial:* Implementación de `@paypal/react-paypal-js` enlazado con la cuenta comercial PayPal Business Ecuador (divisa oficial USD).<br>  - *Instrumentos Admitidos:* Saldo PayPal y cobro directo con tarjetas internacionales de débito/crédito (Visa, Mastercard, American Express) vía *Guest Checkout* sin obligar a registrarse en PayPal.<br>  - *Endpoints Transaccionales:* Creación de `POST /api/checkout/paypal/create-order` (generación de orden OAuth2 con `intent: 'CAPTURE'`) y `POST /api/checkout/paypal/capture-order` (captura fiduciaria, validación `status === 'COMPLETED'`, persistencia en Firestore con `paymentStatus: 'confirmed'`, distribución de comisión de embajadores y despacho de voucher de confirmación por email).<br>  - *Ajustes de Infraestructura Edge en `next.config.mjs`:* Configuración de Content-Security-Policy (CSP) permitiendo dominios oficiales de PayPal en `script-src`, `img-src`, `frame-src` y `connect-src`; y Cross-Origin-Opener-Policy (COOP) fijado en `same-origin-allow-popups` para asegurar la comunicación fluida del popup de pago de PayPal.<br>• **Transferencia Bancaria Internacional Payoneer (EE. UU. / Europa) & Produbanco - Ahorra Comisión:**<br>  - *Alternativa Fiduciaria sin Comisiones de Tarjeta:* Habilitación de cuentas de recepción locales en Estados Unidos (USD vía ACH/Fedwire), Europa (EUR vía transferencias SEPA) y Ecuador (cuenta corriente Produbanco).<br>  - *Endpoint Serverless:* Creación de `POST /api/checkout/payoneer/transfer` con validación Zod y Honeypot, asentando las reservas con estatus fiduciario 'Espera de pago' (`paymentStatus: 'pending_payment'`, `status: 'pending'`), comisión provisional y despacho de instrucciones bancarias al cliente.<br>  - *Voucher PDF Adaptado & Botón WhatsApp 24/7:* Generación de comprobante en [`TravelVoucherModal.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/booking/TravelVoucherModal.tsx) adaptado con distintivo ámbar *"Reserva en Espera de Pago"*, y botón de notificación directa por WhatsApp 24/7 con código `VR-` preformateado para envío expedito del comprobante.<br>• **Soporte Integral de Internacionalización (8 Idiomas) en Checkout:**<br>  - Erradicación absoluta de textos hardcodeados en el checkout ([`app/[locale]/checkout/payment/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/payment/page.tsx)).<br>  - Implementación del diccionario centralizado `CHECKOUT_I18N` cubriendo 8 idiomas: Español (`es`), Inglés (`en`), Francés (`fr`), Alemán (`de`), Chino Simplificado (`zh`), Italiano (`it`), Portugués (`pt`) y Japonés (`ja`), con fallback automático a inglés/español.<br>• **Elevación de Versión del Plano Maestro:** Ascenso a `v1.6.0` en encabezado y bitácora, con actualización exhaustiva de diagramas Mermaid, esquema de base de datos en Firestore, inventario de rutas Next.js y especificaciones de seguridad perimetral. | 1. Configurar Webhooks de PayPal (`PAYMENT.CAPTURE.COMPLETED`, `CHECKOUT.ORDER.APPROVED`) para conciliación asíncrona redundante en Firestore.<br>2. Integrar confirmación bancaria en un clic para operadores de finanzas desde la pestaña *Finanzas & Tesorería* del CRM (`/admin?tab=finance`) para pasar reservas Payoneer de `pending_payment` a `confirmed`.<br>3. Conectar notificaciones automáticas vía WhatsApp Business API oficial para recordatorios de pago a pasajeros con transferencias pendientes. |
 | **2026-09-03** | `v1.5.0` | **Arquitecto de Sistemas** | • **Eliminación de Redirección Legacy en Producción (`proxy.ts`):** Supresión definitiva de la regla de redirección en el middleware Edge que interceptaba `/dashboard` y `/network` y redirigía forzosamente hacia la raíz (`/`) cuando el host de la solicitud no era `embassy.vermilionroutes.com` ni `localhost`. Ahora el tráfico en hosts de producción (`vermilionroutes.com`) accede de manera transparente a las rutas canónicas del portal de embajadores (`/affiliates/dashboard`, `/affiliates/network`) sin expulsiones ni bucles involuntarios.<br>• **Adopción del Patrón EnergyEngine en Affiliates (`affiliates/layout.tsx` y `auth/affiliates/page.tsx`):**<br>  - *Asunción de Rol por Defecto:* Si una cuenta existe en la colección `affiliates` de Firestore pero el campo `role` no está definido, el sistema adopta automáticamente `'affiliate'` (`rawRole = String(aff.role \|\| 'affiliate')`), resolviendo de inmediato el acceso para embajadores registrados en etapas previas o migrados (ej. `ing.pablo`).<br>  - *Telemetría y Diagnóstico en Consola ('Chismosos'):* Instrumentación de trazas detalladas (`[CHISMOSO AFFILIATES LAYOUT]`, `[CHISMOSO AUTH FORM]`, `[CHISMOSO LOGIN FORM]`) que auditan en tiempo real cada paso: sesión activa en Firebase Auth, documento Firestore encontrado, rol y estatus evaluados, y banderas de cambio obligatorio de clave.<br>  - *Retención en Formulario ante Errores:* En lugar de expulsar al usuario a la página de inicio ante inconsistencias de rol o estatus, la sesión se purga y el usuario permanece siempre en la pantalla de autenticación con su respectiva alerta (`setErrorMsg` o `?error=`), permitiéndole corregir credenciales o reintentar sin fricción.<br>  - *Confidencialidad Bancaria Total en Alertas 403:* Erradicación estricta de nombres técnicos de roles internos (`affiliat`, `super`, `editor`, etc.) en mensajes de error visuales y banners de advertencia, cumpliendo con los máximos estándares de seguridad bancaria e institucional.<br>• **Blindaje de cPanel y Admin CRM para Fundadores (Pase Directo Maestro):**<br>  - *Acceso Ininterrumpido:* Verificación incondicional de cuentas maestras fundadoras (`pablofgarciaf@gmail.com`, `info@vermilionroutes.com`, `admin@vermilionroutes.com`): tanto en cPanel ([`app/[locale]/cpanel/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/cpanel/page.tsx) y [`components/admin/AdminLoginForm.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/admin/AdminLoginForm.tsx)) como en Admin CRM ([`app/[locale]/admin/layout.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/admin/layout.tsx)), los fundadores reciben pase directo garantizado con rol `super`. Esto asegura acceso ininterrumpido al CMS y al centro de comando CRM incluso si la colección `usuarios` se encuentra en construcción, migración o vacía.<br>  - *Confidencialidad en Pantalla 403 de Admin CRM y cPanel:* Eliminación del indicador visible del rol del usuario (`userRole`) en la pantalla de acceso restringido del CRM y reemplazo del mensaje divulgador en `AdminLoginForm` por un aviso confidencial neutral: *"Acceso denegado (403): Tu cuenta no dispone de permisos para acceder a cPanel."*<br>• **Elevación de Versión del Plano Maestro:** Ascenso a `v1.5.0` en encabezado y bitácora, con actualización integral de diagramas Mermaid, matriz de módulos, especificaciones de seguridad y documentación de infraestructura Edge. | 1. Implementar reglas de seguridad en `firestore.rules` específicas para las colecciones `usuarios` y campos de pago de `bookings`.<br>2. Conectar notificaciones automáticas vía WhatsApp (Twilio/Meta Cloud API) para alertas de leads a operadores.<br>3. Integrar generación automatizada de vouchers de regalo VIP Pakari en formato PDF. |
 | **2026-09-03** | `v1.4.0` | **Arquitecto de Sistemas** | • **Unificación y Elevación del Gran CRM Empresarial (`/admin`):** Consolidación de todas las facetas operativas, comerciales y directivas en un centro de comando unificado (*Master Command CRM*) estructurado en **8 áreas departamentales completas**: (1) Tablero Ejecutivo BI (GMV, cobrado en cuenta, utilidad neta P&L, expediciones en ruta y piscinas globales), (2) Ventas & Pipeline Kanban (Ficha 360° del Pasajero con alergias y tallas, más Cotizador Rápido VIP con tarifas base por categorías hoteleras y despacho a WhatsApp), (3) Operaciones & Run-Sheet (itinerario día a día, choferes, hoteles, check-in y botón "Señalar Viaje Realizado"), (4) Amenities VIP Pakari (gestor de chocolates orgánicos y sombreros Montecristi con confirmación de entrega a bordo), (5) Finanzas & Tesorería (matriz P&L por expedición, modal fiduciario de dispersión bancaria y registro de comprobantes), (6) Red MLM & Piscinas Globales (árbol genealógico interactivo 10-3-2), (7) Concierge WhatsApp (plantillas multilingües en es/en/de de contacto en 1 clic), y (8) Equipo & Roles (directorio corporativo y altas en tiempo real conectadas a la colección `usuarios` de Firestore).<br>• **Unificación Canónica del Portal de Operador (`/operator`):** El portal `/operator` se unifica dentro del Gran CRM en `/admin` como la pestaña *Operaciones & Run-Sheet*, redirigiendo de forma canónica mediante `router.replace('/[locale]/admin?tab=operations')` en [`app/[locale]/operator/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/operator/page.tsx), manteniendo el layout guard de compatibilidad en [`app/[locale]/operator/layout.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/operator/layout.tsx).<br>• **Sidebar Dinámico RBAC:** Implementación del filtro `canAccess(tab)` en [`components/crm/AdminCrmDashboard.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/crm/AdminCrmDashboard.tsx): roles `super` y `admin` gozan de visibilidad sobre las 8 áreas completas; roles específicos visualizan estrictamente sus áreas autorizadas (`operator` -> Operaciones y Amenities; `sales` -> Pipeline y Concierge; `financial` -> Finanzas y P&L; `concierge` -> Amenities y WhatsApp).<br>• **Selector de Simulación de Roles Exclusivo para Super Admin (`activeRoleView`):** Herramienta reactiva para auditar en tiempo real la experiencia y permisos de cualquier rol departamental sin salir de la sesión ni alterar tokens.<br>• **Capa de Datos y Modelos en Firestore:** Tipado exhaustivo de `UserRole` (8 roles departamentales), `PassengerProfile`, `RunSheetDay`, `WhatsAppTemplate`, `GenealogyNode`, y ampliación de `CrmBooking` (`directCosts`, `vipGiftDelivered`, `runSheet`, `passengersList`) y `CrmLead` (`passengerDetails`). | 1. Implementar reglas de seguridad en `firestore.rules` específicas para las colecciones `usuarios` y campos de pago de `bookings`.<br>2. Conectar notificaciones automáticas vía WhatsApp (Twilio/Meta Cloud API) para alertas de leads a operadores.<br>3. Integrar generación automatizada de vouchers de regalo VIP Pakari en formato PDF. |
 | **2026-09-03** | `v1.3.0` | **Arquitecto de Sistemas** | • **Blindaje Integral RBAC en Affiliates (`app/[locale]/affiliates/layout.tsx`):** Verificación estricta del campo `role === 'affiliate'` o `role === 'founder'`. Detección de adulteración (tampering): si el rol es alterado (ej. `"affiliat"`), el guard ejecuta `signOut(auth)` de inmediato y expulsa al usuario redirigiendo a `/${locale}/auth/affiliates?error=invalid_role`. Verificación de estatus operativo activo (`status !== 'suspended'`, `'blocked'`, `'inactive'`), revocando la sesión ante cuentas inactivas con `error=suspended`. Se mantiene bypass exclusivo de auditoría técnica para Super Admin (`usuarios` con rol `super`).<br>• **Creación de Layout Guards Dedicados en App Router:**<br>  1. [`app/[locale]/admin/layout.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/admin/layout.tsx): Restringe el acceso al Admin CRM exclusivamente a roles `super` y `admin` consultados en la colección `usuarios`. Renderiza pantalla estilizada **Error 403 · Forbidden (Acceso Restringido)** para cualquier otro usuario o rol no autorizado con botón de cierre de sesión.<br>  2. [`app/[locale]/operator/layout.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/operator/layout.tsx): Restringe el Portal de Operadores exclusivamente a roles `super`, `admin` y `operator` de la colección `usuarios`. Renderiza pantalla estilizada **Error 403 · Forbidden (Acceso Operativo Restringido)** con estética corporativa teal.<br>• **Blindaje de Acceso en cPanel (CMS):** Validación de identidad y rol en [`app/[locale]/cpanel/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/cpanel/page.tsx) y [`components/admin/AdminLoginForm.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/admin/AdminLoginForm.tsx) exigiendo pertenencia a la colección `usuarios` con roles `super` o `editor`. Expulsión inmediata con mensaje de error 403 ante roles no autorizados.<br>• **Manejo de Alertas Rojas de Seguridad (403) en Autenticación (`app/[locale]/auth/affiliates/page.tsx`):** Captura reactiva de search params de error (`invalid_role`, `suspended`, `not_found`) desplegando cajas de advertencia en rojo de alta visibilidad para orientar al usuario y prevenir accesos ilegítimos. Verificación previa en `onAuthStateChanged` impidiendo redirecciones automáticas a usuarios sin rol válido.<br>• **Actualización del Plano Arquitectónico Maestro:** Registro de la arquitectura de Layout Guards (Sección 2.3), actualización de la tabla de módulos, inventario de rutas Next.js y diagramas de flujo de autorización. | 1. Implementar reglas de seguridad en `firestore.rules` específicas para las colecciones `usuarios` y campos de pago de `bookings`.<br>2. Conectar notificaciones automáticas vía WhatsApp (Twilio/Meta Cloud API) para alertas de leads a operadores.<br>3. Integrar generación automatizada de vouchers de regalo VIP Pakari en formato PDF. |

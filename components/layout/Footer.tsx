@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import {
   Compass,
@@ -151,6 +152,7 @@ import { BrandLogo } from '@/components/ui/BrandLogo';
 export function Footer() {
   const { settings } = useSettings();
   const locale = useLocale();
+  const pathname = usePathname();
   const t = TRANSLATIONS[locale] || TRANSLATIONS['en'];
   const [newsletterEmail, setNewsletterEmail] = useState('');
 
@@ -158,6 +160,31 @@ export function Footer() {
     const stored = getStoredUserProfile();
     if (stored.email) setNewsletterEmail(stored.email);
   }, []);
+
+  const handleAnchorClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    ...targetIds: string[]
+  ) => {
+    const isHomePage =
+      pathname === `/${locale}` ||
+      pathname === `/${locale}/` ||
+      pathname === '/' ||
+      !pathname;
+
+    if (isHomePage) {
+      for (const id of targetIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth' });
+          try {
+            window.history.pushState(null, '', `#${id}`);
+          } catch {}
+          return;
+        }
+      }
+    }
+  };
 
   return (
     <footer className="bg-gradient-to-b from-emerald-950 via-[#032118] to-[#021812] dark:from-black dark:via-zinc-950 dark:to-black text-zinc-100 pt-16 pb-8 border-t border-emerald-900/80 dark:border-zinc-900">
@@ -293,7 +320,11 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm text-zinc-300">
               <li>
-                <a href={`/${locale}#experience`} className="hover:text-white transition-colors">
+                <a
+                  href={`/${locale}#about`}
+                  onClick={(e) => handleAnchorClick(e, 'about', 'experience')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   {t.about}
                 </a>
               </li>
@@ -308,7 +339,11 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href={`/${locale}#contact`} className="hover:text-white transition-colors">
+                <a
+                  href={`/${locale}#contact`}
+                  onClick={(e) => handleAnchorClick(e, 'contact')}
+                  className="hover:text-white transition-colors cursor-pointer"
+                >
                   {t.contact}
                 </a>
               </li>
@@ -497,7 +532,11 @@ export function Footer() {
             <a href={`/${locale}/terms`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
               {t.terms}
             </a>
-            <a href={`/${locale}#affiliate`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
+            <a
+              href={`/${locale}#affiliate`}
+              onClick={(e) => handleAnchorClick(e, 'affiliate')}
+              className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60 cursor-pointer"
+            >
               {t.affiliateProgram}
             </a>
           </div>

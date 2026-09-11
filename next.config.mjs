@@ -80,7 +80,7 @@ const nextConfig = {
     return [
       {
         source: '/:locale/about',
-        destination: '/:locale#experience',
+        destination: '/:locale#about',
         permanent: true,
       },
       {
@@ -90,7 +90,7 @@ const nextConfig = {
       },
       {
         source: '/about',
-        destination: '/en#experience',
+        destination: '/en#about',
         permanent: true,
       },
       {
@@ -155,7 +155,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://js.stripe.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https:; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.youtube.com https://www.google.com; connect-src 'self' https: wss:; object-src 'none'; base-uri 'self';",
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://js.stripe.com https://apis.google.com https://www.paypal.com https://*.paypal.com https://*.paypalobjects.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https: https://*.paypalobjects.com; font-src 'self' data: https://fonts.gstatic.com; frame-src 'self' https://js.stripe.com https://hooks.stripe.com https://www.youtube.com https://www.google.com https://www.paypal.com https://*.paypal.com; connect-src 'self' https: wss: https://*.paypal.com; object-src 'none'; base-uri 'self';",
           },
           {
             key: 'Permissions-Policy',
