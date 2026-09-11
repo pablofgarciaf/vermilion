@@ -15,7 +15,8 @@ import {
   Linkedin,
   ShieldCheck,
   Award,
-  Sparkles
+  Sparkles,
+  Globe
 } from 'lucide-react';
 import { useSettings } from '@/hooks/useSettings';
 import { useLocale } from 'next-intl';
@@ -450,6 +451,39 @@ export function Footer() {
           <div className="flex items-center gap-2 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 px-4 py-2.5 rounded-2xl">
             <Sparkles className="w-4 h-4 text-emerald-400 dark:text-amber-400" />
             <span className="text-white font-medium">{t.secure}</span>
+          </div>
+        </div>
+
+        {/* International Language Hub - 8 Supported Locales */}
+        <div className="py-6 border-b border-emerald-900/60 dark:border-zinc-900 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <span className="text-[11px] uppercase tracking-wider font-semibold text-emerald-400/90 flex items-center gap-1.5">
+            <Globe className="w-3.5 h-3.5 text-emerald-400" />
+            <span>International / Idiomas:</span>
+          </span>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            {[
+              { code: 'en', label: 'English', flag: '/flags/us.svg' },
+              { code: 'es', label: 'Español', flag: '/flags/es.svg' },
+              { code: 'fr', label: 'Français', flag: '/flags/fr.svg' },
+              { code: 'de', label: 'Deutsch', flag: '/flags/de.svg' },
+              { code: 'pt', label: 'Português', flag: '/flags/pt.svg' },
+              { code: 'it', label: 'Italiano', flag: '/flags/it.svg' },
+              { code: 'ja', label: '日本語', flag: '/flags/jp.svg' },
+              { code: 'zh', label: '中文', flag: '/flags/cn.svg' },
+            ].map((lang) => (
+              <a
+                key={lang.code}
+                href={`/${lang.code}`}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
+                  locale === lang.code
+                    ? 'bg-emerald-600 text-white font-bold shadow-xs'
+                    : 'bg-emerald-950/40 hover:bg-emerald-900/60 text-zinc-300 hover:text-white border border-emerald-800/40'
+                }`}
+              >
+                <img src={lang.flag} alt="" aria-hidden="true" width={16} height={12} className="w-3.5 h-2.5 object-cover rounded-[1px]" />
+                <span>{lang.label}</span>
+              </a>
+            ))}
           </div>
         </div>
 

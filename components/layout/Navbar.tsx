@@ -316,19 +316,26 @@ export function Navbar() {
                   <div className={`absolute top-full right-0 pt-2 w-52 z-50 notranslate ${langOpen ? 'block' : 'hidden'}`}>
                     <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-2 shadow-2xl border border-zinc-200/90 dark:border-zinc-800 max-h-[70vh] overflow-y-auto">
                       <div className="flex flex-col gap-1">
-                        {LOCALES.map((l) => (
-                          <button
-                            key={l.code}
-                            onClick={() => changeLanguage(l.code)}
-                            className={`flex items-center gap-3 text-sm text-left px-3 py-2.5 rounded-lg font-medium transition-colors ${locale === l.code
-                              ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
-                              : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                              }`}
-                          >
-                            <img src={l.flagUrl} alt="" aria-hidden="true" width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
-                            <span>{l.label}</span>
-                          </button>
-                        ))}
+                        {LOCALES.map((l) => {
+                          const targetHref = `/${l.code}${pathname.replace(new RegExp(`^/${locale}`), '') || ''}`;
+                          return (
+                            <a
+                              key={l.code}
+                              href={targetHref}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                changeLanguage(l.code);
+                              }}
+                              className={`flex items-center gap-3 text-sm text-left px-3 py-2.5 rounded-lg font-medium transition-colors ${locale === l.code
+                                ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
+                                : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                                }`}
+                            >
+                              <img src={l.flagUrl} alt="" aria-hidden="true" width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
+                              <span>{l.label}</span>
+                            </a>
+                          );
+                        })}
                       </div>
                       <div className="pt-2 mt-2 border-t border-zinc-100 dark:border-zinc-800 flex flex-col gap-2">
                         <button
@@ -435,19 +442,26 @@ export function Navbar() {
                   <div className={`absolute top-full right-0 pt-2 w-52 z-50 notranslate ${langOpen ? 'block' : 'hidden'}`}>
                     <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-2 shadow-2xl border border-zinc-200/90 dark:border-zinc-800 max-h-[70vh] overflow-y-auto">
                       <div className="flex flex-col gap-1">
-                        {LOCALES.map((l) => (
-                          <button
-                            key={l.code}
-                            onClick={() => changeLanguage(l.code)}
-                            className={`flex items-center gap-3 text-sm text-left px-3 py-2.5 rounded-lg font-medium transition-colors ${locale === l.code
-                              ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
-                              : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
-                              }`}
-                          >
-                            <img src={l.flagUrl} alt={l.code} width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
-                            <span>{l.label}</span>
-                          </button>
-                        ))}
+                        {LOCALES.map((l) => {
+                          const targetHref = `/${l.code}${pathname.replace(new RegExp(`^/${locale}`), '') || ''}`;
+                          return (
+                            <a
+                              key={l.code}
+                              href={targetHref}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                changeLanguage(l.code);
+                              }}
+                              className={`flex items-center gap-3 text-sm text-left px-3 py-2.5 rounded-lg font-medium transition-colors ${locale === l.code
+                                ? 'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
+                                : 'text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800'
+                                }`}
+                            >
+                              <img src={l.flagUrl} alt={l.code} width={20} height={15} className="w-5 h-auto rounded-[2px] shadow-sm" />
+                              <span>{l.label}</span>
+                            </a>
+                          );
+                        })}
                       </div>
                       <div className="pt-2 mt-2 border-t border-zinc-100 dark:border-zinc-800 flex flex-col gap-2">
                         <button

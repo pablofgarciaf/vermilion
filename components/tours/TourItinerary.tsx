@@ -18,9 +18,10 @@ import { getLocalizedText } from '@/utils/i18nHelper';
 
 interface TourItineraryProps {
   itinerary: ItineraryDay[];
+  tourTitle?: string;
 }
 
-export function TourItinerary({ itinerary }: TourItineraryProps) {
+export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
   const [openDays, setOpenDays] = useState<number[]>([1]); // Day 1 open by default
   const locale = useLocale();
 
@@ -51,7 +52,11 @@ export function TourItinerary({ itinerary }: TourItineraryProps) {
         <div className="space-y-1">
           <h2 className="font-serif font-bold text-2xl text-stone-900 dark:text-stone-100 flex items-center gap-2.5">
             <Calendar className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-            <span>{locale === 'es' ? 'Itinerario Detallado Día a Día' : 'Detailed Day-by-Day Expedition Itinerary'}</span>
+            <span>
+              {tourTitle
+                ? (locale === 'es' ? `Itinerario Detallado: ${tourTitle}` : `Detailed Itinerary: ${tourTitle}`)
+                : (locale === 'es' ? 'Itinerario Detallado Día a Día' : 'Detailed Day-by-Day Expedition Itinerary')}
+            </span>
           </h2>
           <p className="text-xs text-stone-500 dark:text-stone-400">
             {locale === 'es'

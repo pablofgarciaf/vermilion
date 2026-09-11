@@ -162,9 +162,9 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                   <span className="tracking-wide">{welcomeText.rating}</span>
                 </div>
 
-                {/* "ALL YOU NEED IS" Vibrant Oswald H1 - Semantic 50-60 char H1 for SEO */}
-                <h1 className="welcome-title flex flex-col items-center justify-center md:items-start mb-2.5">
-                  <span aria-hidden="true" className="flex gap-2 sm:gap-3 md:gap-4 font-oswald font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[68px] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] [text-shadow:0_3px_10px_rgba(0,0,0,0.9)]">
+                {/* "ALL YOU NEED IS" Vibrant Oswald Decorative Brand Art */}
+                <div aria-hidden="true" className="welcome-title flex flex-col items-center justify-center md:items-start mb-2.5 select-none pointer-events-none">
+                  <span className="flex gap-2 sm:gap-3 md:gap-4 font-oswald font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[68px] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] [text-shadow:0_3px_10px_rgba(0,0,0,0.9)]">
                     <span className="flex">
                       <span className="text-[#FDB913]">A</span>
                       <span className="text-[#F58220]">L</span>
@@ -186,8 +186,10 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                       <span className="text-[#29B6F6]">S</span>
                     </span>
                   </span>
-                  <span className="sr-only">{h1Text}</span>
-                </h1>
+                </div>
+
+                {/* Clean Semantic 50-60 char H1 for SEO */}
+                <h1 className="sr-only">{h1Text}</h1>
 
                 {/* Logo Glass Card - Centered under ALL YOU NEED IS */}
                 <div className="welcome-logo-card relative w-[230px] h-[78px] sm:w-[290px] sm:h-[98px] md:w-[340px] md:h-[112px] mb-3 bg-gradient-to-r from-emerald-950/45 via-cyan-900/35 to-emerald-950/45 backdrop-blur-lg rounded-full p-2.5 sm:p-3 border border-white/35 shadow-[0_12px_40px_rgba(0,0,0,0.75)] flex items-center justify-center mx-auto md:mx-0 md:ml-[82px] lg:ml-[95px] xl:ml-[105px]">
@@ -195,10 +197,10 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                     <Image
                       src="/logo_blanco.png"
                       alt="Vermilion Routes"
-                      fill
-                      sizes="(max-width: 640px) 230px, (max-width: 768px) 290px, 340px"
+                      width={340}
+                      height={112}
                       quality={85}
-                      className="object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.85)]"
+                      className="w-full h-full object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.85)]"
                       priority
                       fetchPriority="high"
                       loading="eager"

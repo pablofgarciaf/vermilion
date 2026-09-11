@@ -254,7 +254,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
               </div>
 
               <h2 className="font-serif font-bold text-2xl text-zinc-900 dark:text-white">
-                {locale === 'es' ? 'Descripción de la Expedición' : 'Expedition Overview'}
+                {locale === 'es' ? `Resumen de la Expedición: ${title}` : `Expedition Overview: ${title}`}
               </h2>
               <p className="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:text-emerald-800 dark:first-letter:text-emerald-400 first-letter:leading-none">
                 {getLocalizedText(tour.description, locale)}
@@ -274,7 +274,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
             <div className="bg-emerald-950/5 dark:bg-emerald-950/20 p-6 sm:p-8 rounded-3xl border border-emerald-200/60 dark:border-emerald-800/40 space-y-4">
               <h2 className="font-serif font-bold text-xl text-emerald-950 dark:text-emerald-300 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                <span>Key Itinerary Highlights</span>
+                <span>{locale === 'es' ? `Puntos Destacados: ${title}` : `Key Highlights: ${title}`}</span>
               </h2>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-900 dark:text-emerald-200">
                 {tour.highlights.map((item, idx) => (
@@ -291,7 +291,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
 
           {/* Day by Day Itinerary Accordion */}
           {tour.itinerary && tour.itinerary.length > 0 && (
-            <TourItinerary itinerary={tour.itinerary} />
+            <TourItinerary itinerary={tour.itinerary} tourTitle={title} />
           )}
 
           {/* Inclusions & Exclusions */}

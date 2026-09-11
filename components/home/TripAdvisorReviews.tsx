@@ -163,16 +163,10 @@ export function TripAdvisorReviews({
                     </div>
 
                     {rev.verifiedTripAdvisor && (
-                      <a
-                        href={TRIPADVISOR_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-200/80 dark:border-emerald-800 hover:bg-emerald-100 transition-colors cursor-pointer"
-                      >
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-200/80 dark:border-emerald-800">
                         <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                        Verificado en TripAdvisor
-                        <ExternalLink className="w-2.5 h-2.5 opacity-60" />
-                      </a>
+                        <span>Verificado en TripAdvisor</span>
+                      </span>
                     )}
                   </div>
 

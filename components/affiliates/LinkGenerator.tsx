@@ -34,7 +34,7 @@ export function LinkGenerator({ username }: LinkGeneratorProps) {
       case 'home':    return `${BASE}/${locale}?vid=${username}`;
       case 'tours':   return `${BASE}/${locale}/tours?vid=${username}`;
       case 'booking': return `${BASE}/${locale}/booking?vid=${username}`;
-      case 'tour':    return `${BASE}/${locale}/booking?tourid=${selectedTour}&vid=${username}`;
+      case 'tour':    return `${BASE}/${locale}/tours/${selectedTour}?vid=${username}`;
     }
   })();
 

@@ -8,6 +8,7 @@ import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getSeoAlternates } from '@/utils/seoHelper';
 import { LeadMagnetBanner } from '@/components/home/LeadMagnetBanner';
+import { BlogTourBookingShowcase } from '@/components/blog/BlogTourBookingShowcase';
 import {
   Calendar,
   Clock,
@@ -102,6 +103,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const relatedTour = post.relatedTourId
     ? mockTours.find((t) => t.id === post.relatedTourId)
     : mockTours[0];
+
+  const complementaryTours = mockTours.filter((t) => t.id !== relatedTour?.id).slice(0, 2);
+  const destinationName = getLocalizedText(post.category, locale) || 'Galapagos & Ecuador';
+  const articleTitle = getLocalizedText(post.title, locale);
 
   const contentText = locale === 'es' ? post.content.es : post.content.en;
 
@@ -234,9 +239,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const backLabel = t.back;
   const shareLabel = t.share;
-  const relatedLabel = t.related;
-  const fromLabel = t.from;
-  const bookLabel = t.book;
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100 pt-28 pb-20 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
@@ -463,55 +465,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           ))}
         </div>
 
-        {/* Related Tour Recommendation Box */}
-        {relatedTour && (
-          <div className="bg-gradient-to-r from-emerald-900 via-zinc-900 to-zinc-950 border border-emerald-700/60 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl text-white">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-emerald-800/60 pb-5">
-              <div>
-                <span className="text-xs uppercase font-bold text-emerald-400 tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  {relatedLabel}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold font-serif text-white mt-1">
-                  {getLocalizedText(relatedTour.title, locale)}
-                </h3>
-                <p className="text-xs text-zinc-300 mt-1">
-                  {getLocalizedText(relatedTour.duration, locale)} &bull; {t.luxuryService}
-                </p>
-              </div>
-
-              <div className="text-right shrink-0">
-                <span className="text-xs text-zinc-400 block">{fromLabel}</span>
-                <span className="text-2xl font-extrabold text-emerald-400 font-serif" suppressHydrationWarning>
-                  ${relatedTour.price.toLocaleString('en-US')} <span className="text-xs text-zinc-400 font-normal">USD</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-              <p className="text-xs text-zinc-300 leading-relaxed max-w-md">
-                {t.guideComfort}
-              </p>
-
-              <div className="flex flex-wrap gap-3 w-full sm:w-auto">
-                <Link
-                  href={`/${locale}/tours/${relatedTour.id}`}
-                  className="flex-1 sm:flex-initial px-5 py-3 border-2 border-emerald-400/40 bg-emerald-950/60 hover:bg-emerald-900/80 hover:border-emerald-400 text-emerald-300 hover:text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5"
-                >
-                  <span>{t.viewItinerary}</span>
-                  <span>→</span>
-                </Link>
-                <Link
-                  href={`/${locale}/booking?tourid=${relatedTour.id}`}
-                  className="flex-1 sm:flex-initial px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-emerald-950/60 flex items-center justify-center gap-2"
-                >
-                  <span>{bookLabel}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
+        {/* Interactive Blog Tour Booking Showcase */}
+        <BlogTourBookingShowcase
+          primaryTour={relatedTour}
+          complementaryTours={complementaryTours}
+          articleTitle={articleTitle}
+          destinationName={destinationName}
+          locale={locale}
+        />
 
         {/* Lead Magnet: Free Packing Guide Download */}
         <LeadMagnetBanner />
