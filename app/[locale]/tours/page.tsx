@@ -563,7 +563,15 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <span className="group-hover:scale-105 transition-transform">{t.viewItinerary}</span>
                       </Link>
                       <Link
-                        href={`/${locale}/booking?addTour=${tour.id}`}
+                        href={`/${locale}/booking`}
+                        onClick={() => {
+                          if (typeof window !== 'undefined') {
+                            try {
+                              sessionStorage.setItem('preselected_tour_id', tour.id);
+                              localStorage.setItem('vermilion_selected_tour', tour.id);
+                            } catch (e) {}
+                          }
+                        }}
                         aria-label={`${t.book} - ${title}`}
                         className="flex-1 py-3 px-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
@@ -643,7 +651,15 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <span className="group-hover:scale-105 transition-transform">{t.details}</span>
                       </Link>
                       <Link
-                        href={`/${locale}/booking?addTour=${tour.id}`}
+                        href={`/${locale}/booking`}
+                        onClick={() => {
+                          if (typeof window !== 'undefined') {
+                            try {
+                              sessionStorage.setItem('preselected_tour_id', tour.id);
+                              localStorage.setItem('vermilion_selected_tour', tour.id);
+                            } catch (e) {}
+                          }
+                        }}
                         aria-label={`${t.book} - ${title}`}
                         className="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-[11px] uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >
@@ -732,7 +748,15 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <span className="group-hover:scale-105 transition-transform">{t.viewFullItinerary}</span>
                       </Link>
                       <Link
-                        href={`/${locale}/booking?addTour=${tour.id}`}
+                        href={`/${locale}/booking`}
+                        onClick={() => {
+                          if (typeof window !== 'undefined') {
+                            try {
+                              sessionStorage.setItem('preselected_tour_id', tour.id);
+                              localStorage.setItem('vermilion_selected_tour', tour.id);
+                            } catch (e) {}
+                          }
+                        }}
                         aria-label={`${t.bookExpedition} - ${title}`}
                         className="flex-1 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-emerald-900/30 text-center flex items-center justify-center hover:scale-[1.02] active:scale-95"
                       >

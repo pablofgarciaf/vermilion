@@ -7,7 +7,7 @@ import { mockTours } from '@/data/mock';
 import { calculateTourPrice, PricingDetails } from '@/lib/pricing';
 import { PriceCalculator } from './PriceCalculator';
 import { TravelDatePicker } from './TravelDatePicker';
-import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ExternalLink, Lock, ArrowRight, Sparkles, Loader2 } from 'lucide-react';
+import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ExternalLink, Lock, ArrowRight, Sparkles, Loader2, Search, X, ArrowLeftRight, Compass } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getStoredAffiliateRef } from '@/components/affiliates/AffiliateTracker';
@@ -107,6 +107,9 @@ export function BookingWizard() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showFullCatalog, setShowFullCatalog] = useState(false);
+  const [isTourModalOpen, setIsTourModalOpen] = useState(false);
+  const [tourSearchQuery, setTourSearchQuery] = useState('');
+  const [swappedTourNotice, setSwappedTourNotice] = useState<string | null>(null);
 
   const dateRef = useRef<HTMLDivElement>(null);
   const passengersRef = useRef<HTMLDivElement>(null);
@@ -163,10 +166,23 @@ export function BookingWizard() {
   });
 
   useEffect(() => {
-    if (addTourId) {
-      const tour = mockTours.find(t => t.id === addTourId);
+    let targetTourId = addTourId;
+    if (!targetTourId && typeof window !== 'undefined') {
+      try {
+        targetTourId = sessionStorage.getItem('preselected_tour_id') || localStorage.getItem('vermilion_selected_tour');
+      } catch (e) {}
+    }
+
+    if (targetTourId) {
+      const tour = mockTours.find(t => t.id === targetTourId);
       if (tour) {
         setSelectedTours(prev => prev.some(t => t.id === tour.id) ? prev : [tour, ...prev]);
+        if (typeof window !== 'undefined') {
+          try {
+            sessionStorage.removeItem('preselected_tour_id');
+            localStorage.removeItem('vermilion_selected_tour');
+          } catch (e) {}
+        }
         return;
       }
     }
@@ -180,7 +196,13 @@ export function BookingWizard() {
   const complementarySuggestions = getComplementarySuggestions(primaryTour, mockTours);
 
   const replacePrimaryTour = (newTour: Tour) => {
-    setSelectedTours(prev => [newTour, ...prev.filter(t => t.id !== newTour.id && t.id !== primaryTour?.id)]);
+    setSelectedTours(prev => {
+      const remaining = prev.filter(t => t.id !== newTour.id && t.id !== primaryTour?.id);
+      return [newTour, ...remaining];
+    });
+    const tourTitleStr = getLocalizedText(newTour.title, locale);
+    setSwappedTourNotice(tourTitleStr);
+    setTimeout(() => setSwappedTourNotice(null), 4000);
   };
 
   const toggleTour = (tour: Tour) => {
@@ -289,6 +311,13 @@ export function BookingWizard() {
   };
   const mobileCTA = getMobileCTA();
   const filteredTours = filterTours(mockTours, activeFilter);
+  const searchedTours = filteredTours.filter((t) => {
+    if (!tourSearchQuery.trim()) return true;
+    const q = tourSearchQuery.toLowerCase().trim();
+    const title = (typeof t.title === 'string' ? t.title : (t.title?.es || t.title?.en || '')).toLowerCase();
+    const dest = (typeof t.destination === 'string' ? t.destination : (t.destination?.es || t.destination?.en || '')).toLowerCase();
+    return title.includes(q) || dest.includes(q);
+  });
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-8 pb-28 lg:pb-8">
@@ -324,15 +353,25 @@ export function BookingWizard() {
 
             <div>
               <div className="flex items-center justify-between mb-3">
-                <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+                <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
                   <Map className="w-5 h-5 text-emerald-600" /> 1. {isEs ? 'Tu Expedición Principal' : 'Your Primary Expedition'}
-                </h2>
+                </h3>
                 {selectedTours.length > 1 && (
                   <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs">
                     {selectedTours.length} {isEs ? 'expediciones seleccionadas' : 'expeditions selected'}
                   </span>
                 )}
               </div>
+
+              {/* Feedback toast when tour is swapped */}
+              {swappedTourNotice && (
+                <div className="mb-3 p-3 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-900 dark:text-emerald-200 text-xs flex items-center gap-2 animate-fade-in">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>
+                    {isEs ? 'Expedición principal cambiada a:' : 'Primary expedition changed to:'} <strong>{swappedTourNotice}</strong>
+                  </span>
+                </div>
+              )}
 
               {/* Tarjeta Principal Seleccionada */}
               {primaryTour && (
@@ -376,7 +415,7 @@ export function BookingWizard() {
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-emerald-200/60 dark:border-emerald-800/40 flex flex-wrap items-center justify-between gap-2">
+                  <div className="pt-3 border-t border-emerald-200/60 dark:border-emerald-800/40 flex flex-wrap items-center justify-between gap-2.5">
                     <a
                       href={`/${locale}/tours/${primaryTour.id}`}
                       target="_blank"
@@ -386,13 +425,27 @@ export function BookingWizard() {
                       <span>{isEs ? 'Ver Itinerario Completo día por día' : 'View Full Day-by-Day Itinerary'}</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
-                    <button
-                      type="button"
-                      onClick={() => setShowFullCatalog(true)}
-                      className="text-xs font-semibold text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors cursor-pointer"
-                    >
-                      {isEs ? 'Cambiar por otro tour del catálogo ↓' : 'Change for another tour ↓'}
-                    </button>
+
+                    <div className="flex flex-wrap items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setIsTourModalOpen(true)}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
+                      >
+                        <ArrowLeftRight className="w-3.5 h-3.5" />
+                        <span>{isEs ? 'Cambiar por otro tour del catálogo' : 'Change for another tour'}</span>
+                      </button>
+
+                      <a
+                        href={`/${locale}/tours`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 text-xs font-semibold transition-all cursor-pointer"
+                      >
+                        <Compass className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                        <span>{isEs ? 'Explorar todos los tours ↗' : 'Explore all tours ↗'}</span>
+                      </a>
+                    </div>
                   </div>
                 </div>
               )}
@@ -488,15 +541,15 @@ export function BookingWizard() {
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
               <div ref={dateRef} className="md:col-span-7">
-                <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
+                <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
                   <CalendarDays className="w-5 h-5 text-emerald-600" /> {isEs ? '2. ¿Cuándo viajas?' : '2. When are you traveling?'}
-                </h2>
+                </h3>
                 <TravelDatePicker selectedDate={date} onDateSelect={(d) => setDate(d)} durationDays={selectedTours.reduce((max, t) => Math.max(max, t.durationDays || 1), 1)} />
               </div>
               <div ref={passengersRef} className="md:col-span-5">
-                <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
+                <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
                   <Users className="w-5 h-5 text-emerald-600" /> {isEs ? '3. ¿Quiénes viajan?' : '3. Who is traveling?'}
-                </h2>
+                </h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 border border-zinc-200 dark:border-zinc-800 rounded-xl">
                     <div>
@@ -536,9 +589,9 @@ export function BookingWizard() {
                 </div>
                 <hr className="border-zinc-100 dark:border-zinc-800 my-5" />
                 <div ref={contactRef}>
-                  <h2 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
+                  <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
                     <CheckCircle2 className="w-5 h-5 text-emerald-600" /> {isEs ? '4. Tus Datos de Contacto' : '4. Contact Details'}
-                  </h2>
+                  </h3>
                   <div className="grid grid-cols-1 gap-3">
                     <div className="space-y-1">
                       <label htmlFor="booking-name" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Nombre Completo</label>
@@ -718,6 +771,189 @@ export function BookingWizard() {
           <p className="text-center text-[10px] text-zinc-400 mt-1.5">{selectedTours.length} tour{selectedTours.length > 1 ? 's' : ''} seleccionado{selectedTours.length > 1 ? 's' : ''}</p>
         )}
       </div>
+
+      {/* ── MODAL INTERACTIVO: CATÁLOGO COMPLETO DE EXPEDICIONES ── */}
+      {isTourModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md animate-fade-in">
+          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+            {/* Modal Header */}
+            <div className="p-4 sm:p-5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                  <Compass className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-zinc-900 dark:text-white">
+                    {isEs ? 'Catálogo de Expediciones y Tours' : 'Expeditions & Tours Catalog'}
+                  </h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                    {isEs ? 'Selecciona tu tour principal o añade extensiones adicionales a tu itinerario' : 'Select your primary tour or add additional extensions to your itinerary'}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsTourModalOpen(false)}
+                className="p-2 rounded-xl text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                aria-label="Cerrar modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Filter Toolbar & Search */}
+            <div className="p-4 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-950/40 space-y-3">
+              <div className="relative">
+                <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={tourSearchQuery}
+                  onChange={(e) => setTourSearchQuery(e.target.value)}
+                  placeholder={isEs ? 'Buscar tour por nombre o destino (ej. Galápagos, Cotopaxi, Quito)...' : 'Search tour by title or destination...'}
+                  className="w-full pl-10 pr-16 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-xs text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                />
+                {tourSearchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setTourSearchQuery('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 cursor-pointer"
+                  >
+                    {isEs ? 'Limpiar' : 'Clear'}
+                  </button>
+                )}
+              </div>
+
+              {/* Category Pills */}
+              <div className="flex flex-wrap items-center gap-1.5">
+                {CATEGORIES.map((cat) => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setActiveFilter(cat.id)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer border ${
+                      activeFilter === cat.id
+                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                        : 'bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700 hover:border-emerald-500/40'
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Tours Grid */}
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+              {searchedTours.length === 0 ? (
+                <div className="py-12 text-center text-zinc-500 text-xs">
+                  {isEs ? 'No se encontraron tours con ese criterio.' : 'No tours found matching your search.'}
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {searchedTours.map((t) => {
+                    const isPrimary = primaryTour?.id === t.id;
+                    const isAdded = selectedTours.some(st => st.id === t.id);
+
+                    return (
+                      <div
+                        key={t.id}
+                        className={`rounded-2xl p-4 border transition-all flex flex-col justify-between gap-3 ${
+                          isPrimary
+                            ? 'border-2 border-emerald-500 bg-emerald-50/70 dark:bg-emerald-950/30 shadow-md ring-1 ring-emerald-500'
+                            : isAdded
+                            ? 'border-teal-500 bg-teal-50/50 dark:bg-teal-950/20'
+                            : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 hover:border-emerald-500/40'
+                        }`}
+                      >
+                        <div className="flex items-start gap-3">
+                          <img
+                            src={t.imageUrl}
+                            alt={getLocalizedText(t.title, locale)}
+                            width={72}
+                            height={72}
+                            className="w-18 h-18 rounded-xl object-cover shrink-0 border border-zinc-200 dark:border-zinc-700"
+                          />
+                          <div className="flex-1 min-w-0">
+                            {isPrimary && (
+                              <span className="inline-block px-2 py-0.5 rounded-md bg-emerald-600 text-white font-bold text-[9px] uppercase tracking-wider mb-1">
+                                ⭐ {isEs ? 'Principal Actual' : 'Current Primary'}
+                              </span>
+                            )}
+                            <h4 className="font-bold text-sm text-zinc-900 dark:text-white line-clamp-2 leading-snug">
+                              {getLocalizedText(t.title, locale)}
+                            </h4>
+                            <div className="flex items-center gap-2 mt-1.5 text-xs">
+                              <span className="font-extrabold text-emerald-600 dark:text-emerald-400">
+                                ${t.price.toLocaleString('en-US')} USD
+                              </span>
+                              <span className="text-zinc-400">&bull;</span>
+                              <span className="text-zinc-500 dark:text-zinc-400 text-[11px]">
+                                {getLocalizedText(t.duration, locale)}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2">
+                          {isPrimary ? (
+                            <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                              ✓ {isEs ? 'Expedición seleccionada' : 'Selected expedition'}
+                            </span>
+                          ) : (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                replacePrimaryTour(t);
+                                setIsTourModalOpen(false);
+                              }}
+                              className="py-1.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-all shadow-sm active:scale-95 cursor-pointer"
+                            >
+                              {isEs ? 'Elegir como Principal' : 'Set as Primary'}
+                            </button>
+                          )}
+
+                          <button
+                            type="button"
+                            onClick={() => toggleTour(t)}
+                            className={`py-1.5 px-3 rounded-xl font-bold text-xs transition-all cursor-pointer ${
+                              isAdded
+                                ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-300'
+                                : 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:opacity-90'
+                            }`}
+                          >
+                            {isAdded ? (isEs ? 'Quitar extensión' : 'Remove extension') : (isEs ? '+ Añadir extensión' : '+ Add extension')}
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-950/60 flex items-center justify-between">
+              <a
+                href={`/${locale}/tours`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1.5"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>{isEs ? 'Ver todos los tours en el sitio web ↗' : 'View all tours on website ↗'}</span>
+              </a>
+
+              <button
+                type="button"
+                onClick={() => setIsTourModalOpen(false)}
+                className="py-2 px-4 rounded-xl bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-bold text-xs transition-all cursor-pointer"
+              >
+                {isEs ? 'Cerrar ventana' : 'Close'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

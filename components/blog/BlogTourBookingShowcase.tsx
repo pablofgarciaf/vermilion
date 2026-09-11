@@ -341,7 +341,7 @@ export function BlogTourBookingShowcase({
                         {t.viewTour}
                       </Link>
                       <Link
-                        href={`/${locale}/booking?addTour=${tour.id}`}
+                        href={`/${locale}/booking`}
                         onClick={() => handleBookingRedirect(tour.id)}
                         className="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold text-center transition-colors shadow-md flex items-center justify-center gap-1"
                       >

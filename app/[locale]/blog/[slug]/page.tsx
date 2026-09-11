@@ -448,8 +448,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Author info & Social */}
           <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-600 dark:border-emerald-700">
-                <Image src={post.author.avatar} alt={post.author.name} fill className="object-cover" />
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-600 dark:border-emerald-700 shrink-0">
+                <Image src={post.author.avatar} alt={post.author.name} width={40} height={40} className="w-full h-full object-cover" />
               </div>
               <div>
                 <p className="text-sm font-bold text-zinc-900 dark:text-white">{post.author.name}</p>

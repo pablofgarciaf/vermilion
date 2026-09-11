@@ -91,7 +91,55 @@ export function AffiliateTracker() {
   }, [searchParams]);
 
 
+  // Auto-dismiss banner after 6 seconds
+  useEffect(() => {
+    if (bannerVisible) {
+      const timer = setTimeout(() => {
+        setBannerVisible(false);
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [bannerVisible]);
+
   if (!bannerVisible || !activeRef) return null;
+
+  const vipTexts = {
+    es: {
+      title: '¡10% de Descuento VIP Activo!',
+      desc: `Recomendado por @${activeRef}. Tu descuento se aplicará automáticamente al reservar.`
+    },
+    en: {
+      title: '10% VIP Discount Active!',
+      desc: `Referred by @${activeRef}. Your discount will apply automatically upon booking.`
+    },
+    fr: {
+      title: 'Remise VIP de 10% Activée !',
+      desc: `Recommandé par @${activeRef}. Votre réduction sera appliquée automatiquement.`
+    },
+    de: {
+      title: '10% VIP-Rabatt Aktiviert!',
+      desc: `Empfohlen von @${activeRef}. Ihr Rabatt wird automatisch angewendet.`
+    },
+    it: {
+      title: 'Sconto VIP del 10% Attivo!',
+      desc: `Consigliato da @${activeRef}. Il tuo sconto verrà applicato automaticamente.`
+    },
+    pt: {
+      title: '10% de Desconto VIP Ativo!',
+      desc: `Recomendado por @${activeRef}. Seu desconto será aplicado automaticamente.`
+    },
+    ja: {
+      title: '10% VIP割引が適用されました！',
+      desc: `@${activeRef} からの紹介。予約時に自動的に割引が適用されます。`
+    },
+    zh: {
+      title: '10% VIP专属折扣已激活！',
+      desc: `来自 @${activeRef} 的推荐。预订时将自动扣减优惠。`
+    }
+  }[locale] || {
+    title: '10% VIP Discount Active!',
+    desc: `Referred by @${activeRef}. Your discount will apply automatically upon booking.`
+  };
 
   return (
     <div className="fixed bottom-4 right-4 z-50 animate-fade-in max-w-sm">
@@ -101,17 +149,15 @@ export function AffiliateTracker() {
         </div>
         <div className="flex-1 text-xs">
           <p className="font-bold text-amber-400">
-            {isEs ? '¡10% de Descuento VIP Activo!' : '10% VIP Discount Active!'}
+            {vipTexts.title}
           </p>
           <p className="text-zinc-300 mt-0.5 leading-relaxed">
-            {isEs
-              ? `Recomendado por @${activeRef}. Tu descuento se aplicará automáticamente al reservar.`
-              : `Referred by @${activeRef}. Your discount will apply automatically upon booking.`}
+            {vipTexts.desc}
           </p>
         </div>
         <button
           onClick={() => setBannerVisible(false)}
-          className="text-zinc-400 hover:text-white p-1"
+          className="text-zinc-400 hover:text-white p-1 transition-colors cursor-pointer"
           aria-label="Cerrar aviso"
         >
           <X className="w-4 h-4" />

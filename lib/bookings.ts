@@ -41,7 +41,7 @@ export async function generateBookingCode(tourId?: string, affiliateUsername?: s
   // 2. Current year
   const year = new Date().getFullYear();
 
-  // 3. Sequential counter starting at 80
+  // 3. Sequential counter starting strictly at 80
   let seqNumber = 80;
 
   if (db) {
@@ -53,6 +53,8 @@ export async function generateBookingCode(tourId?: string, affiliateUsername?: s
         const storedSeq = Number(data?.[`seq_${year}`] || data?.[String(year)] || 0);
         if (storedSeq >= 80) {
           seqNumber = storedSeq + 1;
+        } else {
+          seqNumber = 80;
         }
       }
 
@@ -63,8 +65,8 @@ export async function generateBookingCode(tourId?: string, affiliateUsername?: s
       await setDoc(counterDocRef, { [`seq_${year}`]: seqNumber, [String(year)]: seqNumber }, { merge: true });
       return candidateCode;
     } catch (e) {
-      console.warn('[generateBookingCode] Firestore counter notice, using random-safe seq:', e);
-      seqNumber = 80 + Math.floor(Math.random() * 900);
+      console.warn('[generateBookingCode] Firestore counter notice, using baseline seq 80:', e);
+      seqNumber = 80;
     }
   }
 

@@ -189,9 +189,9 @@ export function TripAdvisorReviews({
                         <Image
                           src={rev.avatarUrl}
                           alt={rev.author || 'Reviewer'}
-                          fill
-                          sizes="44px"
-                          className="object-cover"
+                          width={44}
+                          height={44}
+                          className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         />
                       ) : (

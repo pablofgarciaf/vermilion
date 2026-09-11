@@ -248,14 +248,14 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     zh: '支持的支付方式:',
   },
   paypalNotice: {
-    en: 'Instant confirmation with bank-grade encryption via PayPal Business Ecuador (USD). You can pay using your PayPal account balance or directly with international debit/credit cards.',
-    es: 'Confirmación inmediata con encriptación bancaria a través de PayPal Business Ecuador (USD). Puedes pagar con tu cuenta PayPal o directamente con tarjetas internacionales de crédito/débito.',
-    fr: 'Confirmation immédiate avec cryptage bancaire via PayPal Business Ecuador (USD). Vous pouvez payer avec votre solde PayPal ou directement avec une carte internationale.',
-    de: 'Sofortige Bestätigung mit Banken-Verschlüsselung über PayPal Business Ecuador (USD). Bezahlen Sie mit Ihrem PayPal-Guthaben oder internationalen Karten.',
-    it: 'Conferma immediata con crittografia bancaria tramite PayPal Business Ecuador (USD). Paga con il tuo conto PayPal o direttamente con carte internazionali.',
-    pt: 'Confirmação imediata com criptografia bancária via PayPal Business Ecuador (USD). Pague com saldo PayPal ou cartões internacionais de crédito/débito.',
-    ja: 'PayPal Business Ecuador (USD) を通じた銀行レベルの暗号化による即時決済。PayPalアカウントまたは主要な国際クレジットカード/デビットカードでお支払いいただけます。',
-    zh: '通过 PayPal Business Ecuador (USD) 享受银行级加密与即时确认。支持使用 PayPal 账户余额或直接输入国际借记卡/信用卡支付。',
+    en: 'Secure payment via PayPal account balance or international debit/credit cards. No PayPal account required to pay with cards.',
+    es: 'Pago seguro con tu saldo PayPal o directamente con tarjeta internacional de crédito/débito. No requieres cuenta PayPal para pagar con tarjeta.',
+    fr: 'Paiement sécurisé avec PayPal ou carte bancaire internationale. Aucun compte PayPal requis pour régler par carte.',
+    de: 'Sichere Zahlung mit PayPal-Guthaben oder Debit-/Kreditkarte. Für Kartenzahlung ist kein PayPal-Konto erforderlich.',
+    it: 'Pagamento sicuro con conto PayPal o carta di credito/debito internazionale. Nessun conto PayPal richiesto per pagare con carta.',
+    pt: 'Pagamento seguro com saldo PayPal ou cartão de crédito/débito internacional. Não é necessária conta PayPal para pagar com cartão.',
+    ja: 'PayPal残高または国際クレジットカード/デビットカードによる安全な決済。カード決済の場合アカウントは不要です。',
+    zh: '通过 PayPal 账户余额或国际借记卡/信用卡安全结算。使用银行卡支付无需预先注册 PayPal 账户。',
   },
   wireHeaderDesc: {
     en: 'Official bank wire transfer details for Citibank (Florida, USA) and Produbanco (Ecuador).',
@@ -477,7 +477,7 @@ export default function CheckoutPaymentPage() {
 
   // Tabs: 'card' (PayPal & Cards) | 'bank' (Payoneer & Produbanco Wire)
   const [activeTab, setActiveTab] = useState<'card' | 'bank'>('card');
-  const [openBankCard, setOpenBankCard] = useState<'usa' | 'ecuador' | 'spain' | null>('usa');
+  const [openBankCard, setOpenBankCard] = useState<'usa' | 'ecuador' | 'spain' | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isPaid, setIsPaid] = useState(false);
   const [receiptSubmitted, setReceiptSubmitted] = useState(false);
@@ -833,9 +833,9 @@ export default function CheckoutPaymentPage() {
                     />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h1 className="text-sm sm:text-base font-bold font-serif text-stone-900 dark:text-white leading-snug line-clamp-2">
+                    <h3 className="text-sm sm:text-base font-bold font-serif text-stone-900 dark:text-white leading-snug line-clamp-2">
                       {tourTitle}
-                    </h1>
+                    </h3>
                     <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-medium block mt-0.5">
                       {matchedTour.duration?.en || matchedTour.duration?.es || 'Ecuador & Galápagos'}
                     </span>
@@ -872,7 +872,7 @@ export default function CheckoutPaymentPage() {
                 <div className="pt-2 border-t border-stone-200 dark:border-white/5">
                   <button
                     type="button"
-                    onClick={() => router.push(`/${locale}/booking?addTour=${tourId}&date=${travelDate}&adults=${adultsParam || '1'}&children=${childrenParam || '0'}`)}
+                    onClick={() => router.push(`/${locale}/booking?tourid=${tourId}&date=${travelDate}&adults=${adultsParam || '1'}&children=${childrenParam || '0'}`)}
                     className="w-full flex items-center justify-center gap-1.5 py-2 px-3 text-xs text-stone-600 dark:text-zinc-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors font-medium border border-stone-200 dark:border-white/10 rounded-xl hover:bg-stone-50 dark:hover:bg-zinc-800/50 cursor-pointer"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
@@ -984,21 +984,28 @@ export default function CheckoutPaymentPage() {
               </div>
 
               {/* ─────────────────────────────────────────────
-                  TAB 1: OFFICIAL PAYPAL CHECKOUT & CARDS
+                  TAB 1: OFFICIAL PAYPAL CHECKOUT & CARDS (LUXURY FINTECH DESIGN)
                   ───────────────────────────────────────────── */}
               {activeTab === 'card' && (
                 <div className="space-y-4 animate-fade-in">
-                  <div className="p-4 bg-stone-50 dark:bg-zinc-950/70 border border-stone-200 dark:border-white/5 rounded-2xl space-y-2.5">
-                    <div className="flex flex-wrap items-center justify-between text-xs text-stone-700 dark:text-zinc-300 gap-2">
-                      <span className="text-stone-500 dark:text-zinc-400">{t('cardsAccepted')}</span>
-                      <div className="flex items-center gap-1.5 font-semibold text-stone-800 dark:text-white text-[11px]">
-                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 shadow-2xs">PayPal</span>
-                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 shadow-2xs">Visa</span>
-                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 shadow-2xs">MasterCard</span>
-                        <span className="px-2 py-0.5 rounded bg-white dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700 shadow-2xs">Amex</span>
+                  <div className="p-4 bg-gradient-to-br from-white to-stone-50/60 dark:from-zinc-950 dark:to-zinc-900/60 border border-stone-200/80 dark:border-emerald-500/20 rounded-2xl shadow-xs space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                          <Lock className="w-3.5 h-3.5" />
+                        </div>
+                        <span className="font-bold text-stone-900 dark:text-white">
+                          {locale === 'es' ? 'Pago Online Inmediato' : 'Instant Online Checkout'}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1 font-semibold text-stone-700 dark:text-zinc-300 text-[10px]">
+                        <span className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700">PayPal</span>
+                        <span className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700">Visa</span>
+                        <span className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700">Mastercard</span>
+                        <span className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700">Amex</span>
                       </div>
                     </div>
-                    <p className="text-[11px] text-stone-600 dark:text-zinc-400 leading-relaxed">
+                    <p className="text-[11px] text-stone-500 dark:text-zinc-400 leading-relaxed pl-8">
                       {t('paypalNotice')}
                     </p>
                   </div>

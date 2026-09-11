@@ -155,16 +155,37 @@ export function PayPalCheckoutButton({
     }
   };
 
+  const trustCopy = {
+    es: '🔒 Procesado vía PayPal Holdings, Inc. • Datos financieros 100% encriptados y privados.',
+    en: '🔒 Processed via PayPal Holdings, Inc. • Financial data is 100% encrypted & private.',
+    fr: '🔒 Traité via PayPal Holdings, Inc. • Données financières 100% cryptées et privées.',
+    de: '🔒 Abgewickelt über PayPal Holdings, Inc. • Finanzdaten sind 100% verschlüsselt & privat.',
+    it: '🔒 Elaborato tramite PayPal Holdings, Inc. • Dati finanziari crittografati al 100% e privati.',
+    pt: '🔒 Processado via PayPal Holdings, Inc. • Dados financeiros 100% criptografados e privados.',
+    ja: '🔒 PayPal Holdings, Inc. 経由で安全に処理 • 金融情報は完全に暗号化されています。',
+    zh: '🔒 通过 PayPal Holdings, Inc. 安全处理 • 财务信息受 256 位高强度加密保护。',
+  }[locale] || '🔒 Processed via PayPal Holdings, Inc. • Financial data is 100% encrypted & private.';
+
   // If PayPal client ID is in setup/fallback, provide seamless payment button without technical warnings
   if (!isConfigured) {
     return (
-      <div className="space-y-3">
+      <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3.5">
         {errorMessage && (
           <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl text-xs text-rose-600 dark:text-rose-300 flex items-center gap-2">
             <AlertCircle className="w-4 h-4 shrink-0 text-rose-500" />
             <span>{errorMessage}</span>
           </div>
         )}
+
+        <div className="flex items-center justify-between text-xs text-zinc-500 pb-2 border-b border-zinc-100 dark:border-zinc-800">
+          <span className="font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
+            <Lock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+            {locale === 'es' ? 'Cifrado SSL 256-Bit' : '256-Bit SSL Encrypted'}
+          </span>
+          <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+            USD ${(amount || 0).toLocaleString('en-US')}
+          </span>
+        </div>
 
         <button
           type="button"
@@ -202,7 +223,6 @@ export function PayPalCheckoutButton({
                   discountApplied: Boolean(affiliateCode),
                   createdAt: new Date().toISOString(),
                 }, { merge: true });
-                console.log('✅ [PayPal Fallback Client Firestore] Booking saved:', bookingRef);
               } catch (clientDbErr) {
                 console.warn('[PayPal Fallback Client Firestore notice]', clientDbErr);
               }
@@ -234,82 +254,92 @@ export function PayPalCheckoutButton({
               onSuccess(confirmedRef);
             } catch (err: any) {
               console.error('[PayPal Payment error]', err);
-              // Fallback ensure user is not stranded
               onSuccess(bookingRef);
             } finally {
               setIsCapturing(false);
             }
           }}
-          className="w-full flex items-center justify-center gap-2.5 py-4 px-6 rounded-2xl bg-[#0070BA] hover:bg-[#005ea6] text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg shadow-blue-900/20 hover:scale-[1.01] active:scale-95 cursor-pointer border-none disabled:opacity-50"
+          className="w-full flex items-center justify-center gap-2.5 py-3.5 px-6 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-300 text-stone-950 font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-md hover:scale-[1.01] active:scale-95 cursor-pointer border-none disabled:opacity-50"
         >
           {isCapturing ? (
             <>
-              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              <span>Conectando con PayPal Seguro...</span>
+              <span className="w-4 h-4 border-2 border-stone-950 border-t-transparent rounded-full animate-spin" />
+              <span>{locale === 'es' ? 'Conectando con PayPal...' : 'Connecting to PayPal...'}</span>
             </>
           ) : (
             <>
-              <Lock className="w-4 h-4 text-amber-300" />
-              <span>Pagar con PayPal / Tarjeta Internacional</span>
+              <Lock className="w-4 h-4 text-stone-950" />
+              <span>{locale === 'es' ? 'Pagar con PayPal / Tarjeta Internacional' : 'Pay with PayPal / International Card'}</span>
             </>
           )}
         </button>
 
-        <div className="flex items-center justify-center gap-2 text-[10px] text-stone-500 dark:text-zinc-400 pt-1">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-          <span>Transacción segura y encriptada vía PayPal Business Ecuador (USD)</span>
-        </div>
+        <p className="text-[10px] text-center text-zinc-400 dark:text-zinc-500 pt-1">
+          {trustCopy}
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-3">
+    <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
       {errorMessage && (
-        <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl text-xs text-rose-300 flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+        <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl text-xs text-rose-500 dark:text-rose-300 flex items-center gap-2">
+          <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{errorMessage}</span>
         </div>
       )}
 
+      <div className="flex items-center justify-between text-xs text-zinc-500 pb-2 border-b border-zinc-100 dark:border-zinc-800">
+        <span className="font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
+          <Lock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+          {locale === 'es' ? 'Cifrado SSL 256-Bit' : '256-Bit SSL Encrypted'}
+        </span>
+        <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+          USD ${(amount || 0).toLocaleString('en-US')}
+        </span>
+      </div>
+
       {isCapturing ? (
-        <div className="py-6 flex flex-col items-center justify-center gap-2 text-emerald-400">
-          <div className="w-6 h-6 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin" />
-          <span className="text-xs font-semibold">Confirmando pago con PayPal...</span>
+        <div className="py-8 flex flex-col items-center justify-center gap-3 text-emerald-500">
+          <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+          <span className="text-xs font-semibold">{locale === 'es' ? 'Confirmando pago seguro con PayPal...' : 'Confirming secure payment with PayPal...'}</span>
         </div>
       ) : (
-        <PayPalScriptProvider
-          options={{
-            clientId,
-            currency: 'USD',
-            intent: 'capture',
-            components: 'buttons',
-            enableFunding: 'card', // Enables international debit and credit card button
-          }}
-        >
-          <PayPalButtons
-            style={{
-              layout: 'vertical',
-              shape: 'rect',
-              color: 'gold',
-              label: 'pay',
-              tagline: false,
+        <div className="min-h-[120px] relative">
+          <PayPalScriptProvider
+            options={{
+              clientId,
+              currency: 'USD',
+              intent: 'capture',
+              components: 'buttons',
+              enableFunding: 'card',
             }}
-            createOrder={handleCreateOrder}
-            onApprove={handleApprove}
-            onError={(err) => {
-              console.error('[PayPal Buttons Error]', err);
-              setErrorMessage('Error al procesar el pago con PayPal.');
-              if (onError) onError(err);
-            }}
-          />
-        </PayPalScriptProvider>
+          >
+            <PayPalButtons
+              style={{
+                layout: 'vertical',
+                shape: 'rect',
+                color: 'gold',
+                height: 48,
+                label: 'pay',
+                tagline: false,
+              }}
+              createOrder={handleCreateOrder}
+              onApprove={handleApprove}
+              onError={(err) => {
+                console.error('[PayPal Buttons Error]', err);
+                setErrorMessage(locale === 'es' ? 'Error al procesar el pago con PayPal.' : 'Error processing payment with PayPal.');
+                if (onError) onError(err);
+              }}
+            />
+          </PayPalScriptProvider>
+        </div>
       )}
 
-      <div className="flex items-center justify-center gap-2 text-[10px] text-zinc-400 pt-1">
-        <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-        <span>Acepta cuentas PayPal y tarjetas Visa, Mastercard, American Express</span>
-      </div>
+      <p className="text-[10px] text-center text-zinc-400 dark:text-zinc-500 pt-1">
+        {trustCopy}
+      </p>
     </div>
   );
 }
