@@ -46,26 +46,26 @@ export async function generateBookingCode(tourId?: string, affiliateUsername?: s
 
   if (db) {
     try {
-      const counterDocRef = doc(db, 'settings', 'booking_counters');
-      const counterSnap = await getDoc(counterDocRef);
-      if (counterSnap.exists()) {
-        const data = counterSnap.data();
-        const storedSeq = Number(data?.[`seq_${year}`] || data?.[String(year)] || 0);
-        if (storedSeq >= 80) {
-          seqNumber = storedSeq + 1;
-        } else {
-          seqNumber = 80;
-        }
-      }
+      // Calculate sequence from real bookings in the database:
+      // 0 bookings -> 80
+      // 1 booking  -> 81
+      // 2 bookings -> 82
+      const bookingsSnap = await getDocs(collection(db, BOOKINGS_COLLECTION));
+      const realBookingsCount = bookingsSnap.size;
+      seqNumber = 80 + realBookingsCount;
 
       // Candidate official code
       const candidateCode = `R-${year}-${tourCode}-${seqNumber}`;
 
-      // Persist the latest counter value
-      await setDoc(counterDocRef, { [`seq_${year}`]: seqNumber, [String(year)]: seqNumber }, { merge: true });
+      // Synchronize settings/booking_counters
+      try {
+        const counterDocRef = doc(db, 'settings', 'booking_counters');
+        await setDoc(counterDocRef, { [`seq_${year}`]: seqNumber, [String(year)]: seqNumber, lastUpdated: new Date().toISOString() }, { merge: true });
+      } catch (_) {}
+
       return candidateCode;
     } catch (e) {
-      console.warn('[generateBookingCode] Firestore counter notice, using baseline seq 80:', e);
+      console.warn('[generateBookingCode] Firestore count notice, using baseline seq 80:', e);
       seqNumber = 80;
     }
   }

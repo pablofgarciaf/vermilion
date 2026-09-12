@@ -7,13 +7,114 @@ import { mockTours } from '@/data/mock';
 import { calculateTourPrice, PricingDetails } from '@/lib/pricing';
 import { PriceCalculator } from './PriceCalculator';
 import { TravelDatePicker } from './TravelDatePicker';
-import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ExternalLink, Lock, ArrowRight, Sparkles, Loader2, Search, X, ArrowLeftRight, Compass } from 'lucide-react';
+import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, ExternalLink, Lock, ArrowRight, Sparkles, Loader2, Search, X, ArrowLeftRight, Compass } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getStoredAffiliateRef } from '@/components/affiliates/AffiliateTracker';
 import { getAffiliateByCode, AffiliateAccount } from '@/lib/affiliates';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 import { generateBookingCode } from '@/lib/bookings';
+
+const BOOKING_CAROUSEL_I18N: Record<string, {
+  sectionTitle: string;
+  sectionDesc: string;
+  setPrimary: string;
+  addExtension: string;
+  added: string;
+  from: string;
+  perTraveler: string;
+  viewAll: string;
+  viewDetails: string;
+}> = {
+  es: {
+    sectionTitle: 'Explora y Añade Otras Expediciones Recomendadas',
+    sectionDesc: 'Desliza para descubrir más rutas a medida para combinar o sustituir en tu viaje',
+    setPrimary: 'Elegir como Principal',
+    addExtension: '+ Añadir Extensión',
+    added: '✓ Añadido',
+    from: 'Desde',
+    perTraveler: 'por persona',
+    viewAll: 'Explorar todos los tours del catálogo ↗',
+    viewDetails: 'Ver itinerario',
+  },
+  en: {
+    sectionTitle: 'Explore & Add Other Recommended Expeditions',
+    sectionDesc: 'Swipe to discover more bespoke routes to combine or substitute in your journey',
+    setPrimary: 'Set as Primary',
+    addExtension: '+ Add Extension',
+    added: '✓ Added',
+    from: 'From',
+    perTraveler: 'per traveler',
+    viewAll: 'Explore full tour catalog ↗',
+    viewDetails: 'View itinerary',
+  },
+  fr: {
+    sectionTitle: 'Explorez et Ajoutez d’Autres Expéditions Recommandées',
+    sectionDesc: 'Faites défiler pour découvrir d’autres circuits sur mesure à combiner ou remplacer',
+    setPrimary: 'Choisir comme Principal',
+    addExtension: '+ Ajouter en Extension',
+    added: '✓ Ajouté',
+    from: 'À partir de',
+    perTraveler: 'par voyageur',
+    viewAll: 'Explorer tout le catalogue de tours ↗',
+    viewDetails: 'Voir l’itinéraire',
+  },
+  de: {
+    sectionTitle: 'Erkunden und Weitere Empfohlene Expeditionen Hinzufügen',
+    sectionDesc: 'Wischen Sie, um weitere maßgeschneiderte Routen zum Kombinieren zu entdecken',
+    setPrimary: 'Als Haupttour wählen',
+    addExtension: '+ Als Verlängerung hinzufügen',
+    added: '✓ Hinzugefügt',
+    from: 'Ab',
+    perTraveler: 'pro Reisender',
+    viewAll: 'Gesamten Reisekatalog ansehen ↗',
+    viewDetails: 'Reiseroute ansehen',
+  },
+  it: {
+    sectionTitle: 'Esplora e Aggiungi Altre Spedizioni Consigliate',
+    sectionDesc: 'Scorri per scoprire altri itinerari su misura da combinare o sostituire',
+    setPrimary: 'Scegli come Principale',
+    addExtension: '+ Aggiungi Estensione',
+    added: '✓ Aggiunto',
+    from: 'Da',
+    perTraveler: 'a viaggiatore',
+    viewAll: 'Esplora tutto il catalogo tour ↗',
+    viewDetails: 'Vedi itinerario',
+  },
+  pt: {
+    sectionTitle: 'Explore e Adicione Outras Expedições Recomendadas',
+    sectionDesc: 'Deslize para descobrir mais roteiros sob medida para combinar ou substituir',
+    setPrimary: 'Escolher como Principal',
+    addExtension: '+ Adicionar Extensão',
+    added: '✓ Adicionado',
+    from: 'A partir de',
+    perTraveler: 'por viajante',
+    viewAll: 'Explorar catálogo completo de tours ↗',
+    viewDetails: 'Ver itinerário',
+  },
+  ja: {
+    sectionTitle: '他のおすすめ遠征ツアーを探して追加する',
+    sectionDesc: 'スワイプして、旅に組み合わせる・変更できる多彩なルートをご覧ください',
+    setPrimary: 'メインツアーに指定',
+    addExtension: '+ エクステンションを追加',
+    added: '✓ 追加済み',
+    from: '料金',
+    perTraveler: 'お一人様あたり',
+    viewAll: '全ツアーカタログを見る ↗',
+    viewDetails: '日程を見る',
+  },
+  zh: {
+    sectionTitle: '探索并添加其他精选推荐探险行程',
+    sectionDesc: '左右滑动以发现更多可自由组合或替换的专属定制路线',
+    setPrimary: '设为主探险行程',
+    addExtension: '+ 添加为延伸行程',
+    added: '✓ 已添加',
+    from: '起价',
+    perTraveler: '每位旅客',
+    viewAll: '浏览全部探险行程目录 ↗',
+    viewDetails: '查看行程',
+  },
+};
 
 const CATEGORIES = [
   { id: 'all', label: 'Todas las Expediciones' },
@@ -114,6 +215,14 @@ export function BookingWizard() {
   const dateRef = useRef<HTMLDivElement>(null);
   const passengersRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
+  const carouselScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollRecommendations = (dir: 'left' | 'right') => {
+    if (carouselScrollRef.current) {
+      const scrollAmount = dir === 'left' ? -340 : 340;
+      carouselScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const ref = searchParams.get('vid') || searchParams.get('ref') || searchParams.get('affiliate') || getStoredAffiliateRef();
@@ -194,6 +303,8 @@ export function BookingWizard() {
 
   const primaryTour: Tour = selectedTours[0] || (addTourId ? mockTours.find(t => t.id === addTourId) : null) || mockTours.find(t => t.id === 'galapagos-5days') || mockTours[0];
   const complementarySuggestions = getComplementarySuggestions(primaryTour, mockTours);
+  const candidateTours = mockTours.filter(t => t.id !== primaryTour?.id);
+  const ci18n = BOOKING_CAROUSEL_I18N[locale] || BOOKING_CAROUSEL_I18N['es'];
 
   const replacePrimaryTour = (newTour: Tour) => {
     setSelectedTours(prev => {
@@ -315,7 +426,7 @@ export function BookingWizard() {
     if (!tourSearchQuery.trim()) return true;
     const q = tourSearchQuery.toLowerCase().trim();
     const title = (typeof t.title === 'string' ? t.title : (t.title?.es || t.title?.en || '')).toLowerCase();
-    const dest = (typeof t.destination === 'string' ? t.destination : (t.destination?.es || t.destination?.en || '')).toLowerCase();
+    const dest = (typeof t.destination === 'string' ? t.destination : ((t.destination as any)?.es || (t.destination as any)?.en || '')).toLowerCase();
     return title.includes(q) || dest.includes(q);
   });
 
@@ -450,70 +561,126 @@ export function BookingWizard() {
                 </div>
               )}
 
-              {/* 2 SUGERENCIAS COMPLEMENTARIAS INTELIGENTES */}
-              {complementarySuggestions.length > 0 && (
-                <div className="mt-5 space-y-3">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-amber-500" />
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
-                      {isEs ? 'Complementos & Upgrades Recomendados para tu Expedición' : 'Recommended Complements & Upgrades for your Expedition'}
-                    </h4>
+              {/* CARRUSEL MULTILINGÜE DE TODAS LAS EXPEDICIONES RECOMENDADAS */}
+              {candidateTours.length > 0 && (
+                <div className="mt-6 space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-800 dark:text-zinc-200">
+                          {ci18n.sectionTitle}
+                        </h4>
+                        <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                          {ci18n.sectionDesc}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Botones de navegación del carrusel */}
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => scrollRecommendations('left')}
+                        aria-label="Previous tour"
+                        className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-emerald-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => scrollRecommendations('right')}
+                        aria-label="Next tour"
+                        className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-emerald-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {complementarySuggestions.map(({ tour: sugTour, badge, reason }) => {
+                  {/* Contenedor del Carrusel Deslizable */}
+                  <div
+                    ref={carouselScrollRef}
+                    className="flex gap-3.5 overflow-x-auto scrollbar-none snap-x snap-mandatory py-2 px-0.5"
+                    style={{ scrollBehavior: 'smooth' }}
+                  >
+                    {candidateTours.map((sugTour) => {
                       const isAdded = selectedTours.some(st => st.id === sugTour.id);
+                      const tourTitle = getLocalizedText(sugTour.title, locale);
+                      const tourDesc = getLocalizedText(sugTour.description, locale);
+                      const tourDuration = getLocalizedText(sugTour.duration, locale);
+                      const badgeText = sugTour.id.includes('galapagos')
+                        ? '🐢 Galápagos'
+                        : sugTour.id.includes('volcano') || sugTour.id.includes('andes')
+                        ? '🏔️ Andes'
+                        : sugTour.id.includes('amazon')
+                        ? '🌿 Amazonía'
+                        : '✨ Combinado';
+
                       return (
                         <div
                           key={sugTour.id}
-                          className={`rounded-2xl p-4 border transition-all flex flex-col justify-between gap-3 ${
+                          className={`w-[290px] sm:w-[320px] shrink-0 snap-start rounded-2xl p-4 border transition-all flex flex-col justify-between gap-3 shadow-sm ${
                             isAdded
-                              ? 'border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/30 shadow-md ring-1 ring-emerald-500'
-                              : 'border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/40 hover:border-amber-400/60'
+                              ? 'border-emerald-500 bg-emerald-50/85 dark:bg-emerald-950/30 ring-1 ring-emerald-500'
+                              : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/70 hover:border-emerald-400/80 hover:shadow-md'
                           }`}
                         >
-                          <div>
-                            <div className="flex items-center justify-between gap-2 mb-2">
-                              <span className="px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-800 dark:text-amber-300 font-bold text-[10px] tracking-tight">
-                                {badge}
+                          <div className="space-y-2.5">
+                            {/* Header tarjeta */}
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 font-bold text-[10px] tracking-tight">
+                                {badgeText}
                               </span>
-                              <span className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400">
-                                +${sugTour.price.toLocaleString('en-US')} USD
+                              <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+                                {tourDuration}
                               </span>
                             </div>
 
+                            {/* Foto y Título */}
                             <div className="flex items-start gap-3">
                               <img
                                 src={sugTour.imageUrl}
-                                alt={getLocalizedText(sugTour.title, locale)}
-                                width={56}
-                                height={56}
-                                className="w-14 h-14 rounded-xl object-cover shrink-0 border border-zinc-200 dark:border-zinc-700"
+                                alt={tourTitle}
+                                width={68}
+                                height={68}
+                                className="w-16 h-16 rounded-xl object-cover shrink-0 border border-zinc-200 dark:border-zinc-700 shadow-xs"
                               />
-                              <div className="min-w-0">
+                              <div className="min-w-0 flex-1">
                                 <h5 className="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white line-clamp-1 leading-snug">
-                                  {getLocalizedText(sugTour.title, locale)}
+                                  {tourTitle}
                                 </h5>
                                 <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2 mt-0.5">
-                                  {reason}
+                                  {tourDesc}
                                 </p>
                               </div>
                             </div>
+
+                            {/* Precio */}
+                            <div className="pt-1 flex items-baseline justify-between">
+                              <span className="text-[11px] text-zinc-400">
+                                {ci18n.from}:
+                              </span>
+                              <span className="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">
+                                ${sugTour.price.toLocaleString('en-US')} USD <span className="text-[10px] font-normal text-zinc-400">{ci18n.perTraveler}</span>
+                              </span>
+                            </div>
                           </div>
 
-                          <div className="pt-2.5 border-t border-zinc-200/60 dark:border-zinc-800 flex items-center justify-between gap-2">
+                          {/* Acciones */}
+                          <div className="pt-2.5 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between gap-2">
                             <button
                               type="button"
                               onClick={() => replacePrimaryTour(sugTour)}
-                              className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors cursor-pointer"
+                              className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer"
                             >
-                              {isEs ? 'Cambiar a este' : 'Switch to this'}
+                              {ci18n.setPrimary}
                             </button>
 
                             <button
                               type="button"
                               onClick={() => toggleTour(sugTour)}
-                              className={`py-1.5 px-3 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer ${
+                              className={`py-1.5 px-3 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
                                 isAdded
                                   ? 'bg-emerald-600 text-white shadow-sm'
                                   : 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:opacity-90'
@@ -522,16 +689,29 @@ export function BookingWizard() {
                               {isAdded ? (
                                 <>
                                   <CheckCircle2 className="w-3.5 h-3.5" />
-                                  <span>{isEs ? 'Añadido' : 'Added'}</span>
+                                  <span>{ci18n.added}</span>
                                 </>
                               ) : (
-                                <span>{isEs ? '+ Añadir Extensión' : '+ Add Extension'}</span>
+                                <span>{ci18n.addExtension}</span>
                               )}
                             </button>
                           </div>
                         </div>
                       );
                     })}
+                  </div>
+
+                  {/* Botón para explorar todos los tours */}
+                  <div className="pt-2 flex justify-center">
+                    <a
+                      href={`/${locale}/tours`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 text-zinc-700 dark:text-zinc-200 hover:text-emerald-700 dark:hover:text-emerald-400 text-xs font-bold transition-all border border-zinc-200 dark:border-zinc-700 hover:border-emerald-300"
+                    >
+                      <Compass className="w-4 h-4 text-emerald-600" />
+                      <span>{ci18n.viewAll}</span>
+                    </a>
                   </div>
                 </div>
               )}

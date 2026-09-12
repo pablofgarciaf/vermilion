@@ -41,33 +41,13 @@
     "cta": "Explorar Tours"
   },
   "tours": {
-    "badge": "Showcase Interactivo de Carrusel 3D",
-    "title": "Viajes Emblemáticos Destacados",
-    "subtitle": "Experiencias curadas lideradas por naturalistas locales expertos con logística impecable, estancias en hoteles seleccionados y el equilibrio definitivo entre naturaleza, confort y aventura.",
-    "cta": {
-      "label": "¿Buscas algo 100% personalizado?",
-      "title": "Diseñamos Tu Itinerario a Medida Sin Costo Adicional",
-      "subtitle": "Nuestros especialistas en destinos personalizarán las fechas de viaje, el ritmo, el nivel de confort del hotel y las excursiones privadas adaptadas precisamente a tus preferencias.",
-      "button": "Solicitar Itinerario Personalizado"
-    },
     "filter": {
       "all": "Todas las Expediciones",
       "ecuador": "Ecuador Continental",
       "galapagos": "Islas Galápagos",
       "combined": "Viajes Combinados",
       "fullday": "Excursiones Full Day"
-    },
-    "card": {
-      "from": "Desde",
-      "person": "/ persona",
-      "view": "Ver Detalles",
-      "bestseller": "Más Vendido"
-    },
-    "showing": "Mostrando",
-    "of": "de",
-    "journeys": "viajes",
-    "premium": "Premium",
-    "luxury": "A Medida"
+    }
   },
   "about": {
     "badge": "Quiénes Somos",

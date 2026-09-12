@@ -41,33 +41,13 @@
     "cta": "探索行程"
   },
   "tours": {
-    "badge": "3D 交互式轮播展厅",
-    "title": "招牌旗舰探索之旅",
-    "subtitle": "由当地专家级博物学家领队，精选精品酒店，完美平衡自然、舒适与探险。",
-    "cta": {
-      "label": "寻找 100% 完全专属定制的行程？",
-      "title": "为您免费设计私人专属定制行程",
-      "subtitle": "我们的目的地专家将根据您的偏好定制出行日期、节奏、酒店舒适级别及私人游览。",
-      "button": "申请定制行程 proposal"
-    },
     "filter": {
-      "all": "全部探险路线",
-      "ecuador": "厄瓜多尔大陆",
+      "all": "全部探险行程",
+      "ecuador": "厄瓜多尔本土",
       "galapagos": "加拉帕戈斯群岛",
-      "combined": "组合探索之旅",
-      "fullday": "一日游精选"
-    },
-    "card": {
-      "from": "起价",
-      "person": "/ 人",
-      "view": "查看详情",
-      "bestseller": "畅销"
-    },
-    "showing": "正在显示",
-    "of": "/",
-    "journeys": "条路线",
-    "premium": "尊享",
-    "luxury": "奢华"
+      "combined": "经典联游路线",
+      "fullday": "一日游短途"
+    }
   },
   "about": {
     "badge": "关于我们",

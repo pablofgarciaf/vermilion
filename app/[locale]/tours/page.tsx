@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
 import { mockTours } from '@/data/mock';
 import { dailyTours } from '@/data/dailyToursData';
 import { ToursBackgroundSlider } from '@/components/tours/ToursBackgroundSlider';
@@ -23,7 +22,11 @@ import {
 } from 'lucide-react';
 
 import type { Metadata } from 'next';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, SUPPORTED_SEO_LOCALES } from '@/utils/seoHelper';
+
+export async function generateStaticParams() {
+  return SUPPORTED_SEO_LOCALES.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

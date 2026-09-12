@@ -41,33 +41,13 @@
     "cta": "Explore Tours"
   },
   "tours": {
-    "badge": "Interactive 3D Carousel Showcase",
-    "title": "Featured Signature Journeys",
-    "subtitle": "Curated experiences led by expert local naturalists with seamless logistics, boutique stays, and the ultimate balance of nature, comfort, and adventure.",
-    "cta": {
-      "label": "Looking for something 100% customized?",
-      "title": "We Design Your Custom Itinerary At No Extra Cost",
-      "subtitle": "Our destination specialists will customize travel dates, pace, hotel comfort tiers, and private excursions tailored precisely to your preferences.",
-      "button": "Request Custom Itinerary"
-    },
     "filter": {
       "all": "All Expeditions",
       "ecuador": "Mainland Ecuador",
       "galapagos": "Galapagos Islands",
       "combined": "Combined Journeys",
-      "fullday": "Full-Day Excursions"
-    },
-    "card": {
-      "from": "From",
-      "person": "/ person",
-      "view": "View Details",
-      "bestseller": "Best Seller"
-    },
-    "showing": "Showing",
-    "of": "of",
-    "journeys": "journeys",
-    "premium": "Premium",
-    "luxury": "Bespoke"
+      "fullday": "Full-Day Tours"
+    }
   },
   "about": {
     "badge": "Who We Are",

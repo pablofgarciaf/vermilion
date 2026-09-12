@@ -41,33 +41,13 @@
     "cta": "Esplora i Tour"
   },
   "tours": {
-    "badge": "Vetrina Carosello 3D Interattiva",
-    "title": "Viaggi Firma In Evidenza",
-    "subtitle": "Esperienze guidate da naturalisti locali esperti con logistica impeccabile e la combinazione perfetta di natura, comfort e avventura.",
-    "cta": {
-      "label": "Cerchi qualcosa di completamente personalizzato?",
-      "title": "Progettiamo Il Tuo Itinerario Senza Costi Aggiuntivi",
-      "subtitle": "I nostri specialisti personalizzeranno date, ritmo, categoria di comfort ed escursioni private.",
-      "button": "Richiedi Itinerario Personalizzato"
-    },
     "filter": {
-      "all": "Tutte le spedizioni",
+      "all": "Tutte le Spedizioni",
       "ecuador": "Ecuador Continentale",
-      "galapagos": "Isole Galapagos",
+      "galapagos": "Isole Galápagos",
       "combined": "Viaggi Combinati",
       "fullday": "Escursioni Giornaliere"
-    },
-    "card": {
-      "from": "Da",
-      "person": "/ persona",
-      "view": "Vedi Dettagli",
-      "bestseller": "Più Venduto"
-    },
-    "showing": "Mostrando",
-    "of": "di",
-    "journeys": "viaggi",
-    "premium": "Premium",
-    "luxury": "Lusso"
+    }
   },
   "about": {
     "badge": "Chi Siamo",

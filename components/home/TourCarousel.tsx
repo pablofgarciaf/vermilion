@@ -5,24 +5,83 @@ import { Tour } from '@/types';
 import { TourCard } from '@/components/ui/TourCard';
 import { ChevronLeft, ChevronRight, Compass, ChevronDown } from 'lucide-react';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { isBotOrCrawler } from '@/utils/isBot';
+
+const FILTER_I18N: Record<string, { all: string; ecuador: string; galapagos: string; combined: string; fullday: string }> = {
+  es: {
+    all: 'Todas las Expediciones',
+    ecuador: 'Ecuador Continental',
+    galapagos: 'Islas Galápagos',
+    combined: 'Viajes Combinados',
+    fullday: 'Excursiones Full Day',
+  },
+  en: {
+    all: 'All Expeditions',
+    ecuador: 'Mainland Ecuador',
+    galapagos: 'Galapagos Islands',
+    combined: 'Combined Journeys',
+    fullday: 'Full-Day Tours',
+  },
+  fr: {
+    all: 'Toutes les Expéditions',
+    ecuador: 'Équateur Continental',
+    galapagos: 'Îles Galápagos',
+    combined: 'Voyages Combinés',
+    fullday: 'Excursions Journée',
+  },
+  de: {
+    all: 'Alle Expeditionen',
+    ecuador: 'Festland-Ecuador',
+    galapagos: 'Galápagos-Inseln',
+    combined: 'Kombinationsreisen',
+    fullday: 'Tagestouren',
+  },
+  it: {
+    all: 'Tutte le Spedizioni',
+    ecuador: 'Ecuador Continentale',
+    galapagos: 'Isole Galápagos',
+    combined: 'Viaggi Combinati',
+    fullday: 'Escursioni Giornaliere',
+  },
+  pt: {
+    all: 'Todas as Expedições',
+    ecuador: 'Equador Continental',
+    galapagos: 'Ilhas Galápagos',
+    combined: 'Viagens Combinadas',
+    fullday: 'Excursões de Um Dia',
+  },
+  ja: {
+    all: 'すべての遠征ツアー',
+    ecuador: 'エクアドル本土',
+    galapagos: 'ガラパゴス諸島',
+    combined: 'コンビネーションツアー',
+    fullday: '日帰りツアー',
+  },
+  zh: {
+    all: '全部探险行程',
+    ecuador: '厄瓜多尔本土',
+    galapagos: '加拉帕戈斯群岛',
+    combined: '经典联游路线',
+    fullday: '一日游短途',
+  },
+};
 
 interface TourCarouselProps {
   tours: Tour[];
 }
 
 export function TourCarousel({ tours }: TourCarouselProps) {
-  const t = useTranslations('tours');
   const locale = useLocale();
+  const f = FILTER_I18N[locale] || FILTER_I18N['en'];
 
   const CATEGORIES = [
-    { id: 'all', label: t('filter.all') },
-    { id: 'Ecuador', label: `🏔️ ${t('filter.ecuador')}` },
-    { id: 'Galapagos', label: `🐢 ${t('filter.galapagos')}` },
-    { id: 'Combined', label: `✨ ${t('filter.combined')}` },
-    { id: 'FullDay', label: `☀️ ${t('filter.fullday')}` },
+    { id: 'all', label: f.all },
+    { id: 'Ecuador', label: `🏔️ ${f.ecuador}` },
+    { id: 'Galapagos', label: `🐢 ${f.galapagos}` },
+    { id: 'Combined', label: `✨ ${f.combined}` },
+    { id: 'FullDay', label: `☀️ ${f.fullday}` },
   ];
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [currentIndex, setCurrentIndex] = useState<number>(0);

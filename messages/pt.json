@@ -41,33 +41,13 @@
     "cta": "Explorar Passeios"
   },
   "tours": {
-    "badge": "Showcase Interativo de Carrossel 3D",
-    "title": "Viagens Emblemáticas em Destaque",
-    "subtitle": "Experiências guiadas por naturalistas locais especialistas com logística impecável e o equilíbrio definitivo entre natureza, conforto e aventura.",
-    "cta": {
-      "label": "Procurando algo 100% personalizado?",
-      "title": "Desenhamos Seu Itinerário Sob Medida Sem Custo Adicional",
-      "subtitle": "Nossos especialistas personalizarão datas, ritmo, categoria de conforto e passeios privados.",
-      "button": "Solicitar Itinerário Personalizado"
-    },
     "filter": {
       "all": "Todas as Expedições",
       "ecuador": "Equador Continental",
       "galapagos": "Ilhas Galápagos",
       "combined": "Viagens Combinadas",
-      "fullday": "Passeios de 1 Dia"
-    },
-    "card": {
-      "from": "A partir de",
-      "person": "/ pessoa",
-      "view": "Ver Detalhes",
-      "bestseller": "Mais Vendido"
-    },
-    "showing": "Mostrando",
-    "of": "de",
-    "journeys": "viagens",
-    "premium": "Premium",
-    "luxury": "Luxo"
+      "fullday": "Excursões de Um Dia"
+    }
   },
   "about": {
     "badge": "Quem Somos",

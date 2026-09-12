@@ -41,33 +41,13 @@
     "cta": "Touren Erkunden"
   },
   "tours": {
-    "badge": "Interaktive 3D-Karussell-Showcase",
-    "title": "Ausgewählte Highlight-Reisen",
-    "subtitle": "Kuratierte Erlebnisse, geführt von lokalen Agenden-Naturführern mit perfekter Logistik und exzellentem Komfort.",
-    "cta": {
-      "label": "Suchen Sie nach einer 100% individuellen Reise?",
-      "title": "Wir Gestalten Ihre Wunschroute Ohne Aufpreis",
-      "subtitle": "Unsere Spezialisten passen Termine, Tempo, Komfortklasse und private Ausflüge an Ihre Wünsche an.",
-      "button": "Individuelle Route Anfragen"
-    },
     "filter": {
       "all": "Alle Expeditionen",
-      "ecuador": "Festland Ecuador",
-      "galapagos": "Galapagos-Inseln",
-      "combined": "Kombinierte Reisen",
-      "fullday": "Tagesausflüge"
-    },
-    "card": {
-      "from": "Ab",
-      "person": "/ Person",
-      "view": "Details Anzeigen",
-      "bestseller": "Bestseller"
-    },
-    "showing": "Zeige",
-    "of": "von",
-    "journeys": "Reisen",
-    "premium": "Premium",
-    "luxury": "Luxus"
+      "ecuador": "Festland-Ecuador",
+      "galapagos": "Galápagos-Inseln",
+      "combined": "Kombinationsreisen",
+      "fullday": "Tagestouren"
+    }
   },
   "about": {
     "badge": "Wer Wir Sind",

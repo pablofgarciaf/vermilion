@@ -446,7 +446,7 @@ export default function CheckoutPaymentPage() {
   const amountStr = searchParams.get('amount') || '500';
   const type = searchParams.get('type') || 'deposit';
   const initialRef = searchParams.get('ref') || '';
-  const [ref, setRef] = useState(initialRef);
+  const [ref, setRef] = useState(initialRef.includes('-751') ? '' : initialRef);
   const travelDate = searchParams.get('date') || '';
   const travelersParam = searchParams.get('travelers') || searchParams.get('guestsCount') || '';
   const adultsParam = searchParams.get('adults') || '';
@@ -530,7 +530,7 @@ export default function CheckoutPaymentPage() {
     if (!clientName && stored.name) setClientName(stored.name);
 
     // Guarantee ref format R-[year]-[tourCode]-[sequential] (starts at 80)
-    if (!ref || !ref.startsWith('R-2026-')) {
+    if (!ref || !ref.startsWith('R-2026-') || ref.includes('-751')) {
       const affCode = searchParams.get('affiliateCode') || searchParams.get('vid') || getStoredAffiliateRef();
       generateBookingCode(tourId, affCode || undefined).then((newCode) => {
         setRef(newCode);
@@ -988,28 +988,6 @@ export default function CheckoutPaymentPage() {
                   ───────────────────────────────────────────── */}
               {activeTab === 'card' && (
                 <div className="space-y-4 animate-fade-in">
-                  <div className="p-4 bg-gradient-to-br from-white to-stone-50/60 dark:from-zinc-950 dark:to-zinc-900/60 border border-stone-200/80 dark:border-emerald-500/20 rounded-2xl shadow-xs space-y-2">
-                    <div className="flex items-center justify-between text-xs">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-                          <Lock className="w-3.5 h-3.5" />
-                        </div>
-                        <span className="font-bold text-stone-900 dark:text-white">
-                          {locale === 'es' ? 'Pago Online Inmediato' : 'Instant Online Checkout'}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1 font-semibold text-stone-700 dark:text-zinc-300 text-[10px]">
-                        <span className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700">PayPal</span>
-                        <span className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700">Visa</span>
-                        <span className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700">Mastercard</span>
-                        <span className="px-1.5 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 border border-stone-200 dark:border-zinc-700">Amex</span>
-                      </div>
-                    </div>
-                    <p className="text-[11px] text-stone-500 dark:text-zinc-400 leading-relaxed pl-8">
-                      {t('paypalNotice')}
-                    </p>
-                  </div>
-
                   {/* PayPal Official SDK Buttons */}
                   <PayPalCheckoutButton
                     amount={finalAmount}

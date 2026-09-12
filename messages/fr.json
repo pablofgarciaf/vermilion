@@ -41,33 +41,13 @@
     "cta": "Explorer les Circuits"
   },
   "tours": {
-    "badge": "Vitrine Carrousel 3D Interactive",
-    "title": "Voyages Signature En Vedette",
-    "subtitle": "Expériences guidées par des naturalistes locaux experts avec une logistique impeccable, des hébergements de charme et l'équilibre ultime entre nature, confort et aventure.",
-    "cta": {
-      "label": "Vous cherchez un voyage 100% personnalisé ?",
-      "title": "Nous Concevons Votre Itinéraire Sur Mesure Sans Frais Supplémentaires",
-      "subtitle": "Nos spécialistes personnaliseront vos dates, le rythme, la catégorie de confort et les excursions privées.",
-      "button": "Demander un Itinéraire Personnalisé"
-    },
     "filter": {
-      "all": "Toutes les expéditions",
+      "all": "Toutes les Expéditions",
       "ecuador": "Équateur Continental",
       "galapagos": "Îles Galápagos",
       "combined": "Voyages Combinés",
-      "fullday": "Excursions d'une journée"
-    },
-    "card": {
-      "from": "À partir de",
-      "person": "/ personne",
-      "view": "Voir les Détails",
-      "bestseller": "Meilleure Vente"
-    },
-    "showing": "Affichage de",
-    "of": "sur",
-    "journeys": "voyages",
-    "premium": "Premium",
-    "luxury": "Luxe"
+      "fullday": "Excursions Journée"
+    }
   },
   "about": {
     "badge": "Qui Sommes-Nous",
