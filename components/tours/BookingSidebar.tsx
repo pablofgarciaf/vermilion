@@ -31,6 +31,17 @@ interface BookingSidebarProps {
   tour: Tour;
 }
 
+const ADD_EXPEDITION_I18N: Record<string, string> = {
+  es: 'Añadir a mi Expedición',
+  en: 'Add to Expedition',
+  fr: 'Ajouter à mon expédition',
+  de: 'Zur Expedition hinzufügen',
+  it: 'Aggiungi alla mia spedizione',
+  pt: 'Adicionar à minha expedição',
+  ja: '遠征プランに追加する',
+  zh: '添加到我的探险计划',
+};
+
 export function BookingSidebar({ tour }: BookingSidebarProps) {
   const locale = useLocale();
   const t = useTranslations('tours');
@@ -104,7 +115,6 @@ export function BookingSidebar({ tour }: BookingSidebarProps) {
                 ? 'font-serif italic text-[16px] tracking-wider drop-shadow-sm text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-amber-500 to-amber-700 dark:from-amber-200 dark:via-amber-300 dark:to-amber-100 font-bold' 
                 : 'text-xs font-bold uppercase text-zinc-500 dark:text-zinc-400 hover:text-amber-700 dark:hover:text-amber-300'
               }`}
-              style={hotelClass === 'luxury' ? { WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' } : {}}
             >
               <Sparkles className={`w-3.5 h-3.5 shrink-0 ${hotelClass === 'luxury' ? 'text-amber-500 dark:text-amber-300' : 'hidden'}`} />
               {t('luxury')}
@@ -120,12 +130,16 @@ export function BookingSidebar({ tour }: BookingSidebarProps) {
       <div className="space-y-4">
         <button
           onClick={() => {
-            window.location.href = `/${locale}/booking?addTour=${tour.id}`;
+            try {
+              sessionStorage.setItem('preselected_tour_id', tour.id);
+              localStorage.setItem('vermilion_selected_tour', tour.id);
+            } catch {}
+            window.location.href = `/${locale}/booking`;
           }}
           className="w-full gap-2 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#E5C158] hover:to-[#B59049] text-stone-950 font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-amber-900/30 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer border-none flex items-center justify-center"
         >
           <Sparkles className="w-4 h-4" />
-          <span>{locale === 'es' ? 'Añadir a mi Expedición' : 'Add to Expedition'}</span>
+          <span>{ADD_EXPEDITION_I18N[locale] || ADD_EXPEDITION_I18N['en']}</span>
         </button>
 
         {/* Quick WhatsApp Inquiry */}

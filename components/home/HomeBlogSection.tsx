@@ -228,6 +228,7 @@ export function HomeBlogSection() {
           <Link
             key={post.id}
             href={`/${locale}/blog/${post.slug}`}
+            aria-label={`${tSec('readGuide')}: ${getLocalizedText(post.title, locale)}`}
             className="group bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/60 rounded-3xl overflow-hidden flex flex-col shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 w-[85vw] sm:w-[320px] md:w-auto shrink-0 snap-center"
           >
             <div className="relative h-48 sm:h-52 w-full overflow-hidden">
@@ -262,6 +263,7 @@ export function HomeBlogSection() {
 
               <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 pt-2 group-hover:translate-x-1 transition-transform">
                 <span>{tSec('readGuide')}</span>
+                <span className="sr-only">: {getLocalizedText(post.title, locale)}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </div>
             </div>

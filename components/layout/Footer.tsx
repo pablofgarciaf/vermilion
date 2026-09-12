@@ -401,8 +401,16 @@ export function Footer() {
             <div className="pt-2 space-y-2 text-xs text-zinc-200">
               <p className="flex items-center gap-2 text-zinc-300">
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span className="text-zinc-400 text-[11px]">WhatsApp 24/7:</span>
                 <a href="tel:+593994048458" className="hover:text-emerald-300 transition-colors">
-                  {getLocalizedText(settings?.contact?.phone, locale) || '+593 99 404 8458'}
+                  +593 99 404 8458
+                </a>
+              </p>
+              <p className="flex items-center gap-2 text-zinc-300">
+                <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span className="text-zinc-400 text-[11px]">Oficina / Reservas:</span>
+                <a href="tel:+593983992549" className="hover:text-emerald-300 transition-colors">
+                  +593 98 399 2549
                 </a>
               </p>
               <p className="flex items-center gap-2 text-zinc-300">

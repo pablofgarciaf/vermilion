@@ -64,9 +64,20 @@ export function AboutSection() {
           </div>
 
           <div className="pt-2">
-            <a href="#contact">
+            <a href={`/${locale}#contact`}>
               <Button variant="primary" size="md" className="gap-2">
-                <span>Speak with a Travel Specialist</span>
+                <span>
+                  {({
+                    es: 'Hablar con un Especialista',
+                    en: 'Speak with a Travel Specialist',
+                    fr: 'Parler avec un Spécialiste',
+                    de: 'Mit einem Reisespezialisten sprechen',
+                    it: 'Parla con uno Specialista',
+                    pt: 'Falar com um Especialista',
+                    ja: '旅行スペシャリストに相談する',
+                    zh: '咨询资深旅行专家',
+                  } as Record<string, string>)[locale] || 'Speak with a Travel Specialist'}
+                </span>
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </a>

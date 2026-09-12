@@ -322,11 +322,11 @@ export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
                     <Clock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> {featuredPost.readTime}
                   </span>
                 </div>
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold font-serif text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-tight">
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold font-serif text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-tight">
                   <Link href={`/${locale}/blog/${featuredPost.slug}`}>
                     {getLocalizedText(featuredPost.title, locale)}
                   </Link>
-                </h2>
+                </h3>
                 <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 line-clamp-3 leading-relaxed">
                   {getLocalizedText(featuredPost.subtitle || featuredPost.excerpt, locale)}
                 </p>
@@ -421,11 +421,11 @@ export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
                     </span>
                   </div>
 
-                  <h2 className="font-serif font-bold text-lg text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
+                  <h3 className="font-serif font-bold text-lg text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
                     <Link href={`/${locale}/blog/${post.slug}`}>
                       {getLocalizedText(post.title, locale)}
                     </Link>
-                  </h2>
+                  </h3>
 
                   <p className="text-xs text-zinc-600 dark:text-zinc-300 line-clamp-3 leading-relaxed">
                     {getLocalizedText(post.excerpt, locale)}

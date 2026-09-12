@@ -28,13 +28,16 @@ export function StatsSection() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const currentYear = new Date().getFullYear();
+  const dynamicYears = Math.max(20, currentYear - 2005);
+
   const defaultLabels: Record<string, [string, string, string, string]> = {
     es: ['Expediciones a Medida', 'Años de Experiencia', 'Satisfacción 5 Estrellas', 'Atención Concierge 24/7'],
-    en: ['Bespoke & Tailor-Made', 'Field Travel Expertise', '5-Star Satisfaction', 'On-Trip Concierge Care'],
-    zh: ['100% 量身定制', '15+ 年专业路线经验', '99% 客户满意度', '24/7 礼宾关怀'],
+    en: ['Bespoke & Tailor-Made', 'Years of Field Expertise', '5-Star Satisfaction', 'On-Trip Concierge Care'],
+    zh: ['100% 量身定制', `${dynamicYears}+ 年专业路线经验`, '99% 客户满意度', '24/7 礼宾关怀'],
     fr: ['Sur Mesure & Personnalisé', 'Années d\'Expertise', 'Satisfaction 5 Étoiles', 'Service Concierge 24/7'],
     de: ['Maßgeschneiderte Reisen', 'Jahrelange Erfahrung', '5-Sterne-Zufriedenheit', '24/7 Concierge-Betreuung'],
-    it: ['Su Misura e Personalizzato', 'Anni di Esperienza', 'Soddisfazione a 5 Stelle', 'Assistenza Concierge 24/7'],
+    it: ['Su Misura e Personalizzato', 'Anni di Experienza', 'Soddisfazione a 5 Stelle', 'Assistenza Concierge 24/7'],
     pt: ['Sob Medida & Personalizado', 'Anos de Experiência', 'Satisfação 5 Estrelas', 'Atendimento Concierge 24/7'],
     ja: ['100% オーダーメイド', '長年の専門知識', '五つ星の満足度', '24/7 コンシェルジュケア']
   };
@@ -94,7 +97,7 @@ export function StatsSection() {
           </div>
           <div>
             <div className="text-zinc-900 dark:text-white font-oswald font-bold text-base sm:text-lg leading-none mb-1">
-              {getLocalizedText(settings?.about?.metric2Val, locale) || '+15 Yrs'}
+              {getLocalizedText(settings?.about?.metric2Val, locale) || `+${dynamicYears} Yrs`}
             </div>
             <p className="text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-300 font-medium uppercase tracking-wider leading-none">
               {getLabel(settings?.about?.metric2Lbl, 1)}

@@ -89,7 +89,6 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
     badge: string;
     title: string;
     subtitle: string;
-    loading: string;
   }> = {
     es: {
       schemaName: 'Guías de Viaje y Expediciones Vermilion',
@@ -98,8 +97,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       blogBreadcrumb: 'Blog',
       badge: 'Guías y Artículos de Viaje Vermilion',
       title: 'Expediciones, Naturaleza y Cultura',
-      subtitle: 'Artículos editoriales, guías de expedición, calendarios de fauna y consejos de expertos para explorar Ecuador y las Islas Galápagos.',
-      loading: 'Cargando guías de viaje...'
+      subtitle: 'Artículos editoriales, guías de expedición, calendarios de fauna y consejos de expertos para explorar Ecuador y las Islas Galápagos.'
     },
     en: {
       schemaName: 'Vermilion Nature Travel Guides & Insights',
@@ -108,8 +106,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       blogBreadcrumb: 'Travel Guides',
       badge: 'Vermilion Travel Insights & Guides',
       title: 'Journeys, Nature & Expert Guides',
-      subtitle: 'Curated articles, expedition guides, wildlife calendars, and insider tips to explore Ecuador and the Galapagos Islands.',
-      loading: 'Loading travel guides...'
+      subtitle: 'Curated articles, expedition guides, wildlife calendars, and insider tips to explore Ecuador and the Galapagos Islands.'
     },
     fr: {
       schemaName: 'Guides de Voyage et Expéditions Vermilion',
@@ -118,8 +115,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       blogBreadcrumb: 'Guides de Voyage',
       badge: 'Guides et Conseils de Voyage Vermilion',
       title: 'Expéditions, Nature et Culture',
-      subtitle: 'Guides éditoriaux, calendriers fauniques et conseils d’experts pour explorer l’Équateur et les îles Galápagos.',
-      loading: 'Chargement des guides de voyage...'
+      subtitle: 'Guides éditoriaux, calendriers fauniques et conseils d’experts pour explorer l’Équateur et les îles Galápagos.'
     },
     de: {
       schemaName: 'Vermilion Luxus-Reiseführer & Einblicke',
@@ -128,8 +124,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       blogBreadcrumb: 'Reiseführer',
       badge: 'Vermilion Reiseleitfäden & Einblicke',
       title: 'Expeditionen, Natur & Expertenwissen',
-      subtitle: 'Redaktionelle Reiseführer, Tierbeobachtungskalender und Insidertipps für Ecuador und die Galápagos-Inseln.',
-      loading: 'Reiseführer werden geladen...'
+      subtitle: 'Redaktionelle Reiseführer, Tierbeobachtungskalender und Insidertipps für Ecuador und die Galápagos-Inseln.'
     },
     it: {
       schemaName: 'Guide di Viaggio ed Approfondimenti Vermilion',
@@ -138,8 +133,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       blogBreadcrumb: 'Guide di Viaggio',
       badge: 'Guide di Viaggio ed Approfondimenti Vermilion',
       title: 'Spedizioni, Natura e Cultura',
-      subtitle: 'Articoli editoriali, guide alle spedizioni, calendari della fauna selvatica e consigli per esplorare Ecuador e Galápagos.',
-      loading: 'Caricamento guide di viaggio...'
+      subtitle: 'Articoli editoriali, guide alle spedizioni, calendari della fauna selvatica e consigli per esplorare Ecuador e Galápagos.'
     },
     pt: {
       schemaName: 'Guias e Artigos de Viagem Vermilion',
@@ -148,8 +142,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       blogBreadcrumb: 'Guias de Viagem',
       badge: 'Guias e Artigos de Viagem Vermilion',
       title: 'Expedições, Natureza e Cultura',
-      subtitle: 'Artigos editoriais, guias de expedição, calendários de fauna e dicas de especialistas para explorar o Equador e as Ilhas Galápagos.',
-      loading: 'Carregando guias de viagem...'
+      subtitle: 'Artigos editoriais, guias de expedição, calendarios de fauna e dicas de especialistas para explorar o Equador e as Ilhas Galápagos.'
     },
     ja: {
       schemaName: 'Vermilion 豪華旅行ガイド＆インサイト',
@@ -158,8 +151,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       blogBreadcrumb: '旅行ガイド',
       badge: 'Vermilion 旅のインサイト＆ガイド',
       title: '大自然、探検、そしてアンデス文化',
-      subtitle: 'エクアドル本土とガラパゴス諸島を巡るための、編集部特選ガイド、野生動物カレンダー、専門家のアドバイス。',
-      loading: '旅行ガイドを読み込み中...'
+      subtitle: 'エクアドル本土とガラパゴス諸島を巡るための、編集部特選ガイド、野生動物カレンダー、専門家のアドバイス。'
     },
     zh: {
       schemaName: 'Vermilion 奢华旅行指南与深度解析',
@@ -168,8 +160,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       blogBreadcrumb: '旅行指南',
       badge: 'Vermilion 独家旅行指南与深度解析',
       title: '自然探索、秘境探险与南美文化',
-      subtitle: '专为探索厄瓜多尔与加拉帕戈斯群岛打造的专业旅行指南、野生动物日历及资深向导建议。',
-      loading: '正在加载旅行指南...'
+      subtitle: '专为探索厄瓜多尔与加拉帕戈斯群岛打造的专业旅行指南、野生动物日历及资深向导建议。'
     }
   };
 
