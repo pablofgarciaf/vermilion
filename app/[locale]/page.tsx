@@ -63,7 +63,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           alt: 'Vermilion Routes - Bespoke Nature Journeys',
         },
       ],
-      locale,
+      locale: {
+        es: 'es_LA',
+        en: 'en_US',
+        fr: 'fr_FR',
+        de: 'de_DE',
+        it: 'it_IT',
+        pt: 'pt_BR',
+        ja: 'ja_JP',
+        zh: 'zh_CN',
+      }[locale] || 'en_US',
       type: 'website',
     },
     twitter: {

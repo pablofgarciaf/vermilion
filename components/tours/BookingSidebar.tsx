@@ -180,9 +180,9 @@ export function BookingSidebar({ tour }: BookingSidebarProps) {
             <span className="text-[10px] uppercase font-bold tracking-widest text-emerald-700 block">
               Direct Travel Specialist
             </span>
-            <h5 className="font-serif font-bold text-sm text-zinc-900">
+            <h4 className="font-serif font-bold text-sm text-zinc-900">
               Byron Ortiz &amp; Expedition Team
-            </h5>
+            </h4>
             <p className="text-[11px] text-zinc-500">Quito &amp; Galápagos Direct Operator</p>
           </div>
         </div>

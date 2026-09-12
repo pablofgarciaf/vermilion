@@ -21,6 +21,39 @@ interface TourItineraryProps {
   tourTitle?: string;
 }
 
+const ITINERARY_PREFIX: Record<string, string> = {
+  es: 'Itinerario:',
+  en: 'Itinerary:',
+  fr: 'Itinéraire:',
+  de: 'Reiseverlauf:',
+  it: 'Itinerario:',
+  pt: 'Roteiro:',
+  ja: '詳細旅程:',
+  zh: '详细行程:',
+};
+
+const DEFAULT_ITINERARY_TITLE: Record<string, string> = {
+  es: 'Itinerario Detallado Día a Día',
+  en: 'Detailed Day-by-Day Itinerary',
+  fr: 'Itinéraire Détaillé Jour par Jour',
+  de: 'Detaillierter Reiseverlauf Tag für Tag',
+  it: 'Itinerario Dettagliato Giorno per Giorno',
+  pt: 'Roteiro Detalhado Dia a Dia',
+  ja: '日別詳細旅程',
+  zh: '每日详细行程',
+};
+
+const ITINERARY_SUBTITLE: Record<string, string> = {
+  es: 'Explora las actividades diarias, logística de transporte y visitas guiadas con naturalistas.',
+  en: 'Explore verbatim daily activities, transport logistics, and naturalist-guided visits.',
+  fr: 'Découvrez le détail des journées, transports et visites guidées avec naturalistes.',
+  de: 'Entdecken Sie tägliche Aktivitäten, Transportlogistik und geführte Natur-Touren.',
+  it: 'Esplora le attività giornaliere, la logistica dei trasporti e le visite guidate con naturalisti.',
+  pt: 'Explore as atividades diárias, logística de transporte e visitas guiadas por naturalistas.',
+  ja: '毎日のアクティビティ、移動ロジスティクス、ナチュラリストガイドによるツアーをご案内します。',
+  zh: '探索每日精彩行程安排、交通后勤以及由专业自然向导带领的尊享体验。',
+};
+
 export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
   const [openDays, setOpenDays] = useState<number[]>([1]); // Day 1 open by default
   const locale = useLocale();
@@ -54,14 +87,12 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
             <Calendar className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
             <span>
               {tourTitle
-                ? (locale === 'es' ? `Itinerario: ${tourTitle.split(' - ')[0].slice(0, 30).trim()}` : `Itinerary: ${tourTitle.split(' - ')[0].slice(0, 30).trim()}`)
-                : (locale === 'es' ? 'Itinerario Detallado Día a Día' : 'Detailed Day-by-Day Itinerary')}
+                ? `${ITINERARY_PREFIX[locale] || 'Itinerary:'} ${tourTitle.split(' - ')[0].split(':')[0].trim()}`
+                : (DEFAULT_ITINERARY_TITLE[locale] || 'Detailed Day-by-Day Itinerary')}
             </span>
           </h2>
           <p className="text-xs text-stone-500 dark:text-stone-400">
-            {locale === 'es'
-              ? 'Explora las actividades diarias, logística de transporte y visitas guiadas con naturalistas.'
-              : 'Explore verbatim daily activities, transport logistics, and naturalist-guided visits.'}
+            {ITINERARY_SUBTITLE[locale] || ITINERARY_SUBTITLE['en']}
           </p>
         </div>
 

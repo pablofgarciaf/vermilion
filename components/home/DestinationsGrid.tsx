@@ -58,13 +58,24 @@ const FROM_LABELS: Record<string, string> = {
   zh: '起价',
 };
 
+const JOURNEYS_LABELS: Record<string, string> = {
+  en: 'Tours',
+  es: 'Rutas',
+  fr: 'Circuits',
+  de: 'Touren',
+  it: 'Tour',
+  pt: 'Roteiros',
+  ja: 'ツアー',
+  zh: '条路线',
+};
+
 export function DestinationsGrid() {
   const destinations = mockDestinations;
   const t = useTranslations('destinations');
-  const tTour = useTranslations('tours');
   const locale = useLocale();
 
   const fromText = FROM_LABELS[locale] || 'From';
+  const journeysText = JOURNEYS_LABELS[locale] || 'Tours';
 
   const [activeDestId, setActiveDestId] = useState<string>('all');
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -79,17 +90,62 @@ export function DestinationsGrid() {
   });
 
   const stepRef = useRef<number>(0);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const visibleMobileCardIdRef = useRef<string>('ecuador');
 
-  // Staggered interval: alternates one destination card every 2.4 seconds
+  // Fallback scroll listener to detect visible card on mobile
+  const handleScroll = useCallback(() => {
+    const el = scrollContainerRef.current;
+    if (!el || (typeof window !== 'undefined' && window.innerWidth >= 768)) return;
+    const cardWidth = 300;
+    const scrollIndex = Math.round(el.scrollLeft / cardWidth);
+    const cardOrder = ['ecuador', 'galapagos', 'combined', 'full-day'];
+    const activeId = cardOrder[Math.max(0, Math.min(scrollIndex, cardOrder.length - 1))];
+    if (activeId) visibleMobileCardIdRef.current = activeId;
+  }, []);
+
+  // IntersectionObserver to accurately track the card in mobile viewport
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            visibleMobileCardIdRef.current = entry.target.id;
+          }
+        });
+      },
+      { root: scrollContainerRef.current, threshold: 0.5 }
+    );
+
+    destinations.forEach((d) => {
+      const el = cardRefs.current[d.id];
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [destinations]);
+
+  // Rotates cards: on mobile, ONLY rotates the currently visible card; on desktop, staggers through all 4
   useEffect(() => {
     if (!destinations || destinations.length === 0 || isBotOrCrawler()) return;
 
     const interval = setInterval(() => {
       if (document.hidden) return;
 
-      const cardOrder = ['ecuador', 'galapagos', 'combined', 'full-day'];
-      const targetCardId = cardOrder[stepRef.current % cardOrder.length];
-      stepRef.current += 1;
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+      let targetCardId = 'ecuador';
+
+      if (isMobile) {
+        // En móvil: únicamente rota la foto de la tarjeta visible en pantalla
+        targetCardId = visibleMobileCardIdRef.current || 'ecuador';
+      } else {
+        // En desktop: rotación escalonada continua entre las 4 tarjetas
+        const cardOrder = ['ecuador', 'galapagos', 'combined', 'full-day'];
+        targetCardId = cardOrder[stepRef.current % cardOrder.length];
+        stepRef.current += 1;
+      }
 
       setCardImageIndices((prev) => {
         const pool = DESTINATION_IMAGE_POOLS[targetCardId] || [];
@@ -149,7 +205,11 @@ export function DestinationsGrid() {
       </div>
 
       {/* ── Visual Destinations 4-Grid Stage with Staggered Dynamic Images ── */}
-      <div className="flex md:grid md:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
+      <div
+        ref={scrollContainerRef}
+        onScroll={handleScroll}
+        className="flex md:grid md:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0"
+      >
         {destinations.map((dest, destIndex) => {
           const pool = DESTINATION_IMAGE_POOLS[dest.id] || [dest.imageUrl];
           const activeIndex = cardImageIndices[dest.id] ?? 0;
@@ -158,6 +218,9 @@ export function DestinationsGrid() {
             <div
               key={dest.id}
               id={dest.id.toLowerCase()}
+              ref={(el) => {
+                if (el) cardRefs.current[dest.id] = el;
+              }}
               onClick={() => handleDestinationClick(dest.id)}
               className="group relative h-[420px] sm:h-[440px] md:h-[460px] w-[290px] xs:w-[320px] md:w-auto shrink-0 snap-center rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl border border-zinc-200/80 dark:border-zinc-800/80 hover:border-emerald-500/80 transition-all duration-500 flex flex-col justify-between p-5 sm:p-6 cursor-pointer hover:-translate-y-1 bg-zinc-950"
             >
@@ -199,7 +262,7 @@ export function DestinationsGrid() {
               <div className="relative z-10 flex items-center justify-between w-full">
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <span className="text-xs font-semibold uppercase tracking-wider text-emerald-300 bg-emerald-950/80 backdrop-blur-md px-3 py-1 rounded-full border border-emerald-500/30 shadow-sm">
-                    {dest.toursCount} {tTour('journeys')}
+                    {dest.toursCount} {journeysText}
                   </span>
                   <span className="text-[10px] font-bold text-white bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/15 shadow-sm">
                     {fromText} ${(DESTINATION_PRICES[dest.id] || 85).toLocaleString()} <span className="text-[9px] font-normal text-zinc-300">USD</span>

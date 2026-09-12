@@ -42,8 +42,16 @@ export async function generateMetadata({
       title,
       description,
       url: `https://www.vermilionroutes.com/${locale}/auth/affiliates`,
-      siteName: 'Vermilion Routes',
-      locale: locale,
+      locale: {
+        es: 'es_LA',
+        en: 'en_US',
+        fr: 'fr_FR',
+        de: 'de_DE',
+        it: 'it_IT',
+        pt: 'pt_BR',
+        ja: 'ja_JP',
+        zh: 'zh_CN',
+      }[locale] || 'en_US',
       type: 'website',
       images: [
         {

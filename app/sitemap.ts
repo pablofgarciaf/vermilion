@@ -5,6 +5,9 @@ import { BLOG_POSTS } from '@/data/blogData';
 const BASE_URL = 'https://www.vermilionroutes.com';
 const LOCALES = ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'];
 
+const LAST_CATALOG_UPDATE = new Date('2026-09-11T00:00:00.000Z');
+const LAST_LEGAL_UPDATE = new Date('2026-08-15T00:00:00.000Z');
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     '',
@@ -39,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       sitemapEntries.push({
         url: `${BASE_URL}/${locale}${page}`,
-        lastModified: new Date(),
+        lastModified: isLegal ? LAST_LEGAL_UPDATE : LAST_CATALOG_UPDATE,
         changeFrequency: isHome ? 'daily' : isCatalogOrBlog ? 'daily' : isLegal ? 'monthly' : 'weekly',
         priority: isHome ? 1.0 : isCatalogOrBlog ? 0.9 : isLegal ? 0.5 : 0.8,
         alternates: getLanguageAlternates(page),
@@ -53,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of LOCALES) {
       sitemapEntries.push({
         url: `${BASE_URL}/${locale}${tourPath}`,
-        lastModified: new Date(),
+        lastModified: LAST_CATALOG_UPDATE,
         changeFrequency: 'weekly',
         priority: 0.9,
         alternates: getLanguageAlternates(tourPath),

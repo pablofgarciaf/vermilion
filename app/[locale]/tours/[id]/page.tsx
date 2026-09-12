@@ -75,13 +75,17 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
     title = `${rawTitle} Bespoke Tour | Vermilion Routes`;
   }
   if (title.length > 60) {
-    title = `${rawTitle.slice(0, 60 - 19).trim()} | Vermilion Routes`;
+    const maxLen = 60 - 19;
+    const lastSpace = rawTitle.lastIndexOf(' ', maxLen);
+    const safeTitle = lastSpace > 20 ? rawTitle.slice(0, lastSpace).trim() : rawTitle.slice(0, maxLen).trim();
+    title = `${safeTitle} | Vermilion Routes`;
   }
 
   const rawDesc = getLocalizedText(tour.description || tour.shortDescription, resolvedParams.locale) || '';
   let description = rawDesc.replace(/\s+/g, ' ').trim();
   if (description.length > 155) {
-    description = description.slice(0, 152).trim() + '...';
+    const lastSpace = description.lastIndexOf(' ', 150);
+    description = lastSpace > 100 ? description.slice(0, lastSpace).trim() + '.' : description.slice(0, 150).trim() + '.';
   } else if (resolvedParams.locale === 'ja' || resolvedParams.locale === 'zh') {
     if (description.length < 70) {
       const cta = resolvedParams.locale === 'ja'
@@ -149,6 +153,28 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
   };
 }
 
+const OVERVIEW_PREFIX: Record<string, string> = {
+  es: 'Resumen:',
+  en: 'Overview:',
+  fr: 'Aperçu:',
+  de: 'Überblick:',
+  it: 'Panoramica:',
+  pt: 'Visão Geral:',
+  ja: '概要:',
+  zh: '行程概览:',
+};
+
+const HIGHLIGHTS_PREFIX: Record<string, string> = {
+  es: 'Puntos Clave:',
+  en: 'Highlights:',
+  fr: 'Points Forts:',
+  de: 'Höhepunkte:',
+  it: 'Punti Chiave:',
+  pt: 'Destaques:',
+  ja: 'ハイライト:',
+  zh: '行程亮点:',
+};
+
 export default async function TourDetailPage({ params }: TourDetailPageProps) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
@@ -178,6 +204,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
   }
 
   const title = getLocalizedText(tour.title, locale);
+  const shortTourName = title.split(' - ')[0].split(':')[0].trim();
   const dest = getLocalizedText(tour.destination, locale);
   const duration = getLocalizedText(tour.duration, locale);
   const category = getLocalizedText(tour.category, locale);
@@ -291,7 +318,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
               </div>
 
               <h2 className="font-serif font-bold text-2xl text-zinc-900 dark:text-white">
-                {locale === 'es' ? `Resumen: ${title.split(' - ')[0].slice(0, 30).trim()}` : `Overview: ${title.split(' - ')[0].slice(0, 30).trim()}`}
+                {(OVERVIEW_PREFIX[locale] || 'Overview:') + ' ' + shortTourName}
               </h2>
               <p className="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:text-emerald-800 dark:first-letter:text-emerald-400 first-letter:leading-none">
                 {getLocalizedText(tour.description, locale)}
@@ -311,7 +338,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
             <div className="bg-emerald-950/5 dark:bg-emerald-950/20 p-6 sm:p-8 rounded-3xl border border-emerald-200/60 dark:border-emerald-800/40 space-y-4">
               <h2 className="font-serif font-bold text-xl text-emerald-950 dark:text-emerald-300 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                <span>{locale === 'es' ? `Puntos Clave: ${title.split(' - ')[0].slice(0, 30).trim()}` : `Highlights: ${title.split(' - ')[0].slice(0, 30).trim()}`}</span>
+                <span>{(HIGHLIGHTS_PREFIX[locale] || 'Highlights:') + ' ' + shortTourName}</span>
               </h2>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-900 dark:text-emerald-200">
                 {tour.highlights.map((item, idx) => (
@@ -328,7 +355,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
 
           {/* Day by Day Itinerary Accordion */}
           {tour.itinerary && tour.itinerary.length > 0 && (
-            <TourItinerary itinerary={tour.itinerary} tourTitle={title} />
+            <TourItinerary itinerary={tour.itinerary} tourTitle={shortTourName} />
           )}
 
           {/* Inclusions & Exclusions */}

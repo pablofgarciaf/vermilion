@@ -88,9 +88,17 @@ export function TourCarousel({ tours }: TourCarouselProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
   const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const check = () => setIsMobileDevice(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const rawFiltered =
     activeFilter === 'all'
@@ -261,7 +269,7 @@ export function TourCarousel({ tours }: TourCarouselProps) {
             - h-[510px]: Alto total del contenedor del carrusel */}
         {/* Desktop View */}
         {total <= 3 ? (
-          <div className="hidden md:flex flex-row justify-center items-center gap-6 w-full py-4 min-h-[490px]">
+          <div aria-hidden={isMobileDevice ? 'true' : undefined} className="hidden md:flex flex-row justify-center items-center gap-6 w-full py-4 min-h-[490px]">
             {filteredTours.map((tour) => (
               <div key={tour.id} className="w-[320px] lg:w-[340px]">
                 <TourCard
@@ -272,7 +280,7 @@ export function TourCarousel({ tours }: TourCarouselProps) {
             ))}
           </div>
         ) : (
-          <div className="hidden md:block relative w-full h-[510px] perspective-[1400px]">
+          <div aria-hidden={isMobileDevice ? 'true' : undefined} className="hidden md:block relative w-full h-[510px] perspective-[1400px]">
             {filteredTours.map((tour, idx) => {
               let diff = idx - currentIndex;
               if (diff > total / 2) diff -= total;
@@ -318,7 +326,7 @@ export function TourCarousel({ tours }: TourCarouselProps) {
         )}
 
         {/* Mobile: single card with CSS slide */}
-        <div className="md:hidden relative w-full max-w-[340px] mx-auto h-[490px]">
+        <div aria-hidden={!isMobileDevice ? 'true' : undefined} className="md:hidden relative w-full max-w-[340px] mx-auto h-[490px]">
           {filteredTours.map((tour, idx) => {
             const isCurrent = idx === currentIndex;
             const isPrev = idx === prevIdx;

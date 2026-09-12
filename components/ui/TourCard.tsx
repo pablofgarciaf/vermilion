@@ -6,8 +6,59 @@ import Link from 'next/link';
 import { Tour } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { Clock, MapPin, Star, ArrowRight, Sparkles } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
+
+const CARD_I18N: Record<string, { bestseller: string; from: string; person: string; view: string }> = {
+  es: {
+    bestseller: 'Más Popular',
+    from: 'Desde',
+    person: '/ persona',
+    view: 'Ver Detalles',
+  },
+  en: {
+    bestseller: 'Best Seller',
+    from: 'From',
+    person: '/ person',
+    view: 'View Details',
+  },
+  fr: {
+    bestseller: 'Populaire',
+    from: 'À partir de',
+    person: '/ personne',
+    view: 'Voir Détails',
+  },
+  de: {
+    bestseller: 'Bestseller',
+    from: 'Ab',
+    person: '/ Person',
+    view: 'Details Anzeigen',
+  },
+  it: {
+    bestseller: 'Più Venduto',
+    from: 'Da',
+    person: '/ persona',
+    view: 'Dettagli',
+  },
+  pt: {
+    bestseller: 'Mais Popular',
+    from: 'A partir de',
+    person: '/ pessoa',
+    view: 'Ver Detalhes',
+  },
+  ja: {
+    bestseller: '人気ツアー',
+    from: '料金',
+    person: '/ 名様',
+    view: '詳細を見る',
+  },
+  zh: {
+    bestseller: '畅销优选',
+    from: '起价',
+    person: '/ 人',
+    view: '查看详情',
+  },
+};
 
 interface TourCardProps {
   tour: Tour;
@@ -17,7 +68,7 @@ interface TourCardProps {
 
 export function TourCard({ tour, className = '', priority = false }: TourCardProps) {
   const locale = useLocale();
-  const t = useTranslations('tours');
+  const cardTexts = CARD_I18N[locale] || CARD_I18N['en'];
 
   const rawTitle = getLocalizedText(tour.title, locale);
   // Clean card title: remove redundant duration suffix (e.g. " – 8 DÍAS / 7 NOCHES")
@@ -72,7 +123,7 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
         {tour.isPopular && (
           <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-zinc-950/95 text-white shadow-sm border border-emerald-400/60">
             <Sparkles className="w-3 h-3 text-emerald-400" />
-            <span>{t('card.bestseller') || 'Best Seller'}</span>
+            <span>{cardTexts.bestseller}</span>
           </span>
         )}
       </div>
@@ -104,20 +155,20 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
         <div className="pt-2 flex items-end justify-between border-t border-white/15">
           <div>
             <span className="text-[10px] uppercase tracking-wider font-semibold text-white/70 block">
-              {t('card.from') || 'From'}
+              {cardTexts.from}
             </span>
             <div className="flex items-baseline gap-1">
               <span className="font-serif font-bold text-2xl text-white drop-shadow-sm">
                 ${tour.price.toLocaleString('en-US')}
               </span>
               <span className="text-xs text-white/70 font-normal">
-                {t('card.person') || '/ person'}
+                {cardTexts.person}
               </span>
             </div>
           </div>
 
           <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold shadow-lg shadow-emerald-950/60 transition-all group-hover:scale-105 border border-emerald-400/40">
-            <span>{t('card.view') || 'View Details'}</span>
+            <span>{cardTexts.view}</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </div>
         </div>
