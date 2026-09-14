@@ -175,36 +175,36 @@ const BOOKING_CAROUSEL_I18N: Record<string, {
 }> = {
   es: {
     sectionTitle: 'Explora y Añade Otras Expediciones Recomendadas',
-    sectionDesc: 'Desliza para descubrir más rutas a medida para combinar en tu viaje',
+    sectionDesc: 'Desliza para descubrir más rutas a medida para combinar o sustituir en tu viaje',
     setPrimary: 'Elegir como Principal',
     addExtension: '+ Añadir Extensión',
     added: '✓ Añadido',
     from: 'Desde',
     perTraveler: 'por persona',
     viewAll: 'Explorar todos los tours del catálogo ↗',
-    viewDetails: 'Ver detalles del tour',
+    viewDetails: 'Ver itinerario',
   },
   en: {
     sectionTitle: 'Explore & Add Other Recommended Expeditions',
-    sectionDesc: 'Swipe to discover more bespoke routes to combine in your journey',
+    sectionDesc: 'Swipe to discover more bespoke routes to combine or substitute in your journey',
     setPrimary: 'Set as Primary',
     addExtension: '+ Add Extension',
     added: '✓ Added',
     from: 'From',
     perTraveler: 'per traveler',
     viewAll: 'Explore full tour catalog ↗',
-    viewDetails: 'View tour details',
+    viewDetails: 'View itinerary',
   },
   fr: {
     sectionTitle: 'Explorez et Ajoutez d’Autres Expéditions Recommandées',
-    sectionDesc: 'Faites défiler pour découvrir d’autres circuits sur mesure à combiner',
+    sectionDesc: 'Faites défiler pour découvrir d’autres circuits sur mesure à combiner ou remplacer',
     setPrimary: 'Choisir comme Principal',
     addExtension: '+ Ajouter en Extension',
     added: '✓ Ajouté',
     from: 'À partir de',
     perTraveler: 'par voyageur',
     viewAll: 'Explorer tout le catalogue de tours ↗',
-    viewDetails: 'Voir les détails du tour',
+    viewDetails: 'Voir l’itinéraire',
   },
   de: {
     sectionTitle: 'Erkunden und Weitere Empfohlene Expeditionen Hinzufügen',
@@ -215,51 +215,51 @@ const BOOKING_CAROUSEL_I18N: Record<string, {
     from: 'Ab',
     perTraveler: 'pro Reisender',
     viewAll: 'Gesamten Reisekatalog ansehen ↗',
-    viewDetails: 'Tour-Details ansehen',
+    viewDetails: 'Reiseroute ansehen',
   },
   it: {
     sectionTitle: 'Esplora e Aggiungi Altre Spedizioni Consigliate',
-    sectionDesc: 'Scorri per scoprire altri itinerari su misura da combinare',
+    sectionDesc: 'Scorri per scoprire altri itinerari su misura da combinare o sostituire',
     setPrimary: 'Scegli come Principale',
     addExtension: '+ Aggiungi Estensione',
     added: '✓ Aggiunto',
     from: 'Da',
     perTraveler: 'a viaggiatore',
     viewAll: 'Esplora tutto il catalogo tour ↗',
-    viewDetails: 'Vedi dettagli del tour',
+    viewDetails: 'Vedi itinerario',
   },
   pt: {
     sectionTitle: 'Explore e Adicione Outras Expedições Recomendadas',
-    sectionDesc: 'Deslize para descobrir mais roteiros sob medida para combinar',
+    sectionDesc: 'Deslize para descobrir mais roteiros sob medida para combinar ou substituir',
     setPrimary: 'Escolher como Principal',
     addExtension: '+ Adicionar Extensão',
     added: '✓ Adicionado',
     from: 'A partir de',
     perTraveler: 'por viajante',
     viewAll: 'Explorar catálogo completo de tours ↗',
-    viewDetails: 'Ver detalhes do tour',
+    viewDetails: 'Ver itinerário',
   },
   ja: {
     sectionTitle: '他のおすすめ遠征ツアーを探して追加する',
-    sectionDesc: 'スワイプして、旅に組み合わせることができる多彩なルートをご覧ください',
+    sectionDesc: 'スワイプして、旅に組み合わせる・変更できる多彩なルートをご覧ください',
     setPrimary: 'メインツアーに指定',
     addExtension: '+ エクステンションを追加',
     added: '✓ 追加済み',
     from: '料金',
     perTraveler: 'お一人様あたり',
     viewAll: '全ツアーカタログを見る ↗',
-    viewDetails: 'ツアー詳細を見る',
+    viewDetails: '日程を見る',
   },
   zh: {
     sectionTitle: '探索并添加其他精选推荐探险行程',
-    sectionDesc: '左右滑动以发现更多可自由组合的专属定制路线',
+    sectionDesc: '左右滑动以发现更多可自由组合或替换的专属定制路线',
     setPrimary: '设为主探险行程',
     addExtension: '+ 添加为延伸行程',
     added: '✓ 已添加',
     from: '起价',
     perTraveler: '每位旅客',
     viewAll: '浏览全部探险行程目录 ↗',
-    viewDetails: '查看行程详情',
+    viewDetails: '查看行程',
   },
 };
 
@@ -819,7 +819,6 @@ export function BookingWizard() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showFullCatalog, setShowFullCatalog] = useState(false);
   const [isTourModalOpen, setIsTourModalOpen] = useState(false);
-  const [previewTour, setPreviewTour] = useState<Tour | null>(null);
   const [tourSearchQuery, setTourSearchQuery] = useState('');
   const [swappedTourNotice, setSwappedTourNotice] = useState<string | null>(null);
 
@@ -1101,15 +1100,15 @@ export function BookingWizard() {
 
               {/* Tarjeta Principal Seleccionada */}
               {primaryTour && (
-                <div className="border-2 border-emerald-500 bg-gradient-to-br from-emerald-50/90 to-teal-50/40 dark:from-emerald-950/40 dark:to-zinc-900/80 rounded-3xl p-5 sm:p-6 shadow-lg ring-1 ring-emerald-500/30 space-y-4">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-                    <div className="w-full sm:w-44 h-44 sm:h-36 rounded-2xl overflow-hidden shrink-0 border border-emerald-200 dark:border-emerald-800 shadow-md relative">
+                <div className="border-2 border-emerald-500 bg-gradient-to-br from-emerald-50/90 to-teal-50/40 dark:from-emerald-950/40 dark:to-zinc-900/80 rounded-2xl p-4 sm:p-5 shadow-md ring-1 ring-emerald-500/30 space-y-4">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                    <div className="w-full sm:w-28 h-32 sm:h-24 rounded-xl overflow-hidden shrink-0 border border-emerald-200 dark:border-emerald-800 shadow-xs relative">
                       <img
                         src={primaryTour.imageUrl}
                         alt={getLocalizedText(primaryTour.title, locale)}
-                        width={176}
-                        height={144}
-                        className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        width={112}
+                        height={96}
+                        className="w-full h-full object-cover"
                       />
                       <span className="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md bg-emerald-600 text-white font-bold text-[9px] uppercase tracking-wider shadow-sm">
                         {w.primaryBadge}
@@ -1125,10 +1124,10 @@ export function BookingWizard() {
                           {getLocalizedText(primaryTour.duration, locale)}
                         </span>
                       </div>
-                      <h4 className="font-bold text-lg sm:text-xl text-zinc-900 dark:text-white leading-snug">
+                      <h4 className="font-bold text-base sm:text-lg text-zinc-900 dark:text-white leading-snug">
                         {getLocalizedText(primaryTour.title, locale)}
                       </h4>
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1.5 line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 line-clamp-2">
                         {getLocalizedText(primaryTour.description, locale)}
                       </p>
                     </div>
@@ -1141,12 +1140,12 @@ export function BookingWizard() {
                     </div>
                   </div>
 
-                  <div className="pt-3.5 border-t border-emerald-200/60 dark:border-emerald-800/40 flex flex-wrap items-center justify-between gap-3">
+                  <div className="pt-3 border-t border-emerald-200/60 dark:border-emerald-800/40 flex flex-wrap items-center justify-between gap-2.5">
                     <a
                       href={`/${locale}/tours/${primaryTour.id}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1.5"
+                      className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1"
                     >
                       <span>{w.viewFullItinerary}</span>
                       <ExternalLink className="w-3.5 h-3.5" />
@@ -1156,7 +1155,7 @@ export function BookingWizard() {
                       <button
                         type="button"
                         onClick={() => setIsTourModalOpen(true)}
-                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
                       >
                         <ArrowLeftRight className="w-3.5 h-3.5" />
                         <span>{w.changeTour}</span>
@@ -1172,6 +1171,161 @@ export function BookingWizard() {
                         <span>{w.exploreAllTours}</span>
                       </a>
                     </div>
+                  </div>
+                </div>
+              )}
+
+              {/* CARRUSEL MULTILINGÜE DE TODAS LAS EXPEDICIONES RECOMENDADAS */}
+              {candidateTours.length > 0 && (
+                <div className="mt-6 space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-800 dark:text-zinc-200">
+                          {ci18n.sectionTitle}
+                        </h4>
+                        <p className="text-[11px] text-zinc-500 dark:text-zinc-400">
+                          {ci18n.sectionDesc}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Botones de navegación del carrusel */}
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => scrollRecommendations('left')}
+                        aria-label="Previous tour"
+                        className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-emerald-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => scrollRecommendations('right')}
+                        aria-label="Next tour"
+                        className="w-8 h-8 rounded-full border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-emerald-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all shadow-xs cursor-pointer active:scale-95"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Contenedor del Carrusel Deslizable */}
+                  <div
+                    ref={carouselScrollRef}
+                    className="flex gap-3.5 overflow-x-auto scrollbar-none snap-x snap-mandatory py-2 px-0.5"
+                    style={{ scrollBehavior: 'smooth' }}
+                  >
+                    {candidateTours.map((sugTour) => {
+                      const isAdded = selectedTours.some(st => st.id === sugTour.id);
+                      const tourTitle = getLocalizedText(sugTour.title, locale);
+                      const tourDesc = getLocalizedText(sugTour.description, locale);
+                      const tourDuration = getLocalizedText(sugTour.duration, locale);
+                      const badgeText = sugTour.id.includes('galapagos')
+                        ? '🐢 Galápagos'
+                        : sugTour.id.includes('volcano') || sugTour.id.includes('andes')
+                        ? '🏔️ Andes'
+                        : sugTour.id.includes('amazon')
+                        ? '🌿 Amazonía'
+                        : '✨ Combinado';
+
+                      return (
+                        <div
+                          key={sugTour.id}
+                          className={`w-[290px] sm:w-[320px] shrink-0 snap-start rounded-2xl p-4 border transition-all flex flex-col justify-between gap-3 shadow-sm ${
+                            isAdded
+                              ? 'border-emerald-500 bg-emerald-50/85 dark:bg-emerald-950/30 ring-1 ring-emerald-500'
+                              : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/70 hover:border-emerald-400/80 hover:shadow-md'
+                          }`}
+                        >
+                          <div className="space-y-2.5">
+                            {/* Header tarjeta */}
+                            <div className="flex items-center justify-between gap-2">
+                              <span className="px-2 py-0.5 rounded-md bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 font-bold text-[10px] tracking-tight">
+                                {badgeText}
+                              </span>
+                              <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
+                                {tourDuration}
+                              </span>
+                            </div>
+
+                            {/* Foto y Título */}
+                            <div className="flex items-start gap-3">
+                              <img
+                                src={sugTour.imageUrl}
+                                alt={tourTitle}
+                                width={68}
+                                height={68}
+                                className="w-16 h-16 rounded-xl object-cover shrink-0 border border-zinc-200 dark:border-zinc-700 shadow-xs"
+                              />
+                              <div className="min-w-0 flex-1">
+                                <h5 className="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white line-clamp-1 leading-snug">
+                                  {tourTitle}
+                                </h5>
+                                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2 mt-0.5">
+                                  {tourDesc}
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* Precio */}
+                            <div className="pt-1 flex items-baseline justify-between">
+                              <span className="text-[11px] text-zinc-400">
+                                {ci18n.from}:
+                              </span>
+                              <span className="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">
+                                ${sugTour.price.toLocaleString('en-US')} USD <span className="text-[10px] font-normal text-zinc-400">{ci18n.perTraveler}</span>
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Acciones */}
+                          <div className="pt-2.5 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between gap-2">
+                            <button
+                              type="button"
+                              onClick={() => replacePrimaryTour(sugTour)}
+                              className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer"
+                            >
+                              {ci18n.setPrimary}
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => toggleTour(sugTour)}
+                              className={`py-1.5 px-3 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
+                                isAdded
+                                  ? 'bg-emerald-600 text-white shadow-sm'
+                                  : 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:opacity-90'
+                              }`}
+                            >
+                              {isAdded ? (
+                                <>
+                                  <CheckCircle2 className="w-3.5 h-3.5" />
+                                  <span>{ci18n.added}</span>
+                                </>
+                              ) : (
+                                <span>{ci18n.addExtension}</span>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Botón para explorar todos los tours */}
+                  <div className="pt-2 flex justify-center">
+                    <a
+                      href={`/${locale}/tours`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 text-zinc-700 dark:text-zinc-200 hover:text-emerald-700 dark:hover:text-emerald-400 text-xs font-bold transition-all border border-zinc-200 dark:border-zinc-700 hover:border-emerald-300"
+                    >
+                      <Compass className="w-4 h-4 text-emerald-600" />
+                      <span>{ci18n.viewAll}</span>
+                    </a>
                   </div>
                 </div>
               )}
@@ -1304,61 +1458,58 @@ export function BookingWizard() {
                 </div>
               </button>
 
-                {/* Contenedor del Carrusel Deslizable */}
-                <div
-                  ref={carouselScrollRef}
-                  className="flex gap-4 overflow-x-auto scrollbar-none snap-x snap-mandatory py-2 px-0.5"
-                  style={{ scrollBehavior: 'smooth' }}
-                >
-                  {candidateTours.map((sugTour) => {
-                    const isAdded = selectedTours.some(st => st.id === sugTour.id);
-                    const tourTitle = getLocalizedText(sugTour.title, locale);
-                    const tourDesc = getLocalizedText(sugTour.description, locale);
-                    const tourDuration = getLocalizedText(sugTour.duration, locale);
-                    const badgeText = sugTour.id.includes('galapagos')
-                      ? '🐢 Galápagos'
-                      : sugTour.id.includes('volcano') || sugTour.id.includes('andes')
-                      ? '🏔️ Andes'
-                      : sugTour.id.includes('amazon')
-                      ? '🌿 Amazonía'
-                      : '✨ Combinado';
-
-                    return (
-                      <div
-                        key={sugTour.id}
-                        className={`w-[290px] sm:w-[320px] shrink-0 snap-start rounded-2xl p-4 border transition-all flex flex-col justify-between gap-3.5 shadow-sm ${
-                          isAdded
-                            ? 'border-emerald-500 bg-emerald-50/85 dark:bg-emerald-950/30 ring-1 ring-emerald-500'
-                            : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/70 hover:border-emerald-400/80 hover:shadow-md'
+              {showFullCatalog && (
+                <div className="mt-4 space-y-4 animate-fadeIn">
+                  <div className="hidden md:flex flex-wrap items-center gap-2 mb-2">
+                    {CATEGORIES.map((cat) => (
+                      <button
+                        key={cat.id}
+                        type="button"
+                        onClick={() => setActiveFilter(cat.id)}
+                        className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer border ${
+                          activeFilter === cat.id
+                            ? 'bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                            : 'bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border-zinc-200 dark:border-zinc-700'
                         }`}
                       >
-                        <div className="space-y-2.5">
-                          {/* Header tarjeta */}
-                          <div className="flex items-center justify-between gap-2">
-                            <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 font-bold text-[10px] tracking-tight">
-                              {badgeText}
-                            </span>
-                            <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
-                              {tourDuration}
-                            </span>
-                          </div>
+                        {cat.label}
+                      </button>
+                    ))}
+                  </div>
 
-                          {/* Foto y Título */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {filteredTours.map((t) => {
+                      const isSelected = selectedTours.some(st => st.id === t.id);
+                      return (
+                        <div
+                          key={t.id}
+                          className={`border rounded-2xl p-3.5 transition-all flex flex-col justify-between gap-2.5 ${
+                            isSelected
+                              ? 'border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/30 shadow-md ring-1 ring-emerald-500'
+                              : 'border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60'
+                          }`}
+                        >
                           <div className="flex items-start gap-3">
                             <img
-                              src={sugTour.imageUrl}
-                              alt={tourTitle}
-                              width={72}
-                              height={72}
-                              className="w-18 h-18 rounded-xl object-cover shrink-0 border border-zinc-200 dark:border-zinc-700 shadow-xs"
+                              src={t.imageUrl}
+                              alt={getLocalizedText(t.title, locale)}
+                              width={56}
+                              height={56}
+                              className="w-14 h-14 rounded-xl object-cover shrink-0 border border-zinc-200 dark:border-zinc-800"
                             />
-                            <div className="min-w-0 flex-1">
-                              <h5 className="font-bold text-xs sm:text-sm text-zinc-900 dark:text-white line-clamp-1 leading-snug">
-                                {tourTitle}
-                              </h5>
-                              <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2 mt-0.5">
-                                {tourDesc}
-                              </p>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-bold text-xs text-zinc-900 dark:text-white line-clamp-1">
+                                {getLocalizedText(t.title, locale)}
+                              </h4>
+                              <div className="flex items-center gap-2 mt-1">
+                                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                                  ${t.price.toLocaleString('en-US')} USD
+                                </span>
+                                <span className="text-[10px] text-zinc-400">&bull;</span>
+                                <span className="text-[10px] text-zinc-500">
+                                  {getLocalizedText(t.duration, locale)}
+                                </span>
+                              </div>
                             </div>
                           </div>
 
@@ -1383,43 +1534,12 @@ export function BookingWizard() {
                             </button>
                           </div>
                         </div>
-
-                        {/* Acciones */}
-                        <div className="pt-2.5 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-between gap-2">
-                          <button
-                            type="button"
-                            onClick={() => setPreviewTour(sugTour)}
-                            className="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1 cursor-pointer"
-                          >
-                            <span>{ci18n.viewDetails}</span>
-                            <ExternalLink className="w-3 h-3" />
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => toggleTour(sugTour)}
-                            className={`py-1.5 px-3 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 ${
-                              isAdded
-                                ? 'bg-emerald-600 text-white shadow-sm'
-                                : 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:opacity-90'
-                            }`}
-                          >
-                            {isAdded ? (
-                              <>
-                                <CheckCircle2 className="w-3.5 h-3.5" />
-                                <span>{ci18n.added}</span>
-                              </>
-                            ) : (
-                              <span>{ci18n.addExtension}</span>
-                            )}
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
 
@@ -1576,19 +1696,22 @@ export function BookingWizard() {
                           ) : (
                             <button
                               type="button"
-                              onClick={() => setPreviewTour(t)}
-                              className="text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:underline flex items-center gap-1 cursor-pointer"
+                              onClick={() => {
+                                replacePrimaryTour(t);
+                                setIsTourModalOpen(false);
+                              }}
+                              className="py-1.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-all shadow-sm active:scale-95 cursor-pointer"
                             >
                               {w.setAsPrimary}
                             </button>
-                          </div>
+                          )}
 
                           <button
                             type="button"
                             onClick={() => toggleTour(t)}
                             className={`py-1.5 px-3 rounded-xl font-bold text-xs transition-all cursor-pointer ${
                               isAdded
-                                ? 'bg-emerald-600 text-white shadow-sm'
+                                ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-300'
                                 : 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 hover:opacity-90'
                             }`}
                           >
@@ -1620,128 +1743,6 @@ export function BookingWizard() {
                 className="py-2 px-4 rounded-xl bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-bold text-xs transition-all cursor-pointer"
               >
                 {w.closeModal}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ── MODAL QUICK VIEW: DETALLES DE TOUR SIN PERDER FLUJO DE RESERVA ── */}
-      {previewTour && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fade-in">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
-            {/* Header con imagen banner */}
-            <div className="relative h-48 sm:h-56 w-full overflow-hidden shrink-0 bg-zinc-950">
-              <img
-                src={previewTour.imageUrl}
-                alt={getLocalizedText(previewTour.title, locale)}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
-              
-              <button
-                type="button"
-                onClick={() => setPreviewTour(null)}
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 text-white hover:bg-black/90 flex items-center justify-center transition-all cursor-pointer z-10"
-                aria-label="Cerrar"
-              >
-                <X className="w-4 h-4" />
-              </button>
-
-              <div className="absolute bottom-3 left-4 right-4 text-white space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="px-2 py-0.5 rounded-md bg-emerald-600 font-bold text-[10px] uppercase tracking-wider">
-                    {getLocalizedText(previewTour.duration, locale)}
-                  </span>
-                  <span className="text-xs text-amber-400 font-semibold">
-                    ★ 5.0 (35+ reseñas)
-                  </span>
-                </div>
-                <h3 className="font-serif text-lg sm:text-2xl font-bold line-clamp-2 leading-snug">
-                  {getLocalizedText(previewTour.title, locale)}
-                </h3>
-              </div>
-            </div>
-
-            {/* Contenido scrolleable */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-4 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm">
-              <div>
-                <h4 className="font-bold text-zinc-900 dark:text-white uppercase tracking-wider text-xs mb-1.5">
-                  {isEs ? 'Resumen de la Experiencia' : 'Experience Summary'}
-                </h4>
-                <p className="leading-relaxed text-zinc-600 dark:text-zinc-400">
-                  {getLocalizedText(previewTour.description, locale)}
-                </p>
-              </div>
-
-              {previewTour.highlights && previewTour.highlights.length > 0 && (
-                <div>
-                  <h4 className="font-bold text-zinc-900 dark:text-white uppercase tracking-wider text-xs mb-2">
-                    {isEs ? 'Puntos Destacados' : 'Key Highlights'}
-                  </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {previewTour.highlights.map((hl, i) => (
-                      <div key={i} className="flex items-center gap-2 p-2 rounded-xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-100 dark:border-zinc-800">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                        <span className="text-xs">{getLocalizedText(hl, locale)}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Precio */}
-              <div className="p-3.5 rounded-2xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 flex items-center justify-between">
-                <div>
-                  <span className="text-[11px] text-zinc-500 uppercase tracking-wider block">
-                    {isEs ? 'Inversión por Persona' : 'Price per Person'}
-                  </span>
-                  <span className="text-xl font-extrabold text-emerald-700 dark:text-emerald-400">
-                    ${previewTour.price.toLocaleString('en-US')} USD
-                  </span>
-                </div>
-                <a
-                  href={`/${locale}/tours/${previewTour.id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 hover:text-emerald-600 font-bold text-xs border border-zinc-200 dark:border-zinc-700 transition-all"
-                >
-                  <span>{isEs ? 'Abrir ficha completa ↗' : 'Open full tour page ↗'}</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Footer de acción */}
-            <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 flex items-center justify-between gap-3">
-              <button
-                type="button"
-                onClick={() => setPreviewTour(null)}
-                className="py-2.5 px-4 rounded-xl bg-zinc-200 hover:bg-zinc-300 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-800 dark:text-zinc-200 font-bold text-xs transition-all cursor-pointer"
-              >
-                {isEs ? 'Cerrar' : 'Close'}
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  toggleTour(previewTour);
-                  setPreviewTour(null);
-                }}
-                className={`py-2.5 px-5 rounded-xl font-bold text-xs transition-all flex items-center gap-2 cursor-pointer shadow-md ${
-                  selectedTours.some(st => st.id === previewTour.id)
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white'
-                }`}
-              >
-                {selectedTours.some(st => st.id === previewTour.id) ? (
-                  <>
-                    <CheckCircle2 className="w-4 h-4" />
-                    <span>{isEs ? 'Añadido a la Reserva ✓' : 'Added to Booking ✓'}</span>
-                  </>
-                ) : (
-                  <span>{isEs ? '+ Añadir Extensión a mi Reserva' : '+ Add Extension to Booking'}</span>
-                )}
               </button>
             </div>
           </div>

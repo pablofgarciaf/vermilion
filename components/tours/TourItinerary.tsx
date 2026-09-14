@@ -1,23 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { ItineraryDay } from '@/types';
 import {
   Calendar,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   Utensils,
   Hotel,
   Sparkles,
   Compass,
   Bus,
   Footprints,
-  Mountain,
-  Camera,
-  Eye,
-  X
+  Mountain
 } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
@@ -50,14 +44,14 @@ const DEFAULT_ITINERARY_TITLE: Record<string, string> = {
 };
 
 const ITINERARY_SUBTITLE: Record<string, string> = {
-  es: 'Explora las actividades diarias, logística de transporte, visitas guiadas y fotografías de cada destino.',
-  en: 'Explore verbatim daily activities, transport logistics, naturalist-guided visits, and destination photos.',
-  fr: 'Découvrez le détail des journées, transports, visites guidées et photographies de chaque étape.',
-  de: 'Entdecken Sie tägliche Aktivitäten, Transportlogistik, Naturführungen und Fotos jedes Ziels.',
-  it: 'Esplora le attività giornaliere, la logistica dei trasporti, le visite guidate e le foto di ogni tappa.',
-  pt: 'Explore as atividades diárias, logística de transporte, visitas guiadas e fotos de cada destino.',
-  ja: '毎日のアクティビティ、移動ロジスティクス、ナチュラリストガイドによるツアー、現地の写真をご案内します。',
-  zh: '探索每日精彩行程安排、交通后勤、由专业自然向导带领的尊享体验及目的地实景照片。',
+  es: 'Explora las actividades diarias, logística de transporte y visitas guiadas con naturalistas.',
+  en: 'Explore verbatim daily activities, transport logistics, and naturalist-guided visits.',
+  fr: 'Découvrez le détail des journées, transports et visites guidées avec naturalistes.',
+  de: 'Entdecken Sie tägliche Aktivitäten, Transportlogistik und geführte Natur-Touren.',
+  it: 'Esplora le attività giornaliere, la logistica dei trasporti e le visite guidate con naturalisti.',
+  pt: 'Explore as atividades diárias, logística de transporte e visitas guiadas por naturalistas.',
+  ja: '毎日のアクティビティ、移動ロジスティクス、ナチュラリストガイドによるツアーをご案内します。',
+  zh: '探索每日精彩行程安排、交通后勤以及由专业自然向导带领的尊享体验。',
 };
 
 const EXPAND_ALL_TEXT: Record<string, string> = {
@@ -152,9 +146,7 @@ function formatDayBadge(day: number, locale: string): string {
 }
 
 export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
-  // Days start collapsed by default as requested
-  const [openDays, setOpenDays] = useState<number[]>([]);
-  const [selectedPhoto, setSelectedPhoto] = useState<{ src: string; caption: string } | null>(null);
+  const [openDays, setOpenDays] = useState<number[]>([1]); // Day 1 open by default
   const locale = useLocale();
 
   const toggleDay = (day: number) => {
@@ -177,14 +169,12 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
     return null;
   }
 
-  const dayLabel = DAY_PREFIX[locale] || 'Day';
-
   return (
     <div className="space-y-6">
       {/* Header with quick actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-zinc-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-stone-200 dark:border-stone-800">
         <div className="space-y-1">
-          <h2 className="font-serif font-bold text-2xl text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
+          <h2 className="font-serif font-bold text-2xl text-stone-900 dark:text-stone-100 flex items-center gap-2.5">
             <Calendar className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
             <span>
               {tourTitle
@@ -192,22 +182,22 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
                 : (DEFAULT_ITINERARY_TITLE[locale] || 'Detailed Day-by-Day Itinerary')}
             </span>
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+          <p className="text-xs text-stone-500 dark:text-stone-400">
             {ITINERARY_SUBTITLE[locale] || ITINERARY_SUBTITLE['en']}
           </p>
         </div>
 
-        <div className="flex items-center gap-3 text-xs shrink-0">
+        <div className="flex items-center gap-3 text-xs">
           <button
             onClick={expandAll}
-            className="text-emerald-700 dark:text-emerald-400 hover:underline font-semibold cursor-pointer transition-colors px-2 py-1 rounded-lg hover:bg-emerald-50 dark:hover:bg-emerald-950/50"
+            className="text-emerald-700 dark:text-emerald-400 hover:underline font-semibold cursor-pointer transition-colors"
           >
             {EXPAND_ALL_TEXT[locale] || EXPAND_ALL_TEXT['en']}
           </button>
-          <span className="text-zinc-300 dark:text-zinc-700">•</span>
+          <span className="text-stone-300 dark:text-stone-700">•</span>
           <button
             onClick={collapseAll}
-            className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 font-medium cursor-pointer transition-colors px-2 py-1 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800"
+            className="text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 font-medium cursor-pointer transition-colors"
           >
             {COLLAPSE_ALL_TEXT[locale] || COLLAPSE_ALL_TEXT['en']}
           </button>
@@ -215,7 +205,7 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
       </div>
 
       {/* Accordion Days List */}
-      <div className="space-y-4">
+      <div className="space-y-3.5">
         {itinerary.map((item) => {
           const isOpen = openDays.includes(item.day);
           const dayTitle = getLocalizedText(item.title, locale);
@@ -225,68 +215,54 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
           const dayTrans = item.transportation ? getLocalizedText(item.transportation, locale) : '';
           const dayAct = item.activity ? getLocalizedText(item.activity, locale) : '';
           const dayAlt = item.altitude ? getLocalizedText(item.altitude, locale) : '';
-          const dayPhotos = getDayPhotos(item);
 
           const paragraphs = dayDesc.includes('\n')
-            ? dayDesc.split(/\n\s*\n|\r\n\r\n|\n/).map((p) => p.trim()).filter(Boolean)
+            ? dayDesc.split(/\n\s*\n|\r\n\r\n|\n/).map(p => p.trim()).filter(Boolean)
             : [dayDesc];
 
           return (
             <div
               key={item.day}
-              className={`rounded-3xl border transition-all duration-300 overflow-hidden ${
+              className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                 isOpen
-                  ? 'border-emerald-500/50 bg-white dark:bg-zinc-900/95 shadow-xl shadow-emerald-950/5 ring-1 ring-emerald-500/20'
-                  : 'border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40 hover:bg-white dark:hover:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700'
+                  ? 'border-emerald-500/40 bg-white dark:bg-stone-900 shadow-md shadow-emerald-950/5'
+                  : 'border-stone-200/80 dark:border-stone-800 bg-stone-50/50 dark:bg-stone-900/40 hover:bg-white dark:hover:bg-stone-900 hover:border-stone-300 dark:hover:border-stone-700'
               }`}
             >
               {/* Accordion Trigger Header */}
               <button
                 onClick={() => toggleDay(item.day)}
-                className="w-full p-4 sm:p-6 flex items-center justify-between text-left gap-4 cursor-pointer focus:outline-none group"
-                aria-expanded={isOpen}
+                className="w-full p-4 sm:p-5 flex items-center justify-between text-left gap-4 cursor-pointer focus:outline-none group"
               >
-                <div className="flex items-center gap-3.5 sm:gap-5 flex-1 min-w-0">
+                <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
                   {/* Day Badge */}
                   <span
                     className={`shrink-0 px-3 h-11 rounded-2xl font-serif font-bold text-xs sm:text-sm flex items-center justify-center transition-all ${
                       isOpen
-                        ? 'bg-gradient-to-br from-emerald-600 to-teal-700 text-white shadow-emerald-700/25 scale-105 ring-2 ring-emerald-400/40'
-                        : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 group-hover:bg-emerald-50 group-hover:text-emerald-700 dark:group-hover:bg-emerald-950 dark:group-hover:text-emerald-300'
+                        ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25 scale-105'
+                        : 'bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 group-hover:bg-emerald-50 group-hover:text-emerald-700 dark:group-hover:bg-emerald-950 dark:group-hover:text-emerald-300'
                     }`}
                   >
                     {formatDayBadge(item.day, locale)}
                   </span>
 
-                  {/* Title & Micro Highlights */}
-                  <div className="space-y-1.5 min-w-0 flex-1">
-                    <h3 className="font-serif font-semibold text-zinc-900 dark:text-zinc-100 text-base sm:text-lg leading-snug group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+                  {/* Title */}
+                  <div className="space-y-1">
+                    <h3 className="font-semibold text-stone-900 dark:text-stone-100 text-sm sm:text-base leading-snug group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
                       {dayTitle}
                     </h3>
-
-                    <div className="flex flex-wrap items-center gap-2">
-                      {dayMeals && (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200/60 dark:border-emerald-800/40">
-                          <Utensils className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                          {dayMeals}
-                        </span>
-                      )}
-
-                      {dayPhotos.length > 0 && (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800/80 px-2.5 py-0.5 rounded-full">
-                          <Camera className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                          {dayPhotos.length} {dayPhotos.length === 1 ? 'foto' : 'fotos'}
-                        </span>
-                      )}
-                    </div>
+                    {dayMeals && (
+                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-md border border-emerald-200/50 dark:border-emerald-800/40">
+                        <Utensils className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                        {dayMeals}
+                      </span>
+                    )}
                   </div>
                 </div>
 
                 <div
-                  className={`w-9 h-9 rounded-full flex items-center justify-center text-zinc-500 dark:text-zinc-400 transition-all duration-300 shrink-0 ${
-                    isOpen
-                      ? 'rotate-180 bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 shadow-sm'
-                      : 'bg-zinc-100 dark:bg-zinc-800 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700'
+                  className={`w-8 h-8 rounded-full flex items-center justify-center text-stone-500 dark:text-stone-400 transition-transform duration-300 ${
+                    isOpen ? 'rotate-180 bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400' : 'bg-stone-100 dark:bg-stone-800 group-hover:bg-stone-200 dark:group-hover:bg-stone-700'
                   }`}
                 >
                   <ChevronDown className="w-4 h-4" />
@@ -295,49 +271,11 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
 
               {/* Accordion Content Body */}
               {isOpen && (
-                <div className="px-4 pb-6 sm:px-6 sm:pb-8 pt-3 text-sm text-zinc-700 dark:text-zinc-300 border-t border-zinc-100 dark:border-zinc-800/80 space-y-6 animate-in fade-in duration-300">
-                  {/* Multi-Photo Grid for Destinations of that day */}
-                  {dayPhotos.length > 0 && (
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-900 dark:text-emerald-300">
-                        <Camera className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                        <span>Destinos y Paisajes del Día:</span>
-                      </div>
-
-                      <div className={`grid gap-3 ${dayPhotos.length === 1 ? 'grid-cols-1' : dayPhotos.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3'}`}>
-                        {dayPhotos.map((photo, pIdx) => (
-                          <div
-                            key={pIdx}
-                            onClick={() => setSelectedPhoto(photo)}
-                            className="group/photo relative aspect-video rounded-2xl overflow-hidden border border-zinc-200/80 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800 cursor-pointer shadow-sm hover:shadow-md transition-all hover:scale-[1.01]"
-                          >
-                            <Image
-                              src={photo.src}
-                              alt={photo.caption}
-                              fill
-                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                              className="object-cover transition-transform duration-500 group-hover/photo:scale-105"
-                              loading="lazy"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-90 transition-opacity" />
-                            <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-white">
-                              <span className="text-xs font-medium line-clamp-1 drop-shadow-sm">
-                                {photo.caption}
-                              </span>
-                              <div className="w-6 h-6 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center shrink-0 ml-1">
-                                <Eye className="w-3.5 h-3.5 text-white/90" />
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Multi-paragraph description */}
+                <div className="px-4 pb-5 sm:px-5 sm:pb-6 pt-2 text-sm text-stone-700 dark:text-stone-300 border-t border-stone-100 dark:border-stone-800 space-y-4 animate-in fade-in duration-200">
+                  {/* Multi-paragraph descriptions */}
                   <div className="space-y-3 leading-relaxed">
                     {paragraphs.map((p, pIdx) => (
-                      <p key={pIdx} className="text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
+                      <p key={pIdx} className="text-stone-700 dark:text-stone-300 text-sm md:text-base">
                         {p}
                       </p>
                     ))}
@@ -349,12 +287,10 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
                       <span className="text-xs font-bold text-emerald-900 dark:text-emerald-200 uppercase tracking-wider block">
                         {DAY_HIGHLIGHTS_TEXT[locale] || DAY_HIGHLIGHTS_TEXT['en']}
                       </span>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-emerald-950 dark:text-emerald-200 font-medium">
+                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-emerald-900 dark:text-emerald-200 font-medium">
                         {item.highlights.map((hl, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <div className="w-4 h-4 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5 text-[10px]">
-                              ✓
-                            </div>
+                          <li key={i} className="flex items-center gap-2">
+                            <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                             <span>{getLocalizedText(hl, locale)}</span>
                           </li>
                         ))}
@@ -363,30 +299,30 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
                   )}
 
                   {/* Comprehensive Metadata Badges */}
-                  <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-zinc-100 dark:border-zinc-800 text-xs font-medium">
+                  <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-stone-100 dark:border-stone-800 text-xs font-medium">
                     {dayAcc && (
-                      <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-xl border border-zinc-200/80 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200">
+                      <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
                         <Hotel className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                         <span>{STAY_TEXT[locale] || STAY_TEXT['en']} {dayAcc}</span>
                       </div>
                     )}
 
                     {dayTrans && (
-                      <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-xl border border-zinc-200/80 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200">
+                      <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
                         <Bus className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                         <span>{TRANSPORT_TEXT[locale] || TRANSPORT_TEXT['en']} {dayTrans}</span>
                       </div>
                     )}
 
                     {dayAct && (
-                      <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-xl border border-zinc-200/80 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200">
+                      <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
                         <Footprints className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                         <span>{ACTIVITY_TEXT[locale] || ACTIVITY_TEXT['en']} {dayAct}</span>
                       </div>
                     )}
 
                     {dayAlt && (
-                      <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-xl border border-zinc-200/80 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200">
+                      <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
                         <Mountain className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                         <span>{ALTITUDE_TEXT[locale] || ALTITUDE_TEXT['en']} {dayAlt}</span>
                       </div>
@@ -398,39 +334,6 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
           );
         })}
       </div>
-
-      {/* Lightbox / Full Photo Modal */}
-      {selectedPhoto && (
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
-          onClick={() => setSelectedPhoto(null)}
-        >
-          <div
-            className="relative max-w-4xl w-full bg-zinc-950 rounded-3xl overflow-hidden border border-zinc-800 shadow-2xl space-y-3 p-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between pb-2 border-b border-zinc-800 text-white">
-              <span className="font-serif text-sm sm:text-base font-medium">{selectedPhoto.caption}</span>
-              <button
-                onClick={() => setSelectedPhoto(null)}
-                className="w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 flex items-center justify-center text-zinc-300 hover:text-white transition-colors cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <div className="relative aspect-video w-full rounded-2xl overflow-hidden">
-              <Image
-                src={selectedPhoto.src}
-                alt={selectedPhoto.caption}
-                fill
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                className="object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
