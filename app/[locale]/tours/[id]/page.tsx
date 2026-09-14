@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { getToursFromFirestore, getTourByIdFromFirestore } from '@/lib/tours';
 import { TourGallery } from '@/components/tours/TourGallery';
 import { TourItinerary } from '@/components/tours/TourItinerary';
-import { BookingSidebar } from '@/components/tours/BookingSidebar';
 import { TourSubNav } from '@/components/tours/TourSubNav';
 import { LuxuryThemeProvider } from '@/components/providers/LuxuryThemeProvider';
 import dynamic from 'next/dynamic';
@@ -331,43 +330,34 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
           {/* Photo Gallery */}
           <TourGallery images={galleryImages} title={title} tourId={tour.id} destination={tour.destination} />
 
-          {/* Tour Overview with Category Badges */}
-          {tour.description && (
-            <div className="space-y-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800">
-              {/* Badges moved elegantly to overview */}
-              <div className="flex flex-wrap items-center gap-2 pb-1">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>{dest}</span>
+        {/* Tour Overview with Category Badges */}
+        {tour.description && (
+          <div className="space-y-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800">
+            {/* Badges moved elegantly to overview */}
+            <div className="flex flex-wrap items-center gap-2 pb-1">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800">
+                <MapPin className="w-3.5 h-3.5 text-emerald-600" />
+                <span>{dest}</span>
+              </span>
+
+              {category && (
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
+                  {category}
                 </span>
+              )}
 
-                {category && (
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
-                    {category}
-                  </span>
-                )}
-
-                {tour.isPopular && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm">
-                    <Sparkles className="w-3 h-3" />
-                    <span>{getLocalizedText('Best Seller', locale)}</span>
-                  </span>
-                )}
-
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-zinc-700/60">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>{getLocalizedText('Certified Private Guide', locale)}</span>
+              {tour.isPopular && (
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm">
+                  <Sparkles className="w-3 h-3" />
+                  <span>{getLocalizedText('Best Seller', locale)}</span>
                 </span>
-              </div>
+              )}
 
-              <h2 className="font-serif font-bold text-2xl text-zinc-900 dark:text-white">
-                {(OVERVIEW_PREFIX[locale] || 'Overview:') + ' ' + shortTourName}
-              </h2>
-              <p className="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:text-emerald-800 dark:first-letter:text-emerald-400 first-letter:leading-none">
-                {getLocalizedText(tour.description, locale)}
-              </p>
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-zinc-700/60">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span>{getLocalizedText('Certified Private Guide', locale)}</span>
+              </span>
             </div>
-          )}
 
           {/* Vermilion Club vs Vermilion VIP Side-by-Side Pricing Tiers */}
           <TourPricingTiersCard tour={tour} />
@@ -379,30 +369,76 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
             duration={tour.duration} 
           />
 
-          {/* Highlights */}
-          {tour.highlights && tour.highlights.length > 0 && (
-            <div className="bg-emerald-950/5 dark:bg-emerald-950/20 p-6 sm:p-8 rounded-3xl border border-emerald-200/60 dark:border-emerald-800/40 space-y-4">
-              <h2 className="font-serif font-bold text-xl text-emerald-950 dark:text-emerald-300 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                <span>{(HIGHLIGHTS_PREFIX[locale] || 'Highlights:') + ' ' + shortTourName}</span>
-              </h2>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-900 dark:text-emerald-200">
-                {tour.highlights.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <div className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5 text-xs">
-                      ✓
-                    </div>
-                    <span className="font-medium">{getLocalizedText(item, locale)}</span>
+        {/* Expedition Technical Sheet ("At a Glance") */}
+        <ExpeditionFacts 
+          tourId={tour.id} 
+          destination={tour.destination} 
+          duration={tour.duration} 
+        />
+
+        {/* Highlights */}
+        {tour.highlights && tour.highlights.length > 0 && (
+          <div className="bg-emerald-950/5 dark:bg-emerald-950/20 p-6 sm:p-8 rounded-3xl border border-emerald-200/60 dark:border-emerald-800/40 space-y-4">
+            <h2 className="font-serif font-bold text-xl text-emerald-950 dark:text-emerald-300 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+              <span>{(HIGHLIGHTS_PREFIX[locale] || 'Highlights:') + ' ' + shortTourName}</span>
+            </h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-900 dark:text-emerald-200">
+              {tour.highlights.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-2.5">
+                  <div className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5 text-xs">
+                    ✓
+                  </div>
+                  <span className="font-medium">{getLocalizedText(item, locale)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Day by Day Itinerary Accordion */}
+        {tour.itinerary && tour.itinerary.length > 0 && (
+          <TourItinerary itinerary={tour.itinerary} tourTitle={shortTourName} />
+        )}
+
+        {/* Inclusions & Exclusions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+          {/* Inclusions */}
+          {tour.inclusions && tour.inclusions.length > 0 && (
+            <div className="bg-white dark:bg-zinc-900/90 p-6 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
+              <h3 className="font-serif font-bold text-lg text-emerald-900 dark:text-emerald-400 flex items-center gap-2">
+                <Check className="w-5 h-5 text-emerald-600" />
+                <span>{locale === 'es' ? '¿Qué está Incluido?' : 'What is Included?'}</span>
+              </h3>
+              <ul className="space-y-2 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
+                {tour.inclusions.map((inc, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>{getLocalizedText(inc, locale)}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          {/* Day by Day Itinerary Accordion */}
-          {tour.itinerary && tour.itinerary.length > 0 && (
-            <TourItinerary itinerary={tour.itinerary} tourTitle={shortTourName} />
+          {/* Exclusions */}
+          {tour.exclusions && tour.exclusions.length > 0 && (
+            <div className="bg-white dark:bg-zinc-900/90 p-6 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
+              <h3 className="font-serif font-bold text-lg text-zinc-900 dark:text-white flex items-center gap-2">
+                <X className="w-5 h-5 text-rose-500" />
+                <span>{locale === 'es' ? '¿Qué NO está Incluido?' : 'What is NOT Included?'}</span>
+              </h3>
+              <ul className="space-y-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                {tour.exclusions.map((exc, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <X className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                    <span>{getLocalizedText(exc, locale)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
+        </div>
 
           {/* Inclusions & Exclusions */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">
@@ -444,9 +480,12 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
           </div>
         </div>
 
-        {/* Right Sticky Sidebar Col */}
-        <div className="lg:col-span-4 lg:sticky lg:top-[188px] lg:self-start space-y-6 z-10 relative">
-          <BookingSidebar tour={tour} />
+        {/* Verified Guest Reviews */}
+        <div className="pt-6 border-t border-zinc-200/80 dark:border-zinc-800">
+          <TripAdvisorReviews
+            title={`Verified Guest Reviews for ${title}`}
+            subtitle="Discover what recent travelers say about our personalized service, expert guides, and luxury stays."
+          />
         </div>
       </div>
 

@@ -9,8 +9,13 @@ const outputFolder = path.resolve('C:/Users/pablo/Desktop/vermilion-pdfs');
 if (!fs.existsSync(outputFolder)) {
   fs.mkdirSync(outputFolder, { recursive: true });
 }
+const publicGuidesFolder = path.resolve('public/guides');
+if (!fs.existsSync(publicGuidesFolder)) {
+  fs.mkdirSync(publicGuidesFolder, { recursive: true });
+}
 const desktopPdfPath = path.resolve('C:/Users/pablo/Desktop/Vermilion-Routes-Catalogo-Completo-2026.pdf');
 const folderPdfPath = path.join(outputFolder, 'Vermilion-Routes-Catalogo-Completo-2026.pdf');
+const publicPdfPath = path.join(publicGuidesFolder, 'guia-ecuador-galapagos-2026.pdf');
 
 function loadLocalImageAsBase64(relativeOrPublicPath: string): string | null {
   try {
@@ -765,9 +770,11 @@ async function main() {
   const pdfBuffer = Buffer.from(doc.output('arraybuffer'));
   fs.writeFileSync(desktopPdfPath, pdfBuffer);
   fs.writeFileSync(folderPdfPath, pdfBuffer);
+  fs.writeFileSync(publicPdfPath, pdfBuffer);
 
   console.log(`\n🎉 Single Master PDF generated successfully!`);
   console.log(`📄 Desktop: ${desktopPdfPath} (${(pdfBuffer.length / 1024).toFixed(1)} KB, ${totalPages} pages)`);
+  console.log(`📄 Public:  ${publicPdfPath}`);
   console.log(`📄 Folder:  ${folderPdfPath}`);
   process.exit(0);
 }

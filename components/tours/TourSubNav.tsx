@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Clock, Star, MessageCircle } from 'lucide-react';
 import { DownloadPDFButton } from './DownloadPDFButton';
 import { Tour } from '@/types';
+import Link from 'next/link';
 
 interface TourSubNavProps {
   title: string;
@@ -81,7 +82,10 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (!portalNode) return null;
+  const priceValue = tour.priceFromUSD || tour.price || 1000;
+  const fromText = FROM_PREFIX[locale] || 'From';
+  const ctaText = ADD_TO_BOOKING_LABEL[locale] || 'Add to my expedition';
+  const contactText = CONTACT_LABEL[locale] || 'Contact Specialist';
 
   const t = SUBNAV_I18N[locale] || SUBNAV_I18N['en'];
 
@@ -159,7 +163,6 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
           </div>
         </div>
       </div>
-    </div>,
-    portalNode
+    </div>
   );
 }

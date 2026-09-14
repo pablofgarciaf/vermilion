@@ -17,6 +17,7 @@ export interface ItineraryDay {
   includedVisits?: LocalizedString;
   altitude?: LocalizedString;
   image?: string;
+  images?: string[];
 }
 
 export interface Tour {
