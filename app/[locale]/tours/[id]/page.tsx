@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { getToursFromFirestore, getTourByIdFromFirestore } from '@/lib/tours';
 import { TourGallery } from '@/components/tours/TourGallery';
 import { TourItinerary } from '@/components/tours/TourItinerary';
-import { BookingSidebar } from '@/components/tours/BookingSidebar';
 import { TourSubNav } from '@/components/tours/TourSubNav';
 import { LuxuryThemeProvider } from '@/components/providers/LuxuryThemeProvider';
 import dynamic from 'next/dynamic';
@@ -256,161 +255,210 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(tourJsonLd) }}
       />
 
-      <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+      <div className="px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-10">
 
-      {/* Main 2-Column Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        {/* Left Main Content Col */}
-        <div className="lg:col-span-8 space-y-8">
-          {/* Main Semantic H1 for SEO & SSR */}
-          <div className="space-y-3 pb-2">
-            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-zinc-900 dark:text-white tracking-tight leading-tight">
-              {title}
-            </h1>
-            <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
-              <span className="flex items-center gap-1.5 font-medium">
-                <Clock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                <span>{duration}</span>
-              </span>
-              <span>&bull;</span>
-              <span className="flex items-center gap-1 font-semibold text-zinc-900 dark:text-zinc-100">
-                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                <span>{tour.rating}</span>
-                {tour.reviewsCount && (
-                  <span className="text-zinc-500 font-normal">
-                    ({tour.reviewsCount} {locale === 'es' ? 'opiniones verificadas' : 'verified reviews'})
-                  </span>
-                )}
-              </span>
-            </div>
+        {/* Main Semantic H1 for SEO & SSR */}
+        <div className="space-y-3 pb-2">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-zinc-900 dark:text-white tracking-tight leading-tight">
+            {title}
+          </h1>
+          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+            <span className="flex items-center gap-1.5 font-medium">
+              <Clock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>{duration}</span>
+            </span>
+            <span>&bull;</span>
+            <span className="flex items-center gap-1 font-semibold text-zinc-900 dark:text-zinc-100">
+              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+              <span>{tour.rating}</span>
+              {tour.reviewsCount && (
+                <span className="text-zinc-500 font-normal">
+                  ({tour.reviewsCount} {locale === 'es' ? 'opiniones verificadas' : 'verified reviews'})
+                </span>
+              )}
+            </span>
+            <span>&bull;</span>
+            <span className="font-extrabold text-emerald-700 dark:text-emerald-400 text-sm">
+              {locale === 'es' ? 'Desde' : 'From'} ${(tour.priceFromUSD || tour.price || 1000).toLocaleString('en-US')} USD
+            </span>
           </div>
+        </div>
 
-          {/* Photo Gallery */}
-          <TourGallery images={galleryImages} title={title} tourId={tour.id} destination={tour.destination} />
+        {/* Photo Gallery */}
+        <TourGallery images={galleryImages} title={title} tourId={tour.id} destination={tour.destination} />
 
-          {/* Tour Overview with Category Badges */}
-          {tour.description && (
-            <div className="space-y-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800">
-              {/* Badges moved elegantly to overview */}
-              <div className="flex flex-wrap items-center gap-2 pb-1">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>{dest}</span>
+        {/* Tour Overview with Category Badges */}
+        {tour.description && (
+          <div className="space-y-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800">
+            {/* Badges moved elegantly to overview */}
+            <div className="flex flex-wrap items-center gap-2 pb-1">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800">
+                <MapPin className="w-3.5 h-3.5 text-emerald-600" />
+                <span>{dest}</span>
+              </span>
+
+              {category && (
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
+                  {category}
                 </span>
+              )}
 
-                {category && (
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
-                    {category}
-                  </span>
-                )}
-
-                {tour.isPopular && (
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm">
-                    <Sparkles className="w-3 h-3" />
-                    <span>{getLocalizedText('Best Seller', locale)}</span>
-                  </span>
-                )}
-
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-zinc-700/60">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>{getLocalizedText('Certified Private Guide', locale)}</span>
+              {tour.isPopular && (
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-600 text-white shadow-sm">
+                  <Sparkles className="w-3 h-3" />
+                  <span>{getLocalizedText('Best Seller', locale)}</span>
                 </span>
-              </div>
+              )}
 
-              <h2 className="font-serif font-bold text-2xl text-zinc-900 dark:text-white">
-                {(OVERVIEW_PREFIX[locale] || 'Overview:') + ' ' + shortTourName}
-              </h2>
-              <p className="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:text-emerald-800 dark:first-letter:text-emerald-400 first-letter:leading-none">
-                {getLocalizedText(tour.description, locale)}
-              </p>
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-300 border border-zinc-200/60 dark:border-zinc-700/60">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span>{getLocalizedText('Certified Private Guide', locale)}</span>
+              </span>
             </div>
-          )}
 
-          {/* Expedition Technical Sheet ("At a Glance") */}
-          <ExpeditionFacts 
-            tourId={tour.id} 
-            destination={tour.destination} 
-            duration={tour.duration} 
-          />
+            <h2 className="font-serif font-bold text-2xl text-zinc-900 dark:text-white">
+              {(OVERVIEW_PREFIX[locale] || 'Overview:') + ' ' + shortTourName}
+            </h2>
+            <p className="text-zinc-700 dark:text-zinc-300 text-base sm:text-lg leading-relaxed first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:text-emerald-800 dark:first-letter:text-emerald-400 first-letter:leading-none">
+              {getLocalizedText(tour.description, locale)}
+            </p>
+          </div>
+        )}
 
-          {/* Highlights */}
-          {tour.highlights && tour.highlights.length > 0 && (
-            <div className="bg-emerald-950/5 dark:bg-emerald-950/20 p-6 sm:p-8 rounded-3xl border border-emerald-200/60 dark:border-emerald-800/40 space-y-4">
-              <h2 className="font-serif font-bold text-xl text-emerald-950 dark:text-emerald-300 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                <span>{(HIGHLIGHTS_PREFIX[locale] || 'Highlights:') + ' ' + shortTourName}</span>
-              </h2>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-900 dark:text-emerald-200">
-                {tour.highlights.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <div className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5 text-xs">
-                      ✓
-                    </div>
-                    <span className="font-medium">{getLocalizedText(item, locale)}</span>
+        {/* Expedition Technical Sheet ("At a Glance") */}
+        <ExpeditionFacts 
+          tourId={tour.id} 
+          destination={tour.destination} 
+          duration={tour.duration} 
+        />
+
+        {/* Highlights */}
+        {tour.highlights && tour.highlights.length > 0 && (
+          <div className="bg-emerald-950/5 dark:bg-emerald-950/20 p-6 sm:p-8 rounded-3xl border border-emerald-200/60 dark:border-emerald-800/40 space-y-4">
+            <h2 className="font-serif font-bold text-xl text-emerald-950 dark:text-emerald-300 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+              <span>{(HIGHLIGHTS_PREFIX[locale] || 'Highlights:') + ' ' + shortTourName}</span>
+            </h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-900 dark:text-emerald-200">
+              {tour.highlights.map((item, idx) => (
+                <li key={idx} className="flex items-start gap-2.5">
+                  <div className="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5 text-xs">
+                    ✓
+                  </div>
+                  <span className="font-medium">{getLocalizedText(item, locale)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Day by Day Itinerary Accordion */}
+        {tour.itinerary && tour.itinerary.length > 0 && (
+          <TourItinerary itinerary={tour.itinerary} tourTitle={shortTourName} />
+        )}
+
+        {/* Inclusions & Exclusions */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+          {/* Inclusions */}
+          {tour.inclusions && tour.inclusions.length > 0 && (
+            <div className="bg-white dark:bg-zinc-900/90 p-6 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
+              <h3 className="font-serif font-bold text-lg text-emerald-900 dark:text-emerald-400 flex items-center gap-2">
+                <Check className="w-5 h-5 text-emerald-600" />
+                <span>{locale === 'es' ? '¿Qué está Incluido?' : 'What is Included?'}</span>
+              </h3>
+              <ul className="space-y-2 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
+                {tour.inclusions.map((inc, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>{getLocalizedText(inc, locale)}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          {/* Day by Day Itinerary Accordion */}
-          {tour.itinerary && tour.itinerary.length > 0 && (
-            <TourItinerary itinerary={tour.itinerary} tourTitle={shortTourName} />
+          {/* Exclusions */}
+          {tour.exclusions && tour.exclusions.length > 0 && (
+            <div className="bg-white dark:bg-zinc-900/90 p-6 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
+              <h3 className="font-serif font-bold text-lg text-zinc-900 dark:text-white flex items-center gap-2">
+                <X className="w-5 h-5 text-rose-500" />
+                <span>{locale === 'es' ? '¿Qué NO está Incluido?' : 'What is NOT Included?'}</span>
+              </h3>
+              <ul className="space-y-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+                {tour.exclusions.map((exc, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <X className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+                    <span>{getLocalizedText(exc, locale)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
+        </div>
 
-          {/* Inclusions & Exclusions */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">
-            {/* Inclusions */}
-            {tour.inclusions && tour.inclusions.length > 0 && (
-              <div className="bg-white dark:bg-zinc-900/90 p-6 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
-                <h3 className="font-serif font-bold text-lg text-emerald-900 dark:text-emerald-400 flex items-center gap-2">
-                  <Check className="w-5 h-5 text-emerald-600" />
-                  <span>{locale === 'es' ? '¿Qué está Incluido?' : 'What is Included?'}</span>
-                </h3>
-                <ul className="space-y-2 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
-                  {tour.inclusions.map((inc, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span>{getLocalizedText(inc, locale)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+        {/* Prominent Bottom Booking & Consultation Action Banner */}
+        <div className="bg-gradient-to-br from-emerald-950 via-teal-950 to-zinc-900 text-white p-8 sm:p-12 rounded-3xl border border-emerald-800/40 shadow-2xl relative overflow-hidden space-y-6">
+          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="max-w-2xl space-y-3 relative z-10">
+            <span className="text-xs uppercase tracking-widest text-emerald-400 font-bold">
+              {locale === 'es' ? 'Planifica Tu Viaje Privado' : 'Plan Your Bespoke Expedition'}
+            </span>
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              {title}
+            </h3>
+            <p className="text-zinc-300 text-sm sm:text-base leading-relaxed">
+              {locale === 'es'
+                ? 'Diseña tu itinerario con salidas flexibles, alojamiento de lujo y guías naturalistas certificados.'
+                : 'Custom-craft your journey with flexible departures, luxury boutique stays, and certified naturalist guides.'}
+            </p>
+          </div>
 
-            {/* Exclusions */}
-            {tour.exclusions && tour.exclusions.length > 0 && (
-              <div className="bg-white dark:bg-zinc-900/90 p-6 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
-                <h3 className="font-serif font-bold text-lg text-zinc-900 dark:text-white flex items-center gap-2">
-                  <X className="w-5 h-5 text-rose-500" />
-                  <span>{locale === 'es' ? '¿Qué NO está Incluido?' : 'What is NOT Included?'}</span>
-                </h3>
-                <ul className="space-y-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
-                  {tour.exclusions.map((exc, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <X className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
-                      <span>{getLocalizedText(exc, locale)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+          <div className="flex flex-wrap items-center justify-between gap-6 pt-4 border-t border-white/10 relative z-10">
+            <div>
+              <span className="text-xs text-zinc-400 block uppercase tracking-wider">
+                {locale === 'es' ? 'Precio Desde' : 'Starting From'}
+              </span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-white">
+                ${(tour.priceFromUSD || tour.price || 1000).toLocaleString('en-US')} <span className="text-xs font-normal text-emerald-300">USD / {locale === 'es' ? 'persona' : 'guest'}</span>
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={`https://wa.me/593994048458?text=${encodeURIComponent(
+                  locale === 'es'
+                    ? `Hola Vermilion Routes, deseo asesoría para el tour: ${title}`
+                    : `Hello Vermilion Routes, I would like consultation for the tour: ${title}`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold text-white bg-white/10 hover:bg-white/20 transition-all border border-white/20"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <span>{locale === 'es' ? 'Hablar con Especialista' : 'Talk with Specialist'}</span>
+              </a>
+
+              <DownloadPDFButton tour={tour} variant="outline" size="md" />
+
+              <Link
+                href={`/${locale}/booking?addTour=${tour.id}`}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold uppercase tracking-wider bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-zinc-950 shadow-xl transition-all hover:scale-105 active:scale-95"
+              >
+                <span>{locale === 'es' ? 'Añadir a mi Expedición' : 'Add to Expedition'}</span>
+                <Sparkles className="w-4 h-4 text-zinc-950" />
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Right Sticky Sidebar Col */}
-        <div className="lg:col-span-4 lg:sticky lg:top-[188px] lg:self-start space-y-6 z-10 relative">
-          <BookingSidebar tour={tour} />
+        {/* Verified Guest Reviews */}
+        <div className="pt-6 border-t border-zinc-200/80 dark:border-zinc-800">
+          <TripAdvisorReviews
+            title={`Verified Guest Reviews for ${title}`}
+            subtitle="Discover what recent travelers say about our personalized service, expert guides, and luxury stays."
+          />
         </div>
-      </div>
-
-      {/* Verified Guest Reviews */}
-      <div className="pt-10 border-t border-zinc-200/80 dark:border-zinc-800">
-        <TripAdvisorReviews
-          title={`Verified Guest Reviews for ${title}`}
-          subtitle="Discover what recent travelers say about our personalized service, expert guides, and luxury stays."
-        />
-      </div>
       </div>
       </div>
     </LuxuryThemeProvider>

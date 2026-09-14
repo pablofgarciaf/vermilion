@@ -41,6 +41,9 @@
     "cta": "Esplora i Tour"
   },
   "tours": {
+    "badge": "Spedizioni d'Autore",
+    "title": "I Nostri Viaggi Esclusivi",
+    "subtitle": "Itinerari di natura e comfort su misura creati da naturalisti locali certificati.",
     "filter": {
       "all": "Tutte le Spedizioni",
       "ecuador": "Ecuador Continentale",

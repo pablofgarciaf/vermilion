@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display, Oswald } from 'next/font/google';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
@@ -190,13 +190,6 @@ export default async function RootLayout({
             areaServed: ['EC', 'US', 'CA', 'GB', 'EU'],
           },
         ],
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '5.0',
-          reviewCount: '51',
-          bestRating: '5',
-          worstRating: '1',
-        },
         sameAs: [
           'https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html',
           'https://www.instagram.com/vermilionsouthamericanroutes/',
@@ -223,13 +216,11 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable} ${oswald.variable} scroll-smooth`} data-scroll-behavior="smooth" suppressHydrationWarning>
-      <head>
+      <body className="paper-bg text-zinc-900 dark:text-zinc-50 font-sans antialiased selection:bg-emerald-600 selection:text-white flex flex-col min-h-screen" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
         />
-      </head>
-      <body className="paper-bg text-zinc-900 dark:text-zinc-50 font-sans antialiased selection:bg-emerald-600 selection:text-white flex flex-col min-h-screen" suppressHydrationWarning>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-D8ZNLYMCB0" strategy="lazyOnload" />
         <Script id="google-analytics" strategy="lazyOnload">
           {`
@@ -275,7 +266,9 @@ export default async function RootLayout({
               </main>
               <ConditionalFooter />
               <ConciergeWidget />
-              <AffiliateTracker />
+              <Suspense fallback={null}>
+                <AffiliateTracker />
+              </Suspense>
             </NextIntlClientProvider>
           </CurrencyProvider>
         </ThemeProvider>

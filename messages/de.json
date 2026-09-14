@@ -41,6 +41,9 @@
     "cta": "Touren Erkunden"
   },
   "tours": {
+    "badge": "Exklusive Expeditionen",
+    "title": "Unsere Ausgewählten Reisen",
+    "subtitle": "Maßgeschneiderte Natur- und Komfort-Reiserouten von zertifizierten lokalen Naturforschern.",
     "filter": {
       "all": "Alle Expeditionen",
       "ecuador": "Festland-Ecuador",

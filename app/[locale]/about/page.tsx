@@ -421,27 +421,21 @@ export default async function AboutPage({ params }: PageProps) {
           "addressCountry": "ES"
         }
       ],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "51",
-        "bestRating": "5"
-      },
       "award": "TripAdvisor Travelers' Choice 2026"
     }
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-emerald-500 selection:text-white">
+    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
       {/* Schema.org Injected */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* HERO SECTION */}
-      <section className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 px-4 sm:px-6 lg:px-8 border-b border-zinc-800/80 overflow-hidden bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-950">
-        <div className="absolute inset-0 opacity-15 pointer-events-none">
+      {/* HERO SECTION - CINEMATIC VIEWPORT IMPACT */}
+      <section className="relative pt-36 pb-24 sm:pt-44 sm:pb-32 px-4 sm:px-6 lg:px-8 border-b border-zinc-200/80 dark:border-zinc-800/80 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
           <Image
             src="/images/tours/16-9/galapagos-baltra-island-16-9.jpg"
             alt="Galapagos Seascape"
@@ -450,35 +444,35 @@ export default async function AboutPage({ params }: PageProps) {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/85 via-zinc-950/80 to-zinc-950/95 dark:from-zinc-950/90 dark:via-zinc-950/85 dark:to-[#07130C]" />
         </div>
 
-        <div className="relative max-w-5xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-800/60 text-emerald-400 text-xs font-semibold uppercase tracking-wider shadow-lg shadow-emerald-950/50">
+        <div className="relative max-w-5xl mx-auto text-center space-y-6 text-white">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/90 border border-emerald-500/40 text-emerald-300 text-xs font-bold uppercase tracking-wider shadow-xl">
             <Compass className="w-4 h-4 text-emerald-400" />
             <span>{t.heroBadge}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-light text-white tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-light text-white tracking-tight leading-tight drop-shadow-sm">
             {t.h1}
           </h1>
 
-          <p className="text-zinc-300 text-base sm:text-xl font-light leading-relaxed max-w-3xl mx-auto">
+          <p className="text-zinc-200 text-base sm:text-xl font-light leading-relaxed max-w-3xl mx-auto">
             {t.heroSubtitle}
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4 text-xs sm:text-sm text-zinc-400">
-            <span className="flex items-center gap-1.5 font-medium text-emerald-400">
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-4 text-xs sm:text-sm text-zinc-300">
+            <span className="flex items-center gap-1.5 font-medium text-emerald-300">
               <ShieldCheck className="w-4 h-4" />
               <span>Ministerio de Turismo No. 1793215456001</span>
             </span>
             <span>•</span>
-            <span className="flex items-center gap-1.5 font-medium text-amber-400">
+            <span className="flex items-center gap-1.5 font-medium text-amber-300">
               <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
               <span>TripAdvisor Travelers&apos; Choice (5.0/5.0)</span>
             </span>
             <span>•</span>
-            <span className="flex items-center gap-1.5 font-medium text-zinc-300">
+            <span className="flex items-center gap-1.5 font-medium text-zinc-200">
               <Clock className="w-4 h-4 text-emerald-400" />
               <span>Soporte 24/7 En Ruta</span>
             </span>
@@ -490,37 +484,37 @@ export default async function AboutPage({ params }: PageProps) {
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 space-y-6">
-            <div className="inline-flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
               <Sparkles className="w-4 h-4" />
               <span>Our Heritage Since 2005</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-zinc-900 dark:text-white tracking-tight">
               {t.heritageHeading}
             </h2>
-            <div className="space-y-4 text-zinc-300 text-sm sm:text-base leading-relaxed">
+            <div className="space-y-4 text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
               <p>{t.heritageP1}</p>
               <p>{t.heritageP2}</p>
             </div>
             <div className="pt-2 flex items-center gap-6">
               <div>
-                <div className="text-3xl font-serif font-bold text-emerald-400">20+</div>
-                <div className="text-xs text-zinc-400 uppercase tracking-wide mt-1">Years of Crafting Journeys</div>
+                <div className="text-3xl font-serif font-bold text-emerald-700 dark:text-emerald-400">20+</div>
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wide mt-1">Years of Crafting Journeys</div>
               </div>
-              <div className="h-10 w-px bg-zinc-800" />
+              <div className="h-10 w-px bg-zinc-200 dark:bg-zinc-800" />
               <div>
-                <div className="text-3xl font-serif font-bold text-emerald-400">51</div>
-                <div className="text-xs text-zinc-400 uppercase tracking-wide mt-1">Verified 5.0 Reviews</div>
+                <div className="text-3xl font-serif font-bold text-emerald-700 dark:text-emerald-400">51</div>
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wide mt-1">Verified 5.0 Reviews</div>
               </div>
-              <div className="h-10 w-px bg-zinc-800" />
+              <div className="h-10 w-px bg-zinc-200 dark:bg-zinc-800" />
               <div>
-                <div className="text-3xl font-serif font-bold text-emerald-400">100%</div>
-                <div className="text-xs text-zinc-400 uppercase tracking-wide mt-1">Private &amp; Carbon Neutral</div>
+                <div className="text-3xl font-serif font-bold text-emerald-700 dark:text-emerald-400">100%</div>
+                <div className="text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wide mt-1">Private &amp; Carbon Neutral</div>
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-6">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-zinc-800 bg-zinc-900 group">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 group">
               <div className="aspect-[4/3] relative">
                 <Image
                   src="/images/tours/16-9/galapagos-lobo-marino-16-9.jpg"
@@ -530,11 +524,11 @@ export default async function AboutPage({ params }: PageProps) {
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <div className="p-6 bg-zinc-900/90 backdrop-blur-sm border-t border-zinc-800">
-                <p className="text-xs text-zinc-400 italic">
+              <div className="p-6 bg-zinc-50/90 dark:bg-zinc-900/90 backdrop-blur-sm border-t border-zinc-200 dark:border-zinc-800">
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 italic">
                   &ldquo;We don&apos;t just guide trips; we safeguard the timeless wonder of these islands for future generations.&rdquo;
                 </p>
-                <p className="text-xs text-emerald-400 font-semibold mt-2">
+                <p className="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mt-2">
                   — Vermilion Expedition Naturalist Team
                 </p>
               </div>
@@ -544,54 +538,54 @@ export default async function AboutPage({ params }: PageProps) {
       </section>
 
       {/* 3 PILLARS SECTION */}
-      <section className="py-16 bg-zinc-900/50 border-y border-zinc-800/80 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 bg-zinc-100/60 dark:bg-zinc-900/50 border-y border-zinc-200 dark:border-zinc-800/80 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
               <Award className="w-4 h-4" />
               <span>Excellence Standard</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-4xl font-serif font-bold text-zinc-900 dark:text-white tracking-tight">
               {t.pillarsHeading}
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Pillar 1 */}
-            <div className="bg-zinc-900/90 border border-zinc-800 hover:border-emerald-500/50 rounded-2xl p-7 space-y-4 transition-all hover:shadow-xl hover:shadow-emerald-950/30">
-              <div className="w-12 h-12 rounded-xl bg-emerald-950 border border-emerald-800/60 flex items-center justify-center text-emerald-400">
+            <div className="bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/50 rounded-3xl p-7 space-y-4 transition-all shadow-md hover:shadow-xl hover:shadow-emerald-950/10">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-center text-emerald-700 dark:text-emerald-400">
                 <Users className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-serif font-bold text-white">
+              <h3 className="text-lg font-serif font-bold text-zinc-900 dark:text-white">
                 {t.p1Title}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                 {t.p1Desc}
               </p>
             </div>
 
             {/* Pillar 2 */}
-            <div className="bg-zinc-900/90 border border-zinc-800 hover:border-emerald-500/50 rounded-2xl p-7 space-y-4 transition-all hover:shadow-xl hover:shadow-emerald-950/30">
-              <div className="w-12 h-12 rounded-xl bg-emerald-950 border border-emerald-800/60 flex items-center justify-center text-emerald-400">
+            <div className="bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/50 rounded-3xl p-7 space-y-4 transition-all shadow-md hover:shadow-xl hover:shadow-emerald-950/10">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-center text-emerald-700 dark:text-emerald-400">
                 <Compass className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-serif font-bold text-white">
+              <h3 className="text-lg font-serif font-bold text-zinc-900 dark:text-white">
                 {t.p2Title}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                 {t.p2Desc}
               </p>
             </div>
 
             {/* Pillar 3 */}
-            <div className="bg-zinc-900/90 border border-zinc-800 hover:border-emerald-500/50 rounded-2xl p-7 space-y-4 transition-all hover:shadow-xl hover:shadow-emerald-950/30">
-              <div className="w-12 h-12 rounded-xl bg-emerald-950 border border-emerald-800/60 flex items-center justify-center text-emerald-400">
+            <div className="bg-white dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/50 rounded-3xl p-7 space-y-4 transition-all shadow-md hover:shadow-xl hover:shadow-emerald-950/10">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800/60 flex items-center justify-center text-emerald-700 dark:text-emerald-400">
                 <HeartHandshake className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-serif font-bold text-white">
+              <h3 className="text-lg font-serif font-bold text-zinc-900 dark:text-white">
                 {t.p3Title}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                 {t.p3Desc}
               </p>
             </div>
@@ -602,85 +596,85 @@ export default async function AboutPage({ params }: PageProps) {
       {/* DUAL GLOBAL HUBS SECTION */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 text-emerald-700 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
             <Globe2 className="w-4 h-4" />
             <span>Dual Global Presence</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-zinc-900 dark:text-white tracking-tight">
             {t.hubsHeading}
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Ecuador HQ Card */}
-          <div className="bg-zinc-900/80 border border-emerald-900/60 rounded-3xl p-8 space-y-6 shadow-xl relative overflow-hidden">
+          <div className="bg-white dark:bg-zinc-900/80 border border-emerald-200 dark:border-emerald-900/60 rounded-3xl p-8 space-y-6 shadow-xl relative overflow-hidden">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-950 border border-emerald-800 text-emerald-400">
+              <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-400">
                 Headquarters (Ecuador)
               </span>
-              <MapPin className="w-5 h-5 text-emerald-400" />
+              <MapPin className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-xl font-serif font-bold text-white">
+              <h3 className="text-xl font-serif font-bold text-zinc-900 dark:text-white">
                 {t.ecuadorHubTitle}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                 {t.ecuadorHubSubtitle}
               </p>
             </div>
 
-            <div className="space-y-3 pt-3 border-t border-zinc-800 text-xs sm:text-sm text-zinc-300">
+            <div className="space-y-3 pt-3 border-t border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
               <p className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                 <span>Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503)</span>
               </p>
               <p className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a href="tel:+593994048458" className="hover:text-white transition-colors">
+                <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                <a href="tel:+593994048458" className="hover:text-emerald-700 dark:hover:text-white transition-colors">
                   +593-994-048-458
                 </a>
               </p>
               <p className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
+                <Mail className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                 <span>
-                  <span>info</span><span className="text-emerald-400">&#64;</span><span>vermilionroutes.com</span>
+                  <span>info</span><span className="text-emerald-600 dark:text-emerald-400">&#64;</span><span>vermilionroutes.com</span>
                 </span>
               </p>
             </div>
           </div>
 
           {/* Spain Hub Card */}
-          <div className="bg-zinc-900/80 border border-zinc-800 rounded-3xl p-8 space-y-6 shadow-xl relative overflow-hidden">
+          <div className="bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-8 space-y-6 shadow-xl relative overflow-hidden">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-300">
+              <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-300">
                 European Hub (Coral Tour)
               </span>
-              <MapPin className="w-5 h-5 text-amber-400" />
+              <MapPin className="w-5 h-5 text-amber-500" />
             </div>
 
             <div className="space-y-2">
-              <h3 className="text-xl font-serif font-bold text-white">
+              <h3 className="text-xl font-serif font-bold text-zinc-900 dark:text-white">
                 {t.spainHubTitle}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">
+              <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                 {t.spainHubSubtitle}
               </p>
             </div>
 
-            <div className="space-y-3 pt-3 border-t border-zinc-800 text-xs sm:text-sm text-zinc-300">
+            <div className="space-y-3 pt-3 border-t border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
               <p className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                 <span>Calle Seco 3, 28007 Madrid, España</span>
               </p>
               <p className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-amber-400 shrink-0" />
-                <a href="tel:+593994048458" className="hover:text-white transition-colors">
+                <Phone className="w-4 h-4 text-amber-500 shrink-0" />
+                <a href="tel:+593994048458" className="hover:text-amber-600 dark:hover:text-white transition-colors">
                   +593-994-048-458 (Direct WhatsApp VIP)
                 </a>
               </p>
               <p className="flex items-center gap-2.5">
-                <Clock className="w-4 h-4 text-amber-400 shrink-0" />
+                <Clock className="w-4 h-4 text-amber-500 shrink-0" />
                 <span>CET Timezone Consultations (09:00 - 19:00)</span>
               </p>
             </div>
@@ -689,7 +683,7 @@ export default async function AboutPage({ params }: PageProps) {
       </section>
 
       {/* PHOTOGRAPHY SHOWCASE SECTION */}
-      <section className="py-16 bg-zinc-900/40 border-y border-zinc-800/80 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 bg-zinc-100/50 dark:bg-zinc-900/40 border-y border-zinc-200 dark:border-zinc-800/80 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <AboutGallerySection locale={locale} />
         </div>
@@ -697,7 +691,7 @@ export default async function AboutPage({ params }: PageProps) {
 
       {/* TRUST & ACCREDITATIONS SECTION */}
       <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-950/60 via-zinc-900 to-zinc-900 border border-emerald-800/50 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
+        <div className="bg-gradient-to-r from-emerald-950 via-zinc-900 to-zinc-900 border border-emerald-800/50 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl text-white">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
               <ShieldCheck className="w-4 h-4" />
@@ -729,10 +723,10 @@ export default async function AboutPage({ params }: PageProps) {
 
       {/* CALL TO ACTION */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center space-y-6">
-        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl font-serif font-bold text-zinc-900 dark:text-white tracking-tight">
           {t.ctaHeading}
         </h2>
-        <p className="text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className="text-zinc-600 dark:text-zinc-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
           {t.ctaSubtitle}
         </p>
         <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
@@ -740,14 +734,14 @@ export default async function AboutPage({ params }: PageProps) {
             href="https://wa.me/593994048458"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all hover:scale-105 active:scale-95 shadow-xl shadow-emerald-950/50"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all hover:scale-105 active:scale-95 shadow-xl shadow-emerald-950/20"
           >
             <span>{t.ctaButton}</span>
             <ArrowRight className="w-4 h-4" />
           </a>
           <Link
             href={`/${locale}/tours`}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-zinc-800 hover:bg-zinc-700 text-white font-semibold text-sm transition-all hover:scale-105 active:scale-95 border border-zinc-700"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-white dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-zinc-900 dark:text-white font-semibold text-sm transition-all hover:scale-105 active:scale-95 border border-zinc-200 dark:border-zinc-700 shadow-sm"
           >
             <span>Explore Tour Packages</span>
           </Link>

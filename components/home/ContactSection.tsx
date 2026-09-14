@@ -31,6 +31,13 @@ export function ContactSection() {
         phone: prev.phone || stored.phone || '',
       }));
     }
+
+    if (typeof window !== 'undefined' && window.location.hash === '#contact') {
+      setTimeout(() => {
+        const el = document.getElementById('contact');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 400);
+    }
   }, []);
 
   const [errors, setErrors] = useState<{ name?: string; email?: string; phone?: string; submit?: string }>({});

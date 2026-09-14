@@ -41,6 +41,9 @@
     "cta": "Explorar Passeios"
   },
   "tours": {
+    "badge": "Expedições Exclusivas",
+    "title": "Nossos Roteiros Selecionados",
+    "subtitle": "Itinerários de natureza e conforto sob medida criados por naturalistas locais certificados.",
     "filter": {
       "all": "Todas as Expedições",
       "ecuador": "Equador Continental",

@@ -41,6 +41,9 @@
     "cta": "Explorer les Circuits"
   },
   "tours": {
+    "badge": "Expéditions d'Auteur",
+    "title": "Nos Circuits d'Exception",
+    "subtitle": "Itinéraires nature et confort sur mesure conçus par des naturalistes locaux certifiés.",
     "filter": {
       "all": "Toutes les Expéditions",
       "ecuador": "Équateur Continental",

@@ -41,6 +41,9 @@
     "cta": "Explore Tours"
   },
   "tours": {
+    "badge": "Signature Expeditions",
+    "title": "Our Curated Journeys",
+    "subtitle": "Tailor-made nature and comfort itineraries crafted by certified local naturalists.",
     "filter": {
       "all": "All Expeditions",
       "ecuador": "Mainland Ecuador",

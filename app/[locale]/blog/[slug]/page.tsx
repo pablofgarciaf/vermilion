@@ -153,7 +153,13 @@ function parseMarkdown(text: string, locale: string): string {
     .replace(/\[(.*?)\]\((.*?)\)/g, (_, label, url) => {
       const href = url.startsWith('/') && !url.startsWith(`/${locale}`) ? `/${locale}${url}` : url;
       const isExternal = url.startsWith('http');
+      const isTourOrBooking = href.includes('/tours/') || href.includes('/booking');
       const rel = isExternal ? 'rel="noopener noreferrer" target="_blank"' : '';
+
+      if (isTourOrBooking) {
+        return `<a href="${href}" ${rel} class="inline-flex items-center gap-1 px-2.5 py-0.5 my-0.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300/80 dark:border-emerald-700 font-bold hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-600 dark:hover:text-white transition-all shadow-sm"><span>${label}</span><span class="text-xs">↗</span></a>`;
+      }
+
       return `<a href="${href}" ${rel} class="text-emerald-700 dark:text-emerald-400 font-semibold underline underline-offset-4 decoration-emerald-500/50 hover:text-emerald-900 dark:hover:text-emerald-200 transition-colors">${label}</a>`;
     });
 }
@@ -570,46 +576,90 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         )}
 
         {/* Article Body */}
-        <div className="space-y-6 text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
-          {contentText.split('\n\n').map((paragraph, idx) => {
-            const trimmed = paragraph.trim();
-            if (!trimmed) return null;
+        <div className="space-y-8 text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
+          {(() => {
+            let imgCount = 0;
+            return contentText.split('\n\n').map((paragraph, idx) => {
+              const trimmed = paragraph.trim();
+              if (!trimmed) return null;
 
-            {/* Inline Markdown Image: ![caption](/path/to/image.jpg) */}
-            if (trimmed.startsWith('![') && trimmed.includes('](')) {
-              const match = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
-              if (match) {
-                const alt = match[1];
-                const src = match[2];
-                return (
-                  <figure key={idx} className="my-8 rounded-3xl overflow-hidden shadow-xl border border-zinc-200 dark:border-zinc-800">
-                    <div className="relative h-64 sm:h-80 md:h-[400px] w-full">
-                      <Image
-                        src={src}
-                        alt={alt}
-                        fill
-                        quality={95}
-                        sizes="(max-width: 768px) 100vw, 850px"
-                        className="object-cover"
-                      />
+              {/* Inline Markdown Image: ![caption](/path/to/image.jpg) in Magazine Style */}
+              if (trimmed.startsWith('![') && trimmed.includes('](')) {
+                const match = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
+                if (match) {
+                  const alt = match[1];
+                  const src = match[2];
+                  imgCount++;
+                  const isEven = imgCount % 2 === 0;
+
+                  return (
+                    <div
+                      key={idx}
+                      className="my-8 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center bg-white/70 dark:bg-zinc-900/60 p-5 sm:p-7 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-xl transition-all"
+                    >
+                      {/* Image Column */}
+                      <div className={`md:col-span-6 ${isEven ? 'order-1 md:order-2' : 'order-1'}`}>
+                        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-2xl overflow-hidden shadow-lg border border-zinc-200/50 dark:border-zinc-700/50 group">
+                          <Image
+                            src={src}
+                            alt={alt}
+                            fill
+                            quality={95}
+                            sizes="(max-width: 768px) 100vw, 480px"
+                            className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+                          {alt && (
+                            <span className="absolute bottom-2.5 left-3 right-3 text-[11px] font-medium text-white/95 line-clamp-1 drop-shadow">
+                              {alt}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Content / Context Column */}
+                      <div className={`md:col-span-6 space-y-3.5 ${isEven ? 'order-2 md:order-1' : 'order-2'}`}>
+                        <div className="flex items-center gap-2">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300/60 dark:border-emerald-800">
+                            <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                            <span>{locale === 'es' ? 'Paisaje & Destino' : 'Landscape & Destination'}</span>
+                          </span>
+                        </div>
+
+                        <h4 className="font-serif text-lg sm:text-xl font-bold text-zinc-900 dark:text-white leading-snug">
+                          {alt}
+                        </h4>
+
+                        <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
+                          {locale === 'es'
+                            ? 'Descubre este paraje en nuestros itinerarios privados con guías naturalistas bilingües y traslados exclusivos.'
+                            : 'Explore this landmark on our bespoke itineraries featuring private transfers and certified bilingual naturalists.'}
+                        </p>
+
+                        {relatedTour && (
+                          <div className="pt-1">
+                            <Link
+                              href={`/${locale}/booking?addTour=${relatedTour.id}`}
+                              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-emerald-900 dark:text-emerald-200 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 transition-all group/btn"
+                            >
+                              <span>{locale === 'es' ? 'Reservar este tour' : 'Book this expedition'}</span>
+                              <ArrowRight className="w-3.5 h-3.5 text-emerald-600 transition-transform group-hover/btn:translate-x-1" />
+                            </Link>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    {alt && (
-                      <figcaption className="text-center text-xs text-zinc-500 dark:text-zinc-400 py-3 px-4 bg-zinc-50 dark:bg-zinc-900/90 border-t border-zinc-100 dark:border-zinc-800 font-medium">
-                        {alt}
-                      </figcaption>
-                    )}
-                  </figure>
+                  );
+                }
+              }
+
+              if (trimmed.startsWith('## ')) {
+                return (
+                  <h2 key={idx} className="text-2xl sm:text-3xl font-bold font-serif text-zinc-900 dark:text-white pt-6 pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                    {trimmed.replace('## ', '')}
+                  </h2>
                 );
               }
-            }
-
-            if (trimmed.startsWith('## ')) {
-              return (
-                <h2 key={idx} className="text-2xl sm:text-3xl font-bold font-serif text-zinc-900 dark:text-white pt-6 pb-2 border-b border-zinc-200 dark:border-zinc-800">
-                  {trimmed.replace('## ', '')}
-                </h2>
-              );
-            }
             if (trimmed.startsWith('### ')) {
               return (
                 <h3 key={idx} className="text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400 pt-4 pb-1">
@@ -676,7 +726,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 }}
               />
             );
-          })}
+          });
+        })()}
         </div>
 
         {/* Article FAQ Section for GEO / AI Citation */}
