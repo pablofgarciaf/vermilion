@@ -176,8 +176,11 @@ export const paypalCreateOrderSchema = z.object({
   tourId: z.string().nullable().optional(),
   tourTitle: z.string().optional(),
   clientName: z.string().optional(),
-  clientEmail: z.string().min(3).refine((email) => isValidEmail(email), {
-    message: 'A valid email address is required.',
+  clientEmail: z.string().optional().transform((email) => {
+    if (email && isValidEmail(email.trim())) {
+      return email.trim().toLowerCase();
+    }
+    return 'guest@vermilionroutes.com';
   }),
   clientPhone: z.string().optional(),
   amount: z.number().positive(),

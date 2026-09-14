@@ -4,7 +4,7 @@ import { Navbar } from './Navbar';
 
 export function ConditionalNavbar() {
   const pathname = usePathname();
-  // No mostrar el navbar en las rutas internas (affiliates, admin, cpanel, operator, auth)
+  // No mostrar el navbar en las rutas internas (affiliates, admin, cpanel, operator, auth, checkout)
   if (
     pathname?.includes('/affiliates') || 
     pathname?.includes('/admin') || 
@@ -13,11 +13,19 @@ export function ConditionalNavbar() {
     pathname?.includes('/auth') ||
     pathname?.includes('/checkout')
   ) return null;
+
+  // Las páginas con Hero Banner a pantalla completa (Home y Detalle de Tour)
+  // inician en top: 0 detrás del navbar transparente; no requieren espaciador.
+  const isFullBleedHero = 
+    pathname === '/' || 
+    !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/?$/) ||
+    (pathname?.includes('/tours/') && !pathname?.endsWith('/tours'));
+
   return (
     <>
       <Navbar />
-      {/* Spacer so main content doesn't hide under fixed Navbar */}
-      <div className="h-20 sm:h-24 md:h-28 lg:h-[120px]" />
+      {/* Spacer so main content doesn't hide under fixed Navbar, except on full-bleed hero pages */}
+      {!isFullBleedHero && <div className="h-20 sm:h-24 md:h-28 lg:h-[120px]" />}
     </>
   );
 }

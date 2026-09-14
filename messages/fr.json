@@ -41,12 +41,21 @@
     "cta": "Explorer les Circuits"
   },
   "tours": {
+    "badge": "Expéditions Sélectionnées",
+    "title": "Nos Circuits & Voyages Sur Mesure",
+    "subtitle": "Découvrez des itinéraires exclusifs conçus par des guides naturalistes experts aux Galapagos et en Équateur.",
     "filter": {
       "all": "Toutes les Expéditions",
       "ecuador": "Équateur Continental",
-      "galapagos": "Îles Galápagos",
+      "galapagos": "Îles Galapagos",
       "combined": "Voyages Combinés",
-      "fullday": "Excursions Journée"
+      "fullday": "Excursions d'une Journée"
+    },
+    "cta": {
+      "label": "Circuits Personnalisés Sur Mesure",
+      "title": "Vous Cherchez une Expédition Unique Créée Spécialement Pour Vous?",
+      "subtitle": "Nous concevons des itinéraires 100% personnalisés adaptés à vos dates, vos envies et votre rythme avec conciergerie 24/7.",
+      "button": "Demander un Devis Sur Mesure"
     }
   },
   "about": {

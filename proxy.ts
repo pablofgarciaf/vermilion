@@ -19,6 +19,7 @@ const intlMiddleware = createMiddleware({
   locales,
   defaultLocale: 'en',
   localePrefix: 'always',
+  localeDetection: true, // Enables automatic Accept-Language browser language negotiation for visitors (e.g. France -> /fr)
   alternateLinks: false, // Prevents duplicate HTTP Link headers; HTML <link rel="alternate"> in <head> has full control
 });
 
@@ -128,21 +129,51 @@ function checkRateLimit(ip: string, pathname: string): { allowed: boolean; limit
   return { allowed: true, limit, remaining: limit - record.timestamps.length, reset: Math.ceil(windowMs / 1000) };
 }
 
-export function proxy(req: NextRequest) {
+// Mapa de variantes regionales → locale base soportado
+const LOCALE_REGION_MAP: Record<string, string> = {
+  'es-ec': 'es', 'es-419': 'es', 'es-mx': 'es', 'es-co': 'es', 'es-ar': 'es',
+  'es-pe': 'es', 'es-cl': 'es', 'es-ve': 'es', 'es-bo': 'es', 'es-py': 'es',
+  'es-uy': 'es', 'es-cr': 'es', 'es-gt': 'es', 'es-hn': 'es', 'es-sv': 'es',
+  'fr-ca': 'fr', 'fr-be': 'fr', 'fr-ch': 'fr', 'fr-lu': 'fr',
+  'de-at': 'de', 'de-ch': 'de', 'de-li': 'de',
+  'pt-br': 'pt', 'pt-pt': 'pt', 'pt-ao': 'pt',
+  'zh-cn': 'zh', 'zh-tw': 'zh', 'zh-hk': 'zh', 'zh-sg': 'zh',
+  'it-ch': 'it', 'it-sm': 'it',
+  'ja-jp': 'ja',
+};
+
+const SUPPORTED_LOCALES_SET = new Set(['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja']);
+
+/**
+ * Detecta el locale preferido del visitante desde Accept-Language.
+ * Resuelve variantes regionales: 'es-EC' → 'es', 'fr-CA' → 'fr', etc.
+ */
+function detectPreferredLocale(acceptLang: string): string | null {
+  if (!acceptLang) return null;
+  const langs = acceptLang
+    .split(',')
+    .map((l) => l.split(';')[0].trim().toLowerCase())
+    .filter(Boolean);
+
+  for (const lang of langs) {
+    if (SUPPORTED_LOCALES_SET.has(lang)) return lang;
+    if (LOCALE_REGION_MAP[lang]) return LOCALE_REGION_MAP[lang];
+    const base = lang.split('-')[0];
+    if (SUPPORTED_LOCALES_SET.has(base)) return base;
+  }
+  return null;
+}
+
+export default function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const host = req.headers.get('host') || '';
   const hostname = host.split(':')[0].toLowerCase();
   const proto = req.headers.get('x-forwarded-proto') || 'https';
 
-  // 0. Redirección canónica de dominio e idioma en un solo salto (Evita "Multiple page redirects" en GTmetrix)
+  // 0. Redirección canónica de dominio en un solo salto (Evita "Multiple page redirects" en GTmetrix)
   if (hostname === 'vermilionroutes.com' || (proto === 'http' && !hostname.includes('localhost') && !hostname.includes('127.0.0.1'))) {
-    const targetPath = pathname === '/' ? '/en' : pathname;
     const search = req.nextUrl.search || '';
-    return NextResponse.redirect(`https://www.vermilionroutes.com${targetPath}${search}`, 301);
-  }
-
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL('/en', req.url), 301);
+    return NextResponse.redirect(`https://www.vermilionroutes.com${pathname}${search}`, 301);
   }
 
   // Rutas canónicas de afiliados y administración permitidas en todos los dominios autorizados
@@ -208,7 +239,23 @@ export function proxy(req: NextRequest) {
   // --------------------------------------------------------------------------
   // PASO 3: Procesamiento de Rutas Públicas e Internacionalización (i18n)
   // --------------------------------------------------------------------------
-  // (Las rutas /dashboard y /network ya fueron manejadas en el PASO 0 y retornaron Next)
+  // Redirección explícita para la raíz '/' basada en Accept-Language.
+  // next-intl con localeDetection:true ya resuelve esto, pero la cookie NEXT_LOCALE
+  // puede persistir un locale anterior. Esta lógica da prioridad al header del navegador
+  // cuando el usuario llega a la raíz sin seleccionar idioma explícitamente.
+  if (pathname === '/') {
+    const acceptLang = req.headers.get('accept-language') || '';
+    const detectedLocale = detectPreferredLocale(acceptLang);
+    if (detectedLocale && detectedLocale !== 'en') {
+      const url = req.nextUrl.clone();
+      url.pathname = `/${detectedLocale}`;
+      const response = NextResponse.redirect(url, 302);
+      // Actualizar la cookie de locale para que next-intl no revierta al cookie previo
+      response.cookies.set('NEXT_LOCALE', detectedLocale, { path: '/', maxAge: 60 * 60 * 24 * 365 });
+      return response;
+    }
+  }
+
   return intlMiddleware(req);
 }
 

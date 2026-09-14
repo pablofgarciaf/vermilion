@@ -208,6 +208,137 @@ const DEFAULT_TRANSLATIONS: Record<string, Record<string, string>> = {
     ja: "すべてのツアーを見る",
     zh: "查看所有行程"
   }
+,
+  "Certified Naturalist Guide": {
+    es: "Guía Naturalista Certificado",
+    en: "Certified Naturalist Guide",
+    de: "Zertifizierter Naturführer",
+    fr: "Guide Naturaliste Certifié",
+    it: "Guida Naturalistica Certificata",
+    pt: "Guia Naturalista Certificado",
+    ja: "認定ナチュラリストガイド",
+    zh: "官方认证自然向导"
+  },
+  "verified reviews": {
+    es: "opiniones verificadas",
+    en: "verified reviews",
+    de: "verifizierte Bewertungen",
+    fr: "avis vérifiés",
+    it: "recensioni verificate",
+    pt: "avaliações verificadas",
+    ja: "件の認定レビュー",
+    zh: "条真实评价"
+  },
+  "From": {
+    es: "Desde",
+    en: "From",
+    de: "Ab",
+    fr: "À partir de",
+    it: "Da",
+    pt: "A partir de",
+    ja: "料金",
+    zh: "起价"
+  },
+  "Starting From": {
+    es: "Desde",
+    en: "Starting From",
+    de: "Ab",
+    fr: "À partir de",
+    it: "Da",
+    pt: "A partir de",
+    ja: "料金",
+    zh: "起价"
+  },
+  "What is Included?": {
+    es: "¿Qué está Incluido?",
+    en: "What is Included?",
+    de: "Was ist enthalten?",
+    fr: "Ce qui est inclus",
+    it: "Cosa è incluso?",
+    pt: "O que está incluído?",
+    ja: "ツアーに含まれるもの",
+    zh: "费用包含"
+  },
+  "What is NOT Included?": {
+    es: "¿Qué NO está Incluido?",
+    en: "What is NOT Included?",
+    de: "Was ist nicht enthalten?",
+    fr: "Ce qui n'est pas inclus",
+    it: "Cosa non è incluso?",
+    pt: "O que não está incluído?",
+    ja: "ツアーに含まれないもの",
+    zh: "费用不含"
+  },
+  "Plan Your Bespoke Expedition": {
+    es: "Planifique su Expedición a Medida",
+    en: "Plan Your Bespoke Expedition",
+    de: "Planen Sie Ihre maßgeschneiderte Expedition",
+    fr: "Planifiez votre expédition sur mesure",
+    it: "Pianifica la Tua Spedizione su Misura",
+    pt: "Planeje sua Expedição sob Medida",
+    ja: "オーダーメイド遠征を計画する",
+    zh: "定制您的专属探险之旅"
+  },
+  "Custom-craft your journey with flexible departures, boutique stays, and certified naturalist guides.": {
+    es: "Diseñe su viaje a medida con fechas flexibles, alojamientos boutique y guías naturalistas certificados.",
+    en: "Custom-craft your journey with flexible departures, boutique stays, and certified naturalist guides.",
+    de: "Gestalten Sie Ihre Reise individuell mit flexiblen Abreisen, Boutique-Unterkünften und zertifizierten Naturführern.",
+    fr: "Concevez votre voyage sur mesure avec départs flexibles, hébergements boutique et guides certifiés.",
+    it: "Crea il tuo viaggio su misura con partenze flessibili, soggiorni boutique e guide certificate.",
+    pt: "Crie sua viagem sob medida com partidas flexíveis, estadias boutique e guias certificados.",
+    ja: "日程自由・厳選ブティックホテル・認定ナチュラリストガイド同行のオーダーメイドツアー。",
+    zh: "灵活出发日期、专属精品酒店与官方认证自然向导，量身定制非凡之旅。"
+  },
+  "Talk with Specialist": {
+    es: "Hablar con Especialista",
+    en: "Talk with Specialist",
+    de: "Mit Spezialisten sprechen",
+    fr: "Parler à un spécialiste",
+    it: "Parla con lo Specialista",
+    pt: "Falar com Especialista",
+    ja: "専任スペシャリストに相談",
+    zh: "联系专属管家"
+  },
+  "Add to Expedition": {
+    es: "Añadir a mi Expedición",
+    en: "Add to Expedition",
+    de: "Zur Expedition hinzufügen",
+    fr: "Ajouter à mon expédition",
+    it: "Aggiungi alla spedizione",
+    pt: "Adicionar à expedição",
+    ja: "遠征プランに追加",
+    zh: "添加至我的定制行程"
+  },
+  "Download Full Itinerary": {
+    es: "Descargar Itinerario Completo",
+    en: "Download Full Itinerary",
+    de: "Vollständige Reiseroute herunterladen",
+    fr: "Télécharger l'itinéraire complet",
+    it: "Scarica l'itinerario completo",
+    pt: "Baixar itinerário completo",
+    ja: "完全な日程表をダウンロード",
+    zh: "下载完整行程"
+  },
+  "Verified Guest Reviews for": {
+    es: "Opiniones Verificadas de Viajeros para",
+    en: "Verified Guest Reviews for",
+    de: "Verifizierte Gästebewertungen für",
+    fr: "Avis Vérifiés des Voyageurs pour",
+    it: "Recensioni Verificate degli Ospiti per",
+    pt: "Avaliações Verificadas de Hóspedes para",
+    ja: "認定ゲストレビュー:",
+    zh: "真实旅客评价:"
+  },
+  "Discover what recent travelers say about our personalized service, expert guides, and premium stays.": {
+    es: "Descubra lo que dicen nuestros viajeros sobre el servicio personalizado, guías expertos y alojamientos premium.",
+    en: "Discover what recent travelers say about our personalized service, expert guides, and premium stays.",
+    fr: "Découvrez ce que disent nos voyageurs sur notre service personnalisé, nos guides experts et nos hébergements premium.",
+    de: "Erfahren Sie, was unsere Gäste über unseren persönlichen Service, Expertenführer und Premium-Unterkünfte sagen.",
+    it: "Scoprite cosa dicono i nostri viaggiatori sul servicio personalizzato, le guide esperte e i soggiorni premium.",
+    pt: "Descubra o que nossos viajantes dizem sobre o serviço personalizado, guias especializados e hospedagens premium.",
+    ja: "パーソナライズされたサービス、エキスパートガイド、プレミアム滞在について旅行者が語る声をご覧ください。",
+    zh: "了解旅行者对我们个性化服务、专业向导和高端住宿的真实评价。"
+  }
 };
 
 export function getLocalizedText(text: LocalizedString | undefined | null, locale: string): string {

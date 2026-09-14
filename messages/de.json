@@ -41,12 +41,21 @@
     "cta": "Touren Erkunden"
   },
   "tours": {
+    "badge": "Kuratierte Expeditionen",
+    "title": "Unsere Maßgeschneiderten Touren & Reisen",
+    "subtitle": "Entdecken Sie exklusive Reiserouten von erfahrenen Naturführern auf den Galapagos-Inseln und in Ecuador.",
     "filter": {
       "all": "Alle Expeditionen",
-      "ecuador": "Festland-Ecuador",
-      "galapagos": "Galápagos-Inseln",
+      "ecuador": "Ecuador Festland",
+      "galapagos": "Galapagos-Inseln",
       "combined": "Kombinationsreisen",
-      "fullday": "Tagestouren"
+      "fullday": "Tagesausflüge"
+    },
+    "cta": {
+      "label": "Individuelle Maßgeschneiderte Touren",
+      "title": "Suchen Sie Nach Einer Einzigartigen Expedition Nur Für Sie?",
+      "subtitle": "Wir gestalten 100% individuelle Reiserouten, abgestimmt auf Ihre Termine und Wünsche mit 24/7 VIP-Concierge-Betreuung.",
+      "button": "Maßgeschneidertes Angebot Anfordern"
     }
   },
   "about": {

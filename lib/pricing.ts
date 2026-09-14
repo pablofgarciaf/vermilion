@@ -5,6 +5,8 @@ export interface PricingDetails {
   childrenCount: number;
   isDailyTour?: boolean;
   minTwoPersonApplied?: boolean;
+  singleSupplementApplied?: boolean;
+  singleSupplementAmount?: number;
   
   // Totals before discount
   adultsTotal: number;
@@ -26,22 +28,24 @@ export function calculateTourPrice(
   date: string | null,
   isDailyTour: boolean = false
 ): PricingDetails {
-  // A child is generally cheaper (20% off base price)
+  // A child is generally 20% off base price
   const basePricePerChild = basePrice * 0.8;
+  const totalPeople = adults + children;
 
   let adultsTotal = adults * basePrice;
   let childrenTotal = children * basePricePerChild;
   let minTwoPersonApplied = false;
+  let singleSupplementApplied = false;
+  let singleSupplementAmount = 0;
 
-  // Business Rule: For daily tours (1 day), minimum operating cost is 2 persons.
-  // If 1 person travels, they are charged basePrice * 2 (operational minimum for private guide & transport).
-  // If 2 people travel, basePrice * 2.
-  // If >2 people travel, standard per-passenger pricing applies.
-  const totalPeople = adults + children;
-  if (isDailyTour && totalPeople === 1) {
-    minTwoPersonApplied = true;
-    adultsTotal = basePrice * 2;
+  // Business Rule: All private tours are priced per person based on double occupancy (minimum 2 travelers).
+  // If 1 solo traveler books (totalPeople === 1), a 50% single supplement surcharge applies (+50% base price).
+  if (totalPeople === 1) {
+    singleSupplementApplied = true;
+    singleSupplementAmount = basePrice * 0.50;
+    adultsTotal = basePrice + singleSupplementAmount;
     childrenTotal = 0;
+    minTwoPersonApplied = true;
   }
 
   const subtotal = adultsTotal + childrenTotal;
@@ -66,6 +70,8 @@ export function calculateTourPrice(
     childrenCount: children,
     isDailyTour,
     minTwoPersonApplied,
+    singleSupplementApplied,
+    singleSupplementAmount,
     adultsTotal,
     childrenTotal,
     subtotal,

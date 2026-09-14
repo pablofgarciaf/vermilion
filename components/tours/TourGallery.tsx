@@ -52,6 +52,18 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
     return () => clearInterval(timer);
   }, [activeImageIndex, uniqueImages.length]);
 
+  // Close lightbox on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setActiveImageIndex(null);
+        setIsDestinationModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   if (!uniqueImages || uniqueImages.length === 0) return null;
 
   const currentImage = uniqueImages[selectedMainIndex] || uniqueImages[0];

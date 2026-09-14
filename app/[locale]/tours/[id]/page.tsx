@@ -16,6 +16,7 @@ const TripAdvisorReviews = dynamic(
 
 import { Button } from '@/components/ui/Button';
 import { ExpeditionFacts } from '@/components/tours/ExpeditionFacts';
+import { TourPricingTiersCard } from '@/components/tours/TourPricingTiersCard';
 import { DownloadPDFButton } from '@/components/tours/DownloadPDFButton';
 import {
   MapPin,
@@ -250,41 +251,83 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
   return (
     <LuxuryThemeProvider>
       <TourSubNav title={title} duration={duration} tour={tour} locale={locale} />
-      <div className="pt-36 sm:pt-40 pb-16 bg-zinc-50 dark:bg-zinc-950 min-h-screen">
+      <div className="relative bg-zinc-50 dark:bg-zinc-950 min-h-screen">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(tourJsonLd) }}
       />
 
-      <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+      {/* Full-Bleed Hero Header Banner behind transparent navbar */}
+      <div className="relative w-full min-h-[460px] sm:min-h-[520px] lg:min-h-[580px] flex items-end overflow-hidden bg-zinc-950 text-white">
+        <img
+          src={tour.mainImage || tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'}
+          alt={title}
+          fetchPriority="high"
+          loading="eager"
+          className="absolute inset-0 w-full h-full object-cover object-center transform scale-105 filter brightness-[0.85] transition-transform duration-1000"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/60 to-zinc-950/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/80 via-transparent to-zinc-950/50" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[130px] sm:pt-[150px] lg:pt-[170px] pb-10 sm:pb-12 w-full space-y-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 backdrop-blur-md text-emerald-300 border border-emerald-400/30 uppercase tracking-wider">
+              <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{dest}</span>
+            </span>
+
+            {category && (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/10 backdrop-blur-md text-zinc-200 border border-white/15">
+                {category}
+              </span>
+            )}
+
+            {tour.isPopular && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-stone-950 shadow-lg shadow-amber-500/20 uppercase tracking-wider">
+                <Sparkles className="w-3 h-3" />
+                <span>{getLocalizedText('Best Seller', locale)}</span>
+              </span>
+            )}
+
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-white/10 backdrop-blur-md text-zinc-200 border border-white/15">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{getLocalizedText('Certified Naturalist Guide', locale)}</span>
+            </span>
+          </div>
+
+          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-tight max-w-4xl drop-shadow-md">
+            {title}
+          </h1>
+
+          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-zinc-300 pt-1">
+            <span className="flex items-center gap-1.5 font-semibold text-emerald-400">
+              <Clock className="w-4 h-4" />
+              <span>{duration}</span>
+            </span>
+            <span>&bull;</span>
+            <span className="flex items-center gap-1 font-semibold text-amber-400">
+              <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+              <span>{tour.rating}</span>
+              {tour.reviewsCount && (
+                <span className="text-zinc-300 font-normal">
+                  ({tour.reviewsCount} {getLocalizedText('verified reviews', locale)})
+                </span>
+              )}
+            </span>
+            <span>&bull;</span>
+            <span className="text-zinc-300 font-medium">
+              {getLocalizedText('From', locale)} <span className="font-bold text-white text-base">${(tour.price3Star || tour.price || 1050).toLocaleString('en-US')} USD</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-10 space-y-8">
 
       {/* Main 2-Column Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
         {/* Left Main Content Col */}
         <div className="lg:col-span-8 space-y-8">
-          {/* Main Semantic H1 for SEO & SSR */}
-          <div className="space-y-3 pb-2">
-            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-zinc-900 dark:text-white tracking-tight leading-tight">
-              {title}
-            </h1>
-            <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
-              <span className="flex items-center gap-1.5 font-medium">
-                <Clock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                <span>{duration}</span>
-              </span>
-              <span>&bull;</span>
-              <span className="flex items-center gap-1 font-semibold text-zinc-900 dark:text-zinc-100">
-                <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                <span>{tour.rating}</span>
-                {tour.reviewsCount && (
-                  <span className="text-zinc-500 font-normal">
-                    ({tour.reviewsCount} {locale === 'es' ? 'opiniones verificadas' : 'verified reviews'})
-                  </span>
-                )}
-              </span>
-            </div>
-          </div>
-
           {/* Photo Gallery */}
           <TourGallery images={galleryImages} title={title} tourId={tour.id} destination={tour.destination} />
 
@@ -326,6 +369,9 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
             </div>
           )}
 
+          {/* Vermilion Club vs Vermilion VIP Side-by-Side Pricing Tiers */}
+          <TourPricingTiersCard tour={tour} />
+
           {/* Expedition Technical Sheet ("At a Glance") */}
           <ExpeditionFacts 
             tourId={tour.id} 
@@ -365,7 +411,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
               <div className="bg-white dark:bg-zinc-900/90 p-6 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
                 <h3 className="font-serif font-bold text-lg text-emerald-900 dark:text-emerald-400 flex items-center gap-2">
                   <Check className="w-5 h-5 text-emerald-600" />
-                  <span>{locale === 'es' ? '¿Qué está Incluido?' : 'What is Included?'}</span>
+                  <span>{getLocalizedText('What is Included?', locale)}</span>
                 </h3>
                 <ul className="space-y-2 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
                   {tour.inclusions.map((inc, i) => (
@@ -383,7 +429,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
               <div className="bg-white dark:bg-zinc-900/90 p-6 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
                 <h3 className="font-serif font-bold text-lg text-zinc-900 dark:text-white flex items-center gap-2">
                   <X className="w-5 h-5 text-rose-500" />
-                  <span>{locale === 'es' ? '¿Qué NO está Incluido?' : 'What is NOT Included?'}</span>
+                  <span>{getLocalizedText('What is NOT Included?', locale)}</span>
                 </h3>
                 <ul className="space-y-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
                   {tour.exclusions.map((exc, i) => (
@@ -407,8 +453,8 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
       {/* Verified Guest Reviews */}
       <div className="pt-10 border-t border-zinc-200/80 dark:border-zinc-800">
         <TripAdvisorReviews
-          title={`Verified Guest Reviews for ${title}`}
-          subtitle="Discover what recent travelers say about our personalized service, expert guides, and luxury stays."
+          title={`${getLocalizedText('Verified Guest Reviews for', locale)} ${title}`}
+          subtitle={getLocalizedText('Discover what recent travelers say about our personalized service, expert guides, and premium stays.', locale)}
         />
       </div>
       </div>

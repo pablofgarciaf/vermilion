@@ -41,12 +41,21 @@
     "cta": "Esplora i Tour"
   },
   "tours": {
+    "badge": "Spedizioni Selezionate",
+    "title": "I Nostri Tour & Viaggi Su Misura",
+    "subtitle": "Scopri itinerari esclusivi creati da guide naturalistiche esperte tra le Galapagos e l'Ecuador.",
     "filter": {
       "all": "Tutte le Spedizioni",
       "ecuador": "Ecuador Continentale",
-      "galapagos": "Isole Galápagos",
+      "galapagos": "Isole Galapagos",
       "combined": "Viaggi Combinati",
-      "fullday": "Escursioni Giornaliere"
+      "fullday": "Escursioni Full Day"
+    },
+    "cta": {
+      "label": "Tour Personalizzati Su Misura",
+      "title": "Cerchi una Spedizione Unica Creata Appositamente per Te?",
+      "subtitle": "Progettiamo itinerari personalizzati al 100% adatti alle tue date e preferenze con assistenza VIP 24/7.",
+      "button": "Richiedi Preventivo Su Misura"
     }
   },
   "about": {

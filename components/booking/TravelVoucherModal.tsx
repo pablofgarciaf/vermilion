@@ -214,7 +214,7 @@ export function TravelVoucherModal({
                 {isEs ? 'Viajeros & Categoría' : 'Travelers & Tier'}
               </p>
               <p className="font-bold text-white print:text-black">{clientInfo.adults} {isEs ? 'Adultos' : 'Adults'} {clientInfo.children > 0 ? `• ${clientInfo.children} N` : ''}</p>
-              <p className="text-[10px] text-zinc-400 print:text-zinc-600 truncate">{clientInfo.hotelTier || (isEs ? 'Lujo Boutique' : 'Boutique Luxury')}</p>
+              <p className="text-[10px] text-zinc-400 print:text-zinc-600 truncate">{clientInfo.hotelTier || 'Vermilion VIP'}</p>
             </div>
 
             <div className="space-y-0.5">

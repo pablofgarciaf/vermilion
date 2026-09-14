@@ -41,12 +41,21 @@
     "cta": "Explore Tours"
   },
   "tours": {
+    "badge": "Curated Expeditions",
+    "title": "Our Bespoke Tours & Journeys",
+    "subtitle": "Discover exclusive itineraries crafted by expert naturalist guides across Galapagos and Ecuador.",
     "filter": {
       "all": "All Expeditions",
       "ecuador": "Mainland Ecuador",
       "galapagos": "Galapagos Islands",
       "combined": "Combined Journeys",
-      "fullday": "Full-Day Tours"
+      "fullday": "Full Day Excursions"
+    },
+    "cta": {
+      "label": "Custom Tailor-Made Tours",
+      "title": "Looking for a Unique Expedition Crafted Just for You?",
+      "subtitle": "We design 100% bespoke itineraries tailored to your dates, interests, and style with 24/7 VIP concierge care.",
+      "button": "Request Tailor-Made Quote"
     }
   },
   "about": {

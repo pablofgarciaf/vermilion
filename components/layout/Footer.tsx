@@ -38,7 +38,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Stripe Payments",
     badgeCitibank: "Citibank USA & Zelle",
     badgeSSL: "SSL 256-Bit Encrypted",
-    affiliateProgram: "Affiliate Program"
+    affiliateProgram: "Affiliate Program",
+    officeReservations: "Office / Reservations:",
+    hqEcuador: "Ecuador Headquarters (HQ)",
+    officeSpain: "Spain Branch (Coral Tour)",
+    internationalLanguages: "International / Languages:"
   },
   es: {
     topDestinations: "Destinos Principales", galapagos: "Islas Galápagos", ecuador: "Ecuador Continental", fullDay: "Excursiones Full Day", amazon: "Amazonía Ecuatoriana", volcanoes: "Avenida de los Volcanes",
@@ -53,7 +57,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Pagos con Stripe",
     badgeCitibank: "Citibank EE.UU. & Zelle",
     badgeSSL: "Encriptación SSL de 256 Bits",
-    affiliateProgram: "Programa de Afiliados"
+    affiliateProgram: "Programa de Afiliados",
+    officeReservations: "Oficina / Reservas:",
+    hqEcuador: "Sede Ecuador (HQ)",
+    officeSpain: "Sede España (Coral Tour)",
+    internationalLanguages: "Internacional / Idiomas:"
   },
   fr: {
     topDestinations: "Meilleures Destinations", galapagos: "Îles Galapagos", ecuador: "Équateur Continental", fullDay: "Excursions Full Day", amazon: "Amazonie Équatorienne", volcanoes: "Avenue des Volcans",
@@ -68,7 +76,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Paiements Stripe",
     badgeCitibank: "Citibank USA & Zelle",
     badgeSSL: "Crypté SSL 256 Bits",
-    affiliateProgram: "Programme d'Affiliation"
+    affiliateProgram: "Programme d'Affiliation",
+    officeReservations: "Bureau / Réservations:",
+    hqEcuador: "Siège Équateur (HQ)",
+    officeSpain: "Filiale Espagne (Coral Tour)",
+    internationalLanguages: "International / Langues:"
   },
   de: {
     topDestinations: "Top-Reiseziele", galapagos: "Galapagos-Inseln", ecuador: "Ecuador Festland", fullDay: "Tagesausflüge (Full Day)", amazon: "Ecuadorianischer Amazonas", volcanoes: "Straße der Vulkane",
@@ -83,7 +95,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Stripe-Zahlungen",
     badgeCitibank: "Citibank USA & Zelle",
     badgeSSL: "SSL 256-Bit-Verschlüsselung",
-    affiliateProgram: "Partnerprogramm"
+    affiliateProgram: "Partnerprogramm",
+    officeReservations: "Büro / Reservierungen:",
+    hqEcuador: "Hauptsitz Ecuador (HQ)",
+    officeSpain: "Niederlassung Spanien (Coral Tour)",
+    internationalLanguages: "International / Sprachen:"
   },
   it: {
     topDestinations: "Destinazioni Top", galapagos: "Isole Galapagos", ecuador: "Ecuador Continentale", fullDay: "Escursioni Full Day", amazon: "Amazzonia Ecuadoriana", volcanoes: "Viale dei Vulcani",
@@ -98,7 +114,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Pagamenti Stripe",
     badgeCitibank: "Citibank USA & Zelle",
     badgeSSL: "Crittografia SSL a 256 Bit",
-    affiliateProgram: "Programma di Affiliazione"
+    affiliateProgram: "Programma di Affiliazione",
+    officeReservations: "Ufficio / Prenotazioni:",
+    hqEcuador: "Sede Ecuador (HQ)",
+    officeSpain: "Sede Spagna (Coral Tour)",
+    internationalLanguages: "Internazionale / Lingue:"
   },
   pt: {
     topDestinations: "Principais Destinos", galapagos: "Ilhas Galápagos", ecuador: "Equador Continental", fullDay: "Excursões Full Day", amazon: "Amazônia Equatoriana", volcanoes: "Avenida dos Vulcões",
@@ -113,7 +133,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Pagamentos Stripe",
     badgeCitibank: "Citibank EUA & Zelle",
     badgeSSL: "Criptografia SSL de 256 Bits",
-    affiliateProgram: "Programa de Afiliados"
+    affiliateProgram: "Programa de Afiliados",
+    officeReservations: "Escritório / Reservas:",
+    hqEcuador: "Sede Equador (HQ)",
+    officeSpain: "Sede Espanha (Coral Tour)",
+    internationalLanguages: "Internacional / Idiomas:"
   },
   ja: {
     topDestinations: "人気の目的地", galapagos: "ガラパゴス諸島", ecuador: "エクアドル本土", fullDay: "日帰りツアー（Full Day）", amazon: "エクアドル・アマゾン", volcanoes: "火山の道",
@@ -128,7 +152,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Stripe カード決済",
     badgeCitibank: "米国シティバンク & Zelle",
     badgeSSL: "256ビット SSL 暗号化保護",
-    affiliateProgram: "アフィリエイト・プログラム"
+    affiliateProgram: "アフィリエイト・プログラム",
+    officeReservations: "オフィス / 予約:",
+    hqEcuador: "エクアドル本社 (HQ)",
+    officeSpain: "スペイン支社 (Coral Tour)",
+    internationalLanguages: "グローバル / 言語を選択:"
   },
   zh: {
     topDestinations: "热门目的地", galapagos: "加拉帕戈斯群岛", ecuador: "厄瓜多尔大陆", fullDay: "全天一日游", amazon: "厄瓜多尔亚马逊", volcanoes: "火山大道",
@@ -143,7 +171,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Stripe 国际银行卡支付",
     badgeCitibank: "美国花旗银行 & Zelle",
     badgeSSL: "256位 SSL 顶级加密",
-    affiliateProgram: "联盟伙伴计划"
+    affiliateProgram: "联盟伙伴计划",
+    officeReservations: "办公室 / 预订专线:",
+    hqEcuador: "厄瓜多尔总部 (HQ)",
+    officeSpain: "西班牙分部 (Coral Tour)",
+    internationalLanguages: "国际多语言切换:"
   }
 };
 
@@ -408,7 +440,14 @@ export function Footer() {
               </p>
               <p className="flex items-center gap-2 text-zinc-300">
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="text-zinc-400 text-[11px]">Oficina / Reservas:</span>
+                <span className="text-zinc-400 text-[11px]">WhatsApp 24/7:</span>
+                <a href="tel:+593994048458" className="hover:text-emerald-300 transition-colors">
+                  +593 99 404 8458
+                </a>
+              </p>
+              <p className="flex items-center gap-2 text-zinc-300">
+                <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span className="text-zinc-400 text-[11px]">{t.officeReservations}</span>
                 <a href="tel:+593983992549" className="hover:text-emerald-300 transition-colors">
                   +593 98 399 2549
                 </a>
@@ -427,7 +466,7 @@ export function Footer() {
                 <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-[11px] leading-snug">
                   <div className="flex items-center gap-1.5 font-semibold text-emerald-300 mb-1">
                     <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Sede Ecuador (HQ)</span>
+                    <span>{t.hqEcuador}</span>
                   </div>
                   <p className="text-zinc-300 pl-5">
                     Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503)
@@ -437,7 +476,7 @@ export function Footer() {
                 <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-[11px] leading-snug">
                   <div className="flex items-center gap-1.5 font-semibold text-emerald-300 mb-1">
                     <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>Sede España (Coral Tour)</span>
+                    <span>{t.officeSpain}</span>
                   </div>
                   <p className="text-zinc-300 pl-5">
                     Calle Seco 3, 28007 Madrid, España
@@ -500,7 +539,7 @@ export function Footer() {
         <div className="py-6 border-b border-emerald-900/60 dark:border-zinc-900 flex flex-wrap items-center justify-between gap-3 text-xs">
           <span className="text-[11px] uppercase tracking-wider font-semibold text-emerald-400/90 flex items-center gap-1.5">
             <Globe className="w-3.5 h-3.5 text-emerald-400" />
-            <span>International / Idiomas:</span>
+            <span>{t.internationalLanguages}</span>
           </span>
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             {[

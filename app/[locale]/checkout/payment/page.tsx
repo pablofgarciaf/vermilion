@@ -426,7 +426,197 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     pt: 'Ao continuar com a reserva, você concorda com os termos e políticas de privacidade da Vermilion Routes.',
     ja: '本予約手続きを完了することにより、Vermilion Routesの利用規約およびプライバシーポリシーに同意したものとみなされます。',
     zh: '确认付款或登记预订，即代表您同意遵循 Vermilion Routes 的服务条款与隐私政策。',
-  }
+  },
+  adultsText: {
+    en: 'Adults',
+    es: 'Adultos',
+    fr: 'Adultes',
+    de: 'Erwachsene',
+    it: 'Adulti',
+    pt: 'Adultos',
+    ja: '大人',
+    zh: '位成人',
+  },
+  adultText: {
+    en: 'Adult',
+    es: 'Adulto',
+    fr: 'Adulte',
+    de: 'Erwachsener',
+    it: 'Adulto',
+    pt: 'Adulto',
+    ja: '大人',
+    zh: '位成人',
+  },
+  childrenText: {
+    en: 'Children',
+    es: 'Niños',
+    fr: 'Enfants',
+    de: 'Kinder',
+    it: 'Bambini',
+    pt: 'Crianças',
+    ja: '子供',
+    zh: '位儿童',
+  },
+  childText: {
+    en: 'Child',
+    es: 'Niño',
+    fr: 'Enfant',
+    de: 'Kind',
+    it: 'Bambino',
+    pt: 'Criança',
+    ja: '子供',
+    zh: '位儿童',
+  },
+  travelersText: {
+    en: 'Travelers',
+    es: 'Viajeros',
+    fr: 'Voyageurs',
+    de: 'Reisende',
+    it: 'Viaggiatori',
+    pt: 'Viajantes',
+    ja: '名様',
+    zh: '位旅行者',
+  },
+  travelerText: {
+    en: 'Traveler',
+    es: 'Viajero',
+    fr: 'Voyageur',
+    de: 'Reisender',
+    it: 'Viaggiatore',
+    pt: 'Viajante',
+    ja: '名様',
+    zh: '位旅行者',
+  },
+  defaultTravelerName: {
+    en: 'Valued Traveler',
+    es: 'Viajero Distinguido',
+    fr: 'Voyageur Distingué',
+    de: 'Geschätzter Reisender',
+    it: 'Viaggiatore Distinto',
+    pt: 'Viajante Ilustre',
+    ja: '大切なお客様',
+    zh: '尊贵旅客',
+  },
+  toBeConfirmed: {
+    en: 'To be confirmed',
+    es: 'Por confirmar',
+    fr: 'À confirmer',
+    de: 'Zu bestätigen',
+    it: 'Da confermare',
+    pt: 'A confirmar',
+    ja: '確認中',
+    zh: '待确认',
+  },
+  downloadVoucherPdf: {
+    en: 'Download Voucher (PDF)',
+    es: 'Descargar Voucher (PDF)',
+    fr: 'Télécharger le Voucher (PDF)',
+    de: 'Gutschein herunterladen (PDF)',
+    it: 'Scarica Voucher (PDF)',
+    pt: 'Baixar Voucher (PDF)',
+    ja: 'バウチャーをダウンロード (PDF)',
+    zh: '下载凭证 (PDF)',
+  },
+  backToModify: {
+    en: 'Back to modify booking',
+    es: 'Volver a modificar mi reserva',
+    fr: 'Modifier ma réservation',
+    de: 'Zurück zur Buchungsänderung',
+    it: 'Torna a modificare la prenotazione',
+    pt: 'Voltar para modificar minha reserva',
+    ja: '予約変更に戻る',
+    zh: '返回修改我的预订',
+  },
+  spainTransferDesc: {
+    en: 'Local reception in Euros via European SEPA bank transfer with zero international exchange fees. Settle in EUR now by contacting our 24/7 Concierge on WhatsApp to receive Madrid deposit details.',
+    es: 'Recepción local en euros mediante transferencia bancaria europea SEPA sin comisiones internacionales de cambio. Si deseas liquidar en EUR de inmediato, contacta a nuestro Concierge 24/7 en WhatsApp para coordinar los datos de depósito directo en Madrid.',
+    fr: 'Réception locale en euros par virement bancaire européen SEPA sans frais de change. Pour régler en EUR dès maintenant, contactez notre Concierge 24/7 sur WhatsApp pour recevoir les coordonnées de dépôt à Madrid.',
+    de: 'Lokaler Empfang in Euro per europäischer SEPA-Banküberweisung ohne Wechselgebühren. Um jetzt in EUR zu bezahlen, kontaktieren Sie unseren 24/7 Concierge auf WhatsApp für die Kontodaten in Madrid.',
+    it: 'Ricezione locale in Euro tramite bonifico europeo SEPA senza commissioni di cambio. Per saldare in EUR ora, contatta il nostro Concierge 24/7 su WhatsApp per le coordinate di Madrid.',
+    pt: 'Recebimento local em euros via transferência bancária europeia SEPA sem taxas de câmbio. Para liquidar em EUR agora, contate nosso Concierge 24/7 no WhatsApp para receber os dados de depósito em Madrid.',
+    ja: '欧州SEPA銀行振込による手数料無料のユーロ受取。EURでのお支払いをご希望の場合は、24時間対応のWhatsAppコンシェルジュにマドリード口座詳細をお問い合わせください。',
+    zh: '支持通过欧洲 SEPA 银行转账直接支付欧元，免除任何国际兑换手续费。如需立即使用欧元结算，请随时联系我们的 24/7 WhatsApp 礼宾客服获取马德里指定账户信息。',
+  },
+  requestMadridWa: {
+    en: 'Request Madrid account via WhatsApp',
+    es: 'Solicitar cuenta en Madrid por WhatsApp',
+    fr: 'Demander le compte de Madrid via WhatsApp',
+    de: 'Madrid-Kontodaten per WhatsApp anfordern',
+    it: 'Richiedi conto di Madrid via WhatsApp',
+    pt: 'Solicitar conta em Madrid pelo WhatsApp',
+    ja: 'WhatsAppでマドリード口座を問い合わせる',
+    zh: '通过 WhatsApp 索取马德里银行账户',
+  },
+  contactDetailsTitle: {
+    en: 'Lead Traveler Contact Details',
+    es: 'Datos del Pasajero Principal',
+    fr: 'Coordonnées du Passager Principal',
+    de: 'Kontaktdaten des Hauptreisenden',
+    it: 'Dati del Passeggero Principale',
+    pt: 'Dados do Passageiro Principal',
+    ja: '代表者連絡先情報',
+    zh: '主要旅客联系信息',
+  },
+  contactDetailsSubtitle: {
+    en: 'Official voucher, tickets & receipts will be sent to this email.',
+    es: 'Los vouchers oficiales, tickets y comprobantes se enviarán a este correo.',
+    fr: 'Les bons officiels, billets et reçus seront envoyés à cette adresse.',
+    de: 'Offizielle Gutscheine, Tickets und Belege werden an diese E-Mail gesendet.',
+    it: 'Voucher ufficiali, biglietti e ricevute saranno inviati a questa email.',
+    pt: 'Vouchers oficiais, ingressos e comprovantes serão enviados para este e-mail.',
+    ja: '公式バウチャー、チケット、領収書はこのメール宛てに送信されます。',
+    zh: '正式凭证、出行票据与确认单将发送至此电子邮箱。',
+  },
+  fullNameLabel: {
+    en: 'Full Name',
+    es: 'Nombre y Apellidos',
+    fr: 'Nom et Prénom',
+    de: 'Vollständiger Name',
+    it: 'Nome e Cognome',
+    pt: 'Nome e Sobrenome',
+    ja: '氏名',
+    zh: '旅客姓名',
+  },
+  fullNamePlaceholder: {
+    en: 'e.g. Alexander von Humboldt',
+    es: 'ej. Alejandro de Humboldt',
+    fr: 'ex. Alexandre de Humboldt',
+    de: 'z.B. Alexander von Humboldt',
+    it: 'es. Alessandro di Humboldt',
+    pt: 'ex. Alexandre de Humboldt',
+    ja: '例：山田 太郎',
+    zh: '例如：王小明',
+  },
+  emailLabel: {
+    en: 'Email Address',
+    es: 'Correo Electrónico',
+    fr: 'Adresse Email',
+    de: 'E-Mail-Adresse',
+    it: 'Indirizzo Email',
+    pt: 'Endereço de E-mail',
+    ja: 'メールアドレス',
+    zh: '电子邮箱',
+  },
+  emailPlaceholder: {
+    en: 'alexander@example.com',
+    es: 'alejandro@ejemplo.com',
+    fr: 'alexandre@exemple.com',
+    de: 'alexander@beispiel.de',
+    it: 'alessandro@esempio.it',
+    pt: 'alexandre@exemplo.com',
+    ja: 'taro@example.com',
+    zh: 'example@domain.com',
+  },
+  phoneLabel: {
+    en: 'Phone / WhatsApp (Optional)',
+    es: 'Teléfono / WhatsApp (Opcional)',
+    fr: 'Téléphone / WhatsApp (Opcional)',
+    de: 'Telefon / WhatsApp (Optional)',
+    it: 'Telefono / WhatsApp (Opzionale)',
+    pt: 'Telefone / WhatsApp (Opcional)',
+    ja: '電話番号 / WhatsApp（任意）',
+    zh: '联系电话 / WhatsApp（选填）',
+  },
 };
 
 export default function CheckoutPaymentPage() {
@@ -443,6 +633,7 @@ export default function CheckoutPaymentPage() {
   const tourTitle = searchParams.get('tourTitle') || 'Vermilion Routes Expedition';
   const [email, setEmail] = useState(searchParams.get('email') || '');
   const [clientName, setClientName] = useState(searchParams.get('name') || '');
+  const [clientPhone, setClientPhone] = useState(searchParams.get('phone') || '');
   const amountStr = searchParams.get('amount') || '500';
   const type = searchParams.get('type') || 'deposit';
   const initialRef = searchParams.get('ref') || '';
@@ -459,15 +650,15 @@ export default function CheckoutPaymentPage() {
     const c = parseInt(childrenParam);
     if (!isNaN(a) && a > 0) {
       if (!isNaN(c) && c > 0) {
-        return `${a} ${a === 1 ? (locale === 'es' ? 'Adulto' : 'Adult') : (locale === 'es' ? 'Adultos' : 'Adults')}, ${c} ${c === 1 ? (locale === 'es' ? 'Niño' : 'Child') : (locale === 'es' ? 'Niños' : 'Children')}`;
+        return `${a} ${a === 1 ? t('adultText') : t('adultsText')}, ${c} ${c === 1 ? t('childText') : t('childrenText')}`;
       }
-      return `${a} ${a === 1 ? (locale === 'es' ? 'Viajero' : 'Traveler') : (locale === 'es' ? 'Viajeros' : 'Travelers')}`;
+      return `${a} ${a === 1 ? t('travelerText') : t('travelersText')}`;
     }
     const tCount = parseInt(travelersParam);
     if (!isNaN(tCount) && tCount > 0) {
-      return `${tCount} ${tCount === 1 ? (locale === 'es' ? 'Viajero' : 'Traveler') : (locale === 'es' ? 'Viajeros' : 'Travelers')}`;
+      return `${tCount} ${tCount === 1 ? t('travelerText') : t('travelersText')}`;
     }
-    return locale === 'es' ? '1 Viajero' : '1 Traveler';
+    return `1 ${t('travelerText')}`;
   };
 
   // Discount code & Automatic 10% Referral Discount
@@ -490,11 +681,11 @@ export default function CheckoutPaymentPage() {
     try {
       await generateTravelVoucherPDF({
         bookingRef: ref,
-        customerName: clientName || email.split('@')[0] || (locale === 'es' ? 'Viajero Distinguido' : 'Valued Traveler'),
+        customerName: clientName || email.split('@')[0] || t('defaultTravelerName'),
         customerEmail: email || 'info@vermilionroutes.com',
         tourTitle,
         destination: matchedTour?.destination || 'Ecuador & Galápagos',
-        travelDate: travelDate || (locale === 'es' ? 'Por confirmar' : 'To be confirmed'),
+        travelDate: travelDate || t('toBeConfirmed'),
         travelersCount: getTravelersText(),
         totalAmount: finalAmount,
         paymentMethod: receiptSubmitted ? 'Transferencia Bancaria Internacional' : 'PayPal / Tarjeta Internacional',
@@ -783,7 +974,7 @@ export default function CheckoutPaymentPage() {
                 ) : (
                   <Download className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
                 )}
-                <span>{locale === 'es' ? 'Descargar Voucher (PDF)' : 'Download Voucher (PDF)'}</span>
+                <span>{t('downloadVoucherPdf')}</span>
               </button>
 
               <a
@@ -856,7 +1047,7 @@ export default function CheckoutPaymentPage() {
                     </div>
                   )}
                   <div className="flex justify-between items-center">
-                    <span className="text-stone-500 dark:text-zinc-500">Viajeros:</span>
+                    <span className="text-stone-500 dark:text-zinc-500">{t('travelersText')}:</span>
                     <strong className="text-stone-900 dark:text-zinc-200 flex items-center gap-1">
                       <Users className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> {getTravelersText()}
                       {isDailyTourParam && (parseInt(travelersParam) === 1 || adultsParam === '1') && (
@@ -876,7 +1067,7 @@ export default function CheckoutPaymentPage() {
                     className="w-full flex items-center justify-center gap-1.5 py-2 px-3 text-xs text-stone-600 dark:text-zinc-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors font-medium border border-stone-200 dark:border-white/10 rounded-xl hover:bg-stone-50 dark:hover:bg-zinc-800/50 cursor-pointer"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
-                    <span>{locale === 'es' ? 'Volver a modificar mi reserva' : 'Back to modify booking'}</span>
+                    <span>{t('backToModify')}</span>
                   </button>
                 </div>
               </div>
@@ -953,6 +1144,64 @@ export default function CheckoutPaymentPage() {
 
             {/* ── RIGHT COLUMN (7 COLS): PAYMENT METHOD & DIRECT ACTIONS ── */}
             <div className="lg:col-span-7 space-y-4">
+
+              {/* Lead Traveler Contact Details Card */}
+              <div className="bg-white dark:bg-zinc-950 border border-stone-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                    <h2 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white">
+                      {t('contactDetailsTitle')}
+                    </h2>
+                  </div>
+                  <span className="text-[10px] font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                    256-Bit SSL
+                  </span>
+                </div>
+                <p className="text-[11px] text-stone-500 dark:text-zinc-400">
+                  {t('contactDetailsSubtitle')}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                  <div>
+                    <label className="block text-[10px] font-bold text-stone-600 dark:text-zinc-300 uppercase tracking-wider mb-1">
+                      {t('fullNameLabel')}
+                    </label>
+                    <input
+                      type="text"
+                      value={clientName}
+                      onChange={(e) => setClientName(e.target.value)}
+                      placeholder={t('fullNamePlaceholder')}
+                      className="w-full text-xs px-3 py-2.5 rounded-xl border border-stone-300 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900 text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-stone-600 dark:text-zinc-300 uppercase tracking-wider mb-1">
+                      {t('emailLabel')} *
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={t('emailPlaceholder')}
+                      required
+                      className="w-full text-xs px-3 py-2.5 rounded-xl border border-stone-300 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900 text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="block text-[10px] font-bold text-stone-600 dark:text-zinc-300 uppercase tracking-wider mb-1">
+                      {t('phoneLabel')}
+                    </label>
+                    <input
+                      type="tel"
+                      value={clientPhone}
+                      onChange={(e) => setClientPhone(e.target.value)}
+                      placeholder="+1 (555) 000-0000"
+                      className="w-full text-xs px-3 py-2.5 rounded-xl border border-stone-300 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900 text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 bg-stone-100 dark:bg-zinc-950 border border-stone-200 dark:border-white/10 rounded-2xl text-xs font-semibold">
                 {/* Tab 1: PayPal / Card */}
                 <button
@@ -994,8 +1243,9 @@ export default function CheckoutPaymentPage() {
                     bookingRef={ref}
                     tourId={tourId}
                     tourTitle={tourTitle}
-                    clientName={clientName || email.split('@')[0] || 'Valued Traveler'}
+                    clientName={clientName || email.split('@')[0] || t('defaultTravelerName')}
                     clientEmail={email}
+                    clientPhone={clientPhone}
                     travelDate={travelDate}
                     guestsCount={getTravelersText()}
                     passengersCount={parseInt(travelersParam) || parseInt(adultsParam) || 1}
@@ -1221,9 +1471,7 @@ export default function CheckoutPaymentPage() {
                       {openBankCard === 'spain' && (
                         <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-2 text-[11px] text-stone-600 dark:text-zinc-400 animate-fade-in">
                           <p className="pt-2 leading-relaxed">
-                            {locale === 'es'
-                              ? 'Recepción local en euros mediante transferencia bancaria europea SEPA sin comisiones internacionales de cambio. Próximamente disponible en línea; si deseas liquidar en EUR de inmediato, contacta a nuestro Concierge 24/7 en WhatsApp para coordinar los datos de depósito directo en Madrid.'
-                              : 'Local reception in Euros via European SEPA bank transfer with zero international exchange fees. Coming soon directly online; to settle in EUR now, contact our 24/7 Concierge on WhatsApp to receive Madrid deposit details.'}
+                            {t('spainTransferDesc')}
                           </p>
                           <a
                             href={`https://wa.me/593994048458?text=${encodeURIComponent(
@@ -1234,7 +1482,7 @@ export default function CheckoutPaymentPage() {
                             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold text-[10px] hover:bg-emerald-100 transition-colors"
                           >
                             <MessageCircle className="w-3.5 h-3.5" />
-                            <span>{locale === 'es' ? 'Solicitar cuenta en Madrid por WhatsApp' : 'Request Madrid account via WhatsApp'}</span>
+                            <span>{t('requestMadridWa')}</span>
                           </a>
                         </div>
                       )}

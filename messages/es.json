@@ -41,12 +41,21 @@
     "cta": "Explorar Tours"
   },
   "tours": {
+    "badge": "Expediciones Seleccionadas",
+    "title": "Nuestros Tours y Viajes a Medida",
+    "subtitle": "Descubra itinerarios exclusivos diseñados por guias naturalistas expertos por Galápagos y Ecuador.",
     "filter": {
       "all": "Todas las Expediciones",
       "ecuador": "Ecuador Continental",
       "galapagos": "Islas Galápagos",
       "combined": "Viajes Combinados",
       "fullday": "Excursiones Full Day"
+    },
+    "cta": {
+      "label": "Tours Personalizados a Medida",
+      "title": "¿Busca una Expedición Única Creada Especialmente para Usted?",
+      "subtitle": "Diseñamos itinerarios 100% personalizados adaptados a sus fechas, intereses y preferencias con atención VIP 24/7.",
+      "button": "Solicitar Cotización a Medida"
     }
   },
   "about": {

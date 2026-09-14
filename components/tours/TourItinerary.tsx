@@ -54,6 +54,97 @@ const ITINERARY_SUBTITLE: Record<string, string> = {
   zh: '探索每日精彩行程安排、交通后勤以及由专业自然向导带领的尊享体验。',
 };
 
+const EXPAND_ALL_TEXT: Record<string, string> = {
+  es: 'Expandir Todo',
+  en: 'Expand All',
+  fr: 'Tout Développer',
+  de: 'Alle Ausklappen',
+  it: 'Espandi Tutto',
+  pt: 'Expandir Tudo',
+  ja: 'すべて展開',
+  zh: '展开全部',
+};
+
+const COLLAPSE_ALL_TEXT: Record<string, string> = {
+  es: 'Contraer Todo',
+  en: 'Collapse All',
+  fr: 'Tout Réduire',
+  de: 'Alle Einklappen',
+  it: 'Comprimer Tutto',
+  pt: 'Recolher Tudo',
+  ja: 'すべて折りたたむ',
+  zh: '折叠全部',
+};
+
+const DAY_HIGHLIGHTS_TEXT: Record<string, string> = {
+  es: 'Puntos Clave del Día:',
+  en: 'Day Highlights:',
+  fr: 'Points Forts du Jour:',
+  de: 'Tages-Highlights:',
+  it: 'Punti Salienti del Giorno:',
+  pt: 'Destaques do Dia:',
+  ja: '本日のハイライト:',
+  zh: '每日行程亮点:',
+};
+
+const STAY_TEXT: Record<string, string> = {
+  es: 'Alojamiento:',
+  en: 'Stay:',
+  fr: 'Hébergement:',
+  de: 'Unterkunft:',
+  it: 'Alloggio:',
+  pt: 'Hospedagem:',
+  ja: '宿泊:',
+  zh: '住宿安排:',
+};
+
+const TRANSPORT_TEXT: Record<string, string> = {
+  es: 'Transporte:',
+  en: 'Transport:',
+  fr: 'Transport:',
+  de: 'Transport:',
+  it: 'Trasporto:',
+  pt: 'Transporte:',
+  ja: '移動手段:',
+  zh: '交通安排:',
+};
+
+const ACTIVITY_TEXT: Record<string, string> = {
+  es: 'Actividad:',
+  en: 'Activity:',
+  fr: 'Activité:',
+  de: 'Aktivität:',
+  it: 'Attività:',
+  pt: 'Atividade:',
+  ja: 'アクティビティ:',
+  zh: '活动内容:',
+};
+
+const ALTITUDE_TEXT: Record<string, string> = {
+  es: 'Altitud:',
+  en: 'Altitude:',
+  fr: 'Altitud:',
+  de: 'Höhe:',
+  it: 'Altitudine:',
+  pt: 'Altitude:',
+  ja: '高度:',
+  zh: '海拔高度:',
+};
+
+function formatDayBadge(day: number, locale: string): string {
+  switch (locale) {
+    case 'es': return `Día ${day}`;
+    case 'fr': return `Jour ${day}`;
+    case 'de': return `Tag ${day}`;
+    case 'it': return `Giorno ${day}`;
+    case 'pt': return `Dia ${day}`;
+    case 'ja': return `${day}日目`;
+    case 'zh': return `第${day}天`;
+    case 'en':
+    default: return `Day ${day}`;
+  }
+}
+
 export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
   const [openDays, setOpenDays] = useState<number[]>([1]); // Day 1 open by default
   const locale = useLocale();
@@ -101,14 +192,14 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
             onClick={expandAll}
             className="text-emerald-700 dark:text-emerald-400 hover:underline font-semibold cursor-pointer transition-colors"
           >
-            Expand All
+            {EXPAND_ALL_TEXT[locale] || EXPAND_ALL_TEXT['en']}
           </button>
           <span className="text-stone-300 dark:text-stone-700">•</span>
           <button
             onClick={collapseAll}
             className="text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 font-medium cursor-pointer transition-colors"
           >
-            Collapse All
+            {COLLAPSE_ALL_TEXT[locale] || COLLAPSE_ALL_TEXT['en']}
           </button>
         </div>
       </div>
@@ -146,13 +237,13 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
                 <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
                   {/* Day Badge */}
                   <span
-                    className={`shrink-0 w-11 h-11 rounded-2xl font-serif font-bold text-sm flex items-center justify-center transition-all ${
+                    className={`shrink-0 px-3 h-11 rounded-2xl font-serif font-bold text-xs sm:text-sm flex items-center justify-center transition-all ${
                       isOpen
                         ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25 scale-105'
                         : 'bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 group-hover:bg-emerald-50 group-hover:text-emerald-700 dark:group-hover:bg-emerald-950 dark:group-hover:text-emerald-300'
                     }`}
                   >
-                    Day {item.day}
+                    {formatDayBadge(item.day, locale)}
                   </span>
 
                   {/* Title */}
@@ -194,7 +285,7 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
                   {item.highlights && item.highlights.length > 0 && (
                     <div className="bg-emerald-50/70 dark:bg-emerald-950/30 p-3.5 rounded-2xl border border-emerald-100/80 dark:border-emerald-900/40 space-y-2">
                       <span className="text-xs font-bold text-emerald-900 dark:text-emerald-200 uppercase tracking-wider block">
-                        Day Highlights:
+                        {DAY_HIGHLIGHTS_TEXT[locale] || DAY_HIGHLIGHTS_TEXT['en']}
                       </span>
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-emerald-900 dark:text-emerald-200 font-medium">
                         {item.highlights.map((hl, i) => (
@@ -212,28 +303,28 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
                     {dayAcc && (
                       <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
                         <Hotel className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>Stay: {dayAcc}</span>
+                        <span>{STAY_TEXT[locale] || STAY_TEXT['en']} {dayAcc}</span>
                       </div>
                     )}
 
                     {dayTrans && (
                       <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
                         <Bus className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>Transport: {dayTrans}</span>
+                        <span>{TRANSPORT_TEXT[locale] || TRANSPORT_TEXT['en']} {dayTrans}</span>
                       </div>
                     )}
 
                     {dayAct && (
                       <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
                         <Footprints className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>Activity: {dayAct}</span>
+                        <span>{ACTIVITY_TEXT[locale] || ACTIVITY_TEXT['en']} {dayAct}</span>
                       </div>
                     )}
 
                     {dayAlt && (
                       <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
                         <Mountain className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>Altitude: {dayAlt}</span>
+                        <span>{ALTITUDE_TEXT[locale] || ALTITUDE_TEXT['en']} {dayAlt}</span>
                       </div>
                     )}
                   </div>

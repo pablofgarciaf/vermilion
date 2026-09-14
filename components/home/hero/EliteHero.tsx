@@ -175,8 +175,8 @@ export function EliteHero({ locale = 'es' }: EliteHeroProps) {
 
         <p className="mt-8 text-base sm:text-lg md:text-xl font-sans max-w-xl font-light tracking-wide text-zinc-300 leading-relaxed opacity-0 elite-hero-fade">
           {isEs
-            ? 'Arquitectura de viajes de ultra lujo en Ecuador y Galápagos. Conectamos viajeros exigentes con experiencias privadas de impacto inolvidable.'
-            : 'Ultra-luxury travel architecture in Ecuador & Galápagos. Connecting discerning travelers with private, unforgettable journeys.'}
+            ? 'Arquitectura de viajes a medida de excelencia en Ecuador y Galápagos. Conectamos viajeros exigentes con experiencias privadas de impacto inolvidable.'
+            : 'Bespoke travel architecture in Ecuador & Galápagos. Connecting discerning travelers with private, unforgettable journeys.'}
         </p>
 
         {/* Action Buttons with Kinetic Bézier Fill */}

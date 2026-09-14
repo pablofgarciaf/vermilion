@@ -108,7 +108,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   };
 
   return (
-    <div className="space-y-8 pb-12 relative -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px]">
+    <div className="space-y-8 pb-12 relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

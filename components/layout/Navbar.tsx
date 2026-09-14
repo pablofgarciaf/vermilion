@@ -73,12 +73,17 @@ export function Navbar() {
     router.push(`/${newLocale}${pathWithoutLocale}`);
   };
 
+  const isSubNavRoute = Boolean((pathname?.includes('/tours/') && !pathname?.endsWith('/tours')) || pathname?.includes('/booking'));
+  const [isSubNavScrolled, setIsSubNavScrolled] = useState(false);
+
   useEffect(() => {
     setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      setIsSubNavScrolled(window.scrollY > 200);
     };
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -184,10 +189,21 @@ export function Navbar() {
         Main Sticky Header 
       */}
       <header
-        className={`transition-all duration-300 backdrop-blur-xl border-b ${isScrolled ? 'pt-2.5 shadow-md bg-[#FAF8F5]/95 dark:bg-[#05140C]/95 border-zinc-200/90 dark:border-zinc-800/90' : 'pt-3 bg-[#FAF8F5]/70 dark:bg-[#05140C]/60 border-zinc-200/30 dark:border-white/10'
-          }`}
+        className={`transition-all duration-300 backdrop-blur-xl border-b ${
+          isSubNavRoute && isSubNavScrolled
+            ? 'pt-0 border-none bg-transparent shadow-none'
+            : isScrolled
+            ? 'pt-2.5 shadow-md bg-[#FAF8F5]/95 dark:bg-[#05140C]/95 border-zinc-200/90 dark:border-zinc-800/90'
+            : 'pt-3 bg-[#FAF8F5]/70 dark:bg-[#05140C]/60 border-zinc-200/30 dark:border-white/10'
+        }`}
       >
-        <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between pb-2 sm:pb-1.5">
+        <div
+          className={`max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex items-center justify-between transition-all duration-300 ${
+            isSubNavRoute && isSubNavScrolled
+              ? 'max-h-0 opacity-0 py-0 overflow-hidden pointer-events-none -translate-y-2'
+              : 'pb-2 sm:pb-1.5 opacity-100 translate-y-0'
+          }`}
+        >
           {/* Logo */}
           <Link href={`/${locale}`} aria-label="Vermilion Routes Inicio" className="flex items-center gap-3 relative z-10 group notranslate">
             <div className="relative w-[165px] h-[40px] sm:w-[180px] sm:h-[45px] md:w-[220px] md:h-[55px] shrink-0">

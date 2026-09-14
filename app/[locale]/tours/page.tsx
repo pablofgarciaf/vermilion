@@ -512,7 +512,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
               const title = getLocalizedText(tour.title, locale);
               const duration = getLocalizedText(tour.duration, locale);
               const desc = getLocalizedText(tour.description, locale);
-              const price = tour.price3Star || tour.price || 1590;
+              const price = tour.price3Star || tour.price || 1050;
 
               return (
                 <div
