@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Clock, Star, MessageCircle } from 'lucide-react';
-import { DownloadPDFButton } from './DownloadPDFButton';
+import { Star, Hotel, Sparkles, MessageCircle, Phone, ChevronDown } from 'lucide-react';
 import { Tour } from '@/types';
 
 interface TourSubNavProps {
@@ -15,52 +14,21 @@ interface TourSubNavProps {
   locale: string;
 }
 
-const SUBNAV_I18N: Record<string, { reviews: string; contactUs: string; waPrefix: string }> = {
-  es: {
-    reviews: 'opiniones verificadas',
-    contactUs: 'Contáctanos',
-    waPrefix: 'Hola Vermilion Routes, deseo información personalizada y reservar el tour:',
-  },
-  en: {
-    reviews: 'verified reviews',
-    contactUs: 'Contact Us',
-    waPrefix: 'Hello Vermilion Routes, I would like custom information and book the tour:',
-  },
-  fr: {
-    reviews: 'avis vérifiés',
-    contactUs: 'Contactez-nous',
-    waPrefix: 'Bonjour Vermilion Routes, je souhaite des informations personnalisées et réserver le tour :',
-  },
-  de: {
-    reviews: 'verifizierte Bewertungen',
-    contactUs: 'Kontaktieren Sie uns',
-    waPrefix: 'Hallo Vermilion Routes, ich wünsche individuelle Informationen und Buchung der Tour:',
-  },
-  it: {
-    reviews: 'recensioni verificate',
-    contactUs: 'Contattaci',
-    waPrefix: 'Ciao Vermilion Routes, desidero informazioni personalizzate e prenotare il tour:',
-  },
-  pt: {
-    reviews: 'avaliações verificadas',
-    contactUs: 'Contate-nos',
-    waPrefix: 'Olá Vermilion Routes, desejo informações personalizadas e reservar o tour:',
-  },
-  ja: {
-    reviews: '認証済みレビュー',
-    contactUs: 'お問い合わせ',
-    waPrefix: 'Vermilion Routes様、以下のツアーのカスタム相談と予約を希望します:',
-  },
-  zh: {
-    reviews: '条真实住客点评',
-    contactUs: '联系我们',
-    waPrefix: '您好 Vermilion Routes，我希望了解专属定制信息并预订行程：',
-  },
+const SUBNAV_I18N: Record<string, { reviews: string; club: string; vip: string; contact: string; whatsapp: string; call: string }> = {
+  es: { reviews: 'opiniones verificadas', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contacto', whatsapp: 'WhatsApp', call: 'Llamar' },
+  en: { reviews: 'verified reviews', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Call' },
+  fr: { reviews: 'avis vérifiés', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Appeler' },
+  de: { reviews: 'verifizierte Bewertungen', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Kontakt', whatsapp: 'WhatsApp', call: 'Anrufen' },
+  it: { reviews: 'recensioni verificate', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contatto', whatsapp: 'WhatsApp', call: 'Chiama' },
+  pt: { reviews: 'avaliações verificadas', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contato', whatsapp: 'WhatsApp', call: 'Ligar' },
+  ja: { reviews: '認証済みレビュー', club: 'Club (3★)', vip: 'VIP (4★)', contact: '連絡先', whatsapp: 'WhatsApp', call: '電話' },
+  zh: { reviews: '条真实住客点评', club: 'Club (3★)', vip: 'VIP (4★)', contact: '联系我们', whatsapp: 'WhatsApp', call: '拨打电话' },
 };
 
 export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [showContactMenu, setShowContactMenu] = useState(false);
 
   useEffect(() => {
     const node = document.getElementById('tour-subnav-portal');
@@ -68,95 +36,118 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
       setPortalNode(node);
     }
 
-    const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    // En los detalles de tour esta es la navegación principal: debe estar
+    // disponible desde el primer píxel, no solo después de hacer scroll.
+    setIsVisible(true);
   }, []);
 
   if (!portalNode) return null;
 
   const t = SUBNAV_I18N[locale] || SUBNAV_I18N['en'];
+  const priceClub = tour.price3Star || tour.price || 1050;
+  const priceVip = tour.price4Star || Math.round(priceClub * 1.15);
+
+  const whatsappUrl = `https://wa.me/593994048458?text=${encodeURIComponent(
+    locale === 'es'
+      ? `Hola, deseo información sobre el tour: ${title}`
+      : `Hello, I would like information about the tour: ${title}`
+  )}`;
 
   return createPortal(
     <div
-      className={`w-full bg-[#FAF8F5]/98 dark:bg-stone-950/98 backdrop-blur-2xl border-b border-zinc-200/90 dark:border-white/10 py-2.5 transition-all duration-300 shadow-xl ${
-        isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none h-0 py-0 border-none overflow-hidden'
-      }`}
+      className={`w-full bg-[#FAF8F5]/98 dark:bg-stone-950/98 backdrop-blur-2xl border-b border-zinc-200/90 dark:border-white/10 py-2 transition-all duration-300 shadow-2xl ${isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none h-0 py-0 border-none overflow-hidden'
+        }`}
     >
-      <div className="max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div className="flex items-center gap-3.5 min-w-0">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-start justify-between gap-3 sm:gap-5">
+
+          {/* Lado Izquierdo: Logo imponente y Títulos a escala perfecta */}
+          <div className="flex items-start gap-3 sm:gap-6 min-w-0">
             <Link
               href={`/${locale}`}
               aria-label="Vermilion Routes Home"
               className="shrink-0 group flex items-center notranslate"
             >
-              <div className="relative w-[120px] h-[32px] sm:w-[145px] sm:h-[36px]">
+              <div className="relative w-[92px] h-[32px] sm:w-[160px] sm:h-[46px] lg:w-[180px] lg:h-[48px]">
                 <Image
                   src="/logo_inicio.png"
                   alt="Vermilion Routes"
-                  width={145}
-                  height={36}
+                  width={210}
+                  height={56}
                   className="w-auto h-full object-contain block dark:hidden"
                   priority
                 />
                 <Image
                   src="/logo_blanco.png"
                   alt="Vermilion Routes"
-                  width={145}
-                  height={36}
+                  width={210}
+                  height={56}
                   className="w-auto h-full object-contain hidden dark:block"
                   priority
                 />
               </div>
             </Link>
 
-            <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700 hidden md:block shrink-0" />
+            <div className="h-8 w-px bg-zinc-300 dark:bg-zinc-700 hidden lg:block shrink-0" />
 
-            <div className="space-y-0.5 min-w-0">
-              <div className="font-serif text-sm sm:text-base lg:text-lg font-bold text-zinc-900 dark:text-white tracking-tight truncate max-w-xs sm:max-w-md lg:max-w-xl">
+            <div className="space-y-1 min-w-0">
+              <div className="font-serif text-sm sm:text-base lg:text-lg font-bold text-zinc-900 dark:text-white tracking-tight leading-tight whitespace-normal break-words">
                 {title}
               </div>
-
-              <div className="flex flex-wrap items-center gap-3 text-[11px] text-zinc-600 dark:text-zinc-400">
-                <div className="flex items-center gap-1 font-medium">
-                  <Clock className="w-3 h-3 text-[#D4AF37] dark:text-[#F3E5AB]" />
-                  <span>{duration}</span>
-                </div>
-
-                <div className="flex items-center gap-1 font-semibold text-zinc-900 dark:text-zinc-100">
-                  <Star className="w-3 h-3 fill-[#D4AF37] text-[#D4AF37]" />
-                  <span>{tour.rating}</span>
-                  {tour.reviewsCount && (
-                    <span className="text-zinc-500 dark:text-zinc-400 font-normal">
-                      ({tour.reviewsCount} {t.reviews})
-                    </span>
-                  )}
-                </div>
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] sm:text-sm text-zinc-500 font-medium">
+                <span>{duration}</span>
+                <span>&bull;</span>
+                <span className="flex items-center gap-1.5 text-[#D4AF37] font-semibold">
+                  <Star className="w-4 h-4 fill-[#D4AF37]" /> {tour.rating}
+                </span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 shrink-0 self-end sm:self-center">
-            <a
-              href={`https://wa.me/593994048458?text=${encodeURIComponent(`${t.waPrefix} ${title}`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#E5C158] hover:to-[#B59049] text-stone-950 shadow-md shadow-amber-900/20 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
+          {/* Contacto siempre accesible; las tarifas van en la segunda fila. */}
+          <div className="relative shrink-0">
+            <button
+              onClick={() => setShowContactMenu(!showContactMenu)}
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] sm:text-sm font-bold transition-all shadow-md shadow-emerald-600/20 cursor-pointer"
             >
-              <MessageCircle className="w-3.5 h-3.5" />
-              <span>{t.contactUs}</span>
-            </a>
-            <DownloadPDFButton tour={tour} variant="outline" size="sm" />
+              <MessageCircle className="w-4 h-4" />
+              <span>{t.contact}</span>
+              <ChevronDown className={`w-4 h-4 transition-transform ${showContactMenu ? 'rotate-180' : ''}`} />
+            </button>
+
+            {showContactMenu && (
+              <div className="absolute right-0 mt-2.5 w-60 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl py-2 z-50 animate-in fade-in duration-200">
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors">
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <span>{t.whatsapp} (+593 99 404 8458)</span>
+                </a>
+                <a href="tel:+593994048458" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors border-t border-zinc-100 dark:border-zinc-800">
+                  <Phone className="w-4 h-4 text-emerald-600" />
+                  <span>{t.call} (+593 99 404 8458)</span>
+                </a>
+              </div>
+            )}
           </div>
+        </div>
+
+        <div className="mt-2 grid grid-cols-2 gap-2 sm:flex sm:justify-end sm:gap-3">
+            <Link
+              href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
+              className="flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all text-[11px] sm:text-sm font-bold text-white shadow-sm shadow-emerald-900/30"
+            >
+              <Hotel className="w-4 h-4 text-emerald-200" />
+              <span>{t.club}</span>
+              <span className="text-emerald-100 font-extrabold text-sm sm:text-base">${priceClub}</span>
+            </Link>
+
+            <Link
+              href={`/${locale}/booking?addTour=${tour.id}&tier=vip`}
+              className="flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] hover:brightness-105 transition-all text-[11px] sm:text-sm font-bold text-zinc-950 shadow-md shadow-amber-500/20"
+            >
+              <Sparkles className="w-4 h-4 text-zinc-950 fill-zinc-950" />
+              <span>{t.vip}</span>
+              <span className="font-extrabold text-sm sm:text-base">${priceVip}</span>
+            </Link>
         </div>
       </div>
     </div>,

@@ -4,6 +4,7 @@ import { Navbar } from './Navbar';
 
 export function ConditionalNavbar() {
   const pathname = usePathname();
+  const isTourDetail = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/tours\/[^/]+$/);
   // No mostrar el navbar en las rutas internas (affiliates, admin, cpanel, operator, auth, checkout)
   if (
     pathname?.includes('/affiliates') || 
@@ -14,12 +15,19 @@ export function ConditionalNavbar() {
     pathname?.includes('/checkout')
   ) return null;
 
+  // Los detalles de tour usan TourSubNav como su única barra contextual.
+  // Conservamos el portal para que el componente cliente pueda montarse sin
+  // renderizar también la navegación global.
+  if (isTourDetail) {
+    return <div id="tour-subnav-portal" />;
+  }
+
   // Las páginas con Hero Banner a pantalla completa (Home y Detalle de Tour)
   // inician en top: 0 detrás del navbar transparente; no requieren espaciador.
   const isFullBleedHero = 
     pathname === '/' || 
     !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/?$/) ||
-    (pathname?.includes('/tours/') && !pathname?.endsWith('/tours'));
+    isTourDetail;
 
   return (
     <>
