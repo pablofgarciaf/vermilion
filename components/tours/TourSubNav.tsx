@@ -46,6 +46,8 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
   const t = SUBNAV_I18N[locale] || SUBNAV_I18N['en'];
   const priceClub = tour.price3Star || tour.price || 1050;
   const priceVip = tour.price4Star || Math.round(priceClub * 1.15);
+  const isDailyTour = tour.durationDays === 1 || (typeof tour.duration === 'object' && String(tour.duration?.en || '').includes('1 DAY'));
+  const tierButtonTextSize = isDailyTour ? 'text-[10px] sm:text-xs' : 'text-[11px] sm:text-sm';
 
   const whatsappUrl = `https://wa.me/593994048458?text=${encodeURIComponent(
     locale === 'es'
@@ -133,7 +135,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
         <div className="mt-2 grid grid-cols-2 gap-2 sm:flex sm:justify-end sm:gap-3">
             <Link
               href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
-              className="flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all text-[11px] sm:text-sm font-bold text-white shadow-sm shadow-emerald-900/30"
+              className={`flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all ${tierButtonTextSize} font-bold text-white shadow-sm shadow-emerald-900/30`}
             >
               <Hotel className="w-4 h-4 text-emerald-200" />
               <span>{t.club}</span>
@@ -142,7 +144,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
 
             <Link
               href={`/${locale}/booking?addTour=${tour.id}&tier=vip`}
-              className="flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] hover:brightness-105 transition-all text-[11px] sm:text-sm font-bold text-zinc-950 shadow-md shadow-amber-500/20"
+              className={`flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] hover:brightness-105 transition-all ${tierButtonTextSize} font-bold text-zinc-950 shadow-md shadow-amber-500/20`}
             >
               <Sparkles className="w-4 h-4 text-zinc-950 fill-zinc-950" />
               <span>{t.vip}</span>
