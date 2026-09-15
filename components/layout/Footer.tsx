@@ -440,13 +440,6 @@ export function Footer() {
               </p>
               <p className="flex items-center gap-2 text-zinc-300">
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="text-zinc-400 text-[11px]">WhatsApp 24/7:</span>
-                <a href="tel:+593994048458" className="hover:text-emerald-300 transition-colors">
-                  +593 99 404 8458
-                </a>
-              </p>
-              <p className="flex items-center gap-2 text-zinc-300">
-                <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span className="text-zinc-400 text-[11px]">{t.officeReservations}</span>
                 <a href="tel:+593983992549" className="hover:text-emerald-300 transition-colors">
                   +593 98 399 2549
@@ -469,7 +462,7 @@ export function Footer() {
                     <span>{t.hqEcuador}</span>
                   </div>
                   <p className="text-zinc-300 pl-5">
-                    Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503)
+                    Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170124)
                   </p>
                 </div>
 

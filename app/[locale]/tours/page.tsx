@@ -446,7 +446,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(toursSchema) }}
       />
-      
+
       {/* ── HERO REVISTA (EDITORIAL LUXURY) ────────────────────────────────── */}
       <section className="relative pt-[146px] sm:pt-40 pb-32 border-b border-zinc-200 dark:border-white/10">
         <ToursBackgroundSlider />
@@ -519,7 +519,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                   key={tour.id}
                   className="bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/10 rounded-3xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 flex flex-col group"
                 >
-                  <div className="relative h-64 w-full overflow-hidden">
+                  <Link href={`/${locale}/tours/${tour.id}`} className="relative h-64 w-full overflow-hidden block">
                     <Image
                       src={tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'}
                       alt={title}
@@ -546,7 +546,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </Link>
 
                   <div className="p-6 flex flex-col flex-1 justify-between space-y-4">
                     <div>
@@ -609,7 +609,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                   key={tour.id}
                   className="bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/10 rounded-3xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 flex flex-col group shadow-lg"
                 >
-                  <div className="relative h-56 w-full overflow-hidden">
+                  <Link href={`/${locale}/tours/${tour.id}`} className="relative h-56 w-full overflow-hidden block">
                     <Image
                       src={tour.imageUrl || '/images/tours/16-9/cotopaxi-volcano-16-9.jpg'}
                       alt={title}
@@ -624,7 +624,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         {duration}
                       </span>
                     </div>
-                  </div>
+                  </Link>
 
                   <div className="p-5 flex flex-col flex-1 justify-between space-y-4">
                     <div>
@@ -691,7 +691,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                   key={tour.id}
                   className="bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/10 rounded-[32px] overflow-hidden hover:border-blue-500/30 transition-all duration-300 flex flex-col group shadow-xl"
                 >
-                  <div className="relative h-72 w-full overflow-hidden">
+                  <Link href={`/${locale}/tours/${tour.id}`} className="relative h-72 w-full overflow-hidden block">
                     <Image
                       src={tour.imageUrl || '/images/tours/16-9/galapagos-snorkeling-16-9.jpg'}
                       alt={title}
@@ -717,7 +717,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </Link>
 
                   <div className="p-8 flex flex-col flex-1 justify-between space-y-6">
                     <div>

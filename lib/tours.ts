@@ -76,8 +76,13 @@ export function subscribeToursFromFirestore(
                 : data.imageUrl;
 
               tours.push({
-                id: docSnap.id,
+                ...mockTour,
                 ...data,
+                id: docSnap.id,
+                price: mockTour?.price || data.price,
+                price3Star: mockTour?.price3Star || mockTour?.price || data.price3Star || data.price,
+                price4Star: mockTour?.price4Star || data.price4Star,
+                itinerary: mockTour?.itinerary || data.itinerary,
                 imageUrl
               } as Tour);
             }
@@ -133,7 +138,17 @@ export async function getToursFromFirestore(): Promise<Tour[]> {
     const tours: Tour[] = [];
     snapshot.forEach((docSnap) => {
       if (officialIds.has(docSnap.id)) {
-        tours.push({ id: docSnap.id, ...docSnap.data() } as Tour);
+        const data = docSnap.data();
+        const mockTour = mockTours.find(m => m.id === docSnap.id);
+        tours.push({
+          ...mockTour,
+          ...data,
+          id: docSnap.id,
+          price: mockTour?.price || data.price,
+          price3Star: mockTour?.price3Star || mockTour?.price || data.price3Star || data.price,
+          price4Star: mockTour?.price4Star || data.price4Star,
+          itinerary: mockTour?.itinerary || data.itinerary,
+        } as Tour);
       }
     });
 
@@ -151,8 +166,8 @@ export async function getToursFromFirestore(): Promise<Tour[]> {
  * Fetch a single tour by ID from Firestore.
  */
 export async function getTourByIdFromFirestore(id: string, fallbackTour?: Tour): Promise<Tour | null> {
+  const fallback = fallbackTour || mockTours.find((t) => t.id === id);
   if (!db) {
-    const fallback = fallbackTour || mockTours.find((t) => t.id === id);
     return fallback || null;
   }
   try {
@@ -160,15 +175,22 @@ export async function getTourByIdFromFirestore(id: string, fallbackTour?: Tour):
     const docSnap = await withTimeout(getDoc(docRef), 3500);
 
     if (docSnap.exists()) {
-      return { id: docSnap.id, ...docSnap.data() } as Tour;
+      const data = docSnap.data();
+      return {
+        ...fallback,
+        ...data,
+        id: docSnap.id,
+        price: fallback?.price || data.price,
+        price3Star: fallback?.price3Star || fallback?.price || data.price3Star || data.price,
+        price4Star: fallback?.price4Star || data.price4Star,
+        itinerary: fallback?.itinerary || data.itinerary,
+      } as Tour;
     }
 
     // Fallback to local mock
-    const fallback = fallbackTour || mockTours.find((t) => t.id === id);
     return fallback || null;
   } catch (err) {
     console.warn(`Error fetching tour ${id} from Firestore, falling back:`, err);
-    const fallback = fallbackTour || mockTours.find((t) => t.id === id);
     return fallback || null;
   }
 }

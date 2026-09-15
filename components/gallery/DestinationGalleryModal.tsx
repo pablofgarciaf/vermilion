@@ -180,12 +180,16 @@ export function DestinationGalleryModal({
 
   // Filtered photos
   const filteredPhotos = useMemo(() => {
-    if (activeTab === 'all') return allPhotos;
-    if (activeTab === 'landscape') return allPhotos.filter((p) => !p.isPortrait);
-    if (activeTab === 'portrait') return allPhotos.filter((p) => p.isPortrait);
-    if (activeTab === 'wildlife') return allPhotos.filter((p) => p.category === 'wildlife');
-    if (activeTab === 'expedition') return allPhotos.filter((p) => p.category === 'expedition' || p.category === 'landscape');
-    return allPhotos;
+    let photos = allPhotos;
+    if (activeTab === 'landscape') photos = allPhotos.filter((p) => !p.isPortrait);
+    else if (activeTab === 'portrait') photos = allPhotos.filter((p) => p.isPortrait);
+    else if (activeTab === 'wildlife') photos = allPhotos.filter((p) => p.category === 'wildlife');
+    else if (activeTab === 'expedition') photos = allPhotos.filter((p) => p.category === 'expedition' || p.category === 'landscape');
+
+    return [...photos].sort((a, b) => {
+      if (a.isPortrait === b.isPortrait) return 0;
+      return a.isPortrait ? 1 : -1;
+    });
   }, [allPhotos, activeTab]);
 
   const destMeta = getDestinationMetadata(destination);
@@ -270,11 +274,10 @@ export function DestinationGalleryModal({
       <div className="w-full bg-zinc-950/80 border-b border-zinc-800/80 px-4 sm:px-6 py-2.5 flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
         <button
           onClick={() => setActiveTab('all')}
-          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
-            activeTab === 'all'
-              ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
-              : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
-          }`}
+          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${activeTab === 'all'
+            ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
+            : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
+            }`}
         >
           <Sparkles className="w-3.5 h-3.5" />
           <span>{t.all}</span>
@@ -283,11 +286,10 @@ export function DestinationGalleryModal({
 
         <button
           onClick={() => setActiveTab('landscape')}
-          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
-            activeTab === 'landscape'
-              ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
-              : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
-          }`}
+          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${activeTab === 'landscape'
+            ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
+            : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
+            }`}
         >
           <Monitor className="w-3.5 h-3.5" />
           <span>{t.landscape}</span>
@@ -298,11 +300,10 @@ export function DestinationGalleryModal({
 
         <button
           onClick={() => setActiveTab('portrait')}
-          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
-            activeTab === 'portrait'
-              ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
-              : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
-          }`}
+          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${activeTab === 'portrait'
+            ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
+            : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
+            }`}
         >
           <Smartphone className="w-3.5 h-3.5" />
           <span>{t.portrait}</span>
@@ -313,11 +314,10 @@ export function DestinationGalleryModal({
 
         <button
           onClick={() => setActiveTab('wildlife')}
-          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
-            activeTab === 'wildlife'
-              ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
-              : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
-          }`}
+          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${activeTab === 'wildlife'
+            ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
+            : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
+            }`}
         >
           <span>🐢</span>
           <span>{t.wildlife}</span>
@@ -325,11 +325,10 @@ export function DestinationGalleryModal({
 
         <button
           onClick={() => setActiveTab('expedition')}
-          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${
-            activeTab === 'expedition'
-              ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
-              : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
-          }`}
+          className={`px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer shrink-0 ${activeTab === 'expedition'
+            ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/30'
+            : 'bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800'
+            }`}
         >
           <Compass className="w-3.5 h-3.5" />
           <span>{t.expedition}</span>
@@ -342,40 +341,51 @@ export function DestinationGalleryModal({
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             {filteredPhotos.map((photo, index) => {
               const photoTitle = photo.title[locale] || photo.title.en || 'Photo';
-              return (
-                <div
-                  key={photo.id}
-                  onClick={() => setActiveLightboxIndex(index)}
-                  className={`group relative rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800/80 hover:border-emerald-500/60 transition-all duration-300 cursor-pointer shadow-md hover:shadow-emerald-950/40 hover:-translate-y-0.5 ${
-                    photo.isPortrait ? 'aspect-[3/4]' : 'aspect-[4/3]'
-                  }`}
-                >
-                  <Image
-                    src={photo.thumb}
-                    alt={photoTitle}
-                    fill
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                    referrerPolicy="no-referrer"
-                  />
-                  
-                  {/* Aspect Ratio Badge */}
-                  <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-[10px] font-semibold text-zinc-200 border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {photo.isPortrait ? '9:16' : '16:9'}
-                  </div>
+              const isFirstPortrait = photo.isPortrait && (index === 0 || !filteredPhotos[index - 1].isPortrait);
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-2.5">
-                    <p className="text-white text-xs font-medium line-clamp-2 drop-shadow-md">
-                      {photoTitle}
-                    </p>
-                    <div className="flex items-center gap-1 text-[10px] text-emerald-400 mt-1">
-                      <Maximize2 className="w-3 h-3" />
-                      <span>{t.fullscreen}</span>
+              return (
+                <React.Fragment key={photo.id}>
+                  {isFirstPortrait && index > 0 && (
+                    <div className="col-span-full my-4 flex items-center gap-4">
+                      <div className="h-px bg-zinc-800 flex-1"></div>
+                      <span className="text-zinc-400 font-medium text-xs tracking-widest uppercase">
+                        {t.portrait} (9:16)
+                      </span>
+                      <div className="h-px bg-zinc-800 flex-1"></div>
+                    </div>
+                  )}
+                  <div
+                    onClick={() => setActiveLightboxIndex(index)}
+                    className={`group relative rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800/80 hover:border-emerald-500/60 transition-all duration-300 cursor-pointer shadow-md hover:shadow-emerald-950/40 hover:-translate-y-0.5 ${photo.isPortrait ? 'aspect-[3/4]' : 'aspect-[4/3]'
+                      }`}
+                  >
+                    <Image
+                      src={photo.thumb}
+                      alt={photoTitle}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                      referrerPolicy="no-referrer"
+                    />
+
+                    {/* Aspect Ratio Badge */}
+                    <div className="absolute top-2 left-2 z-10 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-md text-[10px] font-semibold text-zinc-200 border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {photo.isPortrait ? '9:16' : '16:9'}
+                    </div>
+
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-2.5">
+                      <p className="text-white text-xs font-medium line-clamp-2 drop-shadow-md">
+                        {photoTitle}
+                      </p>
+                      <div className="flex items-center gap-1 text-[10px] text-emerald-400 mt-1">
+                        <Maximize2 className="w-3 h-3" />
+                        <span>{t.fullscreen}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </React.Fragment>
               );
             })}
           </div>

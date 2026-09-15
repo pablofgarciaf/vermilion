@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Camera, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLocale } from 'next-intl';
 
 import { DestinationGalleryModal } from '@/components/gallery/DestinationGalleryModal';
 
@@ -13,7 +14,19 @@ interface TourGalleryProps {
   destination?: string;
 }
 
+const VIEW_PHOTOS_I18N: Record<string, string> = {
+  es: '+ Ver fotos de la revista',
+  en: '+ View magazine photos',
+  fr: '+ Voir les photos du magazine',
+  de: '+ Magazinfotos ansehen',
+  it: '+ Vedi foto della rivista',
+  pt: '+ Ver fotos da revista',
+  ja: '+ 写真を見る',
+  zh: '+ 查看画册照片',
+};
+
 export function TourGallery({ images, title, tourId, destination }: TourGalleryProps) {
+  const locale = useLocale();
   const [isDestinationModalOpen, setIsDestinationModalOpen] = useState(false);
 
   // De-duplicate and filter out 9-16 vertical images in the tour page gallery
@@ -167,7 +180,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
             className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/75 hover:bg-emerald-700/90 backdrop-blur-md px-4 py-2.5 rounded-full text-white text-xs font-bold border border-white/20 shadow-lg z-10 transition-all hover:scale-105 active:scale-95 cursor-pointer"
           >
             <Camera className="w-4 h-4 text-emerald-400" />
-            <span>+ View more photos</span>
+            <span>{VIEW_PHOTOS_I18N[locale] || VIEW_PHOTOS_I18N['en']}</span>
           </button>
 
           {/* Maximize Icon */}

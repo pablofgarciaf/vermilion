@@ -102,7 +102,20 @@ export function Navbar() {
       ],
     },
     { name: tNav('tours'), href: `/${locale}/tours` },
-    { name: 'Blog', href: `/${locale}/blog` },
+    {
+      name:
+        {
+          zh: '博客',
+          ja: 'ブログ',
+          en: 'Blog',
+          es: 'Blog',
+          fr: 'Blog',
+          de: 'Blog',
+          it: 'Blog',
+          pt: 'Blog',
+        }[locale] || 'Blog',
+      href: `/${locale}/blog`,
+    },
     { name: tNav('about'), href: `/${locale}/about` },
     { name: tNav('contact'), href: `/${locale}#contact` },
   ];

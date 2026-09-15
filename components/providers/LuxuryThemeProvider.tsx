@@ -35,7 +35,10 @@ export function LuxuryThemeProvider({ children }: { children: React.ReactNode })
 export function useLuxury() {
   const context = useContext(LuxuryContext);
   if (context === undefined) {
-    throw new Error('useLuxury must be used within a LuxuryThemeProvider');
+    return {
+      isLuxuryMode: false,
+      setLuxuryMode: () => {},
+    };
   }
   return context;
 }

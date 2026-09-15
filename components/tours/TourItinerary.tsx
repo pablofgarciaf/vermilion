@@ -1,20 +1,22 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { ItineraryDay } from '@/types';
 import {
-  Calendar,
-  ChevronDown,
   Utensils,
   Hotel,
   Sparkles,
-  Compass,
   Bus,
   Footprints,
-  Mountain
+  Mountain,
+  Compass,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { isBotOrCrawler } from '@/utils/isBot';
 
 interface TourItineraryProps {
   itinerary: ItineraryDay[];
@@ -33,47 +35,31 @@ const ITINERARY_PREFIX: Record<string, string> = {
 };
 
 const DEFAULT_ITINERARY_TITLE: Record<string, string> = {
-  es: 'Itinerario Detallado Día a Día',
-  en: 'Detailed Day-by-Day Itinerary',
-  fr: 'Itinéraire Détaillé Jour par Jour',
-  de: 'Detaillierter Reiseverlauf Tag für Tag',
-  it: 'Itinerario Dettagliato Giorno per Giorno',
-  pt: 'Roteiro Detalhado Dia a Dia',
-  ja: '日別詳細旅程',
-  zh: '每日详细行程',
+  es: 'Diario de Expedición Día a Día',
+  en: 'Day-by-Day Expedition Journal',
+  fr: 'Journal d\'Expédition Jour par Jour',
+  de: 'Tägliches Expeditions-Journal',
+  it: 'Diario di Spedizione Giorno per Giorno',
+  pt: 'Diário de Expedição Dia a Dia',
+  ja: '日別遠征ジャーナル',
+  zh: '每日探险日志',
 };
 
-const ITINERARY_SUBTITLE: Record<string, string> = {
-  es: 'Explora las actividades diarias, logística de transporte y visitas guiadas con naturalistas.',
-  en: 'Explore verbatim daily activities, transport logistics, and naturalist-guided visits.',
-  fr: 'Découvrez le détail des journées, transports et visites guidées avec naturalistes.',
-  de: 'Entdecken Sie tägliche Aktivitäten, Transportlogistik und geführte Natur-Touren.',
-  it: 'Esplora le attività giornaliere, la logistica dei trasporti e le visite guidate con naturalisti.',
-  pt: 'Explore as atividades diárias, logística de transporte e visitas guiadas por naturalistas.',
-  ja: '毎日のアクティビティ、移動ロジスティクス、ナチュラリストガイドによるツアーをご案内します。',
-  zh: '探索每日精彩行程安排、交通后勤以及由专业自然向导带领的尊享体验。',
+const DAY_WORD: Record<string, string> = {
+  es: 'Día',
+  en: 'Day',
+  fr: 'Jour',
+  de: 'Tag',
+  it: 'Giorno',
+  pt: 'Dia',
+  ja: '日目',
+  zh: '第',
 };
 
-const EXPAND_ALL_TEXT: Record<string, string> = {
-  es: 'Expandir Todo',
-  en: 'Expand All',
-  fr: 'Tout Développer',
-  de: 'Alle Ausklappen',
-  it: 'Espandi Tutto',
-  pt: 'Expandir Tudo',
-  ja: 'すべて展開',
-  zh: '展开全部',
-};
-
-const COLLAPSE_ALL_TEXT: Record<string, string> = {
-  es: 'Contraer Todo',
-  en: 'Collapse All',
-  fr: 'Tout Réduire',
-  de: 'Alle Einklappen',
-  it: 'Comprimer Tutto',
-  pt: 'Recolher Tudo',
-  ja: 'すべて折りたたむ',
-  zh: '折叠全部',
+const DAY_WORD_SUFFIX: Record<string, string> = {
+  zh: '天',
+  ja: '日目',
+  default: '',
 };
 
 const DAY_HIGHLIGHTS_TEXT: Record<string, string> = {
@@ -132,209 +118,209 @@ const ALTITUDE_TEXT: Record<string, string> = {
 };
 
 function formatDayBadge(day: number, locale: string): string {
-  switch (locale) {
-    case 'es': return `Día ${day}`;
-    case 'fr': return `Jour ${day}`;
-    case 'de': return `Tag ${day}`;
-    case 'it': return `Giorno ${day}`;
-    case 'pt': return `Dia ${day}`;
-    case 'ja': return `${day}日目`;
-    case 'zh': return `第${day}天`;
-    case 'en':
-    default: return `Day ${day}`;
+  const prefix = DAY_WORD[locale] || DAY_WORD['en'];
+  const suffix = DAY_WORD_SUFFIX[locale] || '';
+  if (locale === 'zh' || locale === 'ja') {
+    return `${prefix}${day}${suffix}`;
   }
+  return `${prefix} ${day}`;
 }
 
 export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
-  const [openDays, setOpenDays] = useState<number[]>([1]); // Day 1 open by default
+  const [activeDay, setActiveDay] = useState<number>(1);
+  const [isHovered, setIsHovered] = useState(false);
   const locale = useLocale();
+  const totalDays = itinerary.length;
 
-  const toggleDay = (day: number) => {
-    if (openDays.includes(day)) {
-      setOpenDays(openDays.filter((d) => d !== day));
-    } else {
-      setOpenDays([...openDays, day]);
-    }
-  };
+  // Rotación automática inteligente
+  useEffect(() => {
+    if (isHovered || totalDays <= 1 || isBotOrCrawler()) return;
 
-  const expandAll = () => {
-    setOpenDays(itinerary.map((item) => item.day));
-  };
+    const interval = setInterval(() => {
+      setActiveDay((prev) => (prev >= totalDays ? 1 : prev + 1));
+    }, 6000);
 
-  const collapseAll = () => {
-    setOpenDays([]);
-  };
+    return () => clearInterval(interval);
+  }, [totalDays, isHovered, activeDay]);
 
-  if (!itinerary || itinerary.length === 0) {
+  if (!itinerary || totalDays === 0) {
     return null;
   }
 
+  const currentItem = itinerary.find((item) => item.day === activeDay) || itinerary[0];
+  const dayTitle = getLocalizedText(currentItem.title, locale);
+  const dayDesc = getLocalizedText(currentItem.description, locale);
+  const dayMeals = currentItem.meals ? getLocalizedText(currentItem.meals, locale) : '';
+  const dayAcc = currentItem.accommodation ? getLocalizedText(currentItem.accommodation, locale) : '';
+  const dayTrans = currentItem.transportation ? getLocalizedText(currentItem.transportation, locale) : '';
+  const dayAct = currentItem.activity ? getLocalizedText(currentItem.activity, locale) : '';
+  const dayAlt = currentItem.altitude ? getLocalizedText(currentItem.altitude, locale) : '';
+
+  const paragraphs = dayDesc.includes('\n')
+    ? dayDesc.split(/\n\s*\n|\r\n\r\n|\n/).map(p => p.trim()).filter(Boolean)
+    : [dayDesc];
+
+  const handlePrevDay = () => {
+    setActiveDay((prev) => (prev <= 1 ? totalDays : prev - 1));
+  };
+
+  const handleNextDay = () => {
+    setActiveDay((prev) => (prev >= totalDays ? 1 : prev + 1));
+  };
+
   return (
-    <div className="space-y-6">
-      {/* Header with quick actions */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-3 border-b border-stone-200 dark:border-stone-800">
-        <div className="space-y-1">
-          <h2 className="font-serif font-bold text-2xl text-stone-900 dark:text-stone-100 flex items-center gap-2.5">
-            <Calendar className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-            <span>
-              {tourTitle
-                ? `${ITINERARY_PREFIX[locale] || 'Itinerary:'} ${tourTitle.split(' - ')[0].split(':')[0].trim()}`
-                : (DEFAULT_ITINERARY_TITLE[locale] || 'Detailed Day-by-Day Itinerary')}
-            </span>
+    <div className="space-y-6 w-full">
+      {/* Encabezado Superior con Flechas y Contador */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-zinc-200/80 dark:border-zinc-800/80">
+        <div className="space-y-1.5">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200/80 uppercase tracking-wider">
+            <Compass className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Bitácora de Viaje</span>
+          </span>
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white tracking-tight">
+            {tourTitle
+              ? `${ITINERARY_PREFIX[locale] || 'Itinerary:'} ${tourTitle.split(' - ')[0].split(':')[0].trim()}`
+              : (DEFAULT_ITINERARY_TITLE[locale] || 'Day-by-Day Expedition Journal')}
           </h2>
-          <p className="text-xs text-stone-500 dark:text-stone-400">
-            {ITINERARY_SUBTITLE[locale] || ITINERARY_SUBTITLE['en']}
-          </p>
         </div>
 
-        <div className="flex items-center gap-3 text-xs">
-          <button
-            onClick={expandAll}
-            className="text-emerald-700 dark:text-emerald-400 hover:underline font-semibold cursor-pointer transition-colors"
-          >
-            {EXPAND_ALL_TEXT[locale] || EXPAND_ALL_TEXT['en']}
-          </button>
-          <span className="text-stone-300 dark:text-stone-700">•</span>
-          <button
-            onClick={collapseAll}
-            className="text-stone-500 dark:text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 font-medium cursor-pointer transition-colors"
-          >
-            {COLLAPSE_ALL_TEXT[locale] || COLLAPSE_ALL_TEXT['en']}
-          </button>
+        {/* Controles de Flechas y Contador */}
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-semibold text-zinc-500">
+            {locale === 'es' ? `Día ${activeDay} de ${totalDays}` : `Day ${activeDay} of ${totalDays}`}
+          </span>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={handlePrevDay}
+              aria-label="Día anterior"
+              className="p-2.5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all shadow-sm cursor-pointer"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={handleNextDay}
+              aria-label="Día siguiente"
+              className="p-2.5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all shadow-sm cursor-pointer"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Accordion Days List */}
-      <div className="space-y-3.5">
-        {itinerary.map((item) => {
-          const isOpen = openDays.includes(item.day);
-          const dayTitle = getLocalizedText(item.title, locale);
-          const dayDesc = getLocalizedText(item.description, locale);
-          const dayMeals = item.meals ? getLocalizedText(item.meals, locale) : '';
-          const dayAcc = item.accommodation ? getLocalizedText(item.accommodation, locale) : '';
-          const dayTrans = item.transportation ? getLocalizedText(item.transportation, locale) : '';
-          const dayAct = item.activity ? getLocalizedText(item.activity, locale) : '';
-          const dayAlt = item.altitude ? getLocalizedText(item.altitude, locale) : '';
+      {/* Escenario Principal Integrado (Sin botones de pestañas abajo) */}
+      <div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="bg-white dark:bg-zinc-900/90 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xl transition-all duration-700 space-y-6 relative overflow-hidden"
+      >
+        {/* Título del Día Integrado Directamente Arriba (Como pediste en la imagen) */}
+        <div className="space-y-2.5 pb-5 border-b border-zinc-100 dark:border-zinc-800">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200/50">
+              {formatDayBadge(currentItem.day, locale)} • Expedición Vermilion
+            </span>
+            {dayMeals && (
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-200/50">
+                <Utensils className="w-3 h-3 text-emerald-600" />
+                {dayMeals}
+              </span>
+            )}
+          </div>
+          <h3 className="font-serif font-bold text-xl sm:text-2xl text-zinc-900 dark:text-white tracking-tight leading-snug">
+            {formatDayBadge(currentItem.day, locale)} – {dayTitle}
+          </h3>
+        </div>
 
-          const paragraphs = dayDesc.includes('\n')
-            ? dayDesc.split(/\n\s*\n|\r\n\r\n|\n/).map(p => p.trim()).filter(Boolean)
-            : [dayDesc];
+        {/* Grid Principal: Foto Izquierda + Texto Derecha (Con tipografía más compacta y elegante) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
-          return (
-            <div
-              key={item.day}
-              className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                isOpen
-                  ? 'border-emerald-500/40 bg-white dark:bg-stone-900 shadow-md shadow-emerald-950/5'
-                  : 'border-stone-200/80 dark:border-stone-800 bg-stone-50/50 dark:bg-stone-900/40 hover:bg-white dark:hover:bg-stone-900 hover:border-stone-300 dark:hover:border-stone-700'
-              }`}
-            >
-              {/* Accordion Trigger Header */}
-              <button
-                onClick={() => toggleDay(item.day)}
-                className="w-full p-4 sm:p-5 flex items-center justify-between text-left gap-4 cursor-pointer focus:outline-none group"
-              >
-                <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
-                  {/* Day Badge */}
-                  <span
-                    className={`shrink-0 px-3 h-11 rounded-2xl font-serif font-bold text-xs sm:text-sm flex items-center justify-center transition-all ${
-                      isOpen
-                        ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/25 scale-105'
-                        : 'bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 group-hover:bg-emerald-50 group-hover:text-emerald-700 dark:group-hover:bg-emerald-950 dark:group-hover:text-emerald-300'
-                    }`}
-                  >
-                    {formatDayBadge(item.day, locale)}
-                  </span>
-
-                  {/* Title */}
-                  <div className="space-y-1">
-                    <h3 className="font-semibold text-stone-900 dark:text-stone-100 text-sm sm:text-base leading-snug group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
-                      {dayTitle}
-                    </h3>
-                    {dayMeals && (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-md border border-emerald-200/50 dark:border-emerald-800/40">
-                        <Utensils className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                        {dayMeals}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-stone-500 dark:text-stone-400 transition-transform duration-300 ${
-                    isOpen ? 'rotate-180 bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400' : 'bg-stone-100 dark:bg-stone-800 group-hover:bg-stone-200 dark:group-hover:bg-stone-700'
-                  }`}
-                >
-                  <ChevronDown className="w-4 h-4" />
-                </div>
-              </button>
-
-              {/* Accordion Content Body */}
-              {isOpen && (
-                <div className="px-4 pb-5 sm:px-5 sm:pb-6 pt-2 text-sm text-stone-700 dark:text-stone-300 border-t border-stone-100 dark:border-stone-800 space-y-4 animate-in fade-in duration-200">
-                  {/* Multi-paragraph descriptions */}
-                  <div className="space-y-3 leading-relaxed">
-                    {paragraphs.map((p, pIdx) => (
-                      <p key={pIdx} className="text-stone-700 dark:text-stone-300 text-sm md:text-base">
-                        {p}
-                      </p>
-                    ))}
-                  </div>
-
-                  {/* Highlights if available */}
-                  {item.highlights && item.highlights.length > 0 && (
-                    <div className="bg-emerald-50/70 dark:bg-emerald-950/30 p-3.5 rounded-2xl border border-emerald-100/80 dark:border-emerald-900/40 space-y-2">
-                      <span className="text-xs font-bold text-emerald-900 dark:text-emerald-200 uppercase tracking-wider block">
-                        {DAY_HIGHLIGHTS_TEXT[locale] || DAY_HIGHLIGHTS_TEXT['en']}
-                      </span>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-emerald-900 dark:text-emerald-200 font-medium">
-                        {item.highlights.map((hl, i) => (
-                          <li key={i} className="flex items-center gap-2">
-                            <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                            <span>{getLocalizedText(hl, locale)}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* Comprehensive Metadata Badges */}
-                  <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-stone-100 dark:border-stone-800 text-xs font-medium">
-                    {dayAcc && (
-                      <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
-                        <Hotel className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>{STAY_TEXT[locale] || STAY_TEXT['en']} {dayAcc}</span>
-                      </div>
-                    )}
-
-                    {dayTrans && (
-                      <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
-                        <Bus className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>{TRANSPORT_TEXT[locale] || TRANSPORT_TEXT['en']} {dayTrans}</span>
-                      </div>
-                    )}
-
-                    {dayAct && (
-                      <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
-                        <Footprints className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>{ACTIVITY_TEXT[locale] || ACTIVITY_TEXT['en']} {dayAct}</span>
-                      </div>
-                    )}
-
-                    {dayAlt && (
-                      <div className="flex items-center gap-1.5 bg-stone-100 dark:bg-stone-800 px-3 py-1 rounded-full border border-stone-200 dark:border-stone-700 text-stone-800 dark:text-stone-200">
-                        <Mountain className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>{ALTITUDE_TEXT[locale] || ALTITUDE_TEXT['en']} {dayAlt}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
+          {/* Fotografía Cinemática */}
+          {(currentItem.image || (currentItem.images && currentItem.images.length > 0)) && (
+            <div className="lg:col-span-5 relative rounded-2xl overflow-hidden aspect-[4/3] bg-zinc-100 dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 shadow-xl group">
+              <Image
+                src={currentItem.image || (currentItem.images && currentItem.images[0]) || ''}
+                alt={dayTitle}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                sizes="(max-width: 1024px) 100vw, 500px"
+              />
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-[11px] font-medium px-3 py-1.5 rounded-xl bg-black/40 backdrop-blur-md border border-white/10">
+                <span className="flex items-center gap-1.5">
+                  <Compass className="w-3 h-3 text-emerald-400" />
+                  <span>Bitácora Oficial • {formatDayBadge(currentItem.day, locale)}</span>
+                </span>
+                <span className="text-emerald-300 font-bold uppercase tracking-wider">Vermilion</span>
+              </div>
             </div>
-          );
-        })}
+          )}
+
+          {/* Narrativa Literaria Compacta */}
+          <div className="lg:col-span-7 space-y-4">
+            <div className="space-y-3 leading-relaxed">
+              {paragraphs.map((p, pIdx) => (
+                <p
+                  key={pIdx}
+                  className={`text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed ${pIdx === 0
+                      ? 'first-letter:font-serif first-letter:text-4xl first-letter:font-bold first-letter:float-left first-letter:mr-2.5 first-letter:text-emerald-700 dark:first-letter:text-emerald-400 first-letter:leading-none'
+                      : ''
+                    }`}
+                >
+                  {p}
+                </p>
+              ))}
+            </div>
+
+            {/* Puntos Clave / Highlights */}
+            {currentItem.highlights && currentItem.highlights.length > 0 && (
+              <div className="bg-emerald-950/5 dark:bg-emerald-950/30 p-4 rounded-2xl border border-emerald-200/60 dark:border-emerald-800/40 space-y-2">
+                <span className="text-xs font-bold text-emerald-900 dark:text-emerald-200 uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>{DAY_HIGHLIGHTS_TEXT[locale] || DAY_HIGHLIGHTS_TEXT['en']}</span>
+                </span>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs text-emerald-900 dark:text-emerald-200 font-medium">
+                  {currentItem.highlights.map((hl, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <span className="text-emerald-600 font-bold mt-0.5">✓</span>
+                      <span>{getLocalizedText(hl, locale)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+        </div>
+
+        {/* Sellos de Pasaporte / Logística de Expedición */}
+        <div className="flex flex-wrap items-center gap-2.5 pt-5 border-t border-zinc-100 dark:border-zinc-800 text-[11px] font-semibold">
+          {dayAcc && (
+            <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800/80 px-3.5 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 shadow-sm">
+              <Hotel className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>{STAY_TEXT[locale] || STAY_TEXT['en']} {dayAcc}</span>
+            </div>
+          )}
+          {dayTrans && (
+            <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800/80 px-3.5 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 shadow-sm">
+              <Bus className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>{TRANSPORT_TEXT[locale] || TRANSPORT_TEXT['en']} {dayTrans}</span>
+            </div>
+          )}
+          {dayAct && (
+            <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800/80 px-3.5 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 shadow-sm">
+              <Footprints className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>{ACTIVITY_TEXT[locale] || ACTIVITY_TEXT['en']} {dayAct}</span>
+            </div>
+          )}
+          {dayAlt && (
+            <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-zinc-800/80 px-3.5 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 shadow-sm">
+              <Mountain className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+              <span>{ALTITUDE_TEXT[locale] || ALTITUDE_TEXT['en']} {dayAlt}</span>
+            </div>
+          )}
+        </div>
+
       </div>
     </div>
   );
 }
-

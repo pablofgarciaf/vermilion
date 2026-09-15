@@ -16,6 +16,7 @@ interface PriceCalculatorProps {
   canContinue: boolean;
   step: number;
   affiliateRef?: string | null;
+  tier: 'club' | 'vip';
 }
 
 const PRICE_CALC_I18N: Record<string, {
@@ -48,8 +49,8 @@ const PRICE_CALC_I18N: Record<string, {
     ambassadorDiscount: 'Descuento Embajador',
     totalToPay: 'Total a Pagar',
     pendingSteps: 'Pasos pendientes para reservar:',
-    step2Date: 'Paso 2: Selecciona tu fecha de viaje',
-    step4Contact: 'Paso 4: Ingresa tu nombre y correo electrónico',
+    step2Date: 'Paso 4: Selecciona tu fecha de viaje',
+    step4Contact: 'Paso 5: Ingresa tu nombre y correo electrónico',
     btnPay: 'Proceder al Pago Seguro',
     btnComplete: 'Completar Datos Requeridos',
     noChargeNotice: 'No se realizará ningún cargo aún.',
@@ -66,8 +67,8 @@ const PRICE_CALC_I18N: Record<string, {
     ambassadorDiscount: 'Ambassador Discount',
     totalToPay: 'Total Amount',
     pendingSteps: 'Required steps before proceeding:',
-    step2Date: 'Step 2: Select your departure date',
-    step4Contact: 'Step 4: Enter your name and contact email',
+    step2Date: 'Step 4: Select your departure date',
+    step4Contact: 'Step 5: Enter your name and contact email',
     btnPay: 'Proceed to Secure Checkout',
     btnComplete: 'Complete Required Fields',
     noChargeNotice: 'No payment will be charged yet.',
@@ -84,8 +85,8 @@ const PRICE_CALC_I18N: Record<string, {
     ambassadorDiscount: 'Remise Ambassadeur',
     totalToPay: 'Total à Régler',
     pendingSteps: 'Étapes requises avant de continuer :',
-    step2Date: 'Étape 2 : Sélectionnez votre date de voyage',
-    step4Contact: 'Étape 4 : Renseignez votre nom et votre adresse e-mail',
+    step2Date: 'Étape 4: Sélectionnez votre date de voyage',
+    step4Contact: 'Étape 5: Renseignez votre nom et votre adresse e-mail',
     btnPay: 'Procéder au Paiement Sécurisé',
     btnComplete: 'Remplir les Informations Requises',
     noChargeNotice: 'Aucun débit ne sera effectué pour l’instant.',
@@ -102,8 +103,8 @@ const PRICE_CALC_I18N: Record<string, {
     ambassadorDiscount: 'Botschafter-Rabatt',
     totalToPay: 'Gesamtbetrag',
     pendingSteps: 'Erforderliche Schritte vor dem Fortfahren:',
-    step2Date: 'Schritt 2: Reisedatum auswählen',
-    step4Contact: 'Schritt 4: Name und E-Mail-Adresse eingeben',
+    step2Date: 'Schritt 4: Reisedatum auswählen',
+    step4Contact: 'Schritt 5: Name und E-Mail-Adresse eingeben',
     btnPay: 'Zur sicheren Zahlung übergehen',
     btnComplete: 'Erforderliche Daten ausfüllen',
     noChargeNotice: 'Es wird noch keine Abbuchung vorgenommen.',
@@ -120,8 +121,8 @@ const PRICE_CALC_I18N: Record<string, {
     ambassadorDiscount: 'Sconto Ambasciatore',
     totalToPay: 'Totale da Pagare',
     pendingSteps: 'Passaggi obbligatori prima di proseguire:',
-    step2Date: 'Passaggio 2: Seleziona la data del viaggio',
-    step4Contact: 'Passaggio 4: Inserisci nome ed email di contatto',
+    step2Date: 'Passaggio 4: Seleziona la data del viaggio',
+    step4Contact: 'Passaggio 5: Inserisci nome ed email di contatto',
     btnPay: 'Procedi al Pagamento Sicuro',
     btnComplete: 'Completa i Dati Richiesti',
     noChargeNotice: 'Nessun addebito verrà effettuato adesso.',
@@ -138,8 +139,8 @@ const PRICE_CALC_I18N: Record<string, {
     ambassadorDiscount: 'Desconto de Embaixador',
     totalToPay: 'Total a Pagar',
     pendingSteps: 'Etapas pendentes para concluir a reserva:',
-    step2Date: 'Etapa 2: Selecione a data da viagem',
-    step4Contact: 'Etapa 4: Insira seu nome e e-mail de contato',
+    step2Date: 'Etapa 4: Selecione a data da viagem',
+    step4Contact: 'Etapa 5: Insira seu nome e e-mail de contato',
     btnPay: 'Prosseguir para o Pagamento Seguro',
     btnComplete: 'Preencher Dados Obrigatórios',
     noChargeNotice: 'Nenhum valor será cobrado agora.',
@@ -156,8 +157,8 @@ const PRICE_CALC_I18N: Record<string, {
     ambassadorDiscount: 'アンバサダー割引',
     totalToPay: '合計お支払い金額',
     pendingSteps: 'お手続き完了までに必要な項目:',
-    step2Date: 'ステップ2: ご出発日を選択してください',
-    step4Contact: 'ステップ4: お名前とメールアドレスをご入力ください',
+    step2Date: 'ステップ4: ご出発日を選択してください',
+    step4Contact: 'ステップ5: お名前とメールアドレスをご入力ください',
     btnPay: '安全な決済ページへ進む',
     btnComplete: '必須項目を入力してください',
     noChargeNotice: '現時点で料金が引き落とされることはありません。',
@@ -174,8 +175,8 @@ const PRICE_CALC_I18N: Record<string, {
     ambassadorDiscount: '大使专属折扣',
     totalToPay: '应付费用总额',
     pendingSteps: '确认预订前尚需完成的步骤：',
-    step2Date: '第2步：请选择您的出发日期',
-    step4Contact: '第4步：请输入您的姓名与电子邮箱',
+    step2Date: '第4步：请选择您的出发日期',
+    step4Contact: '第5步：请输入您的姓名与电子邮箱',
     btnPay: '前往安全收银台结算',
     btnComplete: '填写必填信息',
     noChargeNotice: '当前阶段不会立即扣除任何费用。',
@@ -201,7 +202,8 @@ export function PriceCalculator({
   onContinue,
   canContinue,
   step,
-  affiliateRef
+  affiliateRef,
+  tier,
 }: PriceCalculatorProps) {
   const locale = useLocale();
   const t = PRICE_CALC_I18N[locale] || PRICE_CALC_I18N['en'];
@@ -236,20 +238,26 @@ export function PriceCalculator({
       </h3>
 
       <div className="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-        {tours.map(t => (
-          <div key={t.id} className="flex gap-4 items-start bg-zinc-50 dark:bg-zinc-800/30 p-2.5 rounded-2xl border border-zinc-100 dark:border-zinc-800">
+        {tours.map(tour => {
+          const isDailyTour = tour.durationDays === 1 || (typeof tour.duration === 'object' && String(tour.duration.en || '').includes('1 DAY'));
+          const displayedPrice = tier === 'vip' && !isDailyTour
+            ? tour.price4Star || Math.round((tour.price3Star || tour.price || 1050) * 1.2)
+            : tour.price3Star || tour.price || 1050;
+
+          return (
+          <div key={tour.id} className="flex gap-4 items-start bg-zinc-50 dark:bg-zinc-800/30 p-2.5 rounded-2xl border border-zinc-100 dark:border-zinc-800">
             <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
-              <img src={t.imageUrl} alt={getLocalizedText(t.title, locale)} width={56} height={56} className="w-full h-full object-cover" />
+              <img src={tour.imageUrl} alt={getLocalizedText(tour.title, locale)} width={56} height={56} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1">
-              <h4 className="font-bold text-sm text-zinc-900 dark:text-white line-clamp-1">{getLocalizedText(t.title, locale)}</h4>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 flex items-center justify-between">
-                <span>{getLocalizedText(t.duration, locale)}</span>
-                <span className="font-semibold text-zinc-900 dark:text-white">${formatAmount(t.price)}</span>
+              <h4 className="font-bold text-sm text-zinc-900 dark:text-white pr-2 leading-snug">{getLocalizedText(tour.title, locale)}</h4>              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 flex items-center justify-between">
+                <span>{getLocalizedText(tour.duration, locale)}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white">${formatAmount(displayedPrice)}</span>
               </p>
             </div>
           </div>
-        ))}
+          );
+        })}
 
         {date && (
           <div className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-950 p-3 rounded-xl border border-zinc-100 dark:border-zinc-800">
@@ -266,16 +274,22 @@ export function PriceCalculator({
           <div className="flex justify-between text-sm">
             <span className="text-zinc-500 dark:text-zinc-400">
               {t.adultsLabel} ({pricing.adultsCount} x ${formatAmount(pricing.basePricePerAdult)})
-              {pricing.singleSupplementApplied && (
-                <span className="block text-[11px] text-amber-700 dark:text-amber-300 font-semibold mt-0.5">
-                  {t.singleSupplement}
-                </span>
-              )}
             </span>
-            <span className="font-medium text-zinc-900 dark:text-white">${formatAmount(pricing.adultsTotal)}</span>
+            <span className="font-medium text-zinc-900 dark:text-white">
+              ${formatAmount(pricing.adultsTotal - (pricing.singleSupplementApplied ? (pricing.singleSupplementAmount || 0) : 0))}
+            </span>
           </div>
         )}
-        
+
+        {pricing.singleSupplementApplied && (
+          <div className="flex justify-between text-sm mt-2 pt-2 border-t border-zinc-100/50 dark:border-zinc-800/50">
+            <span className="text-amber-700 dark:text-amber-400 font-semibold">{t.singleSupplement}</span>
+            <span className="font-bold text-amber-700 dark:text-amber-400">
+              +${formatAmount(pricing.singleSupplementAmount || 0)}
+            </span>
+          </div>
+        )}
+
         {pricing.childrenCount > 0 && (
           <div className="flex justify-between text-sm">
             <span className="text-zinc-500 dark:text-zinc-400">{t.childrenLabel} ({pricing.childrenCount} x ${formatAmount(pricing.basePricePerChild)})</span>
@@ -291,7 +305,7 @@ export function PriceCalculator({
         {pricing.groupDiscountAmount > 0 && (
           <div className="flex justify-between text-sm text-emerald-600 dark:text-emerald-400 font-medium bg-emerald-50 dark:bg-emerald-950/30 p-2 rounded-lg mt-2">
             <span className="flex items-center gap-1.5">
-              <Ticket className="w-3.5 h-3.5" /> 
+              <Ticket className="w-3.5 h-3.5" />
               {t.groupDiscount} ({(pricing.groupDiscountPercentage * 100).toFixed(0)}%)
             </span>
             <span>-${formatAmount(pricing.groupDiscountAmount)}</span>
@@ -339,11 +353,10 @@ export function PriceCalculator({
       <button
         type="button"
         onClick={onContinue}
-        className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-95 group cursor-pointer border-none ${
-          canContinue
-            ? 'bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white shadow-emerald-900/30'
-            : 'bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-amber-500/40 shadow-zinc-950/40'
-        }`}
+        className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-95 group cursor-pointer border-none ${canContinue
+          ? 'bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white shadow-emerald-900/30'
+          : 'bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-amber-500/40 shadow-zinc-950/40'
+          }`}
       >
         <span>{canContinue ? t.btnPay : t.btnComplete}</span>
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

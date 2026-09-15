@@ -40,6 +40,30 @@ export default async function BookingPage({ params }: { params: Promise<{ locale
   const { locale } = await params;
   const isEs = locale === 'es';
 
+  // Title translations for all supported locales
+  const titleTexts: Record<string, string> = {
+    es: 'Reserva tu Expedición a Medida en Ecuador y Galápagos',
+    en: 'Book Your Bespoke Nature Expedition in Galapagos & Andes',
+    fr: 'Réservez votre expédition sur mesure aux Galápagos et aux Andes',
+    de: 'Buchen Sie Ihre maßgeschneiderte Naturexpedition in Galápagos & Anden',
+    it: 'Prenota la tua spedizione su misura a Galápagos e Ande',
+    pt: 'Reserve sua expedição sob medida em Galápagos e Andes',
+    ja: 'ガラパゴスとアンデスのカスタム自然遠征を予約する',
+    zh: '预订加拉帕戈斯和安第斯的定制自然探险'
+  };
+
+  // Paragraph translations for all supported locales
+  const paragraphTexts: Record<string, string> = {
+    es: 'Planifique su viaje exclusivo por Galápagos y Ecuador con asistencia personalizada 24/7.',
+    en: 'Customize your private journey across Galapagos & Ecuador with 24/7 dedicated travel designers.',
+    fr: 'Personnalisez votre voyage privé à travers les Galápagos & l\'Équateur avec des concepteurs de voyage dédiés 24/7.',
+    de: 'Gestalten Sie Ihre private Reise durch Galápagos & Ecuador mit 24/7 dedizierten Reiseplanern.',
+    it: 'Personalizza il tuo viaggio privato tra Galápagos & Ecuador con designer di viaggio dedicati 24/7.',
+    pt: 'Personalize sua viagem privada entre Galápagos & Equador com designers de viagem dedicados 24/7.',
+    ja: 'ガラパゴスとエクアドルのプライベート旅行を24/7の旅行デザイナーと共にカスタマイズ',
+    zh: '使用24/7专属旅行设计师定制加拉帕戈斯和厄瓜多尔的私人行程。'
+  };
+
   return (
     <main className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] relative -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px] pt-[100px] sm:pt-[120px] lg:pt-[150px] transition-colors duration-300">
       <div className="absolute top-0 left-0 w-full h-[70vh] bg-gradient-to-b from-emerald-900/15 via-emerald-900/5 to-transparent -z-10 pointer-events-none" />
@@ -47,12 +71,10 @@ export default async function BookingPage({ params }: { params: Promise<{ locale
         {/* Static SSR H1 Header - Guarantees H1 is first heading in DOM */}
         <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-zinc-900 dark:text-white tracking-tight">
-            {isEs ? 'Reserva tu Expedición a Medida en Ecuador y Galápagos' : 'Book Your Bespoke Nature Expedition in Galapagos & Andes'}
+            {titleTexts[locale]}
           </h1>
           <p className="text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm max-w-xl mx-auto">
-            {isEs
-              ? 'Planifique su viaje exclusivo por Galápagos y Ecuador con asistencia personalizada 24/7.'
-              : 'Customize your private journey across Galapagos & Ecuador with 24/7 dedicated travel designers.'}
+            {paragraphTexts[locale]}
           </p>
         </div>
 

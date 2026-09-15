@@ -6,26 +6,26 @@ const multiDayTours: Tour[] = [
   {
     id: 'galapagos-4days',
     code: '1.1',
-    title: { 
-      en: 'Galapagos Encounter: 4 Days Of Wonder', 
+    title: {
+      en: 'Galapagos Encounter: 4 Days Of Wonder',
       es: 'Encuentro Galápagos: 4 Días De Magia',
-      fr: 'Rencontre aux Galápagos: 4 Jours Merveilleux', 
-      de: 'Galapagos Entdeckung: 4 Tage Magie', 
-      it: 'Incontro alle Galapagos: 4 Giorni di Magia', 
-      pt: 'Encontro em Galápagos: 4 Dias de Magia', 
-      ja: 'ガラパゴス諸島 4日間の驚異', 
-      zh: '加拉帕戈斯群岛4日奇妙之旅' 
+      fr: 'Rencontre aux Galápagos: 4 Jours Merveilleux',
+      de: 'Galapagos Entdeckung: 4 Tage Magie',
+      it: 'Incontro alle Galapagos: 4 Giorni di Magia',
+      pt: 'Encontro em Galápagos: 4 Dias de Magia',
+      ja: 'ガラパゴス諸島 4日間の驚異',
+      zh: '加拉帕戈斯群岛4日奇妙之旅'
     },
     destination: 'Galapagos',
-    duration: { 
-      en: '4 DAYS / 3 NIGHTS', 
-      es: '4 DÍAS / 3 NOCHES', 
-      fr: '4 JOURS / 3 NUITS', 
-      de: '4 TAGE / 3 NÄCHTE', 
-      it: '4 GIORNI / 3 NOTTI', 
-      pt: '4 DIAS / 3 NOITES', 
-      ja: '4日間 / 3泊', 
-      zh: '4天 / 3晚' 
+    duration: {
+      en: '4 DAYS / 3 NIGHTS',
+      es: '4 DÍAS / 3 NOCHES',
+      fr: '4 JOURS / 3 NUITS',
+      de: '4 TAGE / 3 NÄCHTE',
+      it: '4 GIORNI / 3 NOTTI',
+      pt: '4 DIAS / 3 NOITES',
+      ja: '4日間 / 3泊',
+      zh: '4天 / 3晚'
     },
     durationDays: 4,
     price: 1050,
@@ -47,15 +47,15 @@ const multiDayTours: Tour[] = [
     rating: 5,
     reviewsCount: 28,
     isPopular: true,
-    category: { 
-      en: 'Island Hopping Expedition', 
-      es: 'Expedición Island Hopping', 
-      fr: "Expédition d'île en île", 
-      de: 'Insel-Hopping-Expedition', 
-      it: 'Spedizione Island Hopping', 
-      pt: 'Expedição Entre Ilhas', 
-      ja: 'アイランドホッピング探検', 
-      zh: '跳岛精华探险' 
+    category: {
+      en: 'Island Hopping Expedition',
+      es: 'Expedición Island Hopping',
+      fr: "Expédition d'île en île",
+      de: 'Insel-Hopping-Expedition',
+      it: 'Spedizione Island Hopping',
+      pt: 'Expedição Entre Ilhas',
+      ja: 'アイランドホッピング探検',
+      zh: '跳岛精华探险'
     },
     description: {
       en: 'Experience the wonders of the Galápagos on this 4-day itinerary featuring Santa Cruz highlands, giant tortoises at Primicias Ranch, full-day boat excursion to Isabela Island with Tintoreras snorkeling and flamingo lagoon, and coastal exploration at La Lobería, Punta Estrada and Las Grietas.',
@@ -92,59 +92,199 @@ const multiDayTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Day 1 – Arrival In Baltra | Twin Craters | Primicias Ranch', 
-      es: 'Día 1 – Llegada A Baltra | Cráteres Gemelos | Rancho Primicias' },
+        title: {
+          en: 'Day 1 – Arrival In Baltra | Twin Craters | Primicias Ranch',
+          es: 'Día 1 – Llegada A Baltra | Cráteres Gemelos | Rancho Primicias',
+          fr: 'Jour 1 – Arrivée à Baltra | Cratères Jumeaux | Rancho Primicias',
+          de: 'Tag 1 – Ankunft in Baltra | Zwillingskrater | Rancho Primicias',
+          it: 'Giorno 1 – Arrivo a Baltra | Crateri Gemelli | Rancho Primicias',
+          pt: 'Dia 1 – Chegada a Baltra | Crateras Gêmeas | Rancho Primicias',
+          ja: '第1日 – バルトラ島到着 | ツインクレーター | プリミシアスランチ',
+          zh: '第1天 – 抵达巴尔特拉 | 双子坑 | 普里米西亚巨龟庄园'
+        },
         description: {
           en: 'Upon arrival at Seymour Airport on Baltra Island, you will be welcomed by our representative and begin your journey through the Galápagos Islands.\n\nAfter crossing the Itabaca Channel to Santa Cruz Island, we will travel to the highlands to visit the famous Twin Craters (Los Gemelos). These impressive volcanic formations are surrounded by the lush Scalesia forest and offer an excellent introduction to the unique geological landscape of Santa Cruz Island.\n\nWe will then continue to Primicias Ranch, a private reserve where giant Galápagos tortoises can be observed roaming freely in their natural environment. During the visit, you will learn about these iconic animals and their importance to the Galápagos ecosystem.\n\nAfter the excursion, we will continue to Puerto Ayora for hotel check-in and the remainder of the day at leisure.',
-          es: 'Llegada al Aeropuerto Seymour en Isla Baltra, recepción por nuestro representante e inicio del viaje en Galápagos.\n\nTras cruzar el Canal de Itabaca hacia Isla Santa Cruz, nos trasladamos a las tierras altas para visitar los famosos Cráteres Gemelos (Los Gemelos), impresionantes formaciones volcánicas rodeadas por el bosque de Scalesia.\n\nContinuamos hacia el Rancho Primicias, reserva privada donde las tortugas gigantes de Galápagos viven libremente en su hábitat natural, aprendiendo sobre su conservación y explorando túneles de lava.\n\nTraslado a Puerto Ayora para check-in en el hotel y resto de la tarde libre.'
+          es: 'Llegada al Aeropuerto Seymour en Isla Baltra, recepción por nuestro representante e inicio del viaje en Galápagos.\n\nTras cruzar el Canal de Itabaca hacia Isla Santa Cruz, nos trasladamos a las tierras altas para visitar los famosos Cráteres Gemelos (Los Gemelos), impresionantes formaciones volcánicas rodeadas por el bosque de Scalesia.\n\nContinuamos hacia el Rancho Primicias, reserva privada donde las tortugas gigantes de Galápagos viven libremente en su hábitat natural, aprendiendo sobre su conservación y explorando túneles de lava.\n\nTraslado a Puerto Ayora para check-in en el hotel y resto de la tarde libre.',
+          zh: '抵达巴尔特拉岛西摩机场，由专属向导迎接开启加拉帕戈斯探险之旅。\n\n横渡伊塔巴卡海峡抵达圣克鲁斯岛后，前往高地探索著名的双子坑（Los Gemelos），感受繁茂鳞片树林环抱的火山地貌。\n\n随后前往普里米西亚巨龟庄园私人生态保护区，近距离观察自由漫步的加拉帕戈斯象龟并探寻熔岩隧道。\n\n游览结束后前往阿约拉港办理入住，尽享惬意自由时光。'
         },
         image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
-        accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
-        meals: { en: 'According to selected hotel plan', es: 'Según plan hotelero' },
-        transportation: { en: 'Private land transportation & airport shuttle', es: 'Transporte privado terrestre y shuttle de aeropuerto' }
+        accommodation: {
+          en: 'Santa Cruz Island – Puerto Ayora',
+          es: 'Isla Santa Cruz – Puerto Ayora',
+          fr: 'Île Santa Cruz – Puerto Ayora',
+          de: 'Insel Santa Cruz – Puerto Ayora',
+          it: 'Isola di Santa Cruz – Puerto Ayora',
+          pt: 'Ilha Santa Cruz – Puerto Ayora',
+          ja: 'サンタクルス島 – プエルトアヨラ',
+          zh: '圣克鲁斯岛 – 阿约拉港'
+        },
+        meals: {
+          en: 'According to selected hotel plan',
+          es: 'Según plan hotelero seleccionado',
+          fr: 'Selon formule hôtelière sélectionnée',
+          de: 'Gemäß Hotelplan',
+          it: 'Secondo piano alberghiero',
+          pt: 'De acordo com o plano do hotel',
+          ja: 'ホテルプランに準ずる',
+          zh: '根据所选酒店方案提供'
+        },
+        transportation: {
+          en: 'Private land transportation & airport shuttle',
+          es: 'Transporte privado terrestre y shuttle de aeropuerto',
+          fr: 'Transport terrestre privé et navette aéroport',
+          de: 'Privater Landtransport & Flughafentransfer',
+          it: 'Trasporto terrestre privato e navetta aeroportuale',
+          pt: 'Transporte terrestre privado e traslado do aeroporto',
+          ja: '専用陸上送迎＆空港シャトル',
+          zh: '陆路专车与机场接驳'
+        }
       },
       {
         day: 2,
-        title: { 
-      en: 'Day 2 – Full-Day Excursion To Isabela Island | Tortoise Breeding Center | Flamingo Lagoon | Tintoreras', 
-      es: 'Día 2 – Excursión Full-Day A Isla Isabela | Centro De Crianza | Laguna De Flamingos | Tintoreras' },
+        title: {
+          en: 'Day 2 – Full-Day Excursion To Isabela Island | Tortoise Breeding Center | Flamingo Lagoon | Tintoreras',
+          es: 'Día 2 – Excursión Full-Day A Isla Isabela | Centro De Crianza | Laguna De Flamingos | Tintoreras',
+          fr: 'Jour 2 – Excursion Journée Complète à l\'Île Isabela | Centre d\'Élevage | Lagune des Flamants | Tintoreras',
+          de: 'Tag 2 – Ganztagesausflug zur Insel Isabela | Schildkrötenzuchtzentrum | Flamingo-Lagune | Tintoreras',
+          it: 'Giorno 2 – Escursione Giornata Intera a Isola Isabela | Centro di Riproduzione | Laguna dei Fenicotteri | Tintoreras',
+          pt: 'Dia 2 – Excursão Dia Inteiro à Ilha Isabela | Centro de Reprodução | Lagoa de Flamingos | Tintoreras',
+          ja: '第2日 – イサベラ島終日エクスカーション | ゾウガメ繁殖センター | フラミンゴラグーン | ティントレラス',
+          zh: '第2天 – 伊莎贝拉岛全日游览 | 巨龟繁殖中心 | 火烈鸟泻湖 | 蒂恩托雷拉斯石礁'
+        },
         description: {
           en: 'After breakfast, transfer to the pier to board a speedboat to Isabela Island. The navigation takes approximately 2 to 2.5 hours, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, we will visit the Giant Tortoise Breeding Center, where you will learn about the conservation and breeding programs established to protect Isabela\'s giant tortoise populations.\n\nWe will then visit the Flamingo Lagoon, one of the island\'s most important wetlands. Depending on natural conditions, you may observe Galápagos flamingos and other species of birds in their natural habitat.\n\nThe excursion will continue with a boat trip to Tintoreras Islet, a small volcanic islet located just off the coast of Isabela. Its clear waters and rich marine environment make it an excellent snorkeling destination. During the activity, you may have the opportunity to observe sea lions, sea turtles, rays, penguins and colorful tropical fish, depending on wildlife activity and sea conditions.\n\nAfter the excursion, return by speedboat to Santa Cruz Island and Puerto Ayora.',
-          es: 'Traslado al muelle para tomar la lancha rápida hacia Isla Isabela (2 a 2.5 horas de navegación).\n\nEn Puerto Villamil visitamos el Centro de Crianza de Tortugas Gigantes para conocer los programas de reproducción y conservación.\n\nLuego visitamos la Laguna de Flamingos para observar flamingos y aves marinas en los humedales costeros.\n\nPor la tarde, navegación al Islote Tintoreras, formación volcánica de aguas cristalinas ideal para snorkeling con lobos marinos, tortugas marinas, rayas, pingüinos de Galápagos y peces tropicales.\n\nRetorno en lancha rápida a Santa Cruz y Puerto Ayora.'
+          es: 'Traslado al muelle para tomar la lancha rápida hacia Isla Isabela (2 a 2.5 horas de navegación).\n\nEn Puerto Villamil visitamos el Centro de Crianza de Tortugas Gigantes para conocer los programas de reproducción y conservación.\n\nLuego visitamos la Laguna de Flamingos para observar flamingos y aves marinas en los humedales costeros.\n\nPor la tarde, navegación al Islote Tintoreras, formación volcánica de aguas cristalinas ideal para snorkeling con lobos marinos, tortugas marinas, rayas, pingüinos de Galápagos y peces tropicales.\n\nRetorno en lancha rápida a Santa Cruz y Puerto Ayora.',
+          zh: '早餐后前往码头乘快艇赴伊莎贝拉岛（航程约2至2.5小时）。\n\n抵达维利亚米尔港后探访巨龟繁育中心，了解伊莎贝拉岛象龟保育项目。\n\n随后漫步火烈鸟泻湖湿地观察野生鸟类。\n\n午后乘船前往蒂恩托雷拉斯石礁（Islote Tintoreras），在清澈水域中浮潜，与海狮、海龟、海鬣蜥和热带鱼同游。\n\n游览结束后乘快艇返回圣克鲁斯岛阿约拉港。'
         },
         image: '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
-        accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
-        meals: { en: 'Breakfast and lunch', es: 'Desayuno y almuerzo' },
-        transportation: { en: 'Shared speedboat and private land transportation', es: 'Lancha rápida compartida y transporte terrestre privado' },
-        activity: { en: 'Full-day guided excursion and snorkeling', es: 'Excursión guiada full-day y snorkeling' }
+        accommodation: {
+          en: 'Santa Cruz Island – Puerto Ayora',
+          es: 'Isla Santa Cruz – Puerto Ayora',
+          fr: 'Île Santa Cruz – Puerto Ayora',
+          de: 'Insel Santa Cruz – Puerto Ayora',
+          it: 'Isola di Santa Cruz – Puerto Ayora',
+          pt: 'Ilha Santa Cruz – Puerto Ayora',
+          ja: 'サンタクルス島 – プエルトアヨラ',
+          zh: '圣克鲁斯岛 – 阿约拉港'
+        },
+        meals: {
+          en: 'Breakfast and lunch',
+          es: 'Desayuno y almuerzo',
+          fr: 'Petit-déjeuner et déjeuner',
+          de: 'Frühstück und Mittagessen',
+          it: 'Colazione e pranzo',
+          pt: 'Café da manhã e almoço',
+          ja: '朝食・昼食付き',
+          zh: '包含早餐与午餐'
+        },
+        transportation: {
+          en: 'Shared speedboat and private land transportation',
+          es: 'Lancha rápida compartida y transporte terrestre privado',
+          fr: 'Bateau rapide partagé et transport terrestre privé',
+          de: 'Geteiltes Schnellboot und privater Landtransport',
+          it: 'Motoscafo condiviso e trasporto terrestre privato',
+          pt: 'Lancha rápida compartilhada e transporte terrestre privado',
+          ja: '混乗スピードボート＆専用陸上送迎',
+          zh: '公共快艇与陆路专车接送'
+        },
+        activity: {
+          en: 'Full-day guided excursion and snorkeling',
+          es: 'Excursión guiada full-day y snorkeling',
+          fr: 'Excursion guidée journée complète et snorkeling',
+          de: 'Ganztägige geführte Tour & Schnorcheln',
+          it: 'Escursione guidata giornata intera e snorkeling',
+          pt: 'Excursão guiada dia inteiro e snorkeling',
+          ja: '終日専属ガイドツアー＆シュノーケリング',
+          zh: '全天向导陪同游览与浮潜体验'
+        }
       },
       {
         day: 3,
-        title: { 
-      en: 'Day 3 – La Lobería | Punta Estrada | Las Grietas', 
-      es: 'Día 3 – La Lobería | Punta Estrada | Las Grietas' },
+        title: {
+          en: 'Day 3 – La Lobería | Punta Estrada | Las Grietas',
+          es: 'Día 3 – La Lobería | Punta Estrada | Las Grietas',
+          fr: 'Jour 3 – La Lobería | Punta Estrada | Las Grietas',
+          de: 'Tag 3 – La Lobería | Punta Estrada | Las Grietas',
+          it: 'Giorno 3 – La Lobería | Punta Estrada | Las Grietas',
+          pt: 'Dia 3 – La Lobería | Punta Estrada | Las Grietas',
+          ja: '第3日 – ラ・ロベリア | プンタ・エストラダ | ラス・グリエタス',
+          zh: '第3天 – 海狮滩 (La Lobería) | 埃斯特拉达角 | 拉斯格里塔斯火山裂缝'
+        },
         description: {
           en: 'After breakfast, we will begin the day\'s activities with a visit to La Lobería, a coastal area famous for its resident population of Galápagos sea lions. Here, you will have the opportunity to observe these playful animals in their natural environment.\n\nWe will then continue to Punta Estrada, a beautiful coastal area surrounded by rocky formations and clear waters. The area offers excellent opportunities for nature observation and marine activities.\n\nThe excursion will continue to Las Grietas, a spectacular natural formation consisting of a narrow volcanic canyon filled with crystal-clear turquoise water. This is one of the most popular snorkeling and swimming sites near Puerto Ayora.\n\nDuring the snorkeling activity, you can explore the underwater environment and observe a variety of colorful fish and marine life.\n\nAfter the visit, return to Puerto Ayora and enjoy the remainder of the day at leisure.',
-          es: 'Visita matutina a La Lobería para observar la colonia residente de lobos marinos de Galápagos en la playa y en el agua.\n\nContinuamos a Punta Estrada, bahía costera de formaciones rocosas y aguas calmas para observación de aves e iguanas marinas.\n\nCaminata hacia Las Grietas, cañón volcánico con aguas cristalinas turquesas donde nadar y hacer snorkel entre paredes de roca de 15 metros.\n\nRetorno a Puerto Ayora y resto de la tarde libre para recorrer el pueblo o descansar.'
+          es: 'Visita matutina a La Lobería para observar la colonia residente de lobos marinos de Galápagos en la playa y en el agua.\n\nContinuamos a Punta Estrada, bahía costera de formaciones rocosas y aguas calmas para observación de aves e iguanas marinas.\n\nCaminata hacia Las Grietas, cañón volcánico con aguas cristalinas turquesas donde nadar y hacer snorkel entre paredes de roca de 15 metros.\n\nRetorno a Puerto Ayora y resto de la tarde libre para recorrer el pueblo o descansar.',
+          zh: '清晨前往海狮滩（La Lobería）观赏沙滩上嬉戏的海狮。\n\n随后漫步埃斯特拉达角（Punta Estrada）欣赏奇特海岸地貌。\n\n徒步探秘拉斯格里塔斯火山岩峡谷（Las Grietas），在两岸耸立的火山岩绝壁与碧绿如翡翠的水域中畅游浮潜。\n\n结束后返回阿约拉港享受闲适午后。'
         },
         image: '/images/tours/16-9/galapagos-las-grietas-16-9.jpg',
-        accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
-        meals: { en: 'Breakfast', es: 'Desayuno' },
-        activity: { en: 'Guided excursion and snorkeling', es: 'Excursión guiada y snorkeling' }
+        accommodation: {
+          en: 'Santa Cruz Island – Puerto Ayora',
+          es: 'Isla Santa Cruz – Puerto Ayora',
+          fr: 'Île Santa Cruz – Puerto Ayora',
+          de: 'Insel Santa Cruz – Puerto Ayora',
+          it: 'Isola di Santa Cruz – Puerto Ayora',
+          pt: 'Ilha Santa Cruz – Puerto Ayora',
+          ja: 'サンタクルス島 – プエルトアヨラ',
+          zh: '圣克鲁斯岛 – 阿约拉港'
+        },
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        activity: {
+          en: 'Guided excursion and snorkeling',
+          es: 'Excursión guiada y snorkeling',
+          fr: 'Excursion guidée et snorkeling',
+          de: 'Geführte Tour & Schnorcheln',
+          it: 'Escursione guidata e snorkeling',
+          pt: 'Excursão guiada e snorkeling',
+          ja: 'ガイド付きツアー＆シュノーケリング',
+          zh: '向导陪同游览与浮潜体验'
+        }
       },
       {
         day: 4,
-        title: { 
-      en: 'Day 4 – Transfer To Baltra Airport | Departure', 
-      es: 'Día 4 – Traslado Al Aeropuerto De Baltra | Salida' },
+        title: {
+          en: 'Day 4 – Transfer To Baltra Airport | Departure',
+          es: 'Día 4 – Traslado Al Aeropuerto De Baltra | Salida',
+          fr: 'Jour 4 – Transfert à l\'Aéroport de Baltra | Départ',
+          de: 'Tag 4 – Transfer zum Flughafen Baltra | Abreise',
+          it: 'Giorno 4 – Trasferimento all\'Aeroporto di Baltra | Partenza',
+          pt: 'Dia 4 – Transfer para o Aeroporto de Baltra | Partida',
+          ja: '第4日 – バルトラ空港へ送迎 | ご出発',
+          zh: '第4天 – 送往巴尔特拉机场 | 航班离境'
+        },
         description: {
           en: 'After breakfast, check out from the hotel and begin the transfer from Puerto Ayora to Baltra Airport.\n\nThe journey includes transportation across Santa Cruz Island and the crossing of the Itabaca Channel, followed by the airport shuttle to Seymour Airport.\n\nUpon arrival at the airport, assistance will be provided for your departure flight, marking the end of your Galápagos Islands experience.',
-          es: 'Desayuno, check-out del hotel y traslado terrestre a través de Santa Cruz hacia el Canal de Itabaca.\n\nCruce en ferry y traslado en shuttle hacia el Aeropuerto Seymour de Baltra con asistencia para abordar el vuelo de retorno al continente.'
+          es: 'Desayuno, check-out del hotel y traslado terrestre a través de Santa Cruz hacia el Canal de Itabaca.\n\nCruce en ferry y traslado en shuttle hacia el Aeropuerto Seymour de Baltra con asistencia para abordar el vuelo de retorno al continente.',
+          zh: '早餐后退房启程送往巴尔特拉机场。\n\n横穿圣克鲁斯岛并摆渡伊塔巴卡海峡，由机场穿梭巴士送达西摩机场办理登机，圆满结束加拉帕戈斯群岛探险之旅。'
         },
         image: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
-        meals: { en: 'Breakfast', es: 'Desayuno' },
-        transportation: { en: 'Private land transportation and airport shuttle', es: 'Transporte terrestre privado y shuttle de aeropuerto' }
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'Private land transportation and airport shuttle',
+          es: 'Transporte terrestre privado y shuttle de aeropuerto',
+          fr: 'Transport terrestre privé et navette aéroport',
+          de: 'Privater Landtransport & Flughafentransfer',
+          it: 'Trasporto terrestre privato e navetta aeroportuale',
+          pt: 'Transporte terrestre privado e traslado do aeroporto',
+          ja: '専用陸上送迎＆空港シャトル',
+          zh: '专车陆路接送与机场接驳'
+        }
       }
     ]
   },
@@ -153,26 +293,26 @@ const multiDayTours: Tour[] = [
   {
     id: 'galapagos-5days',
     code: '1.2',
-    title: { 
-      en: 'Galapagos Explorer: The 5-Day Expedition', 
+    title: {
+      en: 'Galapagos Explorer: The 5-Day Expedition',
       es: 'Expedición Galápagos: El Viaje De 5 Días',
-      fr: 'Expédition Galápagos: L\'aventure de 5 Jours', 
-      de: 'Galapagos Expedition: 5 Tage Abenteuer', 
-      it: 'Spedizione Galapagos: L\'avventura di 5 Giorni', 
-      pt: 'Expedição Galápagos: A Aventura de 5 Dias', 
-      ja: 'ガラパゴス諸島 5日間の探検', 
-      zh: '加拉帕戈斯群岛5日探险之旅' 
+      fr: 'Expédition Galápagos: L\'aventure de 5 Jours',
+      de: 'Galapagos Expedition: 5 Tage Abenteuer',
+      it: 'Spedizione Galapagos: L\'avventura di 5 Giorni',
+      pt: 'Expedição Galápagos: A Aventura de 5 Dias',
+      ja: 'ガラパゴス諸島 5日間の探検',
+      zh: '加拉帕戈斯群岛5日探险之旅'
     },
     destination: 'Galapagos',
-    duration: { 
-      en: '5 DAYS / 4 NIGHTS', 
-      es: '5 DÍAS / 4 NOCHES', 
-      fr: '5 JOURS / 4 NUITS', 
-      de: '5 TAGE / 4 NÄCHTE', 
-      it: '5 GIORNI / 4 NOTTI', 
-      pt: '5 DIAS / 4 NOITES', 
-      ja: '5日間 / 4泊', 
-      zh: '5天 / 4晚' 
+    duration: {
+      en: '5 DAYS / 4 NIGHTS',
+      es: '5 DÍAS / 4 NOCHES',
+      fr: '5 JOURS / 4 NUITS',
+      de: '5 TAGE / 4 NÄCHTE',
+      it: '5 GIORNI / 4 NOTTI',
+      pt: '5 DIAS / 4 NOITES',
+      ja: '5日間 / 4泊',
+      zh: '5天 / 4晚'
     },
     durationDays: 5,
     price: 1250,
@@ -194,15 +334,15 @@ const multiDayTours: Tour[] = [
     rating: 5,
     reviewsCount: 35,
     isPopular: true,
-    category: { 
-      en: 'Grand Island Hopping & Cruise', 
-      es: 'Gran Salto de Islas y Crucero', 
-      fr: 'Grande croisière et îles', 
-      de: 'Große Insel-Hopping-Reise', 
-      it: 'Grande Spedizione Isole e Crociera', 
-      pt: 'Grande Expedição entre Ilhas', 
-      ja: 'アイランドホッピング＆クルーズ', 
-      zh: '大跳岛与游艇巡航' 
+    category: {
+      en: 'Grand Island Hopping & Cruise',
+      es: 'Gran Salto de Islas y Crucero',
+      fr: 'Grande croisière et îles',
+      de: 'Große Insel-Hopping-Reise',
+      it: 'Grande Spedizione Isole e Crociera',
+      pt: 'Grande Expedição entre Ilhas',
+      ja: 'アイランドホッピング＆クルーズ',
+      zh: '大跳岛与游艇巡航'
     },
     description: {
       en: 'Comprehensive 5-day Galápagos journey connecting Santa Cruz highlands, overnight stay on Isabela Island with Tintoreras Islet and flamingo lagoon, Las Grietas volcanic canyon, and a full-day navigable yacht excursion to Santa Fe or Pinzón Island.',
@@ -240,8 +380,8 @@ const multiDayTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Day 1 – Arrival In Baltra | Twin Craters | Primicias Ranch', 
+        title: {
+      en: 'Day 1 – Arrival In Baltra | Twin Craters | Primicias Ranch',
       es: 'Día 1 – Llegada A Baltra | Cráteres Gemelos | Rancho Primicias' },
         description: {
           en: 'Upon arrival at Seymour Airport on Baltra Island, you will be welcomed by our representative and begin your journey through the Galápagos Islands.\n\nAfter crossing the Itabaca Channel to Santa Cruz Island, we will continue towards the highlands. Along the way, we will visit the famous Twin Craters (Los Gemelos), two impressive volcanic formations surrounded by the lush vegetation of the Santa Cruz highlands. Here, you will learn about the geological origins of the island and observe the unique Scalesia forest.\n\nWe will then continue to Primicias Ranch, a private reserve where you can observe giant Galápagos tortoises roaming freely in their natural environment. This is an excellent opportunity to photograph these iconic animals and learn about their importance to the Galápagos ecosystem.\n\nAfter the visit, we will continue to your hotel in Puerto Ayora for check-in and the remainder of the day at leisure.',
@@ -252,8 +392,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 2,
-        title: { 
-      en: 'Day 2 – Santa Cruz To Isabela | Flamingo Lagoon | Tortoise Breeding Center | Tintoreras', 
+        title: {
+      en: 'Day 2 – Santa Cruz To Isabela | Flamingo Lagoon | Tortoise Breeding Center | Tintoreras',
       es: 'Día 2 – Santa Cruz A Isabela | Laguna De Flamingos | Centro De Crianza | Tintoreras' },
         description: {
           en: 'After breakfast, we will transfer to the pier for a speedboat journey from Santa Cruz to Isabela Island. The crossing takes approximately 2 to 2.5 hours, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, we will begin our exploration of Isabela. Our first stop will be the Flamingo Lagoon, one of the most important wetland areas on the island. Here, you may observe American flamingos feeding and resting in the shallow waters, together with other species of coastal and migratory birds.\n\nWe will then visit the Giant Tortoise Breeding Center, where you will learn about the conservation and reproduction programs designed to protect Isabela\'s giant tortoise populations. The visit provides an insight into the efforts being made to preserve these emblematic species.\n\nIn the afternoon, we will take a boat excursion to Tintoreras Islet, a small volcanic islet located just off the coast of Isabela. The area is famous for its crystal-clear waters and rich marine life. During the snorkeling activity, you may encounter sea lions, sea turtles, rays, colorful fish and penguins, depending on the conditions and wildlife activity.\n\nAfter the excursion, return to Puerto Villamil and enjoy the evening at leisure.',
@@ -264,8 +404,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 3,
-        title: { 
-      en: 'Day 3 – Isabela To Santa Cruz | La Lobería | Las Grietas', 
+        title: {
+      en: 'Day 3 – Isabela To Santa Cruz | La Lobería | Las Grietas',
       es: 'Día 3 – Isabela A Santa Cruz | La Lobería | Las Grietas' },
         description: {
           en: 'After breakfast, we will return to the pier for the boat transfer back to Santa Cruz Island.\n\nUpon arrival in Puerto Ayora, we will continue with a visit to La Lobería, a small coastal area known for its population of Galápagos sea lions. This is a wonderful place to observe these playful animals both on the beach and in the water.\n\nWe will then visit Las Grietas, a spectacular natural formation created by volcanic activity. This narrow canyon is filled with clear, turquoise water and is one of the most popular swimming and snorkeling sites near Puerto Ayora.\n\nDuring the snorkeling activity, you will have the opportunity to explore the underwater environment and observe colorful tropical fish and other marine species.\n\nAfter the visit, return to Puerto Ayora and check in at your hotel. The remainder of the afternoon and evening will be free to relax or explore the town independently.',
@@ -276,8 +416,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 4,
-        title: { 
-      en: 'Day 4 – Full-Day Excursion To Santa Fe Or Pinzón Island', 
+        title: {
+      en: 'Day 4 – Full-Day Excursion To Santa Fe Or Pinzón Island',
       es: 'Día 4 – Excursión Full-Day A Isla Santa Fe O Isla Pinzón' },
         description: {
           en: 'Today, enjoy a full-day boat excursion to one of the Galápagos\' outstanding snorkeling destinations: Santa Fe Island or Pinzón Island, depending on availability, sea conditions and the selected tour.\n\nSanta Fe Island is known for its beautiful turquoise waters, white sandy beaches and endemic wildlife. During the excursion, you may encounter sea lions, sea turtles, rays, marine iguanas and a variety of tropical fish. The island is also home to the endemic Santa Fe land iguana.\n\nAlternatively, the excursion may take you to Pinzón Island, a spectacular location surrounded by clear waters and abundant marine life. The snorkeling sites around Pinzón are particularly well known for encounters with sea turtles, sea lions, rays, colorful fish and, with some luck, Galápagos penguins.\n\nThe day will include navigation, snorkeling and opportunities to observe wildlife both above and below the water. Lunch will generally be provided during the excursion, depending on the selected tour.\n\nReturn to Puerto Ayora in the afternoon and enjoy your final evening in the Galápagos.',
@@ -289,8 +429,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 5,
-        title: { 
-      en: 'Day 5 – Transfer To Baltra Airport | Departure', 
+        title: {
+      en: 'Day 5 – Transfer To Baltra Airport | Departure',
       es: 'Día 5 – Traslado Al Aeropuerto De Baltra | Salida' },
         description: {
           en: 'After breakfast, check out from the hotel and transfer from Puerto Ayora towards Baltra Island.\n\nThe journey includes transportation across Santa Cruz Island and the Itabaca Channel, followed by the transfer to Seymour Airport (Baltra).\n\nUpon arrival at the airport, assistance will be provided for your departure flight, marking the end of your Galápagos Islands adventure.',
@@ -305,26 +445,26 @@ const multiDayTours: Tour[] = [
   {
     id: 'galapagos-6days',
     code: '1.3',
-    title: { 
-      en: 'Galapagos Enchanted Journey', 
+    title: {
+      en: 'Galapagos Enchanted Journey',
       es: 'Galápagos Completo: La Gran Odisea De 6 Días',
-      fr: 'Voyage Enchanté aux Galápagos', 
-      de: 'Verzauberte Reise nach Galapagos', 
-      it: 'Viaggio Incantato alle Galapagos', 
-      pt: 'Jornada Encantada em Galápagos', 
-      ja: '魅惑のガラパゴス諸島の旅', 
-      zh: '加拉帕戈斯迷人之旅' 
+      fr: 'Voyage Enchanté aux Galápagos',
+      de: 'Verzauberte Reise nach Galapagos',
+      it: 'Viaggio Incantato alle Galapagos',
+      pt: 'Jornada Encantada em Galápagos',
+      ja: '魅惑のガラパゴス諸島の旅',
+      zh: '加拉帕戈斯迷人之旅'
     },
     destination: 'Galapagos',
-    duration: { 
-      en: '6 DAYS / 5 NIGHTS', 
-      es: '6 DÍAS / 5 NOCHES', 
-      fr: '6 JOURS / 5 NUITS', 
-      de: '6 TAGE / 5 NÄCHTE', 
-      it: '6 GIORNI / 5 NOTTI', 
-      pt: '6 DIAS / 5 NOITES', 
-      ja: '6日間 / 5泊', 
-      zh: '6天 / 5晚' 
+    duration: {
+      en: '6 DAYS / 5 NIGHTS',
+      es: '6 DÍAS / 5 NOCHES',
+      fr: '6 JOURS / 5 NUITS',
+      de: '6 TAGE / 5 NÄCHTE',
+      it: '6 GIORNI / 5 NOTTI',
+      pt: '6 DIAS / 5 NOITES',
+      ja: '6日間 / 5泊',
+      zh: '6天 / 5晚'
     },
     durationDays: 6,
     price: 1550,
@@ -346,15 +486,15 @@ const multiDayTours: Tour[] = [
     rating: 5,
     reviewsCount: 39,
     isPopular: true,
-    category: { 
-      en: 'Triple Island Discovery & Cruise', 
-      es: 'Descubrimiento Triple Isla y Crucero', 
-      fr: "Découverte de trois îles", 
-      de: 'Drei-Inseln-Entdeckung & Kreuzfahrt', 
-      it: 'Scoperta di Tre Isole e Crociera', 
-      pt: 'Descoberta de Três Ilhas', 
-      ja: '3島巡礼＆クルーズ', 
-      zh: '三岛深度探索与游艇巡航' 
+    category: {
+      en: 'Triple Island Discovery & Cruise',
+      es: 'Descubrimiento Triple Isla y Crucero',
+      fr: "Découverte de trois îles",
+      de: 'Drei-Inseln-Entdeckung & Kreuzfahrt',
+      it: 'Scoperta di Tre Isole e Crociera',
+      pt: 'Descoberta de Três Ilhas',
+      ja: '3島巡礼＆クルーズ',
+      zh: '三岛深度探索与游艇巡航'
     },
     description: {
       en: 'Ultimate 6-day Galápagos expedition exploring 3 major islands: Santa Cruz highlands & giant tortoises, Isabela Island with Tintoreras & flamingos, Las Grietas volcanic canyon, navigable yacht cruise to Santa Fe or Pinzón Island, and San Cristóbal Island with Interpretation Center, Tijeretas Hill and La Lobería.',
@@ -393,8 +533,8 @@ const multiDayTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Day 1: Arrival In Baltra – Twin Craters – Primicias Ranch', 
+        title: {
+      en: 'Day 1: Arrival In Baltra – Twin Craters – Primicias Ranch',
       es: 'Día 1: Llegada A Baltra – Cráteres Gemelos – Rancho Primicias' },
         description: {
           en: 'Upon arrival at Baltra Airport, you will be welcomed by our representative and begin your Galápagos adventure.\n\nYour first visit will be to the Twin Craters (Los Gemelos), two impressive volcanic formations located in the highlands of Santa Cruz Island. These large craters were created by ancient volcanic activity and are surrounded by lush vegetation, including the characteristic scalesia forest. During the visit, you will have the opportunity to learn about the island’s geological history and observe some of the native bird species of the highlands.\n\nAfterward, continue to Primicias Ranch, a private ecological reserve where you can observe giant Galápagos tortoises roaming freely in their natural environment. You will also have the chance to walk through lava tunnels and learn more about the conservation efforts dedicated to protecting these iconic animals.\n\nAt the end of the excursion, transfer to your accommodation in Santa Cruz Island and enjoy the rest of the day at leisure.',
@@ -404,8 +544,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 2,
-        title: { 
-      en: 'Day 2: Santa Cruz – Isabela Island – Flamingo Lagoon – Tortoise Breeding Center – Tintoreras Islet', 
+        title: {
+      en: 'Day 2: Santa Cruz – Isabela Island – Flamingo Lagoon – Tortoise Breeding Center – Tintoreras Islet',
       es: 'Día 2: Santa Cruz – Isla Isabela – Laguna De Flamingos – Centro De Crianza – Islote Tintoreras' },
         description: {
           en: 'After breakfast, transfer to the pier for a speedboat ride to Isabela Island, the largest island in the Galápagos archipelago. The journey offers the possibility of seeing marine wildlife along the way, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, begin your exploration of Isabela with a visit to a flamingo lagoon, where you may observe the beautiful Galápagos flamingos feeding and resting in the shallow waters.\n\nContinue to the Tortoise Breeding Center, a conservation facility dedicated to the reproduction and protection of Isabela’s giant tortoise populations. Here, you will learn about the conservation programs and the efforts being made to preserve these endangered species.\n\nIn the afternoon, take a boat excursion to Tintoreras Islet, a small group of volcanic islets located near Puerto Villamil. The area is famous for its clear waters and abundant marine life. During the visit, you will have the opportunity to snorkel with sea turtles, sea lions, tropical fish, rays, and marine iguanas. On land, you may also see penguins, blue-footed boobies, and other coastal birds.\n\nReturn to Puerto Villamil and enjoy the evening at leisure.',
@@ -415,8 +555,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 3,
-        title: { 
-      en: 'Day 3: Isabela – Santa Cruz – La Lobería – Las Grietas', 
+        title: {
+      en: 'Day 3: Isabela – Santa Cruz – La Lobería – Las Grietas',
       es: 'Día 3: Isabela – Santa Cruz – La Lobería – Las Grietas' },
         description: {
           en: 'After breakfast, transfer to the pier for your return journey to Santa Cruz Island.\n\nUpon arrival, continue with a visit to La Lobería, a coastal area known for its colony of playful Galápagos sea lions. Enjoy a short walk along the coast and take the opportunity to observe these animals in their natural habitat. Depending on conditions, you may also see marine iguanas, shorebirds, and other native wildlife.\n\nLater, visit Las Grietas, one of Santa Cruz’s most popular natural swimming and snorkeling sites. This spectacular geological formation consists of a narrow water-filled crevice surrounded by high volcanic rock walls. Its clear waters provide excellent conditions for observing colorful fish and other marine species.\n\nReturn to your hotel and enjoy the remainder of the afternoon and evening at leisure.',
@@ -426,8 +566,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 4,
-        title: { 
-      en: 'Day 4: Full-Day Excursion – Santa Fe Island Or Pinzón Islet', 
+        title: {
+      en: 'Day 4: Full-Day Excursion – Santa Fe Island Or Pinzón Islet',
       es: 'Día 4: Excursión Full-Day – Isla Santa Fe O Islote Pinzón' },
         description: {
           en: 'Today, enjoy a full-day boat excursion to Santa Fe Island or Pinzón Islet, depending on availability, weather, and sea conditions.\n\nOption 1: Santa Fe Island\nSanta Fe is famous for its beautiful turquoise waters, white-sand beaches, and abundant wildlife. During the excursion, you may observe sea lions, marine iguanas, sea turtles, rays, and a variety of tropical fish. The snorkeling experience offers an excellent opportunity to explore the rich marine ecosystem surrounding the island. You may also enjoy a short hike to explore the island’s arid landscape and endemic vegetation.\n\nOption 2: Pinzón Islet\nPinzón is a spectacular snorkeling destination surrounded by nutrient-rich waters and abundant marine life. During the excursion, you may have the opportunity to swim alongside sea turtles, sea lions, rays, sharks, and schools of tropical fish.\n\nAfter the activities, enjoy lunch on board and continue exploring the surrounding waters before returning to Santa Cruz.\n\nArrive in Puerto Ayora in the afternoon and enjoy the evening at leisure.',
@@ -437,8 +577,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 5,
-        title: { 
-      en: 'Day 5: Santa Cruz – San Cristóbal – Interpretation Center – Tijeretas – La Lobería', 
+        title: {
+      en: 'Day 5: Santa Cruz – San Cristóbal – Interpretation Center – Tijeretas – La Lobería',
       es: 'Día 5: Santa Cruz – San Cristóbal – Centro De Interpretación – Tijeretas – La Lobería' },
         description: {
           en: 'After breakfast, transfer to the pier for a speedboat journey to San Cristóbal Island, one of the easternmost islands in the Galápagos.\n\nUpon arrival in Puerto Baquerizo Moreno, begin your tour with a visit to the San Cristóbal Interpretation Center, an excellent introduction to the natural and human history of the Galápagos Islands. Through informative exhibits, you will learn about the islands’ volcanic origins, ecosystems, endemic species, human settlement, and conservation challenges.\n\nContinue to Tijeretas Hill, a scenic viewpoint offering beautiful panoramic views of the coastline and surrounding ocean. The area is also associated with frigatebirds, which can frequently be observed flying above the cliffs.\n\nFinally, visit La Lobería, a beautiful coastal site where you can observe sea lions resting on the beach and playing in the water. The area also offers opportunities to see marine iguanas and coastal birds.\n\nReturn to Puerto Baquerizo Moreno and enjoy your final evening in the Galápagos.',
@@ -448,8 +588,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 6,
-        title: { 
-      en: 'Day 6: San Cristóbal – Airport Transfer And Departure', 
+        title: {
+      en: 'Day 6: San Cristóbal – Airport Transfer And Departure',
       es: 'Día 6: San Cristóbal – Traslado Al Aeropuerto Y Salida' },
         description: {
           en: 'After breakfast, enjoy some free time depending on your flight schedule.\n\nAt the appropriate time, transfer to San Cristóbal Airport for your departure flight.\n\nYour unforgettable Galápagos adventure comes to an end as you board your flight back to the mainland.',
@@ -463,26 +603,26 @@ const multiDayTours: Tour[] = [
   {
     id: 'volcanoes-rivers-8days',
     code: '2.1',
-    title: { 
-      en: 'Andes To Amazon: Volcanoes & Rivers', 
+    title: {
+      en: 'Andes To Amazon: Volcanoes & Rivers',
       es: 'Volcanes, Ríos Y Selva: La Ruta De La Aventura',
-      fr: 'Des Andes à l\'Amazonie: Volcans et Rivières', 
-      de: 'Von den Anden zum Amazonas: Vulkane & Flüsse', 
-      it: 'Dalle Ande all\'Amazzonia: Vulcani e Fiumi', 
-      pt: 'Dos Andes à Amazônia: Vulcões e Rios', 
-      ja: 'アンデスからアマゾンへ: 火山と川の旅', 
-      zh: '从安第斯到亚马逊：火山与河流' 
+      fr: 'Des Andes à l\'Amazonie: Volcans et Rivières',
+      de: 'Von den Anden zum Amazonas: Vulkane & Flüsse',
+      it: 'Dalle Ande all\'Amazzonia: Vulcani e Fiumi',
+      pt: 'Dos Andes à Amazônia: Vulcões e Rios',
+      ja: 'アンデスからアマゾンへ: 火山と川の旅',
+      zh: '从安第斯到亚马逊：火山与河流'
     },
     destination: 'Mainland Ecuador',
-    duration: { 
-      en: '8 DAYS / 7 NIGHTS', 
-      es: '8 DÍAS / 7 NOCHES', 
-      fr: '8 JOURS / 7 NUITS', 
-      de: '8 TAGE / 7 NÄCHTE', 
-      it: '8 GIORNI / 7 NOTTI', 
-      pt: '8 DIAS / 7 NOITES', 
-      ja: '8日間 / 7泊', 
-      zh: '8天 / 7晚' 
+    duration: {
+      en: '8 DAYS / 7 NIGHTS',
+      es: '8 DÍAS / 7 NOCHES',
+      fr: '8 JOURS / 7 NUITS',
+      de: '8 TAGE / 7 NÄCHTE',
+      it: '8 GIORNI / 7 NOTTI',
+      pt: '8 DIAS / 7 NOITES',
+      ja: '8日間 / 7泊',
+      zh: '8天 / 7晚'
     },
     durationDays: 8,
     price: 1550,
@@ -504,15 +644,15 @@ const multiDayTours: Tour[] = [
     rating: 5,
     reviewsCount: 31,
     isPopular: true,
-    category: { 
-      en: 'Andes & Amazon Overland', 
-      es: 'Andes y Amazonía Overland', 
-      fr: 'Aventure Andes & Amazonie', 
-      de: 'Anden- & Amazonas-Reise', 
-      it: 'Overland Ande e Amazzonia', 
-      pt: 'Expedição Andes e Amazônia', 
-      ja: 'アンデス＆アマゾン周遊', 
-      zh: '安第斯与亚马逊经典穿越' 
+    category: {
+      en: 'Andes & Amazon Overland',
+      es: 'Andes y Amazonía Overland',
+      fr: 'Aventure Andes & Amazonie',
+      de: 'Anden- & Amazonas-Reise',
+      it: 'Overland Ande e Amazzonia',
+      pt: 'Expedição Andes e Amazônia',
+      ja: 'アンデス＆アマゾン周遊',
+      zh: '安第斯与亚马逊经典穿越'
     },
     description: {
       en: '8-day overland journey connecting Quito Historic Center, Equator Line, Papallacta thermal springs, Tena Amazon lodge with motorized canoe, Yanacocha rescue biopark, Baños waterfalls & Pailón del Diablo (Devil\'s Cauldron), and Quilotoa Crater Lake.',
@@ -541,8 +681,8 @@ const multiDayTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Day 1 – Arrival In Quito', 
+        title: {
+      en: 'Day 1 – Arrival In Quito',
       es: 'Día 1 – Llegada A Quito' },
         description: {
           en: 'Airport Transfer (IN): Welcome at Quito International Airport and private transfer to your hotel.',
@@ -553,8 +693,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 2,
-        title: { 
-      en: 'Day 2 – Quito City Tour & Equator Line', 
+        title: {
+      en: 'Day 2 – Quito City Tour & Equator Line',
       es: 'Día 2 – City Tour En Quito Y Línea Ecuatorial' },
         description: {
           en: 'Quito was declared a UNESCO World Cultural Heritage Site in 1978 and is considered one of the most beautiful cities in the Americas.\n\nToday, we explore both the modern and historic areas of Quito. The historic center is renowned for its impressive churches, colonial architecture, and beautiful plazas.\n\nWe will visit the Cathedral, the Archbishop’s Palace, and the Presidential Palace, all located around the main square, known as Plaza Grande. We will also visit La Compañía de Jesús, one of Quito’s most spectacular churches, famous for its interior richly decorated with gold leaf, as well as San Francisco Square and Church.\n\nAfterward, we continue to the Middle of the World (Mitad del Mundo), where we visit the Intiñan Museum, famous for its demonstrations and experiments related to the Equator. Here, you can experience the unique sensation of standing in the Northern and Southern Hemispheres at the same time.',
@@ -567,8 +707,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 3,
-        title: { 
-      en: 'Day 3 – Quito – Papallacta – Amazon Rainforest', 
+        title: {
+      en: 'Day 3 – Quito – Papallacta – Amazon Rainforest',
       es: 'Día 3 – Quito – Papallacta – Selva Amazónica' },
         description: {
           en: 'We travel approximately two hours east of Quito along a historic route used by Spanish explorers in the 16th century in their search for gold and cinnamon. This expedition eventually led to the discovery of the Amazon River.\n\nAlong the way, we pass by the historic Guápulo Church and cross the Andes at approximately 4,100 meters (13,451 ft) above sea level. The route passes between two ecological reserves before descending toward the transition zone between the Andes and the Ecuadorian Amazon.\n\nWe stop at the famous Papallacta Hot Springs, where you can enjoy several activities: relax in thermal pools with different temperatures while enjoying spectacular views of Antisana Volcano (5,704 m / 18,714 ft), enjoy some relaxing time at the spa, or explore the walking trails around the area.\n\nWe then continue our descent toward the Amazon Rainforest.',
@@ -581,8 +721,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 4,
-        title: { 
-      en: 'Day 4 – Tena & Amazon Rainforest', 
+        title: {
+      en: 'Day 4 – Tena & Amazon Rainforest',
       es: 'Día 4 – Tena Y Selva Amazónica' },
         description: {
           en: 'In the morning, we board a motorized canoe and travel downstream to visit an Amazon Rainforest wildlife rescue center, where we will learn about local wildlife and conservation efforts.\n\nWe then have the opportunity to explore primary rainforest on foot, accompanied by a knowledgeable local guide. During the hike, we will discover the incredible biodiversity of the Amazon and learn about the rainforest ecosystem.\n\nWe will also visit a local Kichwa family and learn about their traditions, culture, and way of life.\n\nFinally, we visit a caiman lagoon, where we can observe these fascinating Amazonian reptiles in their natural environment.\n\nWe then return to the lodge.',
@@ -595,8 +735,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 5,
-        title: { 
-      en: 'Day 5 – Tena – Puyo – Baños', 
+        title: {
+      en: 'Day 5 – Tena – Puyo – Baños',
       es: 'Día 5 – Tena – Puyo – Baños' },
         description: {
           en: 'In the morning, we travel south toward the city of Puyo. Along the way, we visit Yanacocha Biopark, where we will learn about Amazonian wildlife species that have been rescued from illegal wildlife trafficking.\n\nWe then continue toward Baños along the spectacular Route of the Waterfalls, one of Ecuador’s most scenic routes.\n\nWe will have the opportunity to hike to Pailón del Diablo (Devil\'s Cauldron), one of the most impressive waterfalls in Ecuador, surrounded by lush vegetation and dramatic mountain scenery.\n\nWe continue to Baños for our overnight stay.',
@@ -609,8 +749,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 6,
-        title: { 
-      en: 'Day 6 – Baños – Free Day', 
+        title: {
+      en: 'Day 6 – Baños – Free Day',
       es: 'Día 6 – Baños – Día Libre' },
         description: {
           en: 'Enjoy a free day in Baños, a charming tourist town located at the foothills of the active Tungurahua Volcano.\n\nYou can enjoy a variety of optional activities at your own expense, including: cycling, white-water rafting, waterfall hikes, cable-car rides (tarabita), and horseback riding.',
@@ -621,8 +761,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 7,
-        title: { 
-      en: 'Day 7 – Baños – Quilotoa – Quito', 
+        title: {
+      en: 'Day 7 – Baños – Quilotoa – Quito',
       es: 'Día 7 – Baños – Quilotoa – Quito' },
         description: {
           en: 'In the morning, we begin our journey toward Quito. Along the way, we visit the spectacular Quilotoa Crater Lake, famous for its breathtaking scenery and turquoise waters.\n\nYou will have the opportunity to hike approximately two hours toward the bottom of the crater.\n\nWe may also make a stop in the traditional village of Tigua, famous for its colorful Andean paintings, as well as local guinea pig farms.\n\nWe then continue to Quito.',
@@ -635,8 +775,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 8,
-        title: { 
-      en: 'Day 8 – Transfer To The Airport', 
+        title: {
+      en: 'Day 8 – Transfer To The Airport',
       es: 'Día 8 – Traslado Al Aeropuerto' },
         description: {
           en: 'Private transfer to the airport for your onward flight connections to the Galápagos Islands or Mainland Ecuador.\n\nEnd of the tour.',
@@ -651,26 +791,26 @@ const multiDayTours: Tour[] = [
   {
     id: 'andes-amazon-7days',
     code: '2.2',
-    title: { 
-      en: 'Mystic Andes & Amazon Rainforest', 
+    title: {
+      en: 'Mystic Andes & Amazon Rainforest',
       es: 'El Latido De Los Andes Y La Amazonía',
-      fr: 'Andes Mystiques et Forêt Amazonienne', 
-      de: 'Mystische Anden & Amazonas Regenwald', 
-      it: 'Ande Mistiche e Foresta Amazzonica', 
-      pt: 'Andes Místicos e Floresta Amazônica', 
-      ja: '神秘的なアンデスとアマゾン熱帯雨林', 
-      zh: '神秘安第斯与亚马逊热带雨林' 
+      fr: 'Andes Mystiques et Forêt Amazonienne',
+      de: 'Mystische Anden & Amazonas Regenwald',
+      it: 'Ande Mistiche e Foresta Amazzonica',
+      pt: 'Andes Místicos e Floresta Amazônica',
+      ja: '神秘的なアンデスとアマゾン熱帯雨林',
+      zh: '神秘安第斯与亚马逊热带雨林'
     },
     destination: 'Mainland Ecuador',
-    duration: { 
-      en: '7 DAYS / 6 NIGHTS', 
-      es: '7 DÍAS / 6 NOCHES', 
-      fr: '7 JOURS / 6 NUITS', 
-      de: '7 TAGE / 6 NÄCHTE', 
-      it: '7 GIORNI / 6 NOTTI', 
-      pt: '7 DIAS / 6 NOITES', 
-      ja: '7日間 / 6泊', 
-      zh: '7天 / 6晚' 
+    duration: {
+      en: '7 DAYS / 6 NIGHTS',
+      es: '7 DÍAS / 6 NOCHES',
+      fr: '7 JOURS / 6 NUITS',
+      de: '7 TAGE / 6 NÄCHTE',
+      it: '7 GIORNI / 6 NOTTI',
+      pt: '7 DIAS / 6 NOITES',
+      ja: '7日間 / 6泊',
+      zh: '7天 / 6晚'
     },
     durationDays: 7,
     price: 1190,
@@ -691,15 +831,15 @@ const multiDayTours: Tour[] = [
     ],
     rating: 5,
     reviewsCount: 26,
-    category: { 
-      en: 'Andes & Amazon Expedition', 
-      es: 'Expedición Andes y Amazonía', 
-      fr: 'Expédition Andes & Amazonie', 
-      de: 'Anden- & Amazonas-Expedition', 
-      it: 'Spedizione Ande e Amazzonia', 
-      pt: 'Expedição Andes e Amazônia', 
-      ja: 'アンデス＆アマゾン探検', 
-      zh: '雨林木屋沉浸探险' 
+    category: {
+      en: 'Andes & Amazon Expedition',
+      es: 'Expedición Andes y Amazonía',
+      fr: 'Expédition Andes & Amazonie',
+      de: 'Anden- & Amazonas-Expedition',
+      it: 'Spedizione Ande e Amazzonia',
+      pt: 'Expedição Andes e Amazônia',
+      ja: 'アンデス＆アマゾン探検',
+      zh: '雨林木屋沉浸探险'
     },
     description: {
       en: '7-day immersive journey uniting Quito colonial heritage, Equator line, Papallacta thermal springs, Tena jungle lodge, motorized canoe expeditions, Kichwa cultural encounter, and Paikawe Amazon reserve giant fish lagoon.',
@@ -727,8 +867,8 @@ const multiDayTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Day 1 – Arrival In Quito', 
+        title: {
+      en: 'Day 1 – Arrival In Quito',
       es: 'Día 1 – Llegada A Quito' },
         description: {
           en: 'Airport Transfer (IN): Welcome at Quito International Airport and private transfer to your hotel.',
@@ -739,8 +879,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 2,
-        title: { 
-      en: 'Day 2 – Quito City Tour & Equator Line', 
+        title: {
+      en: 'Day 2 – Quito City Tour & Equator Line',
       es: 'Día 2 – City Tour En Quito Y Línea Ecuatorial' },
         description: {
           en: 'Quito was declared a UNESCO World Cultural Heritage Site in 1978 and is considered one of the most beautiful cities in the Americas.\n\nToday, we explore both the modern and historic areas of Quito. The historic center is renowned for its impressive churches, colonial architecture, and beautiful plazas.\n\nWe will visit the Cathedral, the Archbishop’s Palace, and the Presidential Palace, all located around the main square, known as Plaza Grande. We will also visit La Compañía de Jesús, one of Quito’s most spectacular churches, famous for its richly decorated interior covered in gold leaf, as well as San Francisco Square and Church.\n\nWe then continue to the Middle of the World (Mitad del Mundo), where we visit the Intiñan Museum, famous for its demonstrations and experiments related to the Equator. Here, you can experience the unique sensation of standing in the Northern and Southern Hemispheres at the same time.',
@@ -754,8 +894,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 3,
-        title: { 
-      en: 'Day 3 – Quito – Papallacta – Amazon Rainforest', 
+        title: {
+      en: 'Day 3 – Quito – Papallacta – Amazon Rainforest',
       es: 'Día 3 – Quito – Papallacta – Selva Amazónica' },
         description: {
           en: 'We travel approximately two hours east of Quito along a historic route used by Spanish explorers in the 16th century in their search for gold and cinnamon. This expedition eventually led to the discovery of the Amazon River.\n\nAlong the way, we pass by the historic Guápulo Church and cross the Andes at approximately 4,100 meters (13,451 ft) above sea level. The route passes between two ecological reserves before descending toward the transition zone between the Andes and the Ecuadorian Amazon.\n\nWe stop at the famous Papallacta Hot Springs, where you can choose from several activities: relax in thermal pools with different temperatures while enjoying spectacular views of Antisana Volcano (5,704 m / 18,714 ft), enjoy some relaxing time at the spa, or explore the walking trails around the area.\n\nWe then continue our descent toward the Amazon Rainforest.',
@@ -769,8 +909,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 4,
-        title: { 
-      en: 'Day 4 – Tena & Amazon Rainforest', 
+        title: {
+      en: 'Day 4 – Tena & Amazon Rainforest',
       es: 'Día 4 – Tena Y Selva Amazónica' },
         description: {
           en: 'In the morning, we board a motorized canoe and travel downstream to visit an Amazon Rainforest wildlife rescue center, where we will learn about local wildlife and conservation efforts.\n\nWe then have the opportunity to explore primary rainforest on foot, accompanied by a knowledgeable local guide. During the hike, we will discover the incredible biodiversity of the Amazon and learn about the rainforest ecosystem.\n\nWe will also visit a local Kichwa family and learn about their traditions, culture, and daily way of life.\n\nFinally, we visit a caiman lagoon, where we can observe these fascinating Amazonian reptiles in their natural environment.\n\nReturn to the lodge and overnight stay.',
@@ -784,8 +924,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 5,
-        title: { 
-      en: 'Day 5 – Misahuallí – Paikawe Reserve – Quito', 
+        title: {
+      en: 'Day 5 – Misahuallí – Paikawe Reserve – Quito',
       es: 'Día 5 – Misahuallí – Reserva Paikawe – Quito' },
         description: {
           en: 'In the morning, we visit Paikawe Reserve, where we have the opportunity to hike through primary rainforest and explore the lagoon by boat.\n\nDuring the visit, we can observe the impressive giant fish of the Amazon and discover the extraordinary biodiversity of this tropical environment.\n\nAfter the visit, we begin our return journey to Quito.',
@@ -799,8 +939,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 6,
-        title: { 
-      en: 'Day 6 – Free Day In Quito', 
+        title: {
+      en: 'Day 6 – Free Day In Quito',
       es: 'Día 6 – Día Libre En Quito' },
         description: {
           en: 'Enjoy a free day to relax, explore Quito independently, or discover more of the city’s cultural and historical attractions.',
@@ -812,8 +952,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 7,
-        title: { 
-      en: 'Day 7 – Transfer To The Airport', 
+        title: {
+      en: 'Day 7 – Transfer To The Airport',
       es: 'Día 7 – Traslado Al Aeropuerto' },
         description: {
           en: 'Private transfer to the airport for your onward flight connections to the Galápagos Islands.\n\nEnd of the tour.',
@@ -829,26 +969,26 @@ const multiDayTours: Tour[] = [
   {
     id: 'snow-volcanoes-6days',
     code: '2.3',
-    title: { 
-      en: 'Avenue Of The Volcanoes Expedition', 
+    title: {
+      en: 'Avenue Of The Volcanoes Expedition',
       es: 'Nieve, Volcanes Y Manantiales: Expedición Andina',
-      fr: 'Expédition sur l\'Avenue des Volcans', 
-      de: 'Expedition auf der Straße der Vulkane', 
-      it: 'Spedizione lungo il Viale dei Vulcani', 
-      pt: 'Expedição pela Avenida dos Vulcões', 
-      ja: '火山通りの探検', 
-      zh: '火山大道探险之旅' 
+      fr: 'Expédition sur l\'Avenue des Volcans',
+      de: 'Expedition auf der Straße der Vulkane',
+      it: 'Spedizione lungo il Viale dei Vulcani',
+      pt: 'Expedição pela Avenida dos Vulcões',
+      ja: '火山通りの探検',
+      zh: '火山大道探险之旅'
     },
     destination: 'Mainland Ecuador',
-    duration: { 
-      en: '6 DAYS / 5 NIGHTS', 
-      es: '6 DÍAS / 5 NOCHES', 
-      fr: '6 JOURS / 5 NUITS', 
-      de: '6 TAGE / 5 NÄCHTE', 
-      it: '6 GIORNI / 5 NOTTI', 
-      pt: '6 DIAS / 5 NOITES', 
-      ja: '6日間 / 5泊', 
-      zh: '6天 / 5晚' 
+    duration: {
+      en: '6 DAYS / 5 NIGHTS',
+      es: '6 DÍAS / 5 NOCHES',
+      fr: '6 JOURS / 5 NUITS',
+      de: '6 TAGE / 5 NÄCHTE',
+      it: '6 GIORNI / 5 NOTTI',
+      pt: '6 DIAS / 5 NOITES',
+      ja: '6日間 / 5泊',
+      zh: '6天 / 5晚'
     },
     durationDays: 6,
     price: 950,
@@ -869,15 +1009,15 @@ const multiDayTours: Tour[] = [
     ],
     rating: 5,
     reviewsCount: 19,
-    category: { 
-      en: 'Andean Highlights & Waterfalls', 
-      es: 'Aventura Andina y Cascadas', 
-      fr: 'Points forts des Andes et cascades', 
-      de: 'Anden-Highlights & Wasserfälle', 
-      it: 'Meraviglie Andine e Cascate', 
-      pt: 'Destaques Andinos e Cachoeiras', 
-      ja: 'アンデス絶景と滝巡り', 
-      zh: '安第斯山脉与瀑布速览' 
+    category: {
+      en: 'Andean Highlights & Waterfalls',
+      es: 'Aventura Andina y Cascadas',
+      fr: 'Points forts des Andes et cascades',
+      de: 'Anden-Highlights & Wasserfälle',
+      it: 'Meraviglie Andine e Cascate',
+      pt: 'Destaques Andinos e Cachoeiras',
+      ja: 'アンデス絶景と滝巡り',
+      zh: '安第斯山脉与瀑布速览'
     },
     description: {
       en: '6-day overland journey traversing the Avenue of the Volcanoes, adventure town of Baños, Pailón del Diablo (Devil\'s Cauldron) waterfall, Pastaza canyon, Puyo rainforest biopark, and Quilotoa turquoise crater lake.',
@@ -905,8 +1045,8 @@ const multiDayTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Day 1 – Arrival In Quito', 
+        title: {
+      en: 'Day 1 – Arrival In Quito',
       es: 'Día 1 – Llegada A Quito' },
         description: {
           en: 'Airport assistance and private transfer to your hotel.\n\nDeparture: The tour can begin on any day of the week.',
@@ -917,8 +1057,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 2,
-        title: { 
-      en: 'Day 2 – Quito – Baños', 
+        title: {
+      en: 'Day 2 – Quito – Baños',
       es: 'Día 2 – Quito – Baños' },
         description: {
           en: 'Today, we travel south along the Pan-American Highway and through Ecuador’s famous “Avenue of the Volcanoes,” home to approximately 62 volcanoes.\n\nWe continue toward Baños, a charming tourist town located at the foothills of the active Tungurahua Volcano. Surrounded by spectacular landscapes between the Amazon Rainforest and the Andes Mountains, Baños offers a wide variety of optional activities, including cycling, rafting, horseback riding, cable-car rides, hiking, and visits to beautiful waterfalls.\n\nWe will visit the spectacular Pailón del Diablo (Devil\'s Cauldron) Waterfall, one of the region’s most impressive natural attractions.',
@@ -931,8 +1071,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 3,
-        title: { 
-      en: 'Day 3 – Baños – Amazon Rainforest – Puyo', 
+        title: {
+      en: 'Day 3 – Baños – Amazon Rainforest – Puyo',
       es: 'Día 3 – Baños – Selva Amazónica – Puyo' },
         description: {
           en: 'In the morning, we head into the Amazon Rainforest, traveling through the spectacular Pastaza River Canyon toward the city of Puyo.\n\nOur first stop is Yanacocha Biopark, where you will have the opportunity to observe and learn about local animal species that have been rescued from illegal wildlife trafficking.\n\nWe then continue with a hike through the Amazon Rainforest to Hola Vida Waterfall, surrounded by lush vegetation and tropical scenery.\n\nFinally, we visit a local Indigenous family, where we will have the opportunity to learn about their traditions, culture, and way of life.\n\nAfter the visit, we return to Baños.',
@@ -945,8 +1085,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 4,
-        title: { 
-      en: 'Day 4 – Baños – Quilotoa – Quito', 
+        title: {
+      en: 'Day 4 – Baños – Quilotoa – Quito',
       es: 'Día 4 – Baños – Quilotoa – Quito' },
         description: {
           en: 'In the morning, we begin our journey back to Quito. Along the way, we visit the spectacular Quilotoa Crater Lake, one of Ecuador’s most iconic natural attractions, famous for its striking turquoise waters and breathtaking Andean scenery.\n\nYou will have the opportunity to hike approximately two hours toward the bottom of the crater. Along the way, we may also stop at the traditional village of Tigua, famous for its colorful paintings and Andean artistic traditions, as well as local guinea pig farms.\n\nWe then continue to Quito.',
@@ -959,8 +1099,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 5,
-        title: { 
-      en: 'Day 5 – Free Day In Quito', 
+        title: {
+      en: 'Day 5 – Free Day In Quito',
       es: 'Día 5 – Día Libre En Quito' },
         description: {
           en: 'Enjoy a free day to explore Quito at your own pace, relax, or discover more of the city’s attractions and cultural highlights.',
@@ -971,8 +1111,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 6,
-        title: { 
-      en: 'Day 6 – Transfer To The Airport', 
+        title: {
+      en: 'Day 6 – Transfer To The Airport',
       es: 'Día 6 – Traslado Al Aeropuerto' },
         description: {
           en: 'Private transfer to the airport for your onward flight connections, including connections to the Galápagos Islands.\n\nEnd of the tour.',
@@ -987,26 +1127,26 @@ const multiDayTours: Tour[] = [
   {
     id: 'ecuador-fantastic-8days',
     code: '2.4',
-    title: { 
-      en: 'Fantastic Ecuador: The Complete Circuit', 
+    title: {
+      en: 'Fantastic Ecuador: The Complete Circuit',
       es: 'Ecuador Fantástico: La Gran Ruta De Los Andes',
-      fr: 'Équateur Fantastique: Le Circuit Complet', 
-      de: 'Fantastisches Ecuador: Die komplette Route', 
-      it: 'Ecuador Fantastico: Il Circuito Completo', 
-      pt: 'Equador Fantástico: O Circuito Completo', 
-      ja: '素晴らしいエクアドル：完全な周遊', 
-      zh: '奇妙厄瓜多尔：全景环线游' 
+      fr: 'Équateur Fantastique: Le Circuit Complet',
+      de: 'Fantastisches Ecuador: Die komplette Route',
+      it: 'Ecuador Fantastico: Il Circuito Completo',
+      pt: 'Equador Fantástico: O Circuito Completo',
+      ja: '素晴らしいエクアドル：完全な周遊',
+      zh: '奇妙厄瓜多尔：全景环线游'
     },
     destination: 'Mainland Ecuador',
-    duration: { 
-      en: '8 DAYS / 7 NIGHTS', 
-      es: '8 DÍAS / 7 NOCHES', 
-      fr: '8 JOURS / 7 NUITS', 
-      de: '8 TAGE / 7 NÄCHTE', 
-      it: '8 GIORNI / 7 NOTTI', 
-      pt: '8 DIAS / 7 NOITES', 
-      ja: '8日間 / 7泊', 
-      zh: '8天 / 7晚' 
+    duration: {
+      en: '8 DAYS / 7 NIGHTS',
+      es: '8 DÍAS / 7 NOCHES',
+      fr: '8 JOURS / 7 NUITS',
+      de: '8 TAGE / 7 NÄCHTE',
+      it: '8 GIORNI / 7 NOTTI',
+      pt: '8 DIAS / 7 NOITES',
+      ja: '8日間 / 7泊',
+      zh: '8天 / 7晚'
     },
     durationDays: 8,
     price: 1490,
@@ -1028,15 +1168,15 @@ const multiDayTours: Tour[] = [
     rating: 5,
     reviewsCount: 45,
     isPopular: true,
-    category: { 
-      en: 'Grand Mainland Expedition', 
-      es: 'Gran Expedición Continental', 
-      fr: "Grande expédition équatorienne", 
-      de: 'Große Festland-Expedition', 
-      it: 'Grande Spedizione Continentale', 
-      pt: 'Grande Expedição Continental', 
-      ja: 'エクアドル縦断グランドツアー', 
-      zh: '厄瓜多尔陆地旗舰纵贯线' 
+    category: {
+      en: 'Grand Mainland Expedition',
+      es: 'Gran Expedición Continental',
+      fr: "Grande expédition équatorienne",
+      de: 'Große Festland-Expedition',
+      it: 'Grande Spedizione Continentale',
+      pt: 'Grande Expedição Continental',
+      ja: 'エクアドル縦断グランドツアー',
+      zh: '厄瓜多尔陆地旗舰纵贯线'
     },
     description: {
       en: 'Discover the Best of Ecuador in 8 Days: Quito Historic Center, Otavalo market, Cuicocha lake, Mitad del Mundo, Baños waterfalls & Pailón del Diablo (Devil\'s Cauldron), Chimborazo Volcano (6,310m), Ingapirca Inca ruins, Colonial Cuenca, Cajas National Park lakes, and finishing in coastal Guayaquil.',
@@ -1066,8 +1206,8 @@ const multiDayTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Day 1 – Arrival In Quito', 
+        title: {
+      en: 'Day 1 – Arrival In Quito',
       es: 'Día 1 – Llegada A Quito' },
         description: {
           en: 'Airport assistance and private transfer to your hotel.\n\nImportant: Ecuador uses the US dollar (USD) as its official currency. We recommend carrying small-denomination bills, as larger notes may not always be accepted.',
@@ -1077,8 +1217,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 2,
-        title: { 
-      en: 'Day 2 – Otavalo Artisan Market & Cuicocha Crater Lake', 
+        title: {
+      en: 'Day 2 – Otavalo Artisan Market & Cuicocha Crater Lake',
       es: 'Día 2 – Plaza de Ponchos (Mercado Artesanal) De Otavalo Y Laguna De Cuicocha' },
         description: {
           en: 'Travel north from Quito for approximately two hours through beautiful Andean landscapes and scenic viewpoints until reaching Otavalo, home to one of the most famous Artisan Markets in South America, renowned for its traditional handicrafts, textiles and local products.\n\nIn the afternoon, continue to Cotacachi, a town famous for its high-quality leather goods and traditional craftsmanship.\n\nWe will then visit Cuicocha Crater Lake, one of Ecuador’s most spectacular volcanic lakes, located inside a breathtaking Andean landscape.\n\nReturn to Quito in the afternoon.\n\nMarket information: The largest and most vibrant Otavalo market takes place on Saturdays, although a smaller market operates daily.',
@@ -1091,8 +1231,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 3,
-        title: { 
-      en: 'Day 3 – Quito Historic Center & Mitad Del Mundo', 
+        title: {
+      en: 'Day 3 – Quito Historic Center & Mitad Del Mundo',
       es: 'Día 3 – Centro Histórico De Quito Y Mitad Del Mundo' },
         description: {
           en: 'Discover Quito, declared a UNESCO World Heritage Site and considered one of the most beautiful historic cities in the Americas.\n\nExplore both the modern and colonial areas of the city, including its magnificent churches, plazas and historic buildings: Quito Cathedral, Archbishop’s Palace, Presidential Palace, Plaza Grande, La Compañía de Jesús Church (famous for its richly decorated golden interior), and San Francisco Plaza and Church.\n\nWe will then travel to Mitad del Mundo (Middle of the World), where you can experience standing on the Equator between the Northern and Southern Hemispheres. Visit the Intiñan Museum, known for its interactive demonstrations and fascinating exhibits related to Ecuadorian culture and the Equator.',
@@ -1105,8 +1245,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 4,
-        title: { 
-      en: 'Day 4 – Quito – Baños: The Avenue Of Volcanoes', 
+        title: {
+      en: 'Day 4 – Quito – Baños: The Avenue Of Volcanoes',
       es: 'Día 4 – Quito – Baños: La Avenida De Los Volcanes' },
         description: {
           en: 'Travel south from Quito along the famous Avenue of the Volcanoes, a spectacular Andean route surrounded by Ecuador’s impressive volcanic landscapes.\n\nContinue to Baños de Agua Santa, a picturesque adventure town located at the foot of the active Tungurahua Volcano. Baños offers a wide range of optional activities, including cycling, rafting, hiking to waterfalls, cable-car rides, and horseback riding.\n\nLocated between the Andes and the Amazon basin, Baños is surrounded by lush vegetation, dramatic mountains and spectacular waterfalls. Visit the famous Pailón del Diablo (Devil\'s Cauldron) Waterfall before settling into your hotel.',
@@ -1119,8 +1259,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 5,
-        title: { 
-      en: 'Day 5 – Chimborazo National Reserve, Ingapirca & Cuenca', 
+        title: {
+      en: 'Day 5 – Chimborazo National Reserve, Ingapirca & Cuenca',
       es: 'Día 5 – Reserva Chimborazo, Ingapirca Y Cuenca' },
         description: {
           en: 'Start early with a visit to the Chimborazo Reserve, home to Chimborazo Volcano, Ecuador’s highest mountain at approximately 6,310 meters (20,700 ft) above sea level.\n\nEnjoy the opportunity to observe the unique flora and fauna of the high Andean páramo and hike toward the mountain refuge at approximately 5,000 meters (16,400 ft), weather and conditions permitting.\n\nContinue toward Cuenca, with a fascinating stop at Ingapirca, Ecuador’s most important Inca archaeological complex.',
@@ -1133,8 +1273,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 6,
-        title: { 
-      en: 'Day 6 – Cuenca City Tour', 
+        title: {
+      en: 'Day 6 – Cuenca City Tour',
       es: 'Día 6 – City Tour En Cuenca' },
         description: {
           en: 'Discover Cuenca, another UNESCO World Heritage Site and one of Ecuador’s most beautiful cities, famous for its charming streets, historic buildings, plazas and churches.\n\nVisit: Cuenca Cathedral, Plaza de las Flores, a traditional toquilla straw hat workshop (Panama hats), El Barranco along the Tomebamba River, and modern Cuenca. Finish the tour at El Turi Viewpoint, offering panoramic views over the city.\n\nThe remainder of the afternoon is free for you to explore Cuenca at your own pace.',
@@ -1147,8 +1287,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 7,
-        title: { 
-      en: 'Day 7 – Cuenca – Cajas National Park – Guayaquil', 
+        title: {
+      en: 'Day 7 – Cuenca – Cajas National Park – Guayaquil',
       es: 'Día 7 – Cuenca – Parque Nacional Cajas – Guayaquil' },
         description: {
           en: 'Depart Cuenca and travel west through the spectacular Cajas National Park, famous for its rugged Andean landscapes and approximately 200 natural lakes and lagoons.\n\nDepending on weather and trail conditions, enjoy a hike around Laguna Toreadora, while observing the distinctive flora and fauna of Ecuador’s high-altitude páramo ecosystem.\n\nFrom the high Andes, the road then descends dramatically toward sea level, arriving in Guayaquil, Ecuador’s largest port city and economic capital.',
@@ -1161,8 +1301,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 8,
-        title: { 
-      en: 'Day 8 – Departure From Guayaquil', 
+        title: {
+      en: 'Day 8 – Departure From Guayaquil',
       es: 'Día 8 – Salida Desde Guayaquil' },
         description: {
           en: 'Private transfer to José Joaquín de Olmedo International Airport in Guayaquil for your onward flight or connection to the Galápagos Islands.\n\nEnd of the Ecuador Fantastic journey.',
@@ -1177,26 +1317,26 @@ const multiDayTours: Tour[] = [
   {
     id: 'ecuador-galapagos-12days',
     code: '3.1',
-    title: { 
-      en: 'The Ultimate Ecuador & Galapagos Odyssey', 
+    title: {
+      en: 'The Ultimate Ecuador & Galapagos Odyssey',
       es: 'De Los Andes Al Encanto De Galápagos',
-      fr: 'L\'Odyssée Ultime: Équateur et Galápagos', 
-      de: 'Die ultimative Ecuador & Galapagos Odyssee', 
-      it: 'L\'Odissea Definitiva: Ecuador e Galapagos', 
-      pt: 'A Odisséia Definitiva: Equador e Galápagos', 
-      ja: '究極のエクアドル＆ガラパゴスの旅', 
-      zh: '厄瓜多尔与加拉帕戈斯终极奥德赛' 
+      fr: 'L\'Odyssée Ultime: Équateur et Galápagos',
+      de: 'Die ultimative Ecuador & Galapagos Odyssee',
+      it: 'L\'Odissea Definitiva: Ecuador e Galapagos',
+      pt: 'A Odisséia Definitiva: Equador e Galápagos',
+      ja: '究極のエクアドル＆ガラパゴスの旅',
+      zh: '厄瓜多尔与加拉帕戈斯终极奥德赛'
     },
     destination: 'Ecuador & Galapagos',
-    duration: { 
-      en: '12 DAYS / 11 NIGHTS', 
-      es: '12 DÍAS / 11 NOCHES', 
-      fr: '12 JOURS / 11 NUITS', 
-      de: '12 TAGE / 11 NÄCHTE', 
-      it: '12 GIORNI / 11 NOTTI', 
-      pt: '12 DIAS / 11 NOITES', 
-      ja: '12日間 / 11泊', 
-      zh: '12天 / 11晚' 
+    duration: {
+      en: '12 DAYS / 11 NIGHTS',
+      es: '12 DÍAS / 11 NOCHES',
+      fr: '12 JOURS / 11 NUITS',
+      de: '12 TAGE / 11 NÄCHTE',
+      it: '12 GIORNI / 11 NOTTI',
+      pt: '12 DIAS / 11 NOITES',
+      ja: '12日間 / 11泊',
+      zh: '12天 / 11晚'
     },
     durationDays: 12,
     price: 2590,
@@ -1218,15 +1358,15 @@ const multiDayTours: Tour[] = [
     rating: 5,
     reviewsCount: 52,
     isPopular: true,
-    category: { 
-      en: 'Ultimate Mainland & Galapagos', 
-      es: 'Expedición Suprema Continente y Galápagos', 
-      fr: "Ultime combiné Équateur et Galapagos", 
-      de: 'Ultimative Ecuador & Galapagos Expedition', 
-      it: 'Spedizione Suprema Continente e Galapagos', 
-      pt: 'Expedição Suprema Equador e Galápagos', 
-      ja: 'エクアドル＆ガラパゴス至高の旅', 
-      zh: '大陆雨林与海岛巅峰12日游' 
+    category: {
+      en: 'Ultimate Mainland & Galapagos',
+      es: 'Expedición Suprema Continente y Galápagos',
+      fr: "Ultime combiné Équateur et Galapagos",
+      de: 'Ultimative Ecuador & Galapagos Expedition',
+      it: 'Spedizione Suprema Continente e Galapagos',
+      pt: 'Expedição Suprema Equador e Galápagos',
+      ja: 'エクアドル＆ガラパゴス至高の旅',
+      zh: '大陆雨林与海岛巅峰12日游'
     },
     description: {
       en: '12-day flagship expedition: Quito colonial city & Equator, Papallacta thermal springs, Tena Amazon lodge with motorized canoe & caiman lagoon, Paikawe giant fish reserve, Santa Cruz highlands & giant tortoises, Isabela Island flamingo lagoon & Tintoreras snorkeling, Las Grietas, and full-day yacht cruise to Santa Fe or Pinzón Island.',
@@ -1260,8 +1400,8 @@ const multiDayTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Day 1 – Arrival In Quito | Airport Assistance & Hotel Transfer', 
+        title: {
+      en: 'Day 1 – Arrival In Quito | Airport Assistance & Hotel Transfer',
       es: 'Día 1 – Llegada A Quito | Asistencia En Aeropuerto Y Traslado' },
         description: {
           en: 'Upon arrival at Mariscal Sucre International Airport in Quito, you will be welcomed by our representative and assisted with your private transfer to the hotel.\n\nThe remainder of the day will be free to rest and acclimatize to the altitude of Quito.',
@@ -1273,8 +1413,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 2,
-        title: { 
-      en: 'Day 2 – Quito City Tour & Mitad Del Mundo', 
+        title: {
+      en: 'Day 2 – Quito City Tour & Mitad Del Mundo',
       es: 'Día 2 – City Tour En Quito Y Mitad Del Mundo' },
         description: {
           en: 'After breakfast, we will explore Quito, the capital of Ecuador and one of the country\'s most important cultural destinations. The city was declared a UNESCO World Heritage Site in 1978 and is renowned for its beautifully preserved historic center, colonial architecture and spectacular Andean setting.\n\nOur city tour will include both the modern and historic areas of Quito. In the historic center, we will visit some of the city\'s most important landmarks, including Plaza Grande, where we will see the Metropolitan Cathedral, the Archbishop\'s Palace and the Presidential Palace.\n\nWe will continue to the impressive Church of La Compañía de Jesús, famous for its richly decorated interior covered with gold leaf. We will also visit San Francisco Square and Church, one of the most iconic architectural complexes in Quito.\n\nAfter exploring the historic center, we will continue towards the Equator Monument and Mitad del Mundo. Here, we will visit the Intiñan Museum, where you can learn about indigenous cultures and participate in a variety of fascinating experiments related to the Equator.\n\nYou will have the opportunity to experience the unique sensation of standing at the Equator, where the Northern and Southern Hemispheres meet.',
@@ -1287,8 +1427,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 3,
-        title: { 
-      en: 'Day 3 – Quito – Papallacta – Tena | Andean Highlands & Thermal Springs', 
+        title: {
+      en: 'Day 3 – Quito – Papallacta – Tena | Andean Highlands & Thermal Springs',
       es: 'Día 3 – Quito – Papallacta – Tena | Termas Y Páramo Andino' },
         description: {
           en: 'After breakfast, we will travel east from Quito towards Papallacta, following a historic route once used by Spanish explorers in the 16th century in their search for gold and cinnamon, eventually leading towards the discovery and exploration of the Amazon region.\n\nAlong the way, we will pass by Guápulo Church and continue through the spectacular Andean mountains, reaching elevations of approximately 4,100 meters / 13,450 feet above sea level.\n\nThe route passes through protected natural areas and offers impressive views of the Andean landscape before descending gradually towards the transition zone between the Andes and the Amazon Basin.\n\nWe will stop at the famous Papallacta Hot Springs, where you can enjoy the thermal pools at different temperatures while admiring the surrounding mountain scenery and, weather permitting, views of Antisana Volcano (5,704 meters / 18,714 feet).\n\nYou may also choose to relax at the spa, enjoy a massage or hydrotherapy treatment, or take a short walk along the surrounding trails.\n\nAfter the visit, we will continue our descent towards the Amazon region and the town of Tena.',
@@ -1301,8 +1441,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 4,
-        title: { 
-      en: 'Day 4 – Tena | Amazon Rainforest Experience | Wildlife Rescue Center | Kichwa Community', 
+        title: {
+      en: 'Day 4 – Tena | Amazon Rainforest Experience | Wildlife Rescue Center | Kichwa Community',
       es: 'Día 4 – Tena | Experiencia En Selva Amazónica | Centro De Rescate | Comunidad Kichwa' },
         description: {
           en: 'After breakfast, we will begin our Amazon adventure with a motorized canoe ride along the river, traveling downstream through the lush rainforest.\n\nOur first visit will be to a wildlife rescue and rehabilitation center, where you will learn about native Amazonian species and conservation efforts to protect animals affected by illegal wildlife trafficking and other threats.\n\nWe will then continue into the primary rainforest, where, accompanied by a local native guide, we will take a hike through the jungle. The walk offers an opportunity to discover the incredible biodiversity of the Amazon and learn about the traditional uses of plants and the relationship between local communities and the forest.\n\nWe will also visit a local Kichwa family, where you will have the opportunity to learn about their traditions, customs and culture and gain a deeper understanding of their connection with the Amazon environment.\n\nOur final visit will be to a caiman lagoon, where we will learn about these fascinating reptiles and the aquatic ecosystems of the rainforest.\n\nAfter the excursion, we will return to the lodge.',
@@ -1315,8 +1455,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 5,
-        title: { 
-      en: 'Day 5 – Tena – Misahuallí | Paikawe Reserve | Amazon Lagoon | Quito', 
+        title: {
+      en: 'Day 5 – Tena – Misahuallí | Paikawe Reserve | Amazon Lagoon | Quito',
       es: 'Día 5 – Tena – Misahuallí | Reserva Paikawe | Laguna Amazónica | Quito' },
         description: {
           en: 'After breakfast, we will visit Paikawe Reserve, a beautiful Amazonian natural area where you will have the opportunity to experience the rainforest from both land and water.\n\nWe will take a walk through primary rainforest, accompanied by a local guide, and learn about the biodiversity and natural environment of the region.\n\nWe will then navigate the lagoon by canoe, where you may have the opportunity to observe some of the giant fish species found in the Amazon, depending on natural conditions and wildlife activity.\n\nAfter the visit, we will begin our return journey to Quito.',
@@ -1329,8 +1469,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 6,
-        title: { 
-      en: 'Day 6 – Quito | Free Day', 
+        title: {
+      en: 'Day 6 – Quito | Free Day',
       es: 'Día 6 – Quito | Día Libre' },
         description: {
           en: 'Today is free to enjoy Quito at your own pace.\n\nYou may choose to explore the city independently, visit additional museums and cultural attractions, enjoy local cuisine, or simply relax at the hotel.\n\nThis free day also provides an opportunity to rest before continuing your journey to the Galápagos Islands the following day.\n\nOptional excursions and activities can be arranged upon request.',
@@ -1341,8 +1481,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 7,
-        title: { 
-      en: 'Day 7 – Quito – Baltra | Twin Craters | Primicias Ranch | Puerto Ayora', 
+        title: {
+      en: 'Day 7 – Quito – Baltra | Twin Craters | Primicias Ranch | Puerto Ayora',
       es: 'Día 7 – Quito – Baltra | Cráteres Gemelos | Rancho Primicias | Puerto Ayora' },
         description: {
           en: 'After breakfast, transfer to Mariscal Sucre International Airport for your flight to the Galápagos Islands.\n\nUpon arrival at Seymour Airport on Baltra Island, you will be welcomed by our representative and begin your Galápagos adventure.\n\nAfter crossing the Itabaca Channel to Santa Cruz Island, we will continue towards the highlands to visit the famous Twin Craters (Los Gemelos), two impressive volcanic formations surrounded by the lush vegetation of the Santa Cruz highlands.\n\nHere, you will learn about the geological origins of the island and discover the unique Scalesia forest, one of the characteristic ecosystems of the Santa Cruz highlands.\n\nWe will then continue to Primicias Ranch, a private reserve where giant Galápagos tortoises can be observed roaming freely in their natural environment. This is an excellent opportunity to photograph these iconic animals and learn about their importance to the Galápagos ecosystem.\n\nAfter the excursion, we will continue to Puerto Ayora for hotel check-in and the remainder of the day at leisure.',
@@ -1354,8 +1494,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 8,
-        title: { 
-      en: 'Day 8 – Santa Cruz To Isabela | Flamingo Lagoon | Tortoise Breeding Center | Tintoreras', 
+        title: {
+      en: 'Day 8 – Santa Cruz To Isabela | Flamingo Lagoon | Tortoise Breeding Center | Tintoreras',
       es: 'Día 8 – Santa Cruz A Isabela | Laguna De Flamingos | Centro De Crianza | Tintoreras' },
         description: {
           en: 'After breakfast, we will transfer to the pier to board a speedboat to Isabela Island. The crossing takes approximately 2 to 2.5 hours, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, we will begin our exploration of Isabela.\n\nOur first stop will be the Flamingo Lagoon, one of the island\'s most important wetland areas. Here, you may observe Galápagos flamingos feeding and resting in the shallow waters, together with other species of coastal and migratory birds.\n\nWe will then visit the Giant Tortoise Breeding Center, where you will learn about the conservation and breeding programs established to protect Isabela\'s giant tortoise populations.\n\nIn the afternoon, we will take a boat excursion to Tintoreras Islet, a small volcanic islet located just off the coast of Isabela. The area is famous for its crystal-clear waters and rich marine life.\n\nDuring the snorkeling activity, you may have the opportunity to encounter sea lions, sea turtles, rays, colorful tropical fish and Galápagos penguins, depending on sea conditions and wildlife activity.\n\nAfter the excursion, return to Puerto Villamil and enjoy the evening at leisure.',
@@ -1368,8 +1508,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 9,
-        title: { 
-      en: 'Day 9 – Isabela To Santa Cruz | La Lobería | Las Grietas', 
+        title: {
+      en: 'Day 9 – Isabela To Santa Cruz | La Lobería | Las Grietas',
       es: 'Día 9 – Isabela A Santa Cruz | La Lobería | Las Grietas' },
         description: {
           en: 'After breakfast, we will return to the pier for the speedboat transfer back to Santa Cruz Island.\n\nUpon arrival in Puerto Ayora, we will continue with a visit to La Lobería, a small coastal area known for its population of Galápagos sea lions. This is an excellent place to observe these playful animals both on the beach and in the water.\n\nWe will then visit Las Grietas, a spectacular natural formation created by volcanic activity. This narrow canyon is filled with clear, turquoise water and is one of the most popular swimming and snorkeling sites near Puerto Ayora.\n\nDuring the snorkeling activity, you will have the opportunity to explore the underwater environment and observe colorful tropical fish and other marine species.\n\nAfter the excursion, return to Puerto Ayora and check in at your hotel. The remainder of the afternoon and evening will be free to relax or explore the town independently.',
@@ -1382,8 +1522,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 10,
-        title: { 
-      en: 'Day 10 – Full-Day Excursion To Santa Fe Or Pinzón Island', 
+        title: {
+      en: 'Day 10 – Full-Day Excursion To Santa Fe Or Pinzón Island',
       es: 'Día 10 – Excursión Full-Day A Isla Santa Fe O Isla Pinzón' },
         description: {
           en: 'Today, enjoy a full-day boat excursion to one of the Galápagos\' outstanding snorkeling destinations: Santa Fe Island or Pinzón Island, depending on availability, sea conditions and the selected tour.\n\nSanta Fe Island is known for its beautiful turquoise waters, white sandy beaches and endemic wildlife. During the excursion, you may encounter sea lions, sea turtles, rays, marine iguanas and a variety of tropical fish. The island is also home to the endemic Santa Fe land iguana.\n\nAlternatively, the excursion may take you to Pinzón Island, a spectacular location surrounded by clear waters and abundant marine life. The snorkeling sites around Pinzón are particularly well known for encounters with sea turtles, sea lions, rays, colorful fish and, with some luck, Galápagos penguins.\n\nThe day will include navigation, snorkeling and opportunities to observe wildlife both above and below the water. Lunch will generally be provided during the excursion, depending on the selected tour.\n\nReturn to Puerto Ayora in the afternoon and enjoy your final evening in the Galápagos.',
@@ -1395,8 +1535,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 11,
-        title: { 
-      en: 'Day 11 – Santa Cruz – Baltra Airport | Departure', 
+        title: {
+      en: 'Day 11 – Santa Cruz – Baltra Airport | Departure',
       es: 'Día 11 – Santa Cruz – Aeropuerto De Baltra | Salida' },
         description: {
           en: 'After breakfast, check out from the hotel and begin the transfer from Puerto Ayora to Baltra Airport.\n\nThe journey includes transportation across Santa Cruz Island and the crossing of the Itabaca Channel, followed by the airport shuttle to Seymour Airport (Baltra).\n\nUpon arrival at the airport, assistance will be provided for your departure flight, marking the end of your Ecuador and Galápagos Islands experience.',
@@ -1408,8 +1548,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 12,
-        title: { 
-      en: 'Day 12 – Quito | International Departure', 
+        title: {
+      en: 'Day 12 – Quito | International Departure',
       es: 'Día 12 – Quito | Salida Internacional' },
         description: {
           en: 'After breakfast, check out from the hotel and meet your private driver for your transfer to Mariscal Sucre International Airport.\n\nAssistance will be provided for your departure flight and international connections.\n\nThis marks the end of your Ecuador and Galápagos Islands experience.',
@@ -1425,26 +1565,26 @@ const multiDayTours: Tour[] = [
   {
     id: 'ecuador-galapagos-11days',
     code: '3.2',
-    title: { 
-      en: 'Master Journey: Mainland Ecuador To Galapagos', 
+    title: {
+      en: 'Master Journey: Mainland Ecuador To Galapagos',
       es: 'Ecuador Y Galápagos En Breve: Magia Y Aventura',
-      fr: 'Voyage Maître: De l\'Équateur Continental aux Galápagos', 
-      de: 'Meisterreise: Vom Festland Ecuadors nach Galapagos', 
-      it: 'Viaggio Maestro: Dall\'Ecuador Continentale alle Galapagos', 
-      pt: 'Jornada Mestra: Do Equador Continental a Galápagos', 
-      ja: 'エクアドル本土からガラパゴスへのマスタージャーニー', 
-      zh: '大师之旅：从厄瓜多尔大陆到加拉帕戈斯' 
+      fr: 'Voyage Maître: De l\'Équateur Continental aux Galápagos',
+      de: 'Meisterreise: Vom Festland Ecuadors nach Galapagos',
+      it: 'Viaggio Maestro: Dall\'Ecuador Continentale alle Galapagos',
+      pt: 'Jornada Mestra: Do Equador Continental a Galápagos',
+      ja: 'エクアドル本土からガラパゴスへのマスタージャーニー',
+      zh: '大师之旅：从厄瓜多尔大陆到加拉帕戈斯'
     },
     destination: 'Ecuador & Galapagos',
-    duration: { 
-      en: '11 DAYS / 10 NIGHTS', 
-      es: '11 DÍAS / 10 NOCHES', 
-      fr: '11 JOURS / 10 NUITS', 
-      de: '11 TAGE / 10 NÄCHTE', 
-      it: '11 GIORNI / 10 NOTTI', 
-      pt: '11 DIAS / 10 NOITES', 
-      ja: '11日間 / 10泊', 
-      zh: '11天 / 10晚' 
+    duration: {
+      en: '11 DAYS / 10 NIGHTS',
+      es: '11 DÍAS / 10 NOCHES',
+      fr: '11 JOURS / 10 NUITS',
+      de: '11 TAGE / 10 NÄCHTE',
+      it: '11 GIORNI / 10 NOTTI',
+      pt: '11 DIAS / 10 NOITES',
+      ja: '11日間 / 10泊',
+      zh: '11天 / 10晚'
     },
     durationDays: 11,
     price: 2290,
@@ -1466,15 +1606,15 @@ const multiDayTours: Tour[] = [
     rating: 5,
     reviewsCount: 32,
     isPopular: true,
-    category: { 
-      en: 'Classic Mainland & Galapagos', 
-      es: 'Clásico Continente y Galápagos', 
-      fr: 'Classique Équateur et Galapagos', 
-      de: 'Klassisches Ecuador & Galapagos', 
-      it: 'Classico Ecuador e Galapagos', 
-      pt: 'Clássico Equador e Galápagos', 
-      ja: 'エクアドル＆ガラパゴス周遊', 
-      zh: '海陆经典联合全景游' 
+    category: {
+      en: 'Classic Mainland & Galapagos',
+      es: 'Clásico Continente y Galápagos',
+      fr: 'Classique Équateur et Galapagos',
+      de: 'Klassisches Ecuador & Galapagos',
+      it: 'Classico Ecuador e Galapagos',
+      pt: 'Clássico Equador e Galápagos',
+      ja: 'エクアドル＆ガラパゴス周遊',
+      zh: '海陆经典联合全景游'
     },
     description: {
       en: '11-day master journey connecting mainland Ecuador (Quito, Avenue of Volcanoes, Baños Pailón del Diablo (Devil\'s Cauldron), Puyo Amazon Rainforest, Quilotoa Crater Lake) with Galápagos Islands (Santa Cruz highlands, giant tortoises, Isabela full-day with Tintoreras & flamingos, La Lobería and Las Grietas canyon).',
@@ -1506,8 +1646,8 @@ const multiDayTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Day 1 – Arrival In Quito | Airport Assistance & Hotel Transfer', 
+        title: {
+      en: 'Day 1 – Arrival In Quito | Airport Assistance & Hotel Transfer',
       es: 'Día 1 – Llegada A Quito | Asistencia En Aeropuerto Y Traslado' },
         description: {
           en: 'Upon arrival at Mariscal Sucre International Airport in Quito, you will be welcomed by our representative and assisted with your private transfer to the hotel.\n\nThis program can begin on any day of the week, depending on your travel arrangements.\n\nThe remainder of the day will be free to rest and acclimatize to the altitude of Quito.',
@@ -1519,8 +1659,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 2,
-        title: { 
-      en: 'Day 2 – Quito – Baños | Avenue Of The Volcanoes | Pailón Del Diablo Waterfall', 
+        title: {
+      en: 'Day 2 – Quito – Baños | Avenue Of The Volcanoes | Pailón Del Diablo Waterfall',
       es: 'Día 2 – Quito – Baños | Avenida De Los Volcanes | Cascada Pailón Del Diablo' },
         description: {
           en: 'After breakfast, we will travel south along the Pan-American Highway, following the famous Avenue of the Volcanoes, one of the most spectacular landscapes in the Ecuadorian Andes.\n\nThe route takes us through a region surrounded by numerous volcanic peaks before continuing towards Baños de Agua Santa, a charming tourist town located at the foothills of the active Tungurahua Volcano.\n\nBaños is surrounded by dramatic mountain scenery, waterfalls and lush vegetation, offering a wide variety of adventure activities such as cycling, rafting, hiking, tarabita cable-car rides and horseback riding.\n\nDuring today\'s excursion, we will visit the spectacular Pailón del Diablo (Devil\'s Cauldron) Waterfall, one of Ecuador\'s most impressive waterfalls. We will follow the trails through the lush vegetation and enjoy different viewpoints of the waterfall.\n\nBaños is located in a unique geographical setting between the Andes and the Amazon region, creating an extraordinary combination of ecosystems and landscapes.\n\nAfter the visit, we will continue to the hotel in Baños.',
@@ -1533,8 +1673,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 3,
-        title: { 
-      en: 'Day 3 – Baños – Amazon Rainforest | Puyo | Yanacocha Biopark | Hola Vida Waterfall | Kichwa Community', 
+        title: {
+      en: 'Day 3 – Baños – Amazon Rainforest | Puyo | Yanacocha Biopark | Hola Vida Waterfall | Kichwa Community',
       es: 'Día 3 – Baños – Selva Amazónica | Puyo | Bioparque Yanacocha | Cascada Hola Vida | Comunidad Kichwa' },
         description: {
           en: 'After breakfast, we will head east towards the Amazon Rainforest, traveling through the spectacular Pastaza River Canyon on our way to the city of Puyo, one of the gateways to Ecuador\'s Amazon region.\n\nOur first stop will be Yanacocha Biopark, where you will learn about and observe native animal species that have been rescued from illegal wildlife trafficking. The biopark is dedicated to wildlife conservation and environmental education.\n\nWe will then continue into the Amazon Rainforest for a guided hike through the lush vegetation to Hola Vida Waterfall. The approximately two-hour hike offers an opportunity to experience the extraordinary biodiversity of the rainforest and enjoy its natural surroundings.\n\nLater, we will visit a local Kichwa family, where you will have the opportunity to learn about their traditions, customs and way of life. This cultural encounter provides an authentic insight into the relationship between the local community and the Amazon Rainforest.\n\nWe will then begin our return journey to Baños.',
@@ -1547,8 +1687,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 4,
-        title: { 
-      en: 'Day 4 – Baños – Quilotoa – Quito | Quilotoa Crater Lake | Tigua', 
+        title: {
+      en: 'Day 4 – Baños – Quilotoa – Quito | Quilotoa Crater Lake | Tigua',
       es: 'Día 4 – Baños – Quilotoa – Quito | Laguna De Quilotoa | Tigua' },
         description: {
           en: 'After breakfast, we will begin our journey towards Quito, traveling through some of the most spectacular landscapes of the Ecuadorian Andes.\n\nOur main stop will be Quilotoa Crater Lake, one of Ecuador\'s most iconic natural attractions. The lake lies inside the crater of an ancient volcano and is famous for its striking turquoise-green waters surrounded by dramatic Andean landscapes.\n\nDuring the visit, you will have the opportunity to enjoy a two-hour hike towards the bottom of the crater. The descent provides spectacular views of the lake and surrounding mountains. Please note that the return hike is more demanding due to the steep terrain and altitude.\n\nAlong the way, we may also stop at the traditional village of Tigua, famous for its colorful paintings depicting Andean culture and everyday life. Depending on local availability, we may also visit a traditional guinea pig farm and learn about this important element of Andean rural life.\n\nWe will then continue to Quito.',
@@ -1561,8 +1701,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 5,
-        title: { 
-      en: 'Day 5 – Quito | Free Day', 
+        title: {
+      en: 'Day 5 – Quito | Free Day',
       es: 'Día 5 – Quito | Día Libre' },
         description: {
           en: 'Today is free to enjoy Quito at your own pace.\n\nYou may choose to explore the city\'s historic center, visit museums and cultural attractions, discover local cuisine, or simply relax at the hotel.\n\nOptional excursions and activities can be arranged upon request.\n\nThis free day also provides an opportunity to rest before continuing your journey to the Galápagos Islands the following day.',
@@ -1574,8 +1714,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 6,
-        title: { 
-      en: 'Day 6 – Quito – Baltra | Twin Craters | Primicias Ranch | Puerto Ayora', 
+        title: {
+      en: 'Day 6 – Quito – Baltra | Twin Craters | Primicias Ranch | Puerto Ayora',
       es: 'Día 6 – Quito – Baltra | Cráteres Gemelos | Rancho Primicias | Puerto Ayora' },
         description: {
           en: 'After breakfast, transfer to Mariscal Sucre International Airport for your flight to the Galápagos Islands.\n\nUpon arrival at Seymour Airport on Baltra Island, you will be welcomed by our representative and begin your Galápagos adventure.\n\nAfter crossing the Itabaca Channel to Santa Cruz Island, we will travel to the highlands to visit the famous Twin Craters (Los Gemelos). These impressive volcanic formations are surrounded by lush Scalesia forest and offer an excellent introduction to the unique geological landscape of Santa Cruz Island.\n\nWe will then continue to Primicias Ranch, a private reserve where giant Galápagos tortoises can be observed roaming freely in their natural environment. During the visit, you will learn about these iconic animals and their importance to the Galápagos ecosystem.\n\nAfter the excursion, we will continue to Puerto Ayora for hotel check-in and the remainder of the day at leisure.',
@@ -1587,8 +1727,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 7,
-        title: { 
-      en: 'Day 7 – Full-Day Excursion To Isabela Island | Tortoise Breeding Center | Flamingo Lagoon | Tintoreras', 
+        title: {
+      en: 'Day 7 – Full-Day Excursion To Isabela Island | Tortoise Breeding Center | Flamingo Lagoon | Tintoreras',
       es: 'Día 7 – Excursión Full-Day A Isla Isabela | Centro De Crianza | Laguna De Flamingos | Tintoreras' },
         description: {
           en: 'After breakfast, transfer to the pier to board a speedboat to Isabela Island. The navigation takes approximately 2 to 2.5 hours, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, we will visit the Giant Tortoise Breeding Center, where you will learn about the conservation and breeding programs established to protect Isabela\'s giant tortoise populations.\n\nWe will then visit the Flamingo Lagoon, one of the island\'s most important wetlands. Depending on natural conditions, you may observe Galápagos flamingos and other bird species in their natural habitat.\n\nThe excursion will continue with a boat trip to Tintoreras Islet, a small volcanic islet located just off the coast of Isabela. Its clear waters and rich marine environment make it an excellent snorkeling destination.\n\nDuring the snorkeling activity, you may have the opportunity to observe sea lions, sea turtles, rays, penguins and colorful tropical fish, depending on wildlife activity and sea conditions.\n\nAfter the excursion, we will return by speedboat to Santa Cruz Island and Puerto Ayora.',
@@ -1601,8 +1741,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 8,
-        title: { 
-      en: 'Day 8 – La Lobería | Punta Estrada | Las Grietas', 
+        title: {
+      en: 'Day 8 – La Lobería | Punta Estrada | Las Grietas',
       es: 'Día 8 – La Lobería | Punta Estrada | Las Grietas' },
         description: {
           en: 'After breakfast, we will begin the day\'s activities with a visit to La Lobería, a coastal area famous for its resident population of Galápagos sea lions. Here, you will have the opportunity to observe these playful animals in their natural environment.\n\nWe will then continue to Punta Estrada, a beautiful coastal area surrounded by rocky formations and clear waters. The area offers excellent opportunities for nature observation and marine activities.\n\nThe excursion will continue to Las Grietas, a spectacular natural formation consisting of a narrow volcanic canyon filled with crystal-clear turquoise water. This is one of the most popular snorkeling and swimming sites near Puerto Ayora.\n\nDuring the snorkeling activity, you can explore the underwater environment and observe a variety of colorful fish and marine life.\n\nAfter the visit, return to Puerto Ayora and enjoy the remainder of the day at leisure.',
@@ -1614,8 +1754,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 9,
-        title: { 
-      en: 'Day 9 – Santa Cruz | Free Day', 
+        title: {
+      en: 'Day 9 – Santa Cruz | Free Day',
       es: 'Día 9 – Santa Cruz | Día Libre' },
         description: {
           en: 'After breakfast, enjoy a free day in Santa Cruz Island.\n\nThis day can be used to relax at the hotel, explore Puerto Ayora independently, visit local shops and restaurants, or simply enjoy the island at your own pace.\n\nOptional excursions and activities can be arranged upon request, depending on availability and local conditions.',
@@ -1626,8 +1766,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 10,
-        title: { 
-      en: 'Day 10 – Baltra Airport | Departure', 
+        title: {
+      en: 'Day 10 – Baltra Airport | Departure',
       es: 'Día 10 – Traslado Al Aeropuerto De Baltra | Vuelo A Quito' },
         description: {
           en: 'After breakfast, check out from the hotel and begin the transfer from Puerto Ayora to Baltra Airport.\n\nThe journey includes transportation across Santa Cruz Island and the crossing of the Itabaca Channel, followed by the airport shuttle to Seymour Airport.\n\nUpon arrival at the airport, assistance will be provided for your departure flight, marking the end of your Ecuador and Galápagos Islands experience.',
@@ -1639,8 +1779,8 @@ const multiDayTours: Tour[] = [
       },
       {
         day: 11,
-        title: { 
-      en: 'Day 11 – Quito | International Departure', 
+        title: {
+      en: 'Day 11 – Quito | International Departure',
       es: 'Día 11 – Quito | Salida Internacional' },
         description: {
           en: 'After breakfast, check out from the hotel and meet your private driver for your transfer to Mariscal Sucre International Airport.\n\nAssistance will be provided for your departure flight and international connections.\n\nThis marks the end of your Ecuador and Galápagos Islands experience.',
@@ -1659,8 +1799,8 @@ export const mockDestinations: Destination[] = [
   {
     id: 'ecuador',
     name: { en: 'Mainland Ecuador', es: 'Ecuador Continental', fr: 'Équateur Continental', de: 'Festland Ecuador', it: 'Ecuador Continentale', pt: 'Equador Continental', ja: 'エクアドル本土', zh: '厄瓜多尔大陆' },
-    subtitle: { 
-      en: 'Andes, Volcanoes & Amazon Rainforest', 
+    subtitle: {
+      en: 'Andes, Volcanoes & Amazon Rainforest',
       es: 'Andes, Volcanes Y Selva Amazónica', fr: 'Andes, volcans et jungle amazonienne', de: 'Anden, Vulkane & Amazonas-Regenwald', it: 'Ande, Vulcani e Foresta Amazzonica', pt: 'Andes, Vulcões e Floresta Amazônica', ja: 'アンデス、火山、アマゾン熱帯雨林', zh: '安第斯高原、壮丽火山与亚马逊雨林' },
     description: {
       en: 'Explore the Avenue of the Volcanoes, historic Quito, Baños waterfalls, Amazon jungle lodges and ancient Inca heritage.',
@@ -1674,8 +1814,8 @@ export const mockDestinations: Destination[] = [
   {
     id: 'galapagos',
     name: { en: 'Galápagos Islands', es: 'Islas Galápagos', fr: 'Îles Galápagos', de: 'Galapagos-Inseln', it: 'Isole Galapagos', pt: 'Ilhas Galápagos', ja: 'ガラパゴス諸島', zh: '加拉帕戈斯群岛' },
-    subtitle: { 
-      en: 'The Enchanted Archipelago & Cruises', 
+    subtitle: {
+      en: 'The Enchanted Archipelago & Cruises',
       es: 'El Archipiélago Encantado', fr: 'L\'archipel enchanté et croisières', de: 'Das verzauberte Archipel & Kreuzfahrten', it: 'L\'Arcipelago Incantato e Crociere', pt: 'O Arquipélago Encantado e Cruzeiros', ja: '魅惑の諸島とネイチャークルーズ', zh: '魔幻群岛与尊享生态巡游' },
     description: {
       en: 'Cruises and island-hopping tours to witness wildlife and pristine waters found nowhere else on Earth.',
@@ -1689,8 +1829,8 @@ export const mockDestinations: Destination[] = [
   {
     id: 'combined',
     name: { en: 'Grand Combined Expeditions', es: 'Grandes Expediciones Combinadas', fr: 'Grandes Expéditions Combinées', de: 'Große Kombinations-Expeditionen', it: 'Grandi Spedizioni Combinate', pt: 'Grandes Expedições Combinadas', ja: 'グランド・コンビネーション探検', zh: '全景尊享组合探险' },
-    subtitle: { 
-      en: 'Mainland Ecuador + Galápagos Islands', 
+    subtitle: {
+      en: 'Mainland Ecuador + Galápagos Islands',
       es: 'Ecuador Continental + Islas Galápagos', fr: 'Équateur Continental + Îles Galápagos', de: 'Festland Ecuador + Galapagos-Inseln', it: 'Ecuador Continentale + Isole Galapagos', pt: 'Equador Continental + Ilhas Galápagos', ja: 'エクアドル本土 ＋ ガラパゴス諸島', zh: '厄瓜多尔大陆 ＋ 加拉帕戈斯群岛' },
     description: {
       en: 'The ultimate master journeys linking volcanic Andean trails, Amazon wonders and the pristine Galápagos islands.',
@@ -1704,8 +1844,8 @@ export const mockDestinations: Destination[] = [
   {
     id: 'full-day',
     name: { en: 'Day Excursions', es: 'Excursiones Full Day', fr: 'Excursions Full Day', de: 'Full-Day Tagesausflüge', it: 'Escursioni Full Day', pt: 'Passeios Full Day', ja: '日帰りツアー (Full Day)', zh: '单日全景游 (Full Day)' },
-    subtitle: { 
-      en: '1-Day Tours In Mainland Ecuador', 
+    subtitle: {
+      en: '1-Day Tours In Mainland Ecuador',
       es: 'Tours De 1 Día En Ecuador Continental', fr: 'Tours d\'une journée en Équateur Continental', de: '1-Tages-Touren in Festland-Ecuador', it: 'Tour di 1 Giorno in Ecuador Continentale', pt: 'Tours de 1 Dia no Equador Continental', ja: 'エクアドル本土 1日ツアー', zh: '厄瓜多尔大陆 1日精选游' },
     description: {
       en: 'Immersive 1-day adventures: volcanic craters, Andean waterfalls, cloud forests, thermal springs and indigenous artisan markets.',

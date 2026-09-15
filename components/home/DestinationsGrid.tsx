@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Compass, ArrowRight, Menu } from 'lucide-react';
 import { mockDestinations } from '@/data/mock';
 import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { isBotOrCrawler } from '@/utils/isBot';
 
@@ -73,6 +74,7 @@ export function DestinationsGrid() {
   const destinations = mockDestinations;
   const t = useTranslations('destinations');
   const locale = useLocale();
+  const router = useRouter();
 
   const fromText = FROM_LABELS[locale] || 'From';
   const journeysText = JOURNEYS_LABELS[locale] || 'Tours';
@@ -163,18 +165,14 @@ export function DestinationsGrid() {
 
   const handleDestinationClick = (destId: string) => {
     setActiveDestId(destId);
-    const filterMap: Record<string, string> = {
-      ecuador: 'Ecuador',
-      galapagos: 'Galapagos',
-      combined: 'Combined',
-      'full-day': 'FullDay',
+    const sectionMap: Record<string, string> = {
+      ecuador: 'continental',
+      galapagos: 'galapagos',
+      combined: 'combinados',
+      'full-day': 'diarios',
     };
-    const targetFilter = filterMap[destId.toLowerCase()] || 'all';
-    window.dispatchEvent(new CustomEvent('selectDestinationFilter', { detail: targetFilter }));
-    const toursSection = document.getElementById('tours');
-    if (toursSection) {
-      toursSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    const targetSection = sectionMap[destId.toLowerCase()] || 'galapagos';
+    router.push(`/${locale}/tours#${targetSection}`);
   };
 
   if (!destinations || destinations.length === 0) return null;
