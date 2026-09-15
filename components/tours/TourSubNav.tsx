@@ -27,7 +27,7 @@ const SUBNAV_I18N: Record<string, { reviews: string; club: string; vip: string; 
 
 export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [showContactMenu, setShowContactMenu] = useState(false);
 
   useEffect(() => {
@@ -36,9 +36,15 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
       setPortalNode(node);
     }
 
-    // En los detalles de tour esta es la navegación principal: debe estar
-    // disponible desde el primer píxel, no solo después de hacer scroll.
-    setIsVisible(true);
+    const handleScroll = () => {
+      const shouldShowContextualNav = window.scrollY > 200;
+      setIsVisible(shouldShowContextualNav);
+      if (!shouldShowContextualNav) setShowContactMenu(false);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   if (!portalNode) return null;
@@ -60,7 +66,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
       className={`w-full bg-[#FAF8F5]/98 dark:bg-stone-950/98 backdrop-blur-2xl border-b border-zinc-200/90 dark:border-white/10 py-2 transition-all duration-300 shadow-2xl ${isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none h-0 py-0 border-none overflow-hidden'
         }`}
     >
-      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-4">
         <div className="flex items-start justify-between gap-3 sm:gap-5">
 
           {/* Lado Izquierdo: Logo imponente y Títulos a escala perfecta */}
@@ -132,7 +138,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
           </div>
         </div>
 
-        <div className="mt-2 grid grid-cols-2 gap-2 sm:flex sm:justify-end sm:gap-3">
+        <div className="mt-2 grid grid-cols-2 gap-2 sm:flex sm:justify-end sm:gap-3 md:mt-0 md:items-center">
             <Link
               href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
               className={`flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all ${tierButtonTextSize} font-bold text-white shadow-sm shadow-emerald-900/30`}

@@ -15,13 +15,6 @@ export function ConditionalNavbar() {
     pathname?.includes('/checkout')
   ) return null;
 
-  // Los detalles de tour usan TourSubNav como su única barra contextual.
-  // Conservamos el portal para que el componente cliente pueda montarse sin
-  // renderizar también la navegación global.
-  if (isTourDetail) {
-    return <div id="tour-subnav-portal" />;
-  }
-
   // Las páginas con Hero Banner a pantalla completa (Home y Detalle de Tour)
   // inician en top: 0 detrás del navbar transparente; no requieren espaciador.
   const isFullBleedHero = 
