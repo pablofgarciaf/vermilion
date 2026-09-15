@@ -144,6 +144,11 @@ const HIGHLIGHTS_PREFIX: Record<string, string> = {
   zh: '行程亮点:',
 };
 
+const DAILY_TOUR_CTA: Record<string, string> = {
+  es: 'Reservar tour', en: 'Book tour', fr: 'Réserver le circuit', de: 'Tour buchen',
+  it: 'Prenota il tour', pt: 'Reservar tour', ja: 'ツアーを予約', zh: '预订行程',
+};
+
 export default async function TourDetailPage({ params }: TourDetailPageProps) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
@@ -184,6 +189,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
 
   const priceClub = tour.price3Star || tour.price || 1050;
   const priceVip = tour.price4Star || Math.round(priceClub * 1.15);
+  const isDailyTour = tour.durationDays === 1;
 
   const tourJsonLd = {
     '@context': 'https://schema.org',
@@ -255,6 +261,15 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                 </span>
               </div>
 
+              {isDailyTour && (
+                <div className="flex items-baseline gap-2 pt-1">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">USD</span>
+                  <span className="font-serif text-3xl sm:text-4xl font-bold text-amber-600 dark:text-amber-400">
+                    ${priceClub.toLocaleString('en-US')}
+                  </span>
+                </div>
+              )}
+
               {/* Resumen integrado en el Hero */}
               {tour.description && (
                 <p className="text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed pt-1">
@@ -262,18 +277,27 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                 </p>
               )}
 
-              {/* Botones de Tarifas (Club vs VIP) compactos dentro del Hero */}
+              {/* Los tours diarios tienen una tarifa única; las expediciones conservan sus categorías. */}
               <div className="pt-2 space-y-3">
-                <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider block">
-                  {locale === 'es' ? 'Seleccione su Categoría:' : 'Select Your Tier:'}
-                </span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {isDailyTour ? (
+                  <Link
+                    href={`/${locale}/booking?addTour=${tour.id}`}
+                    className="inline-flex items-center gap-2 rounded-xl border border-amber-400/70 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-4 py-2.5 text-xs font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105 group"
+                  >
+                    {DAILY_TOUR_CTA[locale] || DAILY_TOUR_CTA.en}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-all" />
+                  </Link>
+                ) : <>
+                  <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider block">
+                    {locale === 'es' ? 'Seleccione su Categoría:' : 'Select Your Tier:'}
+                  </span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {/* Botón Club (Verde Metálico Elegante) */}
                   <Link
                     href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
-                    className="p-3.5 rounded-2xl border-2 border-emerald-600/70 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all flex items-center justify-between group shadow-md shadow-emerald-900/30"
+                    className="relative flex min-h-[72px] items-center rounded-xl border-2 border-emerald-600/70 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 px-3 py-2.5 shadow-md shadow-emerald-900/30 transition-all hover:brightness-110 group"
                   >
-                    <div className="space-y-0.5">
+                    <div className="flex flex-1 flex-col items-center justify-center gap-0.5 pr-6 text-center">
                       <div className="flex items-center gap-1.5 text-xs font-bold text-white">
                         <Hotel className="w-3.5 h-3.5 text-emerald-300" />
                         <span>Vermilion Club (3★)</span>
@@ -282,15 +306,15 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                         ${priceClub.toLocaleString('en-US')} USD
                       </p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-emerald-300 group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight className="absolute right-3 top-1/2 w-4 h-4 -translate-y-1/2 text-emerald-300 transition-all group-hover:translate-x-0.5" />
                   </Link>
 
                   {/* Botón VIP (Dorado Metálico Estilo Referencia) */}
                   <Link
                     href={`/${locale}/booking?addTour=${tour.id}&tier=vip`}
-                    className="p-3.5 rounded-2xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] hover:brightness-105 transition-all flex items-center justify-between group shadow-md shadow-amber-500/20"
+                    className="relative flex min-h-[72px] items-center rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-3 py-2.5 shadow-md shadow-amber-500/20 transition-all hover:brightness-105 group"
                   >
-                    <div className="space-y-0.5">
+                    <div className="flex flex-1 flex-col items-center justify-center gap-0.5 pr-6 text-center">
                       <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-950">
                         <Sparkles className="w-3.5 h-3.5 text-zinc-950 fill-zinc-950" />
                         <span>Vermilion VIP (4★)</span>
@@ -299,9 +323,10 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                         ${priceVip.toLocaleString('en-US')} USD
                       </p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-zinc-950 group-hover:translate-x-0.5 transition-all" />
+                    <ArrowRight className="absolute right-3 top-1/2 w-4 h-4 -translate-y-1/2 text-zinc-950 transition-all group-hover:translate-x-0.5" />
                   </Link>
                 </div>
+                </>}
               </div>
             </div>
 

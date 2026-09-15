@@ -14,15 +14,15 @@ interface TourSubNavProps {
   locale: string;
 }
 
-const SUBNAV_I18N: Record<string, { reviews: string; club: string; vip: string; contact: string; whatsapp: string; call: string }> = {
-  es: { reviews: 'opiniones verificadas', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contacto', whatsapp: 'WhatsApp', call: 'Llamar' },
-  en: { reviews: 'verified reviews', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Call' },
-  fr: { reviews: 'avis vérifiés', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Appeler' },
-  de: { reviews: 'verifizierte Bewertungen', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Kontakt', whatsapp: 'WhatsApp', call: 'Anrufen' },
-  it: { reviews: 'recensioni verificate', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contatto', whatsapp: 'WhatsApp', call: 'Chiama' },
-  pt: { reviews: 'avaliações verificadas', club: 'Club (3★)', vip: 'VIP (4★)', contact: 'Contato', whatsapp: 'WhatsApp', call: 'Ligar' },
-  ja: { reviews: '認証済みレビュー', club: 'Club (3★)', vip: 'VIP (4★)', contact: '連絡先', whatsapp: 'WhatsApp', call: '電話' },
-  zh: { reviews: '条真实住客点评', club: 'Club (3★)', vip: 'VIP (4★)', contact: '联系我们', whatsapp: 'WhatsApp', call: '拨打电话' },
+const SUBNAV_I18N: Record<string, { reviews: string; club: string; vip: string; book: string; contact: string; whatsapp: string; call: string }> = {
+  es: { reviews: 'opiniones verificadas', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Reservar', contact: 'Contacto', whatsapp: 'WhatsApp', call: 'Llamar' },
+  en: { reviews: 'verified reviews', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Book', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Call' },
+  fr: { reviews: 'avis vérifiés', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Réserver', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Appeler' },
+  de: { reviews: 'verifizierte Bewertungen', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Buchen', contact: 'Kontakt', whatsapp: 'WhatsApp', call: 'Anrufen' },
+  it: { reviews: 'recensioni verificate', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Prenota', contact: 'Contatto', whatsapp: 'WhatsApp', call: 'Chiama' },
+  pt: { reviews: 'avaliações verificadas', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Reservar', contact: 'Contato', whatsapp: 'WhatsApp', call: 'Ligar' },
+  ja: { reviews: '認証済みレビュー', club: 'Club (3★)', vip: 'VIP (4★)', book: '予約する', contact: '連絡先', whatsapp: 'WhatsApp', call: '電話' },
+  zh: { reviews: '条真实住客点评', club: 'Club (3★)', vip: 'VIP (4★)', book: '预订', contact: '联系我们', whatsapp: 'WhatsApp', call: '拨打电话' },
 };
 
 export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
@@ -140,7 +140,13 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
           </div>
           </div>
 
-          <div className="mt-2 grid grid-cols-2 gap-2 sm:flex sm:justify-end sm:gap-3">
+          <div className={`mt-2 ${isDailyTour ? '' : 'grid grid-cols-2 gap-2 sm:flex sm:justify-end sm:gap-3'}`}>
+            {isDailyTour ? (
+              <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-4 py-2.5 text-xs font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
+                <Sparkles className="w-4 h-4 fill-zinc-950" />
+                <span>{t.book}</span>
+              </Link>
+            ) : <>
             <Link
               href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
               className={`flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all ${tierButtonTextSize} font-bold text-white shadow-sm shadow-emerald-900/30`}
@@ -158,6 +164,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               <span>{t.vip}</span>
               <span className="font-extrabold text-sm sm:text-base">${priceVip}</span>
             </Link>
+            </>}
           </div>
         </div>
 
@@ -229,6 +236,12 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
+            {isDailyTour ? (
+              <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex items-center justify-center gap-1.5 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-4 py-2.5 whitespace-nowrap text-xs font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
+                <Sparkles className="w-3.5 h-3.5 fill-zinc-950" />
+                <span>{t.book}</span>
+              </Link>
+            ) : <>
             <Link
               href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
               className={`flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all whitespace-nowrap ${desktopTierButtonTextSize} font-bold text-white shadow-sm shadow-emerald-900/30`}
@@ -246,6 +259,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               <span>{t.vip}</span>
               <span className="font-extrabold text-xs lg:text-sm">${priceVip}</span>
             </Link>
+            </>}
           </div>
         </div>
       </div>
