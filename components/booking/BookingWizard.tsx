@@ -10,6 +10,7 @@ import { mockTours } from '@/data/mock';
 import { calculateTourPrice, PricingDetails } from '@/lib/pricing';
 import { PriceCalculator } from './PriceCalculator';
 import { TravelDatePicker } from './TravelDatePicker';
+import { BookingComfortTierSelector, BookingTier } from './BookingComfortTierSelector';
 import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, ExternalLink, Lock, ArrowRight, Sparkles, Loader2, Search, X, ArrowLeftRight, Compass } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
@@ -384,14 +385,14 @@ const BOOKING_WIZARD_I18N: Record<string, Record<string, string>> = {
     zh: '浏览全部行程 ↗',
   },
   step2: {
-    es: '2. ¿Cuándo viajas?',
-    en: '2. When are you traveling?',
-    fr: '2. Quand voyagez-vous ?',
-    de: '2. Wann reisen Sie?',
-    it: '2. Quando viaggi?',
-    pt: '2. Quando você viaja?',
-    ja: '2. 出発時期はいつですか？',
-    zh: '2. 您计划何时出行？',
+    es: '4. ¿Cuándo viajas?',
+    en: '4. When are you traveling?',
+    fr: '4. Quand voyagez-vous ?',
+    de: '4. Wann reisen Sie?',
+    it: '4. Quando viaggi?',
+    pt: '4. Quando você viaja?',
+    ja: '4. 出発時期はいつですか？',
+    zh: '4. 您计划何时出行？',
   },
   step3: {
     es: '3. ¿Quiénes viajan?',
@@ -444,14 +445,14 @@ const BOOKING_WIZARD_I18N: Record<string, Record<string, string>> = {
     zh: '0至11岁（特惠8折费率）',
   },
   step4: {
-    es: '4. Tus Datos de Contacto',
-    en: '4. Contact Details',
-    fr: '4. Vos Coordonnées',
-    de: '4. Ihre Kontaktdaten',
-    it: '4. I Tuoi Dati di Contatto',
-    pt: '4. Seus Datos de Contato',
-    ja: '4. お客様のご連絡先',
-    zh: '4. 您的联系方式',
+    es: '5. Tus Datos de Contacto',
+    en: '5. Contact Details',
+    fr: '5. Vos Coordonnées',
+    de: '5. Ihre Kontaktdaten',
+    it: '5. I Tuoi Dati di Contatto',
+    pt: '5. Seus Datos de Contato',
+    ja: '5. お客様のご連絡先',
+    zh: '5. 您的联系方式',
   },
   fullName: {
     es: 'Nombre Completo',
@@ -748,6 +749,37 @@ function filterTours(tours: Tour[], activeFilter: string): Tour[] {
   });
 }
 
+type BookingTourCategory = 'daily' | 'galapagos' | 'continental' | 'combined';
+
+function getBookingTourCategory(tour: Tour): BookingTourCategory {
+  const destination = (typeof tour.destination === 'string' ? tour.destination : (tour.destination as any)?.en || (tour.destination as any)?.es || '').toLowerCase();
+  const id = (tour.id || '').toLowerCase();
+  const isDaily = tour.durationDays === 1 || id.includes('quito-city') || id.includes('otavalo') || id.includes('papallacta') || id.includes('mindo') || id.includes('antisana') || id.includes('cotopaxi') || id.includes('quilotoa') || destination.includes('full') || destination.includes('daily');
+
+  if (isDaily) return 'daily';
+  if (id.includes('ecuador-galapagos') || (destination.includes('ecuador') && destination.includes('galapagos')) || destination.includes('combined')) return 'combined';
+  if (destination.includes('galapagos') || id.includes('galapagos')) return 'galapagos';
+  return 'continental';
+}
+
+function canAddTourToBooking(candidate: Tour, selectedTours: Tour[]): boolean {
+  if (selectedTours.some((tour) => tour.id === candidate.id)) return true;
+  const selectedCategories = selectedTours.map(getBookingTourCategory);
+  const candidateCategory = getBookingTourCategory(candidate);
+
+  if (selectedCategories.length === 0 || selectedCategories.every((category) => category === 'daily')) return true;
+  if (selectedCategories.includes('combined') || (selectedCategories.includes('galapagos') && selectedCategories.includes('continental'))) return candidateCategory === 'daily';
+  if (selectedCategories.includes('galapagos')) return candidateCategory === 'continental' || candidateCategory === 'daily';
+  if (selectedCategories.includes('continental')) return candidateCategory === 'galapagos' || candidateCategory === 'daily';
+  return candidateCategory === 'daily';
+}
+
+function getTourPriceForTier(tour: Tour, tier: BookingTier): number {
+  if (getBookingTourCategory(tour) === 'daily') return tour.price3Star || tour.price || 0;
+  const clubPrice = tour.price3Star || tour.price || 0;
+  return tier === 'vip' ? tour.price4Star || Math.round(clubPrice * 1.15) : clubPrice;
+}
+
 function getComplementarySuggestions(primaryTour: Tour, allTours: Tour[]): { tour: Tour; badge: string; reason: string }[] {
   if (!primaryTour) return [];
   const pid = (primaryTour.id || '').toLowerCase();
@@ -809,8 +841,10 @@ export function BookingWizard() {
   const isEs = locale === 'es';
   const searchParams = useSearchParams();
   const addTourId = searchParams.get('addTour') || searchParams.get('tourid') || searchParams.get('tourId');
+  const requestedTier = searchParams.get('tier');
 
   const [selectedTours, setSelectedTours] = useState<Tour[]>([]);
+  const [selectedTier, setSelectedTier] = useState<BookingTier>(requestedTier === 'vip' ? 'vip' : 'club');
   const [affiliateRef, setAffiliateRef] = useState<string | null>(null);
   const [affiliateData, setAffiliateData] = useState<AffiliateAccount | null>(null);
   const [isValidatingAffiliate, setIsValidatingAffiliate] = useState(false);
@@ -845,6 +879,10 @@ export function BookingWizard() {
       });
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    setSelectedTier(requestedTier === 'vip' ? 'vip' : 'club');
+  }, [requestedTier]);
 
   const [date, setDate] = useState<string>('');
   const [adults, setAdults] = useState<number>(2);
@@ -912,12 +950,12 @@ export function BookingWizard() {
 
   const primaryTour: Tour = selectedTours[0] || (addTourId ? mockTours.find(t => t.id === addTourId) : null) || mockTours.find(t => t.id === 'galapagos-5days') || mockTours[0];
   const complementarySuggestions = getComplementarySuggestions(primaryTour, mockTours);
-  const candidateTours = mockTours.filter(t => t.id !== primaryTour?.id);
+  const candidateTours = mockTours.filter((tour) => tour.id !== primaryTour?.id && canAddTourToBooking(tour, selectedTours));
   const ci18n = BOOKING_CAROUSEL_I18N[locale] || BOOKING_CAROUSEL_I18N['es'];
 
   const replacePrimaryTour = (newTour: Tour) => {
     setSelectedTours(prev => {
-      const remaining = prev.filter(t => t.id !== newTour.id && t.id !== primaryTour?.id);
+      const remaining = prev.filter((tour) => tour.id !== newTour.id && tour.id !== primaryTour?.id && canAddTourToBooking(tour, [newTour]));
       return [newTour, ...remaining];
     });
     const tourTitleStr = getLocalizedText(newTour.title, locale);
@@ -932,6 +970,7 @@ export function BookingWizard() {
         if (prev.length <= 1) return prev;
         return prev.filter(t => t.id !== tour.id);
       }
+      if (!canAddTourToBooking(tour, prev)) return prev;
       return [...prev, tour];
     });
   };
@@ -942,7 +981,7 @@ export function BookingWizard() {
       let anyMinTwo = false;
       selectedTours.forEach(tour => {
         const isDaily = tour.durationDays === 1 || (typeof tour.duration === 'object' && String(tour.duration?.en || '').includes('1 DAY'));
-        const p = calculateTourPrice(tour.price, adults, children, date, isDaily);
+        const p = calculateTourPrice(getTourPriceForTier(tour, selectedTier), adults, children, date, isDaily);
         if (p.minTwoPersonApplied) anyMinTwo = true;
         tAB += p.basePricePerAdult; tCB += p.basePricePerChild;
         tAA += p.adultsTotal; tCA += p.childrenTotal;
@@ -960,7 +999,7 @@ export function BookingWizard() {
     } else {
       setPricing({ basePricePerAdult: 0, basePricePerChild: 0, adultsCount: adults, childrenCount: children, adultsTotal: 0, childrenTotal: 0, subtotal: 0, groupDiscountPercentage: 0, groupDiscountAmount: 0, total: 0 });
     }
-  }, [selectedTours, adults, children, date]);
+  }, [selectedTours, selectedTier, adults, children, date]);
 
   const handleCheckout = async () => {
     if (selectedTours.length === 0) {
@@ -1015,6 +1054,7 @@ export function BookingWizard() {
       adults: String(adults),
       children: String(children),
       travelers: String(totalTravelers),
+      tier: selectedTier,
       isDailyTour: isDaily ? 'true' : 'false',
     });
     window.location.href = `/${locale}/checkout/payment?${queryParams.toString()}`;
@@ -1038,7 +1078,7 @@ export function BookingWizard() {
     return { label: `${w.proceedPayment} - $${pricing.total.toLocaleString('en-US')} USD`, ref: null, ready: true };
   };
   const mobileCTA = getMobileCTA();
-  const filteredTours = filterTours(mockTours, activeFilter);
+  const filteredTours = filterTours(mockTours, activeFilter).filter((tour) => selectedTours.some((selected) => selected.id === tour.id) || canAddTourToBooking(tour, selectedTours));
   const searchedTours = filteredTours.filter((t) => {
     if (!tourSearchQuery.trim()) return true;
     const q = tourSearchQuery.toLowerCase().trim();
@@ -1139,7 +1179,7 @@ export function BookingWizard() {
                       <div className="sm:text-right shrink-0">
                         <span className="text-[10px] text-zinc-400 block uppercase tracking-wider">{w.startingFrom}</span>
                         <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 dark:text-emerald-400" suppressHydrationWarning>
-                          ${primaryTour.price.toLocaleString('en-US')} USD
+                          ${getTourPriceForTier(primaryTour, selectedTier).toLocaleString('en-US')} USD
                         </span>
                         <span className="text-[10px] text-zinc-400 block">{w.perTraveler}</span>
                       </div>
@@ -1280,7 +1320,7 @@ export function BookingWizard() {
                                   {ci18n.from}:
                                 </span>
                                 <span className="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">
-                                  ${sugTour.price.toLocaleString('en-US')} USD <span className="text-[10px] font-normal text-zinc-400">{ci18n.perTraveler}</span>
+                                  ${getTourPriceForTier(sugTour, selectedTier).toLocaleString('en-US')} USD <span className="text-[10px] font-normal text-zinc-400">{ci18n.perTraveler}</span>
                                 </span>
                               </div>
                             </div>
@@ -1334,6 +1374,10 @@ export function BookingWizard() {
                 )}
               </div>
 
+              {selectedTours.some((tour) => getBookingTourCategory(tour) !== 'daily') && (
+                <BookingComfortTierSelector locale={locale} selectedTier={selectedTier} onSelectTier={setSelectedTier} />
+              )}
+
               <hr className="border-zinc-100 dark:border-zinc-800" />
 
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -1341,7 +1385,7 @@ export function BookingWizard() {
                   <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
                     <CalendarDays className="w-5 h-5 text-emerald-600" /> {w.step2}
                   </h3>
-                  <TravelDatePicker selectedDate={date} onDateSelect={(d) => setDate(d)} durationDays={selectedTours.reduce((max, t) => Math.max(max, t.durationDays || 1), 1)} />
+                  <TravelDatePicker selectedDate={date} onDateSelect={(d) => setDate(d)} durationDays={selectedTours.reduce((total, tour) => total + (tour.durationDays || 1), 0)} />
                 </div>
                 <div ref={passengersRef} className="md:col-span-5">
                   <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
@@ -1504,7 +1548,7 @@ export function BookingWizard() {
                                 </h4>
                                 <div className="flex items-center gap-2 mt-1">
                                   <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                                    ${t.price.toLocaleString('en-US')} USD
+                                    ${getTourPriceForTier(t, selectedTier).toLocaleString('en-US')} USD
                                   </span>
                                   <span className="text-[10px] text-zinc-400">&bull;</span>
                                   <span className="text-[10px] text-zinc-500">
@@ -1544,7 +1588,7 @@ export function BookingWizard() {
           </div>
 
           <div className="lg:col-span-4 sticky top-24 self-start">
-            <PriceCalculator tours={selectedTours} pricing={pricing} date={date} contactInfo={contactInfo} step={3} onContinue={handleCheckout} canContinue={isFormComplete() && !isProcessing} affiliateRef={affiliateRef} />
+            <PriceCalculator tours={selectedTours} pricing={pricing} date={date} contactInfo={contactInfo} step={3} onContinue={handleCheckout} canContinue={isFormComplete() && !isProcessing} affiliateRef={affiliateRef} tier={selectedTier} />
           </div>
         </div>
 
@@ -1676,7 +1720,7 @@ export function BookingWizard() {
                               </h4>
                               <div className="flex items-center gap-2 mt-1.5 text-xs">
                                 <span className="font-extrabold text-emerald-600 dark:text-emerald-400">
-                                  ${t.price.toLocaleString('en-US')} USD
+                                  ${getTourPriceForTier(t, selectedTier).toLocaleString('en-US')} USD
                                 </span>
                                 <span className="text-zinc-400">&bull;</span>
                                 <span className="text-zinc-500 dark:text-zinc-400 text-[11px]">
