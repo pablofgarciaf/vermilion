@@ -497,16 +497,6 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     ja: '大切なお客様',
     zh: '尊贵旅客',
   },
-  toBeConfirmed: {
-    en: 'To be confirmed',
-    es: 'Por confirmar',
-    fr: 'À confirmer',
-    de: 'Zu bestätigen',
-    it: 'Da confermare',
-    pt: 'A confirmar',
-    ja: '確認中',
-    zh: '待确认',
-  },
   downloadVoucherPdf: {
     en: 'Download Voucher (PDF)',
     es: 'Descargar Voucher (PDF)',

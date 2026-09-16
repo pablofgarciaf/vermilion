@@ -267,6 +267,64 @@ function isGalapagosRegion(title: string, desc: string): boolean {
 }
 
 /**
+ * The day badge is already rendered independently in the PDF.  Source titles
+ * historically include that badge as well (for example, "Day 1 – …"), so
+ * leaving it in produces the "DAY 1 / Day 1" duplication seen in downloads.
+ */
+function removeDayPrefix(title: string, day: number): string {
+  const escapedDay = String(day).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const prefix = new RegExp(
+    `^(?:(?:day|d[ií]a|jour|tag|giorno|dia)\\s*${escapedDay}|第\\s*${escapedDay}\\s*(?:天|日)?)(?:\\s*[-–—:|•]\\s*)?`,
+    'iu'
+  );
+
+  let cleaned = title.trim();
+  // Some legacy entries contain the prefix twice. Remove every leading copy.
+  while (prefix.test(cleaned)) cleaned = cleaned.replace(prefix, '').trim();
+  return cleaned;
+}
+
+function formatPdfDayBadge(day: number, locale: string, dayLabel: string): string {
+  if (locale === 'zh') return `第${day}天`;
+  if (locale === 'ja') return `第${day}日`;
+  return `${dayLabel} ${day}`;
+}
+
+const PDF_DAY_CONTEXT: Record<string, { dailyProgram: string; logistics: string }> = {
+  en: { dailyProgram: 'EXCURSION PROGRAM', logistics: 'LOGISTICS / FREE DAY' },
+  es: { dailyProgram: 'PROGRAMA DE EXCURSIÓN', logistics: 'LOGÍSTICA / DÍA LIBRE' },
+  fr: { dailyProgram: 'PROGRAMME D\'EXCURSION', logistics: 'LOGISTIQUE / JOURNÉE LIBRE' },
+  de: { dailyProgram: 'AUSFLUGSPROGRAMM', logistics: 'LOGISTIK / FREIER TAG' },
+  it: { dailyProgram: 'PROGRAMMA DELL\'ESCURSIONE', logistics: 'LOGISTICA / GIORNO LIBERO' },
+  pt: { dailyProgram: 'PROGRAMA DA EXCURSÃO', logistics: 'LOGÍSTICA / DIA LIVRE' },
+  ja: { dailyProgram: '日帰りツアープログラム', logistics: '移動・自由行動日' },
+  zh: { dailyProgram: '一日游行程', logistics: '交通安排／自由活动日' },
+};
+
+function drawPdfMetadataLine(
+  doc: jsPDF,
+  label: string,
+  value: string,
+  x: number,
+  y: number,
+  maxWidth: number
+): number {
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8.2);
+  doc.setTextColor(15, 23, 42);
+  const labelText = `${label}: `;
+  doc.text(labelText, x, y);
+  const valueX = x + doc.getTextWidth(labelText) + 2;
+  const valueWidth = Math.max(20, maxWidth - (valueX - x));
+
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(71, 85, 105);
+  const valueLines = doc.splitTextToSize(value, valueWidth);
+  doc.text(valueLines, valueX, y);
+  return Math.max(4.6, valueLines.length * 3.8);
+}
+
+/**
  * Loads an image from a URL and converts it to Base64 (preserves PNG transparency)
  */
 async function loadImageAsBase64(url: string, forcePng: boolean = false): Promise<string | null> {
@@ -750,7 +808,8 @@ export async function generateTourPDF(
 
     for (let i = 0; i < itinerary.length; i++) {
       const dayItem = itinerary[i];
-      const dayTitle = getLocalizedText(dayItem.title, locale);
+      const localizedDayTitle = getLocalizedText(dayItem.title, locale);
+      const dayTitle = removeDayPrefix(localizedDayTitle, dayItem.day) || localizedDayTitle;
       const rawDayDesc = getLocalizedText(dayItem.description, locale);
       const dayMeals = dayItem.meals ? getLocalizedText(dayItem.meals, locale) : '';
       const dayAcc = dayItem.accommodation ? getLocalizedText(dayItem.accommodation, locale) : '';
@@ -795,7 +854,12 @@ export async function generateTourPDF(
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(8.5);
         doc.setTextColor(71, 85, 105);
-        doc.text(`${t.day.toUpperCase()} ${dayItem.day} • [ ${isDailyTour ? 'PROGRAMA DE EXCURSIÓN' : 'LOGÍSTICA / DÍA LIBRE'} ]`, marginX + 6, yPos + 6);
+        const dayContext = PDF_DAY_CONTEXT[locale] || PDF_DAY_CONTEXT.en;
+        doc.text(
+          `${formatPdfDayBadge(dayItem.day, locale, t.day).toUpperCase()} • [ ${isDailyTour ? dayContext.dailyProgram : dayContext.logistics} ]`,
+          marginX + 6,
+          yPos + 6
+        );
 
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
@@ -813,9 +877,9 @@ export async function generateTourPDF(
           doc.setFontSize(8.2);
           doc.setTextColor(71, 85, 105);
           const metaParts: string[] = [];
-          if (dayTrans) metaParts.push(`TRANSPORT: ${dayTrans}`);
-          if (dayMeals) metaParts.push(`MEALS: ${dayMeals}`);
-          if (dayAct) metaParts.push(`DURATION: ${dayAct}`);
+          if (dayTrans) metaParts.push(`${t.transport.toUpperCase()}: ${dayTrans}`);
+          if (dayMeals) metaParts.push(`${t.meals.toUpperCase()}: ${dayMeals}`);
+          if (dayAct) metaParts.push(`${t.activity.toUpperCase()}: ${dayAct}`);
           doc.text(metaParts.join('  •  '), marginX + 6, descY + 2);
         }
 
@@ -866,7 +930,7 @@ export async function generateTourPDF(
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(8.5);
           doc.setTextColor(6, 78, 59);
-          doc.text(`${t.day.toUpperCase()} ${dayItem.day}`, textX, yPos + 5.5);
+          doc.text(formatPdfDayBadge(dayItem.day, locale, t.day).toUpperCase(), textX, yPos + 5.5);
 
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(10);
@@ -885,49 +949,10 @@ export async function generateTourPDF(
             descY += (paraLines.length * 4.2) + 2.6;
           }
 
-          // Metadata Badges (clean text without broken emojis)
-          if (dayAcc) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.accommodation}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(71, 85, 105);
-            doc.text(dayAcc, textX + 18, descY);
-            descY += 4.6;
-          }
-          if (dayTrans) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.transport}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(71, 85, 105);
-            const splitTrans = doc.splitTextToSize(dayTrans, textWidth - 18);
-            doc.text(splitTrans, textX + 18, descY);
-            descY += (splitTrans.length * 3.8);
-          }
-          if (dayMeals) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.meals}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(71, 85, 105);
-            doc.text(dayMeals, textX + 14, descY);
-            descY += 4.6;
-          }
-          if (dayAct) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.activity}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(71, 85, 105);
-            const splitAct = doc.splitTextToSize(dayAct, textWidth - 16);
-            doc.text(splitAct, textX + 16, descY);
-            descY += (splitAct.length * 3.8);
-          }
+          if (dayAcc) descY += drawPdfMetadataLine(doc, t.accommodation, dayAcc, textX, descY, textWidth);
+          if (dayTrans) descY += drawPdfMetadataLine(doc, t.transport, dayTrans, textX, descY, textWidth);
+          if (dayMeals) descY += drawPdfMetadataLine(doc, t.meals, dayMeals, textX, descY, textWidth);
+          if (dayAct) descY += drawPdfMetadataLine(doc, t.activity, dayAct, textX, descY, textWidth);
         } else {
           // ODD DAY: Text on LEFT (14mm to 138mm), Image on RIGHT (144mm to 196mm)
           const textX = marginX; // 14mm
@@ -943,7 +968,7 @@ export async function generateTourPDF(
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(8.5);
           doc.setTextColor(6, 78, 59);
-          doc.text(`${t.day.toUpperCase()} ${dayItem.day}`, textX, yPos + 5.5);
+          doc.text(formatPdfDayBadge(dayItem.day, locale, t.day).toUpperCase(), textX, yPos + 5.5);
 
           doc.setFont('helvetica', 'bold');
           doc.setFontSize(10);
@@ -962,49 +987,10 @@ export async function generateTourPDF(
             descY += (paraLines.length * 4.2) + 2.6;
           }
 
-          // Metadata Badges
-          if (dayAcc) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.accommodation}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(71, 85, 105);
-            doc.text(dayAcc, textX + 18, descY);
-            descY += 4.6;
-          }
-          if (dayTrans) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.transport}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(71, 85, 105);
-            const splitTrans = doc.splitTextToSize(dayTrans, textWidth - 18);
-            doc.text(splitTrans, textX + 18, descY);
-            descY += (splitTrans.length * 3.8);
-          }
-          if (dayMeals) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.meals}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(71, 85, 105);
-            doc.text(dayMeals, textX + 14, descY);
-            descY += 4.6;
-          }
-          if (dayAct) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.activity}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(71, 85, 105);
-            const splitAct = doc.splitTextToSize(dayAct, textWidth - 16);
-            doc.text(splitAct, textX + 16, descY);
-            descY += (splitAct.length * 3.8);
-          }
+          if (dayAcc) descY += drawPdfMetadataLine(doc, t.accommodation, dayAcc, textX, descY, textWidth);
+          if (dayTrans) descY += drawPdfMetadataLine(doc, t.transport, dayTrans, textX, descY, textWidth);
+          if (dayMeals) descY += drawPdfMetadataLine(doc, t.meals, dayMeals, textX, descY, textWidth);
+          if (dayAct) descY += drawPdfMetadataLine(doc, t.activity, dayAct, textX, descY, textWidth);
         }
 
         yPos += blockHeight + 8;

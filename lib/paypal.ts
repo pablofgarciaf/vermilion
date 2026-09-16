@@ -40,6 +40,42 @@ async function getPayPalAccessToken(): Promise<string> {
   return data.access_token;
 }
 
+/**
+ * Browser-safe token required by the PayPal v6 web SDK. The secret remains on
+ * the server; only this short-lived token is returned to the checkout page.
+ */
+export async function createPayPalBrowserSafeClientToken(domain?: string): Promise<string> {
+  if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
+    throw new Error('PAYPAL_NOT_CONFIGURED: Missing PayPal credentials.');
+  }
+
+  const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`).toString('base64');
+  const body = new URLSearchParams({
+    grant_type: 'client_credentials',
+    response_type: 'client_token',
+  });
+  if (domain) body.append('domains[]', domain);
+
+  const response = await fetch(`${PAYPAL_API_BASE}/v1/oauth2/token`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${auth}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: body.toString(),
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(`PayPal client token error (${response.status}): ${detail}`);
+  }
+
+  const data = await response.json();
+  if (!data.access_token) throw new Error('PayPal did not return a browser-safe client token.');
+  return data.access_token;
+}
+
 export interface CreateOrderParams {
   amount: number;
   currency?: string;
@@ -55,14 +91,9 @@ export interface CreateOrderParams {
 export async function createPayPalOrder(params: CreateOrderParams) {
   const { amount, currency = 'USD', bookingRef, tourTitle = 'Vermilion Routes Expedition' } = params;
 
-  // If credentials are not set, return simulated demo order id
+  // Never create a simulated order: it could make an unpaid booking look paid.
   if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
-    console.warn('[PayPal] Keys not configured in .env. Returning simulated demo order.');
-    return {
-      id: `SIMULATED_PAYPAL_${Date.now()}`,
-      status: 'CREATED',
-      simulated: true,
-    };
+    throw new Error('PAYPAL_NOT_CONFIGURED: Missing PayPal credentials.');
   }
 
   const accessToken = await getPayPalAccessToken();
@@ -109,18 +140,6 @@ export async function createPayPalOrder(params: CreateOrderParams) {
  * Capture funds for an approved PayPal Checkout Order
  */
 export async function capturePayPalOrder(orderId: string) {
-  if (orderId.startsWith('SIMULATED_PAYPAL_')) {
-    return {
-      id: orderId,
-      status: 'COMPLETED',
-      simulated: true,
-      payer: {
-        email_address: 'demo@vermilionroutes.com',
-        name: { given_name: 'Demo Traveler' },
-      },
-    };
-  }
-
   const accessToken = await getPayPalAccessToken();
 
   const response = await fetch(`${PAYPAL_API_BASE}/v2/checkout/orders/${orderId}/capture`, {
