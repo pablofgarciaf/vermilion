@@ -126,6 +126,13 @@ function formatDayBadge(day: number, locale: string): string {
   return `${prefix} ${day}`;
 }
 
+function removeRepeatedDayPrefix(title: string, day: number, locale: string): string {
+  const localizedBadge = formatDayBadge(day, locale);
+  const escapedBadge = localizedBadge.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const prefixPattern = new RegExp(`^${escapedBadge}\\s*[-–—:]\\s*`, 'i');
+  return title.replace(prefixPattern, '').trim();
+}
+
 export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
   const [activeDay, setActiveDay] = useState<number>(1);
   const [isHovered, setIsHovered] = useState(false);
@@ -149,6 +156,7 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
 
   const currentItem = itinerary.find((item) => item.day === activeDay) || itinerary[0];
   const dayTitle = getLocalizedText(currentItem.title, locale);
+  const dayTitleWithoutPrefix = removeRepeatedDayPrefix(dayTitle, currentItem.day, locale);
   const dayDesc = getLocalizedText(currentItem.description, locale);
   const dayMeals = currentItem.meals ? getLocalizedText(currentItem.meals, locale) : '';
   const dayAcc = currentItem.accommodation ? getLocalizedText(currentItem.accommodation, locale) : '';
@@ -228,7 +236,7 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
             )}
           </div>
           <h3 className="font-serif font-bold text-xl sm:text-2xl text-zinc-900 dark:text-white tracking-tight leading-snug">
-            {formatDayBadge(currentItem.day, locale)} – {dayTitle}
+            {formatDayBadge(currentItem.day, locale)} – {dayTitleWithoutPrefix || dayTitle}
           </h3>
         </div>
 
