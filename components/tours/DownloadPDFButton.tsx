@@ -11,13 +11,15 @@ interface DownloadPDFButtonProps {
   variant?: 'primary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  iconOnly?: boolean;
 }
 
 export function DownloadPDFButton({
   tour,
   variant = 'outline',
   size = 'md',
-  className = ''
+  className = '',
+  iconOnly = false,
 }: DownloadPDFButtonProps) {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isDownloaded, setIsDownloaded] = useState(false);
@@ -83,6 +85,7 @@ export function DownloadPDFButton({
     md: "px-4 py-2 text-xs sm:text-sm",
     lg: "px-6 py-3 text-sm sm:text-base font-bold shadow-lg"
   }[size];
+  const iconSizeStyles = size === 'sm' ? 'w-8 h-8' : size === 'lg' ? 'w-11 h-11' : 'w-9 h-9';
 
   const variantStyles = {
     primary: "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/30 hover:scale-[1.02]",
@@ -96,24 +99,27 @@ export function DownloadPDFButton({
         type="button"
         onClick={handleDownloadClick}
         disabled={isGenerating}
-        className={`${baseStyles} ${sizeStyles} ${variantStyles} ${className}`}
-        aria-label="Download Tour PDF Brochure"
+        className={`${baseStyles} ${iconOnly ? iconSizeStyles : sizeStyles} ${variantStyles} ${className}`}
+        aria-label={label}
+        title={label}
       >
         {isGenerating ? (
           <>
             <Loader2 className="w-4 h-4 animate-spin text-emerald-600 dark:text-emerald-400" />
-            <span>Generating PDF...</span>
+            {!iconOnly && <span>Generating PDF...</span>}
           </>
         ) : isDownloaded ? (
           <>
             <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>Downloaded!</span>
+            {!iconOnly && <span>Downloaded!</span>}
           </>
         ) : (
           <>
-            <FileText className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>{label}</span>
-            <Download className="w-3.5 h-3.5 opacity-70" />
+            {iconOnly ? <Download className="w-4 h-4" /> : <>
+              <FileText className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <span>{label}</span>
+              <Download className="w-3.5 h-3.5 opacity-70" />
+            </>}
           </>
         )}
       </button>

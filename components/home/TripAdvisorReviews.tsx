@@ -26,6 +26,17 @@ interface TripAdvisorReviewsProps {
 
 const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html';
 
+const EXPERIENCE_CARD_I18N: Record<string, { badge: string; title: string; description: string; certified: string; sustainable: string }> = {
+  es: { badge: 'Viajes 100% Privados y a Medida', title: 'Experiencia Inigualable, Excelencia Inquebrantable', description: 'Creamos expediciones únicas, inolvidables y totalmente personalizadas a través de los espectaculares paisajes de Ecuador y Galápagos. Como operadores locales directos, combinamos la experiencia regional con una excelencia inquebrantable.', certified: 'Operador Certificado', sustainable: 'Impacto Sostenible' },
+  en: { badge: '100% Private & Bespoke Journeys', title: 'Unmatched Experiences, Unwavering Excellence', description: 'We create unique, unforgettable and fully personalized expeditions through Ecuador and Galapagos’ spectacular landscapes. As direct local operators, we combine regional expertise with unwavering excellence.', certified: 'Certified Operator', sustainable: 'Sustainable Impact' },
+  fr: { badge: 'Voyages 100 % Privés et Sur Mesure', title: 'Une Expérience Inégalée, une Excellence Sans Faille', description: 'Nous créons des expéditions uniques, inoubliables et entièrement personnalisées à travers les paysages spectaculaires de l’Équateur et des Galápagos. Opérateurs locaux directs, nous allions expertise régionale et excellence.', certified: 'Opérateur Certifié', sustainable: 'Impact Durable' },
+  de: { badge: '100 % Private Reisen nach Maß', title: 'Einzigartige Erlebnisse, Unerschütterliche Exzellenz', description: 'Wir gestalten einzigartige, unvergessliche und vollständig personalisierte Expeditionen durch Ecuadors und Galápagos’ spektakuläre Landschaften. Als direkte lokale Veranstalter verbinden wir regionale Expertise mit Exzellenz.', certified: 'Zertifizierter Veranstalter', sustainable: 'Nachhaltige Wirkung' },
+  it: { badge: 'Viaggi 100% Privati e su Misura', title: 'Esperienze Impareggiabili, Eccellenza Incrollabile', description: 'Creiamo spedizioni uniche, indimenticabili e completamente personalizzate attraverso gli spettacolari paesaggi dell’Ecuador e delle Galápagos. Come operatori locali diretti, uniamo esperienza locale ed eccellenza.', certified: 'Operatore Certificato', sustainable: 'Impatto Sostenibile' },
+  pt: { badge: 'Viagens 100% Privadas e Sob Medida', title: 'Experiência Inigualável, Excelência Inabalável', description: 'Criamos expedições únicas, inesquecíveis e totalmente personalizadas pelas paisagens espetaculares do Equador e das Galápagos. Como operadores locais diretos, unimos experiência regional e excelência.', certified: 'Operador Certificado', sustainable: 'Impacto Sustentável' },
+  ja: { badge: '100%プライベート・オーダーメイド旅行', title: '比類なき体験、揺るぎない卓越性', description: 'エクアドルとガラパゴスの壮大な景観をめぐる、唯一無二で忘れられない完全オーダーメイドの遠征をご提案します。現地直営の専門家として、地域の知識と卓越したサービスをお届けします。', certified: '認定旅行会社', sustainable: '持続可能な取り組み' },
+  zh: { badge: '100% 私人定制旅行', title: '非凡体验，卓越不凡', description: '我们为您打造独特、难忘且完全定制的厄瓜多尔与加拉帕戈斯探险之旅。作为当地直营运营商，我们将深厚的区域经验与始终如一的卓越服务相结合。', certified: '认证运营商', sustainable: '可持续影响' },
+};
+
 export function TripAdvisorReviews({
   reviews = mockReviews,
   title = "Opiniones Verificadas de Viajeros",
@@ -34,6 +45,7 @@ export function TripAdvisorReviews({
 }: TripAdvisorReviewsProps) {
   const hookLocale = useLocale();
   const currentLocale = locale || hookLocale || 'en';
+  const experienceCard = EXPERIENCE_CARD_I18N[currentLocale] || EXPERIENCE_CARD_I18N.en;
   const total = reviews.length;
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -156,26 +168,26 @@ export function TripAdvisorReviews({
             <div className="space-y-3 relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-600/50 text-xs font-semibold text-emerald-200 backdrop-blur-sm">
                 <Compass className="w-3.5 h-3.5" />
-                <span>Viajes 100% Privados & A Medida</span>
+                <span>{experienceCard.badge}</span>
               </div>
 
               <h3 className="font-serif text-xl sm:text-2xl font-bold text-white leading-snug">
-                Experiencia Inigualable, Excelencia Inquebrantable
+                {experienceCard.title}
               </h3>
 
               <p className="text-emerald-50/90 text-xs sm:text-sm leading-relaxed">
-                Creamos expediciones únicas, inolvidables y totalmente personalizadas a través de los espectaculares paisajes de Ecuador y Galápagos. Como operadores locales directos, combinamos la experiencia regional con una excelencia inquebrantable.
+                {experienceCard.description}
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-2 relative z-10 pt-4 mt-auto border-t border-emerald-700/50">
               <div className="flex items-center gap-1.5 text-emerald-200 font-bold text-xs bg-emerald-950/40 px-3 py-1.5 rounded-xl border border-emerald-700/50">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Operador Certificado</span>
+                <span>{experienceCard.certified}</span>
               </div>
               <div className="flex items-center gap-1.5 text-emerald-200 font-bold text-xs bg-emerald-950/40 px-3 py-1.5 rounded-xl border border-emerald-700/50">
                 <Heart className="w-3.5 h-3.5" />
-                <span>Impacto Sostenible</span>
+                <span>{experienceCard.sustainable}</span>
               </div>
             </div>
           </div>

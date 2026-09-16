@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Star, Hotel, Sparkles, MessageCircle, Phone, ChevronDown } from 'lucide-react';
 import { Tour } from '@/types';
+import { DownloadPDFButton } from './DownloadPDFButton';
 
 interface TourSubNavProps {
   title: string;
@@ -138,6 +139,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               </div>
             )}
           </div>
+          <DownloadPDFButton tour={tour} variant="ghost" size="sm" iconOnly className="shrink-0 border border-emerald-200 dark:border-emerald-800" />
           </div>
 
           <div className={`mt-2 ${isDailyTour ? '' : 'grid grid-cols-2 gap-2 sm:flex sm:justify-end sm:gap-3'}`}>
@@ -236,6 +238,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
+            <DownloadPDFButton tour={tour} variant="ghost" size="sm" iconOnly className="shrink-0 border border-emerald-200 dark:border-emerald-800" />
             {isDailyTour ? (
               <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex items-center justify-center gap-1.5 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-4 py-2.5 whitespace-nowrap text-xs font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
                 <Sparkles className="w-3.5 h-3.5 fill-zinc-950" />

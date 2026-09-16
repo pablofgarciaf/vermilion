@@ -279,6 +279,12 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
 
               {/* Los tours diarios tienen una tarifa única; las expediciones conservan sus categorías. */}
               <div className="pt-2 space-y-3">
+                <div className="flex items-center justify-between gap-3">
+                  {!isDailyTour && <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider block">
+                    {locale === 'es' ? 'Seleccione su Categoría:' : 'Select Your Tier:'}
+                  </span>}
+                  <DownloadPDFButton tour={tour} variant="ghost" size="sm" iconOnly className="ml-auto border border-emerald-200 dark:border-emerald-800" />
+                </div>
                 {isDailyTour ? (
                   <Link
                     href={`/${locale}/booking?addTour=${tour.id}`}
@@ -288,9 +294,6 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-all" />
                   </Link>
                 ) : <>
-                  <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider block">
-                    {locale === 'es' ? 'Seleccione su Categoría:' : 'Select Your Tier:'}
-                  </span>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {/* Botón Club (Verde Metálico Elegante) */}
                   <Link
