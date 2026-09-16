@@ -73,6 +73,7 @@ export async function POST(req: Request) {
       status: paymentStatus === 'confirmed' ? 'confirmed' : 'pending',
       affiliateCode: affiliateCode || undefined,
       discountApplied: Boolean(affiliateCode),
+      sriInvoice: body.sriInvoice,
     });
 
     console.log(`[Confirm Booking] Successfully persisted in Firestore: ${savedRef}`);

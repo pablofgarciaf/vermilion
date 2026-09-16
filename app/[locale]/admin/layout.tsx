@@ -22,7 +22,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (!auth) {
       setLoading(false);
-      setDenied(true);
+      router.replace(`/${locale}/auth/admin`);
       return;
     }
 
@@ -33,7 +33,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       if (!firebaseUser || !firebaseUser.email) {
         setLoading(false);
-        setDenied(true);
+        router.replace(`/${locale}/auth/admin`);
         return;
       }
 
@@ -80,11 +80,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           setDenied(false);
         } else {
           console.error(`🕵️‍♂️ [CHISMOSO ADMIN LAYOUT] Acceso denegado a rol no corporativo: "${role}"`);
-          setDenied(true);
+          await signOut(auth);
+          router.replace(`/${locale}/auth/admin?error=invalid_role`);
         }
       } catch (err) {
         console.error('[Admin Guard Error]', err);
-        setDenied(true);
+        router.replace(`/${locale}/auth/admin?error=security_check_failed`);
       } finally {
         if (isMounted) setLoading(false);
       }

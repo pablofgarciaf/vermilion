@@ -88,14 +88,34 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     zh: 'PayPal / 国际信用卡与借记卡',
   },
   tabBankTitle: {
-    en: 'International Wire Transfer (USA / Ecuador)',
-    es: 'Transferencia Bancaria Internacional (EE. UU. / Ecuador)',
-    fr: 'Virement Bancaire International (USA / Équateur)',
-    de: 'Internationale Banküberweisung (USA / Ecuador)',
-    it: 'Bonifico Bancario Internazionale (USA / Ecuador)',
-    pt: 'Transferência Bancária Internacional (EUA / Equador)',
-    ja: '国際銀行振込 (米国 / エクアドル)',
-    zh: '国际银行电汇 (美国 / 厄瓜多尔)',
+    en: 'International Wire Transfer',
+    es: 'Transferencia Bancaria Internacional',
+    fr: 'Virement Bancaire International',
+    de: 'Internationale Banküberweisung',
+    it: 'Bonifico Bancario Internazionale',
+    pt: 'Transferência Bancária Internacional',
+    ja: '国際銀行振込',
+    zh: '国际银行电汇',
+  },
+  checkoutHeaderTitle: {
+    en: 'Complete Your Expedition Payment',
+    es: 'Completa el Pago de tu Expedición',
+    fr: 'Finalisez le Paiement de votre Expédition',
+    de: 'Schließen Sie Ihre Expeditionszahlung ab',
+    it: 'Completa il Pagamento della tua Spedizione',
+    pt: 'Conclua o Pagamento da sua Expedição',
+    ja: 'ツアーのお支払いを完了する',
+    zh: '完成您的专属探险行程支付',
+  },
+  checkoutHeaderSubtitle: {
+    en: 'Select your preferred payment method to secure your official booking with 24/7 concierge assistance.',
+    es: 'Selecciona tu método de pago preferido para confirmar tus plazas oficiales con asistencia y garantía 24/7.',
+    fr: 'Sélectionnez votre mode de paiement pour sécuriser votre réservation avec assistance 24/7.',
+    de: 'Wählen Sie Ihre bevorzugte Zahlungsmethode, um Ihre Buchung mit 24/7-Concierge zu sichern.',
+    it: 'Seleziona il tuo metodo di pagamento per confermare la tua prenotazione con assistenza 24/7.',
+    pt: 'Selecione seu método de pagamento preferido para confirmar sua reserva com assistência 24/7.',
+    ja: '24時間対応のコンシェルジュサポート付きで、公式なお席を確定するための決済方法をお選びください。',
+    zh: '选择您首选的支付方式，以确认您的专属官方名额并享受 24/7 礼宾服务。',
   },
   tabBankTitleShort: {
     en: 'Bank Wire Transfer',
@@ -258,14 +278,14 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     zh: '通过 PayPal 账户余额或国际借记卡/信用卡安全结算。使用银行卡支付无需预先注册 PayPal 账户。',
   },
   wireHeaderDesc: {
-    en: 'Official bank wire transfer details for Citibank (Florida, USA) and Produbanco (Ecuador).',
-    es: 'Cuentas bancarias oficiales de recepción en Citibank (Florida, EE. UU.) y Produbanco (Ecuador).',
-    fr: 'Comptes bancaires officiels de réception chez Citibank (Floride, USA) et Produbanco (Équateur).',
-    de: 'Offizielle Empfangskonten bei der Citibank (Florida, USA) und Produbanco (Ecuador).',
-    it: 'Coordinate bancarie ufficiali per Citibank (Florida, USA) e Produbanco (Ecuador).',
-    pt: 'Contas bancárias oficiais no Citibank (Flórida, EUA) e Produbanco (Equador).',
-    ja: 'Citibank（米国フロリダ州）およびProdubanco（エクアドル）の公式受取口座情報。',
-    zh: '花旗银行（美国佛罗里达州）与 Produbanco（厄瓜多尔）官方收款账户信息。',
+    en: 'Official receiving bank accounts in the United States, Ecuador, and Europe.',
+    es: 'Cuentas bancarias oficiales de recepción en Estados Unidos, Ecuador y Europa.',
+    fr: 'Comptes bancaires officiels de réception aux États-Unis, en Équateur et en Europe.',
+    de: 'Offizielle Empfangskonten in den USA, Ecuador und Europa.',
+    it: 'Coordinate bancarie ufficiali negli Stati Uniti, in Ecuador e in Europa.',
+    pt: 'Contas bancárias oficiais nos Estados Unidos, Equador e Europa.',
+    ja: '米国、エクアドル、欧州の公式受取口座。',
+    zh: '美国、厄瓜多尔与欧洲官方收款账户。',
   },
   step1Wire: {
     en: '1. Transfer the exact amount to one of the official accounts below.',
@@ -878,57 +898,58 @@ export default function CheckoutPaymentPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] dark:bg-[#07130C] text-stone-900 dark:text-white flex items-center justify-center pt-8 sm:pt-14 pb-12 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-[#FAF9F5] dark:bg-[#07130C] text-stone-900 dark:text-white py-4 sm:py-6 px-3 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
       {/* Background ambient glows */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 dark:bg-emerald-600/10 rounded-full blur-[140px]" />
         <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-amber-500/5 dark:bg-amber-500/5 rounded-full blur-[120px]" />
       </div>
 
-      <div className={`w-full bg-white dark:bg-zinc-900/90 border border-stone-200 dark:border-emerald-500/20 rounded-3xl p-5 sm:p-8 lg:p-10 shadow-xl shadow-stone-200/50 dark:shadow-2xl backdrop-blur-xl relative z-10 space-y-6 text-stone-900 dark:text-white transition-all ${
-        isPaid ? 'max-w-xl' : 'max-w-5xl'
-      }`}>
-        
-        {/* Top Header */}
-        <div className="flex items-center justify-between border-b border-stone-200 dark:border-white/10 pb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-              <Compass className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+      <div className={`w-full mx-auto relative z-10 transition-all ${isPaid
+        ? 'max-w-xl my-6 bg-white dark:bg-zinc-900/90 border border-stone-200 dark:border-emerald-500/20 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-xl space-y-6 text-stone-900 dark:text-white'
+        : 'max-w-[96%] xl:max-w-7xl 2xl:max-w-[1440px] space-y-3.5'
+        }`}>
+
+        {/* Top Header for Paid State */}
+        {isPaid && (
+          <div className="flex items-center justify-between border-b border-stone-200 dark:border-white/10 pb-4">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+                <Compass className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              </div>
+              <div>
+                <span className="font-serif font-bold tracking-widest uppercase text-xs text-stone-900 dark:text-zinc-100 block">
+                  VERMILION ROUTES
+                </span>
+                <span className="text-[10px] text-emerald-700 dark:text-emerald-400/80 uppercase tracking-wider block font-medium">
+                  {t('luxuryExpeditions')}
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="font-serif font-bold tracking-widest uppercase text-xs text-stone-900 dark:text-zinc-100 block">
-                VERMILION ROUTES
-              </span>
-              <span className="text-[10px] text-emerald-700 dark:text-emerald-400/80 uppercase tracking-wider block font-medium">
-                {t('luxuryExpeditions')}
-              </span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-semibold">
+              <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+              <span>{t('secureSsl')}</span>
             </div>
           </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-semibold">
-            <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-            <span>{t('secureSsl')}</span>
-          </div>
-        </div>
+        )}
 
         {isPaid ? (
           /* ─────────────────────────────────────────────
              SUCCESS SCREEN (PAID OR PENDING PAYMENT)
              ───────────────────────────────────────────── */
           <div className="text-center py-6 space-y-5 animate-fade-in">
-            <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg border ${
-              receiptSubmitted
-                ? 'bg-amber-50 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/40 shadow-amber-900/10'
-                : 'bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/40 shadow-emerald-900/10'
-            }`}>
+            <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg border ${receiptSubmitted
+              ? 'bg-amber-50 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/40 shadow-amber-900/10'
+              : 'bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/40 shadow-emerald-900/10'
+              }`}>
               {receiptSubmitted ? <Clock className="w-8 h-8" /> : <CheckCircle2 className="w-8 h-8" />}
             </div>
 
             <div className="space-y-1">
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${
-                receiptSubmitted
-                  ? 'bg-amber-50 dark:bg-amber-950/80 border-amber-200 dark:border-amber-500/40 text-amber-800 dark:text-amber-300'
-                  : 'bg-emerald-50 dark:bg-emerald-950/80 border-emerald-200 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300'
-              }`}>
+              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${receiptSubmitted
+                ? 'bg-amber-50 dark:bg-amber-950/80 border-amber-200 dark:border-amber-500/40 text-amber-800 dark:text-amber-300'
+                : 'bg-emerald-50 dark:bg-emerald-950/80 border-emerald-200 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300'
+                }`}>
                 {receiptSubmitted ? <Clock className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
                 <span>{receiptSubmitted ? 'Espera de pago' : 'Pago Confirmado'}</span>
               </span>
@@ -989,249 +1010,101 @@ export default function CheckoutPaymentPage() {
             </div>
           </div>
         ) : (
-          /* ─────────────────────────────────────────────
-             CHECKOUT 2-COLUMN VIEWPORT LAYOUT
-             ───────────────────────────────────────────── */
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            
-            {/* ── LEFT COLUMN (5 COLS): EXPEDITION SUMMARY & PRICE ── */}
-            <div className="lg:col-span-5 space-y-4">
-              <div className="bg-stone-50 dark:bg-zinc-950/60 border border-stone-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 space-y-3.5">
-                <div className="flex items-center justify-between gap-2.5">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 text-[10px] uppercase font-bold tracking-wider">
-                    {type === 'full' ? t('fullTitle') : t('depositTitle')}
+          <>
+            {/* ── CABECERA PRINCIPAL REDISEÑADA ── */}
+            <header className="bg-white dark:bg-zinc-900/95 backdrop-blur-md border border-stone-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-stone-900 dark:text-white">
+
+              {/* 1. Marca a la izquierda con Referencia dinámica */}
+              <div className="flex items-center gap-3 shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+                  <Compass className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                </div>
+                <div>
+                  <span className="font-serif font-black tracking-widest uppercase text-xs text-stone-900 dark:text-white block leading-tight">
+                    VERMILION ROUTES
                   </span>
-                  <span className="font-mono text-[11px] text-stone-500 dark:text-zinc-400">Ref: <strong className="text-stone-900 dark:text-zinc-200">{ref}</strong></span>
+                  <span className="font-mono text-[11px] font-bold text-emerald-700 dark:text-emerald-400 block leading-tight mt-1">
+                    Ref: {ref || 'R-2026-1.2-80'}
+                  </span>
                 </div>
+              </div>
 
-                <div className="flex gap-3 items-start">
-                  <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 border border-stone-200 dark:border-zinc-800">
-                    <Image
-                      src={matchedTour.imageUrl || '/images/tours/16-9/galapagos-snorkeling-16-9.jpg'}
-                      alt={tourTitle}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-sm sm:text-base font-bold font-serif text-stone-900 dark:text-white leading-snug line-clamp-2">
-                      {tourTitle}
-                    </h3>
-                    <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-medium block mt-0.5">
-                      {matchedTour.duration?.en || matchedTour.duration?.es || 'Ecuador & Galápagos'}
-                    </span>
-                  </div>
-                </div>
+              <div className="hidden md:block h-10 w-px bg-stone-200 dark:bg-white/10 shrink-0" />
 
-                <div className="space-y-1.5 text-xs text-stone-600 dark:text-zinc-400 pt-2 border-t border-stone-200 dark:border-white/5">
-                  <div className="flex justify-between items-center">
-                    <span className="text-stone-500 dark:text-zinc-500">{t('clientLabel')}:</span>
-                    <strong className="text-stone-900 dark:text-zinc-200 truncate max-w-[180px]">{email || 'Traveler'}</strong>
-                  </div>
+              {/* 2. Título completo, Fecha, Viajeros y Precio Integrado */}
+              <div className="flex-1 min-w-0">
+                <h1 className="text-sm sm:text-base font-serif font-bold text-stone-900 dark:text-white leading-snug truncate" title={tourTitle}>
+                  {tourTitle}
+                </h1>
+
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone-600 dark:text-zinc-300 pt-1.5">
                   {travelDate && (
-                    <div className="flex justify-between items-center">
-                      <span className="text-stone-500 dark:text-zinc-500">{t('travelDateLabel')}:</span>
-                      <strong className="text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5" /> {travelDate}
-                      </strong>
-                    </div>
+                    <span className="inline-flex items-center gap-1.5 font-medium">
+                      <Calendar className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span>{travelDate}</span>
+                    </span>
                   )}
-                  <div className="flex justify-between items-center">
-                    <span className="text-stone-500 dark:text-zinc-500">{t('travelersText')}:</span>
-                    <strong className="text-stone-900 dark:text-zinc-200 flex items-center gap-1">
-                      <Users className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> {getTravelersText()}
-                      {isDailyTourParam && (parseInt(travelersParam) === 1 || adultsParam === '1') && (
-                        <span className="text-[10px] text-amber-600 dark:text-amber-400 font-normal">
-                          (Mín. 2 pax)
-                        </span>
-                      )}
-                    </strong>
-                  </div>
-                </div>
-
-                {/* Back to Modify Booking Button */}
-                <div className="pt-2 border-t border-stone-200 dark:border-white/5">
-                  <button
-                    type="button"
-                    onClick={() => router.push(`/${locale}/booking?tourid=${tourId}&date=${travelDate}&adults=${adultsParam || '1'}&children=${childrenParam || '0'}`)}
-                    className="w-full flex items-center justify-center gap-1.5 py-2 px-3 text-xs text-stone-600 dark:text-zinc-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors font-medium border border-stone-200 dark:border-white/10 rounded-xl hover:bg-stone-50 dark:hover:bg-zinc-800/50 cursor-pointer"
-                  >
-                    <ArrowLeft className="w-3.5 h-3.5" />
-                    <span>{t('backToModify')}</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Clean Price Box */}
-              <div className="p-4 sm:p-5 bg-stone-50/80 dark:bg-zinc-950/80 border border-emerald-600/20 dark:border-emerald-500/30 rounded-2xl space-y-3.5 shadow-sm relative overflow-hidden">
-                <div className="flex items-baseline justify-between border-b border-stone-200 dark:border-white/10 pb-3">
-                  <div>
-                    <h2 className="text-xs font-bold text-stone-900 dark:text-white uppercase tracking-widest">
-                      {t('totalToPay')}
-                    </h2>
-                    <p className="text-[10px] text-stone-500 dark:text-zinc-400">
-                      {t('taxesIncluded')}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-2xl sm:text-3xl font-extrabold font-serif text-emerald-700 dark:text-emerald-400" suppressHydrationWarning>
-                      ${formatPrice(finalAmount)}
+                  <span className="inline-flex items-center gap-1.5 font-medium">
+                    <Users className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>{getTravelersText()}</span>
+                  </span>
+                  <span className="text-stone-300 dark:text-zinc-700">•</span>
+                  <span className="inline-flex items-baseline gap-1 font-bold text-stone-900 dark:text-white">
+                    <span className="text-emerald-600 dark:text-emerald-400 text-[11px] mr-0.5">$</span>
+                    <span className="text-sm sm:text-base font-black text-emerald-700 dark:text-emerald-400 tracking-tight">
+                      {formatPrice(finalAmount)}
                     </span>
-                    <span className="text-xs text-emerald-700/80 dark:text-emerald-400/80 font-medium ml-1">USD</span>
-                  </div>
-                </div>
-
-                {/* VIP Discount Row if active */}
-                {discountApplied && (
-                  <div className="flex items-center justify-between text-amber-800 dark:text-amber-300 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 px-3 py-2 rounded-xl text-xs font-medium">
-                    <span className="flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span>{t('vipDiscountApplied')}</span>
+                    <span className="text-[10px] text-stone-500 dark:text-zinc-400 font-semibold ml-1">USD</span>
+                    <span className="text-[10px] text-emerald-700 dark:text-emerald-400/80 font-normal ml-1">
+                      ({t('taxesIncluded')})
                     </span>
-                    <span className="font-bold font-mono" suppressHydrationWarning>
-                      -${formatPrice(discountSavings)} USD
-                    </span>
-                  </div>
-                )}
-
-                {/* Promo Code Input */}
-                {!discountApplied ? (
-                  <div className="flex gap-2">
-                    <div className="relative flex-1">
-                      <Tag className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-2.5" />
-                      <input
-                        type="text"
-                        placeholder={t('promoPlaceholder')}
-                        value={discountCode}
-                        onChange={(e) => setDiscountCode(e.target.value)}
-                        className="w-full pl-8 pr-2.5 py-2 bg-white dark:bg-zinc-900 border border-stone-300 dark:border-zinc-700 rounded-xl text-xs text-stone-900 dark:text-white placeholder-stone-400 uppercase focus:outline-none focus:border-emerald-600"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleApplyDiscount}
-                      className="px-3.5 py-2 bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm cursor-pointer border-none"
-                    >
-                      {t('btnApply')}
-                    </button>
-                  </div>
-                ) : null}
-                {discountError && <p className="text-[11px] text-amber-600 text-center">{discountError}</p>}
-
-                {/* Trust Badges */}
-                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-stone-200 dark:border-white/5 text-[10px] text-stone-600 dark:text-zinc-400">
-                  <div className="flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span>100% Flexible</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Award className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                    <span>TripAdvisor Choice</span>
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-[11px] text-stone-500 dark:text-zinc-400 text-center leading-relaxed px-3">
-                {t('conciergeHelp')}
-              </p>
-            </div>
-
-            {/* ── RIGHT COLUMN (7 COLS): PAYMENT METHOD & DIRECT ACTIONS ── */}
-            <div className="lg:col-span-7 space-y-4">
-
-              {/* Lead Traveler Contact Details Card */}
-              <div className="bg-white dark:bg-zinc-950 border border-stone-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 shadow-sm space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Users className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                    <h2 className="text-xs sm:text-sm font-bold text-stone-900 dark:text-white">
-                      {t('contactDetailsTitle')}
-                    </h2>
-                  </div>
-                  <span className="text-[10px] font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-500/20">
-                    256-Bit SSL
                   </span>
                 </div>
-                <p className="text-[11px] text-stone-500 dark:text-zinc-400">
-                  {t('contactDetailsSubtitle')}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                  <div>
-                    <label className="block text-[10px] font-bold text-stone-600 dark:text-zinc-300 uppercase tracking-wider mb-1">
-                      {t('fullNameLabel')}
-                    </label>
-                    <input
-                      type="text"
-                      value={clientName}
-                      onChange={(e) => setClientName(e.target.value)}
-                      placeholder={t('fullNamePlaceholder')}
-                      className="w-full text-xs px-3 py-2.5 rounded-xl border border-stone-300 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900 text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
-                    />
+              </div>
+
+              {/* 3. Botón Volver a modificar mi reserva (reemplaza al SSL) */}
+              <div className="shrink-0 w-full md:w-auto flex justify-end">
+                <button
+                  type="button"
+                  onClick={() => router.push(`/${locale}/booking?tourid=${tourId}&date=${travelDate}&adults=${adultsParam || '2'}&children=${childrenParam || '0'}`)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-100 dark:bg-zinc-800/90 hover:bg-stone-200 dark:hover:bg-zinc-700 border border-stone-200 dark:border-zinc-700 text-stone-800 dark:text-zinc-200 text-xs font-semibold transition-all hover:scale-[1.02] active:scale-95 cursor-pointer shadow-sm"
+                >
+                  <ArrowLeft className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  <span>{t('backToModify')}</span>
+                </button>
+              </div>
+
+            </header>
+            {/* LAS 2 COLUMNAS (50% / 50% en pantallas grandes) */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+
+              {/* ── COLUMNA 1: PAYPAL / TARJETA INTERNACIONAL ── */}
+              <div className="bg-white dark:bg-zinc-950/70 border border-stone-200 dark:border-white/10 rounded-3xl p-5 sm:p-7 space-y-5 shadow-sm relative overflow-hidden">
+                <div className="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-white/5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center">
+                      <CreditCard className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif font-bold text-base text-stone-900 dark:text-white">
+                        {t('tabPaypalCard')}
+                      </h3>
+                      <span className="text-[11px] text-stone-500 dark:text-zinc-400 block">
+                        Confirmación Inmediata • Cifrado 256-Bit
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-[10px] font-bold text-stone-600 dark:text-zinc-300 uppercase tracking-wider mb-1">
-                      {t('emailLabel')} *
-                    </label>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder={t('emailPlaceholder')}
-                      required
-                      className="w-full text-xs px-3 py-2.5 rounded-xl border border-stone-300 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900 text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-[10px] font-bold text-stone-600 dark:text-zinc-300 uppercase tracking-wider mb-1">
-                      {t('phoneLabel')}
-                    </label>
-                    <input
-                      type="tel"
-                      value={clientPhone}
-                      onChange={(e) => setClientPhone(e.target.value)}
-                      placeholder="+1 (555) 000-0000"
-                      className="w-full text-xs px-3 py-2.5 rounded-xl border border-stone-300 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900 text-stone-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/40"
-                    />
-                  </div>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-500/30 text-blue-800 dark:text-blue-300 text-[10px] font-bold uppercase tracking-wider">
+                    Recomendado
+                  </span>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-1.5 bg-stone-100 dark:bg-zinc-950 border border-stone-200 dark:border-white/10 rounded-2xl text-xs font-semibold">
-                {/* Tab 1: PayPal / Card */}
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('card')}
-                  className={`py-3 px-3 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                    activeTab === 'card'
-                      ? 'bg-emerald-700 dark:bg-emerald-600 text-white shadow-md'
-                      : 'text-stone-600 dark:text-zinc-400 hover:text-stone-900 dark:hover:text-white'
-                  }`}
-                >
-                  <CreditCard className="w-4 h-4 shrink-0" />
-                  <span className="font-semibold text-center leading-tight">{t('tabPaypalCard')}</span>
-                </button>
+                <p className="text-xs text-stone-600 dark:text-zinc-300 leading-relaxed">
+                  {t('paypalNotice')}
+                </p>
 
-                {/* Tab 2: International Wire Transfer */}
-                <button
-                  type="button"
-                  onClick={() => setActiveTab('bank')}
-                  className={`py-3 px-3 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
-                    activeTab === 'bank'
-                      ? 'bg-emerald-700 dark:bg-emerald-600 text-white shadow-md'
-                      : 'text-stone-600 dark:text-zinc-400 hover:text-stone-900 dark:hover:text-white'
-                  }`}
-                >
-                  <Building2 className="w-4 h-4 shrink-0" />
-                  <span className="font-semibold text-center leading-tight">{t('tabBankTitleShort')}</span>
-                </button>
-              </div>
-
-              {/* ─────────────────────────────────────────────
-                  TAB 1: OFFICIAL PAYPAL CHECKOUT & CARDS (LUXURY FINTECH DESIGN)
-                  ───────────────────────────────────────────── */}
-              {activeTab === 'card' && (
-                <div className="space-y-4 animate-fade-in">
-                  {/* PayPal Official SDK Buttons */}
+                {/* PayPal Official SDK Buttons */}
+                <div className="pt-2">
                   <PayPalCheckoutButton
                     amount={finalAmount}
                     bookingRef={ref}
@@ -1244,6 +1117,7 @@ export default function CheckoutPaymentPage() {
                     guestsCount={getTravelersText()}
                     passengersCount={parseInt(travelersParam) || parseInt(adultsParam) || 1}
                     locale={locale}
+                    currency="USD"
                     affiliateCode={discountApplied ? discountCode : undefined}
                     onSuccess={(confirmedRef) => {
                       setRef(confirmedRef);
@@ -1251,328 +1125,318 @@ export default function CheckoutPaymentPage() {
                       setIsPaid(true);
                     }}
                   />
-
                 </div>
-              )}
 
-              {/* ─────────────────────────────────────────────
-                  TAB 2: WIRE TRANSFER (CITIBANK USA & PRODUBANCO ECUADOR)
-                  Leaves order in status 'Espera de pago' (pending_payment)
-                  ───────────────────────────────────────────── */}
-              {activeTab === 'bank' && (
-                <div className="space-y-4 animate-fade-in text-xs">
-                  <div className="p-3.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-500/30 rounded-2xl space-y-2">
-                    <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-xs">
-                      <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                      <span>{t('tabBankTitle')}</span>
-                    </div>
-                    <p className="text-[11px] text-stone-600 dark:text-zinc-300 leading-relaxed">
-                      {t('wireHeaderDesc')}
-                    </p>
+                <div className="pt-3 border-t border-stone-100 dark:border-white/5 flex items-center justify-between text-[11px] text-stone-500 dark:text-zinc-400">
+                  <div className="flex items-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>PayPal Holdings, Inc.</span>
                   </div>
-
-                  {/* Steps Guide */}
-                  <div className="p-3.5 bg-stone-50 dark:bg-zinc-950/90 border border-stone-200 dark:border-white/5 rounded-2xl space-y-1.5 text-[11px] text-stone-700 dark:text-zinc-300">
-                    <p>{t('step1Wire')}</p>
-                    <p className="text-amber-800 dark:text-amber-300 font-medium">
-                      {t('step2Wire')} <span className="font-mono font-bold text-stone-900 dark:text-white bg-white dark:bg-black/50 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-500/30">{ref}</span>
-                    </p>
-                    <p className="text-emerald-700 dark:text-emerald-400">{t('step3Wire')}</p>
+                  <div className="flex items-center gap-1">
+                    <Lock className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>SSL 256-Bit Encryption</span>
                   </div>
-
-                  {/* Official Receiving Account Accordion Cards */}
-                  <div className="space-y-2">
-                    
-                    {/* ACCORDION 1: USA (USD) Citi bank */}
-                    <div className="border border-stone-200 dark:border-white/10 rounded-2xl overflow-hidden bg-white dark:bg-zinc-950 transition-all shadow-2xs">
-                      <button
-                        type="button"
-                        onClick={() => setOpenBankCard(openBankCard === 'usa' ? null : 'usa')}
-                        className="w-full flex items-center justify-between p-3 sm:p-3.5 text-left hover:bg-stone-50 dark:hover:bg-zinc-900/50 transition-colors cursor-pointer"
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className="text-base">🇺🇸</span>
-                          <div>
-                            <span className="text-[11px] font-bold text-stone-900 dark:text-white block">
-                              USA (USD) • Citi bank (Florida)
-                            </span>
-                            <span className="text-[10px] text-stone-500 dark:text-zinc-400">
-                              ACH / Domestic Wire / Zelle
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
-                            USD
-                          </span>
-                          {openBankCard === 'usa' ? <ChevronUp className="w-4 h-4 text-stone-500" /> : <ChevronDown className="w-4 h-4 text-stone-500" />}
-                        </div>
-                      </button>
-
-                      {openBankCard === 'usa' && (
-                        <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 animate-fade-in">
-                          <div className="flex justify-between items-center pt-2">
-                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Checking Account:</span>
-                            <button
-                              type="button"
-                              onClick={() => handleCopy('9119836186', 'us_acc')}
-                              className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                            >
-                              9119836186 {copiedKey === 'us_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Account Holder:</span>
-                            <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium">Medardo Sanchez</span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Zelle Transfer:</span>
-                            <button
-                              type="button"
-                              onClick={() => handleCopy('*gsanchez@plustelesmart.com.ec', 'us_zelle')}
-                              className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer font-sans"
-                            >
-                              *gsanchez@plustelesmart.com.ec {copiedKey === 'us_zelle' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Location:</span>
-                            <span className="text-stone-700 dark:text-zinc-300 font-sans text-[11px]">Florida, USA</span>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* ACCORDION 2: ECUADOR (USD) Banco Produbanco */}
-                    <div className="border border-stone-200 dark:border-white/10 rounded-2xl overflow-hidden bg-white dark:bg-zinc-950 transition-all shadow-2xs">
-                      <button
-                        type="button"
-                        onClick={() => setOpenBankCard(openBankCard === 'ecuador' ? null : 'ecuador')}
-                        className="w-full flex items-center justify-between p-3 sm:p-3.5 text-left hover:bg-stone-50 dark:hover:bg-zinc-900/50 transition-colors cursor-pointer"
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className="text-base">🇪🇨</span>
-                          <div>
-                            <span className="text-[11px] font-bold text-stone-900 dark:text-white block">
-                              Ecuador (USD) • Produbanco
-                            </span>
-                            <span className="text-[10px] text-stone-500 dark:text-zinc-400">
-                              Cuenta Corriente / SWIFT
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="px-2 py-0.5 rounded bg-stone-100 dark:bg-zinc-800 text-[9px] font-bold text-stone-700 dark:text-zinc-300">
-                            USD
-                          </span>
-                          {openBankCard === 'ecuador' ? <ChevronUp className="w-4 h-4 text-stone-500" /> : <ChevronDown className="w-4 h-4 text-stone-500" />}
-                        </div>
-                      </button>
-
-                      {openBankCard === 'ecuador' && (
-                        <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 animate-fade-in">
-                          <div className="flex justify-between items-center pt-2">
-                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Cuenta Corriente:</span>
-                            <button
-                              type="button"
-                              onClick={() => handleCopy('27059152821', 'pro_acc')}
-                              className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                            >
-                              27059152821 {copiedKey === 'pro_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-500 font-sans">SWIFT:</span>
-                            <button
-                              type="button"
-                              onClick={() => handleCopy('PRODECEQXXX', 'pro_swift')}
-                              className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
-                            >
-                              PRODECEQXXX {copiedKey === 'pro_swift' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-500 font-sans">Titular:</span>
-                            <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium">VERMILION ROUTES (RUC 1711992808001)</span>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* ACCORDION 3: ESPAÑA / EUROPA (EUR) SEPA Transfer */}
-                    <div className="border border-stone-200 dark:border-white/10 rounded-2xl overflow-hidden bg-white dark:bg-zinc-950 transition-all shadow-2xs">
-                      <button
-                        type="button"
-                        onClick={() => setOpenBankCard(openBankCard === 'spain' ? null : 'spain')}
-                        className="w-full flex items-center justify-between p-3 sm:p-3.5 text-left hover:bg-stone-50 dark:hover:bg-zinc-900/50 transition-colors cursor-pointer"
-                      >
-                        <div className="flex items-center gap-2">
-                          <span className="text-base">🇪🇸</span>
-                          <div>
-                            <span className="text-[11px] font-bold text-stone-900 dark:text-white block">
-                              España / Europa (EUR) • Transferencia SEPA
-                            </span>
-                            <span className="text-[10px] text-stone-500 dark:text-zinc-400">
-                              Sede Asociada Madrid (Coral Tour)
-                            </span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-500/20 text-[9px] font-bold text-blue-800 dark:text-blue-300">
-                            EUR
-                          </span>
-                          {openBankCard === 'spain' ? <ChevronUp className="w-4 h-4 text-stone-500" /> : <ChevronDown className="w-4 h-4 text-stone-500" />}
-                        </div>
-                      </button>
-
-                      {openBankCard === 'spain' && (
-                        <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-2 text-[11px] text-stone-600 dark:text-zinc-400 animate-fade-in">
-                          <p className="pt-2 leading-relaxed">
-                            {t('spainTransferDesc')}
-                          </p>
-                          <a
-                            href={`https://wa.me/593994048458?text=${encodeURIComponent(
-                              `Hola Vermilion Routes, deseo transferir en Euros (EUR) vía SEPA a su cuenta en Madrid para el tour "${tourTitle}" (Ref: ${ref}).`
-                            )}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold text-[10px] hover:bg-emerald-100 transition-colors"
-                          >
-                            <MessageCircle className="w-3.5 h-3.5" />
-                            <span>{t('requestMadridWa')}</span>
-                          </a>
-                        </div>
-                      )}
-                    </div>
-
-                  </div>
-
-                  {/* Wire Transfer Registration Form */}
-                  <form onSubmit={handleSubmitWireRegistration} className="space-y-3 pt-2 border-t border-stone-200 dark:border-white/10">
-                    
-                    {/* 🛡️ Anti-bot honeypot field (Catches automated scripts & Python bots) */}
-                    <div className="sr-only opacity-0 h-0 w-0 pointer-events-none absolute -left-[9999px]" aria-hidden="true">
-                      <label htmlFor="website_url_hp">Website URL</label>
-                      <input
-                        id="website_url_hp"
-                        type="text"
-                        name="_hp_trap"
-                        value={hpTrap}
-                        onChange={(e) => setHpTrap(e.target.value)}
-                        tabIndex={-1}
-                        autoComplete="off"
-                      />
-                    </div>
-
-                    <h3 className="font-bold text-stone-900 dark:text-white text-xs flex items-center gap-1.5">
-                      <Upload className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                      {t('uploadOptional')}
-                    </h3>
-
-                    {/* File Dropzone */}
-                    <div className="border-2 border-dashed border-stone-300 dark:border-zinc-700 hover:border-emerald-600 dark:hover:border-emerald-500 rounded-2xl p-4 text-center transition-all bg-stone-50/60 dark:bg-zinc-950/60 cursor-pointer relative">
-                      <input
-                        type="file"
-                        accept="image/*,.pdf"
-                        onChange={handleFileChange}
-                        className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                      />
-                      {previewUrl ? (
-                        <div className="space-y-2">
-                          <div className="relative w-28 h-20 mx-auto rounded-lg overflow-hidden border border-stone-300 dark:border-zinc-700">
-                            <Image src={previewUrl} alt="Receipt Preview" fill className="object-cover" />
-                          </div>
-                          <p className="text-emerald-700 dark:text-emerald-400 font-medium text-xs">
-                            {bankReceipt?.name} ({Math.round((bankReceipt?.size || 0) / 1024)} KB)
-                          </p>
-                          <span className="text-[10px] text-stone-500 dark:text-zinc-500">Haz clic para cambiar archivo</span>
-                        </div>
-                      ) : (
-                        <div className="space-y-1 py-2">
-                          <Upload className="w-6 h-6 text-emerald-600 dark:text-emerald-500 mx-auto" />
-                          <p className="text-xs text-stone-800 dark:text-zinc-200 font-semibold">
-                            {t('uploadDragText')}
-                          </p>
-                          <p className="text-[10px] text-stone-500 dark:text-zinc-500">Formatos JPG, PNG, PDF hasta 10MB</p>
-                        </div>
-                      )}
-                    </div>
-
-                    <div>
-                      <input
-                        type="text"
-                        placeholder={t('refOptionalPlaceholder')}
-                        value={transferRef}
-                        onChange={(e) => setTransferRef(e.target.value)}
-                        className="w-full px-3.5 py-2.5 bg-white dark:bg-zinc-950 border border-stone-300 dark:border-zinc-800 rounded-xl text-xs text-stone-900 dark:text-white placeholder-stone-400 dark:placeholder-zinc-600 focus:outline-none focus:border-emerald-600 dark:focus:border-emerald-500"
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isProcessing}
-                      className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/20 transition-all duration-300 hover:scale-[1.01] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none"
-                    >
-                      {isProcessing ? (
-                        <>
-                          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          <span>Registrando Reserva...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Clock className="w-4 h-4 shrink-0 group-hover:-translate-y-0.5 transition-transform text-amber-300" />
-                          <span>{t('btnSubmitWire')}</span>
-                          <ArrowRight className="w-4 h-4 hidden sm:block shrink-0 group-hover:translate-x-1 transition-transform" />
-                        </>
-                      )}
-                    </button>
-                  </form>
-                </div>
-              )}
-
-          </div>
-
-          {/* ── THIRD SECTION: CONCIERGE, TRUST & TERMS ── */}
-          <section className="lg:col-span-12 border-t border-stone-200 dark:border-white/10 pt-5 space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-3 text-[10px] text-stone-600 dark:text-zinc-400">
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span>PayPal Business Ecuador</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span>RUC 1711992808001</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
-                  <span>TripAdvisor Travelers Choice</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span>Garantía de Fechas</span>
                 </div>
               </div>
 
-              <a
-                href={`https://wa.me/593994048458?text=${encodeURIComponent(
-                  `Hola, estoy en el checkout del tour "${tourTitle}" (Ref: ${ref || 'Web'}). Deseo asistencia personalizada para completar mi reserva.`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl border border-emerald-600/30 dark:border-emerald-500/40 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-bold text-xs transition-all hover:scale-[1.01] active:scale-95 shadow-sm shrink-0"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                <span>WhatsApp Concierge (24/7)</span>
-              </a>
+              {/* ── COLUMNA 2: TRANSFERENCIA BANCARIA INTERNACIONAL ── */}
+              <div className="bg-white dark:bg-zinc-950/70 border border-stone-200 dark:border-white/10 rounded-3xl p-5 sm:p-7 space-y-5 shadow-sm relative overflow-hidden">
+                <div className="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-white/5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+                      <Building2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-serif font-bold text-base text-stone-900 dark:text-white">
+                        {t('tabBankTitle')}
+                      </h3>
+                      <span className="text-[11px] text-stone-500 dark:text-zinc-400 block">
+                        Cuentas Oficiales • Sin recargo de pasarela
+                      </span>
+                    </div>
+                  </div>
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
+                    Directo
+                  </span>
+                </div>
+
+                {/* 1. LAS TRES OPCIONES EN UNA SOLA LÍNEA */}
+                <div className="grid grid-cols-3 gap-2">
+                  {/* Opción US */}
+                  <button
+                    type="button"
+                    onClick={() => setOpenBankCard(openBankCard === 'usa' ? null : 'usa')}
+                    className={`flex flex-col items-center justify-center p-2 sm:p-3 rounded-2xl border text-center transition-all cursor-pointer ${openBankCard === 'usa'
+                      ? 'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 ring-2 ring-emerald-500/30 font-bold'
+                      : 'border-stone-200 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900/60 hover:border-emerald-500/50 text-stone-700 dark:text-zinc-300'
+                      }`}
+                  >
+                    <span className="text-xs font-bold text-stone-900 dark:text-white block">US</span>
+                    <span className="text-[11px] font-semibold leading-tight mt-0.5 line-clamp-1">USA (USD)</span>
+                    <span className="text-[9px] text-stone-500 dark:text-zinc-400 block truncate">Citi bank</span>
+                  </button>
+
+                  {/* Opción EC */}
+                  <button
+                    type="button"
+                    onClick={() => setOpenBankCard(openBankCard === 'ecuador' ? null : 'ecuador')}
+                    className={`flex flex-col items-center justify-center p-2 sm:p-3 rounded-2xl border text-center transition-all cursor-pointer ${openBankCard === 'ecuador'
+                      ? 'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 ring-2 ring-emerald-500/30 font-bold'
+                      : 'border-stone-200 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900/60 hover:border-emerald-500/50 text-stone-700 dark:text-zinc-300'
+                      }`}
+                  >
+                    <span className="text-xs font-bold text-stone-900 dark:text-white block">EC</span>
+                    <span className="text-[11px] font-semibold leading-tight mt-0.5 line-clamp-1">Ecuador (USD)</span>
+                    <span className="text-[9px] text-stone-500 dark:text-zinc-400 block truncate">Produbanco</span>
+                  </button>
+
+                  {/* Opción ES */}
+                  <button
+                    type="button"
+                    onClick={() => setOpenBankCard(openBankCard === 'spain' ? null : 'spain')}
+                    className={`flex flex-col items-center justify-center p-2 sm:p-3 rounded-2xl border text-center transition-all cursor-pointer ${openBankCard === 'spain'
+                      ? 'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 ring-2 ring-emerald-500/30 font-bold'
+                      : 'border-stone-200 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900/60 hover:border-emerald-500/50 text-stone-700 dark:text-zinc-300'
+                      }`}
+                  >
+                    <span className="text-xs font-bold text-stone-900 dark:text-white block">ES</span>
+                    <span className="text-[11px] font-semibold leading-tight mt-0.5 line-clamp-1">España (EUR)</span>
+                    <span className="text-[9px] text-stone-500 dark:text-zinc-400 block truncate">SEPA</span>
+                  </button>
+                </div>
+
+                {/* 2. SECCIÓN INFERIOR DINÁMICA */}
+                {openBankCard === null ? (
+                  <div className="p-4 sm:p-5 border border-stone-200 dark:border-zinc-800 rounded-2xl space-y-3 bg-stone-50/50 dark:bg-zinc-900/40 animate-fade-in">
+                    <div className="text-center">
+                      <p className="font-bold text-xs sm:text-sm text-emerald-700 dark:text-emerald-400">
+                        👆 ¿Deseas pagar por transferencia?
+                      </p>
+                    </div>
+                    <div className="p-3 bg-white dark:bg-zinc-950/80 border border-stone-200 dark:border-zinc-800/80 rounded-xl text-left text-xs space-y-1.5 font-medium">
+                      <p className="text-stone-800 dark:text-zinc-200">
+                        1. Elige una de nuestras cuentas oficiales arriba para ver los datos bancarios.
+                      </p>
+                      <p className="text-stone-800 dark:text-zinc-200">
+                        2. En el concepto, coloca tu Referencia: <strong className="font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-zinc-900 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800/80 font-bold">{ref || 'R-2026-1.2-80'}</strong>
+                      </p>
+                    </div>
+                    <p className="text-[11px] text-center text-stone-500 dark:text-zinc-400">
+                      Haz clic en cualquiera de las 3 cuentas arriba para ver los números de cuenta oficiales y adjuntar tu comprobante de pago.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-4 animate-fade-in">
+                    <div className="p-4 bg-stone-50 dark:bg-zinc-900/80 border border-stone-200 dark:border-zinc-800 rounded-2xl text-xs space-y-2">
+                      {openBankCard === 'usa' && (
+                        <div className="space-y-2 font-mono text-[11px]">
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Checking Account:</span>
+                            <button type="button" onClick={() => handleCopy('9119836186', 'us_acc')} className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer">
+                              9119836186 {copiedKey === 'us_acc' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Account Holder:</span>
+                            <span className="text-stone-900 dark:text-white font-sans font-bold">Medardo Sanchez</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Routing (ACH):</span>
+                            <button type="button" onClick={() => handleCopy('063100277', 'us_ach')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
+                              063100277 {copiedKey === 'us_ach' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Routing (Wire):</span>
+                            <button type="button" onClick={() => handleCopy('021000089', 'us_wire')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
+                              021000089 {copiedKey === 'us_wire' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Zelle Transfer:</span>
+                            <button type="button" onClick={() => handleCopy('*gsanchez@plustelesmart.com.ec', 'us_zelle')} className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer font-sans text-xs">
+                              *gsanchez@plustelesmart.com.ec {copiedKey === 'us_zelle' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      {openBankCard === 'ecuador' && (
+                        <div className="space-y-2 font-mono text-[11px]">
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Cuenta Corriente:</span>
+                            <button type="button" onClick={() => handleCopy('27059152821', 'pro_acc')} className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer">
+                              27059152821 {copiedKey === 'pro_acc' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Beneficiario:</span>
+                            <span className="text-stone-900 dark:text-white font-sans font-bold">Agencia de Viajes Vermilion</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">RUC:</span>
+                            <button type="button" onClick={() => handleCopy('1793215456001', 'pro_ruc')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
+                              1793215456001 {copiedKey === 'pro_ruc' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">SWIFT:</span>
+                            <button type="button" onClick={() => handleCopy('PRODECEQXXX', 'pro_swift')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
+                              PRODECEQXXX {copiedKey === 'pro_swift' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      {openBankCard === 'spain' && (
+                        <div className="space-y-2 font-mono text-[11px]">
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">IBAN SEPA:</span>
+                            <button type="button" onClick={() => handleCopy('ES4021000418450200051192', 'es_iban')} className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer text-[10px]">
+                              ES40 2100 0418 4502 0005 1192 {copiedKey === 'es_iban' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Beneficiario:</span>
+                            <span className="text-stone-900 dark:text-white font-sans font-bold">Coral Tour Operador España</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-stone-500 dark:text-zinc-400 font-sans">BIC / SWIFT:</span>
+                            <button type="button" onClick={() => handleCopy('CAIXESBBXXX', 'es_bic')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
+                              CAIXESBBXXX {copiedKey === 'es_bic' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Formulario de subida de comprobante */}
+                    <form onSubmit={handleSubmitWireRegistration} className="space-y-3 pt-3 border-t border-stone-200 dark:border-white/10 animate-fade-in">
+                      {/* Honeypot trap */}
+                      <div className="sr-only opacity-0 h-0 w-0 pointer-events-none absolute -left-[9999px]" aria-hidden="true">
+                        <label htmlFor="website_url_hp">Website URL</label>
+                        <input
+                          id="website_url_hp"
+                          type="text"
+                          name="_hp_trap"
+                          value={hpTrap}
+                          onChange={(e) => setHpTrap(e.target.value)}
+                          tabIndex={-1}
+                          autoComplete="off"
+                        />
+                      </div>
+
+                      <h4 className="font-bold text-stone-900 dark:text-white text-xs flex items-center gap-1.5">
+                        <Upload className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                        <span>{t('uploadOptional')}</span>
+                      </h4>
+
+                      <div className="border-2 border-dashed border-stone-300 dark:border-zinc-700 hover:border-emerald-600 dark:hover:border-emerald-500 rounded-2xl p-4 text-center transition-all bg-stone-50/60 dark:bg-zinc-950/60 cursor-pointer relative">
+                        <input type="file" accept="image/*,.pdf" onChange={handleFileChange} className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
+                        {previewUrl ? (
+                          <div className="space-y-2">
+                            <div className="relative w-28 h-20 mx-auto rounded-lg overflow-hidden border border-stone-300 dark:border-zinc-700">
+                              <Image src={previewUrl} alt="Receipt Preview" fill className="object-cover" />
+                            </div>
+                            <p className="text-emerald-700 dark:text-emerald-400 font-medium text-xs">
+                              {bankReceipt?.name} ({Math.round((bankReceipt?.size || 0) / 1024)} KB)
+                            </p>
+                            <span className="text-[10px] text-stone-500 dark:text-zinc-500">Haz clic para cambiar archivo</span>
+                          </div>
+                        ) : (
+                          <div className="space-y-1 py-2">
+                            <Upload className="w-6 h-6 text-emerald-600 dark:text-emerald-500 mx-auto" />
+                            <p className="text-xs text-stone-800 dark:text-zinc-200 font-semibold">
+                              {t('uploadDragText')}
+                            </p>
+                            <p className="text-[10px] text-stone-500 dark:text-zinc-500">Formatos JPG, PNG, PDF hasta 10MB</p>
+                          </div>
+                        )}
+                      </div>
+
+                      <div>
+                        <input
+                          type="text"
+                          placeholder={t('refOptionalPlaceholder')}
+                          value={transferRef}
+                          onChange={(e) => setTransferRef(e.target.value)}
+                          className="w-full px-3.5 py-2.5 bg-white dark:bg-zinc-950 border border-stone-300 dark:border-zinc-800 rounded-xl text-xs text-stone-900 dark:text-white placeholder-stone-400 dark:placeholder-zinc-600 focus:outline-none focus:border-emerald-600 dark:focus:border-emerald-500"
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={isProcessing}
+                        className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/20 transition-all duration-300 hover:scale-[1.01] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none"
+                      >
+                        {isProcessing ? (
+                          <>
+                            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            <span>Registrando Reserva...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Clock className="w-4 h-4 shrink-0 group-hover:-translate-y-0.5 transition-transform text-amber-300" />
+                            <span>{t('btnSubmitWire')}</span>
+                            <ArrowRight className="w-4 h-4 hidden sm:block shrink-0 group-hover:translate-x-1 transition-transform" />
+                          </>
+                        )}
+                      </button>
+                    </form>
+                  </div>
+                )}
+              </div>
+
             </div>
 
-            <p className="text-[10px] text-stone-500 dark:text-zinc-500 text-center leading-relaxed pt-4 border-t border-stone-200 dark:border-white/5">
-              {t('termsAgreement')}
-            </p>
-          </section>
-        </div>
-      )}
+            {/* Support & Trust Footer */}
+            <div className="w-full pt-4 space-y-4 max-w-3xl mx-auto">
+              {/* WhatsApp Concierge */}
+              <div className="text-center space-y-2">
+                <p className="text-xs font-medium text-stone-500 dark:text-zinc-400">
+                  {t('conciergeHelp')}
+                </p>
+                <a
+                  href={`https://wa.me/593994048458?text=${encodeURIComponent(
+                    `Hola Vermilion Routes, estoy en el checkout del tour "${tourTitle}" (Ref: ${ref || 'Web'}). Deseo asistencia personalizada.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-emerald-600/30 dark:border-emerald-500/40 bg-emerald-50/80 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-bold text-xs transition-all hover:scale-[1.02] active:scale-95 shadow-xs"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                  <span>WhatsApp Concierge 24/7 Oficial</span>
+                </a>
+              </div>
+
+              {/* Trust Badges */}
+              <div className="pt-3 border-t border-stone-200 dark:border-zinc-800/80">
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pb-2 text-[11px] font-semibold text-stone-600 dark:text-zinc-400">
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>Pago Seguro SSL</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>RUC Oficial 1793215456001</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                    <span>TripAdvisor Travelers Choice</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>Garantía de Salida</span>
+                  </div>
+                </div>
+
+                <p className="text-[10px] text-stone-400 dark:text-zinc-500 text-center leading-relaxed">
+                  {t('termsAgreement')}
+                </p>
+              </div>
+            </div>
+          </>
+        )}
 
       </div>
 

@@ -3,13 +3,10 @@ import {
   collection,
   doc,
   getDoc,
-  getDocs,
-  addDoc,
   setDoc,
   deleteDoc,
   onSnapshot,
   query,
-  where,
   orderBy,
   updateDoc
 } from 'firebase/firestore';
@@ -23,7 +20,6 @@ const BOOKINGS_COLLECTION = 'bookings';
  * Generates an official, standardized sequential booking code:
  * Format: R-[YEAR]-[TOUR_CODE]-[SEQUENTIAL]
  * Example: "R-2026-1.1-80"
- * Starts at sequential 80 for the current year.
  */
 export async function generateBookingCode(tourId?: string, affiliateUsername?: string): Promise<string> {
   // 1. Determine tour code (default '1.1')
@@ -38,35 +34,33 @@ export async function generateBookingCode(tourId?: string, affiliateUsername?: s
     }
   }
 
-  // 2. Current year
   const year = new Date().getFullYear();
-
-  // 3. Sequential counter starting strictly at 80
-  let seqNumber = 80;
+  let seqNumber = 80; // Base inicial
 
   if (db) {
     try {
-      // Calculate sequence from real bookings in the database:
-      // 0 bookings -> 80
-      // 1 booking  -> 81
-      // 2 bookings -> 82
-      const bookingsSnap = await getDocs(collection(db, BOOKINGS_COLLECTION));
-      const realBookingsCount = bookingsSnap.size;
-      seqNumber = 80 + realBookingsCount;
+      // Leemos directamente del documento de contadores (que tiene permisos públicos)
+      const counterDocRef = doc(db, 'settings', 'booking_counters');
+      const counterSnap = await getDoc(counterDocRef);
 
-      // Candidate official code
-      const candidateCode = `R-${year}-${tourCode}-${seqNumber}`;
+      if (counterSnap.exists()) {
+        const data = counterSnap.data();
+        // Buscamos si ya hay un contador para este año
+        const currentSeq = data[`seq_${year}`] || data[String(year)];
+        if (currentSeq && typeof currentSeq === 'number') {
+          seqNumber = currentSeq + 1;
+        }
+      }
 
-      // Synchronize settings/booking_counters
-      try {
-        const counterDocRef = doc(db, 'settings', 'booking_counters');
-        await setDoc(counterDocRef, { [`seq_${year}`]: seqNumber, [String(year)]: seqNumber, lastUpdated: new Date().toISOString() }, { merge: true });
-      } catch (_) {}
+      // Guardamos el nuevo contador actualizado
+      await setDoc(counterDocRef, {
+        [`seq_${year}`]: seqNumber,
+        [String(year)]: seqNumber,
+        lastUpdated: new Date().toISOString()
+      }, { merge: true });
 
-      return candidateCode;
     } catch (e) {
-      console.warn('[generateBookingCode] Firestore count notice, using baseline seq 80:', e);
-      seqNumber = 80;
+      console.warn('[generateBookingCode] Usando secuencia base 80 por error de lectura:', e);
     }
   }
 
@@ -75,7 +69,6 @@ export async function generateBookingCode(tourId?: string, affiliateUsername?: s
 
 /**
  * Creates a new booking in Firestore after sanitizing fields.
- * Uses the booking reference code as the Firestore Document ID (e.g. "R-2026-1.1-80").
  */
 export async function createBookingInFirestore(
   bookingData: Omit<BookingRequest, 'id' | 'status' | 'createdAt'> & { status?: BookingRequest['status'] }
@@ -139,7 +132,6 @@ export async function createBookingInFirestore(
   if (db) {
     const docRef = doc(db, BOOKINGS_COLLECTION, refCode);
     await setDoc(docRef, payload, { merge: true });
-    return refCode;
   }
   return refCode;
 }
@@ -153,7 +145,7 @@ export function subscribeBookingsFromFirestore(
 ): () => void {
   if (typeof window === 'undefined' || !db) {
     onUpdate([]);
-    return () => {};
+    return () => { };
   }
 
   try {
@@ -178,12 +170,12 @@ export function subscribeBookingsFromFirestore(
   } catch (err: any) {
     console.warn('Failed to subscribe to Firestore bookings:', err);
     if (onError) onError(err);
-    return () => {};
+    return () => { };
   }
 }
 
 /**
- * Updates status of a booking request (e.g., 'contacted', 'confirmed', 'cancelled').
+ * Updates status of a booking request
  */
 export async function updateBookingStatusInFirestore(
   id: string,

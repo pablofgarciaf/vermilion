@@ -125,6 +125,12 @@ export interface BookingRequest {
   travelStartDate?: string;
   travelEndDate?: string;
   passengersCount?: number;
+  sriInvoice?: {
+    requested: boolean;
+    ruc?: string;
+    razonSocial?: string;
+    direccionFiscal?: string;
+  };
 }
 
 

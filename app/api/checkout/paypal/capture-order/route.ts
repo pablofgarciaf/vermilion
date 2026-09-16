@@ -65,6 +65,7 @@ export const POST = withValidation(paypalCaptureOrderSchema, async (_req, _ctx, 
       affiliateCode: data.affiliateCode || undefined,
       discountApplied: Boolean(data.affiliateCode),
       status: 'confirmed',
+      sriInvoice: data.sriInvoice,
     });
 
     // Distribute affiliate commission if applicable

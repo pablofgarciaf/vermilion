@@ -16,7 +16,8 @@ interface PriceCalculatorProps {
   canContinue: boolean;
   step: number;
   affiliateRef?: string | null;
-  tier: 'club' | 'vip';
+  isProcessing?: boolean;
+  tier?: 'standard' | 'firstClass' | 'vip'; // <-- ¡Agregado para arreglar el error TS2304!
 }
 
 const PRICE_CALC_I18N: Record<string, {
@@ -36,6 +37,7 @@ const PRICE_CALC_I18N: Record<string, {
   btnPay: string;
   btnComplete: string;
   noChargeNotice: string;
+  btnProcessing: string; // <-- ¡Agregado para arreglar el error TS2353!
 }> = {
   es: {
     emptyTitle: 'Resumen de Reserva',
@@ -54,6 +56,7 @@ const PRICE_CALC_I18N: Record<string, {
     btnPay: 'Proceder al Pago Seguro',
     btnComplete: 'Completar Datos Requeridos',
     noChargeNotice: 'No se realizará ningún cargo aún.',
+    btnProcessing: 'Procesando tu reserva...',
   },
   en: {
     emptyTitle: 'Booking Summary',
@@ -72,6 +75,7 @@ const PRICE_CALC_I18N: Record<string, {
     btnPay: 'Proceed to Secure Checkout',
     btnComplete: 'Complete Required Fields',
     noChargeNotice: 'No payment will be charged yet.',
+    btnProcessing: 'Processing...',
   },
   fr: {
     emptyTitle: 'Résumé de Réservation',
@@ -90,6 +94,7 @@ const PRICE_CALC_I18N: Record<string, {
     btnPay: 'Procéder au Paiement Sécurisé',
     btnComplete: 'Remplir les Informations Requises',
     noChargeNotice: 'Aucun débit ne sera effectué pour l’instant.',
+    btnProcessing: 'Traitement en cours...',
   },
   de: {
     emptyTitle: 'Buchungsübersicht',
@@ -108,6 +113,7 @@ const PRICE_CALC_I18N: Record<string, {
     btnPay: 'Zur sicheren Zahlung übergehen',
     btnComplete: 'Erforderliche Daten ausfüllen',
     noChargeNotice: 'Es wird noch keine Abbuchung vorgenommen.',
+    btnProcessing: 'Wird bearbeitet...',
   },
   it: {
     emptyTitle: 'Riepilogo Prenotazione',
@@ -126,6 +132,7 @@ const PRICE_CALC_I18N: Record<string, {
     btnPay: 'Procedi al Pagamento Sicuro',
     btnComplete: 'Completa i Dati Richiesti',
     noChargeNotice: 'Nessun addebito verrà effettuato adesso.',
+    btnProcessing: 'Elaborazione...',
   },
   pt: {
     emptyTitle: 'Resumo da Reserva',
@@ -144,6 +151,7 @@ const PRICE_CALC_I18N: Record<string, {
     btnPay: 'Prosseguir para o Pagamento Seguro',
     btnComplete: 'Preencher Dados Obrigatórios',
     noChargeNotice: 'Nenhum valor será cobrado agora.',
+    btnProcessing: 'Processando...',
   },
   ja: {
     emptyTitle: 'ご予約概要',
@@ -162,6 +170,7 @@ const PRICE_CALC_I18N: Record<string, {
     btnPay: '安全な決済ページへ進む',
     btnComplete: '必須項目を入力してください',
     noChargeNotice: '現時点で料金が引き落とされることはありません。',
+    btnProcessing: '処理中...',
   },
   zh: {
     emptyTitle: '预订费用总览',
@@ -180,6 +189,7 @@ const PRICE_CALC_I18N: Record<string, {
     btnPay: '前往安全收银台结算',
     btnComplete: '填写必填信息',
     noChargeNotice: '当前阶段不会立即扣除任何费用。',
+    btnProcessing: '处理中...',
   },
 };
 
@@ -203,7 +213,8 @@ export function PriceCalculator({
   canContinue,
   step,
   affiliateRef,
-  tier,
+  isProcessing = false,
+  tier = 'standard' // <-- Valor por defecto agregado
 }: PriceCalculatorProps) {
   const locale = useLocale();
   const t = PRICE_CALC_I18N[locale] || PRICE_CALC_I18N['en'];
@@ -245,17 +256,17 @@ export function PriceCalculator({
             : tour.price3Star || tour.price || 1050;
 
           return (
-          <div key={tour.id} className="flex gap-4 items-start bg-zinc-50 dark:bg-zinc-800/30 p-2.5 rounded-2xl border border-zinc-100 dark:border-zinc-800">
-            <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
-              <img src={tour.imageUrl} alt={getLocalizedText(tour.title, locale)} width={56} height={56} className="w-full h-full object-cover" />
+            <div key={tour.id} className="flex gap-4 items-start bg-zinc-50 dark:bg-zinc-800/30 p-2.5 rounded-2xl border border-zinc-100 dark:border-zinc-800">
+              <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
+                <img src={tour.imageUrl} alt={getLocalizedText(tour.title, locale)} width={56} height={56} className="w-full h-full object-cover" />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-bold text-sm text-zinc-900 dark:text-white pr-2 leading-snug">{getLocalizedText(tour.title, locale)}</h4>              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 flex items-center justify-between">
+                  <span>{getLocalizedText(tour.duration, locale)}</span>
+                  <span className="font-semibold text-zinc-900 dark:text-white">${formatAmount(displayedPrice)}</span>
+                </p>
+              </div>
             </div>
-            <div className="flex-1">
-              <h4 className="font-bold text-sm text-zinc-900 dark:text-white pr-2 leading-snug">{getLocalizedText(tour.title, locale)}</h4>              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 flex items-center justify-between">
-                <span>{getLocalizedText(tour.duration, locale)}</span>
-                <span className="font-semibold text-zinc-900 dark:text-white">${formatAmount(displayedPrice)}</span>
-              </p>
-            </div>
-          </div>
           );
         })}
 
@@ -336,30 +347,26 @@ export function PriceCalculator({
         </div>
       </div>
 
-      {!canContinue && (
-        <div className="mb-4 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/25 text-xs space-y-1.5 animate-in fade-in">
-          <p className="font-bold text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
-            <Info className="w-4 h-4 text-amber-500 shrink-0" /> {t.pendingSteps}
-          </p>
-          <ul className="text-zinc-600 dark:text-zinc-300 text-[11px] space-y-1 ml-5 list-disc">
-            {!date && <li>{t.step2Date}</li>}
-            {(!contactInfo?.name?.trim() || !contactInfo?.email?.trim()) && (
-              <li>{t.step4Contact}</li>
-            )}
-          </ul>
-        </div>
-      )}
-
       <button
         type="button"
         onClick={onContinue}
-        className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-95 group cursor-pointer border-none ${canContinue
-          ? 'bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white shadow-emerald-900/30'
-          : 'bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-amber-500/40 shadow-zinc-950/40'
+        disabled={isProcessing}
+        className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all duration-300 border-none ${isProcessing
+            ? 'bg-zinc-900 dark:bg-zinc-950 border border-emerald-500/40 text-emerald-400 cursor-wait shadow-emerald-950/40'
+            : 'bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white shadow-emerald-900/30 hover:scale-[1.02] active:scale-95 group cursor-pointer'
           }`}
       >
-        <span>{canContinue ? t.btnPay : t.btnComplete}</span>
-        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        {isProcessing ? (
+          <div className="flex items-center justify-center gap-2.5 py-0.5">
+            <div className="w-5 h-5 border-2 border-emerald-500/30 border-t-emerald-400 rounded-full animate-spin shrink-0" />
+            <span className="text-emerald-400 font-bold tracking-wider animate-pulse">{t.btnProcessing}</span>
+          </div>
+        ) : (
+          <>
+            <span>{t.btnPay}</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </>
+        )}
       </button>
 
       <p className="text-[11px] text-zinc-400 text-center mt-4 flex items-center justify-center gap-1">

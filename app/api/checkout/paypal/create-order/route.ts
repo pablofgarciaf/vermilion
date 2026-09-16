@@ -7,7 +7,7 @@ export const POST = withValidation(paypalCreateOrderSchema, async (_req, _ctx, d
   try {
     const order = await createPayPalOrder({
       amount: data.amount,
-      currency: 'USD',
+      currency: data.currency || 'USD',
       bookingRef: data.bookingRef,
       tourTitle: data.tourTitle,
       clientName: data.clientName,

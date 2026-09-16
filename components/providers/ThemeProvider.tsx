@@ -7,16 +7,17 @@ import { ThemeProvider as NextThemesProvider } from 'next-themes';
 if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
   const originalError = console.error;
   console.error = (...args) => {
-    if (args[0] && typeof args[0] === 'string') {
-      if (
-        args[0].includes('Encountered a script tag while rendering React component') ||
-        args[0].includes('Could not reach Cloud Firestore backend') ||
-        args[0].includes('@firebase/firestore') ||
-        args[0].includes('fdprocessedid') ||
-        args[0].includes('A tree hydrated but some attributes of the server rendered HTML didn\'t match')
-      ) {
-        return;
-      }
+    const errStr = typeof args[0] === 'string' ? args[0] : (args[0]?.message || String(args[0] || ''));
+    if (
+      errStr.includes('Encountered a script tag while rendering React component') ||
+      errStr.includes('Could not reach Cloud Firestore backend') ||
+      errStr.includes('@firebase/firestore') ||
+      errStr.includes('fdprocessedid') ||
+      errStr.includes('paypal_js_sdk') ||
+      errStr.includes('paypal') ||
+      errStr.includes('A tree hydrated but some attributes of the server rendered HTML didn\'t match')
+    ) {
+      return;
     }
     originalError.call(console, ...args);
   };

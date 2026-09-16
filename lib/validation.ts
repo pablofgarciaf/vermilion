@@ -188,7 +188,15 @@ export const paypalCreateOrderSchema = z.object({
   affiliateCode: z.string().optional(),
   travelDate: z.string().optional(),
   guestsCount: z.string().optional(),
+  passengersCount: z.number().optional(),
   locale: z.string().optional(),
+  currency: z.string().optional(),
+  sriInvoice: z.object({
+    requested: z.boolean(),
+    ruc: z.string().optional(),
+    razonSocial: z.string().optional(),
+    direccionFiscal: z.string().optional(),
+  }).optional(),
 });
 
 export type PaypalCreateOrderInput = z.infer<typeof paypalCreateOrderSchema>;
@@ -205,6 +213,12 @@ export const paypalCaptureOrderSchema = z.object({
   guestsCount: z.string().optional(),
   locale: z.string().optional(),
   affiliateCode: z.string().optional(),
+  sriInvoice: z.object({
+    requested: z.boolean(),
+    ruc: z.string().optional(),
+    razonSocial: z.string().optional(),
+    direccionFiscal: z.string().optional(),
+  }).optional(),
 });
 
 export type PaypalCaptureOrderInput = z.infer<typeof paypalCaptureOrderSchema>;
