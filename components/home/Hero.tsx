@@ -102,26 +102,16 @@ export function Hero() {
 
   return (
     <div className="relative w-full h-[100svh] min-h-[580px] sm:min-h-[620px] md:min-h-[650px] overflow-hidden bg-zinc-950 text-white font-sans select-none z-0">
-      {/* Fixed background image — no rotation, no slider */}
+      {/* Fixed background image — 4K high-res splash */}
       <Image
-        src="/splash-4-worlds.webp"
+        src="/splash-4-worlds-original.webp"
         alt="Vermilion Routes — Ecuador & Galapagos"
         fill
         priority
         fetchPriority="high"
-        quality={85}
+        quality={90}
         sizes="100vw"
-        className="object-cover object-center md:hidden"
-      />
-      <Image
-        src="/intro-hero-bg.webp"
-        alt="Vermilion Routes — Ecuador & Galapagos"
-        fill
-        priority
-        fetchPriority="high"
-        quality={85}
-        sizes="100vw"
-        className="object-cover object-center hidden md:block"
+        className="object-cover object-center"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/55 pointer-events-none" />
 

@@ -15,9 +15,9 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: 'サンタクルス島の高地で自由に歩き回る古代の巨大ゾウガメを観察し、スカレシアの森に囲まれた壮大な双子の火口を探索しましょう。',
     },
     isWelcome: true,
-    image: '/intro-hero-bg.webp',
-    desktopImage: '/intro-hero-bg.webp',
-    mobileImage: '/splash-4-worlds.webp'
+    image: '/splash-4-worlds-original.webp',
+    desktopImage: '/splash-4-worlds-original.webp',
+    mobileImage: '/splash-4-worlds-original.webp'
   },
   {
     place: { en: 'Pichincha - Quito', es: 'Pichincha - Quito', fr: 'Pichincha - Quito', de: 'Pichincha - Quito', it: 'Pichincha - Quito', pt: 'Pichincha - Quito', ja: 'ピチンチャ - キト', zh: '皮钦查 - 基多' },

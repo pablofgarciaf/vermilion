@@ -504,7 +504,7 @@ function AffiliatesAuthContent() {
                   <button
                     type="button"
                     onClick={() => { setTab('forgot'); setErrorMsg(''); setSuccessMsg(''); }}
-                    className="text-[11px] text-amber-400/80 hover:text-amber-300 underline"
+                    className="text-[11px] text-amber-400/90 hover:text-amber-300 underline font-semibold transition-colors cursor-pointer"
                   >
                     {isEs ? '¿Olvidaste tu contraseña?' : 'Forgot password?'}
                   </button>

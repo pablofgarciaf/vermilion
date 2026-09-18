@@ -74,7 +74,7 @@ export function SplashScreen() {
       {/* Background Image with Instant Eager Load */}
       <Image
         id="splash-bg-image"
-        src="/intro-hero-bg.webp"
+        src="/splash-4-worlds-original.webp"
         alt="Vermilion Routes Welcome"
         fill
         priority
