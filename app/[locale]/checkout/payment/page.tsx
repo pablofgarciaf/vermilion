@@ -647,7 +647,12 @@ export default function CheckoutPaymentPage() {
   const amountStr = searchParams.get('amount') || '500';
   const type = searchParams.get('type') || 'deposit';
   const initialRef = searchParams.get('ref') || '';
-  const [ref, setRef] = useState(initialRef.includes('-751') ? '' : initialRef);
+  const [ref, setRef] = useState<string>(() => {
+    if (initialRef && initialRef.startsWith('R-2026-') && !initialRef.includes('-751')) {
+      return initialRef;
+    }
+    return `R-2026-1.1-${Math.floor(1000 + Math.random() * 9000)}`;
+  });
   const travelDate = searchParams.get('date') || '';
   const travelersParam = searchParams.get('travelers') || searchParams.get('guestsCount') || '';
   const adultsParam = searchParams.get('adults') || '';
@@ -731,13 +736,13 @@ export default function CheckoutPaymentPage() {
     if (!clientName && stored.name) setClientName(stored.name);
 
     // Guarantee ref format R-[year]-[tourCode]-[sequential] (starts at 80)
-    if (!ref || !ref.startsWith('R-2026-') || ref.includes('-751')) {
-      const affCode = searchParams.get('affiliateCode') || searchParams.get('vid') || getStoredAffiliateRef();
+    const affCode = searchParams.get('affiliateCode') || searchParams.get('vid') || getStoredAffiliateRef();
+    if (!ref || !ref.startsWith('R-2026-') || ref.includes('-751') || ref.length > 20) {
       generateBookingCode(tourId, affCode || undefined).then((newCode) => {
-        setRef(newCode);
+        if (newCode) setRef(newCode);
       });
     }
-  }, [tourId, ref, searchParams, email, clientName]);
+  }, [tourId, searchParams, email, clientName]);
 
   // Auto-detect affiliate referral code from URL or Storage/Cookie
   useEffect(() => {

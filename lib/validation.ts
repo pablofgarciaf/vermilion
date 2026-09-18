@@ -185,7 +185,7 @@ export const paypalCreateOrderSchema = z.object({
   }),
   clientPhone: z.string().optional(),
   amount: z.number().positive(),
-  bookingRef: z.string().min(2),
+  bookingRef: z.string().optional().transform(v => (v && v.trim().length >= 2 ? v.trim() : `VR-${Date.now().toString(36).toUpperCase()}`)),
   affiliateCode: z.string().optional(),
   travelDate: z.string().optional(),
   guestsCount: z.string().optional(),
@@ -204,7 +204,7 @@ export type PaypalCreateOrderInput = z.infer<typeof paypalCreateOrderSchema>;
 
 export const paypalCaptureOrderSchema = z.object({
   orderId: z.string().min(3),
-  bookingRef: z.string().min(2),
+  bookingRef: z.string().optional().transform(v => (v && v.trim().length >= 2 ? v.trim() : `VR-${Date.now().toString(36).toUpperCase()}`)),
   tourId: z.string().optional(),
   tourTitle: z.string().optional(),
   clientName: z.string().optional(),

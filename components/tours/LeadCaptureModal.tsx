@@ -38,14 +38,23 @@ export function LeadCaptureModal({ isOpen, onClose, onSuccess, tour, locale }: L
     setError('');
 
     try {
-      // 1. Guardar el lead en Firestore
+      // 1. Guardar el lead en Firestore con campos completos y normalizados para el CRM
+      const tourTitleStr = tour.title[locale] || tour.title['en'] || tour.id;
+      const budgetNum = tour.price3Star || tour.price || 1790;
       await addDoc(collection(db, 'leads'), {
         name,
+        customerName: name,
         email,
+        customerEmail: email,
         tourId: tour.id,
-        tourName: tour.title[locale] || tour.title['en'] || tour.id,
+        tourName: tourTitleStr,
+        destination: tour.destination?.[locale] || tour.destination?.['es'] || 'Ecuador & Galápagos',
+        estimatedBudget: budgetNum,
+        passengersCount: 2,
+        status: 'new',
         source: 'pdf_download',
         locale,
+        notes: `Descarga de itinerario PDF en web (${locale}).`,
         createdAt: serverTimestamp(),
       });
 

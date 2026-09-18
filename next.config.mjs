@@ -150,6 +150,16 @@ const nextConfig = {
         destination: '/en/tours/galapagos-7days',
         permanent: true,
       },
+      {
+        source: '/:locale/tours/ecuador-fantastic',
+        destination: '/:locale/tours/ecuador-fantastic-8days',
+        permanent: true,
+      },
+      {
+        source: '/tours/ecuador-fantastic',
+        destination: '/en/tours/ecuador-fantastic-8days',
+        permanent: true,
+      },
     ];
   },
   async headers() {

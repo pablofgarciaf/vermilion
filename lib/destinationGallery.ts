@@ -9,8 +9,6 @@
  * 2. High-speed Google Photos Edge CDN with on-the-fly cropping/resizing (=w1920-h1080-c, =w1080-h1920-c)
  */
 
-import googlePhotosCatalog from '@/data/googlePhotosCatalog.json';
-
 export type DestinationKey =
   | 'galapagos'
   | 'quito'
@@ -419,6 +417,90 @@ const LOCAL_DESTINATION_PHOTOS: DestinationGalleryItem[] = [
     category: 'wildlife',
     source: 'local',
   },
+  {
+    id: 'local_gala_7',
+    destination: 'galapagos',
+    title: {
+      en: 'Isabela Island Volcanic Coastlines',
+      es: 'Costas Volcánicas de la Isla Isabela',
+      fr: 'Côtes Volcaniques de l’Île Isabela',
+      de: 'Vulkanische Küsten der Insel Isabela',
+      it: 'Coste Vulcaniche dell’Isola Isabela',
+      pt: 'Costas Vulcânicas da Ilha Isabela',
+      ja: 'イサベラ島の火山海岸景観',
+      zh: '伊莎贝拉岛原始火山海岸线',
+    },
+    url16x9: '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
+    url9x16: '/images/tours/9-16/galapagos-flamingos-9-16.jpg',
+    thumb: '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
+    original: '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
+    isPortrait: false,
+    category: 'landscape',
+    source: 'local',
+  },
+  {
+    id: 'local_gala_8',
+    destination: 'galapagos',
+    title: {
+      en: 'Marine Snorkeling & Sea Turtles',
+      es: 'Snorkel con Tortugas Marinas y Peces Tropicales',
+      fr: 'Plongée avec Tortues Marines et Poissons Tropicaux',
+      de: 'Schnorcheln mit Meeresschildkröten & Tropenfischen',
+      it: 'Snorkeling con Tartarughe Marine e Pesci Tropicali',
+      pt: 'Snorkel com Tartarugas Marinhas e Peixes Tropicais',
+      ja: 'ウミガメと熱帯魚とのシュノーケリング',
+      zh: '加拉帕戈斯与海龟及热带鱼浮潜体验',
+    },
+    url16x9: '/images/tours/16-9/galapagos-snorkeling-16-9.jpg',
+    url9x16: '/images/tours/9-16/galapagos-snorkeling-9-16.jpg',
+    thumb: '/images/tours/16-9/galapagos-snorkeling-16-9.jpg',
+    original: '/images/tours/16-9/galapagos-snorkeling-16-9.jpg',
+    isPortrait: false,
+    category: 'expedition',
+    source: 'local',
+  },
+  {
+    id: 'local_gala_9',
+    destination: 'galapagos',
+    title: {
+      en: 'Puerto Ayora Harbor & Academy Bay',
+      es: 'Puerto Ayora y Bahía Academia al Atardecer',
+      fr: 'Port de Puerto Ayora et Baie d’Académie',
+      de: 'Hafen von Puerto Ayora & Academy Bay',
+      it: 'Porto di Puerto Ayora e Baia di Academy',
+      pt: 'Porto de Puerto Ayora e Baía Academia',
+      ja: 'プエルトアヨラ港とアカデミー湾の夕景',
+      zh: '阿约拉港与学院湾壮丽日落风光',
+    },
+    url16x9: '/images/tours/16-9/galapagos-puerto-ayora-16-9.jpg',
+    url9x16: '/images/tours/9-16/galapagos-puerto-ayora-9-16.jpg',
+    thumb: '/images/tours/16-9/galapagos-puerto-ayora-16-9.jpg',
+    original: '/images/tours/16-9/galapagos-puerto-ayora-16-9.jpg',
+    isPortrait: false,
+    category: 'culture',
+    source: 'local',
+  },
+  {
+    id: 'local_gala_10',
+    destination: 'galapagos',
+    title: {
+      en: 'Baltra Island & Itabaca Marine Canal',
+      es: 'Canal de Itabaca e Isla Baltra',
+      fr: 'Canal d’Itabaca et Île de Baltra',
+      de: 'Itabaca-Kanal & Insel Baltra',
+      it: 'Canale di Itabaca e Isola di Baltra',
+      pt: 'Canal de Itabaca e Ilha Baltra',
+      ja: 'イタバカ運河とバルトラ島',
+      zh: '伊塔巴卡运河与巴尔特拉海峡风光',
+    },
+    url16x9: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
+    url9x16: '/images/tours/9-16/galapagos-focas-9-16.jpg',
+    thumb: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
+    original: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
+    isPortrait: false,
+    category: 'landscape',
+    source: 'local',
+  },
   // Quito Local
   {
     id: 'local_quito_1',
@@ -585,39 +667,9 @@ const LOCAL_DESTINATION_PHOTOS: DestinationGalleryItem[] = [
   },
 ];
 
-// Curate 4 top Google Photos to complement the 6 local Galapagos photos (Exact 10 photos for Galapagos)
-const GOOGLE_PHOTOS_GALAPAGOS: DestinationGalleryItem[] = (googlePhotosCatalog as any[]).slice(0, 4).map((item, idx) => {
-  const isPortrait = Boolean(item.isPortrait);
-  const categories: ('wildlife' | 'landscape' | 'expedition')[] = ['wildlife', 'landscape', 'expedition'];
-  const category = categories[idx % categories.length];
-
-  return {
-    id: `gphoto_${idx + 1}`,
-    destination: 'galapagos',
-    title: {
-      en: `Galapagos Expedition Highlight #${idx + 1}`,
-      es: `Expedición Destacada Galápagos #${idx + 1}`,
-      fr: `Point Fort Galápagos #${idx + 1}`,
-      de: `Galapagos-Expeditionshöhepunkt #${idx + 1}`,
-      it: `Momento Saliente Galápagos #${idx + 1}`,
-      pt: `Destaque da Expedição Galápagos #${idx + 1}`,
-      ja: `ガラパゴス諸島 厳選フォト #${idx + 1}`,
-      zh: `加拉帕戈斯群岛精选探险实拍 #${idx + 1}`,
-    },
-    url16x9: item.url16x9 || `${item.baseUrl}=w1920-h1080-c`,
-    url9x16: item.url9x16 || `${item.baseUrl}=w1080-h1920-c`,
-    thumb: item.thumb || `${item.baseUrl}=w800-h600-c`,
-    original: item.original || `${item.baseUrl}=w2400`,
-    isPortrait,
-    category,
-    source: 'google-photos',
-  };
-});
-
-// All combined gallery database (strictly curated to max 10 photos per destination)
+// All combined gallery database (strictly curated to max 10 local photos per destination)
 const ALL_GALLERY_PHOTOS: DestinationGalleryItem[] = [
   ...LOCAL_DESTINATION_PHOTOS,
-  ...GOOGLE_PHOTOS_GALAPAGOS,
 ];
 
 /**

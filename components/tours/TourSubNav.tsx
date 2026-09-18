@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Star, Hotel, Sparkles, MessageCircle, Phone, ChevronDown } from 'lucide-react';
 import { Tour } from '@/types';
-import { DownloadPDFButton } from './DownloadPDFButton';
 
 interface TourSubNavProps {
   title: string;
@@ -139,7 +138,6 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               </div>
             )}
           </div>
-          <DownloadPDFButton tour={tour} variant="ghost" size="sm" iconOnly className="shrink-0 border border-emerald-200 dark:border-emerald-800" />
           </div>
 
           <div className={`mt-2 ${isDailyTour ? '' : 'grid grid-cols-2 gap-2 sm:flex sm:justify-end sm:gap-3'}`}>
@@ -170,8 +168,8 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-5">
-          <div className="flex items-start gap-6 min-w-0 flex-1">
+        <div className="hidden md:flex items-center justify-between gap-5">
+          <div className="flex items-center gap-6 min-w-0 flex-1">
             <Link
               href={`/${locale}`}
               aria-label="Vermilion Routes Home"
@@ -197,48 +195,23 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               </div>
             </Link>
 
-            <div className="relative shrink-0">
-              <button
-                onClick={() => setShowContactMenu(!showContactMenu)}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-2xl border border-emerald-200 bg-white/95 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-800 text-sm font-bold transition-all shadow-md shadow-emerald-900/10 hover:shadow-emerald-600/20 cursor-pointer dark:bg-zinc-900 dark:border-emerald-800 dark:text-emerald-300 dark:hover:bg-emerald-950/50"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>{t.contact}</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${showContactMenu ? 'rotate-180' : ''}`} />
-              </button>
-
-              {showContactMenu && (
-                <div className="absolute left-0 mt-2.5 w-60 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl py-2 z-50 animate-in fade-in duration-200">
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors">
-                    <MessageCircle className="w-4 h-4 text-emerald-600" />
-                    <span>{t.whatsapp} (+593 96 003 9156)</span>
-                  </a>
-                  <a href="tel:+593960039156" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors border-t border-zinc-100 dark:border-zinc-800">
-                    <Phone className="w-4 h-4 text-emerald-600" />
-                    <span>{t.call} (+593 96 003 9156)</span>
-                  </a>
-                </div>
-              )}
-            </div>
-
             <div className="h-8 w-px bg-zinc-300 dark:bg-zinc-700 shrink-0" />
 
-            <div className="space-y-1 min-w-0">
-              <div className="font-serif text-lg font-bold text-zinc-900 dark:text-white tracking-tight leading-tight whitespace-normal break-words">
+            <div className="space-y-0.5 min-w-0">
+              <div className="font-serif text-base lg:text-lg font-bold text-zinc-900 dark:text-white tracking-tight leading-tight truncate">
                 {title}
               </div>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-zinc-500 font-medium">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs lg:text-sm text-zinc-500 font-medium">
                 <span>{duration}</span>
                 <span>&bull;</span>
                 <span className="flex items-center gap-1.5 text-[#D4AF37] font-semibold">
-                  <Star className="w-4 h-4 fill-[#D4AF37]" /> {tour.rating}
+                  <Star className="w-3.5 h-3.5 fill-[#D4AF37]" /> {tour.rating}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
-            <DownloadPDFButton tour={tour} variant="ghost" size="sm" iconOnly className="shrink-0 border border-emerald-200 dark:border-emerald-800" />
+          <div className="flex items-center gap-3 shrink-0">
             {isDailyTour ? (
               <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex items-center justify-center gap-1.5 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-4 py-2.5 whitespace-nowrap text-xs font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
                 <Sparkles className="w-3.5 h-3.5 fill-zinc-950" />
@@ -263,6 +236,31 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               <span className="font-extrabold text-xs lg:text-sm">${priceVip}</span>
             </Link>
             </>}
+
+            {/* Botón de Contacto ubicado al lado de VIP */}
+            <div className="relative shrink-0">
+              <button
+                onClick={() => setShowContactMenu(!showContactMenu)}
+                className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl border border-emerald-200 bg-white/95 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-800 text-xs lg:text-sm font-bold transition-all shadow-md shadow-emerald-900/10 hover:shadow-emerald-600/20 cursor-pointer dark:bg-zinc-900 dark:border-emerald-800 dark:text-emerald-300 dark:hover:bg-emerald-950/50"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <span>{t.contact}</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showContactMenu ? 'rotate-180' : ''}`} />
+              </button>
+
+              {showContactMenu && (
+                <div className="absolute right-0 mt-2.5 w-60 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl py-2 z-50 animate-in fade-in duration-200">
+                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors">
+                    <MessageCircle className="w-4 h-4 text-emerald-600" />
+                    <span>{t.whatsapp} (+593 96 003 9156)</span>
+                  </a>
+                  <a href="tel:+593960039156" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors border-t border-zinc-100 dark:border-zinc-800">
+                    <Phone className="w-4 h-4 text-emerald-600" />
+                    <span>{t.call} (+593 96 003 9156)</span>
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

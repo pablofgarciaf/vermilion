@@ -6,6 +6,7 @@ import { collection, doc, getDocs, setDoc, updateDoc, onSnapshot } from 'firebas
 import {
   SystemUser,
   CrmLead,
+  LeadStatus,
   CrmBooking,
   RunSheetDay,
   PassengerProfile,
@@ -74,7 +75,7 @@ const INITIAL_LEADS: CrmLead[] = [
     status: 'negotiation',
     assignedOperatorId: 'info@vermilionroutes.com',
     assignedOperatorName: 'Jairo Ludeña',
-    notes: 'Reserva confirmada en web. Interés en tour Galápagos Magia 4 Días + extensión.',
+    notes: 'Reserva confirmada en web. Interés en tour Galápagos Magia 6 Días + extensión.',
     source: 'affiliate_referral',
     affiliateReferralCode: 'pablo.g',
     passengerDetails: {
@@ -255,7 +256,35 @@ export function useCrmData() {
         unsubscribeLeads = onSnapshot(leadsCol, (snap) => {
           if (!snap.empty) {
             const list: CrmLead[] = [];
-            snap.forEach((d) => list.push({ ...(d.data() as CrmLead), id: d.id }));
+            snap.forEach((d) => {
+              const raw = d.data() as any;
+              const customerName = raw.customerName || raw.name || (raw.email ? raw.email.split('@')[0] : 'Prospecto Web');
+              const customerEmail = raw.customerEmail || raw.email || '';
+              const isVolcano = String(raw.tourId || '').includes('volcano') || String(raw.tourName || '').includes('Volcanes');
+              const estBudget = Number(raw.estimatedBudget) || (isVolcano ? 1100 : 1790);
+              const dest = raw.destination || (isVolcano ? 'Andes & Volcanes' : 'Galapagos');
+              const status: LeadStatus = (raw.status as LeadStatus) || 'new';
+
+              list.push({
+                id: d.id,
+                customerName,
+                customerEmail,
+                customerPhone: raw.customerPhone || raw.phone || '',
+                country: raw.country || 'Ecuador',
+                destination: dest,
+                passengersCount: Number(raw.passengersCount) || 2,
+                estimatedBudget: estBudget,
+                travelDates: raw.travelDates || 'Por coordinar',
+                status,
+                assignedOperatorId: raw.assignedOperatorId || 'info@vermilionroutes.com',
+                assignedOperatorName: raw.assignedOperatorName || 'Jairo Ludeña',
+                notes: raw.notes || `Interés en: ${raw.tourName || raw.tourId || 'Expedición'}`,
+                source: raw.source || 'web_lead',
+                affiliateReferralCode: raw.affiliateReferralCode || raw.affiliateCode || '',
+                createdAt: typeof raw.createdAt === 'string' ? raw.createdAt : (raw.createdAt?.toDate ? raw.createdAt.toDate().toISOString() : new Date().toISOString()),
+                updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : new Date().toISOString(),
+              });
+            });
             setLeads(list);
           }
         }, (err) => console.warn('[useCrmData] leads notice:', err.message));

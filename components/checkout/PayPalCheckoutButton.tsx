@@ -94,14 +94,17 @@ export function PayPalCheckoutButton({
 
   const safeEmail = (clientEmail && clientEmail.includes('@')) ? clientEmail.trim().toLowerCase() : 'guest@vermilionroutes.com';
   const safeName = (clientName || clientEmail?.split('@')[0] || t.defaultTravelerName).trim();
+  const safeRef = (bookingRef && bookingRef.trim().length >= 3)
+    ? bookingRef.trim()
+    : `R-2026-1.1-${Date.now().toString().slice(-4)}`;
 
   const saveBookingDirectly = async () => {
     if (!db) return;
     try {
-      await setDoc(doc(db, 'bookings', bookingRef), {
-        id: bookingRef,
-        refCode: bookingRef,
-        bookingCode: bookingRef,
+      await setDoc(doc(db, 'bookings', safeRef), {
+        id: safeRef,
+        refCode: safeRef,
+        bookingCode: safeRef,
         tourId: tourId || 'custom',
         tourTitle: tourTitle || 'Vermilion Routes Expedition',
         customerName: safeName,
@@ -134,7 +137,7 @@ export function PayPalCheckoutButton({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           amount,
-          bookingRef,
+          bookingRef: safeRef,
           tourId,
           tourTitle,
           clientName: safeName,
@@ -155,7 +158,7 @@ export function PayPalCheckoutButton({
       return data.orderId;
     } catch (err: any) {
       console.warn('[PayPal createOrder warning, using fallback ref]', err);
-      return `ORDER_${bookingRef}_${Date.now()}`;
+      return `ORDER_${safeRef}_${Date.now()}`;
     }
   };
 
@@ -170,7 +173,7 @@ export function PayPalCheckoutButton({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           orderId: data.orderID,
-          bookingRef,
+          bookingRef: safeRef,
           tourId,
           tourTitle,
           clientName: safeName,
@@ -186,9 +189,9 @@ export function PayPalCheckoutButton({
       });
 
       const result = await res.json();
-      onSuccess(result?.bookingRef || bookingRef);
+      onSuccess(result?.bookingRef || safeRef);
     } catch {
-      onSuccess(bookingRef);
+      onSuccess(safeRef);
     } finally {
       setIsCapturing(false);
     }

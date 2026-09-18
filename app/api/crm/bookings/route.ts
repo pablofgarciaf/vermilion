@@ -22,10 +22,77 @@ function saveLocalBookings(bookings: any[]) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(bookings, null, 2), 'utf8');
 }
 
+import { db, auth } from '@/lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
 export async function GET() {
   try {
-    const bookings = getLocalBookings();
-    return NextResponse.json({ success: true, count: bookings.length, bookings });
+    const list: any[] = [];
+    const seen = new Set<string>();
+
+    // 1. Fetch from Firestore (Source of Truth)
+    if (db) {
+      if (auth && !auth.currentUser && process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD) {
+        try {
+          await signInWithEmailAndPassword(auth, process.env.ADMIN_EMAIL, process.env.ADMIN_PASSWORD);
+        } catch (authErr) {
+          console.warn('[api/crm/bookings] Server auth notice:', authErr);
+        }
+      }
+      try {
+        const snap = await getDocs(collection(db, 'bookings'));
+        snap.forEach((d) => {
+          const data = d.data() as any;
+          const ref = data.bookingCode || data.refCode || d.id;
+          seen.add(ref);
+          const amount = Number(data.totalAmount || data.paidAmount || data.amountPaid || 0);
+          list.push({
+            id: d.id,
+            bookingCode: ref,
+            tourTitle: data.tourTitle || 'Expedición Vermilion',
+            destination: data.destination || 'Islas Galápagos',
+            customerName: data.customerName || 'Viajero Vermilion',
+            customerEmail: data.customerEmail || '',
+            customerPhone: data.customerPhone || '',
+            passengersCount: Number(data.passengersCount) || 2,
+            totalAmount: amount,
+            paidAmount: amount,
+            directCosts: Math.round(amount * 0.55),
+            status: data.status === 'confirmed' ? 'deposit_confirmed' : (data.status || 'deposit_confirmed'),
+            travelStartDate: data.travelStartDate || data.travelDates || '2026-10-22',
+            travelEndDate: data.travelEndDate || data.travelDates || '2026-10-27',
+            assignedOperatorId: data.assignedOperatorId || 'info@vermilionroutes.com',
+            assignedOperatorName: data.assignedOperatorName || 'Jairo Ludeña',
+            affiliateId: data.affiliateCode || data.affiliateId || '',
+            affiliateCommissionAmount: Number(data.affiliateCommissionAmount || (amount * 0.1)),
+            affiliateCommissionStatus: data.affiliateCommissionStatus || 'ready_for_review',
+            operatorCommissionAmount: 250,
+            operatorCommissionStatus: 'pending',
+            paymentReference: data.transferRef || ref,
+            vipGiftAssigned: 'Kit VIP Pakari Imperial & Sombrero Montecristi',
+            vipGiftDelivered: false,
+            notes: data.notes || `Reserva confirmada en línea vía ${data.paymentMethod || 'Web'}.`,
+            createdAt: data.createdAt || new Date().toISOString(),
+            updatedAt: data.updatedAt || new Date().toISOString(),
+          });
+        });
+      } catch (dbErr: any) {
+        console.warn('[api/crm/bookings] Firestore fetch error:', dbErr.message);
+      }
+    }
+
+    // 2. Merge local bookings if not already present from Firestore
+    const localBookings = getLocalBookings();
+    for (const b of localBookings) {
+      const ref = b.bookingCode || b.refCode || b.id;
+      if (!seen.has(ref)) {
+        seen.add(ref);
+        list.push(b);
+      }
+    }
+
+    return NextResponse.json({ success: true, count: list.length, bookings: list });
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err.message }, { status: 500 });
   }

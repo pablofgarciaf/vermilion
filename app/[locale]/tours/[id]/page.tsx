@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getToursFromFirestore, getTourByIdFromFirestore } from '@/lib/tours';
 import { TourGallery } from '@/components/tours/TourGallery';
 import { TourItinerary } from '@/components/tours/TourItinerary';
@@ -210,6 +210,18 @@ const SELECT_TIER_LABEL: Record<string, string> = {
 export default async function TourDetailPage({ params }: TourDetailPageProps) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
+
+  // Defensive 301 redirects for legacy tours
+  if (resolvedParams.id === 'galapagos-4days') {
+    redirect(`/${locale}/tours/galapagos-6days`);
+  }
+  if (resolvedParams.id === 'galapagos-5days') {
+    redirect(`/${locale}/tours/galapagos-7days`);
+  }
+  if (resolvedParams.id === 'ecuador-fantastic') {
+    redirect(`/${locale}/tours/ecuador-fantastic-8days`);
+  }
+
   const rawTour = mockTours.find((t) => t.id === resolvedParams.id);
   const tour = await getTourByIdFromFirestore(resolvedParams.id, rawTour);
 
@@ -342,12 +354,11 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
 
               {/* Los tours diarios tienen una tarifa única; las expediciones conservan sus categorías. */}
               <div className="pt-2 space-y-3">
-                <div className="flex items-center justify-between gap-3">
-                  {!isDailyTour && <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider block">
+                {!isDailyTour && (
+                  <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider block">
                     {SELECT_TIER_LABEL[locale] || SELECT_TIER_LABEL.en}
-                  </span>}
-                  <DownloadPDFButton tour={tour} variant="ghost" size="sm" iconOnly className="ml-auto border border-emerald-200 dark:border-emerald-800" />
-                </div>
+                  </span>
+                )}
                 {isDailyTour ? (
                   <Link
                     href={`/${locale}/booking?addTour=${tour.id}`}
@@ -403,6 +414,11 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                     </div>
                   </div>
                 </>}
+
+                {/* Botón de Descarga de Itinerario en PDF espacioso y elegante */}
+                <div className="pt-3 border-t border-zinc-200/60 dark:border-zinc-800/60 flex items-center justify-start">
+                  <DownloadPDFButton tour={tour} variant="outline" size="sm" className="w-full sm:w-auto" />
+                </div>
               </div>
             </div>
 
