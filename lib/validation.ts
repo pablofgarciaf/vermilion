@@ -113,6 +113,7 @@ export const leadSchema = z.object({
   guestsCount: z.string().optional(),
   travelers: z.string().optional(),
   message: z.string().optional(),
+  timeline: z.string().optional(),
   _hp_trap: z.string().optional(),
   website_url: z.string().optional(),
 }).superRefine((data, ctx) => {

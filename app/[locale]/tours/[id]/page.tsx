@@ -28,6 +28,7 @@ import {
   Sparkles,
   Hotel,
   ArrowRight,
+  Zap,
 } from 'lucide-react';
 
 interface TourDetailPageProps {
@@ -149,6 +150,63 @@ const DAILY_TOUR_CTA: Record<string, string> = {
   it: 'Prenota il tour', pt: 'Reservar tour', ja: 'ツアーを予約', zh: '预订行程',
 };
 
+const EXPRESS_DEPARTURE_PILL: Record<string, string> = {
+  es: 'Salidas en 24h Disponibles',
+  en: '24h Express Departures Available',
+  fr: 'Départs en 24h Disponibles',
+  de: '24h-Express-Abreisen Verfügbar',
+  it: 'Partenze in 24h Disponibili',
+  pt: 'Saídas em 24h Disponíveis',
+  ja: '24時間以内の即時出発対応',
+  zh: '支持24小时极速出发',
+};
+
+const TIER_COMPARISON: Record<string, { clubFeatures: string; vipFeatures: string }> = {
+  es: {
+    clubFeatures: 'Hoteles 3★ seleccionados, desayuno continental, traslados con A/C, guía naturalista oficial.',
+    vipFeatures: 'Hoteles 4★ de lujo, desayuno buffet, lanchas rápidas VIP, copa de bienvenida y concierge 24/7.',
+  },
+  en: {
+    clubFeatures: 'Selected 3★ boutique hotels, continental breakfast, A/C transfers, official naturalist guide.',
+    vipFeatures: 'Top 4★ luxury hotels, buffet breakfast, VIP speedboats, champagne welcome & 24/7 concierge.',
+  },
+  fr: {
+    clubFeatures: 'Hôtels 3★ sélectionnés, petit-déjeuner continental, transferts climatisés, guide naturaliste.',
+    vipFeatures: 'Hôtels 4★ de luxe, petit-déjeuner buffet, bateaux VIP, champagne de bienvenue et conciergerie 24/7.',
+  },
+  de: {
+    clubFeatures: 'Ausgewählte 3★-Hotels, kontinentales Frühstück, klimatisierte Transfers, zertifizierter Guide.',
+    vipFeatures: 'Erstklassige 4★-Luxushotels, Frühstücksbuffet, VIP-Schnellboote, Begrüßungsgetränk & 24/7 Concierge.',
+  },
+  it: {
+    clubFeatures: 'Hotel 3★ selezionati, colazione continentale, trasferimenti climatizzati, guida naturalistica.',
+    vipFeatures: 'Hotel 4★ di lusso, colazione a buffet, motoscafi VIP veloci, brindisi di benvenuto e concierge 24/7.',
+  },
+  pt: {
+    clubFeatures: 'Hotéis 3★ selecionados, café da manhã continental, traslados com ar condicionado, guia naturalista.',
+    vipFeatures: 'Hotéis 4★ de luxo, buffet de café da manhã, lanchas VIP rápidas, brinde de boas-vindas e concierge 24/7.',
+  },
+  ja: {
+    clubFeatures: '厳選3星ブティックホテル、コンチネンタル朝食、冷房完備専用送迎、公認ナチュラリストガイド。',
+    vipFeatures: '最高級4星ラグジュアリーホテル、ビュッフェ朝食、高速VIPボート、ウェルカムドリンク＆24時間コンシェルジュ。',
+  },
+  zh: {
+    clubFeatures: '精选3星精品酒店、欧式早餐、全空调专属接送、官方认证自然学向导。',
+    vipFeatures: '顶级4星奢华酒店、全丰盛自助早餐、高速VIP巡航快艇、迎宾香槟及24/7全天候礼宾支持。',
+  },
+};
+
+const SELECT_TIER_LABEL: Record<string, string> = {
+  es: 'Seleccione su Categoría:',
+  en: 'Select Your Tier:',
+  fr: 'Sélectionnez votre Catégorie :',
+  de: 'Wählen Sie Ihre Kategorie:',
+  it: 'Seleziona la tua Categoria:',
+  pt: 'Selecione sua Categoria:',
+  ja: 'クラスを選択してください:',
+  zh: '请选择您的专属等级：',
+};
+
 export default async function TourDetailPage({ params }: TourDetailPageProps) {
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
@@ -244,7 +302,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                 {title}
               </h1>
 
-              <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
+              <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
                 <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
                   <Clock className="w-4 h-4" />
                   <span>{duration}</span>
@@ -258,6 +316,11 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                       ({tour.reviewsCount} {getLocalizedText('verified reviews', locale)})
                     </span>
                   )}
+                </span>
+                <span>&bull;</span>
+                <span className="inline-flex items-center gap-1.5 font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100/80 dark:bg-emerald-950/60 px-2.5 py-1 rounded-full text-xs">
+                  <Zap className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 animate-pulse" />
+                  <span>{EXPRESS_DEPARTURE_PILL[locale] || EXPRESS_DEPARTURE_PILL.en}</span>
                 </span>
               </div>
 
@@ -281,7 +344,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
               <div className="pt-2 space-y-3">
                 <div className="flex items-center justify-between gap-3">
                   {!isDailyTour && <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider block">
-                    {locale === 'es' ? 'Seleccione su Categoría:' : 'Select Your Tier:'}
+                    {SELECT_TIER_LABEL[locale] || SELECT_TIER_LABEL.en}
                   </span>}
                   <DownloadPDFButton tour={tour} variant="ghost" size="sm" iconOnly className="ml-auto border border-emerald-200 dark:border-emerald-800" />
                 </div>
@@ -294,41 +357,51 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-all" />
                   </Link>
                 ) : <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  {/* Botón Club (Verde Metálico Elegante) */}
-                  <Link
-                    href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
-                    className="relative flex min-h-[72px] items-center rounded-xl border-2 border-emerald-600/70 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 px-3 py-2.5 shadow-md shadow-emerald-900/30 transition-all hover:brightness-110 group"
-                  >
-                    <div className="flex flex-1 flex-col items-center justify-center gap-0.5 pr-6 text-center">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-white">
-                        <Hotel className="w-3.5 h-3.5 text-emerald-300" />
-                        <span>Vermilion Club (3★)</span>
-                      </div>
-                      <p className="text-xs font-extrabold text-emerald-200">
-                        ${priceClub.toLocaleString('en-US')} USD
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {/* Botón Club (Verde Metálico Elegante) */}
+                    <div className="space-y-1.5">
+                      <Link
+                        href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
+                        className="relative flex min-h-[72px] items-center rounded-xl border-2 border-emerald-600/70 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 px-3 py-2.5 shadow-md shadow-emerald-900/30 transition-all hover:brightness-110 group"
+                      >
+                        <div className="flex flex-1 flex-col items-center justify-center gap-0.5 pr-6 text-center">
+                          <div className="flex items-center gap-1.5 text-xs font-bold text-white">
+                            <Hotel className="w-3.5 h-3.5 text-emerald-300" />
+                            <span>Vermilion Club (3★)</span>
+                          </div>
+                          <p className="text-xs font-extrabold text-emerald-200">
+                            ${priceClub.toLocaleString('en-US')} USD
+                          </p>
+                        </div>
+                        <ArrowRight className="absolute right-3 top-1/2 w-4 h-4 -translate-y-1/2 text-emerald-300 transition-all group-hover:translate-x-0.5" />
+                      </Link>
+                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-snug px-1">
+                        {(TIER_COMPARISON[locale] || TIER_COMPARISON.en).clubFeatures}
                       </p>
                     </div>
-                    <ArrowRight className="absolute right-3 top-1/2 w-4 h-4 -translate-y-1/2 text-emerald-300 transition-all group-hover:translate-x-0.5" />
-                  </Link>
 
-                  {/* Botón VIP (Dorado Metálico Estilo Referencia) */}
-                  <Link
-                    href={`/${locale}/booking?addTour=${tour.id}&tier=vip`}
-                    className="relative flex min-h-[72px] items-center rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-3 py-2.5 shadow-md shadow-amber-500/20 transition-all hover:brightness-105 group"
-                  >
-                    <div className="flex flex-1 flex-col items-center justify-center gap-0.5 pr-6 text-center">
-                      <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-950">
-                        <Sparkles className="w-3.5 h-3.5 text-zinc-950 fill-zinc-950" />
-                        <span>Vermilion VIP (4★)</span>
-                      </div>
-                      <p className="text-xs font-extrabold text-zinc-950">
-                        ${priceVip.toLocaleString('en-US')} USD
+                    {/* Botón VIP (Dorado Metálico Estilo Referencia) */}
+                    <div className="space-y-1.5">
+                      <Link
+                        href={`/${locale}/booking?addTour=${tour.id}&tier=vip`}
+                        className="relative flex min-h-[72px] items-center rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-3 py-2.5 shadow-md shadow-amber-500/20 transition-all hover:brightness-105 group"
+                      >
+                        <div className="flex flex-1 flex-col items-center justify-center gap-0.5 pr-6 text-center">
+                          <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-950">
+                            <Sparkles className="w-3.5 h-3.5 text-zinc-950 fill-zinc-950" />
+                            <span>Vermilion VIP (4★)</span>
+                          </div>
+                          <p className="text-xs font-extrabold text-zinc-950">
+                            ${priceVip.toLocaleString('en-US')} USD
+                          </p>
+                        </div>
+                        <ArrowRight className="absolute right-3 top-1/2 w-4 h-4 -translate-y-1/2 text-zinc-950 transition-all group-hover:translate-x-0.5" />
+                      </Link>
+                      <p className="text-[11px] text-amber-700/90 dark:text-amber-300/90 leading-snug px-1">
+                        {(TIER_COMPARISON[locale] || TIER_COMPARISON.en).vipFeatures}
                       </p>
                     </div>
-                    <ArrowRight className="absolute right-3 top-1/2 w-4 h-4 -translate-y-1/2 text-zinc-950 transition-all group-hover:translate-x-0.5" />
-                  </Link>
-                </div>
+                  </div>
                 </>}
               </div>
             </div>

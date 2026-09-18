@@ -37,6 +37,49 @@ interface BlogPostPageProps {
   }>;
 }
 
+const BLOG_INLINE_CARD_I18N: Record<string, { badge: string; desc: string; cta: string }> = {
+  es: {
+    badge: 'Paisaje & Destino',
+    desc: 'Descubre este paraje en nuestros itinerarios privados con guías naturalistas bilingües y traslados exclusivos.',
+    cta: 'Reservar este tour',
+  },
+  en: {
+    badge: 'Landscape & Destination',
+    desc: 'Explore this landmark on our bespoke itineraries featuring private transfers and certified bilingual naturalists.',
+    cta: 'Book this expedition',
+  },
+  fr: {
+    badge: 'Paysage & Destination',
+    desc: 'Découvrez ce site d’exception dans nos itinéraires sur mesure avec guides bilingues et transferts privés.',
+    cta: 'Réserver ce tour',
+  },
+  de: {
+    badge: 'Landschaft & Reiseziel',
+    desc: 'Entdecken Sie diese Sehenswürdigkeit auf unseren maßgeschneiderten Privattouren mit lizenzierten Guides.',
+    cta: 'Diese Tour buchen',
+  },
+  it: {
+    badge: 'Paesaggio & Destinazione',
+    desc: 'Scopri questa meraviglia nei nostri itinerari privati con guide naturalistiche bilingui e transfer esclusivi.',
+    cta: 'Prenota questo tour',
+  },
+  pt: {
+    badge: 'Paisagem & Destino',
+    desc: 'Descubra este refúgio em nossos roteiros privados com guias naturalistas bilíngues e traslados exclusivos.',
+    cta: 'Reservar este tour',
+  },
+  ja: {
+    badge: '景観・絶景スポット',
+    desc: '公認バイリンガル・ガイドと専用車送迎を備えた完全オーダーメイドのプライベート日程で巡ります。',
+    cta: 'このツアーを予約する',
+  },
+  zh: {
+    badge: '绝景与自然目的地',
+    desc: '在我们的定制私家探险中探索这处自然奇观，尊享官方认证双语自然学向导与专属接送。',
+    cta: '预订此项专属探险',
+  },
+};
+
 export async function generateStaticParams() {
   const LOCALES = ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'];
   const params: { locale: string; slug: string }[] = [];
@@ -622,7 +665,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <div className="flex items-center gap-2">
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wider bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-300/60 dark:border-emerald-800">
                             <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                            <span>{locale === 'es' ? 'Paisaje & Destino' : 'Landscape & Destination'}</span>
+                            <span>{(BLOG_INLINE_CARD_I18N[locale] || BLOG_INLINE_CARD_I18N.en).badge}</span>
                           </span>
                         </div>
 
@@ -631,9 +674,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         </h4>
 
                         <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
-                          {locale === 'es'
-                            ? 'Descubre este paraje en nuestros itinerarios privados con guías naturalistas bilingües y traslados exclusivos.'
-                            : 'Explore this landmark on our bespoke itineraries featuring private transfers and certified bilingual naturalists.'}
+                          {(BLOG_INLINE_CARD_I18N[locale] || BLOG_INLINE_CARD_I18N.en).desc}
                         </p>
 
                         {relatedTour && (
@@ -642,7 +683,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                               href={`/${locale}/booking?addTour=${relatedTour.id}`}
                               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-emerald-900 dark:text-emerald-200 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 transition-all group/btn"
                             >
-                              <span>{locale === 'es' ? 'Reservar este tour' : 'Book this expedition'}</span>
+                              <span>{(BLOG_INLINE_CARD_I18N[locale] || BLOG_INLINE_CARD_I18N.en).cta}</span>
                               <ArrowRight className="w-3.5 h-3.5 text-emerald-600 transition-transform group-hover/btn:translate-x-1" />
                             </Link>
                           </div>

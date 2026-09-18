@@ -111,7 +111,12 @@
     "opt1": "1 Reisender (Alleine)",
     "opt2": "2 Reisende (Paar)",
     "opt35": "Familie / Kleingruppe (3-5)",
-    "opt6plus": "Privat-Charter / Gruppe (6+)"
+    "opt6plus": "Privat-Charter / Gruppe (6+)",
+    "timeline": "Reisezeitraum",
+    "optExpress": "⚡ Express-Abreise (< 48 Std. / Morgen)",
+    "opt1to4weeks": "Nächste 2–4 Wochen",
+    "opt1to3months": "Nächste 1–3 Monate",
+    "optFlexible": "Flexible Termine / In Planung"
   },
   "tour": {
     "overview": "Übersicht",

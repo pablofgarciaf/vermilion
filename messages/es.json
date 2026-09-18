@@ -111,7 +111,12 @@
     "opt1": "1 Viajero (Solo)",
     "opt2": "2 Viajeros (Pareja)",
     "opt35": "Familia / Grupo Pequeño (3-5)",
-    "opt6plus": "Chárter Privado / Grupo Grande (6+)"
+    "opt6plus": "Chárter Privado / Grupo Grande (6+)",
+    "timeline": "Plazo de Viaje",
+    "optExpress": "⚡ Salida Relámpago (< 48h / Mañana)",
+    "opt1to4weeks": "Próximas 2–4 Semanas",
+    "opt1to3months": "Próximos 1–3 Meses",
+    "optFlexible": "Fechas Flexibles / Explorando"
   },
   "tour": {
     "overview": "Resumen",

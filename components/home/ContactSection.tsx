@@ -5,11 +5,47 @@ import { Button } from '@/components/ui/Button';
 import { createBookingInFirestore } from '@/lib/bookings';
 import { filterPhoneInput, isValidEmail, isValidPhone, sanitizeText } from '@/lib/validation';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
-import { useTranslations } from 'next-intl';
-import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle, Zap } from 'lucide-react';
+
+const EXPRESS_BANNER_I18N: Record<string, { title: string; desc: string }> = {
+  es: {
+    title: 'Especialistas en Viajes Relámpago (Salidas en 24h)',
+    desc: '¿Quieres viajar mañana? Gracias a nuestro equipo permanente en Quito y Galápagos, coordinamos tus vuelos internos, permisos de parque, yate privado y hotel boutique en menos de 24 horas.',
+  },
+  en: {
+    title: 'Express Expeditions Specialist (24h Departures)',
+    desc: 'Want to travel tomorrow? Thanks to our resident operations team in Quito and Galapagos, we coordinate domestic flights, park permits, private yachts, and boutique hotels in under 24 hours.',
+  },
+  fr: {
+    title: 'Spécialistes des Expéditions Express (Départs en 24h)',
+    desc: 'Vous souhaitez voyager demain ? Grâce à notre équipe sur place à Quito et aux Galápagos, nous organisons vos vols intérieurs, permis, yachts privés et hôtels boutique en moins de 24 heures.',
+  },
+  de: {
+    title: 'Spezialisten für Express-Abreisen (Abflug in 24h)',
+    desc: 'Möchten Sie morgen reisen? Dank unseres Teams in Quito und auf Galapagos koordinieren wir Inlandsflüge, Nationalpark-Genehmigungen, Privatyachten und Boutique-Hotels in unter 24 Stunden.',
+  },
+  it: {
+    title: 'Specialisti in Viaggi Express (Partenze in 24h)',
+    desc: 'Vuoi viaggiare domani? Grazie al nostro team operativo a Quito e alle Galápagos, coordiniamo voli interni, permessi del parco, yacht privati e boutique hotel in meno di 24 ore.',
+  },
+  pt: {
+    title: 'Especialistas em Viagens Express (Saídas em 24h)',
+    desc: 'Quer viajar amanhã? Graças à nossa equipe residente em Quito e Galápagos, coordenamos seus voos internos, permissões do parque, iates particulares e hotéis boutique em menos de 24 horas.',
+  },
+  ja: {
+    title: '緊急即時出発スペシャリスト（24時間以内の出発対応）',
+    desc: '明日出発をご希望ですか？キトとガラパゴス諸島に常駐する専任チームが、国内線航空券、国立公園入場許可証、専用クルーズ船、ブティックホテルを24時間以内に手配完了いたします。',
+  },
+  zh: {
+    title: '极速出行专家（支持24小时内闪电启程）',
+    desc: '计划明天启程？得益于我们在基多与加拉帕戈斯群岛的在地常驻团队，我们能在24小时内为您统筹厄瓜多尔境内航班、国家公园通行许可、私家游艇与精品度假酒店。',
+  },
+};
 
 export function ContactSection() {
   const t = useTranslations('contact');
+  const locale = useLocale();
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -18,6 +54,7 @@ export function ContactSection() {
     phone: '',
     destination: 'Galapagos Islands',
     travelers: '2 Travelers',
+    timeline: 'flexible',
     message: '',
   });
 
@@ -87,6 +124,7 @@ export function ContactSection() {
           customerPhone: formData.phone,
           destination: formData.destination,
           guestsCount: formData.travelers,
+          timeline: formData.timeline,
           message: formData.message,
         }),
       });
@@ -113,7 +151,8 @@ export function ContactSection() {
           customerPhone: formData.phone,
           destination: formData.destination,
           guestsCount: formData.travelers,
-          message: formData.message,
+          travelDates: formData.timeline === 'express' ? '⚡ Salida Relámpago (< 48h)' : formData.timeline,
+          message: formData.timeline ? `[Plazo: ${formData.timeline}]\n${formData.message}` : formData.message,
         });
         setSubmitted(true);
       } catch (fallbackErr: any) {
@@ -139,6 +178,17 @@ export function ContactSection() {
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed">
               {t('subtitle')}
+            </p>
+          </div>
+
+          {/* Express 24h Departures Callout */}
+          <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-500/15 via-emerald-500/5 to-teal-500/10 border border-emerald-500/30 text-zinc-900 dark:text-zinc-100 shadow-sm space-y-1.5">
+            <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-xs uppercase tracking-wider">
+              <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 animate-pulse" />
+              <span>{(EXPRESS_BANNER_I18N[locale] || EXPRESS_BANNER_I18N.en).title}</span>
+            </div>
+            <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
+              {(EXPRESS_BANNER_I18N[locale] || EXPRESS_BANNER_I18N.en).desc}
             </p>
           </div>
 
@@ -227,6 +277,7 @@ export function ContactSection() {
                     phone: '',
                     destination: 'Galapagos Islands',
                     travelers: '2 Travelers',
+                    timeline: 'flexible',
                     message: ''
                   });
                 }}
@@ -307,7 +358,7 @@ export function ContactSection() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label htmlFor="contact-phone" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">{t('phone')}</label>
                   <input
@@ -348,7 +399,9 @@ export function ContactSection() {
                     <option value="Full Day Excursions">{t('optFullDay')}</option>
                   </select>
                 </div>
+              </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label htmlFor="contact-travelers" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">{t('travelers')}</label>
                   <select
@@ -363,6 +416,25 @@ export function ContactSection() {
                     <option value="2 Travelers">{t('opt2')}</option>
                     <option value="3-5 Travelers">{t('opt35')}</option>
                     <option value="6+ Travelers">{t('opt6plus')}</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label htmlFor="contact-timeline" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
+                    <span>{t('timeline')}</span>
+                  </label>
+                  <select
+                    id="contact-timeline"
+                    aria-label={t('timeline')}
+                    value={formData.timeline}
+                    onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
+                    suppressHydrationWarning
+                    className="w-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 cursor-pointer"
+                  >
+                    <option value="express">{t('optExpress')}</option>
+                    <option value="1-4weeks">{t('opt1to4weeks')}</option>
+                    <option value="1-3months">{t('opt1to3months')}</option>
+                    <option value="flexible">{t('optFlexible')}</option>
                   </select>
                 </div>
               </div>

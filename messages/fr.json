@@ -111,7 +111,12 @@
     "opt1": "1 Voyageur (Solo)",
     "opt2": "2 Voyageurs (Couple)",
     "opt35": "Famille / Petit Groupe (3-5)",
-    "opt6plus": "Privatisation / Grand Groupe (6+)"
+    "opt6plus": "Privatisation / Grand Groupe (6+)",
+    "timeline": "Délai de Voyage",
+    "optExpress": "⚡ Départ Express (< 48h / Demain)",
+    "opt1to4weeks": "Dans les 2 à 4 prochaines semaines",
+    "opt1to3months": "Dans les 1 à 3 prochains mois",
+    "optFlexible": "Dates flexibles / En exploration"
   },
   "tour": {
     "overview": "Aperçu",

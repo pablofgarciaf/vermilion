@@ -57,9 +57,13 @@ const BOOKING_SIDEBAR_I18N: Record<string, {
   tripAdvisorReviews: string;
   from: string;
   checkAvailability: string;
+  expressDepartureBadge: string;
+  expressDepartureText: string;
   waMessage: (title: string, duration: string) => string;
 }> = {
   es: {
+    expressDepartureBadge: 'Salidas en 24h Disponibles',
+    expressDepartureText: '¿Viajas mañana? Gestionamos vuelos internos, permisos y yates de inmediato.',
     startingPrice: 'Tarifa Inicial',
     perPerson: 'USD / por persona',
     durationLabel: 'Duración:',
@@ -77,6 +81,8 @@ const BOOKING_SIDEBAR_I18N: Record<string, {
     waMessage: (title, duration) => `¡Hola Vermilion Routes! Me interesa la expedición "${title}" (${duration}). ¿Podrían enviarme cotización a medida y fechas disponibles?`,
   },
   en: {
+    expressDepartureBadge: '24h Express Departures Available',
+    expressDepartureText: 'Traveling tomorrow? We arrange domestic flights, permits, and private yachts immediately.',
     startingPrice: 'Starting Price',
     perPerson: 'USD / per person',
     durationLabel: 'Duration:',
@@ -94,6 +100,8 @@ const BOOKING_SIDEBAR_I18N: Record<string, {
     waMessage: (title, duration) => `Hello Vermilion Routes! I am interested in the tour "${title}" (${duration}). Could you please send me a custom quote and departure availability?`,
   },
   fr: {
+    expressDepartureBadge: 'Départs Express en 24h Disponibles',
+    expressDepartureText: 'Vous voyagez demain ? Nous gérons vols internes, permis et yachts immédiatement.',
     startingPrice: 'Tarif de Départ',
     perPerson: 'USD / par personne',
     durationLabel: 'Durée :',
@@ -111,6 +119,8 @@ const BOOKING_SIDEBAR_I18N: Record<string, {
     waMessage: (title, duration) => `Bonjour Vermilion Routes ! Je suis intéressé(e) par l'expédition "${title}" (${duration}). Pourriez-vous me transmettre un devis sur mesure et les disponibilités ?`,
   },
   de: {
+    expressDepartureBadge: '24h-Express-Abreisen Verfügbar',
+    expressDepartureText: 'Reisen Sie morgen? Wir organisieren Inlandsflüge, Genehmigungen und Yachten sofort.',
     startingPrice: 'Ab-Preis',
     perPerson: 'USD / pro Person',
     durationLabel: 'Dauer:',
@@ -128,6 +138,8 @@ const BOOKING_SIDEBAR_I18N: Record<string, {
     waMessage: (title, duration) => `Hallo Vermilion Routes! Ich interessiere mich für die Tour "${title}" (${duration}). Könnten Sie mir bitte ein individuelles Angebot und verfügbare Termine zusenden?`,
   },
   it: {
+    expressDepartureBadge: 'Partenze Express in 24h Disponibili',
+    expressDepartureText: 'Viaggi domani? Gestiamo voli interni, permessi e yacht immediatamente.',
     startingPrice: 'Prezzo di Partenza',
     perPerson: 'USD / per persona',
     durationLabel: 'Durata:',
@@ -145,6 +157,8 @@ const BOOKING_SIDEBAR_I18N: Record<string, {
     waMessage: (title, duration) => `Ciao Vermilion Routes! Sono interessato/a alla spedizione "${title}" (${duration}). Potreste inviarmi un preventivo personalizzato e le date disponibili?`,
   },
   pt: {
+    expressDepartureBadge: 'Saídas Express em 24h Disponíveis',
+    expressDepartureText: 'Viaja amanhã? Gerenciamos voos internos, licenças e iates de imediato.',
     startingPrice: 'Tarifa Inicial',
     perPerson: 'USD / por pessoa',
     durationLabel: 'Duração:',
@@ -162,6 +176,8 @@ const BOOKING_SIDEBAR_I18N: Record<string, {
     waMessage: (title, duration) => `Olá Vermilion Routes! Tenho interesse na expedição "${title}" (${duration}). Poderiam me enviar um orçamento sob medida e disponibilidade de saídas?`,
   },
   ja: {
+    expressDepartureBadge: '24時間以内の緊急出発に対応',
+    expressDepartureText: '明日ご出発ですか？国内線、国立公園入場許可、プライベートクルーズを即時手配します。',
     startingPrice: '開始料金',
     perPerson: 'USD / お一人様あたり',
     durationLabel: '所要日数:',
@@ -179,6 +195,8 @@ const BOOKING_SIDEBAR_I18N: Record<string, {
     waMessage: (title, duration) => `Vermilion Routes様、ツアー「${title}」（${duration}）について相談を希望します。特注お見積りと最新の空き状況をお知らせいただけますか？`,
   },
   zh: {
+    expressDepartureBadge: '支持24小时内极速出发',
+    expressDepartureText: '计划明天启程？我们为您即刻协调厄瓜多尔境内航班、国家公园通行证及私家游艇。',
     startingPrice: '起价',
     perPerson: 'USD / 每位旅客',
     durationLabel: '行程时长:',
@@ -318,6 +336,17 @@ export function BookingSidebar({ tour }: BookingSidebarProps) {
             <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>{sb.conciergeSupport}</span>
           </div>
+        </div>
+
+        {/* Express 24h Departures Callout */}
+        <div className="p-3.5 rounded-2xl bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-teal-500/10 border border-emerald-500/25 text-zinc-900 dark:text-zinc-100 space-y-1">
+          <div className="flex items-center gap-1.5 text-emerald-700 dark:text-emerald-400 font-bold text-[11px] uppercase tracking-wider">
+            <Zap className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 animate-pulse" />
+            <span>{sb.expressDepartureBadge}</span>
+          </div>
+          <p className="text-[11px] text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            {sb.expressDepartureText}
+          </p>
         </div>
 
         {/* ── 1. Senior Travel Designer Concierge Card ── */}

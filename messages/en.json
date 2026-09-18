@@ -111,7 +111,12 @@
     "opt1": "1 Traveler (Solo)",
     "opt2": "2 Travelers (Couple)",
     "opt35": "Family / Small Group (3-5)",
-    "opt6plus": "Private Charter / Large Group (6+)"
+    "opt6plus": "Private Charter / Large Group (6+)",
+    "timeline": "Travel Timeline",
+    "optExpress": "⚡ Express Departure (< 48h / Tomorrow)",
+    "opt1to4weeks": "Next 2–4 Weeks",
+    "opt1to3months": "Next 1–3 Months",
+    "optFlexible": "Exploring / Flexible Dates"
   },
   "tour": {
     "overview": "Overview",

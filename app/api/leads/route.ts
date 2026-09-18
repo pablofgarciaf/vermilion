@@ -32,7 +32,9 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
       : 'Galapagos / Mainland Ecuador';
   const destination = sanitizeText(resolvedDestStr);
 
-  const travelDates = sanitizeText(body.travelDates || body.date || 'Flexible');
+  const timeline = sanitizeText(body.timeline || '');
+  const rawDates = sanitizeText(body.travelDates || body.date || 'Flexible');
+  const travelDates = timeline ? `${timeline} | ${rawDates}` : rawDates;
   const guestsCount = sanitizeText(body.guestsCount || body.travelers || '2 Travelers');
   const message = sanitizeText(body.message || '');
 
