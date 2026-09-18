@@ -144,7 +144,7 @@ export function ContactSection() {
 
           <div className="space-y-4">
             <a
-              href="tel:+593994048458"
+              href="tel:+593960039156"
               className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
             >
               <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform">
@@ -153,7 +153,7 @@ export function ContactSection() {
               <div>
                 <span className="text-xs text-zinc-400 font-medium block">{t('directCall')}</span>
                 <span className="font-semibold text-zinc-900 dark:text-white text-sm group-hover:text-emerald-600 transition-colors">
-                  +593 99 404 8458
+                  +593 96 003 9156
                 </span>
               </div>
             </a>

@@ -6,10 +6,10 @@ const dir169 = path.resolve('public/images/tours/16-9');
 const dir916 = path.resolve('public/images/tours/9-16');
 
 const map169 = [
-  { src: 'hero_galapagos_tortoise_16_9_1787444174780.jpg', dst: 'galapagos-tortuga-gigante-16-9.jpg' },
-  { src: 'hero_quito_san_francisco_16_9_1787444265434.jpg', dst: 'quito-iglesia-de-san-francisco-16-9.jpg' },
-  { src: 'hero_banos_waterfall_16_9_1787444296467.jpg', dst: 'pailon-del-diablo-16-9.jpg' },
-  { src: 'hero_cotopaxi_volcano_16_9_1787445625907.jpg', dst: 'cotopaxi-volcano-16-9.jpg' },
+  { src: 'hero_galapagos_tortoise_16_9_1787444174780.jpg', dst: 'galapagos-tortuga-gigante-16-9.webp' },
+  { src: 'hero_quito_san_francisco_16_9_1787444265434.jpg', dst: 'quito-iglesia-de-san-francisco-16-9.webp' },
+  { src: 'hero_banos_waterfall_16_9_1787444296467.jpg', dst: 'pailon-del-diablo-16-9.webp' },
+  { src: 'hero_cotopaxi_volcano_16_9_1787445625907.jpg', dst: 'cotopaxi-volcano-16-9.webp' },
   { src: 'hero_quilotoa_crater_16_9_1787445686657.jpg', dst: 'quilotoa-16-9.jpg' },
   { src: 'hero_amazon_napo_16_9_1787445736890.jpg', dst: 'amazon-river-canoe-16-9.jpg' },
   { src: 'hero_isabela_tintoreras_16_9_1787445790400.jpg', dst: 'isabela-island-16-9.jpg' },

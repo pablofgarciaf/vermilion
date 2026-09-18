@@ -57,7 +57,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
   const tierButtonTextSize = isDailyTour ? 'text-[10px] sm:text-xs' : 'text-[11px] sm:text-sm';
   const desktopTierButtonTextSize = isDailyTour ? 'text-[10px] lg:text-[11px]' : 'text-[10px] lg:text-xs';
 
-  const whatsappUrl = `https://wa.me/593994048458?text=${encodeURIComponent(
+  const whatsappUrl = `https://wa.me/593960039156?text=${encodeURIComponent(
     locale === 'es'
       ? `Hola, deseo información sobre el tour: ${title}`
       : `Hello, I would like information about the tour: ${title}`
@@ -130,11 +130,11 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               <div className="absolute right-0 mt-2.5 w-60 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl py-2 z-50 animate-in fade-in duration-200">
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors">
                   <MessageCircle className="w-4 h-4 text-emerald-600" />
-                  <span>{t.whatsapp} (+593 99 404 8458)</span>
+                  <span>{t.whatsapp} (+593 96 003 9156)</span>
                 </a>
-                <a href="tel:+593994048458" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors border-t border-zinc-100 dark:border-zinc-800">
+                <a href="tel:+593960039156" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors border-t border-zinc-100 dark:border-zinc-800">
                   <Phone className="w-4 h-4 text-emerald-600" />
-                  <span>{t.call} (+593 99 404 8458)</span>
+                  <span>{t.call} (+593 96 003 9156)</span>
                 </a>
               </div>
             )}
@@ -211,11 +211,11 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
                 <div className="absolute left-0 mt-2.5 w-60 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl py-2 z-50 animate-in fade-in duration-200">
                   <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors">
                     <MessageCircle className="w-4 h-4 text-emerald-600" />
-                    <span>{t.whatsapp} (+593 99 404 8458)</span>
+                    <span>{t.whatsapp} (+593 96 003 9156)</span>
                   </a>
-                  <a href="tel:+593994048458" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors border-t border-zinc-100 dark:border-zinc-800">
+                  <a href="tel:+593960039156" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors border-t border-zinc-100 dark:border-zinc-800">
                     <Phone className="w-4 h-4 text-emerald-600" />
-                    <span>{t.call} (+593 99 404 8458)</span>
+                    <span>{t.call} (+593 96 003 9156)</span>
                   </a>
                 </div>
               )}

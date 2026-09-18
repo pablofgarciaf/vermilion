@@ -123,7 +123,7 @@ ${catalog}
    - For Travelers: Dates, destinations (Galapagos vs Andes/Amazon), or number of travelers?
    - For Ambassadors: Are they looking to monetize their social media audience or promote to luxury clients?
 3. **Closing Call-to-Action**: Propose:
-   - "¿Deseas que te contactemos por WhatsApp (+593 98 399 2549) o llamada?"
+   - "¿Deseas que te contactemos por WhatsApp (+593 99 404 8458) o llamada?"
    - "¿Prefieres dejarnos tu correo para enviarte el itinerario o plan de comisiones?"
    - "¿O deseas registrarte gratis ahora mismo en nuestro portal?"
 

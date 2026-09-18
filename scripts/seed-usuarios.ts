@@ -27,7 +27,7 @@ async function seedUsuarios() {
       role: 'super',
       roles: ['super', 'admin', 'operator', 'editor'],
       authUid: 'DmwBje9JwvVJKbe5rr8ExCS823S2',
-      phone: '+593983992549',
+      phone: '+593994048458',
       address: 'Ecuador',
       cedula: '1721790721',
       isActive: true,

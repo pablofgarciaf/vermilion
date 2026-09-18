@@ -83,7 +83,7 @@ export function ConciergeWidget() {
   const [leadCaptured, setLeadCaptured] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const phoneNumber = '593994048458';
+  const phoneNumber = '593960039156';
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -294,7 +294,7 @@ export function ConciergeWidget() {
                     <ChevronRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
                   </div>
                   <p className="text-[11px] text-zinc-300 mt-0.5">
-                    Chat with senior travel specialist Pablo & Team (+593 99 404 8458).
+                    Chat with senior travel specialist Pablo & Team (+593 96 003 9156).
                   </p>
                 </div>
               </a>

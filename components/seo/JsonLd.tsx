@@ -33,7 +33,7 @@ export function TourJsonLd({ tour, locale }: TourJsonLdProps) {
       '@type': 'TravelAgency',
       name: 'Vermilion Routes - Agencia de Viajes Vermilion',
       url: 'https://www.vermilionroutes.com',
-      telephone: '+593994048458',
+      telephone: '+593960039156',
     },
     aggregateRating: {
       '@type': 'AggregateRating',

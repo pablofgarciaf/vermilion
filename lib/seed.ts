@@ -4,11 +4,11 @@ import { mockTours, mockDestinations, mockReviews } from '@/data/mock';
 
 export const defaultSettings = {
   contact: {
-    phone: "+593 99 404 8458",
+    phone: "+593 96 003 9156",
     email: "info@vermilionroutes.com",
     address: "Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170503), Ecuador",
     addressSpain: "Calle Seco 3, 28007 Madrid, España (Coral Tour)",
-    whatsappUrl: "https://wa.me/593994048458",
+    whatsappUrl: "https://wa.me/593960039156",
     facebook: "https://www.facebook.com/VermilionSouthAmericanRoutes",
     instagram: "https://www.instagram.com/vermilionsouthamericanroutes/",
     tiktok: "https://www.tiktok.com/@vermilionsaroutes",
@@ -31,8 +31,8 @@ export const defaultSettings = {
         title: 'GIANT TORTOISES',
         title2: 'OF GALAPAGOS',
         description: 'Observe ancient giant tortoises roaming freely in their natural habitat at the highlands of Santa Cruz Island and explore majestic volcanic twin craters.',
-        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
-        desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+        desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
         mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.jpg'
       },
       {
@@ -40,8 +40,8 @@ export const defaultSettings = {
         title: 'HISTORIC CENTER',
         title2: 'OF QUITO',
         description: 'The first UNESCO World Cultural Heritage site in the world. Walk along preserved cobblestone streets and marvel at the golden altars of La Compañía Church.',
-        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg',
-        desktopImage: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg',
+        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
+        desktopImage: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
         mobileImage: '/images/tours/16-9/quito-colonial-16-9.jpg'
       },
       {
@@ -49,8 +49,8 @@ export const defaultSettings = {
         title: 'PAILÓN',
         title2: 'DEL DIABLO',
         description: 'Feel the thunderous roar of Ecuador’s most famous waterfall. Experience suspension bridges, lush tropical cloud forest, and the scenic Route of the Waterfalls.',
-        image: '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
-        desktopImage: '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
+        image: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
+        desktopImage: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
         mobileImage: '/images/tours/9-16/pailon-diablo-9-16.jpg'
       },
       {
@@ -58,9 +58,9 @@ export const defaultSettings = {
         title: 'MAJESTIC VOLCANO',
         title2: 'COTOPAXI',
         description: 'The iconic snow-capped volcano rising proudly over 5,897 meters across the Avenue of Volcanoes, surrounded by wild horses and high-altitude Andean páramo.',
-        image: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-        desktopImage: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-        mobileImage: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg'
+        image: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+        desktopImage: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+        mobileImage: '/images/tours/16-9/cotopaxi-volcano-16-9.webp'
       },
       {
         place: 'Cotopaxi - Quilotoa',
@@ -94,8 +94,8 @@ export const defaultSettings = {
         title: 'COLONIAL CUENCA',
         title2: '& CAJAS',
         description: 'Discover the UNESCO-listed colonial elegance of Cuenca, handcrafted toquilla hats, and hike among the 200 glacial lakes of Cajas National Park.',
-        image: '/images/tours/16-9/cuenca-colonial-16-9.jpg',
-        desktopImage: '/images/tours/16-9/cuenca-colonial-16-9.jpg',
+        image: '/images/tours/16-9/cuenca-colonial-16-9.webp',
+        desktopImage: '/images/tours/16-9/cuenca-colonial-16-9.webp',
         mobileImage: '/images/tours/9-16/cajas-national-park-9-16.jpg'
       },
       {
@@ -103,8 +103,8 @@ export const defaultSettings = {
         title: 'HIGHEST SUMMIT',
         title2: 'OF CHIMBORAZO',
         description: 'The closest point on Earth to the Sun at 6,310 meters. Experience the majestic Andean reserve home to wild vicuñas and ancestral Inca mountain landscapes.',
-        image: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
-        desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
+        image: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+        desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
         mobileImage: '/images/tours/9-16/chimborazo-9-16.jpg'
       },
       {
@@ -112,8 +112,8 @@ export const defaultSettings = {
         title: 'LAS GRIETAS',
         title2: '& LOBERÍA',
         description: 'Swim and snorkel in the crystal-clear volcanic crevice of Las Grietas and observe playful Galapagos sea lions resting on the white sand beaches of La Lobería.',
-        image: '/images/tours/16-9/galapagos-las-grietas-16-9.jpg',
-        desktopImage: '/images/tours/16-9/galapagos-las-grietas-16-9.jpg',
+        image: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
+        desktopImage: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
         mobileImage: '/images/tours/9-16/galapagos-las-grietas-9-16.jpg'
       }
     ]
@@ -123,7 +123,7 @@ export const defaultSettings = {
     subtitle: "OUR CREDENTIALS",
     paragraph1: "At Vermilion Routes, we don't just book tours. We curate deeply personal, once-in-a-lifetime expeditions across the spectacular landscapes of Ecuador and the Galapagos. As direct local operators, we combine local wisdom with uncompromising exclusivity.",
     paragraph2: "Whether you are navigating the volcanic channels of the Galapagos on a private yacht charter, staying in remote, eco-friendly Amazon rainforest canopy suites, or walking the cobblestone paths of Quito historic center, we handle every detail with absolute precision.",
-    imageUrl: "/images/tours/16-9/cuenca-colonial-16-9.jpg",
+    imageUrl: "/images/tours/16-9/cuenca-colonial-16-9.webp",
     metric1Val: "100%",
     metric1Lbl: "Bespoke & Tailor-Made",
     metric2Val: "+15 Yrs",
@@ -225,11 +225,13 @@ export async function seedAllDataToFirestore(): Promise<void> {
     await setDoc(settingsRef, defaultSettings, { merge: true });
     console.log('Seeded settings.');
 
-    // Delete any legacy peru destination if exists in Firestore
+    // Delete any legacy peru destination or obsolete tour IDs if exists in Firestore
     try {
       const { deleteDoc } = await import('firebase/firestore');
       await deleteDoc(doc(db, 'destinations', 'peru'));
       await deleteDoc(doc(db, 'destinations', 'peru-místico'));
+      await deleteDoc(doc(db, 'tours', 'galapagos-4days'));
+      await deleteDoc(doc(db, 'tours', 'galapagos-5days'));
     } catch {}
 
     // 2. Seed destinations

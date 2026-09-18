@@ -89,8 +89,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       }[locale] || 'en_US',
       images: [
         {
-          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
-          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
           width: 1200,
           height: 630,
           type: 'image/jpeg',
@@ -105,7 +105,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       creator: '@vermilionroutes',
       title,
       description,
-      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'],
+      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
     },
   };
 }
@@ -401,10 +401,10 @@ export default async function AboutPage({ params }: PageProps) {
       "legalName": "Agencia de Viajes Vermilion",
       "foundingDate": "2005",
       "taxID": "1711992808001",
-      "telephone": "+593994048458",
+      "telephone": "+593960039156",
       "email": "info@vermilionroutes.com",
       "url": "https://www.vermilionroutes.com",
-      "image": "https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg",
+      "image": "https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp",
       "address": [
         {
           "@type": "PostalAddress",
@@ -631,8 +631,8 @@ export default async function AboutPage({ params }: PageProps) {
               </p>
               <p className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                <a href="tel:+593994048458" className="hover:text-emerald-700 dark:hover:text-white transition-colors">
-                  +593-994-048-458
+                <a href="tel:+593960039156" className="hover:text-emerald-700 dark:hover:text-white transition-colors">
+                  +593-96-003-9156
                 </a>
               </p>
               <p className="flex items-center gap-2.5">
@@ -669,8 +669,8 @@ export default async function AboutPage({ params }: PageProps) {
               </p>
               <p className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-amber-500 shrink-0" />
-                <a href="tel:+593994048458" className="hover:text-amber-600 dark:hover:text-white transition-colors">
-                  +593-994-048-458 (Direct WhatsApp VIP)
+                <a href="tel:+593960039156" className="hover:text-amber-600 dark:hover:text-white transition-colors">
+                  +593-96-003-9156 (Direct WhatsApp VIP)
                 </a>
               </p>
               <p className="flex items-center gap-2.5">
@@ -731,7 +731,7 @@ export default async function AboutPage({ params }: PageProps) {
         </p>
         <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
           <a
-            href="https://wa.me/593994048458"
+            href="https://wa.me/593960039156"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all hover:scale-105 active:scale-95 shadow-xl shadow-emerald-950/20"

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const COUPLES_TOUR_IDS = ['ecuador-galapagos-12days', 'ecuador-galapagos-11days', 'galapagos-6days', 'galapagos-5days', 'snow-volcanoes-6days'];
+const COUPLES_TOUR_IDS = ['ecuador-galapagos-12days', 'ecuador-galapagos-11days', 'galapagos-8days', 'galapagos-7days', 'snow-volcanoes-6days'];
 
 export default async function CouplesAnniversaryPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -68,7 +68,7 @@ export default async function CouplesAnniversaryPage({ params }: { params: Promi
             {isEs ? 'Momentos unicos e irrepetibles para parejas: amaneceres sobre volcanes andinos, playas virgenes en Galapagos y hoteles boutique con vistas de sueno.' : "Unrepeatable moments for couples: Andean volcano sunrises, pristine Galapagos beaches, and dream-view boutique hotels."}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <a href={"https://wa.me/593994048458?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all hover:scale-105 shadow-lg">
+            <a href={"https://wa.me/593960039156?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all hover:scale-105 shadow-lg">
               <MessageCircle className="w-4 h-4" />
               {isEs ? 'Planificar Nuestro Viaje' : 'Plan Our Trip'}
             </a>
@@ -133,7 +133,7 @@ export default async function CouplesAnniversaryPage({ params }: { params: Promi
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white">{isEs ? 'Haz Inolvidable Vuestra Ocasion Especial' : 'Make Your Special Occasion Unforgettable'}</h2>
           <p className="text-zinc-600 dark:text-zinc-400">{isEs ? 'Disenamos cada detalle: aniversarios, lunas de miel, propuestas de matrimonio o simplemente el viaje de vuestra vida.' : "We design every detail: anniversaries, honeymoons, proposals, or simply the trip of your life."}</p>
-          <a href={"https://wa.me/593994048458?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base transition-all hover:scale-105 shadow-xl">
+          <a href={"https://wa.me/593960039156?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base transition-all hover:scale-105 shadow-xl">
             <MessageCircle className="w-5 h-5" />
             {isEs ? 'Disenar Nuestro Escape Perfecto' : 'Design Our Perfect Escape'}
           </a>

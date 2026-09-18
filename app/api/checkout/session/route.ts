@@ -57,7 +57,7 @@ export const POST = withValidation(checkoutSchema, async (request, _ctx, data) =
               product_data: {
                 name: resolvedTitle,
                 description: `${paymentType === 'full' ? 'Full Expedition Payment' : 'Expedition Reservation Deposit'} • Ref: ${bookingRef}`,
-                images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'],
+                images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
               },
               unit_amount: Math.round(finalAmountUSD * 100),
             },
@@ -88,9 +88,9 @@ export const POST = withValidation(checkoutSchema, async (request, _ctx, data) =
 
       return NextResponse.json({ sessionId: session.id, url: session.url });
     } catch (stripeErr: any) {
-      console.error('Stripe checkout session creation failed:', stripeErr.message);
+      console.error('Stripe checkout session creation failed:', stripeErr?.message || stripeErr);
       return NextResponse.json(
-        { error: stripeErr.message || 'Payment session could not be created' },
+        { error: 'Payment session could not be created' },
         { status: 500 }
       );
     }

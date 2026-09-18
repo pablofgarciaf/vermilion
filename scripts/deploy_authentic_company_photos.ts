@@ -7,28 +7,28 @@ const dir916 = path.resolve('public/images/tours/9-16');
 
 const realPhotoMappings = [
   {
-    target169: 'galapagos-tortuga-gigante-16-9.jpg',
+    target169: 'galapagos-tortuga-gigante-16-9.webp',
     target916: 'galapagos-tortuga-gigante-9-16.jpg',
     source: '16as-07-1.jpg',
     backupSource: 'galatoursopt-01.jpg',
     title: 'Galapagos Giant Tortoises'
   },
   {
-    target169: 'quito-iglesia-de-san-francisco-16-9.jpg',
+    target169: 'quito-iglesia-de-san-francisco-16-9.webp',
     target916: 'quito-plaza-independencia-9-16.jpg',
     source: 'plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg',
     backupSource: 'nrew-11.jpg',
     title: 'Quito Historic Center'
   },
   {
-    target169: 'pailon-del-diablo-16-9.jpg',
+    target169: 'pailon-del-diablo-16-9.webp',
     target916: 'banos-cascada-9-16.jpg',
     source: 'nrew-09.jpg',
     backupSource: 'nrew-09.jpg',
     title: 'Baños Pailón del Diablo'
   },
   {
-    target169: 'cotopaxi-volcano-16-9.jpg',
+    target169: 'cotopaxi-volcano-16-9.webp',
     target916: 'cotopaxi-volcano-9-16.jpg',
     source: 'blogvolcan1.jpg',
     backupSource: 'nrew-03.jpg',

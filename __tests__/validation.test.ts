@@ -19,7 +19,7 @@ describe('Perimeter Input Validation & Sanitization Security', () => {
   });
 
   it('should correctly validate phone numbers', () => {
-    expect(isValidPhone('+593994048458')).toBe(true);
+    expect(isValidPhone('+593960039156')).toBe(true);
     expect(isValidPhone('+1 (555) 234-5678')).toBe(true);
     expect(isValidPhone('123')).toBe(false);
   });

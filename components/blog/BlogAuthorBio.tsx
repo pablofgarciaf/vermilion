@@ -173,7 +173,7 @@ export function BlogAuthorBio({ locale = 'en' }: BlogAuthorBioProps) {
       {/* WhatsApp Concierge direct contact */}
       <div className="pt-2 flex justify-start">
         <a
-          href="https://wa.me/593994048458?text=Hola%20Jhayro,%20leí%20tu%20artículo%20en%20Vermilion%20Routes%20y%20deseo%20planificar%20una%20expedición%20a%20medida."
+          href="https://wa.me/593960039156?text=Hola%20Jhayro,%20leí%20tu%20artículo%20en%20Vermilion%20Routes%20y%20deseo%20planificar%20una%20expedición%20a%20medida."
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-sm hover:scale-[1.01] active:scale-95"

@@ -44,6 +44,7 @@ next-env.d.ts
 # IDE & Skills
 .vscode/
 .idea/
+.claude/
 scratch/
 .agents/
 skills-lock.json

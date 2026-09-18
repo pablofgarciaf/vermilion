@@ -71,7 +71,7 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "CAPÍTULO II: ISLAS GALÁPAGOS — EXPEDICIÓN MARINA",
     andesChapterTitle: "CAPÍTULO I: REGIÓN ANDINA Y AMAZONÍA",
     conciergeTitle: "CONCIERGE 24/7 WHATSAPP Y RESERVAS PERSONALIZADAS",
-    conciergeDesc: "Escribe a +593 994 048 458 para personalizar fechas, mejorar hoteles o solicitar guías privados."
+    conciergeDesc: "Escribe a +593 96 003 9156 para personalizar fechas, mejorar hoteles o solicitar guías privados."
   }
 };
 
@@ -129,7 +129,7 @@ function drawHeaderBand(doc: any, logoBase64: string | null, pageWidth: number, 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(7.6);
   doc.setTextColor(30, 41, 59);
-  doc.text('+(593) 994-048-458', cX + 5.2, cY1);
+  doc.text('+(593) 96-003-9156', cX + 5.2, cY1);
 
   // --- Email Vector Icon ---
   doc.setFillColor(27, 67, 50);
@@ -187,7 +187,7 @@ function renderTourIntoDoc(doc: any, tour: Tour, isFirstTour: boolean = false, l
   const contentWidth = pageWidth - marginX - marginRight; // 182mm
   let yPos = 0;
 
-  const coverImgPath = tour.desktopImage || tour.imageUrl || '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg';
+  const coverImgPath = tour.desktopImage || tour.imageUrl || '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp';
   const coverBase64 = loadLocalImageAsBase64(coverImgPath);
 
   const dayImagesBase64: (string | null)[] = [];

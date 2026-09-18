@@ -8,19 +8,19 @@ const dest916 = path.resolve('public/images/tours/9-16');
 const image169Mappings = [
   {
     src: 'hero_galapagos_giant_tortoise_16_9_1787445749716.jpg',
-    target: 'galapagos-tortuga-gigante-16-9.jpg'
+    target: 'galapagos-tortuga-gigante-16-9.webp'
   },
   {
     src: 'hero_quito_san_francisco_16_9_1787445778848.jpg',
-    target: 'quito-iglesia-de-san-francisco-16-9.jpg'
+    target: 'quito-iglesia-de-san-francisco-16-9.webp'
   },
   {
     src: 'hero_pailon_del_diablo_waterfall_16_9_1787445802283.jpg',
-    target: 'pailon-del-diablo-16-9.jpg'
+    target: 'pailon-del-diablo-16-9.webp'
   },
   {
     src: 'hero_cotopaxi_volcano_16_9_1787445837130.jpg',
-    target: 'cotopaxi-volcano-16-9.jpg'
+    target: 'cotopaxi-volcano-16-9.webp'
   },
   {
     src: 'hero_quilotoa_crater_lake_16_9_1787445859664.jpg',

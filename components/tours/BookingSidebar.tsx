@@ -294,7 +294,7 @@ export function BookingSidebar({ tour }: BookingSidebarProps) {
 
           {/* Quick WhatsApp Inquiry */}
           <a
-            href={`https://wa.me/593994048458?text=${whatsappMessage}`}
+            href={`https://wa.me/593960039156?text=${whatsappMessage}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100 transition-colors text-xs font-bold"
@@ -343,7 +343,7 @@ export function BookingSidebar({ tour }: BookingSidebarProps) {
 
           <div className="grid grid-cols-2 gap-2 pt-1">
             <a
-              href={`https://wa.me/593994048458?text=${whatsappMessage}`}
+              href={`https://wa.me/593960039156?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold shadow-sm transition-all"
@@ -353,7 +353,7 @@ export function BookingSidebar({ tour }: BookingSidebarProps) {
             </a>
 
             <a
-              href="tel:+593994048458"
+              href="tel:+593960039156"
               className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-[11px] font-bold transition-all"
             >
               <Phone className="w-3.5 h-3.5 text-zinc-600" />

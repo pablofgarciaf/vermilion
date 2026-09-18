@@ -87,7 +87,7 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
 
   const dest = getLocalizedText(tour.destination, resolvedParams.locale);
   const alternates = getSeoAlternates(`/tours/${tour.id}`, resolvedParams.locale);
-  const rawImg = tour.mainImage || tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg';
+  const rawImg = tour.mainImage || tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp';
   const fullImgUrl = rawImg.startsWith('http') ? rawImg : `https://www.vermilionroutes.com${rawImg}`;
   const fbLocale = {
     es: 'es_LA',

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const FAMILY_TOUR_IDS = ['galapagos-4days', 'galapagos-5days', 'ecuador-fantastic-8days', 'andes-amazon-7days', 'ecuador-galapagos-12days'];
+const FAMILY_TOUR_IDS = ['galapagos-6days', 'galapagos-7days', 'ecuador-fantastic-8days', 'andes-amazon-7days', 'ecuador-galapagos-12days'];
 
 export default async function FamilyFriendlyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -68,7 +68,7 @@ export default async function FamilyFriendlyPage({ params }: { params: Promise<{
             {isEs ? 'Descubrid juntos tortugas gigantes, leones marinos, volcanes nevados y selva amazonica. Expediciones disenadas para todas las edades, 100% privadas y a vuestro ritmo.' : "Discover giant tortoises, sea lions, snowy volcanoes and Amazon jungle together. Expeditions designed for all ages, 100% private and at your pace."}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <a href={"https://wa.me/593994048458?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all hover:scale-105 shadow-lg">
+            <a href={"https://wa.me/593960039156?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all hover:scale-105 shadow-lg">
               <MessageCircle className="w-4 h-4" />
               {isEs ? 'Planificar Nuestra Aventura' : 'Plan Our Family Adventure'}
             </a>
@@ -130,7 +130,7 @@ export default async function FamilyFriendlyPage({ params }: { params: Promise<{
         <div className="max-w-2xl mx-auto space-y-6">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white">{isEs ? 'El Viaje Familiar que Siempre Sonasteis' : 'The Family Trip You Have Always Dreamed Of'}</h2>
           <p className="text-zinc-600 dark:text-zinc-400">{isEs ? 'Cada aventura es 100% privada y adaptada a las edades y ritmos de vuestra familia.' : "Every adventure is 100% private and adapted to your family's ages and pace."}</p>
-          <a href={"https://wa.me/593994048458?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base transition-all hover:scale-105 shadow-xl">
+          <a href={"https://wa.me/593960039156?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base transition-all hover:scale-105 shadow-xl">
             <MessageCircle className="w-5 h-5" />
             {isEs ? 'Disenar Nuestra Aventura Familiar' : 'Design Our Family Adventure'}
           </a>

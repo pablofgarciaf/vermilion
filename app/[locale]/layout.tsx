@@ -55,8 +55,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Vermilion Routes',
       images: [
         {
-          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
-          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
           width: 1200,
           height: 630,
           type: 'image/jpeg',
@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       creator: '@vermilionroutes',
       title: t('title') || defaultTitle,
       description: t('description') || defaultDescription,
-      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'],
+      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
     },
     verification: {
       google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'google-site-verification-vermilion',
@@ -139,7 +139,7 @@ export default async function RootLayout({
         url: 'https://www.vermilionroutes.com',
         logo: 'https://www.vermilionroutes.com/logo.png',
         image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
-        telephone: '+593994048458',
+        telephone: '+593960039156',
         email: 'info@vermilionroutes.com',
         priceRange: '$$$$',
         openingHours: 'Mo,Tu,We,Th,Fr 09:00-18:00',
@@ -178,14 +178,14 @@ export default async function RootLayout({
         contactPoint: [
           {
             '@type': 'ContactPoint',
-            telephone: '+593994048458',
+            telephone: '+593960039156',
             contactType: 'customer service',
             availableLanguage: ['English', 'Spanish', 'French', 'German', 'Italian', 'Portuguese'],
             areaServed: ['EC', 'US', 'CA', 'GB', 'EU'],
           },
           {
             '@type': 'ContactPoint',
-            telephone: '+593983992549',
+            telephone: '+593994048458',
             contactType: 'reservations',
             availableLanguage: ['English', 'Spanish', 'French', 'German', 'Italian', 'Portuguese'],
             areaServed: ['EC', 'US', 'CA', 'GB', 'EU'],

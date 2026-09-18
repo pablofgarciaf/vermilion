@@ -2,112 +2,375 @@ import { Tour, Destination, Review } from '@/types';
 import { dailyTours } from './dailyToursData';
 
 const multiDayTours: Tour[] = [
-  // Tour 1: Galapagos 4 Days
+  // Tour: galapagos-6days
   {
-    id: 'galapagos-4days',
+    id: 'galapagos-6days',
     code: '1.1',
     title: {
-      en: 'Galapagos Encounter: 4 Days Of Wonder',
-      es: 'Encuentro Galápagos: 4 Días De Magia',
-      fr: 'Rencontre aux Galápagos: 4 Jours Merveilleux',
-      de: 'Galapagos Entdeckung: 4 Tage Magie',
-      it: 'Incontro alle Galapagos: 4 Giorni di Magia',
-      pt: 'Encontro em Galápagos: 4 Dias de Magia',
-      ja: 'ガラパゴス諸島 4日間の驚異',
-      zh: '加拉帕戈斯群岛4日奇妙之旅'
+      en: 'Galapagos Encounter: 6-Day Expedition (With Quito Transfers)',
+      es: 'Encuentro Galápagos: 6 Días De Magia (Con Transfers UIO)',
+      fr: 'Rencontre aux Galápagos: 6 Jours Merveilleux (Transferts UIO Inclus)',
+      de: 'Galapagos Entdeckung: 6 Tage Magie (Inkl. Quito-Transfers)',
+      it: 'Incontro alle Galapagos: 6 Giorni di Magia (Con Trasferimenti UIO)',
+      pt: 'Encontro em Galápagos: 6 Dias de Magia (Com Transfers UIO)',
+      ja: 'ガラパゴス諸島 6日間の驚異（キト送迎付き）',
+      zh: '加拉帕戈斯群岛6日奇妙之旅（含基多接送机）'
     },
     destination: 'Galapagos',
     duration: {
-      en: '4 DAYS / 3 NIGHTS',
-      es: '4 DÍAS / 3 NOCHES',
-      fr: '4 JOURS / 3 NUITS',
-      de: '4 TAGE / 3 NÄCHTE',
-      it: '4 GIORNI / 3 NOTTI',
-      pt: '4 DIAS / 3 NOITES',
-      ja: '4日間 / 3泊',
-      zh: '4天 / 3晚'
+      en: '6 DAYS / 5 NIGHTS',
+      es: '6 DÍAS / 5 NOCHES',
+      fr: '6 JOURS / 5 NUITS',
+      de: '6 TAGE / 5 NÄCHTE',
+      it: '6 GIORNI / 5 NOTTI',
+      pt: '6 DIAS / 5 NOITES',
+      ja: '6日間 / 5泊',
+      zh: '6天 / 5晚'
     },
-    durationDays: 4,
-    price: 1,
-    price3Star: 1,
-    price4Star: 1,
-    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+    durationDays: 6,
+    price: 1790,
+    price3Star: 1790,
+    price4Star: 2199,
+    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
     mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.jpg',
-    desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+    desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
     gallery: [
-      '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
-      '/images/tours/16-9/galapagos-snorkeling-16-9.jpg',
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
-      '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.jpg',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
+      '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
+      '/images/tours/16-9/galapagos-tintoreras16-9.jpg',
       '/images/tours/16-9/galapagos-lobo-marino-16-9.jpg',
       '/images/tours/16-9/galapagos-puerto-ayora-16-9.jpg',
-      '/images/tours/16-9/santa-fe-island-16-9.jpg',
-      '/images/tours/16-9/galapagos-focas-16-9.jpg'
+      '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.1.webp',
+      '/images/tours/16-9/galapagos-baltra-island-16-9.jpg'
     ],
     rating: 5,
-    reviewsCount: 28,
+    reviewsCount: 32,
     isPopular: true,
     category: {
-      en: 'Island Hopping Expedition',
-      es: 'Expedición Island Hopping',
-      fr: "Expédition d'île en île",
-      de: 'Insel-Hopping-Expedition',
-      it: 'Spedizione Island Hopping',
-      pt: 'Expedição Entre Ilhas',
-      ja: 'アイランドホッピング探検',
-      zh: '跳岛精华探险'
+      en: 'Island Hopping Expedition & Quito Transfers',
+      es: 'Expedición Island Hopping y Transfers en Quito',
+      fr: 'Expédition d\'île en île et transferts à Quito',
+      de: 'Insel-Hopping-Expedition & Quito-Transfers',
+      it: 'Spedizione Island Hopping e Trasferimenti a Quito',
+      pt: 'Expedição Entre Ilhas e Transfers em Quito',
+      ja: 'アイランドホッピング探検＆キト送迎',
+      zh: '跳岛精华探险与基多专属接送'
     },
     description: {
-      en: 'Experience the wonders of the Galápagos on this 4-day itinerary featuring Santa Cruz highlands, giant tortoises at Primicias Ranch, full-day boat excursion to Isabela Island with Tintoreras snorkeling and flamingo lagoon, and coastal exploration at La Lobería, Punta Estrada and Las Grietas.',
-      es: 'Explora Santa Cruz y sus tortugas gigantes en Rancho Primicias, excursión en yate a Isla Isabela con snorkel en Tintoreras y relax en Las Grietas.',
-      zh: '加拉帕戈斯4日精选探险，游览巴尔特拉岛、双子坑、普里米西亚巨龟保护区、伊莎贝拉岛快艇游览、火烈鸟泻湖、蒂恩托雷拉斯石礁潜水、拉洛贝里亚海狮滩与拉斯格里塔斯火山峡谷。'
+      en: 'Comprehensive 6-day Galápagos journey featuring private airport transfers in Quito, Santa Cruz highlands, giant tortoises at Primicias Ranch, full-day Isabela Island speedboat excursion with Tintoreras snorkeling and flamingo lagoon, and coastal exploration at La Lobería, Punta Estrada and Las Grietas.',
+      es: 'Experiencia integral de 6 días con traslados privados en Quito, tierras altas de Santa Cruz, tortugas gigantes en Rancho Primicias, excursión de día completo en lancha rápida a Isla Isabela con snorkel en Tintoreras y laguna de flamingos, y relax en Las Grietas y La Lobería.',
+      fr: 'Circuit complet de 6 jours comprenant transferts privés à Quito, hauts plateaux de Santa Cruz, tortues géantes au Rancho Primicias, excursion d\'une journée à l\'île Isabela avec snorkeling à Tintoreras et flamants roses, et Las Grietas.',
+      de: 'Umfassende 6-tägige Galapagos-Reise mit privaten Quito-Flughafentransfers, Santa Cruz Hochland, Riesenschildkröten auf der Primicias Ranch, Ganztagesausflug nach Isabela mit Tintoreras-Schnorcheln und Flamingos sowie Las Grietas.',
+      it: 'Viaggio completo di 6 giorni alle Galapagos con trasferimenti privati a Quito, alture di Santa Cruz, tartarughe giganti al Rancho Primicias, escursione di una giornata a Isabela con snorkeling a Tintoreras e fenicotteri, e Las Grietas.',
+      pt: 'Viagem completa de 6 dias em Galápagos com transfers privados em Quito, terras altas de Santa Cruz, tartarugas gigantes no Rancho Primicias, excursão de dia inteiro a Isabela com snorkel em Tintoreras e flamingos, e Las Grietas.',
+      ja: 'キト空港専用送迎、サンタクルス島高地の双子坑、プリミシアス牧場の野生ゾウガメ、イサベラ島への終日スピードボートツアー（ティントレラスのシュノーケリング＆フラミンゴ）、ラス・グリエタス火山峡谷を巡る充実の6日間。',
+      zh: '包含基多私人机场往返接送的加拉帕戈斯6日精选行程：游览圣克鲁斯高地双子坑与普里米西亚野生巨龟保护区，乘快艇全日探秘伊莎贝拉岛并在蒂恩托雷拉斯浮潜观赏海龟、海狮与企鹅，探索拉洛贝里亚与拉斯格里塔斯火山峡谷。'
     },
     highlights: [
-      { en: 'Twin Craters & Primicias Giant Tortoise Ranch', es: 'Cráteres Gemelos y Rancho de Tortugas Primicias', zh: '双子坑与普里米西亚巨龟保护区' },
-      { en: 'Full-Day Isabela Excursion & Tintoreras Snorkeling', es: 'Excursión Full-Day Isabela y Snorkel en Tintoreras', zh: '伊莎贝拉全日游与蒂恩托雷拉斯潜水' },
-      { en: 'Flamingo Lagoon & Giant Tortoise Breeding Center', es: 'Laguna de Flamingos y Centro de Crianza', zh: '火烈鸟泻湖与巨龟繁殖中心' },
-      { en: 'La Lobería Sea Lion Colony & Punta Estrada', es: 'Colonia de Lobos Marinos en La Lobería y Punta Estrada', zh: '拉洛贝里亚海狮滩与埃斯特拉达角' },
-      { en: 'Las Grietas Crystal-Clear Volcanic Canyon', es: 'Cañón Volcánico Las Grietas', zh: '拉斯格里塔斯火山峡谷' }
+      {
+        en: 'Private Quito Airport Transfers (Arrival & Departure)',
+        es: 'Traslados Privados Aeropuerto Quito (Llegada y Salida)',
+        fr: 'Transferts Privés Aéroport de Quito (Arrivée et Départ)',
+        de: 'Private Quito-Flughafentransfers (Ankunft & Abreise)',
+        it: 'Trasferimenti Privati Aeroporto di Quito (Arrivo e Partenza)',
+        pt: 'Traslados Privados Aeroporto de Quito (Chegada e Partida)',
+        ja: 'キト空港専用往復送迎（到着＆出発）',
+        zh: '基多国际机场私人专车接送（抵达与离境）'
+      },
+      {
+        en: 'Twin Craters & Primicias Giant Tortoise Ranch',
+        es: 'Cráteres Gemelos y Rancho de Tortugas Primicias',
+        fr: 'Cratères Jumeaux et Réserve de Tortues Primicias',
+        de: 'Zwillingskrater & Riesenschildkröten-Farm Primicias',
+        it: 'Crateri Gemelli e Riserva Tartarughe Primicias',
+        pt: 'Crateras Gêmeas e Rancho de Tartarugas Primicias',
+        ja: '双子坑（ロス・ヘメロス）＆プリミシアス巨亀保護区',
+        zh: '双子坑与普里米西亚巨龟生态保护区'
+      },
+      {
+        en: 'Full-Day Isabela Excursion & Tintoreras Snorkeling',
+        es: 'Excursión Full-Day Isabela y Snorkel en Tintoreras',
+        fr: 'Excursion Journée Isabela & Snorkeling aux Tintoreras',
+        de: 'Ganztagesausflug Isabela & Schnorcheln bei Tintoreras',
+        it: 'Escursione Giornata Intera a Isabela e Snorkeling a Tintoreras',
+        pt: 'Excursão Dia Inteiro Isabela e Snorkel em Tintoreras',
+        ja: 'イサベラ島終日ツアー＆ティントレラスでのシュノーケリング',
+        zh: '伊莎贝拉岛全日探险与蒂恩托雷拉斯浮潜'
+      },
+      {
+        en: 'Flamingo Lagoon & Giant Tortoise Breeding Center',
+        es: 'Laguna de Flamingos y Centro de Crianza de Tortugas',
+        fr: 'Lagune des Flamants et Centre d\'Élevage de Tortues',
+        de: 'Flamingo-Lagune & Schildkrötenzuchtzentrum',
+        it: 'Laguna dei Fenicotteri e Centro Riproduzione Tartarughe',
+        pt: 'Lagoa de Flamingos e Centro de Reprodução de Tartarugas',
+        ja: 'フラミンゴラグーン＆ゾウガメ繁殖センター',
+        zh: '火烈鸟泻湖与巨龟繁育保护中心'
+      },
+      {
+        en: 'La Lobería Sea Lion Colony & Las Grietas Volcanic Canyon',
+        es: 'Colonia de Lobos Marinos en La Lobería y Cañón Las Grietas',
+        fr: 'Colonie d\'Otarie à La Lobería et Canyon Volcanique Las Grietas',
+        de: 'Seelöwenkolonie La Lobería & Vulkanschlucht Las Grietas',
+        it: 'Colonia di Leoni Marini a La Lobería e Canyon Las Grietas',
+        pt: 'Colônia de Leões-Marinhos em La Lobería e Cânion Las Grietas',
+        ja: 'ラ・ロベリアのアシカコロニー＆ラス・グリエタス火山渓谷',
+        zh: '拉洛贝里亚海狮聚居地与拉斯格里塔斯火山峡谷'
+      }
     ],
     inclusions: [
-      { en: 'Accommodation at the hotel of your choice in Santa Cruz', es: 'Alojamiento en el hotel seleccionado en Santa Cruz' },
-      { en: 'Buffet breakfast at 4-star hotels / Continental breakfast at 3-star hotels', es: 'Desayuno buffet en hoteles 4★ / Desayuno continental en hoteles 3★' },
-      { en: 'Lunches with a set menu', es: 'Almuerzos menú incluidos' },
-      { en: 'Plane Ticket (Quito/Guayaquil – Baltra – Quito/Guayaquil)', es: 'Boleto aéreo (Quito/Guayaquil – Baltra – Quito/Guayaquil)' },
-      { en: 'Visits to the islands according to the itinerary', es: 'Visitas a las islas según itinerario' },
-      { en: 'Airport reception and departure assistance at Galápagos Airport', es: 'Recepción y asistencia en aeropuertos de Galápagos' },
-      { en: 'Land and sea transportation', es: 'Transporte terrestre y marítimo' },
-      { en: 'Level III Naturalist Guides (Spanish / English)', es: 'Guías Naturalistas Nivel III (Español / Inglés)' },
-      { en: 'Snorkeling equipment for boat excursions (mask and snorkel)', es: 'Equipo de snorkel para excursiones en barco (máscara y tubo)' },
-      { en: 'Safety lockers available at hotel reception', es: 'Casilleros de seguridad en recepción' },
-      { en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport', es: 'Bus de aeropuerto Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto' },
-      { en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors', es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros' }
+      {
+        en: 'Accommodation at the hotel of your choice in Santa Cruz (3★ or 4★)',
+        es: 'Alojamiento en el hotel seleccionado en Santa Cruz (3★ o 4★)',
+        fr: 'Hébergement à l\'hôtel de votre choix à Santa Cruz (3★ ou 4★)',
+        de: 'Unterkunft im gewählten Hotel auf Santa Cruz (3★ oder 4★)',
+        it: 'Sistemazione nell\'hotel prescelto a Santa Cruz (3★ o 4★)',
+        pt: 'Hospedagem no hotel de sua escolha em Santa Cruz (3★ ou 4★)',
+        ja: 'サンタクルス島の厳選ホテル宿泊（3★または4★）',
+        zh: '圣克鲁斯岛自选精品酒店住宿（3星级或4星级）'
+      },
+      {
+        en: 'Private airport transfers in Quito (Arrival & Departure)',
+        es: 'Traslados privados en aeropuerto de Quito (Llegada y Salida)',
+        fr: 'Transferts privés aéroport de Quito (Arrivée et Départ)',
+        de: 'Private Flughafentransfers in Quito (Ankunft & Abreise)',
+        it: 'Trasferimenti privati aeroporto di Quito (Arrivo e Partenza)',
+        pt: 'Traslados privados no aeroporto de Quito (Chegada e Partida)',
+        ja: 'キト空港専用プライベート送迎（到着＆出発）',
+        zh: '基多国际机场私人专车接送（抵达与出发）'
+      },
+      {
+        en: 'Buffet breakfast at 4★ hotels / Continental breakfast at 3★ hotels',
+        es: 'Desayuno buffet en hoteles 4★ / Desayuno continental en hoteles 3★',
+        fr: 'Petit-déjeuner buffet en hôtel 4★ / continental en hôtel 3★',
+        de: 'Frühstücksbuffet in 4★-Hotels / Kontinentales Frühstück in 3★-Hotels',
+        it: 'Colazione a buffet in hotel 4★ / Continentale in hotel 3★',
+        pt: 'Café da manhã buffet em hotéis 4★ / Continental em hotéis 3★',
+        ja: '4★ホテルのビュッフェ朝食 / 3★ホテルのコンチネンタル朝食',
+        zh: '4星级酒店自助早餐 / 3星级酒店欧陆式早餐'
+      },
+      {
+        en: 'Set-menu lunches according to the itinerary',
+        es: 'Almuerzos menú incluidos según el itinerario',
+        fr: 'Déjeuners avec menu préétabli selon l\'itinéraire',
+        de: 'Mittagessen mit festem Menü gemäß Reiseroute',
+        it: 'Pranzi con menu fisso secondo l\'itinerario',
+        pt: 'Almoços com cardápio fixo de acordo com o itinerário',
+        ja: '旅程に応じたセットメニューの昼食',
+        zh: '行程中规划的指定套餐午餐'
+      },
+      {
+        en: 'Domestic Flight Ticket (Quito – Baltra – Quito)',
+        es: 'Boleto aéreo doméstico (Quito – Baltra – Quito)',
+        fr: 'Billet d\'avion intérieur (Quito – Baltra – Quito)',
+        de: 'Inlandsflugticket (Quito – Baltra – Quito)',
+        it: 'Biglietto aereo nazionale (Quito – Baltra – Quito)',
+        pt: 'Passagem aérea doméstica (Quito – Baltra – Quito)',
+        ja: '国内線往復航空券（キト – バルトラ – キト）',
+        zh: '厄瓜多尔境内往返机票（基多 – 巴尔特拉 – 基多）'
+      },
+      {
+        en: 'All guided visits to the islands according to the itinerary',
+        es: 'Todas las visitas guiadas a las islas según el itinerario',
+        fr: 'Toutes les visites guidées des îles selon l\'itinéraire',
+        de: 'Alle geführten Inselbesuche gemäß Reiseroute',
+        it: 'Tutte le visite guidate alle isole secondo l\'itinerario',
+        pt: 'Todas as visitas guiadas às ilhas de acordo com o itinerário',
+        ja: '旅程に記載されたすべてのガイド付き島内観光',
+        zh: '行程规划的所有受保护海岛导览游览'
+      },
+      {
+        en: 'Airport reception and departure assistance at Galápagos airports',
+        es: 'Recepción y asistencia en aeropuertos de Galápagos',
+        fr: 'Accueil et assistance aux aéroports des Galápagos',
+        de: 'Flughafenempfang und Abreisebetreuung auf Galápagos',
+        it: 'Accoglienza e assistenza negli aeroporti delle Galapagos',
+        pt: 'Recepção e assistência nos aeroportos de Galápagos',
+        ja: 'ガラパゴス諸島空港での到着出迎えおよび出発サポート',
+        zh: '加拉帕戈斯各机场抵达专员接机与出发协助'
+      },
+      {
+        en: 'Comprehensive land and maritime transportation',
+        es: 'Transporte terrestre y marítimo integral',
+        fr: 'Transport terrestre et maritime complet',
+        de: 'Umfassender Land- und Seetransport',
+        it: 'Trasporto terrestre e marittimo completo',
+        pt: 'Transporte terrestre e marítimo completo',
+        ja: '全行程における陸上および海上移動交通',
+        zh: '全程专车陆路与快艇海上交通'
+      },
+      {
+        en: 'Level III Certified Naturalist Guides (Spanish / English)',
+        es: 'Guías naturalistas certificados Nivel III (Español / Inglés)',
+        fr: 'Guides naturalistes certifiés de niveau III (Espagnol / Anglais)',
+        de: 'Zertifizierte Naturführer der Stufe III (Spanisch / Englisch)',
+        it: 'Guide naturalistiche certificate di Livello III (Spagnolo / Inglese)',
+        pt: 'Guias naturalistas certificados Nível III (Espanhol / Inglês)',
+        ja: 'レベルIII認定ナチュラリストガイド（英語・スペイン語）',
+        zh: '三级国家认证资深自然向导（英语/西班牙语）'
+      },
+      {
+        en: 'Snorkeling equipment for boat excursions (mask and snorkel)',
+        es: 'Equipo de snorkel para excursiones en barco (máscara y tubo)',
+        fr: 'Équipement de snorkeling pour les excursions en bateau (masque et tuba)',
+        de: 'Schnorchelausrüstung für Bootstouren (Maske und Schnorchel)',
+        it: 'Attrezzatura da snorkeling per escursioni in barca (maschera e boccaglio)',
+        pt: 'Equipamento de snorkel para excursões de barco (máscara e snorkel)',
+        ja: 'ボートツアー用シュノーケリング装備（マスク＆スノーケル）',
+        zh: '游艇出海探险高品质浮潜装备（面镜和呼吸管）'
+      },
+      {
+        en: 'Safety lockers available at hotel reception',
+        es: 'Casilleros de seguridad disponibles en la recepción del hotel',
+        fr: 'Coffres-forts disponibles à la réception de l\'hôtel',
+        de: 'Sicherheitsschließfächer an der Hotelrezeption verfügbar',
+        it: 'Cassette di sicurezza alla reception dell\'hotel',
+        pt: 'Cofres de segurança na recepção do hotel',
+        ja: 'ホテルフロントのセーフティボックス利用可能',
+        zh: '酒店前台免费提供安全保险箱服务'
+      },
+      {
+        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
+        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
+        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
+        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
+        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
+        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
+        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
+        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
+      },
+      {
+        en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
+        es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros',
+        fr: 'Taxe de quai d\'Isabela: 5,00 USD nationaux / 10,00 USD étrangers',
+        de: 'Isabela-Dockgebühr: USD 5,00 für Ecuadorianer / USD 10,00 für Ausländer',
+        it: 'Tassa portuale di Isabela: 5,00 USD ecuadoriani / 10,00 USD stranieri',
+        pt: 'Taxa de cais de Isabela: USD 5,00 nacionais / USD 10,00 estrangeiros',
+        ja: 'イサベラ島入港税：エクアドル国籍 USD 5.00 / 外国人 USD 10.00',
+        zh: '伊莎贝拉岛码头税：厄瓜多尔公民 5 美元 / 外国游客 10 美元'
+      }
     ],
     exclusions: [
-      { en: 'Galápagos National Park entrance fee: USD 6.00 for Ecuadorian nationals; USD 200.00 for foreign visitors', es: 'Entrada al Parque Nacional Galápagos: USD 6.00 nacionales / USD 200.00 extranjeros' },
-      { en: 'Dinners', es: 'Cenas' },
-      { en: 'Transit Control Card (TCT): USD 20.00', es: 'Tarjeta de Control de Tránsito (TCT): USD 20.00' },
-      { en: 'Services not specified in the program', es: 'Servicios no especificados en el programa' }
+      {
+        en: 'Galápagos National Park entrance fee: USD 6.00 for Ecuadorian nationals; USD 200.00 for foreign visitors',
+        es: 'Entrada al Parque Nacional Galápagos: USD 6.00 nacionales / USD 200.00 extranjeros',
+        fr: 'Entrée au Parc National des Galápagos: 6,00 USD nationaux / 200,00 USD étrangers',
+        de: 'Eintrittsgebühr für den Galapagos-Nationalpark: USD 6,00 für Ecuadorianer / USD 200,00 für Ausländer',
+        it: 'Ingresso al Parco Nazionale delle Galapagos: 6,00 USD ecuadoriani / 200,00 USD stranieri',
+        pt: 'Entrada no Parque Nacional Galápagos: USD 6,00 nacionais / USD 200,00 estrangeiros',
+        ja: 'ガラパゴス国立公園入場料：エクアドル国籍 USD 6.00 / 外国人 USD 200.00',
+        zh: '加拉帕戈斯国家公园入园费：厄瓜多尔公民 6 美元 / 外国游客 200 美元'
+      },
+      {
+        en: 'Dinners (to give you freedom to enjoy local gastronomy)',
+        es: 'Cenas (libertad para explorar la gastronomía local)',
+        fr: 'Dîners (pour vous laisser libre de découvrir la gastronomie locale)',
+        de: 'Abendessen (Freiheit zur Entdeckung der lokalen Gastronomie)',
+        it: 'Cene (libertà di esplorare la gastronomia locale)',
+        pt: 'Jantares (liberdade para desfrutar da gastronomia local)',
+        ja: '夕食（地元のグルメを自由にお楽しみいただけます）',
+        zh: '晚餐（留白时间自由品味当地特色海鲜与美馔）'
+      },
+      {
+        en: 'Transit Control Card (TCT): USD 20.00 per person',
+        es: 'Tarjeta de Control de Tránsito (TCT): USD 20.00 por persona',
+        fr: 'Carte de Contrôle de Transit (TCT): 20,00 USD par personne',
+        de: 'Transit Control Card (TCT): USD 20,00 pro Person',
+        it: 'Carta di Controllo del Transito (TCT): 20,00 USD a persona',
+        pt: 'Cartão de Controle de Trânsito (TCT): USD 20,00 por pessoa',
+        ja: 'トランジットコントロールカード（TCT）：お一人様 USD 20.00',
+        zh: '加拉帕戈斯通行控制卡（TCT）：每人 20 美元'
+      },
+      {
+        en: 'Services not specified in the program & personal expenses',
+        es: 'Servicios no especificados en el programa y gastos personales',
+        fr: 'Services non spécifiés dans le programme et dépenses personnelles',
+        de: 'Nicht im Programm aufgeführte Leistungen & persönliche Ausgaben',
+        it: 'Servizi non specificati nel programma e spese personali',
+        pt: 'Serviços não especificados no programa e despesas pessoais',
+        ja: 'プログラムに明記されていないサービスおよび個人的な費用',
+        zh: '行程未提及的额外消费及私人支出'
+      }
     ],
     itinerary: [
       {
         day: 1,
         title: {
-          en: 'Day 1 – Arrival In Baltra | Twin Craters | Primicias Ranch',
-          es: 'Día 1 – Llegada A Baltra | Cráteres Gemelos | Rancho Primicias',
-          fr: 'Jour 1 – Arrivée à Baltra | Cratères Jumeaux | Rancho Primicias',
-          de: 'Tag 1 – Ankunft in Baltra | Zwillingskrater | Rancho Primicias',
-          it: 'Giorno 1 – Arrivo a Baltra | Crateri Gemelli | Rancho Primicias',
-          pt: 'Dia 1 – Chegada a Baltra | Crateras Gêmeas | Rancho Primicias',
-          ja: '第1日 – バルトラ島到着 | ツインクレーター | プリミシアスランチ',
-          zh: '第1天 – 抵达巴尔特拉 | 双子坑 | 普里米西亚巨龟庄园'
+          en: 'Day 1 – Arrival In Quito | Private Airport Transfer',
+          es: 'Día 1 – Llegada A Quito | Traslado Privado De Aeropuerto',
+          fr: 'Jour 1 – Arrivée à Quito | Transfert Privé Aéroport',
+          de: 'Tag 1 – Ankunft in Quito | Privater Flughafentransfer',
+          it: 'Giorno 1 – Arrivo a Quito | Trasferimento Privato Aeroporto',
+          pt: 'Dia 1 – Chegada a Quito | Traslado Privado do Aeroporto',
+          ja: '第1日 – キト到着 | 専用空港送迎',
+          zh: '第1天 – 抵达基多 | 尊享私人机场接机'
         },
         description: {
-          en: 'Upon arrival at Seymour Airport on Baltra Island, you will be welcomed by our representative and begin your journey through the Galápagos Islands.\n\nAfter crossing the Itabaca Channel to Santa Cruz Island, we will travel to the highlands to visit the famous Twin Craters (Los Gemelos). These impressive volcanic formations are surrounded by the lush Scalesia forest and offer an excellent introduction to the unique geological landscape of Santa Cruz Island.\n\nWe will then continue to Primicias Ranch, a private reserve where giant Galápagos tortoises can be observed roaming freely in their natural environment. During the visit, you will learn about these iconic animals and their importance to the Galápagos ecosystem.\n\nAfter the excursion, we will continue to Puerto Ayora for hotel check-in and the remainder of the day at leisure.',
-          es: 'Llegada al Aeropuerto Seymour en Isla Baltra, recepción por nuestro representante e inicio del viaje en Galápagos.\n\nTras cruzar el Canal de Itabaca hacia Isla Santa Cruz, nos trasladamos a las tierras altas para visitar los famosos Cráteres Gemelos (Los Gemelos), impresionantes formaciones volcánicas rodeadas por el bosque de Scalesia.\n\nContinuamos hacia el Rancho Primicias, reserva privada donde las tortugas gigantes de Galápagos viven libremente en su hábitat natural, aprendiendo sobre su conservación y explorando túneles de lava.\n\nTraslado a Puerto Ayora para check-in en el hotel y resto de la tarde libre.',
-          zh: '抵达巴尔特拉岛西摩机场，由专属向导迎接开启加拉帕戈斯探险之旅。\n\n横渡伊塔巴卡海峡抵达圣克鲁斯岛后，前往高地探索著名的双子坑（Los Gemelos），感受繁茂鳞片树林环抱的火山地貌。\n\n随后前往普里米西亚巨龟庄园私人生态保护区，近距离观察自由漫步的加拉帕戈斯象龟并探寻熔岩隧道。\n\n游览结束后前往阿约拉港办理入住，尽享惬意自由时光。'
+          en: 'Welcome at Quito International Airport and private transfer to your hotel. Relax and prepare for your extraordinary adventure across the enchanted archipelago.',
+          es: 'Recepción de bienvenida en el Aeropuerto Internacional Mariscal Sucre de Quito y traslado privado exclusivo a su hotel. Tiempo libre para descansar y aclimatarse antes de viajar a Galápagos.',
+          fr: 'Accueil chaleureux à l\'aéroport international de Quito et transfert privé vers votre hôtel. Reposez-vous et préparez-vous pour une aventure exceptionnelle aux Galápagos.',
+          de: 'Herzlicher Empfang am internationalen Flughafen Quito und privater Transfer zu Ihrem Hotel. Erholen Sie sich und stimmen Sie sich auf Ihr Galapagos-Abenteuer ein.',
+          it: 'Benvenuto all\'Aeroporto Internazionale di Quito e trasferimento privato in hotel. Tempo a disposizione per rilassarsi prima della partenza per le Galapagos.',
+          pt: 'Boas-vindas no Aeroporto Internacional de Quito e traslado privado para o hotel. Descanse e prepare-se para esta inesquecível aventura em Galápagos.',
+          ja: 'キト国際空港にて専属スタッフがお出迎えし、専用車でホテルへ移動。翌日からのガラパゴス諸島探検に向けてゆったりとお過ごしください。',
+          zh: '抵达基多苏克雷元帅国际机场，专属向导贴心接机并乘坐专车前往酒店办理入住。休整身心，准备开启加拉帕戈斯奇迹之旅。'
         },
-        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
+        accommodation: {
+          en: 'Hotel in Quito (Selected category 3★ or 4★)',
+          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
+          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
+          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
+          it: 'Hotel a Quito (Categoria 3★ o 4★)',
+          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
+          ja: 'キト市内の厳選ホテル（3★または4★）',
+          zh: '基多精选酒店（3星级或4星级）'
+        },
+        meals: {
+          en: 'Not included / at leisure',
+          es: 'No incluidas / libres',
+          fr: 'Non inclus',
+          de: 'Nicht inbegriffen',
+          it: 'Non inclusi',
+          pt: 'Não incluídas',
+          ja: '食事なし',
+          zh: '敬请自理'
+        },
+        transportation: {
+          en: 'Private transportation from Quito Airport',
+          es: 'Transporte privado desde Aeropuerto de Quito',
+          fr: 'Transport privé depuis l\'aéroport de Quito',
+          de: 'Privater Transport vom Flughafen Quito',
+          it: 'Trasporto privato dall\'aeroporto di Quito',
+          pt: 'Transporte privado do aeroporto de Quito',
+          ja: 'キト空港からの専用送迎車',
+          zh: '基多机场专属商务专车接机'
+        },
+      },
+      {
+        day: 2,
+        title: {
+          en: 'Day 2 – Arrival In Baltra | Twin Craters | Primicias Giant Tortoise Ranch',
+          es: 'Día 2 – Llegada A Baltra | Cráteres Gemelos | Rancho De Tortugas Primicias',
+          fr: 'Jour 2 – Arrivée à Baltra | Cratères Jumeaux | Rancho Primicias',
+          de: 'Tag 2 – Ankunft in Baltra | Zwillingskrater | Primicias-Ranch',
+          it: 'Giorno 2 – Arrivo a Baltra | Crateri Gemelli | Rancho Primicias',
+          pt: 'Dia 2 – Chegada a Baltra | Crateras Gêmeas | Rancho Primicias',
+          ja: '第2日 – バルトラ島到着 | 双子坑 | プリミシアス巨亀保護区',
+          zh: '第2天 – 飞抵巴尔特拉岛 | 双子坑 | 普里米西亚野生巨龟保护区'
+        },
+        description: {
+          en: 'Morning transfer from your Quito hotel to the airport for your flight to the Galápagos Islands. Upon arrival at Seymour Airport on Baltra Island, you will be welcomed by our representative and begin your journey. After crossing the Itabaca Channel to Santa Cruz Island, travel to the highlands to visit the famous Twin Craters (Los Gemelos), surrounded by lush Scalesia forest. Continue to Primicias Ranch, a private ecological reserve where giant tortoises roam freely in their natural habitat and explore natural volcanic lava tunnels. Transfer to Puerto Ayora for check-in and leisure.',
+          es: 'Traslado privado desde su hotel en Quito hacia el aeropuerto para abordar el vuelo a Galápagos. A su llegada al Aeropuerto Seymour en Isla Baltra, recepción por nuestro representante. Tras cruzar el Canal de Itabaca hacia Isla Santa Cruz, ascendemos a las tierras altas para visitar los famosos Cráteres Gemelos (Los Gemelos), impresionantes depresiones volcánicas en medio del bosque de Scalesia. Luego visitamos el Rancho Primicias, reserva privada donde las tortugas gigantes de Galápagos viven en libertad y caminamos por túneles de lava. Traslado a Puerto Ayora y tarde libre.',
+          fr: 'Transfert matinal de votre hôtel de Quito à l\'aéroport pour votre vol vers les Galápagos. Accueil à l\'aéroport Seymour de Baltra par notre représentant. Traversée du canal d\'Itabaca vers l\'île Santa Cruz et montée dans les hautes terres pour découvrir les impressionnants Cratères Jumeaux (Los Gemelos) au cœur de la forêt de Scalesia. Poursuite vers le Rancho Primicias pour observer les tortues géantes en liberté et traverser des tunnels de lave volcanique. Transfert à Puerto Ayora et fin de journée libre.',
+          de: 'Morgendlicher Transfer vom Hotel in Quito zum Flughafen für den Flug nach Galapagos. Nach der Ankunft am Flughafen Seymour auf der Insel Baltra Begrüßung durch unseren Reiseleiter. Überquerung des Itabaca-Kanals nach Santa Cruz und Fahrt ins Hochland zu den berühmten Zwillingskratern (Los Gemelos) im Scalesia-Wald. Weiter zur Primicias Ranch, um Riesenschildkröten in freier Wildbahn zu beobachten und Lavatunnel zu erkunden. Transfer nach Puerto Ayora und Freizeit.',
+          it: 'Trasferimento mattutino dall\'hotel di Quito all\'aeroporto per il volo verso le Galapagos. Arrivo all\'aeroporto Seymour di Baltra e accoglienza da parte del nostro rappresentante. Attraversamento del Canale di Itabaca verso Santa Cruz e visita agli spettacolari Crateri Gemelli (Los Gemelos) nella foresta di Scalesia. Proseguimento verso il Rancho Primicias per ammirare le tartarughe giganti nel loro habitat ed esplorare tunnel di lava. Trasferimento a Puerto Ayora.',
+          pt: 'Traslado matutino do hotel em Quito ao aeroporto para embarque rumo a Galápagos. Recepção no Aeroporto Seymour na Ilha Baltra por nosso representante. Travessia do Canal de Itabaca até Santa Cruz e subida às terras altas para visitar as imponentes Crateras Gêmeas (Los Gemelos) no bosque de Scalesia. Visita ao Rancho Primicias para observar tartarugas gigantes em liberdade e túneis de lava. Traslado a Puerto Ayora.',
+          ja: 'ホテルからキト空港へ専用送迎し、ガラパゴス諸島バルトラ空港へフライト。到着後、専属ガイドがお出迎え。イタバカ運河を渡りサンタクルス島高地へ。緑豊かなスカレシアの森に囲まれた双子坑（ロス・ヘメロス）を見学後、プリミシアス牧場で野生の巨大ガラパゴスゾウガメを観察し溶岩トンネルを探検。プエルトアヨラのホテルへ。',
+          zh: '晨间从基多酒店专车送往机场飞往加拉帕戈斯群岛。抵达巴尔特拉岛西摩机场后由中文/英文向导迎接。渡过伊塔巴卡海峡抵达圣克鲁斯岛高地，探索壮观的火山双子坑（Los Gemelos）与特有鳞片树林。随后探访普里米西亚私人生态保护区，近距离观察自由漫步的加拉帕戈斯野生象龟并穿越火山熔岩隧道。前往阿约拉港办理入住。'
+        },
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
         accommodation: {
           en: 'Santa Cruz Island – Puerto Ayora',
           es: 'Isla Santa Cruz – Puerto Ayora',
@@ -121,40 +384,45 @@ const multiDayTours: Tour[] = [
         meals: {
           en: 'According to selected hotel plan',
           es: 'Según plan hotelero seleccionado',
-          fr: 'Selon formule hôtelière sélectionnée',
-          de: 'Gemäß Hotelplan',
-          it: 'Secondo piano alberghiero',
-          pt: 'De acordo com o plano do hotel',
+          fr: 'Selon la formule hôtelière choisie',
+          de: 'Gemäß gewähltem Hotelplan',
+          it: 'Secondo il piano alberghiero scelto',
+          pt: 'De acordo com o plano do hotel escolhido',
           ja: 'ホテルプランに準ずる',
-          zh: '根据所选酒店方案提供'
+          zh: '按所选酒店方案包含'
         },
         transportation: {
-          en: 'Private land transportation & airport shuttle',
-          es: 'Transporte privado terrestre y shuttle de aeropuerto',
-          fr: 'Transport terrestre privé et navette aéroport',
-          de: 'Privater Landtransport & Flughafentransfer',
-          it: 'Trasporto terrestre privato e navetta aeroportuale',
-          pt: 'Transporte terrestre privado e traslado do aeroporto',
-          ja: '専用陸上送迎＆空港シャトル',
-          zh: '陆路专车与机场接驳'
-        }
+          en: 'Private airport transfer in Quito, flight, ferry & private island transport',
+          es: 'Transfer privado en Quito, vuelo, ferry y transporte privado en isla',
+          fr: 'Transfert privé à Quito, vol, ferry et transport terrestre privé',
+          de: 'Privater Transfer in Quito, Flug, Fähre & privater Inseltransport',
+          it: 'Trasferimento privato a Quito, volo, traghetto e trasporto privato',
+          pt: 'Transfer privado em Quito, voo, balsa e transporte terrestre na ilha',
+          ja: 'キト空港送迎、フライト、フェリー＆島内専用車',
+          zh: '基多专车送机、国内航班、渡轮及岛上专车'
+        },
       },
       {
-        day: 2,
+        day: 3,
         title: {
-          en: 'Day 2 – Full-Day Excursion To Isabela Island | Tortoise Breeding Center | Flamingo Lagoon | Tintoreras',
-          es: 'Día 2 – Excursión Full-Day A Isla Isabela | Centro De Crianza | Laguna De Flamingos | Tintoreras',
-          fr: 'Jour 2 – Excursion Journée Complète à l\'Île Isabela | Centre d\'Élevage | Lagune des Flamants | Tintoreras',
-          de: 'Tag 2 – Ganztagesausflug zur Insel Isabela | Schildkrötenzuchtzentrum | Flamingo-Lagune | Tintoreras',
-          it: 'Giorno 2 – Escursione Giornata Intera a Isola Isabela | Centro di Riproduzione | Laguna dei Fenicotteri | Tintoreras',
-          pt: 'Dia 2 – Excursão Dia Inteiro à Ilha Isabela | Centro de Reprodução | Lagoa de Flamingos | Tintoreras',
-          ja: '第2日 – イサベラ島終日エクスカーション | ゾウガメ繁殖センター | フラミンゴラグーン | ティントレラス',
-          zh: '第2天 – 伊莎贝拉岛全日游览 | 巨龟繁殖中心 | 火烈鸟泻湖 | 蒂恩托雷拉斯石礁'
+          en: 'Day 3 – Full-Day Excursion To Isabela Island | Breeding Center | Flamingo Lagoon | Tintoreras',
+          es: 'Día 3 – Excursión Full-Day A Isla Isabela | Centro De Crianza | Laguna De Flamingos | Tintoreras',
+          fr: 'Jour 3 – Excursion Journée à l\'Île Isabela | Centre d\'Élevage | Flamants Roses | Tintoreras',
+          de: 'Tag 3 – Ganztagesausflug Insel Isabela | Zuchtzentrum | Flamingo-Lagune | Tintoreras',
+          it: 'Giorno 3 – Escursione a Isabela | Centro Riproduzione | Fenicotteri | Tintoreras',
+          pt: 'Dia 3 – Excursão Dia Inteiro a Isabela | Centro de Reprodução | Flamingos | Tintoreras',
+          ja: '第3日 – イサベラ島終日ツアー | ゾウガメ繁殖センター | フラミンゴラグーン | ティントレラス',
+          zh: '第3天 – 伊莎贝拉岛全日探险 | 巨龟繁育中心 | 火烈鸟泻湖 | 蒂恩托雷拉斯石礁浮潜'
         },
         description: {
-          en: 'After breakfast, transfer to the pier to board a speedboat to Isabela Island. The navigation takes approximately 2 to 2.5 hours, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, we will visit the Giant Tortoise Breeding Center, where you will learn about the conservation and breeding programs established to protect Isabela\'s giant tortoise populations.\n\nWe will then visit the Flamingo Lagoon, one of the island\'s most important wetlands. Depending on natural conditions, you may observe Galápagos flamingos and other species of birds in their natural habitat.\n\nThe excursion will continue with a boat trip to Tintoreras Islet, a small volcanic islet located just off the coast of Isabela. Its clear waters and rich marine environment make it an excellent snorkeling destination. During the activity, you may have the opportunity to observe sea lions, sea turtles, rays, penguins and colorful tropical fish, depending on wildlife activity and sea conditions.\n\nAfter the excursion, return by speedboat to Santa Cruz Island and Puerto Ayora.',
-          es: 'Traslado al muelle para tomar la lancha rápida hacia Isla Isabela (2 a 2.5 horas de navegación).\n\nEn Puerto Villamil visitamos el Centro de Crianza de Tortugas Gigantes para conocer los programas de reproducción y conservación.\n\nLuego visitamos la Laguna de Flamingos para observar flamingos y aves marinas en los humedales costeros.\n\nPor la tarde, navegación al Islote Tintoreras, formación volcánica de aguas cristalinas ideal para snorkeling con lobos marinos, tortugas marinas, rayas, pingüinos de Galápagos y peces tropicales.\n\nRetorno en lancha rápida a Santa Cruz y Puerto Ayora.',
-          zh: '早餐后前往码头乘快艇赴伊莎贝拉岛（航程约2至2.5小时）。\n\n抵达维利亚米尔港后探访巨龟繁育中心，了解伊莎贝拉岛象龟保育项目。\n\n随后漫步火烈鸟泻湖湿地观察野生鸟类。\n\n午后乘船前往蒂恩托雷拉斯石礁（Islote Tintoreras），在清澈水域中浮潜，与海狮、海龟、海鬣蜥和热带鱼同游。\n\n游览结束后乘快艇返回圣克鲁斯岛阿约拉港。'
+          en: 'After breakfast, transfer to the pier to board a speedboat to Isabela Island (approx 2 to 2.5 hours). Upon arrival in Puerto Villamil, visit the Giant Tortoise Breeding Center to learn about island conservation. Next, stroll around the Flamingo Lagoon to observe wild flamingos in their natural wetland habitat. Continue with a boat excursion to Tintoreras Islet, a pristine volcanic islet with turquoise waters ideal for snorkeling alongside sea lions, sea turtles, rays, reef sharks, Galápagos penguins, and marine iguanas. Return by speedboat to Santa Cruz Island in the late afternoon.',
+          es: 'Desayuno y traslado al muelle para abordar la lancha rápida hacia Isla Isabela (2 a 2.5 horas de navegación). En Puerto Villamil, visitamos el Centro de Crianza de Tortugas Gigantes para conocer los programas de preservación. Luego recorremos la Laguna de Flamingos para admirar estas aves en su hábitat de humedales. Por la tarde, navegación al Islote Tintoreras, formación volcánica de aguas cristalinas ideal para snorkeling con lobos marinos, tortugas marinas, rayas, tiburones tintorera, pingüinos de Galápagos e iguanas marinas. Retorno en lancha rápida a Santa Cruz.',
+          fr: 'Après le petit-déjeuner, départ en bateau rapide vers l\'île Isabela (2 à 2h30 de traversée). À Puerto Villamil, visite du centre d\'élevage des tortues géantes puis promenade près de la lagune des flamants roses. L\'après-midi, excursion en bateau vers l\'îlot Tintoreras, paradis de lave volcanique offrant un snorkeling exceptionnel au milieu des otaries, tortues de mer, raies, manchots des Galápagos et requins à pointes blanches. Retour en bateau rapide à Santa Cruz.',
+          de: 'Nach dem Frühstück Schnellbootfahrt zur Insel Isabela (ca. 2–2,5 Stunden). In Puerto Villamil Besuch des Riesenschildkröten-Zuchtzentrums und der Flamingo-Lagune. Nachmittags Bootstour zum Tintoreras-Inselchen: Schnorcheln im kristallklaren Wasser mit Seelöwen, Meeresschildkröten, Rochen, Weißspitzen-Riffhaien, Galapagos-Pinguinen und Meerechsen. Rückfahrt per Schnellboot nach Santa Cruz.',
+          it: 'Dopo colazione, motoscafo verso l\'isola Isabela (circa 2-2,5 ore). A Puerto Villamil, visita al Centro di Riproduzione delle Tartarughe e alla Laguna dei Fenicotteri. Nel pomeriggio, escursione in barca all\'isolotto Tintoreras, ideale per lo snorkeling con leoni marini, tartarughe marine, razze, pinguini delle Galapagos e squali pinna bianca. Rientro a Santa Cruz in motoscafo.',
+          pt: 'Após o café da manhã, lancha rápida até a Ilha Isabela (2 a 2,5 horas). Em Puerto Villamil, visita ao Centro de Reprodução de Tartarugas Gigantes e à Lagoa de Flamingos. À tarde, navegação ao Ilhote Tintoreras para snorkel incrível com leões-marinhos, tartarugas marinhas, arraias, pinguins e tubarões-tintureira. Retorno em lancha rápida a Santa Cruz.',
+          ja: '朝食後、スピードボートで最大の島イサベラ島へ（約2〜2.5時間）。プエルト・ビジャミル到着後、ゾウガメ繁殖センターとフラミンゴラグーンを見学。午後はティントレラス小島へボートクルーズ。アシカ、ウミガメ、エイ、ガラパゴスペンギン、ネムリブカが生息する透明な水路でシュノーケリング。夕方サンタクルス島へ帰還。',
+          zh: '早餐后乘快艇横渡至加拉帕戈斯最大岛屿伊莎贝拉岛（航程约2至2.5小时）。抵达维利亚米尔港后探访巨龟繁殖中心了解保护成效，漫步火烈鸟泻湖湿地。午后乘船前往蒂恩托雷拉斯石礁（Tintoreras），在清澈的火山海湾中浮潜，与海狮、海龟、蝠鲼、加拉帕戈斯企鹅及白顶礁鲨近距离畅游。傍晚乘快艇返回圣克鲁斯岛。'
         },
         image: '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
         accommodation: {
@@ -178,44 +446,49 @@ const multiDayTours: Tour[] = [
           zh: '包含早餐与午餐'
         },
         transportation: {
-          en: 'Shared speedboat and private land transportation',
-          es: 'Lancha rápida compartida y transporte terrestre privado',
-          fr: 'Bateau rapide partagé et transport terrestre privé',
-          de: 'Geteiltes Schnellboot und privater Landtransport',
-          it: 'Motoscafo condiviso e trasporto terrestre privato',
-          pt: 'Lancha rápida compartilhada e transporte terrestre privado',
-          ja: '混乗スピードボート＆専用陸上送迎',
-          zh: '公共快艇与陆路专车接送'
+          en: 'Inter-island speedboat and local land transfers',
+          es: 'Lancha rápida interislas y traslados locales',
+          fr: 'Bateau rapide inter-îles et transferts locaux',
+          de: 'Schnellboot zwischen den Inseln & lokale Transfers',
+          it: 'Motoscafo interisola e trasferimenti locali',
+          pt: 'Lancha rápida interilhas e traslados locais',
+          ja: '島間スピードボート＆現地送迎',
+          zh: '城际快艇与岛上观光专车'
         },
         activity: {
-          en: 'Full-day guided excursion and snorkeling',
-          es: 'Excursión guiada full-day y snorkeling',
-          fr: 'Excursion guidée journée complète et snorkeling',
-          de: 'Ganztägige geführte Tour & Schnorcheln',
-          it: 'Escursione guidata giornata intera e snorkeling',
-          pt: 'Excursão guiada dia inteiro e snorkeling',
-          ja: '終日専属ガイドツアー＆シュノーケリング',
-          zh: '全天向导陪同游览与浮潜体验'
-        }
+          en: 'Full-day guided island excursion and marine snorkeling',
+          es: 'Excursión guiada de día completo y snorkel marino',
+          fr: 'Excursion guidée journée complète et snorkeling marin',
+          de: 'Ganztägige geführte Tour & Meeresschnorcheln',
+          it: 'Escursione guidata di un\'intera giornata e snorkeling',
+          pt: 'Excursão guiada de dia inteiro e snorkel marítimo',
+          ja: '終日ガイド付き島ツアー＆海洋シュノーケリング',
+          zh: '全天自然向导陪同探险与海洋浮潜'
+        },
       },
       {
-        day: 3,
+        day: 4,
         title: {
-          en: 'Day 3 – La Lobería | Punta Estrada | Las Grietas',
-          es: 'Día 3 – La Lobería | Punta Estrada | Las Grietas',
-          fr: 'Jour 3 – La Lobería | Punta Estrada | Las Grietas',
-          de: 'Tag 3 – La Lobería | Punta Estrada | Las Grietas',
-          it: 'Giorno 3 – La Lobería | Punta Estrada | Las Grietas',
-          pt: 'Dia 3 – La Lobería | Punta Estrada | Las Grietas',
-          ja: '第3日 – ラ・ロベリア | プンタ・エストラダ | ラス・グリエタス',
-          zh: '第3天 – 海狮滩 (La Lobería) | 埃斯特拉达角 | 拉斯格里塔斯火山裂缝'
+          en: 'Day 4 – La Lobería | Punta Estrada | Las Grietas Volcanic Canyon',
+          es: 'Día 4 – La Lobería | Punta Estrada | Cañón Volcánico Las Grietas',
+          fr: 'Jour 4 – La Lobería | Punta Estrada | Canyon Volcanique Las Grietas',
+          de: 'Tag 4 – La Lobería | Punta Estrada | Vulkanschlucht Las Grietas',
+          it: 'Giorno 4 – La Lobería | Punta Estrada | Canyon Vulcanico Las Grietas',
+          pt: 'Dia 4 – La Lobería | Punta Estrada | Cânion Vulcânico Las Grietas',
+          ja: '第4日 – ラ・ロベリア | プンタ・エストラーダ | ラス・グリエタス火山峡谷',
+          zh: '第4天 – 拉洛贝里亚海狮滩 | 埃斯特拉达角 | 拉斯格里塔斯火山峡谷'
         },
         description: {
-          en: 'After breakfast, we will begin the day\'s activities with a visit to La Lobería, a coastal area famous for its resident population of Galápagos sea lions. Here, you will have the opportunity to observe these playful animals in their natural environment.\n\nWe will then continue to Punta Estrada, a beautiful coastal area surrounded by rocky formations and clear waters. The area offers excellent opportunities for nature observation and marine activities.\n\nThe excursion will continue to Las Grietas, a spectacular natural formation consisting of a narrow volcanic canyon filled with crystal-clear turquoise water. This is one of the most popular snorkeling and swimming sites near Puerto Ayora.\n\nDuring the snorkeling activity, you can explore the underwater environment and observe a variety of colorful fish and marine life.\n\nAfter the visit, return to Puerto Ayora and enjoy the remainder of the day at leisure.',
-          es: 'Visita matutina a La Lobería para observar la colonia residente de lobos marinos de Galápagos en la playa y en el agua.\n\nContinuamos a Punta Estrada, bahía costera de formaciones rocosas y aguas calmas para observación de aves e iguanas marinas.\n\nCaminata hacia Las Grietas, cañón volcánico con aguas cristalinas turquesas donde nadar y hacer snorkel entre paredes de roca de 15 metros.\n\nRetorno a Puerto Ayora y resto de la tarde libre para recorrer el pueblo o descansar.',
-          zh: '清晨前往海狮滩（La Lobería）观赏沙滩上嬉戏的海狮。\n\n随后漫步埃斯特拉达角（Punta Estrada）欣赏奇特海岸地貌。\n\n徒步探秘拉斯格里塔斯火山岩峡谷（Las Grietas），在两岸耸立的火山岩绝壁与碧绿如翡翠的水域中畅游浮潜。\n\n结束后返回阿约拉港享受闲适午后。'
+          en: 'After breakfast, begin the day with a visit to La Lobería, a scenic coastal area known for its playful sea lion colony. Continue to Punta Estrada to observe coastal marine wildlife and unique lava formations. Proceed to Las Grietas, a stunning geological crevice filled with transparent brackish turquoise water flanked by towering volcanic cliffs—a world-class spot for refreshing swimming and snorkeling. Afternoon at leisure in Puerto Ayora to explore art galleries and local artisan markets.',
+          es: 'Tras el desayuno, visita a La Lobería, hermosa bahía costera famosa por su activa colonia de lobos marinos. Continuamos hacia Punta Estrada con sus paisajes volcánicos y aves marinas. Luego exploramos Las Grietas, una grieta volcánica natural de aguas turquesas cristalinas encajonada entre paredes de lava, ideal para nadar y hacer snorkel entre peces loro y peces cirujano. Resto de la tarde libre en Puerto Ayora para relajarse o visitar galerías locales.',
+          fr: 'Visite côtière de La Lobería pour observer la joyeuse colonie d\'otaries des Galápagos. Découverte de Punta Estrada et de ses paysages de lave. Puis exploration de Las Grietas, spectaculaire faille géologique aux eaux turquoise limpides protégée par de hauts murs de basalte, parfaite pour la baignade et le snorkeling. Après-midi libre à Puerto Ayora.',
+          de: 'Besuch der Bucht La Lobería mit ihrer verspielten Seelöwenkolonie und von Punta Estrada. Weiter nach Las Grietas, einer spektakulären vulkanischen Felsspalte mit kristallklarem, türkisfarbenem Wasser – ein grandioser Ort zum Schwimmen und Schnorcheln. Freier Nachmittag im lebendigen Küstenort Puerto Ayora.',
+          it: 'Escursione a La Lobería per osservare i leoni marini e proseguimento per Punta Estrada. Visita a Las Grietas, una spettacolare crepa vulcanica dalle acque turchesi e trasparenti ideale per nuotare e fare snorkeling. Pomeriggio libero a Puerto Ayora.',
+          pt: 'Visita à baía de La Lobería para observar os leões-marinhos e caminhada até Punta Estrada. Em seguida, descubra Las Grietas, um cânion vulcânico magnífico com águas cristalinas perfeito para banho e snorkel. Tarde livre em Puerto Ayora.',
+          ja: 'アシカが集まる美しい海岸ラ・ロベリアとプンタ・エストラーダを散策。続いて高さのある溶岩の絶壁に囲まれたエメラルドグリーンの天然クレバス「ラス・グリエタス」へ。透明度抜群の汽水でスイミングとシュノーケリングを満喫。午後はプエルトアヨラで自由時間。',
+          zh: '晨间游览拉洛贝里亚海岸，观赏海滩上憨态可掬的加拉帕戈斯海狮群与海鬣蜥。随后前往埃斯特拉达角，深入壮丽的拉斯格里塔斯（Las Grietas）火山玄武岩裂谷，在峭壁掩映的翡翠色纯净水域中游泳和浮潜。下午在阿约拉港自由漫步，体验当地手工艺品与咖啡文化。'
         },
-        image: '/images/tours/16-9/galapagos-las-grietas-16-9.jpg',
+        image: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
         accommodation: {
           en: 'Santa Cruz Island – Puerto Ayora',
           es: 'Isla Santa Cruz – Puerto Ayora',
@@ -236,35 +509,60 @@ const multiDayTours: Tour[] = [
           ja: '朝食付き',
           zh: '包含早餐'
         },
+        transportation: {
+          en: 'Water taxi and scenic coastal trail walk',
+          es: 'Taxi acuático y caminata escénica por sendero costero',
+          fr: 'Bateau-taxi et sentier côtier panoramique',
+          de: 'Wassertaxi & malerische Küstenwanderung',
+          it: 'Taxi acqueo e passeggiata costiera panoramica',
+          pt: 'Táxi aquático e caminhada por trilha costeira',
+          ja: '水上タクシー＆沿岸トレッキング',
+          zh: '水上出租船与海岸步行徒步'
+        },
         activity: {
-          en: 'Guided excursion and snorkeling',
-          es: 'Excursión guiada y snorkeling',
-          fr: 'Excursion guidée et snorkeling',
-          de: 'Geführte Tour & Schnorcheln',
-          it: 'Escursione guidata e snorkeling',
-          pt: 'Excursão guiada e snorkeling',
-          ja: 'ガイド付きツアー＆シュノーケリング',
-          zh: '向导陪同游览与浮潜体验'
-        }
+          en: 'Coastal wildlife watching, Las Grietas swimming & snorkeling',
+          es: 'Observación de fauna costera, natación y snorkel en Las Grietas',
+          fr: 'Observation de la faune côtière, baignade et snorkeling à Las Grietas',
+          de: 'Küstenfauna-Beobachtung, Schwimmen & Schnorcheln in Las Grietas',
+          it: 'Avvistamento fauna costiera, nuoto e snorkeling a Las Grietas',
+          pt: 'Observação de vida silvestre costeira, nado e snorkel em Las Grietas',
+          ja: '沿岸野生生物観察、ラス・グリエタスでのスイミング＆シュノーケリング',
+          zh: '沿海野生动物巡礼、拉斯格里塔斯峡谷游泳与浮潜'
+        },
       },
       {
-        day: 4,
+        day: 5,
         title: {
-          en: 'Day 4 – Transfer To Baltra Airport | Departure',
-          es: 'Día 4 – Traslado Al Aeropuerto De Baltra | Salida',
-          fr: 'Jour 4 – Transfert à l\'Aéroport de Baltra | Départ',
-          de: 'Tag 4 – Transfer zum Flughafen Baltra | Abreise',
-          it: 'Giorno 4 – Trasferimento all\'Aeroporto di Baltra | Partenza',
-          pt: 'Dia 4 – Transfer para o Aeroporto de Baltra | Partida',
-          ja: '第4日 – バルトラ空港へ送迎 | ご出発',
-          zh: '第4天 – 送往巴尔特拉机场 | 航班离境'
+          en: 'Day 5 – Transfer To Baltra Airport | Flight To Quito | Private Hotel Transfer',
+          es: 'Día 5 – Traslado Al Aeropuerto De Baltra | Vuelo A Quito | Transfer Privado Al Hotel',
+          fr: 'Jour 5 – Transfert à l\'Aéroport de Baltra | Vol vers Quito | Transfert Privé Hôtel',
+          de: 'Tag 5 – Transfer zum Flughafen Baltra | Flug nach Quito | Privater Hoteltransfer',
+          it: 'Giorno 5 – Trasferimento all\'Aeroporto di Baltra | Volo per Quito | Transfer Privato in Hotel',
+          pt: 'Dia 5 – Traslado ao Aeroporto de Baltra | Voo para Quito | Transfer Privado ao Hotel',
+          ja: '第5日 – バルトラ空港へ送迎 | キト行きフライト | ホテル専用送迎',
+          zh: '第5天 – 前往巴尔特拉机场 | 飞往基多 | 专车接机入住酒店'
         },
         description: {
-          en: 'After breakfast, check out from the hotel and begin the transfer from Puerto Ayora to Baltra Airport.\n\nThe journey includes transportation across Santa Cruz Island and the crossing of the Itabaca Channel, followed by the airport shuttle to Seymour Airport.\n\nUpon arrival at the airport, assistance will be provided for your departure flight, marking the end of your Galápagos Islands experience.',
-          es: 'Desayuno, check-out del hotel y traslado terrestre a través de Santa Cruz hacia el Canal de Itabaca.\n\nCruce en ferry y traslado en shuttle hacia el Aeropuerto Seymour de Baltra con asistencia para abordar el vuelo de retorno al continente.',
-          zh: '早餐后退房启程送往巴尔特拉机场。\n\n横穿圣克鲁斯岛并摆渡伊塔巴卡海峡，由机场穿梭巴士送达西摩机场办理登机，圆满结束加拉帕戈斯群岛探险之旅。'
+          en: 'After breakfast, check out from your hotel in Puerto Ayora and transfer across Santa Cruz Island and the Itabaca Channel to Baltra Seymour Airport for your return flight to the mainland. Upon landing in Quito, our representative will provide private transfer to your hotel. Enjoy your evening relaxing in the historic Andean capital.',
+          es: 'Desayuno, check-out del hotel en Puerto Ayora y traslado terrestre cruzando Santa Cruz y el Canal de Itabaca hacia el Aeropuerto Seymour de Baltra para abordar el vuelo de retorno a Quito. A su llegada al continente, recepción y traslado privado exclusivo a su hotel en Quito. Noche libre para disfrutar de la capital andina.',
+          fr: 'Petit-déjeuner, check-out de votre hôtel et transfert à travers Santa Cruz et le canal d\'Itabaca vers l\'aéroport Seymour de Baltra pour votre vol retour vers Quito. À votre arrivée sur le continent, accueil et transfert privé à votre hôtel.',
+          de: 'Nach dem Frühstück Fahrt über Santa Cruz und den Itabaca-Kanal zum Flughafen Baltra für den Rückflug nach Quito. Nach der Landung privater Transfer zu Ihrem Hotel in Quito. Entspannter Abend in der Andenmetropole.',
+          it: 'Dopo colazione, check-out e trasferimento attraverso Santa Cruz e il canale di Itabaca verso l\'aeroporto di Baltra per il volo di rientro a Quito. Accoglienza e trasferimento privato in hotel.',
+          pt: 'Café da manhã, check-out e traslado por Santa Cruz e Canal de Itabaca até o Aeroporto de Baltra para voo de retorno a Quito. Chegada e traslado privado exclusivo ao hotel em Quito.',
+          ja: '朝食後チェックアウトし、イタバカ運河を経由してバルトラ島空港へ移動。キト行きの国内線フライトに搭乗。キト到着後、専用車でホテルへお送りいたします。歴史あるアンデスの首都でゆったりとお過ごしください。',
+          zh: '早餐后办理退房，穿过圣克鲁斯岛与伊塔巴卡海峡前往巴尔特拉西摩机场，搭乘航班返回厄瓜多尔大陆。抵达基多后专车接机送抵酒店。夜晚可漫步老城或在酒店休憩。'
         },
         image: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
+        accommodation: {
+          en: 'Hotel in Quito (Selected category 3★ or 4★)',
+          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
+          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
+          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
+          it: 'Hotel a Quito (Categoria 3★ o 4★)',
+          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
+          ja: 'キト市内の厳選ホテル（3★または4★）',
+          zh: '基多精选酒店（3星级或4星级）'
+        },
         meals: {
           en: 'Breakfast',
           es: 'Desayuno',
@@ -276,325 +574,1489 @@ const multiDayTours: Tour[] = [
           zh: '包含早餐'
         },
         transportation: {
-          en: 'Private land transportation and airport shuttle',
-          es: 'Transporte terrestre privado y shuttle de aeropuerto',
-          fr: 'Transport terrestre privé et navette aéroport',
-          de: 'Privater Landtransport & Flughafentransfer',
-          it: 'Trasporto terrestre privato e navetta aeroportuale',
-          pt: 'Transporte terrestre privado e traslado do aeroporto',
-          ja: '専用陸上送迎＆空港シャトル',
-          zh: '专车陆路接送与机场接驳'
-        }
-      }
-    ]
-  },
-
-  // Tour 2: Galapagos 5 Days
-  {
-    id: 'galapagos-5days',
-    code: '1.2',
-    title: {
-      en: 'Galapagos Explorer: The 5-Day Expedition',
-      es: 'Expedición Galápagos: El Viaje De 5 Días',
-      fr: 'Expédition Galápagos: L\'aventure de 5 Jours',
-      de: 'Galapagos Expedition: 5 Tage Abenteuer',
-      it: 'Spedizione Galapagos: L\'avventura di 5 Giorni',
-      pt: 'Expedição Galápagos: A Aventura de 5 Dias',
-      ja: 'ガラパゴス諸島 5日間の探検',
-      zh: '加拉帕戈斯群岛5日探险之旅'
-    },
-    destination: 'Galapagos',
-    duration: {
-      en: '5 DAYS / 4 NIGHTS',
-      es: '5 DÍAS / 4 NOCHES',
-      fr: '5 JOURS / 4 NUITS',
-      de: '5 TAGE / 4 NÄCHTE',
-      it: '5 GIORNI / 4 NOTTI',
-      pt: '5 DIAS / 4 NOITES',
-      ja: '5日間 / 4泊',
-      zh: '5天 / 4晚'
-    },
-    durationDays: 5,
-    price: 1250,
-    price3Star: 1250,
-    price4Star: 1390,
-    imageUrl: '/images/tours/16-9/santa-fe-island-16-9.jpg',
-    mobileImage: '/images/tours/9-16/santa-fe-island-9-16.jpg',
-    desktopImage: '/images/tours/16-9/santa-fe-island-16-9.jpg',
-    gallery: [
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
-      '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
-      '/images/tours/16-9/galapagos-tintoreras16-9.jpg',
-      '/images/tours/16-9/galapagos-las-grietas-16-9.jpg',
-      '/images/tours/16-9/galapagos-tortuga-bay-16-9.jpg',
-      '/images/tours/16-9/galapagos-lobo-marino-16-9.jpg',
-      '/images/tours/16-9/galapagos-snorkeling-16-9.jpg',
-      '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.1.jpg'
-    ],
-    rating: 5,
-    reviewsCount: 35,
-    isPopular: true,
-    category: {
-      en: 'Grand Island Hopping & Cruise',
-      es: 'Gran Salto de Islas y Crucero',
-      fr: 'Grande croisière et îles',
-      de: 'Große Insel-Hopping-Reise',
-      it: 'Grande Spedizione Isole e Crociera',
-      pt: 'Grande Expedição entre Ilhas',
-      ja: 'アイランドホッピング＆クルーズ',
-      zh: '大跳岛与游艇巡航'
-    },
-    description: {
-      en: 'Comprehensive 5-day Galápagos journey connecting Santa Cruz highlands, overnight stay on Isabela Island with Tintoreras Islet and flamingo lagoon, Las Grietas volcanic canyon, and a full-day navigable yacht excursion to Santa Fe or Pinzón Island.',
-      es: 'Aventura de 5 días visitando Santa Cruz, noche en Isla Isabela con Islote Tintoreras y navegación de día completo en yate hacia Santa Fe o Pinzón.',
-      zh: '加拉帕戈斯5日全面行程，包含圣克鲁斯高地、伊莎贝拉岛过夜、蒂恩托雷拉斯石礁潜水、拉斯格里塔斯峡谷，以及前往圣菲岛或平松岛的日间游艇巡航。'
-    },
-    highlights: [
-      { en: 'Twin Craters & Primicias Giant Tortoise Ranch', es: 'Cráteres Gemelos y Rancho Primicias', zh: '双子坑与普里米西亚巨龟保护区' },
-      { en: 'Overnight in Isabela Island & Flamingo Lagoon', es: 'Noche en Isla Isabela y Laguna de Flamingos', zh: '伊莎贝拉岛住宿与火烈鸟泻湖' },
-      { en: 'Tintoreras Islet Snorkeling & Marine Iguanas', es: 'Snorkel en Tintoreras e Iguanas Marinas', zh: '蒂恩托雷拉斯潜水与海鬣蜥' },
-      { en: 'La Lobería & Las Grietas Volcanic Chasm', es: 'La Lobería y Cañón de Las Grietas', zh: '拉洛贝里亚与拉斯格里塔斯峡谷' },
-      { en: 'Full-Day Yacht Cruise to Santa Fe or Pinzón Island', es: 'Navegación Full-Day a Santa Fe o Pinzón', zh: '圣菲岛或平松岛全天游艇巡航' }
-    ],
-    inclusions: [
-      { en: 'Accommodation at the hotel of your choice in Santa Cruz', es: 'Alojamiento en el hotel seleccionado en Santa Cruz' },
-      { en: 'Accommodation at Tintorera Guesthouse in Isabela', es: 'Alojamiento en Hostal Tintorera en Isabela' },
-      { en: 'Buffet breakfast at 4-star hotels / Continental breakfast at 3-star hotels', es: 'Desayuno buffet en hoteles 4★ / Desayuno continental en hoteles 3★' },
-      { en: 'Lunches with a set menu', es: 'Almuerzos menú incluidos' },
-      { en: 'Plane Ticket (Quito – Baltra – Quito)', es: 'Boleto aéreo Quito – Baltra – Quito' },
-      { en: 'Visits to the islands according to the itinerary', es: 'Visitas a las islas según itinerario' },
-      { en: 'Airport reception and departure assistance at Galápagos Airport', es: 'Recepción y asistencia en aeropuertos de Galápagos' },
-      { en: 'Land and sea transportation', es: 'Transporte terrestre y marítimo' },
-      { en: 'Level III Naturalist Guides (Spanish / English)', es: 'Guías Naturalistas Nivel III (Español / Inglés)' },
-      { en: 'Snorkeling equipment for navigable excursions (mask and snorkel)', es: 'Equipo de snorkel para excursiones navegables' },
-      { en: 'Safety lockers available at hotel reception', es: 'Casilleros de seguridad en recepción' },
-      { en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport', es: 'Bus de aeropuerto Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto' },
-      { en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors', es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros' }
-    ],
-    exclusions: [
-      { en: 'Galápagos National Park entrance fee: USD 6.00 for Ecuadorian nationals; USD 200.00 for foreign visitors', es: 'Entrada al Parque Nacional Galápagos: USD 6.00 nacionales / USD 200.00 extranjeros' },
-      { en: 'Dinners', es: 'Cenas' },
-      { en: 'Transit Control Card (TCT): USD 20.00', es: 'Tarjeta de Control de Tránsito (TCT): USD 20.00' },
-      { en: 'Services not specified in the program', es: 'Servicios no especificados en el programa' }
-    ],
-    itinerary: [
-      {
-        day: 1,
-        title: {
-      en: 'Day 1 – Arrival In Baltra | Twin Craters | Primicias Ranch',
-      es: 'Día 1 – Llegada A Baltra | Cráteres Gemelos | Rancho Primicias' },
-        description: {
-          en: 'Upon arrival at Seymour Airport on Baltra Island, you will be welcomed by our representative and begin your journey through the Galápagos Islands.\n\nAfter crossing the Itabaca Channel to Santa Cruz Island, we will continue towards the highlands. Along the way, we will visit the famous Twin Craters (Los Gemelos), two impressive volcanic formations surrounded by the lush vegetation of the Santa Cruz highlands. Here, you will learn about the geological origins of the island and observe the unique Scalesia forest.\n\nWe will then continue to Primicias Ranch, a private reserve where you can observe giant Galápagos tortoises roaming freely in their natural environment. This is an excellent opportunity to photograph these iconic animals and learn about their importance to the Galápagos ecosystem.\n\nAfter the visit, we will continue to your hotel in Puerto Ayora for check-in and the remainder of the day at leisure.',
-          es: 'Llegada al Aeropuerto Seymour en Baltra, recepción y cruce del Canal de Itabaca hacia Santa Cruz.\n\nVisita a los Cráteres Gemelos rodeados del bosque de Scalesia en las tierras altas.\n\nContinuamos al Rancho Primicias para observar tortugas gigantes en libertad y cruzar túneles de lava.\n\nCheck-in en el hotel de Puerto Ayora y tiempo libre.'
+          en: 'Island ground transfer, Baltra airport shuttle, domestic flight & private Quito transfer',
+          es: 'Transporte en isla, bus Lobito, vuelo doméstico y traslado privado en Quito',
+          fr: 'Transport terrestre sur l\'île, navette aéroport, vol intérieur et transfert privé à Quito',
+          de: 'Insel-Transfer, Shuttlebus, Inlandsflug & privater Transfer in Quito',
+          it: 'Trasferimento sull\'isola, navetta, volo nazionale e transfer privato a Quito',
+          pt: 'Transporte na ilha, ônibus shuttle, voo doméstico e traslado privado em Quito',
+          ja: '島内陸上送迎、空港シャトル、国内線フライト＆キト市内専用送迎',
+          zh: '岛上陆路接驳、机场专线巴士、国内航班及基多市内专车'
         },
-        accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
-        meals: { en: 'Not included / according to hotel plan', es: 'No incluidas / según plan hotelero' }
-      },
-      {
-        day: 2,
-        title: {
-      en: 'Day 2 – Santa Cruz To Isabela | Flamingo Lagoon | Tortoise Breeding Center | Tintoreras',
-      es: 'Día 2 – Santa Cruz A Isabela | Laguna De Flamingos | Centro De Crianza | Tintoreras' },
-        description: {
-          en: 'After breakfast, we will transfer to the pier for a speedboat journey from Santa Cruz to Isabela Island. The crossing takes approximately 2 to 2.5 hours, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, we will begin our exploration of Isabela. Our first stop will be the Flamingo Lagoon, one of the most important wetland areas on the island. Here, you may observe American flamingos feeding and resting in the shallow waters, together with other species of coastal and migratory birds.\n\nWe will then visit the Giant Tortoise Breeding Center, where you will learn about the conservation and reproduction programs designed to protect Isabela\'s giant tortoise populations. The visit provides an insight into the efforts being made to preserve these emblematic species.\n\nIn the afternoon, we will take a boat excursion to Tintoreras Islet, a small volcanic islet located just off the coast of Isabela. The area is famous for its crystal-clear waters and rich marine life. During the snorkeling activity, you may encounter sea lions, sea turtles, rays, colorful fish and penguins, depending on the conditions and wildlife activity.\n\nAfter the excursion, return to Puerto Villamil and enjoy the evening at leisure.',
-          es: 'Lancha rápida a Isla Isabela (2 a 2.5 h). En Puerto Villamil visitamos la Laguna de Flamingos y el Centro de Crianza de Tortugas Gigantes.\n\nPor la tarde, navegación al Islote Tintoreras para snorkel con lobos marinos, tortugas marinas, rayas, pingüinos y peces tropicales.\n\nNoche y descanso en Puerto Villamil.'
-        },
-        accommodation: { en: 'Isabela Island – Puerto Villamil (Hostal Tintorera)', es: 'Isla Isabela – Puerto Villamil (Hostal Tintorera)' },
-        meals: { en: 'Breakfast', es: 'Desayuno' }
-      },
-      {
-        day: 3,
-        title: {
-      en: 'Day 3 – Isabela To Santa Cruz | La Lobería | Las Grietas',
-      es: 'Día 3 – Isabela A Santa Cruz | La Lobería | Las Grietas' },
-        description: {
-          en: 'After breakfast, we will return to the pier for the boat transfer back to Santa Cruz Island.\n\nUpon arrival in Puerto Ayora, we will continue with a visit to La Lobería, a small coastal area known for its population of Galápagos sea lions. This is a wonderful place to observe these playful animals both on the beach and in the water.\n\nWe will then visit Las Grietas, a spectacular natural formation created by volcanic activity. This narrow canyon is filled with clear, turquoise water and is one of the most popular swimming and snorkeling sites near Puerto Ayora.\n\nDuring the snorkeling activity, you will have the opportunity to explore the underwater environment and observe colorful tropical fish and other marine species.\n\nAfter the visit, return to Puerto Ayora and check in at your hotel. The remainder of the afternoon and evening will be free to relax or explore the town independently.',
-          es: 'Lancha rápida de retorno a Santa Cruz. Visita a La Lobería para observar lobos marinos y aves costeras.\n\nCaminata a Las Grietas para nadar y hacer snorkel en el cañón volcánico.\n\nTarde libre en Puerto Ayora.'
-        },
-        accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
-        meals: { en: 'Breakfast', es: 'Desayuno' }
-      },
-      {
-        day: 4,
-        title: {
-      en: 'Day 4 – Full-Day Excursion To Santa Fe Or Pinzón Island',
-      es: 'Día 4 – Excursión Full-Day A Isla Santa Fe O Isla Pinzón' },
-        description: {
-          en: 'Today, enjoy a full-day boat excursion to one of the Galápagos\' outstanding snorkeling destinations: Santa Fe Island or Pinzón Island, depending on availability, sea conditions and the selected tour.\n\nSanta Fe Island is known for its beautiful turquoise waters, white sandy beaches and endemic wildlife. During the excursion, you may encounter sea lions, sea turtles, rays, marine iguanas and a variety of tropical fish. The island is also home to the endemic Santa Fe land iguana.\n\nAlternatively, the excursion may take you to Pinzón Island, a spectacular location surrounded by clear waters and abundant marine life. The snorkeling sites around Pinzón are particularly well known for encounters with sea turtles, sea lions, rays, colorful fish and, with some luck, Galápagos penguins.\n\nThe day will include navigation, snorkeling and opportunities to observe wildlife both above and below the water. Lunch will generally be provided during the excursion, depending on the selected tour.\n\nReturn to Puerto Ayora in the afternoon and enjoy your final evening in the Galápagos.',
-          es: 'Navegación de día completo en yate hacia Isla Santa Fe o Isla Pinzón.\n\nEn Santa Fe disfrutará de bahías turquesas, iguanas terrestres endémicas y abundante vida marina. En Pinzón, aguas profundas ricas en nutrientes con tortugas marinas gigantes, rayas, tiburones y peces multicolores.\n\nAlmuerzo a bordo incluido y retorno por la tarde a Puerto Ayora.'
-        },
-        accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
-        meals: { en: 'Breakfast and lunch', es: 'Desayuno y almuerzo' },
-        activity: { en: 'Full-day boat excursion and snorkeling', es: 'Excursión en barco de día completo y snorkel' }
-      },
-      {
-        day: 5,
-        title: {
-      en: 'Day 5 – Transfer To Baltra Airport | Departure',
-      es: 'Día 5 – Traslado Al Aeropuerto De Baltra | Salida' },
-        description: {
-          en: 'After breakfast, check out from the hotel and transfer from Puerto Ayora towards Baltra Island.\n\nThe journey includes transportation across Santa Cruz Island and the Itabaca Channel, followed by the transfer to Seymour Airport (Baltra).\n\nUpon arrival at the airport, assistance will be provided for your departure flight, marking the end of your Galápagos Islands adventure.',
-          es: 'Desayuno, check-out del hotel y traslado terrestre a través de Santa Cruz hacia el Canal de Itabaca y Aeropuerto Seymour de Baltra para tomar el vuelo de retorno.'
-        },
-        meals: { en: 'Breakfast', es: 'Desayuno' }
-      }
-    ]
-  },
-
-  // Tour 3: Galapagos 6 Days
-  {
-    id: 'galapagos-6days',
-    code: '1.3',
-    title: {
-      en: 'Galapagos Enchanted Journey',
-      es: 'Galápagos Completo: La Gran Odisea De 6 Días',
-      fr: 'Voyage Enchanté aux Galápagos',
-      de: 'Verzauberte Reise nach Galapagos',
-      it: 'Viaggio Incantato alle Galapagos',
-      pt: 'Jornada Encantada em Galápagos',
-      ja: '魅惑のガラパゴス諸島の旅',
-      zh: '加拉帕戈斯迷人之旅'
-    },
-    destination: 'Galapagos',
-    duration: {
-      en: '6 DAYS / 5 NIGHTS',
-      es: '6 DÍAS / 5 NOCHES',
-      fr: '6 JOURS / 5 NUITS',
-      de: '6 TAGE / 5 NÄCHTE',
-      it: '6 GIORNI / 5 NOTTI',
-      pt: '6 DIAS / 5 NOITES',
-      ja: '6日間 / 5泊',
-      zh: '6天 / 5晚'
-    },
-    durationDays: 6,
-    price: 1550,
-    price3Star: 1550,
-    price4Star: 1690,
-    imageUrl: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
-    mobileImage: '/images/tours/9-16/tijeretas-hill-9-16.jpg',
-    desktopImage: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
-    gallery: [
-      '/images/tours/16-9/isabela-island-16-9.jpg',
-      '/images/tours/16-9/galapagos-tintoreras16-9.jpg',
-      '/images/tours/16-9/galapagos-las-grietas-16-9.jpg',
-      '/images/tours/16-9/galapagos-tortuga-bay-16-9.1.jpg',
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.1.jpg',
-      '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.jpg',
-      '/images/tours/16-9/santa-fe-island-16-9.jpg',
-      '/images/tours/16-9/galapagos-baltra-island-16-9.jpg'
-    ],
-    rating: 5,
-    reviewsCount: 39,
-    isPopular: true,
-    category: {
-      en: 'Triple Island Discovery & Cruise',
-      es: 'Descubrimiento Triple Isla y Crucero',
-      fr: "Découverte de trois îles",
-      de: 'Drei-Inseln-Entdeckung & Kreuzfahrt',
-      it: 'Scoperta di Tre Isole e Crociera',
-      pt: 'Descoberta de Três Ilhas',
-      ja: '3島巡礼＆クルーズ',
-      zh: '三岛深度探索与游艇巡航'
-    },
-    description: {
-      en: 'Ultimate 6-day Galápagos expedition exploring 3 major islands: Santa Cruz highlands & giant tortoises, Isabela Island with Tintoreras & flamingos, Las Grietas volcanic canyon, navigable yacht cruise to Santa Fe or Pinzón Island, and San Cristóbal Island with Interpretation Center, Tijeretas Hill and La Lobería.',
-      es: 'Expedición de 6 días explorando 3 islas: Santa Cruz, Isabela y San Cristóbal, con fauna endémica, snorkel en yate y paisajes volcánicos únicos.',
-      zh: '加拉帕戈斯6日大周游，涵盖圣克鲁斯高地、伊莎贝拉岛、蒂恩托雷拉斯、拉斯格里塔斯、圣菲/平松游艇巡航，以及圣克里斯托巴尔岛（解读中心、军舰鸟丘与拉洛贝里亚）。'
-    },
-    highlights: [
-      { en: 'Twin Craters & Primicias Giant Tortoise Reserve', es: 'Cráteres Gemelos y Rancho Primicias', zh: '双子坑与普里米西亚巨龟保护区' },
-      { en: 'Isabela Island, Flamingo Lagoon & Tintoreras', es: 'Isla Isabela, Laguna de Flamingos y Tintoreras', zh: '伊莎贝拉岛、火烈鸟与蒂恩托雷拉斯' },
-      { en: 'Las Grietas Volcanic Rock Canyon', es: 'Cañón de Las Grietas', zh: '拉斯格里塔斯火山峡谷' },
-      { en: 'Full-Day Yacht Cruise to Santa Fe or Pinzón Island', es: 'Navegación Full-Day a Santa Fe o Pinzón', zh: '圣菲岛或平松岛全天游艇巡航' },
-      { en: 'San Cristóbal Interpretation Center & Tijeretas Hill', es: 'Centro de Interpretación y Cerro Tijeretas en San Cristóbal', zh: '圣克里斯托巴尔岛解读中心与军舰鸟丘' }
-    ],
-    inclusions: [
-      { en: 'Accommodation at the hotel of your choice in Santa Cruz', es: 'Alojamiento en el hotel seleccionado en Santa Cruz' },
-      { en: 'Accommodation at Hostal Tintorera in Isabela', es: 'Alojamiento en Hostal Tintorera en Isabela' },
-      { en: 'Accommodation at Hotel Algarrobos in San Cristóbal', es: 'Alojamiento en Hotel Algarrobos en San Cristóbal' },
-      { en: 'Buffet breakfast at 4-star hotels / Continental breakfast at 3-star hotels', es: 'Desayuno buffet en hoteles 4★ / Desayuno continental en hoteles 3★' },
-      { en: 'Plane ticket (Quito – Baltra / San Cristóbal – Quito)', es: 'Boleto aéreo Quito – Baltra / San Cristóbal – Quito' },
-      { en: 'Set-menu lunches', es: 'Almuerzos menú incluidos' },
-      { en: 'Visits to the islands according to the itinerary', es: 'Visitas a las islas según itinerario' },
-      { en: 'Airport reception and departure assistance at Galápagos airports', es: 'Recepción y asistencia en aeropuertos de Galápagos' },
-      { en: 'Maritime and land transportation', es: 'Transporte marítimo y terrestre' },
-      { en: 'Naturalist Guide Class III (Spanish/English)', es: 'Guía Naturalista Nivel III (Español/Inglés)' },
-      { en: 'Snorkeling equipment for boat excursions (mask and snorkel)', es: 'Equipo de snorkel para excursiones en barco (máscara y tubo)' },
-      { en: 'Safety lockers available at hotel reception', es: 'Casilleros de seguridad en recepción' },
-      { en: 'Lobito Airport Bus: Airport – Itabaca Channel – Airport', es: 'Bus de aeropuerto Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto' },
-      { en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors', es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros' }
-    ],
-    exclusions: [
-      { en: 'Galápagos National Park entrance fee: USD 6.00 for Ecuadorian nationals; USD 200.00 for foreign visitors', es: 'Entrada al Parque Nacional Galápagos: USD 6.00 nacionales / USD 200.00 extranjeros' },
-      { en: 'Dinners in Santa Cruz', es: 'Cenas en Santa Cruz' },
-      { en: 'Transit Control Card (TCT): USD 20.00', es: 'Tarjeta de Control de Tránsito (TCT): USD 20.00' },
-      { en: 'Services not specified in the program', es: 'Servicios no especificados en el programa' }
-    ],
-    itinerary: [
-      {
-        day: 1,
-        title: {
-      en: 'Day 1: Arrival In Baltra – Twin Craters – Primicias Ranch',
-      es: 'Día 1: Llegada A Baltra – Cráteres Gemelos – Rancho Primicias' },
-        description: {
-          en: 'Upon arrival at Baltra Airport, you will be welcomed by our representative and begin your Galápagos adventure.\n\nYour first visit will be to the Twin Craters (Los Gemelos), two impressive volcanic formations located in the highlands of Santa Cruz Island. These large craters were created by ancient volcanic activity and are surrounded by lush vegetation, including the characteristic scalesia forest. During the visit, you will have the opportunity to learn about the island’s geological history and observe some of the native bird species of the highlands.\n\nAfterward, continue to Primicias Ranch, a private ecological reserve where you can observe giant Galápagos tortoises roaming freely in their natural environment. You will also have the chance to walk through lava tunnels and learn more about the conservation efforts dedicated to protecting these iconic animals.\n\nAt the end of the excursion, transfer to your accommodation in Santa Cruz Island and enjoy the rest of the day at leisure.',
-          es: 'Llegada al Aeropuerto de Baltra, recepción y traslado a las tierras altas de Santa Cruz para visitar los Cráteres Gemelos rodeados del bosque de Scalesia.\n\nLuego visitamos el Rancho Primicias para observar tortugas gigantes en libertad y cruzar túneles de lava volcánica.\n\nTraslado al hotel en Santa Cruz y tiempo libre.'
-        },
-        accommodation: { en: 'Santa Cruz Island', es: 'Isla Santa Cruz' }
-      },
-      {
-        day: 2,
-        title: {
-      en: 'Day 2: Santa Cruz – Isabela Island – Flamingo Lagoon – Tortoise Breeding Center – Tintoreras Islet',
-      es: 'Día 2: Santa Cruz – Isla Isabela – Laguna De Flamingos – Centro De Crianza – Islote Tintoreras' },
-        description: {
-          en: 'After breakfast, transfer to the pier for a speedboat ride to Isabela Island, the largest island in the Galápagos archipelago. The journey offers the possibility of seeing marine wildlife along the way, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, begin your exploration of Isabela with a visit to a flamingo lagoon, where you may observe the beautiful Galápagos flamingos feeding and resting in the shallow waters.\n\nContinue to the Tortoise Breeding Center, a conservation facility dedicated to the reproduction and protection of Isabela’s giant tortoise populations. Here, you will learn about the conservation programs and the efforts being made to preserve these endangered species.\n\nIn the afternoon, take a boat excursion to Tintoreras Islet, a small group of volcanic islets located near Puerto Villamil. The area is famous for its clear waters and abundant marine life. During the visit, you will have the opportunity to snorkel with sea turtles, sea lions, tropical fish, rays, and marine iguanas. On land, you may also see penguins, blue-footed boobies, and other coastal birds.\n\nReturn to Puerto Villamil and enjoy the evening at leisure.',
-          es: 'Lancha rápida a Isla Isabela. Visita a la laguna de flamingos y al Centro de Crianza de Tortugas Gigantes de Isabela.\n\nPor la tarde, navegación al Islote Tintoreras para snorkel con leones marinos, tortugas, peces tropicales, iguanas marinas y pingüinos de Galápagos.\n\nNoche en Isabela (Hostal Tintorera).'
-        },
-        accommodation: { en: 'Isabela Island (Hostal Tintorera)', es: 'Isla Isabela (Hostal Tintorera)' }
-      },
-      {
-        day: 3,
-        title: {
-      en: 'Day 3: Isabela – Santa Cruz – La Lobería – Las Grietas',
-      es: 'Día 3: Isabela – Santa Cruz – La Lobería – Las Grietas' },
-        description: {
-          en: 'After breakfast, transfer to the pier for your return journey to Santa Cruz Island.\n\nUpon arrival, continue with a visit to La Lobería, a coastal area known for its colony of playful Galápagos sea lions. Enjoy a short walk along the coast and take the opportunity to observe these animals in their natural habitat. Depending on conditions, you may also see marine iguanas, shorebirds, and other native wildlife.\n\nLater, visit Las Grietas, one of Santa Cruz’s most popular natural swimming and snorkeling sites. This spectacular geological formation consists of a narrow water-filled crevice surrounded by high volcanic rock walls. Its clear waters provide excellent conditions for observing colorful fish and other marine species.\n\nReturn to your hotel and enjoy the remainder of the afternoon and evening at leisure.',
-          es: 'Lancha de regreso a Santa Cruz. Visita costera a La Lobería para observar lobos marinos. Luego caminata a Las Grietas, espectacular cañón volcánico de aguas cristalinas para natación y snorkel. Tarde libre en Puerto Ayora.'
-        },
-        accommodation: { en: 'Santa Cruz Island', es: 'Isla Santa Cruz' }
-      },
-      {
-        day: 4,
-        title: {
-      en: 'Day 4: Full-Day Excursion – Santa Fe Island Or Pinzón Islet',
-      es: 'Día 4: Excursión Full-Day – Isla Santa Fe O Islote Pinzón' },
-        description: {
-          en: 'Today, enjoy a full-day boat excursion to Santa Fe Island or Pinzón Islet, depending on availability, weather, and sea conditions.\n\nOption 1: Santa Fe Island\nSanta Fe is famous for its beautiful turquoise waters, white-sand beaches, and abundant wildlife. During the excursion, you may observe sea lions, marine iguanas, sea turtles, rays, and a variety of tropical fish. The snorkeling experience offers an excellent opportunity to explore the rich marine ecosystem surrounding the island. You may also enjoy a short hike to explore the island’s arid landscape and endemic vegetation.\n\nOption 2: Pinzón Islet\nPinzón is a spectacular snorkeling destination surrounded by nutrient-rich waters and abundant marine life. During the excursion, you may have the opportunity to swim alongside sea turtles, sea lions, rays, sharks, and schools of tropical fish.\n\nAfter the activities, enjoy lunch on board and continue exploring the surrounding waters before returning to Santa Cruz.\n\nArrive in Puerto Ayora in the afternoon and enjoy the evening at leisure.',
-          es: 'Navegación de día completo en yate hacia Isla Santa Fe o Islote Pinzón con sesiones de snorkel de alta biodiversidad marina (tortugas, leones marinos, rayas y peces de colores). Almuerzo a bordo incluido.'
-        },
-        accommodation: { en: 'Santa Cruz Island', es: 'Isla Santa Cruz' }
-      },
-      {
-        day: 5,
-        title: {
-      en: 'Day 5: Santa Cruz – San Cristóbal – Interpretation Center – Tijeretas – La Lobería',
-      es: 'Día 5: Santa Cruz – San Cristóbal – Centro De Interpretación – Tijeretas – La Lobería' },
-        description: {
-          en: 'After breakfast, transfer to the pier for a speedboat journey to San Cristóbal Island, one of the easternmost islands in the Galápagos.\n\nUpon arrival in Puerto Baquerizo Moreno, begin your tour with a visit to the San Cristóbal Interpretation Center, an excellent introduction to the natural and human history of the Galápagos Islands. Through informative exhibits, you will learn about the islands’ volcanic origins, ecosystems, endemic species, human settlement, and conservation challenges.\n\nContinue to Tijeretas Hill, a scenic viewpoint offering beautiful panoramic views of the coastline and surrounding ocean. The area is also associated with frigatebirds, which can frequently be observed flying above the cliffs.\n\nFinally, visit La Lobería, a beautiful coastal site where you can observe sea lions resting on the beach and playing in the water. The area also offers opportunities to see marine iguanas and coastal birds.\n\nReturn to Puerto Baquerizo Moreno and enjoy your final evening in the Galápagos.',
-          es: 'Lancha a Isla San Cristóbal. Visita al Centro de Interpretación de San Cristóbal, caminata al mirador de Cerro Tijeretas con avistamiento de fragatas y relax en la playa La Lobería con lobos marinos. Noche en San Cristóbal (Hotel Algarrobos).'
-        },
-        accommodation: { en: 'San Cristóbal Island (Hotel Algarrobos)', es: 'Isla San Cristóbal (Hotel Algarrobos)' }
       },
       {
         day: 6,
         title: {
-      en: 'Day 6: San Cristóbal – Airport Transfer And Departure',
-      es: 'Día 6: San Cristóbal – Traslado Al Aeropuerto Y Salida' },
+          en: 'Day 6 – Private Quito Airport Transfer | Onward Connections',
+          es: 'Día 6 – Traslado Privado Al Aeropuerto De Quito | Vuelo Internacional',
+          fr: 'Jour 6 – Transfert Privé vers l\'Aéroport de Quito | Connexions Internationales',
+          de: 'Tag 6 – Privater Transfer zum Flughafen Quito | Weiterflug',
+          it: 'Giorno 6 – Trasferimento Privato all\'Aeroporto di Quito | Volo di Rientro',
+          pt: 'Dia 6 – Traslado Privado ao Aeroporto de Quito | Conexões Internacionais',
+          ja: '第6日 – キト空港専用送迎 | 帰国の途へ',
+          zh: '第6天 – 基多机场私人专车送机 | 踏上归途'
+        },
         description: {
-          en: 'After breakfast, enjoy some free time depending on your flight schedule.\n\nAt the appropriate time, transfer to San Cristóbal Airport for your departure flight.\n\nYour unforgettable Galápagos adventure comes to an end as you board your flight back to the mainland.',
-          es: 'Desayuno y tiempo libre hasta el traslado al Aeropuerto de San Cristóbal para abordar su vuelo de retorno al continente.'
-        }
+          en: 'At the scheduled time, private transfer from your hotel to Quito International Airport for your onward international flight connections. End of our services, taking home unforgettable memories of the enchanted Galápagos Islands.',
+          es: 'A la hora acordada, traslado privado exclusivo desde su hotel hacia el Aeropuerto Internacional Mariscal Sucre de Quito para tomar su vuelo de conexión internacional. Fin de nuestros servicios con recuerdos inolvidables de las Islas Encantadas.',
+          fr: 'Transfert privé de votre hôtel vers l\'aéroport international de Quito pour votre vol de correspondance internationale. Fin de nos prestations avec des souvenirs mémorables des îles Galápagos.',
+          de: 'Rechtzeitiger privater Transfer vom Hotel zum internationalen Flughafen Quito für Ihren internationalen Weiterflug. Ende unserer Leistungen mit unvergesslichen Erinnerungen an die verzauberten Galapagos-Inseln.',
+          it: 'All\'orario concordato, trasferimento privato dall\'hotel all\'Aeroporto Internazionale di Quito per il volo internazionale di ritorno. Fine dei nostri servizi.',
+          pt: 'No horário programado, traslado privado do hotel ao Aeroporto Internacional de Quito para conexão com seu voo internacional. Fim de nossos serviços com lembranças inesquecíveis.',
+          ja: 'フライト時間に合わせてホテルからキト国際空港へ専用車で送迎いたします。魔法のようなガラパゴス諸島の思い出とともに帰国の途へ。サービス終了となります。',
+          zh: '根据国际航班起飞时间，专车送往基多国际机场办理登机手续，踏上温馨归途。加拉帕戈斯群岛的奇妙探险圆满结束。'
+        },
+        image: '/images/tours/16-9/quito-colonial-16-9.jpg',
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'Private transportation to Quito International Airport',
+          es: 'Transporte privado al Aeropuerto Internacional de Quito',
+          fr: 'Transport privé vers l\'aéroport international de Quito',
+          de: 'Privater Transport zum Flughafen Quito',
+          it: 'Trasporto privato per l\'aeroporto di Quito',
+          pt: 'Transporte privado para o Aeroporto de Quito',
+          ja: 'キト国際空港への専用送迎車',
+          zh: '基多国际机场私人专车送机'
+        },
+      }
+    ]
+  },
+
+  // Tour: galapagos-7days
+  {
+    id: 'galapagos-7days',
+    code: '1.2',
+    title: {
+      en: 'Galapagos Explorer: 7-Day Island Expedition (With Quito Transfers)',
+      es: 'Expedición Galápagos: 7 Días De Aventura (Con Transfers UIO)',
+      fr: 'Expédition Galápagos: 7 Jours d\'Aventure (Transferts UIO Inclus)',
+      de: 'Galapagos Entdecker: 7 Tage Inselabenteuer (Inkl. Quito-Transfers)',
+      it: 'Spedizione Galapagos: 7 Giorni di Avventura (Con Trasferimenti UIO)',
+      pt: 'Expedição Galápagos: 7 Dias de Aventura (Com Transfers UIO)',
+      ja: 'ガラパゴス探検：7日間のアイランドアドベンチャー（キト送迎付き）',
+      zh: '加拉帕戈斯探索者：7日海岛深度探险（含基多接送机）'
+    },
+    destination: 'Galapagos',
+    duration: {
+      en: '7 DAYS / 6 NIGHTS',
+      es: '7 DÍAS / 6 NOCHES',
+      fr: '7 JOURS / 6 NUITS',
+      de: '7 TAGE / 6 NÄCHTE',
+      it: '7 GIORNI / 6 NOTTI',
+      pt: '7 DIAS / 6 NOITES',
+      ja: '7日間 / 6泊',
+      zh: '7天 / 6晚'
+    },
+    durationDays: 7,
+    price: 2050,
+    price3Star: 2050,
+    price4Star: 2399,
+    imageUrl: '/images/tours/16-9/santa-fe-island-16-9.jpg',
+    mobileImage: '/images/tours/9-16/santa-fe-island-9-16.jpg',
+    desktopImage: '/images/tours/16-9/santa-fe-island-16-9.jpg',
+    gallery: [
+      '/images/tours/16-9/santa-fe-island-16-9.jpg',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
+      '/images/tours/16-9/galapagos-tintoreras16-9.jpg',
+      '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
+      '/images/tours/16-9/galapagos-lobo-marino-16-9.jpg',
+      '/images/tours/16-9/galapagos-snorkeling-16-9.jpg',
+      '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.1.webp'
+    ],
+    rating: 5,
+    reviewsCount: 38,
+    isPopular: true,
+    category: {
+      en: 'Multi-Island Hopping & Yacht Cruise',
+      es: 'Gran Salto de Islas y Navegación en Yate',
+      fr: 'Grand saut d\'îles et croisière en yacht',
+      de: 'Großes Inselhüpfen & Yacht-Kreuzfahrt',
+      it: 'Grande Salto tra Isole e Navigazione in Yacht',
+      pt: 'Grande Salto entre Ilhas e Navegação em Iate',
+      ja: 'マルチアイランド＆ヨットクルーズ',
+      zh: '多岛跳岛探险与游艇巡航'
+    },
+    description: {
+      en: 'Unforgettable 7-day journey connecting Quito private transfers, Santa Cruz highlands & giant tortoises, an overnight stay on Isabela Island with Tintoreras & flamingo lagoon, Las Grietas canyon, and a full-day navigable yacht excursion to Santa Fe or Pinzón Island.',
+      es: 'Inolvidable viaje de 7 días que conecta traslados privados en Quito, tierras altas de Santa Cruz, noche en Isla Isabela con Tintoreras y laguna de flamingos, cañón de Las Grietas y navegación de día completo en yate a Santa Fe o Pinzón.',
+      fr: 'Voyage inoubliable de 7 jours reliant les transferts privés à Quito, les hauts plateaux de Santa Cruz, une nuit sur l\'île Isabela avec Tintoreras et flamants roses, Las Grietas et une excursion navigable d\'une journée en yacht vers Santa Fe ou Pinzón.',
+      de: 'Unvergessliche 7-tägige Reise mit privaten Quito-Transfers, Santa Cruz Hochland, Übernachtung auf der Insel Isabela mit Tintoreras & Flamingo-Lagune, Las Grietas und ganztägigem Yachtausflug zur Insel Santa Fe oder Pinzón.',
+      it: 'Indimenticabile viaggio di 7 giorni con trasferimenti privati a Quito, alture di Santa Cruz, pernottamento a Isabela con Tintoreras e fenicotteri, canyon di Las Grietas ed escursione in yacht a Santa Fe o Pinzón.',
+      pt: 'Inesquecível viagem de 7 dias combinando traslados privados em Quito, terras altas de Santa Cruz, pernoite na Ilha Isabela com Tintoreras e flamingos, cânion de Las Grietas e navegação de dia inteiro a Santa Fe ou Pinzón.',
+      ja: 'キト専用送迎、サンタクルス島の巨亀と双子坑、イサベラ島での宿泊とティントレラスのシュノーケリング、ラス・グリエタス、そしてサンタフェ島またはピンソン島への終日ヨットクルーズを含む贅沢な7日間。',
+      zh: '7日经典海岛探险，包含基多私人机场接送、圣克鲁斯高地巨龟保护区、伊莎贝拉岛过夜体验（蒂恩托雷拉斯群礁浮潜与火烈鸟泻湖）、拉斯格里塔斯火山峡谷，以及前往圣菲岛或平松岛的全天出海游艇巡航。'
+    },
+    highlights: [
+      {
+        en: 'Private Quito Airport Transfers (Arrival & Departure)',
+        es: 'Traslados Privados Aeropuerto Quito (Llegada y Salida)',
+        fr: 'Transferts Privés Aéroport de Quito (Arrivée et Départ)',
+        de: 'Private Quito-Flughafentransfers (Ankunft & Abreise)',
+        it: 'Trasferimenti Privati Aeroporto di Quito (Arrivo e Partenza)',
+        pt: 'Traslados Privados Aeroporto de Quito (Chegada e Partida)',
+        ja: 'キト空港専用往復送迎（到着＆出発）',
+        zh: '基多国际机场私人专车接送（抵达与离境）'
+      },
+      {
+        en: 'Twin Craters & Primicias Giant Tortoise Reserve',
+        es: 'Cráteres Gemelos y Reserva de Tortugas Primicias',
+        fr: 'Cratères Jumeaux et Réserve de Tortues Primicias',
+        de: 'Zwillingskrater & Riesenschildkröten-Reservat Primicias',
+        it: 'Crateri Gemelli e Riserva Tartarughe Primicias',
+        pt: 'Crateras Gêmeas e Reserva de Tartarugas Primicias',
+        ja: '双子坑＆プリミシアス巨亀保護区',
+        zh: '双子坑与普里米西亚巨龟生态保护区'
+      },
+      {
+        en: 'Overnight in Isabela Island & Flamingo Lagoon',
+        es: 'Noche en Isla Isabela y Laguna de Flamingos',
+        fr: 'Nuit sur l\'île Isabela & Lagune des Flamants',
+        de: 'Übernachtung auf der Insel Isabela & Flamingo-Lagune',
+        it: 'Pernottamento a Isabela e Laguna dei Fenicotteri',
+        pt: 'Pernoite na Ilha Isabela e Lagoa de Flamingos',
+        ja: 'イサベラ島での宿泊＆フラミンゴラグーン',
+        zh: '伊莎贝拉岛深度过夜体验与火烈鸟泻湖'
+      },
+      {
+        en: 'Tintoreras Islet Snorkeling & Marine Iguana Colonies',
+        es: 'Snorkel en Tintoreras y Colonias de Iguanas Marinas',
+        fr: 'Snorkeling aux Tintoreras & Iguanes Marins',
+        de: 'Schnorcheln bei Tintoreras & Meerechsenkolonien',
+        it: 'Snorkeling a Tintoreras e Colonie di Iguane Marine',
+        pt: 'Snorkel em Tintoreras e Colônias de Iguanas Marinhas',
+        ja: 'ティントレラスでのシュノーケリング＆ウミイグアナの群れ',
+        zh: '蒂恩托雷拉斯石礁浮潜与海鬣蜥群落巡礼'
+      },
+      {
+        en: 'Full-Day Navigable Yacht Cruise to Santa Fe or Pinzón Island',
+        es: 'Navegación Full-Day en Yate a Isla Santa Fe o Pinzón',
+        fr: 'Croisière Navigable d\'une Journée à Santa Fe ou Pinzón',
+        de: 'Ganztägige Yacht-Kreuzfahrt zur Insel Santa Fe oder Pinzón',
+        it: 'Crociera in Yacht di un\'intera Giornata a Santa Fe o Pinzón',
+        pt: 'Cruzeiro de Dia Inteiro em Iate para Santa Fe ou Pinzón',
+        ja: 'サンタフェ島またはピンソン島への終日ヨットクルーズ',
+        zh: '圣菲岛或平松岛全天出海游艇航行与浮潜'
+      }
+    ],
+    inclusions: [
+      {
+        en: 'Accommodation at the hotel of your choice in Santa Cruz (3★ or 4★)',
+        es: 'Alojamiento en el hotel seleccionado en Santa Cruz (3★ o 4★)',
+        fr: 'Hébergement à l\'hôtel de votre choix à Santa Cruz (3★ ou 4★)',
+        de: 'Unterkunft im gewählten Hotel auf Santa Cruz (3★ oder 4★)',
+        it: 'Sistemazione nell\'hotel prescelto a Santa Cruz (3★ o 4★)',
+        pt: 'Hospedagem no hotel de sua escolha em Santa Cruz (3★ ou 4★)',
+        ja: 'サンタクルス島の厳選ホテル宿泊（3★または4★）',
+        zh: '圣克鲁斯岛自选精品酒店住宿（3星级或4星级）'
+      },
+      {
+        en: 'Accommodation at Hostal Tintorera in Isabela Island',
+        es: 'Alojamiento en Hostal Tintorera en Isla Isabela',
+        fr: 'Hébergement à l\'Hostal Tintorera sur l\'île Isabela',
+        de: 'Unterkunft im Hostal Tintorera auf der Insel Isabela',
+        it: 'Sistemazione presso Hostal Tintorera sull\'isola Isabela',
+        pt: 'Hospedagem no Hostal Tintorera na Ilha Isabela',
+        ja: 'イサベラ島のオスタル・ティントレラ宿泊',
+        zh: '伊莎贝拉岛廷托雷拉客栈住宿'
+      },
+      {
+        en: 'Private airport transfers in Quito (Arrival & Departure)',
+        es: 'Traslados privados en aeropuerto de Quito (Llegada y Salida)',
+        fr: 'Transferts privés aéroport de Quito (Arrivée et Départ)',
+        de: 'Private Flughafentransfers in Quito (Ankunft & Abreise)',
+        it: 'Trasferimenti privati aeroporto di Quito (Arrivo e Partenza)',
+        pt: 'Traslados privados no aeroporto de Quito (Chegada e Partida)',
+        ja: 'キト空港専用プライベート送迎（到着＆出発）',
+        zh: '基多国际机场私人专车接送（抵达与出发）'
+      },
+      {
+        en: 'Buffet breakfast at 4★ hotels / Continental breakfast at 3★ hotels',
+        es: 'Desayuno buffet en hoteles 4★ / Desayuno continental en hoteles 3★',
+        fr: 'Petit-déjeuner buffet en hôtel 4★ / continental en hôtel 3★',
+        de: 'Frühstücksbuffet in 4★-Hotels / Kontinentales Frühstück in 3★-Hotels',
+        it: 'Colazione a buffet in hotel 4★ / Continentale in hotel 3★',
+        pt: 'Café da manhã buffet em hotéis 4★ / Continental em hotéis 3★',
+        ja: '4★ホテルのビュッフェ朝食 / 3★ホテルのコンチネンタル朝食',
+        zh: '4星级酒店自助早餐 / 3星级酒店欧陆式早餐'
+      },
+      {
+        en: 'Set-menu lunches according to the itinerary',
+        es: 'Almuerzos menú incluidos según el itinerario',
+        fr: 'Déjeuners avec menu préétabli selon l\'itinéraire',
+        de: 'Mittagessen mit festem Menü gemäß Reiseroute',
+        it: 'Pranzi con menu fisso secondo l\'itinerario',
+        pt: 'Almoços com cardápio fixo de acordo com o itinerário',
+        ja: '旅程に応じたセットメニューの昼食',
+        zh: '行程中规划的指定套餐午餐'
+      },
+      {
+        en: 'Domestic Flight Ticket (Quito – Baltra – Quito)',
+        es: 'Boleto aéreo doméstico (Quito – Baltra – Quito)',
+        fr: 'Billet d\'avion intérieur (Quito – Baltra – Quito)',
+        de: 'Inlandsflugticket (Quito – Baltra – Quito)',
+        it: 'Biglietto aereo nazionale (Quito – Baltra – Quito)',
+        pt: 'Passagem aérea doméstica (Quito – Baltra – Quito)',
+        ja: '国内線往復航空券（キト – バルトラ – キト）',
+        zh: '厄瓜多尔境内往返机票（基多 – 巴尔特拉 – 基多）'
+      },
+      {
+        en: 'All guided visits to the islands according to the itinerary',
+        es: 'Todas las visitas guiadas a las islas según el itinerario',
+        fr: 'Toutes les visites guidées des îles selon l\'itinéraire',
+        de: 'Alle geführten Inselbesuche gemäß Reiseroute',
+        it: 'Tutte le visite guidate alle isole secondo l\'itinerario',
+        pt: 'Todas as visitas guiadas às ilhas de acordo com o itinerário',
+        ja: '旅程に記載されたすべてのガイド付き島内観光',
+        zh: '行程规划的所有受保护海岛导览游览'
+      },
+      {
+        en: 'Airport reception and departure assistance at Galápagos airports',
+        es: 'Recepción y asistencia en aeropuertos de Galápagos',
+        fr: 'Accueil et assistance aux aéroports des Galápagos',
+        de: 'Flughafenempfang und Abreisebetreuung auf Galápagos',
+        it: 'Accoglienza e assistenza negli aeroporti delle Galapagos',
+        pt: 'Recepção e assistência nos aeroportos de Galápagos',
+        ja: 'ガラパゴス諸島空港での到着出迎えおよび出発サポート',
+        zh: '加拉帕戈斯各机场抵达专员接机与出发协助'
+      },
+      {
+        en: 'Comprehensive land and maritime transportation',
+        es: 'Transporte terrestre y marítimo integral',
+        fr: 'Transport terrestre et maritime complet',
+        de: 'Umfassender Land- und Seetransport',
+        it: 'Trasporto terrestre e marittimo completo',
+        pt: 'Transporte terrestre e marítimo completo',
+        ja: '全行程における陸上および海上移動交通',
+        zh: '全程专车陆路与快艇海上交通'
+      },
+      {
+        en: 'Level III Certified Naturalist Guides (Spanish / English)',
+        es: 'Guías naturalistas certificados Nivel III (Español / Inglés)',
+        fr: 'Guides naturalistes certifiés de niveau III (Espagnol / Anglais)',
+        de: 'Zertifizierte Naturführer der Stufe III (Spanisch / Englisch)',
+        it: 'Guide naturalistiche certificate di Livello III (Spagnolo / Inglese)',
+        pt: 'Guias naturalistas certificados Nível III (Espanhol / Inglês)',
+        ja: 'レベルIII認定ナチュラリストガイド（英語・スペイン語）',
+        zh: '三级国家认证资深自然向导（英语/西班牙语）'
+      },
+      {
+        en: 'Snorkeling equipment for boat excursions (mask and snorkel)',
+        es: 'Equipo de snorkel para excursiones en barco (máscara y tubo)',
+        fr: 'Équipement de snorkeling pour les excursions en bateau (masque et tuba)',
+        de: 'Schnorchelausrüstung für Bootstouren (Maske und Schnorchel)',
+        it: 'Attrezzatura da snorkeling per escursioni in barca (maschera e boccaglio)',
+        pt: 'Equipamento de snorkel para excursões de barco (máscara e snorkel)',
+        ja: 'ボートツアー用シュノーケリング装備（マスク＆スノーケル）',
+        zh: '游艇出海探险高品质浮潜装备（面镜和呼吸管）'
+      },
+      {
+        en: 'Safety lockers available at hotel reception',
+        es: 'Casilleros de seguridad disponibles en la recepción del hotel',
+        fr: 'Coffres-forts disponibles à la réception de l\'hôtel',
+        de: 'Sicherheitsschließfächer an der Hotelrezeption verfügbar',
+        it: 'Cassette di sicurezza alla reception dell\'hotel',
+        pt: 'Cofres de segurança na recepção do hotel',
+        ja: 'ホテルフロントのセーフティボックス利用可能',
+        zh: '酒店前台免费提供安全保险箱服务'
+      },
+      {
+        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
+        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
+        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
+        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
+        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
+        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
+        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
+        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
+      },
+      {
+        en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
+        es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros',
+        fr: 'Taxe de quai d\'Isabela: 5,00 USD nationaux / 10,00 USD étrangers',
+        de: 'Isabela-Dockgebühr: USD 5,00 für Ecuadorianer / USD 10,00 für Ausländer',
+        it: 'Tassa portuale di Isabela: 5,00 USD ecuadoriani / 10,00 USD stranieri',
+        pt: 'Taxa de cais de Isabela: USD 5,00 nacionais / USD 10,00 estrangeiros',
+        ja: 'イサベラ島入港税：エクアドル国籍 USD 5.00 / 外国人 USD 10.00',
+        zh: '伊莎贝拉岛码头税：厄瓜多尔公民 5 美元 / 外国游客 10 美元'
+      }
+    ],
+    exclusions: [
+      {
+        en: 'Galápagos National Park entrance fee: USD 6.00 for Ecuadorian nationals; USD 200.00 for foreign visitors',
+        es: 'Entrada al Parque Nacional Galápagos: USD 6.00 nacionales / USD 200.00 extranjeros',
+        fr: 'Entrée au Parc National des Galápagos: 6,00 USD nationaux / 200,00 USD étrangers',
+        de: 'Eintrittsgebühr für den Galapagos-Nationalpark: USD 6,00 für Ecuadorianer / USD 200,00 für Ausländer',
+        it: 'Ingresso al Parco Nazionale delle Galapagos: 6,00 USD ecuadoriani / 200,00 USD stranieri',
+        pt: 'Entrada no Parque Nacional Galápagos: USD 6,00 nacionais / USD 200,00 estrangeiros',
+        ja: 'ガラパゴス国立公園入場料：エクアドル国籍 USD 6.00 / 外国人 USD 200.00',
+        zh: '加拉帕戈斯国家公园入园费：厄瓜多尔公民 6 美元 / 外国游客 200 美元'
+      },
+      {
+        en: 'Dinners (to give you freedom to enjoy local gastronomy)',
+        es: 'Cenas (libertad para explorar la gastronomía local)',
+        fr: 'Dîners (pour vous laisser libre de découvrir la gastronomie locale)',
+        de: 'Abendessen (Freiheit zur Entdeckung der lokalen Gastronomie)',
+        it: 'Cene (libertà di esplorare la gastronomia locale)',
+        pt: 'Jantares (liberdade para desfrutar da gastronomia local)',
+        ja: '夕食（地元のグルメを自由にお楽しみいただけます）',
+        zh: '晚餐（留白时间自由品味当地特色海鲜与美馔）'
+      },
+      {
+        en: 'Transit Control Card (TCT): USD 20.00 per person',
+        es: 'Tarjeta de Control de Tránsito (TCT): USD 20.00 por persona',
+        fr: 'Carte de Contrôle de Transit (TCT): 20,00 USD par personne',
+        de: 'Transit Control Card (TCT): USD 20,00 pro Person',
+        it: 'Carta di Controllo del Transito (TCT): 20,00 USD a persona',
+        pt: 'Cartão de Controle de Trânsito (TCT): USD 20,00 por pessoa',
+        ja: 'トランジットコントロールカード（TCT）：お一人様 USD 20.00',
+        zh: '加拉帕戈斯通行控制卡（TCT）：每人 20 美元'
+      },
+      {
+        en: 'Services not specified in the program & personal expenses',
+        es: 'Servicios no especificados en el programa y gastos personales',
+        fr: 'Services non spécifiés dans le programme et dépenses personnelles',
+        de: 'Nicht im Programm aufgeführte Leistungen & persönliche Ausgaben',
+        it: 'Servizi non specificati nel programma e spese personali',
+        pt: 'Serviços não especificados no programa e despesas pessoais',
+        ja: 'プログラムに明記されていないサービスおよび個人的な費用',
+        zh: '行程未提及的额外消费及私人支出'
+      }
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: {
+          en: 'Day 1 – Arrival In Quito | Private Airport Transfer',
+          es: 'Día 1 – Llegada A Quito | Traslado Privado De Aeropuerto',
+          fr: 'Jour 1 – Arrivée à Quito | Transfert Privé Aéroport',
+          de: 'Tag 1 – Ankunft in Quito | Privater Flughafentransfer',
+          it: 'Giorno 1 – Arrivo a Quito | Trasferimento Privato Aeroporto',
+          pt: 'Dia 1 – Chegada a Quito | Traslado Privado do Aeroporto',
+          ja: '第1日 – キト到着 | 専用空港送迎',
+          zh: '第1天 – 抵达基多 | 尊享私人机场接机'
+        },
+        description: {
+          en: 'Welcome at Quito International Airport and private transfer to your hotel. Rest and prepare for your upcoming journey into the Galápagos archipelago.',
+          es: 'Recepción en el Aeropuerto Internacional de Quito y traslado privado a su hotel. Tiempo libre para descansar y aclimatarse antes de su expedición.',
+          fr: 'Accueil à l\'aéroport international de Quito et transfert privé vers votre hôtel. Temps libre pour vous reposer avant le grand départ pour les Galápagos.',
+          de: 'Empfang am internationalen Flughafen Quito und privater Transfer zu Ihrem Hotel. Erholen Sie sich vor Ihrem Abflug auf die Galapagos-Inseln.',
+          it: 'Accoglienza all\'Aeroporto Internazionale di Quito e trasferimento privato in hotel. Tempo a disposizione per il relax.',
+          pt: 'Recepção no Aeroporto Internacional de Quito e traslado privado para o hotel. Tempo livre para descansar.',
+          ja: 'キト国際空港にてお出迎え後、専用車でホテルへ移動。翌日からのガラパゴス諸島探検に向けてごゆっくりお休みください。',
+          zh: '基多国际机场专员接机，乘坐专车抵达酒店办理入住。休整身心，准备迎接壮丽的海岛探险。'
+        },
+        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
+        accommodation: {
+          en: 'Hotel in Quito (Selected category 3★ or 4★)',
+          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
+          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
+          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
+          it: 'Hotel a Quito (Categoria 3★ o 4★)',
+          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
+          ja: 'キト市内の厳選ホテル（3★または4★）',
+          zh: '基多精选酒店（3星级或4星级）'
+        },
+        meals: {
+          en: 'Not included / at leisure',
+          es: 'No incluidas / libres',
+          fr: 'Non inclus',
+          de: 'Nicht inbegriffen',
+          it: 'Non inclusi',
+          pt: 'Não incluídas',
+          ja: '食事なし',
+          zh: '敬请自理'
+        },
+        transportation: {
+          en: 'Private transportation from Quito Airport',
+          es: 'Transporte privado desde Aeropuerto de Quito',
+          fr: 'Transport privé depuis l\'aéroport de Quito',
+          de: 'Privater Transport vom Flughafen Quito',
+          it: 'Trasporto privato dall\'aeroporto di Quito',
+          pt: 'Transporte privado do aeroporto de Quito',
+          ja: 'キト空港からの専用送迎車',
+          zh: '基多机场专属商务专车接机'
+        },
+      },
+      {
+        day: 2,
+        title: {
+          en: 'Day 2 – Arrival In Baltra | Twin Craters | Primicias Ranch',
+          es: 'Día 2 – Llegada A Baltra | Cráteres Gemelos | Rancho Primicias',
+          fr: 'Jour 2 – Arrivée à Baltra | Cratères Jumeaux | Rancho Primicias',
+          de: 'Tag 2 – Ankunft in Baltra | Zwillingskrater | Rancho Primicias',
+          it: 'Giorno 2 – Arrivo a Baltra | Crateri Gemelli | Rancho Primicias',
+          pt: 'Dia 2 – Chegada a Baltra | Crateras Gêmeas | Rancho Primicias',
+          ja: '第2日 – バルトラ島到着 | 双子坑 | プリミシアス牧場',
+          zh: '第2天 – 抵达巴尔特拉 | 双子坑 | 普里米西亚巨龟保护区'
+        },
+        description: {
+          en: 'Private transfer from your Quito hotel to the airport for your flight to Seymour Airport on Baltra Island. Upon arrival, welcome by our representative. Cross the Itabaca Channel to Santa Cruz Island and ascend into the highlands to visit the majestic Twin Craters (Los Gemelos) within the Scalesia forest. Continue to Primicias Ranch to witness giant tortoises roaming freely in their natural habitat and walk through volcanic lava tunnels. Transfer to your Puerto Ayora hotel and enjoy the evening at leisure.',
+          es: 'Traslado desde el hotel en Quito al aeropuerto y vuelo a Baltra. Recepción en el Aeropuerto Seymour y cruce del Canal de Itabaca hacia Santa Cruz. En las tierras altas visitamos los Cráteres Gemelos y el Rancho Primicias para observar tortugas gigantes en libertad y cruzar túneles de lava. Check-in en Puerto Ayora y tiempo libre.',
+          fr: 'Transfert à l\'aéroport de Quito et vol vers Baltra. Accueil à l\'aéroport Seymour et traversée vers Santa Cruz. Dans les hauts plateaux, visite des Cratères Jumeaux et du Rancho Primicias pour observer les tortues géantes et explorer les tunnels de lave. Installation à l\'hôtel à Puerto Ayora.',
+          de: 'Transfer zum Flughafen Quito und Flug nach Baltra. Begrüßung am Flughafen Seymour und Überfahrt nach Santa Cruz. Im Hochland Besuch der Zwillingskrater und der Primicias Ranch mit freilebenden Riesenschildkröten und Lavatunneln. Hotelbezug in Puerto Ayora.',
+          it: 'Trasferimento all\'aeroporto di Quito e volo per Baltra. Arrivo e attraversamento per Santa Cruz. Visita ai Crateri Gemelli e al Rancho Primicias per ammirare le tartarughe giganti e i tunnel di lava. Check-in a Puerto Ayora.',
+          pt: 'Traslado ao aeroporto de Quito e voo para Baltra. Chegada e travessia para Santa Cruz. Visita às Crateras Gêmeas e ao Rancho Primicias para ver tartarugas gigantes e túneis de lava. Check-in em Puerto Ayora.',
+          ja: 'キト空港へ送迎しバルトラへフライト。イタバカ運河を渡りサンタクルス高地へ。双子坑とプリミシアス牧場で巨大ゾウガメと溶岩トンネルを見学。プエルトアヨラで宿泊。',
+          zh: '送机飞往巴尔特拉，渡过海峡登上圣克鲁斯岛。游览火山双子坑并探访普里米西亚保护区观察自由漫步的象龟，徒步熔岩隧道。入住阿约拉港酒店。'
+        },
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+        accommodation: {
+          en: 'Santa Cruz Island – Puerto Ayora',
+          es: 'Isla Santa Cruz – Puerto Ayora',
+          fr: 'Île Santa Cruz – Puerto Ayora',
+          de: 'Insel Santa Cruz – Puerto Ayora',
+          it: 'Isola di Santa Cruz – Puerto Ayora',
+          pt: 'Ilha Santa Cruz – Puerto Ayora',
+          ja: 'サンタクルス島 – プエルトアヨラ',
+          zh: '圣克鲁斯岛 – 阿约拉港'
+        },
+        meals: {
+          en: 'According to selected hotel plan',
+          es: 'Según plan hotelero seleccionado',
+          fr: 'Selon plan hôtelier',
+          de: 'Gemäß Hotelplan',
+          it: 'Secondo piano alberghiero',
+          pt: 'De acordo com o plano do hotel',
+          ja: 'ホテルプランに準ずる',
+          zh: '按所选酒店方案包含'
+        },
+        transportation: {
+          en: 'Private airport transfer in Quito, flight, ferry & private island transport',
+          es: 'Transfer privado en Quito, vuelo, ferry y transporte privado en isla',
+          fr: 'Transfert privé à Quito, vol, ferry et transport terrestre privé',
+          de: 'Privater Transfer in Quito, Flug, Fähre & privater Inseltransport',
+          it: 'Trasferimento privato a Quito, volo, traghetto e trasporto privato',
+          pt: 'Transfer privado em Quito, voo, balsa e transporte terrestre na ilha',
+          ja: 'キト空港送迎、フライト、フェリー＆島内専用車',
+          zh: '基多专车送机、国内航班、渡轮及岛上专车'
+        },
+      },
+      {
+        day: 3,
+        title: {
+          en: 'Day 3 – Santa Cruz To Isabela | Flamingo Lagoon | Tortoise Breeding Center | Tintoreras',
+          es: 'Día 3 – Santa Cruz A Isabela | Laguna De Flamingos | Centro De Crianza | Tintoreras',
+          fr: 'Jour 3 – De Santa Cruz à Isabela | Flamants Roses | Centre d\'Élevage | Tintoreras',
+          de: 'Tag 3 – Von Santa Cruz nach Isabela | Flamingo-Lagune | Zuchtzentrum | Tintoreras',
+          it: 'Giorno 3 – Da Santa Cruz a Isabela | Fenicotteri | Centro Riproduzione | Tintoreras',
+          pt: 'Dia 3 – Santa Cruz a Isabela | Lagoa de Flamingos | Centro de Reprodução | Tintoreras',
+          ja: '第3日 – サンタクルスからイサベラ島へ | フラミンゴラグーン | 繁殖センター | ティントレラス',
+          zh: '第3天 – 圣克鲁斯至伊莎贝拉岛 | 火烈鸟泻湖 | 巨龟繁育中心 | 蒂恩托雷拉斯'
+        },
+        description: {
+          en: 'After breakfast, speedboat transfer from Santa Cruz to Isabela Island (approx 2 to 2.5 hours). Upon arrival in Puerto Villamil, visit the Flamingo Lagoon wetland and the Giant Tortoise Breeding Center. In the afternoon, boat trip to Tintoreras Islet for incredible snorkeling with sea lions, marine iguanas, rays, sea turtles, and penguins. Overnight in Puerto Villamil.',
+          es: 'Lancha rápida a Isla Isabela (2 a 2.5 h). En Puerto Villamil visitamos la Laguna de Flamingos y el Centro de Crianza de Tortugas Gigantes. Por la tarde, navegación al Islote Tintoreras para snorkel con lobos marinos, tortugas marinas, rayas, pingüinos e iguanas marinas. Pernocte en Isabela.',
+          fr: 'Bateau rapide vers l\'île Isabela. À Puerto Villamil, visite de la lagune des flamants roses et du centre d\'élevage des tortues. L\'après-midi, navigation vers l\'îlot Tintoreras pour un snorkeling exceptionnel avec otaries, tortues et raies. Nuit à Isabela.',
+          de: 'Schnellbootfahrt nach Isabela. Besuch der Flamingo-Lagune und des Schildkrötenzuchtzentrums. Nachmittags Bootstour zu den Tintoreras-Inseln zum Schnorcheln mit Seelöwen, Meeresschildkröten und Pinguinen. Übernachtung auf Isabela.',
+          it: 'Motoscafo verso Isabela. Visita alla Laguna dei Fenicotteri e al Centro Riproduzione Tartarughe. Nel pomeriggio escursione a Tintoreras per snorkeling con leoni marini, tartarughe e mante. Pernottamento a Isabela.',
+          pt: 'Lancha rápida para a Ilha Isabela. Visita à Lagoa de Flamingos e ao Centro de Reprodução de Tartarugas. À tarde, excursão a Tintoreras para snorkel com leões-marinhos, tartarugas e arraias. Pernoite em Isabela.',
+          ja: 'スピードボートでイサベラ島へ。フラミンゴラグーンとゾウガメ繁殖センターを訪問。午後はティントレラスへボートで渡りアシカやウミガメとシュノーケリング。イサベラ島泊。',
+          zh: '乘快艇赴伊莎贝拉岛。探访火烈鸟泻湖与巨龟繁殖中心。午后乘船至蒂恩托雷拉斯石礁浮潜，与海狮、海龟、蝠鲼及企鹅同游。入住伊莎贝拉岛客栈。'
+        },
+        image: '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
+        accommodation: {
+          en: 'Isabela Island – Puerto Villamil (Hostal Tintorera)',
+          es: 'Isla Isabela – Puerto Villamil (Hostal Tintorera)',
+          fr: 'Île Isabela – Puerto Villamil (Hostal Tintorera)',
+          de: 'Insel Isabela – Puerto Villamil (Hostal Tintorera)',
+          it: 'Isola Isabela – Puerto Villamil (Hostal Tintorera)',
+          pt: 'Ilha Isabela – Puerto Villamil (Hostal Tintorera)',
+          ja: 'イサベラ島 – プエルト・ビジャミル（オスタル・ティントレラ）',
+          zh: '伊莎贝拉岛 – 维利亚米尔港（廷托雷拉客栈）'
+        },
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'Inter-island speedboat and local land transport',
+          es: 'Lancha rápida interislas y transporte terrestre local',
+          fr: 'Bateau rapide inter-îles et transport local',
+          de: 'Schnellboot & lokaler Landtransport',
+          it: 'Motoscafo interisola e trasporto locale',
+          pt: 'Lancha rápida interilhas e transporte local',
+          ja: '島間スピードボート＆現地移動',
+          zh: '城际快艇与岛上观光交通'
+        },
+      },
+      {
+        day: 4,
+        title: {
+          en: 'Day 4 – Isabela To Santa Cruz | La Lobería | Las Grietas',
+          es: 'Día 4 – Isabela A Santa Cruz | La Lobería | Las Grietas',
+          fr: 'Jour 4 – D\'Isabela à Santa Cruz | La Lobería | Las Grietas',
+          de: 'Tag 4 – Von Isabela nach Santa Cruz | La Lobería | Las Grietas',
+          it: 'Giorno 4 – Da Isabela a Santa Cruz | La Lobería | Las Grietas',
+          pt: 'Dia 4 – Isabela a Santa Cruz | La Lobería | Las Grietas',
+          ja: '第4日 – イサベラ島からサンタクルスへ | ラ・ロベリア | ラス・グリエタス',
+          zh: '第4天 – 伊莎贝拉岛返回圣克鲁斯 | 拉洛贝里亚 | 拉斯格里塔斯'
+        },
+        description: {
+          en: 'Morning boat transfer back to Santa Cruz Island. Visit La Lobería coastal sanctuary to observe playful sea lions. Continue to Las Grietas volcanic canyon for swimming and snorkeling in transparent turquoise water. Afternoon at leisure in Puerto Ayora.',
+          es: 'Lancha rápida de retorno a Santa Cruz. Visita a La Lobería para observar lobos marinos y caminata a Las Grietas para nadar y hacer snorkel en el cañón volcánico. Tarde libre en Puerto Ayora.',
+          fr: 'Retour en bateau à Santa Cruz. Visite de La Lobería et baignade/snorkeling dans le spectaculaire canyon volcanique de Las Grietas. Après-midi libre à Puerto Ayora.',
+          de: 'Rückfahrt per Boot nach Santa Cruz. Besuch von La Lobería und Schwimmen/Schnorcheln in der Vulkanschlucht Las Grietas. Freier Nachmittag in Puerto Ayora.',
+          it: 'Rientro in barca a Santa Cruz. Visita a La Lobería e nuoto/snorkeling nello spettacolare canyon di Las Grietas. Pomeriggio libero a Puerto Ayora.',
+          pt: 'Retorno em lancha a Santa Cruz. Visita a La Lobería e banho/snorkel no cânion vulcânico de Las Grietas. Tarde livre em Puerto Ayora.',
+          ja: 'ボートでサンタクルス島へ帰還。ラ・ロベリアのアシカを観察し、ラス・グリエタスでスイミング＆シュノーケリング。プエルトアヨラで自由行動。',
+          zh: '快艇返回圣克鲁斯岛。游览拉洛贝里亚海狮滩，深入拉斯格里塔斯火山峡谷纯净水域游泳浮潜。下午自由活动。'
+        },
+        image: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
+        accommodation: {
+          en: 'Santa Cruz Island – Puerto Ayora',
+          es: 'Isla Santa Cruz – Puerto Ayora',
+          fr: 'Île Santa Cruz – Puerto Ayora',
+          de: 'Insel Santa Cruz – Puerto Ayora',
+          it: 'Isola di Santa Cruz – Puerto Ayora',
+          pt: 'Ilha Santa Cruz – Puerto Ayora',
+          ja: 'サンタクルス島 – プエルトアヨラ',
+          zh: '圣克鲁斯岛 – 阿约拉港'
+        },
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'Inter-island speedboat and local walking trails',
+          es: 'Lancha rápida interislas y senderos locales',
+          fr: 'Bateau rapide et sentiers côtiers',
+          de: 'Schnellboot & Wanderpfade',
+          it: 'Motoscafo e percorsi a piedi',
+          pt: 'Lancha rápida e trilhas locais',
+          ja: '島間スピードボート＆徒歩トレイル',
+          zh: '城际快艇与步行步道'
+        },
+      },
+      {
+        day: 5,
+        title: {
+          en: 'Day 5 – Full-Day Navigable Yacht Excursion To Santa Fe Or Pinzón Island',
+          es: 'Día 5 – Excursión Full-Day En Yate A Isla Santa Fe O Isla Pinzón',
+          fr: 'Jour 5 – Excursion Journée en Yacht à l\'Île Santa Fe ou Pinzón',
+          de: 'Tag 5 – Ganztägiger Yachtausflug zur Insel Santa Fe oder Pinzón',
+          it: 'Giorno 5 – Escursione Giornata Intera in Yacht a Santa Fe o Pinzón',
+          pt: 'Dia 5 – Excursão Dia Inteiro em Iate para Santa Fe ou Pinzón',
+          ja: '第5日 – サンタフェ島またはピンソン島への終日ヨットクルーズ',
+          zh: '第5天 – 圣菲岛或平松岛全天出海游艇航海与浮潜'
+        },
+        description: {
+          en: 'Full-day boat excursion to Santa Fe Island or Pinzón Island (depending on availability and conditions). Enjoy turquoise bays, endemic land iguanas at Santa Fe, or deep-water snorkeling at Pinzón with sea turtles, sharks, rays, and sea lions. Fresh lunch served on board.',
+          es: 'Navegación de día completo en yate hacia Isla Santa Fe o Isla Pinzón. En Santa Fe disfrutará de bahías turquesas, iguanas terrestres y rica vida marina. En Pinzón, aguas profundas con tortugas marinas, tiburones y mantarrayas. Almuerzo a bordo incluido.',
+          fr: 'Excursion en yacht d\'une journée à l\'île Santa Fe ou Pinzón. Baies turquoise, iguanes terrestres à Santa Fe, ou snorkeling profond à Pinzón avec tortues, requins et raies. Déjeuner à bord inclus.',
+          de: 'Ganztägige Yachtfahrt zur Insel Santa Fe oder Pinzón. Türkisblaue Buchten, endemische Landleguane auf Santa Fe oder Hochsee-Schnorcheln bei Pinzón mit Haien, Schildkröten und Rochen. Mittagessen an Bord.',
+          it: 'Navigazione di una giornata in yacht a Santa Fe o Pinzón. Acque turchesi, iguane terrestri o snorkeling profondo con squali, tartarughe e mante. Pranzo a bordo incluso.',
+          pt: 'Navegação de dia inteiro em iate para Santa Fe ou Pinzón. Baias turquesas, iguanas terrestres ou snorkel profundo com tubarões, tartarugas e arraias. Almoço a bordo incluído.',
+          ja: 'サンタフェ島またはピンソン島への終日ヨットクルーズ。エメラルドの海でのシュノーケリングでウミガメ、サメ、エイ、アシカと遭遇。船上でのランチ付き。',
+          zh: '全天乘游艇出海探访圣菲岛或平松岛。在绿松石般的清澈海湾探寻特有陆鬣蜥，或在深水区浮潜邂逅海龟、白顶礁鲨、蝠鲼与海狮。含游艇甲板午餐。'
+        },
+        image: '/images/tours/16-9/santa-fe-island-16-9.jpg',
+        accommodation: {
+          en: 'Santa Cruz Island – Puerto Ayora',
+          es: 'Isla Santa Cruz – Puerto Ayora',
+          fr: 'Île Santa Cruz – Puerto Ayora',
+          de: 'Insel Santa Cruz – Puerto Ayora',
+          it: 'Isola di Santa Cruz – Puerto Ayora',
+          pt: 'Ilha Santa Cruz – Puerto Ayora',
+          ja: 'サンタクルス島 – プエルトアヨラ',
+          zh: '圣克鲁斯岛 – 阿约拉港'
+        },
+        meals: {
+          en: 'Breakfast and lunch',
+          es: 'Desayuno y almuerzo',
+          fr: 'Petit-déjeuner et déjeuner',
+          de: 'Frühstück und Mittagessen',
+          it: 'Colazione e pranzo',
+          pt: 'Café da manhã e almoço',
+          ja: '朝食・昼食付き',
+          zh: '包含早餐与午餐'
+        },
+        transportation: {
+          en: 'Navigable tourist yacht and island ground transfers',
+          es: 'Yate turístico navegable y transporte terrestre',
+          fr: 'Yacht touristique navigable et transferts terrestres',
+          de: 'Touristisches Yachtschiff & Landtransport',
+          it: 'Yacht turistico e trasporto a terra',
+          pt: 'Iate turístico navegável e transporte terrestre',
+          ja: '観光ヨットクルーズ船＆陸上送迎',
+          zh: '出海观光游艇与陆地接送'
+        },
+        activity: {
+          en: 'Open-water yacht navigation, deep-water snorkeling & hiking',
+          es: 'Navegación en yate, snorkel en aguas abiertas y caminata',
+          fr: 'Navigation en yacht, snorkeling en eau profonde et randonnée',
+          de: 'Yachtfahrt, Tiefwasserschnorcheln & Wanderung',
+          it: 'Navigazione in yacht, snorkeling e trekking',
+          pt: 'Navegação em iate, snorkel em mar aberto e caminhada',
+          ja: 'ヨットクルーズ、外洋シュノーケリング＆ハイキング',
+          zh: '游艇航行、外海深度浮潜与生态徒步'
+        },
+      },
+      {
+        day: 6,
+        title: {
+          en: 'Day 6 – Transfer To Baltra Airport | Flight To Quito | Private Hotel Transfer',
+          es: 'Día 6 – Traslado Al Aeropuerto De Baltra | Vuelo A Quito | Transfer Privado Al Hotel',
+          fr: 'Jour 6 – Transfert à l\'Aéroport de Baltra | Vol vers Quito | Transfert Privé Hôtel',
+          de: 'Tag 6 – Transfer zum Flughafen Baltra | Flug nach Quito | Privater Hoteltransfer',
+          it: 'Giorno 6 – Trasferimento all\'Aeroporto di Baltra | Volo per Quito | Transfer Privato in Hotel',
+          pt: 'Dia 6 – Traslado ao Aeroporto de Baltra | Voo para Quito | Transfer Privado ao Hotel',
+          ja: '第6日 – バルトラ空港へ送迎 | キト行きフライト | ホテル専用送迎',
+          zh: '第6天 – 前往巴尔特拉机场 | 飞往基多 | 专车接机入住酒店'
+        },
+        description: {
+          en: 'After breakfast, check out and transfer to Baltra Airport for your flight back to mainland Ecuador. Private transfer from Quito Airport to your hotel. Evening at leisure.',
+          es: 'Desayuno, check-out y traslado al Aeropuerto Seymour de Baltra para tomar el vuelo a Quito. Recepción y traslado privado a su hotel en Quito. Tarde y noche libre.',
+          fr: 'Petit-déjeuner et transfert à l\'aéroport de Baltra pour le vol retour vers Quito. Accueil et transfert privé à l\'hôtel.',
+          de: 'Nach dem Frühstück Fahrt zum Flughafen Baltra und Flug nach Quito. Privater Transfer zum Hotel.',
+          it: 'Colazione e trasferimento all\'aeroporto di Baltra per il volo verso Quito. Trasferimento privato in hotel.',
+          pt: 'Café da manhã e traslado ao Aeroporto de Baltra para voo rumo a Quito. Traslado privado para o hotel.',
+          ja: '朝食後バルトラ空港へ移動しキト行きフライトに搭乗。キト到着後専用車でホテルへ。',
+          zh: '早餐后送机至巴尔特拉机场飞往基多，抵达后专车接机送往酒店休息。'
+        },
+        image: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
+        accommodation: {
+          en: 'Hotel in Quito (Selected category 3★ or 4★)',
+          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
+          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
+          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
+          it: 'Hotel a Quito (Categoria 3★ o 4★)',
+          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
+          ja: 'キト市内の厳選ホテル（3★または4★）',
+          zh: '基多精选酒店（3星级或4星级）'
+        },
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'Island ground transfer, Baltra shuttle, domestic flight & private Quito transfer',
+          es: 'Transporte en isla, bus Lobito, vuelo doméstico y traslado privado en Quito',
+          fr: 'Transport terrestre sur l\'île, navette aéroport, vol intérieur et transfert privé à Quito',
+          de: 'Insel-Transfer, Shuttlebus, Inlandsflug & privater Transfer in Quito',
+          it: 'Trasferimento sull\'isola, navetta, volo nazionale e transfer privato a Quito',
+          pt: 'Transporte na ilha, ônibus shuttle, voo doméstico e traslado privado em Quito',
+          ja: '島内陸上送迎、空港シャトル、国内線フライト＆キト市内専用送迎',
+          zh: '岛上陆路接驳、机场专线巴士、国内航班及基多市内专车'
+        },
+      },
+      {
+        day: 7,
+        title: {
+          en: 'Day 7 – Private Quito Airport Transfer | Onward Connections',
+          es: 'Día 7 – Traslado Privado Al Aeropuerto De Quito | Vuelo Internacional',
+          fr: 'Jour 7 – Transfert Privé vers l\'Aéroport de Quito | Connexions Internationales',
+          de: 'Tag 7 – Privater Transfer zum Flughafen Quito | Weiterflug',
+          it: 'Giorno 7 – Trasferimento Privato all\'Aeroporto di Quito | Volo di Rientro',
+          pt: 'Dia 7 – Traslado Privado ao Aeroporto de Quito | Conexões Internacionais',
+          ja: '第7日 – キト空港専用送迎 | 帰国の途へ',
+          zh: '第7天 – 基多机场私人专车送机 | 踏上归途'
+        },
+        description: {
+          en: 'Private transfer from your hotel to Quito International Airport for your international departure flight. End of our services.',
+          es: 'Traslado privado exclusivo desde su hotel hacia el Aeropuerto Internacional de Quito para su vuelo internacional. Fin de servicios.',
+          fr: 'Transfert privé de votre hôtel vers l\'aéroport de Quito pour votre vol de retour international. Fin de nos services.',
+          de: 'Privater Transfer vom Hotel zum Flughafen Quito für Ihren internationalen Rückflug. Ende unserer Leistungen.',
+          it: 'Trasferimento privato dall\'hotel all\'Aeroporto di Quito per il volo internazionale. Fine dei nostri servizi.',
+          pt: 'Traslado privado do hotel ao Aeroporto de Quito para embarque internacional. Fim dos serviços.',
+          ja: 'フライト時刻に合わせてホテルからキト国際空港へ専用送迎。サービス終了となります。',
+          zh: '根据国际航班起飞时间专车送抵基多国际机场，结束难忘的加拉帕戈斯探索之旅。'
+        },
+        image: '/images/tours/16-9/quito-colonial-16-9.jpg',
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'Private transportation to Quito International Airport',
+          es: 'Transporte privado al Aeropuerto Internacional de Quito',
+          fr: 'Transport privé vers l\'aéroport de Quito',
+          de: 'Privater Transport zum Flughafen Quito',
+          it: 'Trasporto privato per l\'aeroporto di Quito',
+          pt: 'Transporte privado para o Aeroporto de Quito',
+          ja: 'キト国際空港への専用送迎車',
+          zh: '基多国际机场私人专车送机'
+        },
+      }
+    ]
+  },
+
+  // Tour: galapagos-8days
+  {
+    id: 'galapagos-8days',
+    code: '1.3',
+    title: {
+      en: 'Galapagos Grand Odyssey: 8-Day 3-Island Expedition (With Quito Transfers)',
+      es: 'Gran Odisea Galápagos: 8 Días y 3 Islas (Con Transfers UIO)',
+      fr: 'Grande Odyssée aux Galápagos: 8 Jours et 3 Îles (Transferts UIO Inclus)',
+      de: 'Galapagos Grand Odyssee: 8 Tage & 3 Inseln (Inkl. Quito-Transfers)',
+      it: 'Grande Odissea alle Galapagos: 8 Giorni e 3 Isole (Con Trasferimenti UIO)',
+      pt: 'Grande Odisseia em Galápagos: 8 Dias e 3 Ilhas (Com Transfers UIO)',
+      ja: 'ガラパゴス諸島 壮大なオデッセイ：8日間 3島巡礼（キト送迎付き）',
+      zh: '加拉帕戈斯盛大史诗：8日三岛大跨越（含基多接送机）'
+    },
+    destination: 'Galapagos',
+    duration: {
+      en: '8 DAYS / 7 NIGHTS',
+      es: '8 DÍAS / 7 NOCHES',
+      fr: '8 JOURS / 7 NUITS',
+      de: '8 TAGE / 7 NÄCHTE',
+      it: '8 GIORNI / 7 NOTTI',
+      pt: '8 DIAS / 7 NOITES',
+      ja: '8日間 / 7泊',
+      zh: '8天 / 7晚'
+    },
+    durationDays: 8,
+    price: 2200,
+    price3Star: 2200,
+    price4Star: 2600,
+    imageUrl: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
+    mobileImage: '/images/tours/9-16/tijeretas-hill-9-16.jpg',
+    desktopImage: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
+    gallery: [
+      '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
+      '/images/tours/16-9/isabela-island-16-9.jpg',
+      '/images/tours/16-9/galapagos-tintoreras16-9.jpg',
+      '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.1.webp',
+      '/images/tours/16-9/santa-fe-island-16-9.jpg',
+      '/images/tours/16-9/galapagos-lobo-marino-16-9.jpg'
+    ],
+    rating: 5,
+    reviewsCount: 42,
+    isPopular: true,
+    category: {
+      en: 'Triple Island Discovery & Yacht Cruise',
+      es: 'Descubrimiento Triple Isla y Navegación en Yate',
+      fr: 'Découverte de trois îles et navigation en yacht',
+      de: 'Drei-Inseln-Entdeckung & Yacht-Kreuzfahrt',
+      it: 'Scoperta di Tre Isole e Crociera in Yacht',
+      pt: 'Descoberta de Três Ilhas e Cruzeiro em Iate',
+      ja: '3島巡礼＆専用ヨットクルーズ',
+      zh: '三岛深度探索与尊享游艇巡航'
+    },
+    description: {
+      en: 'The ultimate 8-day expedition across 3 major islands (Santa Cruz, Isabela, and San Cristóbal) combined with private Quito airport transfers. Discover giant tortoises, Tintoreras Islet, Las Grietas, full-day yacht snorkeling at Santa Fe or Pinzón, and San Cristóbal’s Interpretation Center, Tijeretas Hill and La Lobería.',
+      es: 'La expedición definitiva de 8 días a través de 3 islas principales (Santa Cruz, Isabela y San Cristóbal) con traslados privados en Quito. Tortugas gigantes, Islote Tintoreras, Las Grietas, navegación en yate a Santa Fe o Pinzón, Centro de Interpretación, Cerro Tijeretas y La Lobería.',
+      fr: 'L\'expédition ultime de 8 jours à travers 3 îles majeures (Santa Cruz, Isabela et San Cristóbal) avec transferts privés à Quito. Tortues géantes, îlot Tintoreras, Las Grietas, yacht vers Santa Fe ou Pinzón, Centre d\'interprétation, Cerro Tijeretas et La Lobería.',
+      de: 'Die ultimative 8-tägige Expedition über 3 Hauptinseln (Santa Cruz, Isabela und San Cristóbal) mit privaten Quito-Transfers. Riesenschildkröten, Tintoreras, Las Grietas, Yachtkreuzfahrt nach Santa Fe oder Pinzón, Interpretationszentrum und Tijeretas-Hügel.',
+      it: 'L\'espedizione definitiva di 8 giorni attraverso 3 isole principali (Santa Cruz, Isabela e San Cristóbal) con trasferimenti privati a Quito. Tartarughe giganti, isolotto Tintoreras, Las Grietas, yacht a Santa Fe o Pinzón, Centro di Interpretazione e Cerro Tijeretas.',
+      pt: 'A expedição definitiva de 8 dias através de 3 ilhas principais (Santa Cruz, Isabela e San Cristóbal) com traslados privados em Quito. Tartarugas gigantes, Ilhote Tintoreras, Las Grietas, iate para Santa Fe ou Pinzón, Centro de Interpretação e Cerro Tijeretas.',
+      ja: 'キトの専用送迎に加え、サンタクルス、イサベラ、サンクリストバルの主要3島を網羅する究極の8日間。野生ゾウガメ、ティントレラスの溶岩水路、ラス・グリエタス、サンタフェまたはピンソン島への終日ヨット、サンクリストバル島の解説センター、ティヘレタスの丘、ラ・ロベリアを探訪。',
+      zh: '跨越三座主要岛屿（圣克鲁斯岛、伊莎贝拉岛和圣克里斯托巴尔岛）的8日终极探险，配备基多私人机场接送：探秘高地野生巨龟、蒂恩托雷拉斯石礁浮潜、拉斯格里塔斯峡谷、圣菲/平松全天出海游艇巡航，以及圣克里斯托巴尔岛解读中心、军舰鸟丘与拉洛贝里亚海狮沙滩。'
+    },
+    highlights: [
+      {
+        en: 'Private Quito Airport Transfers (Arrival & Departure)',
+        es: 'Traslados Privados Aeropuerto Quito (Llegada y Salida)',
+        fr: 'Transferts Privés Aéroport de Quito (Arrivée et Départ)',
+        de: 'Private Quito-Flughafentransfers (Ankunft & Abreise)',
+        it: 'Trasferimenti Privati Aeroporto di Quito (Arrivo e Partenza)',
+        pt: 'Traslados Privados Aeroporto de Quito (Chegada e Partida)',
+        ja: 'キト空港専用往復送迎（到着＆出発）',
+        zh: '基多国际机场私人专车接送（抵达与离境）'
+      },
+      {
+        en: 'Twin Craters & Primicias Giant Tortoise Reserve',
+        es: 'Cráteres Gemelos y Rancho Primicias en Santa Cruz',
+        fr: 'Cratères Jumeaux et Réserve de Tortues Primicias',
+        de: 'Zwillingskrater & Primicias-Riesenschildkröten-Farm',
+        it: 'Crateri Gemelli e Riserva Tartarughe Primicias',
+        pt: 'Crateras Gêmeas e Rancho de Tartarugas Primicias',
+        ja: '双子坑＆サンタクルス島プリミシアス巨亀保護区',
+        zh: '双子坑与圣克鲁斯普里米西亚巨龟生态保护区'
+      },
+      {
+        en: 'Isabela Island Overnight, Flamingo Lagoon & Tintoreras',
+        es: 'Noche en Isla Isabela, Laguna de Flamingos y Tintoreras',
+        fr: 'Nuit sur l\'île Isabela, Flamants Roses & Tintoreras',
+        de: 'Übernachtung auf Isabela, Flamingo-Lagune & Tintoreras',
+        it: 'Pernottamento a Isabela, Fenicotteri e Tintoreras',
+        pt: 'Pernoite na Ilha Isabela, Lagoa de Flamingos e Tintoreras',
+        ja: 'イサベラ島宿泊、フラミンゴラグーン＆ティントレラス',
+        zh: '伊莎贝拉岛过夜、火烈鸟泻湖与蒂恩托雷拉斯浮潜'
+      },
+      {
+        en: 'Full-Day Navigable Yacht Cruise to Santa Fe or Pinzón Island',
+        es: 'Navegación Full-Day en Yate a Isla Santa Fe o Pinzón',
+        fr: 'Croisière d\'une Journée en Yacht à Santa Fe ou Pinzón',
+        de: 'Ganztägige Yacht-Kreuzfahrt nach Santa Fe oder Pinzón',
+        it: 'Crociera in Yacht di un\'intera Giornata a Santa Fe o Pinzón',
+        pt: 'Cruzeiro de Dia Inteiro em Iate para Santa Fe ou Pinzón',
+        ja: 'サンタフェ島またはピンソン島への終日ヨットクルーズ',
+        zh: '圣菲岛或平松岛全天出海游艇航行与浮潜'
+      },
+      {
+        en: 'San Cristóbal Island: Interpretation Center, Tijeretas Hill & La Lobería',
+        es: 'Isla San Cristóbal: Centro de Interpretación, Cerro Tijeretas y La Lobería',
+        fr: 'Île San Cristóbal: Centre d\'Interprétation, Tijeretas et La Lobería',
+        de: 'Insel San Cristóbal: Interpretationszentrum, Tijeretas & La Lobería',
+        it: 'Isola San Cristóbal: Centro Interpretazione, Tijeretas e La Lobería',
+        pt: 'Ilha San Cristóbal: Centro de Interpretação, Cerro Tijeretas e La Lobería',
+        ja: 'サンクリストバル島：解説センター、ティヘレタスの丘＆ラ・ロベリア',
+        zh: '圣克里斯托巴尔岛：自然人类解读中心、军舰鸟丘与拉洛贝里亚海滩'
+      }
+    ],
+    inclusions: [
+      {
+        en: 'Accommodation at the hotel of your choice in Santa Cruz (3★ or 4★)',
+        es: 'Alojamiento en el hotel seleccionado en Santa Cruz (3★ o 4★)',
+        fr: 'Hébergement à l\'hôtel de votre choix à Santa Cruz (3★ ou 4★)',
+        de: 'Unterkunft im gewählten Hotel auf Santa Cruz (3★ oder 4★)',
+        it: 'Sistemazione nell\'hotel prescelto a Santa Cruz (3★ o 4★)',
+        pt: 'Hospedagem no hotel de sua escolha em Santa Cruz (3★ ou 4★)',
+        ja: 'サンタクルス島の厳選ホテル宿泊（3★または4★）',
+        zh: '圣克鲁斯岛自选精品酒店住宿（3星级或4星级）'
+      },
+      {
+        en: 'Accommodation at Hostal Tintorera in Isabela Island',
+        es: 'Alojamiento en Hostal Tintorera en Isla Isabela',
+        fr: 'Hébergement à l\'Hostal Tintorera sur l\'île Isabela',
+        de: 'Unterkunft im Hostal Tintorera auf der Insel Isabela',
+        it: 'Sistemazione presso Hostal Tintorera sull\'isola Isabela',
+        pt: 'Hospedagem no Hostal Tintorera na Ilha Isabela',
+        ja: 'イサベラ島のオスタル・ティントレラ宿泊',
+        zh: '伊莎贝拉岛廷托雷拉客栈住宿'
+      },
+      {
+        en: 'Accommodation at Hotel Algarrobos in San Cristóbal Island',
+        es: 'Alojamiento en Hotel Algarrobos en Isla San Cristóbal',
+        fr: 'Hébergement à l\'Hôtel Algarrobos sur l\'île San Cristóbal',
+        de: 'Unterkunft im Hotel Algarrobos auf der Insel San Cristóbal',
+        it: 'Sistemazione presso Hotel Algarrobos sull\'isola San Cristóbal',
+        pt: 'Hospedagem no Hotel Algarrobos na Ilha San Cristóbal',
+        ja: 'サンクリストバル島のホテル・アルガロボス宿泊',
+        zh: '圣克里斯托巴尔岛阿尔加罗博斯酒店住宿'
+      },
+      {
+        en: 'Private airport transfers in Quito (Arrival & Departure)',
+        es: 'Traslados privados en aeropuerto de Quito (Llegada y Salida)',
+        fr: 'Transferts privés aéroport de Quito (Arrivée et Départ)',
+        de: 'Private Flughafentransfers in Quito (Ankunft & Abreise)',
+        it: 'Trasferimenti privati aeroporto di Quito (Arrivo e Partenza)',
+        pt: 'Traslados privados no aeroporto de Quito (Chegada e Partida)',
+        ja: 'キト空港専用プライベート送迎（到着＆出発）',
+        zh: '基多国际机场私人专车接送（抵达与出发）'
+      },
+      {
+        en: 'Buffet breakfast at 4★ hotels / Continental breakfast at 3★ hotels',
+        es: 'Desayuno buffet en hoteles 4★ / Desayuno continental en hoteles 3★',
+        fr: 'Petit-déjeuner buffet en hôtel 4★ / continental en hôtel 3★',
+        de: 'Frühstücksbuffet in 4★-Hotels / Kontinentales Frühstück in 3★-Hotels',
+        it: 'Colazione a buffet in hotel 4★ / Continentale in hotel 3★',
+        pt: 'Café da manhã buffet em hotéis 4★ / Continental em hotéis 3★',
+        ja: '4★ホテルのビュッフェ朝食 / 3★ホテルのコンチネンタル朝食',
+        zh: '4星级酒店自助早餐 / 3星级酒店欧陆式早餐'
+      },
+      {
+        en: 'Set-menu lunches according to the itinerary',
+        es: 'Almuerzos menú incluidos según el itinerario',
+        fr: 'Déjeuners avec menu préétabli selon l\'itinéraire',
+        de: 'Mittagessen mit festem Menü gemäß Reiseroute',
+        it: 'Pranzi con menu fisso secondo l\'itinerario',
+        pt: 'Almoços com cardápio fixo de acordo com o itinerário',
+        ja: '旅程に応じたセットメニューの昼食',
+        zh: '行程中规划的指定套餐午餐'
+      },
+      {
+        en: 'Domestic Flight Ticket (Quito – Baltra / San Cristóbal – Quito)',
+        es: 'Boleto aéreo doméstico (Quito – Baltra / San Cristóbal – Quito)',
+        fr: 'Billet d\'avion intérieur (Quito – Baltra / San Cristóbal – Quito)',
+        de: 'Inlandsflugticket (Quito – Baltra / San Cristóbal – Quito)',
+        it: 'Biglietto aereo nazionale (Quito – Baltra / San Cristóbal – Quito)',
+        pt: 'Passagem aérea doméstica (Quito – Baltra / San Cristóbal – Quito)',
+        ja: '国内線オープンジョー航空券（キト – バルトラ / サンクリストバル – キト）',
+        zh: '厄瓜多尔境内缺口往返机票（基多 – 巴尔特拉 / 圣克里斯托巴尔 – 基多）'
+      },
+      {
+        en: 'All guided visits to the islands according to the itinerary',
+        es: 'Todas las visitas guiadas a las islas según el itinerario',
+        fr: 'Toutes les visites guidées des îles selon l\'itinéraire',
+        de: 'Alle geführten Inselbesuche gemäß Reiseroute',
+        it: 'Tutte le visite guidate alle isole secondo l\'itinerario',
+        pt: 'Todas as visitas guiadas às ilhas de acordo com o itinerário',
+        ja: '旅程に記載されたすべてのガイド付き島内観光',
+        zh: '行程规划的所有受保护海岛导览游览'
+      },
+      {
+        en: 'Airport reception and departure assistance at Galápagos airports',
+        es: 'Recepción y asistencia en aeropuertos de Galápagos',
+        fr: 'Accueil et assistance aux aéroports des Galápagos',
+        de: 'Flughafenempfang und Abreisebetreuung auf Galápagos',
+        it: 'Accoglienza e assistenza negli aeroporti delle Galapagos',
+        pt: 'Recepção e assistência nos aeroportos de Galápagos',
+        ja: 'ガラパゴス諸島空港での到着出迎えおよび出発サポート',
+        zh: '加拉帕戈斯各机场抵达专员接机与出发协助'
+      },
+      {
+        en: 'Comprehensive land and maritime transportation',
+        es: 'Transporte terrestre y marítimo integral',
+        fr: 'Transport terrestre et maritime complet',
+        de: 'Umfassender Land- und Seetransport',
+        it: 'Trasporto terrestre e marittimo completo',
+        pt: 'Transporte terrestre e marítimo completo',
+        ja: '全行程における陸上および海上移動交通',
+        zh: '全程专车陆路与快艇海上交通'
+      },
+      {
+        en: 'Level III Certified Naturalist Guides (Spanish / English)',
+        es: 'Guías naturalistas certificados Nivel III (Español / Inglés)',
+        fr: 'Guides naturalistes certifiés de niveau III (Espagnol / Anglais)',
+        de: 'Zertifizierte Naturführer der Stufe III (Spanisch / Englisch)',
+        it: 'Guide naturalistiche certificate di Livello III (Spagnolo / Inglese)',
+        pt: 'Guias naturalistas certificados Nível III (Espanhol / Inglês)',
+        ja: 'レベルIII認定ナチュラリストガイド（英語・スペイン語）',
+        zh: '三级国家认证资深自然向导（英语/西班牙语）'
+      },
+      {
+        en: 'Snorkeling equipment for boat excursions (mask and snorkel)',
+        es: 'Equipo de snorkel para excursiones en barco (máscara y tubo)',
+        fr: 'Équipement de snorkeling pour les excursions en bateau (masque et tuba)',
+        de: 'Schnorchelausrüstung für Bootstouren (Maske und Schnorchel)',
+        it: 'Attrezzatura da snorkeling per escursioni in barca (maschera e boccaglio)',
+        pt: 'Equipamento de snorkel para excursões de barco (máscara e snorkel)',
+        ja: 'ボートツアー用シュノーケリング装備（マスク＆スノーケル）',
+        zh: '游艇出海探险高品质浮潜装备（面镜和呼吸管）'
+      },
+      {
+        en: 'Safety lockers available at hotel reception',
+        es: 'Casilleros de seguridad disponibles en la recepción del hotel',
+        fr: 'Coffres-forts disponibles à la réception de l\'hôtel',
+        de: 'Sicherheitsschließfächer an der Hotelrezeption verfügbar',
+        it: 'Cassette di sicurezza alla reception dell\'hotel',
+        pt: 'Cofres de segurança na recepção do hotel',
+        ja: 'ホテルフロントのセーフティボックス利用可能',
+        zh: '酒店前台免费提供安全保险箱服务'
+      },
+      {
+        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
+        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
+        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
+        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
+        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
+        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
+        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
+        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
+      },
+      {
+        en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
+        es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros',
+        fr: 'Taxe de quai d\'Isabela: 5,00 USD nationaux / 10,00 USD étrangers',
+        de: 'Isabela-Dockgebühr: USD 5,00 für Ecuadorianer / USD 10,00 für Ausländer',
+        it: 'Tassa portuale di Isabela: 5,00 USD ecuadoriani / 10,00 USD stranieri',
+        pt: 'Taxa de cais de Isabela: USD 5,00 nacionais / USD 10,00 estrangeiros',
+        ja: 'イサベラ島入港税：エクアドル国籍 USD 5.00 / 外国人 USD 10.00',
+        zh: '伊莎贝拉岛码头税：厄瓜多尔公民 5 美元 / 外国游客 10 美元'
+      }
+    ],
+    exclusions: [
+      {
+        en: 'Galápagos National Park entrance fee: USD 6.00 for Ecuadorian nationals; USD 200.00 for foreign visitors',
+        es: 'Entrada al Parque Nacional Galápagos: USD 6.00 nacionales / USD 200.00 extranjeros',
+        fr: 'Entrée au Parc National des Galápagos: 6,00 USD nationaux / 200,00 USD étrangers',
+        de: 'Eintrittsgebühr für den Galapagos-Nationalpark: USD 6,00 für Ecuadorianer / USD 200,00 für Ausländer',
+        it: 'Ingresso al Parco Nazionale delle Galapagos: 6,00 USD ecuadoriani / 200,00 USD stranieri',
+        pt: 'Entrada no Parque Nacional Galápagos: USD 6,00 nacionais / USD 200,00 estrangeiros',
+        ja: 'ガラパゴス国立公園入場料：エクアドル国籍 USD 6.00 / 外国人 USD 200.00',
+        zh: '加拉帕戈斯国家公园入园费：厄瓜多尔公民 6 美元 / 外国游客 200 美元'
+      },
+      {
+        en: 'Dinners (to give you freedom to enjoy local gastronomy)',
+        es: 'Cenas (libertad para explorar la gastronomía local)',
+        fr: 'Dîners (pour vous laisser libre de découvrir la gastronomie locale)',
+        de: 'Abendessen (Freiheit zur Entdeckung der lokalen Gastronomie)',
+        it: 'Cene (libertà di esplorare la gastronomia locale)',
+        pt: 'Jantares (liberdade para desfrutar da gastronomia local)',
+        ja: '夕食（地元のグルメを自由にお楽しみいただけます）',
+        zh: '晚餐（留白时间自由品味当地特色海鲜与美馔）'
+      },
+      {
+        en: 'Transit Control Card (TCT): USD 20.00 per person',
+        es: 'Tarjeta de Control de Tránsito (TCT): USD 20.00 por persona',
+        fr: 'Carte de Contrôle de Transit (TCT): 20,00 USD par personne',
+        de: 'Transit Control Card (TCT): USD 20,00 pro Person',
+        it: 'Carta di Controllo del Transito (TCT): 20,00 USD a persona',
+        pt: 'Cartão de Controle de Trânsito (TCT): USD 20,00 por pessoa',
+        ja: 'トランジットコントロールカード（TCT）：お一人様 USD 20.00',
+        zh: '加拉帕戈斯通行控制卡（TCT）：每人 20 美元'
+      },
+      {
+        en: 'Services not specified in the program & personal expenses',
+        es: 'Servicios no especificados en el programa y gastos personales',
+        fr: 'Services non spécifiés dans le programme et dépenses personnelles',
+        de: 'Nicht im Programm aufgeführte Leistungen & persönliche Ausgaben',
+        it: 'Servizi non specificati nel programma e spese personali',
+        pt: 'Serviços não especificados no programa e despesas pessoais',
+        ja: 'プログラムに明記されていないサービスおよび個人的な費用',
+        zh: '行程未提及的额外消费及私人支出'
+      }
+    ],
+    itinerary: [
+      {
+        day: 1,
+        title: {
+          en: 'Day 1 – Arrival In Quito | Private Airport Transfer',
+          es: 'Día 1 – Llegada A Quito | Traslado Privado De Aeropuerto',
+          fr: 'Jour 1 – Arrivée à Quito | Transfert Privé Aéroport',
+          de: 'Tag 1 – Ankunft in Quito | Privater Flughafentransfer',
+          it: 'Giorno 1 – Arrivo a Quito | Trasferimento Privato Aeroporto',
+          pt: 'Dia 1 – Chegada a Quito | Traslado Privado do Aeroporto',
+          ja: '第1日 – キト到着 | 専用空港送迎',
+          zh: '第1天 – 抵达基多 | 尊享私人机场接机'
+        },
+        description: {
+          en: 'Welcome at Quito International Airport and private transfer to your hotel. Rest and prepare for your Grand Odyssey through 3 islands of the Galápagos.',
+          es: 'Recepción en el Aeropuerto Internacional de Quito y traslado privado a su hotel. Tiempo de descanso para prepararse para la Gran Odisea por 3 islas de Galápagos.',
+          fr: 'Accueil à l\'aéroport international de Quito et transfert privé vers votre hôtel. Reposez-vous avant votre Grande Odyssée à travers les 3 îles.',
+          de: 'Empfang am Flughafen Quito und privater Hoteltransfer. Entspannung vor der Großen Odyssee über 3 Inseln.',
+          it: 'Accoglienza all\'Aeroporto di Quito e trasferimento privato in hotel. Riposo prima della Grande Odissea.',
+          pt: 'Recepção no Aeroporto de Quito e traslado privado ao hotel. Descanso antes da Grande Odisseia.',
+          ja: 'キト国際空港にてお出迎えし専用車でホテルへ。3島を巡る壮大なオデッセイに向けてご準備ください。',
+          zh: '基多国际机场专员接机，专车送抵酒店。休整蓄力，迎接横跨加拉帕戈斯三大名岛的盛大史诗之旅。'
+        },
+        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
+        accommodation: {
+          en: 'Hotel in Quito (Selected category 3★ or 4★)',
+          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
+          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
+          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
+          it: 'Hotel a Quito (Categoria 3★ o 4★)',
+          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
+          ja: 'キト市内の厳選ホテル（3★または4★）',
+          zh: '基多精选酒店（3星级或4星级）'
+        },
+        meals: {
+          en: 'Not included / at leisure',
+          es: 'No incluidas / libres',
+          fr: 'Non inclus',
+          de: 'Nicht inbegriffen',
+          it: 'Non inclusi',
+          pt: 'Não incluídas',
+          ja: '食事なし',
+          zh: '敬请自理'
+        },
+        transportation: {
+          en: 'Private transportation from Quito Airport',
+          es: 'Transporte privado desde Aeropuerto de Quito',
+          fr: 'Transport privé depuis l\'aéroport de Quito',
+          de: 'Privater Transport vom Flughafen Quito',
+          it: 'Trasporto privato dall\'aeroporto di Quito',
+          pt: 'Transporte privado do aeroporto de Quito',
+          ja: 'キト空港からの専用送迎車',
+          zh: '基多机场专属商务专车接机'
+        },
+      },
+      {
+        day: 2,
+        title: {
+          en: 'Day 2 – Arrival In Baltra | Twin Craters | Primicias Ranch',
+          es: 'Día 2 – Llegada A Baltra | Cráteres Gemelos | Rancho Primicias',
+          fr: 'Jour 2 – Arrivée à Baltra | Cratères Jumeaux | Rancho Primicias',
+          de: 'Tag 2 – Ankunft in Baltra | Zwillingskrater | Rancho Primicias',
+          it: 'Giorno 2 – Arrivo a Baltra | Crateri Gemelli | Rancho Primicias',
+          pt: 'Dia 2 – Chegada a Baltra | Crateras Gêmeas | Rancho Primicias',
+          ja: '第2日 – バルトラ島到着 | 双子坑 | プリミシアス牧場',
+          zh: '第2天 – 抵达巴尔特拉 | 双子坑 | 普里米西亚巨龟保护区'
+        },
+        description: {
+          en: 'Transfer to Quito airport for your flight to Baltra Island. Upon arrival at Seymour Airport, welcome by our representative. Travel across Santa Cruz highlands to visit the Twin Craters (Los Gemelos) within Scalesia forests. Continue to Primicias Ranch to observe iconic giant tortoises roaming freely and walk through natural volcanic lava tunnels. Transfer to Puerto Ayora for hotel check-in and evening at leisure.',
+          es: 'Traslado al aeropuerto de Quito y vuelo a Baltra. Recepción y cruce del Canal de Itabaca hacia Santa Cruz. En las tierras altas visitamos los Cráteres Gemelos en el bosque de Scalesia y el Rancho Primicias para observar tortugas gigantes en libertad y cruzar túneles de lava. Check-in en Puerto Ayora y tiempo libre.',
+          fr: 'Transfert à l\'aéroport de Quito et vol vers Baltra. Traversée vers Santa Cruz, visite des Cratères Jumeaux et du Rancho Primicias avec tortues géantes et tunnels de lave. Nuit à Santa Cruz.',
+          de: 'Flug nach Baltra. Fahrt über Santa Cruz ins Hochland zu den Zwillingskratern und der Primicias Ranch mit freilebenden Riesenschildkröten und Lavatunneln. Übernachtung auf Santa Cruz.',
+          it: 'Volo per Baltra. Attraversamento per Santa Cruz e visita ai Crateri Gemelli e al Rancho Primicias con tartarughe giganti e tunnel di lava. Pernottamento a Santa Cruz.',
+          pt: 'Voo para Baltra. Travessia para Santa Cruz e visita às Crateras Gêmeas e ao Rancho Primicias com tartarugas gigantes e túneis de lava. Pernoite em Santa Cruz.',
+          ja: 'キトからバルトラへフライト。サンタクルス高地の双子坑とプリミシアス牧場の野生ゾウガメ、溶岩トンネルを見学。サンタクルス島泊。',
+          zh: '飞抵巴尔特拉岛西摩机场。登上圣克鲁斯高地探索火山双子坑，深入普里米西亚生态保护区寻访野生象龟并穿越熔岩隧道。入住阿约拉港酒店。'
+        },
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+        accommodation: {
+          en: 'Santa Cruz Island – Puerto Ayora',
+          es: 'Isla Santa Cruz – Puerto Ayora',
+          fr: 'Île Santa Cruz – Puerto Ayora',
+          de: 'Insel Santa Cruz – Puerto Ayora',
+          it: 'Isola di Santa Cruz – Puerto Ayora',
+          pt: 'Ilha Santa Cruz – Puerto Ayora',
+          ja: 'サンタクルス島 – プエルトアヨラ',
+          zh: '圣克鲁斯岛 – 阿约拉港'
+        },
+        meals: {
+          en: 'According to selected hotel plan',
+          es: 'Según plan hotelero seleccionado',
+          fr: 'Selon formule hôtelière',
+          de: 'Gemäß Hotelplan',
+          it: 'Secondo piano alberghiero',
+          pt: 'De acordo com o plano do hotel',
+          ja: 'ホテルプランに準ずる',
+          zh: '按所选酒店方案包含'
+        },
+        transportation: {
+          en: 'Private airport transfer in Quito, flight, ferry & private island transport',
+          es: 'Transfer privado en Quito, vuelo, ferry y transporte privado en isla',
+          fr: 'Transfert privé à Quito, vol, ferry et transport terrestre privé',
+          de: 'Privater Transfer in Quito, Flug, Fähre & privater Inseltransport',
+          it: 'Trasferimento privato a Quito, volo, traghetto e trasporto privato',
+          pt: 'Transfer privado em Quito, voo, balsa e transporte terrestre na ilha',
+          ja: 'キト空港送迎、フライト、フェリー＆島内専用車',
+          zh: '基多专车送机、国内航班、渡轮及岛上专车'
+        },
+      },
+      {
+        day: 3,
+        title: {
+          en: 'Day 3 – Santa Cruz To Isabela | Flamingo Lagoon | Breeding Center | Tintoreras Islet',
+          es: 'Día 3 – Santa Cruz A Isla Isabela | Laguna De Flamingos | Centro De Crianza | Islote Tintoreras',
+          fr: 'Jour 3 – De Santa Cruz à Isabela | Flamants Roses | Centre d\'Élevage | Îlot Tintoreras',
+          de: 'Tag 3 – Von Santa Cruz nach Isabela | Flamingo-Lagune | Zuchtzentrum | Tintoreras-Inselchen',
+          it: 'Giorno 3 – Da Santa Cruz a Isabela | Fenicotteri | Centro Riproduzione | Isolotto Tintoreras',
+          pt: 'Dia 3 – Santa Cruz a Isabela | Lagoa de Flamingos | Centro de Reprodução | Ilhote Tintoreras',
+          ja: '第3日 – サンタクルスからイサベラ島へ | フラミンゴラグーン | 繁殖センター | ティントレラス小島',
+          zh: '第3天 – 圣克鲁斯至伊莎贝拉岛 | 火烈鸟泻湖 | 巨龟繁育中心 | 蒂恩托雷拉斯石礁'
+        },
+        description: {
+          en: 'Speedboat ride to Isabela Island, the largest in the archipelago. Explore Puerto Villamil, visit the Flamingo Lagoon, and tour the Giant Tortoise Breeding Center. In the afternoon, boat excursion to Tintoreras Islet to snorkel with sea turtles, sea lions, tropical fish, rays, reef sharks, and marine iguanas. Overnight in Isabela Island at Hostal Tintorera.',
+          es: 'Lancha rápida hacia Isla Isabela. En Puerto Villamil visitamos la laguna de flamingos y el Centro de Crianza de Tortugas Gigantes. Por la tarde, navegación al Islote Tintoreras para snorkel con leones marinos, tortugas, peces tropicales, iguanas marinas y pingüinos de Galápagos. Noche en Isabela (Hostal Tintorera).',
+          fr: 'Traversée en bateau rapide vers l\'île Isabela. Visite de la lagune des flamants roses et du centre d\'élevage. Excursion en bateau aux Tintoreras pour nager avec les otaries, tortues et requins de récif. Nuit à l\'Hostal Tintorera.',
+          de: 'Schnellboot zur Insel Isabela. Flamingo-Lagune und Zuchtzentrum. Nachmittags Bootsexkursion zu den Tintoreras zum Schnorcheln mit Seelöwen, Meeresschildkröten und Pinguinen. Übernachtung im Hostal Tintorera.',
+          it: 'Motoscafo verso Isabela. Laguna dei Fenicotteri e Centro Riproduzione Tartarughe. Nel pomeriggio escursione a Tintoreras con snorkeling tra leoni marini e squali. Pernottamento all\'Hostal Tintorera.',
+          pt: 'Lancha rápida para Isabela. Visita à Lagoa de Flamingos e Centro de Reprodução. À tarde, snorkel em Tintoreras com leões-marinhos, tartarugas e arraias. Pernoite no Hostal Tintorera.',
+          ja: 'スピードボートでイサベラ島へ。フラミンゴラグーンとゾウガメ繁殖センターを見学。午後はティントレラスへ渡りアシカやウミガメ、ペンギンとシュノーケリング。オスタル・ティントレラ泊。',
+          zh: '乘快艇赴伊莎贝拉岛。探访火烈鸟泻湖与巨龟繁殖中心。午后乘船至蒂恩托雷拉斯石礁浮潜，与海狮、海龟、蝠鲼及企鹅同游。入住廷托雷拉客栈。'
+        },
+        image: '/images/tours/16-9/galapagos-isabela-island-16-9.jpg',
+        accommodation: {
+          en: 'Isabela Island (Hostal Tintorera)',
+          es: 'Isla Isabela (Hostal Tintorera)',
+          fr: 'Île Isabela (Hostal Tintorera)',
+          de: 'Insel Isabela (Hostal Tintorera)',
+          it: 'Isola Isabela (Hostal Tintorera)',
+          pt: 'Ilha Isabela (Hostal Tintorera)',
+          ja: 'イサベラ島（オスタル・ティントレラ）',
+          zh: '伊莎贝拉岛（廷托雷拉客栈）'
+        },
+        meals: {
+          en: 'Breakfast and lunch',
+          es: 'Desayuno y almuerzo',
+          fr: 'Petit-déjeuner et déjeuner',
+          de: 'Frühstück und Mittagessen',
+          it: 'Colazione e pranzo',
+          pt: 'Café da manhã e almoço',
+          ja: '朝食・昼食付き',
+          zh: '包含早餐与午餐'
+        },
+        transportation: {
+          en: 'Inter-island speedboat and local land transport',
+          es: 'Lancha rápida interislas y transporte terrestre local',
+          fr: 'Bateau rapide inter-îles et transport local',
+          de: 'Schnellboot & lokaler Transport',
+          it: 'Motoscafo interisola e trasporto locale',
+          pt: 'Lancha rápida interilhas e transporte local',
+          ja: '島間スピードボート＆現地送迎',
+          zh: '城际快艇与岛上观光专车'
+        },
+      },
+      {
+        day: 4,
+        title: {
+          en: 'Day 4 – Isabela To Santa Cruz | La Lobería | Las Grietas',
+          es: 'Día 4 – Isabela A Santa Cruz | La Lobería | Las Grietas',
+          fr: 'Jour 4 – D\'Isabela à Santa Cruz | La Lobería | Las Grietas',
+          de: 'Tag 4 – Von Isabela nach Santa Cruz | La Lobería | Las Grietas',
+          it: 'Giorno 4 – Da Isabela a Santa Cruz | La Lobería | Las Grietas',
+          pt: 'Dia 4 – Isabela a Santa Cruz | La Lobería | Las Grietas',
+          ja: '第4日 – イサベラ島からサンタクルスへ | ラ・ロベリア | ラス・グリエタス',
+          zh: '第4天 – 伊莎贝拉岛返回圣克鲁斯 | 拉洛贝里亚 | 拉斯格里塔斯'
+        },
+        description: {
+          en: 'Morning boat transfer back to Santa Cruz Island. Visit coastal La Lobería to observe colonies of sea lions. Continue to Las Grietas, a narrow volcanic chasm filled with crystal-clear turquoise brackish water—ideal for swimming and snorkeling. Afternoon at leisure in Puerto Ayora.',
+          es: 'Lancha de regreso a Santa Cruz. Visita costera a La Lobería para observar lobos marinos. Luego caminata a Las Grietas, espectacular cañón volcánico de aguas cristalinas para natación y snorkel. Tarde libre en Puerto Ayora.',
+          fr: 'Retour en bateau à Santa Cruz. Visite de La Lobería pour observer les otaries. Baignade et snorkeling à Las Grietas dans une eau limpide turquoise. Après-midi libre.',
+          de: 'Bootstransfer nach Santa Cruz. Besuch von La Lobería und Las Grietas zum Schwimmen und Schnorcheln im kristallklaren Wasser. Nachmittag zur freien Verfügung.',
+          it: 'Rientro in barca a Santa Cruz. Visita a La Lobería e nuoto/snorkeling a Las Grietas. Pomeriggio libero a Puerto Ayora.',
+          pt: 'Lancha de retorno a Santa Cruz. Visita a La Lobería e snorkel nas águas límpidas de Las Grietas. Tarde livre em Puerto Ayora.',
+          ja: 'ボートでサンタクルス島へ戻り、ラ・ロベリアのアシカを観察。ラス・グリエタスの透明な水路でシュノーケリング。プエルトアヨラで自由時間。',
+          zh: '乘船返回圣克鲁斯岛。游览拉洛贝里亚海狮群栖息地，在拉斯格里塔斯火山峡谷翡翠色清澈水域中畅泳浮潜。下午在阿约拉港自由活动。'
+        },
+        image: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
+        accommodation: {
+          en: 'Santa Cruz Island – Puerto Ayora',
+          es: 'Isla Santa Cruz – Puerto Ayora',
+          fr: 'Île Santa Cruz – Puerto Ayora',
+          de: 'Insel Santa Cruz – Puerto Ayora',
+          it: 'Isola di Santa Cruz – Puerto Ayora',
+          pt: 'Ilha Santa Cruz – Puerto Ayora',
+          ja: 'サンタクルス島 – プエルトアヨラ',
+          zh: '圣克鲁斯岛 – 阿约拉港'
+        },
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'Inter-island speedboat and local walking trails',
+          es: 'Lancha rápida interislas y senderos locales',
+          fr: 'Bateau rapide et sentiers côtiers',
+          de: 'Schnellboot & Wanderpfade',
+          it: 'Motoscafo e percorsi a piedi',
+          pt: 'Lancha rápida e trilhas locais',
+          ja: '島間スピードボート＆徒歩トレイル',
+          zh: '城际快艇与步行步道'
+        },
+      },
+      {
+        day: 5,
+        title: {
+          en: 'Day 5 – Full-Day Navigable Yacht Excursion To Santa Fe Or Pinzón Island',
+          es: 'Día 5 – Excursión Full-Day En Yate A Isla Santa Fe O Islote Pinzón',
+          fr: 'Jour 5 – Excursion Journée en Yacht à l\'Île Santa Fe ou Pinzón',
+          de: 'Tag 5 – Ganztägiger Yachtausflug zur Insel Santa Fe oder Pinzón',
+          it: 'Giorno 5 – Escursione Giornata Intera in Yacht a Santa Fe o Pinzón',
+          pt: 'Dia 5 – Excursão Dia Inteiro em Iate para Santa Fe ou Pinzón',
+          ja: '第5日 – サンタフェ島またはピンソン島への終日ヨットクルーズ',
+          zh: '第5天 – 圣菲岛或平松岛全天出海游艇航海与浮潜'
+        },
+        description: {
+          en: 'Full-day navigable yacht excursion to Santa Fe Island (turquoise waters, white beaches, endemic land iguanas) or Pinzón Islet (deep-water snorkeling alongside sea turtles, sea lions, rays, sharks, and schools of tropical fish). Lunch served on board.',
+          es: 'Navegación de día completo en yate hacia Isla Santa Fe o Islote Pinzón con sesiones de snorkel de alta biodiversidad marina (tortugas, leones marinos, rayas y peces de colores). Almuerzo a bordo incluido.',
+          fr: 'Croisière d\'une journée en yacht vers Santa Fe ou l\'îlot Pinzón avec snorkeling exceptionnel au milieu des tortues, raies, requins et bancs de poissons tropicaux. Déjeuner à bord.',
+          de: 'Ganztagesausflug per Yacht nach Santa Fe oder Pinzón mit erstklassigem Schnorcheln (Schildkröten, Seelöwen, Haie und Rochen). Mittagessen an Bord.',
+          it: 'Escursione giornaliera in yacht a Santa Fe o Pinzón con snorkeling d\'eccezione (tartarughe, leoni marini, mante e pesci tropicali). Pranzo a bordo.',
+          pt: 'Navegação de dia inteiro em iate para Santa Fe ou Pinzón com snorkel de alta biodiversidade (tartarugas, leões-marinhos, arraias e tubarões). Almoço a bordo.',
+          ja: 'サンタフェ島またはピンソン島への終日ヨットクルーズ。ウミガメ、アシカ、サメ、エイが生息する豊かな海でシュノーケリング。船上ランチ付き。',
+          zh: '全天乘游艇出海探访圣菲岛或平松岛。在碧波荡漾的水域中深潜浮潜，与海龟、海狮、蝠鲼和白顶礁鲨同游。包含甲板精致午餐。'
+        },
+        image: '/images/tours/16-9/santa-fe-island-16-9.jpg',
+        accommodation: {
+          en: 'Santa Cruz Island – Puerto Ayora',
+          es: 'Isla Santa Cruz – Puerto Ayora',
+          fr: 'Île Santa Cruz – Puerto Ayora',
+          de: 'Insel Santa Cruz – Puerto Ayora',
+          it: 'Isola di Santa Cruz – Puerto Ayora',
+          pt: 'Ilha Santa Cruz – Puerto Ayora',
+          ja: 'サンタクルス島 – プエルトアヨラ',
+          zh: '圣克鲁斯岛 – 阿约拉港'
+        },
+        meals: {
+          en: 'Breakfast and lunch',
+          es: 'Desayuno y almuerzo',
+          fr: 'Petit-déjeuner et déjeuner',
+          de: 'Frühstück und Mittagessen',
+          it: 'Colazione e pranzo',
+          pt: 'Café da manhã e almoço',
+          ja: '朝食・昼食付き',
+          zh: '包含早餐与午餐'
+        },
+        transportation: {
+          en: 'Navigable tourist yacht and island ground transfers',
+          es: 'Yate turístico navegable y transporte terrestre',
+          fr: 'Yacht touristique navigable et transferts terrestres',
+          de: 'Yachtschiff & Landtransport',
+          it: 'Yacht turistico e trasporto a terra',
+          pt: 'Iate turístico navegável e transporte terrestre',
+          ja: '観光ヨットクルーズ船＆陸上送迎',
+          zh: '出海观光游艇与陆地接送'
+        },
+        activity: {
+          en: 'Open-water yacht navigation, deep-water snorkeling & hiking',
+          es: 'Navegación en yate, snorkel en aguas abiertas y caminata',
+          fr: 'Navigation en yacht, snorkeling en eau profonde et randonnée',
+          de: 'Yachtfahrt, Tiefwasserschnorcheln & Wanderung',
+          it: 'Navigazione in yacht, snorkeling e trekking',
+          pt: 'Navegação em iate, snorkel em mar aberto e caminhada',
+          ja: 'ヨットクルーズ、外洋シュノーケリング＆ハイキング',
+          zh: '游艇航行、外海深度浮潜与生态徒步'
+        },
+      },
+      {
+        day: 6,
+        title: {
+          en: 'Day 6 – Santa Cruz To San Cristóbal | Interpretation Center | Tijeretas Hill | La Lobería',
+          es: 'Día 6 – Santa Cruz A San Cristóbal | Centro De Interpretación | Cerro Tijeretas | La Lobería',
+          fr: 'Jour 6 – De Santa Cruz à San Cristóbal | Centre d\'Interprétation | Tijeretas | La Lobería',
+          de: 'Tag 6 – Von Santa Cruz nach San Cristóbal | Interpretationszentrum | Tijeretas | La Lobería',
+          it: 'Giorno 6 – Da Santa Cruz a San Cristóbal | Centro Interpretazione | Tijeretas | La Lobería',
+          pt: 'Dia 6 – Santa Cruz a San Cristóbal | Centro de Interpretação | Tijeretas | La Lobería',
+          ja: '第6日 – サンタクルスからサンクリストバル島へ | 解説センター | ティヘレタス | ラ・ロベリア',
+          zh: '第6天 – 圣克鲁斯至圣克里斯托巴尔岛 | 解读中心 | 军舰鸟丘 | 拉洛贝里亚海滩'
+        },
+        description: {
+          en: 'Speedboat journey from Santa Cruz to San Cristóbal Island. Upon arrival in Puerto Baquerizo Moreno, visit the San Cristóbal Interpretation Center to explore the islands\' natural origins and human history. Hike up scenic Tijeretas Hill for panoramic coastal ocean views and frigatebird nesting sites. Conclude with a visit to La Lobería beach to observe sea lions and marine iguanas. Overnight in San Cristóbal Island at Hotel Algarrobos.',
+          es: 'Lancha rápida a Isla San Cristóbal. En Puerto Baquerizo Moreno, visita al Centro de Interpretación para conocer el origen volcánico y la historia humana del archipiélago. Caminata al mirador de Cerro Tijeretas con avistamiento de fragatas y relax en la playa La Lobería rodeada de lobos marinos e iguanas. Noche en San Cristóbal (Hotel Algarrobos).',
+          fr: 'Traversée en bateau rapide vers San Cristóbal. Visite du Centre d\'Interprétation de Puerto Baquerizo Moreno. Randonnée au belvédère de Cerro Tijeretas pour admirer les frégates et panorama sur l\'océan. Détente sur la plage de La Lobería au milieu des otaries. Nuit à l\'Hôtel Algarrobos.',
+          de: 'Schnellbootfahrt nach San Cristóbal. Besuch des Interpretationszentrums in Puerto Baquerizo Moreno. Wanderung zum Aussichtspunkt Cerro Tijeretas zur Beobachtung von Fregattvögeln und Entspannung am Strand La Lobería bei den Seelöwen. Übernachtung im Hotel Algarrobos.',
+          it: 'Motoscafo verso San Cristóbal. Visita al Centro di Interpretazione, passeggiata panoramica al Cerro Tijeretas con fregate e relax sulla spiaggia di La Lobería con i leoni marini. Pernottamento all\'Hotel Algarrobos.',
+          pt: 'Lancha rápida para San Cristóbal. Visita ao Centro de Interpretação em Puerto Baquerizo Moreno. Caminhada até o mirante do Cerro Tijeretas para ver fragatas e relaxe na praia de La Lobería com leões-marinhos. Pernoite no Hotel Algarrobos.',
+          ja: 'スピードボートでサンクリストバル島へ。解説センターを見学後、グンカンドリが舞うティヘレタスの丘展望台へハイキング。ラ・ロベリア海岸でアシカやウミイグアナを観察。ホテル・アルガロボス泊。',
+          zh: '乘快艇抵达圣克里斯托巴尔岛。参观解读中心了解加拉帕戈斯的地质与人文历史。徒步登上军舰鸟丘（Cerro Tijeretas）俯瞰壮丽海岸全景与翱翔的军舰鸟，漫步拉洛贝里亚海滩观赏海狮与海鬣蜥。入住阿尔加罗博斯酒店。'
+        },
+        image: '/images/tours/16-9/galapagos-baltra-island-16-9.jpg',
+        accommodation: {
+          en: 'San Cristóbal Island (Hotel Algarrobos)',
+          es: 'Isla San Cristóbal (Hotel Algarrobos)',
+          fr: 'Île San Cristóbal (Hôtel Algarrobos)',
+          de: 'Insel San Cristóbal (Hotel Algarrobos)',
+          it: 'Isola San Cristóbal (Hotel Algarrobos)',
+          pt: 'Ilha San Cristóbal (Hotel Algarrobos)',
+          ja: 'サンクリストバル島（ホテル・アルガロボス）',
+          zh: '圣克里斯托巴尔岛（阿尔加罗博斯酒店）'
+        },
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'Inter-island speedboat and local ground transport',
+          es: 'Lancha rápida interislas y transporte terrestre local',
+          fr: 'Bateau rapide inter-îles et transport local',
+          de: 'Schnellboot & lokaler Transport',
+          it: 'Motoscafo interisola e trasporto locale',
+          pt: 'Lancha rápida interilhas e transporte local',
+          ja: '島間スピードボート＆現地移動',
+          zh: '城际快艇与岛上观光专车'
+        },
+      },
+      {
+        day: 7,
+        title: {
+          en: 'Day 7 – San Cristóbal Airport Transfer | Flight To Quito | Private Hotel Transfer',
+          es: 'Día 7 – Traslado Aeropuerto San Cristóbal | Vuelo A Quito | Transfer Privado Al Hotel',
+          fr: 'Jour 7 – Transfert Aéroport San Cristóbal | Vol vers Quito | Transfert Privé Hôtel',
+          de: 'Tag 7 – Transfer Flughafen San Cristóbal | Flug nach Quito | Privater Hoteltransfer',
+          it: 'Giorno 7 – Trasferimento Aeroporto San Cristóbal | Volo per Quito | Transfer Privato in Hotel',
+          pt: 'Dia 7 – Traslado Aeroporto San Cristóbal | Voo para Quito | Transfer Privado ao Hotel',
+          ja: '第7日 – サンクリストバル空港へ送迎 | キト行きフライト | ホテル専用送迎',
+          zh: '第7天 – 圣克里斯托巴尔机场送机 | 飞往基多 | 专车接机入住酒店'
+        },
+        description: {
+          en: 'After breakfast, free morning depending on your flight schedule. Transfer to San Cristóbal Airport for your departure flight to Quito. Upon arrival in Quito, private transfer to your hotel. Evening at leisure.',
+          es: 'Desayuno y tiempo libre según horario de vuelo. Traslado al Aeropuerto de San Cristóbal para tomar el vuelo de retorno a Quito. Llegada y traslado privado exclusivo a su hotel en Quito.',
+          fr: 'Petit-déjeuner et temps libre. Transfert à l\'aéroport de San Cristóbal pour votre vol retour vers Quito. Accueil et transfert privé vers votre hôtel.',
+          de: 'Frühstück und Freizeit je nach Flugplan. Transfer zum Flughafen San Cristóbal für den Flug nach Quito. Privater Transfer zu Ihrem Hotel in Quito.',
+          it: 'Colazione e tempo libero. Trasferimento all\'aeroporto di San Cristóbal per il volo verso Quito. Accoglienza e trasferimento privato in hotel.',
+          pt: 'Café da manhã e tempo livre. Traslado ao Aeroporto de San Cristóbal para voo de retorno a Quito. Traslado privado para o hotel.',
+          ja: '朝食後、フライト時間に合わせて自由行動。サンクリストバル空港へ送迎しキト行きフライトに搭乗。キト到着後専用車でホテルへ。',
+          zh: '早餐后根据航班时间自由活动。送往圣克里斯托巴尔机场飞往基多，抵达后专车接机送往酒店休息。'
+        },
+        image: '/images/tours/16-9/galapagos-lobo-marino-16-9.jpg',
+        accommodation: {
+          en: 'Hotel in Quito (Selected category 3★ or 4★)',
+          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
+          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
+          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
+          it: 'Hotel a Quito (Categoria 3★ o 4★)',
+          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
+          ja: 'キト市内の厳選ホテル（3★または4★）',
+          zh: '基多精选酒店（3星级或4星级）'
+        },
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'San Cristóbal airport transfer, domestic flight & private Quito transfer',
+          es: 'Traslado al aeropuerto de San Cristóbal, vuelo y traslado privado en Quito',
+          fr: 'Transfert aéroport San Cristóbal, vol intérieur et transfert privé à Quito',
+          de: 'Flughafentransfer San Cristóbal, Flug & privater Transfer in Quito',
+          it: 'Trasferimento aeroporto San Cristóbal, volo e transfer privato a Quito',
+          pt: 'Traslado ao aeroporto de San Cristóbal, voo e traslado privado em Quito',
+          ja: 'サンクリストバル空港送迎、国内線フライト＆キト市内専用送迎',
+          zh: '圣克里斯托巴尔机场送机、国内航班及基多专车接机'
+        },
+      },
+      {
+        day: 8,
+        title: {
+          en: 'Day 8 – Private Quito Airport Transfer | International Departure',
+          es: 'Día 8 – Traslado Privado Al Aeropuerto De Quito | Vuelo Internacional',
+          fr: 'Jour 8 – Transfert Privé vers l\'Aéroport de Quito | Vol International',
+          de: 'Tag 8 – Privater Transfer zum Flughafen Quito | Internationaler Rückflug',
+          it: 'Giorno 8 – Trasferimento Privato all\'Aeroporto di Quito | Partenza Internazionale',
+          pt: 'Dia 8 – Traslado Privado ao Aeroporto de Quito | Embarque Internacional',
+          ja: '第8日 – キト空港専用送迎 | 帰国の途へ',
+          zh: '第8天 – 基多机场私人专车送机 | 踏上归途'
+        },
+        description: {
+          en: 'Private transfer to Quito International Airport for your onward international flight connections. End of our services.',
+          es: 'Traslado privado exclusivo desde su hotel hacia el Aeropuerto Internacional de Quito para su vuelo internacional. Fin de servicios.',
+          fr: 'Transfert privé vers l\'aéroport international de Quito pour votre vol retour. Fin de nos services.',
+          de: 'Privater Transfer zum internationalen Flughafen Quito für Ihren internationalen Weiterflug. Ende unserer Leistungen.',
+          it: 'Trasferimento privato all\'Aeroporto di Quito per il volo internazionale. Fine dei nostri servizi.',
+          pt: 'Traslado privado ao Aeroporto de Quito para conexão internacional. Fim de nossos serviços.',
+          ja: 'キト国際空港へ専用車で送迎。サービス終了となります。素晴らしいガラパゴスの思い出とともにお気をつけてお帰りください。',
+          zh: '根据国际航班起飞时间专车送往基多国际机场，结束丰富充实的三岛大跨越加拉帕戈斯探险。'
+        },
+        image: '/images/tours/16-9/quito-colonial-16-9.jpg',
+        meals: {
+          en: 'Breakfast',
+          es: 'Desayuno',
+          fr: 'Petit-déjeuner',
+          de: 'Frühstück',
+          it: 'Colazione',
+          pt: 'Café da manhã',
+          ja: '朝食付き',
+          zh: '包含早餐'
+        },
+        transportation: {
+          en: 'Private transportation to Quito International Airport',
+          es: 'Transporte privado al Aeropuerto Internacional de Quito',
+          fr: 'Transport privé vers l\'aéroport de Quito',
+          de: 'Privater Transport zum Flughafen Quito',
+          it: 'Trasporto privato per l\'aeroporto di Quito',
+          pt: 'Transporte privado para o Aeroporto de Quito',
+          ja: 'キト国際空港への専用送迎車',
+          zh: '基多国际机场私人专车送机'
+        },
       }
     ]
   },
@@ -628,18 +2090,18 @@ const multiDayTours: Tour[] = [
     price: 1550,
     price3Star: 1550,
     price4Star: 1990,
-    imageUrl: '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
+    imageUrl: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
     mobileImage: '/images/tours/9-16/pailon-diablo-9-16.jpg',
-    desktopImage: '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
+    desktopImage: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
     gallery: [
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
-      '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
+      '/images/tours/16-9/pailon-del-diablo-16-9.webp',
       '/images/tours/16-9/amazon-river-16-9.jpg',
       '/images/tours/16-9/puyo-yanacocha-16-9.jpg',
       '/images/tours/16-9/quito-colonial-16-9.jpg',
-      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg'
+      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 31,
@@ -821,12 +2283,12 @@ const multiDayTours: Tour[] = [
     desktopImage: '/images/tours/16-9/amazon-cuyabeno-16-9.jpg',
     gallery: [
       '/images/tours/16-9/amazon-river-16-9.jpg',
-      '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
+      '/images/tours/16-9/pailon-del-diablo-16-9.webp',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
       '/images/tours/16-9/amazon-cuyabeno-16-9.jpg',
       '/images/tours/16-9/puyo-yanacocha-16-9.jpg',
-      '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
+      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
       '/images/tours/16-9/quito-colonial-16-9.jpg'
     ],
     rating: 5,
@@ -901,7 +2363,7 @@ const multiDayTours: Tour[] = [
           en: 'We travel approximately two hours east of Quito along a historic route used by Spanish explorers in the 16th century in their search for gold and cinnamon. This expedition eventually led to the discovery of the Amazon River.\n\nAlong the way, we pass by the historic Guápulo Church and cross the Andes at approximately 4,100 meters (13,451 ft) above sea level. The route passes between two ecological reserves before descending toward the transition zone between the Andes and the Ecuadorian Amazon.\n\nWe stop at the famous Papallacta Hot Springs, where you can choose from several activities: relax in thermal pools with different temperatures while enjoying spectacular views of Antisana Volcano (5,704 m / 18,714 ft), enjoy some relaxing time at the spa, or explore the walking trails around the area.\n\nWe then continue our descent toward the Amazon Rainforest.',
           es: 'Cruce de los Andes a 4,100 m y relax en las Termas de Papallacta con vista al Antisana. Descenso a la Amazonía hasta llegar a nuestro lodge en Tena.'
         },
-        image: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
+        image: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
         accommodation: { en: 'Tena Lodge', es: 'Tena Lodge' },
         activity: { en: '6-hour guided tour; descent from 4,000m to 500m; 1-hour hike', es: 'Tour de 6 horas y caminata de 1 hora' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -946,7 +2408,7 @@ const multiDayTours: Tour[] = [
           en: 'Enjoy a free day to relax, explore Quito independently, or discover more of the city’s cultural and historical attractions.',
           es: 'Día libre en Quito para recorrer sus museos, gastronomía o descansar.'
         },
-        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg',
+        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         meals: { en: 'Breakfast', es: 'Desayuno' }
       },
@@ -994,17 +2456,17 @@ const multiDayTours: Tour[] = [
     price: 950,
     price3Star: 950,
     price4Star: 1390,
-    imageUrl: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
+    imageUrl: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
     mobileImage: '/images/tours/9-16/chimborazo-9-16.jpg',
-    desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
+    desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
     gallery: [
-      '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
-      '/images/tours/16-9/cuenca-colonial-16-9.jpg',
+      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
+      '/images/tours/16-9/cuenca-colonial-16-9.webp',
       '/images/tours/16-9/quito-colonial-16-9.jpg',
-      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg',
-      '/images/tours/16-9/otavalo-market-16-9.jpg',
+      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
+      '/images/tours/16-9/otavalo-market-16-9.webp',
       '/images/tours/16-9/taita-imbabura-16-9.jpg'
     ],
     rating: 5,
@@ -1156,13 +2618,13 @@ const multiDayTours: Tour[] = [
     mobileImage: '/images/tours/9-16/quito-centro-historico.jpg',
     desktopImage: '/images/tours/16-9/quito-colonial-16-9.jpg',
     gallery: [
-      '/images/tours/16-9/cuenca-colonial-16-9.jpg',
+      '/images/tours/16-9/cuenca-colonial-16-9.webp',
       '/images/tours/16-9/guayaquil-16-9.jpg',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
-      '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
-      '/images/tours/16-9/otavalo-market-16-9.jpg',
-      '/images/tours/16-9/otavalo-market-16-9.jpg',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
+      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+      '/images/tours/16-9/otavalo-market-16-9.webp',
+      '/images/tours/16-9/otavalo-market-16-9.webp',
       '/images/tours/16-9/quito-colonial-16-9.jpg'
     ],
     rating: 5,
@@ -1347,11 +2809,11 @@ const multiDayTours: Tour[] = [
     desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.jpg',
     gallery: [
       '/images/tours/16-9/galapagos-snorkeling-16-9.jpg',
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
       '/images/tours/16-9/isabela-island-16-9.jpg',
       '/images/tours/16-9/galapagos-tintoreras16-9.jpg',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
       '/images/tours/16-9/amazon-river-16-9.jpg',
       '/images/tours/16-9/quito-colonial-16-9.jpg'
     ],
@@ -1596,11 +3058,11 @@ const multiDayTours: Tour[] = [
     gallery: [
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.jpg',
       '/images/tours/16-9/galapagos-tortuga-bay-16-9.jpg',
-      '/images/tours/16-9/galapagos-las-grietas-16-9.jpg',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
-      '/images/tours/16-9/otavalo-market-16-9.jpg',
+      '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
+      '/images/tours/16-9/otavalo-market-16-9.webp',
       '/images/tours/16-9/quito-colonial-16-9.jpg'
     ],
     rating: 5,
@@ -1807,7 +3269,7 @@ export const mockDestinations: Destination[] = [
       es: 'Atraviesa la Avenida de los Volcanes, explora lodges en la selva profunda y maravíllate con la arquitectura colonial.',
       zh: '探索火山大道、基多古城、巴尼奥斯瀑布、亚马逊丛林木屋与印加遗址。'
     },
-    imageUrl: '/images/tours/16-9/cuenca-colonial-16-9.jpg',
+    imageUrl: '/images/tours/16-9/cuenca-colonial-16-9.webp',
     toursCount: 5,
     slug: 'ecuador'
   },
@@ -1822,7 +3284,7 @@ export const mockDestinations: Destination[] = [
       es: 'Cruceros privados curados y excursiones de isla en isla para presenciar vida silvestre que no se encuentra en ningún otro lugar.',
       zh: '邂逅地球上独一无二的野生动物，与海狮、海鬣蜥、巨龟和企鹅一同浮潜。'
     },
-    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
     toursCount: 3,
     slug: 'galapagos'
   },
@@ -1837,7 +3299,7 @@ export const mockDestinations: Destination[] = [
       es: 'Grandes travesías integrales que unen lo mejor de los Andes, la Amazonía y los cruceros en las Islas Galápagos en un solo viaje.',
       zh: '精选全景路线，将安第斯山脉、亚马逊雨林与加拉帕戈斯群岛的奇迹完美融为一体。'
     },
-    imageUrl: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
+    imageUrl: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
     toursCount: 2,
     slug: 'combined'
   },
@@ -1852,7 +3314,7 @@ export const mockDestinations: Destination[] = [
       es: 'Aventuras inmersivas de 1 día a cráteres volcánicos, cascadas andinas, bosque nuboso, termas y mercados indígenas en Ecuador Continental.',
       zh: '厄瓜多尔大陆全日游精选：赤道线、奥塔瓦洛集市、帕帕亚克塔温泉、明多云雾森林、科托帕希与基洛托阿。'
     },
-    imageUrl: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg',
+    imageUrl: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
     toursCount: 7,
     slug: 'full-day'
   }

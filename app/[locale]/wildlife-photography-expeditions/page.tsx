@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const WILDLIFE_TOUR_IDS = ['galapagos-4days', 'galapagos-5days', 'galapagos-6days', 'andes-amazon-7days', 'ecuador-galapagos-12days'];
+const WILDLIFE_TOUR_IDS = ['galapagos-6days', 'galapagos-7days', 'galapagos-8days', 'andes-amazon-7days', 'ecuador-galapagos-12days'];
 
 export default async function WildlifePhotographyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -68,7 +68,7 @@ export default async function WildlifePhotographyPage({ params }: { params: Prom
             {isEs ? 'Acceso privilegiado a ecosistemas unicos con guias naturalistas privados certificados. Captura fauna que no encontraras en ningun otro lugar del planeta.' : "Privileged access to the planet's most unique ecosystems with certified private naturalist guides."}
           </p>
           <div className="flex flex-col sm:flex-row gap-3">
-            <a href={"https://wa.me/593994048458?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all hover:scale-105 shadow-lg">
+            <a href={"https://wa.me/593960039156?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-all hover:scale-105 shadow-lg">
               <MessageCircle className="w-4 h-4" />
               {isEs ? 'Disenar Mi Expedicion' : 'Design My Expedition'}
             </a>
@@ -130,7 +130,7 @@ export default async function WildlifePhotographyPage({ params }: { params: Prom
         <div className="max-w-2xl mx-auto space-y-6">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-zinc-900 dark:text-white">{isEs ? 'Captura Imagenes Unicas en el Mundo' : 'Capture Once-in-a-Lifetime Images'}</h2>
           <p className="text-zinc-600 dark:text-zinc-400">{isEs ? 'Cuentanos que especies quieres fotografiar y disenamos la expedicion perfecta.' : "Tell us which species you want to photograph and we'll design the perfect expedition."}</p>
-          <a href={"https://wa.me/593994048458?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base transition-all hover:scale-105 shadow-xl">
+          <a href={"https://wa.me/593960039156?text=" + encodeURIComponent(waMsg)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-base transition-all hover:scale-105 shadow-xl">
             <MessageCircle className="w-5 h-5" />
             {isEs ? 'Hablar con un Naturalista' : 'Speak With a Naturalist Guide'}
           </a>

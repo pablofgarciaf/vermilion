@@ -60,7 +60,7 @@ describe('DatabaseService & DAL Hardening', () => {
     const tours = await toursRepository.getAll();
     expect(tours.length).toBeGreaterThan(0);
 
-    const tour = await toursRepository.getById('galapagos-4days');
+    const tour = await toursRepository.getById('galapagos-6days');
     expect(tour).toBeDefined();
     expect(tour?.destination).toBe('Galapagos');
   });

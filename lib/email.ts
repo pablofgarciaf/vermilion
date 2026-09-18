@@ -179,8 +179,8 @@ export const sendLeadMagnetEmail = async (toEmail: string, locale: string = 'es'
         <p style="margin: 0; font-weight: bold; color: #ffffff;">${isEs ? '¿Planeando un viaje a medida?' : 'Planning a custom expedition?'}</p>
         <p style="margin: 5px 0 0 0; color: #ccfbf1;">
           ${isEs 
-            ? 'Nuestro equipo de especialistas en expediciones está listo para diseñar tu itinerario privado perfecto. Contáctanos por WhatsApp al +593 99 404 8458.' 
-            : 'Our expedition specialists are ready to craft your bespoke private itinerary. Contact us on WhatsApp at +593 99 404 8458.'}
+            ? 'Nuestro equipo de especialistas en expediciones está listo para diseñar tu itinerario privado perfecto. Contáctanos por WhatsApp al +593 96 003 9156.' 
+            : 'Our expedition specialists are ready to craft your bespoke private itinerary. Contact us on WhatsApp at +593 96 003 9156.'}
         </p>
       </div>
       
@@ -369,7 +369,7 @@ export const sendBookingConfirmationEmail = async (params: BookingConfirmationEm
                         </p>
                         <p style="margin: 6px 0 0 0; color: #a7f3d0; font-size: 12px;">
                           ${isEs ? 'Línea de Asistencia & WhatsApp 24/7:' : '24/7 WhatsApp & Concierge Hotline:'} 
-                          <strong style="color: #34d399;">+593 99 404 8458</strong> • 
+                          <strong style="color: #34d399;">+593 96 003 9156</strong> • 
                           <strong style="color: #34d399;">info@vermilionroutes.com</strong>
                         </p>
                       </td>

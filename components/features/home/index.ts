@@ -5,7 +5,7 @@
  * FSD convention: import from '@/components/features/home' instead of
  * individual paths. Existing imports via '@/components/home/*' remain valid.
  */
-export { HeroSlider } from '@/components/home/HeroSlider';
+export { Hero } from '@/components/home/Hero';
 export { StatsSection } from '@/components/home/StatsSection';
 export { DestinationsGrid } from '@/components/home/DestinationsGrid';
 export { FeaturedTours } from '@/components/home/FeaturedTours';

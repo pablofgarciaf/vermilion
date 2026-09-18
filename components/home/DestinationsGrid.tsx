@@ -96,16 +96,52 @@ export function DestinationsGrid() {
   const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const visibleMobileCardIdRef = useRef<string>('ecuador');
 
-  // Fallback scroll listener to detect visible card on mobile
+  // Exact px distance between the first card of copy 0 and the first card of copy 1
+  // (measured from the DOM so padding/gaps/breakpoint card widths are all accounted for).
+  const getCopyWidth = useCallback(() => {
+    const firstId = destinations[0]?.id.toLowerCase();
+    if (!firstId) return 0;
+    const clone = cardRefs.current[`${firstId}-loop-0`];
+    const real = cardRefs.current[firstId];
+    if (!clone || !real) return 0;
+    return real.getBoundingClientRect().left - clone.getBoundingClientRect().left;
+  }, [destinations]);
+
+  // Fallback scroll listener to detect visible card on mobile + seamless infinite-loop wrap
   const handleScroll = useCallback(() => {
     const el = scrollContainerRef.current;
     if (!el || (typeof window !== 'undefined' && window.innerWidth >= 768)) return;
+
+    // The mobile rail renders 3 identical copies back-to-back. Jumping by exactly
+    // one copy's width is visually undetectable (the content is pixel-identical),
+    // so we can silently rewrap the scroll position to fake an infinite loop.
+    const copyWidth = getCopyWidth();
+    if (copyWidth > 0) {
+      if (el.scrollLeft < copyWidth * 0.5) {
+        el.scrollLeft += copyWidth;
+      } else if (el.scrollLeft > copyWidth * 1.5) {
+        el.scrollLeft -= copyWidth;
+      }
+    }
+
     const cardWidth = 300;
-    const scrollIndex = Math.round(el.scrollLeft / cardWidth);
     const cardOrder = ['ecuador', 'galapagos', 'combined', 'full-day'];
-    const activeId = cardOrder[Math.max(0, Math.min(scrollIndex, cardOrder.length - 1))];
+    const scrollIndex = Math.round(el.scrollLeft / cardWidth);
+    const activeId = cardOrder[((scrollIndex % cardOrder.length) + cardOrder.length) % cardOrder.length];
     if (activeId) visibleMobileCardIdRef.current = activeId;
-  }, []);
+  }, [getCopyWidth]);
+
+  // Start the mobile rail on the middle copy so swiping backward from the first
+  // card also wraps seamlessly (there's a full copy of "buffer" content on each side).
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el || typeof window === 'undefined' || window.innerWidth >= 768) return;
+    const raf = requestAnimationFrame(() => {
+      const copyWidth = getCopyWidth();
+      if (copyWidth > 0) el.scrollLeft = copyWidth;
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [destinations, getCopyWidth]);
 
   // IntersectionObserver to accurately track the card in mobile viewport
   useEffect(() => {
@@ -114,15 +150,15 @@ export function DestinationsGrid() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-            visibleMobileCardIdRef.current = entry.target.id;
+            const realId = (entry.target as HTMLElement).dataset.destId;
+            if (realId) visibleMobileCardIdRef.current = realId;
           }
         });
       },
       { root: scrollContainerRef.current, threshold: 0.5 }
     );
 
-    destinations.forEach((d) => {
-      const el = cardRefs.current[d.id];
+    Object.values(cardRefs.current).forEach((el) => {
       if (el) observer.observe(el);
     });
 
@@ -177,6 +213,12 @@ export function DestinationsGrid() {
 
   if (!destinations || destinations.length === 0) return null;
 
+  // 3 identical copies back-to-back for the mobile infinite rail. Copies 0 and 2
+  // are hidden on md+ (desktop grid only shows the real middle copy).
+  const railItems = [0, 1, 2].flatMap((copyIdx) =>
+    destinations.map((dest, destIndex) => ({ dest, destIndex, copyIdx }))
+  );
+
   return (
     <section
       id="destinations"
@@ -208,19 +250,23 @@ export function DestinationsGrid() {
         onScroll={handleScroll}
         className="flex md:grid md:grid-cols-4 gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0"
       >
-        {destinations.map((dest, destIndex) => {
+        {railItems.map(({ dest, destIndex, copyIdx }) => {
           const pool = DESTINATION_IMAGE_POOLS[dest.id] || [dest.imageUrl];
           const activeIndex = cardImageIndices[dest.id] ?? 0;
+          const isRealCopy = copyIdx === 1;
+          const uniqueId = isRealCopy ? dest.id.toLowerCase() : `${dest.id.toLowerCase()}-loop-${copyIdx}`;
 
           return (
             <div
-              key={dest.id}
-              id={dest.id.toLowerCase()}
+              key={`${dest.id}-${copyIdx}`}
+              id={uniqueId}
+              data-dest-id={dest.id}
+              aria-hidden={isRealCopy ? undefined : true}
               ref={(el) => {
-                if (el) cardRefs.current[dest.id] = el;
+                if (el) cardRefs.current[uniqueId] = el;
               }}
               onClick={() => handleDestinationClick(dest.id)}
-              className="group relative h-[420px] sm:h-[440px] md:h-[460px] w-[290px] xs:w-[320px] md:w-auto shrink-0 snap-center rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl border border-zinc-200/80 dark:border-zinc-800/80 hover:border-emerald-500/80 transition-all duration-500 flex flex-col justify-between p-5 sm:p-6 cursor-pointer hover:-translate-y-1 bg-zinc-950"
+              className={`group relative h-[420px] sm:h-[440px] md:h-[460px] w-[290px] xs:w-[320px] md:w-auto shrink-0 snap-center rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl border border-zinc-200/80 dark:border-zinc-800/80 hover:border-emerald-500/80 transition-all duration-500 flex flex-col justify-between p-5 sm:p-6 cursor-pointer hover:-translate-y-1 bg-zinc-950 ${isRealCopy ? '' : 'md:hidden'}`}
             >
               {/* Dynamic Layered Images with Seamless Crossfade & Subtle Ken Burns Zoom */}
               {pool.map((imgSrc, imgIdx) => {

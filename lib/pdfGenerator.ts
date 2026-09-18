@@ -32,7 +32,7 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "CHAPTER II: GALAPAGOS ISLANDS — MARINE EXPEDITION",
     andesChapterTitle: "CHAPTER I: ANDES & AMAZON REGION",
     conciergeTitle: "24/7 WHATSAPP CONCIERGE & CUSTOM BOOKING",
-    conciergeDesc: "Contact +593 994 048 458 to customize your dates, hotel upgrades, or private naturalist guides.",
+    conciergeDesc: "Contact +593 96 003 9156 to customize your dates, hotel upgrades, or private naturalist guides.",
     gallerySectionTitle: "VISUAL APPENDIX — FEATURED DESTINATIONS & LANDMARKS"
   },
   es: {
@@ -62,7 +62,7 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "CAPÍTULO II: ISLAS GALÁPAGOS — EXPEDICIÓN MARINA",
     andesChapterTitle: "CAPÍTULO I: REGIÓN ANDINA Y AMAZONÍA",
     conciergeTitle: "CONCIERGE 24/7 WHATSAPP Y RESERVAS PERSONALIZADAS",
-    conciergeDesc: "Escribe a +593 994 048 458 para personalizar fechas, mejorar hoteles o solicitar guías privados.",
+    conciergeDesc: "Escribe a +593 96 003 9156 para personalizar fechas, mejorar hoteles o solicitar guías privados.",
     gallerySectionTitle: "ANEXO FOTOGRÁFICO — DESTINOS Y LUGARES DESTACADOS"
   },
   fr: {
@@ -92,7 +92,7 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "CHAPITRE II: ÎLES GALAPAGOS — EXPÉDITION MARINE",
     andesChapterTitle: "CHAPITRE I: RÉGION DES ANDES ET AMAZONIE",
     conciergeTitle: "CONCIERGE 24/7 WHATSAPP & RÉSERVATIONS SUR MESURE",
-    conciergeDesc: "Contactez le +593 994 048 458 pour personnaliser vos dates ou hébergements.",
+    conciergeDesc: "Contactez le +593 96 003 9156 pour personnaliser vos dates ou hébergements.",
     gallerySectionTitle: "ANNEXE VISUELLE — DESTINATIONS ET SITES EMBLÉMATIQUES"
   },
   de: {
@@ -122,7 +122,7 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "KAPITEL II: GALAPAGOS-INSELN — MEERESEXPEDITION",
     andesChapterTitle: "KAPITEL I: ANDEN & AMAZONAS-REGION",
     conciergeTitle: "24/7 WHATSAPP CONCIERGE & INDIVIDUELLE BUCHUNG",
-    conciergeDesc: "Schreiben Sie an +593 994 048 458 für maßgeschneiderte Daten und Hotels.",
+    conciergeDesc: "Schreiben Sie an +593 96 003 9156 für maßgeschneiderte Daten und Hotels.",
     gallerySectionTitle: "BILDANHANG — AUSGEWÄHLTE REISEZIELE & HÖHEPUNKTE"
   },
   it: {
@@ -152,7 +152,7 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "CAPITOLO II: ISOLE GALAPAGOS — SPEDIZIONE MARINA",
     andesChapterTitle: "CAPITOLO I: REGIONE DELLE ANDE E AMMAZZONIA",
     conciergeTitle: "CONCIERGE 24/7 WHATSAPP E PRENOTAZIONI SU MISURA",
-    conciergeDesc: "Contatta +593 994 048 458 per personalizzare date, hotel o guide private.",
+    conciergeDesc: "Contatta +593 96 003 9156 per personalizzare date, hotel o guide private.",
     gallerySectionTitle: "APPENDICE VISIVA — DESTINAZIONI E LUOGHI DI RILIEVO"
   },
   pt: {
@@ -182,7 +182,7 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "CAPÍTULO II: ILHAS GALÁPAGOS — EXPEDIÇÃO MARÍTIMA",
     andesChapterTitle: "CAPÍTULO I: REGIÃO DOS ANDES E AMAZÔNIA",
     conciergeTitle: "CONCIERGE 24/7 WHATSAPP E RESERVAS PERSONALIZADAS",
-    conciergeDesc: "Fale com +593 994 048 458 para personalizar suas datas ou hotéis.",
+    conciergeDesc: "Fale com +593 96 003 9156 para personalizar suas datas ou hotéis.",
     gallerySectionTitle: "ANEXO VISUAL — DESTINOS E LOCAIS EM DESTAQUE"
   },
   ja: {
@@ -212,7 +212,7 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "第2章: ガラパゴス諸島 — 海洋探検",
     andesChapterTitle: "第1章: アンデス＆アマゾン地域",
     conciergeTitle: "24時間対応WHATSAPPコンシェルジュ＆カスタム予約",
-    conciergeDesc: "+593 994 048 458 まで日程や宿泊先のアップグレードをご相談ください。",
+    conciergeDesc: "+593 96 003 9156 まで日程や宿泊先のアップグレードをご相談ください。",
     gallerySectionTitle: "ビジュアル付録 — 注目の目的地＆名所ギャラリー"
   },
   zh: {
@@ -242,7 +242,7 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "第二章: 加拉帕戈斯群岛 — 海洋探险",
     andesChapterTitle: "第一章: 安第斯与亚马逊地区",
     conciergeTitle: "24/7 WHATSAPP 专属礼宾服务与私人定制",
-    conciergeDesc: "请联系 +593 994 048 458 定制您的出行日期、酒店升级或专属私人导游。",
+    conciergeDesc: "请联系 +593 96 003 9156 定制您的出行日期、酒店升级或专属私人导游。",
     gallerySectionTitle: "视觉附录 — 核心目的地与标志性景观画册"
   }
 };
@@ -401,7 +401,7 @@ function drawHeaderBand(doc: jsPDF, logoBase64: string | null, pageWidth: number
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(7.6);
   doc.setTextColor(30, 41, 59);
-  doc.text('+(593) 994-048-458', cX + 5.2, cY1);
+  doc.text('+(593) 96-003-9156', cX + 5.2, cY1);
 
   // --- Email Vector Icon ---
   doc.setFillColor(27, 67, 50);

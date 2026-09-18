@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import { HeroSlider } from '@/components/home/HeroSlider';
+import { Hero } from '@/components/home/Hero';
 import { StatsSection } from '@/components/home/StatsSection';
 import { DestinationsGrid } from '@/components/home/DestinationsGrid';
 import { CombinedExperienceSection } from '@/components/home/CombinedExperienceSection';
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Vermilion Routes',
       images: [
         {
-          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
           width: 1200,
           height: 630,
           alt: 'Vermilion Routes - Bespoke Nature Journeys',
@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title,
       description,
-      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'],
+      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
     },
   };
 }
@@ -118,7 +118,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       {/* 1. Critical Above-the-Fold Viewport */}
       <div>
-        <HeroSlider />
+        <Hero />
         <StatsSection />
       </div>
 

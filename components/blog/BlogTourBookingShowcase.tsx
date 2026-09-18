@@ -290,7 +290,7 @@ export function BlogTourBookingShowcase({
                 {/* Image & Badges */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
                   <Image
-                    src={tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'}
+                    src={tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'}
                     alt={tourTitle}
                     width={600}
                     height={375}
@@ -375,7 +375,7 @@ export function BlogTourBookingShowcase({
 
           <div className="shrink-0 flex items-center gap-2">
             <a
-              href="https://wa.me/593994048458"
+              href="https://wa.me/593960039156"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-black font-bold text-xs flex items-center gap-2 transition-all hover:scale-105 shadow-md"

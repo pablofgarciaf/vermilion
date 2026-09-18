@@ -85,8 +85,8 @@ export function TourModal({ tour, isOpen, onClose }: TourModalProps) {
   };
 
   const handleWhatsApp = () => {
-    const rawNumber = getLocalizedText(settings?.contact?.whatsappUrl, locale) || getLocalizedText(settings?.contact?.phone, locale) || '593994048458';
-    const phoneNumber = rawNumber.replace(/[^0-9]/g, '') || '593994048458';
+    const rawNumber = getLocalizedText(settings?.contact?.whatsappUrl, locale) || getLocalizedText(settings?.contact?.phone, locale) || '593960039156';
+    const phoneNumber = rawNumber.replace(/[^0-9]/g, '') || '593960039156';
     const titleText = getLocalizedText(tour.title, locale);
     const message = encodeURIComponent(`Hello Vermilion Routes, I am interested in booking the "${titleText}" tour.`);
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');

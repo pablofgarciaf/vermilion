@@ -42,7 +42,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     officeReservations: "Office / Reservations:",
     hqEcuador: "Ecuador Headquarters (HQ)",
     officeSpain: "Spain Branch (Coral Tour)",
-    internationalLanguages: "International / Languages:"
+    internationalLanguages: "International / Languages:",
+    featuredExperiences: "Featured Experiences",
+    expCouples: "Galapagos Anniversary Trips",
+    expFamily: "Family-Friendly Ecuador",
+    expWildlife: "Wildlife Photography Expeditions"
   },
   es: {
     topDestinations: "Destinos Principales", galapagos: "Islas Galápagos", ecuador: "Ecuador Continental", fullDay: "Excursiones Full Day", amazon: "Amazonía Ecuatoriana", volcanoes: "Avenida de los Volcanes",
@@ -61,7 +65,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     officeReservations: "Oficina / Reservas:",
     hqEcuador: "Sede Ecuador (HQ)",
     officeSpain: "Sede España (Coral Tour)",
-    internationalLanguages: "Internacional / Idiomas:"
+    internationalLanguages: "Internacional / Idiomas:",
+    featuredExperiences: "Experiencias Destacadas",
+    expCouples: "Aniversario en Galápagos",
+    expFamily: "Ecuador en Familia",
+    expWildlife: "Fotografía de Vida Silvestre"
   },
   fr: {
     topDestinations: "Meilleures Destinations", galapagos: "Îles Galapagos", ecuador: "Équateur Continental", fullDay: "Excursions Full Day", amazon: "Amazonie Équatorienne", volcanoes: "Avenue des Volcans",
@@ -80,7 +88,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     officeReservations: "Bureau / Réservations:",
     hqEcuador: "Siège Équateur (HQ)",
     officeSpain: "Filiale Espagne (Coral Tour)",
-    internationalLanguages: "International / Langues:"
+    internationalLanguages: "International / Langues:",
+    featuredExperiences: "Expériences Vedettes",
+    expCouples: "Anniversaire aux Galápagos",
+    expFamily: "Équateur en Famille",
+    expWildlife: "Photographie de Faune Sauvage"
   },
   de: {
     topDestinations: "Top-Reiseziele", galapagos: "Galapagos-Inseln", ecuador: "Ecuador Festland", fullDay: "Tagesausflüge (Full Day)", amazon: "Ecuadorianischer Amazonas", volcanoes: "Straße der Vulkane",
@@ -99,7 +111,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     officeReservations: "Büro / Reservierungen:",
     hqEcuador: "Hauptsitz Ecuador (HQ)",
     officeSpain: "Niederlassung Spanien (Coral Tour)",
-    internationalLanguages: "International / Sprachen:"
+    internationalLanguages: "International / Sprachen:",
+    featuredExperiences: "Besondere Erlebnisse",
+    expCouples: "Jubiläumsreisen auf Galápagos",
+    expFamily: "Ecuador für Familien",
+    expWildlife: "Wildtier-Fotografie-Expeditionen"
   },
   it: {
     topDestinations: "Destinazioni Top", galapagos: "Isole Galapagos", ecuador: "Ecuador Continentale", fullDay: "Escursioni Full Day", amazon: "Amazzonia Ecuadoriana", volcanoes: "Viale dei Vulcani",
@@ -118,7 +134,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     officeReservations: "Ufficio / Prenotazioni:",
     hqEcuador: "Sede Ecuador (HQ)",
     officeSpain: "Sede Spagna (Coral Tour)",
-    internationalLanguages: "Internazionale / Lingue:"
+    internationalLanguages: "Internazionale / Lingue:",
+    featuredExperiences: "Esperienze in Evidenza",
+    expCouples: "Anniversario alle Galápagos",
+    expFamily: "Ecuador in Famiglia",
+    expWildlife: "Spedizioni di Fotografia Naturalistica"
   },
   pt: {
     topDestinations: "Principais Destinos", galapagos: "Ilhas Galápagos", ecuador: "Equador Continental", fullDay: "Excursões Full Day", amazon: "Amazônia Equatoriana", volcanoes: "Avenida dos Vulcões",
@@ -137,7 +157,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     officeReservations: "Escritório / Reservas:",
     hqEcuador: "Sede Equador (HQ)",
     officeSpain: "Sede Espanha (Coral Tour)",
-    internationalLanguages: "Internacional / Idiomas:"
+    internationalLanguages: "Internacional / Idiomas:",
+    featuredExperiences: "Experiências em Destaque",
+    expCouples: "Aniversário em Galápagos",
+    expFamily: "Equador em Família",
+    expWildlife: "Expedições de Fotografia de Vida Selvagem"
   },
   ja: {
     topDestinations: "人気の目的地", galapagos: "ガラパゴス諸島", ecuador: "エクアドル本土", fullDay: "日帰りツアー（Full Day）", amazon: "エクアドル・アマゾン", volcanoes: "火山の道",
@@ -156,7 +180,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     officeReservations: "オフィス / 予約:",
     hqEcuador: "エクアドル本社 (HQ)",
     officeSpain: "スペイン支社 (Coral Tour)",
-    internationalLanguages: "グローバル / 言語を選択:"
+    internationalLanguages: "グローバル / 言語を選択:",
+    featuredExperiences: "注目の体験",
+    expCouples: "ガラパゴス記念日旅行",
+    expFamily: "ファミリー向けエクアドル",
+    expWildlife: "野生動物フォトグラフィー遠征"
   },
   zh: {
     topDestinations: "热门目的地", galapagos: "加拉帕戈斯群岛", ecuador: "厄瓜多尔大陆", fullDay: "全天一日游", amazon: "厄瓜多尔亚马逊", volcanoes: "火山大道",
@@ -175,7 +203,11 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     officeReservations: "办公室 / 预订专线:",
     hqEcuador: "厄瓜多尔总部 (HQ)",
     officeSpain: "西班牙分部 (Coral Tour)",
-    internationalLanguages: "国际多语言切换:"
+    internationalLanguages: "国际多语言切换:",
+    featuredExperiences: "精选体验",
+    expCouples: "加拉帕戈斯纪念日之旅",
+    expFamily: "厄瓜多尔亲子游",
+    expWildlife: "野生动物摄影探险"
   }
 };
 
@@ -343,6 +375,27 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+
+            <p className="font-serif font-semibold text-sm text-white tracking-wide pt-2">
+              {t.featuredExperiences}
+            </p>
+            <ul className="space-y-2.5 text-sm text-zinc-300">
+              <li>
+                <a href={`/${locale}/couples-anniversary-galapagos`} className="hover:text-white transition-colors">
+                  {t.expCouples}
+                </a>
+              </li>
+              <li>
+                <a href={`/${locale}/family-friendly-ecuador`} className="hover:text-white transition-colors">
+                  {t.expFamily}
+                </a>
+              </li>
+              <li>
+                <a href={`/${locale}/wildlife-photography-expeditions`} className="hover:text-white transition-colors">
+                  {t.expWildlife}
+                </a>
+              </li>
+            </ul>
           </div>
 
           {/* Company */}
@@ -434,15 +487,15 @@ export function Footer() {
               <p className="flex items-center gap-2 text-zinc-300">
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span className="text-zinc-400 text-[11px]">WhatsApp 24/7:</span>
-                <a href="tel:+593994048458" className="hover:text-emerald-300 transition-colors">
-                  +593 99 404 8458
+                <a href="tel:+593960039156" className="hover:text-emerald-300 transition-colors">
+                  +593 96 003 9156
                 </a>
               </p>
               <p className="flex items-center gap-2 text-zinc-300">
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span className="text-zinc-400 text-[11px]">{t.officeReservations}</span>
-                <a href="tel:+593983992549" className="hover:text-emerald-300 transition-colors">
-                  +593 98 399 2549
+                <a href="tel:+593994048458" className="hover:text-emerald-300 transition-colors">
+                  +593 99 404 8458
                 </a>
               </p>
               <p className="flex items-center gap-2 text-zinc-300">

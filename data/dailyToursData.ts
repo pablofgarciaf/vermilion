@@ -32,13 +32,13 @@ export const dailyTours: Tour[] = [
     price4Star: 89,
     imageUrl: '/images/tours/16-9/quito-colonial-16-9.jpg',
     mobileImage: '/images/tours/9-16/quito-centro-historico.jpg',
-    desktopImage: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg',
+    desktopImage: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
     gallery: [
       '/images/tours/16-9/quito-colonial-16-9.jpg',
       '/images/tours/16-9/mitad-del-mundo-16-9.jpg',
-      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg'
+      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 42,
@@ -128,12 +128,12 @@ export const dailyTours: Tour[] = [
     price: 92,
     price3Star: 92,
     price4Star: 92,
-    imageUrl: '/images/tours/16-9/otavalo-market-16-9.jpg',
+    imageUrl: '/images/tours/16-9/otavalo-market-16-9.webp',
     mobileImage: '/images/tours/9-16/otavalo-market-9-16.jpg',
-    desktopImage: '/images/tours/16-9/otavalo-market-16-9.jpg',
+    desktopImage: '/images/tours/16-9/otavalo-market-16-9.webp',
     gallery: [
-      '/images/tours/16-9/otavalo-market-16-9.jpg',
-      '/images/tours/16-9/otavalo-market-16-9.jpg',
+      '/images/tours/16-9/otavalo-market-16-9.webp',
+      '/images/tours/16-9/otavalo-market-16-9.webp',
       '/images/tours/16-9/taita-imbabura-16-9.jpg',
       '/images/tours/16-9/imbabura-16-9.jpg',
       '/images/tours/16-9/quito-colonial-16-9.jpg'
@@ -230,10 +230,10 @@ export const dailyTours: Tour[] = [
     desktopImage: '/images/tours/16-9/amazon-river-16-9.jpg',
     gallery: [
       '/images/tours/16-9/amazon-river-16-9.jpg',
-      '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
+      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
       '/images/tours/16-9/amazon-cuyabeno-16-9.jpg',
-      '/images/tours/16-9/pailon-del-diablo-16-9.jpg'
+      '/images/tours/16-9/pailon-del-diablo-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 29,
@@ -327,7 +327,7 @@ export const dailyTours: Tour[] = [
     desktopImage: '/images/tours/16-9/mindo-16-9.jpg',
     gallery: [
       '/images/tours/16-9/mindo-16-9.jpg',
-      '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
+      '/images/tours/16-9/pailon-del-diablo-16-9.webp',
       '/images/tours/16-9/amazon-river-16-9.jpg',
       '/images/tours/16-9/quito-colonial-16-9.jpg',
       '/images/tours/16-9/mitad-del-mundo-16-9.jpg'
@@ -420,15 +420,15 @@ export const dailyTours: Tour[] = [
     price: 90,
     price3Star: 90,
     price4Star: 90,
-    imageUrl: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
+    imageUrl: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
     mobileImage: '/images/tours/9-16/chimborazo-9-16.jpg',
-    desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
+    desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
     gallery: [
-      '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
+      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
       '/images/tours/16-9/quito-colonial-16-9.jpg',
-      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg'
+      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 26,
@@ -516,13 +516,13 @@ export const dailyTours: Tour[] = [
     price: 96,
     price3Star: 96,
     price4Star: 96,
-    imageUrl: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
+    imageUrl: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
     mobileImage: '/images/tours/9-16/cotopaxi-9-16.jpg',
-    desktopImage: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
+    desktopImage: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
     gallery: [
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
-      '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
+      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
       '/images/tours/16-9/quito-colonial-16-9.jpg',
       '/images/tours/16-9/mitad-del-mundo-16-9.jpg'
     ],
@@ -613,14 +613,14 @@ export const dailyTours: Tour[] = [
     price: 98,
     price3Star: 98,
     price4Star: 98,
-    imageUrl: '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
+    imageUrl: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
     mobileImage: '/images/tours/9-16/quilotoa-9-16.jpg',
-    desktopImage: '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
+    desktopImage: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
     gallery: [
-      '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-      '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
-      '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
+      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+      '/images/tours/16-9/pailon-del-diablo-16-9.webp',
       '/images/tours/16-9/quito-colonial-16-9.jpg'
     ],
     rating: 5,

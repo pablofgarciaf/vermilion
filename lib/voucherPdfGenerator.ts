@@ -161,7 +161,7 @@ export async function generateTravelVoucherPDF(data: VoucherPdfData): Promise<vo
   doc.setTextColor(15, 23, 42);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(9);
-  doc.text(data.customerPhone || '+593 99 404 8458', leftX, y + 4.5);
+  doc.text(data.customerPhone || '+593 96 003 9156', leftX, y + 4.5);
   doc.text(data.travelersCount || '1 Viajero', rightX, y + 4.5);
 
   y += lineHeight;
@@ -255,8 +255,8 @@ export async function generateTravelVoucherPDF(data: VoucherPdfData): Promise<vo
         ? 'Presente este voucher en formato digital (PDF en su teléfono) o impreso a su llegada al aeropuerto. Su guía naturalista y chofer privado le recibirán portando el identificador con su nombre y el código oficial de reserva.'
         : 'Present this voucher digitally on your mobile or printed upon arrival at the airport. Your private guide and driver will meet you holding a sign with your name and official booking reference.')
     : (isEs
-        ? 'Su reserva ha sido registrada temporalmente. Por favor complete la transferencia antes de la fecha límite e incluya su código de reserva en el concepto bancario. Notifique a nuestro Concierge 24/7 al +593 99 404 8458.'
-        : 'Your expedition spot is held. Please complete wire transfer before expiry and include your reference code in the bank memo. Notify our 24/7 Concierge at +593 99 404 8458.');
+        ? 'Su reserva ha sido registrada temporalmente. Por favor complete la transferencia antes de la fecha límite e incluya su código de reserva en el concepto bancario. Notifique a nuestro Concierge 24/7 al +593 96 003 9156.'
+        : 'Your expedition spot is held. Please complete wire transfer before expiry and include your reference code in the bank memo. Notify our 24/7 Concierge at +593 96 003 9156.');
 
   const splitInst = doc.splitTextToSize(instructions, contentWidth - 10);
   doc.text(splitInst, margin + 5, y + 12);
@@ -264,8 +264,8 @@ export async function generateTravelVoucherPDF(data: VoucherPdfData): Promise<vo
   doc.setFont('helvetica', 'bold');
   doc.text(
     isEs
-      ? 'Concierge 24/7: +593 99 404 8458  •  Email: info@vermilionroutes.com  •  Web: vermilionroutes.com'
-      : 'Concierge 24/7: +593 99 404 8458  •  Email: info@vermilionroutes.com  •  Web: vermilionroutes.com',
+      ? 'Concierge 24/7: +593 96 003 9156  •  Email: info@vermilionroutes.com  •  Web: vermilionroutes.com'
+      : 'Concierge 24/7: +593 96 003 9156  •  Email: info@vermilionroutes.com  •  Web: vermilionroutes.com',
     margin + 5,
     y + 24
   );

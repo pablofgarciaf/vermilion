@@ -130,6 +130,26 @@ const nextConfig = {
         destination: '/en/dashboard',
         permanent: true,
       },
+      {
+        source: '/:locale/tours/galapagos-4days',
+        destination: '/:locale/tours/galapagos-6days',
+        permanent: true,
+      },
+      {
+        source: '/tours/galapagos-4days',
+        destination: '/en/tours/galapagos-6days',
+        permanent: true,
+      },
+      {
+        source: '/:locale/tours/galapagos-5days',
+        destination: '/:locale/tours/galapagos-7days',
+        permanent: true,
+      },
+      {
+        source: '/tours/galapagos-5days',
+        destination: '/en/tours/galapagos-7days',
+        permanent: true,
+      },
     ];
   },
   async headers() {

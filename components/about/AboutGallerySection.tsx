@@ -77,12 +77,12 @@ const TEXTS: Record<string, {
 
 const SHOWCASE_PHOTOS = [
   {
-    src: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg',
+    src: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
     title: 'Giant Tortoise in Santa Cruz Highlands',
     aspect: 'col-span-2 row-span-2 aspect-[16/10] sm:aspect-auto sm:h-full',
   },
   {
-    src: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
+    src: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
     title: 'Cotopaxi Snow-Capped Volcano',
     aspect: 'col-span-1 aspect-[4/3]',
   },

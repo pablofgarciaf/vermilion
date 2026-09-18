@@ -989,7 +989,7 @@ export default function CheckoutPaymentPage() {
               </button>
 
               <a
-                href={`https://wa.me/593994048458?text=${encodeURIComponent(
+                href={`https://wa.me/593960039156?text=${encodeURIComponent(
                   `Hola Vermilion Routes, he registrado mi reserva para "${tourTitle}" (Ref: ${ref}). Método: ${receiptSubmitted ? 'Transferencia Bancaria Internacional' : 'PayPal'}.`
                 )}`}
                 target="_blank"
@@ -1397,7 +1397,7 @@ export default function CheckoutPaymentPage() {
                   {t('conciergeHelp')}
                 </p>
                 <a
-                  href={`https://wa.me/593994048458?text=${encodeURIComponent(
+                  href={`https://wa.me/593960039156?text=${encodeURIComponent(
                     `Hola Vermilion Routes, estoy en el checkout del tour "${tourTitle}" (Ref: ${ref || 'Web'}). Deseo asistencia personalizada.`
                   )}`}
                   target="_blank"

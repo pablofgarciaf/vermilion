@@ -86,8 +86,8 @@ export default function PrivacyPolicyPage() {
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a href="tel:+593994048458" className="text-zinc-200 hover:text-white">
-                  +593-994-048-458
+                <a href="tel:+593960039156" className="text-zinc-200 hover:text-white">
+                  +593-96-003-9156
                 </a>
               </p>
               <p className="text-xs text-zinc-400">

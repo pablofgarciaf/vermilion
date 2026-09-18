@@ -148,7 +148,7 @@ function BookingSubNav({ primaryTour, pricing, locale }: { primaryTour: Tour | n
           </div>
 
           <a
-            href={`https://wa.me/593994048458?text=${encodeURIComponent(`${st.waPrefix} ${title}`)}`}
+            href={`https://wa.me/593960039156?text=${encodeURIComponent(`${st.waPrefix} ${title}`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-stone-950 shadow-md transition-all hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
@@ -782,12 +782,12 @@ function getComplementarySuggestions(primaryTour: Tour, allTours: Tour[]): { tou
     ].filter(item => item.tour && item.tour.id !== primaryTour.id);
   } else if (pid.includes('ecuador-galapagos') || pid.includes('12days') || pid.includes('11days')) {
     // Si ya tiene el Gran Tour Combinado -> Sugerir experiencia boutique de Galápagos y Ruta de Nieve
-    const galapagosSpec = allTours.find(t => t.id === 'galapagos-5days') || allTours[1];
+    const galapagosSpec = allTours.find(t => t.id === 'galapagos-7days') || allTours.find(t => t.id === 'galapagos-6days') || allTours[1];
     const andesSpec = allTours.find(t => t.id === 'snow-volcanoes-6days') || allTours[5];
     return [
       {
         tour: galapagosSpec,
-        badge: '🐢 Enfoque Galápagos Exclusivo (5 Días)',
+        badge: '🐢 Enfoque Galápagos Exclusivo (7 Días)',
         reason: 'Dedicado exclusivamente a la fauna endémica marina y navegación entre islotes',
       },
       {
@@ -797,8 +797,8 @@ function getComplementarySuggestions(primaryTour: Tour, allTours: Tour[]): { tou
       },
     ].filter(item => item.tour && item.tour.id !== primaryTour.id);
   } else {
-    // Tour continental -> Complementario 1: Galápagos 5 días + Complementario 2: Grand Tour 12 Días
-    const galapagos = allTours.find(t => t.id === 'galapagos-5days') || allTours.find(t => t.id === 'galapagos-4days') || allTours[1];
+    // Tour continental -> Complementario 1: Galápagos 7 días + Complementario 2: Grand Tour 12 Días
+    const galapagos = allTours.find(t => t.id === 'galapagos-7days') || allTours.find(t => t.id === 'galapagos-6days') || allTours[1];
     const grandTour = allTours.find(t => t.id === 'ecuador-galapagos-12days') || allTours[7];
     return [
       {
@@ -962,12 +962,12 @@ export function BookingWizard() {
       }
     }
     if (selectedTours.length === 0 && mockTours.length > 0) {
-      const defaultTour = mockTours.find(t => t.id === 'galapagos-5days') || mockTours[0];
+      const defaultTour = mockTours.find(t => t.id === 'galapagos-7days') || mockTours.find(t => t.id === 'galapagos-6days') || mockTours[0];
       setSelectedTours([defaultTour]);
     }
   }, [addTourId]);
 
-  const primaryTour: Tour = selectedTours[0] || (addTourId ? mockTours.find(t => t.id === addTourId) : null) || mockTours.find(t => t.id === 'galapagos-5days') || mockTours[0];
+  const primaryTour: Tour = selectedTours[0] || (addTourId ? mockTours.find(t => t.id === addTourId) : null) || mockTours.find(t => t.id === 'galapagos-7days') || mockTours.find(t => t.id === 'galapagos-6days') || mockTours[0];
   const complementarySuggestions = getComplementarySuggestions(primaryTour, mockTours);
   const candidateTours = mockTours.filter(t => t.id !== primaryTour?.id);
   const ci18n = BOOKING_CAROUSEL_I18N[locale] || BOOKING_CAROUSEL_I18N['es'];
@@ -1962,7 +1962,7 @@ export function BookingWizard() {
             {/* Header */}
             <div className="relative h-48 sm:h-56 w-full shrink-0 overflow-hidden bg-zinc-950">
               <img
-                src={previewTour.imageUrl || previewTour.mainImage || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'}
+                src={previewTour.imageUrl || previewTour.mainImage || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'}
                 alt={getLocalizedText(previewTour.title, locale)}
                 className="w-full h-full object-cover brightness-90"
               />

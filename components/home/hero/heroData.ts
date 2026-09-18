@@ -33,8 +33,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: '世界初の世界文化遺産。保存状態の良い石畳の街並みを歩き、黄金色に輝くラ・コンパニーア教会の祭壇に驚嘆してください。',
       zh: '全球首个联合国教科文组织世界文化遗产。漫步在鹅卵石古街，赞叹拉孔帕尼亚教堂富丽堂皇的金箔祭坛。'
     },
-    image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg',
-    desktopImage: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.jpg',
+    image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
+    desktopImage: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
     mobileImage: '/images/tours/9-16/quito-centro-historico.jpg'
   },
   {
@@ -51,8 +51,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: 'エクアドルで最も有名な滝の雷鳴のような轟音を感じ、豊かな熱帯雲霧林と吊り橋の絶景を体験してください。',
       zh: '感受厄瓜多尔最著名瀑布的雷霆万钧之力，漫步悬索桥与热带云雾森林。'
     },
-    image: '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
-    desktopImage: '/images/tours/16-9/pailon-del-diablo-16-9.jpg',
+    image: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
+    desktopImage: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
     mobileImage: '/images/tours/9-16/pailon-diablo-9-16.jpg'
   },
   {
@@ -69,8 +69,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: '野生の馬や高山植物に囲まれ、火山の街道に誇らしげにそびえる標高5,897メートルのコトパクシ火山。',
       zh: '海拔5897米白雪皑皑的完美火山锥，雄踞火山大道，周围环绕着高山草甸与野马。'
     },
-    image: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
-    desktopImage: '/images/tours/16-9/cotopaxi-volcano-16-9.jpg',
+    image: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+    desktopImage: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
     mobileImage: '/images/tours/9-16/cotopaxi-9-16.jpg'
   },
   {
@@ -87,8 +87,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: 'アンデス山脈のパノラマビューを望む標高3,500メートルの古代カルデラ内の見事なターコイズブルーの湖水。',
       zh: '惊叹于海拔3500米古代火山口内令人着迷的绿松石色湖水与壮丽安第斯全景。'
     },
-    image: '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
-    desktopImage: '/images/tours/16-9/laguna-quilotoa-16-9.jpg',
+    image: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
+    desktopImage: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
     mobileImage: '/images/tours/9-16/quilotoa-9-16.jpg'
   },
   {
@@ -106,7 +106,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       zh: '乘坐机动独木舟穿行于原始亚马逊支流，探访野生动物保护区，融入传统奇瓦印第安社区。'
     },
     image: '/images/tours/16-9/amazon-river-16-9.jpg',
-    desktopImage: '/images/tours/16-9/amazon-nutria-9-16.jpg',
+    desktopImage: '/images/tours/16-9/amazon-nutria-9-16.webp',
     mobileImage: '/images/tours/9-16/amazon-waterfall-9-16.jpg'
   },
   {
@@ -123,8 +123,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: '壮大なアンデスの湖と火山に囲まれた南米最大の先住民市場を探索し、アンデスの伝統工芸品を発見してください。',
       zh: '探索南美洲最大的原住民市场，周围环绕着壮丽的安第斯湖泊和火山，并发现安第斯山脉的祖先手工艺。'
     },
-    image: '/images/tours/16-9/otavalo-market-16-9.jpg',
-    desktopImage: '/images/tours/16-9/otavalo-market-16-9.jpg',
+    image: '/images/tours/16-9/otavalo-market-16-9.webp',
+    desktopImage: '/images/tours/16-9/otavalo-market-16-9.webp',
     mobileImage: '/images/tours/9-16/otavalo-market-9-16.jpg'
   },
   {
@@ -141,8 +141,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: '世界遺産の街クエンカのコロニアルな優雅さとパナマハット工房を発見し、カハス国立公園の200以上の氷河湖を巡りましょう。',
       zh: '探索世界遗产城市昆卡的殖民典雅、巴拿马草帽工坊，徒步于卡哈斯国家公园的200多个冰川湖泊。'
     },
-    image: '/images/tours/16-9/cuenca-colonial-16-9.jpg',
-    desktopImage: '/images/tours/16-9/cuenca-colonial-16-9.jpg',
+    image: '/images/tours/16-9/cuenca-colonial-16-9.webp',
+    desktopImage: '/images/tours/16-9/cuenca-colonial-16-9.webp',
     mobileImage: '/images/tours/9-16/cajas-national-park-9-16.jpg'
   },
   {
@@ -159,8 +159,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: '地球上で太陽に最も近い標高6,310メートルのチンボラソ火山。野生のビクーニャが生息する雄大なアンデス自然保護区を体験。',
       zh: '海拔6310米，地球表面距离太阳最近的点。探索栖息着野生小羊驼与古老印加山地的宏伟安第斯保护区。'
     },
-    image: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
-    desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.jpg',
+    image: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+    desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
     mobileImage: '/images/tours/9-16/chimborazo-9-16.jpg'
   },
   {
@@ -177,8 +177,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: 'ラス・グリエタスの透き通った溶岩の裂け目で泳ぎ、ラ・ロベリアの白砂のビーチで遊ぶアシカを観察しましょう。',
       zh: '在拉斯格里塔斯清澈见底的火山峡谷裂缝中游泳潜水，在拉洛贝里亚白沙滩观赏海狮群。'
     },
-    image: '/images/tours/16-9/galapagos-las-grietas-16-9.jpg',
-    desktopImage: '/images/tours/16-9/galapagos-las-grietas-16-9.jpg',
+    image: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
+    desktopImage: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
     mobileImage: '/images/tours/9-16/galapagos-las-grietas-9-16.jpg'
   }
 ];
