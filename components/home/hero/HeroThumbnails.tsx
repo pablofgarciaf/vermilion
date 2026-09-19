@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { SlideData } from '@/types';
 import { isBotOrCrawler } from '@/utils/isBot';
+import { DESTINATIONS } from '@/data/destinationsData';
 
 interface HeroThumbnailsProps {
   slidesData: SlideData[];
@@ -57,18 +58,21 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
                 aria-label={`View ${getLocalizedText(slide.place, locale) || 'slide'} ${idx + 1}`}
                 className="absolute inset-0 cursor-pointer z-10"
                 onClick={() => {
-                  const placeName = (getLocalizedText(slide.place, 'en') || '').toLowerCase();
-                  let destSlug = 'continental';
-                  if (placeName.includes('galapagos')) destSlug = 'galapagos';
-                  if (placeName.includes('amazon')) destSlug = 'amazon';
-                  
-                  // Si tiene window.__activeSlideIdx y somos el slide activo (o el index 0 si no se ha seteado)
+                  // La tarjeta activa abre la ficha del destino; una inactiva
+                  // primero se trae al frente.
                   const currentActive = (window as any).__activeSlideIdx ?? 0;
-                  if (idx === currentActive || ((window as any).jumpToSlide === undefined && idx === 0)) {
-                     window.location.href = `/${locale}/tours#${destSlug}`;
-                  } else {
-                     (window as any).jumpToSlide?.(idx);
+                  const isActive = idx === currentActive
+                    || ((window as any).jumpToSlide === undefined && idx === 0);
+
+                  if (!isActive) {
+                    (window as any).jumpToSlide?.(idx);
+                    return;
                   }
+
+                  const dest = DESTINATIONS.find((d) => d.heroIndex === idx);
+                  window.location.href = dest
+                    ? `/${locale}/destinos/${dest.slug}`
+                    : `/${locale}/tours`;
                 }}
               />
             </div>

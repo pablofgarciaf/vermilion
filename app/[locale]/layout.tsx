@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getTranslations } from 'next-intl/server';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { CurrencyProvider } from '@/context/CurrencyContext';
+import { LuxuryThemeProvider } from '@/components/providers/LuxuryThemeProvider';
 import '../globals.css';
 import Script from 'next/script';
 import { ConditionalNavbar } from '@/components/layout/ConditionalNavbar';
@@ -269,6 +270,7 @@ export default async function RootLayout({
             </Script>
           )}
 
+          <LuxuryThemeProvider>
           <CurrencyProvider>
             <NextIntlClientProvider messages={messages} locale={locale}>
               <ConditionalNavbar />
@@ -282,6 +284,7 @@ export default async function RootLayout({
               </Suspense>
             </NextIntlClientProvider>
           </CurrencyProvider>
+          </LuxuryThemeProvider>
         </ThemeProvider>
       </body>
     </html>

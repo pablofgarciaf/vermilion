@@ -759,60 +759,127 @@ function filterTours(tours: Tour[], activeFilter: string): Tour[] {
   });
 }
 
+/**
+ * Categoria comercial de un tour. El orden importa: un combinado contiene
+ * "galapagos" en su id, asi que hay que descartarlo antes de clasificarlo
+ * como Galapagos puro.
+ */
+export type TourCategory = 'galapagos' | 'continental' | 'combined' | 'daily';
+
+export function getTourCategory(tour: Tour): TourCategory {
+  const dest = (typeof tour.destination === 'string'
+    ? tour.destination
+    : (tour.destination as any)?.en || (tour.destination as any)?.es || '').toLowerCase();
+  const id = (tour.id || '').toLowerCase();
+  const durationDays = tour.durationDays ?? 0;
+
+  const isDaily = durationDays === 1
+    || id.includes('quito-city') || id.includes('otavalo') || id.includes('papallacta')
+    || id.includes('mindo') || id.includes('antisana') || id.includes('cotopaxi')
+    || id.includes('quilotoa') || dest.includes('full') || dest.includes('daily');
+  if (isDaily) return 'daily';
+
+  const isCombined = id.includes('ecuador-galapagos')
+    || (dest.includes('galapagos') && dest.includes('ecuador'))
+    || dest.includes('combined');
+  if (isCombined) return 'combined';
+
+  if (dest.includes('galapagos') || id.includes('galapagos')) return 'galapagos';
+  return 'continental';
+}
+
+/**
+ * Que categorias puede AÑADIR todavia el cliente, segun lo que ya lleva:
+ *  - Con Galapagos  -> continental + diarios (nunca otro Galapagos ni un combinado)
+ *  - Con continental-> Galapagos + diarios   (nunca otro continental ni un combinado)
+ *  - Con combinado  -> solo diarios (el combinado ya cubre Galapagos y continente)
+ *  - Solo diarios   -> cualquier cosa
+ * Los diarios siempre se pueden sumar.
+ */
+export function getAllowedCategories(selected: Tour[]): Set<TourCategory> {
+  const cats = new Set(selected.map(getTourCategory));
+  const allowed = new Set<TourCategory>(['daily']);
+
+  if (cats.has('combined')) return allowed;
+
+  if (!cats.has('galapagos')) allowed.add('galapagos');
+  if (!cats.has('continental')) allowed.add('continental');
+  // Un combinado solo cabe si aun no hay nada de multi-dia en el carrito
+  if (!cats.has('galapagos') && !cats.has('continental')) allowed.add('combined');
+
+  return allowed;
+}
+
+/** Un tour ya elegido siempre sigue visible (para poder quitarlo). */
+export function isTourSelectable(tour: Tour, selected: Tour[]): boolean {
+  if (selected.some(t => t.id === tour.id)) return true;
+  return getAllowedCategories(selected).has(getTourCategory(tour));
+}
+
 function getComplementarySuggestions(primaryTour: Tour, allTours: Tour[]): { tour: Tour; badge: string; reason: string }[] {
   if (!primaryTour) return [];
-  const pid = (primaryTour.id || '').toLowerCase();
-  
-  if (pid.includes('galapagos')) {
-    // Si viene por Galápagos (ej. 5 o 4 días) -> Complementario 1: Ecuador Continental (Andes/Volcanes) + Complementario 2: Grand Tour Completo 12 Días
-    const continental = allTours.find(t => t.id === 'volcanoes-rivers-8days') || allTours.find(t => t.id === 'andes-amazon-7days') || allTours[3];
-    const grandTour = allTours.find(t => t.id === 'ecuador-galapagos-12days') || allTours.find(t => t.id === 'ecuador-galapagos-11days') || allTours[7];
 
-    return [
-      {
-        tour: continental,
-        badge: '🏔️ Extensión Recomendada (Andes)',
-        reason: 'Combina las Islas Encantadas con la Avenida de los Volcanes y la Amazonía sin duplicar vuelos',
-      },
-      {
-        tour: grandTour,
-        badge: '👑 Upgrade VIP Todo Incluido (12 Días)',
-        reason: 'La gran expedición insignia definitiva que une lo mejor de los Andes y Galápagos',
-      },
-    ].filter(item => item.tour && item.tour.id !== primaryTour.id);
-  } else if (pid.includes('ecuador-galapagos') || pid.includes('12days') || pid.includes('11days')) {
-    // Si ya tiene el Gran Tour Combinado -> Sugerir experiencia boutique de Galápagos y Ruta de Nieve
-    const galapagosSpec = allTours.find(t => t.id === 'galapagos-7days') || allTours.find(t => t.id === 'galapagos-6days') || allTours[1];
-    const andesSpec = allTours.find(t => t.id === 'snow-volcanoes-6days') || allTours[5];
-    return [
-      {
-        tour: galapagosSpec,
-        badge: '🐢 Enfoque Galápagos Exclusivo (7 Días)',
-        reason: 'Dedicado exclusivamente a la fauna endémica marina y navegación entre islotes',
-      },
-      {
-        tour: andesSpec,
-        badge: '🌋 Enfoque Andes & Volcanes (6 Días)',
-        reason: 'Expedición de alta montaña por volcanes activos y haciendas coloniales',
-      },
-    ].filter(item => item.tour && item.tour.id !== primaryTour.id);
+  const allowed = getAllowedCategories([primaryTour]);
+  const pick = (cat: TourCategory, ...ids: string[]): Tour | undefined => {
+    if (!allowed.has(cat)) return undefined;
+    for (const id of ids) {
+      const found = allTours.find(t => t.id === id);
+      if (found && found.id !== primaryTour.id) return found;
+    }
+    return allTours.find(t => t.id !== primaryTour.id && getTourCategory(t) === cat);
+  };
+
+  const category = getTourCategory(primaryTour);
+  const out: { tour?: Tour; badge: string; reason: string }[] = [];
+
+  if (category === 'galapagos') {
+    // Ya tiene las islas: solo cabe el continente y las excursiones de un dia.
+    out.push({
+      tour: pick('continental', 'volcanoes-rivers-8days', 'andes-amazon-7days'),
+      badge: '🏔️ Extension Continental',
+      reason: 'Suma la Avenida de los Volcanes y la Amazonia a tus islas, sin duplicar vuelos ni noches',
+    });
+    out.push({
+      tour: pick('daily'),
+      badge: '🌄 Escapada de un dia',
+      reason: 'Aprovecha tus dias en Quito con una excursion corta antes o despues de volar a las islas',
+    });
+  } else if (category === 'combined') {
+    // El combinado ya cubre islas y continente: solo tours diarios.
+    out.push({
+      tour: pick('daily'),
+      badge: '🌄 Escapada de un dia',
+      reason: 'Tu gran expedicion ya cubre islas y continente; suma una excursion corta en tus dias libres',
+    });
+  } else if (category === 'daily') {
+    // Un tour diario no bloquea nada: se puede construir el viaje completo.
+    out.push({
+      tour: pick('galapagos', 'galapagos-7days', 'galapagos-6days'),
+      badge: '🐢 Expedicion a Galapagos',
+      reason: 'Convierte tu escapada en el viaje de tu vida con las Islas Encantadas',
+    });
+    out.push({
+      tour: pick('combined', 'ecuador-galapagos-12days', 'ecuador-galapagos-11days'),
+      badge: '👑 Gran Expedicion Combinada',
+      reason: 'Andes, Amazonia y Galapagos en un solo itinerario con toda la logistica resuelta',
+    });
   } else {
-    // Tour continental -> Complementario 1: Galápagos 7 días + Complementario 2: Grand Tour 12 Días
-    const galapagos = allTours.find(t => t.id === 'galapagos-7days') || allTours.find(t => t.id === 'galapagos-6days') || allTours[1];
-    const grandTour = allTours.find(t => t.id === 'ecuador-galapagos-12days') || allTours[7];
-    return [
-      {
-        tour: galapagos,
-        badge: '🐢 Extensión Galápagos Imprescindible',
-        reason: 'Suma las Islas Galápagos a tu recorrido andino para vivir el viaje completo',
-      },
-      {
-        tour: grandTour,
-        badge: '👑 Upgrade VIP Todo Incluido (12 Días)',
-        reason: 'Expedición combinada con toda la logística y conexiones aéreas resueltas',
-      },
-    ].filter(item => item.tour && item.tour.id !== primaryTour.id);
+    // Continental: solo faltan las islas y las excursiones de un dia.
+    out.push({
+      tour: pick('galapagos', 'galapagos-7days', 'galapagos-6days'),
+      badge: '🐢 Extension Galapagos',
+      reason: 'Anade las Islas Encantadas a tu recorrido andino para vivir el viaje completo',
+    });
+    out.push({
+      tour: pick('daily'),
+      badge: '🌄 Escapada de un dia',
+      reason: 'Completa tus dias libres en Quito con una excursion corta de alta demanda',
+    });
   }
+
+  return out.filter((i): i is { tour: Tour; badge: string; reason: string } =>
+    Boolean(i.tour) && i.tour!.id !== primaryTour.id
+  );
 }
 
 export function BookingWizard() {
@@ -969,7 +1036,14 @@ export function BookingWizard() {
 
   const primaryTour: Tour = selectedTours[0] || (addTourId ? mockTours.find(t => t.id === addTourId) : null) || mockTours.find(t => t.id === 'galapagos-7days') || mockTours.find(t => t.id === 'galapagos-6days') || mockTours[0];
   const complementarySuggestions = getComplementarySuggestions(primaryTour, mockTours);
-  const candidateTours = mockTours.filter(t => t.id !== primaryTour?.id);
+  // Lo que el cliente lleva hoy: manda la seleccion real; si aun no hay, el principal.
+  const activeSelection: Tour[] = selectedTours.length > 0
+    ? selectedTours
+    : (primaryTour ? [primaryTour] : []);
+  // Solo ofrecemos lo que de verdad puede sumar a su viaje.
+  const candidateTours = mockTours.filter(
+    t => t.id !== primaryTour?.id && isTourSelectable(t, activeSelection)
+  );
   const ci18n = BOOKING_CAROUSEL_I18N[locale] || BOOKING_CAROUSEL_I18N['es'];
 
   const replacePrimaryTour = (newTour: Tour) => {
@@ -1126,7 +1200,7 @@ export function BookingWizard() {
     return { label: `${w.proceedPayment || 'Proceed to Payment'} - $${pricing.total.toLocaleString('en-US')} USD`, ref: null, ready: true };
   };
   const mobileCTA = getMobileCTA();
-  const filteredTours = filterTours(mockTours, activeFilter);
+  const filteredTours = filterTours(mockTours, activeFilter).filter(t => isTourSelectable(t, activeSelection));
   const searchedTours = filteredTours.filter((t) => {
     if (!tourSearchQuery.trim()) return true;
     const q = tourSearchQuery.toLowerCase().trim();

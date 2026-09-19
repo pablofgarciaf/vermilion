@@ -243,7 +243,7 @@ export function PriceCalculator({
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 sm:p-8 border border-zinc-200/90 dark:border-zinc-800 shadow-xl sticky top-28">
+    <div className="lux-panel bg-white dark:bg-zinc-900 rounded-3xl p-6 sm:p-8 border border-zinc-200/90 dark:border-zinc-800 shadow-xl sticky top-28">
       <h3 className="font-serif text-xl font-bold text-zinc-900 dark:text-white mb-6">
         {t.summaryTitle}
       </h3>
@@ -340,7 +340,7 @@ export function PriceCalculator({
           <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-wider mb-1">{t.totalToPay}</p>
           <div className="flex items-center gap-1">
             <span className="text-sm font-semibold text-zinc-400">USD</span>
-            <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
+            <span className="lux-amount text-3xl font-bold text-emerald-600 dark:text-emerald-400">
               ${formatAmount(finalPayableTotal)}
             </span>
           </div>

@@ -6,7 +6,6 @@ import { getToursFromFirestore, getTourByIdFromFirestore } from '@/lib/tours';
 import { TourGallery } from '@/components/tours/TourGallery';
 import { TourItinerary } from '@/components/tours/TourItinerary';
 import { TourSubNav } from '@/components/tours/TourSubNav';
-import { LuxuryThemeProvider } from '@/components/providers/LuxuryThemeProvider';
 import dynamic from 'next/dynamic';
 const TripAdvisorReviews = dynamic(
   () => import('@/components/home/TripAdvisorReviews').then(mod => mod.TripAdvisorReviews),
@@ -294,7 +293,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
   };
 
   return (
-    <LuxuryThemeProvider>
+    <>
       <TourSubNav title={title} duration={duration} tour={tour} locale={locale} />
 
       {/* Padding superior ampliado para evitar solapamiento con el navbar */}
@@ -515,6 +514,6 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
 
         </div>
       </div>
-    </LuxuryThemeProvider>
+    </>
   );
 }
