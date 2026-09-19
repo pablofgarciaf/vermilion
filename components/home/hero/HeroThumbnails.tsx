@@ -55,20 +55,6 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
 
               <div className="card-overlay absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none transition-opacity duration-300" />
 
-              {/* Etiqueta que vive DENTRO de la foto de la tarjeta pequena. La
-                  version grande usa .card-content (fuera del recorte); esta se
-                  esconde cuando la tarjeta es la activa para no duplicar texto. */}
-              {idx !== 0 && (
-                <div className="thumb-label absolute inset-x-0 bottom-0 p-2.5 pointer-events-none z-[5] transition-opacity duration-300">
-                  <span className="block text-[10px] font-oswald font-semibold tracking-wider uppercase leading-tight text-white/95 drop-shadow-lg line-clamp-1">
-                    {getLocalizedText(slide.place, locale)}
-                  </span>
-                  <p className="text-[11px] font-oswald font-bold tracking-wide uppercase text-emerald-300 drop-shadow line-clamp-2 mt-0.5 leading-tight">
-                    {getLocalizedText(slide.title, locale)}
-                  </p>
-                </div>
-              )}
-
               <button
                 type="button"
                 aria-label={`View ${getLocalizedText(slide.place, locale) || 'slide'} ${idx + 1}`}
