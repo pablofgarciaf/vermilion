@@ -22,19 +22,46 @@ function findDestination(slug: string): Destination | undefined {
   return DESTINATIONS.find((d) => d.slug === slug);
 }
 
-/** Tours cuyo destino o titulo coincide con las palabras clave de este lugar. */
+/**
+ * Tours que visitan este lugar, ordenados por lo protagonista que es el destino
+ * dentro del viaje. Un tour que lo lleva en el titulo pesa mas que uno que solo
+ * lo menciona de paso en un dia del itinerario. Se muestran los seis mejores.
+ */
 function toursForDestination(dest: Destination) {
-  return mockTours.filter((tour) => {
-    const haystack = [
-      typeof tour.destination === 'string' ? tour.destination : '',
-      getLocalizedText(tour.title, 'es'),
-      getLocalizedText(tour.title, 'en'),
-      tour.id,
-    ]
-      .join(' ')
-      .toLowerCase();
-    return dest.tourKeywords.some((k) => haystack.includes(k.toLowerCase()));
-  });
+  const claves = dest.tourKeywords.map((k) => k.toLowerCase());
+
+  const puntuados = mockTours
+    .map((tour) => {
+      const titulo = [
+        getLocalizedText(tour.title, 'es'),
+        getLocalizedText(tour.title, 'en'),
+        tour.id,
+      ]
+        .join(' ')
+        .toLowerCase();
+      const destino = (typeof tour.destination === 'string' ? tour.destination : '').toLowerCase();
+      const itinerario = (tour.itinerary || [])
+        .flatMap((d) => [
+          getLocalizedText(d.title, 'es'),
+          getLocalizedText(d.title, 'en'),
+          getLocalizedText(d.description, 'es'),
+        ])
+        .concat((tour.highlights || []).map((h) => getLocalizedText(h, 'es')))
+        .join(' ')
+        .toLowerCase();
+
+      let score = 0;
+      for (const k of claves) {
+        if (titulo.includes(k)) score += 10;
+        else if (destino.includes(k)) score += 4;
+        else if (itinerario.includes(k)) score += 1;
+      }
+      return { tour, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score || (a.tour.durationDays ?? 0) - (b.tour.durationDays ?? 0));
+
+  return puntuados.slice(0, 6).map((x) => x.tour);
 }
 
 export async function generateMetadata({
