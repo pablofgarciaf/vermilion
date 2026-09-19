@@ -20,7 +20,7 @@ async function main() {
   const auth = getAuth(app);
   
   const email = process.env.ADMIN_EMAIL || 'admin@vermilionroutes.com';
-  const password = process.env.ADMIN_PASSWORD || 'Vermilion2026*';
+  const password = process.env.ADMIN_PASSWORD || '';
   console.log('🔐 Authenticating as admin:', email);
   const userCred = await signInWithEmailAndPassword(auth, email, password);
   console.log('✅ Authenticated successfully! UID:', userCred.user.uid);

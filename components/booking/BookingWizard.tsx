@@ -1224,13 +1224,25 @@ export function BookingWizard() {
                         {getLocalizedText(primaryTour.description, locale)}
                       </p>
                     </div>
-                    <div className="sm:text-right shrink-0">
-                      <span className="text-[10px] text-zinc-400 block uppercase tracking-wider">{w.startingFrom}</span>
-                      <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 dark:text-emerald-400" suppressHydrationWarning>
-                        ${primaryTour.price.toLocaleString('en-US')} USD
-                      </span>
-                      <span className="text-[10px] text-zinc-400 block">{w.perTraveler}</span>
-                    </div>
+                    {(() => {
+                      const isDaily = primaryTour.durationDays === 1;
+                      const activeUnitPrice = (selectedTier === 'vip' || isLuxury) && !isDaily
+                        ? (primaryTour.price4Star || Math.round((primaryTour.price3Star || primaryTour.price || 1050) * 1.2))
+                        : (primaryTour.price3Star || primaryTour.price || 1050);
+                      const tierLabel = (selectedTier === 'vip' || isLuxury) && !isDaily
+                        ? (locale === 'es' ? 'INVERSIÓN VIP' : (locale === 'zh' ? '尊享贵宾套餐' : (locale === 'fr' ? 'TARIF VIP' : (locale === 'de' ? 'VIP-TARIF' : 'VIP TIER'))))
+                        : w.startingFrom;
+
+                      return (
+                        <div className="sm:text-right shrink-0">
+                          <span className="text-[10px] text-zinc-400 block uppercase tracking-wider">{tierLabel}</span>
+                          <span className="text-xl sm:text-2xl font-extrabold text-emerald-600 dark:text-emerald-400" suppressHydrationWarning>
+                            ${activeUnitPrice.toLocaleString('en-US')} USD
+                          </span>
+                          <span className="text-[10px] text-zinc-400 block">{w.perTraveler}</span>
+                        </div>
+                      );
+                    })()}
                   </div>
 
                   <div className="pt-3 border-t border-emerald-200/60 dark:border-emerald-800/40 flex flex-wrap items-center justify-between gap-2.5">
@@ -1551,70 +1563,71 @@ export function BookingWizard() {
 
             <hr className="border-zinc-100 dark:border-zinc-800 my-6" />
 
-            {/* Step 4: Date (Full width) */}
-            <div ref={dateRef} className="mb-6">
-              <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
-                <CalendarDays className="w-5 h-5 text-emerald-600" />
-                <span>
-                  {locale === 'es' ? '4. ¿Cuándo deseas viajar?' : (locale === 'zh' ? '4. 您计划何时出行？' : (locale === 'fr' ? '4. Quand souhaitez-vous partir ?' : (locale === 'de' ? '4. Wann möchten Sie reisen?' : (locale === 'it' ? '4. Quando desideri viaggiare?' : (locale === 'pt' ? '4. Quando deseja viajar?' : (locale === 'ja' ? '4. ご希望の出発時期' : '4. When are you traveling?'))))))}
-                </span>
-              </h3>
-              <div className="max-w-xl">
-                <TravelDatePicker selectedDate={date} onDateSelect={(d) => setDate(d)} durationDays={selectedTours.reduce((max, t) => Math.max(max, t.durationDays || 1), 1)} />
-              </div>
-            </div>
-
-            <hr className="border-zinc-100 dark:border-zinc-800 my-6" />
-
-            {/* Step 5: Contact form (Full width) */}
-            <div ref={contactRef} className="mb-4">
-              <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-3 flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                <span>
-                  {locale === 'es' ? '5. Tus Datos de Contacto' : (locale === 'zh' ? '5. 您的联系信息' : (locale === 'fr' ? '5. Vos Coordonnées' : (locale === 'de' ? '5. Ihre Kontaktdaten' : (locale === 'it' ? '5. I Tuoi Dati di Contatto' : (locale === 'pt' ? '5. Seus Dados de Contato' : (locale === 'ja' ? '5. お客様情報' : '5. Your Contact Details'))))))}
-                </span>
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label htmlFor="booking-name" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{w.fullName}</label>
-                  <input
-                    id="booking-name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    autoCapitalize="words"
-                    value={contactInfo.name}
-                    onChange={(e) => handleContactChange('name', e.target.value)}
-                    placeholder={w.fullNamePlaceholder}
-                    className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label htmlFor="booking-email" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{w.email}</label>
-                  <input
-                    id="booking-email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    inputMode="email"
-                    value={contactInfo.email}
-                    onChange={(e) => handleContactChange('email', e.target.value)}
-                    placeholder="tu@email.com"
-                    className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                  />
+            {/* Step 4: Date & Step 5: Contact side-by-side on desktop, stacked on mobile */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6 items-start">
+              {/* Step 4: Date */}
+              <div ref={dateRef} className="space-y-3">
+                <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+                  <CalendarDays className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <span>
+                    {locale === 'es' ? '4. ¿Cuándo deseas viajar?' : (locale === 'zh' ? '4. 您计划何时出行？' : (locale === 'fr' ? '4. Quand souhaitez-vous partir ?' : (locale === 'de' ? '4. Wann möchten Sie reisen?' : (locale === 'it' ? '4. Quando desideri viaggiare?' : (locale === 'pt' ? '4. Quando deseja viajar?' : (locale === 'ja' ? '4. ご希望の出発時期' : '4. When are you traveling?'))))))}
+                  </span>
+                </h3>
+                <div className="w-full">
+                  <TravelDatePicker selectedDate={date} onDateSelect={(d) => setDate(d)} durationDays={selectedTours.reduce((max, t) => Math.max(max, t.durationDays || 1), 1)} />
                 </div>
               </div>
-              <div className="space-y-1 mt-4">
-                <label htmlFor="booking-notes" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{w.specialRequests}</label>
-                <textarea
-                  id="booking-notes"
-                  name="notes"
-                  rows={2}
-                  value={contactInfo.notes}
-                  onChange={(e) => handleContactChange('notes', e.target.value)}
-                  placeholder={w.specialRequestsPlaceholder}
-                  className="w-full bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
-                />
+
+              {/* Step 5: Contact form */}
+              <div ref={contactRef} className="space-y-3">
+                <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <span>
+                    {locale === 'es' ? '5. Tus Datos de Contacto' : (locale === 'zh' ? '5. 您的联系信息' : (locale === 'fr' ? '5. Vos Coordonnées' : (locale === 'de' ? '5. Ihre Kontaktdaten' : (locale === 'it' ? '5. I Tuoi Dati di Contatto' : (locale === 'pt' ? '5. Seus Dados de Contato' : (locale === 'ja' ? '5. お客様情報' : '5. Your Contact Details'))))))}
+                  </span>
+                </h3>
+                <div className="space-y-3 bg-zinc-50/60 dark:bg-zinc-900/40 p-4 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800">
+                  <div className="space-y-1">
+                    <label htmlFor="booking-name" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{w.fullName}</label>
+                    <input
+                      id="booking-name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      autoCapitalize="words"
+                      value={contactInfo.name}
+                      onChange={(e) => handleContactChange('name', e.target.value)}
+                      placeholder={w.fullNamePlaceholder}
+                      className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label htmlFor="booking-email" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{w.email}</label>
+                    <input
+                      id="booking-email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      inputMode="email"
+                      value={contactInfo.email}
+                      onChange={(e) => handleContactChange('email', e.target.value)}
+                      placeholder="tu@email.com"
+                      className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label htmlFor="booking-notes" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{w.specialRequests}</label>
+                    <textarea
+                      id="booking-notes"
+                      name="notes"
+                      rows={3}
+                      value={contactInfo.notes}
+                      onChange={(e) => handleContactChange('notes', e.target.value)}
+                      placeholder={w.specialRequestsPlaceholder}
+                      className="w-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1735,6 +1748,7 @@ export function BookingWizard() {
             tours={selectedTours}
             pricing={pricing}
             date={date}
+            tier={selectedTier === 'vip' || isLuxury ? 'vip' : 'standard'}
             contactInfo={{
               ...contactInfo,
               name: contactInfo.name || (typeof document !== 'undefined' ? (document.getElementById('booking-name') as HTMLInputElement)?.value || '' : ''),

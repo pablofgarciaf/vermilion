@@ -61,79 +61,7 @@ const INITIAL_USERS: SystemUser[] = [
   },
 ];
 
-const INITIAL_LEADS: CrmLead[] = [
-  {
-    id: 'lead-101',
-    customerName: 'Pablo Fabricio García Flores',
-    customerEmail: 'pablofgarciaf@gmail.com',
-    customerPhone: '+593 99 404 8458',
-    country: 'Ecuador',
-    destination: 'Galapagos',
-    passengersCount: 2,
-    estimatedBudget: 1500,
-    travelDates: '18 Sep - 22 Sep 2026',
-    status: 'negotiation',
-    assignedOperatorId: 'info@vermilionroutes.com',
-    assignedOperatorName: 'Jairo Ludeña',
-    notes: 'Reserva confirmada en web. Interés en tour Galápagos Magia 6 Días + extensión.',
-    source: 'affiliate_referral',
-    affiliateReferralCode: 'pablo.g',
-    passengerDetails: {
-      fullName: 'Pablo Fabricio García Flores',
-      passportNumber: '1721790721',
-      nationality: 'Ecuatoriana',
-      dietaryRestrictions: 'Ninguna',
-      fitnessLevel: 'activo',
-      hatSize: '58 (M)',
-    },
-    createdAt: '2026-09-08T10:00:00.000Z',
-    updatedAt: '2026-09-08T14:00:00.000Z',
-  },
-  {
-    id: 'lead-102',
-    customerName: 'Jairo Ludeña / Coral Tour Madrid',
-    customerEmail: 'info@vermilionroutes.com',
-    customerPhone: '+593 96 003 9156',
-    country: 'España',
-    destination: 'Galapagos & Andes',
-    passengersCount: 4,
-    estimatedBudget: 4760,
-    travelDates: '05 Oct - 17 Oct 2026',
-    status: 'itinerary_sent',
-    assignedOperatorId: 'info@vermilionroutes.com',
-    assignedOperatorName: 'Jairo Ludeña',
-    notes: 'Expedición privada Grand Tour 12 días para grupo VIP desde Madrid.',
-    source: 'landing_popup',
-    passengerDetails: {
-      fullName: 'Jairo Ludeña',
-      nationality: 'Española / Ecuatoriana',
-      dietaryRestrictions: 'Ninguna',
-      fitnessLevel: 'activo',
-      hatSize: '58 (M)',
-    },
-    createdAt: '2026-09-07T08:15:00.000Z',
-    updatedAt: '2026-09-08T12:00:00.000Z',
-  },
-  {
-    id: 'lead-103',
-    customerName: 'Medardo Sánchez',
-    customerEmail: 'gsanchez@plustelesmart.com.ec',
-    customerPhone: '+1 (786) 555-0199',
-    country: 'Estados Unidos',
-    destination: 'Andes & Volcanes Luxury',
-    passengersCount: 2,
-    estimatedBudget: 2400,
-    travelDates: '15 Nov - 22 Nov 2026',
-    status: 'new',
-    assignedOperatorId: 'info@vermilionroutes.com',
-    assignedOperatorName: 'Jairo Ludeña',
-    notes: 'Coordinando pago vía transferencia bancaria Citibank USA / Zelle.',
-    source: 'affiliate_referral',
-    affiliateReferralCode: 'ing.pablo',
-    createdAt: '2026-09-08T09:00:00.000Z',
-    updatedAt: '2026-09-08T09:00:00.000Z',
-  },
-];
+const INITIAL_LEADS: CrmLead[] = [];
 
 const INITIAL_BOOKINGS: CrmBooking[] = [];
 
@@ -286,6 +214,8 @@ export function useCrmData() {
               });
             });
             setLeads(list);
+          } else {
+            setLeads([]);
           }
         }, (err) => console.warn('[useCrmData] leads notice:', err.message));
 
@@ -359,9 +289,9 @@ export function useCrmData() {
               list.push(normalized);
             });
             list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-            if (list.length > 0) {
-              setBookings(list);
-            }
+            setBookings(list);
+          } else {
+            setBookings([]);
           }
         }, (err) => console.warn('[useCrmData] bookings notice:', err.message));
 

@@ -34,26 +34,6 @@ export function AdminLoginForm() {
 
     const targetEmail = (email || '').trim().toLowerCase();
     const targetPassword = (password || '').trim();
-    const masterEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'admin@vermilionroutes.com').trim().toLowerCase();
-    const masterPassword = (process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'Vermilion2026*').trim();
-
-    // Fast check for master credentials (with or without trailing asterisk)
-    const isMasterEmail = targetEmail === masterEmail || targetEmail === 'admin@vermilionroutes.com';
-    const isMasterPass = targetPassword === masterPassword || targetPassword === 'Vermilion2026' || targetPassword === 'Vermilion2026*';
-
-    if (isMasterEmail && isMasterPass) {
-      try {
-        if (auth) {
-          await signInWithEmailAndPassword(auth, 'admin@vermilionroutes.com', 'Vermilion2026*');
-        }
-      } catch (e) {
-        console.warn('Firebase master auth note:', e);
-      }
-      localStorage.setItem('vermilion_admin_session', 'true');
-      window.dispatchEvent(new Event('storage'));
-      window.location.reload();
-      return;
-    }
 
     try {
       console.log('🕵️‍♂️ [CHISMOSO ADMIN LOGIN] Autenticando en Firebase Auth:', targetEmail);
@@ -61,6 +41,7 @@ export function AdminLoginForm() {
       const loggedEmail = cred.user.email?.toLowerCase().trim();
       console.log('🕵️‍♂️ [CHISMOSO ADMIN LOGIN] Firebase Auth exitoso para:', loggedEmail);
 
+      const masterEmail = (process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'admin@vermilionroutes.com').trim().toLowerCase();
       // Los fundadores tienen pase directo garantizado como Super Admins
       const isFounder =
         loggedEmail === 'pablofgarciaf@gmail.com' ||
