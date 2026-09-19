@@ -26,8 +26,8 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
     let detailsEven = true;
     let offsetTop = 200;
     let offsetLeft = 700;
-    const cardWidth = 180;
-    const cardHeight = 260;
+    const cardWidth = 144;
+    const cardHeight = 208;
     const gap = 20;
     const numberSize = 50;
     const ease = "sine.inOut";

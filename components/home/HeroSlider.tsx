@@ -127,8 +127,6 @@ export function HeroSlider() {
         <HeroActions
           exploreLabel={getExploreLabel()}
           planLabel={getPlanLabel()}
-          destinationHref={activeDestination ? `/${locale}/destinations/${activeDestination.slug}` : undefined}
-          destinationLabel={getDestinationLabel()}
         />
 
         {/* 3. Thumbnail Cards Carousel */}

@@ -105,7 +105,7 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
       />
 
       {/* 🎨 GRADIENTE LIGERO Y LIMPIO (Solo en la base inferior para leer el texto sin oscurecer la foto) */}
-      <div className="absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-black/95 via-black/50 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-black/95 via-black/70 to-transparent pointer-events-none" />
 
       {/* 🏷️ BADGES SUPERIORES (Destino + Bestseller) */}
       <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-10">
@@ -147,7 +147,7 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
         </div>
 
         {/* Título Principal */}
-        <h3 className="font-serif font-bold text-lg sm:text-xl text-white group-hover:text-emerald-200 transition-colors drop-shadow-md line-clamp-2 leading-snug">
+        <h3 className="font-serif font-bold text-lg sm:text-xl text-white group-hover:text-emerald-200 transition-colors line-clamp-2 leading-snug [text-shadow:0_2px_10px_rgba(0,0,0,0.85)]">
           {title}
         </h3>
 
@@ -158,7 +158,7 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
               {cardTexts.from}
             </span>
             <div className="flex items-baseline gap-1">
-              <span className="font-serif font-bold text-2xl text-white drop-shadow-sm">
+              <span className="font-serif font-bold text-2xl text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.85)]">
                 ${tour.price.toLocaleString('en-US')}
               </span>
               <span className="text-xs text-white/70 font-normal">

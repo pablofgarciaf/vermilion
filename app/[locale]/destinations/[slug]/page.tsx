@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { MapPin, Mountain, Leaf, Info, ArrowRight, Sparkles, BookOpen } from 'lucide-react';
+import { MapPin, Mountain, Leaf, Info, ArrowRight, Sparkles, BookOpen, ImageIcon } from 'lucide-react';
 
 import { DESTINATIONS, DESTINATION_UI, INSIDER_TIPS, Destination } from '@/data/destinationsData';
 import { mockTours } from '@/data/mock';
@@ -180,6 +180,30 @@ export default async function DestinationPage({
             {t(dest.intro as any)}
           </p>
         </section>
+
+        {/* GALERIA DE FOTOS DEL LUGAR */}
+        {dest.gallery && dest.gallery.length > 0 && (
+          <section>
+            <h2 className="flex items-center gap-2 font-serif text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-6">
+              <ImageIcon className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+              {locale === 'es' ? 'Galería del destino' : 'Destination gallery'}
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              {dest.gallery.map((img, i) => (
+                <div key={i} className="relative aspect-[4/3] rounded-2xl overflow-hidden group">
+                  <Image
+                    src={img}
+                    alt={`${name} ${i + 1}`}
+                    fill
+                    quality={90}
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* QUE VAS A VER */}
         <section>
