@@ -48,3 +48,9 @@ next-env.d.ts
 scratch/
 .agents/
 skills-lock.json
+
+# Scratch & Temporary data
+data/_*
+*.bak
+*-opt.webp
+

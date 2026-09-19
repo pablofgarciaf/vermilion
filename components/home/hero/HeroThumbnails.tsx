@@ -33,7 +33,8 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
                   fill
                   priority={idx === 0}
                   fetchPriority={idx === 0 ? "high" : "auto"}
-                  quality={90}
+                  quality={95}
+                  unoptimized={idx === 0}
                   className="object-cover object-center md:hidden"
                   sizes="100vw"
                 />
@@ -46,7 +47,8 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
                 fill
                 priority={idx === 0}
                 fetchPriority={idx === 0 ? "high" : "auto"}
-                quality={90}
+                quality={95}
+                unoptimized={idx === 0}
                 className={`object-cover object-top ${slide.mobileImage ? 'hidden md:block' : 'block'}`}
                 sizes="100vw"
               />

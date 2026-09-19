@@ -80,7 +80,8 @@ export function SplashScreen() {
         priority
         loading="eager"
         fetchPriority="high"
-        quality={85}
+        quality={95}
+        unoptimized
         sizes="100vw"
         className="object-cover scale-[1.03] transition-transform duration-[5000ms] ease-out"
       />
