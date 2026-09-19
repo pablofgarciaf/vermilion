@@ -3,11 +3,12 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { MapPin, Mountain, Award, CalendarDays, Leaf, Info, ArrowRight, Sparkles } from 'lucide-react';
+import { MapPin, Mountain, Leaf, Info, ArrowRight, Sparkles, BookOpen } from 'lucide-react';
 
 import { DESTINATIONS, DESTINATION_UI, INSIDER_TIPS, Destination } from '@/data/destinationsData';
 import { mockTours } from '@/data/mock';
 import { TourCarousel } from '@/components/home/TourCarousel';
+import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getSeoAlternates, BASE_CANONICAL_URL, SUPPORTED_SEO_LOCALES } from '@/utils/seoHelper';
 
@@ -107,6 +108,7 @@ export default async function DestinationPage({
   const name = t(dest.name as any);
   const tours = toursForDestination(dest);
   const insider = INSIDER_TIPS[dest.slug];
+  const relatedPosts = BLOG_POSTS.filter((p) => (dest.relatedPosts || []).includes(p.slug));
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -257,6 +259,44 @@ export default async function DestinationPage({
             </div>
           )}
         </section>
+        {/* LECTURAS SOBRE ESTE DESTINO */}
+        {relatedPosts.length > 0 && (
+          <section>
+            <h2 className="flex items-center gap-2 font-serif text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-6">
+              <BookOpen className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
+              {locale === 'es' ? 'Lee más sobre este destino' : 'Read more about this destination'}
+            </h2>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {relatedPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/${locale}/blog/${post.slug}`}
+                  className="group flex gap-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 hover:shadow-lg transition-shadow"
+                >
+                  <div className="relative w-24 h-24 shrink-0 rounded-xl overflow-hidden">
+                    <Image
+                      src={post.imageUrl}
+                      alt={getLocalizedText(post.title, locale)}
+                      fill
+                      quality={85}
+                      sizes="96px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-zinc-900 dark:text-white leading-snug mb-1 line-clamp-2">
+                      {getLocalizedText(post.title, locale)}
+                    </h3>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                      {getLocalizedText(post.excerpt, locale)}
+                    </p>
+                    <span className="mt-2 inline-block text-xs text-zinc-500">{post.readTime}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </>
   );

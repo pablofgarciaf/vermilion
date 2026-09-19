@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { BLOG_POSTS, BlogPost } from '@/data/blogData';
+import { DESTINATIONS, Destination } from '@/data/destinationsData';
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getSeoAlternates } from '@/utils/seoHelper';
@@ -845,6 +846,33 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           destinationName={destinationName}
           locale={locale}
         />
+
+        {/* Destinos que trata este articulo: enlace inverso para que el
+            articulo y la ficha del lugar se refuercen en buscadores. */}
+        {(() => {
+          const destinos: Destination[] = DESTINATIONS.filter((d) =>
+            (d.relatedPosts || []).includes(slug)
+          );
+          if (destinos.length === 0) return null;
+          return (
+            <div className="my-10 rounded-2xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50 dark:bg-emerald-950/25 p-6">
+              <h2 className="font-serif text-xl font-bold text-emerald-900 dark:text-emerald-200 mb-4">
+                {locale === 'es' ? 'Destinos de este artículo' : 'Destinations in this article'}
+              </h2>
+              <div className="flex flex-wrap gap-3">
+                {destinos.map((d) => (
+                  <Link
+                    key={d.slug}
+                    href={`/${locale}/destinos/${d.slug}`}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-emerald-300 dark:border-emerald-800 text-sm font-semibold text-emerald-800 dark:text-emerald-200 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors"
+                  >
+                    {getLocalizedText(d.name, locale)}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
 
         {/* Lead Magnet: Free Packing Guide Download */}
         <LeadMagnetBanner />

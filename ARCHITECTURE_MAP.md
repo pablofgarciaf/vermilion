@@ -1245,3 +1245,44 @@ Vermilion Routes implementa un modelo de comisiones de dos vertientes:
 3. **Negociación Automática de Idioma en el Edge ([`proxy.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/proxy.ts)):**
    - `next-intl` middleware analiza la cabecera `Accept-Language` del navegador (ej. `fr-FR` de usuarios en Francia) y redirige automáticamente hacia `/{locale}` en el primer impacto de carga.
 
+
+---
+
+## Módulo Público: Fichas de Destino (`/[locale]/destinos/[slug]`)
+
+Páginas de destino indexables, una por lugar, en los 8 idiomas. Existen para
+captar la búsqueda de quien aún no sabe qué tour quiere ("qué ver en el
+Quilotoa") y llevarlo al producto, algo que el listado de tours no hace.
+
+### Dónde está cada cosa
+
+| Qué | Archivo | Notas |
+| :-- | :-- | :-- |
+| Datos de los 14 destinos | `data/destinationsData.ts` | `DESTINATIONS` (fichas), `DESTINATION_UI` (etiquetas de interfaz, una sola vez para todos), `INSIDER_TIPS` (experiencia propia de la casa) |
+| Página | `app/[locale]/destinos/[slug]/page.tsx` | Estática: `generateStaticParams` cruza 8 idiomas × 14 destinos |
+| Entrada desde el hero | `components/home/hero/HeroThumbnails.tsx` | La tarjeta activa enlaza por `heroIndex` |
+| Botón "Conoce este destino" | `components/home/hero/HeroActions.tsx` | Recibe el destino activo desde `HeroSlider` |
+| Aviso de cambio de diapositiva | `components/home/hero/useHeroSliderAnimation.ts` | Emite el evento `hero-slide-change` con el índice activo |
+
+### Reglas de los datos
+
+Los valores duros (altitud, año UNESCO, distancias) son neutros al idioma y se
+escriben una sola vez dentro del texto; solo se traduce la prosa. Las etiquetas
+de interfaz viven en `DESTINATION_UI`, no repetidas por destino.
+
+`heroIndex` es opcional: solo lo tienen los 10 destinos que salen en el hero.
+`needsPhoto: true` marca los que aún usan una foto prestada y esperan una
+imagen propia — hoy Papallacta y Antisana.
+
+### Cómo se emparejan los tours
+
+`toursForDestination` puntúa cada tour según dónde aparece el destino: 10 si
+está en el título, 4 si está en el campo destino, 1 si solo se menciona en un
+día del itinerario. Muestra los seis mejores en el carrusel `TourCarousel` con
+`showFilters={false}`, porque la lista ya viene acotada.
+
+### Relación con el blog
+
+`relatedPosts` enlaza cada destino con los artículos que hablan de él, y el
+artículo enlaza de vuelta a sus destinos. Se enlazan en lugar de fusionarlos
+para que ambos se refuercen en buscadores en vez de competir entre sí.
