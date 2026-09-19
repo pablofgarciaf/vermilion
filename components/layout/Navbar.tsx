@@ -221,7 +221,7 @@ export function Navbar() {
           <Link href={`/${locale}`} aria-label="Vermilion Routes Inicio" className="flex items-center gap-3 relative z-10 group notranslate">
             <div className="relative w-[165px] h-[40px] sm:w-[180px] sm:h-[45px] md:w-[220px] md:h-[55px] shrink-0">
               {/* Light Mode Logo (dark letters for light background) */}
-              <Image
+              <Image quality={95}
                 src="/logo_inicio.png"
                 alt="Vermilion Routes"
                 width={220}
@@ -230,7 +230,7 @@ export function Navbar() {
                 priority
               />
               {/* Dark Mode Logo (white letters for dark background) */}
-              <Image
+              <Image quality={95}
                 src="/logo_blanco.png"
                 alt="Vermilion Routes"
                 width={220}

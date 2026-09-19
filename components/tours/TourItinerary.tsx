@@ -246,7 +246,7 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
           {/* Fotografía Cinemática */}
           {(currentItem.image || (currentItem.images && currentItem.images.length > 0)) && (
             <div className="lg:col-span-5 relative rounded-2xl overflow-hidden aspect-[4/3] bg-zinc-100 dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 shadow-xl group">
-              <Image
+              <Image quality={90}
                 src={currentItem.image || (currentItem.images && currentItem.images[0]) || ''}
                 alt={dayTitle}
                 fill

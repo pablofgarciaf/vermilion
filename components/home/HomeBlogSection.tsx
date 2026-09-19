@@ -295,7 +295,7 @@ export function HomeBlogSection() {
               className={`group relative rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800 hover:border-emerald-500 transition-all flex-col shadow-lg ${idx >= 2 ? 'hidden sm:flex' : 'flex'}`}
             >
               <div className="relative h-36 w-full overflow-hidden">
-                <Image
+                <Image quality={85}
                   src={vid.thumb}
                   alt={getLocalizedText(vid.title, locale)}
                   fill

@@ -149,7 +149,7 @@ export function AboutGallerySection({ locale }: AboutGallerySectionProps) {
             }}
             className={`group relative rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-emerald-500/60 transition-all cursor-pointer shadow-xl ${photo.aspect}`}
           >
-            <Image
+            <Image quality={90}
               src={photo.src}
               alt={photo.title}
               fill

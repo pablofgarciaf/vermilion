@@ -333,7 +333,7 @@ export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
                 <div className="pt-2 flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <div className="relative w-8 h-8 rounded-full overflow-hidden border border-emerald-600/40 shrink-0">
-                      <Image src={featuredPost.author.avatar} alt={featuredPost.author.name} width={32} height={32} className="w-full h-full object-cover" />
+                      <Image quality={85} src={featuredPost.author.avatar} alt={featuredPost.author.name} width={32} height={32} className="w-full h-full object-cover" />
                     </div>
                     <div className="text-left">
                       <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-200">{featuredPost.author.name}</p>
@@ -435,7 +435,7 @@ export function BlogIndexClient({ hideHeader = false }: BlogIndexClientProps) {
                 <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
                     <div className="relative w-6 h-6 rounded-full overflow-hidden border border-emerald-600/30 shrink-0">
-                      <Image src={post.author.avatar} alt={post.author.name} width={24} height={24} className="w-full h-full object-cover" />
+                      <Image quality={85} src={post.author.avatar} alt={post.author.name} width={24} height={24} className="w-full h-full object-cover" />
                     </div>
                     <span className="text-zinc-700 dark:text-zinc-300 font-medium text-[11px]">{post.author.name}</span>
                   </div>

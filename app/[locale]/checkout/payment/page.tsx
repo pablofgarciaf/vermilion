@@ -1341,7 +1341,7 @@ export default function CheckoutPaymentPage() {
                         {previewUrl ? (
                           <div className="space-y-2">
                             <div className="relative w-28 h-20 mx-auto rounded-lg overflow-hidden border border-stone-300 dark:border-zinc-700">
-                              <Image src={previewUrl} alt="Receipt Preview" fill className="object-cover" />
+                              <Image src={previewUrl} alt="Receipt Preview" fill sizes="112px" className="object-cover" />
                             </div>
                             <p className="text-emerald-700 dark:text-emerald-400 font-medium text-xs">
                               {bankReceipt?.name} ({Math.round((bankReceipt?.size || 0) / 1024)} KB)

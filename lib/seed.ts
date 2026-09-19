@@ -67,8 +67,8 @@ export const defaultSettings = {
         title: 'CRATER LAGOON',
         title2: 'OF QUILOTOA',
         description: 'Marvel at the striking turquoise waters inside an ancient volcanic caldera located at 3,500 meters altitude with panoramic views of the western Andes range.',
-        image: '/images/tours/16-9/quilotoa-16-9.jpg',
-        desktopImage: '/images/tours/16-9/quilotoa-16-9.jpg',
+        image: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
+        desktopImage: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
         mobileImage: '/images/tours/9-16/quilotoa-9-16.jpg'
       },
       {

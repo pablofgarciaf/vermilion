@@ -212,10 +212,11 @@ export function SmartSearch({ onSearchSelect }: SmartSearchProps) {
                     className="flex items-center gap-3.5 p-3 rounded-2xl hover:bg-emerald-50/70 border border-transparent hover:border-emerald-200 transition-all group text-left cursor-pointer w-full outline-none"
                   >
                     <div className="relative w-16 h-16 rounded-xl overflow-hidden shrink-0 shadow-sm">
-                      <Image
+                      <Image quality={90}
                         src={tour.mainImage || tour.imageUrl}
                         alt={tour.title}
                         fill
+                        sizes="64px"
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
                         referrerPolicy="no-referrer"
                       />

@@ -107,7 +107,7 @@ export function BlogAuthorBio({ locale = 'en' }: BlogAuthorBioProps) {
         {/* Avatar with Verified Badge */}
         <div className="relative shrink-0">
           <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-emerald-600 dark:border-emerald-500 shadow-md">
-            <Image
+            <Image quality={85}
               src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=85"
               alt="Jhayro Ludeña - Lead Naturalist Guide & Founder"
               fill

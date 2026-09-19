@@ -101,7 +101,7 @@ export function AdminTourTable({
                 isTourTable={true}
                 imageNode={
                   tour.imageUrl ? (
-                    <Image src={tour.imageUrl} alt={getSafeString(tour.title, locale)} fill sizes="(max-width: 768px) 100vw, 360px" className="object-cover" />
+                    <Image quality={85} src={tour.imageUrl} alt={getSafeString(tour.title, locale)} fill sizes="(max-width: 768px) 100vw, 360px" className="object-cover" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-xs text-zinc-400">
                       No Img

@@ -295,6 +295,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
               src={uniqueImages[activeImageIndex]}
               alt={`${title} - Enlarged View`}
               fill
+              sizes="(max-width: 1024px) 100vw, 1024px"
               quality={95}
               className="object-contain"
               priority

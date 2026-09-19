@@ -436,7 +436,7 @@ export default async function AboutPage({ params }: PageProps) {
       {/* HERO SECTION - CINEMATIC VIEWPORT IMPACT */}
       <section className="relative pt-36 pb-24 sm:pt-44 sm:pb-32 px-4 sm:px-6 lg:px-8 border-b border-zinc-200/80 dark:border-zinc-800/80 overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
-          <Image
+          <Image quality={90}
             src="/images/tours/16-9/galapagos-baltra-island-16-9.jpg"
             alt="Galapagos Seascape"
             fill
@@ -516,7 +516,7 @@ export default async function AboutPage({ params }: PageProps) {
           <div className="lg:col-span-6">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 group">
               <div className="aspect-[4/3] relative">
-                <Image
+                <Image quality={90}
                   src="/images/tours/16-9/galapagos-lobo-marino-16-9.jpg"
                   alt="Sea Lions and Naturalist Guide in Galapagos"
                   fill

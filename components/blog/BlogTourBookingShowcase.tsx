@@ -289,7 +289,7 @@ export function BlogTourBookingShowcase({
               >
                 {/* Image & Badges */}
                 <div className="relative aspect-[16/10] w-full overflow-hidden">
-                  <Image
+                  <Image quality={90}
                     src={tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'}
                     alt={tourTitle}
                     width={600}

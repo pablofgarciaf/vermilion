@@ -9,8 +9,8 @@ import '../globals.css';
 import Script from 'next/script';
 import { ConditionalNavbar } from '@/components/layout/ConditionalNavbar';
 import { ConditionalFooter } from '@/components/layout/ConditionalFooter';
-import { ConciergeWidget } from '@/components/ui/ConciergeWidget';
 import { AffiliateTracker } from '@/components/affiliates/AffiliateTracker';
+import { ConciergeWidgetLazy } from '@/components/ui/ConciergeWidgetLazy';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -218,6 +218,11 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable} ${oswald.variable} scroll-smooth`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
@@ -271,7 +276,7 @@ export default async function RootLayout({
                 {children}
               </main>
               <ConditionalFooter />
-              <ConciergeWidget />
+              <ConciergeWidgetLazy />
               <Suspense fallback={null}>
                 <AffiliateTracker />
               </Suspense>

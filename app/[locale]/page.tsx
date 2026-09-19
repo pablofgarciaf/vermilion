@@ -2,9 +2,10 @@ import React from 'react';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import { HeroSlider } from '@/components/home/HeroSlider';
-import { StatsSection } from '@/components/home/StatsSection';
+import FluidBackgroundCursor from '@/components/home/FluidBackgroundCursor';
+import { StatsSectionLazy } from '@/components/home/StatsSectionLazy';
 import { DestinationsGrid } from '@/components/home/DestinationsGrid';
-import { CombinedExperienceSection } from '@/components/home/CombinedExperienceSection';
+const CombinedExperienceSection = dynamic(() => import('@/components/home/CombinedExperienceSection').then(m => ({ default: m.CombinedExperienceSection })), { ssr: true });
 import { FeaturedTours } from '@/components/home/FeaturedTours';
 import { HomeBlogSection } from '@/components/home/HomeBlogSection';
 import { AlsoAskedFaq } from '@/components/home/AlsoAskedFaq';
@@ -84,12 +85,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const FluidBackgroundCursor = dynamic(
-  () => import('@/components/home/FluidBackgroundCursor'),
-  {
-    loading: () => null,
-  }
-);
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -119,7 +114,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       {/* 1. Critical Above-the-Fold Viewport */}
       <div>
         <HeroSlider />
-        <StatsSection />
+        <StatsSectionLazy />
       </div>
 
       {/* 2. Top Destinations Grid (Direct SSR - 0.00 CLS) */}

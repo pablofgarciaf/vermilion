@@ -2,8 +2,6 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import { useTheme } from 'next-themes';
 import { isBotOrCrawler } from '@/utils/isBot';
 
@@ -197,28 +195,31 @@ export default function FluidBackgroundCursor() {
     };
   }, [mounted, isDark, isTouchDevice]);
 
-  useGSAP(
-    () => {
+  useEffect(() => {
       if (!mounted || isTouchDevice || !cursorRef.current) return;
+      let cleanup: (() => void) | undefined;
 
-      const xTo = gsap.quickTo(cursorRef.current, 'x', {
-        duration: 0.03,
-        ease: 'power4.out',
-      });
-      const yTo = gsap.quickTo(cursorRef.current, 'y', {
-        duration: 0.03,
-        ease: 'power4.out',
+      import('gsap').then(({ default: gsap }) => {
+        if (!cursorRef.current) return;
+        const xTo = gsap.quickTo(cursorRef.current, 'x', {
+          duration: 0.03,
+          ease: 'power4.out',
+        });
+        const yTo = gsap.quickTo(cursorRef.current, 'y', {
+          duration: 0.03,
+          ease: 'power4.out',
+        });
+
+        const moveCursor = (e: MouseEvent) => {
+          xTo(e.clientX);
+          yTo(e.clientY);
+        };
+        window.addEventListener('mousemove', moveCursor, { passive: true });
+        cleanup = () => window.removeEventListener('mousemove', moveCursor);
       });
 
-      const moveCursor = (e: MouseEvent) => {
-        xTo(e.clientX);
-        yTo(e.clientY);
-      };
-      window.addEventListener('mousemove', moveCursor, { passive: true });
-      return () => window.removeEventListener('mousemove', moveCursor);
-    },
-    { scope: containerRef, dependencies: [mounted, isTouchDevice] }
-  );
+      return () => cleanup?.();
+    }, [mounted, isTouchDevice]);
 
   if (!mounted || isTouchDevice) return null;
 

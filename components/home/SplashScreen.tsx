@@ -145,10 +145,11 @@ export function SplashScreen() {
           className="relative w-[260px] h-[95px] sm:w-[350px] sm:h-[120px] md:w-[440px] md:h-[145px] mb-3 sm:mb-4 bg-gradient-to-r from-emerald-950/40 via-cyan-900/30 to-emerald-950/40 backdrop-blur-lg rounded-full p-3 sm:p-4 border border-white/30 shadow-[0_12px_40px_rgba(0,0,0,0.7)] flex items-center justify-center transition-all"
         >
           <div className="relative w-full h-full flex items-center justify-center">
-            <Image
+            <Image quality={95}
               src="/logo_inicio.png"
               alt="Vermilion Routes"
               fill
+              sizes="(max-width: 768px) 80vw, 500px"
               className="object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.8)]"
               priority
             />

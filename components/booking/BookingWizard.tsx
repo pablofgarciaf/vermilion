@@ -105,7 +105,7 @@ function BookingSubNav({ primaryTour, pricing, locale }: { primaryTour: Tour | n
             className="shrink-0 group flex items-center notranslate"
           >
             <div className="relative w-[120px] h-[32px] sm:w-[145px] sm:h-[36px]">
-              <Image
+              <Image quality={95}
                 src="/logo_inicio.png"
                 alt="Vermilion Routes"
                 width={145}
@@ -113,7 +113,7 @@ function BookingSubNav({ primaryTour, pricing, locale }: { primaryTour: Tour | n
                 className="w-auto h-full object-contain block dark:hidden"
                 priority
               />
-              <Image
+              <Image quality={95}
                 src="/logo_blanco.png"
                 alt="Vermilion Routes"
                 width={145}

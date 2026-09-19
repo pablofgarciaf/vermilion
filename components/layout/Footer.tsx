@@ -259,7 +259,7 @@ export function Footer() {
           <div className="lg:col-span-2 space-y-5">
             <a href={`/${locale}`} aria-label="Vermilion Routes Home" className="flex items-center gap-3">
               <div className="relative w-[160px] h-[40px] md:w-[220px] md:h-[55px] shrink-0">
-                <Image
+                <Image quality={95}
                   src="/logo_blanco.png"
                   alt="Vermilion Routes"
                   width={220}

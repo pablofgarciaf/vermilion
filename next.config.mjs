@@ -29,7 +29,7 @@ const nextConfig = {
   output: process.env.VERCEL ? undefined : 'standalone',
   compress: true,
   experimental: {
-    optimizePackageImports: ['three', 'gsap', 'lucide-react', '@react-three/fiber', '@react-three/drei'],
+    optimizePackageImports: ['three', 'gsap', 'lucide-react', '@react-three/fiber', '@react-three/drei', 'framer-motion', 'motion'],
   },
   transpilePackages: ['motion', 'framer-motion', 'motion-dom'],
   images: {
@@ -166,6 +166,15 @@ const nextConfig = {
     return [
       {
         source: '/images/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/fonts/:path*',
         headers: [
           {
             key: 'Cache-Control',

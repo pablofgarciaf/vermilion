@@ -79,7 +79,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               className="shrink-0 group flex items-center notranslate"
             >
               <div className="relative w-[92px] h-[32px] sm:w-[160px] sm:h-[46px] lg:w-[180px] lg:h-[48px]">
-                <Image
+                <Image quality={95}
                   src="/logo_inicio.png"
                   alt="Vermilion Routes"
                   width={210}
@@ -87,7 +87,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
                   className="w-auto h-full object-contain block dark:hidden"
                   priority
                 />
-                <Image
+                <Image quality={95}
                   src="/logo_blanco.png"
                   alt="Vermilion Routes"
                   width={210}
@@ -176,7 +176,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               className="shrink-0 group flex items-center notranslate"
             >
               <div className="relative w-[180px] h-[48px]">
-                <Image
+                <Image quality={95}
                   src="/logo_inicio.png"
                   alt="Vermilion Routes"
                   width={210}
@@ -184,7 +184,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
                   className="w-auto h-full object-contain block dark:hidden"
                   priority
                 />
-                <Image
+                <Image quality={95}
                   src="/logo_blanco.png"
                   alt="Vermilion Routes"
                   width={210}

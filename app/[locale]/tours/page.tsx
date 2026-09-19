@@ -520,7 +520,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                   className="bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/10 rounded-3xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 flex flex-col group"
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-64 w-full overflow-hidden block">
-                    <Image
+                    <Image quality={90}
                       src={tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'}
                       alt={title}
                       fill
@@ -610,7 +610,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                   className="bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/10 rounded-3xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 flex flex-col group shadow-lg"
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-56 w-full overflow-hidden block">
-                    <Image
+                    <Image quality={90}
                       src={tour.imageUrl || '/images/tours/16-9/cotopaxi-volcano-16-9.webp'}
                       alt={title}
                       fill
@@ -692,7 +692,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                   className="bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/10 rounded-[32px] overflow-hidden hover:border-blue-500/30 transition-all duration-300 flex flex-col group shadow-xl"
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-72 w-full overflow-hidden block">
-                    <Image
+                    <Image quality={90}
                       src={tour.imageUrl || '/images/tours/16-9/galapagos-snorkeling-16-9.jpg'}
                       alt={title}
                       fill

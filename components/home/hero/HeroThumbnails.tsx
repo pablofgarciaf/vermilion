@@ -32,22 +32,22 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
                   fill
                   priority={idx === 0}
                   fetchPriority={idx === 0 ? "high" : "auto"}
-                  quality={80}
+                  quality={90}
                   className="object-cover object-center md:hidden"
-                  sizes={idx === 0 ? "100vw" : "30vw"}
+                  sizes="100vw"
                 />
               )}
 
               {/* 💻 FOTO HORIZONTAL 16:9 PARA PANTALLAS GRANDES */}
               <Image
-                src={slide.desktopImage || slide.image || slide.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg'}
+                src={slide.desktopImage || slide.image || slide.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'}
                 alt={getLocalizedText(slide.place, locale) || 'Vermilion Routes'}
                 fill
                 priority={idx === 0}
                 fetchPriority={idx === 0 ? "high" : "auto"}
-                quality={80}
+                quality={90}
                 className={`object-cover object-top ${slide.mobileImage ? 'hidden md:block' : 'block'}`}
-                sizes={idx === 0 ? "100vw" : "60vw"}
+                sizes="100vw"
               />
 
               <div className="card-overlay absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none transition-opacity duration-300" />
