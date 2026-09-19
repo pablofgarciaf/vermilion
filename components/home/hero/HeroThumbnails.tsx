@@ -73,7 +73,7 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
 
                   const dest = DESTINATIONS.find((d) => d.heroIndex === idx);
                   window.location.href = dest
-                    ? `/${locale}/destinos/${dest.slug}`
+                    ? `/${locale}/destinations/${dest.slug}`
                     : `/${locale}/tours`;
                 }}
               />

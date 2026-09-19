@@ -863,7 +863,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 {destinos.map((d) => (
                   <Link
                     key={d.slug}
-                    href={`/${locale}/destinos/${d.slug}`}
+                    href={`/${locale}/destinations/${d.slug}`}
                     className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-zinc-900 border border-emerald-300 dark:border-emerald-800 text-sm font-semibold text-emerald-800 dark:text-emerald-200 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors"
                   >
                     {getLocalizedText(d.name, locale)}

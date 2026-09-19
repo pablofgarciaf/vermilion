@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { mockTours } from '@/data/mock';
 import { BLOG_POSTS } from '@/data/blogData';
+import { DESTINATIONS } from '@/data/destinationsData';
 
 const BASE_URL = 'https://www.vermilionroutes.com';
 const LOCALES = ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'];
@@ -74,6 +75,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: 'monthly',
         priority: 0.8,
         alternates: getLanguageAlternates(blogPath),
+      });
+    }
+  }
+
+  // 4. Fichas de destino. Van en el sitemap con su hreflang completo para que
+  // el buscador indexe directamente la version del idioma del visitante y no
+  // tenga que pasar por la redireccion de la raiz.
+  for (const dest of DESTINATIONS) {
+    const destPath = `/destinations/${dest.slug}`;
+    for (const locale of LOCALES) {
+      sitemapEntries.push({
+        url: `${BASE_URL}/${locale}${destPath}`,
+        lastModified: LAST_CATALOG_UPDATE,
+        changeFrequency: 'monthly',
+        priority: 0.85,
+        alternates: getLanguageAlternates(destPath),
       });
     }
   }

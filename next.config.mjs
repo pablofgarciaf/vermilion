@@ -160,6 +160,14 @@ const nextConfig = {
         destination: '/en/tours/ecuador-fantastic-8days',
         permanent: true,
       },
+      {
+        // La ficha de destino nacio en /destinos/ y paso a /destinations/ para
+        // que la URL no mezcle idiomas. Permanente para que el buscador
+        // traspase lo poco que hubiera indexado.
+        source: '/:locale(en|es|fr|de|zh|it|pt|ja)/destinos/:slug',
+        destination: '/:locale/destinations/:slug',
+        permanent: true,
+      },
     ];
   },
   async headers() {

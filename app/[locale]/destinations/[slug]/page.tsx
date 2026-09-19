@@ -83,7 +83,7 @@ export async function generateMetadata({
   return {
     title,
     description,
-    alternates: getSeoAlternates(`/destinos/${slug}`, locale),
+    alternates: getSeoAlternates(`/destinations/${slug}`, locale),
     openGraph: {
       title,
       description,
@@ -116,7 +116,7 @@ export default async function DestinationPage({
     name,
     description: t(dest.intro as any),
     image: `${BASE_CANONICAL_URL}${dest.image}`,
-    url: `${BASE_CANONICAL_URL}/${locale}/destinos/${dest.slug}`,
+    url: `${BASE_CANONICAL_URL}/${locale}/destinations/${dest.slug}`,
     address: { '@type': 'PostalAddress', addressCountry: 'EC' },
     ...(tours.length > 0 && {
       hasPart: tours.slice(0, 6).map((tour) => ({

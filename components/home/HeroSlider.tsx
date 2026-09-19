@@ -127,7 +127,7 @@ export function HeroSlider() {
         <HeroActions
           exploreLabel={getExploreLabel()}
           planLabel={getPlanLabel()}
-          destinationHref={activeDestination ? `/${locale}/destinos/${activeDestination.slug}` : undefined}
+          destinationHref={activeDestination ? `/${locale}/destinations/${activeDestination.slug}` : undefined}
           destinationLabel={getDestinationLabel()}
         />
 
