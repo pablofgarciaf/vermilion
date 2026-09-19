@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
-import { Hero } from '@/components/home/Hero';
+import { HeroSlider } from '@/components/home/HeroSlider';
 import { StatsSection } from '@/components/home/StatsSection';
 import { DestinationsGrid } from '@/components/home/DestinationsGrid';
 import { CombinedExperienceSection } from '@/components/home/CombinedExperienceSection';
@@ -118,7 +118,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
       {/* 1. Critical Above-the-Fold Viewport */}
       <div>
-        <Hero />
+        <HeroSlider />
         <StatsSection />
       </div>
 

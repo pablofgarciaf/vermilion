@@ -6,6 +6,7 @@
  * individual paths. Existing imports via '@/components/home/*' remain valid.
  */
 export { Hero } from '@/components/home/Hero';
+export { HeroSlider } from '@/components/home/HeroSlider';
 export { StatsSection } from '@/components/home/StatsSection';
 export { DestinationsGrid } from '@/components/home/DestinationsGrid';
 export { FeaturedTours } from '@/components/home/FeaturedTours';
