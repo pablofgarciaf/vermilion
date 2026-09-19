@@ -359,7 +359,7 @@ export function DestinationGalleryModal({
                     className={`group relative rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800/80 hover:border-emerald-500/60 transition-all duration-300 cursor-pointer shadow-md hover:shadow-emerald-950/40 hover:-translate-y-0.5 ${photo.isPortrait ? 'aspect-[3/4]' : 'aspect-[4/3]'
                       }`}
                   >
-                    <Image quality={85}
+                    <Image quality={100}
                       src={photo.thumb}
                       alt={photoTitle}
                       fill
@@ -464,7 +464,7 @@ export function DestinationGalleryModal({
                 'Photo Preview'
               }
               fill
-              quality={95}
+              quality={100}
               sizes="(max-width: 1200px) 100vw, 1200px"
               className="object-contain drop-shadow-2xl"
               priority

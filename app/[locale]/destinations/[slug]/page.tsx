@@ -142,7 +142,7 @@ export default async function DestinationPage({
           fill
           priority
           fetchPriority="high"
-          quality={90}
+          quality={100}
           sizes="100vw"
           className="object-cover hidden md:block"
         />
@@ -152,7 +152,7 @@ export default async function DestinationPage({
           fill
           priority
           fetchPriority="high"
-          quality={90}
+          quality={100}
           sizes="100vw"
           className="object-cover md:hidden"
         />
@@ -186,7 +186,7 @@ export default async function DestinationPage({
           <section>
             <h2 className="flex items-center gap-2 font-serif text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-6">
               <ImageIcon className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-              {locale === 'es' ? 'Galería del destino' : 'Destination gallery'}
+              {ui('galleryTitle')}
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {dest.gallery.map((img, i) => (
@@ -195,7 +195,7 @@ export default async function DestinationPage({
                     src={img}
                     alt={`${name} ${i + 1}`}
                     fill
-                    quality={90}
+                    quality={100}
                     sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />

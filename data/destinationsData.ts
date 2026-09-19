@@ -150,6 +150,7 @@ export const DESTINATION_UI = {
   viewTour: { es: 'Ver expedición', en: 'View expedition', fr: 'Voir l’expédition', de: 'Expedition ansehen', it: 'Vedi spedizione', pt: 'Ver expedição', ja: 'ツアーを見る', zh: '查看行程' },
   from: { es: 'Desde', en: 'From', fr: 'À partir de', de: 'Ab', it: 'Da', pt: 'A partir de', ja: '料金', zh: '起价' },
   days: { es: 'días', en: 'days', fr: 'jours', de: 'Tage', it: 'giorni', pt: 'dias', ja: '日間', zh: '天' },
+  galleryTitle: { es: 'Galería del destino', en: 'Destination gallery', fr: 'Galerie du lieu', de: 'Galerie des Reiseziels', it: 'Galleria della destinazione', pt: 'Galeria do destino', ja: '現地のギャラリー', zh: '目的地相册' },
 } as const;
 
 export const DESTINATIONS: Destination[] = [

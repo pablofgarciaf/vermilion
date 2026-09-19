@@ -236,7 +236,7 @@ export function HomeBlogSection() {
                 src={post.imageUrl}
                 alt={getLocalizedText(post.title, locale)}
                 fill
-                quality={95}
+                quality={100}
                 sizes="(max-width: 768px) 85vw, (max-width: 1200px) 33vw, 400px"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />

@@ -119,7 +119,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
               src={previousImage}
               alt={`${title} - Previous Photo`}
               fill
-              quality={95}
+              quality={100}
               sizes="(max-width: 640px) 5vw, (max-width: 1024px) 70vw, 850px"
               className="object-cover"
               priority
@@ -136,7 +136,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
               src={currentImage}
               alt={`${title} - Main Gallery Photo`}
               fill
-              quality={95}
+              quality={100}
               sizes="(max-width: 640px) 5vw, (max-width: 1024px) 70vw, 850px"
               className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               priority
@@ -207,7 +207,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
                     src={img}
                     alt={`${title} - Thumbnail ${idx}`}
                     fill
-                    quality={95}
+                    quality={100}
                     sizes="10vw"
                     className="object-cover group-hover:scale-110 transition-all duration-500 ease-out"
                     referrerPolicy="no-referrer"
@@ -238,7 +238,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
                   src={img}
                   alt={`${title} - Thumbnail ${idx}`}
                   fill
-                  quality={95}
+                  quality={100}
                   sizes="10vw"
                   className="object-cover"
                   referrerPolicy="no-referrer"
@@ -296,7 +296,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
               alt={`${title} - Enlarged View`}
               fill
               sizes="(max-width: 1024px) 100vw, 1024px"
-              quality={95}
+              quality={100}
               className="object-contain"
               priority
               referrerPolicy="no-referrer"
