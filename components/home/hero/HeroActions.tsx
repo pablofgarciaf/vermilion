@@ -1,12 +1,16 @@
 import React from 'react';
-import { ArrowRight, MessageCircle } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, MessageCircle, MapPin } from 'lucide-react';
 
 interface HeroActionsProps {
   exploreLabel: string;
   planLabel: string;
+  /** Ficha del destino que se esta viendo ahora mismo en el hero. */
+  destinationHref?: string;
+  destinationLabel?: string;
 }
 
-export function HeroActions({ exploreLabel, planLabel }: HeroActionsProps) {
+export function HeroActions({ exploreLabel, planLabel, destinationHref, destinationLabel }: HeroActionsProps) {
   {/* 🎨 AJUSTE POSICIÓN BOTONES HERO:
       - En Celular: bottom-[55px] sm:bottom-[65px] (cambia 55px para subir o bajar los botones en móvil)
       - En Escritorio: md:top-[calc(50%+148px)] md:left-[30px] lg:left-[60px] (cambia 148px para subir/bajar en desktop) */}
@@ -37,6 +41,18 @@ export function HeroActions({ exploreLabel, planLabel }: HeroActionsProps) {
         <MessageCircle className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
         <span>{planLabel}</span>
       </button>
+
+      {/* Entrada explicita a la ficha del destino que se ve ahora: sin esto el
+          visitante no descubre que las fotos del hero llevan a alguna parte. */}
+      {destinationHref && destinationLabel && (
+        <Link
+          href={destinationHref}
+          className="w-[270px] sm:w-auto px-6 py-4 bg-white/10 hover:bg-white/20 text-white font-bold uppercase tracking-wider text-xs md:text-sm rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 border border-white/40 hover:border-white/70 active:scale-95 cursor-pointer backdrop-blur-md shadow-lg text-center shrink-0 group"
+        >
+          <MapPin className="w-4 h-4 text-amber-300 group-hover:scale-110 transition-transform" />
+          <span>{destinationLabel}</span>
+        </Link>
+      )}
     </div>
   );
 }

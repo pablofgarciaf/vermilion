@@ -70,9 +70,15 @@ const FILTER_I18N: Record<string, { all: string; ecuador: string; galapagos: str
 
 interface TourCarouselProps {
   tours: Tour[];
+  /**
+   * Muestra los chips de categoria. Se oculta donde la lista ya viene acotada
+   * (la seccion Full Day o una pagina de destino): ahi filtrar no aporta nada
+   * porque todas las tarjetas son ya de la misma categoria.
+   */
+  showFilters?: boolean;
 }
 
-export function TourCarousel({ tours }: TourCarouselProps) {
+export function TourCarousel({ tours, showFilters = true }: TourCarouselProps) {
   const locale = useLocale();
   const f = FILTER_I18N[locale] || FILTER_I18N['en'];
 
@@ -203,7 +209,8 @@ export function TourCarousel({ tours }: TourCarouselProps) {
 
   return (
     <div className="space-y-6">
-      {/* ── Filter Category Tabs ── */}
+      {/* ── Filter Category Tabs (se ocultan cuando la lista ya viene acotada) ── */}
+      {showFilters && (
       <div className="px-4">
         {/* Desktop View */}
         <div className="hidden md:flex flex-wrap items-center justify-center gap-2">
@@ -255,6 +262,7 @@ export function TourCarousel({ tours }: TourCarouselProps) {
             )}
         </div>
       </div>
+      )}
 
       {/* ── Carousel Stage ── */}
       <div

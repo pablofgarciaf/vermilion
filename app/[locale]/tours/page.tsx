@@ -769,7 +769,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
 
           {/* Carrusel 3D interactivo */}
           <div className="pt-6">
-            <TourCarousel tours={dailyTours} />
+            <TourCarousel tours={dailyTours} showFilters={false} />
           </div>
         </section>
 

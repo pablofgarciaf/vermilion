@@ -68,6 +68,9 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
 
         const [active, ...rest] = order;
         (window as any).__activeSlideIdx = active;
+        // Avisa a la interfaz de React que cambio la diapositiva activa,
+        // para que el boton del hero apunte al destino que se esta viendo.
+        window.dispatchEvent(new CustomEvent('hero-slide-change', { detail: { index: active } }));
         set(getCard(active), { x: 0, y: 0, width: "100vw", height: "100%", borderRadius: 0, scale: 1.05, opacity: 1 });
         set(getCardContent(active), { opacity: 0 });
 
@@ -100,6 +103,9 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
 
         const [active, ...rest] = order;
         (window as any).__activeSlideIdx = active;
+        // Avisa a la interfaz de React que cambio la diapositiva activa,
+        // para que el boton del hero apunte al destino que se esta viendo.
+        window.dispatchEvent(new CustomEvent('hero-slide-change', { detail: { index: active } }));
         const detailsActive = detailsEven ? "#details-even" : "#details-odd";
         const detailsInactive = detailsEven ? "#details-odd" : "#details-even";
 

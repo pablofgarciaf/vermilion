@@ -7,6 +7,7 @@ import { MapPin, Mountain, Award, CalendarDays, Leaf, Info, ArrowRight, Sparkles
 
 import { DESTINATIONS, DESTINATION_UI, INSIDER_TIPS, Destination } from '@/data/destinationsData';
 import { mockTours } from '@/data/mock';
+import { TourCarousel } from '@/components/home/TourCarousel';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getSeoAlternates, BASE_CANONICAL_URL, SUPPORTED_SEO_LOCALES } from '@/utils/seoHelper';
 
@@ -251,38 +252,8 @@ export default async function DestinationPage({
               </Link>
             </div>
           ) : (
-            <div className="grid gap-6 sm:grid-cols-2">
-              {tours.map((tour) => (
-                <Link
-                  key={tour.id}
-                  href={`/${locale}/tours/${tour.id}`}
-                  className="group rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:shadow-xl transition-shadow"
-                >
-                  <div className="relative aspect-[16/10]">
-                    <Image
-                      src={tour.mobileImage || tour.imageUrl}
-                      alt={getLocalizedText(tour.title, locale)}
-                      fill
-                      quality={90}
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-2 leading-snug">
-                      {getLocalizedText(tour.title, locale)}
-                    </h3>
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-zinc-500 dark:text-zinc-400">
-                        {tour.durationDays} {ui('days')}
-                      </span>
-                      <span className="font-bold text-emerald-600 dark:text-emerald-400">
-                        {ui('from')} ${tour.priceFromUSD ?? tour.price} USD
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
+            <div className="-mx-6">
+              <TourCarousel tours={tours} showFilters={false} />
             </div>
           )}
         </section>

@@ -9,6 +9,7 @@ import { HeroActions } from './hero/HeroActions';
 import { HeroThumbnails } from './hero/HeroThumbnails';
 import { HeroPagination } from './hero/HeroPagination';
 import { useHeroSliderAnimation } from './hero/useHeroSliderAnimation';
+import { DESTINATIONS } from '@/data/destinationsData';
 
 export function HeroSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -73,6 +74,34 @@ export function HeroSlider() {
     }
   };
 
+  // Sigue que diapositiva esta al frente para que el boton del hero apunte
+  // al destino que el visitante esta viendo en ese momento.
+  const [activeSlide, setActiveSlide] = useState(0);
+  useEffect(() => {
+    const onChange = (e: Event) => {
+      const idx = (e as CustomEvent<{ index: number }>).detail?.index;
+      if (typeof idx === 'number') setActiveSlide(idx);
+    };
+    window.addEventListener('hero-slide-change', onChange);
+    return () => window.removeEventListener('hero-slide-change', onChange);
+  }, []);
+
+  const activeDestination = DESTINATIONS.find((d) => d.heroIndex === activeSlide);
+
+  const getDestinationLabel = () => {
+    const map: Record<string, string> = {
+      es: 'Conoce este destino',
+      en: 'Discover this destination',
+      fr: 'Découvrir cette destination',
+      de: 'Dieses Reiseziel entdecken',
+      it: 'Scopri questa destinazione',
+      pt: 'Conheça este destino',
+      ja: 'この目的地を見る',
+      zh: '了解这个目的地',
+    };
+    return map[locale] || map.en;
+  };
+
   const slidesData = HERO_SLIDES_DATA;
   const initialData = slidesData[0];
 
@@ -95,7 +124,12 @@ export function HeroSlider() {
         <HeroDetails initialData={initialData} locale={locale} />
 
         {/* 2. Action Buttons */}
-        <HeroActions exploreLabel={getExploreLabel()} planLabel={getPlanLabel()} />
+        <HeroActions
+          exploreLabel={getExploreLabel()}
+          planLabel={getPlanLabel()}
+          destinationHref={activeDestination ? `/${locale}/destinos/${activeDestination.slug}` : undefined}
+          destinationLabel={getDestinationLabel()}
+        />
 
         {/* 3. Thumbnail Cards Carousel */}
         <HeroThumbnails slidesData={slidesData} locale={locale} isMobile={isMobile} />
