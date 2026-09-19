@@ -289,7 +289,7 @@ export function DestinationsGrid() {
                       src={imgSrc}
                       alt={getLocalizedText(dest.name, locale)}
                       fill
-                      quality={90}
+                      quality={100}
                       loading="lazy"
                       sizes="(max-width: 640px) 340px, (max-width: 1024px) 360px, 320px"
                       className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"

@@ -109,7 +109,7 @@ export function Hero() {
         fill
         priority
         fetchPriority="high"
-        quality={95}
+        quality={100}
         unoptimized
         sizes="100vw"
         className="object-cover object-center"
@@ -158,7 +158,7 @@ export function Hero() {
             alt="Vermilion Routes"
             width={340}
             height={112}
-            quality={85}
+            quality={100}
             className="w-full h-full object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.85)]"
             priority
           />

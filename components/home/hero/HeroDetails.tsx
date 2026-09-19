@@ -216,7 +216,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                       alt="Vermilion Routes"
                       width={340}
                       height={112}
-                      quality={85}
+                      quality={100}
                       className="w-full h-full object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.85)]"
                       priority
                       fetchPriority="high"

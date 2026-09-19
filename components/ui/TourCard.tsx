@@ -98,7 +98,7 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
         alt={title || 'Tour Expedition'}
         fill
         priority={priority}
-        quality={90}
+        quality={100}
         sizes="(max-width: 640px) 340px, (max-width: 1024px) 360px, 340px"
         className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         referrerPolicy="no-referrer"
