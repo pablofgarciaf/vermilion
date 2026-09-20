@@ -5,8 +5,8 @@ export const dailyTours: Tour[] = [
   {
     id: 'quito-city-middle-of-the-world',
     code: '4.1',
-    title: { 
-      en: 'Quito City Tour & Middle Of The World', 
+    title: {
+      en: 'Quito City Tour & Middle Of The World',
       es: 'Quito Colonial Y Mitad Del Mundo',
       fr: 'VISITE DE QUITO ET MILIEU DU MONDE',
       de: 'QUITO CITY TOUR & MITTE DER WELT',
@@ -30,12 +30,12 @@ export const dailyTours: Tour[] = [
     price: 89,
     price3Star: 89,
     price4Star: 89,
-    imageUrl: '/images/tours/16-9/quito-colonial-16-9.jpg',
-    mobileImage: '/images/tours/9-16/quito-centro-historico.jpg',
+    imageUrl: '/images/tours/16-9/quito-colonial-16-9.webp',
+    mobileImage: '/images/tours/9-16/quito-centro-historico.webp',
     desktopImage: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
     gallery: [
-      '/images/tours/16-9/quito-colonial-16-9.jpg',
-      '/images/tours/16-9/mitad-del-mundo-16-9.jpg',
+      '/images/tours/16-9/quito-colonial-16-9.webp',
+      '/images/tours/16-9/mitad-del-mundo-16-9.webp',
       '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
       '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
       '/images/tours/16-9/laguna-quilotoa-16-9.webp'
@@ -85,9 +85,10 @@ export const dailyTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Full Day – Historic Quito & Equatorial Line At Intiñan', 
-      es: 'Día Completo – Quito Histórico Y Línea Ecuatorial En Intiñan' },
+        title: {
+          en: 'Full Day – Historic Quito & Equatorial Line At Intiñan',
+          es: 'Día Completo – Quito Histórico Y Línea Ecuatorial En Intiñan'
+        },
         description: {
           en: 'Our tour begins at Plaza Grande, the heart of Quito’s historic center and an important place in Ecuador’s history. From here, we explore the surrounding colonial architecture and learn about the city’s rich cultural heritage.\n\nDuring our walk through the historic center, we will observe several beautiful churches, convents, and historic buildings, including the Convent of La Concepción, which was considered the largest convent in America during its time, and the Church of El Sagrario, an outstanding example of colonial religious architecture.\n\nWe continue to the Archbishop’s Palace, located beside Plaza Grande, and then visit La Compañía de Jesús, one of Quito’s most spectacular churches, famous for its richly decorated interior covered in gold leaf and its impressive Baroque architecture.\n\nNext, we enjoy a special Yumbos chocolate experience, where we learn about Ecuadorian cacao and have the opportunity to taste delicious Ecuadorian chocolate.\n\nWe then continue our visit to Plaza and Church of San Francisco, one of the most iconic places in Quito’s historic center. The church and convent form one of the most important architectural and cultural complexes in the city.\n\nAfter discovering Quito’s historic center, we continue our journey toward the Middle of the World. Along the way, we can enjoy views of Quito and its surrounding landscapes.\n\nAt the Middle of the World, we visit the famous equatorial monument and then enter the Intiñan Museum, an interactive cultural museum where visitors can learn about Ecuador’s indigenous cultures, ancestral traditions, and fascinating experiences related to the Equator.',
           es: 'Iniciamos en la Plaza Grande en el corazón del centro colonial de Quito. Recorremos calles empedradas admirando el Convento de La Concepción y la Iglesia de El Sagrario.\n\nContinuamos hacia el Palacio Arzobispal y visitamos la deslumbrante Iglesia de La Compañía de Jesús, famosa por su decoración en pan de oro y arquitectura barroca.\n\nDisfrutamos de una cata guiada de chocolate ecuatoriano en Yumbos Chocolate, aprendiendo sobre el grano de cacao de aroma.\n\nVisitamos la histórica Plaza e Iglesia de San Francisco antes de trasladarnos hacia el norte hacia la Mitad del Mundo.\n\nEn la línea ecuatorial, visitamos el monumento y el Museo Interactivo Intiñan con experimentos solares y tradiciones ancestrales antes de retornar a su hotel en Quito.'
@@ -103,8 +104,8 @@ export const dailyTours: Tour[] = [
   {
     id: 'otavalo-indigenous-market',
     code: '4.2',
-    title: { 
-      en: 'Otavalo Artisan Market & Cotacachi', 
+    title: {
+      en: 'Otavalo Artisan Market & Cotacachi',
       es: 'Plaza De Ponchos (Mercado Artesanal) De Otavalo Y Cotacachi',
       fr: 'MARCHÉ INDIGÈNE D’OTAVALO ET COTACACHI',
       de: 'INDIGENER MARKT VON OTAVALO & COTACACHI',
@@ -129,14 +130,14 @@ export const dailyTours: Tour[] = [
     price3Star: 92,
     price4Star: 92,
     imageUrl: '/images/tours/16-9/otavalo-market-16-9.webp',
-    mobileImage: '/images/tours/9-16/otavalo-market-9-16.jpg',
+    mobileImage: '/images/tours/9-16/otavalo-market-9-16.webp',
     desktopImage: '/images/tours/16-9/otavalo-market-16-9.webp',
     gallery: [
       '/images/tours/16-9/otavalo-market-16-9.webp',
       '/images/tours/16-9/otavalo-market-16-9.webp',
-      '/images/tours/16-9/taita-imbabura-16-9.jpg',
-      '/images/tours/16-9/imbabura-16-9.jpg',
-      '/images/tours/16-9/quito-colonial-16-9.jpg'
+      '/images/tours/16-9/taita-imbabura-16-9.webp',
+      '/images/tours/16-9/imbabura-16-9.webp',
+      '/images/tours/16-9/quito-colonial-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 38,
@@ -182,9 +183,10 @@ export const dailyTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Full Day – Otavalo Textiles, Peguche Culture & Cotacachi Leather', 
-      es: 'Día Completo – Textiles De Otavalo, Cultura En Peguche Y Cuero En Cotacachi' },
+        title: {
+          en: 'Full Day – Otavalo Textiles, Peguche Culture & Cotacachi Leather',
+          es: 'Día Completo – Textiles De Otavalo, Cultura En Peguche Y Cuero En Cotacachi'
+        },
         description: {
           en: 'Our adventure begins in Quito, traveling north through spectacular Andean landscapes. During the approximately two-hour journey, enjoy mountain valleys and panoramic viewpoints toward Imbabura province.\n\nOur first stop is Otavalo at Plaza de los Ponchos, discovering colorful textiles, traditional clothing, handmade crafts, and jewelry created by local artisans.\n\nWe continue to Peguche for a traditional lunch and the special Mindalae cultural experience, followed by a visit to a master workshop crafting Andean panpipes, flutes, and drums.\n\nOur final stop is Cotacachi, renowned for its high-quality leather jackets, bags, and shoes before returning to Quito in the afternoon.',
           es: 'Salida desde Quito hacia el norte atravesando valles andinos hacia la provincia de Imbabura.\n\nPrimera parada en Otavalo y su Plaza de los Ponchos, repleta de textiles, ponchos, tapices y artesanías.\n\nContinuación a Peguche para degustar un almuerzo típico y participar en la vivencia cultural Mindalae, visitando un taller de luthería andina.\n\nVisita a las tiendas de cuero en Cotacachi antes del viaje de retorno a Quito.'
@@ -200,8 +202,8 @@ export const dailyTours: Tour[] = [
   {
     id: 'papallacta-hot-springs',
     code: '4.3',
-    title: { 
-      en: 'Papallacta Thermal Springs & Andean Cloud Forest', 
+    title: {
+      en: 'Papallacta Thermal Springs & Andean Cloud Forest',
       es: 'Termas De Papallacta Y Bosque Nublado Andino',
       fr: 'SOURCES THERMALES DE PAPALLACTA',
       de: 'THERMEN VON PAPALLACTA & ANDEN-NEBELWALD',
@@ -225,14 +227,14 @@ export const dailyTours: Tour[] = [
     price: 85,
     price3Star: 85,
     price4Star: 85,
-    imageUrl: '/images/tours/16-9/amazon-river-16-9.jpg',
-    mobileImage: '/images/tours/9-16/amazon-waterfall-9-16.jpg',
-    desktopImage: '/images/tours/16-9/amazon-river-16-9.jpg',
+    imageUrl: '/images/tours/16-9/papallacta-laguna-16-9.webp',
+    mobileImage: '/images/tours/16-9/papallacta-laguna-16-9.webp',
+    desktopImage: '/images/tours/16-9/papallacta-laguna-16-9.webp',
     gallery: [
-      '/images/tours/16-9/amazon-river-16-9.jpg',
+      '/images/tours/16-9/amazon-river-16-9.webp',
       '/images/tours/16-9/chimborazo-volcano-16-9.webp',
       '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
-      '/images/tours/16-9/amazon-cuyabeno-16-9.jpg',
+      '/images/tours/16-9/amazon-cuyabeno-16-9.webp',
       '/images/tours/16-9/pailon-del-diablo-16-9.webp'
     ],
     rating: 5,
@@ -279,9 +281,10 @@ export const dailyTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Full Day – Andes Pass & Papallacta Thermal Springs', 
-      es: 'Día Completo – Paso Andino Y Termas De Papallacta' },
+        title: {
+          en: 'Full Day – Andes Pass & Papallacta Thermal Springs',
+          es: 'Día Completo – Paso Andino Y Termas De Papallacta'
+        },
         description: {
           en: 'Depart Quito crossing the Eastern Andes at 4,100 m with panoramic views of the páramo.\n\nArrive at Papallacta Hot Springs and immerse in therapeutic thermal pools surrounded by pristine mountain air and lush vegetation.\n\nEnjoy an included lunch and a guided scenic walk along river trails before returning to Quito in the afternoon.',
           es: 'Salida desde Quito cruzando la cordillera a 4.100 m con vistas al páramo andino.\n\nLlegada a las Termas de Papallacta para disfrutar de sus piscinas calientes de agua mineral volcánica.\n\nAlmuerzo y caminata ecológica a orillas del río antes del regreso a Quito.'
@@ -297,8 +300,8 @@ export const dailyTours: Tour[] = [
   {
     id: 'mindo-cloud-forest',
     code: '4.4',
-    title: { 
-      en: 'Mindo Cloud Forest, Waterfalls & Chocolate', 
+    title: {
+      en: 'Mindo Cloud Forest, Waterfalls & Chocolate',
       es: 'Bosque Nuboso De Mindo, Cascadas Y Chocolate',
       fr: 'FORÊT DE NUAGES DE MINDO, CASCADES ET CHOCOLAT',
       de: 'MINDO NEBELWALD, WASSERFÄLLE & SCHOKOLADE',
@@ -322,15 +325,15 @@ export const dailyTours: Tour[] = [
     price: 95,
     price3Star: 95,
     price4Star: 95,
-    imageUrl: '/images/tours/16-9/mindo-16-9.jpg',
-    mobileImage: '/images/tours/9-16/mindo-9-16.jpg',
-    desktopImage: '/images/tours/16-9/mindo-16-9.jpg',
+    imageUrl: '/images/tours/16-9/mindo-16-9.webp',
+    mobileImage: '/images/tours/9-16/mindo-9-16.webp',
+    desktopImage: '/images/tours/16-9/mindo-16-9.webp',
     gallery: [
-      '/images/tours/16-9/mindo-16-9.jpg',
+      '/images/tours/16-9/mindo-16-9.webp',
       '/images/tours/16-9/pailon-del-diablo-16-9.webp',
-      '/images/tours/16-9/amazon-river-16-9.jpg',
-      '/images/tours/16-9/quito-colonial-16-9.jpg',
-      '/images/tours/16-9/mitad-del-mundo-16-9.jpg'
+      '/images/tours/16-9/amazon-river-16-9.webp',
+      '/images/tours/16-9/quito-colonial-16-9.webp',
+      '/images/tours/16-9/mitad-del-mundo-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 45,
@@ -377,9 +380,10 @@ export const dailyTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Full Day – Mindo Cloud Forest, Hummingbirds & Zip-Line', 
-      es: 'Día Completo – Bosque Nublado De Mindo, Colibríes Y Canopy' },
+        title: {
+          en: 'Full Day – Mindo Cloud Forest, Hummingbirds & Zip-Line',
+          es: 'Día Completo – Bosque Nublado De Mindo, Colibríes Y Canopy'
+        },
         description: {
           en: 'Travel from Quito to the northwestern slope of the Andes into the Mindo Cloud Forest.\n\nFirst, visit the Hummingbird Sanctuary to marvel at their incredible agility and colorful plumage.\n\nNext, hike through the Mindo-Nambillo reserve to discover a secluded forest waterfall.\n\nAfter an included lunch, gear up for an exhilarating 3-line zip-line canopy flight across the treetops before returning to Quito.',
           es: 'Viaje desde Quito hacia el bosque nublado de Mindo.\n\nVisita al Santuario de Colibríes para contemplar su increíble velocidad y colores brillantes.\n\nCaminata en la Reserva Mindo-Nambillo hasta una hermosa cascada natural.\n\nAlmuerzo y emocionante circuito de tirolesa (canopy 3 líneas) sobre las copas del bosque antes de retornar a Quito.'
@@ -395,8 +399,8 @@ export const dailyTours: Tour[] = [
   {
     id: 'antisana-national-park',
     code: '4.5',
-    title: { 
-      en: 'Antisana Ecological Reserve & Condor Sanctuary', 
+    title: {
+      en: 'Antisana Ecological Reserve & Condor Sanctuary',
       es: 'Reserva Ecológica Antisana Y Santuario Del Cóndor',
       fr: 'RÉSERVE ÉCOLOGIQUE D’ANTISANA ET CONDORS',
       de: 'ÖKOLOGISCHES RESERVAT ANTISANA & KONDOR-SCHUTZGEBIET',
@@ -420,14 +424,14 @@ export const dailyTours: Tour[] = [
     price: 90,
     price3Star: 90,
     price4Star: 90,
-    imageUrl: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
-    mobileImage: '/images/tours/9-16/chimborazo-9-16.jpg',
-    desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
+    imageUrl: '/images/tours/16-9/antisana-16-9.webp',
+    mobileImage: '/images/tours/16-9/antisana-16-9.webp',
+    desktopImage: '/images/tours/16-9/antisana-16-9.webp',
     gallery: [
       '/images/tours/16-9/chimborazo-volcano-16-9.webp',
       '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
       '/images/tours/16-9/laguna-quilotoa-16-9.webp',
-      '/images/tours/16-9/quito-colonial-16-9.jpg',
+      '/images/tours/16-9/quito-colonial-16-9.webp',
       '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp'
     ],
     rating: 5,
@@ -473,9 +477,10 @@ export const dailyTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Full Day – Antisana Condor Sanctuary & La Mica Lagoon', 
-      es: 'Día Completo – Santuario Del Cóndor En Antisana Y Laguna La Mica' },
+        title: {
+          en: 'Full Day – Antisana Condor Sanctuary & La Mica Lagoon',
+          es: 'Día Completo – Santuario Del Cóndor En Antisana Y Laguna La Mica'
+        },
         description: {
           en: 'Depart Quito through Valle de los Chillos toward Pintag, entering Antisana National Park.\n\nAscend to prime viewpoints to search for wild Andean condors, wild llamas, and deer.\n\nArrive at La Mica Lagoon for a scenic high-altitude hike exploring the páramo ecosystem and stunning volcano glaciers.\n\nEnjoy an included lunch before beginning the return journey to Quito in the afternoon.',
           es: 'Salida de Quito por el Valle de los Chillos hacia Pintag ingresando al Parque Nacional Antisana.\n\nParadas estratégicas en miradores de páramo para avistamiento del cóndor andino y fauna silvestre.\n\nLlegada a la Laguna La Mica para realizar una caminata panorámica frente a los glaciares del volcán.\n\nAlmuerzo y retorno a Quito por la tarde.'
@@ -491,8 +496,8 @@ export const dailyTours: Tour[] = [
   {
     id: 'cotopaxi-national-park',
     code: '4.6',
-    title: { 
-      en: 'Cotopaxi National Park & Limpiopungo Lagoon', 
+    title: {
+      en: 'Cotopaxi National Park & Limpiopungo Lagoon',
       es: 'Parque Nacional Cotopaxi Y Laguna De Limpiopungo',
       fr: 'PARC NATIONAL COTOPAXI ET LAGUNE DE LIMPIOPUNGO',
       de: 'COTOPAXI-NATIONALPARK & LAGUNE LIMPIOPUNGO',
@@ -517,14 +522,14 @@ export const dailyTours: Tour[] = [
     price3Star: 96,
     price4Star: 96,
     imageUrl: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
-    mobileImage: '/images/tours/9-16/cotopaxi-9-16.jpg',
+    mobileImage: '/images/tours/9-16/cotopaxi-9-16.webp',
     desktopImage: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
     gallery: [
       '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
       '/images/tours/16-9/laguna-quilotoa-16-9.webp',
       '/images/tours/16-9/chimborazo-volcano-16-9.webp',
-      '/images/tours/16-9/quito-colonial-16-9.jpg',
-      '/images/tours/16-9/mitad-del-mundo-16-9.jpg'
+      '/images/tours/16-9/quito-colonial-16-9.webp',
+      '/images/tours/16-9/mitad-del-mundo-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 52,
@@ -570,9 +575,10 @@ export const dailyTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Full Day – Avenue Of The Volcanoes & Cotopaxi Refuge Hike', 
-      es: 'Día Completo – Avenida De Los Volcanes Y Ascenso Al Refugio Cotopaxi' },
+        title: {
+          en: 'Full Day – Avenue Of The Volcanoes & Cotopaxi Refuge Hike',
+          es: 'Día Completo – Avenida De Los Volcanes Y Ascenso Al Refugio Cotopaxi'
+        },
         description: {
           en: 'Depart early from Quito traveling south on the Pan-American Highway through the Avenue of Volcanoes.\n\nEnter Cotopaxi National Park, visiting the Interpretation Center and panoramic páramo grasslands.\n\nDrive up to the parking lot at 4,500 m and begin the memorable hike up volcanic ash scree to José Rivas Refuge at 4,800 m.\n\nAfter taking in breathtaking views and warming up at the refuge, descend and visit Limpiopungo Lagoon before enjoying an included lunch and returning to Quito.',
           es: 'Salida temprana desde Quito hacia el sur por la Avenida de los Volcanes.\n\nIngreso al Parque Nacional Cotopaxi, visita al Centro de Interpretación y ascenso vehicular al parqueadero (4.500 m).\n\nCaminata guiada por la ladera de arena volcánica hasta el Refugio José Rivas (4.800 m).\n\nDescenso, visita panorámica a la Laguna de Limpiopungo, almuerzo incluido y retorno a Quito por la tarde.'
@@ -588,8 +594,8 @@ export const dailyTours: Tour[] = [
   {
     id: 'quilotoa-crater-lake',
     code: '4.7',
-    title: { 
-      en: 'Quilotoa Crater Cruise & Toachi Canyon', 
+    title: {
+      en: 'Quilotoa Crater Cruise & Toachi Canyon',
       es: 'Laguna Del Quilotoa Y Cañón Del Toachi',
       fr: 'CRATÈRE DU QUILOTOA ET CANYON DU TOACHI',
       de: 'QUILOTOA-KRATERSEE & TOACHI-SCHLUCHT',
@@ -614,14 +620,14 @@ export const dailyTours: Tour[] = [
     price3Star: 98,
     price4Star: 98,
     imageUrl: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
-    mobileImage: '/images/tours/9-16/quilotoa-9-16.jpg',
+    mobileImage: '/images/tours/9-16/quilotoa-9-16.webp',
     desktopImage: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
     gallery: [
       '/images/tours/16-9/laguna-quilotoa-16-9.webp',
       '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
       '/images/tours/16-9/chimborazo-volcano-16-9.webp',
       '/images/tours/16-9/pailon-del-diablo-16-9.webp',
-      '/images/tours/16-9/quito-colonial-16-9.jpg'
+      '/images/tours/16-9/quito-colonial-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 48,
@@ -669,9 +675,10 @@ export const dailyTours: Tour[] = [
     itinerary: [
       {
         day: 1,
-        title: { 
-      en: 'Full Day – Tigua Art, Cuy Farm & Quilotoa Volcanic Caldera', 
-      es: 'Día Completo – Arte De Tigua, Granja De Cuyes Y Cráter De Quilotoa' },
+        title: {
+          en: 'Full Day – Tigua Art, Cuy Farm & Quilotoa Volcanic Caldera',
+          es: 'Día Completo – Arte De Tigua, Granja De Cuyes Y Cráter De Quilotoa'
+        },
         description: {
           en: 'Depart early morning from Quito traveling southwest through rural Andean farming valleys.\n\nMake a cultural stop in Tigua discovering colorful local paintings depicting mountain life, followed by a visit to a traditional guinea pig (cuy) farm.\n\nArrive at Quilotoa and take in the awe-inspiring turquoise waters from the rim viewpoint.\n\nOptional hike down into the crater to touch the mineral-rich waters. Enjoy an included lunch before the return drive to Quito in the afternoon.',
           es: 'Salida temprano desde Quito hacia el suroeste a través de valles agrícolas andinos.\n\nParada cultural en Tigua descubriendo pinturas autóctonas en cuero de oveja y visita a una granja tradicional de cuyes.\n\nLlegada al mirador del Quilotoa contemplando el majestuoso cráter volcánico de agua color turquesa.\n\nCaminata opcional hacia el fondo de la caldera, almuerzo incluido y retorno a Quito por la tarde.'
