@@ -93,7 +93,7 @@ export function Navbar() {
     { name: tNav('home'), href: `/${locale}` },
     {
       name: tNav('destinations'),
-      href: `/${locale}#destinations`,
+      href: `/${locale}/destinations`,
       hasDropdown: true,
       subItems: [
         { name: tNav('galapagos'), href: `/${locale}#galapagos`, desc: 'Premium Cruises & Island Hopping' },

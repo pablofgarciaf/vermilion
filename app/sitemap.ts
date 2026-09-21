@@ -15,6 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/tours',
     '/blog',
+    '/destinations',
+    '/manifiesto',
     '/booking',
     '/presentation',
     '/couples-anniversary-galapagos',
