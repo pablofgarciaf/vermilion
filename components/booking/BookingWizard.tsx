@@ -95,68 +95,98 @@ function BookingSubNav({ primaryTour, pricing, locale, onPayClick, isProcessing 
 
   return createPortal(
     <div
-      className={`w-full bg-white/85 dark:bg-black/85 backdrop-blur-2xl border-b border-zinc-200/80 dark:border-white/10 py-2.5 transition-all duration-300 shadow-xl ${isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none h-0 py-0 border-none overflow-hidden'
+      className={`w-full bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-all duration-300 shadow-sm ${isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none h-0 border-none overflow-hidden'
         }`}
     >
-      <div className="max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div className="flex items-center gap-3.5 min-w-0">
-          <Link
-            href={`/${locale}`}
-            aria-label="Vermilion Routes Home"
-            className="shrink-0 group flex items-center notranslate"
-          >
-            <div className="relative w-[120px] h-[32px] sm:w-[145px] sm:h-[36px]">
-              <Image quality={100}
-                src="/logo_inicio.png"
-                alt="Vermilion Routes"
-                width={145}
-                height={36}
-                className="w-auto h-full object-contain block dark:hidden"
-                priority
-              />
-              <Image quality={100}
-                src="/logo_blanco.png"
-                alt="Vermilion Routes"
-                width={145}
-                height={36}
-                className="w-auto h-full object-contain hidden dark:block"
-                priority
-              />
-            </div>
-          </Link>
-
-          <div className="h-6 w-px bg-zinc-300 dark:bg-zinc-700 hidden md:block shrink-0" />
-
-          <div className="space-y-0.5 min-w-0">
-            <div className="font-serif text-sm sm:text-base lg:text-lg font-bold text-zinc-900 dark:text-white truncate max-w-xs sm:max-w-md lg:max-w-xl">
-              {title}
-            </div>
-            {duration && (
-              <div className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold flex items-center gap-1.5">
-                <span>{duration}</span>
-                {primaryTour?.code && <span>&bull; Code: {primaryTour.code}</span>}
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3">
+        {/* Mobile View */}
+        <div className="md:hidden">
+          <div className="flex items-start justify-between gap-3 sm:gap-5">
+            <div className="flex items-start gap-3 sm:gap-6 min-w-0">
+              <Link
+                href={`/${locale}`}
+                aria-label="Vermilion Routes Home"
+                className="shrink-0 group flex items-center notranslate"
+              >
+                <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0">
+                  <Image quality={100}
+                    src="/icon.png"
+                    alt="Vermilion Routes"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+              </Link>
+              
+              <div className="min-w-0 flex flex-col justify-center">
+                <div className="font-serif text-sm font-bold text-zinc-900 dark:text-white leading-tight">
+                  {title} {duration && <span className="font-sans text-[10px] sm:text-xs text-emerald-700 dark:text-emerald-400 ml-1 font-semibold whitespace-nowrap">{duration}{primaryTour?.code ? ` • Code: ${primaryTour.code}` : ''}</span>}
+                </div>
               </div>
-            )}
+            </div>
+          </div>
+          <div className="mt-2 w-full max-w-[400px] mx-auto flex flex-col gap-2 pb-1">
+            <button
+              onClick={onPayClick}
+              disabled={isProcessing}
+              type="button"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-2 py-2 text-sm font-extrabold uppercase tracking-widest text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105 active:scale-95 disabled:opacity-50"
+            >
+              {isProcessing ? (locale === 'es' ? 'Procesando...' : 'Processing...') : `RESERVAR • $${pricing.total.toLocaleString("en-US")} USD`}
+            </button>
           </div>
         </div>
 
-        <div className="flex items-center gap-3.5 shrink-0 self-end sm:self-center">
-          <button
-            onClick={onPayClick}
-            disabled={isProcessing}
-            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-widest bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-stone-950 shadow-md shadow-amber-900/20 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
-          >
-            {isProcessing ? (
-              <span className="flex items-center gap-1.5">
-                <Loader2 className="w-4 h-4 animate-spin" />
-                {locale === 'es' ? 'Procesando...' : 'Processing...'}
-              </span>
-            ) : (
-              <span className="flex items-center gap-2 whitespace-nowrap">
-                {locale === 'es' ? 'RESERVAR' : 'BOOK'}&nbsp;&nbsp;&bull;&nbsp;&nbsp;${pricing.total.toLocaleString('en-US')} USD
-              </span>
-            )}
-          </button>
+        {/* Desktop View */}
+        <div className="hidden md:flex items-center justify-between gap-5">
+          <div className="flex items-center gap-6 min-w-0 flex-1">
+            <Link
+              href={`/${locale}`}
+              aria-label="Vermilion Routes Home"
+              className="shrink-0 group flex items-center notranslate"
+            >
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0">
+                  <Image quality={100}
+                    src="/icon.png"
+                    alt="Vermilion Routes"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+            </Link>
+
+            <div className="h-8 w-px bg-zinc-300 dark:bg-zinc-700 shrink-0" />
+
+            <div className="space-y-0.5 min-w-0">
+              <div className="font-serif text-base lg:text-lg font-bold text-zinc-900 dark:text-white tracking-tight leading-tight truncate">
+                {title}
+              </div>
+              {duration && (
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs lg:text-sm text-emerald-700 dark:text-emerald-400 font-semibold">
+                  <span>{duration}</span>
+                  {primaryTour?.code && (
+                    <>
+                      <span>&bull;</span>
+                      <span>Code: {primaryTour.code}</span>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3.5 shrink-0">
+            <button
+              onClick={onPayClick}
+              disabled={isProcessing}
+              type="button"
+              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-extrabold uppercase tracking-widest bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-stone-950 shadow-md shadow-amber-900/20 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+            >
+              {isProcessing ? (locale === 'es' ? 'Procesando...' : 'Processing...') : `RESERVAR • $${pricing.total.toLocaleString("en-US")} USD`}
+            </button>
+          </div>
         </div>
       </div>
     </div>,
@@ -1865,7 +1895,7 @@ export function BookingWizard() {
               <span className="truncate">{locale === 'es' ? 'Procesando...' : (locale === 'zh' ? '处理中...' : (locale === 'ja' ? '処理中...' : 'Processing...'))}</span>
             </button>
           ) : mobileCTA.ready ? (
-            <button onClick={onPayClick} disabled={isProcessing} className="w-full relative overflow-hidden flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-[1.02] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none">
+            <button onClick={handleCheckout} disabled={isProcessing} className="w-full relative overflow-hidden flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-[1.02] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none">
                 <span className="absolute inset-0 bg-white/20 skew-x-[45deg] -translate-x-[150%] animate-[shine_2s_ease-in-out_infinite]" />
               <Lock className="w-4 h-4 shrink-0" />
               <span className="truncate">{mobileCTA.label}</span>
