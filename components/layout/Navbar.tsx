@@ -220,24 +220,39 @@ export function Navbar() {
           {/* Logo */}
           <Link href={`/${locale}`} aria-label="Vermilion Routes Inicio" className="flex items-center gap-3 relative z-10 group notranslate">
             <div className="relative w-[165px] h-[40px] sm:w-[180px] sm:h-[45px] md:w-[220px] md:h-[55px] shrink-0">
-              {/* Light Mode Logo (dark letters for light background) */}
-              <Image quality={100}
-                src="/logo_inicio.png"
-                alt="Vermilion Routes"
-                width={220}
-                height={55}
-                className="w-auto h-full object-contain transition-transform group-hover:scale-105 block dark:hidden"
-                priority
-              />
-              {/* Dark Mode Logo (white letters for dark background) */}
-              <Image quality={100}
-                src="/logo_blanco.png"
-                alt="Vermilion Routes"
-                width={220}
-                height={55}
-                className="w-auto h-full object-contain transition-transform group-hover:scale-105 hidden dark:block"
-                priority
-              />
+              {/* Full Logo when NOT scrolled */}
+              <div className={`transition-opacity duration-300 w-full h-full absolute inset-0 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                <Image quality={100}
+                  src="/logo_inicio.png"
+                  alt="Vermilion Routes"
+                  width={220}
+                  height={55}
+                  className="w-auto h-full object-contain transition-transform group-hover:scale-105 block dark:hidden"
+                  priority
+                />
+                <Image quality={100}
+                  src="/logo_blanco.png"
+                  alt="Vermilion Routes"
+                  width={220}
+                  height={55}
+                  className="w-auto h-full object-contain transition-transform group-hover:scale-105 hidden dark:block"
+                  priority
+                />
+              </div>
+
+              {/* Icon + Text when Scrolled */}
+              <div className={`transition-opacity duration-300 absolute inset-0 flex items-center gap-2 ${isScrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                <Image quality={100}
+                  src="/icon.png"
+                  alt="Vermilion Icon"
+                  width={45}
+                  height={45}
+                  className="w-auto h-full object-contain transition-transform group-hover:scale-105"
+                />
+                <span className="font-serif font-black tracking-widest text-sm sm:text-base md:text-lg text-emerald-950 dark:text-white hidden sm:block whitespace-nowrap">
+                  VERMILION ROUTES
+                </span>
+              </div>
             </div>
           </Link>
 
