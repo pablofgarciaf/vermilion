@@ -1648,7 +1648,7 @@ export function BookingWizard() {
                   </span>
                 </h3>
                 <div className="w-full">
-                  <TravelDatePicker selectedDate={date} onDateSelect={(d) => setDate(d)} durationDays={selectedTours.reduce((max, t) => Math.max(max, t.durationDays || 1), 1)} />
+                  <TravelDatePicker selectedDate={date} onDateSelect={(d) => setDate(d)} durationDays={selectedTours.reduce((sum, t) => sum + (t.durationDays || 1), 0) || 1} />
                 </div>
               </div>
 

@@ -176,6 +176,34 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
     setActiveDay((prev) => (prev >= totalDays ? 1 : prev + 1));
   };
 
+  // Resolver inteligente para garantizar que todo día tenga fotografía de alta calidad
+  const resolveDayImage = (item: ItineraryDay, title: string, desc: string): string => {
+    if (item.image) return item.image;
+    if (item.images && item.images.length > 0 && item.images[0]) return item.images[0];
+    const combined = `${title} ${desc}`.toLowerCase();
+    if (combined.includes('quilotoa')) return '/images/tours/16-9/laguna-quilotoa-16-9.webp';
+    if (combined.includes('cotopaxi')) return '/images/tours/16-9/cotopaxi-volcano-16-9.webp';
+    if (combined.includes('chimborazo')) return '/images/tours/16-9/chimborazo-volcano-16-9.webp';
+    if (combined.includes('baños') || combined.includes('banos') || combined.includes('pailón') || combined.includes('pailon') || combined.includes('cauldron')) return '/images/tours/16-9/pailon-del-diablo-16-9.webp';
+    if (combined.includes('papallacta') || combined.includes('termas') || combined.includes('thermal')) return '/images/tours/16-9/papallacta-laguna-16-9.webp';
+    if (combined.includes('mindo') || combined.includes('colibr') || combined.includes('orquíd') || combined.includes('cloud forest')) return '/images/tours/16-9/mindo-16-9.webp';
+    if (combined.includes('antisana') || combined.includes('cóndor') || combined.includes('condor')) return '/images/tours/16-9/antisana-16-9.webp';
+    if (combined.includes('otavalo') || combined.includes('peguche') || combined.includes('ponchos')) return '/images/tours/16-9/otavalo-market-16-9.webp';
+    if (combined.includes('cuenca') || combined.includes('tomebamba')) return '/images/tours/16-9/cuenca-colonial-16-9.webp';
+    if (combined.includes('cajas')) return '/images/tours/16-9/parque-nacional-el-cajas-9-16.webp';
+    if (combined.includes('amazon') || combined.includes('puyo') || combined.includes('selva') || combined.includes('cuyabeno') || combined.includes('rainforest')) return '/images/tours/16-9/amazon-river-16-9.webp';
+    if (combined.includes('mitad del mundo') || combined.includes('intiñan') || combined.includes('intinan') || combined.includes('equatorial') || combined.includes('ecuatorial')) return '/images/tours/16-9/mitad-del-mundo-16-9.webp';
+    if (combined.includes('quito') || combined.includes('san francisco') || combined.includes('colonial') || combined.includes('plaza grande') || combined.includes('compañía') || combined.includes('compania')) return '/images/tours/16-9/quito-colonial-16-9.webp';
+    if (combined.includes('isabela') || combined.includes('tintoreras') || combined.includes('sierra negra')) return '/images/tours/16-9/isabela-island-16-9.webp';
+    if (combined.includes('tortuga') || combined.includes('santa cruz') || combined.includes('charles darwin')) return '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp';
+    if (combined.includes('grietas') || combined.includes('puerto ayora')) return '/images/tours/16-9/galapagos-las-grietas-16-9.webp';
+    if (combined.includes('baltra')) return '/images/tours/16-9/galapagos-baltra-island-16-9.webp';
+    if (combined.includes('santa fe') || combined.includes('lobo marino') || combined.includes('sea lion')) return '/images/tours/16-9/santa-fe-island-16-9.webp';
+    return '/images/tours/16-9/chimborazo-volcano-16-9.webp';
+  };
+
+  const dayImageSrc = resolveDayImage(currentItem, dayTitle, dayDesc);
+
   return (
     <div className="space-y-6 w-full">
       {/* Encabezado Superior con Flechas y Contador */}
@@ -230,7 +258,7 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
             </span>
             {dayMeals && (
               <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-0.5 rounded-full border border-emerald-200/50">
-                <Utensils className="w-3 h-3 text-emerald-600" />
+                <Utensils className="w-3.5 h-3.5 text-emerald-600" />
                 {dayMeals}
               </span>
             )}
@@ -244,10 +272,10 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 
           {/* Fotografía Cinemática */}
-          {(currentItem.image || (currentItem.images && currentItem.images.length > 0)) && (
+          {dayImageSrc && (
             <div className="lg:col-span-5 relative rounded-2xl overflow-hidden aspect-[4/3] bg-zinc-100 dark:bg-zinc-950 border border-zinc-200/80 dark:border-zinc-800 shadow-xl group">
-              <Image quality={90}
-                src={currentItem.image || (currentItem.images && currentItem.images[0]) || ''}
+              <Image quality={100}
+                src={dayImageSrc}
                 alt={dayTitle}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-1000"

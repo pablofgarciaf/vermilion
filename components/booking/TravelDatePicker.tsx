@@ -125,14 +125,14 @@ export function TravelDatePicker({ selectedDate, onDateSelect, durationDays = 1 
               type="button"
               disabled={isPast}
               onClick={() => onDateSelect(dateStr)}
-              className={`h-9 sm:h-10 rounded-xl text-xs font-semibold flex items-center justify-center transition-all cursor-pointer relative ${
+              className={`cal-day h-9 sm:h-10 rounded-xl text-xs font-semibold flex items-center justify-center transition-all cursor-pointer relative ${
                 isPast
-                  ? 'text-zinc-400 dark:text-zinc-600 opacity-50 cursor-not-allowed'
+                  ? 'text-zinc-300 dark:text-zinc-600 opacity-40 cursor-not-allowed'
                   : isSelected
                   ? 'bg-emerald-600 text-white font-bold shadow-md shadow-emerald-600/30 scale-105 z-10'
                   : isInRange
                   ? 'bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 font-bold border border-emerald-500/30'
-                  : 'text-black dark:text-zinc-100 hover:bg-emerald-100 dark:hover:bg-zinc-800 hover:text-emerald-700 dark:hover:text-emerald-400'
+                  : 'text-zinc-800 dark:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-emerald-700 dark:hover:text-emerald-400'
               }`}
             >
               <span>{dateObj.getDate()}</span>
