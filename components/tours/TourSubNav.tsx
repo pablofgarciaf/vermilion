@@ -91,16 +91,9 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
 
             <div className="h-8 w-px bg-zinc-300 dark:bg-zinc-700 hidden lg:block shrink-0" />
 
-            <div className="space-y-1 min-w-0">
-              <div className="font-serif text-sm sm:text-base lg:text-lg font-bold text-zinc-900 dark:text-white tracking-tight leading-tight whitespace-normal break-words">
-                {title}
-              </div>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] sm:text-sm text-zinc-500 font-medium">
-                <span>{duration}</span>
-                <span>&bull;</span>
-                <span className="flex items-center gap-1.5 text-[#D4AF37] font-semibold">
-                  <Star className="w-4 h-4 fill-[#D4AF37]" /> {tour.rating}
-                </span>
+            <div className="min-w-0 flex flex-col justify-center">
+              <div className="font-serif text-sm font-bold text-zinc-900 dark:text-white truncate">
+                {title} <span className="font-sans text-[10px] sm:text-xs text-zinc-500 ml-1 font-semibold whitespace-nowrap">{duration} &bull; <Star className="inline w-3 h-3 fill-[#D4AF37] text-[#D4AF37] relative -top-[1px]" /> {tour.rating}</span>
               </div>
             </div>
           </div>
@@ -110,14 +103,14 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
 
           <div className={`mt-2 ${isDailyTour ? 'flex items-center gap-2' : 'grid grid-cols-3 gap-2 sm:flex sm:justify-end sm:gap-3'}`}>
             {isDailyTour ? (
-              <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-4 py-2.5 text-xs font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
+              <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-2 py-1.5 text-xs font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
                 <Sparkles className="w-4 h-4 fill-zinc-950" />
                 <span>{t.book}</span>
               </Link>
             ) : <>
             <Link
               href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
-              className={`flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all ${tierButtonTextSize} font-bold text-white shadow-sm shadow-emerald-900/30`}
+              className={`flex items-center justify-center gap-2 px-1 sm:px-5 py-1.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all ${tierButtonTextSize} font-bold text-white shadow-sm shadow-emerald-900/30`}
             >
               <Hotel className="w-4 h-4 text-emerald-200" />
               <span>{t.club}</span>
@@ -126,7 +119,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
 
             <Link
               href={`/${locale}/booking?addTour=${tour.id}&tier=vip`}
-              className={`flex items-center justify-center gap-2 px-3 sm:px-5 py-2.5 rounded-2xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] hover:brightness-105 transition-all ${tierButtonTextSize} font-bold text-zinc-950 shadow-md shadow-amber-500/20`}
+              className={`flex items-center justify-center gap-2 px-1 sm:px-5 py-1.5 rounded-2xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] hover:brightness-105 transition-all ${tierButtonTextSize} font-bold text-zinc-950 shadow-md shadow-amber-500/20`}
             >
               <Sparkles className="w-4 h-4 text-zinc-950 fill-zinc-950" />
               <span>{t.vip}</span>

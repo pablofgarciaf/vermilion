@@ -5,6 +5,7 @@ import { Navbar } from './Navbar';
 export function ConditionalNavbar() {
   const pathname = usePathname();
   const isTourDetail = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/tours\/[^/]+$/);
+  const isDestinationDetail = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/destinations\/[^/]+$/);
   // No mostrar el navbar en las rutas internas (affiliates, admin, cpanel, operator, auth, checkout)
   if (
     pathname?.includes('/affiliates') || 
@@ -20,7 +21,8 @@ export function ConditionalNavbar() {
   const isFullBleedHero = 
     pathname === '/' || 
     !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/?$/) ||
-    isTourDetail;
+    isTourDetail ||
+    isDestinationDetail;
 
   return (
     <>

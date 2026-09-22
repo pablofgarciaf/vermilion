@@ -141,25 +141,20 @@ function BookingSubNav({ primaryTour, pricing, locale, onPayClick }: { primaryTo
         </div>
 
         <div className="flex items-center gap-3.5 shrink-0 self-end sm:self-center">
-          <div className="text-right">
-            <span className="text-[9px] uppercase tracking-wider text-zinc-400 block font-semibold">{st.estimatedTotal}</span>
-            <span className="font-bold text-emerald-600 dark:text-emerald-400 text-base sm:text-lg font-mono">
-              ${pricing.total.toLocaleString('en-US')} USD
-            </span>
-          </div>
-
           <button
             onClick={handleCheckout}
             disabled={isProcessing}
-            className="inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-stone-950 shadow-md transition-all hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-widest bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-stone-950 shadow-md shadow-amber-900/20 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
           >
             {isProcessing ? (
               <span className="flex items-center gap-1.5">
-                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                ...
+                <Loader2 className="w-4 h-4 animate-spin" />
+                {locale === 'es' ? 'Procesando...' : 'Processing...'}
               </span>
             ) : (
-              <span>{st.support}</span>
+              <span className="flex items-center gap-2 whitespace-nowrap">
+                {locale === 'es' ? 'RESERVAR' : 'BOOK'}&nbsp;&nbsp;&bull;&nbsp;&nbsp;${pricing.total.toLocaleString('en-US')} USD
+              </span>
             )}
           </button>
         </div>
