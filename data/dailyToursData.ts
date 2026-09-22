@@ -87,8 +87,9 @@ export const dailyTours: Tour[] = [
         day: 1,
         title: {
           en: 'Full Day – Historic Quito & Equatorial Line At Intiñan',
-          es: 'Día Completo – Quito Histórico Y Línea Ecuatorial En Intiñan'
+          es: "Iniciaremos nuestra jornada sumergiéndonos en la magia del Centro Histórico de Quito, el Primer Patrimonio Cultural de la Humanidad declarado por la UNESCO. Recorreremos la emblemática Plaza Grande rodeada por el Palacio Presidencial y la Catedral, y nos deslumbremos con la espectacular iglesia de La Compañía de Jesús, cuya nave central está completamente cubierta en pan de oro.\n\nLuego nos dirigiremos hacia la latitud cero en el complejo de la Mitad del Mundo. Allí podrá pisar ambos hemisferios simultáneamente y participaremos en divertidos y sorprendentes experimentos físicos en el Museo Intiñan."
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         description: {
           en: 'Our tour begins at Plaza Grande, the heart of Quito’s historic center and an important place in Ecuador’s history. From here, we explore the surrounding colonial architecture and learn about the city’s rich cultural heritage.\n\nDuring our walk through the historic center, we will observe several beautiful churches, convents, and historic buildings, including the Convent of La Concepción, which was considered the largest convent in America during its time, and the Church of El Sagrario, an outstanding example of colonial religious architecture.\n\nWe continue to the Archbishop’s Palace, located beside Plaza Grande, and then visit La Compañía de Jesús, one of Quito’s most spectacular churches, famous for its richly decorated interior covered in gold leaf and its impressive Baroque architecture.\n\nNext, we enjoy a special Yumbos chocolate experience, where we learn about Ecuadorian cacao and have the opportunity to taste delicious Ecuadorian chocolate.\n\nWe then continue our visit to Plaza and Church of San Francisco, one of the most iconic places in Quito’s historic center. The church and convent form one of the most important architectural and cultural complexes in the city.\n\nAfter discovering Quito’s historic center, we continue our journey toward the Middle of the World. Along the way, we can enjoy views of Quito and its surrounding landscapes.\n\nAt the Middle of the World, we visit the famous equatorial monument and then enter the Intiñan Museum, an interactive cultural museum where visitors can learn about Ecuador’s indigenous cultures, ancestral traditions, and fascinating experiences related to the Equator.',
           es: 'Iniciamos en la Plaza Grande en el corazón del centro colonial de Quito. Recorremos calles empedradas admirando el Convento de La Concepción y la Iglesia de El Sagrario.\n\nContinuamos hacia el Palacio Arzobispal y visitamos la deslumbrante Iglesia de La Compañía de Jesús, famosa por su decoración en pan de oro y arquitectura barroca.\n\nDisfrutamos de una cata guiada de chocolate ecuatoriano en Yumbos Chocolate, aprendiendo sobre el grano de cacao de aroma.\n\nVisitamos la histórica Plaza e Iglesia de San Francisco antes de trasladarnos hacia el norte hacia la Mitad del Mundo.\n\nEn la línea ecuatorial, visitamos el monumento y el Museo Interactivo Intiñan con experimentos solares y tradiciones ancestrales antes de retornar a su hotel en Quito.'
@@ -185,8 +186,9 @@ export const dailyTours: Tour[] = [
         day: 1,
         title: {
           en: 'Full Day – Otavalo Textiles, Peguche Culture & Cotacachi Leather',
-          es: 'Día Completo – Textiles De Otavalo, Cultura En Peguche Y Cuero En Cotacachi'
+          es: "Emprenderemos un pintoresco viaje hacia el norte del país, atravesando el espectacular callejón interandino rumbo a la \"Provincia de los Lagos\". Haremos una breve parada en Cayambe para degustar sus famosos bizcochos tradicionales.\n\nAl llegar a Otavalo, descubriremos el mercado indígena artesanal más grande e importante de Sudamérica en la vibrante Plaza de los Ponchos, donde podrá admirar y adquirir finos textiles y artesanías locales. Tras un delicioso almuerzo típico, visitaremos la mística Cascada de Peguche, un centro ceremonial indígena, para finalmente explorar el famoso cantón de Cotacachi, reconocido internacionalmente por sus exquisitas manufacturas en cuero."
         },
+        image: '/images/tours/16-9/otavalo-market-16-9.webp',
         description: {
           en: 'Our adventure begins in Quito, traveling north through spectacular Andean landscapes. During the approximately two-hour journey, enjoy mountain valleys and panoramic viewpoints toward Imbabura province.\n\nOur first stop is Otavalo at Plaza de los Ponchos, discovering colorful textiles, traditional clothing, handmade crafts, and jewelry created by local artisans.\n\nWe continue to Peguche for a traditional lunch and the special Mindalae cultural experience, followed by a visit to a master workshop crafting Andean panpipes, flutes, and drums.\n\nOur final stop is Cotacachi, renowned for its high-quality leather jackets, bags, and shoes before returning to Quito in the afternoon.',
           es: 'Salida desde Quito hacia el norte atravesando valles andinos hacia la provincia de Imbabura.\n\nPrimera parada en Otavalo y su Plaza de los Ponchos, repleta de textiles, ponchos, tapices y artesanías.\n\nContinuación a Peguche para degustar un almuerzo típico y participar en la vivencia cultural Mindalae, visitando un taller de luthería andina.\n\nVisita a las tiendas de cuero en Cotacachi antes del viaje de retorno a Quito.'
@@ -283,8 +285,9 @@ export const dailyTours: Tour[] = [
         day: 1,
         title: {
           en: 'Full Day – Andes Pass & Papallacta Thermal Springs',
-          es: 'Día Completo – Paso Andino Y Termas De Papallacta'
+          es: "Partimos desde Quito ascendiendo por la cordillera oriental de los Andes a través de la histórica ruta de la canela, alcanzando el paso de montaña a 4.100 metros de altitud con espectaculares vistas al páramo andino.\n\nDescendemos hacia el majestuoso valle de Papallacta para ingresar a sus exclusivas termas naturales. Aquí, disfrutaremos de piscinas de aguas medicinales que brotan directamente de fuentes volcánicas con temperaturas ideales para la máxima relajación muscular.\n\nComplementamos la experiencia con un almuerzo tradicional y una hermosa caminata ecológica a orillas de un río cristalino, rodeados de bosques de polylepis y vistas inigualables del volcán Antisana."
         },
+        image: '/images/tours/16-9/papallacta-laguna-16-9.webp',
         description: {
           en: 'Depart Quito crossing the Eastern Andes at 4,100 m with panoramic views of the páramo.\n\nArrive at Papallacta Hot Springs and immerse in therapeutic thermal pools surrounded by pristine mountain air and lush vegetation.\n\nEnjoy an included lunch and a guided scenic walk along river trails before returning to Quito in the afternoon.',
           es: 'Salida desde Quito cruzando la cordillera a 4.100 m con vistas al páramo andino.\n\nLlegada a las Termas de Papallacta para disfrutar de sus piscinas calientes de agua mineral volcánica.\n\nAlmuerzo y caminata ecológica a orillas del río antes del regreso a Quito.'
@@ -382,8 +385,9 @@ export const dailyTours: Tour[] = [
         day: 1,
         title: {
           en: 'Full Day – Mindo Cloud Forest, Hummingbirds & Zip-Line',
-          es: 'Día Completo – Bosque Nublado De Mindo, Colibríes Y Canopy'
+          es: "Descendemos desde los Andes hacia el noroccidente adentrándonos en la exuberante Reserva del Bosque Nuboso del Chocó Andino, una de las zonas con mayor biodiversidad del planeta.\n\nCruzamos el dosel del bosque a bordo de una espectacular tarabita (teleférico rústico) que nos llevará hacia el santuario de la Cascada de Nambillo. Allí realizaremos una caminata rodeados de orquídeas y aves tropicales hasta llegar a la caída de agua. Por la tarde, deleitaremos nuestros sentidos con una visita interactiva a una fábrica de chocolate artesanal, conociendo el proceso del \"grano a la barra\", culminando con un almuerzo exquisito."
         },
+        image: '/images/tours/16-9/mindo-16-9.webp',
         description: {
           en: 'Travel from Quito to the northwestern slope of the Andes into the Mindo Cloud Forest.\n\nFirst, visit the Hummingbird Sanctuary to marvel at their incredible agility and colorful plumage.\n\nNext, hike through the Mindo-Nambillo reserve to discover a secluded forest waterfall.\n\nAfter an included lunch, gear up for an exhilarating 3-line zip-line canopy flight across the treetops before returning to Quito.',
           es: 'Viaje desde Quito hacia el bosque nublado de Mindo.\n\nVisita al Santuario de Colibríes para contemplar su increíble velocidad y colores brillantes.\n\nCaminata en la Reserva Mindo-Nambillo hasta una hermosa cascada natural.\n\nAlmuerzo y emocionante circuito de tirolesa (canopy 3 líneas) sobre las copas del bosque antes de retornar a Quito.'
@@ -479,8 +483,9 @@ export const dailyTours: Tour[] = [
         day: 1,
         title: {
           en: 'Full Day – Antisana Condor Sanctuary & La Mica Lagoon',
-          es: 'Día Completo – Santuario Del Cóndor En Antisana Y Laguna La Mica'
+          es: "Nos dirigimos a la Reserva Ecológica Antisana, un paraíso para los amantes de la naturaleza y el mejor lugar en Ecuador para el avistamiento del imponente Cóndor Andino. Ascendemos a más de 3.800 metros recorriendo vastos paisajes de páramo llenos de vida salvaje.\n\nLlegaremos a la deslumbrante Laguna de La Mica, situada a las faldas del inmenso glaciar del Volcán Antisana. Tras una caminata guiada rodeados de flora altoandina, concluiremos con un exquisito almuerzo en una hacienda local de la zona antes de nuestro regreso a la capital."
         },
+        image: '/images/tours/16-9/antisana-16-9.webp',
         description: {
           en: 'Depart Quito through Valle de los Chillos toward Pintag, entering Antisana National Park.\n\nAscend to prime viewpoints to search for wild Andean condors, wild llamas, and deer.\n\nArrive at La Mica Lagoon for a scenic high-altitude hike exploring the páramo ecosystem and stunning volcano glaciers.\n\nEnjoy an included lunch before beginning the return journey to Quito in the afternoon.',
           es: 'Salida de Quito por el Valle de los Chillos hacia Pintag ingresando al Parque Nacional Antisana.\n\nParadas estratégicas en miradores de páramo para avistamiento del cóndor andino y fauna silvestre.\n\nLlegada a la Laguna La Mica para realizar una caminata panorámica frente a los glaciares del volcán.\n\nAlmuerzo y retorno a Quito por la tarde.'
@@ -577,8 +582,9 @@ export const dailyTours: Tour[] = [
         day: 1,
         title: {
           en: 'Full Day – Avenue Of The Volcanoes & Cotopaxi Refuge Hike',
-          es: 'Día Completo – Avenida De Los Volcanes Y Ascenso Al Refugio Cotopaxi'
+          es: "Salimos temprano desde Quito recorriendo la icónica Avenida de los Volcanes hacia el majestuoso Parque Nacional Cotopaxi. Nuestra primera parada es el Centro de Interpretación, seguido de una caminata guiada alrededor de la Laguna de Limpiopungo (3.800 m), ideal para la observación de aves andinas y caballos salvajes. Si las condiciones climáticas lo permiten, iniciaremos el emocionante ascenso hasta el Refugio José Ribas (4.864 m), ubicado en las faldas de este coloso nevado activo. Luego del descenso, disfrutaremos de un almuerzo revitalizante antes de emprender nuestro regreso a Quito."
         },
+        image: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
         description: {
           en: 'Depart early from Quito traveling south on the Pan-American Highway through the Avenue of Volcanoes.\n\nEnter Cotopaxi National Park, visiting the Interpretation Center and panoramic páramo grasslands.\n\nDrive up to the parking lot at 4,500 m and begin the memorable hike up volcanic ash scree to José Rivas Refuge at 4,800 m.\n\nAfter taking in breathtaking views and warming up at the refuge, descend and visit Limpiopungo Lagoon before enjoying an included lunch and returning to Quito.',
           es: 'Salida temprana desde Quito hacia el sur por la Avenida de los Volcanes.\n\nIngreso al Parque Nacional Cotopaxi, visita al Centro de Interpretación y ascenso vehicular al parqueadero (4.500 m).\n\nCaminata guiada por la ladera de arena volcánica hasta el Refugio José Rivas (4.800 m).\n\nDescenso, visita panorámica a la Laguna de Limpiopungo, almuerzo incluido y retorno a Quito por la tarde.'
@@ -677,8 +683,9 @@ export const dailyTours: Tour[] = [
         day: 1,
         title: {
           en: 'Full Day – Tigua Art, Cuy Farm & Quilotoa Volcanic Caldera',
-          es: 'Día Completo – Arte De Tigua, Granja De Cuyes Y Cráter De Quilotoa'
+          es: "Partimos temprano desde Quito adentrándonos hacia el suroeste por impresionantes valles agrícolas andinos. Realizamos una parada cultural en la comunidad de Tigua, famosa por sus vibrantes pinturas autóctonas plasmadas en cuero de oveja. Continuamos nuestro trayecto con la visita a una granja tradicional para conocer la crianza de cuyes, una práctica milenaria en los Andes.\n\nFinalmente llegamos al imponente cráter del Quilotoa, donde quedará maravillado por las deslumbrantes aguas color verde esmeralda de su laguna volcánica. Disfrute de tiempo libre para descender a la orilla o caminar por el borde, seguido de un almuerzo tradicional antes de retornar a la capital."
         },
+        image: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
         description: {
           en: 'Depart early morning from Quito traveling southwest through rural Andean farming valleys.\n\nMake a cultural stop in Tigua discovering colorful local paintings depicting mountain life, followed by a visit to a traditional guinea pig (cuy) farm.\n\nArrive at Quilotoa and take in the awe-inspiring turquoise waters from the rim viewpoint.\n\nOptional hike down into the crater to touch the mineral-rich waters. Enjoy an included lunch before the return drive to Quito in the afternoon.',
           es: 'Salida temprano desde Quito hacia el suroeste a través de valles agrícolas andinos.\n\nParada cultural en Tigua descubriendo pinturas autóctonas en cuero de oveja y visita a una granja tradicional de cuyes.\n\nLlegada al mirador del Quilotoa contemplando el majestuoso cráter volcánico de agua color turquesa.\n\nCaminata opcional hacia el fondo de la caldera, almuerzo incluido y retorno a Quito por la tarde.'
