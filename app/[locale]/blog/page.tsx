@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Reiseführer & Expeditionen nach Maß',
     it: 'Vermilion Routes | Guide di Viaggio e Spedizioni Uniche',
     pt: 'Vermilion Routes | Guias de Viagem e Expedições a Medida',
-    ja: 'Vermilion Routes | 自然旅行ガイドとエクアドル遠征記',
-    zh: 'Vermilion Routes | 自然旅行指南与厄瓜多尔探险纪行',
+    ja: 'Vermilion Routes | 自然旅行ガイド',
+    zh: 'Vermilion Routes | 自然旅行指南',
   };
   const descriptions: Record<string, string> = {
     es: 'Guías de viaje y consejos para explorar Galápagos, los Andes y la Amazonía ecuatoriana con la asesoría de expertos de Vermilion Routes 24/7.',

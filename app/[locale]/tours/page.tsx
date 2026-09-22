@@ -38,8 +38,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Naturreisen nach Ecuador & Galápagos',
     it: 'Vermilion Routes | Viaggi su Misura in Ecuador e Andes',
     pt: 'Vermilion Routes | Expedições sob Medida no Equador 24/7',
-    ja: 'Vermilion Routes | ガラパゴス＆エクアドル自然遠征ツアー',
-    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯群岛自然探险',
+    ja: 'Vermilion Routes | 自然遠征ツアーカタログ',
+    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯行程精选',
   };
   const descriptions: Record<string, string> = {
     es: 'Explore nuestro catálogo exclusivo de viajes a medida a Galápagos, la Amazonía y los Andes. Itinerarios privados con confort y atención 24/7.',

@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Tierfotografie & Naturreisen 24/7',
     it: 'Vermilion Routes | Spedizioni Fotografiche e Natura 24/7',
     pt: 'Vermilion Routes | Expedições de Fotografia e Vida Selvagem',
-    ja: 'Vermilion Routes | ガラパゴス＆アマゾン野生動物写真撮影ツアー',
-    zh: 'Vermilion Routes | 厄瓜多尔加拉帕戈斯野生动物摄影探险',
+    ja: 'Vermilion Routes | 野生動物写真撮影ツアー',
+    zh: 'Vermilion Routes | 野生动物摄影探险',
   };
   const descriptions: Record<string, string> = {
     es: 'Expediciones privadas para fotógrafos y amantes de la fauna en Galápagos y la Amazonía con guías naturalistas dedicados y soporte exclusivo 24/7.',

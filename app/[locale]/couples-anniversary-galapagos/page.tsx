@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Romantische Reisen nach Galápagos 24/7',
     it: 'Vermilion Routes | Viaggi Romantici alle Galápagos 24/7',
     pt: 'Vermilion Routes | Viagens Românticas em Galápagos 24/7',
-    ja: 'Vermilion Routes | ガラパゴス＆エクアドル記念日ロマンチック旅行',
-    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯蜜月浪漫之旅',
+    ja: 'Vermilion Routes | 記念日・ハネムーン旅行',
+    zh: 'Vermilion Routes | 蜜月与周年浪漫之旅',
   };
   const descriptions: Record<string, string> = {
     es: 'Viajes románticos a medida en Galápagos y Ecuador: atardeceres volcánicos, lodges boutique y cenas exclusivas con asesoría experta 24/7.',

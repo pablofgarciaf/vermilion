@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Buchen Sie Ihre Reise nach Maß',
     it: 'Vermilion Routes | Prenota la Tua Spedizione Unica',
     pt: 'Vermilion Routes | Reserve sua Viagem sob Medida',
-    ja: 'Vermilion Routes | ガラパゴス＆エクアドル自然旅行予約',
-    zh: 'Vermilion Routes | 预订厄瓜多尔与加拉帕戈斯自然之旅',
+    ja: 'Vermilion Routes | 自然旅行のご予約',
+    zh: 'Vermilion Routes | 在线预订自然探险行程',
   };
   const descriptions: Record<string, string> = {
     es: 'Reserve su expedición a medida en Galápagos y Ecuador con Vermilion Routes. Naturaleza, confort, asesoría 24/7 y cotizaciones exclusivas garantizadas.',
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     it: 'Prenota la tua spedizione su misura alle Galápagos ed in Ecuador con Vermilion Routes. Natura, comfort, consulenti dedicati 24/7 e preventivi diretti.',
     pt: 'Reserve sua expedição sob medida em Galápagos e no Equador com a Vermilion Routes. Natureza, conforto, consultoria dedicada 24/7 e cotações diretas.',
     ja: 'ガラパゴス諸島とエクアドル本土へのオーダーメイド自然体験ツアーをご予約ください。専任トラベルデザイナーが24時間体制で見積もりを作成します。',
-    zh: '在线预约定制专属的厄瓜多尔与加拉帕戈斯群岛自然探险行程。24/7全天候私人旅行设计师竭诚为您提供一对一专属行程规划与安全舒适体验。',
+    zh: '在线预约定制专属的厄瓜多尔与加拉帕戈斯自然探险。24/7私人旅行设计师提供一对一行程规划。',
   };
 
   const title = titles[locale] || titles['en'];

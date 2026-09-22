@@ -12,12 +12,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Datenschutzerklärung & Schutz 24/7',
     it: 'Vermilion Routes | Informativa sulla Privacy & Dati 24/7',
     pt: 'Vermilion Routes | Política de Privacidade e Datos 24/7',
-    ja: 'Vermilion Routes | 公式プライバシーポリシーと個人情報保護方針',
-    zh: 'Vermilion Routes | 官方隐私政策与个人信息安全保护',
+    ja: 'Vermilion Routes | プライバシーポリシー',
+    zh: 'Vermilion Routes | 官方隐私政策',
   };
   const descriptions: Record<string, string> = {
-    es: 'Política de Privacidad oficial de Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Protección de datos personales y reservas seguras 24/7.',
-    en: 'Official Privacy Policy of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Transparent personal data protection and secure travel 24/7.',
+    es: 'Política de Privacidad de Agencia de Viajes Vermilion (Quito, Ecuador). Protección de datos personales y reservas seguras con asesoría 24/7.',
+    en: 'Privacy Policy of Agencia de Viajes Vermilion (Quito, Ecuador). Transparent data protection and secure bookings with dedicated 24/7 support.',
     fr: 'Politique de Confidentialité officielle d\'Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Équateur. Protection des données et réservations 24/7.',
     de: 'Offizielle Datenschutzerklärung der Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Höchster Datenschutz für sichere Buchungen 24/7.',
     it: 'Informativa sulla Privacy di Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador. Protezione dei dati personali e prenotazioni sicure 24/7.',

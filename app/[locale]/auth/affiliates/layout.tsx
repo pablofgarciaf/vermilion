@@ -16,8 +16,8 @@ export async function generateMetadata({
     de: 'Vermilion Routes | Botschafter- und Partnerportal 24/7',
     it: 'Vermilion Routes | Portale Ambasciatori e Partner 24/7',
     pt: 'Vermilion Routes | Portal de Embaixadores e Parceiros',
-    ja: 'Vermilion Routes | 公式アンバサダー＆パートナー専用ポータル',
-    zh: 'Vermilion Routes | 官方旅行大使与合作伙伴专属门户',
+    ja: 'Vermilion Routes | アンバサダー専用ポータル',
+    zh: 'Vermilion Routes | 官方旅行大使门户',
   };
 
   const descriptions: Record<string, string> = {

@@ -12,11 +12,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Allgemeine Geschäftsbedingungen 24/7',
     it: 'Vermilion Routes | Termini e Condizioni di Viaggio 24/7',
     pt: 'Vermilion Routes | Termos e Condições Gerais de Viagem',
-    ja: 'Vermilion Routes | 公式利用規約およびツアー約款',
-    zh: 'Vermilion Routes | 官方服务条款与旅行预订合同细则',
+    ja: 'Vermilion Routes | 利用規約とツアー約款',
+    zh: 'Vermilion Routes | 服务条款与预订细则',
   };
   const descriptions: Record<string, string> = {
-    es: 'Términos y condiciones oficiales, políticas de reserva, cancelaciones y lealtad de Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador 24/7.',
+    es: 'Términos y condiciones, reservas, cancelaciones y lealtad de Agencia de Viajes Vermilion (Quito, Ecuador). Asesoría personal 24/7.',
     en: 'Official Terms and Conditions, booking policies, cancellations and loyalty terms of Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador.',
     fr: 'Conditions générales officielles, politiques de réservation et d\'annulation de l\'Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Équateur 24/7.',
     de: 'Offizielle Geschäftsbedingungen, Buchungs- und Stornierungsrichtlinien der Agencia de Viajes Vermilion (RUC 1711992808001), Quito, Ecuador 24/7.',

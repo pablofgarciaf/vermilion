@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Familienreisen Ecuador & Galápagos 24/7',
     it: 'Vermilion Routes | Viaggi per Famiglie in Ecuador 24/7',
     pt: 'Vermilion Routes | Viagens em Família no Equador 24/7',
-    ja: 'Vermilion Routes | ガラパゴス＆エクアドル家族向け豪華遠征旅行',
-    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯亲子奢华探险',
+    ja: 'Vermilion Routes | 家族向け豪華自然旅行',
+    zh: 'Vermilion Routes | 亲子奢华探险之旅',
   };
   const descriptions: Record<string, string> = {
     es: 'Expediciones familiares en Galápagos y Ecuador: tortugas gigantes, snorkel y selva amazónica. Viajes seguros con atención personalizada 24/7.',

@@ -11,8 +11,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Offizielles Botschafter-Programm 24/7',
     it: 'Vermilion Routes | Programma Ambasciatori Ufficiale 24/7',
     pt: 'Vermilion Routes | Programa de Embaixadores Oficial 24/7',
-    ja: 'Vermilion Routes | 公式旅行アンバサダー募集 24/7',
-    zh: 'Vermilion Routes | 官方旅行大使与合作伙伴计划 24/7',
+    ja: 'Vermilion Routes | 公式アンバサダー募集',
+    zh: 'Vermilion Routes | 官方旅行大使计划',
   };
   const descriptions: Record<string, string> = {
     es: 'Gane comisiones del 10% recomendando expediciones a medida en Galápagos y Ecuador. Únase a la red oficial de embajadores de Vermilion Routes 24/7.',

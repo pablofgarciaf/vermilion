@@ -29,8 +29,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     de: 'Vermilion Routes | Reisen nach Ecuador & Galápagos 24/7',
     it: 'Vermilion Routes | Viaggi su Misura alle Galápagos 24/7',
     pt: 'Vermilion Routes | Viagens sob Medida no Equador 24/7',
-    ja: 'Vermilion Routes | ガラパゴス＆エクアドル自然旅行 24/7',
-    zh: 'Vermilion Routes | 厄瓜多尔与加拉帕戈斯群岛自然探险',
+    ja: 'Vermilion Routes | エクアドル＆ガラパゴス自然旅行',
+    zh: 'Vermilion Routes | 定制厄瓜多尔与加拉帕戈斯之旅',
   };
 
   const descriptions: Record<string, string> = {
