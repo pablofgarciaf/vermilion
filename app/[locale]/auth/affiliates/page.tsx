@@ -297,12 +297,16 @@ function AffiliatesAuthContent() {
           const userCred = await createUserWithEmailAndPassword(auth, cleanEmail, cleanCedula);
           authUid = userCred.user.uid;
 
-          // Enviar correo de verificación (sin desloguear!)
+          // Enviar correo de verificación
           try {
             await sendEmailVerification(userCred.user);
           } catch (mErr) {
             console.warn('Notice sending verification email:', mErr);
           }
+          
+          // CRITICAL FIX: Sign them out so they must click the email link to proceed
+          await signOut(auth);
+          
         } catch (authErr: any) {
           if (authErr.code === 'auth/email-already-in-use') {
             console.warn('Email already in Firebase Auth, linking profile...');
@@ -325,16 +329,9 @@ function AffiliatesAuthContent() {
 
       setSuccessMsg(
         isEs
-          ? '¡Cuenta creada! Tu sesión está activa. Ahora define tu contraseña definitiva.'
-          : 'Account created! Please set your definitive password now.'
+          ? '¡Cuenta creada exitosamente! Hemos enviado un enlace a tu correo. Por favor, revisa tu bandeja de entrada (o spam) y haz clic en el enlace para activar tu cuenta y establecer tu contraseña definitiva.'
+          : 'Account created! We have sent a verification link to your email. Please check your inbox (or spam) to activate your account and set your password.'
       );
-
-      // Abrir modal de definición de contraseña definitiva con sesión activa
-      setActiveAffiliateId(newAff.id);
-      setActiveUserEmail(cleanEmail);
-      setTimeout(() => {
-        setShowForcePasswordModal(true);
-      }, 500);
 
     } catch (err: any) {
       console.error('[Register Error]', err);

@@ -30,12 +30,20 @@ export const POST = withValidation(paypalCaptureOrderSchema, async (_req, _ctx, 
       ? `${captureResult.payer.name.given_name} ${captureResult.payer.name.surname || ''}`.trim()
       : (data.clientName || payerEmail.split('@')[0] || 'Valued Traveler');
 
+    // Extract exact amount and description directly from the PayPal capture response
+    const purchaseUnit = captureResult.purchase_units?.[0];
+    const capture = purchaseUnit?.payments?.captures?.[0];
+    
+    const officialAmount = capture?.amount?.value;
+    const officialDescription = purchaseUnit?.description;
+
+    const finalAmount = Number(officialAmount) || Number(data.amount) || 0;
+    const finalTourTitle = officialDescription || data.tourTitle || 'Vermilion Routes Expedition';
+
     let bookingRef = data.bookingRef;
     if (!bookingRef || !bookingRef.startsWith('R-')) {
       bookingRef = await generateBookingCode(data.tourId || 'custom', data.affiliateCode);
     }
-
-    const finalAmount = Number(data.amount) || 500;
 
     // Authenticate server session for Firestore security rules if needed
     if (auth && !auth.currentUser) {
@@ -51,7 +59,7 @@ export const POST = withValidation(paypalCaptureOrderSchema, async (_req, _ctx, 
       refCode: bookingRef,
       bookingCode: bookingRef,
       tourId: data.tourId || 'custom',
-      tourTitle: data.tourTitle || 'Vermilion Routes Expedition',
+      tourTitle: finalTourTitle,
       customerName: payerName,
       customerEmail: payerEmail,
       customerPhone: '',
@@ -87,7 +95,7 @@ export const POST = withValidation(paypalCaptureOrderSchema, async (_req, _ctx, 
         await sendBookingConfirmationEmail({
           toEmail: payerEmail,
           customerName: payerName,
-          tourTitle: data.tourTitle || 'Vermilion Routes Expedition',
+          tourTitle: finalTourTitle,
           bookingRef,
           amountPaid: finalAmount,
           paymentMethod: 'PayPal / International Card',
