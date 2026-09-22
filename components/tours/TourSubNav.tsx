@@ -92,7 +92,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
             <div className="h-8 w-px bg-zinc-300 dark:bg-zinc-700 hidden lg:block shrink-0" />
 
             <div className="min-w-0 flex flex-col justify-center">
-              <div className="font-serif text-sm font-bold text-zinc-900 dark:text-white truncate">
+              <div className="font-serif text-sm font-bold text-zinc-900 dark:text-white leading-tight">
                 {title} <span className="font-sans text-[10px] sm:text-xs text-zinc-500 ml-1 font-semibold whitespace-nowrap">{duration} &bull; <Star className="inline w-3 h-3 fill-[#D4AF37] text-[#D4AF37] relative -top-[1px]" /> {tour.rating}</span>
               </div>
             </div>
@@ -101,31 +101,31 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
 
           </div>
 
-          <div className={`mt-2 ${isDailyTour ? 'flex items-center gap-2' : 'grid grid-cols-3 gap-2 sm:flex sm:justify-end sm:gap-3'}`}>
+          <div className="mt-2.5 w-full flex flex-col gap-2 pb-1">
             {isDailyTour ? (
-              <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-2 py-1.5 text-xs font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
+              <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex w-full items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-2 py-2 text-sm font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
                 <Sparkles className="w-4 h-4 fill-zinc-950" />
                 <span>{t.book}</span>
               </Link>
-            ) : <>
+            ) : <div className="grid grid-cols-2 gap-2 w-full">
             <Link
               href={`/${locale}/booking?addTour=${tour.id}&tier=club`}
-              className={`flex items-center justify-center gap-2 px-1 sm:px-5 py-1.5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all ${tierButtonTextSize} font-bold text-white shadow-sm shadow-emerald-900/30`}
+              className="flex items-center justify-center gap-1.5 px-1 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-900 hover:brightness-110 transition-all text-xs font-bold text-white shadow-sm shadow-emerald-900/30"
             >
-              <Hotel className="w-4 h-4 text-emerald-200" />
-              <span>{t.club}</span>
-              <span className="text-emerald-100 font-extrabold text-sm sm:text-base">${priceClub}</span>
+              <Hotel className="w-3.5 h-3.5 text-emerald-200" />
+              <span className="truncate">{t.club}</span>
+              <span className="text-emerald-100 font-extrabold whitespace-nowrap">${priceClub}</span>
             </Link>
 
             <Link
               href={`/${locale}/booking?addTour=${tour.id}&tier=vip`}
-              className={`flex items-center justify-center gap-2 px-1 sm:px-5 py-1.5 rounded-2xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] hover:brightness-105 transition-all ${tierButtonTextSize} font-bold text-zinc-950 shadow-md shadow-amber-500/20`}
+              className="flex items-center justify-center gap-1.5 px-1 py-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] hover:brightness-105 transition-all text-xs font-bold text-zinc-950 shadow-md shadow-amber-500/20"
             >
-              <Sparkles className="w-4 h-4 text-zinc-950 fill-zinc-950" />
-              <span>{t.vip}</span>
-              <span className="font-extrabold text-sm sm:text-base">${priceVip}</span>
+              <Sparkles className="w-3.5 h-3.5 text-zinc-950 fill-zinc-950 shrink-0" />
+              <span className="truncate">{t.vip}</span>
+              <span className="font-extrabold whitespace-nowrap">${priceVip}</span>
             </Link>
-            </>}
+            </div>}
           </div>
         </div>
 

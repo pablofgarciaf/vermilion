@@ -71,7 +71,7 @@ const BOOKING_SUBNAV_I18N: Record<string, { defaultTitle: string; estimatedTotal
   },
 };
 
-function BookingSubNav({ primaryTour, pricing, locale, onPayClick }: { primaryTour: Tour | null; pricing: any; locale: string; onPayClick?: () => void }) {
+function BookingSubNav({ primaryTour, pricing, locale, onPayClick, isProcessing }: { primaryTour: Tour | null; pricing: any; locale: string; onPayClick?: () => void; isProcessing?: boolean }) {
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -142,7 +142,7 @@ function BookingSubNav({ primaryTour, pricing, locale, onPayClick }: { primaryTo
 
         <div className="flex items-center gap-3.5 shrink-0 self-end sm:self-center">
           <button
-            onClick={handleCheckout}
+            onClick={onPayClick}
             disabled={isProcessing}
             className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-extrabold uppercase tracking-widest bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-stone-950 shadow-md shadow-amber-900/20 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
           >
@@ -1865,7 +1865,7 @@ export function BookingWizard() {
               <span className="truncate">{locale === 'es' ? 'Procesando...' : (locale === 'zh' ? '处理中...' : (locale === 'ja' ? '処理中...' : 'Processing...'))}</span>
             </button>
           ) : mobileCTA.ready ? (
-            <button onClick={handleCheckout} disabled={isProcessing} className="w-full relative overflow-hidden flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-[1.02] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none">
+            <button onClick={onPayClick} disabled={isProcessing} className="w-full relative overflow-hidden flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-[1.02] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none">
                 <span className="absolute inset-0 bg-white/20 skew-x-[45deg] -translate-x-[150%] animate-[shine_2s_ease-in-out_infinite]" />
               <Lock className="w-4 h-4 shrink-0" />
               <span className="truncate">{mobileCTA.label}</span>
