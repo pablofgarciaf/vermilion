@@ -162,7 +162,7 @@ export function Navbar() {
     <div className="fixed top-0 left-0 w-full z-50 flex flex-col">
       {/* Top Banner (Desaparece al hacer scroll hacia abajo) */}
       <div
-        className={`transition-all duration-500 overflow-hidden border-b bg-gradient-to-r from-emerald-950 via-emerald-900 to-emerald-800 text-white border-emerald-800/80 ${isScrolled ? 'max-h-0 opacity-0 py-0 border-none' : 'max-h-24 sm:max-h-16 opacity-100 py-1.5 sm:py-2 px-4 sm:px-8 pb-1.5 sm:pb-2'
+        className={`transition-all duration-500 overflow-hidden border-b bg-gradient-to-r from-emerald-950/90 via-emerald-900/85 to-emerald-800/90 backdrop-blur-md text-white border-emerald-800/60 ${isScrolled ? 'max-h-0 opacity-0 py-0 border-none' : 'max-h-24 sm:max-h-16 opacity-100 py-1.5 sm:py-2 px-4 sm:px-8 pb-1.5 sm:pb-2'
           }`}
       >
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
@@ -202,12 +202,12 @@ export function Navbar() {
         Main Sticky Header 
       */}
       <header
-        className={`transition-all duration-300 backdrop-blur-xl border-b ${
+        className={`transition-all duration-300 border-b ${
           isSubNavRoute && isSubNavScrolled
             ? 'pt-0 border-none bg-transparent shadow-none'
-            : isScrolled
-            ? 'pt-2.5 shadow-md bg-[#FAF8F5]/95 dark:bg-[#05140C]/95 border-zinc-200/90 dark:border-zinc-800/90'
-            : 'pt-3 bg-[#FAF8F5]/70 dark:bg-[#05140C]/60 border-zinc-200/30 dark:border-white/10'
+            : isScrolled || mobileMenuOpen
+            ? 'pt-2 sm:pt-2.5 shadow-md bg-white/80 dark:bg-black/80 backdrop-blur-xl border-zinc-200/80 dark:border-white/10'
+            : 'pt-2.5 sm:pt-3 bg-transparent border-transparent shadow-none backdrop-blur-none'
         }`}
       >
         <div
@@ -221,7 +221,7 @@ export function Navbar() {
           <Link href={`/${locale}`} aria-label="Vermilion Routes Inicio" className="flex items-center gap-3 relative z-10 group notranslate">
             <div className="relative w-[165px] h-[40px] sm:w-[180px] sm:h-[45px] md:w-[220px] md:h-[55px] shrink-0">
               {/* Light Mode Logo (dark letters for light background) */}
-              <Image quality={95}
+              <Image quality={100}
                 src="/logo_inicio.png"
                 alt="Vermilion Routes"
                 width={220}
@@ -230,7 +230,7 @@ export function Navbar() {
                 priority
               />
               {/* Dark Mode Logo (white letters for dark background) */}
-              <Image quality={95}
+              <Image quality={100}
                 src="/logo_blanco.png"
                 alt="Vermilion Routes"
                 width={220}
@@ -272,19 +272,19 @@ export function Navbar() {
                     {/* Dropdown Menu */}
                     {destinationsOpen && (
                       <div className="absolute top-full left-0 w-80 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                        <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-2.5 shadow-2xl border border-zinc-200/90 dark:border-zinc-800 ring-1 ring-black/5">
+                        <div className="bg-white/90 dark:bg-black/90 backdrop-blur-xl rounded-2xl p-2.5 shadow-2xl border border-zinc-200/80 dark:border-white/10 ring-1 ring-black/5">
                           {link.subItems?.map((sub) => (
                             <a
                               key={sub.name}
                               href={sub.href}
                               onClick={(e) => handleAnchorClick(e, sub.href)}
-                              className="flex flex-col gap-0.5 p-3 rounded-xl hover:bg-emerald-50/80 dark:hover:bg-emerald-900/30 text-zinc-800 dark:text-zinc-200 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors group"
+                              className="flex flex-col gap-0.5 p-3 rounded-xl hover:bg-emerald-50/80 dark:hover:bg-emerald-950/40 text-zinc-800 dark:text-zinc-200 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors group"
                             >
                               <span className="text-sm font-semibold flex items-center justify-between">
                                 {sub.name}
                                 <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-emerald-600" />
                               </span>
-                              <span className="text-xs text-zinc-500 font-normal">
+                              <span className="text-xs text-zinc-500 dark:text-zinc-400 font-normal">
                                 {sub.desc}
                               </span>
                             </a>
@@ -320,7 +320,7 @@ export function Navbar() {
                 <button
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                   suppressHydrationWarning
-                  className="p-2 text-zinc-600 dark:text-zinc-300 hover:text-emerald-600 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-xl cursor-pointer transition-colors"
+                  className="p-2 text-zinc-700 dark:text-zinc-200 hover:text-emerald-600 bg-white/70 dark:bg-black/60 backdrop-blur-md border border-zinc-200/70 dark:border-white/10 hover:bg-white dark:hover:bg-zinc-900 rounded-xl cursor-pointer transition-colors shadow-xs"
                   aria-label="Toggle Theme"
                 >
                   {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -330,7 +330,7 @@ export function Navbar() {
                     suppressHydrationWarning
                     onClick={() => { setLangOpen(!langOpen); if (langOpen) setShowGTranslate(false); }}
                     aria-label="Cambiar idioma / Change language"
-                    className="flex items-center gap-2 px-3 py-2 text-xs font-semibold bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 rounded-xl cursor-pointer transition-colors shadow-xs"
+                    className="flex items-center gap-2 px-3 py-2 text-xs font-semibold bg-white/70 dark:bg-black/60 backdrop-blur-md text-zinc-800 dark:text-zinc-200 border border-zinc-200/70 dark:border-white/10 hover:bg-white dark:hover:bg-zinc-900 rounded-xl cursor-pointer transition-colors shadow-xs"
                     title="Cambiar idioma / Change language"
                   >
                     <img
@@ -344,7 +344,7 @@ export function Navbar() {
                     <ChevronDown className={`w-3.5 h-3.5 text-zinc-400 transition-transform duration-200 ${langOpen ? 'rotate-180 text-emerald-600' : ''}`} />
                   </button>
                   <div className={`absolute top-full right-0 pt-2 w-52 z-50 notranslate ${langOpen ? 'block' : 'hidden'}`}>
-                    <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-2 shadow-2xl border border-zinc-200/90 dark:border-zinc-800 max-h-[70vh] overflow-y-auto">
+                    <div className="bg-white/90 dark:bg-black/90 backdrop-blur-xl rounded-2xl p-2 shadow-2xl border border-zinc-200/80 dark:border-white/10 max-h-[70vh] overflow-y-auto">
                       <div className="flex flex-col gap-1">
                         {LOCALES.map((l) => {
                           const targetHref = `/${l.code}${pathname.replace(new RegExp(`^/${locale}`), '') || ''}`;
@@ -447,7 +447,7 @@ export function Navbar() {
                 <button
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                   suppressHydrationWarning
-                  className="p-2 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 rounded-xl cursor-pointer transition-colors"
+                  className="p-2 text-zinc-700 dark:text-zinc-200 hover:text-emerald-600 bg-white/70 dark:bg-black/60 backdrop-blur-md border border-zinc-200/70 dark:border-white/10 hover:bg-white dark:hover:bg-zinc-900 rounded-xl cursor-pointer transition-colors shadow-xs"
                   aria-label="Toggle Theme"
                 >
                   {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -456,7 +456,7 @@ export function Navbar() {
                   <button
                     onClick={() => { setLangOpen(!langOpen); if (langOpen) setShowGTranslate(false); }}
                     suppressHydrationWarning
-                    className="flex items-center gap-1.5 p-2 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 rounded-xl cursor-pointer transition-colors"
+                    className="flex items-center gap-1.5 p-2 text-xs font-semibold text-zinc-800 dark:text-zinc-200 bg-white/70 dark:bg-black/60 backdrop-blur-md border border-zinc-200/70 dark:border-white/10 hover:bg-white dark:hover:bg-zinc-900 rounded-xl cursor-pointer transition-colors shadow-xs"
                   >
                     <img
                       src={currentLocaleObj.flagUrl}
@@ -469,7 +469,7 @@ export function Navbar() {
                     <ChevronDown className={`w-3.5 h-3.5 text-zinc-400 transition-transform duration-200 ${langOpen ? 'rotate-180 text-emerald-600' : ''}`} />
                   </button>
                   <div className={`absolute top-full right-0 pt-2 w-52 z-50 notranslate ${langOpen ? 'block' : 'hidden'}`}>
-                    <div className="bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl p-2 shadow-2xl border border-zinc-200/90 dark:border-zinc-800 max-h-[70vh] overflow-y-auto">
+                    <div className="bg-white/90 dark:bg-black/90 backdrop-blur-xl rounded-2xl p-2 shadow-2xl border border-zinc-200/80 dark:border-white/10 max-h-[70vh] overflow-y-auto">
                       <div className="flex flex-col gap-1">
                         {LOCALES.map((l) => {
                           const targetHref = `/${l.code}${pathname.replace(new RegExp(`^/${locale}`), '') || ''}`;
@@ -512,7 +512,7 @@ export function Navbar() {
             <button
               suppressHydrationWarning
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 cursor-pointer"
+              className="p-2 rounded-xl text-zinc-700 dark:text-zinc-200 bg-white/70 dark:bg-black/60 backdrop-blur-md hover:bg-white dark:hover:bg-zinc-900 border border-zinc-200/70 dark:border-white/10 cursor-pointer shadow-xs transition-colors"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -522,7 +522,7 @@ export function Navbar() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-b border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl px-4 pt-3 pb-6 mt-2 space-y-3 shadow-xl">
+          <div className="md:hidden border-b border-zinc-200/80 dark:border-white/10 bg-white/90 dark:bg-black/90 backdrop-blur-2xl px-4 pt-3 pb-6 mt-2 space-y-3 shadow-2xl">
 
             <nav className="flex flex-col gap-1">
               {navLinks.map((link) => {

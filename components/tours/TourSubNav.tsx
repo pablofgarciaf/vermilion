@@ -64,7 +64,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
 
   return createPortal(
     <div
-      className={`w-full bg-[#FAF8F5]/98 dark:bg-stone-950/98 backdrop-blur-2xl border-b border-zinc-200/90 dark:border-white/10 py-2 transition-all duration-300 shadow-2xl ${isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none h-0 py-0 border-none overflow-hidden'
+      className={`w-full bg-white/85 dark:bg-black/85 backdrop-blur-2xl border-b border-zinc-200/80 dark:border-white/10 py-2 transition-all duration-300 shadow-xl ${isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none h-0 py-0 border-none overflow-hidden'
         }`}
     >
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,7 +79,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               className="shrink-0 group flex items-center notranslate"
             >
               <div className="relative w-[92px] h-[32px] sm:w-[160px] sm:h-[46px] lg:w-[180px] lg:h-[48px]">
-                <Image quality={95}
+                <Image quality={100}
                   src="/logo_inicio.png"
                   alt="Vermilion Routes"
                   width={210}
@@ -87,7 +87,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
                   className="w-auto h-full object-contain block dark:hidden"
                   priority
                 />
-                <Image quality={95}
+                <Image quality={100}
                   src="/logo_blanco.png"
                   alt="Vermilion Routes"
                   width={210}
@@ -176,7 +176,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               className="shrink-0 group flex items-center notranslate"
             >
               <div className="relative w-[180px] h-[48px]">
-                <Image quality={95}
+                <Image quality={100}
                   src="/logo_inicio.png"
                   alt="Vermilion Routes"
                   width={210}
@@ -184,7 +184,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
                   className="w-auto h-full object-contain block dark:hidden"
                   priority
                 />
-                <Image quality={95}
+                <Image quality={100}
                   src="/logo_blanco.png"
                   alt="Vermilion Routes"
                   width={210}

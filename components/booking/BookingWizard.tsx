@@ -93,7 +93,7 @@ function BookingSubNav({ primaryTour, pricing, locale }: { primaryTour: Tour | n
 
   return createPortal(
     <div
-      className={`w-full bg-[#FAF8F5]/98 dark:bg-stone-950/98 backdrop-blur-2xl border-b border-zinc-200/90 dark:border-white/10 py-2.5 transition-all duration-300 shadow-xl ${
+      className={`w-full bg-white/85 dark:bg-black/85 backdrop-blur-2xl border-b border-zinc-200/80 dark:border-white/10 py-2.5 transition-all duration-300 shadow-xl ${
         isVisible ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none h-0 py-0 border-none overflow-hidden'
       }`}
     >
@@ -105,7 +105,7 @@ function BookingSubNav({ primaryTour, pricing, locale }: { primaryTour: Tour | n
             className="shrink-0 group flex items-center notranslate"
           >
             <div className="relative w-[120px] h-[32px] sm:w-[145px] sm:h-[36px]">
-              <Image quality={95}
+              <Image quality={100}
                 src="/logo_inicio.png"
                 alt="Vermilion Routes"
                 width={145}
@@ -113,7 +113,7 @@ function BookingSubNav({ primaryTour, pricing, locale }: { primaryTour: Tour | n
                 className="w-auto h-full object-contain block dark:hidden"
                 priority
               />
-              <Image quality={95}
+              <Image quality={100}
                 src="/logo_blanco.png"
                 alt="Vermilion Routes"
                 width={145}
