@@ -87,17 +87,17 @@ const SHOWCASE_PHOTOS = [
     aspect: 'col-span-1 aspect-[4/3]',
   },
   {
-    src: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.jpg',
+    src: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
     title: 'Blue-Footed Booby in Espanola',
     aspect: 'col-span-1 aspect-[4/3]',
   },
   {
-    src: '/images/tours/16-9/quito-colonial-16-9.jpg',
+    src: '/images/tours/16-9/quito-colonial-16-9.webp',
     title: 'Quito Historic Colonial Plaza',
     aspect: 'col-span-1 aspect-[4/3]',
   },
   {
-    src: '/images/tours/16-9/amazon-cuyabeno-16-9.jpg',
+    src: '/images/tours/16-9/amazon-cuyabeno-16-9.webp',
     title: 'Cuyabeno Amazon Rainforest Lagoon',
     aspect: 'col-span-1 aspect-[4/3]',
   },
@@ -149,7 +149,7 @@ export function AboutGallerySection({ locale }: AboutGallerySectionProps) {
             }}
             className={`group relative rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-emerald-500/60 transition-all cursor-pointer shadow-xl ${photo.aspect}`}
           >
-            <Image quality={90}
+            <Image quality={100}
               src={photo.src}
               alt={photo.title}
               fill

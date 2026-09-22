@@ -8,72 +8,72 @@ const dir916 = path.resolve('public/images/tours/9-16');
 const realPhotoMappings = [
   {
     target169: 'galapagos-tortuga-gigante-16-9.webp',
-    target916: 'galapagos-tortuga-gigante-9-16.jpg',
-    source: '16as-07-1.jpg',
-    backupSource: 'galatoursopt-01.jpg',
+    target916: 'galapagos-tortuga-gigante-9-16.webp',
+    source: '16as-07-1.webp',
+    backupSource: 'galatoursopt-01.webp',
     title: 'Galapagos Giant Tortoises'
   },
   {
     target169: 'quito-iglesia-de-san-francisco-16-9.webp',
-    target916: 'quito-plaza-independencia-9-16.jpg',
-    source: 'plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg',
-    backupSource: 'nrew-11.jpg',
+    target916: 'quito-plaza-independencia-9-16.webp',
+    source: 'plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.webp',
+    backupSource: 'nrew-11.webp',
     title: 'Quito Historic Center'
   },
   {
     target169: 'pailon-del-diablo-16-9.webp',
-    target916: 'banos-cascada-9-16.jpg',
-    source: 'nrew-09.jpg',
-    backupSource: 'nrew-09.jpg',
+    target916: 'banos-cascada-9-16.webp',
+    source: 'nrew-09.webp',
+    backupSource: 'nrew-09.webp',
     title: 'Baños Pailón del Diablo'
   },
   {
     target169: 'cotopaxi-volcano-16-9.webp',
-    target916: 'cotopaxi-volcano-9-16.jpg',
-    source: 'blogvolcan1.jpg',
-    backupSource: 'nrew-03.jpg',
+    target916: 'cotopaxi-volcano-9-16.webp',
+    source: 'blogvolcan1.webp',
+    backupSource: 'nrew-03.webp',
     title: 'Cotopaxi Volcano'
   },
   {
-    target169: 'quilotoa-16-9.jpg',
-    target916: 'quilotoa-9-16.jpg',
-    source: 'banner_aboutus-2.jpg',
-    backupSource: 'nrew-02.jpg',
+    target169: 'quilotoa-16-9.webp',
+    target916: 'quilotoa-9-16.webp',
+    source: 'banner_aboutus-2.webp',
+    backupSource: 'nrew-02.webp',
     title: 'Quilotoa Crater Lagoon'
   },
   {
-    target169: 'amazon-river-canoe-16-9.jpg',
-    target916: 'amazon-river-canoe-9-16.jpg',
-    source: 'blogvermi1.jpg',
-    backupSource: 'nrew-07.jpg',
+    target169: 'amazon-river-canoe-16-9.webp',
+    target916: 'amazon-river-canoe-9-16.webp',
+    source: 'blogvermi1.webp',
+    backupSource: 'nrew-07.webp',
     title: 'Amazon Rainforest'
   },
   {
-    target169: 'isabela-island-16-9.jpg',
-    target916: 'isabela-island-9-16.jpg',
-    source: 'SAN-CRISTOBAL-GALAPAGOS-2.jpg',
-    backupSource: '16as-09-1.jpg',
+    target169: 'isabela-island-16-9.webp',
+    target916: 'isabela-island-9-16.webp',
+    source: 'SAN-CRISTOBAL-GALAPAGOS-2.webp',
+    backupSource: '16as-09-1.webp',
     title: 'Isabela Island & Wildlife'
   },
   {
-    target169: 'cajas-national-park-16-9.jpg',
-    target916: 'cajas-national-park-9-16.jpg',
-    source: 'nrew-05.jpg',
-    backupSource: 'nrew-06.jpg',
+    target169: 'cajas-national-park-16-9.webp',
+    target916: 'cajas-national-park-9-16.webp',
+    source: 'nrew-05.webp',
+    backupSource: 'nrew-06.webp',
     title: 'Cuenca Colonial & Cajas'
   },
   {
-    target169: 'chimborazo-volcano-16-9.1.jpg',
-    target916: 'chimborazo-volcano-9-16.jpg',
-    source: '16as-05.jpg',
-    backupSource: 'nrew-04.jpg',
+    target169: 'chimborazo-volcano-16-9.1.webp',
+    target916: 'chimborazo-volcano-9-16.webp',
+    source: '16as-05.webp',
+    backupSource: 'nrew-04.webp',
     title: 'Chimborazo Volcano'
   },
   {
-    target169: 'las-grietas-canyon-16-9.jpg',
-    target916: 'las-grietas-canyon-9-16.jpg',
-    source: '20170406_104637-2.jpg',
-    backupSource: 'galatoursopt-03.jpg',
+    target169: 'las-grietas-canyon-16-9.webp',
+    target916: 'las-grietas-canyon-9-16.webp',
+    source: '20170406_104637-2.webp',
+    backupSource: 'galatoursopt-03.webp',
     title: 'Las Grietas Galapagos'
   }
 ];

@@ -1,8 +1,8 @@
 # 🗺️ VERMILION ROUTES — PLANO MAESTRO ARQUITECTÓNICO (ARCHITECTURE MAP)
 
 > **Documento:** `ARCHITECTURE_MAP.md`  
-> **Versión:** `1.18.0`  
-> **Última Actualización:** 2026-09-16  
+> **Versión:** `1.20.0`  
+> **Última Actualización:** 2026-09-21  
 > **Responsable:** Arquitecto de Sistemas de Vermilion Routes  
 > **Estado:** Activo / Vigente  
 
@@ -1018,7 +1018,7 @@ flowchart TD
 
 ## 5. Rutas en Next.js (Inventario y Módulos)
 
-El proyecto utiliza **Next.js App Router** con soporte multi-idioma a través de `next-intl` (`/[locale]/...`), soportando `en`, `es` e `it`.
+El proyecto utiliza **Next.js App Router** con soporte multi-idioma a través de `next-intl` (`/[locale]/...`), soportando 8 idiomas oficiales: `es`, `en`, `fr`, `de`, `zh`, `it`, `pt` y `ja`.
 
 ```
 vermilion/app/
@@ -1047,6 +1047,10 @@ vermilion/app/
 │   │   ├── resources/page.tsx   ← Enlaces y material promocional
 │   │   └── withdrawals/page.tsx ← Solicitud de desembolsos
 │   │
+│   ├── destinations/            ← Catálogo & Fichas de Destino (v1.20.0)
+│   │   ├── page.tsx             ← Explorador / Directorio interactivo de 14 destinos con filtros regionales
+│   │   └── [slug]/page.tsx      ← Ficha individual de destino (112 URLs en sitemap.xml con hreflang simétrico)
+│   ├── manifiesto/page.tsx      ← Manifiesto de Marca, Liderazgo Naturalista & Filosofía de Conservación
 │   ├── about/                   ← Página oficial Sobre Nosotros (About Us dedicada, SEO/GEO A+, Schema JSON-LD)
 │   │   └── page.tsx             ← Sobre Nosotros, Sedes Quito/Madrid, Guías Nivel III y Galería
 │   ├── couples-anniversary-galapagos/page.tsx      ← Landing SEO: Escapada Romántica Galápagos (CTA directo WhatsApp)
@@ -1089,6 +1093,9 @@ vermilion/app/
 | Ruta (URL Relativa) | Tipo | Módulo | Roles Requeridos | Estado Actual | Archivo Fuente / Guard |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `/[locale]` | Página (SSR) | Público | Público | ✅ Activa | [`app/[locale]/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/page.tsx) |
+| `/[locale]/destinations` | Página (SSR) | **Público (Catálogo Destinos)** | Público | ✅ Activa (Directorio interactivo de 14 destinos con filtros regionales: Galápagos, Andes, Amazonía · 8 Idiomas) | [`app/[locale]/destinations/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/destinations/page.tsx) |
+| `/[locale]/destinations/[slug]` | Página (SSR) | **Público (Ficha Destino)** | Público | ✅ Activa (112 páginas indexables · 14 destinos × 8 idiomas · Galería local, FAQS, Fauna y Enlazado a Tours) | [`app/[locale]/destinations/[slug]/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/destinations/[slug]/page.tsx) |
+| `/[locale]/manifiesto` | Página (SSR) | **Público (Institucional)** | Público | ✅ Activa (Manifiesto de Marca, Turismo Fiduciario, Liderazgo de Guías Nivel III y Código Ético · 8 Idiomas) | [`app/[locale]/manifiesto/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/manifiesto/page.tsx) |
 | `/[locale]/about` | Página (SSR) | **Público** | Público | ✅ Activa (Página Dedicada 200 OK · Metadatos SEO 50-60 chars · Schema `AboutPage` & `Organization` · 8 Idiomas) | [`app/[locale]/about/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/about/page.tsx) |
 | `/[locale]/couples-anniversary-galapagos` | Página (SSR) | **Público (SEO Landing)** | Público | ✅ Activa (Landing dedicada con CTA directo a WhatsApp) | [`app/[locale]/couples-anniversary-galapagos/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/couples-anniversary-galapagos/page.tsx) |
 | `/[locale]/family-friendly-ecuador` | Página (SSR) | **Público (SEO Landing)** | Público | ✅ Activa (Landing dedicada con CTA directo a WhatsApp) | [`app/[locale]/family-friendly-ecuador/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/family-friendly-ecuador/page.tsx) |
@@ -1097,7 +1104,7 @@ vermilion/app/
 | `/[locale]/presentation` | Página (CSR) | Público | Público | ✅ Activa (Presentación comercial pública standalone) | [`app/[locale]/presentation/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/presentation/page.tsx) |
 | `/[locale]/affiliates/presentation` | Página (CSR) | **Affiliates** | Público | ✅ Activa (Diapositivas comerciales para reclutamiento) | [`app/[locale]/affiliates/presentation/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/affiliates/presentation/page.tsx) |
 | `/[locale]/tours` | Página (CSR/SSR) | Público | Público | ✅ Activa | [`app/[locale]/tours/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/tours/page.tsx) |
-| `/[locale]/tours/[id]` | Página (CSR/SSR) | Público | Público | ✅ Activa | [`app/[locale]/tours/[id]/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/tours/page.tsx) |
+| `/[locale]/tours/[id]` | Página (CSR/SSR) | Público | Público | ✅ Activa | [`app/[locale]/tours/[id]/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/tours/[id]/page.tsx) |
 | `/[locale]/blog` | Página (SSR) | Público | Público | ✅ Activa | [`app/[locale]/blog/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/blog/page.tsx) |
 | `/[locale]/blog/[slug]` | Página (SSR) | Público | Público | ✅ Activa | [`app/[locale]/blog/[slug]/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/blog/[slug]/page.tsx) |
 | `/[locale]/booking` | Página (CSR) | Público | Público | ✅ Activa | [`app/[locale]/booking/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/booking/page.tsx) |
@@ -1181,6 +1188,7 @@ Vermilion Routes implementa un modelo de comisiones de dos vertientes:
 
 | Fecha | Versión | Autor | Cambios Implementados | Próximos Pasos / Hitos |
 | :--- | :---: | :--- | :--- | :--- |
+| **2026-09-21** | `v1.20.0` | **Arquitecto de Sistemas** | • **Módulo de Destinos y Directorio Interactivo:**<br>  - Creación del catálogo general en [`app/[locale]/destinations/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/destinations/page.tsx) con el componente selector [`DestinationsFilter.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/destinations/DestinationsFilter.tsx) para filtrado dinámico por región (Galápagos, Andes, Amazonía) y búsqueda en tiempo real.<br>  - Migración y consolidación canónica en inglés de las fichas de destino a [`app/[locale]/destinations/[slug]/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/destinations/[slug]/page.tsx) (14 destinos × 8 idiomas = 112 URLs en `sitemap.xml` con hreflang simétrico) y redirecciones permanentes 301 configuradas en `next.config.mjs` para `/destinos/*`.<br>  - Inyección de galería local en alta definición, fauna y flora autóctona, consejos de campo (`INSIDER_TIPS`) y emparejamiento semántico de expediciones recomendadas por relevancia (`toursForDestination`).<br>• **Página Institucional Manifiesto de Marca:**<br>  - Creación de [`app/[locale]/manifiesto/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/manifiesto/page.tsx) documentando la filosofía fiduciaria de la agencia, expediciones naturalistas guiadas por expertos Nivel III, preservación de ecosistemas frágiles y código ético de avistamiento.<br>• **Expansión Editorial del Blog (4 Nuevos Artículos):**<br>  - Redacción e integración de 4 artículos exhaustivos en [`data/blogData.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/data/blogData.ts): *Isabela*, *Papallacta*, *Antisana* y *Baños / Pailón del Diablo*, con enlazado bidireccional entre destinos y tours (`relatedPosts` / `relatedTourId`), cápsulas GEO `<aside>` en byte 0 y esquema dual `BlogPosting` + `FAQPage`.<br>• **Infraestructura de Medios & Migración WebP 100% Nativa:**<br>  - Conversión masiva de 76 imágenes JPG a WebP nativo preservando resolución original y 0 errores 404.<br>  - Incorporación de fotografías auténticas y verificadas para Papallacta (laguna y volcán) y Antisana.<br>  - Elevación estricta de nitidez al 100% (`quality={100}`) y modo `unoptimized` para el Hero Slider 4K, Splash Screen, Fichas de Destino, Galerías y Catálogo.<br>• **Mejoras Visuales en TourCard & Hero Slider:**<br>  - Incorporación de badges de disponibilidad (`tour.availability`), ajuste ergonómico de tarjetas en el slider 3D (`144px × 208px`) y refuerzo de contraste en textos con sombras y gradientes optimizados. | 1. Monitorear rastreo e indexación de las 112 fichas de destino en Google Search Console.<br>2. Mantener optimización WebP en futuros activos que se integren al catálogo. |
 | **2026-09-16** | `v1.18.0` | **Arquitecto de Sistemas** | • **Actualización Integral de Números de Contacto Telefónico Corporativo:**<br>  - Reemplazo sitewide del número principal de WhatsApp/Contacto `+593 99 404 8458` (`+593994048458`) por el nuevo número oficial `+593 96 003 9156` (`+593960039156`), en todos los formatos (enlaces `tel:`, `wa.me`, JSON-LD `telephone`, PDFs generados con jsPDF, `public/llms.txt`) a través de ~40 ubicaciones en componentes, páginas, hooks, scripts de generación de PDF y datos semilla.<br>  - Reasignación del número personal de Pablo Fabricio García Flores (registro `super` en la colección `usuarios` y datos de ejemplo del CRM) de `+593 98 399 2549` a `+593 99 404 8458`, liberando este último como el nuevo número de "Oficina / Reservas" (`t.officeReservations`) documentado en `components/layout/Footer.tsx` y `public/llms.txt`.<br>• **Corrección Estructural de la Bitácora (Sección 7):**<br>  - Reunificación de la tabla de Changelog, que se encontraba fragmentada en dos bloques no contiguos: las filas `v1.14.0` → `v1.0.0` habían quedado desplazadas accidentalmente al final físico del documento, después de la Sección 8, rompiendo el renderizado de la tabla en Markdown.<br>• **Actualización del Inventario de Rutas (Sección 5):**<br>  - Incorporación al árbol de directorios y a la tabla 5.1 de las rutas públicas que no estaban documentadas: `/[locale]/couples-anniversary-galapagos`, `/[locale]/family-friendly-ecuador`, `/[locale]/wildlife-photography-expeditions`, `/[locale]/verify-newsletter`, `/[locale]/presentation` y `/[locale]/affiliates/presentation`. | 1. Documentar en detalle en la Sección 8 (Cheat-Sheet) los componentes recientes aún sin referencia: `components/admin/AdminSettingsPanel.tsx`, `components/auth/AffiliateClubModal.tsx`, `components/home/TripAdvisorReviews.tsx`, `components/home/LeadMagnetBanner.tsx`, `components/booking/BookingComfortTierSelector.tsx` y `components/booking/TravelVoucherModal.tsx`.<br>2. Documentar las rutas del grupo `(embassy)` (`dashboard`, `network`) y `(main)/affiliates/verify`, actualmente ausentes del inventario.<br>3. Evaluar la división de `ARCHITECTURE_MAP.md` (>1200 líneas) en varios documentos temáticos para reducir el consumo de contexto en revisiones futuras. |
 | **2026-09-14** | `v1.17.0` | **Arquitecto de Sistemas** | • **Coherencia Transversal de Tarifas Oficiales y Políticas de Ocupación:**<br>  - Unificación de la tarifa base oficial de $1,050 USD para Galapagos 4D (Galapagos Encounter) en toda la plataforma: Landing Page, Catálogo, Ficha Individual, Booking Wizard y Checkout.<br>  - Regla de ocupación: expediciones privadas cotizadas por persona en base a ocupación doble (mínimo 2 pasajeros). Para reservas de 1 solo viajero, se estipula de forma transparente el suplemento individual del +50% en el calculador y desglose fiduciario.<br>  - Identidad institucional: Prohibición estricta de términos como "lujo" o "luxury" en la interfaz; oficialización de los niveles **Vermilion Club** ($1,050 USD base) y **Vermilion VIP** ($1,190 USD base).<br>  - Creación del comparador de categorías de viaje [`components/tours/TourPricingTiersCard.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/tours/TourPricingTiersCard.tsx) con traducción exhaustiva en 8 idiomas.<br>• **Hero Full-Bleed & Arquitectura de SubNav Reemplazante en Scroll:**<br>  - En [`components/layout/ConditionalNavbar.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/layout/ConditionalNavbar.tsx) y [`app/[locale]/tours/[id]/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/tours/[id]/page.tsx), el Hero Banner inicia a `top: 0` detrás del Navbar transparente, erradicando espacios negros iniciales.<br>  - SubNav Contextual sincronizado ([`components/tours/TourSubNav.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/tours/TourSubNav.tsx) y `BookingWizard.tsx`): al desplazarse más de 200px, la barra contextual oculta la fila principal del Navbar y se fija en `top: 0` con el logo de la marca, eliminando barras dobles amontonadas.<br>• **Internacionalización Integral (8 Idiomas) sin Ternarios Binarios:**<br>  - Erradicación absoluta de ternarios condicionales binarios (`locale === 'es' ? ... : ...`) en Tours, Booking Wizard, Price Calculator, Booking Sidebar, PayPal y Checkout.<br>  - Soporte de 8 idiomas nativos (`es`, `en`, `fr`, `de`, `zh`, `it`, `pt`, `ja`) en todos los títulos de itinerario diario, servicios incluidos, exclusiones, categorías y botones de acción.<br>  - Corrección de codificación UTF-8 pura en [`utils/i18nHelper.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/utils/i18nHelper.ts).<br>• **Resolución y Blindaje de Pasarela PayPal & Datos de Pasajero:**<br>  - Flexibilización del esquema `paypalCreateOrderSchema` en [`lib/validation.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/lib/validation.ts) con asignación automática de fallback a `'guest@vermilionroutes.com'`, eliminando errores HTTP 400 que bloqueaban el popup de pago.<br>  - Tarjeta de captura y confirmación de datos del pasajero principal (Nombre, Correo y WhatsApp/Teléfono) directamente en [`app/[locale]/checkout/payment/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/payment/page.tsx). | 1. Monitorear transacciones en vivo con PayPal y dispersión a cuentas bancarias.<br>2. Mantener la paridad de precios y traducciones en futuras expediciones. |
 | **2026-09-14** | `v1.16.0` | **Arquitecto de Sistemas** | • **Restauración de Negociación Automática de Idioma (`proxy.ts` Edge Middleware):**<br>  - Erradicación de la regla forzada de redirección a `/en` en la raíz (`/`). Ahora `next-intl` analiza la cabecera `Accept-Language` del navegador del visitante (ej. `fr-FR` -> `/fr`, `ja-JP` -> `/ja`, `es-ES` -> `/es`), enrutando automáticamente al idioma nativo sin forzar selección manual.<br>• **Resolución de Claves de Traducción Faltantes (`tours.cta.*`):**<br>  - Incorporación de las estructuras de traducción `"tours.cta"` (`label`, `title`, `subtitle`, `button`) y `"tours.badge"` en los 8 archivos de idioma (`messages/*.json`), eliminando las impresiones crudas tipo `TOURS.CTA.LABEL`.<br>• **Traducción Integral de Itinerarios de Viaje (8 Idiomas):**<br>  - Localización de todas las etiquetas del acordeón en [`components/tours/TourItinerary.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/tours/TourItinerary.tsx) (`Expandir Todo`, `Contraer Todo`, `Día X` / `Jour X` / `X日目` / `第X天`, `Puntos Clave del Día:`, `Alojamiento:`, `Transporte:`, `Actividad:`, `Altitud:`).<br>  - Enriquecimiento del diccionario `DEFAULT_TRANSLATIONS` en [`utils/i18nHelper.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/utils/i18nHelper.ts) para traducir títulos de días, comidas, alojamientos, transporte y actividades en los 8 idiomas sin fugas de texto.<br>• **Localización Completa de Sedes y Contacto en Footer:**<br>  - Integración de traducciones para `hqEcuador` (*Sede Ecuador HQ*), `officeSpain` (*Sede España Coral Tour*), `officeReservations` (*Oficina / Reservas*) e `internationalLanguages` (*Internacional / Idiomas*) en [`components/layout/Footer.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/layout/Footer.tsx).<br>• **Creación de la Guía de Referencia Rápida (Sección 8):**<br>  - Mapeo directo de componentes visuales, archivos y capas de i18n para localizar y modificar cualquier sección en segundos sin búsquedas a ciegas. | 1. Monitorear redirecciones automáticas por Accept-Language en analítica.<br>2. Mantener sincronizados los 8 archivos de mensajes ante nuevas secciones. |
@@ -1226,6 +1234,9 @@ Vermilion Routes implementa un modelo de comisiones de dos vertientes:
 | **Formulario de Contacto / Cotización** | [`components/home/ContactSection.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/home/ContactSection.tsx) | `messages/*.json` (`"contact"`) |
 | **Middleware & Detección de Idioma** | [`proxy.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/proxy.ts) | [`i18n/request.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/i18n/request.ts) |
 | **Pasarela Checkout & Pagos (PayPal / Tarjetas / Transferencia)** | [`app/[locale]/checkout/payment/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/checkout/payment/page.tsx) | [`components/checkout/PayPalCheckoutButton.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/checkout/PayPalCheckoutButton.tsx) / `CHECKOUT_I18N` |
+| **Explorador & Directorio de Destinos** | [`app/[locale]/destinations/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/destinations/page.tsx) | [`components/destinations/DestinationsFilter.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/components/destinations/DestinationsFilter.tsx) / [`data/destinationsData.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/data/destinationsData.ts) |
+| **Ficha Individual de Destino** | [`app/[locale]/destinations/[slug]/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/destinations/[slug]/page.tsx) | [`data/destinationsData.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/data/destinationsData.ts) (`DESTINATIONS`, `DESTINATION_UI`) |
+| **Manifiesto de Marca & Filosofía Naturalista** | [`app/[locale]/manifiesto/page.tsx`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/app/[locale]/manifiesto/page.tsx) | Traducciones integradas en 8 idiomas dentro de la página |
 
 ### 8.2 Arquitectura de Internacionalización (i18n)
 
@@ -1245,34 +1256,35 @@ Vermilion Routes implementa un modelo de comisiones de dos vertientes:
 3. **Negociación Automática de Idioma en el Edge ([`proxy.ts`](file:///c:/Users/pablo/Desktop/clon-vermilion/vermilion/proxy.ts)):**
    - `next-intl` middleware analiza la cabecera `Accept-Language` del navegador (ej. `fr-FR` de usuarios en Francia) y redirige automáticamente hacia `/{locale}` en el primer impacto de carga.
 
-
 ---
 
-## Módulo Público: Fichas de Destino (`/[locale]/destinos/[slug]`)
+## Módulo Público: Catálogo y Fichas de Destino (`/[locale]/destinations` y `/[locale]/destinations/[slug]`)
 
-Páginas de destino indexables, una por lugar, en los 8 idiomas. Existen para
-captar la búsqueda de quien aún no sabe qué tour quiere ("qué ver en el
-Quilotoa") y llevarlo al producto, algo que el listado de tours no hace.
+Páginas de destino indexables, una por lugar, en los 8 idiomas oficiales. Existen para
+captar la búsqueda orgánica de quien aún no sabe qué tour exacto desea ("qué ver en el
+Quilotoa" / "visitar Santa Cruz Galápagos") y llevarlo al producto comercial correspondiente,
+algo que el listado estricto de tours no cubre.
 
 ### Dónde está cada cosa
 
 | Qué | Archivo | Notas |
 | :-- | :-- | :-- |
-| Datos de los 14 destinos | `data/destinationsData.ts` | `DESTINATIONS` (fichas), `DESTINATION_UI` (etiquetas de interfaz, una sola vez para todos), `INSIDER_TIPS` (experiencia propia de la casa) |
-| Página | `app/[locale]/destinos/[slug]/page.tsx` | Estática: `generateStaticParams` cruza 8 idiomas × 14 destinos |
-| Entrada desde el hero | `components/home/hero/HeroThumbnails.tsx` | La tarjeta activa enlaza por `heroIndex` |
-| Botón "Conoce este destino" | `components/home/hero/HeroActions.tsx` | Recibe el destino activo desde `HeroSlider` |
+| Directorio general de destinos | `app/[locale]/destinations/page.tsx` | Catálogo de los 14 destinos con filtros regionales y buscador |
+| Filtro interactivo de regiones | `components/destinations/DestinationsFilter.tsx` | Tabs: Todos, Galápagos, Andes, Amazonía + búsqueda en vivo |
+| Datos de los 14 destinos | `data/destinationsData.ts` | `DESTINATIONS` (fichas completas), `DESTINATION_UI` (etiquetas de interfaz en 8 idiomas), `INSIDER_TIPS` (consejos reales de campo) |
+| Ficha individual estática | `app/[locale]/destinations/[slug]/page.tsx` | `generateStaticParams` cruza 8 idiomas × 14 destinos = 112 URLs en `sitemap.xml` |
+| Entrada desde el hero | `components/home/hero/HeroThumbnails.tsx` | La tarjeta activa enlaza al destino por `heroIndex` con transición fluida |
 | Aviso de cambio de diapositiva | `components/home/hero/useHeroSliderAnimation.ts` | Emite el evento `hero-slide-change` con el índice activo |
 
 ### Reglas de los datos
 
 Los valores duros (altitud, año UNESCO, distancias) son neutros al idioma y se
 escriben una sola vez dentro del texto; solo se traduce la prosa. Las etiquetas
-de interfaz viven en `DESTINATION_UI`, no repetidas por destino.
+de interfaz viven en `DESTINATION_UI` con soporte en los 8 idiomas oficiales.
 
-`heroIndex` es opcional: solo lo tienen los 10 destinos que salen en el hero.
-`needsPhoto: true` marca los que aún usan una foto prestada y esperan una
-imagen propia — hoy Papallacta y Antisana.
+`heroIndex` es opcional: solo lo tienen los 10 destinos que salen en el hero slider.
+Las fotografías de todos los destinos (incluyendo Papallacta y Antisana) son nativas,
+auténticas y en formato WebP con calidad 100%.
 
 ### Cómo se emparejan los tours
 
@@ -1284,5 +1296,16 @@ día del itinerario. Muestra los seis mejores en el carrusel `TourCarousel` con
 ### Relación con el blog
 
 `relatedPosts` enlaza cada destino con los artículos que hablan de él, y el
-artículo enlaza de vuelta a sus destinos. Se enlazan en lugar de fusionarlos
+artículo enlaza de vuelta a sus destinos. Se enlazan bidireccionalmente en lugar de fusionarlos
 para que ambos se refuercen en buscadores en vez de competir entre sí.
+
+---
+
+## Módulo Público: Manifiesto de Marca (`/[locale]/manifiesto`)
+
+Página institucional dedicada a la identidad fiduciaria, liderazgo naturalista y ética de conservación de Vermilion Routes.
+
+* **Ruta Canónica:** `app/[locale]/manifiesto/page.tsx`
+* **Soporte de Idiomas:** 8 idiomas (`es`, `en`, `fr`, `de`, `zh`, `it`, `pt`, `ja`).
+* **Propósito:** Exponer la propuesta de valor fiduciaria ante viajeros HNWI y motores de búsqueda / IAs (AEO/GEO): expediciones guiadas por naturalistas Nivel III del Parque Nacional Galápagos, respeto irrestricto de distancias biológicas (2 metros de fauna), fomento de la economía comunitaria local y viajes carbono neutral.
+* **Metadatos:** Title y Meta Description en rango estricto, Schema `AboutPage` / `WebPage` con enlaces de cross-linking hacia el catálogo de expediciones y formulario de contacto.

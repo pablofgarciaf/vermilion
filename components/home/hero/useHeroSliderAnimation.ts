@@ -111,7 +111,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
 
         const controlsY = offsetTop + cardHeight + 14;
         set("#pagination", { top: controlsY, left: offsetLeft, y: 0, opacity: 1, zIndex: 60 });
-        
+
         set(`${detailsActive} .text`, { y: 0 });
         set(`${detailsActive} .title-1`, { y: 0 });
         set(`${detailsActive} .title-2`, { y: 0 });
@@ -201,23 +201,23 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
           const audioCtx = new AudioCtx();
           const osc = audioCtx.createOscillator();
           const gainNode = audioCtx.createGain();
-          
+
           osc.type = 'sine';
           osc.frequency.setValueAtTime(300, audioCtx.currentTime);
           osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.15);
-          
+
           gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
           gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
-          
+
           osc.connect(gainNode);
           gainNode.connect(audioCtx.destination);
-          
+
           osc.start();
           osc.stop(audioCtx.currentTime + 0.15);
           setTimeout(() => {
-            try { audioCtx.close(); } catch (e) {}
+            try { audioCtx.close(); } catch (e) { }
           }, 200);
-        } catch (e) {}
+        } catch (e) { }
       };
 
       (window as any).triggerNextSlide = () => {
@@ -263,7 +263,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
         title2: { en: 'OF GALAPAGOS', es: 'DE GALÁPAGOS', fr: 'DES GALAPAGOS', de: 'DER GALAPAGOS', it: 'DELLE GALAPAGOS', pt: 'DE GALÁPAGOS', ja: 'ガラパゴスゾウガメ', zh: '加拉帕戈斯陆龟' },
         image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
         desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
-        mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.jpg'
+        mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp'
       };
 
       let splashDone = false;
@@ -382,10 +382,10 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
           if (prevActive === 0 && !hasMutated) {
             hasMutated = true;
             if (setShowSplash) setShowSplash(false);
-            
+
             // We do NOT mutate the React props/array here per rules. 
             // We only mutate the native DOM to bypass React.
-            
+
             // Update the images natively in the DOM
             const imgEls = container.querySelectorAll(getCard(0) + " img");
             imgEls.forEach((el) => {

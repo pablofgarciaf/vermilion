@@ -5,11 +5,11 @@ const files = ['data/mock.ts', 'data/dailyToursData.ts', 'data/blogData.ts'];
 files.forEach(f => {
   if (fs.existsSync(f)) {
     let content = fs.readFileSync(f, 'utf8');
-    
+
     // Replace terms in English
     content = content.replace(/Indigenous Market/gi, 'Artisan Market');
     content = content.replace(/Indigenous Handicraft Market/gi, 'Artisan Market');
-    
+
     // Replace terms in Spanish
     content = content.replace(/Mercado Indígena/gi, 'Plaza de Ponchos (Mercado Artesanal)');
     content = content.replace(/Mercado Indigena/gi, 'Plaza de Ponchos (Mercado Artesanal)');
@@ -21,9 +21,9 @@ files.forEach(f => {
     content = content.replace(/comunidades indígenas/gi, 'comunidades Kichwa');
 
     // Fix empty or missing images for Otavalo
-    content = content.replace(/\/images\/tours\/16-9\/otavalo[^']*\.jpg/g, '/images/tours/16-9/otavalo-market-16-9.jpg');
+    content = content.replace(/\/images\/tours\/16-9\/otavalo[^']*\.webp/g, '/images/tours/16-9/otavalo-market-16-9.webp');
     // Just in case it's completely empty
-    content = content.replace(/image:\s*''/g, "image: '/images/tours/16-9/otavalo-market-16-9.jpg'");
+    content = content.replace(/image:\s*''/g, "image: '/images/tours/16-9/otavalo-market-16-9.webp'");
 
     fs.writeFileSync(f, content);
   }

@@ -692,8 +692,8 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                   className="bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/10 rounded-[32px] overflow-hidden hover:border-blue-500/30 transition-all duration-300 flex flex-col group shadow-xl"
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-72 w-full overflow-hidden block">
-                    <Image quality={90}
-                      src={tour.imageUrl || '/images/tours/16-9/galapagos-snorkeling-16-9.jpg'}
+                    <Image quality={100}
+                      src={tour.imageUrl || '/images/tours/16-9/galapagos-snorkeling-16-9.webp'}
                       alt={title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"

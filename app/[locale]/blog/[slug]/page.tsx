@@ -460,7 +460,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       />
 
       <div className="max-w-4xl mx-auto space-y-10">
-        
+
         {/* Back Link */}
         <div>
           <Link
@@ -627,7 +627,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               const trimmed = paragraph.trim();
               if (!trimmed) return null;
 
-              {/* Inline Markdown Image: ![caption](/path/to/image.jpg) in Magazine Style */}
+              {/* Inline Markdown Image: ![caption](/path/to/image.webp) in Magazine Style */ }
               if (trimmed.startsWith('![') && trimmed.includes('](')) {
                 const match = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
                 if (match) {
@@ -702,74 +702,74 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </h2>
                 );
               }
-            if (trimmed.startsWith('### ')) {
-              return (
-                <h3 key={idx} className="text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400 pt-4 pb-1">
-                  {trimmed.replace('### ', '')}
-                </h3>
-              );
-            }
-            if (trimmed.startsWith('#### ')) {
-              const lines = trimmed.split('\n');
-              const headingText = lines[0].replace('#### ', '').trim();
-              const restText = lines.slice(1).join('\n').trim();
+              if (trimmed.startsWith('### ')) {
+                return (
+                  <h3 key={idx} className="text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400 pt-4 pb-1">
+                    {trimmed.replace('### ', '')}
+                  </h3>
+                );
+              }
+              if (trimmed.startsWith('#### ')) {
+                const lines = trimmed.split('\n');
+                const headingText = lines[0].replace('#### ', '').trim();
+                const restText = lines.slice(1).join('\n').trim();
 
+                return (
+                  <div key={idx} className="space-y-3 pt-3">
+                    <h4 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white pt-2 pb-1 border-l-4 border-emerald-600 pl-3">
+                      {headingText}
+                    </h4>
+                    {restText && (
+                      <p
+                        className="text-zinc-600 dark:text-zinc-300 font-normal leading-relaxed pl-3.5"
+                        dangerouslySetInnerHTML={{
+                          __html: parseMarkdown(restText, locale)
+                        }}
+                      />
+                    )}
+                  </div>
+                );
+              }
+              if (trimmed.startsWith('* ')) {
+                const items = trimmed.split('\n* ').map((i) => i.replace(/^\*\s*/, ''));
+                return (
+                  <ul key={idx} className="space-y-2 list-disc list-inside pl-2 text-zinc-700 dark:text-zinc-300">
+                    {items.map((it, iIdx) => (
+                      <li
+                        key={iIdx}
+                        dangerouslySetInnerHTML={{
+                          __html: parseMarkdown(it, locale)
+                        }}
+                      />
+                    ))}
+                  </ul>
+                );
+              }
+              if (/^\d+\.\s/.test(trimmed)) {
+                return (
+                  <div
+                    key={idx}
+                    className="space-y-2 pl-2 text-zinc-700 dark:text-zinc-300"
+                    dangerouslySetInnerHTML={{
+                      __html: parseMarkdown(trimmed.replace(/\n/g, '<br />'), locale)
+                    }}
+                  />
+                );
+              }
+              if (trimmed.startsWith('---')) {
+                return <hr key={idx} className="border-zinc-200 dark:border-zinc-800 my-6" />;
+              }
               return (
-                <div key={idx} className="space-y-3 pt-3">
-                  <h4 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white pt-2 pb-1 border-l-4 border-emerald-600 pl-3">
-                    {headingText}
-                  </h4>
-                  {restText && (
-                    <p
-                      className="text-zinc-600 dark:text-zinc-300 font-normal leading-relaxed pl-3.5"
-                      dangerouslySetInnerHTML={{
-                        __html: parseMarkdown(restText, locale)
-                      }}
-                    />
-                  )}
-                </div>
-              );
-            }
-            if (trimmed.startsWith('* ')) {
-              const items = trimmed.split('\n* ').map((i) => i.replace(/^\*\s*/, ''));
-              return (
-                <ul key={idx} className="space-y-2 list-disc list-inside pl-2 text-zinc-700 dark:text-zinc-300">
-                  {items.map((it, iIdx) => (
-                    <li
-                      key={iIdx}
-                      dangerouslySetInnerHTML={{
-                        __html: parseMarkdown(it, locale)
-                      }}
-                    />
-                  ))}
-                </ul>
-              );
-            }
-            if (/^\d+\.\s/.test(trimmed)) {
-              return (
-                <div
+                <p
                   key={idx}
-                  className="space-y-2 pl-2 text-zinc-700 dark:text-zinc-300"
+                  className="leading-relaxed font-normal text-zinc-600 dark:text-zinc-300"
                   dangerouslySetInnerHTML={{
-                    __html: parseMarkdown(trimmed.replace(/\n/g, '<br />'), locale)
+                    __html: parseMarkdown(trimmed, locale)
                   }}
                 />
               );
-            }
-            if (trimmed.startsWith('---')) {
-              return <hr key={idx} className="border-zinc-200 dark:border-zinc-800 my-6" />;
-            }
-            return (
-              <p
-                key={idx}
-                className="leading-relaxed font-normal text-zinc-600 dark:text-zinc-300"
-                dangerouslySetInnerHTML={{
-                  __html: parseMarkdown(trimmed, locale)
-                }}
-              />
-            );
-          });
-        })()}
+            });
+          })()}
         </div>
 
         {/* Article FAQ Section for GEO / AI Citation */}
@@ -826,12 +826,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           const s = post.slug.toLowerCase();
           const destKey: DestinationKey =
             s.includes('galapagos') ? 'galapagos' :
-            s.includes('quito') ? 'quito' :
-            s.includes('volcano') ? 'cotopaxi' :
-            s.includes('amazon') ? 'amazon' :
-            s.includes('cuenca') ? 'cuenca' :
-            s.includes('mindo') || s.includes('otavalo') || s.includes('poncho') ? 'otavalo' :
-            'galapagos';
+              s.includes('quito') ? 'quito' :
+                s.includes('volcano') ? 'cotopaxi' :
+                  s.includes('amazon') ? 'amazon' :
+                    s.includes('cuenca') ? 'cuenca' :
+                      s.includes('mindo') || s.includes('otavalo') || s.includes('poncho') ? 'otavalo' :
+                        'galapagos';
           return <BlogGalleryButton destination={destKey} locale={locale} />;
         })()}
 

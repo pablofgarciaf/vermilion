@@ -1,4 +1,4 @@
-export {};
+export { };
 import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
@@ -11,7 +11,7 @@ if (!fs.existsSync(destDir)) {
 }
 
 // Allowed extensions
-const allowedExts = ['.jpg', '.jpeg', '.png'];
+const allowedExts = ['.webp', '.jpeg', '.png'];
 
 async function processDirectory(dir) {
   if (!fs.existsSync(dir)) return;
@@ -25,7 +25,7 @@ async function processDirectory(dir) {
       const ext = path.extname(entry.name).toLowerCase();
       if (allowedExts.includes(ext)) {
         const destPath = path.join(destDir, entry.name.replace(ext, '.webp'));
-        
+
         // Skip if already exists to avoid redundant processing
         if (!fs.existsSync(destPath)) {
           try {

@@ -36,7 +36,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
       .filter((img) => {
         if (!img || set.has(img)) return false;
         // Exclude 9:16 vertical images from the tour page gallery to avoid pixelation/stretching
-        if (img.includes('/9-16/') || img.includes('-9-16.jpg')) return false;
+        if (img.includes('/9-16/') || img.includes('-9-16.webp')) return false;
         set.add(img);
         return true;
       });

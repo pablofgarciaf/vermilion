@@ -53,7 +53,7 @@ export default async function CouplesAnniversaryPage({ params }: { params: Promi
     <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100">
       <section className="relative min-h-[85vh] flex items-end pb-20 pt-40 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image src="/images/tours/9-16/galapagos-las-grietas-9-16.jpg" alt={isEs ? 'Las Grietas Galapagos atardecer romantico' : 'Las Grietas Galapagos romantic sunset'} fill className="object-cover" priority quality={90} sizes="100vw" />
+          <Image src="/images/tours/9-16/galapagos-las-grietas-9-16.webp" alt={isEs ? 'Las Grietas Galapagos atardecer romantico' : 'Las Grietas Galapagos romantic sunset'} fill className="object-cover" priority quality={100} sizes="100vw" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto w-full space-y-6">

@@ -35,7 +35,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
     desktopImage: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
-    mobileImage: '/images/tours/9-16/quito-centro-historico.jpg'
+    mobileImage: '/images/tours/9-16/quito-centro-historico.webp'
   },
   {
     place: { en: 'Tungurahua - Baños', es: 'Tungurahua - Baños', fr: 'Tungurahua - Baños', de: 'Tungurahua - Baños', it: 'Tungurahua - Baños', pt: 'Tungurahua - Baños', ja: 'トゥングラワ - バニョス', zh: '通古拉瓦 - 巴尼奥斯' },
@@ -53,7 +53,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
     desktopImage: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
-    mobileImage: '/images/tours/9-16/pailon-diablo-9-16.jpg'
+    mobileImage: '/images/tours/9-16/pailon-diablo-9-16.webp'
   },
   {
     place: { en: 'Cotopaxi - Andes', es: 'Cotopaxi - Andes', fr: 'Cotopaxi - Andes', de: 'Cotopaxi - Anden', it: 'Cotopaxi - Ande', pt: 'Cotopaxi - Andes', ja: 'コトパクシ - アンデス', zh: '科托帕希 - 安第斯' },
@@ -71,7 +71,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
     desktopImage: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
-    mobileImage: '/images/tours/9-16/cotopaxi-9-16.jpg'
+    mobileImage: '/images/tours/9-16/cotopaxi-9-16.webp'
   },
   {
     place: { en: 'Cotopaxi - Quilotoa', es: 'Cotopaxi - Quilotoa', fr: 'Cotopaxi - Quilotoa', de: 'Cotopaxi - Quilotoa', it: 'Cotopaxi - Quilotoa', pt: 'Cotopaxi - Quilotoa', ja: 'キロトア - アンデス', zh: '基洛托阿 - 火山湖' },
@@ -89,7 +89,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
     desktopImage: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
-    mobileImage: '/images/tours/9-16/quilotoa-9-16.jpg'
+    mobileImage: '/images/tours/9-16/quilotoa-9-16.webp'
   },
   {
     place: { en: 'Napo - Amazon Rainforest', es: 'Napo - Selva Amazónica', fr: 'Napo - Forêt Amazonienne', de: 'Napo - Amazonas Regenwald', it: 'Napo - Foresta Amazzonica', pt: 'Napo - Selva Amazônica', ja: 'ナポ - アマゾン熱帯雨林', zh: '纳波 - 亚马逊雨林' },
@@ -105,9 +105,9 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       ja: '動力付きカヌーで手付かずのアマゾン川を航行し、固有の野生生物に出会い、先住民族キチュワの家族と交流しましょう。',
       zh: '乘坐机动独木舟穿行于原始亚马逊支流，探访野生动物保护区，融入传统奇瓦印第安社区。'
     },
-    image: '/images/tours/16-9/amazon-river-16-9.jpg',
+    image: '/images/tours/16-9/amazon-river-16-9.webp',
     desktopImage: '/images/tours/16-9/amazon-nutria-9-16.webp',
-    mobileImage: '/images/tours/9-16/amazon-waterfall-9-16.jpg'
+    mobileImage: '/images/tours/9-16/amazon-waterfall-9-16.webp'
   },
   {
     place: { en: 'Imbabura - Otavalo', es: 'Imbabura - Otavalo', fr: 'Imbabura - Otavalo', de: 'Imbabura - Otavalo', it: 'Imbabura - Otavalo', pt: 'Imbabura - Otavalo', ja: 'インバブラ - オタバロ', zh: '因巴布拉 - 奥塔瓦洛' },
@@ -125,7 +125,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/otavalo-market-16-9.webp',
     desktopImage: '/images/tours/16-9/otavalo-market-16-9.webp',
-    mobileImage: '/images/tours/9-16/otavalo-market-9-16.jpg'
+    mobileImage: '/images/tours/9-16/otavalo-market-9-16.webp'
   },
   {
     place: { en: 'Azuay - Cuenca & Cajas', es: 'Azuay - Cuenca y Cajas', fr: 'Azuay - Cuenca & Cajas', de: 'Azuay - Cuenca & Cajas', it: 'Azuay - Cuenca e Cajas', pt: 'Azuay - Cuenca e Cajas', ja: 'クエンカ＆カハス国立公園', zh: '昆卡与卡哈斯国家公园' },
@@ -143,7 +143,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/cuenca-colonial-16-9.webp',
     desktopImage: '/images/tours/16-9/cuenca-colonial-16-9.webp',
-    mobileImage: '/images/tours/9-16/cajas-national-park-9-16.jpg'
+    mobileImage: '/images/tours/9-16/cajas-national-park-9-16.webp'
   },
   {
     place: { en: 'Chimborazo - Andes', es: 'Chimborazo - Andes', fr: 'Chimborazo - Andes', de: 'Chimborazo - Anden', it: 'Chimborazo - Ande', pt: 'Chimborazo - Andes', ja: 'チンボラソ - アンデス', zh: '钦博拉索 - 安第斯' },
@@ -161,7 +161,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
     desktopImage: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
-    mobileImage: '/images/tours/9-16/chimborazo-9-16.jpg'
+    mobileImage: '/images/tours/9-16/chimborazo-9-16.webp'
   },
   {
     place: { en: 'Galapagos - Puerto Ayora', es: 'Galápagos - Puerto Ayora', fr: 'Galapagos - Puerto Ayora', de: 'Galapagos - Puerto Ayora', it: 'Galapagos - Puerto Ayora', pt: 'Galápagos - Puerto Ayora', ja: 'ガラパゴス - プエルト・アヨラ', zh: '加拉帕戈斯 - 阿约拉港' },
@@ -179,6 +179,6 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
     desktopImage: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
-    mobileImage: '/images/tours/9-16/galapagos-las-grietas-9-16.jpg'
+    mobileImage: '/images/tours/9-16/galapagos-las-grietas-9-16.webp'
   }
 ];

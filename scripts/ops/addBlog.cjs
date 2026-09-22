@@ -30,7 +30,7 @@ if (idx !== -1) {
     },
     publishedAt: '2026-08-31',
     readTime: '5 min read',
-    imageUrl: '/images/tours/16-9/otavalo-market-16-9.jpg',
+    imageUrl: '/images/tours/16-9/otavalo-market-16-9.webp',
     featured: false,
     tags: ['Otavalo', 'Plaza de Ponchos', 'Culture', 'Handicrafts', 'Textiles', 'Ecuador'],
     relatedTourId: 'otavalo-indigenous-market',

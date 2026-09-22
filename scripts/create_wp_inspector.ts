@@ -3,19 +3,19 @@ import path from 'path';
 
 const tempDir = path.resolve('public/temp_catalog');
 const photos = [
-  'banner-01.jpg', 'banner-02.jpg', 'banner-03.jpg', 'banner-04.jpg', 'banner-05.jpg',
-  'banner-06.jpg', 'banner-08.jpg', 'banner-09.jpg', 'banner-10.jpg', 'banner_aboutus-2.jpg',
-  'imgbanner-01.jpg', 'imgbanner-02.jpg', 'imgbanner-03.jpg', 'imgbanner-04.jpg',
-  'imgbanner-05.jpg', 'imgbanner-06.jpg', 'imgbanner-07.jpg', 'imgbanner-08.jpg',
-  'nrew-01.jpg', 'nrew-02.jpg', 'nrew-03.jpg', 'nrew-04.jpg', 'nrew-05.jpg', 'nrew-06.jpg',
-  'nrew-07.jpg', 'nrew-08.jpg', 'nrew-09.jpg', 'nrew-10.jpg', 'nrew-11.jpg', 'nrew-12.jpg',
-  'gal1.jpg', 'gal2.jpg', 'gal3.jpg', 'gal4.jpg', 'gal5.jpg', 'gal6.jpg', 'gal7.jpg', 'gal8.jpg',
-  'galatoursopt-01.jpg', 'galatoursopt-03.jpg', 'galatoursopt-05.jpg', 'galatoursopt-07.jpg',
-  '16as-01-2.jpg', '16as-02.jpg', '16as-03.jpg', '16as-04.jpg', '16as-05.jpg', '16as-06.jpg',
-  '16as-07-1.jpg', '16as-08.jpg', '16as-09-1.jpg', '16as-10-1.jpg', '16as-11-1.jpg',
-  'bloggala1.jpg', 'blogquito1.jpg', 'blogvermi1.jpg', 'blogvolcan1.jpg',
-  'plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg', 'SAN-CRISTOBAL-GALAPAGOS-2.jpg',
-  'piquero-1.jpg', '20170406_104637-2.jpg', '20170406_104916-2.jpg'
+  'banner-01.webp', 'banner-02.webp', 'banner-03.webp', 'banner-04.webp', 'banner-05.webp',
+  'banner-06.webp', 'banner-08.webp', 'banner-09.webp', 'banner-10.webp', 'banner_aboutus-2.webp',
+  'imgbanner-01.webp', 'imgbanner-02.webp', 'imgbanner-03.webp', 'imgbanner-04.webp',
+  'imgbanner-05.webp', 'imgbanner-06.webp', 'imgbanner-07.webp', 'imgbanner-08.webp',
+  'nrew-01.webp', 'nrew-02.webp', 'nrew-03.webp', 'nrew-04.webp', 'nrew-05.webp', 'nrew-06.webp',
+  'nrew-07.webp', 'nrew-08.webp', 'nrew-09.webp', 'nrew-10.webp', 'nrew-11.webp', 'nrew-12.webp',
+  'gal1.webp', 'gal2.webp', 'gal3.webp', 'gal4.webp', 'gal5.webp', 'gal6.webp', 'gal7.webp', 'gal8.webp',
+  'galatoursopt-01.webp', 'galatoursopt-03.webp', 'galatoursopt-05.webp', 'galatoursopt-07.webp',
+  '16as-01-2.webp', '16as-02.webp', '16as-03.webp', '16as-04.webp', '16as-05.webp', '16as-06.webp',
+  '16as-07-1.webp', '16as-08.webp', '16as-09-1.webp', '16as-10-1.webp', '16as-11-1.webp',
+  'bloggala1.webp', 'blogquito1.webp', 'blogvermi1.webp', 'blogvolcan1.webp',
+  'plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.webp', 'SAN-CRISTOBAL-GALAPAGOS-2.webp',
+  'piquero-1.webp', '20170406_104637-2.webp', '20170406_104916-2.webp'
 ];
 
 let html = `<!DOCTYPE html>
