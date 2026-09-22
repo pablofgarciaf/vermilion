@@ -117,10 +117,10 @@ export function Navbar() {
       href: `/${locale}/blog`,
     },
     { name: tNav('about'), href: `/${locale}/about` },
-    { name: tNav('contact'), href: `/${locale}#contact` },
+    { name: tNav('contact'), href: `/${locale}` + '#contact', isAnchorToHome: true },
   ];
 
-  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string, isAnchorToHome?: boolean) => {
     if (href.includes('#')) {
       const hash = href.split('#')[1];
 
@@ -145,10 +145,28 @@ export function Navbar() {
         return;
       }
 
+      // If contact link and not on home page, redirect to home with anchor
+      if (hash === 'contact' && isAnchorToHome && !pathname.startsWith(`/${locale}`)) {
+        e.preventDefault();
+        router.push(`/${locale}#contact`);
+        setMobileMenuOpen(false);
+        setDestinationsOpen(false);
+        return;
+      }
+
       const el = document.getElementById(hash) || (hash === 'about' ? document.getElementById('experience') : null) || (hash === 'experience' ? document.getElementById('about') : null);
       if (el) {
         e.preventDefault();
         el.scrollIntoView({ behavior: 'smooth' });
+        setMobileMenuOpen(false);
+        setDestinationsOpen(false);
+        return;
+      }
+
+      // If element not found on current page (e.g., contact on /blog), redirect to home with anchor
+      if (hash === 'contact' && isAnchorToHome) {
+        e.preventDefault();
+        router.push(`/${locale}#contact`);
         setMobileMenuOpen(false);
         setDestinationsOpen(false);
         return;
@@ -301,10 +319,10 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={(e) => handleAnchorClick(e, link.href)}
+                  onClick={(e) => handleAnchorClick(e, link.href, (link as any).isAnchorToHome)}
                   className={`px-3 py-2 text-[11px] uppercase tracking-widest font-bold rounded-xl transition-colors ${
-                    isActive 
-                      ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400' 
+                    isActive
+                      ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
                       : 'text-zinc-800 dark:text-zinc-200 hover:text-emerald-600 hover:bg-zinc-100/70 dark:hover:bg-zinc-800/50'
                   }`}
                 >
@@ -532,7 +550,7 @@ export function Navbar() {
                 <div key={link.name}>
                   <a
                     href={link.href}
-                    onClick={(e) => handleAnchorClick(e, link.href)}
+                    onClick={(e) => handleAnchorClick(e, link.href, (link as any).isAnchorToHome)}
                     className={`block px-4 py-2.5 rounded-xl text-base font-medium transition-colors ${
                       isActive
                         ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'

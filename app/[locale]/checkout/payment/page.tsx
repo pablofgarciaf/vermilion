@@ -1091,16 +1091,16 @@ export default function CheckoutPaymentPage() {
                       <CreditCard className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="font-serif font-bold text-base text-stone-900 dark:text-white">
+                      <h3 className="font-serif font-bold text-lg sm:text-xl text-stone-900 dark:text-white">
                         {t('tabPaypalCard')}
                       </h3>
-                      <span className="text-[11px] text-stone-500 dark:text-zinc-400 block">
-                        Confirmación Inmediata • Cifrado 256-Bit
+                      <span className="text-xs text-stone-500 dark:text-zinc-400 block">
+                        {t('confirmacionInmediata')} • {t('cifrado256Bit')}
                       </span>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-500/30 text-blue-800 dark:text-blue-300 text-[10px] font-bold uppercase tracking-wider">
-                    Recomendado
+                    {t('recomendado')}
                   </span>
                 </div>
 
@@ -1152,16 +1152,16 @@ export default function CheckoutPaymentPage() {
                       <Building2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                     </div>
                     <div>
-                      <h3 className="font-serif font-bold text-base text-stone-900 dark:text-white">
+                      <h3 className="font-serif font-bold text-lg sm:text-xl text-stone-900 dark:text-white">
                         {t('tabBankTitle')}
                       </h3>
-                      <span className="text-[11px] text-stone-500 dark:text-zinc-400 block">
-                        Cuentas Oficiales • Sin recargo de pasarela
+                      <span className="text-xs text-stone-500 dark:text-zinc-400 block">
+                        {t('cuentasOficiales')}
                       </span>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
-                    Directo
+                    {t('directo')}
                   </span>
                 </div>
 
@@ -1214,20 +1214,20 @@ export default function CheckoutPaymentPage() {
                 {openBankCard === null ? (
                   <div className="p-4 sm:p-5 border border-stone-200 dark:border-zinc-800 rounded-2xl space-y-3 bg-stone-50/50 dark:bg-zinc-900/40 animate-fade-in">
                     <div className="text-center">
-                      <p className="font-bold text-xs sm:text-sm text-emerald-700 dark:text-emerald-400">
-                        👆 ¿Deseas pagar por transferencia?
+                      <p className="font-bold text-sm sm:text-base text-emerald-700 dark:text-emerald-400">
+                        {t('deseasPagarTransferencia')}
                       </p>
                     </div>
                     <div className="p-3 bg-white dark:bg-zinc-950/80 border border-stone-200 dark:border-zinc-800/80 rounded-xl text-left text-xs space-y-1.5 font-medium">
                       <p className="text-stone-800 dark:text-zinc-200">
-                        1. Elige una de nuestras cuentas oficiales arriba para ver los datos bancarios.
+                        {t('elegeUnaCuenta')}
                       </p>
                       <p className="text-stone-800 dark:text-zinc-200">
-                        2. En el concepto, coloca tu Referencia: <strong className="font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-zinc-900 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800/80 font-bold">{ref || 'R-2026-1.2-80'}</strong>
+                        {t('enElConcepto')} <strong className="font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-zinc-900 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800/80 font-bold">{ref || 'R-2026-1.2-80'}</strong>
                       </p>
                     </div>
-                    <p className="text-[11px] text-center text-stone-500 dark:text-zinc-400">
-                      Haz clic en cualquiera de las 3 cuentas arriba para ver los números de cuenta oficiales y adjuntar tu comprobante de pago.
+                    <p className="text-xs text-center text-stone-500 dark:text-zinc-400">
+                      {t('haceClickCualquiera')}
                     </p>
                   </div>
                 ) : (
