@@ -69,15 +69,17 @@ export default async function BookingPage({ params }: { params: Promise<{ locale
       <div className="absolute top-0 left-0 w-full h-[70vh] bg-gradient-to-b from-emerald-900/15 via-emerald-900/5 to-transparent -z-10 pointer-events-none" />
       <div className="pb-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Static SSR H1 Header - Guarantees H1 is first heading in DOM */}
-        <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-zinc-900 dark:text-white tracking-tight">
-            {titleTexts[locale]}
-          </h1>
-          <p className="text-zinc-600 dark:text-zinc-300 text-xs sm:text-sm max-w-xl mx-auto">
-            {paragraphTexts[locale]}
-          </p>
-        </div>
-
+        {/* Visually Hidden H1 for SEO compliance (45-65 chars) */}
+        <h1 className="sr-only">
+          {locale === 'es' ? 'Reserva tu Expedición Exclusiva en Galápagos y Ecuador' : 
+           locale === 'en' ? 'Book Your Exclusive Expedition in Galapagos and Ecuador' :
+           locale === 'fr' ? 'Réservez votre Expédition Exclusive aux Galapagos et Equateur' :
+           locale === 'de' ? 'Buchen Sie Ihre exklusive Expedition auf den Galapagos-Inseln' :
+           locale === 'it' ? 'Prenota la tua Spedizione Esclusiva alle Galapagos e Ecuador' :
+           locale === 'pt' ? 'Reserve sua Expedição Exclusiva em Galápagos e no Equador' :
+           locale === 'ja' ? 'ガラパゴス諸島とエクアドルの特別なエクスペディションを予約する' :
+           '预订加拉帕戈斯群岛和厄瓜多尔的专属探险之旅'}
+        </h1>
         <Suspense fallback={<div className="flex items-center justify-center min-h-[60vh] text-emerald-700 font-semibold animate-pulse">{isEs ? 'Iniciando cotizador premium...' : 'Loading booking wizard...'}</div>}>
           <BookingWizard />
         </Suspense>

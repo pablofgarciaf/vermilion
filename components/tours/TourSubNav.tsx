@@ -78,24 +78,15 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               aria-label="Vermilion Routes Home"
               className="shrink-0 group flex items-center notranslate"
             >
-              <div className="relative w-[92px] h-[32px] sm:w-[160px] sm:h-[46px] lg:w-[180px] lg:h-[48px]">
-                <Image quality={100}
-                  src="/logo_inicio.png"
-                  alt="Vermilion Routes"
-                  width={210}
-                  height={56}
-                  className="w-auto h-full object-contain block dark:hidden"
-                  priority
-                />
-                <Image quality={100}
-                  src="/logo_blanco.png"
-                  alt="Vermilion Routes"
-                  width={210}
-                  height={56}
-                  className="w-auto h-full object-contain hidden dark:block"
-                  priority
-                />
-              </div>
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0">
+                  <Image quality={100}
+                    src="/icon.png"
+                    alt="Vermilion Routes"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
             </Link>
 
             <div className="h-8 w-px bg-zinc-300 dark:bg-zinc-700 hidden lg:block shrink-0" />
@@ -118,30 +109,6 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
           </div>
 
           <div className={`mt-2 ${isDailyTour ? 'flex items-center gap-2' : 'grid grid-cols-3 gap-2 sm:flex sm:justify-end sm:gap-3'}`}>
-            {/* BotA3n de Contacto movido a la segunda fila */}
-            <div className="relative shrink-0">
-              <button
-                onClick={() => setShowContactMenu(!showContactMenu)}
-                className="flex items-center justify-center gap-1.5 w-full sm:w-auto px-3 py-2.5 rounded-2xl border border-emerald-200 bg-white/95 text-emerald-700 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-800 text-[11px] sm:text-sm font-bold transition-all shadow-md shadow-emerald-900/10 hover:shadow-emerald-600/20 cursor-pointer dark:bg-zinc-900 dark:border-emerald-800 dark:text-emerald-300 dark:hover:bg-emerald-950/50"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span>{t.contact}</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showContactMenu ? 'rotate-180' : ''}`} />
-              </button>
-
-              {showContactMenu && (
-                <div className="absolute right-0 bottom-full mb-2.5 w-60 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-2xl py-2 z-50 animate-in fade-in duration-200">
-                  <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors">
-                    <MessageCircle className="w-4 h-4 text-emerald-600" />
-                    <span>{t.whatsapp} (+593 96 003 9156)</span>
-                  </a>
-                  <a href="tel:+593960039156" onClick={() => setShowContactMenu(false)} className="flex items-center gap-3 px-4 py-3 text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-700 transition-colors border-t border-zinc-100 dark:border-zinc-800">
-                    <Phone className="w-4 h-4 text-emerald-600" />
-                    <span>{t.call} (+593 96 003 9156)</span>
-                  </a>
-                </div>
-              )}
-            </div>
             {isDailyTour ? (
               <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-4 py-2.5 text-xs font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
                 <Sparkles className="w-4 h-4 fill-zinc-950" />
@@ -176,24 +143,15 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
               aria-label="Vermilion Routes Home"
               className="shrink-0 group flex items-center notranslate"
             >
-              <div className="relative w-[180px] h-[48px]">
-                <Image quality={100}
-                  src="/logo_inicio.png"
-                  alt="Vermilion Routes"
-                  width={210}
-                  height={56}
-                  className="w-auto h-full object-contain block dark:hidden"
-                  priority
-                />
-                <Image quality={100}
-                  src="/logo_blanco.png"
-                  alt="Vermilion Routes"
-                  width={210}
-                  height={56}
-                  className="w-auto h-full object-contain hidden dark:block"
-                  priority
-                />
-              </div>
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 shrink-0">
+                  <Image quality={100}
+                    src="/icon.png"
+                    alt="Vermilion Routes"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
             </Link>
 
             <div className="h-8 w-px bg-zinc-300 dark:bg-zinc-700 shrink-0" />

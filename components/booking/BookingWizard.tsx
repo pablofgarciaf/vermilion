@@ -148,14 +148,20 @@ function BookingSubNav({ primaryTour, pricing, locale, onPayClick }: { primaryTo
             </span>
           </div>
 
-          <a
-            href={`https://wa.me/593960039156?text=${encodeURIComponent(`${st.waPrefix} ${title}`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={handleCheckout}
+            disabled={isProcessing}
             className="inline-flex items-center justify-center gap-1.5 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-extrabold uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-stone-950 shadow-md transition-all hover:scale-[1.02] active:scale-95 cursor-pointer border-none"
           >
-            <span>{st.support}</span>
-          </a>
+            {isProcessing ? (
+              <span className="flex items-center gap-1.5">
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                ...
+              </span>
+            ) : (
+              <span>{st.support}</span>
+            )}
+          </button>
         </div>
       </div>
     </div>,

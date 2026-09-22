@@ -120,7 +120,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
               alt={`${title} - Previous Photo`}
               fill
               quality={100}
-              sizes="(max-width: 640px) 5vw, (max-width: 1024px) 70vw, 850px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 850px"
               className="object-cover"
               priority
               referrerPolicy="no-referrer"
@@ -137,7 +137,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
               alt={`${title} - Main Gallery Photo`}
               fill
               quality={100}
-              sizes="(max-width: 640px) 5vw, (max-width: 1024px) 70vw, 850px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 70vw, 850px"
               className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               priority
               referrerPolicy="no-referrer"
