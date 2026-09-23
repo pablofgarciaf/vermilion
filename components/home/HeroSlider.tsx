@@ -120,6 +120,9 @@ export function HeroSlider() {
       {/* Top Indicator */}
       <div className="indicator fixed top-0 left-0 right-0 h-[3px] bg-white z-[60] will-change-transform" />
 
+        {/* 0. Sombra lateral izquierda para legibilidad del texto (sobre la foto z-20, bajo el texto z-22) */}
+        <div aria-hidden="true" className="absolute inset-0 z-[21] pointer-events-none bg-black/35 md:bg-transparent md:bg-[linear-gradient(90deg,rgba(0,0,0,0.82)_0%,rgba(0,0,0,0.6)_28%,rgba(0,0,0,0.25)_52%,transparent_70%)]" />
+
         {/* 1. Destination Details Panel */}
         <HeroDetails initialData={initialData} locale={locale} />
 
