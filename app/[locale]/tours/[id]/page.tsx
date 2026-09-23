@@ -88,7 +88,7 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
 
   const dest = getLocalizedText(tour.destination, resolvedParams.locale);
   const alternates = getSeoAlternates(`/tours/${tour.id}`, resolvedParams.locale);
-  const rawImg = tour.mainImage || tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp';
+  const rawImg = tour.mainImage || tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp';
   const fullImgUrl = rawImg.startsWith('http') ? rawImg : `https://www.vermilionroutes.com${rawImg}`;
   const fbLocale = {
     es: 'es_LA',
@@ -355,11 +355,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
 
               {/* Los tours diarios tienen una tarifa única; las expediciones conservan sus categorías. */}
               <div className="pt-2 space-y-3">
-                {!isDailyTour && (
-                  <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider block">
-                    {SELECT_TIER_LABEL[locale] || SELECT_TIER_LABEL.en}
-                  </span>
-                )}
+
                 {isDailyTour ? (
                   <Link
                     href={`/${locale}/booking?addTour=${tour.id}`}
@@ -425,7 +421,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
 
             {/* Columna Derecha del Hero: La Galería Interactiva */}
             <div className="lg:col-span-6">
-              <TourGallery images={galleryImages} title={title} tourId={tour.id} destination={tour.destination} />
+              <TourGallery images={galleryImages} title={title} tourId={tour.id} destination={tour.destination} emphasizeFirst={/galapagos/i.test(dest || '')} />
             </div>
 
           </div>

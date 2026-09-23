@@ -7,7 +7,7 @@ import { MapPin, Mountain, TreePine, Waves } from 'lucide-react';
 import { DESTINATIONS, DESTINATION_UI } from '@/data/destinationsData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getSeoAlternates, SUPPORTED_SEO_LOCALES, BASE_CANONICAL_URL } from '@/utils/seoHelper';
-import DestinationsFilter from '@/components/destinations/DestinationsFilter';
+import DestinationsHeroSection from '@/components/destinations/DestinationsHeroSection';
 
 export const dynamicParams = false;
 
@@ -96,35 +96,23 @@ export default async function DestinationsIndexPage({
 
   const t = (key: keyof typeof regionLabels) => (regionLabels[key] as any)[locale] || (regionLabels[key] as any).en;
 
-  return (
-    <>
-      {/* PORTADA */}
-      <section className="relative bg-gradient-to-b from-emerald-950 via-zinc-900 to-zinc-950 pt-32 pb-14 text-white overflow-hidden">
-        <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300 mb-4">
-            <MapPin className="w-3.5 h-3.5" />
-            {getLocalizedText(DESTINATION_UI.allDestinations as any, locale)}
-          </span>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">{h.title}</h1>
-          <p className="text-lg sm:text-xl text-zinc-200 max-w-3xl">{h.subtitle}</p>
-        </div>
-      </section>
+  const labels = {
+    all: t('all'),
+    galapagos: t('galapagos'),
+    andes: t('andes'),
+    amazonia: t('amazonia'),
+    search: locale === 'es' ? 'Buscar destino…' : locale === 'en' ? 'Search destination…' : locale === 'fr' ? 'Rechercher…' : locale === 'de' ? 'Suchen…' : locale === 'it' ? 'Cerca…' : locale === 'pt' ? 'Buscar…' : locale === 'ja' ? '検索…' : '搜索…',
+    empty: locale === 'es' ? 'Ningún destino coincide con tu búsqueda.' : locale === 'en' ? 'No destination matches your search.' : locale === 'fr' ? 'Aucune destination ne correspond.' : locale === 'de' ? 'Kein Reiseziel gefunden.' : locale === 'it' ? 'Nessuna destinazione trovata.' : locale === 'pt' ? 'Nenhum destino encontrado.' : locale === 'ja' ? '該当なし。' : '未找到匹配目的地。',
+  };
 
-      {/* FILTRO + GRID */}
-      <div className="max-w-6xl mx-auto px-6 py-10">
-        <DestinationsFilter
-          items={items}
-          locale={locale}
-          labels={{
-            all: t('all'),
-            galapagos: t('galapagos'),
-            andes: t('andes'),
-            amazonia: t('amazonia'),
-            search: locale === 'es' ? 'Buscar destino…' : locale === 'en' ? 'Search destination…' : locale === 'fr' ? 'Rechercher…' : locale === 'de' ? 'Suchen…' : locale === 'it' ? 'Cerca…' : locale === 'pt' ? 'Buscar…' : locale === 'ja' ? '検索…' : '搜索…',
-            empty: locale === 'es' ? 'Ningún destino coincide con tu búsqueda.' : locale === 'en' ? 'No destination matches your search.' : locale === 'fr' ? 'Aucune destination ne correspond.' : locale === 'de' ? 'Kein Reiseziel gefunden.' : locale === 'it' ? 'Nessuna destinazione trovata.' : locale === 'pt' ? 'Nenhum destino encontrado.' : locale === 'ja' ? '該当なし。' : '未找到匹配目的地。',
-          }}
-        />
-      </div>
-    </>
+  return (
+    <DestinationsHeroSection
+      items={items}
+      locale={locale}
+      labels={labels}
+      title={h.title}
+      subtitle={h.subtitle}
+      eyebrow={getLocalizedText(DESTINATION_UI.allDestinations as any, locale)}
+    />
   );
 }

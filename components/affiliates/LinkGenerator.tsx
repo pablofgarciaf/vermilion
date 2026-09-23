@@ -117,11 +117,11 @@ export function LinkGenerator({ username }: LinkGeneratorProps) {
                 onClick={() => setLinkType(opt.id)}
                 className={`flex items-center gap-3 px-4 py-3 rounded-2xl border text-left text-xs font-semibold transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? 'bg-gradient-to-r from-[#C9A84C] to-[#8B6914] border-[#C9A84C]/50 text-[#0A0A0F] shadow-lg shadow-[#C9A84C]/20'
+                    ? 'bg-gradient-to-r from-[#C9A84C] to-[#8B6914] border-[#C9A84C]/50 text-[#0B1622] shadow-lg shadow-[#C9A84C]/20'
                     : 'border-white/8 bg-white/[0.03] text-[#A9A9A9] hover:border-[#C9A84C]/30 hover:text-white'
                 }`}
               >
-                <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#0A0A0F]' : 'text-[#C9A84C]'}`} />
+                <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#0B1622]' : 'text-[#C9A84C]'}`} />
                 <span>{isEs ? opt.labelEs : opt.labelEn}</span>
               </button>
             );
@@ -168,7 +168,7 @@ export function LinkGenerator({ username }: LinkGeneratorProps) {
 
           <button
             onClick={handleCopy}
-            className="shrink-0 px-3.5 py-2 bg-gradient-to-r from-[#C9A84C] via-[#F5D78A] to-[#B8860B] hover:from-[#D4AF37] hover:to-[#9A6E0A] text-[#0A0A0F] font-bold text-xs rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-md shadow-[#C9A84C]/20 hover:shadow-[#C9A84C]/30 active:scale-95"
+            className="shrink-0 px-3.5 py-2 bg-gradient-to-r from-[#C9A84C] via-[#F5D78A] to-[#B8860B] hover:from-[#D4AF37] hover:to-[#9A6E0A] text-[#0B1622] font-bold text-xs rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shadow-md shadow-[#C9A84C]/20 hover:shadow-[#C9A84C]/30 active:scale-95"
           >
             {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
             <span className="whitespace-nowrap">{copied ? (isEs ? '¡Copiado!' : 'Copied!') : (isEs ? 'Copiar Enlace' : 'Copy Link')}</span>

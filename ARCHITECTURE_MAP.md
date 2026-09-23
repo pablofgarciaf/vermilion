@@ -1196,6 +1196,139 @@ Vermilion Routes implementa un modelo de comisiones de dos vertientes:
 
 ---
 
+
+
+## 9. CRM IA & WhatsApp Business API Integration
+
+### 9.1 Arquitectura General
+El sistema integra WhatsApp Business API con el CRM de Vermilion Routes mediante un webhook serverless en Vercel, orquestado por Hermes (plugin `agency-agents-router`) que delega a 279 agentes especializados.
+
+```mermaid
+flowchart LR
+    User[Usuario WhatsApp] -->|Mensaje| Webhook[POST /api/webhook/whatsapp]
+    Webhook -->|Validar Signature| Firebase[(Firestore Admin SDK)]
+    Firebase -->|Buscar booking/lead/affiliate| Parent[Doc Padre]
+    Parent -->|Guardar mensaje| Messages[Subcolección messages]
+    Parent -->|Actualizar estado| State[conversation_state]
+    Messages --> Classifier[Clasificador Intención]
+    Classifier --> Router[agency_agents_router]
+    Router --> Agent[Agente Especialista]
+    Agent -->|Respuesta| WhatsApp[WhatsApp API]
+    Agent -->|Escalar| Human[Notificación Humano]
+```
+
+### 9.2 Endpoints
+| Endpoint | Método | Propósito |
+|----------|--------|-----------|
+| `/api/webhook/whatsapp` | GET | Verificación Meta (hub.challenge) |
+| `/api/webhook/whatsapp` | POST | Recibir mensajes, statuses, reactions |
+
+### 9.3 Esquema de Datos Firestore
+
+#### Documento Padre (booking/lead/affiliate/usuario)
+```typescript
+interface ConversationState {
+  conversation_state: 'ai_active' | 'human_needed' | 'closed' | 'waiting_user';
+  last_message_at: Timestamp;
+  last_message_preview: string;
+  last_message_from: 'user' | 'assistant';
+  unread_count: number;
+  needs_human_review: boolean;
+  ai_metrics: {
+    resolved_count: number;
+    escalated_count: number;
+    avg_confidence: number;
+    last_ai_response_at: Timestamp;
+  };
+}
+```
+
+#### Subcolección `messages/{messageId}`
+```typescript
+interface WhatsAppMessage {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+  timestamp: Timestamp;
+  agent_slug: string;
+  confidence: number;
+  intent: 'quote' | 'complaint' | 'confirmation' | 'booking_change' | 'payment' | 'info' | 'other';
+  whatsapp_msg_id: string;
+  phone_number_id: string;
+  interactive_type?: string;
+}
+```
+
+### 9.4 Clasificación de Intención
+Sistema basado en patrones regex con 7 categorías:
+| Intención | Patrones clave | Agente por defecto |
+|-----------|----------------|-------------------|
+| `quote` | cotiza, precio, presupuesto, quiero viajar | `sales-discovery-coach` |
+| `complaint` | problema, queja, malo, retraso | `support-support-responder` |
+| `confirmation` | confirmo, ok, pagado, pagué | `sales-deal-strategist` |
+| `booking_change` | cambiar, reprogramar, cancelar | `sales-deal-strategist` |
+| `payment` | pagar, transferencia, comprobante | `support-support-responder` |
+| `info` | horario, dónde, incluye, cómo | `sales-discovery-coach` |
+| `other` | - | `support-support-responder` |
+
+### 9.5 Escalación Humana Automática
+**Triggers:**
+- Confianza < 0.5
+- Palabras clave: "humano", "gerente", "reclamo", "demanda", "abogado"
+- Flag `needs_human_review: true` en doc padre
+
+**Acción:**
+1. `conversation_state` → `human_needed`
+2. Notificación en `/admin?tab=ai` (badge rojo + sonido)
+3. Opcional: Email/Slack a equipo Concierge
+4. IA deja de responder hasta que humano tome control (`Tomar Control` button)
+
+### 9.6 Dashboard `/admin?tab=ai`
+**Métricas en tiempo real:**
+- Conversaciones IA activa / Escaladas / Cerradas
+- Confianza promedio del sistema
+- Tiempo medio de respuesta
+- % Resuelto por IA vs Escalado
+
+**Tabla de conversaciones con:**
+- Filtros por estado
+- Vista previa último mensaje
+- Barra de confianza por conversación
+- Botones: `Tomar Control` | `Ver Chat` | `Cerrar`
+
+### 9.7 Variables de Entorno Requeridas (Vercel)
+| Variable | Descripción |
+|----------|-------------|
+| `FIREBASE_PROJECT_ID` | Firebase project ID |
+| `FIREBASE_CLIENT_EMAIL` | Service account client email |
+| `FIREBASE_PRIVATE_KEY` | Private key (con `\n` escapados) |
+| `WHATSAPP_TOKEN` | Meta Business API token |
+| `WHATSAPP_VERIFY_TOKEN` | Token verificación webhook |
+| `WHATSAPP_APP_SECRET` | Para validar X-Hub-Signature-256 |
+| `WHATSAPP_PHONE_NUMBER_ID` | Meta phone number ID |
+
+### 9.8 Seguridad
+- Validación obligatoria `X-Hub-Signature-256` (HMAC SHA256 con `WHATSAPP_APP_SECRET`)
+- Rate limiting heredado de `proxy.ts` (10 req/min para `/api/webhook/*`)
+- Ventana 24h WhatsApp: solo plantillas aprobadas fuera de ventana
+- Sanitización de entrada via `lib/validation.ts` (Zod + honeypot)
+
+### 9.9 Agentes Especializados Involucrados
+| Agente | Slug | Rol en WhatsApp |
+|--------|------|----------------|
+| Sales Discovery Coach | `sales-discovery-coach` | Cotizaciones, info general, nuevos leads |
+| Support Responder | `support-support-responder` | Quejas, pagos, soporte post-venta |
+| Sales Deal Strategist | `sales-deal-strategist` | Cambios reserva, confirmaciones, cierres |
+| Human Escalation | `human-escalation` | Notifica a equipo Concierge/Admin |
+
+### 9.10 Próximos Pasos (Roadmap)
+- [ ] Integración n8n para flujos complejos
+- [ ] Análisis de sentimiento en tiempo real
+- [ ] Plantillas WhatsApp dinámicas por agente
+- [ ] Métricas de satisfacción (CSAT) post-chat
+- [ ] Multi-agente colaborativo (handoff IA-IA)
+
+---
+
 ## 7. Bitácora de Evolución del Plano (Changelog)
 
 | Fecha | Versión | Autor | Cambios Implementados | Próximos Pasos / Hitos |

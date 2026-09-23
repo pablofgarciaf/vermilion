@@ -12,7 +12,7 @@ import { LinkGenerator } from '@/components/affiliates/LinkGenerator';
 // ── METALLIC GOLD PALETTE ─────────────────────────────────────────────────────
 // Gold gradient: #C9A84C → #F5D78A → #B8860B
 // Silver text:  #D4D4D4 → #A9A9A9
-// Ink:          #0A0A0F (near-black background)
+// Ink:          #0B1622 (near-black background)
 // Cards:        rgba(255,255,255,0.04) with gold border @ 12% opacity
 
 function StatCard({ label, value, sub, icon: Icon, accent }: {
@@ -27,7 +27,7 @@ function StatCard({ label, value, sub, icon: Icon, accent }: {
       {/* Subtle gold glow on hover */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#C9A84C]/5 to-transparent rounded-[20px]" />
       <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accent} shadow-lg`}>
-        <Icon className="w-4.5 h-4.5 text-[#0A0A0F]" />
+        <Icon className="w-4.5 h-4.5 text-[#0B1622]" />
       </div>
       <div className="relative z-10">
         <p className="text-[10px] text-[#A9A9A9] uppercase tracking-[0.12em] font-medium">{label}</p>

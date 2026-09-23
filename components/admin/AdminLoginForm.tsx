@@ -232,7 +232,7 @@ export function AdminLoginForm() {
       {/* Forgot Password Modal - Deluxe Design */}
       {showForgotModal && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300">
-          <div className="w-full max-w-md bg-[#07130C]/95 dark:bg-[#07130C]/95 border border-[#1A3826] p-8 sm:p-10 rounded-[32px] space-y-6 shadow-2xl relative overflow-hidden text-center">
+          <div className="w-full max-w-md bg-[#0B1622]/95 dark:bg-[#0B1622]/95 border border-[#1A3826] p-8 sm:p-10 rounded-[32px] space-y-6 shadow-2xl relative overflow-hidden text-center">
             {/* Glow accent */}
             <div className="absolute -top-16 -right-16 w-36 h-36 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-16 -left-16 w-36 h-36 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />

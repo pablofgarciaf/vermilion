@@ -3,29 +3,35 @@
 import React, { useMemo, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import type { BlogPost } from '@/data/blogData';
 
 export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
   const t = useTranslations();
+  const locale = useLocale();
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [subscriptionStatus, setSubscriptionStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Memoize the categories list
+  // Memoize the categories list (key by the English label for a stable id, display localized text)
   const categories = useMemo(() => {
-    const cats = new Set<string>();
+    const seen = new Map<string, string>();
     BLOG_POSTS.forEach((post) => {
       if (post.category) {
-        cats.add(post.category);
+        const key = post.category.en || getLocalizedText(post.category, locale);
+        if (key && !seen.has(key)) {
+          seen.set(key, getLocalizedText(post.category, locale));
+        }
       }
     });
-    return Array.from(cats).sort();
-  }, []);
+    return Array.from(seen.entries())
+      .map(([key, label]) => ({ key, label }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+  }, [locale]);
 
   // Memoize the featured post
   const featuredPost = useMemo(() => BLOG_POSTS[0] || null, []);
@@ -35,8 +41,8 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
     if (!selectedCategory) {
       return BLOG_POSTS.slice(1); // Exclude featured post from list
     }
-    return BLOG_POSTS.slice(1).filter((post) => post.category === selectedCategory);
-  }, [selectedCategory]);
+    return BLOG_POSTS.slice(1).filter((post) => (post.category?.en || getLocalizedText(post.category, locale)) === selectedCategory);
+  }, [selectedCategory, locale]);
 
   const handleCategoryClick = useCallback((category: string | null) => {
     setSelectedCategory(category);
@@ -77,8 +83,6 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
     return <div className="text-center py-12">{t('noBlogPosts')}</div>;
   }
 
-  const locale = 'en'; // This should be passed as a prop in real usage
-
   return (
     <div className="space-y-12">
       {/* Featured Post Section */}
@@ -103,7 +107,7 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
             <div className="flex flex-col justify-center space-y-3">
               {featuredPost.category && (
                 <div className="inline-flex w-max px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-                  {featuredPost.category}
+                  {getLocalizedText(featuredPost.category, locale)}
                 </div>
               )}
               <h3 className="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
@@ -136,17 +140,17 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
           >
             {t('all') || 'All'}
           </button>
-          {categories.map((category) => (
+          {categories.map(({ key, label }) => (
             <button
-              key={category}
-              onClick={() => handleCategoryClick(category)}
+              key={key}
+              onClick={() => handleCategoryClick(key)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                selectedCategory === category
+                selectedCategory === key
                   ? 'bg-emerald-600 text-white shadow-md'
                   : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-zinc-700'
               }`}
             >
-              {category}
+              {label}
             </button>
           ))}
         </div>
@@ -155,7 +159,9 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
       {/* Blog Posts Grid */}
       <section className="space-y-4">
         <h2 className="text-lg font-semibold text-zinc-700 dark:text-zinc-300">
-          {selectedCategory ? `${selectedCategory} Articles` : t('allArticles') || 'All Articles'}
+          {selectedCategory
+            ? `${categories.find((c) => c.key === selectedCategory)?.label || selectedCategory} ${t('articles') || 'Articles'}`
+            : t('allArticles') || 'All Articles'}
         </h2>
         {filteredPosts.length === 0 ? (
           <div className="text-center py-12 text-zinc-500 dark:text-zinc-400">
@@ -183,7 +189,7 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
                 <div className="p-4 flex flex-col flex-grow space-y-2">
                   {post.category && (
                     <div className="inline-flex w-max px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-                      {post.category}
+                      {getLocalizedText(post.category, locale)}
                     </div>
                   )}
                   <h3 className="text-lg md:text-xl font-bold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors line-clamp-2">

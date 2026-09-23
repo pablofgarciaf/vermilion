@@ -66,7 +66,7 @@ export default async function VerifyNewsletterPage({
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#0B1622] flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white dark:bg-zinc-900 rounded-3xl shadow-xl p-8 sm:p-10 text-center space-y-6">
         <div className="flex justify-center">
           {isSuccess ? (

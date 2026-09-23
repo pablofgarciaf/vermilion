@@ -98,7 +98,7 @@ export default function OperatorLayout({ children }: { children: React.ReactNode
 
   if (denied) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] text-zinc-100 flex items-center justify-center p-6">
+      <div className="min-h-screen bg-[#0B1622] text-zinc-100 flex items-center justify-center p-6">
         <div className="w-full max-w-md bg-zinc-950/80 border border-teal-900/40 rounded-3xl p-8 text-center space-y-6 shadow-2xl shadow-teal-950/50">
           <div className="w-16 h-16 rounded-2xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center mx-auto text-teal-400">
             <ShieldAlert className="w-8 h-8" />

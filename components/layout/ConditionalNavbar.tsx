@@ -6,6 +6,8 @@ export function ConditionalNavbar() {
   const pathname = usePathname();
   const isTourDetail = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/tours\/[^/]+$/);
   const isDestinationDetail = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/destinations\/[^/]+$/);
+  const isDestinationsListing = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/destinations\/?$/);
+  const isAboutPage = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/about\/?$/);
   // No mostrar el navbar en las rutas internas (affiliates, admin, cpanel, operator, auth, checkout)
   if (
     pathname?.includes('/affiliates') || 
@@ -22,7 +24,9 @@ export function ConditionalNavbar() {
     pathname === '/' || 
     !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/?$/) ||
     isTourDetail ||
-    isDestinationDetail;
+    isDestinationDetail ||
+    isDestinationsListing ||
+    isAboutPage;
 
   return (
     <>

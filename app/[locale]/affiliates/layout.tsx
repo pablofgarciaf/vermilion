@@ -161,7 +161,7 @@ export default function AffiliatesLayout({ children }: { children: React.ReactNo
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] dark:bg-[#0A0A0F] text-zinc-900 dark:text-zinc-100 flex flex-col lg:flex-row transition-colors duration-300">
+    <div className="min-h-screen bg-[#FDFBF7] dark:bg-[#0B1622] text-zinc-900 dark:text-zinc-100 flex flex-col lg:flex-row transition-colors duration-300">
       <AffiliatesSidebar />
       <main className="flex-1 lg:pl-72 pt-16 lg:pt-0 min-h-screen">
         {children}

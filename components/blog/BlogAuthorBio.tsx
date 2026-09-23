@@ -102,7 +102,7 @@ export function BlogAuthorBio({ locale = 'en' }: BlogAuthorBioProps) {
   const t = AUTHOR_I18N[locale] || AUTHOR_I18N['en'];
 
   return (
-    <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-stone-50 via-white to-emerald-50/30 dark:from-[#0B1A12] dark:via-[#0E2016] dark:to-[#07130C] border border-stone-200/80 dark:border-emerald-800/30 shadow-md space-y-6">
+    <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-stone-50 via-white to-emerald-50/30 dark:from-[#0F1E2E] dark:via-[#122335] dark:to-[#0B1622] border border-stone-200/80 dark:border-emerald-800/30 shadow-md space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
         {/* Avatar with Verified Badge */}
         <div className="relative shrink-0">
@@ -116,7 +116,7 @@ export function BlogAuthorBio({ locale = 'en' }: BlogAuthorBioProps) {
             />
           </div>
           <div
-            className="absolute -bottom-2 -right-2 p-1.5 rounded-xl bg-emerald-600 text-white shadow-lg border-2 border-white dark:border-[#0B1A12]"
+            className="absolute -bottom-2 -right-2 p-1.5 rounded-xl bg-emerald-600 text-white shadow-lg border-2 border-white dark:border-[#0F1E2E]"
             title="Verified Official MinTur Naturalist Guide"
           >
             <ShieldCheck className="w-4 h-4" />

@@ -441,53 +441,62 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
   const finalContinental = continentalTours.length > 0 ? continentalTours : mockTours.slice(2, 6);
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100 -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px] font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300 relative">
+    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#050618] text-zinc-900 dark:text-zinc-100 -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px] font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300 relative">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(toursSchema) }}
       />
 
       {/* ── HERO REVISTA (EDITORIAL LUXURY) ────────────────────────────────── */}
-      <section className="relative pt-[146px] sm:pt-40 pb-32 border-b border-zinc-200 dark:border-white/10">
+      <section className="relative w-full h-[100svh] min-h-[580px] sm:min-h-[620px] md:min-h-[650px] overflow-hidden">
         <ToursBackgroundSlider />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/75 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/55 pointer-events-none" />
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
-          <div className="text-center max-w-3xl mx-auto space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 backdrop-blur-md border border-white/10 text-emerald-300 text-xs font-bold uppercase tracking-widest shadow-xl">
-              <Compass className="w-3.5 h-3.5" />
-              <span>{t.heroBadge}</span>
-            </div>
+        <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
+          <div className="container mx-auto max-w-7xl">
+            <div className="text-center max-w-3xl mx-auto space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 backdrop-blur-md border border-white/10 text-emerald-300 text-xs font-bold uppercase tracking-widest shadow-xl">
+                <Compass className="w-3.5 h-3.5" />
+                <span>{t.heroBadge}</span>
+              </div>
 
-            <h1 className="font-serif text-5xl sm:text-7xl font-light text-white tracking-tight leading-tight drop-shadow-xl">
-              {t.heroTitleP1}<span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">{t.heroTitleP2}</span>
-            </h1>
+              <h1 className="font-serif text-5xl sm:text-7xl font-light text-white tracking-tight leading-tight hero-title-shadow">
+                {t.heroTitleP1}<span className="font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{t.heroTitleP2}</span>
+              </h1>
 
-            <p className="text-lg text-zinc-200 leading-relaxed max-w-2xl mx-auto drop-shadow-lg font-medium">
-              {t.heroDesc}
-            </p>
+              <p className="text-lg text-zinc-200 leading-relaxed max-w-2xl mx-auto drop-shadow-lg font-medium">
+                {t.heroDesc}
+              </p>
 
-            {/* Quick anchors - MOVED DOWN */}
-            <div className="flex flex-wrap justify-center gap-3 pt-8">
-              <a href="#galapagos" aria-label={t.s1Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
-                {t.anchorGala}
-              </a>
-              <a href="#continental" aria-label={t.s2Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
-                {t.anchorCont}
-              </a>
-              <a href="#combinados" aria-label={t.s3Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
-                {t.anchorComb}
-              </a>
-              <a href="#diarios" aria-label={t.s4Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
-                {t.anchorDaily}
-              </a>
+              {/* Quick anchors - MOVED DOWN */}
+              <div className="flex flex-wrap justify-center gap-3 pt-8">
+                <a href="#galapagos" aria-label={t.s1Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+                  {t.anchorGala}
+                </a>
+                <a href="#continental" aria-label={t.s2Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+                  {t.anchorCont}
+                </a>
+                <a href="#combinados" aria-label={t.s3Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+                  {t.anchorComb}
+                </a>
+                <a href="#diarios" aria-label={t.s4Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
+                  {t.anchorDaily}
+                </a>
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Decorative wave SVG */}
+        <div className="absolute -bottom-1 left-0 right-0 z-10 pointer-events-none" aria-hidden="true">
+          <svg viewBox="0 0 1440 100" preserveAspectRatio="none" className="w-full h-[60px] sm:h-[90px] text-[#FAF8F5] dark:text-zinc-950">
+            <path d="M0,40 C240,90 480,90 720,55 C960,20 1200,10 1440,45 L1440,100 L0,100 Z" fill="currentColor" />
+          </svg>
+        </div>
+
       </section>
 
-      {/* Stats Section exactly like landing page (overlaps the hero via -mt-12) */}
-      <StatsSection />
+
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-7xl space-y-28">
 
@@ -519,9 +528,9 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                   key={tour.id}
                   className="bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/10 rounded-3xl overflow-hidden hover:border-emerald-500/30 transition-all duration-300 flex flex-col group"
                 >
-                  <Link href={`/${locale}/tours/${tour.id}`} className="relative h-64 w-full overflow-hidden block">
+                  <Link href={`/${locale}/tours/${tour.id}`} className="relative h-72 w-full overflow-hidden block">
                     <Image quality={90}
-                      src={tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'}
+                      src={tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp'}
                       alt={title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

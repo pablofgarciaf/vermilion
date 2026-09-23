@@ -118,7 +118,7 @@ export default function CheckoutSuccessPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100 py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#0B1622] text-zinc-900 dark:text-zinc-100 py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="max-w-3xl mx-auto space-y-8">
 
         {/* 🌟 Luxury Confirmation Header */}

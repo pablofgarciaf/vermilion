@@ -74,7 +74,7 @@ export function AdminHeader({ user, onSignOut, activeTab, setActiveTab, toursCou
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 backdrop-blur-md border-b border-white/20 dark:border-zinc-800/30 ${
-          isScrolled ? 'pt-4 pb-4 shadow-sm bg-[#F9F6F0]/90 dark:bg-[#05140C]/90' : 'pt-5 pb-5 bg-[#F9F6F0]/95 dark:bg-[#05140C]/95'
+          isScrolled ? 'pt-4 pb-4 shadow-sm bg-[#F9F6F0]/90 dark:bg-[#0A1420]/90' : 'pt-5 pb-5 bg-[#F9F6F0]/95 dark:bg-[#0A1420]/95'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">

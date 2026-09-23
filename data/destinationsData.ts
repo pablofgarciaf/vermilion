@@ -158,7 +158,7 @@ export const DESTINATIONS: Destination[] = [
     slug: 'galapagos-santa-cruz',
     heroIndex: 0,
     region: 'galapagos',
-    image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+    image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
     mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp',
     name: { es: 'Galápagos · Santa Cruz', en: 'Galápagos · Santa Cruz', fr: 'Galápagos · Santa Cruz', de: 'Galápagos · Santa Cruz', it: 'Galápagos · Santa Cruz', pt: 'Galápagos · Santa Cruz', ja: 'ガラパゴス・サンタクルス島', zh: '加拉帕戈斯·圣克鲁斯岛' },
     tagline: {

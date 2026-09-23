@@ -151,7 +151,7 @@ function VerifyFormContent() {
           <p className="text-white/60 text-xs">Asegura tu cuenta de Embajador Vermilion</p>
         </div>
 
-        <div className="bg-[#0B1A12]/80 backdrop-blur-2xl border border-[#1B3C28] rounded-[32px] p-8 shadow-2xl shadow-emerald-950/60">
+        <div className="bg-[#0F1E2E]/80 backdrop-blur-2xl border border-[#1B3C28] rounded-[32px] p-8 shadow-2xl shadow-emerald-950/60">
           
           {step === 'error' && (
             <div className="mb-6 p-4 bg-rose-950/50 border border-rose-600/40 rounded-xl">

@@ -135,17 +135,16 @@ export default async function DestinationPage({
       />
 
       {/* PORTADA */}
-      <section className="relative h-[70vh] min-h-[460px] w-full">
-        <Image
-          src={dest.image}
-          alt={name}
-          fill
-          priority
-          fetchPriority="high"
-          quality={100}
-          sizes="100vw"
-          className="object-cover hidden md:block"
-        />
+      <section className="relative h-[70vh] min-h-[400px] sm:min-h-[650px] w-full">        <Image
+        src={dest.image}
+        alt={name}
+        fill
+        priority
+        fetchPriority="high"
+        quality={100}
+        sizes="100vw"
+        className="object-cover hidden md:block"
+      />
         <Image
           src={dest.mobileImage || dest.image}
           alt={name}
@@ -156,32 +155,36 @@ export default async function DestinationPage({
           sizes="100vw"
           className="object-cover md:hidden"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
-        <div className="absolute inset-x-0 bottom-0 max-w-5xl mx-auto px-6 pb-12">
-          <Link
-            href={`/${locale}/tours`}
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300 hover:text-emerald-200 transition-colors mb-4"
-          >
-            <MapPin className="w-3.5 h-3.5" />
-            {ui('allDestinations')}
-          </Link>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-3">
+        <div className="absolute inset-x-0 bottom-24 max-w-5xl mx-auto px-6 pb-12">          <Link
+          href={`/${locale}/tours`}
+          className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300 hover:text-emerald-200 transition-colors mb-4"
+        >
+          <MapPin className="w-3.5 h-3.5" />
+          {ui('allDestinations')}
+        </Link>
+          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-3 hero-title-shadow">
             {name}
           </h1>
-          <p className="text-lg sm:text-xl text-zinc-100 max-w-3xl">{t(dest.tagline as any)}</p>
+          <p className="text-base sm:text-lg text-zinc-100 max-w-3xl leading-relaxed hero-title-shadow">{t(dest.intro as any)}</p>
+        </div>
+        {/* Curva de transición estilo revista premium */}
+        <div className="absolute -bottom-1 left-0 right-0 z-10 pointer-events-none" aria-hidden="true">
+          <svg
+            viewBox="0 0 1440 100"
+            preserveAspectRatio="none"
+            className="w-full h-[60px] sm:h-[90px] text-[#FAF8F5] dark:text-zinc-950"
+          >
+            <path
+              d="M0,40 C240,90 480,90 720,55 C960,20 1200,10 1440,45 L1440,100 L0,100 Z"
+              fill="currentColor"
+            />
+          </svg>
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto px-6 py-14 space-y-14">
-        {/* INTRODUCCION */}
-        <section>
-          <p className="text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
-            {t(dest.intro as any)}
-          </p>
-        </section>
-
-        {/* GALERIA DE FOTOS DEL LUGAR */}
+      <div className="max-w-5xl mx-auto px-6 py-14 space-y-14">{/* GALERIA DE FOTOS DEL LUGAR */}
         {dest.gallery && dest.gallery.length > 0 && (
           <section>
             <h2 className="flex items-center gap-2 font-serif text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-6">

@@ -247,7 +247,7 @@ export function AdminCrmDashboard() {
       <header className="flex md:hidden items-center justify-between px-4 py-3 bg-[#060D08] border-b border-emerald-950/80 sticky top-0 z-30 shadow-xl">
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-sm">
-            <div className="w-full h-full bg-[#07130C] rounded-[10px] flex items-center justify-center">
+            <div className="w-full h-full bg-[#0B1622] rounded-[10px] flex items-center justify-center">
               <Image src="/icon.png" alt="Vermilion" width={20} height={20} className="object-contain" />
             </div>
           </div>
@@ -276,7 +276,7 @@ export function AdminCrmDashboard() {
           <div className="flex items-center justify-between pb-4 border-b border-emerald-950/80">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-sm">
-                <div className="w-full h-full bg-[#07130C] rounded-[10px] flex items-center justify-center">
+                <div className="w-full h-full bg-[#0B1622] rounded-[10px] flex items-center justify-center">
                   <Image src="/icon.png" alt="Vermilion" width={20} height={20} className="object-contain" />
                 </div>
               </div>
@@ -320,7 +320,7 @@ export function AdminCrmDashboard() {
                 <select
                   value={activeRoleView}
                   onChange={(e) => setActiveRoleView(e.target.value as UserRole)}
-                  className="w-full bg-[#0B1A12] border border-emerald-800/50 rounded-lg text-[10px] text-zinc-300 py-1.5 px-2 focus:outline-none focus:border-amber-500"
+                  className="w-full bg-[#0F1E2E] border border-emerald-800/50 rounded-lg text-[10px] text-zinc-300 py-1.5 px-2 focus:outline-none focus:border-amber-500"
                 >
                   <option value="super">Super Admin (Todas las 8 Áreas)</option>
                   <option value="admin">Admin Operativo (Gestión Total)</option>
@@ -507,7 +507,7 @@ export function AdminCrmDashboard() {
           {/* Brand Header */}
           <div className="flex items-center gap-3 pb-5 border-b border-emerald-950/80">
             <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/10">
-              <div className="w-full h-full bg-[#07130C] rounded-[14px] flex items-center justify-center">
+              <div className="w-full h-full bg-[#0B1622] rounded-[14px] flex items-center justify-center">
                 <Image src="/icon.png" alt="Vermilion" width={26} height={26} className="object-contain" />
               </div>
             </div>
@@ -547,7 +547,7 @@ export function AdminCrmDashboard() {
                 <select
                   value={activeRoleView}
                   onChange={(e) => setActiveRoleView(e.target.value as UserRole)}
-                  className="w-full bg-[#0B1A12] border border-emerald-800/50 rounded-lg text-[10px] text-zinc-300 py-1 px-2 focus:outline-none focus:border-amber-500"
+                  className="w-full bg-[#0F1E2E] border border-emerald-800/50 rounded-lg text-[10px] text-zinc-300 py-1 px-2 focus:outline-none focus:border-amber-500"
                 >
                   <option value="super">Super Admin (Todas las 8 Áreas)</option>
                   <option value="admin">Admin Operativo (Gestión Total)</option>
@@ -778,7 +778,7 @@ export function AdminCrmDashboard() {
           <div className="space-y-6">
             {/* KPI Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-5 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-2">
+              <div className="p-5 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-2">
                 <span className="text-zinc-400 text-xs font-mono uppercase tracking-wider block">Volumen Bruto (GMV)</span>
                 <h3 className="font-serif text-3xl font-extrabold text-white tracking-tight">
                   ${totalGMV.toLocaleString('en-US')} <span className="text-xs font-normal text-emerald-400">USD</span>
@@ -786,7 +786,7 @@ export function AdminCrmDashboard() {
                 <p className="text-[11px] text-zinc-400">Total expediciones confirmadas en el periodo</p>
               </div>
 
-              <div className="p-5 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-2">
+              <div className="p-5 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-2">
                 <span className="text-zinc-400 text-xs font-mono uppercase tracking-wider block">Cobrado en Cuenta</span>
                 <h3 className="font-serif text-3xl font-extrabold text-emerald-400 tracking-tight">
                   ${totalCollected.toLocaleString('en-US')} <span className="text-xs font-normal text-zinc-400">USD</span>
@@ -794,7 +794,7 @@ export function AdminCrmDashboard() {
                 <p className="text-[11px] text-zinc-400">{Math.round((totalCollected / (totalGMV || 1)) * 100)}% de recaudación efectiva</p>
               </div>
 
-              <div className="p-5 rounded-3xl bg-[#0B1A12]/80 border border-amber-900/40 shadow-xl space-y-2">
+              <div className="p-5 rounded-3xl bg-[#0F1E2E]/80 border border-amber-900/40 shadow-xl space-y-2">
                 <span className="text-amber-300 text-xs font-mono uppercase tracking-wider block">Utilidad Neta P&L</span>
                 <h3 className="font-serif text-3xl font-extrabold text-[#D4AF37] tracking-tight">
                   ${netOperatingProfit.toLocaleString('en-US')} <span className="text-xs font-normal text-amber-200">USD</span>
@@ -802,7 +802,7 @@ export function AdminCrmDashboard() {
                 <p className="text-[11px] text-amber-400/80">Margen neto corporativo promedio: <strong>{avgMargin}%</strong></p>
               </div>
 
-              <div className="p-5 rounded-3xl bg-[#0B1A12]/80 border border-teal-900/40 shadow-xl space-y-2">
+              <div className="p-5 rounded-3xl bg-[#0F1E2E]/80 border border-teal-900/40 shadow-xl space-y-2">
                 <span className="text-teal-300 text-xs font-mono uppercase tracking-wider block">Tours en Operación</span>
                 <h3 className="font-serif text-3xl font-extrabold text-teal-400 tracking-tight">
                   {bookings.filter(b => b.status === 'in_operation').length} <span className="text-xs font-normal text-zinc-400">viajes</span>
@@ -813,7 +813,7 @@ export function AdminCrmDashboard() {
 
             {/* Próximas Salidas & Alertas Operativas */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 p-6 rounded-3xl bg-[#0B1A12]/60 border border-emerald-950/80 space-y-4">
+              <div className="lg:col-span-2 p-6 rounded-3xl bg-[#0F1E2E]/60 border border-emerald-950/80 space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-amber-400" />
@@ -854,7 +854,7 @@ export function AdminCrmDashboard() {
               </div>
 
               {/* Top Embajadores Widget */}
-              <div className="p-6 rounded-3xl bg-[#0B1A12]/60 border border-emerald-950/80 space-y-4">
+              <div className="p-6 rounded-3xl bg-[#0F1E2E]/60 border border-emerald-950/80 space-y-4">
                 <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
                   <Award className="w-4 h-4 text-amber-400" />
                   <span>Top Embajadores del Mes</span>
@@ -907,7 +907,7 @@ export function AdminCrmDashboard() {
                 <select
                   value={destinationFilter}
                   onChange={(e) => setDestinationFilter(e.target.value)}
-                  className="bg-[#0B1A12] border border-emerald-900/50 rounded-xl px-3 py-1.5 text-xs text-white"
+                  className="bg-[#0F1E2E] border border-emerald-900/50 rounded-xl px-3 py-1.5 text-xs text-white"
                 >
                   <option value="all">Todos los Destinos</option>
                   <option value="Galapagos">Galápagos</option>
@@ -923,7 +923,7 @@ export function AdminCrmDashboard() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar prospecto o correo..."
-                  className="pl-9 pr-4 py-1.5 bg-[#0B1A12] border border-emerald-900/50 rounded-xl text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500"
+                  className="pl-9 pr-4 py-1.5 bg-[#0F1E2E] border border-emerald-900/50 rounded-xl text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500"
                 />
               </div>
             </div>
@@ -941,7 +941,7 @@ export function AdminCrmDashboard() {
 
                 <div className="space-y-3">
                   {leads.filter(l => l.status === 'new').map((l) => (
-                    <div key={l.id} className="p-4 rounded-2xl bg-[#0B1A12] border border-emerald-900/30 space-y-2 hover:border-amber-500/50 transition-colors">
+                    <div key={l.id} className="p-4 rounded-2xl bg-[#0F1E2E] border border-emerald-900/30 space-y-2 hover:border-amber-500/50 transition-colors">
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-mono text-zinc-400">{l.destination}</span>
                         <span className="text-[10px] text-amber-400 font-bold">${l.estimatedBudget.toLocaleString('en-US')}</span>
@@ -979,7 +979,7 @@ export function AdminCrmDashboard() {
 
                 <div className="space-y-3">
                   {leads.filter(l => l.status === 'contacted').map((l) => (
-                    <div key={l.id} className="p-4 rounded-2xl bg-[#0B1A12] border border-emerald-900/30 space-y-2">
+                    <div key={l.id} className="p-4 rounded-2xl bg-[#0F1E2E] border border-emerald-900/30 space-y-2">
                       <span className="text-[10px] font-mono text-zinc-400">{l.destination}</span>
                       <h4 className="text-xs font-bold text-white">{l.customerName}</h4>
                       <p className="text-[11px] text-zinc-400">{l.customerEmail}</p>
@@ -1005,7 +1005,7 @@ export function AdminCrmDashboard() {
 
                 <div className="space-y-3">
                   {leads.filter(l => l.status === 'itinerary_sent' || l.status === 'negotiation').map((l) => (
-                    <div key={l.id} className="p-4 rounded-2xl bg-[#0B1A12] border border-purple-900/30 space-y-2">
+                    <div key={l.id} className="p-4 rounded-2xl bg-[#0F1E2E] border border-purple-900/30 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-[10px] font-mono text-purple-300">En Negociación</span>
                         <span className="text-[10px] text-white font-bold">${l.estimatedBudget.toLocaleString('en-US')}</span>
@@ -1071,7 +1071,7 @@ export function AdminCrmDashboard() {
 
             <div className="space-y-4">
               {bookings.map((booking, idx) => (
-                <div key={`${booking.id || booking.bookingCode || 'op'}-${idx}`} className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
+                <div key={`${booking.id || booking.bookingCode || 'op'}-${idx}`} className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-emerald-950">
                     <div>
                       <div className="flex items-center gap-2">
@@ -1145,7 +1145,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 4: AMENITIES VIP PAKARI ───────────────────────────────────── */}
         {activeTab === 'amenities' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-gradient-to-r from-stone-900 via-[#0B1A12] to-stone-950 border border-amber-500/30 shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div className="p-6 rounded-3xl bg-gradient-to-r from-stone-900 via-[#0F1E2E] to-stone-950 border border-amber-500/30 shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-6">
               <div>
                 <span className="text-xs font-mono uppercase tracking-widest text-[#D4AF37] font-bold block mb-1">
                   Experiencia Gastronómica & Regalos de Autor
@@ -1164,7 +1164,7 @@ export function AdminCrmDashboard() {
             </div>
 
             {/* Amenities Orders Table */}
-            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <h4 className="font-serif text-base font-bold text-white">Órdenes de Amenidad por Despachar</h4>
 
               <div className="space-y-3">
@@ -1202,7 +1202,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 5: FINANZAS & P&L ─────────────────────────────────────────── */}
         {activeTab === 'finance' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <h4 className="font-serif text-lg font-bold text-white">Matriz de Rentabilidad (P&L) por Expedición</h4>
 
               <div className="overflow-x-auto">
@@ -1271,7 +1271,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 6: RED MLM & GENEALOGÍA ───────────────────────────────────── */}
         {activeTab === 'genealogy' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="font-serif text-lg font-bold text-white">Árbol Genealógico & Supervisión Unilevel</h4>
@@ -1305,7 +1305,7 @@ export function AdminCrmDashboard() {
                   <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 block">Nivel 1 (Hijos Directos — 3% Comisión Padre)</span>
                   
                   {genealogy.children?.map((child) => (
-                    <div key={child.username} className="p-3.5 rounded-xl bg-[#0B1A12] border border-emerald-900/40 space-y-2">
+                    <div key={child.username} className="p-3.5 rounded-xl bg-[#0F1E2E] border border-emerald-900/40 space-y-2">
                       <div className="flex items-center justify-between">
                         <div>
                           <h5 className="text-xs font-bold text-white">@{child.username} ({child.name})</h5>
@@ -1337,7 +1337,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 7: CONCIERGE WHATSAPP ────────────────────────────────────── */}
         {activeTab === 'concierge' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <h4 className="font-serif text-lg font-bold text-white">Plantillas de Concierge Rápido para WhatsApp</h4>
               <p className="text-xs text-zinc-400">Atención personalizada inmediata con un solo clic.</p>
 
@@ -1352,7 +1352,7 @@ export function AdminCrmDashboard() {
                         <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
                       </div>
                       <h5 className="text-xs font-bold text-white mt-1">{template.title}</h5>
-                      <p className="text-[11px] text-zinc-400 mt-2 bg-[#0B1A12] p-3 rounded-xl font-mono leading-relaxed border border-emerald-950">
+                      <p className="text-[11px] text-zinc-400 mt-2 bg-[#0F1E2E] p-3 rounded-xl font-mono leading-relaxed border border-emerald-950">
                         {template.body}
                       </p>
                     </div>
@@ -1377,7 +1377,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 8: EQUIPO & ROLES ─────────────────────────────────────────── */}
         {activeTab === 'team' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="font-serif text-lg font-bold text-white">Directorio de Personal Corporativo</h4>
@@ -1418,7 +1418,7 @@ export function AdminCrmDashboard() {
       {/* ── MODAL: COTIZADOR RÁPIDO VIP DE TOURS ─────────────────────────────── */}
       {showQuoterModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="w-full max-w-lg bg-[#0B1A12] border border-[#D4AF37]/50 rounded-3xl p-6 sm:p-8 space-y-5 shadow-2xl">
+          <div className="w-full max-w-lg bg-[#0F1E2E] border border-[#D4AF37]/50 rounded-3xl p-6 sm:p-8 space-y-5 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-amber-400" />
@@ -1525,7 +1525,7 @@ export function AdminCrmDashboard() {
       {/* ── MODAL: FICHA 360° DEL PASAJERO ─────────────────────────────────── */}
       {selectedLeadForProfile && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="w-full max-w-md bg-[#0B1A12] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
+          <div className="w-full max-w-md bg-[#0F1E2E] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <div>
                 <span className="text-[10px] font-mono text-amber-400 uppercase">Ficha 360° Pasajero</span>
@@ -1574,7 +1574,7 @@ export function AdminCrmDashboard() {
       {/* ── MODAL: RUN-SHEET COMPLETO ───────────────────────────────────────── */}
       {selectedBookingForRunSheet && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="w-full max-w-2xl bg-[#0B1A12] border border-teal-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-2xl bg-[#0F1E2E] border border-teal-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <div>
                 <span className="text-[10px] font-mono text-teal-400 uppercase">Run-Sheet Operativo</span>
@@ -1625,7 +1625,7 @@ export function AdminCrmDashboard() {
       {/* ── MODAL: DISPERSAR PAGO DE COMISIÓN ───────────────────────────────── */}
       {payoutModalTarget && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="w-full max-w-md bg-[#0B1A12] border border-amber-500/50 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
+          <div className="w-full max-w-md bg-[#0F1E2E] border border-amber-500/50 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <h3 className="font-serif text-lg font-bold text-white">Dispersión de Pago Bancario</h3>
               <button onClick={() => setPayoutModalTarget(null)} className="text-zinc-400 hover:text-white text-xs">
@@ -1684,7 +1684,7 @@ export function AdminCrmDashboard() {
       {/* ── MODAL: NUEVO COLABORADOR / USUARIO ──────────────────────────────── */}
       {showNewUserModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="w-full max-w-md bg-[#0B1A12] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
+          <div className="w-full max-w-md bg-[#0F1E2E] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <h3 className="font-serif text-lg font-bold text-white">Alta de Personal Corporativo</h3>
               <button onClick={() => setShowNewUserModal(false)} className="text-zinc-400 hover:text-white text-xs">

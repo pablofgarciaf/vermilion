@@ -42,7 +42,7 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
 
               {/* 💻 FOTO HORIZONTAL 16:9 PARA PANTALLAS GRANDES */}
               <Image
-                src={slide.desktopImage || slide.image || slide.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'}
+                src={slide.desktopImage || slide.image || slide.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp'}
                 alt={getLocalizedText(slide.place, locale) || 'Vermilion Routes'}
                 fill
                 priority={idx === 0}

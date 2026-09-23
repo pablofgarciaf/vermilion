@@ -77,7 +77,7 @@ const TEXTS: Record<string, {
 
 const SHOWCASE_PHOTOS = [
   {
-    src: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+    src: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
     title: 'Giant Tortoise in Santa Cruz Highlands',
     aspect: 'col-span-2 row-span-2 aspect-[16/10] sm:aspect-auto sm:h-full',
   },

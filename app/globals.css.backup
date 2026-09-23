@@ -36,7 +36,7 @@
   }
 
   .dark {
-    --background: #050618;
+    --background: #0F172A;
     /* Azul Marino Profundo Vibrante - más claro y brillante */
     --foreground: #FFFFFF;
     /* Blanco Puro */
@@ -73,10 +73,7 @@
     --color-emerald-950: #052E16;
   }
 
-
-}
-
-/* Delineado sutil y elegante para titulos blancos sobre heroes fotograficos:
+  /* Delineado sutil y elegante para titulos blancos sobre heroes fotograficos:
      un trazo oscuro casi imperceptible que separa la letra del fondo sin verse
      como una sombra difusa (evita el efecto "drop-shadow" plano). */
 .hero-title-shadow {

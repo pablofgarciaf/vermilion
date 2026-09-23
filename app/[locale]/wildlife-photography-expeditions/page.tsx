@@ -50,7 +50,7 @@ export default async function WildlifePhotographyPage({ params }: { params: Prom
   const waMsg = isEs ? 'Hola Vermilion Routes, me interesa una expedicion de vida silvestre y fotografia en Ecuador/Galapagos.' : 'Hello Vermilion Routes, I am interested in a wildlife & photography expedition in Ecuador/Galapagos.';
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100">
+    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#0B1622] text-zinc-900 dark:text-zinc-100">
       <section className="relative min-h-[80vh] flex items-end pb-20 pt-40 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image src="/images/tours/9-16/galapagos-piquero-patas-azules-9-16.webp" alt={isEs ? 'Piquero de Patas Azules Galapagos' : 'Blue-footed Booby Galapagos'} fill className="object-cover" priority quality={100} sizes="100vw" />

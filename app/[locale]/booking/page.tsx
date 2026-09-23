@@ -65,7 +65,7 @@ export default async function BookingPage({ params }: { params: Promise<{ locale
   };
 
   return (
-    <main className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] relative -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px] pt-[100px] sm:pt-[120px] lg:pt-[150px] transition-colors duration-300">
+    <main className="min-h-screen bg-[#FAF8F5] dark:bg-[#0B1622] relative -mt-20 sm:-mt-24 md:-mt-28 lg:-mt-[120px] pt-[100px] sm:pt-[120px] lg:pt-[150px] transition-colors duration-300">
       <div className="absolute top-0 left-0 w-full h-[70vh] bg-gradient-to-b from-emerald-900/15 via-emerald-900/5 to-transparent -z-10 pointer-events-none" />
       <div className="pb-16 relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Static SSR H1 Header - Guarantees H1 is first heading in DOM */}

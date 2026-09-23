@@ -2099,7 +2099,7 @@ export function BookingWizard() {
               {/* Header */}
               <div className="relative h-48 sm:h-56 w-full shrink-0 overflow-hidden bg-zinc-950">
                 <img
-                  src={previewTour.imageUrl || previewTour.mainImage || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'}
+                  src={previewTour.imageUrl || previewTour.mainImage || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp'}
                   alt={getLocalizedText(previewTour.title, locale)}
                   className="w-full h-full object-cover brightness-90"
                 />

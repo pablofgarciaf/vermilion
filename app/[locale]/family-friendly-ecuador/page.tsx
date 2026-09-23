@@ -50,7 +50,7 @@ export default async function FamilyFriendlyPage({ params }: { params: Promise<{
   const waMsg = isEs ? 'Hola Vermilion Routes, quiero planificar una aventura familiar en Ecuador y/o Galapagos.' : 'Hello Vermilion Routes, I want to plan a family adventure in Ecuador and/or Galapagos.';
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100">
+    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#0B1622] text-zinc-900 dark:text-zinc-100">
       <section className="relative min-h-[85vh] flex items-end pb-20 pt-40 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image src="/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp" alt={isEs ? 'Tortuga gigante Galapagos familia' : 'Giant tortoise Galapagos family'} fill className="object-cover" priority quality={100} sizes="100vw" />

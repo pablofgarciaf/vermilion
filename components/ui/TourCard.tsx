@@ -5,37 +5,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Tour } from '@/types';
 import { Button } from '@/components/ui/Button';
-import { Clock, MapPin, Star, ArrowRight, Sparkles } from 'lucide-react';
+import { Clock, MapPin, Star, ArrowRight } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
-
-// Deriva estado de disponibilidad de un tour a partir de su id y precio.
-// Es determinista (mismo tour = mismo estado) para no confundir al visitante
-// entre recargas, y usa 3 estados como pasonoroeste.com: cupo abierto,
-// formando grupo (con badge de urgencia), y últimas plazas.
-type AvailabilityState = { key: 'open' | 'forming' | 'last'; hint: string };
-function getAvailability(tourId: string, locale: string): AvailabilityState {
-  // Hash simple del id para repartir estados de forma estable
-  let h = 0;
-  for (let i = 0; i < tourId.length; i++) h = ((h << 5) - h + tourId.charCodeAt(i)) | 0;
-  const bucket = Math.abs(h) % 10;
-  const isLast = bucket === 0;         // 10%
-  const isForming = bucket < 4;        // 30%
-  const L: Record<string, { open: string; forming: string; last: string }> = {
-    es: { open: 'Cupo abierto', forming: 'Formando grupo', last: 'Últimas plazas' },
-    en: { open: 'Booking open', forming: 'Group forming', last: 'Last spots' },
-    fr: { open: 'Réservations ouvertes', forming: 'Groupe en formation', last: 'Dernières places' },
-    de: { open: 'Buchung offen', forming: 'Gruppe im Aufbau', last: 'Letzte Plätze' },
-    it: { open: 'Prenotazioni aperte', forming: 'Gruppo in formazione', last: 'Ultimi posti' },
-    pt: { open: 'Reservas abertas', forming: 'Grupo em formação', last: 'Últimas vagas' },
-    ja: { open: '予約受付中', forming: 'グループ編成中', last: '残席わずか' },
-    zh: { open: '正在接受预订', forming: '成团中', last: '仅剩少量名额' },
-  };
-  const l = L[locale] || L.en;
-  if (isLast) return { key: 'last', hint: l.last };
-  if (isForming) return { key: 'forming', hint: l.forming };
-  return { key: 'open', hint: l.open };
-}
 
 // Próxima salida sugerida: primer día del mes siguiente en el idioma del visitante.
 // No inventa una fecha concreta que después el cliente no encuentre en calendario;
@@ -50,51 +22,43 @@ function getNextDeparture(locale: string): string {
   return d.toLocaleDateString(map[locale] || 'en-US', { day: 'numeric', month: 'long' });
 }
 
-const CARD_I18N: Record<string, { bestseller: string; from: string; person: string; view: string }> = {
+const CARD_I18N: Record<string, { from: string; person: string; view: string }> = {
   es: {
-    bestseller: 'Más Popular',
     from: 'Desde',
     person: '/ persona',
     view: 'Ver Detalles',
   },
   en: {
-    bestseller: 'Best Seller',
     from: 'From',
     person: '/ person',
     view: 'View Details',
   },
   fr: {
-    bestseller: 'Populaire',
     from: 'À partir de',
     person: '/ personne',
     view: 'Voir Détails',
   },
   de: {
-    bestseller: 'Bestseller',
     from: 'Ab',
     person: '/ Person',
     view: 'Details Anzeigen',
   },
   it: {
-    bestseller: 'Più Venduto',
     from: 'Da',
     person: '/ persona',
     view: 'Dettagli',
   },
   pt: {
-    bestseller: 'Mais Popular',
     from: 'A partir de',
     person: '/ pessoa',
     view: 'Ver Detalhes',
   },
   ja: {
-    bestseller: '人気ツアー',
     from: '料金',
     person: '/ 名様',
     view: '詳細を見る',
   },
   zh: {
-    bestseller: '畅销优选',
     from: '起价',
     person: '/ 人',
     view: '查看详情',
@@ -111,7 +75,6 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
   const locale = useLocale();
   const cardTexts = CARD_I18N[locale] || CARD_I18N['en'];
 
-  const availability = getAvailability(tour.id, locale);
   const nextDeparture = getNextDeparture(locale);
   const rawTitle = getLocalizedText(tour.title, locale);
   // Clean card title: remove redundant duration suffix (e.g. " – 8 DÍAS / 7 NOCHES")
@@ -123,7 +86,6 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
     .replace(/\s*-\s*\d+-DAY ITINERARY/gi, '')
     .trim() || rawTitle;
 
-  const destination = getLocalizedText(tour.destination, locale);
   const duration = getLocalizedText(tour.duration, locale);
 
   {/* 🎨 AJUSTE CONTENEDOR TARJETA TOUR:
@@ -149,41 +111,6 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
 
       {/* 🎨 GRADIENTE LIGERO Y LIMPIO (Solo en la base inferior para leer el texto sin oscurecer la foto) */}
       <div className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-black/95 via-black/70 to-transparent pointer-events-none" />
-
-      {/* 🏷️ BADGES SUPERIORES (Destino + Bestseller) */}
-      <div className="absolute top-4 left-4 right-4 flex items-center justify-between gap-2 z-10">
-          <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-sm border ${
-            availability.key === 'last'
-              ? 'bg-rose-950/95 text-rose-200 border-rose-500/60 animate-pulse'
-              : availability.key === 'forming'
-              ? 'bg-amber-950/95 text-amber-200 border-amber-500/60'
-              : 'bg-emerald-950/95 text-emerald-200 border-emerald-500/60'
-          }`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${
-              availability.key === 'last' ? 'bg-rose-400' :
-              availability.key === 'forming' ? 'bg-amber-400' : 'bg-emerald-400'
-            }`} />
-            {availability.hint}
-          </span>
-
-        <div className="flex items-center gap-1.5">
-          {tour.code && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-mono font-bold bg-emerald-950/85 text-emerald-300 shadow-sm border border-emerald-500/50">
-              #{tour.code}
-            </span>
-          )}
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-black/75 backdrop-blur-md text-white shadow-sm border border-white/20">
-            <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{destination}</span>
-          </span>
-        </div>
-        {tour.isPopular && (
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-zinc-950/95 text-white shadow-sm border border-emerald-400/60">
-            <Sparkles className="w-3 h-3 text-emerald-400" />
-            <span>{cardTexts.bestseller}</span>
-          </span>
-        )}
-      </div>
 
       {/* 📝 CONTENIDO INFERIOR */}
       <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6 text-white space-y-3 z-10">

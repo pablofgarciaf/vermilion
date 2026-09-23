@@ -13,12 +13,19 @@ import {
   Phone,
   Mail,
   ChevronDown,
+  ChevronRight,
   Globe,
   Sparkles,
   ArrowRight,
   Sun,
   Moon,
-  BookOpen
+  BookOpen,
+  Home,
+  MapPin,
+  Compass,
+  Newspaper,
+  Info,
+  MessageCircle
 } from 'lucide-react';
 import { useSettings } from '@/hooks/useSettings';
 import Image from 'next/image';
@@ -96,18 +103,19 @@ export function NavbarWithReservations() {
   }, []);
 
   const navLinks = [
-    { name: tNav('home'), href: `/${locale}` },
+    { name: tNav('home'), href: `/${locale}`, icon: Home },
     {
       name: tNav('destinations'),
       href: `/${locale}/destinations`,
       hasDropdown: true,
+      icon: MapPin,
       subItems: [
         { name: tNav('galapagos'), href: `/${locale}#galapagos`, desc: 'Premium Cruises & Island Hopping' },
         { name: tNav('ecuador'), href: `/${locale}#ecuador`, desc: 'Avenue of Volcanoes & Amazon' },
         { name: tNav('fullday'), href: `/${locale}#fullday`, desc: 'Galapagos & Mainland 1-Day Tours' },
       ],
     },
-    { name: tNav('tours'), href: `/${locale}/tours` },
+    { name: tNav('tours'), href: `/${locale}/tours`, icon: Compass },
     {
       name: {
         zh: '博客',
@@ -120,9 +128,10 @@ export function NavbarWithReservations() {
         pt: 'Blog',
       }[locale] || 'Blog',
       href: `/${locale}/blog`,
+      icon: Newspaper,
     },
-    { name: tNav('about'), href: `/${locale}/about` },
-    { name: tNav('contact'), href: `/${locale}#contact`, isAnchorToHome: true },
+    { name: tNav('about'), href: `/${locale}/about`, icon: Info },
+    { name: tNav('contact'), href: `/${locale}#contact`, isAnchorToHome: true, icon: MessageCircle },
   ];
 
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string, isAnchorToHome?: boolean) => {
@@ -422,29 +431,6 @@ export function NavbarWithReservations() {
           <div className="flex md:hidden items-center gap-2">
             {mounted && (
               <div className="flex items-center gap-2 animate-in fade-in duration-700">
-                <div className="relative">
-                  <button
-                    onClick={() => setReservationModalOpen((v) => !v)}
-                    className="p-2 text-zinc-700 dark:text-zinc-200 hover:text-emerald-600 bg-white/70 dark:bg-black/60 backdrop-blur-md border border-zinc-200/70 dark:border-white/10 hover:bg-white dark:hover:bg-zinc-900 rounded-xl cursor-pointer transition-colors shadow-xs"
-                    aria-label="Mis Reservas"
-                  >
-                    <BookOpen className="w-5 h-5" />
-                  </button>
-                  <ReservationDropdown
-                    isOpen={reservationModalOpen}
-                    onClose={() => setReservationModalOpen(false)}
-                    onReservationFound={(reservation) => {
-                      router.push(`/${locale}/tours/${reservation.tourId}?reservation=${reservation.reservationNumber}`);
-                    }}
-                  />
-                  {reservationModalOpen && (
-                    <div
-                      className="fixed inset-0 z-40"
-                      onClick={() => setReservationModalOpen(false)}
-                    />
-                  )}
-                </div>
-
                 <button
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                   suppressHydrationWarning
@@ -510,42 +496,96 @@ export function NavbarWithReservations() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-b border-zinc-200/80 dark:border-white/10 bg-white/90 dark:bg-black/90 backdrop-blur-2xl px-4 pt-3 pb-6 mt-2 space-y-3 shadow-2xl">
-            <nav className="flex flex-col gap-1">
-              {navLinks.map((link) => {
-                const isActive = (pathname === link.href) || (link.href !== `/${locale}` && pathname.startsWith(link.href));
-                return (
-                <div key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleAnchorClick(e, link.href, (link as any).isAnchorToHome)}
-                    className={`block px-4 py-2.5 rounded-xl text-base font-medium transition-colors ${
-                      isActive
-                        ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
-                        : 'text-zinc-800 dark:text-zinc-200 hover:bg-emerald-50 dark:hover:bg-emerald-900/30 hover:text-emerald-700 dark:hover:text-emerald-400'
-                    }`}
-                  >
-                    {link.name}
-                  </a>
-                  {link.subItems && (
-                    <div className="ml-2 pl-2 flex flex-col gap-0.5 mt-1">
-                      {link.subItems.map((sub) => (
-                        <a
-                          key={sub.name}
-                          href={sub.href}
-                          onClick={(e) => handleAnchorClick(e, sub.href)}
-                          className="block px-3 py-2 rounded-xl text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
-                        >
-                          {sub.name}
-                        </a>
-                      ))}
+          <div className="md:hidden border-b border-zinc-200/80 dark:border-white/10 bg-white dark:bg-zinc-950 mt-2 shadow-2xl max-h-[calc(100vh-5rem)] overflow-y-auto">
+            {/* Brand header */}
+            <div className="flex items-center gap-3 px-5 py-5 border-b border-zinc-100 dark:border-zinc-800">
+              <div className="w-11 h-11 rounded-full bg-emerald-50 dark:bg-emerald-900/30 flex items-center justify-center overflow-hidden flex-shrink-0">
+                <BrandLogo variant="icon-only" height={26} />
+              </div>
+              <div className="min-w-0">
+                <p className="font-serif text-lg font-bold text-zinc-900 dark:text-white truncate">Vermilion Routes</p>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">Expediciones a medida en Ecuador y Galápagos</p>
+              </div>
+            </div>
+
+            <div className="px-3 py-3 space-y-3">
+              {/* Mis Reservas — expands inline, no popup */}
+              <div className="rounded-xl overflow-hidden bg-emerald-50 dark:bg-emerald-900/20">
+                <button
+                  onClick={() => setReservationModalOpen((v) => !v)}
+                  aria-haspopup="true"
+                  aria-expanded={reservationModalOpen}
+                  aria-label={tRoot('myReservations') || 'Mis Reservas'}
+                  className="w-full flex items-center gap-3 px-4 py-3.5 text-base font-semibold text-emerald-700 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors"
+                >
+                  <BookOpen className="w-5 h-5 flex-shrink-0" />
+                  <span className="flex-1 text-left">{tRoot('myReservations') || 'Mis Reservas'}</span>
+                  <ChevronDown className={`w-4 h-4 flex-shrink-0 transition-transform duration-200 ${reservationModalOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {reservationModalOpen && (
+                  <div className="px-4 pb-4">
+                    <ReservationDropdown
+                      isOpen={reservationModalOpen}
+                      onClose={() => setReservationModalOpen(false)}
+                      variant="inline"
+                      onReservationFound={(reservation) => {
+                        setMobileMenuOpen(false);
+                        setReservationModalOpen(false);
+                        router.push(`/${locale}/tours/${reservation.tourId}?reservation=${reservation.reservationNumber}`);
+                      }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Navigation */}
+              <nav className="flex flex-col gap-0.5">
+                {navLinks.map((link) => {
+                  const isActive = (pathname === link.href) || (link.href !== `/${locale}` && pathname.startsWith(link.href));
+                  const Icon = (link as any).icon;
+                  return (
+                    <div key={link.name}>
+                      <a
+                        href={link.href}
+                        onClick={(e) => handleAnchorClick(e, link.href, (link as any).isAnchorToHome)}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                          isActive
+                            ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                            : 'text-zinc-800 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-900'
+                        }`}
+                      >
+                        {Icon && <Icon className="w-5 h-5 flex-shrink-0 opacity-70" />}
+                        <span className="flex-1">{link.name}</span>
+                        {link.subItems && <ChevronRight className="w-4 h-4 opacity-40" />}
+                      </a>
+                      {link.subItems && (
+                        <div className="ml-11 pl-3 border-l border-zinc-100 dark:border-zinc-800 flex flex-col gap-0.5 mt-0.5 mb-1">
+                          {link.subItems.map((sub) => (
+                            <a
+                              key={sub.name}
+                              href={sub.href}
+                              onClick={(e) => handleAnchorClick(e, sub.href)}
+                              className="block px-3 py-2 rounded-lg text-sm font-medium text-zinc-500 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                            >
+                              {sub.name}
+                            </a>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-                );
-              })}
-            </nav>
-            <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800" />
+                  );
+                })}
+              </nav>
+            </div>
+
+            {/* Footer: contact */}
+            <a
+              href="tel:+593960039156"
+              className="flex items-center gap-3 px-5 py-4 border-t border-zinc-100 dark:border-zinc-800 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+            >
+              <Phone className="w-4 h-4 flex-shrink-0" />
+              <span>+593 96 003 9156</span>
+            </a>
           </div>
         )}
         <div id="tour-subnav-portal"></div>

@@ -48,10 +48,10 @@ export function OperatorDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#07130C] text-zinc-100 font-sans selection:bg-emerald-500 selection:text-black">
+    <div className="min-h-screen bg-[#0B1622] text-zinc-100 font-sans selection:bg-emerald-500 selection:text-black">
       
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-50 bg-[#0B1A12]/90 backdrop-blur-xl border-b border-[#183824] px-6 py-4">
+      <header className="sticky top-0 z-50 bg-[#0F1E2E]/90 backdrop-blur-xl border-b border-[#183824] px-6 py-4">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 p-2 flex items-center justify-center">

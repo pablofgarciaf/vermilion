@@ -78,7 +78,7 @@ export default function EarningsPage() {
       <div className="relative overflow-hidden rounded-[20px] border border-white/8 bg-white/[0.03] dark:bg-white/[0.03] backdrop-blur-sm p-5 flex items-start gap-4 group hover:border-[#C9A84C]/30 transition-all duration-300">
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#C9A84C]/5 to-transparent rounded-[20px]" />
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-gradient-to-br ${accent} shadow-lg`}>
-          <Icon className="w-4.5 h-4.5 text-[#0A0A0F]" />
+          <Icon className="w-4.5 h-4.5 text-[#0B1622]" />
         </div>
         <div className="relative z-10">
           <p className="text-[10px] text-[#A9A9A9] uppercase tracking-[0.12em] font-medium">{label}</p>

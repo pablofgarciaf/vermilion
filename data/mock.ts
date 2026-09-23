@@ -31,11 +31,11 @@ const multiDayTours: Tour[] = [
     price: 1790,
     price3Star: 1790,
     price4Star: 2199,
-    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
     mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp',
-    desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+    desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
     gallery: [
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
       '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
       '/images/tours/16-9/galapagos-isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
@@ -370,7 +370,7 @@ const multiDayTours: Tour[] = [
           ja: 'ホテルからキト空港へ専用送迎し、ガラパゴス諸島バルトラ空港へフライト。到着後、専属ガイドがお出迎え。イタバカ運河を渡りサンタクルス島高地へ。緑豊かなスカレシアの森に囲まれた双子坑（ロス・ヘメロス）を見学後、プリミシアス牧場で野生の巨大ガラパゴスゾウガメを観察し溶岩トンネルを探検。プエルトアヨラのホテルへ。',
           zh: '晨间从基多酒店专车送往机场飞往加拉帕戈斯群岛。抵达巴尔特拉岛西摩机场后由中文/英文向导迎接。渡过伊塔巴卡海峡抵达圣克鲁斯岛高地，探索壮观的火山双子坑（Los Gemelos）与特有鳞片树林。随后探访普里米西亚私人生态保护区，近距离观察自由漫步的加拉帕戈斯野生象龟并穿越火山熔岩隧道。前往阿约拉港办理入住。'
         },
-        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
         accommodation: {
           en: 'Santa Cruz Island – Puerto Ayora',
           es: 'Isla Santa Cruz – Puerto Ayora',
@@ -665,7 +665,7 @@ const multiDayTours: Tour[] = [
     desktopImage: '/images/tours/16-9/santa-fe-island-16-9.webp',
     gallery: [
       '/images/tours/16-9/santa-fe-island-16-9.webp',
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
       '/images/tours/16-9/galapagos-isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
@@ -1009,7 +1009,7 @@ const multiDayTours: Tour[] = [
           ja: 'キト空港へ送迎しバルトラへフライト。イタバカ運河を渡りサンタクルス高地へ。双子坑とプリミシアス牧場で巨大ゾウガメと溶岩トンネルを見学。プエルトアヨラで宿泊。',
           zh: '送机飞往巴尔特拉，渡过海峡登上圣克鲁斯岛。游览火山双子坑并探访普里米西亚保护区观察自由漫步的象龟，徒步熔岩隧道。入住阿约拉港酒店。'
         },
-        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
         accommodation: {
           en: 'Santa Cruz Island – Puerto Ayora',
           es: 'Isla Santa Cruz – Puerto Ayora',
@@ -1351,7 +1351,7 @@ const multiDayTours: Tour[] = [
       '/images/tours/16-9/isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.1.webp',
       '/images/tours/16-9/santa-fe-island-16-9.webp',
       '/images/tours/16-9/galapagos-lobo-marino-16-9.webp'
@@ -1702,7 +1702,7 @@ const multiDayTours: Tour[] = [
           ja: 'キトからバルトラへフライト。サンタクルス高地の双子坑とプリミシアス牧場の野生ゾウガメ、溶岩トンネルを見学。サンタクルス島泊。',
           zh: '飞抵巴尔特拉岛西摩机场。登上圣克鲁斯高地探索火山双子坑，深入普里米西亚生态保护区寻访野生象龟并穿越熔岩隧道。入住阿约拉港酒店。'
         },
-        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
         accommodation: {
           en: 'Santa Cruz Island – Puerto Ayora',
           es: 'Isla Santa Cruz – Puerto Ayora',
@@ -2838,7 +2838,7 @@ const multiDayTours: Tour[] = [
     desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
     gallery: [
       '/images/tours/16-9/galapagos-snorkeling-16-9.webp',
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
       '/images/tours/16-9/isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
@@ -3338,7 +3338,7 @@ export const mockDestinations: Destination[] = [
       es: 'Cruceros privados curados y excursiones de isla en isla para presenciar vida silvestre que no se encuentra en ningún otro lugar.',
       zh: '邂逅地球上独一无二的野生动物，与海狮、海鬣蜥、巨龟和企鹅一同浮潜。'
     },
-    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
     toursCount: 3,
     slug: 'galapagos'
   },

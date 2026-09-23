@@ -142,7 +142,7 @@ export default function AdminAuthPage() {
       <header className="p-6 flex items-center justify-between max-w-6xl mx-auto w-full z-10">
         <Link href={`/${locale}`} className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/10">
-            <div className="w-full h-full bg-[#07130C] rounded-[14px] flex items-center justify-center">
+            <div className="w-full h-full bg-[#0B1622] rounded-[14px] flex items-center justify-center">
               <Image src="/icon.png" alt="Vermilion Routes" width={24} height={24} className="object-contain" priority />
             </div>
           </div>
@@ -166,7 +166,7 @@ export default function AdminAuthPage() {
 
       {/* Main Card */}
       <main className="flex-1 flex items-center justify-center p-4 z-10">
-        <div className="w-full max-w-md bg-[#0B1A12]/80 backdrop-blur-2xl border border-[#1B3C28] rounded-[32px] p-8 sm:p-10 shadow-2xl shadow-emerald-950/60 space-y-6">
+        <div className="w-full max-w-md bg-[#0F1E2E]/80 backdrop-blur-2xl border border-[#1B3C28] rounded-[32px] p-8 sm:p-10 shadow-2xl shadow-emerald-950/60 space-y-6">
 
           {/* Brand Icon Header */}
           <div className="text-center space-y-2">

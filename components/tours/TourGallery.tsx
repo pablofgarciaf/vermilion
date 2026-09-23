@@ -12,20 +12,21 @@ interface TourGalleryProps {
   title: string;
   tourId?: string;
   destination?: string;
+  emphasizeFirst?: boolean;
 }
 
 const VIEW_PHOTOS_I18N: Record<string, string> = {
-  es: '+ Ver fotos de la revista',
-  en: '+ View magazine photos',
-  fr: '+ Voir les photos du magazine',
-  de: '+ Magazinfotos ansehen',
-  it: '+ Vedi foto della rivista',
-  pt: '+ Ver fotos da revista',
+  es: '+ Ver fotos',
+  en: '+ View photos',
+  fr: '+ Voir les photos',
+  de: '+ Fotos ansehen',
+  it: '+ Vedi foto',
+  pt: '+ Ver fotos',
   ja: '+ 写真を見る',
-  zh: '+ 查看画册照片',
+  zh: '+ 查看照片',
 };
 
-export function TourGallery({ images, title, tourId, destination }: TourGalleryProps) {
+export function TourGallery({ images, title, tourId, destination, emphasizeFirst = false }: TourGalleryProps) {
   const locale = useLocale();
   const [isDestinationModalOpen, setIsDestinationModalOpen] = useState(false);
 
@@ -111,7 +112,7 @@ export function TourGallery({ images, title, tourId, destination }: TourGalleryP
         {/* Main Big Photo (Left/Top) with Layered Crossfade */}
         <div
           onClick={() => setActiveImageIndex(selectedMainIndex)}
-          className="relative h-72 md:h-[420px] md:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-950 shadow-md"
+          className={`relative h-72 md:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-950 shadow-md ${emphasizeFirst ? 'md:h-[520px]' : 'md:h-[420px]'}`}
         >
           {/* Base Previous Layer (during crossfade) */}
           {previousImage && previousImage !== currentImage && (

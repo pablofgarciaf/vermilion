@@ -426,7 +426,7 @@ export default async function AboutPage({ params }: PageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#07130C] text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+    <div className="min-h-screen bg-[#FAF8F5] dark:bg-[#050618] text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
       {/* Schema.org Injected */}
       <script
         type="application/ld+json"
@@ -434,49 +434,63 @@ export default async function AboutPage({ params }: PageProps) {
       />
 
       {/* HERO SECTION - CINEMATIC VIEWPORT IMPACT */}
-      <section className="relative pt-36 pb-24 sm:pt-44 sm:pb-32 px-4 sm:px-6 lg:px-8 border-b border-zinc-200/80 dark:border-zinc-800/80 overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <Image quality={100}
-            src="/images/tours/16-9/galapagos-baltra-island-16-9.webp"
-            alt="Galapagos Seascape"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-zinc-950/85 via-zinc-950/80 to-zinc-950/95 dark:from-zinc-950/90 dark:via-zinc-950/85 dark:to-[#07130C]" />
+      <section className="relative w-full h-[95svh] min-h-[580px] sm:min-h-[620px] md:min-h-[650px] overflow-hidden">        <div className="absolute inset-0 pointer-events-none">
+        <Image quality={100}
+          src="/images/tours/16-9/galapagos-baltra-island-16-9.webp"
+          alt="Galapagos Seascape"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
+      </div>
+
+        <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
+          <div className="relative max-w-5xl mx-auto text-center space-y-6 text-white">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/90 border border-emerald-500/40 text-emerald-300 text-xs font-bold uppercase tracking-wider shadow-xl">
+              <Compass className="w-4 h-4 text-emerald-400" />
+              <span>{t.heroBadge}</span>
+            </div>
+
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-light text-white tracking-tight leading-tight hero-title-shadow">
+              {t.h1}
+            </h1>
+
+            <p className="text-zinc-200 text-base sm:text-xl font-light leading-relaxed max-w-3xl mx-auto">
+              {t.heroSubtitle}
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4 text-xs sm:text-sm text-zinc-300">
+              <span className="flex items-center gap-1.5 font-medium text-emerald-300">
+                <ShieldCheck className="w-4 h-4" />
+                <span>Ministerio de Turismo No. 1793215456001</span>
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1.5 font-medium text-amber-300">
+                <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                <span>TripAdvisor Travelers&apos; Choice (5.0/5.0)</span>
+              </span>
+              <span>•</span>
+              <span className="flex items-center gap-1.5 font-medium text-zinc-200">
+                <Clock className="w-4 h-4 text-emerald-400" />
+                <span>Soporte 24/7 En Ruta</span>
+              </span>
+            </div>
+          </div>
         </div>
-
-        <div className="relative max-w-5xl mx-auto text-center space-y-6 text-white">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/90 border border-emerald-500/40 text-emerald-300 text-xs font-bold uppercase tracking-wider shadow-xl">
-            <Compass className="w-4 h-4 text-emerald-400" />
-            <span>{t.heroBadge}</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-light text-white tracking-tight leading-tight drop-shadow-sm">
-            {t.h1}
-          </h1>
-
-          <p className="text-zinc-200 text-base sm:text-xl font-light leading-relaxed max-w-3xl mx-auto">
-            {t.heroSubtitle}
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4 text-xs sm:text-sm text-zinc-300">
-            <span className="flex items-center gap-1.5 font-medium text-emerald-300">
-              <ShieldCheck className="w-4 h-4" />
-              <span>Ministerio de Turismo No. 1793215456001</span>
-            </span>
-            <span>•</span>
-            <span className="flex items-center gap-1.5 font-medium text-amber-300">
-              <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-              <span>TripAdvisor Travelers&apos; Choice (5.0/5.0)</span>
-            </span>
-            <span>•</span>
-            <span className="flex items-center gap-1.5 font-medium text-zinc-200">
-              <Clock className="w-4 h-4 text-emerald-400" />
-              <span>Soporte 24/7 En Ruta</span>
-            </span>
-          </div>
+        {/* Curva de transición estilo revista premium */}
+        <div className="absolute -bottom-1 left-0 right-0 z-10 pointer-events-none" aria-hidden="true">
+          <svg
+            viewBox="0 0 1440 100"
+            preserveAspectRatio="none"
+            className="w-full h-[60px] sm:h-[90px] text-[#FAF8F5] dark:text-zinc-950"
+          >
+            <path
+              d="M0,40 C240,90 480,90 720,55 C960,20 1200,10 1440,45 L1440,100 L0,100 Z"
+              fill="currentColor"
+            />
+          </svg>
         </div>
       </section>
 

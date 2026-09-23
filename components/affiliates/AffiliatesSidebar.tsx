@@ -176,7 +176,7 @@ export default function AffiliatesSidebar() {
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#C9A84C]/5 to-transparent" />
             
             <div className="flex items-center gap-3 relative z-10">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#C9A84C] to-[#8B6914] flex items-center justify-center text-[#0A0A0F] font-serif text-lg shrink-0 shadow-lg shadow-[#C9A84C]/10">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#C9A84C] to-[#8B6914] flex items-center justify-center text-[#0B1622] font-serif text-lg shrink-0 shadow-lg shadow-[#C9A84C]/10">
                 {initial}
               </div>
               <div className="min-w-0 flex-1">
@@ -244,7 +244,7 @@ export default function AffiliatesSidebar() {
             </button>
 
             {langOpen && (
-              <div className="absolute bottom-full mb-2 left-0 right-0 bg-[#0A0A0F] border border-white/10 rounded-[20px] shadow-2xl overflow-hidden py-2 z-50 animate-fade-in backdrop-blur-xl">
+              <div className="absolute bottom-full mb-2 left-0 right-0 bg-[#0B1622] border border-white/10 rounded-[20px] shadow-2xl overflow-hidden py-2 z-50 animate-fade-in backdrop-blur-xl">
                 {LOCALES.map((l) => (
                   <button
                     key={l.code}

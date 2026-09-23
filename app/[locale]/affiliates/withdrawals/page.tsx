@@ -155,7 +155,7 @@ export default function WithdrawalsPage() {
                   required
                   value={method}
                   onChange={e => setMethod(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#0A0A0F] text-sm text-white focus:outline-none focus:border-[#C9A84C]/50 transition-colors cursor-pointer appearance-none"
+                  className="w-full px-4 py-3 rounded-xl border border-white/10 bg-[#0B1622] text-sm text-white focus:outline-none focus:border-[#C9A84C]/50 transition-colors cursor-pointer appearance-none"
                 >
                   <option value="" disabled className="text-[#6B6B6B]">Selecciona un método</option>
                   <option value="bank_transfer">Transferencia Bancaria</option>
@@ -186,7 +186,7 @@ export default function WithdrawalsPage() {
 
             <button
               type="submit"
-              className="w-full py-4 bg-gradient-to-r from-[#C9A84C] via-[#F5D78A] to-[#B8860B] hover:from-[#D4AF37] hover:to-[#9A6E0A] text-[#0A0A0F] text-xs font-bold uppercase tracking-widest rounded-xl transition-all cursor-pointer shadow-lg shadow-[#C9A84C]/20"
+              className="w-full py-4 bg-gradient-to-r from-[#C9A84C] via-[#F5D78A] to-[#B8860B] hover:from-[#D4AF37] hover:to-[#9A6E0A] text-[#0B1622] text-xs font-bold uppercase tracking-widest rounded-xl transition-all cursor-pointer shadow-lg shadow-[#C9A84C]/20"
             >
               Confirmar Retiro
             </button>

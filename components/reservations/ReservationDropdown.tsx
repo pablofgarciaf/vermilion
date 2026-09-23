@@ -17,11 +17,14 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   onReservationFound: (reservation: StoredReservation) => void;
+  /** 'popup' (default): floating card anchored below the trigger, for desktop.
+   *  'inline': expands within the normal document flow, for mobile menus. */
+  variant?: 'popup' | 'inline';
 }
 
 const STORAGE_KEY = 'vermilion_previous_reservations';
 
-export function ReservationDropdown({ isOpen, onClose, onReservationFound }: Props) {
+export function ReservationDropdown({ isOpen, onClose, onReservationFound, variant = 'popup' }: Props) {
   const t = useTranslations();
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
@@ -81,12 +84,22 @@ export function ReservationDropdown({ isOpen, onClose, onReservationFound }: Pro
 
   if (!isOpen) return null;
 
+  const wrapperClass = variant === 'inline'
+    ? 'w-full animate-in fade-in slide-in-from-top-1 duration-200'
+    : 'absolute top-full right-0 w-80 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200';
+
+  const cardClass = variant === 'inline'
+    ? 'bg-zinc-50 dark:bg-zinc-800/60 rounded-xl p-4 border border-zinc-200/80 dark:border-white/10'
+    : 'bg-white/90 dark:bg-black/90 backdrop-blur-xl rounded-2xl p-4 shadow-2xl border border-zinc-200/80 dark:border-white/10 ring-1 ring-black/5';
+
   return (
-    <div className="absolute top-full right-0 w-80 pt-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-      <div className="bg-white/90 dark:bg-black/90 backdrop-blur-xl rounded-2xl p-4 shadow-2xl border border-zinc-200/80 dark:border-white/10 ring-1 ring-black/5">
-        <h3 className="text-sm font-bold text-zinc-900 dark:text-white mb-3">
-          {t('myReservations') || 'Mis Reservas'}
-        </h3>
+    <div className={wrapperClass}>
+      <div className={cardClass}>
+        {variant === 'popup' && (
+          <h3 className="text-sm font-bold text-zinc-900 dark:text-white mb-3">
+            {t('myReservations') || 'Mis Reservas'}
+          </h3>
+        )}
 
         <div className="flex gap-2">
           <input

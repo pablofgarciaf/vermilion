@@ -98,7 +98,7 @@ export default function AdminCrmPage() {
   if (unauthorizedEmail) {
     return (
       <div className="min-h-screen bg-[#07110B] flex items-center justify-center p-4">
-        <div className="max-w-md w-full p-8 rounded-3xl bg-[#0B1A12] border border-amber-500/30 text-center space-y-5 shadow-2xl">
+        <div className="max-w-md w-full p-8 rounded-3xl bg-[#0F1E2E] border border-amber-500/30 text-center space-y-5 shadow-2xl">
           <div className="w-14 h-14 mx-auto rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
             <ShieldAlert className="w-7 h-7" />
           </div>
