@@ -3,59 +3,50 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
-import { ShieldCheck, Zap } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import { HeroActions } from './hero/HeroActions';
 
 const SPLASH_TEXTS: Record<string, {
-  expressBadge: string;
   headline: string;
   subheadline: string;
   worlds: [string, string, string, string];
 }> = {
   es: {
-    expressBadge: 'Viajes Relámpago • Salidas en 24h',
     headline: 'Los Mejores Tours Privados y a Medida de Ecuador & Galápagos',
     subheadline: 'Guías Nativos Certificados • Expediciones Exclusivas',
     worlds: ['Galápagos', 'Andes', 'Amazonas', 'Pacífico'],
   },
   en: {
-    expressBadge: 'Express Expeditions • 24h Departures',
     headline: 'The Best Private & Tailor-Made Tours in Ecuador & Galapagos',
     subheadline: 'Certified Native Guides • Exclusive Expeditions',
     worlds: ['Galapagos', 'Andes', 'Amazon', 'Pacific'],
   },
   fr: {
-    expressBadge: 'Voyages Express • Départs en 24h',
     headline: 'Les Meilleurs Circuits Privés & Sur Mesure en Équateur et Galapagos',
     subheadline: 'Guides Locaux Certifiés • Expéditions Exclusives',
     worlds: ['Galapagos', 'Andes', 'Amazonie', 'Pacifique'],
   },
   de: {
-    expressBadge: 'Express-Reisen • Abreise in 24h',
     headline: 'Die besten privaten & maßgeschneiderten Touren in Ecuador & Galapagos',
     subheadline: 'Zertifizierte einheimische Guides • Exklusive Expeditionen',
     worlds: ['Galapagos', 'Anden', 'Amazonas', 'Pazifik'],
   },
   it: {
-    expressBadge: 'Viaggi Express • Partenze in 24h',
     headline: 'I Migliori Tour Privati e su Misura in Ecuador e Galapagos',
     subheadline: 'Guide Locali Certificate • Spedizioni Esclusive',
     worlds: ['Galapagos', 'Ande', 'Amazzonia', 'Pacifico'],
   },
   pt: {
-    expressBadge: 'Viagens Express • Partidas em 24h',
     headline: 'Os Melhores Passeios Privados e Sob Medida no Equador e Galápagos',
     subheadline: 'Guias Nativos Certificados • Expedições Exclusivas',
     worlds: ['Galápagos', 'Andes', 'Amazonas', 'Pacífico'],
   },
   ja: {
-    expressBadge: '即時出発対応 • 24時間以内に出発可能',
     headline: 'エクアドル＆ガラパゴス最高のプライベート＆オーダーメイドツアー',
     subheadline: '認定ネイティブガイド • 特別なプライベート探検',
     worlds: ['ガラパゴス', 'アンデス', 'アマゾン', '太平洋'],
   },
   zh: {
-    expressBadge: '特快极速出发 • 24小时内全套就绪',
     headline: '厄瓜多尔与加拉帕戈斯顶级私人定制旅行',
     subheadline: '专业持证本地向导 • 专属尊贵探险',
     worlds: ['加拉帕戈斯', '安第斯', '亚马逊', '太平洋'],
@@ -109,13 +100,8 @@ export function Hero() {
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:items-start md:text-left md:pl-[30px] lg:pl-[60px] pb-24 sm:pb-28 md:pb-0 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        {/* Express Departure Badge Only - Removed TripAdvisor */}
-        <div className="mb-6 flex flex-wrap items-center justify-center md:justify-start gap-2">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/80 backdrop-blur-md border border-emerald-400/50 text-emerald-300 text-xs sm:text-sm font-semibold shadow-2xl">
-            <Zap className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-            <span className="tracking-wide">{welcome.expressBadge}</span>
-          </div>
-        </div>
+        {/* No badges on home hero - clean look */}
+        <div className="mb-6 h-0" />
 
         {/* "ALL YOU NEED IS" Golden Oswald Decorative Brand Art */}
         <div aria-hidden="true" className="flex flex-col items-center justify-center md:items-start mb-3 select-none pointer-events-none">
@@ -145,22 +131,22 @@ export function Hero() {
           />
         </div>
 
-        {/* Headline & Subheadline - Pure White */}
+        {/* Headline & Subheadline - Sand/Beige color for subheadline */}
         <div className="mb-3 space-y-0.5 text-center md:text-left max-w-lg">
           <p className="text-sm sm:text-base md:text-lg font-serif font-bold text-white tracking-wide drop-shadow-md">
             {welcome.headline}
           </p>
-          <p className="text-xs sm:text-sm text-emerald-300 font-medium tracking-wider uppercase flex items-center justify-center md:justify-start gap-2 drop-shadow">
-            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+          <p className="text-xs sm:text-sm font-medium tracking-wider uppercase flex items-center justify-center md:justify-start gap-2 drop-shadow" style={{ color: '#C9A961' }}>
+            <ShieldCheck className="w-4 h-4 shrink-0" style={{ color: '#C9A961' }} />
             <span>{welcome.subheadline}</span>
           </p>
         </div>
 
-        {/* 4 Worlds Pills */}
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-white/90 font-medium tracking-[0.18em] uppercase text-[10px] sm:text-xs drop-shadow-md pt-2 border-t border-white/15 max-w-lg">
+        {/* 4 Worlds Pills - Sand/Beige color */}
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 font-medium tracking-[0.18em] uppercase text-[10px] sm:text-xs drop-shadow-md pt-2 border-t border-white/15 max-w-lg" style={{ color: '#C9A961' }}>
           {welcome.worlds.map((w, i) => (
             <React.Fragment key={w}>
-              {i > 0 && <span className="w-1 h-1 rounded-full bg-emerald-400" />}
+              {i > 0 && <span className="w-1 h-1 rounded-full bg-yellow-600" />}
               <span className="px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{w}</span>
             </React.Fragment>
           ))}
