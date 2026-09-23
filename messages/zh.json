@@ -158,5 +158,23 @@
     "rights": "保留所有权利。",
     "privacy": "隐私政策",
     "terms": "服务条款"
-  }
+  },
+  "myReservations": "我的預訂",
+  "myReservation": "您的預訂",
+  "enterReservationNumber": "輸入您的預訂編號",
+  "search": "搜尋",
+  "searching": "搜尋中...",
+  "reservationNotFound": "找不到預訂，請確認您的預訂編號。",
+  "errorFetching": "搜尋時發生錯誤，請重試。",
+  "contactWhatsApp": "透過 WhatsApp 聯絡我們尋求協助",
+  "reservationFound": "已找到預訂！",
+  "previousReservations": "最近的預訂",
+  "travelDate": "旅行日期",
+  "selectTravelDate": "請選擇旅行日期",
+  "saveDates": "儲存日期",
+  "cancel": "取消",
+  "modify": "修改日期",
+  "noDatesSelected": "尚未選擇日期",
+  "selectDates": "選擇日期",
+  "cannotModifyDates": "日期無法修改（距離不足一個月）。"
 }

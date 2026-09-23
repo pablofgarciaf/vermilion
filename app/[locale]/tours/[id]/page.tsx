@@ -6,6 +6,7 @@ import { getToursFromFirestore, getTourByIdFromFirestore } from '@/lib/tours';
 import { TourGallery } from '@/components/tours/TourGallery';
 import { TourItinerary } from '@/components/tours/TourItinerary';
 import { TourSubNav } from '@/components/tours/TourSubNav';
+import { ReservationBannerWrapper } from '@/components/reservations/ReservationBannerWrapper';
 import dynamic from 'next/dynamic';
 const TripAdvisorReviews = dynamic(
   () => import('@/components/home/TripAdvisorReviews').then(mod => mod.TripAdvisorReviews),
@@ -295,6 +296,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
   return (
     <>
       <TourSubNav title={title} duration={duration} tour={tour} locale={locale} />
+      <ReservationBannerWrapper tourId={tour.id} locale={locale} />
 
       {/* Padding superior ampliado para evitar solapamiento con el navbar */}
       <div className="relative bg-zinc-50 dark:bg-zinc-950 min-h-screen pt-32 sm:pt-40">

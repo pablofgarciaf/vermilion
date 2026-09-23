@@ -158,5 +158,23 @@
     "rights": "All rights reserved.",
     "privacy": "プライバシーポリシー",
     "terms": "利用規約"
-  }
+  },
+  "myReservations": "予約",
+  "myReservation": "ご予約",
+  "enterReservationNumber": "予約番号を入力してください",
+  "search": "検索",
+  "searching": "検索中...",
+  "reservationNotFound": "予約が見つかりません。予約番号をご確認ください。",
+  "errorFetching": "検索中にエラーが発生しました。もう一度お試しください。",
+  "contactWhatsApp": "WhatsAppでお問い合わせください",
+  "reservationFound": "予約が見つかりました！",
+  "previousReservations": "最近の予約",
+  "travelDate": "旅行日",
+  "selectTravelDate": "旅行日を選択してください",
+  "saveDates": "日付を保存",
+  "cancel": "キャンセル",
+  "modify": "日付を変更",
+  "noDatesSelected": "まだ日付が選択されていません",
+  "selectDates": "日付を選択",
+  "cannotModifyDates": "日付は変更できません（1ヶ月未満のため）。"
 }

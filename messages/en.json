@@ -158,5 +158,23 @@
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service"
-  }
+  },
+  "myReservations": "My Reservations",
+  "myReservation": "Your Reservation",
+  "enterReservationNumber": "Enter your reservation number",
+  "search": "Search",
+  "searching": "Searching...",
+  "reservationNotFound": "Reservation not found. Please check your reservation number.",
+  "errorFetching": "Error fetching reservation. Please try again.",
+  "contactWhatsApp": "Contact us on WhatsApp for help",
+  "reservationFound": "Reservation found!",
+  "previousReservations": "Recent Reservations",
+  "travelDate": "Travel Date",
+  "selectTravelDate": "Please select a travel date",
+  "saveDates": "Save Date",
+  "cancel": "Cancel",
+  "modify": "Modify Date",
+  "noDatesSelected": "No date selected yet",
+  "selectDates": "Select Date",
+  "cannotModifyDates": "Date cannot be modified (less than 1 month away)."
 }

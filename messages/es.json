@@ -158,5 +158,23 @@
     "rights": "Todos los derechos reservados.",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio"
-  }
+  },
+  "myReservations": "Mis Reservas",
+  "myReservation": "Tu Reserva",
+  "enterReservationNumber": "Ingresa tu número de reserva",
+  "search": "Buscar",
+  "searching": "Buscando...",
+  "reservationNotFound": "Reserva no encontrada. Verifica tu número de reserva.",
+  "errorFetching": "Error al buscar tu reserva. Intenta de nuevo.",
+  "contactWhatsApp": "Contáctanos por WhatsApp para ayuda",
+  "reservationFound": "¡Reserva encontrada!",
+  "previousReservations": "Reservas Recientes",
+  "travelDate": "Fecha de Viaje",
+  "selectTravelDate": "Selecciona una fecha de viaje",
+  "saveDates": "Guardar Fecha",
+  "cancel": "Cancelar",
+  "modify": "Modificar Fecha",
+  "noDatesSelected": "Sin fecha seleccionada aún",
+  "selectDates": "Seleccionar Fecha",
+  "cannotModifyDates": "La fecha no puede modificarse (falta menos de un mes)."
 }
