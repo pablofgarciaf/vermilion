@@ -32,8 +32,8 @@ const AffiliateClubModal = dynamic(
   { ssr: false }
 );
 
-const ReservationModal = dynamic(
-  () => import('@/components/reservations/ReservationModal').then((m) => m.ReservationModal),
+const ReservationDropdown = dynamic(
+  () => import('@/components/reservations/ReservationDropdown').then((m) => m.ReservationDropdown),
   { ssr: false }
 );
 
@@ -50,6 +50,7 @@ export function NavbarWithReservations() {
   const locale = useLocale();
   const t = useTranslations('contact');
   const tNav = useTranslations('nav');
+  const tRoot = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
 
@@ -326,13 +327,32 @@ export function NavbarWithReservations() {
             {mounted && (
               <div className="flex items-center gap-3 animate-in fade-in duration-700">
                 {/* MIS RESERVAS Button */}
-                <button
-                  onClick={() => setReservationModalOpen(true)}
-                  className="flex items-center gap-2 px-3 py-2 text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition-colors"
-                >
-                  <BookOpen className="w-4 h-4" />
-                  <span className="hidden sm:inline">{t('myReservations') || 'Reservations'}</span>
-                </button>
+                <div className="relative">
+                  <button
+                    onClick={() => setReservationModalOpen((v) => !v)}
+                    className={`flex items-center gap-1.5 px-3 py-2 text-[11px] uppercase tracking-widest font-bold rounded-xl transition-colors ${
+                      reservationModalOpen
+                        ? 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400'
+                        : 'text-zinc-800 dark:text-zinc-200 hover:text-emerald-600 hover:bg-zinc-100/70 dark:hover:bg-zinc-800/50'
+                    }`}
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    {tRoot('myReservations') || 'Mis Reservas'}
+                  </button>
+                  <ReservationDropdown
+                    isOpen={reservationModalOpen}
+                    onClose={() => setReservationModalOpen(false)}
+                    onReservationFound={(reservation) => {
+                      router.push(`/${locale}/tours/${reservation.tourId}?reservation=${reservation.reservationNumber}`);
+                    }}
+                  />
+                  {reservationModalOpen && (
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setReservationModalOpen(false)}
+                    />
+                  )}
+                </div>
 
                 <button
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -402,13 +422,28 @@ export function NavbarWithReservations() {
           <div className="flex md:hidden items-center gap-2">
             {mounted && (
               <div className="flex items-center gap-2 animate-in fade-in duration-700">
-                <button
-                  onClick={() => setReservationModalOpen(true)}
-                  className="p-2 text-zinc-700 dark:text-zinc-200 hover:text-emerald-600 bg-white/70 dark:bg-black/60 backdrop-blur-md border border-zinc-200/70 dark:border-white/10 hover:bg-white dark:hover:bg-zinc-900 rounded-xl cursor-pointer transition-colors shadow-xs"
-                  aria-label="My Reservations"
-                >
-                  <BookOpen className="w-5 h-5" />
-                </button>
+                <div className="relative">
+                  <button
+                    onClick={() => setReservationModalOpen((v) => !v)}
+                    className="p-2 text-zinc-700 dark:text-zinc-200 hover:text-emerald-600 bg-white/70 dark:bg-black/60 backdrop-blur-md border border-zinc-200/70 dark:border-white/10 hover:bg-white dark:hover:bg-zinc-900 rounded-xl cursor-pointer transition-colors shadow-xs"
+                    aria-label="Mis Reservas"
+                  >
+                    <BookOpen className="w-5 h-5" />
+                  </button>
+                  <ReservationDropdown
+                    isOpen={reservationModalOpen}
+                    onClose={() => setReservationModalOpen(false)}
+                    onReservationFound={(reservation) => {
+                      router.push(`/${locale}/tours/${reservation.tourId}?reservation=${reservation.reservationNumber}`);
+                    }}
+                  />
+                  {reservationModalOpen && (
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setReservationModalOpen(false)}
+                    />
+                  )}
+                </div>
 
                 <button
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -517,17 +552,6 @@ export function NavbarWithReservations() {
       </header>
 
       {/* Modals */}
-      {reservationModalOpen && (
-        <ReservationModal
-          isOpen={reservationModalOpen}
-          onClose={() => setReservationModalOpen(false)}
-          onReservationFound={(reservation) => {
-            router.push(`/${locale}/tours/${reservation.tourId}?reservation=${reservation.reservationNumber}`);
-          }}
-          locale={locale}
-        />
-      )}
-
       {clubModalOpen && (
         <AffiliateClubModal
           isOpen={clubModalOpen}

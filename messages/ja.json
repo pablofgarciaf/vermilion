@@ -176,5 +176,7 @@
   "modify": "日付を変更",
   "noDatesSelected": "まだ日付が選択されていません",
   "selectDates": "日付を選択",
-  "cannotModifyDates": "日付は変更できません（1ヶ月未満のため）。"
+  "cannotModifyDates": "日付は変更できません（1ヶ月未満のため）。",
+  "requestDateChange": "WhatsAppで日付変更を依頼する",
+  "dateChangePolicy": "日付の変更は、WhatsApp、メール、またはお電話にて、1ヶ月以上前にご依頼ください。"
 }

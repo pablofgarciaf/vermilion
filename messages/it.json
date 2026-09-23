@@ -176,5 +176,7 @@
   "modify": "Modifica Data",
   "noDatesSelected": "Nessuna data selezionata",
   "selectDates": "Seleziona Data",
-  "cannotModifyDates": "La data non può essere modificata (manca meno di un mese)."
+  "cannotModifyDates": "La data non può essere modificata (manca meno di un mese).",
+  "requestDateChange": "Richiedi un cambio data tramite WhatsApp",
+  "dateChangePolicy": "Le modifiche di data si richiedono via WhatsApp, email o chiamata, con almeno 1 mese di anticipo."
 }

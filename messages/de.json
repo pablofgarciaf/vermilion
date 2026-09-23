@@ -176,5 +176,7 @@
   "modify": "Datum Ändern",
   "noDatesSelected": "Noch kein Datum ausgewählt",
   "selectDates": "Datum Auswählen",
-  "cannotModifyDates": "Datum kann nicht geändert werden (weniger als 1 Monat entfernt)."
+  "cannotModifyDates": "Datum kann nicht geändert werden (weniger als 1 Monat entfernt).",
+  "requestDateChange": "Terminänderung per WhatsApp anfragen",
+  "dateChangePolicy": "Terminänderungen werden per WhatsApp, E-Mail oder Anruf beantragt, mindestens 1 Monat im Voraus."
 }

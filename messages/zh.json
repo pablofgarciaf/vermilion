@@ -176,5 +176,7 @@
   "modify": "修改日期",
   "noDatesSelected": "尚未選擇日期",
   "selectDates": "選擇日期",
-  "cannotModifyDates": "日期無法修改（距離不足一個月）。"
+  "cannotModifyDates": "日期無法修改（距離不足一個月）。",
+  "requestDateChange": "透過 WhatsApp 申請更改日期",
+  "dateChangePolicy": "日期變更請透過 WhatsApp、電子郵件或電話申請，至少提前1個月。"
 }

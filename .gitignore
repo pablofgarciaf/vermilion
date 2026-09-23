@@ -54,3 +54,6 @@ data/_*
 *.bak
 *-opt.webp
 
+
+firebase-service-account.json
+*.serviceaccount.json
