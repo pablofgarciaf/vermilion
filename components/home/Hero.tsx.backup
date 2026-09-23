@@ -3,58 +3,67 @@
 import React from 'react';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
-import { ShieldCheck, Zap } from 'lucide-react';
+import { Star, ShieldCheck, Zap } from 'lucide-react';
 import { HeroActions } from './hero/HeroActions';
 
 const SPLASH_TEXTS: Record<string, {
+  rating: string;
   expressBadge: string;
   headline: string;
   subheadline: string;
   worlds: [string, string, string, string];
 }> = {
   es: {
+    rating: '5.0 Excelencia en TripAdvisor',
     expressBadge: 'Viajes Relámpago • Salidas en 24h',
     headline: 'Los Mejores Tours Privados y a Medida de Ecuador & Galápagos',
     subheadline: 'Guías Nativos Certificados • Expediciones Exclusivas',
     worlds: ['Galápagos', 'Andes', 'Amazonas', 'Pacífico'],
   },
   en: {
+    rating: '5.0 Rating Excellence on TripAdvisor',
     expressBadge: 'Express Expeditions • 24h Departures',
     headline: 'The Best Private & Tailor-Made Tours in Ecuador & Galapagos',
     subheadline: 'Certified Native Guides • Exclusive Expeditions',
     worlds: ['Galapagos', 'Andes', 'Amazon', 'Pacific'],
   },
   fr: {
+    rating: '5.0 Excellence sur TripAdvisor',
     expressBadge: 'Voyages Express • Départs en 24h',
     headline: 'Les Meilleurs Circuits Privés & Sur Mesure en Équateur et Galapagos',
     subheadline: 'Guides Locaux Certifiés • Expéditions Exclusives',
     worlds: ['Galapagos', 'Andes', 'Amazonie', 'Pacifique'],
   },
   de: {
+    rating: '5.0 Spitzenbewertung auf TripAdvisor',
     expressBadge: 'Express-Reisen • Abreise in 24h',
     headline: 'Die besten privaten & maßgeschneiderten Touren in Ecuador & Galapagos',
     subheadline: 'Zertifizierte einheimische Guides • Exklusive Expeditionen',
     worlds: ['Galapagos', 'Anden', 'Amazonas', 'Pazifik'],
   },
   it: {
+    rating: '5.0 Eccellenza su TripAdvisor',
     expressBadge: 'Viaggi Express • Partenze in 24h',
     headline: 'I Migliori Tour Privati e su Misura in Ecuador e Galapagos',
     subheadline: 'Guide Locali Certificate • Spedizioni Esclusive',
     worlds: ['Galapagos', 'Ande', 'Amazzonia', 'Pacifico'],
   },
   pt: {
+    rating: '5.0 Excelência no TripAdvisor',
     expressBadge: 'Viagens Express • Partidas em 24h',
     headline: 'Os Melhores Passeios Privados e Sob Medida no Equador e Galápagos',
     subheadline: 'Guias Nativos Certificados • Expedições Exclusivas',
     worlds: ['Galápagos', 'Andes', 'Amazonas', 'Pacífico'],
   },
   ja: {
+    rating: 'TripAdvisor で5.0評価の卓越性',
     expressBadge: '即時出発対応 • 24時間以内に出発可能',
     headline: 'エクアドル＆ガラパゴス最高のプライベート＆オーダーメイドツアー',
     subheadline: '認定ネイティブガイド • 特別なプライベート探検',
     worlds: ['ガラパゴス', 'アンデス', 'アマゾン', '太平洋'],
   },
   zh: {
+    rating: 'TripAdvisor与Google获5.0满分卓越好评',
     expressBadge: '特快极速出发 • 24小时内全套就绪',
     headline: '厄瓜多尔与加拉帕戈斯顶级私人定制旅行',
     subheadline: '专业持证本地向导 • 专属尊贵探险',
@@ -63,10 +72,10 @@ const SPLASH_TEXTS: Record<string, {
 };
 
 const LETTERS: { text: string; color: string }[][] = [
-  [{ text: 'A', color: '#D4AF37' }, { text: 'L', color: '#D4AF37' }, { text: 'L', color: '#D4AF37' }],
-  [{ text: 'Y', color: '#D4AF37' }, { text: 'O', color: '#D4AF37' }, { text: 'U', color: '#D4AF37' }],
-  [{ text: 'N', color: '#D4AF37' }, { text: 'E', color: '#D4AF37' }, { text: 'E', color: '#D4AF37' }, { text: 'D', color: '#D4AF37' }],
-  [{ text: 'I', color: '#D4AF37' }, { text: 'S', color: '#D4AF37' }],
+  [{ text: 'A', color: '#FDB913' }, { text: 'L', color: '#F58220' }, { text: 'L', color: '#F05A28' }],
+  [{ text: 'Y', color: '#EF4136' }, { text: 'O', color: '#ED1C24' }, { text: 'U', color: '#E6007E' }],
+  [{ text: 'N', color: '#E91E63' }, { text: 'E', color: '#F06292' }, { text: 'E', color: '#CE93D8' }, { text: 'D', color: '#AB47BC' }],
+  [{ text: 'I', color: '#42A5F5' }, { text: 'S', color: '#29B6F6' }],
 ];
 
 export function Hero() {
@@ -109,16 +118,26 @@ export function Hero() {
 
       {/* Content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:items-start md:text-left md:pl-[30px] lg:pl-[60px] pb-24 sm:pb-28 md:pb-0 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        {/* Express Departure Badge Only - Removed TripAdvisor */}
-        <div className="mb-6 flex flex-wrap items-center justify-center md:justify-start gap-2">
+        {/* VIP Trust & Express Departure Badges */}
+        <div className="mb-2.5 flex flex-wrap items-center justify-center md:justify-start gap-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 text-xs sm:text-sm font-semibold shadow-2xl">
+            <div className="flex items-center gap-0.5 text-amber-400">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+              ))}
+            </div>
+            <span className="text-zinc-200">|</span>
+            <span className="tracking-wide">{welcome.rating}</span>
+          </div>
+
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-950/80 backdrop-blur-md border border-emerald-400/50 text-emerald-300 text-xs sm:text-sm font-semibold shadow-2xl">
             <Zap className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
             <span className="tracking-wide">{welcome.expressBadge}</span>
           </div>
         </div>
 
-        {/* "ALL YOU NEED IS" Golden Oswald Decorative Brand Art */}
-        <div aria-hidden="true" className="flex flex-col items-center justify-center md:items-start mb-3 select-none pointer-events-none">
+        {/* "ALL YOU NEED IS" Vibrant Oswald Decorative Brand Art */}
+        <div aria-hidden="true" className="flex flex-col items-center justify-center md:items-start mb-2.5 select-none pointer-events-none">
           <span className="flex gap-2 sm:gap-3 md:gap-4 font-oswald font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[68px] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] [text-shadow:0_3px_10px_rgba(0,0,0,0.9)]">
             {LETTERS.map((word, wi) => (
               <span key={wi} className="flex">
@@ -145,7 +164,7 @@ export function Hero() {
           />
         </div>
 
-        {/* Headline & Subheadline - Pure White */}
+        {/* Headline & Subheadline */}
         <div className="mb-3 space-y-0.5 text-center md:text-left max-w-lg">
           <p className="text-sm sm:text-base md:text-lg font-serif font-bold text-white tracking-wide drop-shadow-md">
             {welcome.headline}

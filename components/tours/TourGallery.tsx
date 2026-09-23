@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Camera, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLocale } from 'next-intl';
@@ -13,6 +13,7 @@ interface TourGalleryProps {
   tourId?: string;
   destination?: string;
   emphasizeFirst?: boolean;
+  children?: React.ReactNode;
 }
 
 const VIEW_PHOTOS_I18N: Record<string, string> = {
@@ -26,7 +27,7 @@ const VIEW_PHOTOS_I18N: Record<string, string> = {
   zh: '+ 查看照片',
 };
 
-export function TourGallery({ images, title, tourId, destination, emphasizeFirst = false }: TourGalleryProps) {
+export function TourGallery({ images, title, tourId, destination, emphasizeFirst = false, children }: TourGalleryProps) {
   const locale = useLocale();
   const [isDestinationModalOpen, setIsDestinationModalOpen] = useState(false);
 
@@ -46,7 +47,6 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
   const [selectedMainIndex, setSelectedMainIndex] = useState(0);
   const [prevMainIndex, setPrevMainIndex] = useState(0);
   const [activeImageIndex, setActiveImageIndex] = useState<number | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Smooth Auto-Play Slideshow every 3.8s when not in lightbox
@@ -83,8 +83,6 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
   const currentImage = uniqueImages[selectedMainIndex] || uniqueImages[0];
   const previousImage = uniqueImages[prevMainIndex] || currentImage;
 
-
-
   const handleSelectThumbnail = (targetIndex: number) => {
     if (targetIndex === selectedMainIndex) return;
     setPrevMainIndex(selectedMainIndex);
@@ -104,9 +102,7 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
   };
 
   return (
-    <div
-      className="space-y-2"
-    >
+    <div className="space-y-4">
       {/* Bento Grid Container */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2 rounded-2xl overflow-hidden">
         {/* Main Big Photo (Left/Top) with Layered Crossfade */}
@@ -170,19 +166,6 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
               ))}
             </div>
           )}
-
-          {/* View Gallery Badge */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setIsDestinationModalOpen(true);
-            }}
-            className="absolute bottom-4 left-4 flex items-center gap-2 bg-black/75 hover:bg-emerald-700/90 backdrop-blur-md px-4 py-2.5 rounded-full text-white text-xs font-bold border border-white/20 shadow-lg z-10 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-          >
-            <Camera className="w-4 h-4 text-emerald-400" />
-            <span>{VIEW_PHOTOS_I18N[locale] || VIEW_PHOTOS_I18N['en']}</span>
-          </button>
 
           {/* Maximize Icon */}
           <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 backdrop-blur-md p-2 rounded-full text-white border border-white/20 z-10">
@@ -248,6 +231,19 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
             );
           })}
         </div>
+      </div>
+
+      {/* ── BOTONES: VER FOTOS Y DESCARGAR ITINERARIO ── */}
+      <div className="flex flex-wrap items-center justify-end gap-3 border-t border-zinc-200/60 dark:border-zinc-800/60 pt-3">
+        <button
+          type="button"
+          onClick={() => setIsDestinationModalOpen(true)}
+          className="flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+        >
+          <Camera className="w-4 h-4" />
+          <span>{VIEW_PHOTOS_I18N[locale] || VIEW_PHOTOS_I18N['en']}</span>
+        </button>
+        {children}
       </div>
 
       {/* Lightbox Modal */}
