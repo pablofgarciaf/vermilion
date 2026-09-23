@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { SlideData } from '@/types';
-import { Award, Star, ShieldCheck, Zap } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 interface HeroDetailsProps {
   initialData: SlideData;
