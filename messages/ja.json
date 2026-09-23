@@ -178,5 +178,18 @@
   "selectDates": "日付を選択",
   "cannotModifyDates": "日付は変更できません（1ヶ月未満のため）。",
   "requestDateChange": "WhatsAppで日付変更を依頼する",
-  "dateChangePolicy": "日付の変更は、WhatsApp、メール、またはお電話にて、1ヶ月以上前にご依頼ください。"
+  "dateChangePolicy": "日付の変更は、WhatsApp、メール、またはお電話にて、1ヶ月以上前にご依頼ください。",
+  "noBlogPosts": "記事はまだありません。",
+  "featuredArticle": "注目の記事",
+  "categories": "カテゴリー",
+  "all": "すべて",
+  "allArticles": "すべての記事",
+  "noArticles": "このカテゴリーには記事がありません。",
+  "stayUpdated": "最新情報を受け取る",
+  "subscribeNewsletter": "最新のトラベルガイド、探検のヒント、野生動物の情報をメールでお届けします。",
+  "enterYourEmail": "メールアドレスを入力",
+  "subscribing": "登録中...",
+  "subscribe": "登録する",
+  "subscriptionSuccess": "ご登録ありがとうございます！",
+  "subscriptionError": "エラーが発生しました。もう一度お試しください。"
 }

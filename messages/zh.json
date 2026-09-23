@@ -178,5 +178,18 @@
   "selectDates": "選擇日期",
   "cannotModifyDates": "日期無法修改（距離不足一個月）。",
   "requestDateChange": "透過 WhatsApp 申請更改日期",
-  "dateChangePolicy": "日期變更請透過 WhatsApp、電子郵件或電話申請，至少提前1個月。"
+  "dateChangePolicy": "日期變更請透過 WhatsApp、電子郵件或電話申請，至少提前1個月。",
+  "noBlogPosts": "暂无文章。",
+  "featuredArticle": "精选文章",
+  "categories": "分类",
+  "all": "全部",
+  "allArticles": "所有文章",
+  "noArticles": "该分类下暂无文章。",
+  "stayUpdated": "保持更新",
+  "subscribeNewsletter": "获取最新的旅行指南、探险攻略和野生动物资讯，直达您的邮箱。",
+  "enterYourEmail": "请输入您的邮箱",
+  "subscribing": "订阅中...",
+  "subscribe": "订阅",
+  "subscriptionSuccess": "感谢您的订阅！",
+  "subscriptionError": "发生错误，请重试。"
 }

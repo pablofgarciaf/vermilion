@@ -178,5 +178,18 @@
   "selectDates": "Sélectionner une Date",
   "cannotModifyDates": "La date ne peut pas être modifiée (moins d'un mois restant).",
   "requestDateChange": "Demander un changement de date via WhatsApp",
-  "dateChangePolicy": "Les changements de date se demandent par WhatsApp, e-mail ou appel téléphonique, au moins 1 mois à l'avance."
+  "dateChangePolicy": "Les changements de date se demandent par WhatsApp, e-mail ou appel téléphonique, au moins 1 mois à l'avance.",
+  "noBlogPosts": "Aucun article disponible pour le moment.",
+  "featuredArticle": "Article à la Une",
+  "categories": "Catégories",
+  "all": "Toutes",
+  "allArticles": "Tous les Articles",
+  "noArticles": "Aucun article trouvé dans cette catégorie.",
+  "stayUpdated": "Restez Informé",
+  "subscribeNewsletter": "Recevez les derniers guides de voyage, conseils d'expédition et informations sur la faune directement dans votre boîte mail.",
+  "enterYourEmail": "Entrez votre e-mail",
+  "subscribing": "Inscription en cours...",
+  "subscribe": "S'abonner",
+  "subscriptionSuccess": "Merci pour votre inscription !",
+  "subscriptionError": "Une erreur est survenue. Veuillez réessayer."
 }

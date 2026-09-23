@@ -178,5 +178,18 @@
   "selectDates": "Datum Auswählen",
   "cannotModifyDates": "Datum kann nicht geändert werden (weniger als 1 Monat entfernt).",
   "requestDateChange": "Terminänderung per WhatsApp anfragen",
-  "dateChangePolicy": "Terminänderungen werden per WhatsApp, E-Mail oder Anruf beantragt, mindestens 1 Monat im Voraus."
+  "dateChangePolicy": "Terminänderungen werden per WhatsApp, E-Mail oder Anruf beantragt, mindestens 1 Monat im Voraus.",
+  "noBlogPosts": "Noch keine Artikel verfügbar.",
+  "featuredArticle": "Empfohlener Artikel",
+  "categories": "Kategorien",
+  "all": "Alle",
+  "allArticles": "Alle Artikel",
+  "noArticles": "Keine Artikel in dieser Kategorie gefunden.",
+  "stayUpdated": "Bleiben Sie Informiert",
+  "subscribeNewsletter": "Erhalten Sie die neuesten Reiseführer, Expeditionstipps und Wildtier-Einblicke direkt in Ihr Postfach.",
+  "enterYourEmail": "Ihre E-Mail-Adresse",
+  "subscribing": "Wird abonniert...",
+  "subscribe": "Abonnieren",
+  "subscriptionSuccess": "Vielen Dank für Ihr Abonnement!",
+  "subscriptionError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
 }
