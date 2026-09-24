@@ -671,7 +671,7 @@ export const dailyTours: Tour[] = [
       { en: 'Park entrance fee & required local permits', es: 'Tasa de ingreso y permisos locales' },
       { en: 'Stop in Tigua artisan community', es: 'Parada cultural en la comunidad de Tigua' },
       { en: 'Visit to local guinea pig (cuy) farm', es: 'Visita guiada a la granja de cuyes' },
-      { en: 'Guided visit to Quilotoa Crater Lake Viewpoint', es: 'Visita guiada al mirador del Cráter QUILOTO' }
+      { en: 'Guided visit to Quilotoa Crater Lake Viewpoint', es: 'Visita guiada al mirador del Cráter Quilotoa' }
     ],
     exclusions: [
       { en: 'Mule / horseback rental for uphill return from lake', es: 'Alquiler opcional de mula/caballo para ascenso' },
