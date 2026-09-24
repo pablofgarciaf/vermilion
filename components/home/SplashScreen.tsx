@@ -71,7 +71,20 @@ export function SplashScreen() {
       onClick={() => (window as any).skipSplash?.()}
       className="absolute inset-0 z-[40] w-full h-full bg-zinc-950 overflow-hidden flex items-center justify-center pointer-events-auto cursor-pointer"
     >
-      {/* Background Image with Instant Eager Load */}
+      {/* Background Image – mobile portrait vs desktop landscape */}
+      <Image
+        id="splash-bg-image-mobile"
+        src="/splash-4-worlds-mobile.webp"
+        alt="Vermilion Routes Welcome"
+        fill
+        priority
+        loading="eager"
+        fetchPriority="high"
+        quality={100}
+        unoptimized
+        sizes="100vw"
+        className="object-cover scale-[1.03] transition-transform duration-[5000ms] ease-out md:hidden"
+      />
       <Image
         id="splash-bg-image"
         src="/splash-4-worlds-original.webp"
@@ -83,7 +96,7 @@ export function SplashScreen() {
         quality={100}
         unoptimized
         sizes="100vw"
-        className="object-cover scale-[1.03] transition-transform duration-[5000ms] ease-out"
+        className="object-cover scale-[1.03] transition-transform duration-[5000ms] ease-out hidden md:block"
       />
 
       {/* Deep cinematic vignette & dark gradient */}

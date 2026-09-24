@@ -131,6 +131,7 @@ export interface BookingRequest {
     razonSocial?: string;
     direccionFiscal?: string;
   };
+  locale?: string;
 }
 
 

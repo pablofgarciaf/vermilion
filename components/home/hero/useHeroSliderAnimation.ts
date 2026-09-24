@@ -178,7 +178,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
         if (loopTimeline) loopTimeline.kill();
         set(".indicator", { x: -window.innerWidth });
 
-        const duration = isFirstSlide ? 7.5 : 5.5;
+        const duration = isFirstSlide ? 5 : 4.5;
         isFirstSlide = false;
 
         loopTimeline = gsap.timeline({
@@ -532,10 +532,10 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
       };
 
       if (!isBot) {
-        // Arm after 14s of quiet reading, or immediately on first user touch/scroll/click
+        // Arm after 3.5s of quiet reading, or immediately on first user touch/scroll/click
         calmTimer = setTimeout(() => {
           armLoop();
-        }, 14000);
+        }, 3500);
 
         window.addEventListener('scroll', onUserInteraction, { passive: true, once: true });
         window.addEventListener('pointerdown', onUserInteraction, { passive: true, once: true });

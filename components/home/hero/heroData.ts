@@ -4,7 +4,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
   {
     place: { en: 'Galapagos - Santa Cruz', es: 'Galápagos - Santa Cruz', fr: 'Galapagos - Santa Cruz', de: 'Galapagos - Santa Cruz', it: 'Galapagos - Santa Cruz', pt: 'Galápagos - Santa Cruz', ja: 'ガラパゴス - サンタクルス', zh: '加拉帕戈斯 - 圣克鲁斯' },
     title: { en: 'GIANT TORTOISES', es: 'TORTUGAS GIGANTES', fr: 'TORTUES GÉANTES', de: 'RIESENSCHILD KRÖTEN', it: 'TARTARUGHE GIGANTI', pt: 'TARTARUGAS GIGANTES', ja: '古代の巨大', zh: '古老巨型' },
-    title2: { en: 'OF GALAPAGOS', es: 'DE GALÁPAGOS', fr: 'DES GALAPAGOS', de: 'DER GALAPAGOS', it: 'DELLE GALAPAGOS', pt: 'DE GALÁPAGOS', ja: 'ガラパゴスゾウガメ', zh: '加拉帕戈斯陆龟' },
+    title2: { en: 'GALAPAGOS ISLANDS', es: 'DE GALÁPAGOS', fr: 'DES GALAPAGOS', de: 'DER GALAPAGOS', it: 'DELLE GALAPAGOS', pt: 'DE GALÁPAGOS', ja: 'ガラパゴスゾウガメ', zh: '加拉帕戈斯陆龟' },
     description: {
       en: 'Observe ancient giant tortoises roaming freely in their natural habitat at the highlands of Santa Cruz Island and explore majestic volcanic twin craters surrounded by Scalesia forests.',
       es: 'Observa tortugas gigantes centenarias en su hábitat natural en las tierras altas de Santa Cruz y explora impresionantes cráteres volcánicos gemelos rodeados de bosques de Scalesia.',
@@ -17,7 +17,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     isWelcome: true,
     image: '/splash-4-worlds-original.webp',
     desktopImage: '/splash-4-worlds-original.webp',
-    mobileImage: '/splash-4-worlds-original.webp'
+    mobileImage: '/splash-4-worlds-mobile.webp'
   },
   {
     place: { en: 'Pichincha - Quito', es: 'Pichincha - Quito', fr: 'Pichincha - Quito', de: 'Pichincha - Quito', it: 'Pichincha - Quito', pt: 'Pichincha - Quito', ja: 'ピチンチャ - キト', zh: '皮钦查 - 基多' },
@@ -75,8 +75,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
   },
   {
     place: { en: 'Cotopaxi - Quilotoa', es: 'Cotopaxi - Quilotoa', fr: 'Cotopaxi - Quilotoa', de: 'Cotopaxi - Quilotoa', it: 'Cotopaxi - Quilotoa', pt: 'Cotopaxi - Quilotoa', ja: 'キロトア - アンデス', zh: '基洛托阿 - 火山湖' },
-    title: { en: 'QUILOTOA', es: 'LAGUNA CRÁTER', fr: 'LAGUNE DE CRATÈRE', de: 'KRATERLAGUNE', it: 'LAGUNA CRATERE', pt: 'LAGUNA CRATERA', ja: 'エメラルド色の', zh: '绿松石翡翠色的' },
-    title2: { en: 'CRATER LAKE', es: 'DEL QUILOTOA', fr: 'DU QUILOTOA', de: 'VON QUILOTOA', it: 'DEL QUILOTOA', pt: 'DO QUILOTOA', ja: 'キロトア火口湖', zh: '基洛托阿火山湖' },
+    title: { en: 'QUILOTOA', es: 'LAGUNA DEL CRÁTER', fr: 'LAGUNE DE CRATÈRE', de: 'KRATERLAGUNE', it: 'LAGUNA CRATERE', pt: 'LAGUNA CRATERA', ja: 'エメラルド色の', zh: '绿松石翡翠色的' },
+    title2: { en: 'CRATER LAKE', es: 'QUILOTO', fr: 'DU QUILOTOA', de: 'VON QUILOTOA', it: 'QUILOTO', pt: 'DO QUILOTOA', ja: 'キロトア火口湖', zh: '基洛托阿火山湖' },
     description: {
       en: 'Marvel at the striking turquoise waters inside an ancient volcanic caldera located at 3,500 meters altitude with panoramic views of the western Andes range.',
       es: 'Maravíllate con las aguas color esmeralda dentro de la caldera volcánica a 3.500 metros de altura con vistas panorámicas de la cordillera andina.',

@@ -32,6 +32,7 @@ export async function POST(req: Request) {
       affiliateCode,
       destination = 'Ecuador & Galápagos',
       hotelTier = 'premium',
+      locale = 'en',
     } = body;
 
     let bookingRef = body.bookingRef;
@@ -74,6 +75,7 @@ export async function POST(req: Request) {
       affiliateCode: affiliateCode || undefined,
       discountApplied: Boolean(affiliateCode),
       sriInvoice: body.sriInvoice,
+      locale: locale || 'en',
     });
 
     console.log(`[Confirm Booking] Successfully persisted in Firestore: ${savedRef}`);
@@ -103,6 +105,7 @@ export async function POST(req: Request) {
           paymentMethod: paymentMethod === 'paypal' ? 'PayPal / Tarjeta Internacional' : paymentMethod,
           travelDate,
           guestsCount,
+          locale,
         });
       } catch (mailErr: any) {
         console.warn('[Confirm Booking] Email notification note:', mailErr.message);

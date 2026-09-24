@@ -247,6 +247,76 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     ja: '適用',
     zh: '使用',
   },
+  fullPayment: {
+    en: 'Full Payment',
+    es: 'Pago Completo',
+    fr: 'Paiement Intégral',
+    de: 'Vollständige Zahlung',
+    it: 'Pagamento Completo',
+    pt: 'Pagamento Integral',
+    ja: '全額支払い',
+    zh: '全额支付',
+  },
+  depositPayment: {
+    en: 'Reservation Deposit (min. 30%)',
+    es: 'Depósito de Reserva (mín. 30%)',
+    fr: 'Acompte de Réservation (min. 30%)',
+    de: 'Reservierungsanzahlung (min. 30%)',
+    it: 'Deposito di Prenotazione (min. 30%)',
+    pt: 'Depósito de Reserva (mín. 30%)',
+    ja: '予約デポジット（最低30%）',
+    zh: '预订定金（最低30%）',
+  },
+  depositMin: {
+    en: 'Minimum deposit',
+    es: 'Depósito mínimo',
+    fr: 'Acompte minimum',
+    de: 'Mindestanzahlung',
+    it: 'Deposito minimo',
+    pt: 'Depósito mínimo',
+    ja: '最低デポジット',
+    zh: '最低定金',
+  },
+  depositCustom: {
+    en: 'Custom amount (USD)',
+    es: 'Monto personalizado (USD)',
+    fr: 'Montant personnalisé (USD)',
+    de: 'Individueller Betrag (USD)',
+    it: 'Importo personalizzato (USD)',
+    pt: 'Valor personalizado (USD)',
+    ja: 'カスタム金額（USD）',
+    zh: '自定义金额（美元）',
+  },
+  depositInvalid: {
+    en: 'Amount must be between',
+    es: 'El monto debe estar entre',
+    fr: 'Le montant doit être entre',
+    de: 'Der Betrag muss zwischen',
+    it: 'L\'importo deve essere tra',
+    pt: 'O valor deve estar entre',
+    ja: '金額は以下の範囲内でなければなりません',
+    zh: '金额必须在以下范围内',
+  },
+  remainingBalance: {
+    en: 'Remaining balance due before travel',
+    es: 'Saldo pendiente antes del viaje',
+    fr: 'Solde restant dû avant le voyage',
+    de: 'Restbetrag fällig vor der Reise',
+    it: 'Saldo rimanente dovuto prima del viaggio',
+    pt: 'Saldo restante devido antes da viagem',
+    ja: '旅行前に支払う残額',
+    zh: '旅行前应付余额',
+  },
+  cancellationLink: {
+    en: 'Cancellation Policy',
+    es: 'Política de Cancelación',
+    fr: 'Politique d\'Annulation',
+    de: 'Stornierungsrichtlinien',
+    it: 'Politica di Cancellazione',
+    pt: 'Política de Cancelamento',
+    ja: 'キャンセルポリシー',
+    zh: '取消政策',
+  },
   codeInvalid: {
     en: 'Ambassador code invalid or expired.',
     es: 'Código de embajador no válido o expirado.',
@@ -728,6 +798,14 @@ export default function CheckoutPaymentPage() {
   const finalAmount = discountApplied ? Number((initialAmount * 0.9).toFixed(2)) : initialAmount;
   const discountSavings = discountApplied ? Number((initialAmount - finalAmount).toFixed(2)) : 0;
 
+  // Deposit vs Full Payment
+  const [paymentMode, setPaymentMode] = useState<'full' | 'deposit'>('full');
+  const minimumDeposit = Number((finalAmount * 0.3).toFixed(2));
+  const [customDepositAmount, setCustomDepositAmount] = useState<string>(minimumDeposit.toString());
+  const depositValue = Number(customDepositAmount) || minimumDeposit;
+  const isDepositValid = depositValue >= minimumDeposit && depositValue <= finalAmount;
+  const payableAmount = paymentMode === 'full' ? finalAmount : (isDepositValid ? depositValue : minimumDeposit);
+
   const matchedTour = mockTours.find((t) => t.id === tourId || t.title.en === tourTitle) || mockTours[0];
 
   useEffect(() => {
@@ -1108,10 +1186,60 @@ export default function CheckoutPaymentPage() {
                   {t('paypalNotice')}
                 </p>
 
+                {/* Payment Mode: Full vs Deposit */}
+                <div className="space-y-3 p-4 bg-stone-50 dark:bg-zinc-900/60 border border-stone-200 dark:border-white/10 rounded-2xl">
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setPaymentMode('full')}
+                      className={`flex-1 px-3 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${paymentMode === 'full' ? 'bg-emerald-600 text-white shadow-md' : 'bg-white dark:bg-zinc-800 text-stone-600 dark:text-zinc-300 border border-stone-200 dark:border-zinc-700 hover:border-emerald-400'}`}
+                    >
+                      {t('fullPayment')} — ${formatPrice(finalAmount)}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => { setPaymentMode('deposit'); setCustomDepositAmount(minimumDeposit.toString()); }}
+                      className={`flex-1 px-3 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${paymentMode === 'deposit' ? 'bg-amber-500 text-stone-950 shadow-md' : 'bg-white dark:bg-zinc-800 text-stone-600 dark:text-zinc-300 border border-stone-200 dark:border-zinc-700 hover:border-amber-400'}`}
+                    >
+                      {t('depositPayment')}
+                    </button>
+                  </div>
+
+                  {paymentMode === 'deposit' && (
+                    <div className="space-y-2 pt-1">
+                      <div className="flex items-center gap-2">
+                        <label className="text-[11px] text-stone-500 dark:text-zinc-400 font-medium shrink-0">{t('depositCustom')}:</label>
+                        <div className="relative flex-1">
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-stone-400 font-bold">$</span>
+                          <input
+                            type="number"
+                            min={minimumDeposit}
+                            max={finalAmount}
+                            step="0.01"
+                            value={customDepositAmount}
+                            onChange={(e) => setCustomDepositAmount(e.target.value)}
+                            className={`w-full pl-7 pr-3 py-2 rounded-lg text-sm font-bold border ${isDepositValid ? 'border-emerald-300 dark:border-emerald-600 focus:ring-emerald-500' : 'border-rose-300 dark:border-rose-600 focus:ring-rose-500'} bg-white dark:bg-zinc-800 text-stone-900 dark:text-white focus:outline-none focus:ring-2`}
+                          />
+                        </div>
+                      </div>
+                      {!isDepositValid && (
+                        <p className="text-[10px] text-rose-500 font-medium flex items-center gap-1">
+                          <AlertCircle className="w-3 h-3" />
+                          {t('depositInvalid')} ${formatPrice(minimumDeposit)} – ${formatPrice(finalAmount)} USD
+                        </p>
+                      )}
+                      <div className="flex justify-between text-[11px] text-stone-500 dark:text-zinc-400 pt-1 border-t border-stone-100 dark:border-white/5">
+                        <span>{t('depositMin')}: <strong className="text-stone-700 dark:text-zinc-200">${formatPrice(minimumDeposit)} USD</strong></span>
+                        <span>{t('remainingBalance')}: <strong className="text-amber-600 dark:text-amber-400">${formatPrice(finalAmount - payableAmount)} USD</strong></span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
                 {/* PayPal Official SDK Buttons */}
                 <div className="pt-2">
                   <PayPalCheckoutButton
-                    amount={finalAmount}
+                    amount={payableAmount}
                     bookingRef={ref}
                     tourId={tourId}
                     tourTitle={tourTitle}
@@ -1429,10 +1557,10 @@ export default function CheckoutPaymentPage() {
                     <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
                     <span>TripAdvisor Travelers Choice</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                    <span>Garantía de Salida</span>
-                  </div>
+                  <a href={`/${locale}/cancellation`} className="flex items-center gap-1.5 hover:text-emerald-500 transition-colors">
+                    <FileText className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span className="underline underline-offset-2">{CHECKOUT_I18N.cancellationLink?.[locale] || 'Cancellation Policy'}</span>
+                  </a>
                 </div>
 
                 <p className="text-[10px] text-stone-400 dark:text-zinc-500 text-center leading-relaxed">

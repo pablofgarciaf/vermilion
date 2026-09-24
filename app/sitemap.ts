@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/wildlife-photography-expeditions',
     '/privacy-policy',
     '/terms',
+    '/cancellation',
   ];
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
@@ -41,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of LOCALES) {
       const isHome = page === '';
       const isCatalogOrBlog = page === '/tours' || page === '/blog';
-      const isLegal = page === '/privacy-policy' || page === '/terms';
+      const isLegal = page === '/privacy-policy' || page === '/terms' || page === '/cancellation';
 
       sitemapEntries.push({
         url: `${BASE_URL}/${locale}${page}`,

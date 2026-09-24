@@ -114,6 +114,7 @@ export function PayPalCheckoutButton({
         guestsCount: guestsCount || '1 Viajero',
         passengersCount: passengersCount || 1,
         destination: 'Ecuador & Galapagos',
+        locale: locale || 'en',
         amountPaid: amount,
         paidAmount: amount,
         totalAmount: amount,

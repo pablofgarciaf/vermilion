@@ -659,7 +659,7 @@ export const dailyTours: Tour[] = [
       zh: '探访伊利尼萨斯生态保护区内令人惊叹的海拔3900米基洛托阿翡翠绿火山湖。沿途探访以羊皮画闻名的蒂瓜原住民艺术村，并参观传统豚鼠农庄，体验数百年安第斯乡村生活方式。'
     },
     highlights: [
-      { en: 'Quilotoa Emerald-Turquoise Volcanic Crater Lake (3,900 m)', es: 'Laguna Cráter Verde Esmeralda de Quilotoa (3.900 m)', zh: '海拔3900米基洛托阿绿松石翡翠色火山湖' },
+      { en: 'Quilotoa Emerald-Turquoise Volcanic Crater Lake (3,900 m)', es: 'LAGUNA DEL CRÁTER Verde Esmeralda de Quilotoa (3.900 m)', zh: '海拔3900米基洛托阿绿松石翡翠色火山湖' },
       { en: 'Tigua Indigenous Naïve Art Workshop & Gallery', es: 'Galería y Taller de Arte Indígena de Tigua', zh: '蒂瓜原住民羊皮传统油画工坊与画廊' },
       { en: 'Traditional Andean Guinea Pig (Cuy) Farm Visit', es: 'Visita a Granja Tradicional de Crianza de Cuyes', zh: '安第斯传统豚鼠（Cuy）繁育生态农庄探访' },
       { en: 'Optional Hike Down to the Crater Lake Shore', es: 'Caminata Opcional hacia la Orilla de la Laguna', zh: '火山口沿线峭壁全景与下探湖畔步道' }
@@ -671,7 +671,7 @@ export const dailyTours: Tour[] = [
       { en: 'Park entrance fee & required local permits', es: 'Tasa de ingreso y permisos locales' },
       { en: 'Stop in Tigua artisan community', es: 'Parada cultural en la comunidad de Tigua' },
       { en: 'Visit to local guinea pig (cuy) farm', es: 'Visita guiada a la granja de cuyes' },
-      { en: 'Guided visit to Quilotoa Crater Lake Viewpoint', es: 'Visita guiada al mirador del Cráter del Quilotoa' }
+      { en: 'Guided visit to Quilotoa Crater Lake Viewpoint', es: 'Visita guiada al mirador del Cráter QUILOTO' }
     ],
     exclusions: [
       { en: 'Mule / horseback rental for uphill return from lake', es: 'Alquiler opcional de mula/caballo para ascenso' },
@@ -683,7 +683,7 @@ export const dailyTours: Tour[] = [
         day: 1,
         title: {
           en: 'Full Day – Tigua Art, Cuy Farm & Quilotoa Volcanic Caldera',
-          es: "Partimos temprano desde Quito adentrándonos hacia el suroeste por impresionantes valles agrícolas andinos. Realizamos una parada cultural en la comunidad de Tigua, famosa por sus vibrantes pinturas autóctonas plasmadas en cuero de oveja. Continuamos nuestro trayecto con la visita a una granja tradicional para conocer la crianza de cuyes, una práctica milenaria en los Andes.\n\nFinalmente llegamos al imponente cráter del Quilotoa, donde quedará maravillado por las deslumbrantes aguas color verde esmeralda de su laguna volcánica. Disfrute de tiempo libre para descender a la orilla o caminar por el borde, seguido de un almuerzo tradicional antes de retornar a la capital."
+          es: "Partimos temprano desde Quito adentrándonos hacia el suroeste por impresionantes valles agrícolas andinos. Realizamos una parada cultural en la comunidad de Tigua, famosa por sus vibrantes pinturas autóctonas plasmadas en cuero de oveja. Continuamos nuestro trayecto con la visita a una granja tradicional para conocer la crianza de cuyes, una práctica milenaria en los Andes.\n\nFinalmente llegamos al imponente cráter QUILOTO, donde quedará maravillado por las deslumbrantes aguas color verde esmeralda de su laguna volcánica. Disfrute de tiempo libre para descender a la orilla o caminar por el borde, seguido de un almuerzo tradicional antes de retornar a la capital."
         },
         image: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
         description: {

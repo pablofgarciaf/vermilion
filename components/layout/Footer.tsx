@@ -38,7 +38,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Stripe Payments",
     badgeCitibank: "Citibank USA & Zelle",
     badgeSSL: "SSL 256-Bit Encrypted",
-    affiliateProgram: "Affiliate Program",
+    cancellationPolicy: "Cancellation & Refund Policy",
     officeReservations: "Office / Reservations:",
     hqEcuador: "Ecuador Headquarters (HQ)",
     officeSpain: "Spain Branch (Coral Tour)",
@@ -61,7 +61,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Pagos con Stripe",
     badgeCitibank: "Citibank EE.UU. & Zelle",
     badgeSSL: "Encriptación SSL de 256 Bits",
-    affiliateProgram: "Programa de Afiliados",
+    cancellationPolicy: "Políticas de Cancelación y Reembolsos",
     officeReservations: "Oficina / Reservas:",
     hqEcuador: "Sede Ecuador (HQ)",
     officeSpain: "Sede España (Coral Tour)",
@@ -84,7 +84,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Paiements Stripe",
     badgeCitibank: "Citibank USA & Zelle",
     badgeSSL: "Crypté SSL 256 Bits",
-    affiliateProgram: "Programme d'Affiliation",
+    cancellationPolicy: "Politique d'Annulation et Remboursement",
     officeReservations: "Bureau / Réservations:",
     hqEcuador: "Siège Équateur (HQ)",
     officeSpain: "Filiale Espagne (Coral Tour)",
@@ -107,7 +107,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Stripe-Zahlungen",
     badgeCitibank: "Citibank USA & Zelle",
     badgeSSL: "SSL 256-Bit-Verschlüsselung",
-    affiliateProgram: "Partnerprogramm",
+    cancellationPolicy: "Stornierungs- und Rückerstattungsrichtlinien",
     officeReservations: "Büro / Reservierungen:",
     hqEcuador: "Hauptsitz Ecuador (HQ)",
     officeSpain: "Niederlassung Spanien (Coral Tour)",
@@ -130,7 +130,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Pagamenti Stripe",
     badgeCitibank: "Citibank USA & Zelle",
     badgeSSL: "Crittografia SSL a 256 Bit",
-    affiliateProgram: "Programma di Affiliazione",
+    cancellationPolicy: "Politica di Cancellazione e Rimborso",
     officeReservations: "Ufficio / Prenotazioni:",
     hqEcuador: "Sede Ecuador (HQ)",
     officeSpain: "Sede Spagna (Coral Tour)",
@@ -153,7 +153,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Pagamentos Stripe",
     badgeCitibank: "Citibank EUA & Zelle",
     badgeSSL: "Criptografia SSL de 256 Bits",
-    affiliateProgram: "Programa de Afiliados",
+    cancellationPolicy: "Política de Cancelamento e Reembolso",
     officeReservations: "Escritório / Reservas:",
     hqEcuador: "Sede Equador (HQ)",
     officeSpain: "Sede Espanha (Coral Tour)",
@@ -176,7 +176,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Stripe カード決済",
     badgeCitibank: "米国シティバンク & Zelle",
     badgeSSL: "256ビット SSL 暗号化保護",
-    affiliateProgram: "アフィリエイト・プログラム",
+    cancellationPolicy: "キャンセル・返金ポリシー",
     officeReservations: "オフィス / 予約:",
     hqEcuador: "エクアドル本社 (HQ)",
     officeSpain: "スペイン支社 (Coral Tour)",
@@ -199,7 +199,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     badgeStripe: "Stripe 国际银行卡支付",
     badgeCitibank: "美国花旗银行 & Zelle",
     badgeSSL: "256位 SSL 顶级加密",
-    affiliateProgram: "联盟伙伴计划",
+    cancellationPolicy: "取消与退款政策",
     officeReservations: "办公室 / 预订专线:",
     hqEcuador: "厄瓜多尔总部 (HQ)",
     officeSpain: "西班牙分部 (Coral Tour)",
@@ -625,11 +625,10 @@ export function Footer() {
               {t.terms}
             </a>
             <a
-              href={`/${locale}#affiliate`}
-              onClick={(e) => handleAnchorClick(e, 'affiliate')}
+              href={`/${locale}/cancellation`}
               className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60 cursor-pointer"
             >
-              {t.affiliateProgram}
+              {t.cancellationPolicy}
             </a>
           </div>
         </div>
