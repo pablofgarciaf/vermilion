@@ -53,17 +53,11 @@ export default function AdminAuthPage() {
         try {
           const cleanEmail = user.email.toLowerCase().trim();
 
-          const isMaster =
-            cleanEmail === (process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'admin@vermilionroutes.com').toLowerCase().trim();
-
-          if (isMaster) {
-            router.replace(`/${locale}/admin`);
-            return;
-          }
-
           const userSnap = await getDoc(doc(db, 'usuarios', cleanEmail));
           if (!userSnap.exists()) {
             await signOut(auth);
+            setErrorMsg(isEs ? 'ACCESO DENEGADO (403): Tu cuenta no dispone de permisos corporativos.' : 'ACCESS DENIED (403): Unauthorized.');
+            setLoading(false);
             return;
           }
 
@@ -75,14 +69,18 @@ export default function AdminAuthPage() {
             router.replace(`/${locale}/admin`);
           } else {
             await signOut(auth);
+            setErrorMsg(isEs ? 'ACCESO DENEGADO (403): Tu cuenta no dispone de permisos corporativos.' : 'ACCESS DENIED (403): Unauthorized.');
+            setLoading(false);
           }
         } catch (err) {
           console.warn('[Admin Auth State Check]', err);
+          setErrorMsg(isEs ? 'Error verificando permisos corporativos.' : 'Error checking corporate permissions.');
+          setLoading(false);
         }
       }
     });
     return () => unsubscribe();
-  }, [locale, router, errorParam]);
+  }, [locale, router, errorParam, isEs]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

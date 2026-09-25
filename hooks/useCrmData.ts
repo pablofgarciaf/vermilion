@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { db } from '@/lib/firebase';
-import { collection, doc, getDocs, setDoc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { collection, doc, getDocs, getDoc, setDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 import {
   SystemUser,
   CrmLead,
@@ -118,15 +118,8 @@ export function useCrmData() {
 
   // Firestore & API Synchronization
   useEffect(() => {
-    // 1. Fetch persistent server-side bookings
-    fetch('/api/crm/bookings')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.success && Array.isArray(data.bookings)) {
-          setBookings(data.bookings);
-        }
-      })
-      .catch((err) => console.warn('[useCrmData] API sync notice:', err));
+    // We rely exclusively on Firebase Firestore snapshot listeners below
+    // for real-time bookings sync.
 
     let unsubscribeUsers: (() => void) | undefined;
     let unsubscribeLeads: (() => void) | undefined;
@@ -207,6 +200,7 @@ export function useCrmData() {
                 assignedOperatorId: raw.assignedOperatorId || 'info@vermilionroutes.com',
                 assignedOperatorName: raw.assignedOperatorName || 'Jairo Ludeña',
                 notes: raw.notes || `Interés en: ${raw.tourName || raw.tourId || 'Expedición'}`,
+                observations: raw.observations || [],
                 source: raw.source || 'web_lead',
                 affiliateReferralCode: raw.affiliateReferralCode || raw.affiliateCode || '',
                 createdAt: typeof raw.createdAt === 'string' ? raw.createdAt : (raw.createdAt?.toDate ? raw.createdAt.toDate().toISOString() : new Date().toISOString()),
@@ -322,6 +316,31 @@ export function useCrmData() {
     }
   }, []);
 
+  // Add Lead Observation
+  const addLeadObservation = useCallback(async (leadId: string, text: string, authorEmail: string, authorName: string) => {
+    const newObs = { text, authorEmail, authorName, createdAt: new Date().toISOString() };
+    setLeads((prev) =>
+      prev.map((l) => {
+        if (l.id !== leadId) return l;
+        const observations = [...(l.observations || []), newObs];
+        return { ...l, observations, updatedAt: new Date().toISOString() };
+      })
+    );
+    if (db) {
+      try {
+        const leadRef = doc(db, 'leads', leadId);
+        const leadSnap = await getDoc(leadRef);
+        if (leadSnap.exists()) {
+          const data = leadSnap.data();
+          const observations = [...(data.observations || []), newObs];
+          await updateDoc(leadRef, { observations, updatedAt: new Date().toISOString() });
+        }
+      } catch (err) {
+        console.warn('Could not add observation to firestore:', err);
+      }
+    }
+  }, []);
+
   // Assign Operator to Booking
   const assignOperatorToBooking = useCallback(async (bookingId: string, operatorEmail: string, operatorName: string) => {
     const updates = { assignedOperatorId: operatorEmail, assignedOperatorName: operatorName, updatedAt: new Date().toISOString() };
@@ -369,6 +388,8 @@ export function useCrmData() {
       }
     }
   }, []);
+
+
 
   // Admin approves & marks commission as paid with bank reference
   const approveAndPayCommission = useCallback(async (
@@ -469,7 +490,10 @@ export function useCrmData() {
 
   // Update Booking Status
   const updateBookingStatus = useCallback(async (bookingId: string, newStatus: CrmBooking['status']) => {
-    const updates = { status: newStatus, updatedAt: new Date().toISOString() };
+    const updates: any = { status: newStatus, updatedAt: new Date().toISOString() };
+    if (newStatus === 'completed') {
+      updates.operatorCommissionStatus = 'ready_for_review';
+    }
     setBookings((prev) =>
       prev.map((b) => (b.id === bookingId ? { ...b, ...updates } : b))
     );
@@ -496,6 +520,7 @@ export function useCrmData() {
     loading,
     updateLeadStatus,
     updateBookingStatus,
+    addLeadObservation,
     assignOperatorToBooking,
     signalTripCompleted,
     approveAndPayCommission,

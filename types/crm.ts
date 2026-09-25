@@ -44,6 +44,13 @@ export interface PassengerProfile {
   };
 }
 
+export interface LeadObservation {
+  text: string;
+  authorEmail: string;
+  authorName?: string;
+  createdAt: string;
+}
+
 export interface CrmLead {
   id: string;
   customerName: string;
@@ -58,6 +65,7 @@ export interface CrmLead {
   assignedOperatorId?: string; // email of operator
   assignedOperatorName?: string;
   notes?: string;
+  observations?: LeadObservation[];
   source?: string; // 'landing_popup' | 'contact_form' | 'affiliate_referral'
   affiliateReferralCode?: string;
   passengerDetails?: PassengerProfile;

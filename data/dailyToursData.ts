@@ -263,7 +263,7 @@ export const dailyTours: Tour[] = [
       zh: '翻越海拔4100米的安第斯东部山口，前往帕帕亚克塔高山火山天然地热温泉。在眺望安蒂萨纳雪山的无敌景致中享受矿物水疗与高原自然徒步。'
     },
     highlights: [
-      { en: 'Volcanic Mineral Thermal Pools with Mountain Views', es: 'Piscinas Termales Minerales Volcánicas', zh: '雪山环抱中的天然火山矿物地热温泉' },
+      { en: 'Volcanic Mineral Thermal Pools with Mountain Views', es: 'Fondos Termales Minerales Volcánicas', zh: '雪山环抱中的天然火山矿物地热温泉' },
       { en: 'Panoramic Views of Snow-Capped Antisana Volcano', es: 'Vistas al Volcán Nevado Antisana (5.704 m)', zh: '安蒂萨纳雪山（海拔5704米）壮丽全景' },
       { en: 'High-Altitude Andes to Amazon Transition Zone Hike', es: 'Senderismo en Zona de Transición Andes-Amazonía', zh: '安第斯高山至亚马逊过渡森林步道徒步' },
       { en: 'Spa & Hydrotherapy Relaxation Experience', es: 'Relajación y Bienestar en Entorno de Montaña', zh: '高山水疗与身心深度放松' }
@@ -683,7 +683,7 @@ export const dailyTours: Tour[] = [
         day: 1,
         title: {
           en: 'Full Day – Tigua Art, Cuy Farm & Quilotoa Volcanic Caldera',
-          es: "Partimos temprano desde Quito adentrándonos hacia el suroeste por impresionantes valles agrícolas andinos. Realizamos una parada cultural en la comunidad de Tigua, famosa por sus vibrantes pinturas autóctonas plasmadas en cuero de oveja. Continuamos nuestro trayecto con la visita a una granja tradicional para conocer la crianza de cuyes, una práctica milenaria en los Andes.\n\nFinalmente llegamos al imponente cráter QUILOTO, donde quedará maravillado por las deslumbrantes aguas color verde esmeralda de su laguna volcánica. Disfrute de tiempo libre para descender a la orilla o caminar por el borde, seguido de un almuerzo tradicional antes de retornar a la capital."
+          es: "Partimos temprano desde Quito adentrándonos hacia el suroeste por impresionantes valles agrícolas andinos. Realizamos una parada cultural en la comunidad de Tigua, famosa por sus vibrantes pinturas autóctonas plasmadas en cuero de oveja. Continuamos nuestro trayecto con la visita a una granja tradicional para conocer la crianza de cuyes, una práctica milenaria en los Andes.\n\nFinalmente llegamos al imponente cráter Quilotoa, donde quedará maravillado por las deslumbrantes aguas color verde esmeralda de su laguna volcánica. Disfrute de tiempo libre para descender a la orilla o caminar por el borde, seguido de un almuerzo tradicional antes de retornar a la capital."
         },
         image: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
         description: {

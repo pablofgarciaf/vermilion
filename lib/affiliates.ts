@@ -41,7 +41,7 @@ export const CAPS = {
   activeMinPersonalVolume: 1000 // $1,000 VP para estar activo
 };
 
-/** Piscinas de Acciones del Fondo Global (6% total: 2% c/u) */
+/** Fondos de Acciones del Fondo Global (6% total: 2% c/u) */
 export const GLOBAL_POOLS = {
   pool1: { name: 'Piscina Negocio', target: 3000, percent: 0.02, estimatedShareValue: 60 },
   pool2: { name: 'Piscina Líder', target: 7000, percent: 0.02, estimatedShareValue: 140 },
@@ -67,18 +67,18 @@ export interface AffiliateAccount {
   ramaId: number | string;// Branch identifier ("1", "1.2", etc.)
   rama?: string;          // Hierarchy string
   rank: 'Standard' | 'Ejecutivo' | 'Premium' | 'Empresario';
-  
+
   // Balances
   totalEarnings: number;
   availableBalance: number;
   pendingBalance: number;
-  
+
   // Volumes
   salesCount: number;
   monthlyVolume: number;       // Personal Volume (VP)
   networkVolume: number;       // Total Group Volume (VG)
   cumulativePersonalVolume: number;
-  
+
   // Flags & Auth
   isActive: boolean;           // Active status for grandparent bonus
   forcePasswordChange: boolean;// First login password change trigger
@@ -135,7 +135,7 @@ export async function getAffiliateByUsername(username: string): Promise<Affiliat
       if (snapCache.exists()) {
         return { id: snapCache.id, ...snapCache.data() } as AffiliateAccount;
       }
-    } catch {}
+    } catch { }
     console.warn('getAffiliateByUsername error:', err);
     return null;
   }

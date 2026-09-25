@@ -64,15 +64,15 @@ export function PresentationClient({ initialRef = '', initialLogin = false }: Pr
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] dark:bg-stone-950 text-zinc-900 dark:text-zinc-100 font-sans selection:bg-amber-500/30 selection:text-amber-900 dark:selection:text-amber-200 transition-colors duration-300">
-      
+
       {/* ── HERO SECTION ──────────────── */}
       <header className="-mt-24 sm:-mt-28 pt-36 sm:pt-44 pb-20 sm:pb-24 relative overflow-hidden bg-gradient-to-b from-[#F5EFE6] via-[#FAF8F5] to-[#FAF8F5] dark:from-stone-950 dark:via-zinc-950 dark:to-stone-950 border-b border-amber-500/20 dark:border-amber-500/10">
-        
+
         {/* Glow de iluminación metálica dorada */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] bg-amber-500/10 dark:bg-amber-400/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10 space-y-6">
-          
+
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-400 text-xs font-bold uppercase tracking-widest shadow-xs">
             <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" /> {isEs ? 'El Club de Embajadores High-Ticket' : 'High-Ticket Ambassador Club'}
           </div>
@@ -177,7 +177,7 @@ export function PresentationClient({ initialRef = '', initialLogin = false }: Pr
             </div>
             <div className="text-2xl font-bold font-mono text-amber-600 dark:text-amber-400 mb-2">6% Global</div>
             <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-3">
-              {isEs ? 'Piscinas de Utilidades' : 'Global Profit Pools'}
+              {isEs ? 'Fondos de Utilidades' : 'Global Profit Pools'}
             </h3>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {isEs
@@ -277,7 +277,7 @@ export function PresentationClient({ initialRef = '', initialLogin = false }: Pr
                 ${Math.round(totalEarnings).toLocaleString()}
                 <span className="text-xs text-amber-300/80 block font-sans font-normal mt-1">USD / mes</span>
               </div>
-              
+
               <div className="pt-4 border-t border-white/10 space-y-2 text-xs text-zinc-400 text-left">
                 <div className="flex justify-between">
                   <span>{isEs ? 'Comisión Directa (10%):' : 'Direct (10%):'}</span>
@@ -288,7 +288,7 @@ export function PresentationClient({ initialRef = '', initialLogin = false }: Pr
                   <span className="font-mono text-white">${Math.round(leadershipBonus).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>{isEs ? 'Piscinas Globales:' : 'Global Pools:'}</span>
+                  <span>{isEs ? 'Fondos Globales:' : 'Global Pools:'}</span>
                   <span className="font-mono text-white">${Math.round(globalBonus).toLocaleString()}</span>
                 </div>
               </div>

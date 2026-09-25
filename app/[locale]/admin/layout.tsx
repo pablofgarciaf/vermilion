@@ -46,20 +46,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           return;
         }
 
-        // Fundadores y administradores maestros tienen pase directo garantizado
-        const isMaster =
-          cleanEmail === 'pablofgarciaf@gmail.com' ||
-          cleanEmail === 'info@vermilionroutes.com' ||
-          cleanEmail === (process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'admin@vermilionroutes.com').toLowerCase().trim();
-
-        if (isMaster) {
-          console.log('🕵️‍♂️ [CHISMOSO ADMIN LAYOUT] ✅ Fundador / Super Admin verificado:', cleanEmail);
-          setUserRole('super');
-          setCurrentUser(firebaseUser);
-          setDenied(false);
-          return;
-        }
-
         const userSnap = await getDoc(doc(db, 'usuarios', cleanEmail));
         if (!userSnap.exists()) {
           console.error('🕵️‍♂️ [CHISMOSO ADMIN LAYOUT] Usuario no encontrado en colección usuarios:', cleanEmail);
