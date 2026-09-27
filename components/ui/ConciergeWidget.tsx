@@ -29,7 +29,6 @@ interface ChatMessage {
 }
 
 export function ConciergeWidget() {
-  if (isBotOrCrawler()) return null;
   const locale = useLocale();
   const GREETINGS_BY_LOCALE: Record<string, string> = {
     es: '¡Hola! Soy **Pyro**, tu Especialista de Viajes en Vermilion Routes.\n\nEstoy aquí para ayudarte a diseñar y personalizar tu viaje por **Ecuador Continental y las Islas Galápagos**.\n\n¿En qué destino o fechas te gustaría comenzar a planificar?',
@@ -219,6 +218,8 @@ export function ConciergeWidget() {
     const summary = `Hello Vermilion Routes! I was chatting with Pyro AI on your website about: "${lastUserMsgs || 'Expeditions'}". Can a travel advisor assist me?`;
     window.open(getWhatsAppLink(summary), '_blank');
   };
+
+  if (isBotOrCrawler()) return null;
 
   return (
     <>

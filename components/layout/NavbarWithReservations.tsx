@@ -191,7 +191,7 @@ export function NavbarWithReservations() {
     <div className="fixed top-0 left-0 w-full z-50 flex flex-col">
       {/* Top Banner */}
       <div
-        className={`transition-all duration-500 overflow-hidden border-b bg-gradient-to-r from-emerald-950/90 via-emerald-900/85 to-emerald-800/90 backdrop-blur-md text-white border-emerald-800/60 ${isScrolled ? 'max-h-0 opacity-0 py-0 border-none' : 'max-h-24 sm:max-h-16 opacity-100 py-1.5 sm:py-2 px-4 sm:px-8 pb-1.5 sm:pb-2'
+        className={`transition-all duration-500 overflow-hidden border-b bg-gradient-to-r from-emerald-950/90 via-emerald-900/85 to-emerald-800/90 backdrop-blur-md text-white border-emerald-800/60 hidden sm:block ${isScrolled ? 'max-h-0 opacity-0 py-0 border-none' : 'sm:max-h-16 opacity-100 sm:py-2 sm:px-8 sm:pb-2'
           }`}
       >
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">

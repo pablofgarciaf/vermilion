@@ -143,7 +143,7 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/cuenca-colonial-16-9.webp',
     desktopImage: '/images/tours/16-9/cuenca-colonial-16-9.webp',
-    mobileImage: '/images/tours/9-16/cajas-national-park-9-16.webp'
+    mobileImage: '/images/tours/9-16/cuenca-colonial-9-16.webp'
   },
   {
     place: { en: 'Chimborazo - Andes', es: 'Chimborazo - Andes', fr: 'Chimborazo - Andes', de: 'Chimborazo - Anden', it: 'Chimborazo - Ande', pt: 'Chimborazo - Andes', ja: 'チンボラソ - アンデス', zh: '钦博拉索 - 安第斯' },
