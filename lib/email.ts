@@ -11,6 +11,9 @@ const transporter = nodemailer.createTransport({
   host: SMTP_HOST,
   port: SMTP_PORT,
   secure: SMTP_PORT === 465, // true for 465, false for other ports
+  connectionTimeout: 10_000,
+  greetingTimeout: 10_000,
+  socketTimeout: 15_000,
   auth: {
     user: SMTP_EMAIL,
     pass: SMTP_PASSWORD,
@@ -223,7 +226,14 @@ export interface BookingConfirmationEmailParams {
   locale?: string;
 }
 
-export const sendBookingConfirmationEmail = async (params: BookingConfirmationEmailParams) => {
+export interface BookingConfirmationEmailResult {
+  sent: true;
+  messageId?: string;
+}
+
+export const sendBookingConfirmationEmail = async (
+  params: BookingConfirmationEmailParams
+): Promise<BookingConfirmationEmailResult> => {
   const {
     toEmail,
     customerName,
@@ -403,14 +413,12 @@ export const sendBookingConfirmationEmail = async (params: BookingConfirmationEm
 
   try {
     if (!SMTP_PASSWORD) {
-      console.warn('⚠️ SMTP_PASSWORD no configurado en .env - Simulando envío de confirmación de reserva a ' + toEmail);
-      console.log(`[SIMULACIÓN CORREO] Reserva ${bookingRef} - Cliente: ${customerName} (${toEmail}) - Monto: ${formattedAmount}`);
-      return true;
+      throw new Error('SMTP_PASSWORD is not configured; booking email was not sent.');
     }
 
     const bccList = [SMTP_EMAIL, 'pablofgarciaf@gmail.com'].filter(Boolean);
 
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: `"Vermilion Expeditions" <${SMTP_EMAIL}>`,
       to: toEmail,
       bcc: bccList,
@@ -421,12 +429,13 @@ export const sendBookingConfirmationEmail = async (params: BookingConfirmationEm
     });
 
     console.log(`[Email] Booking confirmation email dispatched successfully to ${toEmail} (BCC: ${bccList.join(', ')})`);
-    return true;
+    return {
+      sent: true,
+      messageId: info.messageId,
+    };
   } catch (error) {
     console.error('Error enviando correo de confirmación de reserva:', error);
-    // Do not throw so fulfillment process does not break if SMTP has transient issues
-    return false;
+    throw error instanceof Error ? error : new Error('Unknown SMTP delivery error');
   }
 };
-
 

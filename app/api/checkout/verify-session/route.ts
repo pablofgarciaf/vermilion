@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
     let isWire = sessionId?.startsWith('wire_') || bodyPaymentMethod === 'bank_wire';
     let paymentStatus: 'confirmed' | 'pending_verification' = isWire ? 'pending_verification' : 'confirmed';
     let paymentMethod: 'card' | 'bank_wire' = isWire ? 'bank_wire' : 'card';
+    let confirmationEmailSent = false;
 
     // 1. If Stripe sessionId is present (cs_...) and stripeKey is configured
     if (sessionId && sessionId.startsWith('cs_') && stripeKey && !stripeKey.includes('fake')) {
@@ -206,9 +207,9 @@ export async function POST(req: NextRequest) {
       }
     }
 
-      // 4. Send official booking confirmation email
+      // 5. Send official booking confirmation email
       try {
-        await sendBookingConfirmationEmail({
+        const emailResult = await sendBookingConfirmationEmail({
           toEmail: resolvedEmail,
           customerName: resolvedName,
           tourTitle: resolvedTourTitle,
@@ -219,6 +220,7 @@ export async function POST(req: NextRequest) {
           guestsCount: resolvedGuests || (locale === 'es' ? '2 Viajeros' : '2 Travelers'),
           locale: locale || 'en',
         });
+        confirmationEmailSent = emailResult.sent;
       } catch (emailErr: any) {
         console.error('[verify-session] Email dispatch error:', emailErr);
       }
@@ -236,6 +238,10 @@ export async function POST(req: NextRequest) {
         travelDate: resolvedDate,
         guestsCount: resolvedGuests,
         paymentStatus,
+      },
+      emailDelivery: {
+        sent: confirmationEmailSent,
+        status: confirmationEmailSent ? 'sent' : 'failed',
       },
     });
   } catch (err: any) {
