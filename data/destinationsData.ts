@@ -31,6 +31,8 @@ export interface Destination {
   needsPhoto?: boolean;
   /** Fotos adicionales del lugar. Se muestran en una galeria bajo la portada. */
   gallery?: string[];
+  /** Anima la portada con ondulación de agua (WebGL) sobre la foto estática. */
+  waterEffect?: boolean;
   region: 'galapagos' | 'andes' | 'amazonia';
   image: string;
   mobileImage?: string;
@@ -398,6 +400,7 @@ export const DESTINATIONS: Destination[] = [
   {
     slug: 'amazonia-napo',
     heroIndex: 5,
+    waterEffect: true,
     region: 'amazonia',
     image: '/images/tours/16-9/amazon-nutria-16-9.webp',
     mobileImage: '/images/tours/9-16/amazon-nutria-9-16.webp',
@@ -505,7 +508,7 @@ export const DESTINATIONS: Destination[] = [
     ],
     wildlife: { es: 'El Cajas reúne 157 especies de aves y 44 de mamíferos: cóndor andino, colibrí gigante, oso de anteojos, tapir andino y el endémico ratón de agua del Cajas. Sobre los 3.300 metros crecen bosques enanos de Polylepis, el árbol de papel. Parque Nacional desde 1996, Humedal Ramsar desde 2002 y zona núcleo de la Reserva de Biosfera Macizo del Cajas desde 2013, con 28.544 hectáreas.', en: 'El Cajas holds 157 bird species and 44 mammals: Andean condor, giant hummingbird, spectacled bear, mountain tapir and the endemic Cajas water mouse. Above 3,300 metres grow dwarf forests of Polylepis, the paper tree. A National Park since 1996, a Ramsar wetland since 2002 and the core zone of the Macizo del Cajas Biosphere Reserve since 2013, across 28,544 hectares.', fr: 'El Cajas réunit 157 espèces d’oiseaux et 44 de mammifères: condor des Andes, colibri géant, ours à lunettes, tapir des Andes et le rat d’eau endémique du Cajas. Au-dessus de 3 300 mètres poussent des forêts naines de Polylepis, l’arbre de papier. Parc national depuis 1996, zone humide Ramsar depuis 2002 et zone centrale de la réserve de biosphère Macizo del Cajas depuis 2013, sur 28 544 hectares.', de: 'El Cajas vereint 157 Vogel- und 44 Säugetierarten: Andenkondor, Riesenkolibri, Brillenbär, Bergtapir und die endemische Cajas-Wassermaus. Über 3.300 Metern wachsen Zwergwälder aus Polylepis, dem Papierbaum. Nationalpark seit 1996, Ramsar-Feuchtgebiet seit 2002 und Kernzone des Biosphärenreservats Macizo del Cajas seit 2013, auf 28.544 Hektar.', it: 'El Cajas riunisce 157 specie di uccelli e 44 di mammiferi: condor andino, colibrì gigante, orso dagli occhiali, tapiro andino e l’endemico topo d’acqua del Cajas. Sopra i 3.300 metri crescono boschi nani di Polylepis, l’albero di carta. Parco Nazionale dal 1996, zona umida Ramsar dal 2002 e area centrale della Riserva della Biosfera Macizo del Cajas dal 2013, su 28.544 ettari.', pt: 'El Cajas reúne 157 espécies de aves e 44 de mamíferos: condor-dos-andes, colibri-gigante, urso-de-óculos, tapir-andino e o endémico rato-de-água do Cajas. Acima dos 3.300 metros crescem bosques anões de Polylepis, a árvore de papel. Parque Nacional desde 1996, zona húmida Ramsar desde 2002 e zona núcleo da Reserva da Biosfera Macizo del Cajas desde 2013, em 28.544 hectares.', ja: 'エル・カハスには157種の鳥類と44種の哺乳類が暮らします。アンデスコンドル、オオハチドリ、メガネグマ、アンデスバク、そして固有種のカハスミズネズミ。標高3,300メートルを超えると、紙の木と呼ばれるポリレピスの矮小林が広がります。1996年に国立公園、2002年にラムサール条約湿地、2013年にはユネスコのマシソ・デル・カハス生物圏保存地域の核心地域となり、面積は28,544ヘクタールに及びます。', zh: '埃尔卡哈斯栖息着157种鸟类与44种哺乳动物：安第斯神鹰、巨蜂鸟、眼镜熊、山貘，以及本地特有的卡哈斯水鼠。海拔3,300米以上生长着被称作纸树的波利莱皮斯矮林。1996年设为国家公园，2002年列入拉姆萨尔湿地，2013年成为卡哈斯山体生物圈保护区的核心区，面积达28,544公顷。' },
     tip: { es: 'De los 2.560 metros de Cuenca a más de 4.000 en el Cajas hay apenas cuarenta minutos de carretera: aclimate uno o dos días en la ciudad antes de caminar. El clima cambia en minutos, con niebla y riesgo real de hipotermia, y no conviene salirse de los senderos señalizados. El registro en las casetas de control es obligatorio al ingresar.', en: 'From 2,560 metres in Cuenca to over 4,000 in El Cajas is barely forty minutes of road: acclimatise a day or two in the city before walking. The weather turns in minutes, with fog and a real risk of hypothermia, and leaving the marked trails is unwise. Registering at the control huts on entry is mandatory.', fr: 'Des 2 560 mètres de Cuenca à plus de 4 000 dans le Cajas, il n’y a que quarante minutes de route: acclimatez-vous un ou deux jours en ville avant de marcher. Le temps change en quelques minutes, avec brouillard et risque réel d’hypothermie; ne quittez pas les sentiers balisés. L’enregistrement aux postes de contrôle est obligatoire à l’entrée.', de: 'Von 2.560 Metern in Cuenca auf über 4.000 im Cajas sind es knapp vierzig Minuten Fahrt: Akklimatisieren Sie sich ein bis zwei Tage in der Stadt, bevor Sie wandern. Das Wetter kippt in Minuten, mit Nebel und echtem Unterkühlungsrisiko; verlassen Sie die markierten Wege nicht. Die Anmeldung an den Kontrollhäuschen ist beim Eintritt Pflicht.', it: 'Dai 2.560 metri di Cuenca a oltre 4.000 nel Cajas ci sono appena quaranta minuti di strada: acclimatatevi uno o due giorni in città prima di camminare. Il tempo cambia in pochi minuti, con nebbia e rischio reale di ipotermia, e non conviene lasciare i sentieri segnalati. La registrazione alle casette di controllo è obbligatoria all’ingresso.', pt: 'Dos 2.560 metros de Cuenca a mais de 4.000 no Cajas há apenas quarenta minutos de estrada: aclimate um ou dois dias na cidade antes de caminhar. O clima muda em minutos, com neblina e risco real de hipotermia, e não convém sair das trilhas sinalizadas. O registo nas casetas de controlo é obrigatório à entrada.', ja: 'クエンカの2,560メートルからカハスの4,000メートル超までは、車でわずか四十分です。歩く前に市内で一日か二日、高度に体を慣らしてください。天候は数分で変わり、霧と低体温症の危険が現実にあります。標示された歩道から外れないこと。入園時には管理小屋での登録が義務づけられています。', zh: '从昆卡的2,560米到卡哈斯的4,000米以上，车程不过四十分钟：徒步之前请在城中适应一到两天。天气数分钟内即变，浓雾与低温症风险实实在在，切勿离开标示步道。入园时须在管理岗亭登记，此为强制规定。' },
-    gallery: ['/images/tours/16-9/parque-nacional-el-cajas-9-16.webp'],
+    gallery: ['/images/tours/16-9/parque-nacional-el-cajas-16-9.webp'],
     tourKeywords: ['cuenca', 'cajas', 'ingapirca', 'gualaceo'],
     relatedPosts: ['cuenca-colonial-and-cajas-national-park'],
   },
@@ -589,7 +592,6 @@ export const DESTINATIONS: Destination[] = [
     slug: 'papallacta',
     region: 'andes',
     image: '/images/tours/16-9/papallacta-laguna-16-9.webp',
-    mobileImage: '/images/tours/16-9/papallacta-laguna-16-9.webp',
     name: { es: 'Papallacta', en: 'Papallacta', fr: 'Papallacta', de: 'Papallacta', it: 'Papallacta', pt: 'Papallacta', ja: 'パパジャクタ', zh: '帕帕亚克塔' },
     tagline: { es: 'Termas geotérmicas a 3.300 metros, en el páramo del Cayambe-Coca', en: 'Geothermal hot springs at 3,300 metres, in the Cayambe-Coca páramo', fr: 'Sources thermales géothermiques à 3 300 mètres, dans le páramo du Cayambe-Coca', de: 'Geothermale Thermalquellen auf 3.300 Metern, im Páramo des Cayambe-Coca', it: 'Terme geotermiche a 3.300 metri, nel páramo del Cayambe-Coca', pt: 'Termas geotérmicas a 3.300 metros, no páramo do Cayambe-Coca', ja: '標高3,300メートル、カヤンベ・コカのパラモに湧く地熱温泉', zh: '海拔3300米，卡扬贝-科卡帕拉莫高原上的地热温泉' },
     intro: {
@@ -697,7 +699,6 @@ export const DESTINATIONS: Destination[] = [
     slug: 'antisana',
     region: 'andes',
     image: '/images/tours/16-9/antisana-16-9.webp',
-    mobileImage: '/images/tours/16-9/antisana-16-9.webp',
     name: { es: 'Antisana', en: 'Antisana', fr: 'Antisana', de: 'Antisana', it: 'Antisana', pt: 'Antisana', ja: 'アンティサナ', zh: '安蒂萨纳' },
     tagline: { es: 'Glaciar a 5.758 metros y uno de los mejores sitios del país para ver cóndor', en: 'A glacier at 5,758 metres and one of the best places in the country to see condors', fr: 'Un glacier à 5 758 mètres et l’un des meilleurs sites du pays pour le condor', de: 'Ein Gletscher auf 5.758 Metern und einer der besten Kondor-Orte des Landes', it: 'Un ghiacciaio a 5.758 metri e uno dei posti migliori del paese per il condor', pt: 'Um glaciar a 5.758 metros e um dos melhores sítios do país para ver condores', ja: '標高5,758メートルの氷河と、国内屈指のコンドル観察地', zh: '海拔5758米的冰川，也是全国最佳的神鹰观察地之一' },
     intro: {
