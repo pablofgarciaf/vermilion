@@ -112,8 +112,15 @@ export interface BookingRequest {
   message?: string;
   amountPaid?: number;
   paymentMethod?: 'card' | 'bank_wire' | 'paypal' | 'payoneer_wire';
-  paymentStatus?: 'confirmed' | 'pending_verification' | 'pending_payment';
+  paymentStatus?: 'paid' | 'payment_verified' | 'confirmed' | 'pending_verification' | 'pending_payment';
   transferRef?: string;
+  paymentProcessor?: 'stripe' | 'paypal' | 'bank_wire' | 'payoneer';
+  paymentProcessorOrderId?: string;
+  paymentProcessorCaptureId?: string;
+  paymentProcessorTransactionId?: string;
+  paymentVerificationStatus?: 'unverified' | 'verified';
+  paymentVerifiedAt?: string;
+  paymentVerifiedBy?: string;
   affiliateCode?: string;
   discountApplied?: boolean;
   receiptUrl?: string;

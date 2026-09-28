@@ -104,23 +104,27 @@
 }
 
 .hero-slider-title-gold {
-  color: #d8b65d;
+  color: #f2d16b;
   background: linear-gradient(
     180deg,
-    #fff4b0 0%,
-    #e4c269 20%,
-    #a96e16 43%,
-    #f2d477 59%,
-    #c18c2c 78%,
-    #85520c 100%
+    #fff9cf 0%,
+    #fff0a3 13%,
+    #f7cc54 29%,
+    #b77a12 46%,
+    #ffe889 56%,
+    #d7a329 70%,
+    #8f5b08 100%
   );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.72);
+  filter: saturate(1.28) brightness(1.1) contrast(1.2);
+  -webkit-text-stroke: 0.42px rgba(0, 0, 0, 0.78);
   text-shadow:
-    0 1px 1px rgba(0, 0, 0, 0.78),
-    0 2px 7px rgba(0, 0, 0, 0.38);
+    0 1px 0 rgba(255, 246, 181, 0.42),
+    0 2px 1px rgba(0, 0, 0, 0.82),
+    0 4px 8px rgba(0, 0, 0, 0.36),
+    0 0 9px rgba(255, 218, 92, 0.22);
 }
 
 /* Light Mode Luxury */

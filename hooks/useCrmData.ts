@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { db } from '@/lib/firebase';
+import { auth, db } from '@/lib/firebase';
 import { collection, doc, getDocs, getDoc, setDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 import {
   SystemUser,
@@ -107,6 +107,14 @@ const INITIAL_GENEALOGY: GenealogyNode = {
   status: 'active',
   children: [],
 };
+
+async function getAdminFetchHeaders() {
+  const token = await auth.currentUser?.getIdToken();
+  return {
+    'Content-Type': 'application/json',
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+}
 
 export function useCrmData() {
   const [users, setUsers] = useState<SystemUser[]>(INITIAL_USERS);
@@ -347,11 +355,11 @@ export function useCrmData() {
     setBookings((prev) =>
       prev.map((b) => (b.id === bookingId ? { ...b, ...updates } : b))
     );
-    fetch('/api/crm/bookings', {
+    getAdminFetchHeaders().then((headers) => fetch('/api/crm/bookings', {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ id: bookingId, updates }),
-    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
+    })).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
         await updateDoc(doc(db, 'bookings', bookingId), updates);
@@ -375,11 +383,11 @@ export function useCrmData() {
         affiliateCommissionStatus: b.affiliateCommissionStatus === 'paid' ? 'paid' : 'ready_for_review',
       } : b))
     );
-    fetch('/api/crm/bookings', {
+    getAdminFetchHeaders().then((headers) => fetch('/api/crm/bookings', {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ id: bookingId, updates }),
-    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
+    })).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
         await updateDoc(doc(db, 'bookings', bookingId), updates);
@@ -413,11 +421,11 @@ export function useCrmData() {
         };
       })
     );
-    fetch('/api/crm/bookings', {
+    getAdminFetchHeaders().then((headers) => fetch('/api/crm/bookings', {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ id: bookingId, updates: updatePayload }),
-    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
+    })).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
         await updateDoc(doc(db, 'bookings', bookingId), updatePayload);
@@ -436,11 +444,11 @@ export function useCrmData() {
         b.id === bookingId ? { ...b, ...updates } : b
       )
     );
-    fetch('/api/crm/bookings', {
+    getAdminFetchHeaders().then((headers) => fetch('/api/crm/bookings', {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ id: bookingId, updates }),
-    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
+    })).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
         await updateDoc(doc(db, 'bookings', bookingId), updates);
@@ -497,11 +505,11 @@ export function useCrmData() {
     setBookings((prev) =>
       prev.map((b) => (b.id === bookingId ? { ...b, ...updates } : b))
     );
-    fetch('/api/crm/bookings', {
+    getAdminFetchHeaders().then((headers) => fetch('/api/crm/bookings', {
       method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ id: bookingId, updates }),
-    }).catch((e) => console.warn('[useCrmData] API update notice:', e));
+    })).catch((e) => console.warn('[useCrmData] API update notice:', e));
     if (db) {
       try {
         await updateDoc(doc(db, 'bookings', bookingId), updates);

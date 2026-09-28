@@ -115,8 +115,12 @@ async function processSuccessfulCheckout(session: Stripe.Checkout.Session) {
       destination: 'Ecuador / Galapagos',
       amountPaid,
       paymentMethod: 'card',
-      paymentStatus: 'confirmed',
+      paymentStatus: 'paid',
       transferRef: typeof session.payment_intent === 'string' ? session.payment_intent : session.id,
+      paymentProcessor: 'stripe',
+      paymentProcessorOrderId: session.id,
+      paymentProcessorTransactionId: typeof session.payment_intent === 'string' ? session.payment_intent : session.id,
+      paymentVerificationStatus: 'unverified',
       affiliateCode,
       discountApplied: !!affiliateCode,
       status: 'confirmed',
@@ -157,4 +161,3 @@ async function processSuccessfulCheckout(session: Stripe.Checkout.Session) {
     console.error('[Stripe Webhook] Email dispatch error:', emailErr);
   }
 }
-

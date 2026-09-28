@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { BookingRequest } from '@/types';
 import { useBookingsData } from '@/hooks/useBookingsData';
+import { auth, db } from '@/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 import {
   Inbox,
   Search,
@@ -19,9 +21,34 @@ import {
 } from 'lucide-react';
 
 export function AdminBookingsTable() {
-  const { bookings, loading, updateStatus, deleteBooking } = useBookingsData();
+  const { bookings, loading, updateStatus, deleteBooking, updatePaymentVerification } = useBookingsData();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+
+  React.useEffect(() => {
+    let active = true;
+    const resolveRole = async () => {
+      const email = auth.currentUser?.email?.toLowerCase().trim();
+      const founder = email === 'pablofgarciaf@gmail.com' || email === 'info@vermilionroutes.com';
+      if (!email || founder) {
+        if (active) setIsSuperAdmin(Boolean(founder));
+        return;
+      }
+      try {
+        const snap = await getDoc(doc(db, 'usuarios', email));
+        const data = snap.data();
+        const roles = Array.isArray(data?.roles) ? data.roles.map((r: unknown) => String(r).toLowerCase()) : [];
+        if (active) setIsSuperAdmin(data?.role === 'super' || roles.includes('super'));
+      } catch {
+        if (active) setIsSuperAdmin(false);
+      }
+    };
+    resolveRole();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const filteredBookings = bookings.filter((b) => {
     const searchLower = searchTerm.toLowerCase();
@@ -83,6 +110,44 @@ export function AdminBookingsTable() {
             Archived / Cancelled
           </span>
         );
+    }
+  };
+
+  const getPaymentBadge = (booking: BookingRequest) => {
+    const isVerified = booking.paymentStatus === 'payment_verified' || booking.paymentVerificationStatus === 'verified';
+    const isPaid = isVerified || booking.paymentStatus === 'paid' || booking.paymentStatus === 'confirmed';
+
+    if (isVerified) {
+      return (
+        <span className="inline-flex items-center gap-1 text-emerald-300 bg-emerald-950/80 border border-emerald-600/70 px-2.5 py-0.5 rounded-full text-[10px] font-bold">
+          <CheckCircle className="w-3 h-3" />
+          Pago verificado
+        </span>
+      );
+    }
+
+    if (isPaid) {
+      return (
+        <span className="inline-flex items-center gap-1 text-amber-300 bg-amber-950/70 border border-amber-700/70 px-2.5 py-0.5 rounded-full text-[10px] font-bold">
+          <Clock className="w-3 h-3" />
+          Pagado
+        </span>
+      );
+    }
+
+    return (
+      <span className="inline-flex items-center gap-1 text-zinc-400 bg-zinc-900 border border-zinc-700 px-2.5 py-0.5 rounded-full text-[10px] font-bold">
+        <XCircle className="w-3 h-3" />
+        No pagado
+      </span>
+    );
+  };
+
+  const handlePaymentVerification = async (id: string, verified: boolean) => {
+    try {
+      await updatePaymentVerification(id, verified);
+    } catch (err: any) {
+      alert(err?.message || 'No se pudo actualizar la verificación de pago.');
     }
   };
 
@@ -214,6 +279,23 @@ export function AdminBookingsTable() {
                   <td className="p-4">
                     <div className="space-y-1">
                       {getStatusBadge(b.status)}
+                      {getPaymentBadge(b)}
+                      {(b.paymentProcessorCaptureId || b.paymentProcessorTransactionId || b.transferRef) && (
+                        <p className="max-w-[180px] truncate text-[10px] font-mono text-zinc-500" title={b.paymentProcessorCaptureId || b.paymentProcessorTransactionId || b.transferRef}>
+                          {b.paymentProcessorCaptureId || b.paymentProcessorTransactionId || b.transferRef}
+                        </p>
+                      )}
+                      {isSuperAdmin && (b.paymentStatus === 'paid' || b.paymentStatus === 'confirmed' || b.paymentStatus === 'payment_verified') && (
+                        <button
+                          type="button"
+                          onClick={() => handlePaymentVerification(b.id!, !(b.paymentStatus === 'payment_verified' || b.paymentVerificationStatus === 'verified'))}
+                          className="block bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-300 text-[10px] uppercase font-bold rounded-lg px-2 py-1.5 hover:border-emerald-500 cursor-pointer"
+                        >
+                          {b.paymentStatus === 'payment_verified' || b.paymentVerificationStatus === 'verified'
+                            ? 'Reabrir pago'
+                            : 'Verificar pago'}
+                        </button>
+                      )}
                       <select
                         value={b.status}
                         onChange={(e) =>

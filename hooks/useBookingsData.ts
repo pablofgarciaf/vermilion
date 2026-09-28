@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { BookingRequest } from '@/types';
 import { BookingRepository } from '@/lib/services/DatabaseService';
+import { auth } from '@/lib/firebase';
 
 export function useBookingsData() {
   const [bookings, setBookings] = useState<BookingRequest[]>([]);
@@ -51,6 +52,30 @@ export function useBookingsData() {
     }
   }, []);
 
+  const updatePaymentVerification = useCallback(async (id: string, verified: boolean) => {
+    try {
+      const token = await auth.currentUser?.getIdToken();
+      if (!token) throw new Error('Admin session is required.');
+
+      const res = await fetch('/api/admin/bookings/payment-verification', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ bookingId: id, verified }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) {
+        throw new Error(data.message || data.error || 'Payment verification failed.');
+      }
+    } catch (err: any) {
+      console.error('Failed to update payment verification:', err);
+      throw err;
+    }
+  }, []);
+
   const pendingCount = bookings.filter((b) => b.status === 'pending').length;
 
   return {
@@ -59,6 +84,7 @@ export function useBookingsData() {
     error,
     pendingCount,
     updateStatus,
-    deleteBooking
+    deleteBooking,
+    updatePaymentVerification
   };
 }

@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
     let resolvedRef = ref || `VR-${Date.now().toString().slice(-6)}`;
     let affiliateCode: string | undefined = bodyAffiliateCode || undefined;
     let isWire = sessionId?.startsWith('wire_') || bodyPaymentMethod === 'bank_wire';
-    let paymentStatus: 'confirmed' | 'pending_verification' = isWire ? 'pending_verification' : 'confirmed';
+    let paymentStatus: 'paid' | 'pending_verification' = isWire ? 'pending_verification' : 'paid';
     let paymentMethod: 'card' | 'bank_wire' = isWire ? 'bank_wire' : 'card';
     let confirmationEmailSent = false;
 
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
           resolvedGuests = session.metadata?.guestsCount || resolvedGuests;
           resolvedRef = session.metadata?.customLinkId || resolvedRef;
           affiliateCode = session.metadata?.affiliateCode || undefined;
-          paymentStatus = session.payment_status === 'paid' ? 'confirmed' : 'pending_verification';
+          paymentStatus = session.payment_status === 'paid' ? 'paid' : 'pending_verification';
           paymentMethod = 'card';
         }
       } catch (stripeErr: any) {
@@ -128,6 +128,10 @@ export async function POST(req: NextRequest) {
           paymentMethod,
           paymentStatus,
           transferRef: sessionId || resolvedRef,
+          paymentProcessor: paymentMethod === 'card' ? 'stripe' : 'bank_wire',
+          paymentProcessorOrderId: sessionId || undefined,
+          paymentProcessorTransactionId: sessionId || undefined,
+          paymentVerificationStatus: 'unverified',
           affiliateCode,
           discountApplied: !!affiliateCode,
           status: isWire ? 'pending' : 'confirmed',

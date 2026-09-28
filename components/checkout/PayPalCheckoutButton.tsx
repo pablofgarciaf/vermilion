@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { AlertCircle, Lock, ShieldCheck } from 'lucide-react';
-import { db } from '@/lib/firebase';
-import { doc, setDoc } from 'firebase/firestore';
 
 interface PayPalCheckoutButtonProps {
   amount: number;
@@ -98,39 +96,6 @@ export function PayPalCheckoutButton({
     ? bookingRef.trim()
     : `R-2026-1.1-${Date.now().toString().slice(-4)}`;
 
-  const saveBookingDirectly = async () => {
-    if (!db) return;
-    try {
-      await setDoc(doc(db, 'bookings', safeRef), {
-        id: safeRef,
-        refCode: safeRef,
-        bookingCode: safeRef,
-        tourId: tourId || 'custom',
-        tourTitle: tourTitle || 'Vermilion Routes Expedition',
-        customerName: safeName,
-        customerEmail: safeEmail,
-        customerPhone: clientPhone || '',
-        travelDates: travelDate || 'To be confirmed',
-        guestsCount: guestsCount || '1 Viajero',
-        passengersCount: passengersCount || 1,
-        destination: 'Ecuador & Galapagos',
-        locale: locale || 'en',
-        amountPaid: amount,
-        paidAmount: amount,
-        totalAmount: amount,
-        paymentMethod: 'paypal',
-        paymentStatus: 'confirmed',
-        status: 'confirmed',
-        affiliateCode: affiliateCode || undefined,
-        discountApplied: Boolean(affiliateCode),
-        sriInvoice: sriData ? { ...sriData, requested: true } : { requested: false },
-        createdAt: new Date().toISOString(),
-      }, { merge: true });
-    } catch (err) {
-      console.warn('[Direct Booking Persistence Notice]', err);
-    }
-  };
-
   const handleCreateOrder = async () => {
     try {
       const res = await fetch('/api/checkout/paypal/create-order', {
@@ -158,15 +123,14 @@ export function PayPalCheckoutButton({
       }
       return data.orderId;
     } catch (err: any) {
-      console.warn('[PayPal createOrder warning, using fallback ref]', err);
-      return `ORDER_${safeRef}_${Date.now()}`;
+      setErrorMessage(err?.message || t.errorInitiating);
+      throw err;
     }
   };
 
   const handleApprove = async (data: { orderID: string }) => {
     setIsCapturing(true);
     setErrorMessage(null);
-    await saveBookingDirectly();
 
     try {
       const res = await fetch('/api/checkout/paypal/capture-order', {
@@ -190,9 +154,13 @@ export function PayPalCheckoutButton({
       });
 
       const result = await res.json();
+      if (!res.ok || !result?.success) {
+        throw new Error(result?.message || result?.error || t.errorProcessing);
+      }
       onSuccess(result?.bookingRef || safeRef);
-    } catch {
-      onSuccess(safeRef);
+    } catch (err: any) {
+      setErrorMessage(err?.message || t.errorProcessing);
+      if (onError) onError(err);
     } finally {
       setIsCapturing(false);
     }

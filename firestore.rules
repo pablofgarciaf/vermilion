@@ -2,10 +2,66 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Helper: verifica que el usuario autenticado sea un usuario del sistema registrado
+    function signedIn() {
+      return request.auth != null && request.auth.token.email != null;
+    }
+
+    function userEmail() {
+      return request.auth.token.email;
+    }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/usuarios/$(userEmail()));
+    }
+
+    function isFounder() {
+      return signedIn()
+          && (userEmail() == 'pablofgarciaf@gmail.com'
+              || userEmail() == 'info@vermilionroutes.com');
+    }
+
+    function hasRole(role) {
+      return signedIn()
+          && (isFounder()
+                  || (exists(/databases/$(database)/documents/usuarios/$(userEmail()))
+                  && (userDoc().data.role == role
+                      || (userDoc().data.roles is list && userDoc().data.roles.hasAny([role])))));
+    }
+
     function isAdmin() {
-      return request.auth != null
-          && request.auth.token.email != null;
+      return hasRole('super') || hasRole('admin') || hasRole('editor') || hasRole('operator') || hasRole('financial');
+    }
+
+    function isSuperAdmin() {
+      return hasRole('super');
+    }
+
+    function validPublicBookingPayload() {
+      return request.resource.data.customerName is string
+          && request.resource.data.customerName.size() >= 2
+          && request.resource.data.customerEmail is string
+          && request.resource.data.customerEmail.matches(
+               '^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$'
+             )
+          && (!('paymentStatus' in request.resource.data)
+              || request.resource.data.paymentStatus in ['pending_payment', 'pending_verification'])
+          && (!('paymentVerificationStatus' in request.resource.data)
+              || request.resource.data.paymentVerificationStatus == 'unverified')
+          && !('paymentVerifiedAt' in request.resource.data)
+          && !('paymentVerifiedBy' in request.resource.data)
+          && !('paymentProcessorCaptureId' in request.resource.data)
+          && !('paymentProcessorTransactionId' in request.resource.data);
+    }
+
+    function touchesPaymentVerification() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasAny([
+        'paymentStatus',
+        'paymentVerificationStatus',
+        'paymentVerifiedAt',
+        'paymentVerifiedBy',
+        'paymentProcessorCaptureId',
+        'paymentProcessorTransactionId'
+      ]);
     }
 
 
@@ -24,12 +80,9 @@ service cloud.firestore {
     // Bookings: creación y actualización pública con validación de campos para checkout,
     // lectura y borrado protegidos solo para personal administrativo
     match /bookings/{bookingId} {
-      allow create, update: if request.resource.data.customerName is string
-                    && request.resource.data.customerName.size() >= 2
-                    && request.resource.data.customerEmail is string
-                    && request.resource.data.customerEmail.matches(
-                         '^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$'
-                       );
+      allow create: if isAdmin() || validPublicBookingPayload();
+      allow update: if isSuperAdmin()
+                    || (isAdmin() && !touchesPaymentVerification());
       allow read, delete: if isAdmin();
     }
 
@@ -80,9 +133,9 @@ service cloud.firestore {
 
     // Usuarios del sistema (super, admin, operator, editor)
     match /usuarios/{email} {
-      allow read: if true;
-      allow create, update: if true;
-      allow delete: if isAdmin();
+      allow read: if isAdmin() || (signedIn() && email == userEmail());
+      allow create, update: if isSuperAdmin() || hasRole('admin');
+      allow delete: if isSuperAdmin();
     }
 
     // Deny-by-default: cualquier otra colección/documento no listado es inaccesible

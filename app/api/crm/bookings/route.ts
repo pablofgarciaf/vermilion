@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { requireAdmin } from '@/lib/adminAuth';
 
 export const runtime = 'nodejs';
 
@@ -26,7 +27,10 @@ import { db, auth } from '@/lib/firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const admin = await requireAdmin(req);
+  if ('response' in admin) return admin.response;
+
   try {
     const list: any[] = [];
     const seen = new Set<string>();
@@ -99,6 +103,9 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const admin = await requireAdmin(req);
+  if ('response' in admin) return admin.response;
+
   try {
     const newBooking = await req.json();
     let bookings = getLocalBookings();
@@ -117,6 +124,9 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PATCH(req: NextRequest) {
+  const admin = await requireAdmin(req);
+  if ('response' in admin) return admin.response;
+
   try {
     const { id, updates } = await req.json();
     if (!id || !updates) {

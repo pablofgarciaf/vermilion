@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { requireAdmin } from '@/lib/adminAuth';
 
 export const runtime = 'nodejs';
 
 const DATA_FILE = path.join(process.cwd(), 'data', 'crm_bookings.json');
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const admin = await requireAdmin(req);
+  if ('response' in admin) return admin.response;
+
   try {
     if (fs.existsSync(DATA_FILE)) {
       const raw = fs.readFileSync(DATA_FILE, 'utf8');
@@ -20,6 +24,9 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
+  const admin = await requireAdmin(req);
+  if ('response' in admin) return admin.response;
+
   try {
     const newBooking = await req.json();
     let bookings: any[] = [];

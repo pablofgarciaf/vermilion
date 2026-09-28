@@ -36,6 +36,9 @@ export const POST = withValidation(paypalCaptureOrderSchema, async (_req, _ctx, 
     
     const officialAmount = capture?.amount?.value;
     const officialDescription = purchaseUnit?.description;
+    const paypalCaptureId = capture?.id;
+    const paypalOrderId = captureResult.id || data.orderId;
+    const processorReference = paypalCaptureId || paypalOrderId;
 
     const finalAmount = Number(officialAmount) || Number(data.amount) || 0;
     const finalTourTitle = officialDescription || data.tourTitle || 'Vermilion Routes Expedition';
@@ -68,8 +71,13 @@ export const POST = withValidation(paypalCaptureOrderSchema, async (_req, _ctx, 
       destination: 'Galapagos / Ecuador',
       amountPaid: finalAmount,
       paymentMethod: 'paypal',
-      paymentStatus: 'confirmed',
-      transferRef: `PayPal Order: ${data.orderId}`,
+      paymentStatus: 'paid',
+      transferRef: `PayPal Capture: ${processorReference}`,
+      paymentProcessor: 'paypal',
+      paymentProcessorOrderId: paypalOrderId,
+      paymentProcessorCaptureId: paypalCaptureId,
+      paymentProcessorTransactionId: processorReference,
+      paymentVerificationStatus: 'unverified',
       affiliateCode: data.affiliateCode || undefined,
       discountApplied: Boolean(data.affiliateCode),
       status: 'confirmed',
@@ -112,7 +120,8 @@ export const POST = withValidation(paypalCaptureOrderSchema, async (_req, _ctx, 
       success: true,
       status: 'COMPLETED',
       bookingRef,
-      orderId: data.orderId,
+      orderId: paypalOrderId,
+      captureId: paypalCaptureId,
     });
   } catch (error: any) {
     console.error('[PAYPAL_CAPTURE_ORDER_ERROR]', error);

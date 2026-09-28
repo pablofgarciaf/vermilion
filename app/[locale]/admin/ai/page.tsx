@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { auth } from '@/lib/firebase';
 
 interface Conversation {
   id: string;
@@ -33,7 +34,10 @@ export default function AIWhatsAppDashboard() {
   useEffect(() => {
     const fetchConversations = async () => {
       try {
-        const res = await fetch('/api/admin/ai-conversations');
+        const token = await auth.currentUser?.getIdToken();
+        const res = await fetch('/api/admin/ai-conversations', {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        });
         if (!res.ok) throw new Error('Failed to fetch');
         const data = await res.json();
         setConversations(data.conversations || []);
