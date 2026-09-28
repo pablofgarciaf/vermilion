@@ -245,17 +245,18 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
       (window as any).jumpToSlide = (targetIdx: number) => {
         if (transitioning) return;
         if (order[0] === targetIdx) return;
+        if (order.indexOf(targetIdx) < 0) return;
         (window as any).__loadAllHeroThumbnails?.();
         playSlideSound();
         if (loopTimeline) loopTimeline.kill();
 
-        const currentPos = order.indexOf(targetIdx);
-        if (currentPos > 0) {
-          order = [...order.slice(currentPos), ...order.slice(0, currentPos)];
-          step('jump').then(() => {
-            if (!isCancelled) startLoop();
-          });
-        }
+        // La reordenacion de `order` ocurre dentro de step() (igual que 'next'/'prev'),
+        // para que prevActive se capture ANTES de mover el objetivo al frente. Hacerlo
+        // aqui duplicaba la mutacion y dejaba la tarjeta anterior atascada a pantalla
+        // completa, ya que prevActive terminaba siendo igual al nuevo activo.
+        step('jump', targetIdx).then(() => {
+          if (!isCancelled) startLoop();
+        });
       };
 
       const TORTUGAS_ORIGINAL = {
@@ -292,7 +293,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
         }
       }
 
-      function step(dir: 'next' | 'prev' | 'jump' = 'next') {
+      function step(dir: 'next' | 'prev' | 'jump' = 'next', targetIdx?: number) {
         return new Promise<void>((resolve) => {
           if (isCancelled) { resolve(); return; }
           transitioning = true;
@@ -301,6 +302,11 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
 
           if (dir === 'prev') {
             order.unshift(order.pop() as number);
+          } else if (dir === 'jump' && typeof targetIdx === 'number') {
+            const currentPos = order.indexOf(targetIdx);
+            if (currentPos > 0) {
+              order = [...order.slice(currentPos), ...order.slice(0, currentPos)];
+            }
           } else if (dir === 'next') {
             order.push(order.shift() as number);
           }

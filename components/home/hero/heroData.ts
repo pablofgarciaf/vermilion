@@ -24,14 +24,14 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     title: { en: 'OLD TOWN', es: 'CENTRO HISTÓRICO', fr: 'CENTRE HISTORIQUE', de: 'HISTORISCHES ZENTRUM', it: 'CENTRO STORICO', pt: 'CENTRO HISTÓRICO', ja: '世界遺産の歴史的', zh: '世界文化遗产' },
     title2: { en: 'QUITO', es: 'DE QUITO', fr: 'DE QUITO', de: 'VON QUITO', it: 'DI QUITO', pt: 'DE QUITO', ja: 'キト旧市街', zh: '基多古城' },
     description: {
-      en: 'The first UNESCO World Cultural Heritage site in the world. Walk along preserved cobblestone streets and marvel at the golden altars of La Compañía Church.',
-      es: 'El primer sitio Patrimonio Cultural de la Humanidad por la UNESCO. Recorre calles coloniales empedradas y admira los templos dorados de La Compañía.',
-      fr: 'Le premier site du patrimoine mondial de l\'UNESCO. Promenez-vous dans des rues pavées et admirez les retables dorés de l\'église de la Compañía.',
-      de: 'Das erste UNESCO-Weltkulturerbe der Welt. Spazieren Sie durch koloniale Kopfsteinpflastergassen und bewundern Sie die vergoldeten Altäre der Kirche La Compañía.',
-      it: 'Il primo sito patrimonio mondiale UNESCO al mondo. Cammina lungo strade acciottolate e admira gli altari dorati della Chiesa de La Compañía.',
-      pt: 'O primeiro local do Patrimônio Mundial da UNESCO. Caminhe por ruas coloniais e admire os altares dourados da Igreja de La Compañía.',
-      ja: '世界初の世界文化遺産。保存状態の良い石畳の街並みを歩き、黄金色に輝くラ・コンパニーア教会の祭壇に驚嘆してください。',
-      zh: '全球首个联合国教科文组织世界文化遗产。漫步在鹅卵石古街，赞叹拉孔帕尼亚教堂富丽堂皇的金箔祭坛。'
+      en: "Feel the embrace of the Andes, guardian of Latin America's best-preserved Historic Center. Walk cobblestone streets and marvel at the golden baroque altars of La Compañía, in the world's first UNESCO World Heritage city.",
+      es: 'Siente el abrazo de los Andes, guardianes del centro histórico mejor conservado de América Latina. Recorre calles empedradas y admira los altares barrocos de oro de La Compañía, en la primera ciudad Patrimonio de la Humanidad del planeta.',
+      fr: 'Sentez l\'étreinte des Andes, gardiennes du centre historique le mieux préservé d\'Amérique latine. Flânez dans les rues pavées et admirez les autels baroques dorés de la Compañía, dans la première ville du patrimoine mondial de l\'UNESCO.',
+      de: 'Spüren Sie die Umarmung der Anden, Wächter des besterhaltenen Kolonialzentrums Lateinamerikas. Spazieren Sie durch Kopfsteinpflastergassen und bewundern Sie die vergoldeten Barockaltäre der Kirche La Compañía, in der ersten UNESCO-Welterbestadt der Welt.',
+      it: 'Senti l\'abbraccio delle Ande, custodi del centro storico meglio conservato dell\'America Latina. Cammina tra le strade acciottolate e ammira gli altari barocchi dorati della Compañía, nella prima città Patrimonio dell\'Umanità UNESCO al mondo.',
+      pt: 'Sinta o abraço dos Andes, guardiões do centro histórico mais bem preservado da América Latina. Caminhe por ruas de pedra e admire os altares barrocos dourados da Compañía, na primeira cidade Patrimônio da Humanidade da UNESCO.',
+      ja: 'アンデスの抱擁を感じてください。ラテンアメリカで最も保存状態の良い歴史地区を守る山々に抱かれたキト。石畳の街を歩き、ラ・コンパニーア教会の黄金のバロック祭壇に息をのむ、世界初のユネスコ世界遺産都市。',
+      zh: '感受安第斯山脉的拥抱——守护着拉丁美洲保存最完好历史中心的群山。漫步鹅卵石街道，惊叹拉孔帕尼亚教堂金碧辉煌的巴洛克祭坛，这里是世界首个联合国教科文组织世界遗产之城。'
     },
     image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
     desktopImage: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',

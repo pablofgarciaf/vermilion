@@ -475,14 +475,14 @@ export const BLOG_POSTS: BlogPost[] = [
       "zh": "基多：世界首个联合国文化遗产古城与安第斯之巅"
     },
     "subtitle": {
-      "en": "From gilded baroque basilicas to the equator line at Middle of the World, explore the architectural, artistic, and culinary crown of the Andes.",
-      "es": "Desde basílicas barrocas doradas hasta la línea ecuatorial en la Mitad del Mundo, descubre la corona arquitectónica, artística y culinaria de los Andes.",
-      "fr": "Des églises baroques dorées à la ligne équatoriale du Milieu du Monde, découvrez le joyau architectural et artistique des Andes.",
-      "de": "Von vergoldeten Barockkirchen bis zur Äquatorlinie in der Mitte der Welt: Entdecken Sie Amerikas besterhaltenes historisches Zentrum.",
-      "it": "Dalle basiliche barocche dorate alla linea equatoriale della Metà del Mondo, scopri il cuore architettonico e culinario delle Ande.",
-      "pt": "De basílicas barrocas folheadas a ouro à linha equatorial na Metade do Mundo, explore o coração arquitetônico e culinário dos Andes.",
-      "ja": "金箔に輝くバロック寺院から赤道直下の「世界の中心」まで。南米屈指の歴史地区と美食文化を探訪。",
-      "zh": "从金碧辉煌的巴洛克大教堂到赤道零度“世界中心”，领略美洲保存最完好、最具文化深度的古老名城。"
+      "en": "Feel the embrace of the Andes, guardian of Latin America's best-preserved Historic Center — from gilded baroque basilicas to the equator line at Middle of the World.",
+      "es": "Siente el abrazo de los Andes, guardianes del centro histórico mejor conservado de América Latina, desde basílicas barrocas doradas hasta la línea ecuatorial en la Mitad del Mundo.",
+      "fr": "Sentez l'étreinte des Andes, gardiennes du centre historique le mieux préservé d'Amérique latine, des basiliques baroques dorées à la ligne équatoriale du Milieu du Monde.",
+      "de": "Spüren Sie die Umarmung der Anden, Wächter des besterhaltenen historischen Zentrums Lateinamerikas — von vergoldeten Barockkirchen bis zur Äquatorlinie in der Mitte der Welt.",
+      "it": "Senti l'abbraccio delle Ande, custodi del centro storico meglio conservato dell'America Latina, dalle basiliche barocche dorate alla linea equatoriale della Metà del Mondo.",
+      "pt": "Sinta o abraço dos Andes, guardiões do centro histórico mais bem preservado da América Latina, de basílicas barrocas douradas à linha equatorial na Metade do Mundo.",
+      "ja": "アンデスの抱擁を感じ、ラテンアメリカ随一の歴史地区へ。金箔輝くバロック聖堂から赤道直下の「世界の中心」まで。",
+      "zh": "感受安第斯的拥抱，探索拉丁美洲保存最完好的历史中心——从金碧辉煌的巴洛克教堂到赤道零度的“世界中心”。"
     },
     "excerpt": {
       "en": "The first UNESCO World Cultural Heritage city in 1978. Marvel at seven tons of gold leaf in La Compañía, colonial plazas, and latitude 0°0'0\" physics.",
