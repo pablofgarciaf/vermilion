@@ -2287,7 +2287,7 @@ const multiDayTours: Tour[] = [
     price3Star: 1190,
     price4Star: 1750,
     imageUrl: '/images/tours/16-9/amazon-cuyabeno-16-9.webp',
-    mobileImage: '/images/tours/9-16/amazon-waterfull-9-16.webp',
+    mobileImage: '/images/tours/9-16/amazon-nutria-9-16.webp',
     desktopImage: '/images/tours/16-9/amazon-cuyabeno-16-9.webp',
     gallery: [
       '/images/tours/16-9/amazon-river-16-9.webp',
