@@ -85,6 +85,44 @@
     0 0 1px rgba(0, 0, 0, 0.85);
 }
 
+/* Hero slider typography: a near-invisible dark keyline keeps the large
+   letterforms legible over changing photography without looking outlined. */
+.hero-slider-title-text,
+.hero-slider-title-gold {
+  display: inline-block;
+  paint-order: stroke fill;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.hero-slider-title-text {
+  color: #ffffff;
+  -webkit-text-stroke: 0.4px rgba(0, 0, 0, 0.68);
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.72),
+    0 2px 6px rgba(0, 0, 0, 0.34);
+}
+
+.hero-slider-title-gold {
+  color: #d8b65d;
+  background: linear-gradient(
+    180deg,
+    #fff4b0 0%,
+    #e4c269 20%,
+    #a96e16 43%,
+    #f2d477 59%,
+    #c18c2c 78%,
+    #85520c 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.45px rgba(0, 0, 0, 0.72);
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.78),
+    0 2px 7px rgba(0, 0, 0, 0.38);
+}
+
 /* Light Mode Luxury */
 .theme-luxury {
   --background: #FAFAF5 !important;

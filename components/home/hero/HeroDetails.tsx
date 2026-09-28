@@ -104,14 +104,14 @@ export function getStandardTemplateHTML(slide: SlideData, locale: string): strin
     </div>
 
     <div class="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-      <h2 class="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left text-white" style="text-shadow: 0px 2px 4px rgba(0,0,0,0.8), 0px 0px 2px rgba(0,0,0,0.6);">
-        <span class="notranslate">${title}</span>
+      <h2 class="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+        <span class="notranslate hero-slider-title-text">${title}</span>
       </h2>
     </div>
 
     <div class="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-      <h3 class="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight text-[#C9A961] whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left" style="text-shadow: 0px 2px 4px rgba(0,0,0,0.8), 0px 0px 2px rgba(0,0,0,0.6);">
-        <span class="notranslate">${title2}</span>
+      <h3 class="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+        <span class="notranslate hero-slider-title-gold">${title2}</span>
       </h3>
     </div>
 
@@ -228,15 +228,15 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
 
                 {/* Line 1 (title - h2 tour slide title) */}
                 <div className="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-                  <h2 className="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
-                    <span className="notranslate"></span>
+                  <h2 className="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+                    <span className="notranslate hero-slider-title-text"></span>
                   </h2>
                 </div>
 
                 {/* Line 2 (title2 - h3 tour slide subtitle) */}
                 <div className="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-                  <h3 className="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight text-[#C9A961] drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
-                    <span className="notranslate"></span>
+                  <h3 className="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+                    <span className="notranslate hero-slider-title-gold"></span>
                   </h3>
                 </div>
 
