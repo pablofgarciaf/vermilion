@@ -199,6 +199,8 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
     if (combined.includes('grietas') || combined.includes('puerto ayora')) return '/images/tours/16-9/galapagos-las-grietas-16-9.webp';
     if (combined.includes('baltra')) return '/images/tours/16-9/galapagos-baltra-island-16-9.webp';
     if (combined.includes('santa fe') || combined.includes('lobo marino') || combined.includes('sea lion')) return '/images/tours/16-9/santa-fe-island-16-9.webp';
+    // No verified photo exists for these locations: omit the image rather than show an unrelated one.
+    if (combined.includes('guayaquil')) return '';
     return '/images/tours/16-9/chimborazo-volcano-16-9.webp';
   };
 

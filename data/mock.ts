@@ -2650,14 +2650,13 @@ const multiDayTours: Tour[] = [
     mobileImage: '/images/tours/9-16/quito-centro-historico.webp',
     desktopImage: '/images/tours/16-9/quito-colonial-16-9.webp',
     gallery: [
-      '/images/tours/16-9/cuenca-colonial-16-9.webp',
-      '/images/tours/16-9/guayaquil-16-9.webp',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
-      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
+      '/images/tours/16-9/quito-colonial-16-9.webp',
+      '/images/tours/16-9/otavalo-market-16-9.webp',
+      '/images/tours/16-9/mitad-del-mundo-16-9.webp',
+      '/images/tours/16-9/pailon-del-diablo-16-9.webp',
       '/images/tours/16-9/chimborazo-volcano-16-9.webp',
-      '/images/tours/16-9/otavalo-market-16-9.webp',
-      '/images/tours/16-9/otavalo-market-16-9.webp',
-      '/images/tours/16-9/quito-colonial-16-9.webp'
+      '/images/tours/16-9/cuenca-colonial-16-9.webp',
+      '/images/tours/16-9/parque-nacional-el-cajas-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 45,
@@ -2817,7 +2816,6 @@ const multiDayTours: Tour[] = [
           en: 'Private transfer to José Joaquín de Olmedo International Airport in Guayaquil for your onward flight or connection to the Galápagos Islands.\n\nEnd of the Ecuador Fantastic journey.',
           es: 'Traslado privado al Aeropuerto Internacional José Joaquín de Olmedo en Guayaquil para su vuelo internacional o conexión a Galápagos. Fin del viaje.'
         },
-        image: '/images/tours/16-9/guayaquil-16-9.webp',
         transportation: { en: 'Private airport transfer', es: 'Traslado privado al aeropuerto' }
       }
     ]
