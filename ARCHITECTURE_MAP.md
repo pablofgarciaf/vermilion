@@ -1198,138 +1198,460 @@ Vermilion Routes implementa un modelo de comisiones de dos vertientes:
 
 
 
-## 9. CRM IA & WhatsApp Business API Integration
+## 9. Agentes IA Integrados: Codex, Antigravity, Hermes, OpenClaw
 
-### 9.1 Arquitectura General
-El sistema integra WhatsApp Business API con el CRM de Vermilion Routes mediante un webhook serverless en Vercel, orquestado por Hermes (plugin `agency-agents-router`) que delega a 279 agentes especializados.
+> **Nota de Arquitectura:** Los 4 agentes IA son orquestadores de alto nivel que leen este mapa (ARCHITECTURE_MAP.md) para entender la estructura de Vermilion Routes y ejecutar modificaciones específicas en código, Firestore y configuración. **Cada agente debe interpretar este mapa antes de actuar.** Las secciones 9.1-9.4 definen puntos de ataque específicos y flujos autorizados.
 
-```mermaid
-flowchart LR
-    User[Usuario WhatsApp] -->|Mensaje| Webhook[POST /api/webhook/whatsapp]
-    Webhook -->|Validar Signature| Firebase[(Firestore Admin SDK)]
-    Firebase -->|Buscar booking/lead/affiliate| Parent[Doc Padre]
-    Parent -->|Guardar mensaje| Messages[Subcolección messages]
-    Parent -->|Actualizar estado| State[conversation_state]
-    Messages --> Classifier[Clasificador Intención]
-    Classifier --> Router[agency_agents_router]
-    Router --> Agent[Agente Especialista]
-    Agent -->|Respuesta| WhatsApp[WhatsApp API]
-    Agent -->|Escalar| Human[Notificación Humano]
-```
+### 9.1 CODEX — Orquestación de Código y Generación de Scripts
 
-### 9.2 Endpoints
-| Endpoint | Método | Propósito |
-|----------|--------|-----------|
-| `/api/webhook/whatsapp` | GET | Verificación Meta (hub.challenge) |
-| `/api/webhook/whatsapp` | POST | Recibir mensajes, statuses, reactions |
+**Propósito:** Generador de código bajo demanda. Lee patrones en el ARCHITECTURE_MAP y genera scripts, consultas SQL, funciones de validación y lógica empresarial.
 
-### 9.3 Esquema de Datos Firestore
+**Puntos de Ataque en Arquitectura:**
 
-#### Documento Padre (booking/lead/affiliate/usuario)
-```typescript
-interface ConversationState {
-  conversation_state: 'ai_active' | 'human_needed' | 'closed' | 'waiting_user';
-  last_message_at: Timestamp;
-  last_message_preview: string;
-  last_message_from: 'user' | 'assistant';
-  unread_count: number;
-  needs_human_review: boolean;
-  ai_metrics: {
-    resolved_count: number;
-    escalated_count: number;
-    avg_confidence: number;
-    last_ai_response_at: Timestamp;
-  };
-}
-```
+| Ubicación | Caso de Uso | Entrada (Input) | Salida (Output) |
+|:---|:---|:---|:---|
+| **`components/crm/SalesKanban.tsx`** (Línea ~193) | Enriquecimiento automático de leads en Kanban | `leadId`, `destinationPreference`, `locale` | `notes?: string` → `leads/{leadId}` en Firestore |
+| **`lib/bookings.ts`** (Funciones de negocio) | Generación de lógica de cálculo de comisiones | `booking`, `affiliateStructure` | Código TypeScript para `calculateCommissions()` |
+| **`components/crm/FinanceDashboard.tsx`** | Consultas dinámicas de reportes P&L | `metricType: 'revenue' \| 'conversion' \| 'commissions'` | Consulta Firestore optimizada |
+| **Plantillas WhatsApp** | Generación de mensajes personalizados para cada idioma | Template ID + variables de booking | Mensaje localizado → `/api/webhook/whatsapp` |
 
-#### Subcolección `messages/{messageId}`
-```typescript
-interface WhatsAppMessage {
-  role: 'user' | 'assistant' | 'system';
-  content: string;
-  timestamp: Timestamp;
-  agent_slug: string;
-  confidence: number;
-  intent: 'quote' | 'complaint' | 'confirmation' | 'booking_change' | 'payment' | 'info' | 'other';
-  whatsapp_msg_id: string;
-  phone_number_id: string;
-  interactive_type?: string;
-}
-```
+**Webhooks y Endpoints:**
+- `POST /api/codex/generate-code` — Solicita generación de código
+  ```typescript
+  {
+    "context": "sales_lead_enrichment | crm_rule | financial_query",
+    "prompt": "Genera una descripción de 2 párrafos para un prospecto de USA...",
+    "locale": "es" | "en" | "de",
+    "maxTokens": 500
+  }
+  ```
 
-### 9.4 Clasificación de Intención
-Sistema basado en patrones regex con 7 categorías:
-| Intención | Patrones clave | Agente por defecto |
-|-----------|----------------|-------------------|
-| `quote` | cotiza, precio, presupuesto, quiero viajar | `sales-discovery-coach` |
-| `complaint` | problema, queja, malo, retraso | `support-support-responder` |
-| `confirmation` | confirmo, ok, pagado, pagué | `sales-deal-strategist` |
-| `booking_change` | cambiar, reprogramar, cancelar | `sales-deal-strategist` |
-| `payment` | pagar, transferencia, comprobante | `support-support-responder` |
-| `info` | horario, dónde, incluye, cómo | `sales-discovery-coach` |
-| `other` | - | `support-support-responder` |
+**Variables de Entorno:**
+- `GITHUB_COPILOT_TOKEN` — Autenticación a GitHub Copilot API
 
-### 9.5 Escalación Humana Automática
-**Triggers:**
-- Confianza < 0.5
-- Palabras clave: "humano", "gerente", "reclamo", "demanda", "abogado"
-- Flag `needs_human_review: true` en doc padre
-
-**Acción:**
-1. `conversation_state` → `human_needed`
-2. Notificación en `/admin?tab=ai` (badge rojo + sonido)
-3. Opcional: Email/Slack a equipo Concierge
-4. IA deja de responder hasta que humano tome control (`Tomar Control` button)
-
-### 9.6 Dashboard `/admin?tab=ai`
-**Métricas en tiempo real:**
-- Conversaciones IA activa / Escaladas / Cerradas
-- Confianza promedio del sistema
-- Tiempo medio de respuesta
-- % Resuelto por IA vs Escalado
-
-**Tabla de conversaciones con:**
-- Filtros por estado
-- Vista previa último mensaje
-- Barra de confianza por conversación
-- Botones: `Tomar Control` | `Ver Chat` | `Cerrar`
-
-### 9.7 Variables de Entorno Requeridas (Vercel)
-| Variable | Descripción |
-|----------|-------------|
-| `FIREBASE_PROJECT_ID` | Firebase project ID |
-| `FIREBASE_CLIENT_EMAIL` | Service account client email |
-| `FIREBASE_PRIVATE_KEY` | Private key (con `\n` escapados) |
-| `WHATSAPP_TOKEN` | Meta Business API token |
-| `WHATSAPP_VERIFY_TOKEN` | Token verificación webhook |
-| `WHATSAPP_APP_SECRET` | Para validar X-Hub-Signature-256 |
-| `WHATSAPP_PHONE_NUMBER_ID` | Meta phone number ID |
-
-### 9.8 Seguridad
-- Validación obligatoria `X-Hub-Signature-256` (HMAC SHA256 con `WHATSAPP_APP_SECRET`)
-- Rate limiting heredado de `proxy.ts` (10 req/min para `/api/webhook/*`)
-- Ventana 24h WhatsApp: solo plantillas aprobadas fuera de ventana
-- Sanitización de entrada via `lib/validation.ts` (Zod + honeypot)
-
-### 9.9 Agentes Especializados Involucrados
-| Agente | Slug | Rol en WhatsApp |
-|--------|------|----------------|
-| Sales Discovery Coach | `sales-discovery-coach` | Cotizaciones, info general, nuevos leads |
-| Support Responder | `support-support-responder` | Quejas, pagos, soporte post-venta |
-| Sales Deal Strategist | `sales-deal-strategist` | Cambios reserva, confirmaciones, cierres |
-| Human Escalation | `human-escalation` | Notifica a equipo Concierge/Admin |
-
-### 9.10 Próximos Pasos (Roadmap)
-- [ ] Integración n8n para flujos complejos
-- [ ] Análisis de sentimiento en tiempo real
-- [ ] Plantillas WhatsApp dinámicas por agente
-- [ ] Métricas de satisfacción (CSAT) post-chat
-- [ ] Multi-agente colaborativo (handoff IA-IA)
+**Restricciones de Seguridad:**
+- ⚠️ JAMÁS modificar `/data/destinationsData.ts`, `/data/mock.ts` u otros archivos de datos maestros
+- ⚠️ JAMÁS usar regex codicioso sobre arrays o documentos Firestore
+- ✅ Solo escribir en campos específicos: `lead.notes`, `booking.operatorNotes`, `commissions.description`
 
 ---
 
-## 7. Bitácora de Evolución del Plano (Changelog)
+### 9.2 ANTIGRAVITY — Motor de Orquestación de Workflows Asincónicos
+
+**Propósito:** Orquestador serverless que maneja workflows complejos, encadena tareas entre agentes, reintentos automáticos y persiste estados de ejecución.
+
+**Workflows Activos en Vermilion:**
+
+#### Workflow 1: `payment-confirmation` (Línea ~800 en Firestore logs)
+**Triggerador:** `bookings.paymentStatus === 'confirmed'`  
+**Paso 1:** Lee booking en `bookings/{bookingId}`  
+**Paso 2:** Invoca Codex para calcular comisiones → obtiene `{ affiliateAmount, operatorAmount }`  
+**Paso 3:** Crea documentos en `commissions/{affiliateId}_{bookingId}` con `status: 'pending'`  
+**Paso 4:** Invoca Hermes para notificar embajador vía WhatsApp  
+**Paso 5:** Escribe log en `workflow_logs/{workflowId}`
+
+```yaml
+# Archivo concepto: workflows/payment-confirmation.yaml
+name: "Payment Confirmation & Commission Distribution"
+trigger: "firestore:bookings.paymentStatus === 'confirmed'"
+steps:
+  - id: "step_1_verify_payment"
+    action: "firestore:read"
+    resource: "bookings/{bookingId}"
+    output: "booking"
+  
+  - id: "step_2_calculate_commissions"
+    action: "codex:generate-code"
+    input:
+      context: "commission_calculation"
+      prompt: "Calcula comisión para {{booking.tourTitle}}"
+    output: "commissions"
+  
+  - id: "step_3_create_commission_records"
+    action: "firestore:batch-write"
+    data:
+      - collection: "commissions"
+        doc: "{{booking.affiliateId}}_{{bookingId}}"
+        fields:
+          bookingId: "{{booking.id}}"
+          amount: "{{commissions.affiliateAmount}}"
+          status: "pending"
+          createdAt: "{{now()}}"
+  
+  - id: "step_4_notify_affiliate"
+    action: "hermes:send-message"
+    recipient: "{{booking.affiliateId}}"
+    template: "commission_earned"
+    variables:
+      amount: "{{commissions.affiliateAmount}}"
+      tourTitle: "{{booking.tourTitle}}"
+  
+  - id: "step_5_log_completion"
+    action: "firestore:write"
+    resource: "workflow_logs/{{workflowId}}"
+    data:
+      completedAt: "{{now()}}"
+      status: "success"
+```
+
+#### Workflow 2: `daily-run-sheet-checkin` (Scheduler: `0 8 * * *` = 8 AM diarios)
+**Triggerador:** Cron automático  
+**Paso 1:** Query en `bookings` donde `status === 'in_operation'`  
+**Paso 2:** Para cada viaje activo, invoca OpenClaw para marcar check-in del día  
+**Paso 3:** Invoca Hermes para notificar al operador sobre actividades del día  
+**Paso 4:** Escribe telemetría en `run_sheet_logs`
+
+**Configuración en Codebase:**
+- Archivo: `lib/antigravity.ts` (nuevo archivo a crear)
+```typescript
+export const AntigravityConfig = {
+  baseURL: process.env.ANTIGRAVITY_API_URL,
+  apiKey: process.env.ANTIGRAVITY_API_KEY,
+  retryPolicy: { maxRetries: 3, backoffMs: 2000, timeoutMs: 30000 },
+  logging: { verbose: process.env.NODE_ENV === 'development', destination: 'firestore:workflow_logs' }
+};
+
+export const triggerWorkflow = async (workflowName: string, payload: any) => {
+  const response = await fetch(`${AntigravityConfig.baseURL}/workflows/${workflowName}/trigger`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${AntigravityConfig.apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+  return response.json();
+};
+```
+
+**Variables de Entorno:**
+- `ANTIGRAVITY_API_URL` — `"https://api.antigravity.run"`
+- `ANTIGRAVITY_API_KEY` — Bearer token para autenticación
+- `ANTIGRAVITY_WEBHOOK_SECRET` — Para validar webhooks de retorno
+
+**Rate Limits:**
+- 1,000 workflows ejecutados por día
+- 5 reintentos máximos por workflow fallido
+
+---
+
+### 9.3 HERMES — Asistente Conversacional Multilingüe (OpenAI ChatGPT-4 Turbo)
+
+**Propósito:** Agente de conversación ultra-lujo. Responde consultas 24/7 en 8 idiomas, genera recomendaciones personalizadas y enriquece leads.
+
+**Canales de Interacción:**
+
+#### Canal 1: WhatsApp Business API (`/api/webhook/whatsapp`)
+**Archivo:** `app/api/webhook/whatsapp/route.ts`  
+**Flujo:**
+1. Usuario envía mensaje → Webhook recibe POST
+2. Valida signature con `X-Hub-Signature-256`
+3. Clasifica intención del mensaje (quote, complaint, confirmation, etc.)
+4. Invoca Hermes con contexto de booking/lead
+5. Hermes retorna respuesta → se envía vía WhatsApp API
+
+**Tipos de Intención:**
+| Intención | Regex Pattern | Agente/Respuesta |
+|:---|:---|:---|
+| `quote` | `cotiza\|precio\|presupuesto\|quiero viajar` | Recomendación de tours |
+| `complaint` | `problema\|queja\|malo\|retraso` | Escalación a `support-responder` |
+| `confirmation` | `confirmo\|ok\|pagado\|pagué` | Confirmación de booking |
+| `booking_change` | `cambiar\|reprogramar\|cancelar` | Gestión de cambios |
+| `payment` | `pagar\|transferencia\|comprobante` | Guía de pago |
+
+#### Canal 2: Cotizador VIP en `/[locale]/checkout`
+**Archivo:** `components/checkout/QuoteGeneratorModal.tsx`  
+**Evento:** Usuario hace clic en "✨ Generar Cotización Personalizada"  
+**Request:**
+```typescript
+POST /api/concierge/generate-quote
+{
+  "customerName": "Sarah Johnson",
+  "passengersCount": 5,
+  "estimatedBudget": 50000,
+  "preferences": "Luxury lodges, private yacht, gourmet dining, adventure",
+  "travelDates": "2026-12-15 to 2026-12-25",
+  "locale": "en"
+}
+```
+**Response:**
+```json
+{
+  "quotation": {
+    "title": "Ecuador & Galápagos Grand Tour – 10 Days",
+    "days": [
+      {
+        "day": 1,
+        "title": "Quito Historical Center",
+        "activities": "Casa Gangotena, Plaza San Francisco...",
+        "accommodation": "Casa Gangotena (Relais & Châteaux)",
+        "meals": "Breakfast, lunch, gourmet dinner"
+      }
+    ],
+    "pricing": {
+      "baseTourPrice": 18500,
+      "privateYachtCharter": 8000,
+      "guideHonorarium": 5000,
+      "accommodationUpgrade": 4500,
+      "totalPerPerson": 9200,
+      "groupTotal": 46000,
+      "ambassadorDiscount": -4600,
+      "finalPrice": 41400
+    }
+  }
+}
+```
+
+**Configuración en Código:**
+- Archivo: `lib/hermes.ts` (nuevo archivo a crear)
+```typescript
+import OpenAI from 'openai';
+
+export const hermes = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  organization: process.env.OPENAI_ORG_ID
+});
+
+export const HERMES_SYSTEM_PROMPTS = {
+  concierge: `Eres un Concierge de Lujo de Vermilion Routes...`,
+  affiliateAdvisor: `Eres un Asesor de Ventas especializado en comisiones 10-3-2...`,
+  customerService: `Eres el Equipo de Atención al Cliente 24/7...`
+};
+
+export const chatWithHermes = async (
+  message: string,
+  systemRole: keyof typeof HERMES_SYSTEM_PROMPTS,
+  locale: string,
+  history?: Array<{ role: 'user' | 'assistant'; content: string }>
+) => {
+  const response = await hermes.chat.completions.create({
+    model: 'gpt-4-turbo',
+    messages: [
+      { role: 'system', content: HERMES_SYSTEM_PROMPTS[systemRole] },
+      ...(history || []),
+      { role: 'user', content: message }
+    ],
+    temperature: 0.7,
+    max_tokens: 1500
+  });
+  return response.choices[0].message.content;
+};
+```
+
+**Variables de Entorno:**
+- `OPENAI_API_KEY` — API key de OpenAI
+- `OPENAI_ORG_ID` — Organization ID
+
+**Rate Limits:**
+- 500 req/min en `/api/concierge/*`
+- Fallback a respuesta genérica si timeout > 10s
+
+---
+
+### 9.4 OPENCLAW — Ejecutor de Acciones Automatizadas
+
+**Propósito:** Framework de ejecución segura de acciones. Ejecuta modificaciones de documentos Firestore, marcas de estado operativo y dispersión de pagos.
+
+**Acciones Implementadas:**
+
+#### Acción 1: `mark-trip-completed`
+**Autorización:** `role === 'operator' | 'admin' | 'super'`  
+**Punto de Activación:** Botón "✓ Viaje Realizado" en `components/crm/RunSheetPanel.tsx` (línea ~485)  
+**Request:**
+```typescript
+POST /api/openclaw/execute
+{
+  "action": "mark_trip_completed",
+  "operatorId": "operators/juan.perez@vermilion.com",
+  "bookingId": "bookings/VR-2026-042",
+  "signalData": {
+    "completedAt": "2026-09-27T18:30:00Z",
+    "passengersCount": 5,
+    "highlights": "Increíble avistamiento de ballenas...",
+    "notes": "Viaje sin incidentes, clientes muy satisfechos"
+  }
+}
+```
+**Modificaciones en Firestore:**
+- `bookings/VR-2026-042` → `status: "in_operation"` → `"completed"`
+- `bookings/VR-2026-042.runSheet[lastDay].status` → `"completed"`
+- Crea documentos en `commissions` (operador + embajador)
+- Escribe log en `openclaw_audit/VR-2026-042`
+
+#### Acción 2: `disburse-commission`
+**Autorización:** `role === 'financial' | 'admin' | 'super'`  
+**Punto de Activación:** Botón "Dispersar Pago" en `components/crm/FinanceDashboard.tsx` (línea ~720)  
+**Request:**
+```typescript
+POST /api/openclaw/execute
+{
+  "action": "disburse_commission",
+  "financialOfficerId": "financial@vermilion.com",
+  "commissionId": "commissions/pablo.g_VR-2026-042",
+  "bankDetails": {
+    "method": "paypal" | "stripe" | "swift" | "zelle",
+    "bankName": "PayPal Business",
+    "accountEmail": "pablo@business.paypal.com"
+  }
+}
+```
+**Modificaciones en Firestore:**
+- `commissions/pablo.g_VR-2026-042` → `status: "pending"` → `"paid"`
+- Integración con PayPal/Stripe SDK
+- Log de auditoría con timestamp + oficial
+
+#### Acción 3: `confirm-pakari-delivery`
+**Autorización:** `role === 'concierge' | 'operator' | 'admin' | 'super'`  
+**Punto de Activación:** Checkbox en `components/crm/AmenitiesPanel.tsx`  
+**Efecto:** `bookings/VR-2026-042.vipGiftDelivered = true` + timestamp
+
+**Archivo de Configuración:**
+- `lib/openclaw.ts` (nuevo archivo a crear)
+```typescript
+export const OpenClawConfig = {
+  baseURL: process.env.OPENCLAW_API_URL,
+  apiKey: process.env.OPENCLAW_API_KEY,
+  authorizations: {
+    'mark_trip_completed': ['operator', 'admin', 'super'],
+    'disburse_commission': ['financial', 'admin', 'super'],
+    'confirm_pakari_delivery': ['concierge', 'operator', 'admin', 'super']
+  },
+  audit: {
+    collection: 'firestore:openclaw_audit',
+    logAllExecutions: true,
+    encryptSensitiveData: true
+  }
+};
+
+export const executeAction = async (
+  actionName: string,
+  userId: string,
+  userRole: string,
+  payload: any
+) => {
+  // Verificar autorización
+  const authorized = OpenClawConfig.authorizations[actionName]?.includes(userRole);
+  if (!authorized) {
+    throw new Error(`Unauthorized: ${userRole} cannot execute ${actionName}`);
+  }
+  
+  const response = await fetch(`${OpenClawConfig.baseURL}/execute`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${OpenClawConfig.apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      action: actionName,
+      userId,
+      userRole,
+      payload,
+      executedAt: new Date().toISOString()
+    })
+  });
+  
+  return response.json();
+};
+```
+
+**Variables de Entorno:**
+- `OPENCLAW_API_URL` — `"https://execute.openclaw.run"`
+- `OPENCLAW_API_KEY` — Bearer token
+
+---
+
+### 9.5 Flujos de Integración Cruzada (Cliente → Hermes → Antigravity → OpenClaw)
+
+```mermaid
+flowchart TD
+    Client["👤 Cliente (WhatsApp)"] -->|"¿Mejor tour para familia?"| Hermes["🗨️ HERMES (GPT-4)"]
+    Hermes -->|Procesa intención, consulta tours| VectorDB["🔍 Vector DB Tours"]
+    VectorDB -->|Top 3 recomendaciones| Hermes
+    Hermes -->|"→ Te recomiendo Amazonía Napo"| WhatsApp["📱 WhatsApp API"]
+    
+    Client -->|"Sí, quiero esa"| Antigravity["⚙️ ANTIGRAVITY (Workflow)"]
+    Antigravity -->|trigger: payment-confirmation| Firestore["🔥 Firestore"]
+    Firestore -->|"Crear lead + booking"| Codex["📝 CODEX (Generate)"]
+    Codex -->|"Genera notas enriquecidas"| Firestore
+    
+    Client -->|Paga vía PayPal| Antigravity
+    Antigravity -->|step: calculate-commissions| Codex
+    Codex -->|"{{commissions}}"| OpenClaw["🦾 OPENCLAW (Execute)"]
+    OpenClaw -->|"Escribe commissions, auditoría"| Firestore
+    
+    OpenClaw -->|success| Hermes
+    Hermes -->|"¡Booking confirmado! ¡Recibirás un email..."| WhatsApp
+```
+
+---
+
+### 9.6 Monitoreo y Observabilidad
+
+**Endpoint de Health Check:**
+```
+GET /api/agents/health
+```
+**Response:**
+```json
+{
+  "status": "healthy",
+  "agents": {
+    "hermes": { "status": "up", "latency_ms": 245, "tokens_today": 1200000 },
+    "codex": { "status": "up", "latency_ms": 380, "requests_today": 842 },
+    "antigravity": { "status": "up", "workflows_running": 23 },
+    "openclaw": { "status": "up", "actions_pending": 5 }
+  },
+  "timestamp": "2026-09-27T16:45:00Z"
+}
+```
+
+**Dashboards en `/admin?tab=agents` (futuro):**
+- Hermes: Latencia promedio, sesiones activas, idiomas más usados
+- Codex: Scripts generados/día, calidad de código
+- Antigravity: Workflows ejecutados, tasa de éxito, fallos
+- OpenClaw: Acciones ejecutadas, tasa de autorización, tiempo de ejecución
+
+---
+
+### 9.7 Auditoría Centralizada y Seguridad
+
+**Colección en Firestore:** `openclaw_audit/{docId}`
+```typescript
+interface AuditLog {
+  id: string;
+  agentName: "codex" | "hermes" | "antigravity" | "openclaw";
+  actionName: string;
+  userId: string;
+  userRole: string;
+  payload: any; // sanitized
+  result: "success" | "failure";
+  timestamp: Timestamp;
+  ipAddress: string;
+  errorDetails?: string;
+}
+```
+
+**Autenticación:** Todos los endpoints de agentes requieren Bearer Token
+```
+Authorization: Bearer ${AGENT_TOKEN}
+X-Request-ID: ${uuid()}
+X-Timestamp: ${ISO-8601}
+```
+
+---
+
+### 9.8 Próximos Pasos (Roadmap IA)
+
+- [ ] Integración de análisis de sentimiento en tiempo real (Hermes)
+- [ ] Plantillas WhatsApp dinámicas por agente (Hermes)
+- [ ] Multi-agente colaborativo con handoff IA-IA (Antigravity + Hermes)
+- [ ] Métricas de satisfacción post-chat (CSAT)
+- [ ] Dashboard unificado de métricas por agente en `/admin?tab=agents`
+
+
+---
+
+## 10. Bitácora de Evolución del Plano (Changelog)
 
 | Fecha | Versión | Autor | Cambios Implementados | Próximos Pasos / Hitos |
 | :--- | :---: | :--- | :--- | :--- |
@@ -1356,7 +1678,7 @@ Sistema basado en patrones regex con 7 categorías:
 
 ---
 
-## 8. Guía de Referencia Rápida para Desarrolladores y Agentes (Cheat-Sheet de Archivos y Componentes)
+## 11. Guía de Referencia Rápida para Desarrolladores y Agentes (Cheat-Sheet de Archivos y Componentes)
 
 > **Regla de Oro:** Antes de modificar cualquier sección de la página o ejecutar comandos de búsqueda masiva, consulte esta tabla para ir **directo al archivo exacto**.
 
