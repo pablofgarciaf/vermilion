@@ -26,7 +26,7 @@ safeCopy(dir169, 'amazon-river-16-9.webp', dir169, 'puyo-yanacocha-16-9.webp');
 // 2. Ensure 9-16 standardized files
 safeCopy(dir916, 'galapagos-tortuga-gigante-9-16.1.webp', dir916, 'galapagos-tortuga-gigante-9-16.webp');
 safeCopy(dir916, 'quito-iglesia-de-san-francisco-16-9.webp', dir916, 'quito-plaza-independencia-9-16.webp');
-safeCopy(dir916, 'amazon-waterfall-9-16.webp', dir916, 'banos-cascada-9-16.webp');
+safeCopy(dir916, 'amazon-nutria-9-16.webp', dir916, 'banos-cascada-9-16.webp');
 safeCopy(dir916, 'cotopaxi-volcano-16-9.webp', dir916, 'cotopaxi-volcano-9-16.webp');
 safeCopy(dir916, 'amazon-river-canoe-16-9.webp', dir916, 'amazon-river-canoe-9-16.webp');
 safeCopy(dir916, 'cajas-national-park-9-16.1.webp', dir916, 'cajas-national-park-9-16.webp');

@@ -15,7 +15,7 @@ const DESTINATION_IMAGE_POOLS: Record<string, string[]> = {
     '/images/tours/9-16/cajas-national-park-9-16.webp',
     '/images/tours/9-16/pailon-diablo-9-16.webp',
     '/images/tours/9-16/chimborazo-9-16.webp',
-    '/images/tours/9-16/amazon-waterfall-9-16.webp',
+    '/images/tours/9-16/amazon-nutria-9-16.webp',
     '/images/tours/9-16/cuenca-colonial-9-16.webp',
   ],
   galapagos: [
@@ -280,8 +280,8 @@ export function DestinationsGrid() {
                   <div
                     key={`${dest.id}-img-${imgIdx}-${imgSrc}`}
                     className={`absolute inset-0 transition-all duration-1000 ease-in-out ${isCurrent
-                        ? 'opacity-100 scale-100 z-0 pointer-events-none'
-                        : 'opacity-0 scale-105 pointer-events-none -z-10'
+                      ? 'opacity-100 scale-100 z-0 pointer-events-none'
+                      : 'opacity-0 scale-105 pointer-events-none -z-10'
                       }`}
                   >
                     <Image
@@ -319,8 +319,8 @@ export function DestinationsGrid() {
                       <span
                         key={`dot-${dotIdx}`}
                         className={`w-1.5 h-1.5 rounded-full transition-transform duration-500 ${dotIdx === activeIndex
-                            ? 'bg-emerald-400 scale-x-150'
-                            : 'bg-white/40'
+                          ? 'bg-emerald-400 scale-x-150'
+                          : 'bg-white/40'
                           }`}
                       />
                     ))}

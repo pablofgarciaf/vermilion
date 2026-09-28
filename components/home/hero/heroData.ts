@@ -106,8 +106,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
       zh: '乘坐机动独木舟穿行于原始亚马逊支流，探访野生动物保护区，融入传统奇瓦印第安社区。'
     },
     image: '/images/tours/16-9/amazon-river-16-9.webp',
-    desktopImage: '/images/tours/16-9/amazon-nutria-9-16.webp',
-    mobileImage: '/images/tours/9-16/amazon-waterfall-9-16.webp'
+    desktopImage: '/images/tours/16-9/amazon-nutria-16-9.webp',
+    mobileImage: '/images/tours/9-16/amazon-nutria-9-16.webp'
   },
   {
     place: { en: 'Imbabura - Otavalo', es: 'Imbabura - Otavalo', fr: 'Imbabura - Otavalo', de: 'Imbabura - Otavalo', it: 'Imbabura - Otavalo', pt: 'Imbabura - Otavalo', ja: 'インバブラ - オタバロ', zh: '因巴布拉 - 奥塔瓦洛' },

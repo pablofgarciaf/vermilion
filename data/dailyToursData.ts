@@ -36,9 +36,7 @@ export const dailyTours: Tour[] = [
     gallery: [
       '/images/tours/16-9/quito-colonial-16-9.webp',
       '/images/tours/16-9/mitad-del-mundo-16-9.webp',
-      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
-      '/images/tours/16-9/panecillo-16-9.webp',
-      '/images/tours/16-9/teleferico-quito-16-9.webp'
+      '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 42,
@@ -136,9 +134,7 @@ export const dailyTours: Tour[] = [
     gallery: [
       '/images/tours/16-9/otavalo-market-16-9.webp',
       '/images/tours/16-9/taita-imbabura-16-9.webp',
-      '/images/tours/16-9/imbabura-16-9.webp',
-      '/images/tours/16-9/laguna-cuicocha-16-9.webp',
-      '/images/tours/16-9/cascada-peguche-16-9.webp'
+      '/images/tours/16-9/imbabura-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 38,
@@ -234,10 +230,7 @@ export const dailyTours: Tour[] = [
     desktopImage: '/images/tours/16-9/papallacta-laguna-16-9.webp',
     gallery: [
       '/images/tours/16-9/papallacta-laguna-16-9.webp',
-      '/images/tours/16-9/papallacta-termas-16-9.webp',
-      '/images/tours/16-9/antisana-16-9.webp',
-      '/images/tours/16-9/paramo-andino-16-9.webp',
-      '/images/tours/16-9/oso-de-anteojos-16-9.webp'
+      '/images/tours/16-9/antisana-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 29,
@@ -331,13 +324,7 @@ export const dailyTours: Tour[] = [
     imageUrl: '/images/tours/16-9/mindo-16-9.webp',
     mobileImage: '/images/tours/9-16/mindo-9-16.webp',
     desktopImage: '/images/tours/16-9/mindo-16-9.webp',
-    gallery: [
-      '/images/tours/16-9/mindo-16-9.webp',
-      '/images/tours/16-9/mindo-tarabita-16-9.webp',
-      '/images/tours/16-9/mindo-cascadas-16-9.webp',
-      '/images/tours/16-9/mindo-mariposas-16-9.webp',
-      '/images/tours/16-9/mindo-colibri-16-9.webp'
-    ],
+    gallery: ['/images/tours/16-9/mindo-16-9.webp'],
     rating: 5,
     reviewsCount: 45,
     isPopular: true,
@@ -431,13 +418,7 @@ export const dailyTours: Tour[] = [
     imageUrl: '/images/tours/16-9/antisana-16-9.webp',
     mobileImage: '/images/tours/16-9/antisana-16-9.webp',
     desktopImage: '/images/tours/16-9/antisana-16-9.webp',
-    gallery: [
-      '/images/tours/16-9/antisana-16-9.webp',
-      '/images/tours/16-9/laguna-mica-16-9.webp',
-      '/images/tours/16-9/condor-andino-16-9.webp',
-      '/images/tours/16-9/paramo-andino-16-9.webp',
-      '/images/tours/16-9/oso-de-anteojos-16-9.webp'
-    ],
+    gallery: ['/images/tours/16-9/antisana-16-9.webp'],
     rating: 5,
     reviewsCount: 26,
     isPopular: false,
@@ -529,13 +510,7 @@ export const dailyTours: Tour[] = [
     imageUrl: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
     mobileImage: '/images/tours/9-16/cotopaxi-9-16.webp',
     desktopImage: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
-    gallery: [
-      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
-      '/images/tours/16-9/laguna-limpiopungo-16-9.webp',
-      '/images/tours/16-9/cotopaxi-refugio-16-9.webp',
-      '/images/tours/16-9/caballos-salvajes-16-9.webp',
-      '/images/tours/16-9/paramo-andino-16-9.webp'
-    ],
+    gallery: ['/images/tours/16-9/cotopaxi-volcano-16-9.webp'],
     rating: 5,
     reviewsCount: 52,
     isPopular: true,
@@ -628,13 +603,7 @@ export const dailyTours: Tour[] = [
     imageUrl: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
     mobileImage: '/images/tours/9-16/quilotoa-9-16.webp',
     desktopImage: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
-    gallery: [
-      '/images/tours/16-9/laguna-quilotoa-16-9.webp',
-      '/images/tours/16-9/quilotoa-mirador-16-9.webp',
-      '/images/tours/16-9/tigua-arte-16-9.webp',
-      '/images/tours/16-9/andes-mountains-16-9.webp',
-      '/images/tours/16-9/llamas-andes-16-9.webp'
-    ],
+    gallery: ['/images/tours/16-9/laguna-quilotoa-16-9.webp'],
     rating: 5,
     reviewsCount: 48,
     isPopular: true,

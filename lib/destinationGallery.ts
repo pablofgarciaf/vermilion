@@ -582,7 +582,7 @@ const LOCAL_DESTINATION_PHOTOS: DestinationGalleryItem[] = [
     destination: 'amazon',
     title: { en: 'Canoe Expedition in Cuyabeno Reserve', es: 'Expedición en Canoa por la Reserva de Cuyabeno' },
     url16x9: '/images/tours/16-9/amazon-cuyabeno-16-9.webp',
-    url9x16: '/images/tours/9-16/amazon-waterfall-9-16.webp',
+    url9x16: '/images/tours/9-16/amazon-nutria-9-16.webp',
     thumb: '/images/tours/16-9/amazon-cuyabeno-16-9.webp',
     original: '/images/tours/16-9/amazon-cuyabeno-16-9.webp',
     isPortrait: false,

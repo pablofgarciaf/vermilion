@@ -399,8 +399,8 @@ export const DESTINATIONS: Destination[] = [
     slug: 'amazonia-napo',
     heroIndex: 5,
     region: 'amazonia',
-    image: '/images/tours/16-9/amazon-nutria-9-16.webp',
-    mobileImage: '/images/tours/9-16/amazon-waterfall-9-16.webp',
+    image: '/images/tours/16-9/amazon-nutria-16-9.webp',
+    mobileImage: '/images/tours/9-16/amazon-nutria-9-16.webp',
     name: { es: 'Amazonía del Napo', en: 'The Napo Amazon', fr: 'Amazonie du Napo', de: 'Amazonien am Napo', it: 'Amazzonia del Napo', pt: 'Amazónia do Napo', ja: 'ナポのアマゾン', zh: '纳波亚马逊' },
     tagline: { es: 'Geoparque Mundial UNESCO Napo Sumaco, declarado en 2025 y todavía casi sin visitantes', en: 'Napo Sumaco UNESCO Global Geopark, designated in 2025 and still almost unvisited', fr: 'Géoparc mondial UNESCO Napo Sumaco, classé en 2025 et encore presque désert', de: 'UNESCO Global Geopark Napo Sumaco, 2025 ausgezeichnet und noch kaum besucht', it: 'Geoparco Mondiale UNESCO Napo Sumaco, riconosciuto nel 2025 e ancora quasi senza visitatori', pt: 'Geoparque Mundial da UNESCO Napo Sumaco, declarado em 2025 e ainda quase sem visitantes', ja: '2025年認定のユネスコ世界ジオパーク「ナポ・スマコ」。訪れる人はまだごくわずか', zh: '2025年获认的联合国教科文组织世界地质公园“纳波苏马科”，至今几乎无人造访' },
     intro: {

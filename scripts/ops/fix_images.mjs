@@ -37,8 +37,8 @@ async function fixImages() {
             if (existsSync(altLocal)) {
                return alt;
             } else {
-               console.log(`Fallback not found for ${path}. Replacing with amazon-waterfall-9-16.webp`);
-               return '/images/tours/9-16/amazon-waterfall-9-16.webp'; // default safe image
+               console.log(`Fallback not found for ${path}. Replacing with amazon-nutria-9-16.webp`);
+               return '/images/tours/9-16/amazon-nutria-9-16.webp'; // default safe image
             }
          }
          return path;

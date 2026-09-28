@@ -78,7 +78,7 @@ export const defaultSettings = {
         description: 'Navigate pristine Amazonian rivers by motorized canoe, encounter native wildlife at rescue sanctuaries, and connect with authentic Kichwa indigenous families.',
         image: '/images/tours/16-9/amazon-river-16-9.webp',
         desktopImage: '/images/tours/16-9/amazon-river-16-9.webp',
-        mobileImage: '/images/tours/9-16/amazon-waterfall-9-16.webp'
+        mobileImage: '/images/tours/9-16/amazon-nutria-9-16.webp'
       },
       {
         place: 'Galapagos - Isabela Island',
