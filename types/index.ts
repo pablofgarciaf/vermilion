@@ -81,6 +81,7 @@ export interface SlideData {
   desktopImage?: string;
   mobileImage?: string;
   isWelcome?: boolean;
+  waterEffect?: boolean;
 }
 
 export interface Review {

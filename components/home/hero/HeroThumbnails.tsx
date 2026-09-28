@@ -6,6 +6,7 @@ import { getLocalizedText } from '@/utils/i18nHelper';
 import { SlideData } from '@/types';
 import { isBotOrCrawler } from '@/utils/isBot';
 import { DESTINATIONS } from '@/data/destinationsData';
+import WaterRippleImage from '@/components/ui/WaterRippleImage';
 
 interface HeroThumbnailsProps {
   slidesData: SlideData[];
@@ -52,6 +53,14 @@ export function HeroThumbnails({ slidesData, locale, isMobile }: HeroThumbnailsP
                 className={`object-cover object-top ${slide.mobileImage ? 'hidden md:block' : 'block'}`}
                 sizes="100vw"
               />
+
+              {slide.waterEffect && (
+                <WaterRippleImage
+                  src={slide.desktopImage || slide.image || slide.imageUrl}
+                  mobileSrc={slide.mobileImage}
+                  className="absolute inset-0"
+                />
+              )}
 
               <div className="card-overlay absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none transition-opacity duration-300" />
 

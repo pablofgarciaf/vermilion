@@ -107,7 +107,8 @@ export const HERO_SLIDES_DATA: SlideData[] = [
     },
     image: '/images/tours/16-9/amazon-river-16-9.webp',
     desktopImage: '/images/tours/16-9/amazon-nutria-16-9.webp',
-    mobileImage: '/images/tours/9-16/amazon-nutria-9-16.webp'
+    mobileImage: '/images/tours/9-16/amazon-nutria-9-16.webp',
+    waterEffect: true
   },
   {
     place: { en: 'Imbabura - Otavalo', es: 'Imbabura - Otavalo', fr: 'Imbabura - Otavalo', de: 'Imbabura - Otavalo', it: 'Imbabura - Otavalo', pt: 'Imbabura - Otavalo', ja: 'インバブラ - オタバロ', zh: '因巴布拉 - 奥塔瓦洛' },

@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           width: 1200,
           height: 630,
           type: 'image/jpeg',
-          alt: 'Giant Tortoises of Galapagos – Vermilion Routes Bespoke Nature Travel',
+          alt: 'Giant Tortoises Galapagos Island – Vermilion Routes Bespoke Nature Travel',
         },
       ],
       locale: {
