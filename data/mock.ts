@@ -2292,13 +2292,9 @@ const multiDayTours: Tour[] = [
     gallery: [
       '/images/tours/16-9/amazon-river-16-9.webp',
       '/images/tours/16-9/amazon-nutria-16-9.webp',
-      '/images/tours/16-9/pailon-del-diablo-16-9.webp',
-      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
       '/images/tours/16-9/laguna-quilotoa-16-9.webp',
-      '/images/tours/16-9/amazon-cuyabeno-16-9.webp',
-      '/images/tours/16-9/puyo-yanacocha-16-9.webp',
-      '/images/tours/16-9/chimborazo-volcano-16-9.webp',
-      '/images/tours/16-9/quito-colonial-16-9.webp'
+      '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+      '/images/tours/16-9/amazon-cuyabeno-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 26,
