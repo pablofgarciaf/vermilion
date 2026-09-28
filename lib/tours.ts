@@ -70,10 +70,6 @@ export function subscribeToursFromFirestore(
             if (officialIds.has(docSnap.id)) {
               const data = docSnap.data();
               const mockTour = mockTours.find(m => m.id === docSnap.id);
-              // If image URL is missing or legacy Unsplash URL, use the updated mockTour image
-              const imageUrl = (!data.imageUrl || data.imageUrl.includes('images.unsplash.com'))
-                ? (mockTour?.imageUrl || data.imageUrl)
-                : data.imageUrl;
 
               tours.push({
                 ...mockTour,
@@ -83,7 +79,12 @@ export function subscribeToursFromFirestore(
                 price3Star: mockTour?.price3Star || mockTour?.price || data.price3Star || data.price,
                 price4Star: mockTour?.price4Star || data.price4Star,
                 itinerary: mockTour?.itinerary || data.itinerary,
-                imageUrl
+                // Las imagenes siempre vienen del codigo fuente (mock.ts), nunca de Firestore:
+                // documentos legacy en la coleccion pueden apuntar a archivos que ya no existen.
+                imageUrl: mockTour?.imageUrl || data.imageUrl,
+                mobileImage: mockTour?.mobileImage || data.mobileImage,
+                desktopImage: mockTour?.desktopImage || data.desktopImage,
+                gallery: mockTour?.gallery || data.gallery,
               } as Tour);
             }
           });
@@ -184,6 +185,12 @@ export async function getTourByIdFromFirestore(id: string, fallbackTour?: Tour):
         price3Star: fallback?.price3Star || fallback?.price || data.price3Star || data.price,
         price4Star: fallback?.price4Star || data.price4Star,
         itinerary: fallback?.itinerary || data.itinerary,
+        // Las imagenes siempre vienen del codigo fuente (mock.ts), nunca de Firestore:
+        // documentos legacy en la coleccion pueden apuntar a archivos .jpg que ya no existen.
+        imageUrl: fallback?.imageUrl || data.imageUrl,
+        mobileImage: fallback?.mobileImage || data.mobileImage,
+        desktopImage: fallback?.desktopImage || data.desktopImage,
+        gallery: fallback?.gallery || data.gallery,
       } as Tour;
     }
 

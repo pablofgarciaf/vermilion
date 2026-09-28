@@ -190,7 +190,7 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
     if (combined.includes('antisana') || combined.includes('cóndor') || combined.includes('condor')) return '/images/tours/16-9/antisana-16-9.webp';
     if (combined.includes('otavalo') || combined.includes('peguche') || combined.includes('ponchos')) return '/images/tours/16-9/otavalo-market-16-9.webp';
     if (combined.includes('cuenca') || combined.includes('tomebamba')) return '/images/tours/16-9/cuenca-colonial-16-9.webp';
-    if (combined.includes('cajas')) return '/images/tours/16-9/parque-nacional-el-cajas-9-16.webp';
+    if (combined.includes('cajas')) return '/images/tours/16-9/parque-nacional-el-cajas-16-9.webp';
     if (combined.includes('amazon') || combined.includes('puyo') || combined.includes('selva') || combined.includes('cuyabeno') || combined.includes('rainforest')) return '/images/tours/16-9/amazon-river-16-9.webp';
     if (combined.includes('mitad del mundo') || combined.includes('intiñan') || combined.includes('intinan') || combined.includes('equatorial') || combined.includes('ecuatorial')) return '/images/tours/16-9/mitad-del-mundo-16-9.webp';
     if (combined.includes('quito') || combined.includes('san francisco') || combined.includes('colonial') || combined.includes('plaza grande') || combined.includes('compañía') || combined.includes('compania')) return '/images/tours/16-9/quito-colonial-16-9.webp';

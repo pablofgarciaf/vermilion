@@ -8,6 +8,7 @@ import { MapPin, Mountain, Leaf, Info, ArrowRight, Sparkles, BookOpen, ImageIcon
 import { DESTINATIONS, DESTINATION_UI, INSIDER_TIPS, Destination } from '@/data/destinationsData';
 import { mockTours } from '@/data/mock';
 import { TourCarousel } from '@/components/home/TourCarousel';
+import WaterRippleImage from '@/components/ui/WaterRippleImage';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getSeoAlternates, BASE_CANONICAL_URL, SUPPORTED_SEO_LOCALES } from '@/utils/seoHelper';
@@ -155,6 +156,13 @@ export default async function DestinationPage({
           sizes="100vw"
           className="object-cover md:hidden"
         />
+        {dest.waterEffect && (
+          <WaterRippleImage
+            src={dest.image}
+            mobileSrc={dest.mobileImage}
+            className="absolute inset-0"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
         <div className="absolute inset-x-0 bottom-24 max-w-5xl mx-auto px-6 pb-12">          <Link

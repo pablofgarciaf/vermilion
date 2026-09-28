@@ -92,7 +92,7 @@ const SHOWCASE_PHOTOS = [
     aspect: 'col-span-1 aspect-[4/3]',
   },
   {
-    src: '/images/tours/16-9/quito-colonial-16-9.webp',
+    src: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
     title: 'Quito Historic Colonial Plaza',
     aspect: 'col-span-1 aspect-[4/3]',
   },
