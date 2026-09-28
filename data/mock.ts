@@ -1928,7 +1928,7 @@ const multiDayTours: Tour[] = [
           ja: 'スピードボートでサンクリストバル島へ。解説センターを見学後、グンカンドリが舞うティヘレタスの丘展望台へハイキング。ラ・ロベリア海岸でアシカやウミイグアナを観察。ホテル・アルガロボス泊。',
           zh: '乘快艇抵达圣克里斯托巴尔岛。参观解读中心了解加拉帕戈斯的地质与人文历史。徒步登上军舰鸟丘（Cerro Tijeretas）俯瞰壮丽海岸全景与翱翔的军舰鸟，漫步拉洛贝里亚海滩观赏海狮与海鬣蜥。入住阿尔加罗博斯酒店。'
         },
-        image: '/images/tours/16-9/galapagos-baltra-island-16-9.webp',
+        image: '/images/tours/16-9/galapagos-focas-16-9.webp',
         accommodation: {
           en: 'San Cristóbal Island (Hotel Algarrobos)',
           es: 'Isla San Cristóbal (Hotel Algarrobos)',
@@ -2151,6 +2151,7 @@ const multiDayTours: Tour[] = [
           en: 'Airport Transfer (IN): Welcome at Quito International Airport and private transfer to your hotel.',
           es: 'Recepción en el Aeropuerto Internacional Mariscal Sucre de Quito y traslado privado al hotel.'
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' }
       },
@@ -2164,6 +2165,7 @@ const multiDayTours: Tour[] = [
           en: 'Quito was declared a UNESCO World Cultural Heritage Site in 1978 and is considered one of the most beautiful cities in the Americas.\n\nToday, we explore both the modern and historic areas of Quito. The historic center is renowned for its impressive churches, colonial architecture, and beautiful plazas.\n\nWe will visit the Cathedral, the Archbishop’s Palace, and the Presidential Palace, all located around the main square, known as Plaza Grande. We will also visit La Compañía de Jesús, one of Quito’s most spectacular churches, famous for its interior richly decorated with gold leaf, as well as San Francisco Square and Church.\n\nAfterward, we continue to the Middle of the World (Mitad del Mundo), where we visit the Intiñan Museum, famous for its demonstrations and experiments related to the Equator. Here, you can experience the unique sensation of standing in the Northern and Southern Hemispheres at the same time.',
           es: 'Visita guiada al centro histórico de Quito: Plaza Grande, Catedral, Palacio Arzobispal, Palacio Presidencial, Iglesia de La Compañía de Jesús cubierta de pan de oro y Plaza San Francisco.\n\nContinuamos a la Mitad del Mundo y Museo Intiñan con experimentos sobre la línea ecuatorial.'
         },
+        image: '/images/tours/16-9/mitad-del-mundo-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         activity: { en: '5-hour guided tour', es: 'Tour guiado de 5 horas' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2179,6 +2181,7 @@ const multiDayTours: Tour[] = [
           en: 'We travel approximately two hours east of Quito along a historic route used by Spanish explorers in the 16th century in their search for gold and cinnamon. This expedition eventually led to the discovery of the Amazon River.\n\nAlong the way, we pass by the historic Guápulo Church and cross the Andes at approximately 4,100 meters (13,451 ft) above sea level. The route passes between two ecological reserves before descending toward the transition zone between the Andes and the Ecuadorian Amazon.\n\nWe stop at the famous Papallacta Hot Springs, where you can enjoy several activities: relax in thermal pools with different temperatures while enjoying spectacular views of Antisana Volcano (5,704 m / 18,714 ft), enjoy some relaxing time at the spa, or explore the walking trails around the area.\n\nWe then continue our descent toward the Amazon Rainforest.',
           es: 'Viaje al este cruzando la cordillera a 4,100 m de altitud con vistas de páramo y paso por Guápulo. Parada en las Termas de Papallacta para disfrutar de las piscinas termales medicinales y senderos ecológicos. Descenso hacia la selva amazónica de Tena.'
         },
+        image: '/images/tours/16-9/papallacta-volcan-16-9.webp',
         accommodation: { en: 'Tena Lodge', es: 'Tena Lodge' },
         activity: { en: '6-hour guided tour; descent from 4,000m to 500m; 1-hour hike', es: 'Tour de 6 horas, descenso de 4,000m a 500m y caminata de 1h' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2194,6 +2197,7 @@ const multiDayTours: Tour[] = [
           en: 'In the morning, we board a motorized canoe and travel downstream to visit an Amazon Rainforest wildlife rescue center, where we will learn about local wildlife and conservation efforts.\n\nWe then have the opportunity to explore primary rainforest on foot, accompanied by a knowledgeable local guide. During the hike, we will discover the incredible biodiversity of the Amazon and learn about the rainforest ecosystem.\n\nWe will also visit a local Kichwa family and learn about their traditions, culture, and way of life.\n\nFinally, we visit a caiman lagoon, where we can observe these fascinating Amazonian reptiles in their natural environment.\n\nWe then return to the lodge.',
           es: 'Paseo en canoa motorizada por el río hacia un centro de rescate de fauna amazónica. Caminata guiada por la selva primaria con guía nativo, visita a una familia Kichwa y observación de caimanes en la laguna.'
         },
+        image: '/images/tours/16-9/amazon-river-16-9.webp',
         accommodation: { en: 'Tena Lodge', es: 'Tena Lodge' },
         activity: { en: '6-hour guided tour + 1-hour motorized canoe ride', es: 'Tour de 6h + paseo en canoa motorizada de 1h' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2209,6 +2213,7 @@ const multiDayTours: Tour[] = [
           en: 'In the morning, we travel south toward the city of Puyo. Along the way, we visit Yanacocha Biopark, where we will learn about Amazonian wildlife species that have been rescued from illegal wildlife trafficking.\n\nWe then continue toward Baños along the spectacular Route of the Waterfalls, one of Ecuador’s most scenic routes.\n\nWe will have the opportunity to hike to Pailón del Diablo (Devil\'s Cauldron), one of the most impressive waterfalls in Ecuador, surrounded by lush vegetation and dramatic mountain scenery.\n\nWe continue to Baños for our overnight stay.',
           es: 'Viaje hacia Puyo y visita al Bioparque Yanacocha de rescate de fauna silvestre. Continuación por el cañón del río Pastaza y la Ruta de las Cascadas hacia Baños, con caminata a la gran cascada Pailón del Diablo (Devil\'s Cauldron).'
         },
+        image: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
         accommodation: { en: 'Baños', es: 'Baños' },
         activity: { en: '6-hour guided tour', es: 'Tour guiado de 6 horas' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2224,6 +2229,7 @@ const multiDayTours: Tour[] = [
           en: 'Enjoy a free day in Baños, a charming tourist town located at the foothills of the active Tungurahua Volcano.\n\nYou can enjoy a variety of optional activities at your own expense, including: cycling, white-water rafting, waterfall hikes, cable-car rides (tarabita), and horseback riding.',
           es: 'Día libre en Baños de Agua Santa para disfrutar de actividades de aventura opcionales: ciclismo de montaña, rafting, tarabitas sobre cañones, termas o cabalgatas.'
         },
+        image: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
         accommodation: { en: 'Baños', es: 'Baños' },
         meals: { en: 'Breakfast', es: 'Desayuno' }
       },
@@ -2237,6 +2243,7 @@ const multiDayTours: Tour[] = [
           en: 'In the morning, we begin our journey toward Quito. Along the way, we visit the spectacular Quilotoa Crater Lake, famous for its breathtaking scenery and turquoise waters.\n\nYou will have the opportunity to hike approximately two hours toward the bottom of the crater.\n\nWe may also make a stop in the traditional village of Tigua, famous for its colorful Andean paintings, as well as local guinea pig farms.\n\nWe then continue to Quito.',
           es: 'Viaje hacia la Laguna del Cráter de Quilotoa con caminata al interior de la caldera volcánica. Parada en el pueblo de pintores de Tigua y continuación hacia Quito.'
         },
+        image: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         activity: { en: '6-hour guided tour + 2-hour hike (3,500 m / 11,483 ft)', es: 'Tour de 6h + caminata de 2h (3,500 m)' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2252,6 +2259,7 @@ const multiDayTours: Tour[] = [
           en: 'Private transfer to the airport for your onward flight connections to the Galápagos Islands or Mainland Ecuador.\n\nEnd of the tour.',
           es: 'Traslado privado al Aeropuerto Internacional de Quito para su vuelo internacional o conexión a Galápagos o Ecuador Continental. Fin de los servicios.'
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' }
       }
     ]
@@ -2371,7 +2379,7 @@ const multiDayTours: Tour[] = [
           en: 'We travel approximately two hours east of Quito along a historic route used by Spanish explorers in the 16th century in their search for gold and cinnamon. This expedition eventually led to the discovery of the Amazon River.\n\nAlong the way, we pass by the historic Guápulo Church and cross the Andes at approximately 4,100 meters (13,451 ft) above sea level. The route passes between two ecological reserves before descending toward the transition zone between the Andes and the Ecuadorian Amazon.\n\nWe stop at the famous Papallacta Hot Springs, where you can choose from several activities: relax in thermal pools with different temperatures while enjoying spectacular views of Antisana Volcano (5,704 m / 18,714 ft), enjoy some relaxing time at the spa, or explore the walking trails around the area.\n\nWe then continue our descent toward the Amazon Rainforest.',
           es: 'Cruce de los Andes a 4,100 m y relax en las Termas de Papallacta con vista al Antisana. Descenso a la Amazonía hasta llegar a nuestro lodge en Tena.'
         },
-        image: '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
+        image: '/images/tours/16-9/papallacta-laguna-16-9.webp',
         accommodation: { en: 'Tena Lodge', es: 'Tena Lodge' },
         activity: { en: '6-hour guided tour; descent from 4,000m to 500m; 1-hour hike', es: 'Tour de 6 horas y caminata de 1 hora' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2403,7 +2411,7 @@ const multiDayTours: Tour[] = [
           en: 'In the morning, we visit Paikawe Reserve, where we have the opportunity to hike through primary rainforest and explore the lagoon by boat.\n\nDuring the visit, we can observe the impressive giant fish of the Amazon and discover the extraordinary biodiversity of this tropical environment.\n\nAfter the visit, we begin our return journey to Quito.',
           es: 'Visita a la Reserva Paikawe con caminata en selva y navegación en canoa para observar los peces gigantes del Amazonas (Paiche/Arapaima). Retorno a Quito.'
         },
-        image: '/images/tours/16-9/puyo-yanacocha-16-9.webp',
+        image: '/images/tours/16-9/amazon-nutria-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         activity: { en: '6-hour guided tour + 1-hour rainforest hike (500m alt.)', es: 'Tour de 6 horas y caminata de 1h' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2433,7 +2441,7 @@ const multiDayTours: Tour[] = [
           en: 'Private transfer to the airport for your onward flight connections to the Galápagos Islands.\n\nEnd of the tour.',
           es: 'Traslado privado al aeropuerto para su vuelo de conexión o retorno internacional.'
         },
-        image: '/images/tours/16-9/imbabura-16-9.webp',
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' }
       }
     ]
@@ -2527,6 +2535,7 @@ const multiDayTours: Tour[] = [
           en: 'Airport assistance and private transfer to your hotel.\n\nDeparture: The tour can begin on any day of the week.',
           es: 'Asistencia en aeropuerto y traslado privado al hotel en Quito.'
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' }
       },
@@ -2540,6 +2549,7 @@ const multiDayTours: Tour[] = [
           en: 'Today, we travel south along the Pan-American Highway and through Ecuador’s famous “Avenue of the Volcanoes,” home to approximately 62 volcanoes.\n\nWe continue toward Baños, a charming tourist town located at the foothills of the active Tungurahua Volcano. Surrounded by spectacular landscapes between the Amazon Rainforest and the Andes Mountains, Baños offers a wide variety of optional activities, including cycling, rafting, horseback riding, cable-car rides, hiking, and visits to beautiful waterfalls.\n\nWe will visit the spectacular Pailón del Diablo (Devil\'s Cauldron) Waterfall, one of the region’s most impressive natural attractions.',
           es: 'Viaje hacia el sur por la Avenida de los Volcanes hacia Baños de Agua Santa, al pie del volcán Tungurahua. Visita y caminata a la majestuosa cascada Pailón del Diablo (Devil\'s Cauldron).'
         },
+        image: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
         accommodation: { en: 'Baños', es: 'Baños' },
         activity: { en: '8-hour guided tour', es: 'Tour guiado de 8 horas' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2555,6 +2565,7 @@ const multiDayTours: Tour[] = [
           en: 'In the morning, we head into the Amazon Rainforest, traveling through the spectacular Pastaza River Canyon toward the city of Puyo.\n\nOur first stop is Yanacocha Biopark, where you will have the opportunity to observe and learn about local animal species that have been rescued from illegal wildlife trafficking.\n\nWe then continue with a hike through the Amazon Rainforest to Hola Vida Waterfall, surrounded by lush vegetation and tropical scenery.\n\nFinally, we visit a local Indigenous family, where we will have the opportunity to learn about their traditions, culture, and way of life.\n\nAfter the visit, we return to Baños.',
           es: 'Viaje por el Cañón del Pastaza hacia Puyo. Visita al Bioparque Yanacocha de rescate de fauna, caminata por la selva a la Cascada Hola Vida y visita a una familia indígena Kichwa.'
         },
+        image: '/images/tours/16-9/puyo-yanacocha-16-9.webp',
         accommodation: { en: 'Baños', es: 'Baños' },
         activity: { en: '6-hour guided tour + 2-hour rainforest hike', es: 'Tour de 6h + caminata en selva de 2h' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2570,6 +2581,7 @@ const multiDayTours: Tour[] = [
           en: 'In the morning, we begin our journey back to Quito. Along the way, we visit the spectacular Quilotoa Crater Lake, one of Ecuador’s most iconic natural attractions, famous for its striking turquoise waters and breathtaking Andean scenery.\n\nYou will have the opportunity to hike approximately two hours toward the bottom of the crater. Along the way, we may also stop at the traditional village of Tigua, famous for its colorful paintings and Andean artistic traditions, as well as local guinea pig farms.\n\nWe then continue to Quito.',
           es: 'Viaje al cráter volcánico de Quilotoa con caminata hacia la laguna turquesa. Parada en los talleres de pintura de Tigua y retorno a Quito.'
         },
+        image: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         activity: { en: '6-hour guided tour + 2-hour hike (3,500 m / 11,483 ft)', es: 'Tour de 6h + caminata de 2h' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2585,6 +2597,7 @@ const multiDayTours: Tour[] = [
           en: 'Enjoy a free day to explore Quito at your own pace, relax, or discover more of the city’s attractions and cultural highlights.',
           es: 'Día libre en Quito para recorrer a su propio ritmo.'
         },
+        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         meals: { en: 'Breakfast', es: 'Desayuno' }
       },
@@ -2598,6 +2611,7 @@ const multiDayTours: Tour[] = [
           en: 'Private transfer to the airport for your onward flight connections, including connections to the Galápagos Islands.\n\nEnd of the tour.',
           es: 'Traslado privado al aeropuerto para su vuelo de conexión o salida.'
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         transportation: { en: 'Private transportation' }
       }
     ]
@@ -2694,6 +2708,7 @@ const multiDayTours: Tour[] = [
           en: 'Airport assistance and private transfer to your hotel.\n\nImportant: Ecuador uses the US dollar (USD) as its official currency. We recommend carrying small-denomination bills, as larger notes may not always be accepted.',
           es: 'Recepción en el Aeropuerto de Quito y traslado privado a su hotel.'
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' }
       },
       {
@@ -2706,6 +2721,7 @@ const multiDayTours: Tour[] = [
           en: 'Travel north from Quito for approximately two hours through beautiful Andean landscapes and scenic viewpoints until reaching Otavalo, home to one of the most famous Artisan Markets in South America, renowned for its traditional handicrafts, textiles and local products.\n\nIn the afternoon, continue to Cotacachi, a town famous for its high-quality leather goods and traditional craftsmanship.\n\nWe will then visit Cuicocha Crater Lake, one of Ecuador’s most spectacular volcanic lakes, located inside a breathtaking Andean landscape.\n\nReturn to Quito in the afternoon.\n\nMarket information: The largest and most vibrant Otavalo market takes place on Saturdays, although a smaller market operates daily.',
           es: 'Viaje hacia Otavalo y su mundialmente famoso mercado artesanal en la Plaza de los Ponchos. Parada en Cotacachi para artesanías de cuero y visita a la impresionante Laguna volcánica de Cuicocha. Retorno a Quito.'
         },
+        image: '/images/tours/16-9/otavalo-market-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         activity: { en: '8-hour guided tour', es: 'Tour guiado de 8 horas' },
         transportation: { en: 'Private vehicle (4x4 or tourist bus)', es: 'Vehículo privado' },
@@ -2721,6 +2737,7 @@ const multiDayTours: Tour[] = [
           en: 'Discover Quito, declared a UNESCO World Heritage Site and considered one of the most beautiful historic cities in the Americas.\n\nExplore both the modern and colonial areas of the city, including its magnificent churches, plazas and historic buildings: Quito Cathedral, Archbishop’s Palace, Presidential Palace, Plaza Grande, La Compañía de Jesús Church (famous for its richly decorated golden interior), and San Francisco Plaza and Church.\n\nWe will then travel to Mitad del Mundo (Middle of the World), where you can experience standing on the Equator between the Northern and Southern Hemispheres. Visit the Intiñan Museum, known for its interactive demonstrations and fascinating exhibits related to Ecuadorian culture and the Equator.',
           es: 'Recorrido por el Centro Histórico de Quito (Patrimonio UNESCO): Catedral, Palacio Presidencial, Plaza Grande, La Compañía de Jesús y San Francisco. Traslado a la Mitad del Mundo y Museo Intiñan.'
         },
+        image: '/images/tours/16-9/mitad-del-mundo-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         activity: { en: '6-hour guided tour', es: 'Tour guiado de 6 horas' },
         transportation: { en: 'Private vehicle (4x4 or tourist bus)', es: 'Vehículo privado' },
@@ -2736,6 +2753,7 @@ const multiDayTours: Tour[] = [
           en: 'Travel south from Quito along the famous Avenue of the Volcanoes, a spectacular Andean route surrounded by Ecuador’s impressive volcanic landscapes.\n\nContinue to Baños de Agua Santa, a picturesque adventure town located at the foot of the active Tungurahua Volcano. Baños offers a wide range of optional activities, including cycling, rafting, hiking to waterfalls, cable-car rides, and horseback riding.\n\nLocated between the Andes and the Amazon basin, Baños is surrounded by lush vegetation, dramatic mountains and spectacular waterfalls. Visit the famous Pailón del Diablo (Devil\'s Cauldron) Waterfall before settling into your hotel.',
           es: 'Viaje por la Avenida de los Volcanes hacia Baños de Agua Santa, al pie del volcán Tungurahua. Visita a la imponente cascada Pailón del Diablo (Devil\'s Cauldron) y noche en Baños.'
         },
+        image: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
         accommodation: { en: 'Baños', es: 'Baños' },
         activity: { en: '8-hour guided tour', es: 'Tour guiado de 8 horas' },
         transportation: { en: 'Private vehicle (4x4 or tourist bus)', es: 'Vehículo privado' },
@@ -2751,6 +2769,7 @@ const multiDayTours: Tour[] = [
           en: 'Start early with a visit to the Chimborazo Reserve, home to Chimborazo Volcano, Ecuador’s highest mountain at approximately 6,310 meters (20,700 ft) above sea level.\n\nEnjoy the opportunity to observe the unique flora and fauna of the high Andean páramo and hike toward the mountain refuge at approximately 5,000 meters (16,400 ft), weather and conditions permitting.\n\nContinue toward Cuenca, with a fascinating stop at Ingapirca, Ecuador’s most important Inca archaeological complex.',
           es: 'Ascenso a la Reserva Chimborazo (6,310 m), la montaña más alta del Ecuador y el punto más cercano al Sol. Caminata hacia el refugio a 5,000 m. Continuación a Ingapirca, el complejo arqueológico inca más importante del país, y llegada a Cuenca.'
         },
+        image: '/images/tours/16-9/chimborazo-volcano-16-9.webp',
         accommodation: { en: 'Cuenca', es: 'Cuenca' },
         activity: { en: '8-hour guided tour', es: 'Tour guiado de 8 horas' },
         transportation: { en: 'Private vehicle (4x4 or tourist bus)', es: 'Vehículo privado' },
@@ -2766,6 +2785,7 @@ const multiDayTours: Tour[] = [
           en: 'Discover Cuenca, another UNESCO World Heritage Site and one of Ecuador’s most beautiful cities, famous for its charming streets, historic buildings, plazas and churches.\n\nVisit: Cuenca Cathedral, Plaza de las Flores, a traditional toquilla straw hat workshop (Panama hats), El Barranco along the Tomebamba River, and modern Cuenca. Finish the tour at El Turi Viewpoint, offering panoramic views over the city.\n\nThe remainder of the afternoon is free for you to explore Cuenca at your own pace.',
           es: 'City tour en Cuenca (Patrimonio UNESCO): Catedral Nueva, Plaza de las Flores, fábrica de sombreros de paja toquilla, El Barranco del Río Tomebamba y Mirador de Turi. Tarde libre.'
         },
+        image: '/images/tours/16-9/cuenca-colonial-16-9.webp',
         accommodation: { en: 'Cuenca', es: 'Cuenca' },
         activity: { en: '3-hour guided tour', es: 'Tour guiado de 3 horas' },
         transportation: { en: 'Private vehicle (4x4 or tourist bus)', es: 'Vehículo privado' },
@@ -2781,6 +2801,7 @@ const multiDayTours: Tour[] = [
           en: 'Depart Cuenca and travel west through the spectacular Cajas National Park, famous for its rugged Andean landscapes and approximately 200 natural lakes and lagoons.\n\nDepending on weather and trail conditions, enjoy a hike around Laguna Toreadora, while observing the distinctive flora and fauna of Ecuador’s high-altitude páramo ecosystem.\n\nFrom the high Andes, the road then descends dramatically toward sea level, arriving in Guayaquil, Ecuador’s largest port city and economic capital.',
           es: 'Cruce del Parque Nacional Cajas con más de 200 lagunas glaciares. Caminata alrededor de la Laguna Toreadora y descenso panorámico desde los Andes hasta la ciudad costera de Guayaquil.'
         },
+        image: '/images/tours/16-9/parque-nacional-el-cajas-16-9.webp',
         accommodation: { en: 'Guayaquil', es: 'Guayaquil' },
         activity: { en: '6-hour guided tour, including 2h hike (up to 3,500m)', es: 'Tour guiado de 6h con caminata de 2h' },
         transportation: { en: 'Private vehicle (4x4 or tourist bus)', es: 'Vehículo privado' },
@@ -2796,6 +2817,7 @@ const multiDayTours: Tour[] = [
           en: 'Private transfer to José Joaquín de Olmedo International Airport in Guayaquil for your onward flight or connection to the Galápagos Islands.\n\nEnd of the Ecuador Fantastic journey.',
           es: 'Traslado privado al Aeropuerto Internacional José Joaquín de Olmedo en Guayaquil para su vuelo internacional o conexión a Galápagos. Fin del viaje.'
         },
+        image: '/images/tours/16-9/guayaquil-16-9.webp',
         transportation: { en: 'Private airport transfer', es: 'Traslado privado al aeropuerto' }
       }
     ]
@@ -2896,6 +2918,7 @@ const multiDayTours: Tour[] = [
           en: 'Upon arrival at Mariscal Sucre International Airport in Quito, you will be welcomed by our representative and assisted with your private transfer to the hotel.\n\nThe remainder of the day will be free to rest and acclimatize to the altitude of Quito.',
           es: 'Llegada al Aeropuerto de Quito, bienvenida por nuestro representante y traslado privado al hotel. Tiempo libre para descansar y aclimatarse.'
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         transportation: { en: 'Private transfer', es: 'Traslado privado' },
         meals: { en: 'Not included', es: 'No incluidas' }
@@ -2910,6 +2933,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will explore Quito, the capital of Ecuador and one of the country\'s most important cultural destinations. The city was declared a UNESCO World Heritage Site in 1978 and is renowned for its beautifully preserved historic center, colonial architecture and spectacular Andean setting.\n\nOur city tour will include both the modern and historic areas of Quito. In the historic center, we will visit some of the city\'s most important landmarks, including Plaza Grande, where we will see the Metropolitan Cathedral, the Archbishop\'s Palace and the Presidential Palace.\n\nWe will continue to the impressive Church of La Compañía de Jesús, famous for its richly decorated interior covered with gold leaf. We will also visit San Francisco Square and Church, one of the most iconic architectural complexes in Quito.\n\nAfter exploring the historic center, we will continue towards the Equator Monument and Mitad del Mundo. Here, we will visit the Intiñan Museum, where you can learn about indigenous cultures and participate in a variety of fascinating experiments related to the Equator.\n\nYou will have the opportunity to experience the unique sensation of standing at the Equator, where the Northern and Southern Hemispheres meet.',
           es: 'City tour completo por Quito colonial: Plaza Grande, Catedral, Palacio de Carondelet, Iglesia de la Compañía de Jesús y San Francisco. Traslado a la Mitad del Mundo y Museo Intiñan.'
         },
+        image: '/images/tours/16-9/mitad-del-mundo-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         activity: { en: '5-hour guided tour', es: 'Tour guiado de 5 horas' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2925,6 +2949,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will travel east from Quito towards Papallacta, following a historic route once used by Spanish explorers in the 16th century in their search for gold and cinnamon, eventually leading towards the discovery and exploration of the Amazon region.\n\nAlong the way, we will pass by Guápulo Church and continue through the spectacular Andean mountains, reaching elevations of approximately 4,100 meters / 13,450 feet above sea level.\n\nThe route passes through protected natural areas and offers impressive views of the Andean landscape before descending gradually towards the transition zone between the Andes and the Amazon Basin.\n\nWe will stop at the famous Papallacta Hot Springs, where you can enjoy the thermal pools at different temperatures while admiring the surrounding mountain scenery and, weather permitting, views of Antisana Volcano (5,704 meters / 18,714 feet).\n\nYou may also choose to relax at the spa, enjoy a massage or hydrotherapy treatment, or take a short walk along the surrounding trails.\n\nAfter the visit, we will continue our descent towards the Amazon region and the town of Tena.',
           es: 'Viaje hacia la Amazonía cruzando los Andes a 4,100 m. Parada en las Termas de Papallacta para disfrutar de sus aguas termales frente al Antisana. Descenso al lodge en Tena.'
         },
+        image: '/images/tours/16-9/papallacta-laguna-16-9.webp',
         accommodation: { en: 'Tena – Lodge', es: 'Tena – Lodge' },
         activity: { en: '6-hour guided tour + 1h nature walk', es: 'Tour guiado de 6h + caminata de 1h' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2940,6 +2965,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will begin our Amazon adventure with a motorized canoe ride along the river, traveling downstream through the lush rainforest.\n\nOur first visit will be to a wildlife rescue and rehabilitation center, where you will learn about native Amazonian species and conservation efforts to protect animals affected by illegal wildlife trafficking and other threats.\n\nWe will then continue into the primary rainforest, where, accompanied by a local native guide, we will take a hike through the jungle. The walk offers an opportunity to discover the incredible biodiversity of the Amazon and learn about the traditional uses of plants and the relationship between local communities and the forest.\n\nWe will also visit a local Kichwa family, where you will have the opportunity to learn about their traditions, customs and culture and gain a deeper understanding of their connection with the Amazon environment.\n\nOur final visit will be to a caiman lagoon, where we will learn about these fascinating reptiles and the aquatic ecosystems of the rainforest.\n\nAfter the excursion, we will return to the lodge.',
           es: 'Canoa motorizada por el río, visita a centro de rescate de animales silvestres, caminata botánica en selva primaria con guía nativo, encuentro cultural con familia Kichwa y laguna de caimanes.'
         },
+        image: '/images/tours/16-9/amazon-river-16-9.webp',
         accommodation: { en: 'Tena – Lodge', es: 'Tena – Lodge' },
         activity: { en: '6-hour guided tour + 1h motorized canoe ride', es: 'Tour de 6h + canoa motorizada de 1h' },
         transportation: { en: 'Private transportation and motorized canoe', es: 'Transporte privado y canoa motorizada' },
@@ -2955,6 +2981,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will visit Paikawe Reserve, a beautiful Amazonian natural area where you will have the opportunity to experience the rainforest from both land and water.\n\nWe will take a walk through primary rainforest, accompanied by a local guide, and learn about the biodiversity and natural environment of the region.\n\nWe will then navigate the lagoon by canoe, where you may have the opportunity to observe some of the giant fish species found in the Amazon, depending on natural conditions and wildlife activity.\n\nAfter the visit, we will begin our return journey to Quito.',
           es: 'Caminata en la selva de la Reserva Paikawe y canoa por la laguna para observar los peces gigantes del Amazonas. Retorno a Quito.'
         },
+        image: '/images/tours/16-9/amazon-nutria-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         activity: { en: '6-hour guided tour + 1h rainforest hike', es: 'Tour de 6h + caminata de 1h' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -2970,6 +2997,7 @@ const multiDayTours: Tour[] = [
           en: 'Today is free to enjoy Quito at your own pace.\n\nYou may choose to explore the city independently, visit additional museums and cultural attractions, enjoy local cuisine, or simply relax at the hotel.\n\nThis free day also provides an opportunity to rest before continuing your journey to the Galápagos Islands the following day.\n\nOptional excursions and activities can be arranged upon request.',
           es: 'Día libre en Quito para recorrer la ciudad a su ritmo y descansar antes del viaje a Galápagos.'
         },
+        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         meals: { en: 'Breakfast', es: 'Desayuno' }
       },
@@ -2983,6 +3011,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, transfer to Mariscal Sucre International Airport for your flight to the Galápagos Islands.\n\nUpon arrival at Seymour Airport on Baltra Island, you will be welcomed by our representative and begin your Galápagos adventure.\n\nAfter crossing the Itabaca Channel to Santa Cruz Island, we will continue towards the highlands to visit the famous Twin Craters (Los Gemelos), two impressive volcanic formations surrounded by the lush vegetation of the Santa Cruz highlands.\n\nHere, you will learn about the geological origins of the island and discover the unique Scalesia forest, one of the characteristic ecosystems of the Santa Cruz highlands.\n\nWe will then continue to Primicias Ranch, a private reserve where giant Galápagos tortoises can be observed roaming freely in their natural environment. This is an excellent opportunity to photograph these iconic animals and learn about their importance to the Galápagos ecosystem.\n\nAfter the excursion, we will continue to Puerto Ayora for hotel check-in and the remainder of the day at leisure.',
           es: 'Vuelo a Galápagos (Baltra), bienvenida y cruce del Canal de Itabaca hacia Santa Cruz. Visita a los Cráteres Gemelos en el bosque de Scalesia y Rancho Primicias con tortugas gigantes en libertad. Check-in en Puerto Ayora.'
         },
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
         accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
         meals: { en: 'Breakfast', es: 'Desayuno' },
         transportation: { en: 'Private land transportation and airport shuttle', es: 'Transporte privado terrestre y shuttle de aeropuerto' }
@@ -2997,6 +3026,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will transfer to the pier to board a speedboat to Isabela Island. The crossing takes approximately 2 to 2.5 hours, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, we will begin our exploration of Isabela.\n\nOur first stop will be the Flamingo Lagoon, one of the island\'s most important wetland areas. Here, you may observe Galápagos flamingos feeding and resting in the shallow waters, together with other species of coastal and migratory birds.\n\nWe will then visit the Giant Tortoise Breeding Center, where you will learn about the conservation and breeding programs established to protect Isabela\'s giant tortoise populations.\n\nIn the afternoon, we will take a boat excursion to Tintoreras Islet, a small volcanic islet located just off the coast of Isabela. The area is famous for its crystal-clear waters and rich marine life.\n\nDuring the snorkeling activity, you may have the opportunity to encounter sea lions, sea turtles, rays, colorful tropical fish and Galápagos penguins, depending on sea conditions and wildlife activity.\n\nAfter the excursion, return to Puerto Villamil and enjoy the evening at leisure.',
           es: 'Lancha rápida a Isla Isabela. Visita a la Laguna de Flamingos y al Centro de Crianza de Tortugas Gigantes. Por la tarde, excursión náutica a Tintoreras para snorkel con lobos marinos, tortugas, pingüinos y rayas. Noche en Isabela.'
         },
+        image: '/images/tours/16-9/galapagos-isabela-island-16-9.webp',
         accommodation: { en: 'Isabela Island – Puerto Villamil', es: 'Isla Isabela – Puerto Villamil' },
         meals: { en: 'Breakfast', es: 'Desayuno' },
         activity: { en: 'Full-day guided excursion and snorkeling', es: 'Excursión guiada full-day y snorkeling' },
@@ -3012,6 +3042,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will return to the pier for the speedboat transfer back to Santa Cruz Island.\n\nUpon arrival in Puerto Ayora, we will continue with a visit to La Lobería, a small coastal area known for its population of Galápagos sea lions. This is an excellent place to observe these playful animals both on the beach and in the water.\n\nWe will then visit Las Grietas, a spectacular natural formation created by volcanic activity. This narrow canyon is filled with clear, turquoise water and is one of the most popular swimming and snorkeling sites near Puerto Ayora.\n\nDuring the snorkeling activity, you will have the opportunity to explore the underwater environment and observe colorful tropical fish and other marine species.\n\nAfter the excursion, return to Puerto Ayora and check in at your hotel. The remainder of the afternoon and evening will be free to relax or explore the town independently.',
           es: 'Lancha de regreso a Santa Cruz. Visita a La Lobería para observar lobos marinos e iguanas, seguida de caminata y natación en las aguas cristalinas de Las Grietas. Tarde libre en Puerto Ayora.'
         },
+        image: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
         accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
         meals: { en: 'Breakfast', es: 'Desayuno' },
         activity: { en: 'Guided excursion and snorkeling', es: 'Excursión guiada y snorkeling' },
@@ -3027,6 +3058,7 @@ const multiDayTours: Tour[] = [
           en: 'Today, enjoy a full-day boat excursion to one of the Galápagos\' outstanding snorkeling destinations: Santa Fe Island or Pinzón Island, depending on availability, sea conditions and the selected tour.\n\nSanta Fe Island is known for its beautiful turquoise waters, white sandy beaches and endemic wildlife. During the excursion, you may encounter sea lions, sea turtles, rays, marine iguanas and a variety of tropical fish. The island is also home to the endemic Santa Fe land iguana.\n\nAlternatively, the excursion may take you to Pinzón Island, a spectacular location surrounded by clear waters and abundant marine life. The snorkeling sites around Pinzón are particularly well known for encounters with sea turtles, sea lions, rays, colorful fish and, with some luck, Galápagos penguins.\n\nThe day will include navigation, snorkeling and opportunities to observe wildlife both above and below the water. Lunch will generally be provided during the excursion, depending on the selected tour.\n\nReturn to Puerto Ayora in the afternoon and enjoy your final evening in the Galápagos.',
           es: 'Navegación de día completo en yate hacia Santa Fe o Pinzón con sesiones de snorkel de alta biodiversidad. Almuerzo a bordo incluido. Retorno por la tarde a Puerto Ayora.'
         },
+        image: '/images/tours/16-9/santa-fe-island-16-9.webp',
         accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
         meals: { en: 'Breakfast and lunch', es: 'Desayuno y almuerzo' },
         activity: { en: 'Full-day boat excursion and snorkeling', es: 'Excursión en barco full-day y snorkel' }
@@ -3041,6 +3073,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, check out from the hotel and begin the transfer from Puerto Ayora to Baltra Airport.\n\nThe journey includes transportation across Santa Cruz Island and the crossing of the Itabaca Channel, followed by the airport shuttle to Seymour Airport (Baltra).\n\nUpon arrival at the airport, assistance will be provided for your departure flight, marking the end of your Ecuador and Galápagos Islands experience.',
           es: 'Traslado al Aeropuerto de Baltra y vuelo de retorno a Quito. Recepción y traslado al hotel en Quito.'
         },
+        image: '/images/tours/16-9/galapagos-baltra-island-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         meals: { en: 'Breakfast', es: 'Desayuno' },
         transportation: { en: 'Private land transportation and airport shuttle', es: 'Transporte privado y shuttle de aeropuerto' }
@@ -3055,6 +3088,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, check out from the hotel and meet your private driver for your transfer to Mariscal Sucre International Airport.\n\nAssistance will be provided for your departure flight and international connections.\n\nThis marks the end of your Ecuador and Galápagos Islands experience.',
           es: 'Desayuno y traslado privado al Aeropuerto Mariscal Sucre de Quito para abordar su vuelo internacional de retorno. Fin de los servicios.'
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         meals: { en: 'Breakfast', es: 'Desayuno' },
         transportation: { en: 'Private airport transfer', es: 'Traslado privado al aeropuerto' }
       }
@@ -3154,6 +3188,7 @@ const multiDayTours: Tour[] = [
           en: 'Upon arrival at Mariscal Sucre International Airport in Quito, you will be welcomed by our representative and assisted with your private transfer to the hotel.\n\nThis program can begin on any day of the week, depending on your travel arrangements.\n\nThe remainder of the day will be free to rest and acclimatize to the altitude of Quito.',
           es: 'Llegada al Aeropuerto Mariscal Sucre de Quito, recepción y traslado privado al hotel. Tiempo libre para descansar y aclimatarse.'
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado (vehículos 4x4 o buses turísticos)' },
         meals: { en: 'Not included', es: 'No incluidas' }
@@ -3168,6 +3203,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will travel south along the Pan-American Highway, following the famous Avenue of the Volcanoes, one of the most spectacular landscapes in the Ecuadorian Andes.\n\nThe route takes us through a region surrounded by numerous volcanic peaks before continuing towards Baños de Agua Santa, a charming tourist town located at the foothills of the active Tungurahua Volcano.\n\nBaños is surrounded by dramatic mountain scenery, waterfalls and lush vegetation, offering a wide variety of adventure activities such as cycling, rafting, hiking, tarabita cable-car rides and horseback riding.\n\nDuring today\'s excursion, we will visit the spectacular Pailón del Diablo (Devil\'s Cauldron) Waterfall, one of Ecuador\'s most impressive waterfalls. We will follow the trails through the lush vegetation and enjoy different viewpoints of the waterfall.\n\nBaños is located in a unique geographical setting between the Andes and the Amazon region, creating an extraordinary combination of ecosystems and landscapes.\n\nAfter the visit, we will continue to the hotel in Baños.',
           es: 'Viaje hacia el sur por la Panamericana a través de la Avenida de los Volcanes hacia Baños de Agua Santa, al pie del volcán Tungurahua. Excursión y caminata a la cascada Pailón del Diablo (Devil\'s Cauldron). Noche en Baños.'
         },
+        image: '/images/tours/16-9/pailon-del-diablo-16-9.webp',
         accommodation: { en: 'Baños', es: 'Baños' },
         activity: { en: '8-hour guided tour', es: 'Tour guiado de 8 horas' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -3183,6 +3219,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will head east towards the Amazon Rainforest, traveling through the spectacular Pastaza River Canyon on our way to the city of Puyo, one of the gateways to Ecuador\'s Amazon region.\n\nOur first stop will be Yanacocha Biopark, where you will learn about and observe native animal species that have been rescued from illegal wildlife trafficking. The biopark is dedicated to wildlife conservation and environmental education.\n\nWe will then continue into the Amazon Rainforest for a guided hike through the lush vegetation to Hola Vida Waterfall. The approximately two-hour hike offers an opportunity to experience the extraordinary biodiversity of the rainforest and enjoy its natural surroundings.\n\nLater, we will visit a local Kichwa family, where you will have the opportunity to learn about their traditions, customs and way of life. This cultural encounter provides an authentic insight into the relationship between the local community and the Amazon Rainforest.\n\nWe will then begin our return journey to Baños.',
           es: 'Viaje por el cañón del Pastaza hacia la selva de Puyo. Visita al Bioparque Yanacocha, caminata de 2h a la cascada Hola Vida y encuentro cultural con una familia Kichwa. Retorno a Baños.'
         },
+        image: '/images/tours/16-9/puyo-yanacocha-16-9.webp',
         accommodation: { en: 'Baños', es: 'Baños' },
         activity: { en: '6-hour guided tour + 2-hour rainforest hike', es: 'Tour de 6h + caminata en selva de 2h' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -3198,6 +3235,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will begin our journey towards Quito, traveling through some of the most spectacular landscapes of the Ecuadorian Andes.\n\nOur main stop will be Quilotoa Crater Lake, one of Ecuador\'s most iconic natural attractions. The lake lies inside the crater of an ancient volcano and is famous for its striking turquoise-green waters surrounded by dramatic Andean landscapes.\n\nDuring the visit, you will have the opportunity to enjoy a two-hour hike towards the bottom of the crater. The descent provides spectacular views of the lake and surrounding mountains. Please note that the return hike is more demanding due to the steep terrain and altitude.\n\nAlong the way, we may also stop at the traditional village of Tigua, famous for its colorful paintings depicting Andean culture and everyday life. Depending on local availability, we may also visit a traditional guinea pig farm and learn about this important element of Andean rural life.\n\nWe will then continue to Quito.',
           es: 'Viaje al Cráter Volcánico de Quilotoa con caminata de 2h hacia la laguna verde esmeralda. Parada en el pueblo de pintores de Tigua y continuación hacia Quito.'
         },
+        image: '/images/tours/16-9/laguna-quilotoa-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         activity: { en: '6-hour guided tour + 2-hour hike (3,500 m / 11,500 ft)', es: 'Tour de 6h + caminata de 2h (3,500 m)' },
         transportation: { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
@@ -3213,6 +3251,7 @@ const multiDayTours: Tour[] = [
           en: 'Today is free to enjoy Quito at your own pace.\n\nYou may choose to explore the city\'s historic center, visit museums and cultural attractions, discover local cuisine, or simply relax at the hotel.\n\nOptional excursions and activities can be arranged upon request.\n\nThis free day also provides an opportunity to rest before continuing your journey to the Galápagos Islands the following day.',
           es: 'Día libre en Quito para explorar sus tesoros históricos, gastronomía o descansar antes del vuelo a Galápagos.'
         },
+        image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         meals: { en: 'Breakfast', es: 'Desayuno' },
         transportation: { en: 'Not included unless specified', es: 'No incluido' }
@@ -3227,6 +3266,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, transfer to Mariscal Sucre International Airport for your flight to the Galápagos Islands.\n\nUpon arrival at Seymour Airport on Baltra Island, you will be welcomed by our representative and begin your Galápagos adventure.\n\nAfter crossing the Itabaca Channel to Santa Cruz Island, we will travel to the highlands to visit the famous Twin Craters (Los Gemelos). These impressive volcanic formations are surrounded by lush Scalesia forest and offer an excellent introduction to the unique geological landscape of Santa Cruz Island.\n\nWe will then continue to Primicias Ranch, a private reserve where giant Galápagos tortoises can be observed roaming freely in their natural environment. During the visit, you will learn about these iconic animals and their importance to the Galápagos ecosystem.\n\nAfter the excursion, we will continue to Puerto Ayora for hotel check-in and the remainder of the day at leisure.',
           es: 'Vuelo a Baltra, bienvenida y cruce a Santa Cruz. Visita a los Cráteres Gemelos en el bosque de Scalesia y Rancho Primicias con tortugas gigantes en libertad. Check-in en Puerto Ayora.'
         },
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
         accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
         meals: { en: 'Breakfast', es: 'Desayuno' },
         transportation: { en: 'Private land transportation and airport shuttle', es: 'Transporte privado terrestre y shuttle de aeropuerto' }
@@ -3241,6 +3281,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, transfer to the pier to board a speedboat to Isabela Island. The navigation takes approximately 2 to 2.5 hours, depending on sea conditions.\n\nUpon arrival in Puerto Villamil, we will visit the Giant Tortoise Breeding Center, where you will learn about the conservation and breeding programs established to protect Isabela\'s giant tortoise populations.\n\nWe will then visit the Flamingo Lagoon, one of the island\'s most important wetlands. Depending on natural conditions, you may observe Galápagos flamingos and other bird species in their natural habitat.\n\nThe excursion will continue with a boat trip to Tintoreras Islet, a small volcanic islet located just off the coast of Isabela. Its clear waters and rich marine environment make it an excellent snorkeling destination.\n\nDuring the snorkeling activity, you may have the opportunity to observe sea lions, sea turtles, rays, penguins and colorful tropical fish, depending on wildlife activity and sea conditions.\n\nAfter the excursion, we will return by speedboat to Santa Cruz Island and Puerto Ayora.',
           es: 'Lancha rápida a Isabela. Visita al Centro de Crianza y Laguna de Flamingos. Excursión náutica al Islote Tintoreras con snorkeling (lobos marinos, tortugas, pingüinos, rayas y peces). Retorno a Santa Cruz.'
         },
+        image: '/images/tours/16-9/galapagos-isabela-island-16-9.webp',
         accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
         meals: { en: 'Breakfast and lunch', es: 'Desayuno y almuerzo' },
         activity: { en: 'Full-day guided excursion and snorkeling', es: 'Excursión guiada full-day y snorkeling' },
@@ -3256,6 +3297,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, we will begin the day\'s activities with a visit to La Lobería, a coastal area famous for its resident population of Galápagos sea lions. Here, you will have the opportunity to observe these playful animals in their natural environment.\n\nWe will then continue to Punta Estrada, a beautiful coastal area surrounded by rocky formations and clear waters. The area offers excellent opportunities for nature observation and marine activities.\n\nThe excursion will continue to Las Grietas, a spectacular natural formation consisting of a narrow volcanic canyon filled with crystal-clear turquoise water. This is one of the most popular snorkeling and swimming sites near Puerto Ayora.\n\nDuring the snorkeling activity, you can explore the underwater environment and observe a variety of colorful fish and marine life.\n\nAfter the visit, return to Puerto Ayora and enjoy the remainder of the day at leisure.',
           es: 'Visita a La Lobería con lobos marinos, Punta Estrada y natación/snorkel en el cañón volcánico de Las Grietas. Tarde libre en Puerto Ayora.'
         },
+        image: '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
         accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
         meals: { en: 'Breakfast', es: 'Desayuno' },
         activity: { en: 'Guided excursion and snorkeling', es: 'Excursión guiada y snorkel' }
@@ -3270,6 +3312,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, enjoy a free day in Santa Cruz Island.\n\nThis day can be used to relax at the hotel, explore Puerto Ayora independently, visit local shops and restaurants, or simply enjoy the island at your own pace.\n\nOptional excursions and activities can be arranged upon request, depending on availability and local conditions.',
           es: 'Día libre en Santa Cruz para disfrutar de Puerto Ayora, Playa Tortuga Bay o tours opcionales.'
         },
+        image: '/images/tours/16-9/galapagos-puerto-ayora-16-9.webp',
         accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
         meals: { en: 'Breakfast', es: 'Desayuno' }
       },
@@ -3283,6 +3326,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, check out from the hotel and begin the transfer from Puerto Ayora to Baltra Airport.\n\nThe journey includes transportation across Santa Cruz Island and the crossing of the Itabaca Channel, followed by the airport shuttle to Seymour Airport.\n\nUpon arrival at the airport, assistance will be provided for your departure flight, marking the end of your Ecuador and Galápagos Islands experience.',
           es: 'Traslado al Aeropuerto Seymour de Baltra y vuelo de retorno a Quito. Recepción y traslado al hotel.'
         },
+        image: '/images/tours/16-9/galapagos-baltra-island-16-9.webp',
         accommodation: { en: 'Quito', es: 'Quito' },
         meals: { en: 'Breakfast', es: 'Desayuno' },
         transportation: { en: 'Private land transportation and airport shuttle', es: 'Transporte privado y shuttle de aeropuerto' }
@@ -3297,6 +3341,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, check out from the hotel and meet your private driver for your transfer to Mariscal Sucre International Airport.\n\nAssistance will be provided for your departure flight and international connections.\n\nThis marks the end of your Ecuador and Galápagos Islands experience.',
           es: 'Desayuno y traslado privado al Aeropuerto Mariscal Sucre de Quito para abordar su vuelo internacional de retorno. Fin de los servicios.'
         },
+        image: '/images/tours/16-9/quito-colonial-16-9.webp',
         meals: { en: 'Breakfast', es: 'Desayuno' },
         transportation: { en: 'Private airport transfer', es: 'Traslado privado al aeropuerto' }
       }
