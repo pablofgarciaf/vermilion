@@ -127,7 +127,7 @@ export default function PrivacyPolicyPage() {
               <li><strong>Payments & Transactions:</strong> Payment status, amount, currency, receipts, processor order IDs, capture IDs, transaction references, and anti-fraud signals. Vermilion does <strong>not</strong> store full card numbers, CVV codes, or card expiration data; card processing is handled by PCI-DSS compliant payment providers such as Stripe and PayPal.</li>
               <li><strong>Invoicing:</strong> Tax identification and official billing addresses where requested.</li>
               <li><strong>Customer Support:</strong> Inquiries, preferences, and communication history.</li>
-              <li><strong>Cookies, Analytics & Advertising:</strong> Consent choices, affiliate attribution references, browsing preferences, page interactions, and campaign measurement data when you authorize optional measurement technologies.</li>
+              <li><strong>Cookies, Analytics & Advertising:</strong> Consent choices, affiliate attribution references, browsing preferences, page interactions, and campaign data when you authorize optional cookies or similar technologies.</li>
             </ul>
           </section>
 
@@ -144,7 +144,7 @@ export default function PrivacyPolicyPage() {
               <li>Providing active customer support, itinerary updates, and urgent travel alerts.</li>
               <li>Sending customized commercial communications and promotions (with prior user consent).</li>
               <li>Auditing security and fraud prevention.</li>
-              <li>Measuring website performance and advertising campaigns only where required consent has been granted.</li>
+              <li>Understanding website performance and improving advertising campaigns only where required cookie consent has been granted.</li>
             </ul>
           </section>
 
@@ -158,7 +158,7 @@ export default function PrivacyPolicyPage() {
               <li>Execution of the contractual travel mediation agreement.</li>
               <li>Adoption of pre-contractual measures requested by the client.</li>
               <li>Compliance with legal, fiscal, and regulatory tourism obligations.</li>
-              <li>Explicit user consent for marketing communications, analytics, advertising measurement, and optional cookies or similar technologies.</li>
+              <li>Explicit user consent for marketing communications, analytics, advertising cookies, and optional cookies or similar technologies.</li>
               <li>Legitimate interest for essential security, fraud prevention, service integrity, and affiliate attribution necessary to honor a valid referral.</li>
             </ul>
           </section>
@@ -178,23 +178,23 @@ export default function PrivacyPolicyPage() {
               <li>Competent public and judicial authorities upon statutory legal request.</li>
             </ul>
             <p>
-              Because we serve international travelers, some providers may process data outside your country of residence, including Ecuador, the United States, the United Kingdom, the European Economic Area, or other jurisdictions where our providers operate. Where required, we rely on contractual safeguards, provider security commitments, and user consent for optional measurement technologies.
+              Because we serve international travelers, some providers may process data outside your country of residence, including Ecuador, the United States, the United Kingdom, the European Economic Area, or other jurisdictions where our providers operate. Where required, we rely on contractual safeguards, provider security commitments, and user consent for optional cookies or similar technologies.
             </p>
           </section>
 
           {/* Section 6 */}
           <section className="space-y-3 bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-6">
-            <h3 className="text-lg font-bold text-white">6. Cookies, Consent & Advertising Measurement</h3>
+            <h3 className="text-lg font-bold text-white">6. Cookies, Consent & Advertising Tools</h3>
             <p>
-              Essential cookies and local storage are used to keep the website secure, remember basic preferences, manage language selection, preserve affiliate attribution, and support booking flows. Optional analytics and advertising measurement tools are activated only after consent where applicable.
+              Necessary cookies and local storage are used to keep the website secure, remember basic preferences, manage language selection, preserve affiliate attribution, and support booking flows. Optional analytics and advertising cookies are activated only after consent where applicable.
             </p>
             <ul className="space-y-1.5 list-disc list-inside text-zinc-300 pl-2">
-              <li><strong>Essential technologies:</strong> language preference, security, booking state, affiliate referral references, and site functionality.</li>
-              <li><strong>Analytics and advertising:</strong> Google Analytics, Google Ads measurement, Meta Pixel, or Microsoft Clarity may be used only when configured and consented to, to understand campaign performance and improve the website.</li>
+              <li><strong>Necessary technologies:</strong> language preference, security, booking state, affiliate referral references, and site functionality.</li>
+              <li><strong>Optional cookies:</strong> Google Analytics, Google Ads, Meta Pixel, or Microsoft Clarity may be used only when configured and consented to, to understand campaign performance and improve the website.</li>
               <li><strong>Payment and fraud prevention:</strong> Stripe, PayPal, Firebase, and related security services may process technical signals necessary to complete payments and prevent abuse.</li>
             </ul>
             <p>
-              You can decline optional measurement from the consent banner and can also clear your browser storage or contact us to request help with privacy choices.
+              You can decline optional cookies from the consent banner. After making a choice, a small &ldquo;Cookies&rdquo; button remains available on the site so you can reopen your privacy choices. You can also clear your browser storage or contact us to request help with privacy choices.
             </p>
           </section>
 

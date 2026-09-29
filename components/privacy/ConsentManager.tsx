@@ -27,62 +27,71 @@ const copy: Record<string, {
   body: string;
   accept: string;
   essential: string;
+  manage: string;
   policy: string;
 }> = {
   es: {
-    title: 'Tu privacidad importa',
-    body: 'Usamos cookies esenciales para operar el sitio. Con tu permiso, activamos analítica y medición publicitaria para mejorar la experiencia y medir campañas.',
-    accept: 'Aceptar medición',
-    essential: 'Solo esenciales',
+    title: 'Cookies y privacidad',
+    body: 'Usamos cookies necesarias para que la web funcione. Con tu permiso, también usamos cookies opcionales para entender visitas, mejorar la experiencia y optimizar campañas.',
+    accept: 'Aceptar cookies opcionales',
+    essential: 'Solo cookies necesarias',
+    manage: 'Cookies',
     policy: 'Ver política de privacidad',
   },
   en: {
-    title: 'Your privacy matters',
-    body: 'We use essential cookies to operate the site. With your permission, we enable analytics and advertising measurement to improve the experience and measure campaigns.',
-    accept: 'Accept measurement',
-    essential: 'Essentials only',
+    title: 'Cookies and privacy',
+    body: 'We use necessary cookies to keep the website working. With your permission, we also use optional cookies to understand visits, improve the experience, and optimize campaigns.',
+    accept: 'Accept optional cookies',
+    essential: 'Necessary cookies only',
+    manage: 'Cookies',
     policy: 'View privacy policy',
   },
   fr: {
-    title: 'Votre confidentialité compte',
-    body: 'Nous utilisons des cookies essentiels au fonctionnement du site. Avec votre accord, nous activons l’analyse et la mesure publicitaire.',
-    accept: 'Accepter la mesure',
-    essential: 'Essentiels seulement',
+    title: 'Cookies et confidentialité',
+    body: 'Nous utilisons des cookies nécessaires au fonctionnement du site. Avec votre accord, nous utilisons aussi des cookies optionnels pour améliorer l’expérience et les campagnes.',
+    accept: 'Accepter les cookies optionnels',
+    essential: 'Cookies nécessaires seulement',
+    manage: 'Cookies',
     policy: 'Voir la politique de confidentialité',
   },
   de: {
-    title: 'Ihre Privatsphäre zählt',
-    body: 'Wir verwenden notwendige Cookies für den Betrieb der Website. Mit Ihrer Zustimmung aktivieren wir Analyse- und Werbemessung.',
-    accept: 'Messung akzeptieren',
-    essential: 'Nur erforderliche',
+    title: 'Cookies und Datenschutz',
+    body: 'Wir verwenden notwendige Cookies für den Betrieb der Website. Mit Ihrer Zustimmung nutzen wir optionale Cookies, um Besuche zu verstehen und Kampagnen zu verbessern.',
+    accept: 'Optionale Cookies akzeptieren',
+    essential: 'Nur notwendige Cookies',
+    manage: 'Cookies',
     policy: 'Datenschutz ansehen',
   },
   zh: {
-    title: '我们重视您的隐私',
-    body: '我们使用必要 Cookie 来运行网站。经您同意后，我们会启用分析和广告衡量，以改善体验并衡量活动效果。',
-    accept: '接受衡量',
-    essential: '仅必要项',
+    title: 'Cookie 与隐私',
+    body: '我们使用必要 Cookie 保持网站正常运行。经您同意后，我们也会使用可选 Cookie 来了解访问、改善体验并优化广告活动。',
+    accept: '接受可选 Cookie',
+    essential: '仅必要 Cookie',
+    manage: 'Cookies',
     policy: '查看隐私政策',
   },
   it: {
-    title: 'La tua privacy conta',
-    body: 'Usiamo cookie essenziali per far funzionare il sito. Con il tuo consenso abilitiamo analisi e misurazione pubblicitaria.',
-    accept: 'Accetta misurazione',
-    essential: 'Solo essenziali',
+    title: 'Cookie e privacy',
+    body: 'Usiamo cookie necessari per far funzionare il sito. Con il tuo consenso usiamo anche cookie opzionali per capire le visite, migliorare l’esperienza e ottimizzare le campagne.',
+    accept: 'Accetta cookie opzionali',
+    essential: 'Solo cookie necessari',
+    manage: 'Cookies',
     policy: 'Vedi privacy policy',
   },
   pt: {
-    title: 'A sua privacidade importa',
-    body: 'Usamos cookies essenciais para operar o site. Com a sua permissão, ativamos análise e medição publicitária.',
-    accept: 'Aceitar medição',
-    essential: 'Só essenciais',
+    title: 'Cookies e privacidade',
+    body: 'Usamos cookies necessários para o site funcionar. Com a sua permissão, também usamos cookies opcionais para entender visitas, melhorar a experiência e otimizar campanhas.',
+    accept: 'Aceitar cookies opcionais',
+    essential: 'Só cookies necessários',
+    manage: 'Cookies',
     policy: 'Ver política de privacidade',
   },
   ja: {
-    title: 'プライバシーを尊重します',
-    body: 'サイト運営に必要な Cookie を使用します。同意いただいた場合のみ、分析と広告測定を有効にします。',
-    accept: '測定を許可',
-    essential: '必須のみ',
+    title: 'Cookie とプライバシー',
+    body: 'サイト運営に必要な Cookie を使用します。同意いただいた場合のみ、任意 Cookie を使って訪問状況を理解し、体験とキャンペーンを改善します。',
+    accept: '任意 Cookie を許可',
+    essential: '必要な Cookie のみ',
+    manage: 'Cookies',
     policy: 'プライバシーポリシー',
   },
 };
@@ -105,6 +114,7 @@ function loadExternalScript(id: string, src: string) {
 
 export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: ConsentManagerProps) {
   const [visible, setVisible] = useState(false);
+  const [hasSavedChoice, setHasSavedChoice] = useState(false);
   const t = useMemo(() => copy[locale] || copy.en, [locale]);
   const policyHref = `/${locale}/privacy-policy`;
 
@@ -156,6 +166,7 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
 
     if (saved === 'accepted' || saved === 'essential') {
       applyConsent(saved);
+      setHasSavedChoice(true);
       return;
     }
 
@@ -164,11 +175,30 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
 
   const saveChoice = (choice: ConsentChoice) => {
     window.localStorage.setItem(STORAGE_KEY, choice);
+    window.localStorage.setItem(`${STORAGE_KEY}_record`, JSON.stringify({
+      choice,
+      updatedAt: new Date().toISOString(),
+      version: 1,
+    }));
     applyConsent(choice);
+    setHasSavedChoice(true);
     setVisible(false);
   };
 
-  if (!visible) return null;
+  if (!visible) {
+    if (!hasSavedChoice) return null;
+
+    return (
+      <button
+        type="button"
+        onClick={() => setVisible(true)}
+        className="fixed bottom-4 left-4 z-[70] rounded-full border border-zinc-700 bg-zinc-950/90 px-4 py-2 text-xs font-bold text-white shadow-xl backdrop-blur-md transition hover:border-emerald-400 hover:text-emerald-300"
+        aria-label={t.title}
+      >
+        {t.manage}
+      </button>
+    );
+  }
 
   return (
     <section
