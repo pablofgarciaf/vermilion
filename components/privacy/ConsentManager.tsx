@@ -32,65 +32,65 @@ const copy: Record<string, {
 }> = {
   es: {
     title: 'Cookies y privacidad',
-    body: 'Usamos cookies necesarias para que la web funcione. Con tu permiso, también usamos cookies opcionales para entender visitas, mejorar la experiencia y optimizar campañas.',
-    accept: 'Aceptar cookies opcionales',
-    essential: 'Solo cookies necesarias',
+    body: 'Puedes aceptar cookies para ayudarnos a mejorar la web o rechazar las que no son necesarias. Las cookies necesarias se mantienen porque permiten que el sitio funcione.',
+    accept: 'Aceptar cookies',
+    essential: 'Rechazar no necesarias',
     manage: 'Cookies',
     policy: 'Ver política de privacidad',
   },
   en: {
     title: 'Cookies and privacy',
-    body: 'We use necessary cookies to keep the website working. With your permission, we also use optional cookies to understand visits, improve the experience, and optimize campaigns.',
-    accept: 'Accept optional cookies',
-    essential: 'Necessary cookies only',
+    body: 'You can accept cookies to help us improve the website or reject the ones that are not necessary. Necessary cookies remain because they keep the site working.',
+    accept: 'Accept cookies',
+    essential: 'Reject non-essential',
     manage: 'Cookies',
     policy: 'View privacy policy',
   },
   fr: {
     title: 'Cookies et confidentialité',
-    body: 'Nous utilisons des cookies nécessaires au fonctionnement du site. Avec votre accord, nous utilisons aussi des cookies optionnels pour améliorer l’expérience et les campagnes.',
-    accept: 'Accepter les cookies optionnels',
-    essential: 'Cookies nécessaires seulement',
+    body: 'Vous pouvez accepter les cookies pour nous aider à améliorer le site ou refuser ceux qui ne sont pas nécessaires. Les cookies nécessaires restent actifs pour faire fonctionner le site.',
+    accept: 'Accepter les cookies',
+    essential: 'Refuser les non nécessaires',
     manage: 'Cookies',
     policy: 'Voir la politique de confidentialité',
   },
   de: {
     title: 'Cookies und Datenschutz',
-    body: 'Wir verwenden notwendige Cookies für den Betrieb der Website. Mit Ihrer Zustimmung nutzen wir optionale Cookies, um Besuche zu verstehen und Kampagnen zu verbessern.',
-    accept: 'Optionale Cookies akzeptieren',
-    essential: 'Nur notwendige Cookies',
+    body: 'Sie können Cookies akzeptieren, um die Website zu verbessern, oder nicht notwendige Cookies ablehnen. Notwendige Cookies bleiben aktiv, damit die Website funktioniert.',
+    accept: 'Cookies akzeptieren',
+    essential: 'Nicht notwendige ablehnen',
     manage: 'Cookies',
     policy: 'Datenschutz ansehen',
   },
   zh: {
     title: 'Cookie 与隐私',
-    body: '我们使用必要 Cookie 保持网站正常运行。经您同意后，我们也会使用可选 Cookie 来了解访问、改善体验并优化广告活动。',
-    accept: '接受可选 Cookie',
-    essential: '仅必要 Cookie',
+    body: '您可以接受 Cookie 来帮助我们改进网站，也可以拒绝非必要 Cookie。必要 Cookie 会保留，因为它们用于保持网站正常运行。',
+    accept: '接受 Cookie',
+    essential: '拒绝非必要 Cookie',
     manage: 'Cookies',
     policy: '查看隐私政策',
   },
   it: {
     title: 'Cookie e privacy',
-    body: 'Usiamo cookie necessari per far funzionare il sito. Con il tuo consenso usiamo anche cookie opzionali per capire le visite, migliorare l’esperienza e ottimizzare le campagne.',
-    accept: 'Accetta cookie opzionali',
-    essential: 'Solo cookie necessari',
+    body: 'Puoi accettare i cookie per aiutarci a migliorare il sito oppure rifiutare quelli non necessari. I cookie necessari restano attivi perché fanno funzionare il sito.',
+    accept: 'Accetta cookie',
+    essential: 'Rifiuta non necessari',
     manage: 'Cookies',
     policy: 'Vedi privacy policy',
   },
   pt: {
     title: 'Cookies e privacidade',
-    body: 'Usamos cookies necessários para o site funcionar. Com a sua permissão, também usamos cookies opcionais para entender visitas, melhorar a experiência e otimizar campanhas.',
-    accept: 'Aceitar cookies opcionais',
-    essential: 'Só cookies necessários',
+    body: 'Pode aceitar cookies para nos ajudar a melhorar o site ou rejeitar os que não são necessários. Os cookies necessários permanecem porque mantêm o site funcionando.',
+    accept: 'Aceitar cookies',
+    essential: 'Rejeitar não necessários',
     manage: 'Cookies',
     policy: 'Ver política de privacidade',
   },
   ja: {
     title: 'Cookie とプライバシー',
-    body: 'サイト運営に必要な Cookie を使用します。同意いただいた場合のみ、任意 Cookie を使って訪問状況を理解し、体験とキャンペーンを改善します。',
-    accept: '任意 Cookie を許可',
-    essential: '必要な Cookie のみ',
+    body: 'サイト改善のために Cookie を許可するか、不要な Cookie を拒否できます。必要な Cookie はサイト運営のため保持されます。',
+    accept: 'Cookie を許可',
+    essential: '不要な Cookie を拒否',
     manage: 'Cookies',
     policy: 'プライバシーポリシー',
   },
@@ -192,7 +192,7 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
       <button
         type="button"
         onClick={() => setVisible(true)}
-        className="fixed bottom-4 left-4 z-[70] rounded-full border border-zinc-700 bg-zinc-950/90 px-4 py-2 text-xs font-bold text-white shadow-xl backdrop-blur-md transition hover:border-emerald-400 hover:text-emerald-300"
+      className="fixed bottom-4 left-4 z-[70] rounded-full border border-zinc-700 bg-zinc-950/90 px-4 py-2 text-xs font-bold text-white shadow-xl backdrop-blur-md transition hover:border-emerald-400 hover:text-emerald-300"
         aria-label={t.title}
       >
         {t.manage}
@@ -203,9 +203,9 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
   return (
     <section
       aria-label={t.title}
-      className="fixed inset-x-4 bottom-4 z-[80] mx-auto max-w-3xl rounded-3xl border border-white/15 bg-zinc-950/95 p-5 text-white shadow-2xl backdrop-blur-md"
+      className="fixed inset-x-4 bottom-4 z-[80] mx-auto max-w-3xl rounded-3xl border border-white/15 bg-zinc-950/95 p-5 text-white shadow-2xl backdrop-blur-md md:inset-x-auto md:right-10 md:bottom-28 md:mx-0 md:max-w-md md:p-4 xl:right-16 xl:bottom-32"
     >
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-4">
         <div className="space-y-2">
           <h2 className="text-base font-semibold tracking-wide">{t.title}</h2>
           <p className="text-sm leading-relaxed text-zinc-200">{t.body}</p>
@@ -213,7 +213,7 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
             {t.policy}
           </a>
         </div>
-        <div className="flex shrink-0 flex-col gap-2 sm:flex-row md:flex-col">
+        <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
           <button
             type="button"
             onClick={() => saveChoice('accepted')}
