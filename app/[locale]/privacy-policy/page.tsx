@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage() {
             <span>Official Legal Document</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-bold font-serif text-white tracking-tight">
-            Privacy Policy
+            Privacy Policy and Data Protection for Travelers
           </h1>
           <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
             This Privacy Policy explains how personal data is collected, processed, and protected within the framework of tourist services offered on{' '}
@@ -124,10 +124,10 @@ export default function PrivacyPolicyPage() {
               <li><strong>User Registration:</strong> Name and email address (or Facebook profile info if registering via social login).</li>
               <li><strong>Contracting & Expeditions:</strong> Full personal details including nationality, residential address, contact phone number, identity document or passport number.</li>
               <li><strong>Tour Bookings:</strong> Traveler names, nationalities, passport numbers, and emergency contact details.</li>
-              <li><strong>Payments & Transactions:</strong> Credit/debit card details, expiration dates, CVV, or bank transfer confirmation receipts. Payments are processed through certified PCI-DSS compliant secure gateways with end-to-end encryption.</li>
+              <li><strong>Payments & Transactions:</strong> Payment status, amount, currency, receipts, processor order IDs, capture IDs, transaction references, and anti-fraud signals. Vermilion does <strong>not</strong> store full card numbers, CVV codes, or card expiration data; card processing is handled by PCI-DSS compliant payment providers such as Stripe and PayPal.</li>
               <li><strong>Invoicing:</strong> Tax identification and official billing addresses where requested.</li>
               <li><strong>Customer Support:</strong> Inquiries, preferences, and communication history.</li>
-              <li><strong>Cookies & Analytics:</strong> Browsing preferences, page interactions, and statistical analytics as configured in your browser.</li>
+              <li><strong>Cookies, Analytics & Advertising:</strong> Consent choices, affiliate attribution references, browsing preferences, page interactions, and campaign measurement data when you authorize optional measurement technologies.</li>
             </ul>
           </section>
 
@@ -144,6 +144,7 @@ export default function PrivacyPolicyPage() {
               <li>Providing active customer support, itinerary updates, and urgent travel alerts.</li>
               <li>Sending customized commercial communications and promotions (with prior user consent).</li>
               <li>Auditing security and fraud prevention.</li>
+              <li>Measuring website performance and advertising campaigns only where required consent has been granted.</li>
             </ul>
           </section>
 
@@ -157,29 +158,49 @@ export default function PrivacyPolicyPage() {
               <li>Execution of the contractual travel mediation agreement.</li>
               <li>Adoption of pre-contractual measures requested by the client.</li>
               <li>Compliance with legal, fiscal, and regulatory tourism obligations.</li>
-              <li>Explicit user consent for marketing communications and cookies.</li>
+              <li>Explicit user consent for marketing communications, analytics, advertising measurement, and optional cookies or similar technologies.</li>
+              <li>Legitimate interest for essential security, fraud prevention, service integrity, and affiliate attribution necessary to honor a valid referral.</li>
             </ul>
           </section>
 
           {/* Section 5 */}
           <section className="space-y-3 bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-6">
-            <h3 className="text-lg font-bold text-white">5. Data Retention & Recipients</h3>
+            <h3 className="text-lg font-bold text-white">5. Data Retention, Recipients & International Transfers</h3>
             <p>
-              Data will be maintained for the duration of the commercial relationship and statutory prescription periods established by applicable Ecuadorian and international law.
+              Data is retained only for as long as needed for the travel relationship, legal obligations, fraud prevention, and statutory prescription periods established by applicable Ecuadorian and international law. As a practical rule, booking, invoicing, tax, and payment reference records may be retained for the legally required accounting period; inactive leads are periodically reviewed; marketing records are kept until consent is withdrawn or the record is no longer necessary.
             </p>
             <p>
               Data may be communicated strictly when necessary to:
             </p>
             <ul className="space-y-1.5 list-disc list-inside text-zinc-300 pl-2">
               <li>Tourism providers (Galapagos cruise operators, airlines, hotels, local guides) for booking confirmation.</li>
-              <li>Technology & payment infrastructure providers (Firebase, certified payment processors).</li>
+              <li>Technology, hosting, authentication, analytics, email, and payment infrastructure providers, including Firebase/Google services, Stripe, PayPal, and authorized email or CRM providers.</li>
               <li>Competent public and judicial authorities upon statutory legal request.</li>
             </ul>
+            <p>
+              Because we serve international travelers, some providers may process data outside your country of residence, including Ecuador, the United States, the United Kingdom, the European Economic Area, or other jurisdictions where our providers operate. Where required, we rely on contractual safeguards, provider security commitments, and user consent for optional measurement technologies.
+            </p>
           </section>
 
           {/* Section 6 */}
           <section className="space-y-3 bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-6">
-            <h3 className="text-lg font-bold text-white">6. Exercise of Rights</h3>
+            <h3 className="text-lg font-bold text-white">6. Cookies, Consent & Advertising Measurement</h3>
+            <p>
+              Essential cookies and local storage are used to keep the website secure, remember basic preferences, manage language selection, preserve affiliate attribution, and support booking flows. Optional analytics and advertising measurement tools are activated only after consent where applicable.
+            </p>
+            <ul className="space-y-1.5 list-disc list-inside text-zinc-300 pl-2">
+              <li><strong>Essential technologies:</strong> language preference, security, booking state, affiliate referral references, and site functionality.</li>
+              <li><strong>Analytics and advertising:</strong> Google Analytics, Google Ads measurement, Meta Pixel, or Microsoft Clarity may be used only when configured and consented to, to understand campaign performance and improve the website.</li>
+              <li><strong>Payment and fraud prevention:</strong> Stripe, PayPal, Firebase, and related security services may process technical signals necessary to complete payments and prevent abuse.</li>
+            </ul>
+            <p>
+              You can decline optional measurement from the consent banner and can also clear your browser storage or contact us to request help with privacy choices.
+            </p>
+          </section>
+
+          {/* Section 7 */}
+          <section className="space-y-3 bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-6">
+            <h3 className="text-lg font-bold text-white">7. Exercise of Rights</h3>
             <p>
               At any time, you may exercise your rights of <strong>access, rectification, deletion, opposition, limitation of processing, or portability</strong> by contacting our Data Protection team at:
             </p>
@@ -191,6 +212,9 @@ export default function PrivacyPolicyPage() {
                 We respond to all verified inquiries promptly within the statutory deadline.
               </p>
             </div>
+            <p>
+              Depending on your location, you may also have rights under Ecuador&apos;s Organic Law on Personal Data Protection, the EU/UK GDPR, United States state privacy laws, or similar privacy rules. We will evaluate verified requests according to the law that applies to your relationship with Vermilion.
+            </p>
           </section>
 
         </div>

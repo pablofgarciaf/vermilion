@@ -12,6 +12,7 @@ import { ConditionalNavbar } from '@/components/layout/ConditionalNavbar';
 import { ConditionalFooter } from '@/components/layout/ConditionalFooter';
 import { AffiliateTracker } from '@/components/affiliates/AffiliateTracker';
 import { ConciergeWidgetLazy } from '@/components/ui/ConciergeWidgetLazy';
+import { ConsentManager } from '@/components/privacy/ConsentManager';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -135,15 +136,38 @@ export default async function RootLayout({
         alternateName: 'Vermilion Routes Bespoke Nature Travel',
         legalName: 'Agencia de Viajes Vermilion Cia. Ltda.',
         taxID: '1711992808001',
+        identifier: [
+          {
+            '@type': 'PropertyValue',
+            name: 'RUC Ecuador',
+            value: '1711992808001',
+          },
+          {
+            '@type': 'PropertyValue',
+            name: 'Ministerio de Turismo Ecuador',
+            value: '1793215456001',
+          },
+        ],
         description:
           'Premier boutique tour operator specializing in bespoke nature and comfort itineraries, Galapagos island cruises, Amazon lodges, and Andean expeditions in Ecuador.',
         url: 'https://www.vermilionroutes.com',
         logo: 'https://www.vermilionroutes.com/logo.png',
-        image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80',
+        image: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
         telephone: '+593960039156',
         email: 'info@vermilionroutes.com',
         priceRange: '$$$$',
         openingHours: 'Mo,Tu,We,Th,Fr 09:00-18:00',
+        foundingLocation: {
+          '@type': 'Place',
+          name: 'Quito, Ecuador',
+        },
+        knowsAbout: [
+          'Galapagos private tours',
+          'Ecuador bespoke travel',
+          'Amazon rainforest lodges',
+          'Andes expedition design',
+          'Nature travel in Ecuador',
+        ],
         address: [
           {
             '@type': 'PostalAddress',
@@ -231,44 +255,21 @@ export default async function RootLayout({
       </head>
       <body className="paper-bg text-zinc-900 dark:text-zinc-50 font-sans antialiased selection:bg-emerald-600 selection:text-white flex flex-col min-h-screen" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
-          <Script src="https://www.googletagmanager.com/gtag/js?id=G-D8ZNLYMCB0" strategy="lazyOnload" />
-          <Script id="google-analytics" strategy="lazyOnload">
+          <Script id="google-consent-default" strategy="afterInteractive">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-D8ZNLYMCB0');
+              gtag('consent', 'default', {
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                analytics_storage: 'denied',
+                functionality_storage: 'granted',
+                security_storage: 'granted'
+              });
             `}
           </Script>
-
-          {process.env.NEXT_PUBLIC_META_PIXEL_ID && (
-            <Script id="meta-pixel" strategy="lazyOnload">
-              {`
-                !function(f,b,e,v,n,t,s)
-                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)}(window, document,'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '${process.env.NEXT_PUBLIC_META_PIXEL_ID}');
-                fbq('track', 'PageView');
-              `}
-            </Script>
-          )}
-
-          {process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID && (
-            <Script id="microsoft-clarity" strategy="lazyOnload">
-              {`
-                (function(c,l,a,r,i,t,y){
-                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}");
-              `}
-            </Script>
-          )}
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-D8ZNLYMCB0" strategy="lazyOnload" />
 
           <LuxuryThemeProvider>
           <CurrencyProvider>
@@ -282,6 +283,12 @@ export default async function RootLayout({
               <Suspense fallback={null}>
                 <AffiliateTracker />
               </Suspense>
+              <ConsentManager
+                locale={locale}
+                gaId="G-D8ZNLYMCB0"
+                metaPixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID}
+                clarityProjectId={process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}
+              />
             </NextIntlClientProvider>
           </CurrencyProvider>
           </LuxuryThemeProvider>
