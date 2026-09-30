@@ -6,7 +6,7 @@ import { createBookingInFirestore } from '@/lib/bookings';
 import { filterPhoneInput, isValidEmail, isValidPhone, sanitizeText } from '@/lib/validation';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 import { useTranslations, useLocale } from 'next-intl';
-import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle, Zap } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle, Zap, Instagram, Facebook, Youtube, MessageCircle, User } from 'lucide-react';
 
 const EXPRESS_BANNER_I18N: Record<string, { title: string; desc: string }> = {
   es: {
@@ -250,6 +250,68 @@ export function ContactSection() {
                 </span>
               </div>
             </div>
+
+            {/* Social Media & Quick Actions */}
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 flex-wrap">
+                <a
+                  href="https://www.instagram.com/vermilionroutes/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
+                  aria-label="Instagram"
+                  title="Follow us on Instagram"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://www.facebook.com/VermilionRoutes/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
+                  aria-label="Facebook"
+                  title="Follow us on Facebook"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://www.youtube.com/@VermilionRoutes"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
+                  aria-label="YouTube"
+                  title="Subscribe on YouTube"
+                >
+                  <Youtube className="w-5 h-5" />
+                </a>
+                <a
+                  href="https://wa.me/593960039156?text=Hola%20Vermilion%20Routes"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
+                  aria-label="WhatsApp"
+                  title="Chat on WhatsApp"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                </a>
+                <a
+                  href="#contact"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const contactEl = document.getElementById('contact');
+                    if (contactEl) contactEl.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
+                  aria-label="My Profile"
+                  title="View profile or send direct message"
+                >
+                  <User className="w-5 h-5" />
+                </a>
+              </div>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
+                {locale === 'es' ? 'Síguenos en redes' : locale === 'fr' ? 'Suivez-nous' : locale === 'de' ? 'Folgen Sie uns' : locale === 'it' ? 'Seguici' : locale === 'pt' ? 'Siga-nos' : locale === 'ja' ? 'フォローする' : locale === 'zh' ? '关注我们' : 'Follow us'}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -290,7 +352,7 @@ export function ContactSection() {
               <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800/50">
                 <h3 className="font-serif font-bold text-xl text-zinc-900 dark:text-white flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-emerald-600" />
-                  <span>{t('title')}</span>
+                  <span>{t('send')}</span>
                 </h3>
                 <span className="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full">
                   {t('noCommitment')}
