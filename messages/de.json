@@ -191,5 +191,9 @@
   "subscribing": "Wird abonniert...",
   "subscribe": "Abonnieren",
   "subscriptionSuccess": "Vielen Dank für Ihr Abonnement!",
-  "subscriptionError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+  "subscriptionError": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+  "concierge": {
+    "title": "Vermilion-Reisespezialisten",
+    "selectAssistance": "Wählen Sie Ihre bevorzugte Unterstützungsart"
+  }
 }

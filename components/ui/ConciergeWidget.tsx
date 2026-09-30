@@ -17,7 +17,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { isBotOrCrawler } from '@/utils/isBot';
 
 interface ChatMessage {
@@ -30,6 +30,7 @@ interface ChatMessage {
 
 export function ConciergeWidget() {
   const locale = useLocale();
+  const t = useTranslations();
   const GREETINGS_BY_LOCALE: Record<string, string> = {
     es: '¡Hola! Soy **Pyro**, tu Especialista de Viajes en Vermilion Routes.\n\nEstoy aquí para ayudarte a diseñar y personalizar tu viaje por **Ecuador Continental y las Islas Galápagos**.\n\n¿En qué destino o fechas te gustaría comenzar a planificar?',
     en: 'Hello! I am **Pyro**, Lead Travel Specialist at Vermilion Routes.\n\nI am here to assist you in designing and customizing your journey across **Mainland Ecuador and the Galápagos Islands**.\n\nWhat destinations or travel dates do you have in mind to get started?',
@@ -208,7 +209,7 @@ export function ConciergeWidget() {
     const defaultText = customText
       ? encodeURIComponent(customText)
       : encodeURIComponent(
-          'Hello Vermilion Routes! I would like to speak with a human travel specialist about planning a itinerary in South America.'
+          'Hello Vermilion Routes! I would like to contact with a human travel specialist about planning a itinerary in Ecuador and Galapagos Islands.'
         );
     return `https://wa.me/${phoneNumber}?text=${defaultText}`;
   };
@@ -235,9 +236,9 @@ export function ConciergeWidget() {
                 </div>
                 <div>
                   <h4 className="font-serif text-sm font-semibold text-amber-200">
-                    Vermilion Travel Specialists
+                    {t('concierge.title')}
                   </h4>
-                  <p className="text-[11px] text-zinc-400">Choose your preferred assistance</p>
+                  <p className="text-[11px] text-zinc-400">{t('concierge.selectAssistance')}</p>
                 </div>
               </div>
               <button

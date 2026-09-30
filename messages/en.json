@@ -191,5 +191,9 @@
   "subscribing": "Subscribing...",
   "subscribe": "Subscribe",
   "subscriptionSuccess": "Thank you for subscribing!",
-  "subscriptionError": "An error occurred. Please try again."
+  "subscriptionError": "An error occurred. Please try again.",
+  "concierge": {
+    "title": "Vermilion Travel Specialists",
+    "selectAssistance": "Choose your preferred assistance"
+  }
 }

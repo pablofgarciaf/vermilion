@@ -191,5 +191,9 @@
   "subscribing": "Inscrevendo...",
   "subscribe": "Inscrever-se",
   "subscriptionSuccess": "Obrigado por se inscrever!",
-  "subscriptionError": "Ocorreu um erro. Tente novamente."
+  "subscriptionError": "Ocorreu um erro. Tente novamente.",
+  "concierge": {
+    "title": "Especialistas em Viagens Vermilion",
+    "selectAssistance": "Escolha seu tipo de assistência preferido"
+  }
 }

@@ -191,5 +191,9 @@
   "subscribing": "登録中...",
   "subscribe": "登録する",
   "subscriptionSuccess": "ご登録ありがとうございます！",
-  "subscriptionError": "エラーが発生しました。もう一度お試しください。"
+  "subscriptionError": "エラーが発生しました。もう一度お試しください。",
+  "concierge": {
+    "title": "Vermilion Routes の旅行専門家",
+    "selectAssistance": "ご希望のサポート方法をお選びください"
+  }
 }

@@ -191,5 +191,9 @@
   "subscribing": "Iscrizione in corso...",
   "subscribe": "Iscriviti",
   "subscriptionSuccess": "Grazie per l'iscrizione!",
-  "subscriptionError": "Si è verificato un errore. Riprova."
+  "subscriptionError": "Si è verificato un errore. Riprova.",
+  "concierge": {
+    "title": "Specialisti di Viaggio Vermilion",
+    "selectAssistance": "Scegli il tuo tipo di assistenza preferito"
+  }
 }

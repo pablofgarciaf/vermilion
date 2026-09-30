@@ -191,5 +191,9 @@
   "subscribing": "订阅中...",
   "subscribe": "订阅",
   "subscriptionSuccess": "感谢您的订阅！",
-  "subscriptionError": "发生错误，请重试。"
+  "subscriptionError": "发生错误，请重试。",
+  "concierge": {
+    "title": "Vermilion Routes 旅行专家",
+    "selectAssistance": "选择您喜欢的协助方式"
+  }
 }
