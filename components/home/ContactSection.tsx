@@ -6,7 +6,7 @@ import { createBookingInFirestore } from '@/lib/bookings';
 import { filterPhoneInput, isValidEmail, isValidPhone, sanitizeText } from '@/lib/validation';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 import { useTranslations, useLocale } from 'next-intl';
-import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle, Zap, Instagram, Facebook, Youtube, MessageCircle, User } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle, Zap, Instagram, Facebook, Youtube, MessageCircle } from 'lucide-react';
 
 const EXPRESS_BANNER_I18N: Record<string, { title: string; desc: string }> = {
   es: {
@@ -166,9 +166,9 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-zinc-200 dark:border-zinc-800/60 scroll-mt-20">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-8">
         {/* Left Col Info */}
-        <div className="lg:col-span-5 space-y-8">
+        <div className="lg:col-span-5 space-y-6">
           <div className="space-y-3">
             <span className="text-emerald-600 text-xs font-bold uppercase tracking-wider block">
               {t('badge')}
@@ -181,138 +181,95 @@ export function ContactSection() {
             </p>
           </div>
 
-          {/* Express 24h Departures Callout */}
-          <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-500/15 via-emerald-500/5 to-teal-500/10 border border-emerald-500/30 text-zinc-900 dark:text-zinc-100 shadow-sm space-y-1.5">
-            <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-xs uppercase tracking-wider">
-              <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 animate-pulse" />
-              <span>{(EXPRESS_BANNER_I18N[locale] || EXPRESS_BANNER_I18N.en).title}</span>
-            </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
-              {(EXPRESS_BANNER_I18N[locale] || EXPRESS_BANNER_I18N.en).desc}
-            </p>
-          </div>
-
-          <div className="space-y-4">
+          {/* Contact Cards Grid 2 Col */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Phone */}
             <a
               href="tel:+593960039156"
-              className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
+              className="p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
             >
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform">
-                <Phone className="w-5 h-5" />
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 group-hover:scale-110 transition-transform">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">{t('directCall')}</span>
               </div>
-              <div>
-                <span className="text-xs text-zinc-400 font-medium block">{t('directCall')}</span>
-                <span className="font-semibold text-zinc-900 dark:text-white text-sm group-hover:text-emerald-600 transition-colors">
-                  +593 96 003 9156
-                </span>
-              </div>
+              <p className="font-semibold text-zinc-900 dark:text-white text-sm leading-snug group-hover:text-emerald-600 transition-colors">
+                +593 96 003 9156
+              </p>
             </a>
 
+            {/* Email */}
             <a
               href="mailto:info@vermilionroutes.com"
-              className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
+              className="p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
             >
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform">
-                <Mail className="w-5 h-5" />
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 group-hover:scale-110 transition-transform">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">{t('emailAddress')}</span>
               </div>
-              <div>
-                <span className="text-xs text-zinc-400 font-medium block">{t('emailAddress')}</span>
-                <span className="font-semibold text-zinc-900 dark:text-white text-sm group-hover:text-emerald-600 transition-colors">
-                  <span>info</span>
-                  <span className="text-emerald-600 font-bold">&#64;</span>
-                  <span>vermilionroutes.com</span>
-                </span>
-              </div>
+              <p className="font-semibold text-zinc-900 dark:text-white text-sm leading-snug group-hover:text-emerald-600 transition-colors">
+                <span>info</span>
+                <span className="text-emerald-600 font-bold">&#64;</span>
+                <span>vermilionroutes.com</span>
+              </p>
             </a>
 
-            {/* Sede Ecuador (HQ) */}
-            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
-                <MapPin className="w-5 h-5" />
+            {/* Sede Ecuador */}
+            <div className="col-span-1 sm:col-span-2 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">{t('headquartersEcuador')}</span>
               </div>
-              <div>
-                <span className="text-xs text-zinc-400 font-medium block">{t('headquartersEcuador')}</span>
-                <span className="font-semibold text-zinc-900 dark:text-white text-sm block leading-snug">
-                  {t('addressEcuador')}
-                </span>
-              </div>
-            </div>
-
-            {/* Sede España (Coral Tour) */}
-            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
-                <MapPin className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="text-xs text-zinc-400 font-medium block">{t('officeSpain')}</span>
-                <span className="font-semibold text-zinc-900 dark:text-white text-sm block leading-snug">
-                  {t('addressSpain')}
-                </span>
-              </div>
-            </div>
-
-            {/* Social Media & Quick Actions */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 flex-wrap">
-                <a
-                  href="https://www.instagram.com/vermilionroutes/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
-                  aria-label="Instagram"
-                  title="Follow us on Instagram"
-                >
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://www.facebook.com/VermilionRoutes/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
-                  aria-label="Facebook"
-                  title="Follow us on Facebook"
-                >
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://www.youtube.com/@VermilionRoutes"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
-                  aria-label="YouTube"
-                  title="Subscribe on YouTube"
-                >
-                  <Youtube className="w-5 h-5" />
-                </a>
-                <a
-                  href="https://wa.me/593960039156?text=Hola%20Vermilion%20Routes"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
-                  aria-label="WhatsApp"
-                  title="Chat on WhatsApp"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                </a>
-                <a
-                  href="#contact"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const contactEl = document.getElementById('contact');
-                    if (contactEl) contactEl.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md"
-                  aria-label="My Profile"
-                  title="View profile or send direct message"
-                >
-                  <User className="w-5 h-5" />
-                </a>
-              </div>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
-                {locale === 'es' ? 'Síguenos en redes' : locale === 'fr' ? 'Suivez-nous' : locale === 'de' ? 'Folgen Sie uns' : locale === 'it' ? 'Seguici' : locale === 'pt' ? 'Siga-nos' : locale === 'ja' ? 'フォローする' : locale === 'zh' ? '关注我们' : 'Follow us'}
+              <p className="font-semibold text-zinc-900 dark:text-white text-sm leading-snug">
+                {t('addressEcuador')}
               </p>
             </div>
+
+            {/* Sede España */}
+            <div className="col-span-1 sm:col-span-2 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">{t('officeSpain')}</span>
+              </div>
+              <p className="font-semibold text-zinc-900 dark:text-white text-sm leading-snug">
+                {t('addressSpain')}
+              </p>
+            </div>
+
+            {/* Social Media Card - Full Width */}
+            <div className="col-span-1 sm:col-span-2 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+              <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide block mb-3">
+                {locale === 'es' ? 'Contactanos' : locale === 'fr' ? 'Nous Contacter' : locale === 'de' ? 'Kontaktieren Sie uns' : locale === 'it' ? 'Contattaci' : locale === 'pt' ? 'Entre em contato' : locale === 'ja' ? 'お問い合わせ' : locale === 'zh' ? '联系我们' : 'Contact Us'}
+              </span>
+              <div className="flex items-center gap-2 flex-wrap">
+                <a href="https://www.instagram.com/vermilionroutes/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Instagram" title="Follow us on Instagram">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="https://www.facebook.com/VermilionRoutes/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Facebook" title="Follow us on Facebook">
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a href="https://www.youtube.com/@VermilionRoutes" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="YouTube" title="Subscribe on YouTube">
+                  <Youtube className="w-5 h-5" />
+                </a>
+                <a href="https://www.tiktok.com/@vermilionroutes" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="TikTok" title="Follow us on TikTok">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.68v13.67a2.4 2.4 0 0 1-2.4 2.4 2.4 2.4 0 0 1-2.4-2.4 2.4 2.4 0 0 1 2.4-2.4c.31 0 .62.04.92.13V9.4a5.9 5.9 0 0 0-.92-.08 5.9 5.9 0 0 0-5.9 5.9 5.9 5.9 0 0 0 5.9 5.9 5.9 5.9 0 0 0 5.9-5.9V8.3a7.68 7.68 0 0 0 4.58 1.52v-3.66a4.5 4.5 0 0 1-.41-.02z"/>
+                  </svg>
+                </a>
+                <a href="https://wa.me/593960039156?text=Hola%20Vermilion%20Routes" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="WhatsApp" title="Chat on WhatsApp">
+                  <MessageCircle className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
           </div>
+
         </div>
 
         {/* Right Col Form */}
@@ -536,6 +493,17 @@ export function ContactSection() {
             </form>
           )}
         </div>
+      </div>
+
+      {/* Express Banner - Full Width */}
+      <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-500/15 via-emerald-500/5 to-teal-500/10 border border-emerald-500/30 text-zinc-900 dark:text-zinc-100 shadow-sm space-y-1.5 mt-8">
+        <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-xs uppercase tracking-wider">
+          <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 animate-pulse" />
+          <span>{(EXPRESS_BANNER_I18N[locale] || EXPRESS_BANNER_I18N.en).title}</span>
+        </div>
+        <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
+          {(EXPRESS_BANNER_I18N[locale] || EXPRESS_BANNER_I18N.en).desc}
+        </p>
       </div>
     </section>
   );
