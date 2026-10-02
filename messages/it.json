@@ -194,6 +194,25 @@
   "subscriptionError": "Si è verificato un errore. Riprova.",
   "concierge": {
     "title": "Specialisti di Viaggio Vermilion",
-    "selectAssistance": "Scegli il tuo tipo di assistenza preferito"
+    "selectAssistance": "Scegli il tuo tipo di assistenza preferito",
+    "defaultWaMessage": "Ciao Vermilion Routes! Vorrei contattare un esperto di viaggi per pianificare un itinerario in Ecuador e alle Isole Galapagos.",
+    "aiConcierge": "Concierge IA",
+    "aiConciergeBadge": "24/7 Immediato",
+    "aiConciergeDesc": "Preventivi istantanei, itinerari giorno per giorno e raccomandazioni personalizzate.",
+    "directWhatsapp": "Consulente Diretto WhatsApp",
+    "directWhatsappBadge": "Quito HQ",
+    "directWhatsappDesc": "Chatta con l'esperto di viaggi senior Pablo e il suo team (+593 96 003 9156).",
+    "authorizedOperator": "Operatore Autorizzato",
+    "responseTime": "Tempo di risposta: < 1 min",
+    "aiSpecialistTitle": "Specialista in Spedizioni Vermilion",
+    "suggestions": "Suggerimenti:",
+    "sugg1": "Consiglia i migliori itinerari e prezzi per crociere alle Galapagos",
+    "sugg2": "Come combinare Galapagos ed Ecuador continentale in un solo viaggio?",
+    "sugg3": "Voglio richiedere un preventivo di viaggio personalizzato per 2 persone",
+    "preferHuman": "Preferisci una risposta umana?",
+    "transferWhatsApp": "Trasferisci la chat su WhatsApp",
+    "leadSaved": "Dettagli del lead salvati nel sistema!",
+    "advisorsWillContact": "I nostri consulenti ti contatteranno",
+    "typeMessage": "Scrivi qui il tuo messaggio..."
   }
 }

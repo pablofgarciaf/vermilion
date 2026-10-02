@@ -1,4 +1,4 @@
-import { GoogleGenAI } from '@google/genai';
+﻿import { GoogleGenAI } from '@google/genai';
 import { db } from './firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { mockTours } from '@/data/mock';
@@ -26,7 +26,7 @@ export interface ConciergeResponse {
   };
 }
 
-/** ✅ W-01 FIX: Caché de catálogo en memoria con TTL de 5 minutos.
+/** âœ… W-01 FIX: CachÃ© de catÃ¡logo en memoria con TTL de 5 minutos.
  * Evita un getDocs() de Firestore en cada mensaje del concierge.
  */
 interface CatalogCache {
@@ -41,7 +41,7 @@ const CATALOG_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos
  * Result is cached in-memory for CATALOG_CACHE_TTL_MS to avoid per-request reads.
  */
 async function getCatalogContext(): Promise<string> {
-  // Servir desde caché si aún es válido
+  // Servir desde cachÃ© si aÃºn es vÃ¡lido
   if (catalogCache && Date.now() < catalogCache.expiresAt) {
     return catalogCache.data;
   }
@@ -57,7 +57,7 @@ async function getCatalogContext(): Promise<string> {
             `- ID: "${t.id}" | Title: "${t.title}" | Dest: "${t.destination}" | Duration: "${t.duration}" | Price: $${t.price} USD | Rating: ${t.rating}\u2605 | Category: "${t.category}" | Highlights: ${t.highlights?.join(', ') || 'N/A'}`
         )
         .join('\n');
-      // Almacenar en caché
+      // Almacenar en cachÃ©
       catalogCache = { data, expiresAt: Date.now() + CATALOG_CACHE_TTL_MS };
       return data;
     }
@@ -65,7 +65,7 @@ async function getCatalogContext(): Promise<string> {
     console.warn('Catalog fetch for AI context fallback:', err);
   }
 
-  // Fallback a mock (no cachear errores para reintentar en el próximo request)
+  // Fallback a mock (no cachear errores para reintentar en el prÃ³ximo request)
   return mockTours
     .map(
       (t) =>
@@ -75,14 +75,14 @@ async function getCatalogContext(): Promise<string> {
 }
 
 const LOCALE_NAMES: Record<string, string> = {
-  es: 'Spanish (Español)',
+  es: 'Spanish (EspaÃ±ol)',
   en: 'English',
-  fr: 'French (Français)',
+  fr: 'French (FranÃ§ais)',
   de: 'German (Deutsch)',
   it: 'Italian (Italiano)',
-  pt: 'Portuguese (Português)',
-  ja: 'Japanese (日本語)',
-  zh: 'Simplified Chinese (中文)',
+  pt: 'Portuguese (PortuguÃªs)',
+  ja: 'Japanese (æ—¥æœ¬èªž)',
+  zh: 'Simplified Chinese (ä¸­æ–‡)',
 };
 
 /**
@@ -90,9 +90,11 @@ const LOCALE_NAMES: Record<string, string> = {
  */
 export async function buildSystemPrompt(locale: string = 'en'): Promise<string> {
   const catalog = await getCatalogContext();
-  const targetLanguage = LOCALE_NAMES[locale] || 'Spanish (Español)';
+  const targetLanguage = LOCALE_NAMES[locale] || 'Spanish (EspaÃ±ol)';
 
   return `You are "Pyro", the Senior Consultative Sales & VIP Ambassador Concierge at Vermilion Routes (https://vermilionroutes.com).
+
+CRITICAL INSTRUCTION: You MUST communicate EXCLUSIVELY in ${targetLanguage}. Do not use English unless the user speaks English. All your responses, suggestions, and output MUST be in ${targetLanguage}.
 
 ### CORE MISSION & SALES PHILOSOPHY:
 You are an elite, warm, and highly persuasive travel & business advisor.
@@ -117,9 +119,9 @@ ${catalog}
 - **Global Pool (6%)**: Profit-sharing shares at $3,000, $7,000, and $15,000 monthly volume.
 - **Registration**: Free, simple, no initial password needed (ID number is temporary password).
 
-### EXPRESS 24-HOUR DEPARTURES SPECIALIST (SALIDAS RELÁMPAGO EN 24 HORAS):
+### EXPRESS 24-HOUR DEPARTURES SPECIALIST (SALIDAS RELÃMPAGO EN 24 HORAS):
 - **Core Differentiator**: We specialize in immediate, last-minute express departures within 24 hours.
-- **Promise**: If a traveler asks to travel tomorrow or within 48 hours ("¿Quieres viajar mañana?"), reassure them warmly and immediately: Vermilion Routes maintains permanent operations teams stationed in Quito and the Galapagos Islands. We coordinate and confirm domestic flights (UIO/GYE - GPS/SCY), Galapagos National Park transit cards (TCT) and park fees, private yachts, certified naturalist guides, and boutique hotels in under 24 hours.
+- **Promise**: If a traveler asks to travel tomorrow or within 48 hours ("Â¿Quieres viajar maÃ±ana?"), reassure them warmly and immediately: Vermilion Routes maintains permanent operations teams stationed in Quito and the Galapagos Islands. We coordinate and confirm domestic flights (UIO/GYE - GPS/SCY), Galapagos National Park transit cards (TCT) and park fees, private yachts, certified naturalist guides, and boutique hotels in under 24 hours.
 - For urgent departures, prioritize immediate WhatsApp handoff (+593 96 003 9156 / +593 99 404 8458) so the flight desk and yachts can be booked instantly.
 
 ### CONSULTATIVE CONVERSATION LOOP:
@@ -128,9 +130,9 @@ ${catalog}
    - For Travelers: Dates (especially if they need to travel tomorrow or soon), destinations (Galapagos vs Andes/Amazon), or number of travelers?
    - For Ambassadors: Are they looking to monetize their social media audience or promote to luxury clients?
 3. **Closing Call-to-Action**: Propose:
-   - "¿Deseas que te contactemos por WhatsApp (+593 96 003 9156 / +593 99 404 8458) o llamada inmediata?"
-   - "¿Prefieres dejarnos tu correo para enviarte el itinerario personalizado o cotización?"
-   - "¿O deseas registrarte gratis ahora mismo en nuestro portal de embajadores?"
+   - "Â¿Deseas que te contactemos por WhatsApp (+593 96 003 9156 / +593 99 404 8458) o llamada inmediata?"
+   - "Â¿Prefieres dejarnos tu correo para enviarte el itinerario personalizado o cotizaciÃ³n?"
+   - "Â¿O deseas registrarte gratis ahora mismo en nuestro portal de embajadores?"
 
 ### LEAD EXTRACTION:
 When user provides contact details (name, email, or phone), append at the end:
@@ -377,20 +379,20 @@ function generateFallbackConciergeReply(
   switch (locale) {
     case 'es':
       if (lastUserMsg.includes('galapagos') || lastUserMsg.includes('isla')) {
-        reply = `¡Hola! Con mucho gusto te asesoro sobre nuestras **Expediciones Exclusivas a las Islas Galápagos**.\n\nNuestras experiencias insignia incluyen:\n- **Ecuador Continental y Galápagos Completo** (11 y 12 Días)\n- **Galápagos Esencial e Isla Isabela** (4, 5 y 6 Días)\n\n¿En qué fechas tentativas planeas viajar y cuántas personas te acompañan? Con esos datos te preparo una propuesta a medida.`;
+        reply = `Â¡Hola! Con mucho gusto te asesoro sobre nuestras **Expediciones Exclusivas a las Islas GalÃ¡pagos**.\n\nNuestras experiencias insignia incluyen:\n- **Ecuador Continental y GalÃ¡pagos Completo** (11 y 12 DÃ­as)\n- **GalÃ¡pagos Esencial e Isla Isabela** (4, 5 y 6 DÃ­as)\n\nÂ¿En quÃ© fechas tentativas planeas viajar y cuÃ¡ntas personas te acompaÃ±an? Con esos datos te preparo una propuesta a medida.`;
       } else if (lastUserMsg.includes('precio') || lastUserMsg.includes('costo') || lastUserMsg.includes('cotiz')) {
-        reply = `Nuestras expediciones a medida van desde escapadas de 1 día hasta travesías integrales de 12 días, con guías naturalistas privados, hoteles boutique seleccionados y logística integral.\n\nSi me compartes tu **Nombre**, **Correo** y **WhatsApp**, te preparo una cotización formal y personalizada de inmediato.`;
+        reply = `Nuestras expediciones a medida van desde escapadas de 1 dÃ­a hasta travesÃ­as integrales de 12 dÃ­as, con guÃ­as naturalistas privados, hoteles boutique seleccionados y logÃ­stica integral.\n\nSi me compartes tu **Nombre**, **Correo** y **WhatsApp**, te preparo una cotizaciÃ³n formal y personalizada de inmediato.`;
       } else {
-        reply = `¡Hola! Soy **Pyro**, tu Concierge y asesor de viajes inteligente en Vermilion Routes.\n\nYa sea que sueñes con nadar con leones marinos en **Galápagos**, explorar la **Amazonía profunda** o recorrer la **Avenida de los Volcanes**, estoy listo para ayudarte a diseñar la experiencia perfecta.\n\n¿Qué destino te gustaría conocer primero?`;
+        reply = `Â¡Hola! Soy **Pyro**, tu Concierge y asesor de viajes inteligente en Vermilion Routes.\n\nYa sea que sueÃ±es con nadar con leones marinos en **GalÃ¡pagos**, explorar la **AmazonÃ­a profunda** o recorrer la **Avenida de los Volcanes**, estoy listo para ayudarte a diseÃ±ar la experiencia perfecta.\n\nÂ¿QuÃ© destino te gustarÃ­a conocer primero?`;
       }
       break;
 
     case 'fr':
-      reply = `Bonjour ! Je suis **Pyro**, votre Concierge chez Vermilion Routes.\n\nNos expéditions exclusives aux **Îles Galápagos et en Équateur Continental** sont entièrement personnalisables.\n\nQuelles sont vos dates de voyage souhaitées et le nombre de participants ? Je me ferai un plaisir de vous préparer un itinéraire sur mesure.`;
+      reply = `Bonjour ! Je suis **Pyro**, votre Concierge chez Vermilion Routes.\n\nNos expÃ©ditions exclusives aux **ÃŽles GalÃ¡pagos et en Ã‰quateur Continental** sont entiÃ¨rement personnalisables.\n\nQuelles sont vos dates de voyage souhaitÃ©es et le nombre de participants ? Je me ferai un plaisir de vous prÃ©parer un itinÃ©raire sur mesure.`;
       break;
 
     case 'de':
-      reply = `Guten Tag! Ich bin **Pyro**, Ihr Concierge bei Vermilion Routes.\n\nGerne plane ich Ihre maßgeschneiderte Luxusreise durch **Festland-Ecuador und die Galapagos-Inseln**.\n\nWelche Reisedaten oder Regionen interessieren Sie besonders?`;
+      reply = `Guten Tag! Ich bin **Pyro**, Ihr Concierge bei Vermilion Routes.\n\nGerne plane ich Ihre maÃŸgeschneiderte Luxusreise durch **Festland-Ecuador und die Galapagos-Inseln**.\n\nWelche Reisedaten oder Regionen interessieren Sie besonders?`;
       break;
 
     case 'it':
@@ -398,15 +400,15 @@ function generateFallbackConciergeReply(
       break;
 
     case 'pt':
-      reply = `Olá! Sou **Pyro**, seu Concierge na Vermilion Routes.\n\nSerá um prazer desenhar seu roteiro personalizado pelas **Ilhas Galápagos e Equador Continental**.\n\nQuais são as suas datas de viagem estimadas e o número de pessoas?`;
+      reply = `OlÃ¡! Sou **Pyro**, seu Concierge na Vermilion Routes.\n\nSerÃ¡ um prazer desenhar seu roteiro personalizado pelas **Ilhas GalÃ¡pagos e Equador Continental**.\n\nQuais sÃ£o as suas datas de viagem estimadas e o nÃºmero de pessoas?`;
       break;
 
     case 'ja':
-      reply = `こんにちは！Vermilion Routes専任AIコンシェルジュの**Pyro（パイロ）**です。\n\n**ガラパゴス諸島およびエクアドル本土**のオーダーメイド旅行プランをご案内いたします。\n\nご希望の時期や人数をお知らせいただければ、最適なプランとお見積りをご提案いたします。`;
+      reply = `ã“ã‚“ã«ã¡ã¯ï¼Vermilion Routeså°‚ä»»AIã‚³ãƒ³ã‚·ã‚§ãƒ«ã‚¸ãƒ¥ã®**Pyroï¼ˆãƒ‘ã‚¤ãƒ­ï¼‰**ã§ã™ã€‚\n\n**ã‚¬ãƒ©ãƒ‘ã‚´ã‚¹è«¸å³¶ãŠã‚ˆã³ã‚¨ã‚¯ã‚¢ãƒ‰ãƒ«æœ¬åœŸ**ã®ã‚ªãƒ¼ãƒ€ãƒ¼ãƒ¡ã‚¤ãƒ‰æ—…è¡Œãƒ—ãƒ©ãƒ³ã‚’ã”æ¡ˆå†…ã„ãŸã—ã¾ã™ã€‚\n\nã”å¸Œæœ›ã®æ™‚æœŸã‚„äººæ•°ã‚’ãŠçŸ¥ã‚‰ã›ã„ãŸã ã‘ã‚Œã°ã€æœ€é©ãªãƒ—ãƒ©ãƒ³ã¨ãŠè¦‹ç©ã‚Šã‚’ã”ææ¡ˆã„ãŸã—ã¾ã™ã€‚`;
       break;
 
     case 'zh':
-      reply = `您好！我是 Vermilion Routes 的专属 AI 旅行礼宾顾问 **Pyro**。\n\n我将为您量身定制**加拉帕戈斯群岛与厄瓜多尔大陆**的高端专属行程。\n\n请问您的预计出行时间与随行人数是多少？我将立即为您出具专属方案。`;
+      reply = `æ‚¨å¥½ï¼æˆ‘æ˜¯ Vermilion Routes çš„ä¸“å±ž AI æ—…è¡Œç¤¼å®¾é¡¾é—® **Pyro**ã€‚\n\næˆ‘å°†ä¸ºæ‚¨é‡èº«å®šåˆ¶**åŠ æ‹‰å¸•æˆˆæ–¯ç¾¤å²›ä¸ŽåŽ„ç“œå¤šå°”å¤§é™†**çš„é«˜ç«¯ä¸“å±žè¡Œç¨‹ã€‚\n\nè¯·é—®æ‚¨çš„é¢„è®¡å‡ºè¡Œæ—¶é—´ä¸Žéšè¡Œäººæ•°æ˜¯å¤šå°‘ï¼Ÿæˆ‘å°†ç«‹å³ä¸ºæ‚¨å‡ºå…·ä¸“å±žæ–¹æ¡ˆã€‚`;
       break;
 
     default: // en
@@ -425,3 +427,6 @@ function generateFallbackConciergeReply(
     providerUsed: 'Vermilion Concierge Engine',
   };
 }
+
+
+

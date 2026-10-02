@@ -208,9 +208,7 @@ export function ConciergeWidget() {
   const getWhatsAppLink = (customText?: string) => {
     const defaultText = customText
       ? encodeURIComponent(customText)
-      : encodeURIComponent(
-          'Hello Vermilion Routes! I would like to contact with a human travel specialist about planning a itinerary in Ecuador and Galapagos Islands.'
-        );
+      : encodeURIComponent(t('concierge.defaultWaMessage'));
     return `https://wa.me/${phoneNumber}?text=${defaultText}`;
   };
 
@@ -267,12 +265,12 @@ export function ConciergeWidget() {
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-xs text-amber-200 flex items-center gap-1.5">
-                      AI Concierge <span className="text-[10px] bg-amber-400/20 text-amber-300 px-1.5 py-0.5 rounded-md">24/7 Instant</span>
+                      {t('concierge.aiConcierge')} <span className="text-[10px] bg-amber-400/20 text-amber-300 px-1.5 py-0.5 rounded-md">{t('concierge.aiConciergeBadge')}</span>
                     </span>
                     <ChevronRight className="w-4 h-4 text-amber-400 group-hover:translate-x-1 transition-transform" />
                   </div>
                   <p className="text-[11px] text-zinc-300 mt-0.5">
-                    Instant quotes, day-by-day itineraries & customized recommendations.
+                    {t('concierge.aiConciergeDesc')}
                   </p>
                 </div>
               </button>
@@ -291,12 +289,12 @@ export function ConciergeWidget() {
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
                     <span className="font-medium text-xs text-emerald-300 flex items-center gap-1.5">
-                      Direct WhatsApp Advisor <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded-md">Quito HQ</span>
+                      {t('concierge.directWhatsapp')} <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded-md">{t('concierge.directWhatsappBadge')}</span>
                     </span>
                     <ChevronRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-1 transition-transform" />
                   </div>
                   <p className="text-[11px] text-zinc-300 mt-0.5">
-                    Chat with senior travel specialist Pablo & Team (+593 96 003 9156).
+                    {t('concierge.directWhatsappDesc')}
                   </p>
                 </div>
               </a>
@@ -304,9 +302,9 @@ export function ConciergeWidget() {
 
             <div className="mt-3 pt-2 border-t border-zinc-800/80 flex items-center justify-between text-[10px] text-zinc-400">
               <span className="flex items-center gap-1">
-                <ShieldCheck className="w-3 h-3 text-amber-400" /> Authorized Operator
+                <ShieldCheck className="w-3 h-3 text-amber-400" /> {t('concierge.authorizedOperator')}
               </span>
-              <span className="text-zinc-500">Response time: &lt; 1 min</span>
+              <span className="text-zinc-500">{t('concierge.responseTime')}</span>
             </div>
           </div>
         )}
@@ -362,12 +360,12 @@ export function ConciergeWidget() {
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="font-serif font-semibold text-sm text-amber-100">Pyro</h3>
-                  <span className="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded font-sans">
-                    AI Concierge
-                  </span>
+                    <span className="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.2 rounded font-sans">
+                      {t('concierge.aiConcierge')}
+                    </span>
                 </div>
                 <p className="text-[11px] text-zinc-400 flex items-center gap-1">
-                  <span>Vermilion Routes Expedition Specialist</span>
+                  <span>{t('concierge.aiSpecialistTitle')}</span>
                 </p>
               </div>
             </div>
@@ -387,25 +385,25 @@ export function ConciergeWidget() {
           {/* QUICK PROMPT PILLS */}
           <div className="bg-zinc-900/80 px-3 py-2 border-b border-zinc-800/60 overflow-x-auto flex items-center gap-2 no-scrollbar">
             <span className="text-[10px] text-zinc-400 shrink-0 flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-amber-400" /> Suggestions:
+              <Sparkles className="w-3 h-3 text-amber-400" /> {t('concierge.suggestions')}
             </span>
             <button
               suppressHydrationWarning
-              onClick={() => handleSendMessage('Recommend top Galapagos cruise itineraries and prices')}
+              onClick={() => handleSendMessage(t('concierge.sugg1'))}
               className="text-[11px] whitespace-nowrap bg-zinc-800 hover:bg-amber-950/50 hover:border-amber-500/40 border border-zinc-700/60 text-zinc-200 px-2.5 py-1 rounded-full transition-colors"
             >
               🏝️ Galapagos Cruises
             </button>
             <button
               suppressHydrationWarning
-              onClick={() => handleSendMessage('How to combine Galapagos and Mainland Ecuador in one trip?')}
+              onClick={() => handleSendMessage(t('concierge.sugg2'))}
               className="text-[11px] whitespace-nowrap bg-zinc-800 hover:bg-amber-950/50 hover:border-amber-500/40 border border-zinc-700/60 text-zinc-200 px-2.5 py-1 rounded-full transition-colors"
             >
               🌋 Galapagos + Ecuador
             </button>
             <button
               suppressHydrationWarning
-              onClick={() => handleSendMessage('I want to request a custom travel quote for 2 people')}
+              onClick={() => handleSendMessage(t('concierge.sugg3'))}
               className="text-[11px] whitespace-nowrap bg-zinc-800 hover:bg-amber-950/50 hover:border-amber-500/40 border border-zinc-700/60 text-zinc-200 px-2.5 py-1 rounded-full transition-colors"
             >
               💰 Get Custom Quote
@@ -465,22 +463,22 @@ export function ConciergeWidget() {
           {leadCaptured && (
             <div className="bg-emerald-950/60 border-t border-emerald-500/30 p-2.5 px-4 flex items-center justify-between text-emerald-300 text-xs">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" /> Lead details saved to system!
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" /> {t('concierge.leadSaved')}
               </span>
-              <span className="text-[10px] text-emerald-400/80">Our advisors will contact you</span>
+              <span className="text-[10px] text-emerald-400/80">{t('concierge.advisorsWillContact')}</span>
             </div>
           )}
 
           {/* WHATSAPP TRANSFORMATION ACTION */}
           <div className="bg-zinc-900/90 px-3 py-2 border-t border-zinc-800 flex items-center justify-between">
-            <span className="text-[11px] text-zinc-400">Prefer human response?</span>
+            <span className="text-[11px] text-zinc-400">{t('concierge.preferHuman')}</span>
             <button
               suppressHydrationWarning
               onClick={transferChatToWhatsApp}
               className="text-[11px] font-medium bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/40 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1.5"
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-              Transfer Chat to WhatsApp
+                {t('concierge.transferWhatsApp')}
             </button>
           </div>
 

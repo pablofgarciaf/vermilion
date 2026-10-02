@@ -194,6 +194,25 @@
   "subscriptionError": "エラーが発生しました。もう一度お試しください。",
   "concierge": {
     "title": "Vermilion Routes の旅行専門家",
-    "selectAssistance": "ご希望のサポート方法をお選びください"
+    "selectAssistance": "ご希望のサポート方法をお選びください",
+    "defaultWaMessage": "こんにちは Vermilion Routes！エクアドルとガラパゴス諸島の旅行を計画するために、旅行の専門家に連絡したいです。",
+    "aiConcierge": "AI コンシェルジュ",
+    "aiConciergeBadge": "24/7 即時",
+    "aiConciergeDesc": "即時見積もり、日別の日程表、カスタマイズされた推奨事項。",
+    "directWhatsapp": "WhatsApp 直接相談",
+    "directWhatsappBadge": "キト本社",
+    "directWhatsappDesc": "シニア旅行スペシャリストのパブロとチームにチャット (+593 96 003 9156)。",
+    "authorizedOperator": "公認オペレーター",
+    "responseTime": "応答時間: 1分未満",
+    "aiSpecialistTitle": "ヴァーミリオン遠征スペシャリスト",
+    "suggestions": "提案：",
+    "sugg1": "おすすめのガラパゴスクルーズの旅程と価格を教えて",
+    "sugg2": "ガラパゴスとエクアドル本土を1回の旅行で組み合わせる方法は？",
+    "sugg3": "2人分のカスタマイズされた旅行見積もりをリクエストしたい",
+    "preferHuman": "人間のスタッフをご希望ですか？",
+    "transferWhatsApp": "チャットを WhatsApp に転送",
+    "leadSaved": "連絡先情報がシステムに保存されました！",
+    "advisorsWillContact": "アドバイザーからご連絡いたします",
+    "typeMessage": "ここにメッセージを入力..."
   }
 }

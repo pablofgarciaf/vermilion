@@ -194,6 +194,25 @@
   "subscriptionError": "发生错误，请重试。",
   "concierge": {
     "title": "Vermilion Routes 旅行专家",
-    "selectAssistance": "选择您喜欢的协助方式"
+    "selectAssistance": "选择您喜欢的协助方式",
+    "defaultWaMessage": "您好 Vermilion Routes！我想联系一位旅行专家，计划一次在厄瓜多尔和加拉帕戈斯群岛的旅行。",
+    "aiConcierge": "AI 礼宾",
+    "aiConciergeBadge": "24/7 即时",
+    "aiConciergeDesc": "即时报价，每日行程和定制建议。",
+    "directWhatsapp": "WhatsApp 直联顾问",
+    "directWhatsappBadge": "基多总部",
+    "directWhatsappDesc": "与高级旅行专家 Pablo 及团队聊天 (+593 96 003 9156)。",
+    "authorizedOperator": "授权运营商",
+    "responseTime": "响应时间：< 1分钟",
+    "aiSpecialistTitle": "Vermilion 探险专家",
+    "suggestions": "建议：",
+    "sugg1": "推荐顶级的加拉帕戈斯游轮行程和价格",
+    "sugg2": "如何在一次旅行中结合加拉帕戈斯和厄瓜多尔大陆？",
+    "sugg3": "我想为2人申请定制的旅行报价",
+    "preferHuman": "更喜欢人工回复？",
+    "transferWhatsApp": "将聊天转移到 WhatsApp",
+    "leadSaved": "线索详情已保存到系统！",
+    "advisorsWillContact": "我们的顾问将与您联系",
+    "typeMessage": "在此输入您的消息..."
   }
 }
