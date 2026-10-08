@@ -293,6 +293,10 @@ export default async function RootLayout({
             `}
           </Script>
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-D8ZNLYMCB0" strategy="lazyOnload" />
+          {/* Ahrefs Web Analytics: clave del proyecto vermilionroutes.com en NEXT_PUBLIC_AHREFS_KEY */}
+          {process.env.NEXT_PUBLIC_AHREFS_KEY && (
+            <Script id="ahrefs-analytics" src="https://analytics.ahrefs.com/analytics.js" data-key={process.env.NEXT_PUBLIC_AHREFS_KEY} strategy="afterInteractive" />
+          )}
 
           <LuxuryThemeProvider>
           <CurrencyProvider>
