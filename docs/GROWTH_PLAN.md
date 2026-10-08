@@ -2,6 +2,7 @@
 
 > Versión 1 · 2026-10-08 · Mercados: EE. UU., Reino Unido, Australia, España/LatAm (ES) · Idiomas operativos: EN y ES
 > Presupuesto de referencia: ~US$400/mes · Estado: **borrador a validar** (precios, cuentas y APIs por confirmar)
+> **Material listo en `docs/growth/`:** calendario de redes, Meta Ads, emails, afiliados, accesos y Genkit.
 
 ## 1. Punto de partida (datos reales)
 
@@ -131,3 +132,39 @@ Reglas: responder dentro de las 24 h de la última escritura del cliente; usar p
 7. **Proveedor de vuelos** (o decisión de usar afiliado).
 
 Las claves y tokens se cargan en variables de entorno o en el conector, **nunca** se pegan en el chat.
+
+
+## 7. Actualización v1.1 (2026-10-08, noche)
+
+### Precios por categoría de hotel
+El tour **no cambia**; solo cambia la categoría. Precios del repo (por confirmar):
+
+| Tour | 3★ | 4★ | Diferencia |
+|---|---|---|---|
+| Galápagos 6 días | 1,790 | 2,199 | 409 |
+| Galápagos 7 días | 2,050 | 2,399 | 349 |
+| Galápagos 8 días | 2,200 | 2,600 | 400 |
+| Ecuador + Galápagos 11 días | 2,290 | 2,450 | 160 |
+| Ecuador + Galápagos 12 días | 2,590 | 2,750 | 160 |
+
+Palanca comercial: en los combinados, 4★ cuesta solo US$160 más. Las publicaciones se separan por categoría (ver `docs/growth/01_social_calendar_30d.md`).
+
+### GA4: aclaración
+La captura que enviaste es de la propiedad **`andicot-web-2`**, que es otro proyecto. Para Vermilion necesitamos el ID de medición del flujo web de vermilionroutes.com.
+
+### Genkit
+Se puede instalar en tu computador como **fábrica de contenido**, fuera del sitio. Detalle en `docs/growth/06_genkit_content_factory.md`.
+
+### Entregables por fase
+
+| Fase | Entregable listo | Archivo |
+|---|---|---|
+| 0 Medición | Checklist de accesos | `05_api_keys_checklist.md` |
+| 1 Mercado | Pendiente de datos de Search Console | — |
+| 2 Sitio | Cambios descritos en este plan; se ejecutan con tu aprobación | este archivo |
+| 3 SEO | Genkit `blogDraftFlow` | `06_genkit_content_factory.md` |
+| 4 Canales | Meta Ads + WhatsApp | `02_meta_ads_whatsapp.md` |
+| 5 Redes | 12 captions, calendario | `01_social_calendar_30d.md` |
+| 6 Email | Secuencia de 5 correos | `03_email_sequence.md` |
+| 7 Afiliados | Kit y reglas | `04_affiliate_kit.md` |
+| 8 Medición | Informe semanal tras conectar GA4 | — |
