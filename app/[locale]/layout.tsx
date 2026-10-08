@@ -13,6 +13,7 @@ import { ConditionalFooter } from '@/components/layout/ConditionalFooter';
 import { AffiliateTracker } from '@/components/affiliates/AffiliateTracker';
 import { ConciergeWidgetLazy } from '@/components/ui/ConciergeWidgetLazy';
 import { ConsentManager } from '@/components/privacy/ConsentManager';
+import { ContactClickTracker } from '@/components/analytics/ContactClickTracker';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,6 +32,9 @@ const oswald = Oswald({
   variable: '--font-oswald',
   display: 'swap',
 });
+
+// GA4 measurement ID: set NEXT_PUBLIC_GA_ID in the host; falls back to the ID that was hardcoded before.
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-D8ZNLYMCB0';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -292,7 +296,7 @@ export default async function RootLayout({
               });
             `}
           </Script>
-          <Script src="https://www.googletagmanager.com/gtag/js?id=G-D8ZNLYMCB0" strategy="lazyOnload" />
+          <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} strategy="lazyOnload" />
 
           <LuxuryThemeProvider>
           <CurrencyProvider>
@@ -306,9 +310,10 @@ export default async function RootLayout({
               <Suspense fallback={null}>
                 <AffiliateTracker />
               </Suspense>
+              <ContactClickTracker />
               <ConsentManager
                 locale={locale}
-                gaId="G-D8ZNLYMCB0"
+                gaId={GA_MEASUREMENT_ID}
                 metaPixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID}
                 clarityProjectId={process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}
               />
