@@ -1,0 +1,11 @@
+{
+  "name": "Vermilion Routes",
+  "market": "Turistas internacionales que visitan Ecuador y Galápagos (inglés por defecto)",
+  "voice": "en-US-GuyNeural",
+  "colors": {"text": "#FFFFFF", "accent": "#C49B45", "background": "#0A0C1A", "muted": "#C8CED2", "button": "#25D366"},
+  "fonts": {"head": "Playfair-Bold.ttf", "body": "Inter-Medium.ttf", "bold": "Inter-Bold.ttf"},
+  "logo": "logo.png",
+  "contact": {"whatsapp": "+593 96 003 9156", "web": "vermilionroutes.com"},
+  "photos": "repo vermilion: public/images/tours/9-16/ (verticales, ideales) y public/images/tours/16-9/",
+  "facts": "https://www.vermilionroutes.com/llms.txt; repo vermilion: public/llms.txt y public/llms-full.txt"
+}

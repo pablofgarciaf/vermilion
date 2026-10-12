@@ -1,0 +1,11 @@
+{
+  "name": "Modulares GM",
+  "market": "Quito y valles, Ecuador (clientes locales, español)",
+  "voice": "es-MX-JorgeNeural",
+  "colors": {"text": "#F5F1E5", "accent": "#B88E44", "background": "#19242D", "muted": "#C8CED2", "button": "#25D366"},
+  "fonts": {"head": "Playfair-Bold.ttf", "body": "Inter-Medium.ttf", "bold": "Inter-Bold.ttf"},
+  "logo": "logo.png",
+  "contact": {"whatsapp": "096 306 4374", "web": "modularesgm.com"},
+  "photos": "repo modularesgm: public/images/catalog/extracted_*/ (fotos reales de obras; mezcla portadas y páginas de texto de los PDF)",
+  "facts": "https://www.modularesgm.com/llms.txt; repo modularesgm: src/lib/campaign.ts (campaña activa), src/lib/catalog-full.ts (CATEGORIES_SEO: precios), src/lib/site.ts (teléfono)"
+}
