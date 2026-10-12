@@ -7,6 +7,7 @@ import { useLocale } from 'next-intl';
 import { useSearchParams, useRouter } from 'next/navigation';
 import {
   Users,
+  Video,
   Compass,
   Calendar,
   CheckCircle2,
@@ -484,6 +485,19 @@ export function AdminCrmDashboard() {
                 <span className="text-[10px] text-zinc-500 font-mono">{users.length}</span>
               </button>
             )}
+
+            {(activeRoleView === 'super' || activeRoleView === 'admin') && (
+              <Link
+                href={`/${locale}/admin/tiktok`}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all text-zinc-300 hover:bg-white/5 hover:text-white"
+              >
+                <div className="flex items-center gap-3">
+                  <Video className="w-4 h-4" />
+                  <span>TikTok</span>
+                </div>
+                <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500" />
+              </Link>
+            )}
           </nav>
 
           <div className="pt-4 border-t border-emerald-950/80 space-y-2 mt-6">
@@ -674,6 +688,19 @@ export function AdminCrmDashboard() {
                 </div>
                 <span className="text-[10px] text-zinc-500 font-mono">{users.length}</span>
               </button>
+            )}
+
+            {(activeRoleView === 'super' || activeRoleView === 'admin') && (
+              <Link
+                href={`/${locale}/admin/tiktok`}
+                className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-zinc-300 hover:bg-white/5 hover:text-white"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Video className="w-4 h-4" />
+                  <span>TikTok</span>
+                </div>
+                <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500" />
+              </Link>
             )}
           </nav>
         </div>

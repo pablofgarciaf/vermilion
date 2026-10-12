@@ -1,0 +1,11 @@
+{
+  "name": "EnergyEngine",
+  "market": "España y Portugal (empresas e industria, español de España)",
+  "voice": "es-ES-AlvaroNeural",
+  "colors": {"text": "#F5F7FA", "accent": "#4CAF6E", "background": "#111417", "muted": "#B8C2CC", "button": "#25D366"},
+  "fonts": {"head": "SpaceGrotesk-Bold.ttf", "body": "Inter-Medium.ttf", "bold": "Inter-Bold.ttf"},
+  "logo": "logo.png",
+  "contact": {"whatsapp": "+34 635 12 05 10", "web": "energyengine.es"},
+  "photos": "repo energyengine: public/*.webp (generadores, mantenimiento, case-*-optimized.webp)",
+  "facts": "https://energyengine.es/llms.txt; repo energyengine: public/llms.txt"
+}
