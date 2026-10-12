@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
@@ -49,72 +49,72 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     expWildlife: "Wildlife Photography Expeditions"
   },
   es: {
-    topDestinations: "Destinos Principales", galapagos: "Islas GalÃ¡pagos", ecuador: "Ecuador Continental", fullDay: "Excursiones Full Day", amazon: "AmazonÃ­a Ecuatoriana", volcanoes: "Avenida de los Volcanes",
-    company: "Empresa", about: "Sobre Nosotros", packages: "Paquetes TurÃ­sticos", contact: "Contactar Especialista",
-    updates: "Recibe Novedades", subscribeText: "SuscrÃ­bete para recibir promociones de cruceros y guÃ­as de viaje seleccionadas.", emailPlaceholder: "Tu correo", subscribeBtn: "Suscribirse",
-    licensed: "Operador TurÃ­stico Certificado en Ecuador y GalÃ¡pagos", support: "Soporte Especializado 24/7 Durante el Viaje", secure: "Reservas Seguras y SatisfacciÃ³n Garantizada al 100%",
-    privacy: "PolÃ­tica de Privacidad", terms: "TÃ©rminos de Servicio",
-    footerDescription: "Operador turÃ­stico boutique especializado en itinerarios de viaje premium a medida a travÃ©s de las maravillas mÃ¡s icÃ³nicas de Ecuador y GalÃ¡pagos.",
-    paymentVerified: "MÃ©todos de Pago Verificados y Seguros",
+    topDestinations: "Destinos Principales", galapagos: "Islas Galápagos", ecuador: "Ecuador Continental", fullDay: "Excursiones Full Day", amazon: "Amazonía Ecuatoriana", volcanoes: "Avenida de los Volcanes",
+    company: "Empresa", about: "Sobre Nosotros", packages: "Paquetes Turísticos", contact: "Contactar Especialista",
+    updates: "Recibe Novedades", subscribeText: "Suscríbete para recibir promociones de cruceros y guías de viaje seleccionadas.", emailPlaceholder: "Tu correo", subscribeBtn: "Suscribirse",
+    licensed: "Operador Turístico Certificado en Ecuador y Galápagos", support: "Soporte Especializado 24/7 Durante el Viaje", secure: "Reservas Seguras y Satisfacción Garantizada al 100%",
+    privacy: "Política de Privacidad", terms: "Términos de Servicio",
+    footerDescription: "Operador turístico boutique especializado en itinerarios de viaje premium a medida a través de las maravillas más icónicas de Ecuador y Galápagos.",
+    paymentVerified: "Métodos de Pago Verificados y Seguros",
     paymentHeading: "Pago Seguro y Encriptado",
-    paymentDesc: "Aceptamos pagos directos y encriptados con tarjeta mediante Stripe, transferencias oficiales vÃ­a Citibank (EE.UU.), transferencias Zelle y Banco Produbanco. GarantÃ­a oficial y comprobantes certificados.",
+    paymentDesc: "Aceptamos pagos directos y encriptados con tarjeta mediante Stripe, transferencias oficiales vía Citibank (EE.UU.), transferencias Zelle y Banco Produbanco. Garantía oficial y comprobantes certificados.",
     badgeStripe: "Pagos con Stripe",
     badgeCitibank: "Citibank EE.UU. & Zelle",
-    badgeSSL: "EncriptaciÃ³n SSL de 256 Bits",
-    cancellationPolicy: "PolÃ­ticas de CancelaciÃ³n y Reembolsos",
+    badgeSSL: "Encriptación SSL de 256 Bits",
+    cancellationPolicy: "Políticas de Cancelación y Reembolsos",
     officeReservations: "Oficina / Reservas:",
     hqEcuador: "Sede Ecuador (HQ)",
-    officeSpain: "Sede EspaÃ±a (Coral Tour)",
+    officeSpain: "Sede España (Coral Tour)",
     internationalLanguages: "Internacional / Idiomas:",
     featuredExperiences: "Experiencias Destacadas",
-    expCouples: "Aniversario en GalÃ¡pagos",
+    expCouples: "Aniversario en Galápagos",
     expFamily: "Ecuador en Familia",
-    expWildlife: "FotografÃ­a de Vida Silvestre"
+    expWildlife: "Fotografía de Vida Silvestre"
   },
   fr: {
-    topDestinations: "Meilleures Destinations", galapagos: "ÃŽles Galapagos", ecuador: "Ã‰quateur Continental", fullDay: "Excursions Full Day", amazon: "Amazonie Ã‰quatorienne", volcanoes: "Avenue des Volcans",
-    company: "Entreprise", about: "Ã€ Propos", packages: "Forfaits", contact: "Contacter un SpÃ©cialiste",
-    updates: "ActualitÃ©s", subscribeText: "Abonnez-vous pour recevoir des promotions de croisiÃ¨res et des guides de voyage.", emailPlaceholder: "Votre e-mail", subscribeBtn: "S'abonner",
-    licensed: "Voyagiste CertifiÃ© en Ã‰quateur et aux Galapagos", support: "Assistance SpÃ©cialisÃ©e 24/7", secure: "RÃ©servations SÃ©curisÃ©es et Satisfaction Garantie",
-    privacy: "ConfidentialitÃ©", terms: "Conditions",
-    footerDescription: "Voyagiste boutique de premier ordre spÃ©cialisÃ© dans les itinÃ©raires de voyage haut de gamme sur mesure Ã  travers l'Ã‰quateur et les Galapagos.",
-    paymentVerified: "Moyens de Paiement VÃ©rifiÃ©s & SÃ©curisÃ©s",
-    paymentHeading: "Paiement SÃ©curisÃ© & CryptÃ©",
-    paymentDesc: "Nous acceptons les paiements sÃ©curisÃ©s par carte via Stripe, virements Citibank (USA), Zelle et Produbanco. Garantie officielle et bons de voyage certifiÃ©s.",
+    topDestinations: "Meilleures Destinations", galapagos: "Îles Galapagos", ecuador: "Équateur Continental", fullDay: "Excursions Full Day", amazon: "Amazonie Équatorienne", volcanoes: "Avenue des Volcans",
+    company: "Entreprise", about: "À Propos", packages: "Forfaits", contact: "Contacter un Spécialiste",
+    updates: "Actualités", subscribeText: "Abonnez-vous pour recevoir des promotions de croisières et des guides de voyage.", emailPlaceholder: "Votre e-mail", subscribeBtn: "S'abonner",
+    licensed: "Voyagiste Certifié en Équateur et aux Galapagos", support: "Assistance Spécialisée 24/7", secure: "Réservations Sécurisées et Satisfaction Garantie",
+    privacy: "Confidentialité", terms: "Conditions",
+    footerDescription: "Voyagiste boutique de premier ordre spécialisé dans les itinéraires de voyage haut de gamme sur mesure à travers l'Équateur et les Galapagos.",
+    paymentVerified: "Moyens de Paiement Vérifiés & Sécurisés",
+    paymentHeading: "Paiement Sécurisé & Crypté",
+    paymentDesc: "Nous acceptons les paiements sécurisés par carte via Stripe, virements Citibank (USA), Zelle et Produbanco. Garantie officielle et bons de voyage certifiés.",
     badgeStripe: "Paiements Stripe",
     badgeCitibank: "Citibank USA & Zelle",
-    badgeSSL: "CryptÃ© SSL 256 Bits",
+    badgeSSL: "Crypté SSL 256 Bits",
     cancellationPolicy: "Politique d'Annulation et Remboursement",
-    officeReservations: "Bureau / RÃ©servations:",
-    hqEcuador: "SiÃ¨ge Ã‰quateur (HQ)",
+    officeReservations: "Bureau / Réservations:",
+    hqEcuador: "Siège Équateur (HQ)",
     officeSpain: "Filiale Espagne (Coral Tour)",
     internationalLanguages: "International / Langues:",
-    featuredExperiences: "ExpÃ©riences Vedettes",
-    expCouples: "Anniversaire aux GalÃ¡pagos",
-    expFamily: "Ã‰quateur en Famille",
+    featuredExperiences: "Expériences Vedettes",
+    expCouples: "Anniversaire aux Galápagos",
+    expFamily: "Équateur en Famille",
     expWildlife: "Photographie de Faune Sauvage"
   },
   de: {
-    topDestinations: "Top-Reiseziele", galapagos: "Galapagos-Inseln", ecuador: "Ecuador Festland", fullDay: "TagesausflÃ¼ge (Full Day)", amazon: "Ecuadorianischer Amazonas", volcanoes: "StraÃŸe der Vulkane",
-    company: "Unternehmen", about: "Ãœber Uns", packages: "Reisepakete", contact: "Kontaktieren",
-    updates: "Reise-Updates", subscribeText: "Abonnieren Sie, um Kreuzfahrt-Angebote und ReisefÃ¼hrer zu erhalten.", emailPlaceholder: "Ihre E-Mail", subscribeBtn: "Abonnieren",
+    topDestinations: "Top-Reiseziele", galapagos: "Galapagos-Inseln", ecuador: "Ecuador Festland", fullDay: "Tagesausflüge (Full Day)", amazon: "Ecuadorianischer Amazonas", volcanoes: "Straße der Vulkane",
+    company: "Unternehmen", about: "Über Uns", packages: "Reisepakete", contact: "Kontaktieren",
+    updates: "Reise-Updates", subscribeText: "Abonnieren Sie, um Kreuzfahrt-Angebote und Reiseführer zu erhalten.", emailPlaceholder: "Ihre E-Mail", subscribeBtn: "Abonnieren",
     licensed: "Zertifizierter Reiseveranstalter in Ecuador & Galapagos", support: "24/7 Spezialisten-Support auf der Reise", secure: "Sichere Buchungen & 100% Zufriedenheitsgarantie",
-    privacy: "DatenschutzerklÃ¤rung", terms: "Nutzungsbedingungen",
-    footerDescription: "Boutique-Reiseveranstalter, spezialisiert auf maÃŸgeschneiderte Premium-Reiserouten zu den kultigsten Wunderwelten von Ecuador und Galapagos.",
+    privacy: "Datenschutzerklärung", terms: "Nutzungsbedingungen",
+    footerDescription: "Boutique-Reiseveranstalter, spezialisiert auf maßgeschneiderte Premium-Reiserouten zu den kultigsten Wunderwelten von Ecuador und Galapagos.",
     paymentVerified: "Verifizierte & Sichere Zahlungsmethoden",
-    paymentHeading: "Sicherer & VerschlÃ¼sselter Checkout",
-    paymentDesc: "Wir akzeptieren sichere Kartenzahlungen Ã¼ber Stripe, offizielle Citibank (USA) Ãœberweisungen, Zelle und Produbanco. Offizielle Garantie und Reisezertifikate.",
+    paymentHeading: "Sicherer & Verschlüsselter Checkout",
+    paymentDesc: "Wir akzeptieren sichere Kartenzahlungen über Stripe, offizielle Citibank (USA) Überweisungen, Zelle und Produbanco. Offizielle Garantie und Reisezertifikate.",
     badgeStripe: "Stripe-Zahlungen",
     badgeCitibank: "Citibank USA & Zelle",
-    badgeSSL: "SSL 256-Bit-VerschlÃ¼sselung",
-    cancellationPolicy: "Stornierungs- und RÃ¼ckerstattungsrichtlinien",
-    officeReservations: "BÃ¼ro / Reservierungen:",
+    badgeSSL: "SSL 256-Bit-Verschlüsselung",
+    cancellationPolicy: "Stornierungs- und Rückerstattungsrichtlinien",
+    officeReservations: "Büro / Reservierungen:",
     hqEcuador: "Hauptsitz Ecuador (HQ)",
     officeSpain: "Niederlassung Spanien (Coral Tour)",
     internationalLanguages: "International / Sprachen:",
     featuredExperiences: "Besondere Erlebnisse",
-    expCouples: "JubilÃ¤umsreisen auf GalÃ¡pagos",
-    expFamily: "Ecuador fÃ¼r Familien",
+    expCouples: "Jubiläumsreisen auf Galápagos",
+    expFamily: "Ecuador für Familien",
     expWildlife: "Wildtier-Fotografie-Expeditionen"
   },
   it: {
@@ -136,78 +136,78 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
     officeSpain: "Sede Spagna (Coral Tour)",
     internationalLanguages: "Internazionale / Lingue:",
     featuredExperiences: "Esperienze in Evidenza",
-    expCouples: "Anniversario alle GalÃ¡pagos",
+    expCouples: "Anniversario alle Galápagos",
     expFamily: "Ecuador in Famiglia",
     expWildlife: "Spedizioni di Fotografia Naturalistica"
   },
   pt: {
-    topDestinations: "Principais Destinos", galapagos: "Ilhas GalÃ¡pagos", ecuador: "Equador Continental", fullDay: "ExcursÃµes Full Day", amazon: "AmazÃ´nia Equatoriana", volcanoes: "Avenida dos VulcÃµes",
-    company: "Empresa", about: "Sobre NÃ³s", packages: "Pacotes", contact: "Contatar",
-    updates: "Atualizaciones", subscribeText: "Inscreva-se para receber promoÃ§Ãµes de cruzeiros e guias de viagem.", emailPlaceholder: "Seu e-mail", subscribeBtn: "Inscrever-se",
-    licensed: "Operador TurÃ­stico Certificado no Equador e GalÃ¡pagos", support: "Suporte Especializado 24/7", secure: "Reservas Seguras e 100% de SatisfaÃ§Ã£o Garantida",
+    topDestinations: "Principais Destinos", galapagos: "Ilhas Galápagos", ecuador: "Equador Continental", fullDay: "Excursões Full Day", amazon: "Amazônia Equatoriana", volcanoes: "Avenida dos Vulcões",
+    company: "Empresa", about: "Sobre Nós", packages: "Pacotes", contact: "Contatar",
+    updates: "Atualizaciones", subscribeText: "Inscreva-se para receber promoções de cruzeiros e guias de viagem.", emailPlaceholder: "Seu e-mail", subscribeBtn: "Inscrever-se",
+    licensed: "Operador Turístico Certificado no Equador e Galápagos", support: "Suporte Especializado 24/7", secure: "Reservas Seguras e 100% de Satisfação Garantida",
     privacy: "Privacidade", terms: "Termos",
-    footerDescription: "Operador turÃ­stico boutique especializado em itinerÃ¡rios de viagem premium sob medida pelas maravilhas mais icÃ´nicas do Equador e GalÃ¡pagos.",
-    paymentVerified: "MÃ©todos de Pagamento Verificados e Seguros",
+    footerDescription: "Operador turístico boutique especializado em itinerários de viagem premium sob medida pelas maravilhas mais icônicas do Equador e Galápagos.",
+    paymentVerified: "Métodos de Pagamento Verificados e Seguros",
     paymentHeading: "Checkout Seguro e Criptografado",
-    paymentDesc: "Aceitamos pagamentos seguros com cartÃ£o via Stripe, transferÃªncias Citibank (EUA), Zelle e Produbanco. Garantia oficial e vouchers certificados.",
+    paymentDesc: "Aceitamos pagamentos seguros com cartão via Stripe, transferências Citibank (EUA), Zelle e Produbanco. Garantia oficial e vouchers certificados.",
     badgeStripe: "Pagamentos Stripe",
     badgeCitibank: "Citibank EUA & Zelle",
     badgeSSL: "Criptografia SSL de 256 Bits",
-    cancellationPolicy: "PolÃ­tica de Cancelamento e Reembolso",
-    officeReservations: "EscritÃ³rio / Reservas:",
+    cancellationPolicy: "Política de Cancelamento e Reembolso",
+    officeReservations: "Escritório / Reservas:",
     hqEcuador: "Sede Equador (HQ)",
     officeSpain: "Sede Espanha (Coral Tour)",
     internationalLanguages: "Internacional / Idiomas:",
-    featuredExperiences: "ExperiÃªncias em Destaque",
-    expCouples: "AniversÃ¡rio em GalÃ¡pagos",
-    expFamily: "Equador em FamÃ­lia",
-    expWildlife: "ExpediÃ§Ãµes de Fotografia de Vida Selvagem"
+    featuredExperiences: "Experiências em Destaque",
+    expCouples: "Aniversário em Galápagos",
+    expFamily: "Equador em Família",
+    expWildlife: "Expedições de Fotografia de Vida Selvagem"
   },
   ja: {
-    topDestinations: "äººæ°—ã®ç›®çš„åœ°", galapagos: "ã‚¬ãƒ©ãƒ‘ã‚´ã‚¹è«¸å³¶", ecuador: "ã‚¨ã‚¯ã‚¢ãƒ‰ãƒ«æœ¬åœŸ", fullDay: "æ—¥å¸°ã‚Šãƒ„ã‚¢ãƒ¼ï¼ˆFull Dayï¼‰", amazon: "ã‚¨ã‚¯ã‚¢ãƒ‰ãƒ«ãƒ»ã‚¢ãƒžã‚¾ãƒ³", volcanoes: "ç«å±±ã®é“",
-    company: "ä¼šç¤¾æ¦‚è¦", about: "ç§ãŸã¡ã«ã¤ã„ã¦", packages: "ãƒ„ã‚¢ãƒ¼ãƒ—ãƒ©ãƒ³", contact: "é€£çµ¡ã™ã‚‹",
-    updates: "æœ€æ–°æƒ…å ±", subscribeText: "ã‚¯ãƒ«ãƒ¼ã‚ºã®ãƒ—ãƒ­ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚„æ—…è¡Œã‚¬ã‚¤ãƒ‰ã‚’å—ã‘å–ã‚‹ãŸã‚ã«è³¼èª­ã—ã¦ãã ã•ã„ã€‚", emailPlaceholder: "ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹", subscribeBtn: "è³¼èª­ã™ã‚‹",
-    licensed: "ã‚¨ã‚¯ã‚¢ãƒ‰ãƒ«ã¨ã‚¬ãƒ©ãƒ‘ã‚´ã‚¹ã®èªå®šæ—…è¡Œä¼šç¤¾", support: "24æ™‚é–“365æ—¥ã®å°‚é–€å®¶ã‚µãƒãƒ¼ãƒˆ", secure: "å®‰å…¨ãªäºˆç´„ã¨100%ã®æº€è¶³ä¿è¨¼",
-    privacy: "ãƒ—ãƒ©ã‚¤ãƒã‚·ãƒ¼ãƒãƒªã‚·ãƒ¼", terms: "åˆ©ç”¨è¦ç´„",
-    footerDescription: "ã‚¨ã‚¯ã‚¢ãƒ‰ãƒ«ã¨ã‚¬ãƒ©ãƒ‘ã‚´ã‚¹ã®è±¡å¾´çš„ãªè¦‹ã©ã“ã‚ã‚’å·¡ã‚‹ã‚ªãƒ¼ãƒ€ãƒ¼ãƒ¡ã‚¤ãƒ‰ã®ãƒ—ãƒ¬ãƒŸã‚¢ãƒ æ—…è¡Œã‚’å°‚é–€ã¨ã™ã‚‹ãƒ–ãƒ†ã‚£ãƒƒã‚¯æ—…è¡Œä¼šç¤¾ã§ã™ã€‚",
-    paymentVerified: "èªè¨¼æ¸ˆã¿å®‰å…¨ãªæ±ºæ¸ˆæ–¹æ³•",
-    paymentHeading: "å®‰å…¨ãªæš—å·åŒ–ãƒã‚§ãƒƒã‚¯ã‚¢ã‚¦ãƒˆï¼†æ±ºæ¸ˆ",
-    paymentDesc: "Stripeã«ã‚ˆã‚‹å®‰å…¨ãªæš—å·åŒ–ã‚«ãƒ¼ãƒ‰æ±ºæ¸ˆã€ç±³å›½Citibankå…¬å¼é€é‡‘ã€Zelleã€ProdubancoéŠ€è¡Œé€é‡‘ã«å¯¾å¿œã€‚å…¬å¼ä¿è¨¼ãŠã‚ˆã³æ­£è¦æ—…è¡Œãƒã‚¦ãƒãƒ£ãƒ¼ã‚’ç™ºè¡Œã—ã¾ã™ã€‚",
-    badgeStripe: "Stripe ã‚«ãƒ¼ãƒ‰æ±ºæ¸ˆ",
-    badgeCitibank: "ç±³å›½ã‚·ãƒ†ã‚£ãƒãƒ³ã‚¯ & Zelle",
-    badgeSSL: "256ãƒ“ãƒƒãƒˆ SSL æš—å·åŒ–ä¿è­·",
-    cancellationPolicy: "ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒ»è¿”é‡‘ãƒãƒªã‚·ãƒ¼",
-    officeReservations: "ã‚ªãƒ•ã‚£ã‚¹ / äºˆç´„:",
-    hqEcuador: "ã‚¨ã‚¯ã‚¢ãƒ‰ãƒ«æœ¬ç¤¾ (HQ)",
-    officeSpain: "ã‚¹ãƒšã‚¤ãƒ³æ”¯ç¤¾ (Coral Tour)",
-    internationalLanguages: "ã‚°ãƒ­ãƒ¼ãƒãƒ« / è¨€èªžã‚’é¸æŠž:",
-    featuredExperiences: "æ³¨ç›®ã®ä½“é¨“",
-    expCouples: "ã‚¬ãƒ©ãƒ‘ã‚´ã‚¹è¨˜å¿µæ—¥æ—…è¡Œ",
-    expFamily: "ãƒ•ã‚¡ãƒŸãƒªãƒ¼å‘ã‘ã‚¨ã‚¯ã‚¢ãƒ‰ãƒ«",
-    expWildlife: "é‡Žç”Ÿå‹•ç‰©ãƒ•ã‚©ãƒˆã‚°ãƒ©ãƒ•ã‚£ãƒ¼é å¾"
+    topDestinations: "人気の目的地", galapagos: "ガラパゴス諸島", ecuador: "エクアドル本土", fullDay: "日帰りツアー（Full Day）", amazon: "エクアドル・アマゾン", volcanoes: "火山の道",
+    company: "会社概要", about: "私たちについて", packages: "ツアープラン", contact: "連絡する",
+    updates: "最新情報", subscribeText: "クルーズのプロモーションや旅行ガイドを受け取るために購読してください。", emailPlaceholder: "メールアドレス", subscribeBtn: "購読する",
+    licensed: "エクアドルとガラパゴスの認定旅行会社", support: "24時間365日の専門家サポート", secure: "安全な予約と100%の満足保証",
+    privacy: "プライバシーポリシー", terms: "利用規約",
+    footerDescription: "エクアドルとガラパゴスの象徴的な見どころを巡るオーダーメイドのプレミアム旅行を専門とするブティック旅行会社です。",
+    paymentVerified: "認証済み安全な決済方法",
+    paymentHeading: "安全な暗号化チェックアウト＆決済",
+    paymentDesc: "Stripeによる安全な暗号化カード決済、米国Citibank公式送金、Zelle、Produbanco銀行送金に対応。公式保証および正規旅行バウチャーを発行します。",
+    badgeStripe: "Stripe カード決済",
+    badgeCitibank: "米国シティバンク & Zelle",
+    badgeSSL: "256ビット SSL 暗号化保護",
+    cancellationPolicy: "キャンセル・返金ポリシー",
+    officeReservations: "オフィス / 予約:",
+    hqEcuador: "エクアドル本社 (HQ)",
+    officeSpain: "スペイン支社 (Coral Tour)",
+    internationalLanguages: "グローバル / 言語を選択:",
+    featuredExperiences: "注目の体験",
+    expCouples: "ガラパゴス記念日旅行",
+    expFamily: "ファミリー向けエクアドル",
+    expWildlife: "野生動物フォトグラフィー遠征"
   },
   zh: {
-    topDestinations: "çƒ­é—¨ç›®çš„åœ°", galapagos: "åŠ æ‹‰å¸•æˆˆæ–¯ç¾¤å²›", ecuador: "åŽ„ç“œå¤šå°”å¤§é™†", fullDay: "å…¨å¤©ä¸€æ—¥æ¸¸", amazon: "åŽ„ç“œå¤šå°”äºšé©¬é€Š", volcanoes: "ç«å±±å¤§é“",
-    company: "å…¬å¸ä¿¡æ¯", about: "å…³äºŽæˆ‘ä»¬", packages: "æ—…æ¸¸å¥—é¤", contact: "è”ç³»ä¸“å®¶",
-    updates: "èŽ·å–æ—…æ¸¸æ›´æ–°", subscribeText: "è®¢é˜…ä»¥æŽ¥æ”¶æ¸¸è½®ä¿ƒé”€æ´»åŠ¨å’Œç²¾é€‰æ—…æ¸¸æŒ‡å—ã€‚", emailPlaceholder: "æ‚¨çš„ç”µå­é‚®ç®±", subscribeBtn: "è®¢é˜…",
-    licensed: "åŽ„ç“œå¤šå°”å’ŒåŠ æ‹‰å¸•æˆˆæ–¯çš„è®¤è¯æ—…è¡Œç¤¾", support: "24/7 ä¸“ä¸šæ—…è¡Œæ”¯æŒ", secure: "å®‰å…¨é¢„è®¢å’Œ100%æ»¡æ„ä¿è¯",
-    privacy: "éšç§æ”¿ç­–", terms: "æœåŠ¡æ¡æ¬¾",
-    footerDescription: "ç²¾å“æ—…è¡Œç¤¾ï¼Œä¸“æ³¨äºŽåœ¨åŽ„ç“œå¤šå°”å’ŒåŠ æ‹‰å¸•æˆˆæ–¯ç¾¤å²›æ‰“é€ å®šåˆ¶çš„å°Šäº«ç²¾å“æ—…è¡Œè¡Œç¨‹ã€‚",
-    paymentVerified: "å®˜æ–¹æƒå¨è®¤è¯å®‰å…¨æ”¯ä»˜æ–¹å¼",
-    paymentHeading: "å…¨æµç¨‹ 256 ä½é“¶è¡Œçº§å®‰å…¨åŠ å¯†æ”¯ä»˜",
-    paymentDesc: "æ”¯æŒé€šè¿‡ Stripe è¿›è¡Œå®‰å…¨é“¶è¡Œå¡æ”¯ä»˜ã€ç¾Žå›½èŠ±æ——é“¶è¡Œï¼ˆCitibankï¼‰å®˜æ–¹ç”µæ±‡ã€Zelle ä»¥åŠåŽ„ç“œå¤šå°” Produbanco é“¶è¡Œè½¬è´¦ã€‚æä¾›å®˜æ–¹åˆåŒæ‹…ä¿ä¸Žæ­£è§„æ—…è¡Œå‡­æ®ã€‚",
-    badgeStripe: "Stripe å›½é™…é“¶è¡Œå¡æ”¯ä»˜",
-    badgeCitibank: "ç¾Žå›½èŠ±æ——é“¶è¡Œ & Zelle",
-    badgeSSL: "256ä½ SSL é¡¶çº§åŠ å¯†",
-    cancellationPolicy: "å–æ¶ˆä¸Žé€€æ¬¾æ”¿ç­–",
-    officeReservations: "åŠžå…¬å®¤ / é¢„è®¢ä¸“çº¿:",
-    hqEcuador: "åŽ„ç“œå¤šå°”æ€»éƒ¨ (HQ)",
-    officeSpain: "è¥¿ç­ç‰™åˆ†éƒ¨ (Coral Tour)",
-    internationalLanguages: "å›½é™…å¤šè¯­è¨€åˆ‡æ¢:",
-    featuredExperiences: "ç²¾é€‰ä½“éªŒ",
-    expCouples: "åŠ æ‹‰å¸•æˆˆæ–¯çºªå¿µæ—¥ä¹‹æ—…",
-    expFamily: "åŽ„ç“œå¤šå°”äº²å­æ¸¸",
-    expWildlife: "é‡Žç”ŸåŠ¨ç‰©æ‘„å½±æŽ¢é™©"
+    topDestinations: "热门目的地", galapagos: "加拉帕戈斯群岛", ecuador: "厄瓜多尔大陆", fullDay: "全天一日游", amazon: "厄瓜多尔亚马逊", volcanoes: "火山大道",
+    company: "公司信息", about: "关于我们", packages: "旅游套餐", contact: "联系专家",
+    updates: "获取旅游更新", subscribeText: "订阅以接收游轮促销活动和精选旅游指南。", emailPlaceholder: "您的电子邮箱", subscribeBtn: "订阅",
+    licensed: "厄瓜多尔和加拉帕戈斯的认证旅行社", support: "24/7 专业旅行支持", secure: "安全预订和100%满意保证",
+    privacy: "隐私政策", terms: "服务条款",
+    footerDescription: "精品旅行社，专注于在厄瓜多尔和加拉帕戈斯群岛打造定制的尊享精品旅行行程。",
+    paymentVerified: "官方权威认证安全支付方式",
+    paymentHeading: "全流程 256 位银行级安全加密支付",
+    paymentDesc: "支持通过 Stripe 进行安全银行卡支付、美国花旗银行（Citibank）官方电汇、Zelle 以及厄瓜多尔 Produbanco 银行转账。提供官方合同担保与正规旅行凭据。",
+    badgeStripe: "Stripe 国际银行卡支付",
+    badgeCitibank: "美国花旗银行 & Zelle",
+    badgeSSL: "256位 SSL 顶级加密",
+    cancellationPolicy: "取消与退款政策",
+    officeReservations: "办公室 / 预订专线:",
+    hqEcuador: "厄瓜多尔总部 (HQ)",
+    officeSpain: "西班牙分部 (Coral Tour)",
+    internationalLanguages: "国际多语言切换:",
+    featuredExperiences: "精选体验",
+    expCouples: "加拉帕戈斯纪念日之旅",
+    expFamily: "厄瓜多尔亲子游",
+    expWildlife: "野生动物摄影探险"
   }
 };
 
@@ -243,7 +243,7 @@ export function Footer() {
           el.scrollIntoView({ behavior: 'smooth' });
           try {
             window.history.pushState(null, '', `#${id}`);
-          } catch { }
+          } catch {}
           return;
         }
       }
@@ -447,7 +447,7 @@ export function Footer() {
                 e.preventDefault();
                 if (newsletterEmail.trim()) {
                   saveStoredUserProfile({ email: newsletterEmail.trim() });
-                  alert(locale === 'es' ? 'Â¡Gracias! Has sido registrado como Cliente Premium. Pronto recibirÃ¡s nuestras mejores ofertas.' : 'Thank you! You have been registered as a Premium Client. You will receive our best offers soon.');
+                  alert(locale === 'es' ? '¡Gracias! Has sido registrado como Cliente Premium. Pronto recibirás nuestras mejores ofertas.' : 'Thank you! You have been registered as a Premium Client. You will receive our best offers soon.');
                 }
               }}
               className="space-y-2"
@@ -515,7 +515,7 @@ export function Footer() {
                     <span>{t.hqEcuador}</span>
                   </div>
                   <p className="text-zinc-300 pl-5">
-                    MonteserrÃ­n, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170124)
+                    Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170124)
                   </p>
                 </div>
 
@@ -525,7 +525,7 @@ export function Footer() {
                     <span>{t.officeSpain}</span>
                   </div>
                   <p className="text-zinc-300 pl-5">
-                    Calle Seco 3, 28007 Madrid, EspaÃ±a
+                    Calle Seco 3, 28007 Madrid, España
                   </p>
                 </div>
               </div>
@@ -590,21 +590,22 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             {[
               { code: 'en', label: 'English', flag: '/flags/us.svg' },
-              { code: 'es', label: 'EspaÃ±ol', flag: '/flags/es.svg' },
-              { code: 'fr', label: 'FranÃ§ais', flag: '/flags/fr.svg' },
+              { code: 'es', label: 'Español', flag: '/flags/es.svg' },
+              { code: 'fr', label: 'Français', flag: '/flags/fr.svg' },
               { code: 'de', label: 'Deutsch', flag: '/flags/de.svg' },
-              { code: 'pt', label: 'PortuguÃªs', flag: '/flags/pt.svg' },
+              { code: 'pt', label: 'Português', flag: '/flags/pt.svg' },
               { code: 'it', label: 'Italiano', flag: '/flags/it.svg' },
-              { code: 'ja', label: 'æ—¥æœ¬èªž', flag: '/flags/jp.svg' },
-              { code: 'zh', label: 'ä¸­æ–‡', flag: '/flags/cn.svg' },
+              { code: 'ja', label: '日本語', flag: '/flags/jp.svg' },
+              { code: 'zh', label: '中文', flag: '/flags/cn.svg' },
             ].map((lang) => (
               <a
                 key={lang.code}
                 href={`/${lang.code}`}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${locale === lang.code
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
+                  locale === lang.code
                     ? 'bg-emerald-600 text-white font-bold shadow-xs'
                     : 'bg-emerald-950/40 hover:bg-emerald-900/60 text-zinc-300 hover:text-white border border-emerald-800/40'
-                  }`}
+                }`}
               >
                 <img src={lang.flag} alt={lang.label} width={16} height={12} className="w-3.5 h-2.5 object-cover rounded-[1px]" />
                 <span>{lang.label}</span>
@@ -615,7 +616,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-300">
-          <p>{getLocalizedText(settings?.footer?.copyright, locale) || `Â© ${new Date().getFullYear()} Agencia de Viajes Vermilion (RUC 1711992808001). All Rights Reserved.`}</p>
+          <p>{getLocalizedText(settings?.footer?.copyright, locale) || `© ${new Date().getFullYear()} Agencia de Viajes Vermilion (RUC 1711992808001). All Rights Reserved.`}</p>
           <div className="flex gap-6">
             <a href={`/${locale}/privacy-policy`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
               {t.privacy}
@@ -635,5 +636,3 @@ export function Footer() {
     </footer>
   );
 }
-
-

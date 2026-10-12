@@ -57,3 +57,9 @@ data/_*
 
 firebase-service-account.json
 *.serviceaccount.json
+
+# Video generation output & recordings
+*.mp4
+*.webm
+*-preview.jpg
+scripts/tiktok/grabacion/

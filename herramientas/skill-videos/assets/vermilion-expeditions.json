@@ -1,0 +1,42 @@
+{
+  "brand": "vermilion",
+  "scene_seconds": 3.0,
+  "scenes": [
+    {
+      "photo": "public/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp",
+      "eyebrow": "Galapagos Islands",
+      "title": "Encounter ancient wildlife up close",
+      "say": "Experience legendary wildlife encounters in the pristine Galapagos Islands."
+    },
+    {
+      "photo": "public/images/tours/9-16/cotopaxi-9-16.webp",
+      "eyebrow": "Andean Volcanoes",
+      "title": "Majestic summits touching the clouds",
+      "say": "Journey across dramatic volcanic landscapes in the Ecuadorian Andes."
+    },
+    {
+      "photo": "public/images/tours/9-16/amazon-nutria-9-16.webp",
+      "eyebrow": "Amazon Rainforest",
+      "title": "Explore the untamed Amazon basin",
+      "say": "Immerse yourself deep within the vibrant biodiversity of the Amazon basin."
+    },
+    {
+      "photo": "public/images/tours/9-16/galapagos-piquero-patas-azules-9-16.webp",
+      "eyebrow": "Private Expeditions",
+      "title": "Curated luxury bespoke travel",
+      "say": "Bespoke itineraries and certified naturalist guides tailored just for you."
+    }
+  ],
+  "end": {
+    "title": "Your private Ecuador journey awaits",
+    "subtitle": "Bespoke & luxury expeditions",
+    "cta": "WhatsApp +593 96 003 9156",
+    "footer": "vermilionroutes.com · Vermilion Routes",
+    "say": "Plan your unforgettable private journey today. Contact our expedition specialists on WhatsApp."
+  },
+  "audio": {
+    "rate": "+0%",
+    "music": "auto",
+    "music_volume": 0.30
+  }
+}
