@@ -6,7 +6,7 @@ type ConsentChoice = 'accepted' | 'essential';
 
 type ConsentManagerProps = {
   locale: string;
-  gaId: string;
+  gaId: string | string[];
   metaPixelId?: string;
   clarityProjectId?: string;
 };
@@ -129,9 +129,14 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
         analytics_storage: 'granted',
       });
       window.gtag?.('js', new Date());
-      window.gtag?.('config', gaId, {
-        anonymize_ip: true,
-        allow_google_signals: false,
+      const gaIds = Array.isArray(gaId) ? gaId : [gaId];
+      gaIds.forEach((id) => {
+        if (id) {
+          window.gtag?.('config', id, {
+            anonymize_ip: true,
+            allow_google_signals: false,
+          });
+        }
       });
 
       if (metaPixelId && !window.fbq) {

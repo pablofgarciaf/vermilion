@@ -243,7 +243,7 @@ export function Footer() {
           el.scrollIntoView({ behavior: 'smooth' });
           try {
             window.history.pushState(null, '', `#${id}`);
-          } catch {}
+          } catch { }
           return;
         }
       }
@@ -308,7 +308,7 @@ export function Footer() {
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href={settings?.contact?.tiktok || 'https://www.tiktok.com/@vermilionsaroutes'}
+                href={settings?.contact?.tiktok || 'https://www.tiktok.com/@vermilionroutes'}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
@@ -570,15 +570,15 @@ export function Footer() {
               <span className="text-white font-medium">{t.licensed}</span>
             </div>
             <span className="text-[10px] text-emerald-400/80 dark:text-zinc-500 font-mono">Reg. No: 1793215456001 &bull; Ministerio de Turismo EC</span>
-            </a>
+          </a>
           <div className="flex items-center gap-2 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 px-4 py-2.5 rounded-2xl">
             <Award className="w-4 h-4 text-emerald-400 dark:text-amber-400" />
             <span className="text-white font-medium">{t.support}</span>
           </div>
           <a href="/Ruc.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 px-4 py-2.5 rounded-2xl hover:bg-emerald-900/60 dark:hover:bg-zinc-800/50 transition-colors cursor-pointer">
-              <Sparkles className="w-4 h-4 text-emerald-400 dark:text-amber-400" />
-              <span className="text-white font-medium">{t.secure}</span>
-            </a>
+            <Sparkles className="w-4 h-4 text-emerald-400 dark:text-amber-400" />
+            <span className="text-white font-medium">{t.secure}</span>
+          </a>
         </div>
 
         {/* International Language Hub - 8 Supported Locales */}
@@ -601,11 +601,10 @@ export function Footer() {
               <a
                 key={lang.code}
                 href={`/${lang.code}`}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
-                  locale === lang.code
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${locale === lang.code
                     ? 'bg-emerald-600 text-white font-bold shadow-xs'
                     : 'bg-emerald-950/40 hover:bg-emerald-900/60 text-zinc-300 hover:text-white border border-emerald-800/40'
-                }`}
+                  }`}
               >
                 <img src={lang.flag} alt={lang.label} width={16} height={12} className="w-3.5 h-2.5 object-cover rounded-[1px]" />
                 <span>{lang.label}</span>

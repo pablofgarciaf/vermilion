@@ -249,13 +249,13 @@ export function ContactSection() {
                 {locale === 'es' ? 'Contactanos' : locale === 'fr' ? 'Nous Contacter' : locale === 'de' ? 'Kontaktieren Sie uns' : locale === 'it' ? 'Contattaci' : locale === 'pt' ? 'Entre em contato' : locale === 'ja' ? 'お問い合わせ' : locale === 'zh' ? '联系我们' : 'Contact Us'}
               </span>
               <div className="flex items-center gap-2 flex-wrap">
-                <a href="https://www.instagram.com/vermilionroutes/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Instagram" title="Follow us on Instagram">
+                <a href="https://www.instagram.com/vermilionsouthamericanroutes/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Instagram" title="Follow us on Instagram">
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="https://www.facebook.com/VermilionRoutes/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Facebook" title="Follow us on Facebook">
+                <a href="https://www.facebook.com/VermilionSouthAmericanRoutes/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Facebook" title="Follow us on Facebook">
                   <Facebook className="w-5 h-5" />
                 </a>
-                <a href="https://www.youtube.com/@VermilionRoutes" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="YouTube" title="Subscribe on YouTube">
+                <a href="https://www.youtube.com/@VermilionSouthAmericanRoutes" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="YouTube" title="Subscribe on YouTube">
                   <Youtube className="w-5 h-5" />
                 </a>
                 <a href="https://www.tiktok.com/@vermilionroutes" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="TikTok" title="Follow us on TikTok">
@@ -263,8 +263,10 @@ export function ContactSection() {
                     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.68v13.67a2.4 2.4 0 0 1-2.4 2.4 2.4 2.4 0 0 1-2.4-2.4 2.4 2.4 0 0 1 2.4-2.4c.31 0 .62.04.92.13V9.4a5.9 5.9 0 0 0-.92-.08 5.9 5.9 0 0 0-5.9 5.9 5.9 5.9 0 0 0 5.9 5.9 5.9 5.9 0 0 0 5.9-5.9V8.3a7.68 7.68 0 0 0 4.58 1.52v-3.66a4.5 4.5 0 0 1-.41-.02z"/>
                   </svg>
                 </a>
-                <a href="https://wa.me/593960039156?text=Hola%20Vermilion%20Routes" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="WhatsApp" title="Chat on WhatsApp">
-                  <MessageCircle className="w-5 h-5" />
+                <a href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="TripAdvisor" title="Review us on TripAdvisor">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2.4c1.8 0 3.4.6 4.7 1.6-1.2.8-2.9 1.4-4.7 1.4s-3.5-.6-4.7-1.4C8.6 5 10.2 4.4 12 4.4zM6.8 9.2c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2S3.6 14.2 3.6 12.4s1.4-3.2 3.2-3.2zm10.4 0c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2-3.2-1.4-3.2-3.2 1.4-3.2 3.2-3.2zm-10.4 1.6c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zm10.4 0c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zM12 11.5c.8 0 1.5.4 1.7 1.1-.5.3-1.1.4-1.7.4s-1.2-.1-1.7-.4c.2-.7.9-1.1 1.7-1.1z" />
+                  </svg>
                 </a>
               </div>
             </div>

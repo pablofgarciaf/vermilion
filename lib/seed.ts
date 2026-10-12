@@ -11,7 +11,7 @@ export const defaultSettings = {
     whatsappUrl: "https://wa.me/593960039156",
     facebook: "https://www.facebook.com/VermilionSouthAmericanRoutes",
     instagram: "https://www.instagram.com/vermilionsouthamericanroutes/",
-    tiktok: "https://www.tiktok.com/@vermilionsaroutes",
+    tiktok: "https://www.tiktok.com/@vermilionroutes",
     tripadvisor: "https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
   },
   seo: {

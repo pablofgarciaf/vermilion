@@ -43,6 +43,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     ? 'Operador boutique para expediciones a medida en Galápagos, la Amazonía y los Andes ecuatorianos. Confort, naturaleza y expertos locales 24/7.'
     : 'Boutique tour operator for bespoke expeditions to Galapagos, the Amazon and the Ecuadorian Andes. Nature, comfort, and local experts 24/7.';
 
+  const googleVerifications = [
+    process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION_SECONDARY,
+  ].filter(Boolean) as string[];
+
   return {
     title: t('title') || defaultTitle,
     description: t('description') || defaultDescription,
@@ -86,7 +91,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
     },
     verification: {
-      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'google-site-verification-vermilion',
+      google: googleVerifications.length > 1
+        ? googleVerifications
+        : googleVerifications.length === 1
+        ? googleVerifications[0]
+        : 'google-site-verification-vermilion',
     },
     other: {
       ...(process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION
@@ -125,6 +134,10 @@ export default async function RootLayout({
 }) {
   const { locale } = await params;
   const messages = await getMessages();
+
+  const gaPrimaryId = process.env.NEXT_PUBLIC_GA_ID || 'G-D8ZNLYMCB0';
+  const gaSecondaryId = process.env.NEXT_PUBLIC_GA_SECONDARY_ID || 'G-0YLF960DJG';
+  const gaIds = Array.from(new Set([gaPrimaryId, gaSecondaryId].filter(Boolean)));
 
   const jsonLdData = {
     '@context': 'https://schema.org',
@@ -219,7 +232,7 @@ export default async function RootLayout({
         sameAs: [
           'https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html',
           'https://www.instagram.com/vermilionsouthamericanroutes/',
-          'https://www.tiktok.com/@vermilionsaroutes',
+          'https://www.tiktok.com/@vermilionroutes',
           'https://www.facebook.com/VermilionSouthAmericanRoutes',
         ],
       },
@@ -290,34 +303,42 @@ export default async function RootLayout({
                 functionality_storage: 'granted',
                 security_storage: 'granted'
               });
+              gtag('js', new Date());
+              ${gaIds.map((id) => `gtag('config', '${id}', { anonymize_ip: true });`).join('\n              ')}
             `}
           </Script>
-          <Script src="https://www.googletagmanager.com/gtag/js?id=G-D8ZNLYMCB0" strategy="lazyOnload" />
+          {gaIds.map((id) => (
+            <Script
+              key={id}
+              src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
+              strategy="lazyOnload"
+            />
+          ))}
           {/* Ahrefs Web Analytics: clave del proyecto vermilionroutes.com en NEXT_PUBLIC_AHREFS_KEY */}
           {process.env.NEXT_PUBLIC_AHREFS_KEY && (
             <Script id="ahrefs-analytics" src="https://analytics.ahrefs.com/analytics.js" data-key={process.env.NEXT_PUBLIC_AHREFS_KEY} strategy="afterInteractive" />
           )}
 
           <LuxuryThemeProvider>
-          <CurrencyProvider>
-            <NextIntlClientProvider messages={messages} locale={locale}>
-              <ConditionalNavbar />
-              <main className="flex-grow">
-                {children}
-              </main>
-              <ConditionalFooter />
-              <ConciergeWidgetLazy />
-              <Suspense fallback={null}>
-                <AffiliateTracker />
-              </Suspense>
-              <ConsentManager
-                locale={locale}
-                gaId="G-D8ZNLYMCB0"
-                metaPixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID}
-                clarityProjectId={process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}
-              />
-            </NextIntlClientProvider>
-          </CurrencyProvider>
+            <CurrencyProvider>
+              <NextIntlClientProvider messages={messages} locale={locale}>
+                <ConditionalNavbar />
+                <main className="flex-grow">
+                  {children}
+                </main>
+                <ConditionalFooter />
+                <ConciergeWidgetLazy />
+                <Suspense fallback={null}>
+                  <AffiliateTracker />
+                </Suspense>
+                <ConsentManager
+                  locale={locale}
+                  gaId={gaIds}
+                  metaPixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID}
+                  clarityProjectId={process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}
+                />
+              </NextIntlClientProvider>
+            </CurrencyProvider>
           </LuxuryThemeProvider>
         </ThemeProvider>
       </body>
