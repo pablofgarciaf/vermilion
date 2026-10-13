@@ -35,7 +35,8 @@ npm install
 ```
 
 ### 3. Environment Variables
-Create a `.env.local` file based on `.env.example`:
+The project uses a **single** `.env` file in the project root (never `.env.local` or copies; see `AGENTS.md`).
+It is git-ignored: never commit it or paste its values anywhere public.
 ```env
 NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id

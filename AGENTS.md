@@ -112,4 +112,20 @@ Todo agente que agregue, edite o revise páginas, rutas o componentes en este pr
   - **Descartar y Neutralizar Auditorías Alucinantes (Estilo GPT / Retórica Pura):** Se caracterizan por jerga pomposa ("metamorfosis tectónica", "estrato HNWI") e invención flagrante de errores inexistentes (como "carruseles 3D interactivos", "títulos con paréntesis vacíos ()", o alegar que no hay `hreflang` ni `robots.txt` cuando están 100% implementados). Prohibido modificar código basándose en quejas ficticias de modelos alucinantes.
 - **Cross-Linking Transaccional Obligatorio:** Ningún artículo del blog puede ser un callejón sin salida (dead-end). Todo post debe enlazar bidireccionalmente a la expedición recomendada vía `BlogTourBookingShowcase.tsx` y hacia el archivo fotográfico de destino.
 
+---
+
+# 🔐 VARIABLES DE ENTORNO: UN SOLO ARCHIVO `.env`
+(Regla del dueño del proyecto. Aplica a TODOS los agentes, sin excepción.)
+
+- **El único archivo de variables de entorno es `.env`, en la raíz del proyecto.** Todos los agentes leen y editan ese archivo y ningún otro.
+- **PROHIBIDO crear** `.env.local`, `.env.development`, `.env.production`, `.env.development.local`, `.env.production.local`, `.env.test`, copias como `.env.bak` o `.env copy`, ni ningún otro archivo `.env.*` con valores.
+- **Si encuentras otro archivo `.env.*` con valores, no lo edites ni lo uses:** avisa al usuario. Next.js da prioridad a `.env.local` sobre `.env`, así que un duplicado hace que los cambios en `.env` parezcan no surtir efecto.
+- **No existe `.env.example`: el dueño lo eliminó a propósito.** No lo recrees ni crees plantillas equivalentes (`.env.sample`, `.env.template`, etc.). Si necesitas documentar qué variables hay, hazlo en este archivo o en `docs/`, solo con nombres y nunca con valores.
+- **`.env` nunca se commitea** (está en `.gitignore`) y **nunca se imprime**: no muestres valores de claves en el chat, en logs ni en commits. Para auditar usa solo nombres, longitudes o prefijos enmascarados.
+- **Secretos jamás en archivos versionados:** el repositorio es público. Ni en `docs/`, ni en `PLAN-*.md`, ni en comentarios, ni en tests. Un secreto commiteado debe rotarse aunque se borre del archivo, porque queda en el historial.
+- **Variables `NEXT_PUBLIC_*` se publican en el navegador.** Nunca las uses para contraseñas, tokens o secretos.
+- **Antes de agregar o renombrar una variable, verifica el nombre exacto que lee el código** (`process.env.NOMBRE`). Un nombre distinto falla en silencio y vale `undefined`.
+- **Entorno actual de TikTok = Sandbox.** `TIKTOK_CLIENT_KEY` y `TIKTOK_CLIENT_SECRET` del `.env` son las de Sandbox y son las únicas que lee `lib/tiktok.ts`. Las de producción están guardadas en el mismo `.env` como `TIKTOK_PRODUCTION_APP_ID`, `TIKTOK_PRODUCTION_CLIENT_KEY` y `TIKTOK_PRODUCTION_CLIENT_SECRET` (el código NO las lee). No las renombres a `TIKTOK_CLIENT_*` hasta que TikTok apruebe la app; ese cambio lo hace el usuario en Vercel.
+- **Formato:** una variable por línea, `NOMBRE="valor"`, sin espacios en el nombre. Nunca escribas claves a mano como `tiktok client key xxxx`: no son variables y el código no las ve.
+
 
