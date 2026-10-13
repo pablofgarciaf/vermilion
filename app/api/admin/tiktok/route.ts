@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
     });
   } catch (err) {
     console.error('[TikTok status]', err);
-    return NextResponse.json({ configured, connected: false, profile: null, error: 'status_failed' }, { status: 500 });
+    return NextResponse.json({ configured, connected: false, profile: null, error: 'status_failed' }, { status: 200 });
   }
 }
 

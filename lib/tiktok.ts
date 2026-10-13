@@ -218,8 +218,13 @@ const connectionDoc = () => getAdminDb().collection('integrations').doc('tiktok'
 export const uploadsCollection = () => getAdminDb().collection('tiktok_uploads');
 
 export async function getConnection(): Promise<TikTokConnection | null> {
-  const snap = await connectionDoc().get();
-  return snap.exists ? (snap.data() as TikTokConnection) : null;
+  try {
+    const snap = await connectionDoc().get();
+    return snap.exists ? (snap.data() as TikTokConnection) : null;
+  } catch (err) {
+    console.warn('[TikTok getConnection] Error al leer Firestore:', err);
+    return null;
+  }
 }
 
 export async function saveConnection(tokens: TokenResponse, profile: { display_name?: string; avatar_url?: string }, connectedBy: string) {
