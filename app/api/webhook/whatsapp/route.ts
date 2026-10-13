@@ -1,33 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 
-// Lazy initialization of Firebase Admin SDK
-let adminDb: any = null;
-let adminAuth: any = null;
-
-async function getAdminDb() {
-  if (adminDb) return adminDb;
-  
-  const { initializeApp, getApps, cert } = await import('firebase-admin/app');
-  const { getFirestore } = await import('firebase-admin/firestore');
-  const { getAuth } = await import('firebase-admin/auth');
-
-  const firebaseAdminConfig = {
-    projectId: process.env.FIREBASE_PROJECT_ID,
-    clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-    privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-  };
-
-  if (!getApps().length && firebaseAdminConfig.projectId && firebaseAdminConfig.clientEmail && firebaseAdminConfig.privateKey) {
-    initializeApp({
-      credential: cert(firebaseAdminConfig),
-    });
-  }
-
-  adminDb = getFirestore();
-  adminAuth = getAuth();
-  return adminDb;
-}
+import { getAdminDb } from '@/lib/firebaseAdmin';
 
 const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
 const APP_SECRET = process.env.WHATSAPP_APP_SECRET;

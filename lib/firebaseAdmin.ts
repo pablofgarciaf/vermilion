@@ -22,7 +22,7 @@ function getAdminApp(): App {
     return adminApp;
   }
 
-  let projectId = process.env.FIREBASE_PROJECT_ID?.trim();
+  let projectId = process.env.FIREBASE_PROJECT_ID?.trim() || process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID?.trim();
   let clientEmail = process.env.FIREBASE_CLIENT_EMAIL?.trim();
   let privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n').trim();
 
@@ -53,8 +53,9 @@ function getAdminApp(): App {
 
   if (privateKey) {
     if ((privateKey.startsWith('"') && privateKey.endsWith('"')) || (privateKey.startsWith("'") && privateKey.endsWith("'"))) {
-      privateKey = privateKey.slice(1, -1).replace(/\\n/g, '\n').trim();
+      privateKey = privateKey.slice(1, -1).trim();
     }
+    privateKey = privateKey.replace(/\\n/g, '\n');
   }
 
   if (!projectId || !clientEmail || !privateKey) {
