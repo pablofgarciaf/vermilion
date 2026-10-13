@@ -22,13 +22,24 @@ function getAdminApp(): App {
     return adminApp;
   }
 
-  const projectId = process.env.FIREBASE_PROJECT_ID;
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  let projectId = process.env.FIREBASE_PROJECT_ID;
+  let clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  let privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
+    try {
+      const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
+      projectId = projectId || sa.project_id;
+      clientEmail = clientEmail || sa.client_email;
+      privateKey = privateKey || sa.private_key?.replace(/\\n/g, '\n');
+    } catch (err) {
+      console.error('[Firebase Admin] Error parsing FIREBASE_SERVICE_ACCOUNT_JSON:', err);
+    }
+  }
 
   if (!projectId || !clientEmail || !privateKey) {
     throw new Error(
-      'Firebase Admin credentials are missing. Set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL and FIREBASE_PRIVATE_KEY in your environment variables.'
+      'Firebase Admin credentials are missing. Set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL and FIREBASE_PRIVATE_KEY or FIREBASE_SERVICE_ACCOUNT_JSON in your environment variables.'
     );
   }
 
