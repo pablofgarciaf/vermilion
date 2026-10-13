@@ -1,6 +1,6 @@
-import { initializeApp, getApps, cert, type App } from 'firebase-admin/app';
-import { getFirestore, type Firestore } from 'firebase-admin/firestore';
-import { getAuth, type Auth } from 'firebase-admin/auth';
+import type { App } from 'firebase-admin/app';
+import type { Firestore } from 'firebase-admin/firestore';
+import type { Auth } from 'firebase-admin/auth';
 
 /**
  * Firebase Admin SDK — SERVER ONLY.
@@ -9,12 +9,55 @@ import { getAuth, type Auth } from 'firebase-admin/auth';
  *   FIREBASE_PROJECT_ID
  *   FIREBASE_CLIENT_EMAIL
  *   FIREBASE_PRIVATE_KEY
+ *
+ * Carga PEREZOSA: `firebase-admin` se requiere al primer uso, no al importar este archivo.
+ * Con un `import` estatico, si el paquete no carga en el runtime (version de Node, empaquetado
+ * del bundle) la funcion muere antes de ejecutar cualquier try/catch y el cliente solo ve un
+ * 500 mudo. Asi el fallo cae dentro del try/catch de cada ruta y se reporta con su causa.
  */
+
+/** El SDK de Firebase Admin no pudo cargarse en este runtime (no es un problema de credenciales). */
+export class FirebaseAdminUnavailableError extends Error {
+  readonly code = 'FIREBASE_ADMIN_UNAVAILABLE';
+  /** Causa resumida y sin secretos, segura para devolver en la respuesta. */
+  readonly detail: string;
+
+  constructor(cause: unknown, module: string) {
+    const raw = cause instanceof Error ? `${cause.name}: ${cause.message}` : String(cause);
+    // Quita rutas absolutas del servidor y limita el largo.
+    const detail = `${module} | node ${process.version} | ${raw}`
+      .replace(/(\/var\/task|\/vercel\/path\d+|[A-Za-z]:\\)[^\s'")]*/g, '<ruta>')
+      .slice(0, 300);
+    super(`Firebase Admin could not be loaded (${detail})`);
+    this.name = 'FirebaseAdminUnavailableError';
+    this.detail = detail;
+  }
+}
+
+function loadAdminModule<T>(name: 'firebase-admin/app' | 'firebase-admin/firestore' | 'firebase-admin/auth'): T {
+  try {
+    /* eslint-disable @typescript-eslint/no-require-imports */
+    switch (name) {
+      case 'firebase-admin/app':
+        return require('firebase-admin/app') as T;
+      case 'firebase-admin/firestore':
+        return require('firebase-admin/firestore') as T;
+      case 'firebase-admin/auth':
+        return require('firebase-admin/auth') as T;
+    }
+    /* eslint-enable @typescript-eslint/no-require-imports */
+  } catch (err) {
+    console.error(`[Firebase Admin] No se pudo cargar ${name}:`, err);
+    throw new FirebaseAdminUnavailableError(err, name);
+  }
+}
 
 let adminApp: App | undefined;
 
 function getAdminApp(): App {
   if (adminApp) return adminApp;
+
+  const { initializeApp, getApps, cert } = loadAdminModule<typeof import('firebase-admin/app')>('firebase-admin/app');
 
   const existing = getApps();
   if (existing.length > 0) {
@@ -72,9 +115,11 @@ function getAdminApp(): App {
 }
 
 export function getAdminDb(): Firestore {
+  const { getFirestore } = loadAdminModule<typeof import('firebase-admin/firestore')>('firebase-admin/firestore');
   return getFirestore(getAdminApp());
 }
 
 export function getAdminAuth(): Auth {
+  const { getAuth } = loadAdminModule<typeof import('firebase-admin/auth')>('firebase-admin/auth');
   return getAuth(getAdminApp());
 }

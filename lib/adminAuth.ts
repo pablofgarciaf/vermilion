@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAdminAuth, getAdminDb } from '@/lib/firebaseAdmin';
+import { getAdminAuth, getAdminDb, FirebaseAdminUnavailableError } from '@/lib/firebaseAdmin';
 
 export type AdminRole = 'super' | 'admin' | 'editor' | 'operator' | 'financial' | 'concierge';
 
@@ -66,6 +66,16 @@ export async function requireAdmin(
       },
     };
   } catch (err) {
+    // El SDK no cargo en el servidor: no es un problema de la sesion del usuario, y debe verse
+    // como tal (503 con causa) en vez de disfrazarse de "no autenticado".
+    if (err instanceof FirebaseAdminUnavailableError) {
+      return {
+        response: NextResponse.json(
+          { success: false, error: err.code, detail: err.detail },
+          { status: 503 }
+        ),
+      };
+    }
     console.warn('[requireAdmin] Auth verification failed:', err);
     return { response: unauthorized(401) };
   }
