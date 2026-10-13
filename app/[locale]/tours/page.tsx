@@ -23,7 +23,7 @@ import {
 import { BookingActionLink } from '@/components/tours/BookingActionLink';
 
 import type { Metadata } from 'next';
-import { getSeoAlternates, SUPPORTED_SEO_LOCALES } from '@/utils/seoHelper';
+import { getSeoAlternates, withBrandTail, SUPPORTED_SEO_LOCALES } from '@/utils/seoHelper';
 
 export async function generateStaticParams() {
   return SUPPORTED_SEO_LOCALES.map((locale) => ({ locale }));
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const title = titles[locale] || titles['en'];
-  const description = descriptions[locale] || descriptions['en'];
+  const description = withBrandTail(descriptions[locale] || descriptions['en'], locale);
   const fbLocale = {
     es: 'es_LA',
     en: 'en_US',
@@ -399,11 +399,15 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
           '@type': 'TouristTrip',
           name: getLocalizedText(tour.title, locale),
           url: `https://www.vermilionroutes.com/${locale}/tours/${tour.id}`,
-          image: tour.mainImage || tour.imageUrl,
+          // Rich Results exige URL absoluta en `image`; las rutas /images/... se reportan como invalidas.
+          image: ((img: string) => (img.startsWith('http') ? img : `https://www.vermilionroutes.com${img}`))(
+            tour.mainImage || tour.imageUrl || '',
+          ),
           offers: {
             '@type': 'Offer',
             price: Number((tour.price3Star || tour.price || 1000).toString().replace(/[^0-9.]/g, '')),
             priceCurrency: 'USD',
+            availability: 'https://schema.org/InStock',
           },
         },
       })),

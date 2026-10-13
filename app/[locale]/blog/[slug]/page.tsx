@@ -7,7 +7,7 @@ import { BLOG_POSTS, BlogPost } from '@/data/blogData';
 import { DESTINATIONS, Destination } from '@/data/destinationsData';
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, withBrandTail } from '@/utils/seoHelper';
 import { LeadMagnetBanner } from '@/components/home/LeadMagnetBanner';
 import { BlogTourBookingShowcase } from '@/components/blog/BlogTourBookingShowcase';
 import { BlogAuthorBio } from '@/components/blog/BlogAuthorBio';
@@ -117,28 +117,10 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     }
   }
 
+  // 110-155 caracteres en los 8 idiomas: recorta en limite de palabra si excede y
+  // completa con la cola de marca si el extracto es corto (tipico en zh/ja).
   const rawDesc = getLocalizedText(post.excerpt, locale);
-  let description = rawDesc.replace(/\s+/g, ' ').trim();
-  if (description.length > 155) {
-    description = description.slice(0, 152).trim() + '...';
-  } else if (locale === 'ja' || locale === 'zh') {
-    if (description.length < 70) {
-      const cta = locale === 'ja'
-        ? ' Vermilion Routesの専任トラベルコンシェルジュが24時間サポート。'
-        : ' Vermilion Routes专属私人旅行顾问为您提供24/7全天候保障。';
-      description = (description + cta).slice(0, 95);
-    }
-  } else if (description.length < 120) {
-    const ctas: Record<string, string> = {
-      es: ' Descubra la asesoría de viajes a medida 24/7 con Vermilion Routes.',
-      en: ' Discover bespoke nature travel planning 24/7 with Vermilion Routes.',
-      fr: ' Découvrez nos voyages sur mesure 24/7 avec Vermilion Routes.',
-      de: ' Entdecken Sie maßgeschneiderte Reisen 24/7 mit Vermilion Routes.',
-      it: ' Scopri i viaggi su misura 24/7 con Vermilion Routes.',
-      pt: ' Descubra viagens sob medida 24/7 com a Vermilion Routes.',
-    };
-    description = (description + (ctas[locale] || ctas['en'])).slice(0, 155);
-  }
+  const description = withBrandTail(rawDesc, locale);
 
   const alternates = getSeoAlternates(`/blog/${slug}`, locale);
   const fullImageUrl = post.imageUrl.startsWith('http')

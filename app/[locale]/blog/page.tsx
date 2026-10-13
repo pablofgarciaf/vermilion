@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { BlogIndexClient } from '@/components/blog/BlogIndexClient';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, withBrandTail } from '@/utils/seoHelper';
 
 export async function generateStaticParams() {
   return ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'].map((locale) => ({ locale }));
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const title = titles[locale] || titles['en'];
-  const description = descriptions[locale] || descriptions['en'];
+  const description = withBrandTail(descriptions[locale] || descriptions['en'], locale);
   const fbLocale = {
     es: 'es_LA',
     en: 'en_US',

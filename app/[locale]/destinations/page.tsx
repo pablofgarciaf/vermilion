@@ -6,7 +6,7 @@ import { MapPin, Mountain, TreePine, Waves } from 'lucide-react';
 
 import { DESTINATIONS, DESTINATION_UI } from '@/data/destinationsData';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { getSeoAlternates, SUPPORTED_SEO_LOCALES, BASE_CANONICAL_URL } from '@/utils/seoHelper';
+import { getSeoAlternates, buildOpenGraph, fitMetaDescription, withBrandTail, SUPPORTED_SEO_LOCALES, BASE_CANONICAL_URL } from '@/utils/seoHelper';
 import DestinationsHeroSection from '@/components/destinations/DestinationsHeroSection';
 
 export const dynamicParams = false;
@@ -50,6 +50,18 @@ const HEADINGS: Record<string, { title: string; subtitle: string }> = {
   },
 };
 
+/** Frase complementaria para que la meta description alcance el rango 120-155 caracteres. */
+const META_EXTRA: Record<string, string> = {
+  es: 'Explora Galápagos, la Amazonía y los Andes con expediciones privadas diseñadas por expertos locales.',
+  en: 'Explore the Galapagos, the Amazon and the Andes with private expeditions designed by local experts.',
+  fr: 'Explorez les Galápagos, l’Amazonie et les Andes avec des expéditions privées conçues par des experts locaux.',
+  de: 'Entdecken Sie Galápagos, Amazonas und Anden mit privaten Expeditionen, gestaltet von lokalen Experten.',
+  it: 'Esplora le Galápagos, l’Amazzonia e le Ande con spedizioni private ideate da esperti locali.',
+  pt: 'Explore Galápagos, a Amazônia e os Andes com expedições privadas criadas por especialistas locais.',
+  ja: 'ガラパゴス、アマゾン、アンデスを、現地の専門家が設計するプライベート探検でご案内します。専任デザイナーが24時間体制で旅程をご提案します。',
+  zh: '由本地专家设计的私人探险，带您深入加拉帕戈斯、亚马逊与安第斯山脉，专属旅行设计师提供全天候 24/7 行程规划服务。',
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -57,15 +69,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const h = HEADINGS[locale] || HEADINGS.en;
+  const title = `${h.title} | Vermilion Routes`;
+  const description = withBrandTail(
+    fitMetaDescription([h.subtitle, META_EXTRA[locale] || META_EXTRA.en]),
+    locale,
+  );
   return {
-    title: `${h.title} | Vermilion Routes`,
-    description: h.subtitle,
+    title,
+    description,
     alternates: getSeoAlternates('/destinations', locale),
-    openGraph: {
-      title: `${h.title} | Vermilion Routes`,
-      description: h.subtitle,
-      images: [{ url: `${BASE_CANONICAL_URL}/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp`, width: 1200, height: 630 }],
-    },
+    openGraph: buildOpenGraph({ locale, path: '/destinations', title, description }),
   };
 }
 

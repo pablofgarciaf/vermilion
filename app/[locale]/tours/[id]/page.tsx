@@ -40,7 +40,7 @@ interface TourDetailPageProps {
 
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, fitMetaDescription, BASE_CANONICAL_URL } from '@/utils/seoHelper';
 
 export const dynamicParams = true;
 export const revalidate = 60;
@@ -56,6 +56,18 @@ export async function generateStaticParams() {
   }
   return params;
 }
+
+/** Frase de cierre para que la meta description de cada tour alcance 120+ caracteres. */
+const TOUR_META_EXTRA: Record<string, string> = {
+  es: 'Itinerario privado a medida con guías locales y asistencia personal 24/7 de Vermilion Routes.',
+  en: 'Private bespoke itinerary with local guides and 24/7 personal support from Vermilion Routes.',
+  fr: 'Itinéraire privé sur mesure avec guides locaux et assistance personnelle 24/7 de Vermilion Routes.',
+  de: 'Privates Maßprogramm mit lokalen Guides und persönlicher 24/7-Betreuung von Vermilion Routes.',
+  it: 'Itinerario privato su misura con guide locali e assistenza personale 24/7 di Vermilion Routes.',
+  pt: 'Roteiro privativo sob medida com guias locais e assistência pessoal 24/7 da Vermilion Routes.',
+  ja: 'Vermilion Routesの現地ガイド同行と24時間体制の専任サポートによる、オーダーメイドのプライベート旅程です。',
+  zh: '由 Vermilion Routes 提供本地向导陪同与全天候 24/7 专属服务，量身定制的私人旅行行程。',
+};
 
 export async function generateMetadata({ params }: TourDetailPageProps): Promise<Metadata> {
   const resolvedParams = await params;
@@ -79,12 +91,13 @@ export async function generateMetadata({ params }: TourDetailPageProps): Promise
     title = `${safeTitle} | Vermilion Routes`;
   }
 
-  const rawDesc = getLocalizedText(tour.description || tour.shortDescription, resolvedParams.locale) || '';
-  let description = rawDesc.replace(/\s+/g, ' ').trim();
-  if (description.length > 155) {
-    const lastSpace = description.lastIndexOf(' ', 150);
-    description = lastSpace > 100 ? description.slice(0, lastSpace).trim() + '.' : description.slice(0, 150).trim() + '.';
-  }
+  // Descripcion en el rango 120-155 caracteres: si la del tour es corta (frecuente en zh/ja)
+  // se completa con la descripcion breve y una frase de marca localizada.
+  const description = fitMetaDescription([
+    getLocalizedText(tour.description || tour.shortDescription, resolvedParams.locale),
+    getLocalizedText(tour.shortDescription, resolvedParams.locale),
+    TOUR_META_EXTRA[resolvedParams.locale] || TOUR_META_EXTRA.en,
+  ]);
 
   const dest = getLocalizedText(tour.destination, resolvedParams.locale);
   const alternates = getSeoAlternates(`/tours/${tour.id}`, resolvedParams.locale);
@@ -213,16 +226,38 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
   const priceVip = tour.price4Star || Math.round(priceClub * 1.15);
   const isDailyTour = tour.durationDays === 1;
 
+  // Google exige URLs absolutas en `image` y `offers.url`; las rutas relativas (/images/...)
+  // se reportan como "URL no valida" en Rich Results y en el validador de schema.org.
+  const toAbsoluteUrl = (u: string) =>
+    u.startsWith('http') ? u : `${BASE_CANONICAL_URL}${u.startsWith('/') ? '' : '/'}${u}`;
+  const tourUrl = `${BASE_CANONICAL_URL}/${locale}/tours/${tour.id}`;
+  const tourImages = Array.from(
+    new Set(
+      [tour.mainImage || tour.imageUrl, ...galleryImages]
+        .filter((img): img is string => typeof img === 'string' && img.length > 0)
+        .map(toAbsoluteUrl),
+    ),
+  );
+  const tourPrice = Number(tour.priceFromUSD || tour.price || 1000);
+
   const tourJsonLd = {
     '@context': 'https://schema.org',
     '@type': ['TouristTrip', 'Product'],
     name: title,
-    description: getLocalizedText(tour.description || tour.shortDescription, locale),
-    image: [tour.mainImage || tour.imageUrl, ...galleryImages],
+    description: getLocalizedText(tour.description || tour.shortDescription, locale) || title,
+    url: tourUrl,
+    image: tourImages,
+    provider: {
+      '@type': 'TravelAgency',
+      name: 'Vermilion Routes',
+      url: BASE_CANONICAL_URL,
+    },
     offers: {
       '@type': 'Offer',
-      price: Number((tour.priceFromUSD || tour.price || 1000).toString().replace(/[^0-9.]/g, '')),
+      url: tourUrl,
+      price: tourPrice,
       priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
     },
   };
 

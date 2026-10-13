@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { Star, Clock, MessageCircle, ArrowRight, Users, ShieldCheck, Smile } from 'lucide-react';
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, buildOpenGraph, withBrandTail } from '@/utils/seoHelper';
+import { RelatedPagesNav } from '@/components/seo/RelatedPagesNav';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -31,13 +32,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const title = titles[locale] || titles['en'];
-  const description = descriptions[locale] || descriptions['en'];
+  const description = withBrandTail(descriptions[locale] || descriptions['en'], locale);
 
   return {
     title,
     description,
-    keywords: ['family Galapagos trip', 'family Ecuador vacation', 'Galapagos with kids', 'Ecuador family adventure', 'family-friendly Galapagos'],
     alternates: getSeoAlternates('/family-friendly-ecuador', locale),
+    openGraph: buildOpenGraph({ locale, path: '/family-friendly-ecuador', title, description }),
   };
 }
 
@@ -136,6 +137,8 @@ export default async function FamilyFriendlyPage({ params }: { params: Promise<{
           </a>
         </div>
       </section>
+
+      <RelatedPagesNav locale={locale} group="experiences" current="family-friendly-ecuador" />
     </div>
   );
 }

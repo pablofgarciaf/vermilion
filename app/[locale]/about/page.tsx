@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, withBrandTail } from '@/utils/seoHelper';
 import { AboutGallerySection } from '@/components/about/AboutGallerySection';
 import {
   Compass,
@@ -66,7 +66,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
 
   const title = TITLES[locale] || TITLES.en;
-  const description = DESCRIPTIONS[locale] || DESCRIPTIONS.en;
+  const description = withBrandTail(DESCRIPTIONS[locale] || DESCRIPTIONS.en, locale);
 
   return {
     title,

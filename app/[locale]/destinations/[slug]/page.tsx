@@ -11,7 +11,13 @@ import { TourCarousel } from '@/components/home/TourCarousel';
 import WaterRippleImage from '@/components/ui/WaterRippleImage';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { getSeoAlternates, BASE_CANONICAL_URL, SUPPORTED_SEO_LOCALES } from '@/utils/seoHelper';
+import {
+  getSeoAlternates,
+  buildOpenGraph,
+  fitMetaDescription,
+  BASE_CANONICAL_URL,
+  SUPPORTED_SEO_LOCALES,
+} from '@/utils/seoHelper';
 
 export const dynamicParams = false;
 
@@ -78,19 +84,25 @@ export async function generateMetadata({
 
   const name = getLocalizedText(dest.name, locale);
   const tagline = getLocalizedText(dest.tagline, locale);
+  const intro = getLocalizedText(dest.intro, locale);
   const title = `${name} | Vermilion Routes`;
-  const description = tagline.length > 155 ? `${tagline.slice(0, 152)}...` : tagline;
+  // El tagline solo mide 14-60 caracteres: se completa con la primera frase de la
+  // introduccion (sin mutar destinationsData) hasta quedar en 120-155 caracteres.
+  const description = fitMetaDescription([tagline, intro]);
 
   return {
     title,
     description,
     alternates: getSeoAlternates(`/destinations/${slug}`, locale),
-    openGraph: {
+    openGraph: buildOpenGraph({
+      locale,
+      path: `/destinations/${slug}`,
       title,
       description,
-      images: [{ url: `${BASE_CANONICAL_URL}${dest.image}`, width: 1200, height: 630, alt: name }],
+      image: `${BASE_CANONICAL_URL}${dest.image}`,
+      imageAlt: name,
       type: 'article',
-    },
+    }),
   };
 }
 
@@ -119,14 +131,24 @@ export default async function DestinationPage({
     image: `${BASE_CANONICAL_URL}${dest.image}`,
     url: `${BASE_CANONICAL_URL}/${locale}/destinations/${dest.slug}`,
     address: { '@type': 'PostalAddress', addressCountry: 'EC' },
-    ...(tours.length > 0 && {
-      hasPart: tours.slice(0, 6).map((tour) => ({
-        '@type': 'TouristTrip',
-        name: getLocalizedText(tour.title, locale),
-        url: `${BASE_CANONICAL_URL}/${locale}/tours/${tour.id}`,
-      })),
-    }),
   };
+
+  // `Place.hasPart` solo admite lugares (un TouristTrip no lo es), asi que los tours
+  // van como ItemList independiente: valido en schema.org y en Rich Results.
+  const toursJsonLd =
+    tours.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          name,
+          itemListElement: tours.slice(0, 6).map((tour, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: getLocalizedText(tour.title, locale),
+            url: `${BASE_CANONICAL_URL}/${locale}/tours/${tour.id}`,
+          })),
+        }
+      : null;
 
   return (
     <>
@@ -134,6 +156,12 @@ export default async function DestinationPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {toursJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(toursJsonLd) }}
+        />
+      )}
 
       {/* PORTADA */}
       <section className="relative h-[70vh] min-h-[400px] sm:min-h-[650px] w-full">        <Image

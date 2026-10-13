@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { Heart, Star, Clock, MessageCircle, ArrowRight, Sparkles, ShieldCheck } from 'lucide-react';
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, buildOpenGraph, withBrandTail } from '@/utils/seoHelper';
+import { RelatedPagesNav } from '@/components/seo/RelatedPagesNav';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -31,13 +32,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const title = titles[locale] || titles['en'];
-  const description = descriptions[locale] || descriptions['en'];
+  const description = withBrandTail(descriptions[locale] || descriptions['en'], locale);
 
   return {
     title,
     description,
-    keywords: ['romantic Galapagos trip', 'couples Ecuador travel', 'anniversary Galapagos', 'honeymoon Ecuador', 'romantic Ecuador vacation'],
     alternates: getSeoAlternates('/couples-anniversary-galapagos', locale),
+    openGraph: buildOpenGraph({ locale, path: '/couples-anniversary-galapagos', title, description }),
   };
 }
 
@@ -139,6 +140,8 @@ export default async function CouplesAnniversaryPage({ params }: { params: Promi
           </a>
         </div>
       </section>
+
+      <RelatedPagesNav locale={locale} group="experiences" current="couples-anniversary-galapagos" />
     </div>
   );
 }

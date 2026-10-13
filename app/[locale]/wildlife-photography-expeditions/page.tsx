@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { Camera, Binoculars, Star, Clock, MessageCircle, ArrowRight } from 'lucide-react';
 import { mockTours } from '@/data/mock';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, buildOpenGraph, withBrandTail } from '@/utils/seoHelper';
+import { RelatedPagesNav } from '@/components/seo/RelatedPagesNav';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -31,13 +32,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const title = titles[locale] || titles['en'];
-  const description = descriptions[locale] || descriptions['en'];
+  const description = withBrandTail(descriptions[locale] || descriptions['en'], locale);
 
   return {
     title,
     description,
-    keywords: ['wildlife photography Galapagos', 'Galapagos photography tour', 'Ecuador wildlife expedition'],
     alternates: getSeoAlternates('/wildlife-photography-expeditions', locale),
+    openGraph: buildOpenGraph({ locale, path: '/wildlife-photography-expeditions', title, description }),
   };
 }
 
@@ -136,6 +137,8 @@ export default async function WildlifePhotographyPage({ params }: { params: Prom
           </a>
         </div>
       </section>
+
+      <RelatedPagesNav locale={locale} group="experiences" current="wildlife-photography-expeditions" />
     </div>
   );
 }

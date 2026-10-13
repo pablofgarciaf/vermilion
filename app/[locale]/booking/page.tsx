@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { BookingWizard } from '@/components/booking/BookingWizard';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, buildOpenGraph, withBrandTail } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -27,12 +27,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const title = titles[locale] || titles['en'];
-  const description = descriptions[locale] || descriptions['en'];
+  const description = withBrandTail(descriptions[locale] || descriptions['en'], locale);
 
   return {
     title,
     description,
     alternates: getSeoAlternates('/booking', locale),
+    openGraph: buildOpenGraph({ locale, path: '/booking', title, description }),
   };
 }
 

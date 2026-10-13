@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { Compass, HeartHandshake, Leaf, Users, MapPin, ShieldCheck, Clock, Sparkles } from 'lucide-react';
-import { getSeoAlternates, SUPPORTED_SEO_LOCALES, BASE_CANONICAL_URL } from '@/utils/seoHelper';
+import { getSeoAlternates, buildOpenGraph, fitMetaDescription, withBrandTail, SUPPORTED_SEO_LOCALES, BASE_CANONICAL_URL } from '@/utils/seoHelper';
 
 export const dynamicParams = false;
 export async function generateStaticParams() {
@@ -146,6 +146,18 @@ const HEADINGS: Record<string, { eyebrow: string; title: string; subtitle: strin
   zh: { eyebrow: '我们如何旅行', title: '八条准则', subtitle: '我们不为所有人服务，这也无妨。以下是每一段从我们门口出发的旅程所遵循的准则。' },
 };
 
+/** Frase complementaria para que la meta description alcance el rango 120-155 caracteres. */
+const META_EXTRA: Record<string, string> = {
+  es: 'Así diseñamos expediciones privadas en Ecuador y Galápagos con guías locales, ritmo humano y atención personal 24/7.',
+  en: 'See how Vermilion Routes designs private expeditions across Ecuador and the Galapagos with local guides and 24/7 personal support.',
+  fr: 'Découvrez comment Vermilion Routes conçoit des expéditions privées en Équateur et aux Galápagos, avec guides locaux et assistance 24/7.',
+  de: 'So gestaltet Vermilion Routes private Expeditionen in Ecuador und auf den Galápagos mit lokalen Guides und persönlicher 24/7-Betreuung.',
+  it: 'Scopri come Vermilion Routes progetta spedizioni private in Ecuador e alle Galápagos, con guide locali e assistenza personale 24/7.',
+  pt: 'Veja como a Vermilion Routes desenha expedições privadas no Equador e em Galápagos, com guias locais e atendimento pessoal 24/7.',
+  ja: 'Vermilion Routesが、エクアドルとガラパゴスで現地ガイドと24時間体制の専任サポートによるプライベート探検をどう設計しているかをご紹介します。',
+  zh: '了解 Vermilion Routes 如何在厄瓜多尔与加拉帕戈斯，依托本地向导与全天候 24/7 专属服务，为您设计私人定制的探险旅程。',
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -153,14 +165,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const h = HEADINGS[locale] || HEADINGS.en;
+  const title = `${h.title} | Vermilion Routes`;
+  const description = withBrandTail(
+    fitMetaDescription([h.subtitle, META_EXTRA[locale] || META_EXTRA.en]),
+    locale,
+  );
   return {
-    title: `${h.title} | Vermilion Routes`,
-    description: h.subtitle,
+    title,
+    description,
     alternates: getSeoAlternates('/manifiesto', locale),
-    openGraph: {
-      title: `${h.title} | Vermilion Routes`,
-      description: h.subtitle,
-    },
+    openGraph: buildOpenGraph({ locale, path: '/manifiesto', title, description }),
   };
 }
 

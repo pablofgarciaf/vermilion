@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, buildOpenGraph, withBrandTail } from '@/utils/seoHelper';
+import { RelatedPagesNav } from '@/components/seo/RelatedPagesNav';
 import { ShieldCheck, FileText, Clock, AlertTriangle, CreditCard, Phone, Mail, MapPin, Percent, CalendarX } from 'lucide-react';
 
 const TITLES: Record<string, string> = {
@@ -27,10 +28,13 @@ const DESCRIPTIONS: Record<string, string> = {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  const title = TITLES[locale] || TITLES['en'];
+  const description = withBrandTail(DESCRIPTIONS[locale] || DESCRIPTIONS['en'], locale);
   return {
-    title: TITLES[locale] || TITLES['en'],
-    description: DESCRIPTIONS[locale] || DESCRIPTIONS['en'],
+    title,
+    description,
     alternates: getSeoAlternates('/cancellation', locale),
+    openGraph: buildOpenGraph({ locale, path: '/cancellation', title, description }),
   };
 }
 
@@ -361,6 +365,8 @@ export default async function CancellationPolicyPage({ params }: { params: Promi
             </a>
           </div>
         </div>
+
+        <RelatedPagesNav locale={locale} group="legal" current="cancellation" tone="dark" />
 
         <p className="text-center text-xs text-zinc-600 pt-4">
           © {new Date().getFullYear()} Vermilion Routes — Agencia de Viajes Vermilion Cia. Ltda. • RUC: 1711992808001

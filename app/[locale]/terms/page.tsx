@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, buildOpenGraph, withBrandTail } from '@/utils/seoHelper';
+import { RelatedPagesNav } from '@/components/seo/RelatedPagesNav';
 import { ShieldCheck, FileCheck, MapPin, Mail, Phone, Clock, AlertTriangle, Gift, CreditCard } from 'lucide-react';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -27,16 +28,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const title = titles[locale] || titles['en'];
-  const description = descriptions[locale] || descriptions['en'];
+  const description = withBrandTail(descriptions[locale] || descriptions['en'], locale);
 
   return {
     title,
     description,
     alternates: getSeoAlternates('/terms', locale),
+    openGraph: buildOpenGraph({ locale, path: '/terms', title, description }),
   };
 }
 
-export default function TermsAndConditionsPage() {
+export default async function TermsAndConditionsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-20 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white">
       <div className="max-w-4xl mx-auto space-y-10">
@@ -184,6 +187,8 @@ export default function TermsAndConditionsPage() {
           </section>
 
         </div>
+
+        <RelatedPagesNav locale={locale} group="legal" current="terms" tone="dark" />
 
         {/* Footer info */}
         <div className="text-center pt-8 border-t border-zinc-800 text-xs text-zinc-500 space-y-1">

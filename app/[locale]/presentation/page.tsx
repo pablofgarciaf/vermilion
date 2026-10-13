@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { PresentationClient } from '@/components/affiliates/PresentationClient';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, buildOpenGraph, withBrandTail } from '@/utils/seoHelper';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -26,18 +26,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const title = titles[locale] || titles['en'];
-  const description = descriptions[locale] || descriptions['en'];
+  const description = withBrandTail(descriptions[locale] || descriptions['en'], locale);
 
   return {
     title,
     description,
     alternates: getSeoAlternates('/presentation', locale),
-    openGraph: {
-      title,
-      description,
-      url: `https://www.vermilionroutes.com/${locale}/presentation`,
-      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
-    },
+    openGraph: buildOpenGraph({ locale, path: '/presentation', title, description }),
   };
 }
 

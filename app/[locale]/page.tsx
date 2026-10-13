@@ -12,7 +12,7 @@ import { AlsoAskedFaq } from '@/components/home/AlsoAskedFaq';
 import { ContactSection } from '@/components/home/ContactSection';
 import AffiliateRegistration from '@/components/home/AffiliateRegistration';
 import { LazySection } from '@/components/ui/LazySection';
-import { getSeoAlternates } from '@/utils/seoHelper';
+import { getSeoAlternates, withBrandTail } from '@/utils/seoHelper';
 import { defaultSettings } from '@/lib/seed';
 import { getLocalizedText } from '@/utils/i18nHelper';
 
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 
   const title = titles[locale] || titles['en'];
-  const description = descriptions[locale] || descriptions['en'];
+  const description = withBrandTail(descriptions[locale] || descriptions['en'], locale);
 
   return {
     title,
