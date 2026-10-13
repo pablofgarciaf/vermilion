@@ -3,6 +3,7 @@ import { requireAdmin } from '@/lib/adminAuth';
 import { RELAY_MAX_BYTES, putChunk, uploadsCollection } from '@/lib/tiktok';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 /**
  * Respaldo: si el navegador no puede subir directo a TikTok, envía aquí la parte (≤ 4,4 MB)

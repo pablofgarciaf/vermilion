@@ -4,14 +4,16 @@ import { locales } from '@/i18n/request';
 import { STATE_COOKIE, STATE_TTL_MS, buildAuthorizeUrl, getTikTokConfig, newNonce, signState } from '@/lib/tiktok';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 /** Devuelve la URL de autorización de TikTok y fija la cookie que ata el flujo a este navegador. */
 export async function POST(req: NextRequest) {
-  const admin = await requireAdmin(req, ['super', 'admin']);
-  if ('response' in admin) return admin.response;
+  try {
+    const admin = await requireAdmin(req, ['super', 'admin']);
+    if ('response' in admin) return admin.response;
 
-  const cfg = getTikTokConfig();
-  if (!cfg) return NextResponse.json({ success: false, error: 'not_configured' }, { status: 503 });
+    const cfg = getTikTokConfig();
+    if (!cfg) return NextResponse.json({ success: false, error: 'not_configured' }, { status: 503 });
 
   const body = await req.json().catch(() => ({}));
   const locale = locales.includes(body?.locale) ? body.locale : 'en';
@@ -27,4 +29,8 @@ export async function POST(req: NextRequest) {
     maxAge: STATE_TTL_MS / 1000,
   });
   return res;
+} catch (err) {
+  console.error('[TikTok connect]', err);
+  return NextResponse.json({ success: false, error: 'connect_init_failed' }, { status: 500 });
+}
 }

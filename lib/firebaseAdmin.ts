@@ -22,18 +22,38 @@ function getAdminApp(): App {
     return adminApp;
   }
 
-  let projectId = process.env.FIREBASE_PROJECT_ID;
-  let clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
-  let privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
+  let projectId = process.env.FIREBASE_PROJECT_ID?.trim();
+  let clientEmail = process.env.FIREBASE_CLIENT_EMAIL?.trim();
+  let privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n').trim();
 
-  if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
+  const rawJson = process.env.FIREBASE_SERVICE_ACCOUNT_JSON?.trim();
+  if (rawJson) {
     try {
-      const sa = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON);
-      projectId = projectId || sa.project_id;
-      clientEmail = clientEmail || sa.client_email;
-      privateKey = privateKey || sa.private_key?.replace(/\\n/g, '\n');
+      let cleaned = rawJson;
+      if ((cleaned.startsWith("'") && cleaned.endsWith("'")) || (cleaned.startsWith('"') && cleaned.endsWith('"'))) {
+        cleaned = cleaned.slice(1, -1).trim();
+      }
+      if (!cleaned.startsWith('{') && !cleaned.startsWith('[')) {
+        try {
+          const decoded = Buffer.from(cleaned, 'base64').toString('utf8').trim();
+          if (decoded.startsWith('{')) cleaned = decoded;
+        } catch {}
+      }
+      const sa = JSON.parse(cleaned);
+      projectId = projectId || sa.project_id || sa.projectId;
+      clientEmail = clientEmail || sa.client_email || sa.clientEmail;
+      const rawKey = sa.private_key || sa.privateKey;
+      if (rawKey && !privateKey) {
+        privateKey = String(rawKey).replace(/\\n/g, '\n').trim();
+      }
     } catch (err) {
       console.error('[Firebase Admin] Error parsing FIREBASE_SERVICE_ACCOUNT_JSON:', err);
+    }
+  }
+
+  if (privateKey) {
+    if ((privateKey.startsWith('"') && privateKey.endsWith('"')) || (privateKey.startsWith("'") && privateKey.endsWith("'"))) {
+      privateKey = privateKey.slice(1, -1).replace(/\\n/g, '\n').trim();
     }
   }
 

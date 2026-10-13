@@ -3,6 +3,7 @@ import { requireAdmin } from '@/lib/adminAuth';
 import { ALLOWED_VIDEO_TYPES, fetchPublishStatus, getValidAccessToken, initInboxUpload, uploadsCollection } from '@/lib/tiktok';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 /** Inicia una subida a la bandeja de borradores de TikTok y devuelve la URL de subida. */
 export async function POST(req: NextRequest) {

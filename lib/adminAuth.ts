@@ -24,11 +24,11 @@ export async function requireAdmin(
   req: NextRequest,
   allowedRoles: AdminRole[] = ['super', 'admin', 'editor', 'operator', 'financial', 'concierge']
 ): Promise<{ user: VerifiedAdminUser } | { response: NextResponse }> {
-  const header = req.headers.get('authorization') || '';
-  const token = header.startsWith('Bearer ') ? header.slice(7).trim() : '';
-  if (!token) return { response: unauthorized(401) };
-
   try {
+    const header = req.headers.get('authorization') || '';
+    const token = header.startsWith('Bearer ') ? header.slice(7).trim() : '';
+    if (!token) return { response: unauthorized(401) };
+
     const decoded = await getAdminAuth().verifyIdToken(token);
     const email = (decoded.email || '').toLowerCase().trim();
     if (!email) return { response: unauthorized(403) };
@@ -65,7 +65,8 @@ export async function requireAdmin(
         roles: effectiveRoles,
       },
     };
-  } catch {
+  } catch (err) {
+    console.warn('[requireAdmin] Auth verification failed:', err);
     return { response: unauthorized(401) };
   }
 }

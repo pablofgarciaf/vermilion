@@ -3,6 +3,7 @@ import { getAdminDb } from '@/lib/firebase-admin';
 import { requireAdmin } from '@/lib/adminAuth';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 export async function GET(req: NextRequest) {
   const admin = await requireAdmin(req);

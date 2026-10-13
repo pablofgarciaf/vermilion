@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { STATE_COOKIE, TIKTOK_SCOPES, exchangeCode, fetchUserInfo, getTikTokConfig, saveConnection, verifyState } from '@/lib/tiktok';
 
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 /**
  * Redirect URI registrada en TikTok Login Kit. TikTok vuelve aquí con `code` y `state`;
