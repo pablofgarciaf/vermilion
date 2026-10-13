@@ -34,7 +34,7 @@ sequenceDiagram
 
 - **App ID:** `7695706754587346951`
 - **Client Key:** `sbawai89zpk0sbyr8h` (prefijo `sb` identifica entorno Sandbox)
-- **Client Secret:** `xUFaaa0Zb6HyM0t5MYJ6oucNMvQmsFuE`
+- **Client Secret:** guardado solo en la variable de entorno `TIKTOK_CLIENT_SECRET` (Vercel y `.env` local). Nunca se escribe en este repositorio, que es publico.
 - **Redirect URI:** `https://www.vermilionroutes.com/api/tiktok/callback`
 - **Alcances (Scopes):** `user.info.basic`, `video.upload`
 
