@@ -102,8 +102,17 @@ function getAdminApp(): App {
   }
 
   if (!projectId || !clientEmail || !privateKey) {
-    throw new Error(
-      'Firebase Admin credentials are missing. Set FIREBASE_PROJECT_ID, FIREBASE_CLIENT_EMAIL and FIREBASE_PRIVATE_KEY or FIREBASE_SERVICE_ACCOUNT_JSON in your environment variables.'
+    // Solo nombres de variables, nunca valores.
+    const missing = [
+      !projectId && 'FIREBASE_PROJECT_ID',
+      !clientEmail && 'FIREBASE_CLIENT_EMAIL',
+      !privateKey && 'FIREBASE_PRIVATE_KEY',
+    ].filter(Boolean);
+    throw new FirebaseAdminUnavailableError(
+      new Error(
+        `Firebase Admin credentials are missing (${missing.join(', ')}). Set them, or FIREBASE_SERVICE_ACCOUNT_JSON, in the environment variables.`
+      ),
+      'credentials'
     );
   }
 
