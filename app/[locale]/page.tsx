@@ -11,7 +11,6 @@ import { HomeBlogSection } from '@/components/home/HomeBlogSection';
 import { AlsoAskedFaq } from '@/components/home/AlsoAskedFaq';
 import { ContactSection } from '@/components/home/ContactSection';
 import AffiliateRegistration from '@/components/home/AffiliateRegistration';
-import { LazySection } from '@/components/ui/LazySection';
 import { getSeoAlternates, withBrandTail } from '@/utils/seoHelper';
 import { defaultSettings } from '@/lib/seed';
 import { getLocalizedText } from '@/utils/i18nHelper';
@@ -123,25 +122,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       {/* 3. Combined Trust & Expertise Section (Direct SSR for #about / #experience) */}
       <CombinedExperienceSection />
 
-      {/* 4. Featured Tours Carousel (Lazy Section) */}
-      <LazySection minHeightClass="min-h-[580px]">
-        <FeaturedTours />
-      </LazySection>
+      {/* 4. Featured tours and links are present in the initial HTML. */}
+      <FeaturedTours />
 
-      {/* 5. Travel Blog & Video Expeditions (Lazy Section) */}
-      <LazySection minHeightClass="min-h-[450px]">
-        <HomeBlogSection />
-      </LazySection>
+      {/* 5. Travel guides remain discoverable without scrolling or JavaScript. */}
+      <HomeBlogSection />
 
-      {/* 6. Frequently Asked Questions (Lazy Section) */}
-      <LazySection minHeightClass="min-h-[400px]">
-        <AlsoAskedFaq />
-      </LazySection>
+      {/* 6. FAQ content matches the JSON-LD served above. */}
+      <AlsoAskedFaq />
 
-      {/* Join the Team / Affiliate Program (Lazy Section) */}
-      <LazySection minHeightClass="min-h-[320px]">
-        <AffiliateRegistration />
-      </LazySection>
+      <AffiliateRegistration />
 
       {/* 7. Contact & Tailor-Made Quotation Form (Direct SSR for #contact) */}
       <ContactSection />

@@ -2,7 +2,7 @@
 
 import React, { useMemo, useState, useCallback } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
@@ -11,7 +11,6 @@ import type { BlogPost } from '@/data/blogData';
 export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
   const t = useTranslations();
   const locale = useLocale();
-  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [subscriptionStatus, setSubscriptionStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -47,10 +46,6 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
   const handleCategoryClick = useCallback((category: string | null) => {
     setSelectedCategory(category);
   }, []);
-
-  const handlePostClick = useCallback((slug: string, locale: string) => {
-    router.push(`/${locale}/blog/${slug}`);
-  }, [router]);
 
   const handleSubscribe = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -88,9 +83,9 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
       {/* Featured Post Section */}
       <section className="space-y-4">
         <h2 className="text-lg font-semibold text-zinc-700 dark:text-zinc-300">{t('featuredArticle') || 'Featured Article'}</h2>
-        <div
-          className="group cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-400 dark:hover:border-emerald-500 transition-all duration-300 shadow-sm hover:shadow-lg"
-          onClick={() => handlePostClick(featuredPost.slug, locale)}
+        <Link
+          href={`/${locale}/blog/${featuredPost.slug}`}
+          className="group block rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-400 dark:hover:border-emerald-500 transition-all duration-300 shadow-sm hover:shadow-lg focus-visible:outline-2 focus-visible:outline-emerald-500"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
             {/* Featured Image */}
@@ -99,6 +94,7 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
                 src={featuredPost.imageUrl}
                 alt={getLocalizedText(featuredPost.title, locale)}
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -119,11 +115,11 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
               <div className="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400">
                 <span>{featuredPost.author.name}</span>
                 <span>•</span>
-                <span>{new Date(featuredPost.publishedAt).toLocaleDateString(locale)}</span>
+                <span>{new Date(featuredPost.publishedAt).toLocaleDateString(locale, { timeZone: 'UTC' })}</span>
               </div>
             </div>
           </div>
-        </div>
+        </Link>
       </section>
 
       {/* Category Filter */}
@@ -172,15 +168,16 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
             {filteredPosts.map((post) => (
               <article
                 key={post.slug}
-                className="group cursor-pointer rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-400 dark:hover:border-emerald-500 transition-all duration-300 shadow-sm hover:shadow-lg flex flex-col"
-                onClick={() => handlePostClick(post.slug, locale)}
+                className="group rounded-2xl overflow-hidden bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-400 dark:hover:border-emerald-500 transition-all duration-300 shadow-sm hover:shadow-lg flex flex-col"
               >
+                <Link href={`/${locale}/blog/${post.slug}`} className="flex flex-col flex-grow focus-visible:outline-2 focus-visible:outline-emerald-500">
                 {/* Post Image */}
                 <div className="relative h-48 overflow-hidden flex-shrink-0">
                   <Image
                     src={post.imageUrl}
                     alt={getLocalizedText(post.title, locale)}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
@@ -201,9 +198,10 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
                   <div className="flex items-center gap-3 text-xs text-zinc-500 dark:text-zinc-400 pt-2 border-t border-zinc-200 dark:border-zinc-800">
                     <span>{post.author.name}</span>
                     <span>•</span>
-                    <span>{new Date(post.publishedAt).toLocaleDateString(locale)}</span>
+                    <span>{new Date(post.publishedAt).toLocaleDateString(locale, { timeZone: 'UTC' })}</span>
                   </div>
                 </div>
+                </Link>
               </article>
             ))}
           </div>
