@@ -558,3 +558,11 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* Home: las secciones bajo el pliegue no se maquetan hasta acercarse a la pantalla.
+   Recorta ~1 s de layout en moviles lentos; el contenido sigue en el HTML para SEO.
+   "auto" recuerda la altura real una vez pintada, asi el scroll no salta. */
+.home-deferred-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}

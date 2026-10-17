@@ -36,6 +36,12 @@
     }
   },
   "homeFunnel": {
+    "hero": {
+      "trustBadge": "5.0 no TripAdvisor · Travelers’ Choice 2026",
+      "trustAria": "Ver as avaliações da Vermilion Routes no TripAdvisor",
+      "audience": "Viagens privadas com guia nativo para casais, famílias e pequenos grupos",
+      "priceLine": "Passeios de um dia a partir de ${fullDay} USD · Viagens de vários dias a partir de ${multiDay} USD"
+    },
     "quoteCta": {
       "eyebrow": "Orçamento grátis e sem compromisso",
       "title": "Desenhamos sua viagem privada ao Equador e Galápagos",

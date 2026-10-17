@@ -36,6 +36,12 @@
     }
   },
   "homeFunnel": {
+    "hero": {
+      "trustBadge": "TripAdvisor 評価5.0 · Travelers’ Choice 2026",
+      "trustAria": "TripAdvisorでVermilion Routesのレビューを見る",
+      "audience": "カップル、ご家族、少人数グループ向けの現地ガイド付きプライベート旅行",
+      "priceLine": "日帰りツアー ${fullDay} USD〜 · 複数日の旅 ${multiDay} USD〜"
+    },
     "quoteCta": {
       "eyebrow": "無料・義務なしのお見積もり",
       "title": "エクアドル＆ガラパゴスのプライベート旅行をお作りします",

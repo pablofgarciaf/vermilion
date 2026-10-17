@@ -36,6 +36,12 @@
     }
   },
   "homeFunnel": {
+    "hero": {
+      "trustBadge": "5.0 auf TripAdvisor · Travelers’ Choice 2026",
+      "trustAria": "Bewertungen von Vermilion Routes auf TripAdvisor lesen",
+      "audience": "Private Reisen mit einheimischen Guides für Paare, Familien und kleine Gruppen",
+      "priceLine": "Tagesausflüge ab ${fullDay} USD · Mehrtägige Reisen ab ${multiDay} USD"
+    },
     "quoteCta": {
       "eyebrow": "Kostenloses, unverbindliches Angebot",
       "title": "Wir planen Ihre private Reise nach Ecuador & Galápagos",

@@ -120,28 +120,44 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       </div>
 
       {/* 2. Qué vendemos y desde cuánto: destinos con precio "Desde $X" */}
-      <DestinationsGrid />
+      <div className="home-deferred-section">
+        <DestinationsGrid />
+      </div>
 
       {/* 3. Tours concretos con precio */}
-      <FeaturedTours />
+      <div className="home-deferred-section">
+        <FeaturedTours />
+      </div>
 
       {/* 4. Confianza: reseñas TripAdvisor y quiénes somos (#about / #experience) */}
-      <CombinedExperienceSection />
+      <div className="home-deferred-section">
+        <CombinedExperienceSection />
+      </div>
 
       {/* 5. Atajo a la cotización a mitad de página */}
-      <QuoteCtaBand locale={locale} />
+      <div className="home-deferred-section">
+        <QuoteCtaBand locale={locale} />
+      </div>
 
       {/* 6. Dudas frecuentes (coincide con el JSON-LD de arriba) */}
-      <AlsoAskedFaq />
+      <div className="home-deferred-section">
+        <AlsoAskedFaq />
+      </div>
 
       {/* 7. Formulario de cotización (#contact) */}
-      <ContactSection />
+      <div className="home-deferred-section">
+        <ContactSection />
+      </div>
 
       {/* 8. Contenido secundario: guías del blog, siguen en el HTML inicial */}
-      <HomeBlogSection />
+      <div className="home-deferred-section">
+        <HomeBlogSection />
+      </div>
 
       {/* 9. Programa de embajadores al pie, fuera del embudo del viajero (ancla #affiliate del footer) */}
-      <AffiliateRegistration />
+      <div className="home-deferred-section">
+        <AffiliateRegistration />
+      </div>
     </div>
   );
 }

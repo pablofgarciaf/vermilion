@@ -1,8 +1,11 @@
 import React from 'react';
-import Image from 'next/image';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { SlideData } from '@/types';
-import { ShieldCheck } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { FULL_DAY_FROM_PRICE, MULTI_DAY_FROM_PRICE } from '@/data/startingPrices';
+
+const TRIPADVISOR_URL =
+  'https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html';
 
 interface HeroDetailsProps {
   initialData: SlideData;
@@ -128,6 +131,13 @@ export function getStandardTemplateHTML(slide: SlideData, locale: string): strin
 export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
   const welcomeText = SPLASH_TEXTS[locale] || SPLASH_TEXTS.en;
   const h1Text = H1_HEADLINES[locale] || H1_HEADLINES.en;
+  const t = useTranslations('homeFunnel.hero');
+  const heroText = {
+    trustBadge: t('trustBadge'),
+    trustAria: t('trustAria'),
+    audience: t('audience'),
+    priceLine: t('priceLine', { fullDay: FULL_DAY_FROM_PRICE, multiDay: MULTI_DAY_FROM_PRICE }),
+  };
 
   return (
     <>
@@ -145,60 +155,30 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
             {isWelcomeSlide ? (
               /* ── BIENVENIDA EXCLUSIVA (Centrada en móvil, a la izquierda en desktop) ── */
               <div className="welcome-container flex flex-col items-center text-center md:items-start md:text-left w-full">
-                {/* "ALL YOU NEED IS" Vibrant Oswald Decorative Brand Art */}
-                <div aria-hidden="true" className="welcome-title flex flex-col items-center justify-center md:items-start mb-2.5 select-none pointer-events-none">
-                  <span className="flex gap-2 sm:gap-3 md:gap-4 font-oswald font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[68px] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] [text-shadow:0_3px_10px_rgba(0,0,0,0.9)]">
-                    <span className="flex">
-                      <span className="text-[#FDB913]">A</span>
-                      <span className="text-[#F58220]">L</span>
-                      <span className="text-[#F05A28]">L</span>
-                    </span>
-                    <span className="flex">
-                      <span className="text-[#EF4136]">Y</span>
-                      <span className="text-[#ED1C24]">O</span>
-                      <span className="text-[#E6007E]">U</span>
-                    </span>
-                    <span className="flex">
-                      <span className="text-[#E91E63]">N</span>
-                      <span className="text-[#F06292]">E</span>
-                      <span className="text-[#CE93D8]">E</span>
-                      <span className="text-[#AB47BC]">D</span>
-                    </span>
-                    <span className="flex">
-                      <span className="text-[#42A5F5]">I</span>
-                      <span className="text-[#29B6F6]">S</span>
-                    </span>
-                  </span>
-                </div>
+                {/* Prueba de confianza visible desde el primer frame */}
+                <a
+                  href={TRIPADVISOR_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={heroText.trustAria}
+                  className="pointer-events-auto inline-flex items-center gap-2 mb-3 px-3.5 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-emerald-400/40 text-white text-xs sm:text-sm font-semibold shadow-lg hover:border-emerald-300 transition-colors"
+                >
+                  <span aria-hidden="true" className="text-amber-400 tracking-tight">★★★★★</span>
+                  <span>{heroText.trustBadge}</span>
+                </a>
 
-                {/* Clean Semantic 50-60 char H1 for SEO */}
-                <h1 className="sr-only">{h1Text}</h1>
+                {/* Titular SEO visible (45-65 caracteres, 8 idiomas). Sin clases .title-*: GSAP no lo toca. */}
+                <h1 className="font-serif font-bold text-white text-[28px] sm:text-[34px] md:text-[38px] lg:text-[44px] leading-[1.08] tracking-tight mb-3 max-w-xl [text-shadow:0_2px_14px_rgba(0,0,0,0.85)]">
+                  {h1Text}
+                </h1>
 
-                {/* Logo Glass Card - Centered under ALL YOU NEED IS */}
-                <div className="welcome-logo-card relative w-[230px] h-[78px] sm:w-[290px] sm:h-[98px] md:w-[340px] md:h-[112px] mb-3 bg-gradient-to-r from-emerald-950/45 via-cyan-900/35 to-emerald-950/45 backdrop-blur-lg rounded-full p-2.5 sm:p-3 border border-white/35 shadow-[0_12px_40px_rgba(0,0,0,0.75)] flex items-center justify-center mx-auto md:mx-0 md:ml-[82px] lg:ml-[95px] xl:ml-[105px]">
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <Image
-                      src="/logo_blanco.png"
-                      alt="Vermilion Routes"
-                      width={340}
-                      height={112}
-                      quality={100}
-                      className="w-full h-full object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.85)]"
-                      priority
-                      fetchPriority="high"
-                      loading="eager"
-                    />
-                  </div>
-                </div>
-
-                {/* Headline & Subheadline */}
-                <div className="welcome-headline mb-3 space-y-0.5 text-center md:text-left max-w-lg mx-auto md:mx-0">
-                  <p className="text-sm sm:text-base md:text-lg font-serif font-bold text-white tracking-wide drop-shadow-md">
-                    {welcomeText.headline}
+                {/* Para quien es y desde cuanto */}
+                <div className="welcome-headline mb-3 space-y-1.5 text-center md:text-left max-w-lg mx-auto md:mx-0">
+                  <p className="text-[15px] sm:text-base md:text-lg font-medium text-white/95 leading-snug [text-shadow:0_1px_8px_rgba(0,0,0,0.9)]">
+                    {heroText.audience}
                   </p>
-                  <p className="text-xs sm:text-sm text-[#C9A961] font-medium tracking-wider uppercase flex items-center justify-center md:justify-start gap-2 drop-shadow">
-                    <ShieldCheck className="w-4 h-4 text-[#C9A961] shrink-0" />
-                    <span>{welcomeText.subheadline}</span>
+                  <p className="text-sm sm:text-base font-bold text-[#F3D27A] tracking-wide [text-shadow:0_1px_8px_rgba(0,0,0,0.9)]">
+                    {heroText.priceLine}
                   </p>
                 </div>
 

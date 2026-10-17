@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { isBotOrCrawler } from '@/utils/isBot';
 import { prefersReducedMotion } from '@/utils/motion';
+import { DESTINATION_STARTING_PRICES } from '@/data/startingPrices';
 
 // Curated high-resolution image pools per destination category (Vertical 9:16 aspect ratio)
 const DESTINATION_IMAGE_POOLS: Record<string, string[]> = {
@@ -42,12 +43,7 @@ const DESTINATION_IMAGE_POOLS: Record<string, string[]> = {
   ],
 };
 
-const DESTINATION_PRICES: Record<string, number> = {
-  ecuador: 950,
-  galapagos: 1050,
-  combined: 2290,
-  'full-day': 85,
-};
+const DESTINATION_PRICES = DESTINATION_STARTING_PRICES;
 
 const FROM_LABELS: Record<string, string> = {
   es: 'Desde',
@@ -83,6 +79,13 @@ export function DestinationsGrid() {
   const [activeDestId, setActiveDestId] = useState<string>('all');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  // Se decide tras montar: si se evaluara durante el render, el servidor (sin navigator)
+  // y un navegador de auditoria (Lighthouse, headless) pintarian HTML distinto y React
+  // regeneraria toda la pagina (error de hidratacion #418).
+  const [isAuditBot, setIsAuditBot] = useState(false);
+  useEffect(() => {
+    setIsAuditBot(isBotOrCrawler());
+  }, []);
 
   // Track active image index per destination card
   const [cardImageIndices, setCardImageIndices] = useState<Record<string, number>>({
@@ -271,7 +274,7 @@ export function DestinationsGrid() {
             >
               {/* Dynamic Layered Images with Seamless Crossfade & Subtle Ken Burns Zoom */}
               {pool.map((imgSrc, imgIdx) => {
-                if (isBotOrCrawler() && imgIdx !== 0) return null;
+                if (isAuditBot && imgIdx !== 0) return null;
                 const isCurrent = imgIdx === activeIndex;
                 const nextIndex = (activeIndex + 1) % pool.length;
                 const isNext = imgIdx === nextIndex;
