@@ -35,6 +35,15 @@
       "support": "Soporte 24/7"
     }
   },
+  "homeFunnel": {
+    "quoteCta": {
+      "eyebrow": "Cotización gratuita y sin compromiso",
+      "title": "Diseñamos tu viaje privado a Ecuador y Galápagos",
+      "text": "Cuéntanos fechas, cuántos viajan y qué quieres vivir. Un especialista local te envía un itinerario con precio en menos de 24 horas.",
+      "button": "Pedir mi cotización gratis",
+      "whatsappHint": "Respuesta de una persona real, no de un robot."
+    }
+  },
   "destinations": {
     "badge": "¿A Dónde Irás?",
     "title": "Explora Nuestros Destinos",

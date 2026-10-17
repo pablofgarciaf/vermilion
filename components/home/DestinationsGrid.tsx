@@ -8,6 +8,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { isBotOrCrawler } from '@/utils/isBot';
+import { prefersReducedMotion } from '@/utils/motion';
 
 // Curated high-resolution image pools per destination category (Vertical 9:16 aspect ratio)
 const DESTINATION_IMAGE_POOLS: Record<string, string[]> = {
@@ -167,7 +168,7 @@ export function DestinationsGrid() {
 
   // Rotates cards: on mobile, ONLY rotates the currently visible card; on desktop, staggers through all 4
   useEffect(() => {
-    if (!destinations || destinations.length === 0 || isBotOrCrawler()) return;
+    if (!destinations || destinations.length === 0 || isBotOrCrawler() || prefersReducedMotion()) return;
 
     const interval = setInterval(() => {
       if (document.hidden) return;

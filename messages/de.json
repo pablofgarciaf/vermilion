@@ -35,6 +35,15 @@
       "support": "24/7 Concierge-Service"
     }
   },
+  "homeFunnel": {
+    "quoteCta": {
+      "eyebrow": "Kostenloses, unverbindliches Angebot",
+      "title": "Wir planen Ihre private Reise nach Ecuador & Galápagos",
+      "text": "Nennen Sie uns Reisedaten, Gruppengröße und Wünsche. Ein lokaler Spezialist schickt Ihnen innerhalb von 24 Stunden eine Route mit Preis.",
+      "button": "Kostenloses Angebot anfordern",
+      "whatsappHint": "Es antwortet ein Mensch, kein Bot."
+    }
+  },
   "destinations": {
     "badge": "Wohin Als Nächstes?",
     "title": "Erkunden Sie Unsere Reiseziele",

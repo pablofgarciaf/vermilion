@@ -35,6 +35,15 @@
       "support": "Service Concierge 24/7"
     }
   },
+  "homeFunnel": {
+    "quoteCta": {
+      "eyebrow": "Devis gratuit et sans engagement",
+      "title": "Nous créons votre voyage privé en Équateur et aux Galápagos",
+      "text": "Indiquez vos dates, le nombre de voyageurs et vos envies. Un spécialiste local vous envoie un itinéraire chiffré en moins de 24 heures.",
+      "button": "Recevoir mon devis gratuit",
+      "whatsappHint": "Une vraie personne vous répond, pas un robot."
+    }
+  },
   "destinations": {
     "badge": "Où Irez-Vous ?",
     "title": "Explorez Nos Destinations",

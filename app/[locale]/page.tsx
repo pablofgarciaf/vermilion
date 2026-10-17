@@ -1,12 +1,13 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
+import { setRequestLocale } from 'next-intl/server';
 import { HeroSlider } from '@/components/home/HeroSlider';
 import FluidBackgroundCursor from '@/components/home/FluidBackgroundCursor';
-import { StatsSectionLazy } from '@/components/home/StatsSectionLazy';
+import { StatsSection } from '@/components/home/StatsSection';
 import { DestinationsGrid } from '@/components/home/DestinationsGrid';
-const CombinedExperienceSection = dynamic(() => import('@/components/home/CombinedExperienceSection').then(m => ({ default: m.CombinedExperienceSection })), { ssr: true });
+import { CombinedExperienceSection } from '@/components/home/CombinedExperienceSection';
 import { FeaturedTours } from '@/components/home/FeaturedTours';
+import { QuoteCtaBand } from '@/components/home/QuoteCtaBand';
 import { HomeBlogSection } from '@/components/home/HomeBlogSection';
 import { AlsoAskedFaq } from '@/components/home/AlsoAskedFaq';
 import { ContactSection } from '@/components/home/ContactSection';
@@ -87,6 +88,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  // Fija el idioma para next-intl sin leer headers(): permite servir la home como HTML estático cacheable.
+  setRequestLocale(locale);
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -107,34 +110,39 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      {/* Dynamic Fluid WebGL Shader Background & Custom Mouse Cursor */}
+      {/* Fondo WebGL y cursor: solo escritorio con ratón y sin prefers-reduced-motion. */}
       <FluidBackgroundCursor />
 
-      {/* 1. Critical Above-the-Fold Viewport */}
+      {/* 1. Hero + franja de confianza (TripAdvisor 5.0) renderizada en el servidor */}
       <div>
         <HeroSlider />
-        <StatsSectionLazy />
+        <StatsSection />
       </div>
 
-      {/* 2. Top Destinations Grid (Direct SSR - 0.00 CLS) */}
+      {/* 2. Qué vendemos y desde cuánto: destinos con precio "Desde $X" */}
       <DestinationsGrid />
 
-      {/* 3. Combined Trust & Expertise Section (Direct SSR for #about / #experience) */}
-      <CombinedExperienceSection />
-
-      {/* 4. Featured tours and links are present in the initial HTML. */}
+      {/* 3. Tours concretos con precio */}
       <FeaturedTours />
 
-      {/* 5. Travel guides remain discoverable without scrolling or JavaScript. */}
-      <HomeBlogSection />
+      {/* 4. Confianza: reseñas TripAdvisor y quiénes somos (#about / #experience) */}
+      <CombinedExperienceSection />
 
-      {/* 6. FAQ content matches the JSON-LD served above. */}
+      {/* 5. Atajo a la cotización a mitad de página */}
+      <QuoteCtaBand locale={locale} />
+
+      {/* 6. Dudas frecuentes (coincide con el JSON-LD de arriba) */}
       <AlsoAskedFaq />
 
-      <AffiliateRegistration />
-
-      {/* 7. Contact & Tailor-Made Quotation Form (Direct SSR for #contact) */}
+      {/* 7. Formulario de cotización (#contact) */}
       <ContactSection />
+
+      {/* 8. Contenido secundario: guías del blog, siguen en el HTML inicial */}
+      <HomeBlogSection />
+
+      {/* 9. Programa de embajadores al pie, fuera del embudo del viajero (ancla #affiliate del footer) */}
+      <AffiliateRegistration />
     </div>
   );
 }
+

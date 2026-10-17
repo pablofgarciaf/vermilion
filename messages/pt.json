@@ -35,6 +35,15 @@
       "support": "Atendimento 24/7"
     }
   },
+  "homeFunnel": {
+    "quoteCta": {
+      "eyebrow": "Orçamento grátis e sem compromisso",
+      "title": "Desenhamos sua viagem privada ao Equador e Galápagos",
+      "text": "Conte-nos as datas, quantas pessoas viajam e o que deseja viver. Um especialista local envia um roteiro com preço em menos de 24 horas.",
+      "button": "Pedir meu orçamento grátis",
+      "whatsappHint": "Quem responde é uma pessoa real, não um robô."
+    }
+  },
   "destinations": {
     "badge": "Para Onde Você Vai?",
     "title": "Explore Nossos Destinos",

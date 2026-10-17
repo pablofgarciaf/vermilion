@@ -32,18 +32,38 @@ export default function FluidBackgroundCursor() {
       'ontouchstart' in window ||
       navigator.maxTouchPoints > 0 ||
       window.innerWidth < 768;
-    setIsTouchDevice(isTouch);
+    const prefersReducedMotion =
+      typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Movil, tactil o "reducir movimiento": no se monta nada (ni cursor ni shader).
+    if (isTouch || prefersReducedMotion) {
+      setIsTouchDevice(true);
+      return;
+    }
+
+    setIsTouchDevice(false);
     setMounted(true);
 
-    if (!isTouch) {
+    // El shader (three.js) no compite con el hero: se descarga solo despues de
+    // que el visitante mueva el raton y el navegador quede libre.
+    let idleId: number | undefined;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const scheduleWebGL = () => {
+      window.removeEventListener('pointermove', scheduleWebGL);
       if ('requestIdleCallback' in window) {
-        const id = (window as any).requestIdleCallback(() => setLoadWebGL(true), { timeout: 2500 });
-        return () => (window as any).cancelIdleCallback?.(id);
+        idleId = (window as any).requestIdleCallback(() => setLoadWebGL(true), { timeout: 4000 });
       } else {
-        const timer = setTimeout(() => setLoadWebGL(true), 1500);
-        return () => clearTimeout(timer);
+        timer = setTimeout(() => setLoadWebGL(true), 2000);
       }
-    }
+    };
+    window.addEventListener('pointermove', scheduleWebGL, { passive: true });
+
+    return () => {
+      window.removeEventListener('pointermove', scheduleWebGL);
+      if (idleId !== undefined) (window as any).cancelIdleCallback?.(idleId);
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   // ── Fairy Dust Flight Trail ──
