@@ -213,7 +213,16 @@
     "transferWhatsApp": "将聊天转移到 WhatsApp",
     "leadSaved": "线索详情已保存到系统！",
     "advisorsWillContact": "我们的顾问将与您联系",
-    "typeMessage": "在此输入您的消息..."
+    "typeMessage": "在此输入您的消息...",
+    "pillCruises": "🏝️ 加拉帕戈斯游轮",
+    "pillCombo": "🌋 加拉帕戈斯 + 厄瓜多尔",
+    "pillQuote": "💰 获取定制报价",
+    "crafting": "Pyro 正在为您准备回复...",
+    "errorFallback": "抱歉，我暂时无法回复。我们的团队可以通过 WhatsApp 或电子邮件直接为您服务。需要为您联系旅行顾问吗？",
+    "transferSummary": "您好，Vermilion Routes！我刚才在网站上和 Pyro 聊到：“{topics}”。可以请顾问帮我吗？",
+    "closeChat": "关闭聊天",
+    "sendMessage": "发送消息",
+    "openMenu": "打开旅行助手"
   },
   "adminTiktok": {
     "title": "TikTok 集成",
@@ -243,5 +252,11 @@
     "done": "完成！打开 TikTok 查看收件箱通知即可完成发布。",
     "failed": "上传失败：{reason}",
     "tooLargeForRelay": "您的浏览器无法直接上传到 TikTok，且文件超过 4 MB。请导出更小的视频后重试。"
+  },
+  "whatsapp": {
+    "cta": "WhatsApp",
+    "tooltip": "通过 WhatsApp 联系旅行顾问",
+    "ariaLabel": "通过 WhatsApp 联系我们",
+    "defaultMessage": "您好，Vermilion Routes！我想规划一次厄瓜多尔和加拉帕戈斯之旅，可以帮我吗？"
   }
 }

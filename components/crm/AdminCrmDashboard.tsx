@@ -995,7 +995,7 @@ export function AdminCrmDashboard() {
                         </td>
                       </tr>
                     ))}
-                  {leads.length === 0 && (
+                  {leads.length === 0 && bookings.length === 0 && (
                     <tr>
                       <td colSpan={7} className="p-8 text-center text-zinc-500">No hay leads en el pipeline.</td>
                     </tr>

@@ -22,6 +22,13 @@ vi.mock('firebase/firestore', () => ({
   addDoc: mockAddDoc,
 }));
 
+// El aviso por correo se ejecuta tras responder; aquí no debe tocar el SMTP real.
+const { mockNotifyNewLead } = vi.hoisted(() => ({ mockNotifyNewLead: vi.fn() }));
+vi.mock('@/lib/email', () => ({ notifyNewLead: mockNotifyNewLead }));
+
+/** Deja correr las tareas posteriores a la respuesta (correo + n8n). */
+const flushAfterResponse = () => new Promise((resolve) => setTimeout(resolve, 0));
+
 import { POST } from '@/app/api/leads/route';
 
 // Global fetch mock for n8n webhook tests
@@ -61,6 +68,7 @@ describe('POST /api/leads', () => {
 
     // Default: no n8n webhook configured
     delete process.env.N8N_WEBHOOK_URL;
+    mockNotifyNewLead.mockResolvedValue({ alert: { sent: true }, acknowledgement: 'skipped' });
   });
 
   // ── Validation — Happy Path ───────────────────────────────────────────────
@@ -155,8 +163,10 @@ describe('POST /api/leads', () => {
 
     const response = await POST(req as any);
     const json = await response.json();
+    await flushAfterResponse();
 
-    expect(json.webhookTriggered).toBe(true);
+    // El webhook corre después de responder: la respuesta ya no informa de él.
+    expect(json.success).toBe(true);
     expect(mockFetch).toHaveBeenCalledWith(
       'https://n8n.example.com/webhook/leads',
       expect.objectContaining({
@@ -176,11 +186,43 @@ describe('POST /api/leads', () => {
     const response = await POST(req as any);
     const json = await response.json();
 
+    await flushAfterResponse();
+
     // Lead must still be saved regardless of webhook failure
     expect(response.status).toBe(200);
     expect(json.success).toBe(true);
     expect(json.bookingId).toBeDefined();
-    expect(json.webhookTriggered).toBe(false);
-    expect(json.webhookError).toBeDefined();
+    expect(mockFetch).toHaveBeenCalled();
+  });
+
+  it('TC-09: avisa al equipo por correo con los datos del lead y acuse al viajero', async () => {
+    const req = makeLeadRequest({ ...VALID_LEAD, locale: 'es' });
+
+    const response = await POST(req as any);
+    await flushAfterResponse();
+
+    expect(response.status).toBe(200);
+    expect(mockNotifyNewLead).toHaveBeenCalledWith(
+      expect.objectContaining({
+        leadId: 'firestore-doc-abc123',
+        customerName: 'John Doe',
+        customerEmail: 'john.doe@example.com',
+        locale: 'es',
+      }),
+      { acknowledgeCustomer: true }
+    );
+  });
+
+  it('TC-10: un fallo del correo no rompe el guardado del lead', async () => {
+    mockNotifyNewLead.mockRejectedValue(new Error('EAUTH 535'));
+    const req = makeLeadRequest(VALID_LEAD);
+
+    const response = await POST(req as any);
+    const json = await response.json();
+    await flushAfterResponse();
+
+    expect(response.status).toBe(200);
+    expect(json.success).toBe(true);
+    expect(json.bookingId).toBe('firestore-doc-abc123');
   });
 });

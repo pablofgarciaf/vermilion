@@ -13,6 +13,8 @@ import { ConditionalFooter } from '@/components/layout/ConditionalFooter';
 import { AffiliateTracker } from '@/components/affiliates/AffiliateTracker';
 import { ConciergeWidgetLazy } from '@/components/ui/ConciergeWidgetLazy';
 import { ConsentManager } from '@/components/privacy/ConsentManager';
+import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
+import { WhatsAppClickTracker } from '@/components/analytics/WhatsAppClickTracker';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -327,7 +329,9 @@ export default async function RootLayout({
                   {children}
                 </main>
                 <ConditionalFooter />
+                <WhatsAppButton />
                 <ConciergeWidgetLazy />
+                <WhatsAppClickTracker />
                 <Suspense fallback={null}>
                   <AffiliateTracker />
                 </Suspense>

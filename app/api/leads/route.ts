@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
+import { runAfterResponse } from '@/lib/runAfterResponse';
 import { withValidation } from '@/lib/apiHandler';
 import { leadSchema, sanitizeText, isValidPhone } from '@/lib/validation';
 import { leadsRepository } from '@/lib/services/DatabaseService';
 import { BookingRequest } from '@/types';
+import { notifyNewLead } from '@/lib/email';
+import { triggerN8nWebhook } from '@/lib/n8n';
 
 export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
   // 🛡️ Honeypot Trap Detection (Python Bot / Automated Form Spammer Neutralizer)
@@ -63,57 +66,40 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
 
   // Persist lead in Firestore using centralized DatabaseService DAL
   const bookingId = await leadsRepository.create(bookingPayload);
+  const locale = sanitizeText(body.locale || '').slice(0, 5) || undefined;
 
-  // Trigger n8n webhook if configured
-  let webhookTriggered = false;
-  let webhookError: string | null = null;
-  const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
-
-  if (n8nWebhookUrl) {
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 sec timeout
-
-      const webhookPayload = {
-        event: 'lead.created',
-        bookingId,
+  // Avisos DESPUÉS de responder al viajero: un fallo de correo o de n8n nunca
+  // hace fallar el guardado del lead ni retrasa la respuesta del formulario.
+  runAfterResponse(async () => {
+    await notifyNewLead(
+      {
+        leadId: bookingId,
+        source: tourId === 'general-inquiry' ? 'contact_form' : `tour:${tourId}`,
+        customerName,
+        customerEmail,
+        customerPhone,
+        tourTitle,
+        destination,
+        travelDates,
+        guestsCount,
+        message,
+        locale,
         createdAt,
-        source: 'vermilion-routes-web',
-        lead: {
-          id: bookingId,
-          ...bookingPayload,
-        },
-      };
-
-      const webhookRes = await fetch(n8nWebhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'User-Agent': 'VermilionRoutes-API/1.0',
-        },
-        body: JSON.stringify(webhookPayload),
-        signal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-
-      if (webhookRes.ok) {
-        webhookTriggered = true;
-      } else {
-        webhookError = `n8n webhook responded with status ${webhookRes.status}`;
-        console.warn('[n8n Webhook Warning]', webhookError);
-      }
-    } catch (err: any) {
-      webhookError = err.name === 'AbortError' ? 'n8n webhook timeout' : err.message;
-      console.warn('[n8n Webhook Error]', webhookError);
-    }
-  }
+      },
+      { acknowledgeCustomer: true }
+    );
+    await triggerN8nWebhook({
+      event: 'lead.created',
+      bookingId,
+      createdAt,
+      source: 'vermilion-routes-web',
+      lead: { id: bookingId, ...bookingPayload },
+    });
+  });
 
   return NextResponse.json({
     success: true,
     bookingId,
     message: 'Lead captured successfully and stored in Firestore.',
-    webhookTriggered,
-    webhookError,
   });
 });
