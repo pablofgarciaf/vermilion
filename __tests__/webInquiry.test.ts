@@ -70,6 +70,6 @@ describe('isWebInquiry', () => {
   });
 
   it('expone la lista de tourId ampliable', () => {
-    expect(WEB_INQUIRY_TOUR_IDS).toEqual(['general-inquiry', 'ai-concierge-lead']);
+    expect(WEB_INQUIRY_TOUR_IDS).toEqual(['general-inquiry', 'ai-concierge-lead', 'whatsapp-lead']);
   });
 });
