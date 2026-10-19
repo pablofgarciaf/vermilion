@@ -118,7 +118,8 @@ export function parseDecision(raw: string, fallbackLocale: WaLocale): AiDecision
   const recommendedTourIds = [...new Set(ids.filter((id): id is string => !!findTour(id)))].slice(0, 3);
 
   const rawLead = (data.lead && typeof data.lead === 'object' ? data.lead : {}) as Record<string, unknown>;
-  const field = (k: string) => sanitizeUntrusted(rawLead[k], 200) || undefined;
+  // Una sola línea: estos campos acaban en asuntos de correo y parámetros de plantilla.
+  const field = (k: string) => sanitizeUntrusted(rawLead[k], 200).replace(/\s+/g, ' ') || undefined;
   const email = field('email');
   const lead: LeadFacts = {
     name: field('name')?.slice(0, 80),

@@ -251,6 +251,9 @@ describe('inyección de prompt y descuentos', () => {
     expect(guardReply('Mira https://www.vermilionroutes.com/es/tours/no-existe').violations).toContain('url');
     expect(guardReply('Mira https://www.vermilionroutes.com/es/tours/galapagos-6days').ok).toBe(true);
     expect(guardReply('Tu reserva está confirmada').violations).toContain('commitment');
+    expect(guardReply('Only today: half price!').violations).toContain('discount');
+    expect(guardReply('现在九折').violations).toContain('discount');
+    expect(guardReply('Promo 2x1 en Galápagos').violations).toContain('discount');
   });
 
   it('recomienda tours reales con su precio "desde" y el enlace en el idioma del cliente', async () => {
@@ -375,6 +378,14 @@ describe('baja, ventana de 24 h, frecuencia e interruptor', () => {
     h.tick(24 * 60 * 60 * 1000);
     await h.send(h.msg('Hola de nuevo'));
     expect(h.mem.leads.size).toBe(2);
+  });
+
+  it('el id del lead es aleatorio (no se puede pre-crear desde el navegador) y el nombre va en una línea', async () => {
+    const h = harness({ cfg: { aiEnabled: false } });
+    await h.send(h.msg('Hola', { name: 'Ana\nBcc: x@evil.test' }));
+    const [leadId] = [...h.mem.leads.keys()];
+    expect(leadId).toMatch(/^wa_20261019_[a-f0-9]{18}$/);
+    expect(h.alerts[0].name).toBe('Ana Bcc: x@evil.test');
   });
 
   it('enmascara teléfonos para los logs', () => {

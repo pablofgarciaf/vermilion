@@ -1,3 +1,4 @@
+import { randomBytes } from 'crypto';
 import { buildSystemPrompt, parseDecision, type AiClient } from './ai';
 import { recommendationBlock } from './catalog';
 import { LIMITS, type WaLocale, type WhatsAppConfig } from './config';
@@ -168,7 +169,7 @@ export async function processInbound(msg: InboundMessage, deps: ProcessorDeps): 
   const text = sanitizeUntrusted(msg.text, LIMITS.maxInboundChars);
   const existing = await store.loadConversation(key);
   const conv: ConversationRecord = existing || newConversation(msg.from, detectLocale(text, 'es'), now);
-  if (msg.name) conv.name = sanitizeUntrusted(msg.name, 80);
+  if (msg.name) conv.name = sanitizeUntrusted(msg.name, 80).replace(/\s+/g, ' ');
   const msgTime = msg.timestampMs > 0 ? Math.min(msg.timestampMs, now) : now;
   // Ventana de 24 h: cuenta desde el último mensaje REAL del cliente, no desde que lo procesamos.
   conv.lastInboundAt = Math.max(existing?.lastInboundAt || 0, msgTime);
@@ -311,7 +312,8 @@ async function persist(ctx: Ctx, opts: { touchLead?: boolean } = {}): Promise<bo
     if (conv.leadDay !== day || !conv.leadId) {
       isNew = true;
       conv.leadDay = day;
-      conv.leadId = `wa_${key.slice(0, 16)}_${day.replace(/-/g, '')}`;
+      // Id aleatorio (no derivable del teléfono): nadie puede pre-crear el documento desde el navegador.
+      conv.leadId = `wa_${day.replace(/-/g, '')}_${randomBytes(9).toString('hex')}`;
     }
   }
   await deps.store.saveConversation(key, conv);

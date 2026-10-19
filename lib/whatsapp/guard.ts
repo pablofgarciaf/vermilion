@@ -24,16 +24,17 @@ export interface GuardResult {
 
 const DISCOUNT_WORDS = new RegExp(
   [
-    'descuento', 'rebaja', 'cupon', 'promocion', 'promo', 'oferta especial', 'gratis',
-    'discount', 'coupon', 'voucher code', 'promo code', 'free of charge', 'for free', 'special offer',
+    'descuento', 'rebaja', 'cupon', 'promocion', 'promo', 'oferta especial', 'gratis', 'mitad de precio', 'medio precio',
+    'precio especial', 'tarifa especial', '2x1', 'dos por uno',
+    'discount', 'coupon', 'voucher code', 'promo code', 'free of charge', 'for free', 'special offer', 'special price', 'half price', 'half off',
     'remise', 'reduction', 'rabais', 'gratuit',
     'rabatt', 'gutschein', 'kostenlos', 'gratis',
     'sconto', 'gratuito',
     'desconto', 'cupom', 'promocao',
     '割引', 'クーポン', '無料', 'セール',
-    '折扣', '优惠', '打折', '免费', '优惠券',
+    '折扣', '优惠', '打折', '免费', '优惠券', '[一二三四五六七八九0-9]折',
   ]
-    .map((w) => (/^[a-z ]+$/.test(w) ? `\\b${w}\\b` : w))
+    .map((w) => (/^[a-z0-9 ]+$/.test(w) ? `\\b${w}\\b` : w))
     .join('|'),
   'i'
 );
