@@ -3426,7 +3426,10 @@ export const mockReviews: Review[] = [
     tourTitle: 'The Avenue of the Volcanoes & Galapagos',
     title: 'A Trip Of A Lifetime',
     comment: 'Truly a magical trip that I will never forget. From hiking in The Avenue of the Volcanos to snorkeling with sea lions and turtles in the Galapagos you truly will never have a dull moment on this trip. Our tour guide Jhayro was truly the best guide. Went above and beyond to make sure everyone was taken care of and provided many additional activities for us on the tour.',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d27987753-r1056131695-Ecuador_essential_Andes_jungle_of_the_Amazon_and_Galapagos-Quito_Pichincha_Pro.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/dylanaK6992XY',
+    photoCount: 4
   },
   {
     id: 'rev-2',
@@ -3437,7 +3440,10 @@ export const mockReviews: Review[] = [
     tourTitle: 'Ecuador & Galapagos Master Tour',
     title: 'Book It!',
     comment: 'This tour was amazing. Very detailed, organized and so fun. I can’t recommend it enough. Jhayro was an incredible and knowledgeable guide.',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d27987753-r1055889796-Ecuador_essential_Andes_jungle_of_the_Amazon_and_Galapagos-Quito_Pichincha_Pro.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/76guadalupel',
+    photoCount: 4
   },
   {
     id: 'rev-3',
@@ -3448,7 +3454,10 @@ export const mockReviews: Review[] = [
     tourTitle: 'Ecuador and the Galapagos',
     title: 'The Best Trip!',
     comment: 'This was the best trip! Our tour guide, Vermilion Jhayro was extremely knowledgeable and showed us the best of Ecuador. His kind, caring, and friendly personality made the trip unforgettable. I highly recommend taking this trip with him as your guide!',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d27987753-r1055885147-Ecuador_essential_Andes_jungle_of_the_Amazon_and_Galapagos-Quito_Pichincha_Pro.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/alanaf365',
+    photoCount: 0
   },
   {
     id: 'rev-4',
@@ -3459,7 +3468,10 @@ export const mockReviews: Review[] = [
     tourTitle: '11-Day Ecuador Flagship Expedition',
     title: 'Hola Vida!',
     comment: 'My time with Jhayro was truly excellent, I couldn’t have asked for a better tour director for our 11 days in Ecuador. From start to finish, he went above and beyond to make the experience unforgettable. Visiting an Kichwa Community in the Amazon, sharing an authentic meal, exploring an animal refuge, and hiking to a beautiful waterfall were experiences I never would have been able to organize on my own.',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d27987753-r1055282476-Ecuador_essential_Andes_jungle_of_the_Amazon_and_Galapagos-Quito_Pichincha_Pro.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/U4362SPnicoleh',
+    photoCount: 0
   },
   {
     id: 'rev-5',
@@ -3470,7 +3482,10 @@ export const mockReviews: Review[] = [
     tourTitle: 'Ecuador & Galapagos with Jhayro',
     title: 'Unforgettable Memories!',
     comment: 'Jhayro was an incredible guide who made our time in Ecuador and the Galapagos so enjoyable and stress free! Not only was he very knowledgeable about the history of Ecuador, he made sure to plan excursions for us to experience the culture with Kichwa communities and traditional food.',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d27987753-r1055280556-Ecuador_essential_Andes_jungle_of_the_Amazon_and_Galapagos-Quito_Pichincha_Pro.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/V2057EVkatiev',
+    photoCount: 0
   },
   {
     id: 'rev-6',
@@ -3481,7 +3496,10 @@ export const mockReviews: Review[] = [
     tourTitle: 'Ecuador Cultural & Natural Wonders',
     title: 'An Unforgettable Experience In Ecuador',
     comment: 'We had an amazing time in Ecuador thanks to Jhayro! He was incredibly informative and so passionate about his country and everything it has to offer. You could really feel how much he cares about sharing Ecuador’s beauty and culture. Always punctual, organized, and attentive.',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d26260308-r1055270640-Vermilion_Routes-Quito_Pichincha_Province.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/527mackenziel',
+    photoCount: 0
   },
   {
     id: 'rev-7',
@@ -3492,7 +3510,10 @@ export const mockReviews: Review[] = [
     tourTitle: 'Bespoke Galapagos Expedition',
     title: 'Incredible Trip!',
     comment: 'This trip was amazing!! Jhayro was an excellent tour guide and made sure we got to see as much as possible. He planned extra stops for us and made special accommodations for people when needed. Would highly recommend booking a tour with him!',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d27987753-r1055226753-Ecuador_essential_Andes_jungle_of_the_Amazon_and_Galapagos-Quito_Pichincha_Pro.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/Y3142DAsarahf',
+    photoCount: 0
   },
   {
     id: 'rev-8',
@@ -3503,7 +3524,10 @@ export const mockReviews: Review[] = [
     tourTitle: 'Andes, Amazon & Galapagos',
     title: 'Most Knowledgeable Guide And Most Fun Itinerary',
     comment: 'We were always moving and going onto the next activity. It was so fun, there were so many surprises and cool things outside of the itinerary that we got to do and see. Our guide was not just organized, but he took care of every thing we needed, all while being so funny and fun to be around.',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d27987753-r1055214745-Ecuador_essential_Andes_jungle_of_the_Amazon_and_Galapagos-Quito_Pichincha_Pro.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/L1077ACtaylork',
+    photoCount: 6
   },
   {
     id: 'rev-9',
@@ -3514,7 +3538,10 @@ export const mockReviews: Review[] = [
     tourTitle: 'Ecuador Tailor-Made Private Tour',
     title: 'Best Tour Guide Ever!',
     comment: 'We had the absolute best experience with our tour guide in Ecuador! From start to finish, he went above and beyond to make sure everything was smooth, enjoyable, and unforgettable. His knowledge of the history, culture, and local spots was incredible. He brought places to life with stories and insights you wouldn’t get anywhere else.',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d27987753-r1055044008-Ecuador_essential_Andes_jungle_of_the_Amazon_and_Galapagos-Quito_Pichincha_Pro.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/naverah2026',
+    photoCount: 0
   },
   {
     id: 'rev-10',
@@ -3525,7 +3552,10 @@ export const mockReviews: Review[] = [
     tourTitle: 'Ecuador tour (Andes, Baños, and Galapagos)',
     title: 'Attentive, Professional And Fluent English',
     comment: 'Jhayro was very attentive. Very fluent English made everything so much easier and comfortable throughout the journey. Highly recommended tour company in Ecuador!',
-    verifiedTripAdvisor: true
+    verifiedTripAdvisor: true,
+    reviewUrl: 'https://www.tripadvisor.com/ShowUserReviews-g294308-d27987753-r1055041535-Ecuador_essential_Andes_jungle_of_the_Amazon_and_Galapagos-Quito_Pichincha_Pro.html',
+    profileUrl: 'https://www.tripadvisor.com/Profile/Daydream67579862583',
+    photoCount: 0
   }
 ];
 

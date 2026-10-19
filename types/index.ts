@@ -96,6 +96,12 @@ export interface Review {
   comment: string;
   verifiedTripAdvisor?: boolean;
   tourId?: string;
+  /** Enlace directo a la reseña en TripAdvisor. */
+  reviewUrl?: string;
+  /** Perfil público del autor en TripAdvisor. */
+  profileUrl?: string;
+  /** Fotos que el viajero subió con su reseña (se ven en TripAdvisor). */
+  photoCount?: number;
 }
 
 export interface BookingRequest {

@@ -202,14 +202,14 @@ export function CombinedExperienceSection() {
                             <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                           ))}
                         </div>
-                        <a 
-                          href={tripAdvisorUrl}
+                        <a
+                          href={rev.reviewUrl || tripAdvisorUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
                         >
                           <TripAdvisorSvg className="w-3 h-3" />
-                          <span>TripAdvisor ↗</span>
+                          <span>{rev.photoCount ? `📷 ${rev.photoCount} · ` : ''}TripAdvisor ↗</span>
                         </a>
                       </div>
                       
@@ -227,10 +227,23 @@ export function CombinedExperienceSection() {
                         {rev.author.charAt(0)}
                       </div>
                       <div>
-                        <div className="font-bold text-xs text-zinc-900 dark:text-white leading-tight">{rev.author}</div>
-                        <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-medium">
-                          {rev.location}
-                        </div>
+                        {rev.profileUrl ? (
+                          <a
+                            href={rev.profileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-bold text-xs text-zinc-900 dark:text-white leading-tight hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline"
+                          >
+                            {rev.author}
+                          </a>
+                        ) : (
+                          <div className="font-bold text-xs text-zinc-900 dark:text-white leading-tight">{rev.author}</div>
+                        )}
+                        {rev.location && (
+                          <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-medium">
+                            {rev.location}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

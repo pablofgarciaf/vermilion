@@ -25,7 +25,7 @@ export const MINTUR_REGISTRY = '1793215456001';
 
 /** Valoración pública en TripAdvisor (fuente única de la puntuación y el número de reseñas). */
 export const TRIPADVISOR_RATING = '5.0';
-export const TRIPADVISOR_REVIEW_COUNT = 51;
+export const TRIPADVISOR_REVIEW_COUNT = 52;
 export const TRIPADVISOR_URL =
   'https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html';
 

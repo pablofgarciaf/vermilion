@@ -4,10 +4,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { Review } from '@/types';
 import { mockReviews } from '@/data/mock';
-import { Compass, ShieldCheck, Heart, Quote, ChevronLeft, ChevronRight, Star, ExternalLink, Award } from 'lucide-react';
+import { Compass, ShieldCheck, Heart, Quote, ChevronLeft, ChevronRight, Star, ExternalLink, CheckCircle } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import { TRIPADVISOR_REVIEW_COUNT } from '@/data/bookingTerms';
-import { getLocalizedText } from '@/utils/i18nHelper';
+import { TRIPADVISOR_REVIEW_COUNT, TRIPADVISOR_URL } from '@/data/bookingTerms';
 import { isBotOrCrawler } from '@/utils/isBot';
 import { prefersReducedMotion } from '@/utils/motion';
 
@@ -26,7 +25,80 @@ interface TripAdvisorReviewsProps {
   locale?: string;
 }
 
-const TRIPADVISOR_URL = 'https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html';
+
+const REVIEW_LABELS_I18N: Record<string, {
+  badge: string;
+  defaultTitle: string;
+  defaultSubtitle: string;
+  verified: string;
+  viewOriginal: string;
+  ratingLabel: string;
+}> = {
+  es: {
+    badge: "Ganador Travelers' Choice 2026 de TripAdvisor ↗",
+    defaultTitle: "Opiniones Verificadas de Viajeros",
+    defaultSubtitle: "Descubra lo que dicen nuestros viajeros sobre el servicio personalizado, guías expertos y alojamientos premium.",
+    verified: "Verificada en TripAdvisor ↗",
+    viewOriginal: "Ver original",
+    ratingLabel: "Puntuación TripAdvisor ↗",
+  },
+  en: {
+    badge: "TripAdvisor Travelers' Choice 2026 Winner ↗",
+    defaultTitle: "Verified Traveler Reviews",
+    defaultSubtitle: "Discover what our travelers say about personalized service, expert naturalist guides, and premium boutique stays.",
+    verified: "Verified on TripAdvisor ↗",
+    viewOriginal: "View original",
+    ratingLabel: "TripAdvisor Rating ↗",
+  },
+  fr: {
+    badge: "Gagnant TripAdvisor Travelers' Choice 2026 ↗",
+    defaultTitle: "Avis Vérifiés de Voyageurs",
+    defaultSubtitle: "Découvrez ce que disent nos voyageurs sur notre service sur mesure, nos guides experts et nos hébergements haut de gamme.",
+    verified: "Vérifié sur TripAdvisor ↗",
+    viewOriginal: "Voir l'original",
+    ratingLabel: "Note TripAdvisor ↗",
+  },
+  de: {
+    badge: "TripAdvisor Travelers' Choice Gewinner 2026 ↗",
+    defaultTitle: "Verifizierte Reisebewertungen",
+    defaultSubtitle: "Erfahren Sie, was unsere Reisenden über persönlichen Service, erfahrene Guides und erstklassige Unterkünfte berichten.",
+    verified: "Auf TripAdvisor verifiziert ↗",
+    viewOriginal: "Original ansehen",
+    ratingLabel: "TripAdvisor Bewertung ↗",
+  },
+  it: {
+    badge: "Vincitore TripAdvisor Travelers' Choice 2026 ↗",
+    defaultTitle: "Recensioni Verificate dei Viaggiatori",
+    defaultSubtitle: "Scopri cosa dicono i nostri viaggiatori sul servizio personalizzato, le guide esperte e gli alloggi premium.",
+    verified: "Verificato su TripAdvisor ↗",
+    viewOriginal: "Vedi originale",
+    ratingLabel: "Valutazione TripAdvisor ↗",
+  },
+  pt: {
+    badge: "Vencedor TripAdvisor Travelers' Choice 2026 ↗",
+    defaultTitle: "Avaliações Verificadas de Viajantes",
+    defaultSubtitle: "Descubra o que nossos viajantes dizem sobre atendimento personalizado, guias especializados e hospedagens de luxo.",
+    verified: "Verificado no TripAdvisor ↗",
+    viewOriginal: "Ver original",
+    ratingLabel: "Avaliação TripAdvisor ↗",
+  },
+  ja: {
+    badge: "トリップアドバイザー トラベラーズチョイス2026受賞 ↗",
+    defaultTitle: "旅行者による認証済みレビュー",
+    defaultSubtitle: "オーダーメイドのサービス、専任の自然ガイド、最高級の宿泊施設に関するお客様の生の声をご覧ください。",
+    verified: "トリップアドバイザー確認済み ↗",
+    viewOriginal: "原本を見る",
+    ratingLabel: "トリップアドバイザー評価 ↗",
+  },
+  zh: {
+    badge: "猫途鹰 TripAdvisor 2026 年度旅行者之选 ↗",
+    defaultTitle: "旅行者真实好评",
+    defaultSubtitle: "了解尊贵旅行者对我们定制私家团服务、资深自然向导与高端精品酒店的真实评价。",
+    verified: "猫途鹰 TripAdvisor 真实认证 ↗",
+    viewOriginal: "查看原文",
+    ratingLabel: "猫途鹰 TripAdvisor 评分 ↗",
+  },
+};
 
 const EXPERIENCE_CARD_I18N: Record<string, { badge: string; title: string; description: string; certified: string; sustainable: string }> = {
   es: { badge: 'Viajes 100% Privados y a Medida', title: 'Experiencia Inigualable, Excelencia Inquebrantable', description: 'Creamos expediciones únicas, inolvidables y totalmente personalizadas a través de los espectaculares paisajes de Ecuador y Galápagos. Como operadores locales directos, combinamos la experiencia regional con una excelencia inquebrantable.', certified: 'Operador Certificado', sustainable: 'Impacto Sostenible' },
@@ -41,14 +113,17 @@ const EXPERIENCE_CARD_I18N: Record<string, { badge: string; title: string; descr
 
 export function TripAdvisorReviews({
   reviews = mockReviews,
-  title = "Opiniones Verificadas de Viajeros",
-  subtitle = "Descubra lo que dicen nuestros viajeros sobre el servicio personalizado, guías expertos y alojamientos premium.",
+  title,
+  subtitle,
   locale
 }: TripAdvisorReviewsProps) {
   const hookLocale = useLocale();
   const tb = useTranslations('bookingConversion');
   const currentLocale = locale || hookLocale || 'en';
   const experienceCard = EXPERIENCE_CARD_I18N[currentLocale] || EXPERIENCE_CARD_I18N.en;
+  const labels = REVIEW_LABELS_I18N[currentLocale] || REVIEW_LABELS_I18N.en;
+  const displayTitle = title || labels.defaultTitle;
+  const displaySubtitle = subtitle || labels.defaultSubtitle;
   const total = reviews.length;
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -69,7 +144,7 @@ export function TripAdvisorReviews({
     const interval = setInterval(() => {
       if (document.body.style.overflow === 'hidden') return;
       handleNext();
-    }, 4500);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [total, isHovered, currentIndex]);
@@ -102,17 +177,17 @@ export function TripAdvisorReviews({
             href={TRIPADVISOR_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200/80 dark:border-emerald-800 text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:scale-105 transition-transform"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60 text-xs font-bold text-emerald-700 dark:text-emerald-400 hover:scale-105 active:scale-95 transition-all shadow-xs"
           >
             <TripAdvisorSvg className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>TripAdvisor Travelers' Choice 2026 Winner ↗</span>
+            <span>{labels.badge}</span>
           </a>
           <h2 className="font-serif text-2xl sm:text-4xl font-bold text-zinc-900 dark:text-white leading-tight">
-            {title}
+            {displayTitle}
           </h2>
-          {subtitle && (
+          {displaySubtitle && (
             <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
-              {subtitle}
+              {displaySubtitle}
             </p>
           )}
         </div>
@@ -122,7 +197,7 @@ export function TripAdvisorReviews({
             href={TRIPADVISOR_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 p-2.5 sm:p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm shrink-0 hover:border-emerald-500/50 hover:shadow-md transition-all group cursor-pointer"
+            className="flex items-center gap-3 p-2.5 sm:p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm shrink-0 hover:border-emerald-500/50 hover:shadow-md active:scale-95 transition-all group cursor-pointer"
           >
             <div className="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center font-bold text-white text-lg group-hover:scale-105 transition-transform">
               5.0
@@ -135,7 +210,7 @@ export function TripAdvisorReviews({
               </div>
               <div className="flex items-center gap-1 text-xs font-bold text-zinc-900 dark:text-white group-hover:text-emerald-600 transition-colors">
                 <TripAdvisorSvg className="w-3.5 h-3.5 text-emerald-600" />
-                <span>TripAdvisor Rating ↗</span>
+                <span>{labels.ratingLabel}</span>
               </div>
               <div className="text-[10px] text-zinc-500">{tb('reviewsBasedOn', { count: TRIPADVISOR_REVIEW_COUNT })}</div>
             </div>
@@ -145,14 +220,14 @@ export function TripAdvisorReviews({
             <button
               onClick={handlePrev}
               aria-label="Previous review"
-              className="p-2 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+              className="p-2.5 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer"
             >
               <ChevronLeft className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
             </button>
             <button
               onClick={handleNext}
               aria-label="Next review"
-              className="p-2 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+              className="p-2.5 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer"
             >
               <ChevronRight className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
             </button>
@@ -163,7 +238,7 @@ export function TripAdvisorReviews({
       {/* Cuerpo Principal: Tarjeta Verde a la Izquierda + Grid 2x2 a la Derecha */}
       <div className="flex flex-col lg:flex-row gap-6 items-stretch">
 
-        {/* Tarjeta Izquierda (Estilo Landing Exacto) */}
+        {/* Tarjeta Izquierda (Estilo Luxury Direct) */}
         <div className="w-full lg:w-[360px] xl:w-[380px] shrink-0 flex flex-col">
           <div className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 p-6 sm:p-7 rounded-3xl shadow-xl flex flex-col justify-between space-y-4 relative group flex-1 border border-emerald-700/50 overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none" />
@@ -209,11 +284,12 @@ export function TripAdvisorReviews({
             {[0, 1, 2, 3].map((offset) => {
               const revIndex = (currentIndex + offset) % total;
               const rev = reviews[revIndex];
+              const verifyUrl = rev.reviewUrl || TRIPADVISOR_URL;
 
               return (
                 <div
                   key={`${rev.id}-${currentIndex}-${offset}`}
-                  className={`bg-white dark:bg-zinc-900/90 backdrop-blur-xl p-5 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs hover:shadow-md transition-all duration-300 flex-col justify-between space-y-3 relative group animate-fade-in ${offset > 0 ? 'hidden sm:flex' : 'flex'
+                  className={`bg-white dark:bg-zinc-900/90 backdrop-blur-xl p-5 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs hover:shadow-md hover:border-emerald-500/40 transition-all duration-300 flex-col justify-between space-y-3 relative group ${offset > 0 ? 'hidden sm:flex' : 'flex'
                     }`}
                 >
                   <Quote className="w-5 h-5 text-emerald-100 dark:text-emerald-950/80 absolute top-4 right-4 pointer-events-none group-hover:text-emerald-200 transition-colors" />
@@ -225,14 +301,17 @@ export function TripAdvisorReviews({
                           <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                         ))}
                       </div>
+                      
+                      {/* Enlace de verificación directa para el visitante */}
                       <a
-                        href={TRIPADVISOR_URL}
+                        href={verifyUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/40 text-[10px] font-bold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-colors"
+                        title="Verificar opinión real en TripAdvisor"
                       >
-                        <TripAdvisorSvg className="w-3 h-3" />
-                        <span>TripAdvisor ↗</span>
+                        <CheckCircle className="w-2.5 h-2.5 text-emerald-600 dark:text-emerald-400" />
+                        <span>{labels.verified}</span>
                       </a>
                     </div>
 
@@ -245,16 +324,44 @@ export function TripAdvisorReviews({
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-2.5 relative z-10 pt-3 border-t border-zinc-100 dark:border-zinc-800/60 mt-auto shrink-0">
-                    <div className="w-8 h-8 rounded-full bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold text-xs flex items-center justify-center shrink-0 border border-emerald-500/20">
-                      {rev.author.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="font-bold text-xs text-zinc-900 dark:text-white leading-tight">{rev.author}</div>
-                      <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-medium">
-                        {rev.location}
+                  <div className="flex items-center justify-between gap-2.5 relative z-10 pt-3 border-t border-zinc-100 dark:border-zinc-800/60 mt-auto shrink-0">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-full bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold text-xs flex items-center justify-center shrink-0 border border-emerald-500/20" aria-hidden="true">
+                        {rev.author.charAt(0)}
+                      </div>
+                      <div>
+                        {rev.profileUrl ? (
+                          <a
+                            href={rev.profileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-bold text-xs text-zinc-900 dark:text-white leading-tight hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline"
+                          >
+                            {rev.author}
+                          </a>
+                        ) : (
+                          <div className="font-bold text-xs text-zinc-900 dark:text-white leading-tight">{rev.author}</div>
+                        )}
+                        {rev.location && (
+                          <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-medium">
+                            {rev.location}
+                          </div>
+                        )}
                       </div>
                     </div>
+
+                    <a
+                      href={verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-0.5"
+                    >
+                      <span>
+                        {rev.photoCount ? `📷 ${rev.photoCount} · ` : ''}
+                        {labels.viewOriginal}
+                      </span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
                   </div>
                 </div>
               );
@@ -281,14 +388,14 @@ export function TripAdvisorReviews({
               <button
                 onClick={handlePrev}
                 aria-label="Previous review"
-                className="p-2 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="p-2 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
               </button>
               <button
                 onClick={handleNext}
                 aria-label="Next review"
-                className="p-2 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="p-2 rounded-xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4 text-zinc-700 dark:text-zinc-300" />
               </button>
