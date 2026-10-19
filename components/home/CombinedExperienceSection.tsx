@@ -6,6 +6,7 @@ import { useSettings } from '@/hooks/useSettings';
 import { useTranslations } from 'next-intl';
 import { mockReviews } from '@/data/mock';
 import { isBotOrCrawler } from '@/utils/isBot';
+import { prefersReducedMotion } from '@/utils/motion';
 
 function TripAdvisorSvg({ className = 'w-4 h-4' }: { className?: string }) {
   return (
@@ -36,7 +37,7 @@ export function CombinedExperienceSection() {
   };
 
   useEffect(() => {
-    if (isHovered || total <= 1 || isBotOrCrawler()) return;
+    if (isHovered || total <= 1 || isBotOrCrawler() || prefersReducedMotion()) return;
     
     const interval = setInterval(() => {
       if (document.body.style.overflow === 'hidden') return;

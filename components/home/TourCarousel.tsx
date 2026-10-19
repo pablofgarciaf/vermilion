@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight, Compass, ChevronDown } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { isBotOrCrawler } from '@/utils/isBot';
+import { prefersReducedMotion } from '@/utils/motion';
 
 const FILTER_I18N: Record<string, { all: string; ecuador: string; galapagos: string; combined: string; fullday: string }> = {
   es: {
@@ -147,7 +148,7 @@ export function TourCarousel({ tours, showFilters = true }: TourCarouselProps) {
 
   // Auto-play
   useEffect(() => {
-    if (total <= 1 || isBotOrCrawler()) return;
+    if (total <= 1 || isBotOrCrawler() || prefersReducedMotion()) return;
     autoPlayRef.current = setInterval(() => {
       if (!document.hidden) handleNext();
     }, 3300);

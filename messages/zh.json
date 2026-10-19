@@ -35,6 +35,21 @@
       "support": "24/7 礼宾服务"
     }
   },
+  "homeFunnel": {
+    "hero": {
+      "trustBadge": "TripAdvisor 5.0 满分 · Travelers’ Choice 2026",
+      "trustAria": "在 TripAdvisor 查看 Vermilion Routes 的评价",
+      "audience": "为情侣、家庭和小团体打造的本地向导私人旅行",
+      "priceLine": "一日游 ${fullDay} 美元起 · 多日游 ${multiDay} 美元起"
+    },
+    "quoteCta": {
+      "eyebrow": "免费报价，无任何义务",
+      "title": "为您量身打造厄瓜多尔与加拉帕戈斯私人之旅",
+      "text": "告诉我们出行日期、人数和想要的体验。本地旅行专家将在24小时内为您发送含价格的行程方案。",
+      "button": "获取免费报价",
+      "whatsappHint": "由真人顾问回复，而非机器人。"
+    }
+  },
   "destinations": {
     "badge": "下一站去哪里？",
     "title": "探索我们的目的地",

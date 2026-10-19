@@ -542,3 +542,27 @@ body {
     transform: none;
   }
 }
+
+/* Reducir movimiento: sin animaciones ni transiciones CSS. El contenido ya es visible sin ellas. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Home: las secciones bajo el pliegue no se maquetan hasta acercarse a la pantalla.
+   Recorta ~1 s de layout en moviles lentos; el contenido sigue en el HTML para SEO.
+   "auto" recuerda la altura real una vez pintada, asi el scroll no salta. */
+.home-deferred-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}

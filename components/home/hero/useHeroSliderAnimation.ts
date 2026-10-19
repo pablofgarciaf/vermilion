@@ -284,6 +284,10 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
             img.srcset = '';
             img.removeAttribute('srcset');
           });
+          // La foto del slide 0 es un <picture>: en movil manda el <source>, asi que tambien se cambia.
+          card0.querySelectorAll('source').forEach((source) => {
+            source.srcset = TORTUGAS_ORIGINAL.mobileImage;
+          });
         }
 
         // 3. Reemplaza el innerHTML del contenedor de texto de la Tarjeta 0, borrando el HTML de Bienvenida y pegándole la estructura HTML del molde estándar de los textos.
@@ -398,6 +402,9 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
               const img = el as HTMLImageElement;
               if (img.src) img.src = TORTUGAS_ORIGINAL.desktopImage || TORTUGAS_ORIGINAL.image;
               if (img.srcset) img.srcset = '';
+            });
+            container.querySelectorAll(getCard(0) + " source").forEach((el) => {
+              (el as HTMLSourceElement).srcset = TORTUGAS_ORIGINAL.mobileImage;
             });
 
             // Update the card thumbnail text

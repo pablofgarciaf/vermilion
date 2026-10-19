@@ -35,6 +35,21 @@
       "support": "Assistenza 24/7"
     }
   },
+  "homeFunnel": {
+    "hero": {
+      "trustBadge": "5.0 su TripAdvisor · Travelers’ Choice 2026",
+      "trustAria": "Leggi le recensioni di Vermilion Routes su TripAdvisor",
+      "audience": "Viaggi privati con guida locale per coppie, famiglie e piccoli gruppi",
+      "priceLine": "Escursioni da ${fullDay} USD · Viaggi di più giorni da ${multiDay} USD"
+    },
+    "quoteCta": {
+      "eyebrow": "Preventivo gratuito e senza impegno",
+      "title": "Progettiamo il tuo viaggio privato in Ecuador e Galápagos",
+      "text": "Raccontaci date, numero di viaggiatori e cosa desideri vivere. Uno specialista locale ti invia un itinerario con prezzo entro 24 ore.",
+      "button": "Richiedi il preventivo gratuito",
+      "whatsappHint": "Ti risponde una persona reale, non un bot."
+    }
+  },
   "destinations": {
     "badge": "Dove Andrai?",
     "title": "Esplora Le Nostre Destinazioni",
