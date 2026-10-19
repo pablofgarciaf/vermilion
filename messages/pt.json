@@ -228,7 +228,16 @@
     "transferWhatsApp": "Transferir conversa para o WhatsApp",
     "leadSaved": "Detalhes do contato salvos no sistema!",
     "advisorsWillContact": "Nossos consultores entrarão em contato",
-    "typeMessage": "Digite sua mensagem aqui..."
+    "typeMessage": "Digite sua mensagem aqui...",
+    "pillCruises": "🏝️ Cruzeiros em Galápagos",
+    "pillCombo": "🌋 Galápagos + Equador",
+    "pillQuote": "💰 Pedir orçamento",
+    "crafting": "Pyro está preparando a sua resposta...",
+    "errorFallback": "Desculpe, não consigo responder agora. Nossa equipe atende você diretamente pelo WhatsApp ou por e-mail. Quer falar com um especialista?",
+    "transferSummary": "Olá Vermilion Routes! Eu estava conversando com o Pyro no site sobre: \"{topics}\". Um consultor pode me ajudar?",
+    "closeChat": "Fechar chat",
+    "sendMessage": "Enviar mensagem",
+    "openMenu": "Abrir assistente de viagem"
   },
   "adminTiktok": {
     "title": "Integração com o TikTok",
@@ -258,5 +267,11 @@
     "done": "Pronto! Abra o TikTok e veja as notificações da caixa de entrada para concluir a publicação.",
     "failed": "O envio falhou: {reason}",
     "tooLargeForRelay": "Seu navegador não conseguiu enviar direto ao TikTok e o arquivo tem mais de 4 MB. Exporte um vídeo menor e tente de novo."
+  },
+  "whatsapp": {
+    "cta": "WhatsApp",
+    "tooltip": "Fale com um especialista pelo WhatsApp",
+    "ariaLabel": "Escreva-nos pelo WhatsApp",
+    "defaultMessage": "Olá Vermilion Routes! Quero planejar uma viagem ao Equador e às Galápagos. Podem me ajudar?"
   }
 }

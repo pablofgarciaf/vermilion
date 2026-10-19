@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { runAfterResponse } from '@/lib/runAfterResponse';
 import { generateConciergeReply, ChatMessage } from '@/lib/ai-providers';
 import { BookingRepository } from '@/lib/services/DatabaseService';
+import { notifyNewLead } from '@/lib/email';
+import { triggerN8nWebhook } from '@/lib/n8n';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_fake', {
@@ -68,18 +71,40 @@ export async function POST(req: NextRequest) {
           leadId = await BookingRepository.create(bookingPayload);
           leadSubmitted = true;
 
-          // Also attempt to notify n8n if configured
-          if (process.env.N8N_WEBHOOK_URL) {
-            fetch(process.env.N8N_WEBHOOK_URL, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                event: 'ai_concierge.lead_captured',
-                bookingId: leadId,
-                lead: bookingPayload,
-              }),
-            }).catch((err) => console.warn('n8n notification from AI concierge warning:', err));
-          }
+          // Aviso al equipo tras responder. SIN acuse al viajero: aquí el email lo extrae
+          // la IA de texto libre (no verificado), y no queremos que el bot se use para
+          // enviar correos a direcciones de terceros.
+          const savedLeadId = leadId;
+          // Lo que escribió el viajero (texto no fiable: el correo lo escapa al pintarlo).
+          const userTranscript = messages
+            .filter((m) => m.role === 'user')
+            .slice(-4)
+            .map((m) => `• ${String(m.content).slice(0, 400)}`)
+            .join('\n');
+          runAfterResponse(async () => {
+            await notifyNewLead(
+              {
+                leadId: savedLeadId,
+                source: 'ai_concierge',
+                customerName: bookingPayload.customerName,
+                customerEmail: bookingPayload.customerEmail,
+                customerPhone: bookingPayload.customerPhone,
+                tourTitle: bookingPayload.tourTitle,
+                destination: bookingPayload.destination,
+                travelDates: bookingPayload.travelDates,
+                guestsCount: bookingPayload.guestsCount,
+                message: userTranscript ? `Conversación con Pyro (últimos mensajes):\n${userTranscript}` : bookingPayload.message,
+                locale,
+                createdAt: bookingPayload.createdAt,
+              },
+              { acknowledgeCustomer: false }
+            );
+            await triggerN8nWebhook({
+              event: 'ai_concierge.lead_captured',
+              bookingId: savedLeadId,
+              lead: bookingPayload,
+            });
+          });
         } catch (err) {
           console.warn('Auto lead save from AI Concierge failed:', err);
         }

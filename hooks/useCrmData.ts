@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { auth, db } from '@/lib/firebase';
+import { isWebInquiry } from '@/lib/crm/webInquiry';
 import { collection, doc, getDocs, getDoc, setDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 import {
   SystemUser,
@@ -108,6 +109,33 @@ const INITIAL_GENEALOGY: GenealogyNode = {
   children: [],
 };
 
+/** Convierte una solicitud guardada en `bookings` al formato de lead del CRM. */
+function bookingToInquiryLead(id: string, raw: Record<string, any>): CrmLead {
+  const createdAt = typeof raw.createdAt === 'string'
+    ? raw.createdAt
+    : (raw.createdAt?.toDate ? raw.createdAt.toDate().toISOString() : new Date().toISOString());
+  return {
+    id,
+    customerName: raw.customerName || 'Prospecto Web',
+    customerEmail: raw.customerEmail || '',
+    customerPhone: raw.customerPhone || '',
+    country: raw.country || '',
+    destination: raw.destination || 'Ecuador & Galápagos',
+    passengersCount: Number(raw.passengersCount) || parseInt(String(raw.guestsCount || ''), 10) || 2,
+    estimatedBudget: Number(raw.estimatedBudget) || 0,
+    travelDates: raw.travelDates || 'Por coordinar',
+    status: (raw.leadStatus as LeadStatus) || 'new',
+    assignedOperatorId: raw.assignedOperatorId || '',
+    assignedOperatorName: raw.assignedOperatorName || '',
+    notes: [raw.tourTitle, raw.message].filter(Boolean).join(' — '),
+    observations: raw.observations || [],
+    source: raw.tourId === 'ai-concierge-lead' ? 'ai_concierge' : 'contact_form',
+    sourceCollection: 'bookings',
+    createdAt,
+    updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : createdAt,
+  };
+}
+
 async function getAdminFetchHeaders() {
   const token = await auth.currentUser?.getIdToken();
   return {
@@ -118,7 +146,22 @@ async function getAdminFetchHeaders() {
 
 export function useCrmData() {
   const [users, setUsers] = useState<SystemUser[]>(INITIAL_USERS);
-  const [leads, setLeads] = useState<CrmLead[]>(INITIAL_LEADS);
+  // Leads de la colección `leads` (guía PDF, etc.) + solicitudes web guardadas en `bookings`
+  const [leadsCollection, setLeadsCollection] = useState<CrmLead[]>(INITIAL_LEADS);
+  const [webInquiries, setWebInquiries] = useState<CrmLead[]>([]);
+  const inquiryIdsRef = useRef<Set<string>>(new Set());
+  const leads = useMemo(
+    () => [...leadsCollection, ...webInquiries].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    ),
+    [leadsCollection, webInquiries]
+  );
+  /** Actualiza un lead en memoria esté en la lista que esté. */
+  const patchLead = useCallback((leadId: string, patch: (l: CrmLead) => CrmLead) => {
+    const apply = (prev: CrmLead[]) => prev.map((l) => (l.id === leadId ? patch(l) : l));
+    setLeadsCollection(apply);
+    setWebInquiries(apply);
+  }, []);
   const [bookings, setBookings] = useState<CrmBooking[]>(INITIAL_BOOKINGS);
   const [waTemplates] = useState<WhatsAppTemplate[]>(INITIAL_WHATSAPP_TEMPLATES);
   const [genealogy, setGenealogy] = useState<GenealogyNode>(INITIAL_GENEALOGY);
@@ -215,9 +258,9 @@ export function useCrmData() {
                 updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : new Date().toISOString(),
               });
             });
-            setLeads(list);
+            setLeadsCollection(list);
           } else {
-            setLeads([]);
+            setLeadsCollection([]);
           }
         }, (err) => console.warn('[useCrmData] leads notice:', err.message));
 
@@ -225,10 +268,18 @@ export function useCrmData() {
         unsubscribeBookings = onSnapshot(bookingsCol, (snap) => {
           if (!snap.empty) {
             const list: CrmBooking[] = [];
+            const inquiries: CrmLead[] = [];
             const seenCodes = new Set<string>();
 
             snap.forEach((d) => {
               const raw = d.data() as any;
+
+              // Solicitudes de la web: van al pipeline de leads, no a reservas/finanzas,
+              // y nunca entran en la purga automática de abajo.
+              if (isWebInquiry(raw)) {
+                inquiries.push(bookingToInquiryLead(d.id, raw));
+                return;
+              }
               const refCode = String(raw.bookingCode || raw.refCode || `VR-${d.id.slice(-6)}`).trim();
 
               // Auto-purge dummy test records
@@ -292,8 +343,12 @@ export function useCrmData() {
             });
             list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
             setBookings(list);
+            inquiryIdsRef.current = new Set(inquiries.map((l) => l.id));
+            setWebInquiries(inquiries);
           } else {
             setBookings([]);
+            inquiryIdsRef.current = new Set();
+            setWebInquiries([]);
           }
         }, (err) => console.warn('[useCrmData] bookings notice:', err.message));
 
@@ -312,31 +367,34 @@ export function useCrmData() {
 
   // Update Lead Status
   const updateLeadStatus = useCallback(async (leadId: string, newStatus: CrmLead['status']) => {
-    setLeads((prev) =>
-      prev.map((l) => (l.id === leadId ? { ...l, status: newStatus, updatedAt: new Date().toISOString() } : l))
-    );
+    const updatedAt = new Date().toISOString();
+    patchLead(leadId, (l) => ({ ...l, status: newStatus, updatedAt }));
     if (db) {
       try {
-        await updateDoc(doc(db, 'leads', leadId), { status: newStatus, updatedAt: new Date().toISOString() });
+        // Las solicitudes web viven en `bookings`: su estado de lead va en `leadStatus`
+        // para no pisar el `status` de reserva que usa el resto del panel.
+        if (inquiryIdsRef.current.has(leadId)) {
+          await updateDoc(doc(db, 'bookings', leadId), { leadStatus: newStatus, updatedAt });
+        } else {
+          await updateDoc(doc(db, 'leads', leadId), { status: newStatus, updatedAt });
+        }
       } catch (err) {
         console.warn('Could not sync lead status to firestore:', err);
       }
     }
-  }, []);
+  }, [patchLead]);
 
   // Add Lead Observation
   const addLeadObservation = useCallback(async (leadId: string, text: string, authorEmail: string, authorName: string) => {
     const newObs = { text, authorEmail, authorName, createdAt: new Date().toISOString() };
-    setLeads((prev) =>
-      prev.map((l) => {
-        if (l.id !== leadId) return l;
-        const observations = [...(l.observations || []), newObs];
-        return { ...l, observations, updatedAt: new Date().toISOString() };
-      })
-    );
+    patchLead(leadId, (l) => ({
+      ...l,
+      observations: [...(l.observations || []), newObs],
+      updatedAt: new Date().toISOString(),
+    }));
     if (db) {
       try {
-        const leadRef = doc(db, 'leads', leadId);
+        const leadRef = doc(db, inquiryIdsRef.current.has(leadId) ? 'bookings' : 'leads', leadId);
         const leadSnap = await getDoc(leadRef);
         if (leadSnap.exists()) {
           const data = leadSnap.data();
@@ -347,7 +405,7 @@ export function useCrmData() {
         console.warn('Could not add observation to firestore:', err);
       }
     }
-  }, []);
+  }, [patchLead]);
 
   // Assign Operator to Booking
   const assignOperatorToBooking = useCallback(async (bookingId: string, operatorEmail: string, operatorName: string) => {

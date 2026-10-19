@@ -439,3 +439,275 @@ export const sendBookingConfirmationEmail = async (
   }
 };
 
+// ============================================================================
+// AVISO DE NUEVO LEAD (al equipo) + ACUSE DE RECIBO (al viajero)
+// ============================================================================
+
+/** Datos mínimos de un lead para avisar al equipo. Todo viene del usuario: se escapa siempre. */
+export interface NewLeadNotification {
+  leadId: string;
+  /** contact_form | ai_concierge | lead_magnet ... */
+  source: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone?: string;
+  tourTitle?: string;
+  destination?: string;
+  travelDates?: string;
+  guestsCount?: string;
+  message?: string;
+  locale?: string;
+  createdAt: string;
+}
+
+export type LeadEmailResult =
+  | { sent: true; messageId?: string }
+  | { sent: false; reason: 'smtp_not_configured' | 'no_valid_recipient' };
+
+/** Emails de relleno que el sistema pone cuando el viajero no dio uno real. */
+const PLACEHOLDER_EMAILS = new Set(['pending@guest.com', 'guest@vermilionroutes.com']);
+
+const escapeHtml = (value: string | undefined | null): string =>
+  String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+const isRealEmail = (email: string | undefined): email is string =>
+  !!email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && !PLACEHOLDER_EMAILS.has(email.toLowerCase());
+
+/** Solo dígitos (formato que exige wa.me). Devuelve null si no parece un teléfono. */
+const toWhatsAppDigits = (phone: string | undefined): string | null => {
+  const digits = String(phone ?? '').replace(/\D/g, '');
+  return digits.length >= 8 && digits.length <= 15 ? digits : null;
+};
+
+type LeadCopy = {
+  subject: string;
+  greeting: (name: string) => string;
+  body: string;
+  whatsapp: string;
+  signoff: string;
+  /** Saludo que el equipo envía al responder por WhatsApp, en el idioma del viajero. */
+  replyGreeting: (name: string) => string;
+};
+
+/** Textos del acuse al viajero, en los 8 idiomas del sitio. */
+const LEAD_ACK_COPY: Record<string, LeadCopy> = {
+  es: {
+    subject: 'Recibimos tu solicitud | Vermilion Routes',
+    greeting: (n) => `Hola ${n},`,
+    body: 'Gracias por escribirnos. Un especialista de nuestro equipo en Quito revisará tu solicitud y te responderá en menos de 24 horas con ideas y precios para tu viaje.',
+    whatsapp: '¿Prefieres hablar ya? Escríbenos por WhatsApp',
+    signoff: 'El equipo de Vermilion Routes',
+    replyGreeting: (n) => `Hola ${n}, te escribimos de Vermilion Routes. Gracias por tu solicitud de viaje.`,
+  },
+  en: {
+    subject: 'We received your request | Vermilion Routes',
+    greeting: (n) => `Hello ${n},`,
+    body: 'Thank you for reaching out. A specialist from our Quito team will review your request and reply within 24 hours with ideas and prices for your trip.',
+    whatsapp: 'Prefer to talk now? Message us on WhatsApp',
+    signoff: 'The Vermilion Routes team',
+    replyGreeting: (n) => `Hello ${n}, this is Vermilion Routes. Thank you for your travel request.`,
+  },
+  fr: {
+    subject: 'Nous avons bien reçu votre demande | Vermilion Routes',
+    greeting: (n) => `Bonjour ${n},`,
+    body: 'Merci de nous avoir écrit. Un spécialiste de notre équipe à Quito étudiera votre demande et vous répondra sous 24 heures avec des idées et des tarifs pour votre voyage.',
+    whatsapp: 'Vous préférez échanger tout de suite ? Écrivez-nous sur WhatsApp',
+    signoff: "L'équipe Vermilion Routes",
+    replyGreeting: (n) => `Bonjour ${n}, ici Vermilion Routes. Merci pour votre demande de voyage.`,
+  },
+  de: {
+    subject: 'Wir haben Ihre Anfrage erhalten | Vermilion Routes',
+    greeting: (n) => `Hallo ${n},`,
+    body: 'Vielen Dank für Ihre Nachricht. Ein Spezialist unseres Teams in Quito prüft Ihre Anfrage und antwortet Ihnen innerhalb von 24 Stunden mit Ideen und Preisen für Ihre Reise.',
+    whatsapp: 'Lieber gleich sprechen? Schreiben Sie uns auf WhatsApp',
+    signoff: 'Ihr Vermilion Routes Team',
+    replyGreeting: (n) => `Hallo ${n}, hier ist Vermilion Routes. Vielen Dank für Ihre Reiseanfrage.`,
+  },
+  it: {
+    subject: 'Abbiamo ricevuto la tua richiesta | Vermilion Routes',
+    greeting: (n) => `Ciao ${n},`,
+    body: 'Grazie per averci scritto. Uno specialista del nostro team a Quito esaminerà la tua richiesta e ti risponderà entro 24 ore con idee e prezzi per il tuo viaggio.',
+    whatsapp: 'Preferisci parlare subito? Scrivici su WhatsApp',
+    signoff: 'Il team di Vermilion Routes',
+    replyGreeting: (n) => `Ciao ${n}, ti scrive Vermilion Routes. Grazie per la tua richiesta di viaggio.`,
+  },
+  pt: {
+    subject: 'Recebemos o seu pedido | Vermilion Routes',
+    greeting: (n) => `Olá ${n},`,
+    body: 'Obrigado por nos escrever. Um especialista da nossa equipe em Quito vai analisar o seu pedido e responder em até 24 horas com ideias e preços para a sua viagem.',
+    whatsapp: 'Prefere falar agora? Escreva-nos pelo WhatsApp',
+    signoff: 'A equipe Vermilion Routes',
+    replyGreeting: (n) => `Olá ${n}, aqui é a Vermilion Routes. Obrigado pelo seu pedido de viagem.`,
+  },
+  ja: {
+    subject: 'お問い合わせを受け付けました | Vermilion Routes',
+    greeting: (n) => `${n} 様`,
+    body: 'お問い合わせいただきありがとうございます。キトの専門スタッフが内容を確認し、24時間以内に旅行のご提案と料金をご連絡いたします。',
+    whatsapp: 'すぐに相談したい方は WhatsApp でご連絡ください',
+    signoff: 'Vermilion Routes チーム',
+    replyGreeting: (n) => `${n} 様、Vermilion Routes です。旅行のお問い合わせありがとうございます。`,
+  },
+  zh: {
+    subject: '我们已收到您的咨询 | Vermilion Routes',
+    greeting: (n) => `${n} 您好，`,
+    body: '感谢您的来信。我们基多团队的旅行专家将审阅您的需求，并在 24 小时内回复您行程建议和报价。',
+    whatsapp: '想立即沟通？请通过 WhatsApp 联系我们',
+    signoff: 'Vermilion Routes 团队',
+    replyGreeting: (n) => `${n} 您好，这里是 Vermilion Routes。感谢您的旅行咨询。`,
+  },
+};
+
+const getLeadCopy = (locale?: string): LeadCopy => LEAD_ACK_COPY[(locale || 'en').slice(0, 2)] || LEAD_ACK_COPY.en;
+
+const COMPANY_WHATSAPP = '593960039156';
+
+/** Primer nombre, recortado: va dentro de correos a terceros, así que no damos espacio para texto arbitrario. */
+const firstNameOf = (name: string | undefined) => ((name || '').trim().split(/\s+/)[0] || '').slice(0, 40);
+
+/**
+ * Avisa al equipo (ADMIN_EMAIL) de un lead nuevo, con enlaces para responder en un clic.
+ * Lanza si el SMTP falla: quien la llame debe capturarlo para no romper el guardado del lead.
+ */
+export const sendNewLeadAlertEmail = async (lead: NewLeadNotification): Promise<LeadEmailResult> => {
+  const adminEmail = process.env.ADMIN_EMAIL || SMTP_EMAIL;
+  if (!SMTP_PASSWORD) {
+    console.warn(`[LeadEmail] SMTP_PASSWORD no configurado: no se envía el aviso del lead ${lead.leadId}.`);
+    return { sent: false, reason: 'smtp_not_configured' };
+  }
+  if (!isRealEmail(adminEmail)) return { sent: false, reason: 'no_valid_recipient' };
+
+  const copy = getLeadCopy(lead.locale);
+  const waDigits = toWhatsAppDigits(lead.customerPhone);
+  const waHref = waDigits
+    ? `https://wa.me/${waDigits}?text=${encodeURIComponent(copy.replyGreeting(firstNameOf(lead.customerName)))}`
+    : null;
+  const hasEmail = isRealEmail(lead.customerEmail);
+  const mailHref = hasEmail
+    ? `mailto:${encodeURIComponent(lead.customerEmail)}?subject=${encodeURIComponent(`Re: ${lead.tourTitle || 'Vermilion Routes'}`)}`
+    : null;
+
+  const rows: Array<[string, string | undefined]> = [
+    ['Nombre', lead.customerName],
+    ['Email', hasEmail ? lead.customerEmail : `${lead.customerEmail || '—'} (no válido o no lo dio)`],
+    ['Teléfono / WhatsApp', lead.customerPhone],
+    ['Tour / Interés', lead.tourTitle],
+    ['Destino', lead.destination],
+    ['Fechas / Plazo', lead.travelDates],
+    ['Viajeros', lead.guestsCount],
+    ['Idioma de la web', lead.locale],
+    ['Origen', lead.source],
+    ['Recibido', lead.createdAt],
+    ['ID en Firestore', lead.leadId],
+  ];
+
+  const rowsHtml = rows
+    .filter(([, v]) => v && String(v).trim())
+    .map(
+      ([k, v]) =>
+        `<tr><td style="padding:6px 10px;color:#71717a;font-size:13px;white-space:nowrap;vertical-align:top;">${escapeHtml(k)}</td><td style="padding:6px 10px;color:#18181b;font-size:14px;">${escapeHtml(v)}</td></tr>`
+    )
+    .join('');
+
+  const button = (href: string, label: string, bg: string) =>
+    `<a href="${escapeHtml(href)}" style="display:inline-block;margin:4px 6px 4px 0;padding:12px 20px;background:${bg};color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;font-size:14px;font-family:sans-serif;">${label}</a>`;
+
+  const html = `
+    <div style="font-family:sans-serif;max-width:620px;margin:0 auto;background:#ffffff;border:1px solid #e4e4e7;border-radius:10px;padding:24px;">
+      <h2 style="margin:0 0 4px 0;color:#065f46;font-size:20px;">🔔 Nuevo lead en la web</h2>
+      <p style="margin:0 0 18px 0;color:#52525b;font-size:13px;">Responde rápido: un lead contestado en la primera hora convierte mucho más.</p>
+      <div style="margin-bottom:18px;">
+        ${waHref ? button(waHref, '💬 Responder por WhatsApp', '#16a34a') : ''}
+        ${mailHref ? button(mailHref, '✉️ Responder por email', '#0f766e') : ''}
+      </div>
+      <table style="width:100%;border-collapse:collapse;background:#fafafa;border-radius:8px;">${rowsHtml}</table>
+      ${lead.message ? `<div style="margin-top:16px;padding:14px;background:#f0fdf4;border-left:4px solid #16a34a;border-radius:6px;color:#18181b;font-size:14px;white-space:pre-wrap;">${escapeHtml(lead.message)}</div>` : ''}
+      <p style="margin-top:20px;color:#a1a1aa;font-size:11px;">Aviso automático de vermilionroutes.com. El lead también queda guardado en Firestore y en el panel /admin.</p>
+    </div>`;
+
+  const subjectName = (lead.customerName || 'Sin nombre').slice(0, 60);
+  const subjectTopic = (lead.destination || lead.tourTitle || 'Consulta').slice(0, 60);
+  const info = await transporter.sendMail({
+    from: `"Vermilion Leads" <${SMTP_EMAIL}>`,
+    to: adminEmail,
+    ...(hasEmail ? { replyTo: lead.customerEmail } : {}),
+    subject: `🔔 Nuevo lead: ${subjectName} — ${subjectTopic}`,
+    html,
+  });
+  return { sent: true, messageId: info.messageId };
+};
+
+/**
+ * Acuse de recibo al viajero en su idioma. Solo si dejó un email real.
+ * Lanza si el SMTP falla (quien la llame lo captura).
+ */
+export const sendLeadAcknowledgementEmail = async (lead: NewLeadNotification): Promise<LeadEmailResult> => {
+  if (!SMTP_PASSWORD) return { sent: false, reason: 'smtp_not_configured' };
+  if (!isRealEmail(lead.customerEmail)) return { sent: false, reason: 'no_valid_recipient' };
+
+  const copy = getLeadCopy(lead.locale);
+  const html = `
+    <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#042f2e;color:#ffffff;padding:32px;border-radius:12px;">
+      <h1 style="font-family:'Times New Roman',serif;color:#2dd4bf;font-weight:normal;font-size:26px;margin:0 0 20px 0;">Vermilion Routes</h1>
+      <p style="font-size:16px;margin:0 0 12px 0;">${escapeHtml(copy.greeting(firstNameOf(lead.customerName)))}</p>
+      <p style="font-size:15px;line-height:1.6;color:#ccfbf1;margin:0 0 24px 0;">${escapeHtml(copy.body)}</p>
+      <a href="https://wa.me/${COMPANY_WHATSAPP}" style="display:inline-block;padding:12px 22px;background:#16a34a;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;">💬 ${escapeHtml(copy.whatsapp)}</a>
+      <p style="margin-top:28px;color:#99f6e4;font-size:13px;">${escapeHtml(copy.signoff)}<br>+593 96 003 9156 · info@vermilionroutes.com</p>
+    </div>`;
+
+  const info = await transporter.sendMail({
+    from: `"Vermilion Routes" <${SMTP_EMAIL}>`,
+    to: lead.customerEmail,
+    replyTo: SMTP_EMAIL,
+    subject: copy.subject,
+    html,
+  });
+  return { sent: true, messageId: info.messageId };
+};
+
+/** Registra un fallo de correo sin credenciales: solo nombre, código y mensaje. */
+const logLeadEmailFailure = (label: string, leadId: string, err: unknown) => {
+  const e = err as { name?: string; code?: string; responseCode?: number; message?: string } | undefined;
+  console.error(`[LeadEmail] ${label} falló para el lead ${leadId}`, {
+    name: e?.name,
+    code: e?.code,
+    responseCode: e?.responseCode,
+    message: e?.message,
+  });
+};
+
+export type NotifyNewLeadResult = {
+  alert: LeadEmailResult | 'failed';
+  acknowledgement: LeadEmailResult | 'failed' | 'skipped';
+};
+
+/**
+ * Envía el aviso al equipo y, si se pide, el acuse al viajero. NUNCA lanza:
+ * un fallo de correo no debe hacer fallar el guardado del lead.
+ */
+export const notifyNewLead = async (
+  lead: NewLeadNotification,
+  options: { acknowledgeCustomer?: boolean } = {}
+): Promise<NotifyNewLeadResult> => {
+  const [alert, acknowledgement] = await Promise.all([
+    sendNewLeadAlertEmail(lead).catch((err): 'failed' => {
+      logLeadEmailFailure('Aviso al equipo', lead.leadId, err);
+      return 'failed';
+    }),
+    options.acknowledgeCustomer
+      ? sendLeadAcknowledgementEmail(lead).catch((err): 'failed' => {
+          logLeadEmailFailure('Acuse al viajero', lead.leadId, err);
+          return 'failed';
+        })
+      : Promise.resolve<'skipped'>('skipped'),
+  ]);
+  if (alert !== 'failed' && alert.sent) {
+    console.log(`[LeadEmail] Aviso del lead ${lead.leadId} enviado al equipo.`);
+  }
+  return { alert, acknowledgement };
+};
+

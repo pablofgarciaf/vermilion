@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { runAfterResponse } from '@/lib/runAfterResponse';
 import { db } from '@/lib/firebase';
 import { addDoc, collection } from 'firebase/firestore';
-import { sendLeadMagnetEmail } from '@/lib/email';
+import { sendLeadMagnetEmail, notifyNewLead } from '@/lib/email';
 
 export async function POST(req: NextRequest) {
   try {
@@ -23,22 +24,40 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Invalid email format' }, { status: 400 });
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
+    const createdAt = new Date().toISOString();
+    let leadId = 'lead_magnet_sin_guardar';
+
     if (db) {
       try {
-        await addDoc(collection(db, 'leads'), {
-          email: email.trim().toLowerCase(),
+        const ref = await addDoc(collection(db, 'leads'), {
+          email: normalizedEmail,
           locale: locale || 'en',
           source: 'lead_magnet',
-          createdAt: new Date().toISOString(),
+          createdAt,
           downloaded: false,
         });
+        leadId = ref.id;
       } catch (dbErr) {
         console.warn('Firestore lead save notice:', dbErr);
       }
     }
 
+    // Aviso al equipo tras responder (el viajero ya recibe la guía: sin acuse extra).
+    runAfterResponse(() =>
+      notifyNewLead({
+        leadId,
+        source: 'lead_magnet',
+        customerName: normalizedEmail.split('@')[0],
+        customerEmail: normalizedEmail,
+        tourTitle: 'Guía PDF Ecuador & Galápagos',
+        locale: typeof locale === 'string' ? locale.slice(0, 5) : undefined,
+        createdAt,
+      }).then(() => undefined)
+    );
+
     // Send actual guide email via SMTP
-    await sendLeadMagnetEmail(email.trim().toLowerCase(), locale || 'es');
+    await sendLeadMagnetEmail(normalizedEmail, locale || 'es');
 
     return NextResponse.json({ success: true });
   } catch (err: any) {

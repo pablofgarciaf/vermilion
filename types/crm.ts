@@ -67,6 +67,8 @@ export interface CrmLead {
   notes?: string;
   observations?: LeadObservation[];
   source?: string; // 'landing_popup' | 'contact_form' | 'affiliate_referral'
+  /** Colección donde vive el documento. Las solicitudes de la web (formulario de contacto, bot) se guardan en 'bookings'. */
+  sourceCollection?: 'leads' | 'bookings';
   affiliateReferralCode?: string;
   passengerDetails?: PassengerProfile;
   createdAt: string;

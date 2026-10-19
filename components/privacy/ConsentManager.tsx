@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useChatPanelOpen } from '@/hooks/useChatPanelOpen';
 
 type ConsentChoice = 'accepted' | 'essential';
 
@@ -115,6 +116,8 @@ function loadExternalScript(id: string, src: string) {
 export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: ConsentManagerProps) {
   const [visible, setVisible] = useState(false);
   const [hasSavedChoice, setHasSavedChoice] = useState(false);
+  // En móvil la píldora "Cookies" tapaba el campo de texto del chat: se oculta mientras está abierto.
+  const chatOpen = useChatPanelOpen();
   const t = useMemo(() => copy[locale] || copy.en, [locale]);
   const policyHref = `/${locale}/privacy-policy`;
 
@@ -191,7 +194,7 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
   };
 
   if (!visible) {
-    if (!hasSavedChoice) return null;
+    if (!hasSavedChoice || chatOpen) return null;
 
     return (
       <button
@@ -208,7 +211,7 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
   return (
     <section
       aria-label={t.title}
-      className="fixed inset-x-4 bottom-4 z-[80] mx-auto max-w-3xl rounded-3xl border border-white/15 bg-zinc-950/95 p-5 text-white shadow-2xl backdrop-blur-md md:inset-x-auto md:right-10 md:bottom-28 md:mx-0 md:max-w-md md:p-4 xl:right-16 xl:bottom-32"
+      className="fixed inset-x-4 bottom-4 z-[80] mx-auto max-w-3xl rounded-3xl border border-white/15 bg-zinc-950/95 p-5 text-white shadow-2xl backdrop-blur-md md:inset-x-auto md:right-10 md:bottom-44 md:mx-0 md:max-w-md md:p-4 xl:right-16 xl:bottom-44"
     >
       <div className="flex flex-col gap-4">
         <div className="space-y-2">

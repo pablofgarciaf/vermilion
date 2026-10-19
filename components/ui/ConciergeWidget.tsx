@@ -19,6 +19,9 @@ import {
 
 import { useLocale, useTranslations } from 'next-intl';
 import { isBotOrCrawler } from '@/utils/isBot';
+import { ChatMarkdown } from '@/components/ui/ChatMarkdown';
+import { setChatPanelOpen } from '@/hooks/useChatPanelOpen';
+import { trackGenerateLead } from '@/lib/analytics/trackLead';
 
 interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
@@ -94,6 +97,13 @@ export function ConciergeWidget() {
       scrollToBottom();
     }
   }, [messages, isOpenChat]);
+
+  // Avisa a los botones flotantes (WhatsApp, Cookies) para que no tapen el menú ni el chat
+  useEffect(() => {
+    setChatPanelOpen(isOpenMenu || isOpenChat);
+  }, [isOpenMenu, isOpenChat]);
+
+  useEffect(() => () => setChatPanelOpen(false), []);
 
   // Update default greeting if locale changes
   useEffect(() => {
@@ -183,8 +193,9 @@ export function ConciergeWidget() {
             providerUsed: data.providerUsed,
           },
         ]);
-        if (data.leadSubmitted) {
+        if (data.leadSubmitted && !leadCaptured) {
           setLeadCaptured(true);
+          trackGenerateLead({ method: 'ai_concierge', placement: 'concierge_chat' });
         }
       } else {
         throw new Error(data.error || 'Failed to get response');
@@ -195,8 +206,7 @@ export function ConciergeWidget() {
         ...prev,
         {
           role: 'assistant',
-          content:
-            'I apologize for the moment. Our concierge team is ready to assist you directly via WhatsApp or email. Would you like me to connect you with a live specialist?',
+          content: t('concierge.errorFallback'),
           providerUsed: 'Fallback System',
         },
       ]);
@@ -214,8 +224,9 @@ export function ConciergeWidget() {
 
   const transferChatToWhatsApp = () => {
     const lastUserMsgs = messages.filter((m) => m.role === 'user').map((m) => m.content).join(' | ');
-    const summary = `Hello Vermilion Routes! I was chatting with Pyro AI on your website about: "${lastUserMsgs || 'Expeditions'}". Can a travel advisor assist me?`;
-    window.open(getWhatsAppLink(summary), '_blank');
+    const summary = t('concierge.transferSummary', { topics: (lastUserMsgs || 'Ecuador & Galápagos').slice(0, 500) });
+    trackGenerateLead({ method: 'whatsapp', placement: 'concierge_transfer' });
+    window.open(getWhatsAppLink(summary), '_blank', 'noopener,noreferrer');
   };
 
   if (isBotOrCrawler()) return null;
@@ -223,7 +234,7 @@ export function ConciergeWidget() {
   return (
     <>
       {/* FLOATING CONCIERGE BUTTON */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+      <div className="fixed bottom-4 right-3 z-50 flex flex-col items-end sm:bottom-6 sm:right-6">
         {/* POPOVER SELECTION MENU */}
         {isOpenMenu && !isOpenChat && (
           <div className="mb-4 w-80 sm:w-96 bg-zinc-900/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl shadow-2xl p-4 text-white animate-in fade-in slide-in-from-bottom-4 duration-200">
@@ -243,7 +254,7 @@ export function ConciergeWidget() {
                 suppressHydrationWarning
                 onClick={() => setIsOpenMenu(false)}
                 className="text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
-                aria-label="Close menu"
+                aria-label={t('concierge.closeChat')}
               >
                 <X className="w-4 h-4" />
               </button>
@@ -314,8 +325,8 @@ export function ConciergeWidget() {
           <button
             suppressHydrationWarning
             onClick={() => setIsOpenMenu(!isOpenMenu)}
-            className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-tr from-amber-600 to-emerald-600 hover:from-amber-500 hover:to-emerald-500 text-white rounded-full shadow-2xl shadow-amber-900/40 hover:shadow-emerald-500/50 hover:scale-110 active:scale-95 transition-all duration-300 group border-2 border-white/30 cursor-pointer"
-            aria-label="Open Concierge Assistant Menu"
+            className="relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-tr from-amber-600 to-emerald-600 hover:from-amber-500 hover:to-emerald-500 text-white rounded-full shadow-2xl shadow-amber-900/40 hover:shadow-emerald-500/50 hover:scale-110 active:scale-95 transition-all duration-300 group border-2 border-white/30 cursor-pointer"
+            aria-label={t('concierge.openMenu')}
           >
             {/* Tooltip on hover */}
             <div className="absolute right-[68px] top-1/2 -translate-y-1/2 bg-zinc-950/95 backdrop-blur-md text-white text-xs font-semibold px-3.5 py-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none shadow-2xl border border-amber-500/40 flex items-center gap-2 translate-x-2 group-hover:translate-x-0 z-50">
@@ -375,7 +386,7 @@ export function ConciergeWidget() {
                 suppressHydrationWarning
                 onClick={() => setIsOpenChat(false)}
                 className="text-zinc-400 hover:text-white p-1.5 rounded-lg hover:bg-zinc-800 transition-colors"
-                aria-label="Close Chat"
+                aria-label={t('concierge.closeChat')}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -392,21 +403,21 @@ export function ConciergeWidget() {
               onClick={() => handleSendMessage(t('concierge.sugg1'))}
               className="text-[11px] whitespace-nowrap bg-zinc-800 hover:bg-amber-950/50 hover:border-amber-500/40 border border-zinc-700/60 text-zinc-200 px-2.5 py-1 rounded-full transition-colors"
             >
-              🏝️ Galapagos Cruises
+              {t('concierge.pillCruises')}
             </button>
             <button
               suppressHydrationWarning
               onClick={() => handleSendMessage(t('concierge.sugg2'))}
               className="text-[11px] whitespace-nowrap bg-zinc-800 hover:bg-amber-950/50 hover:border-amber-500/40 border border-zinc-700/60 text-zinc-200 px-2.5 py-1 rounded-full transition-colors"
             >
-              🌋 Galapagos + Ecuador
+              {t('concierge.pillCombo')}
             </button>
             <button
               suppressHydrationWarning
               onClick={() => handleSendMessage(t('concierge.sugg3'))}
               className="text-[11px] whitespace-nowrap bg-zinc-800 hover:bg-amber-950/50 hover:border-amber-500/40 border border-zinc-700/60 text-zinc-200 px-2.5 py-1 rounded-full transition-colors"
             >
-              💰 Get Custom Quote
+              {t('concierge.pillQuote')}
             </button>
           </div>
 
@@ -432,7 +443,11 @@ export function ConciergeWidget() {
                       : 'bg-zinc-900 border border-zinc-800 text-zinc-200 rounded-bl-xs'
                   }`}
                 >
-                  <div className="whitespace-pre-line">{msg.content}</div>
+                  {msg.role === 'assistant' ? (
+                    <ChatMarkdown content={msg.content} />
+                  ) : (
+                    <div className="whitespace-pre-line">{msg.content}</div>
+                  )}
 
                   {msg.providerUsed && (
                     <div className="mt-2 pt-1.5 border-t border-zinc-800/80 text-[10px] text-zinc-500 flex items-center justify-between">
@@ -451,7 +466,7 @@ export function ConciergeWidget() {
                 </div>
                 <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-3 text-xs text-zinc-400 flex items-center gap-2">
                   <span className="inline-block w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-                  <span>Pyro is crafting your itinerary...</span>
+                  <span>{t('concierge.crafting')}</span>
                 </div>
               </div>
             )}
@@ -494,7 +509,7 @@ export function ConciergeWidget() {
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Ask Pyro about tours, dates, prices..."
+              placeholder={t('concierge.typeMessage')}
               suppressHydrationWarning
               className="flex-1 bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-500 text-xs sm:text-sm rounded-xl px-3 py-2.5 focus:outline-none focus:border-amber-500 transition-colors"
               disabled={isLoading}
@@ -504,7 +519,7 @@ export function ConciergeWidget() {
               disabled={isLoading || !inputMessage.trim()}
               suppressHydrationWarning
               className="bg-amber-500 hover:bg-amber-400 disabled:opacity-50 disabled:hover:bg-amber-500 text-zinc-950 font-bold p-2.5 rounded-xl transition-transform active:scale-95 shadow-md flex items-center justify-center shrink-0"
-              aria-label="Send message"
+              aria-label={t('concierge.sendMessage')}
             >
               <Send className="w-4 h-4" />
             </button>

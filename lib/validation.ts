@@ -114,6 +114,8 @@ export const leadSchema = z.object({
   travelers: z.string().optional(),
   message: z.string().optional(),
   timeline: z.string().optional(),
+  /** Idioma de la página desde la que se envió (para el acuse de recibo). */
+  locale: z.string().max(10).optional(),
   _hp_trap: z.string().optional(),
   website_url: z.string().optional(),
 }).superRefine((data, ctx) => {

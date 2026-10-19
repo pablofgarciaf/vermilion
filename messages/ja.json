@@ -228,7 +228,16 @@
     "transferWhatsApp": "チャットを WhatsApp に転送",
     "leadSaved": "連絡先情報がシステムに保存されました！",
     "advisorsWillContact": "アドバイザーからご連絡いたします",
-    "typeMessage": "ここにメッセージを入力..."
+    "typeMessage": "ここにメッセージを入力...",
+    "pillCruises": "🏝️ ガラパゴスクルーズ",
+    "pillCombo": "🌋 ガラパゴス＋エクアドル",
+    "pillQuote": "💰 見積もりを依頼",
+    "crafting": "Pyro が回答を準備しています...",
+    "errorFallback": "申し訳ありません、現在お答えできません。WhatsApp またはメールでスタッフが直接対応いたします。専門スタッフにおつなぎしましょうか？",
+    "transferSummary": "こんにちは、Vermilion Routes さん。ウェブサイトで Pyro と「{topics}」について話していました。担当者に相談できますか？",
+    "closeChat": "チャットを閉じる",
+    "sendMessage": "メッセージを送信",
+    "openMenu": "旅行アシスタントを開く"
   },
   "adminTiktok": {
     "title": "TikTok 連携",
@@ -258,5 +267,11 @@
     "done": "完了しました！TikTok を開き、受信トレイの通知から投稿を完了してください。",
     "failed": "アップロードに失敗しました：{reason}",
     "tooLargeForRelay": "ブラウザから TikTok へ直接アップロードできず、ファイルが 4 MB を超えています。より小さい動画を書き出して再試行してください。"
+  },
+  "whatsapp": {
+    "cta": "WhatsApp",
+    "tooltip": "WhatsApp で旅行の専門家に相談",
+    "ariaLabel": "WhatsApp でお問い合わせ",
+    "defaultMessage": "こんにちは、Vermilion Routes さん。エクアドルとガラパゴスへの旅行を計画したいです。相談に乗っていただけますか？"
   }
 }
