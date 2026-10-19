@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Compass, Footprints, ThermometerSun, Mountain, Bird } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface ExpeditionFactsProps {
   tourId: string;
@@ -13,6 +13,7 @@ interface ExpeditionFactsProps {
 
 export function ExpeditionFacts({ tourId, destination, duration, className = '' }: ExpeditionFactsProps) {
   const locale = useLocale();
+  const tb = useTranslations('bookingConversion');
 
   // Dynamic curated facts based on tour type
   const isGalapagos = /galapagos/i.test(tourId) || /galapagos/i.test(destination);
@@ -124,7 +125,7 @@ export function ExpeditionFacts({ tourId, destination, duration, className = '' 
               {getText(facts.climate)}
             </span>
             <span className="text-[10px] text-stone-600 dark:text-stone-400 block mt-0.5">
-              Year-round departures
+              {tb('yearRound')}
             </span>
           </div>
         </div>

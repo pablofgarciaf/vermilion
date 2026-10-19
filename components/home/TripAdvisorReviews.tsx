@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { Review } from '@/types';
 import { mockReviews } from '@/data/mock';
 import { Compass, ShieldCheck, Heart, Quote, ChevronLeft, ChevronRight, Star, ExternalLink, Award } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { TRIPADVISOR_REVIEW_COUNT } from '@/data/bookingTerms';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { isBotOrCrawler } from '@/utils/isBot';
 import { prefersReducedMotion } from '@/utils/motion';
@@ -45,6 +46,7 @@ export function TripAdvisorReviews({
   locale
 }: TripAdvisorReviewsProps) {
   const hookLocale = useLocale();
+  const tb = useTranslations('bookingConversion');
   const currentLocale = locale || hookLocale || 'en';
   const experienceCard = EXPERIENCE_CARD_I18N[currentLocale] || EXPERIENCE_CARD_I18N.en;
   const total = reviews.length;
@@ -135,7 +137,7 @@ export function TripAdvisorReviews({
                 <TripAdvisorSvg className="w-3.5 h-3.5 text-emerald-600" />
                 <span>TripAdvisor Rating ↗</span>
               </div>
-              <div className="text-[10px] text-zinc-500">Based on 51 Excellent Reviews</div>
+              <div className="text-[10px] text-zinc-500">{tb('reviewsBasedOn', { count: TRIPADVISOR_REVIEW_COUNT })}</div>
             </div>
           </a>
 
