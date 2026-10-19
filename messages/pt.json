@@ -320,5 +320,46 @@
     "barFrom": "Desde",
     "barPerPerson": "/ pessoa",
     "whatsappAria": "Perguntar no WhatsApp"
+  },
+  "expeditionFacts": {
+    "title": "A expedição em resumo",
+    "activity": "Atividade física",
+    "climate": "Clima médio",
+    "elevation": "Altitude",
+    "wildlife": "Fauna emblemática",
+    "profiles": {
+      "combo": {
+        "level": "Moderado (nível 2/5)",
+        "desc": "Trilhos, caminhadas na floresta nublada, desembarques secos e molhados",
+        "climate": "14°C – 28°C (Andes e clima marinho)",
+        "elevation": "0 m a 3.900 m (do nível do mar ao Quilotoa/Cotopaxi)"
+      },
+      "galapagos": {
+        "level": "Fácil a moderado (nível 2/5)",
+        "desc": "Caminhadas na natureza, trilhos entre fendas vulcânicas, snorkel na praia e travessias de barco",
+        "climate": "22°C – 29°C (marinho subtropical)",
+        "elevation": "0 m a 860 m (terras altas de Santa Cruz)"
+      },
+      "mainland": {
+        "level": "Moderado (nível 2,5/5)",
+        "desc": "Caminhadas até cascatas, experiências na linha do equador, canoa na floresta amazónica",
+        "climate": "12°C – 26°C (primavera andina e Amazónia tropical)",
+        "elevation": "500 m a 4.100 m (da bacia amazónica ao passo de Papallacta)"
+      }
+    },
+    "species": {
+      "tortoise": "Tartarugas-gigantes",
+      "seaLion": "Leões-marinhos das Galápagos",
+      "blueFootedBooby": "Atobás-de-pés-azuis",
+      "marineIguana": "Iguanas-marinhas",
+      "caiman": "Jacarés amazónicos",
+      "paiche": "Pirarucu (arapaima gigante)",
+      "penguin": "Pinguins das Galápagos",
+      "reefShark": "Tubarões-de-pontas-brancas",
+      "flamingo": "Flamingos",
+      "condor": "Condor-dos-andes",
+      "hummingbirdsToucans": "Beija-flores e tucanos",
+      "squirrelMonkey": "Macacos-de-cheiro"
+    }
   }
 }
