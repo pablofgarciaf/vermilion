@@ -170,7 +170,8 @@ export async function processInbound(msg: InboundMessage, deps: ProcessorDeps): 
   const conv: ConversationRecord = existing || newConversation(msg.from, detectLocale(text, 'es'), now);
   if (msg.name) conv.name = sanitizeUntrusted(msg.name, 80);
   const msgTime = msg.timestampMs > 0 ? Math.min(msg.timestampMs, now) : now;
-  conv.lastInboundAt = Math.max(conv.lastInboundAt || 0, msgTime);
+  // Ventana de 24 h: cuenta desde el último mensaje REAL del cliente, no desde que lo procesamos.
+  conv.lastInboundAt = Math.max(existing?.lastInboundAt || 0, msgTime);
   conv.updatedAt = now;
   if (text) conv.locale = detectLocale(text, conv.locale);
 
