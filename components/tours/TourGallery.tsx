@@ -108,7 +108,7 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
         {/* Main Big Photo (Left/Top) with Layered Crossfade */}
         <div
           onClick={() => setActiveImageIndex(selectedMainIndex)}
-          className={`relative h-72 md:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-950 shadow-md ${emphasizeFirst ? 'md:h-[520px]' : 'md:h-[420px]'}`}
+          className={`relative h-72 md:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-200 dark:bg-zinc-800 shadow-md ${emphasizeFirst ? 'md:h-[520px]' : 'md:h-[420px]'}`}
         >
           {/* Base Previous Layer (during crossfade) */}
           {previousImage && previousImage !== currentImage && (
@@ -141,8 +141,6 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
             />
           </div>
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 group-hover:opacity-80 transition-opacity" />
-
           {/* Progress Indicators for slideshow */}
           {uniqueImages.length > 1 && (
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10 bg-black/50 backdrop-blur-md px-2 py-0.5 rounded-full border border-white/15">
@@ -174,7 +172,7 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
         </div>
 
         {/* Desktop Side Shifting Photos (conveyor belt slider) */}
-        <div className="hidden md:block relative h-[420px] overflow-hidden rounded-2xl bg-zinc-950">
+        <div className="hidden md:block relative h-[420px] overflow-hidden rounded-2xl">
           <div
             className="flex flex-col gap-2 transition-transform duration-700 ease-in-out"
             style={{ transform: `translateY(-${((selectedMainIndex + 1) % uniqueImages.length) * 142}px)` }}
@@ -185,7 +183,7 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
                 <div
                   key={`side-desktop-${idx}`}
                   onClick={() => handleSelectThumbnail(originalIndex)}
-                  className="relative h-[134px] w-full shrink-0 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-200/20 hover:border-emerald-500/50 transition-all duration-300"
+                  className="relative h-[134px] w-full shrink-0 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-200 dark:bg-zinc-800 border border-zinc-200/20 hover:border-emerald-500/50 transition-all duration-300"
                 >
                   <Image
                     src={img}
@@ -196,7 +194,6 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
                     className="object-cover group-hover:scale-110 transition-all duration-500 ease-out"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-black/25 group-hover:bg-black/0 transition-colors" />
                 </div>
               );
             })}
@@ -216,7 +213,7 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
               <div
                 key={`side-mobile-${idx}`}
                 onClick={() => handleSelectThumbnail(originalIndex)}
-                className="relative h-20 w-[74px] shrink-0 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-900 border border-zinc-200/20"
+                className="relative h-20 w-[74px] shrink-0 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-200 dark:bg-zinc-800 border border-zinc-200/20"
               >
                 <Image
                   src={img}
