@@ -1,261 +1,88 @@
-import { NextRequest, NextResponse } from 'next/server';
-import crypto from 'crypto';
+import { after, NextRequest, NextResponse } from 'next/server';
 
-import { getAdminDb } from '@/lib/firebaseAdmin';
+import {
+  createProductionDeps,
+  extractEvents,
+  getWhatsAppConfig,
+  LIMITS,
+  processEvents,
+  safeEqual,
+  verifyMetaSignature,
+} from '@/lib/whatsapp';
 
-const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN;
-const APP_SECRET = process.env.WHATSAPP_APP_SECRET;
+/**
+ * Webhook de WhatsApp Cloud API (Meta).
+ *
+ * GET  -> verificación de la suscripción (hub.verify_token, en tiempo constante).
+ * POST -> 1) verifica X-Hub-Signature-256 sobre el cuerpo crudo ANTES de parsear nada,
+ *         2) responde 200 enseguida,
+ *         3) procesa con after(): dedupe por message.id, baja, frecuencia, paso a humano,
+ *            IA (si WHATSAPP_AI_ENABLED=true) y lead en Firestore. Ver lib/whatsapp/.
+ */
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+// after() vive dentro de este tiempo máximo (IA ~12 s + envío + Firestore).
+export const maxDuration = 60;
 
 export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams;
-  const mode = searchParams.get('hub.mode');
-  const token = searchParams.get('hub.verify_token');
-  const challenge = searchParams.get('hub.challenge');
+  const { verifyToken } = getWhatsAppConfig();
+  const params = request.nextUrl.searchParams;
+  const mode = params.get('hub.mode');
+  const token = params.get('hub.verify_token') || '';
+  const challenge = params.get('hub.challenge') || '';
 
-  if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-    return new NextResponse(challenge, { status: 200 });
+  if (verifyToken && mode === 'subscribe' && safeEqual(token, verifyToken) && /^[\w-]{1,128}$/.test(challenge)) {
+    return new NextResponse(challenge, { status: 200, headers: { 'Content-Type': 'text/plain' } });
   }
   return new NextResponse('Forbidden', { status: 403 });
 }
 
-function validateSignature(payload: string, signature: string): boolean {
-  if (!APP_SECRET) return true;
-  const expected = 'sha256=' + crypto.createHmac('sha256', APP_SECRET).update(payload).digest('hex');
-  return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
-}
-
-async function getLocalizedText(obj: Record<string, string> | string, loc: string): Promise<string> {
-  if (typeof obj === 'string') return obj;
-  return obj[loc] || obj.en || Object.values(obj)[0] || '';
-}
-
-async function processIncomingMessage({
-  phoneNumberId,
-  from,
-  messageId,
-  timestamp,
-  type,
-  text,
-  interactive,
-}: {
-  phoneNumberId: string;
-  from: string;
-  messageId: string;
-  timestamp: string;
-  type: string;
-  text?: string;
-  interactive?: any;
-}) {
-  const normalizedPhone = from.replace(/^521/, '52').replace(/^0/, '');
-  const adminDb = await getAdminDb();
-
-  const parentDoc = await findParentByPhone(normalizedPhone, adminDb);
-  if (!parentDoc) {
-    console.log('No parent found for ' + normalizedPhone);
-    return;
-  }
-
-  const { parentRef, parentType, parentData } = parentDoc;
-
-  const messageData = {
-    role: 'user',
-    content: text || getInteractiveText(interactive),
-    timestamp: new Date(parseInt(timestamp) * 1000),
-    agent_slug: 'whatsapp-ingestor',
-    confidence: 1,
-    intent: 'incoming',
-    whatsapp_msg_id: messageId,
-    phone_number_id: phoneNumberId,
-  };
-
-  await parentRef.collection('messages').doc(messageId).set(messageData);
-
-  await parentRef.update({
-    conversation_state: 'ai_active',
-    last_message_at: new Date(),
-    last_message_from: 'user',
-    unread_count: (parentData.unread_count || 0) + 1,
-  });
-
-  // Import classifier and router dynamically
-  const { classifyIntent } = await import('@/lib/whatsapp-classifier');
-  const { routeToAgent } = await import('@/lib/whatsapp-router');
-
-  const intentResult = classifyIntent(text || getInteractiveText(interactive), parentData);
-
-  if (parentData.conversation_state === 'human_needed' || parentData.conversation_state === 'closed') {
-    return;
-  }
-
-  const agentResult = await routeToAgent({
-    intent: intentResult.intent,
-    confidence: intentResult.confidence,
-    context: {
-      parentType,
-      parentData,
-      message: text,
-      phone: normalizedPhone,
-    },
-  });
-
-  if (agentResult.shouldRespond && agentResult.response) {
-    await sendWhatsAppResponse(phoneNumberId, from, agentResult.response);
-    
-    await parentRef.collection('messages').add({
-      role: 'assistant',
-      content: agentResult.response,
-      timestamp: new Date(),
-      agent_slug: agentResult.agentSlug,
-      confidence: agentResult.confidence,
-      intent: intentResult.intent,
-    });
-
-    await parentRef.update({
-      'ai_metrics.resolved_count': (parentData.ai_metrics?.resolved_count || 0) + 1,
-      'ai_metrics.avg_confidence': calculateNewAvg(parentData.ai_metrics?.avg_confidence || 0, agentResult.confidence, parentData.ai_metrics?.resolved_count || 0),
-      'ai_metrics.last_ai_response_at': new Date(),
-      conversation_state: agentResult.escalate ? 'human_needed' : 'ai_active',
-      needs_human_review: agentResult.escalate || false,
-    });
-  }
-}
-
-async function findParentByPhone(phone: string, adminDb: any) {
-  // 1. Buscar en bookings por customerPhone
-  const bookingsSnap = await adminDb.collection('bookings')
-    .where('customerPhone', '==', phone)
-    .orderBy('createdAt', 'desc')
-    .limit(1)
-    .get();
-
-  if (!bookingsSnap.empty) {
-    const doc = bookingsSnap.docs[0];
-    return { parentRef: doc.ref, parentType: 'booking', parentData: doc.data() };
-  }
-
-  // 2. Buscar en leads por customerPhone
-  const leadsSnap = await adminDb.collection('leads')
-    .where('customerPhone', '==', phone)
-    .orderBy('createdAt', 'desc')
-    .limit(1)
-    .get();
-
-  if (!leadsSnap.empty) {
-    const doc = leadsSnap.docs[0];
-    return { parentRef: doc.ref, parentType: 'lead', parentData: doc.data() };
-  }
-
-  // 3. Buscar en affiliates por phone
-  const affiliatesSnap = await adminDb.collection('affiliates')
-    .where('phone', '==', phone)
-    .limit(1)
-    .get();
-
-  if (!affiliatesSnap.empty) {
-    const doc = affiliatesSnap.docs[0];
-    return { parentRef: doc.ref, parentType: 'affiliate', parentData: doc.data() };
-  }
-
-  // 4. Buscar en usuarios por phone
-  const usersSnap = await adminDb.collection('usuarios')
-    .where('phone', '==', phone)
-    .limit(1)
-    .get();
-
-  if (!usersSnap.empty) {
-    const doc = usersSnap.docs[0];
-    return { parentRef: doc.ref, parentType: 'usuario', parentData: doc.data() };
-  }
-
-  return null;
-}
-
-async function sendWhatsAppResponse(phoneNumberId: string, to: string, text: string) {
-  const token = process.env.WHATSAPP_TOKEN;
-  if (!token) return;
-
-  await fetch('https://graph.facebook.com/v20.0/' + phoneNumberId + '/messages', {
-    method: 'POST',
-    headers: {
-      'Authorization': 'Bearer ' + token,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      messaging_product: 'whatsapp',
-      to: to.replace('+', ''),
-      type: 'text',
-      text: { body: text },
-    }),
-  });
-}
-
-function getInteractiveText(interactive: any): string {
-  if (!interactive) return '';
-  if (interactive.type === 'button_reply') return interactive.button_reply?.title || '';
-  if (interactive.type === 'list_reply') return interactive.list_reply?.title || '';
-  return '';
-}
-
-async function updateMessageStatus(messageId: string, status: string) {
-  const adminDb = await getAdminDb();
-  const collections = ['bookings', 'leads', 'affiliates'];
-  for (const col of collections) {
-    const snap = await adminDb.collection(col)
-      .where('messages.whatsapp_msg_id', '==', messageId)
-      .limit(1)
-      .get();
-    if (!snap.empty) {
-      break;
-    }
-  }
-}
-
-function calculateNewAvg(currentAvg: number, newValue: number, count: number): number {
-  return (currentAvg * count + newValue) / (count + 1);
-}
-
 export async function POST(request: NextRequest) {
-  const body = await request.text();
-  const signature = request.headers.get('x-hub-signature-256') || '';
+  const config = getWhatsAppConfig();
 
-  function validateSignature(payload: string, signature: string): boolean {
-    if (!APP_SECRET) return true;
-    const expected = 'sha256=' + crypto.createHmac('sha256', APP_SECRET).update(payload).digest('hex');
-    return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
+  const declaredLength = Number(request.headers.get('content-length') || 0);
+  if (declaredLength > LIMITS.maxBodyBytes) {
+    return NextResponse.json({ error: 'Payload too large' }, { status: 413 });
+  }
+  const rawBody = await request.text();
+  if (Buffer.byteLength(rawBody, 'utf8') > LIMITS.maxBodyBytes) {
+    return NextResponse.json({ error: 'Payload too large' }, { status: 413 });
   }
 
-  if (!validateSignature(body, signature)) {
+  if (!config.appSecret) {
+    console.error('[WhatsApp] Falta WHATSAPP_APP_SECRET: se rechazan todos los eventos.');
+    return NextResponse.json({ error: 'Webhook not configured' }, { status: 503 });
+  }
+  if (!verifyMetaSignature(rawBody, request.headers.get('x-hub-signature-256'), config.appSecret)) {
     return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
   }
 
-  const data = JSON.parse(body);
+  let payload: unknown;
+  try {
+    payload = JSON.parse(rawBody);
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
 
-  for (const entry of data.entry || []) {
-    for (const change of entry.changes || []) {
-      if (change.field !== 'messages') continue;
-
-      const value = change.value;
-      const phoneNumberId = value.metadata?.phone_number_id;
-
-      for (const message of value.messages || []) {
-        await processIncomingMessage({
-          phoneNumberId,
-          from: message.from,
-          messageId: message.id,
-          timestamp: message.timestamp,
-          type: message.type,
-          text: message.text?.body,
-          interactive: message.interactive,
-        });
+  const events = extractEvents(payload);
+  if (events.messages.length > 0 || events.echoes.length > 0) {
+    const task = async () => {
+      try {
+        await processEvents(events, createProductionDeps(config));
+      } catch (err) {
+        const e = err as { name?: string; message?: string };
+        console.error('[WhatsApp] Error en el procesamiento diferido', { name: e?.name, message: e?.message });
       }
-
-      if (value.statuses) {
-        for (const status of value.statuses) {
-          await updateMessageStatus(status.id, status.status);
-        }
-      }
+    };
+    try {
+      after(task);
+    } catch {
+      // Fuera del contexto de una petición (p. ej. tests): se lanza en segundo plano.
+      void task();
     }
   }
 
-  return NextResponse.json({ success: true });
+  // Meta solo necesita un 200 rápido; los estados (sent/delivered/read) se ignoran.
+  return NextResponse.json({ received: true }, { status: 200 });
 }
