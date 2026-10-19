@@ -9,7 +9,7 @@
  */
 
 /** `tourId` que escriben los puntos de entrada de leads. Amplíala si aparece otro formulario. */
-export const WEB_INQUIRY_TOUR_IDS: readonly string[] = ['general-inquiry', 'ai-concierge-lead'];
+export const WEB_INQUIRY_TOUR_IDS: readonly string[] = ['general-inquiry', 'ai-concierge-lead', 'whatsapp-lead'];
 
 const hasValue = (v: unknown): boolean => v !== undefined && v !== null && String(v).trim() !== '';
 
