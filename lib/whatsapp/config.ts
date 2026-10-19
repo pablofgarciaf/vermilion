@@ -80,7 +80,7 @@ export function getWhatsAppConfig(env: NodeJS.ProcessEnv = process.env): WhatsAp
     geminiModel: clean(env.WHATSAPP_AI_MODEL) || 'gemini-2.5-flash',
     graphVersion: clean(env.WHATSAPP_GRAPH_VERSION) || 'v23.0',
     adminWhatsApp: digitsOnly(clean(env.ADMIN_WHATSAPP)),
-    adminEmail: clean(env.ADMIN_EMAIL) || clean(env.SMTP_EMAIL),
+    adminEmail: clean(env.LEAD_ALERT_EMAIL) || clean(env.SMTP_EMAIL),
     adminTemplateName: clean(env.WHATSAPP_ADMIN_TEMPLATE),
     adminTemplateLang: clean(env.WHATSAPP_ADMIN_TEMPLATE_LANG) || 'es',
   };

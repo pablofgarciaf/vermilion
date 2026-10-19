@@ -570,11 +570,12 @@ const COMPANY_WHATSAPP = '593960039156';
 const firstNameOf = (name: string | undefined) => ((name || '').trim().split(/\s+/)[0] || '').slice(0, 40);
 
 /**
- * Avisa al equipo (ADMIN_EMAIL) de un lead nuevo, con enlaces para responder en un clic.
+ * Avisa al equipo (LEAD_ALERT_EMAIL, o SMTP_EMAIL si falta) de un lead nuevo, con enlaces para responder en un clic.
  * Lanza si el SMTP falla: quien la llame debe capturarlo para no romper el guardado del lead.
  */
 export const sendNewLeadAlertEmail = async (lead: NewLeadNotification): Promise<LeadEmailResult> => {
-  const adminEmail = process.env.ADMIN_EMAIL || SMTP_EMAIL;
+  // ADMIN_EMAIL es el usuario del CRM y no tiene por qué ser un buzón real.
+  const adminEmail = process.env.LEAD_ALERT_EMAIL || SMTP_EMAIL;
   if (!SMTP_PASSWORD) {
     console.warn(`[LeadEmail] SMTP_PASSWORD no configurado: no se envía el aviso del lead ${lead.leadId}.`);
     return { sent: false, reason: 'smtp_not_configured' };

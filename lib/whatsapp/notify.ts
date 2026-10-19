@@ -7,7 +7,7 @@ import { maskPhone } from './security';
 /**
  * Aviso al dueño cuando una conversación necesita a un humano (o, con la IA
  * apagada, cuando entra un lead nuevo). Dos canales independientes:
- *  1. Correo a ADMIN_EMAIL (o SMTP_EMAIL) con las mismas variables SMTP del sitio.
+ *  1. Correo a LEAD_ALERT_EMAIL (o SMTP_EMAIL) con las mismas variables SMTP del sitio.
  *  2. WhatsApp a ADMIN_WHATSAPP (si existe). Fuera de la ventana de 24 h del
  *     dueño solo sirve una plantilla aprobada (WHATSAPP_ADMIN_TEMPLATE).
  *
@@ -101,7 +101,7 @@ async function sendAlertEmail(cfg: WhatsAppConfig, alert: OwnerAlert): Promise<b
   const pass = process.env.SMTP_PASSWORD || '';
   const to = cfg.adminEmail;
   if (!pass || !to) {
-    console.error('[WhatsApp] Aviso por correo no enviado: falta SMTP_PASSWORD o ADMIN_EMAIL.');
+    console.error('[WhatsApp] Aviso por correo no enviado: falta SMTP_PASSWORD o el destinatario (LEAD_ALERT_EMAIL / SMTP_EMAIL).');
     return false;
   }
   try {

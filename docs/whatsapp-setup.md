@@ -99,7 +99,7 @@ Mientras tanto, el aviso por **correo** siempre se intenta. Si el correo y el Wh
 | `WHATSAPP_AI_ENABLED` | No | `true` para que la IA conteste. Vacía o `false`: solo guarda y avisa. |
 | `GEMINI_API_KEY` | Si la IA está activa | Ya existe (la usa el bot de la web). |
 | `ADMIN_WHATSAPP` | Recomendada | Tu número **personal** con código de país, solo dígitos, para los avisos. |
-| `ADMIN_EMAIL` | Recomendada | Correo que recibe los avisos (si falta, se usa `SMTP_EMAIL`). |
+| `LEAD_ALERT_EMAIL` | Opcional | Correo que recibe los avisos de leads y de WhatsApp (si falta, se usa `SMTP_EMAIL`, o sea `info@`). `ADMIN_EMAIL` es solo el usuario del CRM. |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_EMAIL`, `SMTP_PASSWORD` | Ya existen | Envío del aviso por correo. **Hoy el SMTP da error `535`**: hay que restablecer la contraseña del buzón y actualizar `SMTP_PASSWORD` en `.env` y en Vercel. |
 | `WHATSAPP_ADMIN_TEMPLATE` | No | Nombre de la plantilla del paso 3.7. |
 | `WHATSAPP_ADMIN_TEMPLATE_LANG` | No | Idioma de esa plantilla (por defecto `es`). |
