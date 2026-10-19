@@ -4,8 +4,10 @@ import React from 'react';
 import { PricingDetails } from '@/lib/pricing';
 import { Tour } from '@/types';
 import { Users, Info, ArrowRight, Wallet, CalendarDays, Ticket, Sparkles } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { BookingTrustPanel } from './BookingTrustPanel';
+import { canPayDeposit, depositAmount, formatUsd } from '@/data/bookingTerms';
 
 interface PriceCalculatorProps {
   tours: Tour[];
@@ -18,6 +20,8 @@ interface PriceCalculatorProps {
   affiliateRef?: string | null;
   isProcessing?: boolean;
   tier?: 'standard' | 'firstClass' | 'vip'; // <-- ¡Agregado para arreglar el error TS2304!
+  /** Texto del botón de pago ("Reservar con el 30% · $X"); si falta, se usa el genérico. */
+  payCtaLabel?: string;
 }
 
 const PRICE_CALC_I18N: Record<string, {
@@ -214,9 +218,11 @@ export function PriceCalculator({
   step,
   affiliateRef,
   isProcessing = false,
-  tier = 'standard' // <-- Valor por defecto agregado
+  tier = 'standard', // <-- Valor por defecto agregado
+  payCtaLabel,
 }: PriceCalculatorProps) {
   const locale = useLocale();
+  const tb = useTranslations('bookingConversion');
   const t = PRICE_CALC_I18N[locale] || PRICE_CALC_I18N['en'];
 
   if (!tours || tours.length === 0) {
@@ -235,6 +241,8 @@ export function PriceCalculator({
   const hasAffiliateDiscount = !!affiliateRef;
   const affiliateDiscountAmount = hasAffiliateDiscount ? Number((pricing.total * 0.10).toFixed(2)) : 0;
   const finalPayableTotal = Number((pricing.total - affiliateDiscountAmount).toFixed(2));
+  const depositAllowed = canPayDeposit(date);
+  const depositNow = depositAmount(finalPayableTotal);
 
   const formatAmount = (val: number) => {
     return (val % 1 !== 0 || val < 10)
@@ -347,6 +355,27 @@ export function PriceCalculator({
         </div>
       </div>
 
+      {/* Plan de pago: el 30% hoy y el resto 30 días antes (o el total si se sale antes) */}
+      {finalPayableTotal > 0 && (
+        <div className="-mt-4 mb-6 rounded-2xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/70 dark:bg-emerald-950/30 p-3.5 text-sm" suppressHydrationWarning>
+          {depositAllowed ? (
+            <>
+              <p className="font-bold text-emerald-900 dark:text-emerald-200">{tb('payTodayTitle')}</p>
+              <div className="mt-1.5 flex justify-between gap-3 text-zinc-700 dark:text-zinc-300">
+                <span>{tb('payToday')}</span>
+                <strong className="text-emerald-700 dark:text-emerald-300">${formatUsd(depositNow)} USD</strong>
+              </div>
+              <div className="flex justify-between gap-3 text-zinc-600 dark:text-zinc-400">
+                <span>{tb('payLater')}</span>
+                <span>${formatUsd(Number((finalPayableTotal - depositNow).toFixed(2)))} USD</span>
+              </div>
+            </>
+          ) : (
+            <p className="text-zinc-700 dark:text-zinc-300">{tb('fullDueNow')}</p>
+          )}
+        </div>
+      )}
+
       <button
         type="button"
         onClick={onContinue}
@@ -363,7 +392,7 @@ export function PriceCalculator({
           </div>
         ) : (
           <>
-            <span>{t.btnPay}</span>
+            <span>{payCtaLabel || t.btnPay}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </>
         )}
@@ -372,6 +401,8 @@ export function PriceCalculator({
       <p className="text-[11px] text-zinc-400 text-center mt-4 flex items-center justify-center gap-1">
         <Info className="w-3 h-3" /> {t.noChargeNotice}
       </p>
+
+      <BookingTrustPanel className="mt-4" />
     </div>
   );
 }

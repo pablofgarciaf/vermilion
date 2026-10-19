@@ -101,7 +101,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
 
           </div>
 
-          <div className="mt-2.5 w-full flex flex-col gap-2 pb-1">
+          <div className="hidden mt-2.5 w-full flex-col gap-2 pb-1">
             {isDailyTour ? (
               <Link href={`/${locale}/booking?addTour=${tour.id}`} className="flex w-full items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-2 py-2 text-sm font-bold text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105">
                 <Sparkles className="w-4 h-4 fill-zinc-950" />

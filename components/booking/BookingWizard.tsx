@@ -12,8 +12,10 @@ import { doc, setDoc } from 'firebase/firestore';
 import { calculateTourPrice, PricingDetails } from '@/lib/pricing';
 import { PriceCalculator } from './PriceCalculator';
 import { TravelDatePicker } from './TravelDatePicker';
-import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, ExternalLink, Lock, ArrowRight, Sparkles, Loader2, Search, X, ArrowLeftRight, Compass, Info, Clock, Check } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, ExternalLink, Lock, ArrowRight, Sparkles, Loader2, Search, X, ArrowLeftRight, Compass, Info, Clock, Check, MessageCircle } from 'lucide-react';
+import { useLocale, useTranslations } from 'next-intl';
+import { AskBeforeBooking } from './AskBeforeBooking';
+import { WHATSAPP_NUMBER, canPayDeposit, depositAmount, formatUsd, isPlausiblePhone } from '@/data/bookingTerms';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getStoredAffiliateRef } from '@/components/affiliates/AffiliateTracker';
 import { getAffiliateByCode, AffiliateAccount } from '@/lib/affiliates';
@@ -71,7 +73,7 @@ const BOOKING_SUBNAV_I18N: Record<string, { defaultTitle: string; estimatedTotal
   },
 };
 
-function BookingSubNav({ primaryTour, pricing, locale, onPayClick, isProcessing }: { primaryTour: Tour | null; pricing: any; locale: string; onPayClick?: () => void; isProcessing?: boolean }) {
+function BookingSubNav({ primaryTour, locale, onPayClick, isProcessing, ctaLabel, processingLabel }: { primaryTour: Tour | null; locale: string; onPayClick?: () => void; isProcessing?: boolean; ctaLabel: string; processingLabel: string }) {
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -131,9 +133,9 @@ function BookingSubNav({ primaryTour, pricing, locale, onPayClick, isProcessing 
               onClick={onPayClick}
               disabled={isProcessing}
               type="button"
-              className="flex w-full items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-2 py-2 text-sm font-extrabold uppercase tracking-widest text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105 active:scale-95 disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-amber-400/65 bg-gradient-to-r from-[#DFBA62] via-[#F2D88E] to-[#C7A048] px-2 py-2 text-sm font-extrabold tracking-wide text-zinc-950 shadow-sm shadow-amber-500/20 transition-all hover:brightness-105 active:scale-95 disabled:opacity-50"
             >
-              {isProcessing ? (locale === 'es' ? 'Procesando...' : 'Processing...') : `RESERVAR • $${pricing.total.toLocaleString("en-US")} USD`}
+              {isProcessing ? processingLabel : ctaLabel}
             </button>
           </div>
         </div>
@@ -182,9 +184,9 @@ function BookingSubNav({ primaryTour, pricing, locale, onPayClick, isProcessing 
               onClick={onPayClick}
               disabled={isProcessing}
               type="button"
-              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-extrabold uppercase tracking-widest bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-stone-950 shadow-md shadow-amber-900/20 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+              className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-sm font-extrabold tracking-wide bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] text-stone-950 shadow-md shadow-amber-900/20 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
             >
-              {isProcessing ? (locale === 'es' ? 'Procesando...' : 'Processing...') : `RESERVAR • $${pricing.total.toLocaleString("en-US")} USD`}
+              {isProcessing ? processingLabel : ctaLabel}
             </button>
           </div>
         </div>
@@ -963,7 +965,11 @@ export function BookingWizard() {
   const [adults, setAdults] = useState<number>(2);
   const [children, setChildren] = useState<number>(0);
   const [contactInfo, setContactInfo] = useState({ name: '', email: '', phone: '', notes: '' });
+  const [phoneTouched, setPhoneTouched] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const tb = useTranslations('bookingConversion');
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const phoneIsValid = isPlausiblePhone(contactInfo.phone);
 
   // Reset isProcessing if user navigates back to this page
   useEffect(() => {
@@ -1167,11 +1173,19 @@ export function BookingWizard() {
       return;
     }
 
+    if (!isPlausiblePhone(contactInfo.phone)) {
+      setPhoneTouched(true);
+      contactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => phoneRef.current?.focus(), 300);
+      return;
+    }
+
     setIsProcessing(true);
     const resolvedContact = {
       ...contactInfo,
       name: currentName,
       email: currentEmail,
+      phone: contactInfo.phone.trim(),
     };
     saveStoredUserProfile(resolvedContact);
     const tourTitleStr = selectedTours.map(t => typeof t.title === 'string' ? t.title : (t.title?.es || t.title?.en || 'Tour')).join(' + ');
@@ -1197,6 +1211,7 @@ export function BookingWizard() {
           tourTitle: tourTitleStr,
           customerName: resolvedContact.name,
           customerEmail: resolvedContact.email,
+          customerPhone: resolvedContact.phone || '',
           travelDates: date || 'To be confirmed',
           passengersCount: totalTravelers,
           guestsCount: `${adults} Adults, ${children} Children`,
@@ -1218,8 +1233,10 @@ export function BookingWizard() {
       tourTitle: tourTitleStr,
       email: resolvedContact.email,
       name: resolvedContact.name,
+      phone: resolvedContact.phone || '',
       amount: String(pricing.total),
-      type: 'full',
+      // El checkout preselecciona el depósito del 30% cuando aún falta más de 30 días.
+      type: canPayDeposit(date) ? 'deposit' : 'full',
       ref: bookingRef,
       affiliateCode: affiliateRef || '',
       discountApplied: affiliateRef ? 'true' : 'false',
@@ -1250,12 +1267,30 @@ export function BookingWizard() {
     return dict;
   }, [locale]);
 
+  // Lo que se paga hoy: 30% si la salida es dentro de más de 30 días; si no, el total.
+  const payableTotal = affiliateRef ? Number((pricing.total * 0.9).toFixed(2)) : pricing.total;
+  const depositAllowed = canPayDeposit(date);
+  const payCtaLabel = depositAllowed
+    ? tb('ctaDeposit', { amount: formatUsd(depositAmount(payableTotal)) })
+    : tb('ctaFull', { amount: formatUsd(payableTotal) });
+  const tierLabel = selectedTier === 'vip' || isLuxury ? 'Vermilion VIP (4★)' : 'Vermilion Club (3★)';
+  const selectionTitle = selectedTours.map((t) => getLocalizedText(t.title, locale)).join(' + ');
+  const askWaHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    tb('waMessage', { tour: selectionTitle, tier: tierLabel, date: date || tb('dateTbd'), adults, children })
+  )}`;
+
+  // La barra fija inferior (< lg) avisa a otros elementos fijos (píldora de cookies) para que suban.
+  useEffect(() => {
+    document.documentElement.dataset.vrBottomBar = 'lg';
+    return () => { delete document.documentElement.dataset.vrBottomBar; };
+  }, []);
+
   type CTAState = { label: string; ref: React.RefObject<HTMLDivElement> | null; ready: boolean };
   const getMobileCTA = (): CTAState => {
     if (selectedTours.length === 0) return { label: w.selectTourPrompt || 'Select a tour above', ref: null, ready: false };
     if (!date) return { label: w.chooseDatePrompt || 'Step 2: Choose your travel date', ref: dateRef, ready: false };
     if (!contactInfo.name.trim() || !contactInfo.email.trim()) return { label: w.fillContactPrompt || 'Step 4: Fill in your contact details', ref: contactRef, ready: false };
-    return { label: `${w.proceedPayment || 'Proceed to Payment'} - $${pricing.total.toLocaleString('en-US')} USD`, ref: null, ready: true };
+    return { label: payCtaLabel, ref: null, ready: true };
   };
   const mobileCTA = getMobileCTA();
   const filteredTours = filterTours(mockTours, activeFilter).filter(t => isTourSelectable(t, activeSelection));
@@ -1269,7 +1304,14 @@ export function BookingWizard() {
 
   return (
     <>
-      <BookingSubNav primaryTour={selectedTours[0] || null} pricing={pricing} locale={locale} />
+      <BookingSubNav
+        primaryTour={selectedTours[0] || null}
+        locale={locale}
+        onPayClick={handleCheckout}
+        isProcessing={isProcessing}
+        ctaLabel={payCtaLabel}
+        processingLabel={tb('processing')}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-8 pb-28 lg:pb-8">
         <div className="mb-5">
           <h2 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-1">
@@ -1744,6 +1786,27 @@ export function BookingWizard() {
                       />
                     </div>
                     <div className="space-y-1">
+                      <label htmlFor="booking-phone" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{tb('phoneLabel')}</label>
+                      <input
+                        ref={phoneRef}
+                        id="booking-phone"
+                        name="phone"
+                        type="tel"
+                        autoComplete="tel"
+                        inputMode="tel"
+                        value={contactInfo.phone}
+                        onChange={(e) => handleContactChange('phone', e.target.value)}
+                        onBlur={() => setPhoneTouched(true)}
+                        placeholder={tb('phonePlaceholder')}
+                        aria-invalid={phoneTouched && !phoneIsValid}
+                        aria-describedby="booking-phone-help"
+                        className={`w-full bg-white dark:bg-zinc-950 border rounded-xl px-3 py-2 text-sm text-zinc-900 dark:text-white focus:outline-none focus:ring-2 ${phoneTouched && !phoneIsValid ? 'border-rose-400 focus:ring-rose-500' : 'border-zinc-200 dark:border-zinc-800 focus:ring-emerald-500'}`}
+                      />
+                      <p id="booking-phone-help" className={`text-[11px] ${phoneTouched && !phoneIsValid ? 'text-rose-600 font-medium' : 'text-zinc-500'}`} role={phoneTouched && !phoneIsValid ? 'alert' : undefined}>
+                        {phoneTouched && !phoneIsValid ? tb('phoneInvalid') : tb('phoneHint')}
+                      </p>
+                    </div>
+                    <div className="space-y-1">
                       <label htmlFor="booking-notes" className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">{w.specialRequests}</label>
                       <textarea
                         id="booking-notes"
@@ -1868,7 +1931,9 @@ export function BookingWizard() {
             </div>
           </div>
 
-          <div className="lg:col-span-4 sticky top-24 self-start">
+          {/* Columna fija con scroll propio: el resumen + confianza + "¿Dudas?" no caben siempre en pantalla */}
+          <div className="lg:col-span-4 lg:sticky lg:top-24 self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:overscroll-contain lg:pr-1 custom-scrollbar">
+
             <PriceCalculator
               tours={selectedTours}
               pricing={pricing}
@@ -1884,22 +1949,37 @@ export function BookingWizard() {
               canContinue={isFormComplete()}
               isProcessing={isProcessing}
               affiliateRef={affiliateRef}
+              payCtaLabel={payCtaLabel}
             />
+            {selectedTours.length > 0 && (
+              <AskBeforeBooking
+                className="mt-4"
+                tourId={selectedTours.map((t) => t.id).join(',')}
+                tourTitle={selectionTitle}
+                tierLabel={tierLabel}
+                date={date || null}
+                adults={adults}
+                children={children}
+                contact={contactInfo}
+                placement="booking_page"
+                stacked
+              />
+            )}
           </div>
         </div>
 
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 p-4 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800 shadow-2xl">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 py-3 pl-3 pr-[68px] bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md border-t border-zinc-200 dark:border-zinc-800 shadow-2xl" style={{ paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))' }}>
+          <div className="flex items-center gap-2">
+          <div className="min-w-0 flex-1">
           {isProcessing ? (
             <button disabled className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-zinc-200 dark:bg-zinc-800 text-zinc-500 font-bold text-xs uppercase tracking-wider transition-all duration-300 border-none">
               <Loader2 className="w-4 h-4 animate-spin shrink-0" />
-              <span className="truncate">{locale === 'es' ? 'Procesando...' : (locale === 'zh' ? '处理中...' : (locale === 'ja' ? '処理中...' : 'Processing...'))}</span>
+              <span className="truncate">{tb('processing')}</span>
             </button>
           ) : mobileCTA.ready ? (
-            <button onClick={handleCheckout} disabled={isProcessing} className="w-full relative overflow-hidden flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-[1.02] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none">
+            <button onClick={handleCheckout} disabled={isProcessing} className="w-full relative overflow-hidden flex items-center justify-center gap-1.5 px-2 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-[13px] whitespace-nowrap shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-[1.02] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none">
                 <span className="absolute inset-0 bg-white/20 skew-x-[45deg] -translate-x-[150%] animate-[shine_2s_ease-in-out_infinite]" />
-              <Lock className="w-4 h-4 shrink-0" />
               <span className="truncate">{mobileCTA.label}</span>
-              <ArrowRight className="w-4 h-4 shrink-0 group-hover:translate-x-1 transition-transform" />
             </button>
           ) : (
             <button onClick={() => { if (mobileCTA.ref?.current) { mobileCTA.ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' }); } }} className="w-full flex items-center justify-center gap-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-semibold py-4 rounded-2xl text-sm transition-all border border-zinc-200 dark:border-zinc-700">
@@ -1907,6 +1987,18 @@ export function BookingWizard() {
               {mobileCTA.ref && <ArrowRight className="w-4 h-4 text-emerald-600" />}
             </button>
           )}
+          </div>
+          <a
+            href={askWaHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-lead-placement="booking_mobile_bar"
+            aria-label={tb('whatsappAria')}
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#25D366]/50 bg-[#25D366]/10 text-[#128C7E]"
+          >
+            <MessageCircle className="h-5 w-5" aria-hidden="true" />
+          </a>
+          </div>
           {selectedTours.length > 0 && !mobileCTA.ready && (
             <p className="text-center text-[10px] text-zinc-400 mt-1.5">{selectedTours.length} tour{selectedTours.length > 1 ? 's' : ''} {w.selectedExpeditions}</p>
           )}

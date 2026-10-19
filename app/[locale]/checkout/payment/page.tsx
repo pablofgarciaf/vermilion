@@ -42,6 +42,8 @@ import { PayPalCheckoutButton } from '@/components/checkout/PayPalCheckoutButton
 import { generateTravelVoucherPDF } from '@/lib/voucherPdfGenerator';
 import { db } from '@/lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import { DEPOSIT_RATE, canPayDeposit } from '@/data/bookingTerms';
+import { BookingTrustPanel } from '@/components/booking/BookingTrustPanel';
 
 // ─────────────────────────────────────────────
 // 8-LANGUAGE DICTIONARY FOR CHECKOUT & PAYMENT
@@ -799,8 +801,11 @@ export default function CheckoutPaymentPage() {
   const discountSavings = discountApplied ? Number((initialAmount - finalAmount).toFixed(2)) : 0;
 
   // Deposit vs Full Payment
-  const [paymentMode, setPaymentMode] = useState<'full' | 'deposit'>('full');
-  const minimumDeposit = Number((finalAmount * 0.3).toFixed(2));
+  // Si viene de la reserva con el 30% (type=deposit) y aún faltan más de 30 días, se preselecciona el depósito.
+  const [paymentMode, setPaymentMode] = useState<'full' | 'deposit'>(
+    searchParams.get('type') === 'deposit' && canPayDeposit(travelDate) ? 'deposit' : 'full'
+  );
+  const minimumDeposit = Number((finalAmount * DEPOSIT_RATE).toFixed(2));
   const [customDepositAmount, setCustomDepositAmount] = useState<string>(minimumDeposit.toString());
   const depositValue = Number(customDepositAmount) || minimumDeposit;
   const isDepositValid = depositValue >= minimumDeposit && depositValue <= finalAmount;
@@ -1259,6 +1264,8 @@ export default function CheckoutPaymentPage() {
                     }}
                   />
                 </div>
+
+                <BookingTrustPanel />
 
                 <div className="pt-3 border-t border-stone-100 dark:border-white/5 flex items-center justify-between text-[11px] text-stone-500 dark:text-zinc-400">
                   <div className="flex items-center gap-1">

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
@@ -16,6 +17,10 @@ const TripAdvisorReviews = dynamic(
 import { Button } from '@/components/ui/Button';
 import { ExpeditionFacts } from '@/components/tours/ExpeditionFacts';
 import { DownloadPDFButton } from '@/components/tours/DownloadPDFButton';
+import { TourPriceSummary } from '@/components/tours/TourPriceSummary';
+import { TourMobileBookingBar } from '@/components/tours/TourMobileBookingBar';
+import { AskBeforeBooking } from '@/components/booking/AskBeforeBooking';
+import { hasGalapagosFees, TRIPADVISOR_RATING, TRIPADVISOR_REVIEW_COUNT, TRIPADVISOR_URL } from '@/data/bookingTerms';
 import {
   MapPin,
   Clock,
@@ -225,6 +230,9 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
   const priceClub = tour.price3Star || tour.price || 1050;
   const priceVip = tour.price4Star || Math.round(priceClub * 1.15);
   const isDailyTour = tour.durationDays === 1;
+  const galapagosFees = hasGalapagosFees(tour.exclusions as Array<string | Record<string, string>> | undefined);
+  const clubLabel = isDailyTour ? title : 'Vermilion Club (3★)';
+  const tb = await getTranslations({ locale, namespace: 'bookingConversion' });
 
   // Google exige URLs absolutas en `image` y `offers.url`; las rutas relativas (/images/...)
   // se reportan como "URL no valida" en Rich Results y en el validador de schema.org.
@@ -264,7 +272,10 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
   return (
     <>
       <TourSubNav title={title} duration={duration} tour={tour} locale={locale} />
-      <ReservationBannerWrapper tourId={tour.id} locale={locale} />
+      {/* useSearchParams() dentro: Suspense evita que toda la ficha pase a render de cliente */}
+      <Suspense fallback={null}>
+        <ReservationBannerWrapper tourId={tour.id} locale={locale} />
+      </Suspense>
 
       {/* Padding superior MUCHO más amplio (pt-32 / pt-40) para separar del Navbar */}
       <div className="relative bg-zinc-50 dark:bg-zinc-950 min-h-screen pt-32 sm:pt-40 lg:pt-36">
@@ -292,30 +303,24 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                     <span>{duration}</span>
                   </span>
                   <span>&bull;</span>
-                  <span className="flex items-center gap-1 font-semibold text-amber-500">
+                  <a
+                    href={TRIPADVISOR_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 font-semibold text-amber-500 hover:underline underline-offset-2"
+                  >
                     <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
-                    <span>{tour.rating}</span>
-                    {tour.reviewsCount && (
-                      <span className="text-zinc-500 dark:text-zinc-400 font-normal">
-                        ({tour.reviewsCount} {getLocalizedText('opiniones verificadas', locale)})
-                      </span>
-                    )}
-                  </span>
+                    <span>{TRIPADVISOR_RATING}</span>
+                    <span className="text-zinc-500 dark:text-zinc-400 font-normal">
+                      ({tb('reviewsLink', { count: TRIPADVISOR_REVIEW_COUNT })})
+                    </span>
+                  </a>
                   <span>&bull;</span>
                   <span className="inline-flex items-center gap-1.5 font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-100/80 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full text-[11px]">
                     <Zap className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 animate-pulse" />
                     <span>{EXPRESS_DEPARTURE_PILL[locale] || EXPRESS_DEPARTURE_PILL.en}</span>
                   </span>
                 </div>
-
-                {isDailyTour && (
-                  <div className="flex items-baseline gap-2 pt-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">USD</span>
-                    <span className="font-serif text-4xl sm:text-5xl font-bold text-amber-600 dark:text-amber-400">
-                      ${priceClub.toLocaleString('en-US')}
-                    </span>
-                  </div>
-                )}
 
                 {tour.description && (
                   <p className="text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
@@ -325,7 +330,8 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
               </div>
 
               {/* Contenedor de Botones (Empujado al final con mt-auto, ahora estilizados y limpios) */}
-              <div className="mt-auto pt-10 lg:pt-14 pb-2">
+              <div className="mt-auto pt-8 lg:pt-10 pb-2 space-y-4">
+                <TourPriceSummary priceFrom={priceClub} galapagosFees={galapagosFees} />
                 {isDailyTour ? (
                   <Link
                     href={`/${locale}/booking?addTour=${tour.id}`}
@@ -348,7 +354,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                           <span>Vermilion Club (3★)</span>
                         </div>
                         <p className="text-base sm:text-lg font-extrabold text-white tracking-tight">
-                          ${priceClub.toLocaleString('en-US')} <span className="text-[10px] font-normal text-emerald-200">USD</span>
+                          ${priceClub.toLocaleString('en-US')} <span className="text-[10px] font-normal text-emerald-200">USD {tb('perPerson')}</span>
                         </p>
                       </div>
                       <ArrowRight className="w-5 h-5 text-emerald-300 transition-transform group-hover:translate-x-1" />
@@ -365,7 +371,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                           <span>Vermilion VIP (4★)</span>
                         </div>
                         <p className="text-base sm:text-lg font-extrabold text-zinc-950 tracking-tight">
-                          ${priceVip.toLocaleString('en-US')} <span className="text-[10px] font-bold text-zinc-800">USD</span>
+                          ${priceVip.toLocaleString('en-US')} <span className="text-[10px] font-bold text-zinc-800">USD {tb('perPerson')}</span>
                         </p>
                       </div>
                       <ArrowRight className="w-5 h-5 text-zinc-950 transition-transform group-hover:translate-x-1" />
@@ -373,6 +379,12 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
 
                   </div>
                 )}
+                <AskBeforeBooking
+                  tourId={tour.id}
+                  tourTitle={title}
+                  tierLabel={clubLabel}
+                  placement="tour_page"
+                />
               </div>
             </div>
 
@@ -445,7 +457,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
             )}
 
             {tour.exclusions && tour.exclusions.length > 0 && (
-              <div className="lg:col-span-1 bg-white dark:bg-zinc-900/90 p-6 sm:p-8 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
+              <div id="tour-exclusions" className="scroll-mt-32 lg:col-span-1 bg-white dark:bg-zinc-900/90 p-6 sm:p-8 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm space-y-4">
                 <h3 className="font-serif font-bold text-lg text-zinc-900 dark:text-white flex items-center gap-2">
                   <X className="w-5 h-5 text-rose-500" />
                   <span>{getLocalizedText('What is NOT Included?', locale)}</span>
@@ -469,8 +481,18 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
             />
           </div>
 
+          {/* Hueco para que la barra fija móvil no tape el final de la página */}
+          <div className="h-16 md:hidden" aria-hidden="true" />
         </div>
       </div>
+      <TourMobileBookingBar
+        locale={locale}
+        tourId={tour.id}
+        tourTitle={title}
+        tierLabel={clubLabel}
+        priceFrom={priceClub}
+        isDailyTour={isDailyTour}
+      />
     </>
   );
 }
