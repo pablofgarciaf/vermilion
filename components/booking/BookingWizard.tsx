@@ -1137,7 +1137,8 @@ export function BookingWizard() {
         minTwoPersonApplied: anyMinTwo,
         singleSupplementApplied: anySingleSupp,
         singleSupplementAmount: singleSuppAmount,
-        groupDiscountPercentage: adults + children >= 6 ? 0.05 : (adults + children >= 4 ? 0.02 : 0),
+        // El % mostrado sale del importe realmente aplicado en lib/pricing.ts (4+ = 5%, 8+ = 10%).
+        groupDiscountPercentage: tSub > 0 ? tDisc / tSub : 0,
         groupDiscountAmount: tDisc, total: tFinal
       });
     } else {
