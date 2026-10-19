@@ -290,5 +290,46 @@
     "barFrom": "Da",
     "barPerPerson": "/ persona",
     "whatsappAria": "Chiedi su WhatsApp"
+  },
+  "expeditionFacts": {
+    "title": "La spedizione in breve",
+    "activity": "Attività fisica",
+    "climate": "Clima medio",
+    "elevation": "Altitudine",
+    "wildlife": "Fauna simbolo",
+    "profiles": {
+      "combo": {
+        "level": "Moderata (livello 2/5)",
+        "desc": "Sentieri, escursioni nella foresta nebulosa, sbarchi asciutti e bagnati",
+        "climate": "14°C – 28°C (altopiani e clima marino)",
+        "elevation": "Da 0 m a 3.900 m (dal livello del mare a Quilotoa/Cotopaxi)"
+      },
+      "galapagos": {
+        "level": "Da facile a moderata (livello 2/5)",
+        "desc": "Passeggiate naturalistiche, escursioni tra crepacci vulcanici, snorkeling dalla spiaggia e traversate in barca",
+        "climate": "22°C – 29°C (marino subtropicale)",
+        "elevation": "Da 0 m a 860 m (altopiani di Santa Cruz)"
+      },
+      "mainland": {
+        "level": "Moderata (livello 2,5/5)",
+        "desc": "Trekking alle cascate, esperimenti sulla linea dell’equatore, canoa nella foresta pluviale",
+        "climate": "12°C – 26°C (primavera andina e Amazzonia tropicale)",
+        "elevation": "Da 500 m a 4.100 m (dal bacino amazzonico al passo di Papallacta)"
+      }
+    },
+    "species": {
+      "tortoise": "Tartarughe giganti",
+      "seaLion": "Leoni marini delle Galápagos",
+      "blueFootedBooby": "Sule dai piedi azzurri",
+      "marineIguana": "Iguane marine",
+      "caiman": "Caimani amazzonici",
+      "paiche": "Paiche (arapaima gigante)",
+      "penguin": "Pinguini delle Galápagos",
+      "reefShark": "Squali pinna bianca del reef",
+      "flamingo": "Fenicotteri",
+      "condor": "Condor andino",
+      "hummingbirdsToucans": "Colibrì e tucani",
+      "squirrelMonkey": "Scimmie scoiattolo"
+    }
   }
 }

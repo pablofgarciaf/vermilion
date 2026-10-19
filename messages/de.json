@@ -290,5 +290,46 @@
     "barFrom": "Ab",
     "barPerPerson": "/ Person",
     "whatsappAria": "Per WhatsApp fragen"
+  },
+  "expeditionFacts": {
+    "title": "Die Expedition auf einen Blick",
+    "activity": "Körperliche Aktivität",
+    "climate": "Durchschnittsklima",
+    "elevation": "Höhenbereich",
+    "wildlife": "Typische Tierwelt",
+    "profiles": {
+      "combo": {
+        "level": "Mittel (Stufe 2/5)",
+        "desc": "Wanderwege, Touren im Nebelwald, trockene und nasse Anlandungen",
+        "climate": "14°C – 28°C (Hochland & Meeresklima)",
+        "elevation": "0 m bis 3.900 m (Meeresspiegel bis Quilotoa/Cotopaxi)"
+      },
+      "galapagos": {
+        "level": "Leicht bis mittel (Stufe 2/5)",
+        "desc": "Naturwanderungen, Touren durch Vulkanspalten, Schnorcheln vom Strand und Bootsfahrten",
+        "climate": "22°C – 29°C (subtropisches Meeresklima)",
+        "elevation": "0 m bis 860 m (Hochland von Santa Cruz)"
+      },
+      "mainland": {
+        "level": "Mittel (Stufe 2,5/5)",
+        "desc": "Wanderungen zu Wasserfällen, Experimente am Äquator, Kanufahrten im Regenwald",
+        "climate": "12°C – 26°C (Andenfrühling & tropisches Amazonasgebiet)",
+        "elevation": "500 m bis 4.100 m (Amazonasbecken bis Papallacta-Pass)"
+      }
+    },
+    "species": {
+      "tortoise": "Riesenschildkröten",
+      "seaLion": "Galápagos-Seelöwen",
+      "blueFootedBooby": "Blaufußtölpel",
+      "marineIguana": "Meerechsen",
+      "caiman": "Amazonas-Kaimane",
+      "paiche": "Paiche (Riesen-Arapaima)",
+      "penguin": "Galápagos-Pinguine",
+      "reefShark": "Weißspitzen-Riffhaie",
+      "flamingo": "Flamingos",
+      "condor": "Andenkondor",
+      "hummingbirdsToucans": "Kolibris & Tukane",
+      "squirrelMonkey": "Totenkopfäffchen"
+    }
   }
 }

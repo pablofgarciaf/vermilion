@@ -290,5 +290,46 @@
     "barFrom": "From",
     "barPerPerson": "/ person",
     "whatsappAria": "Ask on WhatsApp"
+  },
+  "expeditionFacts": {
+    "title": "Expedition at a glance",
+    "activity": "Physical activity",
+    "climate": "Average climate",
+    "elevation": "Altitude range",
+    "wildlife": "Key wildlife",
+    "profiles": {
+      "combo": {
+        "level": "Moderate (level 2/5)",
+        "desc": "Walking trails, cloud forest hikes, dry & wet boat landings",
+        "climate": "14°C – 28°C (highlands & marine)",
+        "elevation": "0 m to 3,900 m (sea level to Quilotoa/Cotopaxi)"
+      },
+      "galapagos": {
+        "level": "Easy to moderate (level 2/5)",
+        "desc": "Nature walks, volcanic chasm hikes, beach snorkeling & boat journeys",
+        "climate": "22°C – 29°C (subtropical marine)",
+        "elevation": "0 m to 860 m (Santa Cruz highlands)"
+      },
+      "mainland": {
+        "level": "Moderate (level 2.5/5)",
+        "desc": "Waterfall treks, equatorial experiments, rainforest canoe navigation",
+        "climate": "12°C – 26°C (Andean spring & tropical Amazon)",
+        "elevation": "500 m to 4,100 m (Amazon Basin to Papallacta Pass)"
+      }
+    },
+    "species": {
+      "tortoise": "Giant tortoises",
+      "seaLion": "Galápagos sea lions",
+      "blueFootedBooby": "Blue-footed boobies",
+      "marineIguana": "Marine iguanas",
+      "caiman": "Amazon caimans",
+      "paiche": "Paiche (giant arapaima)",
+      "penguin": "Galápagos penguins",
+      "reefShark": "White-tip reef sharks",
+      "flamingo": "Flamingos",
+      "condor": "Andean condor",
+      "hummingbirdsToucans": "Hummingbirds & toucans",
+      "squirrelMonkey": "Squirrel monkeys"
+    }
   }
 }

@@ -290,5 +290,46 @@
     "barFrom": "Dès",
     "barPerPerson": "/ pers.",
     "whatsappAria": "Demander sur WhatsApp"
+  },
+  "expeditionFacts": {
+    "title": "L’expédition en un coup d’œil",
+    "activity": "Activité physique",
+    "climate": "Climat moyen",
+    "elevation": "Altitudes",
+    "wildlife": "Faune emblématique",
+    "profiles": {
+      "combo": {
+        "level": "Modérée (niveau 2/5)",
+        "desc": "Sentiers, randonnées en forêt de nuages, débarquements secs et humides",
+        "climate": "14°C – 28°C (Andes et climat marin)",
+        "elevation": "0 m à 3 900 m (du niveau de la mer au Quilotoa/Cotopaxi)"
+      },
+      "galapagos": {
+        "level": "Facile à modérée (niveau 2/5)",
+        "desc": "Balades nature, randonnées entre failles volcaniques, snorkeling depuis la plage et traversées en bateau",
+        "climate": "22°C – 29°C (marin subtropical)",
+        "elevation": "0 m à 860 m (hautes terres de Santa Cruz)"
+      },
+      "mainland": {
+        "level": "Modérée (niveau 2,5/5)",
+        "desc": "Randonnées vers les cascades, expériences sur la ligne de l’équateur, pirogue en forêt amazonienne",
+        "climate": "12°C – 26°C (printemps andin et Amazonie tropicale)",
+        "elevation": "500 m à 4 100 m (du bassin amazonien au col de Papallacta)"
+      }
+    },
+    "species": {
+      "tortoise": "Tortues géantes",
+      "seaLion": "Otaries des Galápagos",
+      "blueFootedBooby": "Fous à pieds bleus",
+      "marineIguana": "Iguanes marins",
+      "caiman": "Caïmans d’Amazonie",
+      "paiche": "Paiche (arapaïma géant)",
+      "penguin": "Manchots des Galápagos",
+      "reefShark": "Requins à pointe blanche",
+      "flamingo": "Flamants roses",
+      "condor": "Condor des Andes",
+      "hummingbirdsToucans": "Colibris et toucans",
+      "squirrelMonkey": "Singes-écureuils"
+    }
   }
 }

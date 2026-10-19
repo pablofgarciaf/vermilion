@@ -290,5 +290,46 @@
     "barFrom": "料金",
     "barPerPerson": "/ 1名",
     "whatsappAria": "WhatsAppで質問する"
+  },
+  "expeditionFacts": {
+    "title": "探検の概要",
+    "activity": "体力レベル",
+    "climate": "平均気温",
+    "elevation": "標高",
+    "wildlife": "代表的な野生動物",
+    "profiles": {
+      "combo": {
+        "level": "中程度（レベル2/5）",
+        "desc": "トレイル散策、雲霧林ハイキング、ドライ／ウェット上陸",
+        "climate": "14°C～28°C（高地・海洋性気候）",
+        "elevation": "0m～3,900m（海抜0mからキロトア／コトパクシまで）"
+      },
+      "galapagos": {
+        "level": "易しい～中程度（レベル2/5）",
+        "desc": "自然散策、火山の裂け目ハイキング、ビーチでのシュノーケリング、ボート移動",
+        "climate": "22°C～29°C（亜熱帯海洋性気候）",
+        "elevation": "0m～860m（サンタクルス島高地）"
+      },
+      "mainland": {
+        "level": "中程度（レベル2.5/5）",
+        "desc": "滝へのトレッキング、赤道での実験体験、熱帯雨林のカヌー",
+        "climate": "12°C～26°C（アンデスの春・アマゾンの熱帯気候）",
+        "elevation": "500m～4,100m（アマゾン流域からパパヤクタ峠まで）"
+      }
+    },
+    "species": {
+      "tortoise": "ゾウガメ",
+      "seaLion": "ガラパゴスアシカ",
+      "blueFootedBooby": "アオアシカツオドリ",
+      "marineIguana": "ウミイグアナ",
+      "caiman": "アマゾンのカイマン",
+      "paiche": "ピラルク（巨大魚）",
+      "penguin": "ガラパゴスペンギン",
+      "reefShark": "ネムリブカ",
+      "flamingo": "フラミンゴ",
+      "condor": "アンデスコンドル",
+      "hummingbirdsToucans": "ハチドリとオオハシ",
+      "squirrelMonkey": "リスザル"
+    }
   }
 }

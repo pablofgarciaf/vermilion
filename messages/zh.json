@@ -290,5 +290,46 @@
     "barFrom": "起价",
     "barPerPerson": "/ 人",
     "whatsappAria": "通过 WhatsApp 咨询"
+  },
+  "expeditionFacts": {
+    "title": "探险技术档案",
+    "activity": "体力要求",
+    "climate": "平均气候",
+    "elevation": "海拔跨度",
+    "wildlife": "重点代表物种",
+    "profiles": {
+      "combo": {
+        "level": "中等 (2/5级)",
+        "desc": "徒步小径、云雾森林漫步与干湿式登陆",
+        "climate": "14°C - 28°C (高山与海洋气候)",
+        "elevation": "0米至3,900米 (海平面至基洛托阿/科托帕希)"
+      },
+      "galapagos": {
+        "level": "轻松至中等 (2/5级)",
+        "desc": "自然漫步、火山峡谷探索、海滩浮潜与快艇航行",
+        "climate": "22°C - 29°C (亚热带海洋气候)",
+        "elevation": "0米至860米 (圣克鲁斯高地)"
+      },
+      "mainland": {
+        "level": "中等 (2.5/5级)",
+        "desc": "瀑布徒步、赤道科学实验与亚马逊独木舟航行",
+        "climate": "12°C - 26°C (安第斯春季与热带雨林)",
+        "elevation": "500米至4,100米 (亚马逊盆地至帕帕亚克塔山口)"
+      }
+    },
+    "species": {
+      "tortoise": "加拉帕戈斯巨龟",
+      "seaLion": "加拉帕戈斯海狮",
+      "blueFootedBooby": "蓝脚鲣鸟",
+      "marineIguana": "海鬣蜥",
+      "caiman": "亚马逊凯门鳄",
+      "paiche": "巨骨舌鱼",
+      "penguin": "加拉帕戈斯企鹅",
+      "reefShark": "白顶礁鲨",
+      "flamingo": "粉红火烈鸟",
+      "condor": "安第斯神鹰",
+      "hummingbirdsToucans": "蜂鸟与巨嘴鸟",
+      "squirrelMonkey": "松鼠猴"
+    }
   }
 }

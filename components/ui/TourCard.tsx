@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { Clock, MapPin, Star, ArrowRight } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { TRIPADVISOR_RATING, TRIPADVISOR_REVIEW_COUNT } from '@/data/bookingTerms';
 
 // Próxima salida sugerida: primer día del mes siguiente en el idioma del visitante.
 // No inventa una fecha concreta que después el cliente no encuentre en calendario;
@@ -123,10 +124,9 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
 
           <div className="flex items-center gap-1 drop-shadow-sm">
             <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-            <span className="font-bold">{tour.rating}</span>
-            {tour.reviewsCount && (
-              <span className="text-white/70 text-[10px]">({tour.reviewsCount})</span>
-            )}
+            {/* Valoración pública de TripAdvisor (fuente única: data/bookingTerms.ts) */}
+            <span className="font-bold">{TRIPADVISOR_RATING}</span>
+            <span className="text-white/70 text-[10px]">({TRIPADVISOR_REVIEW_COUNT})</span>
           </div>
         </div>
 

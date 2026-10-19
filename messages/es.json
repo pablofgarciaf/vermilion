@@ -290,5 +290,46 @@
     "barFrom": "Desde",
     "barPerPerson": "/ persona",
     "whatsappAria": "Preguntar por WhatsApp"
+  },
+  "expeditionFacts": {
+    "title": "Ficha técnica de expedición",
+    "activity": "Actividad física",
+    "climate": "Clima promedio",
+    "elevation": "Rango de altitud",
+    "wildlife": "Fauna emblemática",
+    "profiles": {
+      "combo": {
+        "level": "Moderado (nivel 2/5)",
+        "desc": "Senderos, caminatas en bosque nublado y desembarques secos y húmedos",
+        "climate": "14°C – 28°C (Andes y clima marino)",
+        "elevation": "0 m a 3.900 m (del nivel del mar al Quilotoa/Cotopaxi)"
+      },
+      "galapagos": {
+        "level": "Fácil a moderado (nivel 2/5)",
+        "desc": "Caminatas naturales, senderos entre grietas volcánicas, snorkel en playas y navegación en lancha",
+        "climate": "22°C – 29°C (subtropical marino)",
+        "elevation": "0 m a 860 m (parte alta de Santa Cruz)"
+      },
+      "mainland": {
+        "level": "Moderado (nivel 2,5/5)",
+        "desc": "Caminatas a cascadas, experimentos en la línea ecuatorial y navegación en canoa por la selva",
+        "climate": "12°C – 26°C (primavera andina y Amazonía tropical)",
+        "elevation": "500 m a 4.100 m (de la cuenca amazónica al paso de Papallacta)"
+      }
+    },
+    "species": {
+      "tortoise": "Tortugas gigantes",
+      "seaLion": "Lobos marinos de Galápagos",
+      "blueFootedBooby": "Piqueros de patas azules",
+      "marineIguana": "Iguanas marinas",
+      "caiman": "Caimanes amazónicos",
+      "paiche": "Paiche (arapaima gigante)",
+      "penguin": "Pingüinos de Galápagos",
+      "reefShark": "Tiburones de punta blanca",
+      "flamingo": "Flamencos",
+      "condor": "Cóndor andino",
+      "hummingbirdsToucans": "Colibríes y tucanes",
+      "squirrelMonkey": "Monos ardilla"
+    }
   }
 }
