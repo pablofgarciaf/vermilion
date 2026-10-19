@@ -5,6 +5,7 @@ import { Compass, ShieldCheck, Heart, Quote, CheckCircle2, ChevronLeft, ChevronR
 import { useSettings } from '@/hooks/useSettings';
 import { useTranslations } from 'next-intl';
 import { mockReviews } from '@/data/mock';
+import { TRIPADVISOR_REVIEW_COUNT } from '@/data/bookingTerms';
 import { isBotOrCrawler } from '@/utils/isBot';
 import { prefersReducedMotion } from '@/utils/motion';
 
@@ -19,6 +20,7 @@ function TripAdvisorSvg({ className = 'w-4 h-4' }: { className?: string }) {
 export function CombinedExperienceSection() {
   const { settings } = useSettings();
   const t = useTranslations('experience');
+  const tb = useTranslations('bookingConversion');
   const reviews = mockReviews;
   const total = reviews.length;
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -113,7 +115,7 @@ export function CombinedExperienceSection() {
                   <TripAdvisorSvg className="w-3.5 h-3.5 text-emerald-600" />
                   <span>TripAdvisor Rating ↗</span>
                 </div>
-                <div className="text-[10px] text-zinc-500">Based on 51 Excellent Reviews</div>
+                <div className="text-[10px] text-zinc-500">{tb('reviewsBasedOn', { count: TRIPADVISOR_REVIEW_COUNT })}</div>
               </div>
             </a>
 
