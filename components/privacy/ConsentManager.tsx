@@ -197,7 +197,7 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
       <button
         type="button"
         onClick={() => setVisible(true)}
-      className="fixed bottom-4 left-4 z-[70] rounded-full border border-zinc-700 bg-zinc-950/90 px-4 py-2 text-xs font-bold text-white shadow-xl backdrop-blur-md transition hover:border-emerald-400 hover:text-emerald-300"
+      className="fixed bottom-4 left-4 z-[70] rounded-full border border-zinc-700 bg-zinc-950/90 px-4 py-2 text-xs font-bold text-white shadow-xl backdrop-blur-md transition hover:border-emerald-400 hover:text-emerald-300 max-md:[html[data-vr-bottom-bar=md]_&]:bottom-[84px] max-lg:[html[data-vr-bottom-bar=lg]_&]:bottom-[140px]"
         aria-label={t.title}
       >
         {t.manage}
@@ -206,32 +206,35 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
   }
 
   return (
+    // Franja compacta abajo: no tapa la galería ni el contenido. Las dos opciones tienen
+    // exactamente el mismo estilo (mismo peso visual), como exige el consentimiento libre.
     <section
       aria-label={t.title}
-      className="fixed inset-x-4 bottom-4 z-[80] mx-auto max-w-3xl rounded-3xl border border-white/15 bg-zinc-950/95 p-5 text-white shadow-2xl backdrop-blur-md md:inset-x-auto md:right-10 md:bottom-28 md:mx-0 md:max-w-md md:p-4 xl:right-16 xl:bottom-32"
+      className="fixed inset-x-0 bottom-0 z-[80] border-t border-white/10 bg-zinc-950/95 text-white shadow-[0_-8px_30px_rgba(0,0,0,0.35)] backdrop-blur-md"
+      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
-      <div className="flex flex-col gap-4">
-        <div className="space-y-2">
-          <h2 className="text-base font-semibold tracking-wide">{t.title}</h2>
-          <p className="text-sm leading-relaxed text-zinc-200">{t.body}</p>
-          <a href={policyHref} className="text-sm font-semibold text-emerald-300 underline-offset-4 hover:underline">
+      <div className="mx-auto flex max-w-6xl flex-col gap-2.5 px-4 py-3 md:flex-row md:items-center md:gap-6">
+        <p className="text-xs leading-snug text-zinc-200 md:text-[13px]">
+          <span className="font-semibold text-white">{t.title}.</span>{' '}
+          {t.body}{' '}
+          <a href={policyHref} className="font-semibold text-emerald-300 underline underline-offset-2 hover:text-emerald-200">
             {t.policy}
           </a>
-        </div>
-        <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-          <button
-            type="button"
-            onClick={() => saveChoice('accepted')}
-            className="rounded-full bg-emerald-500 px-5 py-3 text-sm font-bold text-zinc-950 transition hover:bg-emerald-300"
-          >
-            {t.accept}
-          </button>
+        </p>
+        <div className="grid shrink-0 grid-cols-2 gap-2 md:flex">
           <button
             type="button"
             onClick={() => saveChoice('essential')}
-            className="rounded-full border border-white/20 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10"
+            className="min-h-10 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 md:whitespace-nowrap"
           >
             {t.essential}
+          </button>
+          <button
+            type="button"
+            onClick={() => saveChoice('accepted')}
+            className="min-h-10 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 md:whitespace-nowrap"
+          >
+            {t.accept}
           </button>
         </div>
       </div>
