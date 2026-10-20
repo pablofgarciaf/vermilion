@@ -16,11 +16,17 @@ export const POST = withValidation(paypalCreateOrderSchema, async (_req, _ctx, d
         if (docSnap.exists()) {
           const bookingData = docSnap.data();
           if (bookingData && bookingData.totalAmount) {
-             if (Number(bookingData.totalAmount) !== Number(data.amount)) {
-                console.error(`[SECURITY WARNING] Price manipulation detected for ${data.bookingRef}. Expected ${bookingData.totalAmount}, got ${data.amount}.`);
-                // Enforce the backend price
-                verifiedAmount = Number(bookingData.totalAmount);
-             }
+            const total = Number(bookingData.totalAmount);
+            const minDeposit = Number((total * 0.30).toFixed(2));
+            const requested = Number(data.amount);
+
+            // Permite tanto el pago total como un depósito legítimo (mínimo 30% hasta el 100%)
+            if (requested >= (minDeposit - 1) && requested <= (total + 1)) {
+              verifiedAmount = requested;
+            } else {
+              console.error(`[SECURITY WARNING] Invalid payment amount for ${data.bookingRef}. Allowed range [${minDeposit}, ${total}], got ${requested}. Enforcing total.`);
+              verifiedAmount = total;
+            }
           }
         }
       } catch(err) {

@@ -30,8 +30,8 @@ export const POST = withValidation(checkoutSchema, async (request, _ctx, data) =
   const host = request.headers.get('x-forwarded-host') || request.headers.get('host');
   const proto = request.headers.get('x-forwarded-proto') || (host?.includes('localhost') ? 'http' : 'https');
   const detectedOrigin = host ? `${proto}://${host}` : 'http://localhost:3005';
-  const baseUrl = (process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_BASE_URL)
-    ? process.env.NEXT_PUBLIC_BASE_URL
+  const baseUrl = (process.env.NODE_ENV === 'production')
+    ? (process.env.NEXT_PUBLIC_BASE_URL && !process.env.NEXT_PUBLIC_BASE_URL.includes('localhost') ? process.env.NEXT_PUBLIC_BASE_URL : 'https://www.vermilionroutes.com')
     : (process.env.NEXT_PUBLIC_BASE_URL || detectedOrigin);
 
   const finalAmountUSD = amount && amount > 0 ? amount : 500;
