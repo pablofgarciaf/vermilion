@@ -436,7 +436,7 @@ export default async function AboutPage({ params }: PageProps) {
       {/* HERO SECTION - CINEMATIC VIEWPORT IMPACT */}
       <section className="relative w-full h-[95svh] min-h-[580px] sm:min-h-[620px] md:min-h-[650px] overflow-hidden">        <div className="absolute inset-0 pointer-events-none">
         <Image quality={100}
-          src="/images/tours/16-9/galapagos-baltra-island-16-9.webp"
+          src="/images/tours/16-9/galapagos-lobo-marino-16-9.webp"
           alt="Galapagos Seascape"
           fill
           priority

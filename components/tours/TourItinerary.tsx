@@ -195,10 +195,10 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
     if (combined.includes('mitad del mundo') || combined.includes('intiñan') || combined.includes('intinan') || combined.includes('equatorial') || combined.includes('ecuatorial')) return '/images/tours/16-9/mitad-del-mundo-16-9.webp';
     if (combined.includes('quito') || combined.includes('san francisco') || combined.includes('colonial') || combined.includes('plaza grande') || combined.includes('compañía') || combined.includes('compania')) return '/images/tours/16-9/quito-colonial-16-9.webp';
     if (combined.includes('isabela') || combined.includes('tintoreras') || combined.includes('sierra negra')) return '/images/tours/16-9/isabela-island-16-9.webp';
-    if (combined.includes('tortuga') || combined.includes('santa cruz') || combined.includes('charles darwin')) return '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp';
+    if (combined.includes('tortuga') || combined.includes('santa cruz') || combined.includes('charles darwin')) return '/images/tours/16-9/galapagos-tortuga-gigante-16-9.1.webp';
     if (combined.includes('grietas') || combined.includes('puerto ayora')) return '/images/tours/16-9/galapagos-las-grietas-16-9.webp';
-    if (combined.includes('baltra')) return '/images/tours/16-9/galapagos-baltra-island-16-9.webp';
-    if (combined.includes('santa fe') || combined.includes('lobo marino') || combined.includes('sea lion')) return '/images/tours/16-9/santa-fe-island-16-9.webp';
+    if (combined.includes('baltra')) return '/images/tours/16-9/galapagos-tortuga-bay-16-9.1.webp';
+    if (combined.includes('santa fe') || combined.includes('lobo marino') || combined.includes('sea lion')) return '/images/tours/16-9/galapagos-lobo-marino-16-9.webp';
     // No verified photo exists for these locations: omit the image rather than show an unrelated one.
     if (combined.includes('guayaquil')) return '';
     return '/images/tours/16-9/chimborazo-volcano-16-9.webp';

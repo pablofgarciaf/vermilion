@@ -223,23 +223,23 @@ export function CombinedExperienceSection() {
                     </div>
 
                     <div className="flex items-center justify-between gap-2.5 relative z-10 pt-3 border-t border-zinc-100 dark:border-zinc-800/60 mt-auto shrink-0">
-                      {/* Autor con foto real y enlace directo a su perfil de viajero en TripAdvisor */}
+                      {/* Autor con foto real ampliada y enlace directo a su perfil de viajero en TripAdvisor */}
                       <a
                         href={rev.profileUrl || rev.reviewUrl || tripAdvisorUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         title={labels.verifyProfile(rev.author)}
                         aria-label={labels.verifyProfile(rev.author)}
-                        className="group/author flex items-center gap-2.5 min-w-0"
+                        className="group/author flex items-center gap-3 sm:gap-3.5 min-w-0"
                       >
-                        <div className="relative shrink-0 w-9 h-9 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-200 font-bold text-xs flex items-center justify-center border-2 border-emerald-500/40 group-hover/author:border-emerald-500 group-hover/author:scale-105 transition-all shadow-xs overflow-visible">
+                        <div className="relative shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-200 font-bold text-base flex items-center justify-center border-2 border-emerald-500/50 group-hover/author:border-emerald-500 group-hover/author:scale-105 transition-all shadow-md overflow-visible">
                           <span className="select-none" aria-hidden="true">{rev.author.charAt(0)}</span>
                           <img
                             src={rev.avatarUrl || `/images/reviews/${rev.id}.webp`}
                             alt={`Foto de perfil de ${rev.author} en TripAdvisor`}
-                            width={36}
-                            height={36}
-                            className="absolute inset-0 w-full h-full rounded-full object-cover"
+                            width={64}
+                            height={64}
+                            className="absolute inset-0 w-full h-full rounded-full object-cover shadow-inner"
                             loading="lazy"
                             decoding="async"
                             onError={(e) => {
@@ -247,22 +247,25 @@ export function CombinedExperienceSection() {
                             }}
                           />
                           <div
-                            className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 text-white flex items-center justify-center ring-2 ring-white dark:ring-zinc-900 z-10"
+                            className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center ring-2 ring-white dark:ring-zinc-900 z-10 shadow-xs"
                             title={labels.verifiedTraveler}
                           >
-                            <CheckCircle className="w-2.5 h-2.5" />
+                            <CheckCircle className="w-3.5 h-3.5 fill-current" />
                           </div>
                         </div>
                         <div className="min-w-0">
-                          <div className="font-bold text-xs text-zinc-900 dark:text-white leading-tight group-hover/author:text-emerald-600 dark:group-hover/author:text-emerald-400 group-hover/author:underline flex items-center gap-1">
+                          <div className="font-bold text-sm sm:text-base text-zinc-900 dark:text-white leading-tight group-hover/author:text-emerald-600 dark:group-hover/author:text-emerald-400 group-hover/author:underline flex items-center gap-1.5">
                             <span className="truncate">{rev.author}</span>
-                            <ExternalLink className="w-2.5 h-2.5 opacity-60 group-hover/author:opacity-100 transition-opacity shrink-0" />
+                            <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover/author:opacity-100 transition-opacity shrink-0" />
                           </div>
                           {rev.location && (
-                            <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-medium truncate">
+                            <div className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wider font-medium truncate mt-0.5">
                               {rev.location}
                             </div>
                           )}
+                          <div className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 mt-0.5">
+                            <span>TripAdvisor {labels.verified}</span>
+                          </div>
                         </div>
                       </a>
 
@@ -272,13 +275,13 @@ export function CombinedExperienceSection() {
                         rel="noopener noreferrer"
                         title={labels.verifyReview(rev.author)}
                         aria-label={labels.verifyReview(rev.author)}
-                        className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-0.5 shrink-0"
+                        className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:underline flex items-center gap-1 shrink-0 px-2.5 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-800/40 transition-colors"
                       >
                         <span>
                           {rev.photoCount ? `📷 ${rev.photoCount} · ` : ''}
                           {labels.viewOriginal}
                         </span>
-                        <ExternalLink className="w-3 h-3" />
+                        <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     </div>
                   </div>
