@@ -10,7 +10,7 @@ import { TRIPADVISOR_REVIEW_COUNT, TRIPADVISOR_URL } from '@/data/bookingTerms';
 import { isBotOrCrawler } from '@/utils/isBot';
 import { prefersReducedMotion } from '@/utils/motion';
 
-function TripAdvisorSvg({ className = 'w-4 h-4' }: { className?: string }) {
+export function TripAdvisorSvg({ className = 'w-4 h-4' }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="currentColor">
       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2.4c1.8 0 3.4.6 4.7 1.6-1.2.8-2.9 1.4-4.7 1.4s-3.5-.6-4.7-1.4C8.6 5 10.2 4.4 12 4.4zM6.8 9.2c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2S3.6 14.2 3.6 12.4s1.4-3.2 3.2-3.2zm10.4 0c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2-3.2-1.4-3.2-3.2 1.4-3.2 3.2-3.2zm-10.4 1.6c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zm10.4 0c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zM12 11.5c.8 0 1.5.4 1.7 1.1-.5.3-1.1.4-1.7.4s-1.2-.1-1.7-.4c.2-.7.9-1.1 1.7-1.1z" />
@@ -18,22 +18,26 @@ function TripAdvisorSvg({ className = 'w-4 h-4' }: { className?: string }) {
   );
 }
 
-interface TripAdvisorReviewsProps {
+export interface TripAdvisorReviewsProps {
   reviews?: Review[];
   title?: string;
   subtitle?: string;
   locale?: string;
 }
 
-
-const REVIEW_LABELS_I18N: Record<string, {
+export interface ReviewLabels {
   badge: string;
   defaultTitle: string;
   defaultSubtitle: string;
   verified: string;
   viewOriginal: string;
   ratingLabel: string;
-}> = {
+  verifyProfile: (name: string) => string;
+  verifyReview: (name: string) => string;
+  verifiedTraveler: string;
+}
+
+export const REVIEW_LABELS_I18N: Record<string, ReviewLabels> = {
   es: {
     badge: "Ganador Travelers' Choice 2026 de TripAdvisor ↗",
     defaultTitle: "Opiniones Verificadas de Viajeros",
@@ -41,6 +45,9 @@ const REVIEW_LABELS_I18N: Record<string, {
     verified: "Verificada en TripAdvisor ↗",
     viewOriginal: "Ver original",
     ratingLabel: "Puntuación TripAdvisor ↗",
+    verifyProfile: (name: string) => `Verificar perfil de ${name} en TripAdvisor ↗`,
+    verifyReview: (name: string) => `Verificar reseña original de ${name} para Vermilion Routes en TripAdvisor ↗`,
+    verifiedTraveler: "Viajero verificado en TripAdvisor",
   },
   en: {
     badge: "TripAdvisor Travelers' Choice 2026 Winner ↗",
@@ -49,6 +56,9 @@ const REVIEW_LABELS_I18N: Record<string, {
     verified: "Verified on TripAdvisor ↗",
     viewOriginal: "View original",
     ratingLabel: "TripAdvisor Rating ↗",
+    verifyProfile: (name: string) => `Verify ${name}'s profile on TripAdvisor ↗`,
+    verifyReview: (name: string) => `Verify original review by ${name} for Vermilion Routes on TripAdvisor ↗`,
+    verifiedTraveler: "Verified traveler on TripAdvisor",
   },
   fr: {
     badge: "Gagnant TripAdvisor Travelers' Choice 2026 ↗",
@@ -57,6 +67,9 @@ const REVIEW_LABELS_I18N: Record<string, {
     verified: "Vérifié sur TripAdvisor ↗",
     viewOriginal: "Voir l'original",
     ratingLabel: "Note TripAdvisor ↗",
+    verifyProfile: (name: string) => `Vérifier le profil de ${name} sur TripAdvisor ↗`,
+    verifyReview: (name: string) => `Vérifier l'avis original de ${name} pour Vermilion Routes sur TripAdvisor ↗`,
+    verifiedTraveler: "Voyageur vérifié sur TripAdvisor",
   },
   de: {
     badge: "TripAdvisor Travelers' Choice Gewinner 2026 ↗",
@@ -65,6 +78,9 @@ const REVIEW_LABELS_I18N: Record<string, {
     verified: "Auf TripAdvisor verifiziert ↗",
     viewOriginal: "Original ansehen",
     ratingLabel: "TripAdvisor Bewertung ↗",
+    verifyProfile: (name: string) => `Profil von ${name} auf TripAdvisor verifizieren ↗`,
+    verifyReview: (name: string) => `Originalbewertung von ${name} für Vermilion Routes auf TripAdvisor verifizieren ↗`,
+    verifiedTraveler: "Verifizierter Reisender auf TripAdvisor",
   },
   it: {
     badge: "Vincitore TripAdvisor Travelers' Choice 2026 ↗",
@@ -73,6 +89,9 @@ const REVIEW_LABELS_I18N: Record<string, {
     verified: "Verificato su TripAdvisor ↗",
     viewOriginal: "Vedi originale",
     ratingLabel: "Valutazione TripAdvisor ↗",
+    verifyProfile: (name: string) => `Verifica il profilo di ${name} su TripAdvisor ↗`,
+    verifyReview: (name: string) => `Verifica la recensione originale di ${name} per Vermilion Routes su TripAdvisor ↗`,
+    verifiedTraveler: "Viaggiatore verificato su TripAdvisor",
   },
   pt: {
     badge: "Vencedor TripAdvisor Travelers' Choice 2026 ↗",
@@ -81,6 +100,9 @@ const REVIEW_LABELS_I18N: Record<string, {
     verified: "Verificado no TripAdvisor ↗",
     viewOriginal: "Ver original",
     ratingLabel: "Avaliação TripAdvisor ↗",
+    verifyProfile: (name: string) => `Verificar perfil de ${name} no TripAdvisor ↗`,
+    verifyReview: (name: string) => `Verificar avaliação original de ${name} para Vermilion Routes no TripAdvisor ↗`,
+    verifiedTraveler: "Viajante verificado no TripAdvisor",
   },
   ja: {
     badge: "トリップアドバイザー トラベラーズチョイス2026受賞 ↗",
@@ -89,6 +111,9 @@ const REVIEW_LABELS_I18N: Record<string, {
     verified: "トリップアドバイザー確認済み ↗",
     viewOriginal: "原本を見る",
     ratingLabel: "トリップアドバイザー評価 ↗",
+    verifyProfile: (name: string) => `TripAdvisorで${name}のプロフィールを確認 ↗`,
+    verifyReview: (name: string) => `TripAdvisorで${name}によるVermilion Routesの原文レビューを確認 ↗`,
+    verifiedTraveler: "TripAdvisor認証済み旅行者",
   },
   zh: {
     badge: "猫途鹰 TripAdvisor 2026 年度旅行者之选 ↗",
@@ -97,6 +122,9 @@ const REVIEW_LABELS_I18N: Record<string, {
     verified: "猫途鹰 TripAdvisor 真实认证 ↗",
     viewOriginal: "查看原文",
     ratingLabel: "猫途鹰 TripAdvisor 评分 ↗",
+    verifyProfile: (name: string) => `在猫途鹰 TripAdvisor 上验证 ${name} 的真实档案 ↗`,
+    verifyReview: (name: string) => `在猫途鹰 TripAdvisor 上验证 ${name} 对 Vermilion Routes 的原始评价 ↗`,
+    verifiedTraveler: "猫途鹰 TripAdvisor 认证旅行者",
   },
 };
 
@@ -308,7 +336,8 @@ export function TripAdvisorReviews({
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/40 text-[10px] font-bold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 transition-colors"
-                        title="Verificar opinión real en TripAdvisor"
+                        title={labels.verifyReview(rev.author)}
+                        aria-label={labels.verifyReview(rev.author)}
                       >
                         <CheckCircle className="w-2.5 h-2.5 text-emerald-600 dark:text-emerald-400" />
                         <span>{labels.verified}</span>
@@ -325,42 +354,65 @@ export function TripAdvisorReviews({
                   </div>
 
                   <div className="flex items-center justify-between gap-2.5 relative z-10 pt-3 border-t border-zinc-100 dark:border-zinc-800/60 mt-auto shrink-0">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-bold text-xs flex items-center justify-center shrink-0 border border-emerald-500/20" aria-hidden="true">
-                        {rev.author.charAt(0)}
+                    {/* Autor con foto real ampliada y enlace directo a su perfil de viajero en TripAdvisor */}
+                    <a
+                      href={rev.profileUrl || verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={labels.verifyProfile(rev.author)}
+                      aria-label={labels.verifyProfile(rev.author)}
+                      className="group/author flex items-center gap-3 sm:gap-3.5 min-w-0"
+                    >
+                      <div className="relative shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-200 font-bold text-base flex items-center justify-center border-2 border-emerald-500/50 group-hover/author:border-emerald-500 group-hover/author:scale-105 transition-all shadow-md overflow-visible">
+                        <span className="select-none" aria-hidden="true">{rev.author.charAt(0)}</span>
+                        <img
+                          src={rev.avatarUrl || `/images/reviews/${rev.id}.webp`}
+                          alt={`Foto de perfil de ${rev.author} en TripAdvisor`}
+                          width={64}
+                          height={64}
+                          className="absolute inset-0 w-full h-full rounded-full object-cover shadow-inner"
+                          loading="lazy"
+                          decoding="async"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div
+                          className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center ring-2 ring-white dark:ring-zinc-900 z-10 shadow-xs"
+                          title={labels.verifiedTraveler}
+                        >
+                          <CheckCircle className="w-3.5 h-3.5 fill-current" />
+                        </div>
                       </div>
-                      <div>
-                        {rev.profileUrl ? (
-                          <a
-                            href={rev.profileUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-bold text-xs text-zinc-900 dark:text-white leading-tight hover:text-emerald-600 dark:hover:text-emerald-400 hover:underline"
-                          >
-                            {rev.author}
-                          </a>
-                        ) : (
-                          <div className="font-bold text-xs text-zinc-900 dark:text-white leading-tight">{rev.author}</div>
-                        )}
+                      <div className="min-w-0">
+                        <div className="font-bold text-sm sm:text-base text-zinc-900 dark:text-white leading-tight group-hover/author:text-emerald-600 dark:group-hover/author:text-emerald-400 group-hover/author:underline flex items-center gap-1.5">
+                          <span className="truncate">{rev.author}</span>
+                          <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover/author:opacity-100 transition-opacity shrink-0" />
+                        </div>
                         {rev.location && (
-                          <div className="text-[10px] text-zinc-500 uppercase tracking-wider font-medium">
+                          <div className="text-[11px] sm:text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wider font-medium truncate mt-0.5">
                             {rev.location}
                           </div>
                         )}
+                        <div className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 mt-0.5">
+                          <span>TripAdvisor {labels.verified}</span>
+                        </div>
                       </div>
-                    </div>
+                    </a>
 
                     <a
                       href={verifyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-0.5"
+                      title={labels.verifyReview(rev.author)}
+                      aria-label={labels.verifyReview(rev.author)}
+                      className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 hover:underline flex items-center gap-1 shrink-0 px-2.5 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-800/40 transition-colors"
                     >
                       <span>
                         {rev.photoCount ? `📷 ${rev.photoCount} · ` : ''}
                         {labels.viewOriginal}
                       </span>
-                      <ExternalLink className="w-3 h-3" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
                 </div>
