@@ -361,5 +361,24 @@
       "hummingbirdsToucans": "Colibríes y tucanes",
       "squirrelMonkey": "Monos ardilla"
     }
+  },
+  "promotions": {
+    "items": {
+      "halloween": {
+        "name": "Oferta de Halloween"
+      },
+      "blackFriday": {
+        "name": "Oferta Black Friday"
+      }
+    },
+    "banner": "{name}: {pct}% de descuento en todos los viajes de varios días. Termina el {date}.",
+    "bannerCta": "Ver viajes",
+    "badge": "−{pct}% · {name}",
+    "tourNotice": "{name}: {pct}% de descuento en este viaje, aplicado automáticamente al reservar. Termina el {date}.",
+    "tourPrice": "Con la oferta: desde {price}",
+    "summaryLine": "{name} (−{pct}%)",
+    "noStack": "No acumulable con otros descuentos.",
+    "dismiss": "Cerrar oferta",
+    "expired": "La {name} ha terminado. Se aplica el precio normal."
   }
 }

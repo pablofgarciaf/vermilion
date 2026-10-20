@@ -361,5 +361,24 @@
       "hummingbirdsToucans": "Colibris et toucans",
       "squirrelMonkey": "Singes-écureuils"
     }
+  },
+  "promotions": {
+    "items": {
+      "halloween": {
+        "name": "Offre Halloween"
+      },
+      "blackFriday": {
+        "name": "Offre Black Friday"
+      }
+    },
+    "banner": "{name} : {pct} % de réduction sur tous les voyages de plusieurs jours. Jusqu’au {date}.",
+    "bannerCta": "Voir les voyages",
+    "badge": "−{pct} % · {name}",
+    "tourNotice": "{name} : {pct} % de réduction sur ce voyage, appliqués automatiquement à la réservation. Jusqu’au {date}.",
+    "tourPrice": "Avec l’offre : à partir de {price}",
+    "summaryLine": "{name} (−{pct} %)",
+    "noStack": "Non cumulable avec d’autres réductions.",
+    "dismiss": "Fermer l’offre",
+    "expired": "L’{name} est terminée. Le prix normal s’applique."
   }
 }

@@ -361,5 +361,24 @@
       "hummingbirdsToucans": "Hummingbirds & toucans",
       "squirrelMonkey": "Squirrel monkeys"
     }
+  },
+  "promotions": {
+    "items": {
+      "halloween": {
+        "name": "Halloween Offer"
+      },
+      "blackFriday": {
+        "name": "Black Friday Offer"
+      }
+    },
+    "banner": "{name}: {pct}% off every multi-day trip. Ends {date}.",
+    "bannerCta": "See trips",
+    "badge": "−{pct}% · {name}",
+    "tourNotice": "{name}: {pct}% off this trip, applied automatically when you book. Ends {date}.",
+    "tourPrice": "With the offer: from {price}",
+    "summaryLine": "{name} (−{pct}%)",
+    "noStack": "Cannot be combined with other discounts.",
+    "dismiss": "Close offer",
+    "expired": "The {name} has ended. The regular price applies."
   }
 }

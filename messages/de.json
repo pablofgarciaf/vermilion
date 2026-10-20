@@ -361,5 +361,24 @@
       "hummingbirdsToucans": "Kolibris & Tukane",
       "squirrelMonkey": "Totenkopfäffchen"
     }
+  },
+  "promotions": {
+    "items": {
+      "halloween": {
+        "name": "Halloween-Angebot"
+      },
+      "blackFriday": {
+        "name": "Black-Friday-Angebot"
+      }
+    },
+    "banner": "{name}: {pct} % Rabatt auf alle mehrtägigen Reisen. Gültig bis {date}.",
+    "bannerCta": "Reisen ansehen",
+    "badge": "−{pct} % · {name}",
+    "tourNotice": "{name}: {pct} % Rabatt auf diese Reise, automatisch bei der Buchung abgezogen. Gültig bis {date}.",
+    "tourPrice": "Mit dem Angebot: ab {price}",
+    "summaryLine": "{name} (−{pct} %)",
+    "noStack": "Nicht mit anderen Rabatten kombinierbar.",
+    "dismiss": "Angebot schließen",
+    "expired": "Das {name} ist beendet. Es gilt der reguläre Preis."
   }
 }

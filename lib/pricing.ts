@@ -16,6 +16,12 @@ export interface PricingDetails {
   // Discounts
   groupDiscountPercentage: number;
   groupDiscountAmount: number;
+
+  // Promoción por festivo (data/promotions.ts). No se acumula con el de grupo:
+  // se aplica solo el mayor de los dos.
+  promoId?: string | null;
+  promoDiscountPercentage?: number;
+  promoDiscountAmount?: number;
   
   // Final
   total: number;
@@ -26,7 +32,8 @@ export function calculateTourPrice(
   adults: number,
   children: number,
   date: string | null,
-  isDailyTour: boolean = false
+  isDailyTour: boolean = false,
+  promo: { id: string; discountRate: number } | null = null
 ): PricingDetails {
   // A child is generally 20% off base price
   const basePricePerChild = basePrice * 0.8;
@@ -60,8 +67,15 @@ export function calculateTourPrice(
     groupDiscountPercentage = 0.05;
   }
 
+  // Promo de festivo: solo viajes de varios días y nunca sumada al descuento de grupo.
+  const promoRate = promo && !isDailyTour ? promo.discountRate : 0;
+  const promoWins = promoRate > groupDiscountPercentage;
+  if (promoWins) groupDiscountPercentage = 0;
+  const promoDiscountPercentage = promoWins ? promoRate : 0;
+  const promoDiscountAmount = Number((subtotal * promoDiscountPercentage).toFixed(2));
+
   const groupDiscountAmount = subtotal * groupDiscountPercentage;
-  const total = subtotal - groupDiscountAmount;
+  const total = Number((subtotal - groupDiscountAmount - promoDiscountAmount).toFixed(2));
 
   return {
     basePricePerAdult: basePrice,
@@ -77,6 +91,9 @@ export function calculateTourPrice(
     subtotal,
     groupDiscountPercentage,
     groupDiscountAmount,
+    promoId: promoWins && promo ? promo.id : null,
+    promoDiscountPercentage,
+    promoDiscountAmount,
     total
   };
 }

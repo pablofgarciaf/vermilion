@@ -32,6 +32,8 @@ import Image from 'next/image';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { useCurrency, CURRENCIES, CurrencyCode } from '@/context/CurrencyContext';
 import { BrandLogo } from '@/components/ui/BrandLogo';
+import { PromoBanner } from '@/components/promotions/PromoBanner';
+import { useActivePromotion } from '@/hooks/useActivePromotion';
 
 // Dynamic imports
 const AffiliateClubModal = dynamic(
@@ -46,6 +48,7 @@ const ReservationDropdown = dynamic(
 
 export function NavbarWithReservations() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const activePromo = useActivePromotion();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [destinationsOpen, setDestinationsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -189,6 +192,8 @@ export function NavbarWithReservations() {
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 flex flex-col">
+      {/* Promo de festivo vigente (data/promotions.ts); se pliega al hacer scroll */}
+      <PromoBanner promo={activePromo} collapsed={isScrolled || mobileMenuOpen} />
       {/* Top Banner */}
       <div
         className={`transition-all duration-500 overflow-hidden border-b bg-gradient-to-r from-emerald-950/90 via-emerald-900/85 to-emerald-800/90 backdrop-blur-md text-white border-emerald-800/60 hidden sm:block ${isScrolled ? 'max-h-0 opacity-0 py-0 border-none' : 'sm:max-h-16 opacity-100 sm:py-2 sm:px-8 sm:pb-2'

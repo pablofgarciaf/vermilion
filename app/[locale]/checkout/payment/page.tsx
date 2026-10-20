@@ -36,7 +36,8 @@ import { mockTours } from '@/data/mock';
 import { generateBookingCode } from '@/lib/bookings';
 import { getAffiliateByCode } from '@/lib/affiliates';
 import { getStoredAffiliateRef, isBookingCode } from '@/components/affiliates/AffiliateTracker';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { getPromotionById, isPromotionLive } from '@/lib/promotions';
 import { getStoredUserProfile } from '@/lib/userProfile';
 import { PayPalCheckoutButton } from '@/components/checkout/PayPalCheckoutButton';
 import { generateTravelVoucherPDF } from '@/lib/voucherPdfGenerator';
@@ -797,8 +798,19 @@ export default function CheckoutPaymentPage() {
   const [hpTrap, setHpTrap] = useState(''); // Off-screen honeypot field for Python bot defense
 
   const initialAmount = Number(amountStr) || 500;
-  const finalAmount = discountApplied ? Number((initialAmount * 0.9).toFixed(2)) : initialAmount;
-  const discountSavings = discountApplied ? Number((initialAmount - finalAmount).toFixed(2)) : 0;
+  // Promo de festivo: el importe llega ya rebajado desde la reserva. Aquí se
+  // revalida por fecha: si caducó, o si hay código de embajador (no acumulable),
+  // se devuelve al precio sin promo antes de aplicar cualquier otro descuento.
+  const tPromo = useTranslations('promotions');
+  const promoFromUrl = getPromotionById(searchParams.get('promo'));
+  const promoSavingsFromUrl = promoFromUrl ? Math.max(0, Number(searchParams.get('promosavings')) || 0) : 0;
+  const amountWithoutPromo = Number((initialAmount + promoSavingsFromUrl).toFixed(2));
+  const promoActive = !!promoFromUrl && promoSavingsFromUrl > 0 && isPromotionLive(promoFromUrl) && !discountApplied;
+  const promoExpired = !!promoFromUrl && promoSavingsFromUrl > 0 && !isPromotionLive(promoFromUrl);
+  const finalAmount = discountApplied
+    ? Number((amountWithoutPromo * 0.9).toFixed(2))
+    : (promoActive ? initialAmount : amountWithoutPromo);
+  const discountSavings = discountApplied ? Number((amountWithoutPromo - finalAmount).toFixed(2)) : 0;
 
   // Deposit vs Full Payment
   // Si viene de la reserva con el 30% (type=deposit) y aún faltan más de 30 días, se preselecciona el depósito.
@@ -938,6 +950,8 @@ export default function CheckoutPaymentPage() {
           transferRef: transferRef || 'Wire transfer registration',
           affiliateCode: discountApplied ? discountCode : undefined,
           discountApplied,
+          promoId: promoActive && promoFromUrl ? promoFromUrl.id : null,
+          promoDiscountAmount: promoActive ? promoSavingsFromUrl : 0,
           createdAt: new Date().toISOString(),
         }, { merge: true });
         console.log('✅ [CLIENT FIRESTORE] Wire transfer booking saved:', activeRef);
@@ -1148,6 +1162,17 @@ export default function CheckoutPaymentPage() {
                     </span>
                   </span>
                 </div>
+                {promoFromUrl && promoActive && (
+                  <p className="pt-1.5 text-xs font-semibold text-amber-700 dark:text-amber-300" data-promo={promoFromUrl.id}>
+                    {tPromo('summaryLine', { name: tPromo(`items.${promoFromUrl.messageKey}.name`), pct: Math.round(promoFromUrl.discountRate * 100) })}
+                    {' '}−${formatPrice(promoSavingsFromUrl)}
+                  </p>
+                )}
+                {promoFromUrl && promoExpired && (
+                  <p className="pt-1.5 text-xs text-stone-500 dark:text-zinc-400">
+                    {tPromo('expired', { name: tPromo(`items.${promoFromUrl.messageKey}.name`) })}
+                  </p>
+                )}
               </div>
 
               {/* 3. Botón Volver a modificar mi reserva (reemplaza al SSL) */}

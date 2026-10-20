@@ -21,6 +21,7 @@ import {
   Layers,
 } from 'lucide-react';
 import { BookingActionLink } from '@/components/tours/BookingActionLink';
+import { PromoPriceTag } from '@/components/promotions/PromoPriceTag';
 
 import type { Metadata } from 'next';
 import { getSeoAlternates, withBrandTail, SUPPORTED_SEO_LOCALES } from '@/utils/seoHelper';
@@ -557,6 +558,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <p className="font-serif text-2xl font-bold text-white">
                           ${price.toLocaleString()} <span className="text-xs font-normal text-zinc-300">USD</span>
                         </p>
+                        <PromoPriceTag price={price} />
                       </div>
                     </div>
                   </Link>
@@ -649,6 +651,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <p className="font-serif text-xl font-bold text-emerald-700 dark:text-emerald-400">
                           ${price.toLocaleString()} <span className="text-xs font-normal text-zinc-600 dark:text-zinc-300">USD</span>
                         </p>
+                        <PromoPriceTag price={price} tone="light" />
                       </div>
                     </div>
 
@@ -728,6 +731,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                         <p className="font-serif text-3xl font-bold text-white">
                           ${price.toLocaleString()} <span className="text-sm font-normal text-zinc-300">USD</span>
                         </p>
+                        <PromoPriceTag price={price} />
                       </div>
                     </div>
                   </Link>

@@ -8,6 +8,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { BookingTrustPanel } from './BookingTrustPanel';
 import { canPayDeposit, depositAmount, formatUsd } from '@/data/bookingTerms';
+import { getPromotionById } from '@/lib/promotions';
 
 interface PriceCalculatorProps {
   tours: Tour[];
@@ -223,6 +224,7 @@ export function PriceCalculator({
 }: PriceCalculatorProps) {
   const locale = useLocale();
   const tb = useTranslations('bookingConversion');
+  const tPromo = useTranslations('promotions');
   const t = PRICE_CALC_I18N[locale] || PRICE_CALC_I18N['en'];
 
   if (!tours || tours.length === 0) {
@@ -330,6 +332,24 @@ export function PriceCalculator({
             <span>-${formatAmount(pricing.groupDiscountAmount)}</span>
           </div>
         )}
+
+        {/* Promo de festivo (data/promotions.ts): descuento real ya restado del total */}
+        {(() => {
+          const promo = getPromotionById(pricing.promoId);
+          if (!promo || !(pricing.promoDiscountAmount && pricing.promoDiscountAmount > 0)) return null;
+          const name = tPromo(`items.${promo.messageKey}.name`);
+          return (
+            <div className="mt-2 space-y-1 rounded-lg bg-amber-50 p-2 text-sm font-medium text-amber-800 dark:bg-amber-950/30 dark:text-amber-200" data-promo={promo.id}>
+              <div className="flex justify-between">
+                <span className="flex items-center gap-1.5">
+                  <Ticket className="w-3.5 h-3.5" />
+                  {tPromo('summaryLine', { name, pct: Math.round(promo.discountRate * 100) })}
+                </span>
+                <span>-${formatAmount(pricing.promoDiscountAmount)}</span>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* 10% Affiliate Referral Discount Display */}
         {hasAffiliateDiscount && (

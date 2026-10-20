@@ -361,5 +361,24 @@
       "hummingbirdsToucans": "蜂鸟与巨嘴鸟",
       "squirrelMonkey": "松鼠猴"
     }
+  },
+  "promotions": {
+    "items": {
+      "halloween": {
+        "name": "万圣节优惠"
+      },
+      "blackFriday": {
+        "name": "黑色星期五优惠"
+      }
+    },
+    "banner": "{name}：所有多日行程优惠{pct}%。截止至{date}。",
+    "bannerCta": "查看行程",
+    "badge": "−{pct}% · {name}",
+    "tourNotice": "{name}：本行程优惠{pct}%，预订时自动生效。截止至{date}。",
+    "tourPrice": "优惠价：{price}起",
+    "summaryLine": "{name}（−{pct}%）",
+    "noStack": "不可与其他折扣同时使用。",
+    "dismiss": "关闭优惠",
+    "expired": "{name}已结束，按正常价格计算。"
   }
 }

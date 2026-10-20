@@ -10,6 +10,7 @@ import { mockTours } from '@/data/mock';
 import { db } from '@/lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { calculateTourPrice, PricingDetails } from '@/lib/pricing';
+import { getActivePromotion } from '@/lib/promotions';
 import { PriceCalculator } from './PriceCalculator';
 import { TravelDatePicker } from './TravelDatePicker';
 import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, ExternalLink, Lock, ArrowRight, Sparkles, Loader2, Search, X, ArrowLeftRight, Compass, Info, Clock, Check, MessageCircle } from 'lucide-react';
@@ -1107,7 +1108,10 @@ export function BookingWizard() {
 
   useEffect(() => {
     if (selectedTours.length > 0) {
-      let tAB = 0, tCB = 0, tAA = 0, tCA = 0, tSub = 0, tDisc = 0, tFinal = 0;
+      let tAB = 0, tCB = 0, tAA = 0, tCA = 0, tSub = 0, tDisc = 0, tFinal = 0, tPromo = 0;
+      let promoId: string | null = null;
+      // Promo de festivo vigente ahora (caduca sola). Con código de embajador no se acumula.
+      const activePromo = affiliateRef ? null : getActivePromotion();
       let anyMinTwo = false;
       let anySingleSupp = false;
       let singleSuppAmount = 0;
@@ -1119,7 +1123,9 @@ export function BookingWizard() {
         if (isVipApplied) {
           baseTourPrice = tour.price4Star || Math.round(baseTourPrice * 1.2);
         }
-        const p = calculateTourPrice(baseTourPrice, adults, children, date, isDaily);
+        const p = calculateTourPrice(baseTourPrice, adults, children, date, isDaily, activePromo);
+        if (p.promoId) promoId = p.promoId;
+        tPromo += p.promoDiscountAmount || 0;
         if (p.minTwoPersonApplied) anyMinTwo = true;
         if (p.singleSupplementApplied) {
           anySingleSupp = true;
@@ -1139,12 +1145,16 @@ export function BookingWizard() {
         singleSupplementAmount: singleSuppAmount,
         // El % mostrado sale del importe realmente aplicado en lib/pricing.ts (4+ = 5%, 8+ = 10%).
         groupDiscountPercentage: tSub > 0 ? tDisc / tSub : 0,
-        groupDiscountAmount: tDisc, total: tFinal
+        groupDiscountAmount: tDisc,
+        promoId,
+        promoDiscountPercentage: promoId && activePromo ? activePromo.discountRate : 0,
+        promoDiscountAmount: Number(tPromo.toFixed(2)),
+        total: Number(tFinal.toFixed(2))
       });
     } else {
       setPricing({ basePricePerAdult: 0, basePricePerChild: 0, adultsCount: adults, childrenCount: children, adultsTotal: 0, childrenTotal: 0, subtotal: 0, groupDiscountPercentage: 0, groupDiscountAmount: 0, total: 0 });
     }
-  }, [selectedTours, adults, children, date, isLuxury, selectedTier]);
+  }, [selectedTours, adults, children, date, isLuxury, selectedTier, affiliateRef]);
 
   const handleCheckout = async () => {
     if (selectedTours.length === 0) {
@@ -1222,6 +1232,8 @@ export function BookingWizard() {
           paymentStatus: 'pending_payment',
           status: 'pending',
           affiliateCode: affiliateRef || undefined,
+          promoId: pricing.promoId || null,
+          promoDiscountAmount: pricing.promoDiscountAmount || 0,
           createdAt: new Date().toISOString(),
         }, { merge: true });
       }
@@ -1241,6 +1253,9 @@ export function BookingWizard() {
       ref: bookingRef,
       affiliateCode: affiliateRef || '',
       discountApplied: affiliateRef ? 'true' : 'false',
+      // El importe ya lleva la promo; el checkout la revalida por fecha y la quita si caducó.
+      promo: pricing.promoId || '',
+      promosavings: String(pricing.promoDiscountAmount || 0),
       date: date,
       adults: String(adults),
       children: String(children),

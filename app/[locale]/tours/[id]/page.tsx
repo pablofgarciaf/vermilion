@@ -18,6 +18,8 @@ import { Button } from '@/components/ui/Button';
 import { ExpeditionFacts } from '@/components/tours/ExpeditionFacts';
 import { DownloadPDFButton } from '@/components/tours/DownloadPDFButton';
 import { TourPriceSummary } from '@/components/tours/TourPriceSummary';
+import { PromoTourNotice } from '@/components/promotions/PromoTourNotice';
+import { isDayTrip } from '@/lib/promotions';
 import { TourMobileBookingBar } from '@/components/tours/TourMobileBookingBar';
 import { AskBeforeBooking } from '@/components/booking/AskBeforeBooking';
 import { hasGalapagosFees, TRIPADVISOR_RATING, TRIPADVISOR_REVIEW_COUNT, TRIPADVISOR_URL } from '@/data/bookingTerms';
@@ -332,6 +334,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
               {/* Contenedor de Botones (Empujado al final con mt-auto, ahora estilizados y limpios) */}
               <div className="mt-auto pt-8 lg:pt-10 pb-2 space-y-4">
                 <TourPriceSummary priceFrom={priceClub} galapagosFees={galapagosFees} />
+                <PromoTourNotice priceFrom={priceClub} isDayTrip={isDayTrip(tour)} />
                 {isDailyTour ? (
                   <Link
                     href={`/${locale}/booking?addTour=${tour.id}`}

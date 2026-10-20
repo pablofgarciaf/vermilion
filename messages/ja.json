@@ -361,5 +361,24 @@
       "hummingbirdsToucans": "ハチドリとオオハシ",
       "squirrelMonkey": "リスザル"
     }
+  },
+  "promotions": {
+    "items": {
+      "halloween": {
+        "name": "ハロウィン特典"
+      },
+      "blackFriday": {
+        "name": "ブラックフライデー特典"
+      }
+    },
+    "banner": "{name}：複数日ツアーが全て{pct}%オフ。{date}まで。",
+    "bannerCta": "ツアーを見る",
+    "badge": "−{pct}%・{name}",
+    "tourNotice": "{name}：このツアーが{pct}%オフ。予約時に自動で適用されます。{date}まで。",
+    "tourPrice": "特典価格：{price}から",
+    "summaryLine": "{name}（−{pct}%）",
+    "noStack": "他の割引との併用はできません。",
+    "dismiss": "特典を閉じる",
+    "expired": "{name}は終了しました。通常料金が適用されます。"
   }
 }

@@ -6,7 +6,9 @@ import Link from 'next/link';
 import { Tour } from '@/types';
 import { Button } from '@/components/ui/Button';
 import { Clock, MapPin, Star, ArrowRight } from 'lucide-react';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useActivePromotion } from '@/hooks/useActivePromotion';
+import { isDayTrip, promoPrice } from '@/lib/promotions';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { TRIPADVISOR_RATING, TRIPADVISOR_REVIEW_COUNT } from '@/data/bookingTerms';
 
@@ -75,6 +77,11 @@ interface TourCardProps {
 export function TourCard({ tour, className = '', priority = false }: TourCardProps) {
   const locale = useLocale();
   const cardTexts = CARD_I18N[locale] || CARD_I18N['en'];
+  const tPromo = useTranslations('promotions');
+  const activePromo = useActivePromotion();
+  const promo = activePromo && !isDayTrip(tour) ? activePromo : null;
+  const promoName = promo ? tPromo(`items.${promo.messageKey}.name`) : '';
+  const promoPct = promo ? Math.round(promo.discountRate * 100) : 0;
 
   const nextDeparture = getNextDeparture(locale);
   const rawTitle = getLocalizedText(tour.title, locale);
@@ -109,6 +116,13 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
         className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
         referrerPolicy="no-referrer"
       />
+
+      {/* Etiqueta de la promo vigente (solo viajes de varios días) */}
+      {promo && (
+        <span className="absolute left-4 top-4 z-10 rounded-full border border-amber-300/60 bg-zinc-950/85 px-3 py-1 text-[11px] font-bold tracking-wide text-amber-200 shadow-lg backdrop-blur-sm">
+          {tPromo('badge', { pct: promoPct, name: promoName })}
+        </span>
+      )}
 
       {/* 🎨 GRADIENTE LIGERO Y LIMPIO (Solo en la base inferior para leer el texto sin oscurecer la foto) */}
       <div className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-black/95 via-black/70 to-transparent pointer-events-none" />
@@ -149,9 +163,15 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
                 {cardTexts.person}
               </span>
             </div>
-            <span className="mt-0.5 block text-[11px] text-white/70 font-medium tracking-wide">
-              · {nextDeparture}
-            </span>
+            {promo ? (
+              <span className="mt-0.5 block text-[11px] font-bold tracking-wide text-amber-200">
+                {tPromo('tourPrice', { price: `$${promoPrice(tour.price, promo).toLocaleString('en-US')}` })}
+              </span>
+            ) : (
+              <span className="mt-0.5 block text-[11px] text-white/70 font-medium tracking-wide">
+                · {nextDeparture}
+              </span>
+            )}
           </div>
 
           <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold shadow-lg shadow-emerald-950/60 transition-all group-hover:scale-105 border border-emerald-400/40">
