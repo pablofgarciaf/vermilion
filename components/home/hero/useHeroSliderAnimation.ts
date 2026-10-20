@@ -134,6 +134,8 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
           set(detailsActive, { opacity: 1, zIndex: 22, x: 0, y: 0 });
         } else {
           set(getCard(active), { x: 0, y: 0, width: "100vw", height: "100%", zIndex: 20, opacity: 1 });
+          // La tarjeta activa es el fondo a pantalla completa: sin la sombra de miniatura (igual que en las transiciones).
+          set(`${getCard(active)} .card-overlay`, { opacity: 0 });
           set(getCardContent(active), { opacity: 0 });
           set(detailsActive, { opacity: 1, zIndex: 22, x: 0, y: 0 });
 
