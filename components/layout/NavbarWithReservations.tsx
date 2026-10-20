@@ -11,11 +11,9 @@ import {
   Menu,
   X,
   Phone,
-  Mail,
   ChevronDown,
   ChevronRight,
   Globe,
-  Sparkles,
   ArrowRight,
   Sun,
   Moon,
@@ -192,42 +190,8 @@ export function NavbarWithReservations() {
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 flex flex-col">
-      {/* Promo de festivo vigente (data/promotions.ts); se pliega al hacer scroll */}
+      {/* Barra superior única: teléfono fijo + marquesina (sustituye a la franja verde de contacto) */}
       <PromoBanner promo={activePromo} collapsed={isScrolled || mobileMenuOpen} />
-      {/* Top Banner */}
-      <div
-        className={`transition-all duration-500 overflow-hidden border-b bg-gradient-to-r from-emerald-950/90 via-emerald-900/85 to-emerald-800/90 backdrop-blur-md text-white border-emerald-800/60 hidden sm:block ${isScrolled ? 'max-h-0 opacity-0 py-0 border-none' : 'sm:max-h-16 opacity-100 sm:py-2 sm:px-8 sm:pb-2'
-          }`}
-      >
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-          <div className="flex items-center gap-6">
-            <a
-              href={`tel:${getLocalizedText(settings?.contact?.phone, locale) || '+593960039156'}`}
-              className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-emerald-300" />
-              <span className="text-white">{getLocalizedText(settings?.contact?.phone, locale) || '+593 96 003 9156'}</span>
-            </a>
-            <a
-              href="mailto:info@vermilionroutes.com"
-              className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors hidden sm:flex"
-            >
-              <Mail className="w-3.5 h-3.5 text-emerald-300" />
-              <span className="text-white">info@vermilionroutes.com</span>
-            </a>
-          </div>
-          <div className="flex items-center gap-4 text-xs">
-            <span className="text-emerald-100 hidden lg:inline">
-              {tNav('banner.tagline')}
-            </span>
-            <div className="hidden md:flex items-center gap-1 text-emerald-100 font-medium bg-emerald-950/50 px-2.5 py-1 rounded-full border border-emerald-700/60 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
-              <span>{tNav('banner.badge')}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Header */}
       <header
         className={`transition-all duration-300 border-b ${

@@ -624,6 +624,14 @@ export function Footer() {
             <a href={`/${locale}/terms`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
               {t.terms}
             </a>
+            {/* Reabre el aviso de cookies (sustituye a la píldora flotante): retirar el consentimiento debe ser tan fácil como darlo */}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event('vr-open-consent'))}
+              className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60"
+            >
+              Cookies
+            </button>
             <a
               href={`/${locale}/cancellation`}
               className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60 cursor-pointer"

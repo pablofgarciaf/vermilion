@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useChatPanelOpen } from '@/hooks/useChatPanelOpen';
 
 type ConsentChoice = 'accepted' | 'essential';
 
@@ -115,9 +114,6 @@ function loadExternalScript(id: string, src: string) {
 
 export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: ConsentManagerProps) {
   const [visible, setVisible] = useState(false);
-  const [hasSavedChoice, setHasSavedChoice] = useState(false);
-  // En móvil la píldora "Cookies" tapaba el campo de texto del chat: se oculta mientras está abierto.
-  const chatOpen = useChatPanelOpen();
   const t = useMemo(() => copy[locale] || copy.en, [locale]);
   const policyHref = `/${locale}/privacy-policy`;
 
@@ -174,7 +170,6 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
 
     if (saved === 'accepted' || saved === 'essential') {
       applyConsent(saved);
-      setHasSavedChoice(true);
       return;
     }
 
@@ -189,24 +184,18 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
       version: 1,
     }));
     applyConsent(choice);
-    setHasSavedChoice(true);
     setVisible(false);
   };
 
-  if (!visible) {
-    if (!hasSavedChoice || chatOpen) return null;
+  // Tras elegir no queda ningún botón flotante: el enlace "Cookies" del pie
+  // (Footer.tsx) dispara este evento para volver a abrir el aviso.
+  useEffect(() => {
+    const open = () => setVisible(true);
+    window.addEventListener('vr-open-consent', open);
+    return () => window.removeEventListener('vr-open-consent', open);
+  }, []);
 
-    return (
-      <button
-        type="button"
-        onClick={() => setVisible(true)}
-      className="fixed bottom-4 left-4 z-[70] rounded-full border border-zinc-700 bg-zinc-950/90 px-4 py-2 text-xs font-bold text-white shadow-xl backdrop-blur-md transition hover:border-emerald-400 hover:text-emerald-300 max-md:[html[data-vr-bottom-bar=md]_&]:bottom-[84px] max-lg:[html[data-vr-bottom-bar=lg]_&]:bottom-[140px]"
-        aria-label={t.title}
-      >
-        {t.manage}
-      </button>
-    );
-  }
+  if (!visible) return null;
 
   return (
     // Franja compacta abajo: no tapa la galería ni el contenido. Las dos opciones tienen

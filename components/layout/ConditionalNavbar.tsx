@@ -33,8 +33,8 @@ export function ConditionalNavbar() {
       <Navbar />
       {/* Spacer so main content doesn't hide under fixed Navbar, except on full-bleed hero pages */}
       {!isFullBleedHero && <div className="h-20 sm:h-24 md:h-28 lg:h-[120px]" />}
-      {/* La marquesina suma altura al Navbar fijo: este hueco evita que tape el contenido */}
-      {!isFullBleedHero && <div aria-hidden="true" className="h-9 sm:h-10" />}
+      {/* En móvil la barra superior suma altura (desde sm ocupa el sitio de la antigua franja verde) */}
+      {!isFullBleedHero && <div aria-hidden="true" className="h-10 sm:hidden" />}
     </>
   );
 }

@@ -575,8 +575,13 @@ body {
   to { transform: translateX(-100%); }
 }
 .vr-marquee-track {
-  animation: vr-marquee 45s linear infinite;
+  animation: vr-marquee 55s linear infinite;
   will-change: transform;
+}
+/* Fundido en los bordes: el texto entra y sale suave junto al teléfono fijo */
+.vr-marquee-viewport {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent);
 }
 .vr-marquee:hover .vr-marquee-track,
 .vr-marquee:focus-within .vr-marquee-track {

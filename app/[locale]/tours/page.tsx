@@ -459,6 +459,8 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         {/* Sin cajas sobre la foto (decisión del dueño): solo un degradado suave abajo
             y arriba; la legibilidad la da la sombra de texto del título y el subtítulo. */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/25 pointer-events-none" />
+        {/* Franja superior suave para que el menú se lea sobre fotos claras */}
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
 
         <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
           <div className="container mx-auto max-w-7xl">
