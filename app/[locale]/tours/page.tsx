@@ -462,7 +462,8 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         {/* Franja superior suave para que el menú se lea sobre fotos claras */}
         <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
 
-        <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
+        {/* pt: deja sitio a la cabecera fija (barra superior + menú) para que el texto nunca quede debajo del logo */}
+        <div className="absolute inset-0 flex flex-col justify-center px-4 pt-28 pb-16 sm:px-6 sm:pt-32 lg:px-8">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center max-w-3xl mx-auto space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 backdrop-blur-md border border-white/10 text-emerald-300 text-xs font-bold uppercase tracking-widest shadow-xl">
