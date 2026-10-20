@@ -456,10 +456,9 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       {/* ── HERO REVISTA (EDITORIAL LUXURY) ────────────────────────────────── */}
       <section className="relative w-full h-[100svh] min-h-[580px] sm:min-h-[620px] md:min-h-[650px] overflow-hidden">
         <ToursBackgroundSlider />
-        {/* Velo ligero para que se vea la foto. El contraste AA del título lo da el
-            panel translúcido con desenfoque que hay detrás del texto (medido: ≥3:1
-            en el título y ≥4.5:1 en el subtítulo sobre la foto más clara). */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/15 to-black/30 pointer-events-none" />
+        {/* Sin cajas sobre la foto (decisión del dueño): solo un degradado suave abajo
+            y arriba; la legibilidad la da la sombra de texto del título y el subtítulo. */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/25 pointer-events-none" />
 
         <div className="absolute inset-0 flex flex-col justify-center px-4 sm:px-6 lg:px-8">
           <div className="container mx-auto max-w-7xl">
@@ -469,15 +468,13 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 <span>{t.heroBadge}</span>
               </div>
 
-              <div className="mx-auto space-y-5 rounded-3xl bg-black/45 px-5 py-6 backdrop-blur-md sm:px-10 sm:py-8">
-              <h1 className="font-serif text-5xl sm:text-7xl font-light text-white tracking-tight leading-tight hero-title-shadow">
+              <h1 className="font-serif text-5xl sm:text-7xl font-light text-white tracking-tight leading-tight [text-shadow:0_2px_4px_rgba(0,0,0,0.85),0_4px_24px_rgba(0,0,0,0.75),0_0_60px_rgba(0,0,0,0.5)]">
                 {t.heroTitleP1}<span className="font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{t.heroTitleP2}</span>
               </h1>
 
-              <p className="text-lg text-white leading-relaxed max-w-2xl mx-auto font-medium [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
+              <p className="text-lg text-white leading-relaxed max-w-2xl mx-auto font-semibold [text-shadow:0_1px_3px_rgba(0,0,0,0.95),0_2px_14px_rgba(0,0,0,0.8)]">
                 {t.heroDesc}
               </p>
-              </div>
 
               {/* Quick anchors - MOVED DOWN */}
               <div className="flex flex-wrap justify-center gap-3 pt-8">
