@@ -302,8 +302,9 @@ export function DestinationsGrid() {
                 );
               })}
 
-              {/* Luxury Cinematic Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/20 z-[1] pointer-events-none" />
+              {/* Oscuro solo abajo (donde va el texto); arriba la foto queda nítida.
+                  Las etiquetas superiores llevan su propio fondo, no necesitan velo. */}
+              <div className="absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-black/90 via-black/55 to-transparent z-[1] pointer-events-none" />
 
               {/* Top Badge Info */}
               <div suppressHydrationWarning className="relative z-10 flex items-center justify-between w-full">

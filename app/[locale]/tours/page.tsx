@@ -547,7 +547,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       loading="lazy"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent" />
                     <div className="absolute top-4 left-4 flex gap-2">
                       <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold text-emerald-400 border border-white/10">
                         {duration}
@@ -638,7 +638,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       loading="lazy"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent" />
                     <div className="absolute top-3 left-3">
                       <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold text-emerald-400 border border-white/10">
                         {duration}
@@ -721,7 +721,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                       loading="lazy"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent" />
                     <div className="absolute top-4 left-4">
                       <span className="px-3.5 py-1.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 text-xs font-bold">
                         {duration}
