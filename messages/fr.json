@@ -371,14 +371,20 @@
         "name": "Offre Black Friday"
       }
     },
-    "banner": "{name} : {pct} % de réduction sur tous les voyages de plusieurs jours. Jusqu’au {date}.",
+    "banner": "{name} : {pct} % de réduction sur les voyages aux Galápagos et les combinés Équateur + Galápagos. Jusqu’au {date}.",
     "bannerCta": "Voir les voyages",
     "badge": "−{pct} % · {name}",
     "tourNotice": "{name} : {pct} % de réduction sur ce voyage, appliqués automatiquement à la réservation. Jusqu’au {date}.",
     "tourPrice": "Avec l’offre : à partir de {price}",
     "summaryLine": "{name} (−{pct} %)",
     "noStack": "Non cumulable avec d’autres réductions.",
-    "dismiss": "Fermer l’offre",
-    "expired": "L’{name} est terminée. Le prix normal s’applique."
+    "expired": "L’{name} est terminée. Le prix normal s’applique.",
+    "marquee": {
+      "label": "Actualités Vermilion Routes",
+      "tripadvisor": "{rating} sur Tripadvisor · Travelers’ Choice 2026",
+      "deposit": "Réservez avec seulement {pct} % d’acompte",
+      "private": "Circuits 100 % privés avec guide naturaliste",
+      "whatsapp": "Écrivez-nous sur WhatsApp"
+    }
   }
 }

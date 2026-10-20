@@ -11,7 +11,8 @@
  *    sería engañoso. `valueAdds` queda vacío hasta que se apruebe otro extra real.
  *  - No se acumula: gana el mayor entre descuento de grupo y promo; con código
  *    de embajador (10 %) la promo no se aplica.
- *  - Solo viajes de varios días (las excursiones de un día quedan fuera).
+ *  - Solo viajes a Galápagos y combinados Ecuador + Galápagos (ajuste del dueño
+ *    del 20-oct). Ecuador continental y excursiones de un día quedan fuera.
  *
  * Las fechas llevan zona horaria de Ecuador (-05:00). `endsAt` es exclusivo:
  * la promo deja de existir sola en ese instante, sin redesplegar.

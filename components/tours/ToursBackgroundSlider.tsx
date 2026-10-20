@@ -51,7 +51,7 @@ export function ToursBackgroundSlider() {
           </div>
         );
       })}
-      <div className="absolute inset-0 bg-black/40 backdrop-brightness-90 pointer-events-none" />
+      <div className="absolute inset-0 bg-black/10 pointer-events-none" />
     </div>
   );
 }

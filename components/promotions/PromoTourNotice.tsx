@@ -10,16 +10,16 @@ import { formatUsd } from '@/data/bookingTerms';
 interface PromoTourNoticeProps {
   /** Precio "desde" por persona que ya muestra la ficha. */
   priceFrom: number;
-  /** Las excursiones de un día no entran en la promo. */
-  isDayTrip: boolean;
+  /** Solo Galápagos y combinados (lib/promotions.ts → isPromoEligible). */
+  eligible: boolean;
 }
 
 /** Aviso de la promo vigente junto al precio de la ficha del tour. */
-export function PromoTourNotice({ priceFrom, isDayTrip }: PromoTourNoticeProps) {
+export function PromoTourNotice({ priceFrom, eligible }: PromoTourNoticeProps) {
   const promo = useActivePromotion();
   const locale = useLocale();
   const t = useTranslations('promotions');
-  if (!promo || isDayTrip) return null;
+  if (!promo || !eligible) return null;
 
   const name = t(`items.${promo.messageKey}.name`);
   const pct = Math.round(promo.discountRate * 100);

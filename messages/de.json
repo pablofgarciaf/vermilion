@@ -371,14 +371,20 @@
         "name": "Black-Friday-Angebot"
       }
     },
-    "banner": "{name}: {pct} % Rabatt auf alle mehrtägigen Reisen. Gültig bis {date}.",
+    "banner": "{name}: {pct} % Rabatt auf Galápagos-Reisen und Kombireisen Ecuador + Galápagos. Gültig bis {date}.",
     "bannerCta": "Reisen ansehen",
     "badge": "−{pct} % · {name}",
     "tourNotice": "{name}: {pct} % Rabatt auf diese Reise, automatisch bei der Buchung abgezogen. Gültig bis {date}.",
     "tourPrice": "Mit dem Angebot: ab {price}",
     "summaryLine": "{name} (−{pct} %)",
     "noStack": "Nicht mit anderen Rabatten kombinierbar.",
-    "dismiss": "Angebot schließen",
-    "expired": "Das {name} ist beendet. Es gilt der reguläre Preis."
+    "expired": "Das {name} ist beendet. Es gilt der reguläre Preis.",
+    "marquee": {
+      "label": "Neuigkeiten von Vermilion Routes",
+      "tripadvisor": "{rating} auf Tripadvisor · Travelers’ Choice 2026",
+      "deposit": "Buchen mit nur {pct} % Anzahlung",
+      "private": "100 % private Touren mit Naturführer",
+      "whatsapp": "Schreiben Sie uns auf WhatsApp"
+    }
   }
 }

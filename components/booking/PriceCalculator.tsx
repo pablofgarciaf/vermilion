@@ -8,7 +8,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { BookingTrustPanel } from './BookingTrustPanel';
 import { canPayDeposit, depositAmount, formatUsd } from '@/data/bookingTerms';
-import { getPromotionById } from '@/lib/promotions';
+import { getPromotionById, isDayTrip } from '@/lib/promotions';
 
 interface PriceCalculatorProps {
   tours: Tour[];
@@ -260,7 +260,7 @@ export function PriceCalculator({
 
       <div className="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
         {tours.map(tour => {
-          const isDailyTour = tour.durationDays === 1 || (typeof tour.duration === 'object' && String(tour.duration.en || '').includes('1 DAY'));
+          const isDailyTour = isDayTrip(tour);
           const displayedPrice = tier === 'vip' && !isDailyTour
             ? tour.price4Star || Math.round((tour.price3Star || tour.price || 1050) * 1.2)
             : tour.price3Star || tour.price || 1050;

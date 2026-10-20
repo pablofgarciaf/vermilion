@@ -3,14 +3,29 @@ import { PROMOTIONS, Promotion } from '@/data/promotions';
 type TourLike = {
   durationDays?: number;
   duration?: unknown;
+  destination?: string;
 };
 
-/** Misma regla que la reserva: una excursión de un día no entra en la promo. */
+/**
+ * ¿Es una excursión de un día? Manda `durationDays`; si falta, se mira el texto
+ * de duración exigiendo que el "1" no vaya precedido de otro dígito
+ * ("11 DAYS" contiene "1 DAY" y antes se tomaba por excursión).
+ */
 export function isDayTrip(tour: TourLike): boolean {
-  if (tour.durationDays === 1) return true;
+  if (typeof tour.durationDays === 'number') return tour.durationDays === 1;
   const d = tour.duration as { en?: string } | string | undefined;
   const en = typeof d === 'string' ? d : d?.en;
-  return String(en || '').toUpperCase().includes('1 DAY');
+  return /(^|[^0-9])1\s*DAY/.test(String(en || '').toUpperCase());
+}
+
+/**
+ * Alcance aprobado por el dueño (20-oct-2026): solo viajes de varios días que
+ * pasan por Galápagos (Galápagos y combinados Ecuador + Galápagos). Ecuador
+ * continental y excursiones de un día quedan fuera.
+ */
+export function isPromoEligible(tour: TourLike): boolean {
+  if (isDayTrip(tour)) return false;
+  return /gal[aá]pagos/i.test(String(tour.destination || ''));
 }
 
 export function isPromotionLive(promo: Promotion, now: Date = new Date()): boolean {
@@ -32,7 +47,7 @@ export function getPromotionById(id: string | null | undefined): Promotion | nul
 
 /** Promo aplicable a este tour ahora, o null. */
 export function getPromotionForTour(tour: TourLike, now: Date = new Date()): Promotion | null {
-  if (isDayTrip(tour)) return null;
+  if (!isPromoEligible(tour)) return null;
   return getActivePromotion(now);
 }
 

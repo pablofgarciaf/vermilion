@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { calculateTourPrice } from '@/lib/pricing';
-import { getActivePromotion, getPromotionForTour, isDayTrip, promoPrice } from '@/lib/promotions';
+import { getActivePromotion, getPromotionForTour, isDayTrip, isPromoEligible, promoPrice } from '@/lib/promotions';
 import { PROMOTIONS } from '@/data/promotions';
 import { mockTours } from '@/data/mock';
 
@@ -35,6 +35,23 @@ describe('Promociones por festivos', () => {
     const now = at('2026-10-25T12:00:00-05:00');
     expect(getPromotionForTour(day, now)).toBeNull();
     expect(getPromotionForTour(multi, now)?.id).toBe('halloween-2026');
+  });
+
+  it('solo aplica a Galápagos y combinados, no a Ecuador continental (ajuste del 20-oct)', () => {
+    const now = at('2026-10-25T12:00:00-05:00');
+    const byId = (id: string) => mockTours.find((t) => t.id === id)!;
+    expect(getPromotionForTour(byId('galapagos-6days'), now)?.id).toBe('halloween-2026');
+    expect(getPromotionForTour(byId('ecuador-galapagos-11days'), now)?.id).toBe('halloween-2026');
+    expect(getPromotionForTour(byId('ecuador-galapagos-12days'), now)?.id).toBe('halloween-2026');
+    for (const id of ['volcanoes-rivers-8days', 'andes-amazon-7days', 'snow-volcanoes-6days', 'ecuador-fantastic-8days']) {
+      expect(isPromoEligible(byId(id))).toBe(false);
+    }
+  });
+
+  it('un viaje de 11 días no es una excursión de un día', () => {
+    expect(isDayTrip({ duration: { en: '11 DAYS / 10 NIGHTS' } })).toBe(false);
+    expect(isDayTrip({ duration: { en: '1 DAY (FULL DAY)' } })).toBe(true);
+    expect(isDayTrip({ durationDays: 11, duration: { en: '11 DAYS / 10 NIGHTS' } })).toBe(false);
   });
 
   it('aplica el descuento real sobre el precio actual, sin precio "antes"', () => {

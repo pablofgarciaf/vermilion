@@ -1,5 +1,6 @@
 'use client';
 
+import { isDayTrip } from '@/lib/promotions';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
@@ -52,7 +53,7 @@ export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
   const t = SUBNAV_I18N[locale] || SUBNAV_I18N['en'];
   const priceClub = tour.price3Star || tour.price || 1050;
   const priceVip = tour.price4Star || Math.round(priceClub * 1.15);
-  const isDailyTour = tour.durationDays === 1 || (typeof tour.duration === 'object' && String(tour.duration?.en || '').includes('1 DAY'));
+  const isDailyTour = isDayTrip(tour);
   const tierButtonTextSize = isDailyTour ? 'text-[10px] sm:text-xs' : 'text-[11px] sm:text-sm';
   const desktopTierButtonTextSize = isDailyTour ? 'text-[10px] lg:text-[11px]' : 'text-[10px] lg:text-xs';
 

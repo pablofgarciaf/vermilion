@@ -1,11 +1,9 @@
 'use client';
 import { usePathname } from 'next/navigation';
 import { NavbarWithReservations as Navbar } from './NavbarWithReservations';
-import { useActivePromotion } from '@/hooks/useActivePromotion';
 
 export function ConditionalNavbar() {
   const pathname = usePathname();
-  const activePromo = useActivePromotion();
   const isTourDetail = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/tours\/[^/]+$/);
   const isDestinationDetail = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/destinations\/[^/]+$/);
   const isDestinationsListing = !!pathname?.match(/^\/(en|es|fr|de|zh|it|pt|ja)\/destinations\/?$/);
@@ -35,8 +33,8 @@ export function ConditionalNavbar() {
       <Navbar />
       {/* Spacer so main content doesn't hide under fixed Navbar, except on full-bleed hero pages */}
       {!isFullBleedHero && <div className="h-20 sm:h-24 md:h-28 lg:h-[120px]" />}
-      {/* La franja de promo suma altura al Navbar fijo: este hueco evita que tape el contenido */}
-      {!isFullBleedHero && activePromo && <div aria-hidden="true" className="h-14 sm:h-10" />}
+      {/* La marquesina suma altura al Navbar fijo: este hueco evita que tape el contenido */}
+      {!isFullBleedHero && <div aria-hidden="true" className="h-9 sm:h-10" />}
     </>
   );
 }

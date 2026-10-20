@@ -566,3 +566,24 @@ body {
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
 }
+
+/* ── Marquesina de anuncios (components/promotions/PromoBanner.tsx) ──
+   Dos pistas idénticas desplazándose -100% dan un bucle sin saltos.
+   Se pausa con hover o foco; con reduced-motion queda quieta y se desliza a mano. */
+@keyframes vr-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+.vr-marquee-track {
+  animation: vr-marquee 45s linear infinite;
+  will-change: transform;
+}
+.vr-marquee:hover .vr-marquee-track,
+.vr-marquee:focus-within .vr-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .vr-marquee-track { animation: none; }
+  .vr-marquee-track[aria-hidden="true"] { display: none; }
+  .vr-marquee-viewport { overflow-x: auto; scrollbar-width: none; padding-inline: 16px; }
+}

@@ -371,14 +371,20 @@
         "name": "黑色星期五优惠"
       }
     },
-    "banner": "{name}：所有多日行程优惠{pct}%。截止至{date}。",
+    "banner": "{name}：加拉帕戈斯行程及厄瓜多尔+加拉帕戈斯联游优惠{pct}%。截止至{date}。",
     "bannerCta": "查看行程",
     "badge": "−{pct}% · {name}",
     "tourNotice": "{name}：本行程优惠{pct}%，预订时自动生效。截止至{date}。",
     "tourPrice": "优惠价：{price}起",
     "summaryLine": "{name}（−{pct}%）",
     "noStack": "不可与其他折扣同时使用。",
-    "dismiss": "关闭优惠",
-    "expired": "{name}已结束，按正常价格计算。"
+    "expired": "{name}已结束，按正常价格计算。",
+    "marquee": {
+      "label": "Vermilion Routes 最新消息",
+      "tripadvisor": "Tripadvisor {rating} 分 · 2026 年旅行者之选",
+      "deposit": "仅需支付 {pct}% 定金即可预订",
+      "private": "100% 私人团，配自然学家向导",
+      "whatsapp": "通过 WhatsApp 联系我们"
+    }
   }
 }

@@ -10,7 +10,7 @@ import { mockTours } from '@/data/mock';
 import { db } from '@/lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 import { calculateTourPrice, PricingDetails } from '@/lib/pricing';
-import { getActivePromotion } from '@/lib/promotions';
+import { getActivePromotion, isDayTrip, isPromoEligible } from '@/lib/promotions';
 import { PriceCalculator } from './PriceCalculator';
 import { TravelDatePicker } from './TravelDatePicker';
 import { Map, CalendarDays, Users, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, ExternalLink, Lock, ArrowRight, Sparkles, Loader2, Search, X, ArrowLeftRight, Compass, Info, Clock, Check, MessageCircle } from 'lucide-react';
@@ -1116,14 +1116,14 @@ export function BookingWizard() {
       let anySingleSupp = false;
       let singleSuppAmount = 0;
       selectedTours.forEach(tour => {
-        const isDaily = tour.durationDays === 1 || (typeof tour.duration === 'object' && String(tour.duration?.en || '').includes('1 DAY'));
+        const isDaily = isDayTrip(tour);
 
         let baseTourPrice = tour.price3Star || tour.price || 1050;
         const isVipApplied = (selectedTier === 'vip' || isLuxury) && !isDaily;
         if (isVipApplied) {
           baseTourPrice = tour.price4Star || Math.round(baseTourPrice * 1.2);
         }
-        const p = calculateTourPrice(baseTourPrice, adults, children, date, isDaily, activePromo);
+        const p = calculateTourPrice(baseTourPrice, adults, children, date, isDaily, isPromoEligible(tour) ? activePromo : null);
         if (p.promoId) promoId = p.promoId;
         tPromo += p.promoDiscountAmount || 0;
         if (p.minTwoPersonApplied) anyMinTwo = true;
@@ -1210,7 +1210,7 @@ export function BookingWizard() {
     }
 
     const totalTravelers = adults + children;
-    const isDaily = selectedTours.some(t => t.durationDays === 1 || (typeof t.duration === 'object' && String(t.duration?.en || '').includes('1 DAY')));
+    const isDaily = selectedTours.some(t => isDayTrip(t));
 
     try {
       if (db && bookingRef) {

@@ -8,17 +8,17 @@ import { promoPrice } from '@/lib/promotions';
 interface PromoPriceTagProps {
   /** Precio "desde" que ya muestra la tarjeta. */
   price: number;
-  /** Las excursiones de un día no entran en la promo. */
-  isDayTrip?: boolean;
+  /** Solo Galápagos y combinados (lib/promotions.ts → isPromoEligible). */
+  eligible: boolean;
   /** Tono para fondo oscuro (foto) o claro. */
   tone?: 'dark' | 'light';
 }
 
 /** Etiqueta de la promo vigente bajo el precio de una tarjeta. Sin precio tachado. */
-export function PromoPriceTag({ price, isDayTrip = false, tone = 'dark' }: PromoPriceTagProps) {
+export function PromoPriceTag({ price, eligible, tone = 'dark' }: PromoPriceTagProps) {
   const promo = useActivePromotion();
   const t = useTranslations('promotions');
-  if (!promo || isDayTrip) return null;
+  if (!promo || !eligible) return null;
 
   const name = t(`items.${promo.messageKey}.name`);
   const pct = Math.round(promo.discountRate * 100);

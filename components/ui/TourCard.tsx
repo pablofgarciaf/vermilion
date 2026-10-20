@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { Clock, MapPin, Star, ArrowRight } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useActivePromotion } from '@/hooks/useActivePromotion';
-import { isDayTrip, promoPrice } from '@/lib/promotions';
+import { isPromoEligible, promoPrice } from '@/lib/promotions';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { TRIPADVISOR_RATING, TRIPADVISOR_REVIEW_COUNT } from '@/data/bookingTerms';
 
@@ -79,7 +79,7 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
   const cardTexts = CARD_I18N[locale] || CARD_I18N['en'];
   const tPromo = useTranslations('promotions');
   const activePromo = useActivePromotion();
-  const promo = activePromo && !isDayTrip(tour) ? activePromo : null;
+  const promo = activePromo && isPromoEligible(tour) ? activePromo : null;
   const promoName = promo ? tPromo(`items.${promo.messageKey}.name`) : '';
   const promoPct = promo ? Math.round(promo.discountRate * 100) : 0;
 
