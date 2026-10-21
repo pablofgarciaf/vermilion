@@ -391,5 +391,64 @@
       "private": "100% 私人团，配自然学家向导",
       "whatsapp": "通过 WhatsApp 联系我们"
     }
+  },
+  "planTrip": {
+    "cta": "规划您的行程",
+    "talkAdvisor": "咨询旅行顾问",
+    "eyebrow": "私人定制旅行",
+    "title": "一起设计您的旅程",
+    "successTitle": "已提交，{name}！",
+    "stepOf": "第 {n} 步，共 {total} 步",
+    "oneMinute": "约 1 分钟",
+    "successText": "当地专家将在24小时内发送带价格的私人行程。我们已向您发送确认邮件。",
+    "bookCall": "预约免费视频咨询（20分钟）",
+    "close": "关闭",
+    "q1": "您想去哪里？",
+    "dest": {
+      "galapagos": "加拉帕戈斯群岛",
+      "combo": "厄瓜多尔+加拉帕戈斯",
+      "andes": "安第斯山与火山",
+      "amazon": "亚马逊雨林",
+      "dayTrips": "一日游"
+    },
+    "q2": "您什么时候出行？",
+    "arrival": "大致抵达日期",
+    "days": "行程天数",
+    "flexible": "我的日期可以灵活",
+    "q3": "谁一起出行？",
+    "adults": "成人",
+    "children": "儿童",
+    "budget": "每人预算（不含国际机票）",
+    "budgets": {
+      "<1500": "< $1,500",
+      "1500-3000": "$1,500–3,000",
+      "3000-5000": "$3,000–5,000",
+      "5000+": "$5,000+",
+      "unknown": "暂不确定"
+    },
+    "q4": "我们如何联系您？",
+    "name": "姓名",
+    "email": "邮箱",
+    "phone": "电话（含国家区号，选填）",
+    "contactPref": "我希望通过以下方式联系",
+    "contactOpts": {
+      "email": "邮件",
+      "call": "电话",
+      "video": "视频通话",
+      "whatsapp": "WhatsApp"
+    },
+    "back": "上一步",
+    "next": "下一步",
+    "submit": "获取我的方案",
+    "sending": "发送中…",
+    "trust1": "Tripadvisor 5.0 分",
+    "trust2": "24小时内回复",
+    "trust3": "支付30%即可预订",
+    "errDestination": "请选择目的地。",
+    "errDates": "请选择日期或勾选日期灵活。",
+    "errName": "请输入您的姓名。",
+    "errEmail": "请输入有效的邮箱。",
+    "errPhone": "请检查电话：只能包含数字、空格和+。",
+    "errGeneric": "发送失败。请重试或发送邮件至 info@vermilionroutes.com。"
   }
 }

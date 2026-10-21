@@ -23,7 +23,8 @@ import {
   Compass,
   Newspaper,
   Info,
-  MessageCircle
+  MessageCircle,
+  Sparkles
 } from 'lucide-react';
 import { useSettings } from '@/hooks/useSettings';
 import Image from 'next/image';
@@ -32,6 +33,7 @@ import { useCurrency, CURRENCIES, CurrencyCode } from '@/context/CurrencyContext
 import { BrandLogo } from '@/components/ui/BrandLogo';
 import { PromoBanner } from '@/components/promotions/PromoBanner';
 import { useActivePromotion } from '@/hooks/useActivePromotion';
+import { openPlanTrip } from '@/data/planTrip';
 
 // Dynamic imports
 const AffiliateClubModal = dynamic(
@@ -58,6 +60,7 @@ export function NavbarWithReservations() {
   const locale = useLocale();
   const t = useTranslations('contact');
   const tNav = useTranslations('nav');
+  const tPlan = useTranslations('planTrip');
   const tRoot = useTranslations();
   const pathname = usePathname();
   const router = useRouter();
@@ -132,7 +135,6 @@ export function NavbarWithReservations() {
       icon: Newspaper,
     },
     { name: tNav('about'), href: `/${locale}/about`, icon: Info },
-    { name: tNav('contact'), href: `/${locale}#contact`, isAnchorToHome: true, icon: MessageCircle },
   ];
 
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string, isAnchorToHome?: boolean) => {
@@ -304,6 +306,16 @@ export function NavbarWithReservations() {
           <div className="hidden md:flex items-center gap-3">
             {mounted && (
               <div className="flex items-center gap-3 animate-in fade-in duration-700">
+                {/* Botón principal de captación: abre el formulario por pasos */}
+                <button
+                  type="button"
+                  onClick={() => openPlanTrip()}
+                  data-lead-placement="header_plan_trip"
+                  className="group inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-red-600 to-red-500 px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-widest text-white shadow-lg shadow-red-900/30 ring-1 ring-white/20 transition-all hover:scale-[1.03] hover:from-red-500 hover:to-red-400 active:scale-95"
+                >
+                  <Sparkles className="w-4 h-4 transition-transform group-hover:rotate-12" />
+                  {tPlan('cta')}
+                </button>
                 {/* MIS RESERVAS Button */}
                 <div className="relative">
                   <button
@@ -478,6 +490,15 @@ export function NavbarWithReservations() {
             </div>
 
             <div className="px-3 py-3 space-y-3">
+              <button
+                type="button"
+                onClick={() => { setMobileMenuOpen(false); openPlanTrip(); }}
+                data-lead-placement="mobile_menu_plan_trip"
+                className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-red-600 to-red-500 px-4 py-3.5 text-sm font-extrabold uppercase tracking-wider text-white shadow-lg"
+              >
+                <Sparkles className="w-5 h-5" />
+                {tPlan('cta')}
+              </button>
               {/* Mis Reservas — expands inline, no popup */}
               <div className="rounded-xl overflow-hidden bg-emerald-50 dark:bg-emerald-900/20">
                 <button

@@ -391,5 +391,64 @@
       "private": "100 % private Touren mit Naturführer",
       "whatsapp": "Schreiben Sie uns auf WhatsApp"
     }
+  },
+  "planTrip": {
+    "cta": "Reise planen",
+    "talkAdvisor": "Mit einem Berater sprechen",
+    "eyebrow": "Private Reise nach Maß",
+    "title": "Gestalten wir Ihre Reise",
+    "successTitle": "Erledigt, {name}!",
+    "stepOf": "Schritt {n} von {total}",
+    "oneMinute": "1 Minute",
+    "successText": "Ein lokaler Experte schreibt Ihnen innerhalb von 24 Stunden mit einer privaten Reiseroute und ihrem Preis. Wir haben Ihnen eine Bestätigung per E-Mail geschickt.",
+    "bookCall": "Kostenloses Videogespräch buchen (20 Min.)",
+    "close": "Schließen",
+    "q1": "Wohin möchten Sie reisen?",
+    "dest": {
+      "galapagos": "Galápagos-Inseln",
+      "combo": "Ecuador + Galápagos",
+      "andes": "Anden & Vulkane",
+      "amazon": "Amazonas",
+      "dayTrips": "Tagesausflüge"
+    },
+    "q2": "Wann reisen Sie?",
+    "arrival": "Ungefähres Ankunftsdatum",
+    "days": "Reisedauer (Tage)",
+    "flexible": "Meine Daten sind flexibel",
+    "q3": "Wer reist?",
+    "adults": "Erwachsene",
+    "children": "Kinder",
+    "budget": "Budget pro Person (ohne internationale Flüge)",
+    "budgets": {
+      "<1500": "< $1,500",
+      "1500-3000": "$1,500–3,000",
+      "3000-5000": "$3,000–5,000",
+      "5000+": "$5,000+",
+      "unknown": "Noch unklar"
+    },
+    "q4": "Wie erreichen wir Sie?",
+    "name": "Vor- und Nachname",
+    "email": "E-Mail",
+    "phone": "Telefon mit Ländervorwahl (optional)",
+    "contactPref": "Ich bevorzuge Kontakt per",
+    "contactOpts": {
+      "email": "E-Mail",
+      "call": "Anruf",
+      "video": "Videoanruf",
+      "whatsapp": "WhatsApp"
+    },
+    "back": "Zurück",
+    "next": "Weiter",
+    "submit": "Mein Angebot erhalten",
+    "sending": "Wird gesendet…",
+    "trust1": "5.0 auf Tripadvisor",
+    "trust2": "Antwort in 24 Std.",
+    "trust3": "Buchen mit 30 % Anzahlung",
+    "errDestination": "Wählen Sie ein Reiseziel.",
+    "errDates": "Wählen Sie ein Datum oder markieren Sie flexible Daten.",
+    "errName": "Bitte geben Sie Ihren Namen ein.",
+    "errEmail": "Bitte geben Sie eine gültige E-Mail ein.",
+    "errPhone": "Telefon prüfen: nur Ziffern, Leerzeichen und +.",
+    "errGeneric": "Senden fehlgeschlagen. Bitte erneut versuchen oder an info@vermilionroutes.com schreiben."
   }
 }

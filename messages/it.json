@@ -391,5 +391,64 @@
       "private": "Tour 100% privati con guida naturalista",
       "whatsapp": "Scrivici su WhatsApp"
     }
+  },
+  "planTrip": {
+    "cta": "Pianifica il tuo viaggio",
+    "talkAdvisor": "Parla con un consulente",
+    "eyebrow": "Viaggio privato su misura",
+    "title": "Progettiamo il tuo viaggio",
+    "successTitle": "Fatto, {name}!",
+    "stepOf": "Passo {n} di {total}",
+    "oneMinute": "1 minuto",
+    "successText": "Uno specialista locale ti scriverà entro 24 ore con un itinerario privato e il suo prezzo. Ti abbiamo inviato un'e-mail di conferma.",
+    "bookCall": "Prenota la videochiamata gratuita (20 min)",
+    "close": "Chiudi",
+    "q1": "Dove vuoi andare?",
+    "dest": {
+      "galapagos": "Isole Galápagos",
+      "combo": "Ecuador + Galápagos",
+      "andes": "Ande e vulcani",
+      "amazon": "Amazzonia",
+      "dayTrips": "Escursioni di un giorno"
+    },
+    "q2": "Quando viaggi?",
+    "arrival": "Data di arrivo indicativa",
+    "days": "Durata (giorni)",
+    "flexible": "Le mie date sono flessibili",
+    "q3": "Chi viaggia?",
+    "adults": "Adulti",
+    "children": "Bambini",
+    "budget": "Budget a persona (voli internazionali esclusi)",
+    "budgets": {
+      "<1500": "< $1,500",
+      "1500-3000": "$1,500–3,000",
+      "3000-5000": "$3,000–5,000",
+      "5000+": "$5,000+",
+      "unknown": "Non lo so ancora"
+    },
+    "q4": "Come ti contattiamo?",
+    "name": "Nome e cognome",
+    "email": "E-mail",
+    "phone": "Telefono con prefisso (facoltativo)",
+    "contactPref": "Preferisco essere contattato via",
+    "contactOpts": {
+      "email": "E-mail",
+      "call": "Chiamata",
+      "video": "Videochiamata",
+      "whatsapp": "WhatsApp"
+    },
+    "back": "Indietro",
+    "next": "Avanti",
+    "submit": "Ricevi la mia proposta",
+    "sending": "Invio…",
+    "trust1": "5.0 su Tripadvisor",
+    "trust2": "Risposta entro 24 h",
+    "trust3": "Prenota con il 30%",
+    "errDestination": "Scegli una destinazione.",
+    "errDates": "Scegli una data o seleziona date flessibili.",
+    "errName": "Inserisci il tuo nome.",
+    "errEmail": "Inserisci un'e-mail valida.",
+    "errPhone": "Controlla il telefono: solo numeri, spazi e +.",
+    "errGeneric": "Invio non riuscito. Riprova o scrivi a info@vermilionroutes.com."
   }
 }

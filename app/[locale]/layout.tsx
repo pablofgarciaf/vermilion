@@ -17,6 +17,7 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { WhatsAppClickTracker } from '@/components/analytics/WhatsAppClickTracker';
 
 import { allSocialUrls } from '@/data/socialLinks';
+import { PlanTripModal } from '@/components/lead/PlanTripModal';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -329,6 +330,7 @@ export default async function RootLayout({
                 </main>
                 <ConditionalFooter />
                 <WhatsAppButton />
+                <PlanTripModal />
                 <ConciergeWidgetLazy />
                 <WhatsAppClickTracker />
                 <Suspense fallback={null}>

@@ -391,5 +391,64 @@
       "private": "100% private tours with a naturalist guide",
       "whatsapp": "Message us on WhatsApp"
     }
+  },
+  "planTrip": {
+    "cta": "Plan your trip",
+    "talkAdvisor": "Talk to a specialist",
+    "eyebrow": "Private, tailor-made travel",
+    "title": "Let's design your trip",
+    "successTitle": "All set, {name}!",
+    "stepOf": "Step {n} of {total}",
+    "oneMinute": "1 minute",
+    "successText": "A local specialist will write to you within 24 hours with a private itinerary and its price. We've sent you a confirmation email.",
+    "bookCall": "Book your free video call (20 min)",
+    "close": "Close",
+    "q1": "Where do you want to go?",
+    "dest": {
+      "galapagos": "Galápagos Islands",
+      "combo": "Ecuador + Galápagos",
+      "andes": "Andes & volcanoes",
+      "amazon": "Amazon",
+      "dayTrips": "Day trips"
+    },
+    "q2": "When are you traveling?",
+    "arrival": "Approximate arrival date",
+    "days": "Trip length (days)",
+    "flexible": "My dates are flexible",
+    "q3": "Who is traveling?",
+    "adults": "Adults",
+    "children": "Children",
+    "budget": "Budget per person (excluding international flights)",
+    "budgets": {
+      "<1500": "< $1,500",
+      "1500-3000": "$1,500–3,000",
+      "3000-5000": "$3,000–5,000",
+      "5000+": "$5,000+",
+      "unknown": "Not sure yet"
+    },
+    "q4": "How should we reach you?",
+    "name": "Full name",
+    "email": "Email",
+    "phone": "Phone with country code (optional)",
+    "contactPref": "I prefer to be contacted by",
+    "contactOpts": {
+      "email": "Email",
+      "call": "Phone call",
+      "video": "Video call",
+      "whatsapp": "WhatsApp"
+    },
+    "back": "Back",
+    "next": "Next",
+    "submit": "Get my proposal",
+    "sending": "Sending…",
+    "trust1": "5.0 on Tripadvisor",
+    "trust2": "Reply within 24 h",
+    "trust3": "Book with 30% down",
+    "errDestination": "Choose a destination.",
+    "errDates": "Pick a date or tick flexible dates.",
+    "errName": "Please enter your name.",
+    "errEmail": "Please enter a valid email.",
+    "errPhone": "Check the phone: numbers, spaces and + only.",
+    "errGeneric": "We couldn't send it. Please try again or email info@vermilionroutes.com."
   }
 }

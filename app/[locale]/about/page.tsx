@@ -530,9 +530,9 @@ export default async function AboutPage({ params }: PageProps) {
           <div className="lg:col-span-6">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 group">
               <div className="aspect-[4/3] relative">
-                <Image quality={100}
-                  src="/images/tours/16-9/galapagos-lobo-marino-16-9.webp"
-                  alt="Sea Lions and Naturalist Guide in Galapagos"
+                <Image quality={85}
+                  src="/images/tours/16-9/viajeros-vermilion-grupo-quito-16-9.webp"
+                  alt="Vermilion Routes travelers in Quito's historic center"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"

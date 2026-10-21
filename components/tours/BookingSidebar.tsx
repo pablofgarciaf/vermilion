@@ -24,8 +24,10 @@ import {
   User,
   Mail,
   Phone,
-  AlertCircle
+  AlertCircle,
+  Video
 } from 'lucide-react';
+import { openPlanTrip } from '@/data/planTrip';
 
 interface BookingSidebarProps {
   tour: Tour;
@@ -218,6 +220,7 @@ const BOOKING_SIDEBAR_I18N: Record<string, {
 export function BookingSidebar({ tour }: BookingSidebarProps) {
   const locale = useLocale();
   const t = useTranslations('tours');
+  const tPlan = useTranslations('planTrip');
   const sb = BOOKING_SIDEBAR_I18N[locale] || BOOKING_SIDEBAR_I18N['en'];
   const tourTitle = getLocalizedText(tour.title, locale);
   const tourDuration = getLocalizedText(tour.duration, locale);
@@ -308,6 +311,26 @@ export function BookingSidebar({ tour }: BookingSidebarProps) {
           >
             <Sparkles className="w-4 h-4" />
             <span>{ADD_EXPEDITION_I18N[locale] || ADD_EXPEDITION_I18N['en']}</span>
+          </button>
+
+          {/* Hablar con un asesor: abre el formulario por pasos con este tour */}
+          <button
+            type="button"
+            data-lead-placement="tour_sidebar_plan_trip"
+            onClick={() => {
+              const dest = (tourDestination || '').toLowerCase();
+              const hasGal = dest.includes('gal');
+              const hasMain = /quito|andes|ecuador|cotopaxi|amazon/.test(dest);
+              openPlanTrip({
+                tourId: tour.id,
+                tourTitle: tourTitleStr,
+                destination: hasGal && hasMain ? 'combo' : hasGal ? 'galapagos' : 'andes',
+              });
+            }}
+            className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg transition-colors"
+          >
+            <Video className="w-4 h-4" />
+            <span>{tPlan('talkAdvisor')}</span>
           </button>
 
           {/* Quick WhatsApp Inquiry */}
