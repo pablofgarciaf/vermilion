@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/couples-anniversary-galapagos',
     '/family-friendly-ecuador',
     '/wildlife-photography-expeditions',
+    '/galapagos',
     '/galapagos-activities',
     '/privacy-policy',
     '/terms',

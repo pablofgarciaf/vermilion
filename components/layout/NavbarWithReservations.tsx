@@ -114,7 +114,7 @@ export function NavbarWithReservations() {
       hasDropdown: true,
       icon: MapPin,
       subItems: [
-        { name: tNav('galapagos'), href: `/${locale}#galapagos`, desc: 'Premium Cruises & Island Hopping' },
+        { name: tNav('galapagos'), href: `/${locale}/galapagos`, desc: 'Premium Cruises & Island Hopping' },
         { name: tNav('ecuador'), href: `/${locale}#ecuador`, desc: 'Avenue of Volcanoes & Amazon' },
         { name: tNav('fullday'), href: `/${locale}#fullday`, desc: 'Galapagos & Mainland 1-Day Tours' },
       ],
