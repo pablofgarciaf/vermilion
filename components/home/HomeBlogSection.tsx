@@ -12,6 +12,7 @@ import { socialUrl } from '@/data/socialLinks';
 const VIDEO_GUIDES = [
   {
     id: 'YF8ZJuV3NGo',
+    duration: '0:13',
     title: {
       en: "Ecuador's Amazon Adventure: Exploring the Oriente",
       es: 'Aventura en la Amazonía Ecuatoriana: Explorando el Oriente',
@@ -36,6 +37,7 @@ const VIDEO_GUIDES = [
   },
   {
     id: 'AYLgFKlpddM',
+    duration: '0:35',
     title: {
       en: "Quilotoa Crater Lake: Ecuador's Hidden Gem",
       es: 'Laguna del Quilotoa: La Joya Esmeralda de los Andes',
@@ -60,6 +62,7 @@ const VIDEO_GUIDES = [
   },
   {
     id: 'jkO62poRZQo',
+    duration: '0:31',
     title: {
       en: 'Birdwatching Paradise: Exploring Galapagos Birds',
       es: 'Paraíso de Aves: Explorando las Especies de Galápagos',
@@ -84,6 +87,7 @@ const VIDEO_GUIDES = [
   },
   {
     id: 'u0klmckz7fg',
+    duration: '0:21',
     title: {
       en: 'The Wonderful Ecuador & Galapagos Routes',
       es: 'El Maravilloso Ecuador y Rutas de Galápagos',
@@ -188,6 +192,26 @@ const SECTION_TRANSLATIONS: Record<string, Record<string, string>> = {
     pt: "Assistir a todos os vídeos",
     ja: "すべての動画を見る",
     zh: "观看全部实景影片"
+  },
+  youtubeChannel: {
+    es: "Canal Oficial YouTube",
+    en: "Official YouTube Channel",
+    fr: "Chaîne YouTube Officielle",
+    de: "Offizieller YouTube-Kanal",
+    it: "Canale YouTube Ufficiale",
+    pt: "Canal Oficial do YouTube",
+    ja: "公式YouTubeチャンネル",
+    zh: "官方 YouTube 频道"
+  },
+  watchVideo: {
+    es: "Ver en YouTube",
+    en: "Watch on YouTube",
+    fr: "Regarder sur YouTube",
+    de: "Auf YouTube ansehen",
+    it: "Guarda su YouTube",
+    pt: "Assistir no YouTube",
+    ja: "YouTubeで見る",
+    zh: "在 YouTube 观看"
   }
 };
 
@@ -284,6 +308,16 @@ export function HomeBlogSection() {
               {tSec('videoHeading')}
             </h3>
           </div>
+
+          <a
+            href="https://www.youtube.com/@VermilionSouthAmericanRoutes"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-700 hover:border-emerald-500/60 bg-zinc-950/80 hover:bg-emerald-950/30 text-zinc-300 hover:text-white text-xs font-semibold tracking-wide transition-all shadow-sm active:scale-95"
+          >
+            <span>{tSec('youtubeChannel')}</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -293,29 +327,50 @@ export function HomeBlogSection() {
               href={`https://www.youtube.com/watch?v=${vid.id}`}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group relative rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800 hover:border-emerald-500 transition-all flex-col shadow-lg ${idx >= 2 ? 'hidden sm:flex' : 'flex'}`}
+              aria-label={`${tSec('watchVideo')}: ${getLocalizedText(vid.title, locale)}`}
+              className={`group relative rounded-2xl overflow-hidden bg-zinc-950 border border-zinc-800 hover:border-emerald-500/70 transition-all flex flex-col shadow-lg hover:shadow-emerald-950/20 hover:-translate-y-1 duration-300 ${idx >= 2 ? 'hidden sm:flex' : 'flex'}`}
             >
-              <div className="relative h-36 w-full overflow-hidden">
-                <Image quality={85}
+              {/* Contenedor de video en proporción 16:9 nativa, 100% limpia sin velo ni película opaca */}
+              <div className="relative aspect-video w-full overflow-hidden bg-zinc-900">
+                <Image
+                  quality={90}
                   src={vid.thumb}
                   alt={getLocalizedText(vid.title, locale)}
                   fill
                   sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <div className="w-10 h-10 rounded-full bg-emerald-600/90 text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
-                    <Play className="w-4 h-4 fill-white ml-0.5" />
-                  </div>
+
+                {/* Suave degradado inferior exclusivamente en el borde (h-12) para legibilidad de los badges sin oscurecer el centro */}
+                <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none" />
+
+                {/* Badge de Play elegante en la esquina inferior izquierda: NO tapa la imagen central */}
+                <div className="absolute bottom-2.5 left-2.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/65 backdrop-blur-md border border-white/20 text-white text-[11px] font-semibold tracking-wide shadow-md group-hover:bg-emerald-600 group-hover:border-emerald-400 group-hover:shadow-emerald-900/50 transition-all duration-300">
+                  <Play className="w-2.5 h-2.5 fill-current text-white shrink-0" />
+                  <span className="text-[10px] tracking-wider uppercase font-bold">HD</span>
+                </div>
+
+                {/* Badge de duración oficial en la esquina inferior derecha (estilo streaming) */}
+                <div className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-sm text-[10px] font-mono font-bold text-zinc-200 border border-white/10 shadow-sm">
+                  {vid.duration}
                 </div>
               </div>
-              <div className="p-3.5 space-y-1">
-                <h4 className="font-sans font-bold text-xs text-zinc-100 group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
-                  {getLocalizedText(vid.title, locale)}
-                </h4>
-                <p className="text-[11px] text-zinc-300 line-clamp-2">
-                  {getLocalizedText(vid.desc, locale)}
-                </p>
+
+              {/* Textos y llamado a la acción con tipografía limpia */}
+              <div className="p-3.5 sm:p-4 flex flex-col justify-between flex-1 space-y-2">
+                <div className="space-y-1">
+                  <h4 className="font-sans font-bold text-xs sm:text-sm text-zinc-100 group-hover:text-emerald-400 transition-colors line-clamp-2 leading-snug">
+                    {getLocalizedText(vid.title, locale)}
+                  </h4>
+                  <p className="text-[11px] text-zinc-400 line-clamp-2 font-light leading-relaxed">
+                    {getLocalizedText(vid.desc, locale)}
+                  </p>
+                </div>
+
+                <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 group-hover:text-emerald-300 pt-1 transition-colors">
+                  <span>{tSec('watchVideo')}</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
             </a>
           ))}

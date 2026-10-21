@@ -35,7 +35,9 @@ export const verifyToken = (token: string) => {
 };
 
 export const sendVerificationEmail = async (toEmail: string, name: string, token: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://www.vermilionroutes.com' : 'http://localhost:3005');
+  const baseUrl = (process.env.NODE_ENV === 'production')
+    ? (process.env.NEXT_PUBLIC_BASE_URL && !process.env.NEXT_PUBLIC_BASE_URL.includes('localhost') ? process.env.NEXT_PUBLIC_BASE_URL : 'https://www.vermilionroutes.com')
+    : (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3005');
   const finalUrl = `${baseUrl}/es/affiliates/verify?token=${token}`;
 
   const htmlTemplate = `
@@ -102,7 +104,9 @@ export const verifyNewsletterToken = (token: string) => {
 };
 
 export const sendNewsletterVerificationEmail = async (toEmail: string, token: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || (process.env.NODE_ENV === 'production' ? 'https://www.vermilionroutes.com' : 'http://localhost:3005');
+  const baseUrl = (process.env.NODE_ENV === 'production')
+    ? (process.env.NEXT_PUBLIC_BASE_URL && !process.env.NEXT_PUBLIC_BASE_URL.includes('localhost') ? process.env.NEXT_PUBLIC_BASE_URL : 'https://www.vermilionroutes.com')
+    : (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3005');
   const finalUrl = `${baseUrl}/es/verify-newsletter?token=${token}`;
 
   const htmlTemplate = `

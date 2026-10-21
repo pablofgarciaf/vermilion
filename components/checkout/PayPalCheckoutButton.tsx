@@ -169,9 +169,28 @@ export function PayPalCheckoutButton({
   return (
     <div className="bg-white dark:bg-zinc-950 border border-stone-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
       {errorMessage && (
-        <div className="p-3 bg-rose-500/10 border border-rose-500/30 rounded-xl text-xs text-rose-600 dark:text-rose-400 flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 shrink-0" />
-          <span>{errorMessage}</span>
+        <div className="p-3.5 bg-rose-500/10 border border-rose-500/30 rounded-xl text-xs text-rose-700 dark:text-rose-400 space-y-2">
+          <div className="flex items-center gap-2 font-medium">
+            <AlertCircle className="w-4 h-4 shrink-0 text-rose-500" />
+            <span>{errorMessage}</span>
+          </div>
+          <p className="text-[11px] text-stone-600 dark:text-zinc-300 leading-relaxed">
+            {locale === 'es'
+              ? '💡 Muchos bancos internacionales requieren confirmación previa para compras de viajes. Puedes pagar por transferencia bancaria directa o solicitar un enlace de pago alternativo a tu Concierge 24/7:'
+              : '💡 International banks frequently require authorization for high-value travel bookings. You can complete your reservation via direct bank wire or request an alternate payment link from your 24/7 Concierge:'}
+          </p>
+          <a
+            href={`https://wa.me/593960039156?text=${encodeURIComponent(
+              locale === 'es'
+                ? `Hola Vermilion Routes, tuve un problema al procesar mi pago para ${tourTitle || 'mi expedición'} (Ref: ${safeRef}). ¿Me pueden asistir con un método alternativo o transferencia?`
+                : `Hello Vermilion Routes, I encountered an issue processing payment for ${tourTitle || 'my expedition'} (Ref: ${safeRef}). Could you please assist me with an alternate method or wire transfer?`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shadow-sm transition-all"
+          >
+            <span>{locale === 'es' ? 'Asistencia Inmediata por WhatsApp 24/7' : 'Instant 24/7 WhatsApp Assistance'}</span>
+          </a>
         </div>
       )}
 
