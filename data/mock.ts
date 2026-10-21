@@ -661,7 +661,7 @@ const multiDayTours: Tour[] = [
     price3Star: 2050,
     price4Star: 2399,
     imageUrl: '/images/tours/16-9/marine-iguana-galapagos.webp',
-    mobileImage: '/images/tours/9-16/marine-iguana-galapagos-web.webp',
+    mobileImage: '/images/tours/9-16/galapagos-iguana-marina-perfil-vertical.webp',
     desktopImage: '/images/tours/16-9/marine-iguana-galapagos.webp',
     gallery: [
       '/images/tours/16-9/marine-iguana-galapagos.webp',
@@ -3123,7 +3123,7 @@ const multiDayTours: Tour[] = [
     price3Star: 2290,
     price4Star: 2450,
     imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
-    mobileImage: '/images/tours/9-16/tortuga-marina-galapagos-slider-4k.webp',
+    mobileImage: '/images/tours/9-16/galapagos-flamenco-rosa-reflejo-9-16.webp',
     desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
     gallery: [
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
