@@ -386,5 +386,18 @@
       "private": "100 % private Touren mit Naturführer",
       "whatsapp": "Schreiben Sie uns auf WhatsApp"
     }
+  },
+  "quickQuote": {
+    "title": "Ihr Angebot für eine Privatreise innerhalb von 24 Stunden",
+    "subtitle": "Sagen Sie uns, wer Sie sind und wann Sie reisen. Ein lokaler Experte antwortet mit einer Reiseroute samt Preis.",
+    "name": "Ihr Name",
+    "email": "Ihre E-Mail",
+    "dates": "Reisedaten (oder „flexibel“)",
+    "button": "Kostenloses Angebot anfordern",
+    "sending": "Wird gesendet…",
+    "success": "Danke! Ein lokaler Experte antwortet Ihnen innerhalb von 24 Stunden.",
+    "error": "Etwas ist schiefgelaufen. Schreiben Sie uns über",
+    "nameError": "Bitte geben Sie Ihren Namen ein.",
+    "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
   }
 }

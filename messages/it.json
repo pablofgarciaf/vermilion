@@ -386,5 +386,18 @@
       "private": "Tour 100% privati con guida naturalista",
       "whatsapp": "Scrivici su WhatsApp"
     }
+  },
+  "quickQuote": {
+    "title": "Ricevi il preventivo del tuo viaggio privato in 24 ore",
+    "subtitle": "Dicci chi sei e quando viaggi. Uno specialista locale risponde con un itinerario con prezzo.",
+    "name": "Il tuo nome",
+    "email": "La tua e-mail",
+    "dates": "Date di viaggio (o «flessibili»)",
+    "button": "Voglio il preventivo gratuito",
+    "sending": "Invio…",
+    "success": "Grazie! Uno specialista locale ti risponderà entro 24 ore.",
+    "error": "Qualcosa è andato storto. Scrivici su",
+    "nameError": "Inserisci il tuo nome.",
+    "emailError": "Inserisci un indirizzo e-mail valido."
   }
 }

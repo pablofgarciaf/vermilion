@@ -386,5 +386,18 @@
       "private": "Tours 100% privados com guia naturalista",
       "whatsapp": "Fale conosco no WhatsApp"
     }
+  },
+  "quickQuote": {
+    "title": "Receba o orçamento da sua viagem privada em 24 horas",
+    "subtitle": "Conte-nos quem você é e quando viaja. Um especialista local responde com um roteiro com preço.",
+    "name": "Seu nome",
+    "email": "Seu e-mail",
+    "dates": "Datas da viagem (ou «flexíveis»)",
+    "button": "Quero meu orçamento grátis",
+    "sending": "Enviando…",
+    "success": "Obrigado! Um especialista local responderá em até 24 horas.",
+    "error": "Algo deu errado. Escreva-nos pelo",
+    "nameError": "Digite seu nome.",
+    "emailError": "Digite um e-mail válido."
   }
 }

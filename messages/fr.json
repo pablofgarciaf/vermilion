@@ -386,5 +386,18 @@
       "private": "Circuits 100 % privés avec guide naturaliste",
       "whatsapp": "Écrivez-nous sur WhatsApp"
     }
+  },
+  "quickQuote": {
+    "title": "Recevez votre devis de voyage privé sous 24 h",
+    "subtitle": "Dites-nous qui vous êtes et quand vous partez. Un spécialiste local vous répond avec un itinéraire chiffré.",
+    "name": "Votre nom",
+    "email": "Votre e-mail",
+    "dates": "Dates de voyage (ou « flexibles »)",
+    "button": "Recevoir mon devis gratuit",
+    "sending": "Envoi…",
+    "success": "Merci ! Un spécialiste local vous répondra sous 24 h.",
+    "error": "Une erreur est survenue. Écrivez-nous sur",
+    "nameError": "Veuillez saisir votre nom.",
+    "emailError": "Veuillez saisir un e-mail valide."
   }
 }

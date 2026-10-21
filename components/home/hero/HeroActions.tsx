@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowRight, MessageCircle } from 'lucide-react';
+import { HeroPromoChip } from '@/components/promotions/HeroPromoChip';
 
 interface HeroActionsProps {
   exploreLabel: string;
@@ -13,8 +14,14 @@ export function HeroActions({ exploreLabel, planLabel }: HeroActionsProps) {
   return (
     <div
       id="hero-action-buttons"
-      className="absolute inset-x-0 bottom-[75px] sm:bottom-[80px] md:bottom-[65px] lg:bottom-[70px] xl:bottom-[75px] md:inset-x-auto md:left-[30px] lg:left-[60px] z-30 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2.5 sm:gap-3.5 px-4 pointer-events-auto"
+      className="absolute inset-x-0 bottom-[75px] sm:bottom-[80px] md:bottom-[65px] lg:bottom-[70px] xl:bottom-[75px] md:inset-x-auto md:left-[30px] lg:left-[60px] z-30 flex flex-col items-center md:items-start gap-3 px-4 pointer-events-auto"
     >
+      {/* Oferta vigente con fecha de fin: nace vacía y solo aparece si hay promo activa. */}
+      {/* En móvil el texto del hero ocupa todo el alto: ahí la oferta ya va en la barra superior. */}
+      <div className="hidden md:block">
+        <HeroPromoChip />
+      </div>
+      <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2.5 sm:gap-3.5">
       <button
         suppressHydrationWarning
         className="w-[270px] sm:w-auto px-6 py-4 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold uppercase tracking-wider text-xs md:text-sm rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-red-900/40 hover:scale-[1.02] active:scale-95 cursor-pointer text-center shrink-0 group border-none"
@@ -37,6 +44,7 @@ export function HeroActions({ exploreLabel, planLabel }: HeroActionsProps) {
         <MessageCircle className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
         <span>{planLabel}</span>
       </button>
+      </div>
     </div>
   );
 }

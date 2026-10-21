@@ -386,5 +386,18 @@
       "private": "100% private tours with a naturalist guide",
       "whatsapp": "Message us on WhatsApp"
     }
+  },
+  "quickQuote": {
+    "title": "Get your private trip quote in 24 hours",
+    "subtitle": "Tell us who you are and when you travel. A local specialist replies with a priced itinerary.",
+    "name": "Your name",
+    "email": "Your email",
+    "dates": "Travel dates (or \"flexible\")",
+    "button": "Get my free quote",
+    "sending": "Sending…",
+    "success": "Thank you! A local specialist will reply within 24 hours.",
+    "error": "Something went wrong. Please write to us on",
+    "nameError": "Please enter your name.",
+    "emailError": "Please enter a valid email address."
   }
 }
