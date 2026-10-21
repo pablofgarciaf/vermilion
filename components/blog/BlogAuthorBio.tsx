@@ -20,9 +20,9 @@ const AUTHOR_I18N: Record<string, {
     aboutAuthor: 'Sobre el Autor & Diseñador de la Expedición',
     role: 'Guía Naturalista Líder & Director de Itinerarios',
     agency: 'Vermilion Routes · Quito & Galápagos, Ecuador',
-    bio: 'Nacido en los Andes y con más de 12 años liderando expediciones privadas por las Islas Galápagos, la selva amazónica y las cumbres volcánicas de Ecuador. Especialista en biología de campo, avistamiento de fauna endémica y logística de expedición personalizada con certificación oficial del Ministerio de Turismo del Ecuador.',
+    bio: 'Nacido en los Andes y con más de 15 años liderando expediciones privadas por las Islas Galápagos, la selva amazónica y las cumbres volcánicas de Ecuador. Especialista en biología de campo, avistamiento de fauna endémica y logística de expedición personalizada con certificación oficial del Ministerio de Turismo del Ecuador.',
     badgeLicense: 'Licencia Oficial MinTur Reg. 1793215456001',
-    badgeExperience: '12+ Años de Experiencia en Campo',
+    badgeExperience: '15+ Años de Experiencia en Campo',
     badgeTripAdvisor: '5.0/5.0 en TripAdvisor · Travelers\' Choice 2026',
     chatPrompt: 'Consultar directamente con Jhayro por WhatsApp',
   },
@@ -30,9 +30,9 @@ const AUTHOR_I18N: Record<string, {
     aboutAuthor: 'About the Author & Expedition Designer',
     role: 'Lead Naturalist Guide & Head of Expedition Design',
     agency: 'Vermilion Routes · Quito & Galapagos, Ecuador',
-    bio: 'Born in the Ecuadorian Andes with over 12 years guiding private expeditions across the Galapagos Islands, the Amazon rainforest, and high-altitude volcanic trails. Specialized in field biology, endemic wildlife interpretation, and bespoke itinerary planning, officially certified by the Ministry of Tourism of Ecuador.',
+    bio: 'Born in the Ecuadorian Andes with over 15 years guiding private expeditions across the Galapagos Islands, the Amazon rainforest, and high-altitude volcanic trails. Specialized in field biology, endemic wildlife interpretation, and bespoke itinerary planning, officially certified by the Ministry of Tourism of Ecuador.',
     badgeLicense: 'Official MinTur Guide Reg. 1793215456001',
-    badgeExperience: '12+ Years Field & Expedition Experience',
+    badgeExperience: '15+ Years Field & Expedition Experience',
     badgeTripAdvisor: '5.0/5.0 on TripAdvisor · Travelers\' Choice 2026',
     chatPrompt: 'Ask Jhayro Directly on WhatsApp',
   },
@@ -40,9 +40,9 @@ const AUTHOR_I18N: Record<string, {
     aboutAuthor: 'À propos de l’Auteur & Concepteur d’Expédition',
     role: 'Guide Naturaliste Principal & Directeur des Itinéraires',
     agency: 'Vermilion Routes · Quito & Galápagos, Équateur',
-    bio: 'Natif des Andes équatoriennes avec plus de 12 ans d’expérience dans la conduite d’expéditions privées aux Galápagos, en Amazonie et sur l’Avenue des Volcans. Spécialiste de la faune endémique et de la logistique sur mesure, certifié par le Ministère du Tourisme de l’Équateur.',
+    bio: 'Natif des Andes équatoriennes avec plus de 15 ans d’expérience dans la conduite d’expéditions privées aux Galápagos, en Amazonie et sur l’Avenue des Volcans. Spécialiste de la faune endémique et de la logistique sur mesure, certifié par le Ministère du Tourisme de l’Équateur.',
     badgeLicense: 'Guide Agréé Ministère du Tourisme Équateur',
-    badgeExperience: 'Plus de 12 ans d’expérience sur le terrain',
+    badgeExperience: 'Plus de 15 ans d’expérience sur le terrain',
     badgeTripAdvisor: '5.0/5.0 sur TripAdvisor · Travelers\' Choice 2026',
     chatPrompt: 'Contacter Jhayro directement sur WhatsApp',
   },
@@ -50,9 +50,9 @@ const AUTHOR_I18N: Record<string, {
     aboutAuthor: 'Über den Autor & Expeditionsleiter',
     role: 'Leitender Naturführer & Leiter Expeditionsdesign',
     agency: 'Vermilion Routes · Quito & Galapagos, Ecuador',
-    bio: 'Geboren in den ecuadorianischen Anden mit über 12 Jahren Erfahrung in der Führung privater Expeditionen auf den Galapagosinseln, im Amazonas-Regenwald und auf vulkanischen Höhenwegen. Spezialist für endemische Tierwelt und maßgeschneiderte Reiselogistik, lizenziert vom Tourismusministerium Ecuadors.',
+    bio: 'Geboren in den ecuadorianischen Anden mit über 15 Jahren Erfahrung in der Führung privater Expeditionen auf den Galapagosinseln, im Amazonas-Regenwald und auf vulkanischen Höhenwegen. Spezialist für endemische Tierwelt und maßgeschneiderte Reiselogistik, lizenziert vom Tourismusministerium Ecuadors.',
     badgeLicense: 'Offizielle MinTur-Lizenz Reg. 1793215456001',
-    badgeExperience: '12+ Jahre Felderfahrung in Ecuador',
+    badgeExperience: '15+ Jahre Felderfahrung in Ecuador',
     badgeTripAdvisor: '5.0/5.0 auf TripAdvisor · Travelers\' Choice 2026',
     chatPrompt: 'Jhayro direkt auf WhatsApp kontaktieren',
   },
@@ -60,9 +60,9 @@ const AUTHOR_I18N: Record<string, {
     aboutAuthor: 'Informazioni sull\'Autore & Expedition Designer',
     role: 'Guida Naturalistica Principale & Responsabile Itinerari',
     agency: 'Vermilion Routes · Quito & Galapagos, Ecuador',
-    bio: 'Nato nelle Ande ecuadoriane con oltre 12 anni di esperienza nella guida di spedizioni private alle Isole Galapagos, nella foresta amazzonica e tra le vette vulcaniche. Specialista in fauna endemica e pianificazione su misura, ufficialmente certificato dal Ministero del Turismo dell\'Ecuador.',
+    bio: 'Nato nelle Ande ecuadoriane con oltre 15 anni di esperienza nella guida di spedizioni private alle Isole Galapagos, nella foresta amazzonica e tra le vette vulcaniche. Specialista in fauna endemica e pianificazione su misura, ufficialmente certificato dal Ministero del Turismo dell\'Ecuador.',
     badgeLicense: 'Guida Ufficiale MinTur Reg. 1793215456001',
-    badgeExperience: '12+ Anni di Esperienza sul Campo',
+    badgeExperience: '15+ Anni di Esperienza sul Campo',
     badgeTripAdvisor: '5.0/5.0 su TripAdvisor · Travelers\' Choice 2026',
     chatPrompt: 'Parla direttamente con Jhayro su WhatsApp',
   },
@@ -70,9 +70,9 @@ const AUTHOR_I18N: Record<string, {
     aboutAuthor: 'Sobre o Autor & Designer da Expedição',
     role: 'Guia Naturalista Líder & Diretor de Expedições',
     agency: 'Vermilion Routes · Quito & Galápagos, Equador',
-    bio: 'Nascido nos Andes equatorianos com mais de 12 anos liderando expedições privadas pelas Ilhas Galápagos, Amazônia e vulcões andinos. Especialista em vida selvagem endêmica e roteiros personalizados, certificado oficialmente pelo Ministério do Turismo do Equador.',
+    bio: 'Nascido nos Andes equatorianos com mais de 15 anos liderando expedições privadas pelas Ilhas Galápagos, Amazônia e vulcões andinos. Especialista em vida selvagem endêmica e roteiros personalizados, certificado oficialmente pelo Ministério do Turismo do Equador.',
     badgeLicense: 'Guia Oficial MinTur Reg. 1793215456001',
-    badgeExperience: '12+ Anos de Experiência em Campo',
+    badgeExperience: '15+ Anos de Experiência em Campo',
     badgeTripAdvisor: '5.0/5.0 no TripAdvisor · Travelers\' Choice 2026',
     chatPrompt: 'Falar diretamente com Jhayro pelo WhatsApp',
   },
@@ -80,9 +80,9 @@ const AUTHOR_I18N: Record<string, {
     aboutAuthor: '著者および遠征デザイナーについて',
     role: '主任ナチュラリストガイド兼ツアー企画ディレクター',
     agency: 'Vermilion Routes · エクアドル・キト＆ガラパゴス',
-    bio: 'エクアドルのアンデス山脈出身。ガラパゴス諸島、アマゾン熱帯雨林、アンデス火山ルートにおいて12年以上のプライベート遠征ガイド実績を持つ。固有種の生態系と特注プライベートツアーの専門家であり、エクアドル観光省公認ガイド（登録番号 1793215456001）。',
+    bio: 'エクアドルのアンデス山脈出身。ガラパゴス諸島、アマゾン熱帯雨林、アンデス火山ルートにおいて15年以上のプライベート遠征ガイド実績を持つ。固有種の生態系と特注プライベートツアーの専門家であり、エクアドル観光省公認ガイド（登録番号 1793215456001）。',
     badgeLicense: 'エクアドル観光省公認ガイドライセンス',
-    badgeExperience: '現地フィールドガイド歴12年以上',
+    badgeExperience: '現地フィールドガイド歴15年以上',
     badgeTripAdvisor: 'TripAdvisor評価 5.0/5.0 · トラベラーズチョイス2026',
     chatPrompt: 'WhatsAppでJhayroに直接相談する',
   },
@@ -90,9 +90,9 @@ const AUTHOR_I18N: Record<string, {
     aboutAuthor: '关于作者与探险行程设计师',
     role: '首席自然学家向导兼探险规划总监',
     agency: 'Vermilion Routes · 厄瓜多尔基多与加拉帕戈斯',
-    bio: '出生于厄瓜多尔安第斯山区，拥有超过12年在加拉帕戈斯群岛、亚马逊雨林和火山高原带领私人探险团队的资深经验。专精特有野生动物生物学与定制奢享旅行规划，持有厄瓜多尔旅游部官方国家向导执照（注册号：1793215456001）。',
+    bio: '出生于厄瓜多尔安第斯山区，拥有超过15年在加拉帕戈斯群岛、亚马逊雨林和火山高原带领私人探险团队的资深经验。专精特有野生动物生物学与定制奢享旅行规划，持有厄瓜多尔旅游部官方国家向导执照（注册号：1793215456001）。',
     badgeLicense: '厄瓜多尔旅游部官方认证向导执照',
-    badgeExperience: '12年以上资深野外向导经验',
+    badgeExperience: '15年以上资深野外向导经验',
     badgeTripAdvisor: '猫途鹰 TripAdvisor 5.0满分 · 2026旅行者之选',
     chatPrompt: '通过 WhatsApp 直接咨询 Jhayro',
   },
@@ -106,13 +106,14 @@ export function BlogAuthorBio({ locale = 'en' }: BlogAuthorBioProps) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
         {/* Avatar with Verified Badge */}
         <div className="relative shrink-0">
-          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-emerald-600 dark:border-emerald-500 shadow-md">
-            <Image quality={85}
-              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=85"
-              alt="Jhayro Ludeña - Lead Naturalist Guide & Founder"
-              fill
-              className="object-cover"
-              sizes="96px"
+          {/* Sin foto de stock: hasta tener una foto real del guía se muestra el emblema de la marca. */}
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-emerald-600 dark:border-emerald-500 shadow-md bg-[#0B1A17] flex items-center justify-center">
+            <Image
+              src="/icon.png"
+              alt="Vermilion Routes"
+              width={64}
+              height={64}
+              className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
             />
           </div>
           <div

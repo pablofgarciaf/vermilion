@@ -74,7 +74,7 @@ export function BlogGalleryButton({ destination, locale }: BlogGalleryButtonProp
 
   return (
     <>
-      <div className="my-10 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-emerald-950/40 via-zinc-900 to-zinc-900 border border-emerald-800/40 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div className="my-10 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-[#0B1A17] via-zinc-900 to-zinc-900 border border-emerald-800/40 shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-800 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
             <Camera className="w-3.5 h-3.5" />
@@ -83,7 +83,7 @@ export function BlogGalleryButton({ destination, locale }: BlogGalleryButtonProp
           <h4 className="text-lg sm:text-xl font-serif font-bold text-white">
             {t.title}
           </h4>
-          <p className="text-zinc-400 text-xs sm:text-sm max-w-xl">
+          <p className="text-zinc-200 text-xs sm:text-sm max-w-xl">
             {t.subtitle}
           </p>
         </div>

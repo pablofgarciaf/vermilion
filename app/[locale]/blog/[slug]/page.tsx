@@ -30,6 +30,7 @@ import {
   HelpCircle,
   Tag
 } from 'lucide-react';
+import { separateMarkdownBlocks } from '@/lib/blogMarkdown';
 
 interface BlogPostPageProps {
   params: Promise<{
@@ -205,7 +206,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const complementaryTours = mockTours.filter((t) => t.id !== relatedTour?.id).slice(0, 2);
   const destinationName = getLocalizedText(post.category, locale) || 'Galapagos & Ecuador';
   const articleTitle = getLocalizedText(post.title, locale);
-  const contentText = locale === 'es' ? post.content.es : post.content.en;
+  // Un título (## o ###) pegado con un solo salto de línea a su lista o párrafo se separa,
+  // y una lista pegada a un párrafo también: si no, el bloque entero se pintaba como título.
+  const contentText = separateMarkdownBlocks(locale === 'es' ? post.content.es : post.content.en);
 
   const blogJsonLd: any = {
     '@context': 'https://schema.org',
@@ -714,7 +717,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 );
               }
               if (trimmed.startsWith('* ')) {
-                const items = trimmed.split('\n* ').map((i) => i.replace(/^\*\s*/, ''));
+                // Solo el primer elemento conserva el "* " inicial; quitar un "*" a los demás rompía la **negrita**.
+                const items = trimmed.split('\n* ').map((i, k) => (k === 0 ? i.replace(/^\*\s+/, '') : i));
                 return (
                   <ul key={idx} className="space-y-2 list-disc list-inside pl-2 text-zinc-700 dark:text-zinc-300">
                     {items.map((it, iIdx) => (
