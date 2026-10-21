@@ -27,7 +27,7 @@ import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 const TRANSLATIONS: Record<string, Record<string, string>> = {
   en: {
     topDestinations: "Top Destinations", galapagos: "Galapagos Islands", ecuador: "Mainland Ecuador", fullDay: "Full Day Excursions", amazon: "Ecuadorian Amazon", volcanoes: "Avenue of Volcanoes",
-    company: "Company", about: "About Us", packages: "Tour Packages", contact: "Contact Specialist",
+    company: "Company", about: "About Us", packages: "Tour Packages", galapagosActivities: "Galápagos Activities", contact: "Contact Specialist",
     updates: "Get Travel Updates", subscribeText: "Subscribe to receive seasonal Galapagos premium cruise promotions and curated travel guides.", emailPlaceholder: "Your email address", subscribeBtn: "Subscribe",
     licensed: "Fully Licensed & Certified Tour Operator in Ecuador & Galapagos", support: "24/7 Dedicated Trip Specialist Support En Route", secure: "Secure Bookings & 100% Satisfaction Guarantee",
     privacy: "Privacy Policy", terms: "Terms of Service",
@@ -50,7 +50,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
   },
   es: {
     topDestinations: "Destinos Principales", galapagos: "Islas Galápagos", ecuador: "Ecuador Continental", fullDay: "Excursiones Full Day", amazon: "Amazonía Ecuatoriana", volcanoes: "Avenida de los Volcanes",
-    company: "Empresa", about: "Sobre Nosotros", packages: "Paquetes Turísticos", contact: "Contactar Especialista",
+    company: "Empresa", about: "Sobre Nosotros", packages: "Paquetes Turísticos", galapagosActivities: "Actividades en Galápagos", contact: "Contactar Especialista",
     updates: "Recibe Novedades", subscribeText: "Suscríbete para recibir promociones de cruceros y guías de viaje seleccionadas.", emailPlaceholder: "Tu correo", subscribeBtn: "Suscribirse",
     licensed: "Operador Turístico Certificado en Ecuador y Galápagos", support: "Soporte Especializado 24/7 Durante el Viaje", secure: "Reservas Seguras y Satisfacción Garantizada al 100%",
     privacy: "Política de Privacidad", terms: "Términos de Servicio",
@@ -73,7 +73,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
   },
   fr: {
     topDestinations: "Meilleures Destinations", galapagos: "Îles Galapagos", ecuador: "Équateur Continental", fullDay: "Excursions Full Day", amazon: "Amazonie Équatorienne", volcanoes: "Avenue des Volcans",
-    company: "Entreprise", about: "À Propos", packages: "Forfaits", contact: "Contacter un Spécialiste",
+    company: "Entreprise", about: "À Propos", packages: "Forfaits", galapagosActivities: "Activités aux Galápagos", contact: "Contacter un Spécialiste",
     updates: "Actualités", subscribeText: "Abonnez-vous pour recevoir des promotions de croisières et des guides de voyage.", emailPlaceholder: "Votre e-mail", subscribeBtn: "S'abonner",
     licensed: "Voyagiste Certifié en Équateur et aux Galapagos", support: "Assistance Spécialisée 24/7", secure: "Réservations Sécurisées et Satisfaction Garantie",
     privacy: "Confidentialité", terms: "Conditions",
@@ -96,7 +96,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
   },
   de: {
     topDestinations: "Top-Reiseziele", galapagos: "Galapagos-Inseln", ecuador: "Ecuador Festland", fullDay: "Tagesausflüge (Full Day)", amazon: "Ecuadorianischer Amazonas", volcanoes: "Straße der Vulkane",
-    company: "Unternehmen", about: "Über Uns", packages: "Reisepakete", contact: "Kontaktieren",
+    company: "Unternehmen", about: "Über Uns", packages: "Reisepakete", galapagosActivities: "Aktivitäten auf Galápagos", contact: "Kontaktieren",
     updates: "Reise-Updates", subscribeText: "Abonnieren Sie, um Kreuzfahrt-Angebote und Reiseführer zu erhalten.", emailPlaceholder: "Ihre E-Mail", subscribeBtn: "Abonnieren",
     licensed: "Zertifizierter Reiseveranstalter in Ecuador & Galapagos", support: "24/7 Spezialisten-Support auf der Reise", secure: "Sichere Buchungen & 100% Zufriedenheitsgarantie",
     privacy: "Datenschutzerklärung", terms: "Nutzungsbedingungen",
@@ -119,7 +119,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
   },
   it: {
     topDestinations: "Destinazioni Top", galapagos: "Isole Galapagos", ecuador: "Ecuador Continentale", fullDay: "Escursioni Full Day", amazon: "Amazzonia Ecuadoriana", volcanoes: "Viale dei Vulcani",
-    company: "Azienda", about: "Chi Siamo", packages: "Pacchetti", contact: "Contatta",
+    company: "Azienda", about: "Chi Siamo", packages: "Pacchetti", galapagosActivities: "Attività alle Galápagos", contact: "Contatta",
     updates: "Aggiornamenti", subscribeText: "Iscriviti per ricevere promozioni per crociere e guide di viaggio.", emailPlaceholder: "La tua email", subscribeBtn: "Iscriviti",
     licensed: "Tour Operator Certificato in Ecuador e Galapagos", support: "Assistenza Specializzata 24/7", secure: "Prenotazioni Sicure e Soddisfazione Garantita",
     privacy: "Privacy", terms: "Termini",
@@ -142,7 +142,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
   },
   pt: {
     topDestinations: "Principais Destinos", galapagos: "Ilhas Galápagos", ecuador: "Equador Continental", fullDay: "Excursões Full Day", amazon: "Amazônia Equatoriana", volcanoes: "Avenida dos Vulcões",
-    company: "Empresa", about: "Sobre Nós", packages: "Pacotes", contact: "Contatar",
+    company: "Empresa", about: "Sobre Nós", packages: "Pacotes", galapagosActivities: "Atividades em Galápagos", contact: "Contatar",
     updates: "Atualizaciones", subscribeText: "Inscreva-se para receber promoções de cruzeiros e guias de viagem.", emailPlaceholder: "Seu e-mail", subscribeBtn: "Inscrever-se",
     licensed: "Operador Turístico Certificado no Equador e Galápagos", support: "Suporte Especializado 24/7", secure: "Reservas Seguras e 100% de Satisfação Garantida",
     privacy: "Privacidade", terms: "Termos",
@@ -165,7 +165,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
   },
   ja: {
     topDestinations: "人気の目的地", galapagos: "ガラパゴス諸島", ecuador: "エクアドル本土", fullDay: "日帰りツアー（Full Day）", amazon: "エクアドル・アマゾン", volcanoes: "火山の道",
-    company: "会社概要", about: "私たちについて", packages: "ツアープラン", contact: "連絡する",
+    company: "会社概要", about: "私たちについて", packages: "ツアープラン", galapagosActivities: "ガラパゴスのアクティビティ", contact: "連絡する",
     updates: "最新情報", subscribeText: "クルーズのプロモーションや旅行ガイドを受け取るために購読してください。", emailPlaceholder: "メールアドレス", subscribeBtn: "購読する",
     licensed: "エクアドルとガラパゴスの認定旅行会社", support: "24時間365日の専門家サポート", secure: "安全な予約と100%の満足保証",
     privacy: "プライバシーポリシー", terms: "利用規約",
@@ -188,7 +188,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
   },
   zh: {
     topDestinations: "热门目的地", galapagos: "加拉帕戈斯群岛", ecuador: "厄瓜多尔大陆", fullDay: "全天一日游", amazon: "厄瓜多尔亚马逊", volcanoes: "火山大道",
-    company: "公司信息", about: "关于我们", packages: "旅游套餐", contact: "联系专家",
+    company: "公司信息", about: "关于我们", packages: "旅游套餐", galapagosActivities: "加拉帕戈斯活动", contact: "联系专家",
     updates: "获取旅游更新", subscribeText: "订阅以接收游轮促销活动和精选旅游指南。", emailPlaceholder: "您的电子邮箱", subscribeBtn: "订阅",
     licensed: "厄瓜多尔和加拉帕戈斯的认证旅行社", support: "24/7 专业旅行支持", secure: "安全预订和100%满意保证",
     privacy: "隐私政策", terms: "服务条款",
@@ -416,6 +416,11 @@ export function Footer() {
               <li>
                 <a href={`/${locale}/tours`} className="hover:text-white transition-colors">
                   {t.packages}
+                </a>
+              </li>
+              <li>
+                <a href={`/${locale}/galapagos-activities`} className="hover:text-white transition-colors">
+                  {t.galapagosActivities}
                 </a>
               </li>
               <li>

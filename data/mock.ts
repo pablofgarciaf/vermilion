@@ -1344,7 +1344,7 @@ const multiDayTours: Tour[] = [
     price3Star: 2200,
     price4Star: 2600,
     imageUrl: '/images/tours/16-9/galapagos-piquero-patas-azules-roca-4-3.webp',
-    mobileImage: '/images/tours/9-16/galapagos-piquero-patas-azules-9-16.webp',
+    mobileImage: '/images/tours/9-16/galapagos-tortuga-bay-9-16.webp',
     desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-roca-4-3.webp',
     gallery: [
       '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',

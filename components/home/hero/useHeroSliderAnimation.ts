@@ -42,6 +42,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
     let loopTimeline: any = null;
     let onResizeHandler: any = null;
     let hasMutated = false;
+    let pendingMobileMutation = false;
 
     gsap.config({ nullTargetWarn: false });
     if (!containerRef.current) return;
@@ -75,6 +76,18 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
         // Avisa a la interfaz de React que cambio la diapositiva activa,
         // para que el boton del hero apunte al destino que se esta viendo.
         window.dispatchEvent(new CustomEvent('hero-slide-change', { detail: { index: active } }));
+
+        // Móvil: no hay miniaturas. El scroll del navegador del celular dispara 'resize'
+        // (la barra de direcciones aparece/desaparece) y antes colocaba las miniaturas y
+        // mostraba sus textos encima de la foto.
+        if (width < 768) {
+          order.forEach((i, index) => {
+            set(getCard(i), { x: 0, y: 0, width: "100vw", height: "100%", borderRadius: 0, opacity: index === 0 ? 1 : 0, zIndex: index === 0 ? 20 : 10 });
+            set(getCardContent(i), { opacity: 0 });
+          });
+          return;
+        }
+
         set(getCard(active), { x: 0, y: 0, width: "100vw", height: "100%", borderRadius: 0, scale: 1.05, opacity: 1 });
         set(getCardContent(active), { opacity: 0 });
 
@@ -372,6 +385,14 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
               onComplete: () => {
                 transitioning = false;
                 set(getCard(prevActive), { opacity: 0, zIndex: 10 });
+                if (prevActive === 0 && pendingMobileMutation) {
+                  pendingMobileMutation = false;
+                  mutateSlideZero();
+                }
+                if (pendingRelayout) {
+                  pendingRelayout = false;
+                  relayout();
+                }
               }
             });
 
@@ -394,9 +415,10 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
             gsap.to(container.querySelectorAll(".progress-sub-foreground"), { scaleX: (1 / order.length) * (active + 1), ease, duration: 0.8 });
           }
 
-          // DOM Mutation "en las sombras"
-          if (prevActive === 0 && !hasMutated) {
-            hasMutated = true;
+          // DOM Mutation "en las sombras": la tarjeta 0 deja de ser Bienvenida y pasa a Tortugas.
+          // En móvil se hace cuando la nueva foto ya la tapa por completo (onComplete), no antes,
+          // para que no se vea el cambio de imagen.
+          const mutateSlideZero = () => {
             if (setShowSplash) setShowSplash(false);
 
             // We do NOT mutate the React props/array here per rules. 
@@ -417,18 +439,25 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
             const cContent = container.querySelector(getCardContent(0));
             if (cContent) {
               const newHtml = `
-                <div class="absolute bottom-4 left-4 right-4 text-left">
-                  <span class="block text-xs font-oswald font-semibold tracking-wider uppercase leading-tight drop-shadow-md notranslate text-white">
+                <div class="absolute text-left" style="bottom:${HERO_CARD.padding}px;left:${HERO_CARD.padding}px;right:${HERO_CARD.padding}px">
+                  <span style="font-size:${HERO_CARD.titleSize}px" class="block font-oswald font-semibold tracking-wider uppercase leading-tight drop-shadow-md notranslate text-white">
                     ${getLocalizedText(TORTUGAS_ORIGINAL.title, locale)}
                   </span>
-                  <p class="text-sm font-oswald font-bold tracking-wide uppercase text-emerald-300 drop-shadow notranslate mt-0.5">
+                  <p style="font-size:${HERO_CARD.subtitleSize}px" class="font-oswald font-bold tracking-wide uppercase text-emerald-300 drop-shadow notranslate mt-0.5">
                     ${getLocalizedText(TORTUGAS_ORIGINAL.title2, locale)}
                   </p>
                 </div>
               `;
               cContent.innerHTML = newHtml;
             }
+          };
+          if (prevActive === 0 && !hasMutated) {
+            hasMutated = true;
+            if (isMobile) pendingMobileMutation = true;
+            else mutateSlideZero();
           }
+
+          if (isMobile) return;
 
           // Desktop GSAP Carousel Animation
           set(getCard(prevActive), { zIndex: 10 });
