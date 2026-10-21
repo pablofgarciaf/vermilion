@@ -26,7 +26,7 @@ export function getSeoAlternates(path: string, currentLocale: string) {
   };
 }
 
-export const DEFAULT_OG_IMAGE = `${BASE_CANONICAL_URL}/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp`;
+export const DEFAULT_OG_IMAGE = `${BASE_CANONICAL_URL}/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp`;
 
 const OG_LOCALES: Record<string, string> = {
   es: 'es_LA',

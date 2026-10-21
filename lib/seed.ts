@@ -31,8 +31,8 @@ export const defaultSettings = {
         title: 'GIANT TORTOISES',
         title2: 'GALAPAGOS ISLANDS',
         description: 'Observe ancient giant tortoises roaming freely in their natural habitat at the highlands of Santa Cruz Island and explore majestic volcanic twin craters.',
-        image: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
-        desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+        image: '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+        desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
         mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp'
       },
       {

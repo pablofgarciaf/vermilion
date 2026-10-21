@@ -32,17 +32,15 @@ const multiDayTours: Tour[] = [
     price3Star: 1790,
     price4Star: 2199,
     imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
-    mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp',
+    mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-el-chato-9-16.webp',
     desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
     gallery: [
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
       '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
       '/images/tours/16-9/marine-iguana-galapagos.webp',
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
-      '/images/tours/16-9/galapagos-puerto-ayora-16-9.webp',
-      '/images/tours/16-9/galapagos-snorkeling-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 32,
@@ -660,17 +658,16 @@ const multiDayTours: Tour[] = [
     price: 2050,
     price3Star: 2050,
     price4Star: 2399,
-    imageUrl: '/images/tours/16-9/marine-iguana-galapagos.webp',
+    imageUrl: '/images/tours/16-9/galapagos-iguana-marina-cabeza-16-9.webp',
     mobileImage: '/images/tours/9-16/galapagos-iguana-marina-perfil-vertical.webp',
-    desktopImage: '/images/tours/16-9/marine-iguana-galapagos.webp',
+    desktopImage: '/images/tours/16-9/galapagos-iguana-marina-cabeza-16-9.webp',
     gallery: [
       '/images/tours/16-9/marine-iguana-galapagos.webp',
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
       '/images/tours/16-9/galapagos-isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
       '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
-      '/images/tours/16-9/galapagos-snorkeling-16-9.webp',
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp'
     ],
     rating: 5,
@@ -1348,13 +1345,11 @@ const multiDayTours: Tour[] = [
     desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-roca-4-3.webp',
     gallery: [
       '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
-      '/images/tours/16-9/isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
-      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
       '/images/tours/16-9/marine-iguana-galapagos.webp',
-      '/images/tours/16-9/galapagos-snorkeling-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 42,
@@ -2099,7 +2094,6 @@ const multiDayTours: Tour[] = [
       '/images/tours/16-9/laguna-quilotoa-16-9.webp',
       '/images/tours/16-9/pailon-del-diablo-16-9.webp',
       '/images/tours/16-9/amazon-river-16-9.webp',
-      '/images/tours/16-9/puyo-yanacocha-16-9.webp',
       '/images/tours/16-9/quito-colonial-16-9.webp',
       '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp'
     ],
@@ -2647,7 +2641,7 @@ const multiDayTours: Tour[] = [
     price3Star: 1490,
     price4Star: 2090,
     imageUrl: '/images/tours/16-9/quito-colonial-16-9.webp',
-    mobileImage: '/images/tours/9-16/quito-centro-historico.webp',
+    mobileImage: '/images/tours/9-16/quito-la-compania-retablo-9-16.webp',
     desktopImage: '/images/tours/16-9/quito-colonial-16-9.webp',
     gallery: [
       '/images/tours/16-9/quito-colonial-16-9.webp',
@@ -2854,9 +2848,7 @@ const multiDayTours: Tour[] = [
     mobileImage: '/images/tours/9-16/galapagos-piquero-patas-azules-9-16.webp',
     desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
     gallery: [
-      '/images/tours/16-9/galapagos-snorkeling-16-9.webp',
       '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
-      '/images/tours/16-9/isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
       '/images/tours/16-9/laguna-quilotoa-16-9.webp',
@@ -3122,9 +3114,9 @@ const multiDayTours: Tour[] = [
     price: 2290,
     price3Star: 2290,
     price4Star: 2450,
-    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
     mobileImage: '/images/tours/9-16/galapagos-flamenco-rosa-reflejo-9-16.webp',
-    desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+    desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
     gallery: [
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
       '/images/tours/16-9/galapagos-tortuga-bay-16-9.webp',
@@ -3310,7 +3302,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, enjoy a free day in Santa Cruz Island.\n\nThis day can be used to relax at the hotel, explore Puerto Ayora independently, visit local shops and restaurants, or simply enjoy the island at your own pace.\n\nOptional excursions and activities can be arranged upon request, depending on availability and local conditions.',
           es: 'Día libre en Santa Cruz para disfrutar de Puerto Ayora, Playa Tortuga Bay o tours opcionales.'
         },
-        image: '/images/tours/16-9/galapagos-puerto-ayora-16-9.webp',
+        image: '/images/tours/16-9/galapagos-tortuga-bay-16-9.1.webp',
         accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
         meals: { en: 'Breakfast', es: 'Desayuno' }
       },

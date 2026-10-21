@@ -22,7 +22,7 @@ const DESTINATION_IMAGE_POOLS: Record<string, string[]> = {
   ],
   galapagos: [
     '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp',
-    '/images/tours/9-16/galapagos-snorkeling-9-16.webp',
+    '/images/tours/9-16/galapagos-isabela-islote-turquesa-9-16.webp',
     '/images/tours/9-16/galapagos-loberia-9-16.webp',
     '/images/tours/9-16/galapagos-piquero-patas-azules-9-16.webp',
     '/images/tours/9-16/galapagos-las-grietas-9-16.webp',
@@ -30,7 +30,7 @@ const DESTINATION_IMAGE_POOLS: Record<string, string[]> = {
   combined: [
     '/images/tours/9-16/cotopaxi-9-16.webp',
     '/images/tours/9-16/galapagos-piquero-patas-azules-9-16.webp',
-    '/images/tours/9-16/galapagos-snorkeling-9-16.webp',
+    '/images/tours/9-16/galapagos-tortuga-gigante-el-chato-9-16.webp',
     '/images/tours/9-16/chimborazo-9-16.webp',
     '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp',
   ],

@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Vermilion Routes',
       images: [
         {
-          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
           width: 1200,
           height: 630,
           alt: 'Vermilion Routes - Bespoke Nature Journeys',
@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title,
       description,
-      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
+      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp'],
     },
   };
 }

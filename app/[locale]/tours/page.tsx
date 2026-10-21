@@ -80,8 +80,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       images: [
         {
-          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
-          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
           width: 1200,
           height: 630,
           type: 'image/jpeg',
@@ -95,7 +95,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       creator: '@vermilionroutes',
       title,
       description,
-      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
+      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp'],
     },
   };
 }
@@ -715,7 +715,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-72 w-full overflow-hidden block">
                     <Image quality={100}
-                      src={tour.imageUrl || '/images/tours/16-9/galapagos-snorkeling-16-9.webp'}
+                      src={tour.imageUrl || '/images/tours/16-9/galapagos-las-grietas-16-9.webp'}
                       alt={title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"

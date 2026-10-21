@@ -57,7 +57,7 @@ export const POST = withValidation(checkoutSchema, async (request, _ctx, data) =
               product_data: {
                 name: resolvedTitle,
                 description: `${paymentType === 'full' ? 'Full Expedition Payment' : 'Expedition Reservation Deposit'} • Ref: ${bookingRef}`,
-                images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
+                images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp'],
               },
               unit_amount: Math.round(finalAmountUSD * 100),
             },

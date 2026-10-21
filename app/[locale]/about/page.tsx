@@ -89,8 +89,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       }[locale] || 'en_US',
       images: [
         {
-          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
-          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
           width: 1200,
           height: 630,
           type: 'image/jpeg',
@@ -105,7 +105,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       creator: '@vermilionroutes',
       title,
       description,
-      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
+      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp'],
     },
   };
 }
@@ -404,7 +404,7 @@ export default async function AboutPage({ params }: PageProps) {
       "telephone": "+593960039156",
       "email": "info@vermilionroutes.com",
       "url": "https://www.vermilionroutes.com",
-      "image": "https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp",
+      "image": "https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp",
       "address": [
         {
           "@type": "PostalAddress",

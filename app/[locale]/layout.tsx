@@ -66,8 +66,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Vermilion Routes',
       images: [
         {
-          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
-          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
           width: 1200,
           height: 630,
           type: 'image/jpeg',
@@ -92,7 +92,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       creator: '@vermilionroutes',
       title: t('title') || defaultTitle,
       description: t('description') || defaultDescription,
-      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
+      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp'],
     },
     verification: {
       google: googleVerifications.length > 1
@@ -169,7 +169,7 @@ export default async function RootLayout({
           'Premier boutique tour operator specializing in bespoke nature and comfort itineraries, Galapagos island cruises, Amazon lodges, and Andean expeditions in Ecuador.',
         url: 'https://www.vermilionroutes.com',
         logo: 'https://www.vermilionroutes.com/logo.png',
-        image: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+        image: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
         telephone: '+593960039156',
         email: 'info@vermilionroutes.com',
         priceRange: '$$$$',
