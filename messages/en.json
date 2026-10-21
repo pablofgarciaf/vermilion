@@ -100,15 +100,15 @@
   "contact": {
     "badge": "Let's Plan Your Journey",
     "title": "Request Your Free Quote",
-    "subtitle": "Tell us about your dream expedition. Our specialists will design a custom itinerary within 24 hours.",
+    "subtitle": "Tell us what you want to experience and when you arrive. A local specialist sends you a private, priced itinerary within 24 hours.",
     "name": "Your Full Name",
     "email": "Email Address",
     "destination": "Destination of Interest",
     "travelers": "Number of Travelers",
     "message": "Tell us about your dream expedition...",
-    "send": "Send Quote Request",
+    "send": "Get my priced itinerary",
     "sending": "Sending...",
-    "success": "Thank you! We will reach out within 24 hours.",
+    "success": "Got it! We will write to you within 24 hours.",
     "directCall": "Direct Call & WhatsApp",
     "emailAddress": "Email Address",
     "headquarters": "Ecuador Headquarters (HQ)",
@@ -131,7 +131,10 @@
     "optExpress": "⚡ Express Departure (< 48h / Tomorrow)",
     "opt1to4weeks": "Next 2–4 Weeks",
     "opt1to3months": "Next 1–3 Months",
-    "optFlexible": "Exploring / Flexible Dates"
+    "optFlexible": "Exploring / Flexible Dates",
+    "arrivalDate": "Approximate arrival date",
+    "messagePlaceholder": "E.g. honeymoon, 8 days, we want to swim with sea lions and see Cotopaxi.",
+    "another": "Send another request"
   },
   "tour": {
     "overview": "Overview",
@@ -386,18 +389,5 @@
       "private": "100% private tours with a naturalist guide",
       "whatsapp": "Message us on WhatsApp"
     }
-  },
-  "quickQuote": {
-    "title": "Get your private trip quote in 24 hours",
-    "subtitle": "Tell us who you are and when you travel. A local specialist replies with a priced itinerary.",
-    "name": "Your name",
-    "email": "Your email",
-    "dates": "Travel dates (or \"flexible\")",
-    "button": "Get my free quote",
-    "sending": "Sending…",
-    "success": "Thank you! A local specialist will reply within 24 hours.",
-    "error": "Something went wrong. Please write to us on",
-    "nameError": "Please enter your name.",
-    "emailError": "Please enter a valid email address."
   }
 }

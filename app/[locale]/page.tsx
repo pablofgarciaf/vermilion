@@ -8,7 +8,6 @@ import { DestinationsGrid } from '@/components/home/DestinationsGrid';
 import { CombinedExperienceSection } from '@/components/home/CombinedExperienceSection';
 import { FeaturedTours } from '@/components/home/FeaturedTours';
 import { QuoteCtaBand } from '@/components/home/QuoteCtaBand';
-import { QuickQuoteStrip } from '@/components/home/QuickQuoteStrip';
 import { HomeBlogSection } from '@/components/home/HomeBlogSection';
 import { AlsoAskedFaq } from '@/components/home/AlsoAskedFaq';
 import { ContactSection } from '@/components/home/ContactSection';
@@ -117,8 +116,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       {/* 1. Hero + franja de confianza (TripAdvisor 5.0) renderizada en el servidor */}
       <div>
         <HeroSlider />
-        {/* Formulario corto de cotización justo debajo del hero */}
-        <QuickQuoteStrip />
         <StatsSection />
       </div>
 

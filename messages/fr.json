@@ -100,15 +100,15 @@
   "contact": {
     "badge": "Planifions Votre Voyage",
     "title": "Demandez Votre Devis Gratuit",
-    "subtitle": "Parlez-nous de l'expédition de vos rêves. Nos spécialistes vous proposeront un itinéraire sous 24h.",
+    "subtitle": "Dites-nous ce que vous voulez vivre et quand vous arrivez. Un spécialiste local vous envoie sous 24 h un itinéraire privé chiffré.",
     "name": "Votre Nom Complet",
     "email": "Adresse E-mail",
     "destination": "Destination d'Intérêt",
     "travelers": "Nombre de Voyageurs",
     "message": "Parlez-nous de votre voyage de rêve...",
-    "send": "Envoyer la Demande",
+    "send": "Recevoir mon itinéraire chiffré",
     "sending": "Envoi en cours...",
-    "success": "Merci ! Nous vous contacterons dans les 24h.",
+    "success": "Bien reçu ! Nous vous écrivons sous 24 heures.",
     "directCall": "Appel Direct & WhatsApp",
     "emailAddress": "Adresse E-mail",
     "headquarters": "Siège Équateur (HQ)",
@@ -131,7 +131,10 @@
     "optExpress": "⚡ Départ Express (< 48h / Demain)",
     "opt1to4weeks": "Dans les 2 à 4 prochaines semaines",
     "opt1to3months": "Dans les 1 à 3 prochains mois",
-    "optFlexible": "Dates flexibles / En exploration"
+    "optFlexible": "Dates flexibles / En exploration",
+    "arrivalDate": "Date d'arrivée approximative",
+    "messagePlaceholder": "Ex. : lune de miel, 8 jours, nager avec les otaries et voir le Cotopaxi.",
+    "another": "Envoyer une autre demande"
   },
   "tour": {
     "overview": "Aperçu",
@@ -386,18 +389,5 @@
       "private": "Circuits 100 % privés avec guide naturaliste",
       "whatsapp": "Écrivez-nous sur WhatsApp"
     }
-  },
-  "quickQuote": {
-    "title": "Recevez votre devis de voyage privé sous 24 h",
-    "subtitle": "Dites-nous qui vous êtes et quand vous partez. Un spécialiste local vous répond avec un itinéraire chiffré.",
-    "name": "Votre nom",
-    "email": "Votre e-mail",
-    "dates": "Dates de voyage (ou « flexibles »)",
-    "button": "Recevoir mon devis gratuit",
-    "sending": "Envoi…",
-    "success": "Merci ! Un spécialiste local vous répondra sous 24 h.",
-    "error": "Une erreur est survenue. Écrivez-nous sur",
-    "nameError": "Veuillez saisir votre nom.",
-    "emailError": "Veuillez saisir un e-mail valide."
   }
 }

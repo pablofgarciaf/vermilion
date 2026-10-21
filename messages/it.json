@@ -100,15 +100,15 @@
   "contact": {
     "badge": "Pianifichiamo Il Tuo Viaggio",
     "title": "Richiedi Il Tuo Preventivo Gratuito",
-    "subtitle": "Raccontaci il tuo viaggio dei sogni. I nostri specialisti creeranno un itinerario in 24 ore.",
+    "subtitle": "Dicci cosa vuoi vivere e quando arrivi. Uno specialista locale ti invia entro 24 ore un itinerario privato con prezzo.",
     "name": "Nome Completo",
     "email": "Indirizzo Email",
     "destination": "Destinazione di Interesse",
     "travelers": "Numero di Viaggiatori",
     "message": "Raccontaci il tuo viaggio dei sogni...",
-    "send": "Invia Richiesta Preventivo",
+    "send": "Ricevi il mio itinerario con prezzo",
     "sending": "Invio in corso...",
-    "success": "Grazie! Ti contatteremo entro 24 ore.",
+    "success": "Ricevuto! Ti scriviamo entro 24 ore.",
     "directCall": "Chiamata Diretta & WhatsApp",
     "emailAddress": "Indirizzo Email",
     "headquarters": "Sede Ecuador (HQ)",
@@ -131,7 +131,10 @@
     "optExpress": "⚡ Partenza Express (< 48h / Domani)",
     "opt1to4weeks": "Prossime 2–4 settimane",
     "opt1to3months": "Prossimi 1–3 mesi",
-    "optFlexible": "Date flessibili / In esplorazione"
+    "optFlexible": "Date flessibili / In esplorazione",
+    "arrivalDate": "Data di arrivo indicativa",
+    "messagePlaceholder": "Es.: luna di miele, 8 giorni, nuotare con i leoni marini e vedere il Cotopaxi.",
+    "another": "Invia un'altra richiesta"
   },
   "tour": {
     "overview": "Panoramica",
@@ -386,18 +389,5 @@
       "private": "Tour 100% privati con guida naturalista",
       "whatsapp": "Scrivici su WhatsApp"
     }
-  },
-  "quickQuote": {
-    "title": "Ricevi il preventivo del tuo viaggio privato in 24 ore",
-    "subtitle": "Dicci chi sei e quando viaggi. Uno specialista locale risponde con un itinerario con prezzo.",
-    "name": "Il tuo nome",
-    "email": "La tua e-mail",
-    "dates": "Date di viaggio (o «flessibili»)",
-    "button": "Voglio il preventivo gratuito",
-    "sending": "Invio…",
-    "success": "Grazie! Uno specialista locale ti risponderà entro 24 ore.",
-    "error": "Qualcosa è andato storto. Scrivici su",
-    "nameError": "Inserisci il tuo nome.",
-    "emailError": "Inserisci un indirizzo e-mail valido."
   }
 }

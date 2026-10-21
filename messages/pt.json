@@ -100,15 +100,15 @@
   "contact": {
     "badge": "Vamos Planejar Sua Viagem",
     "title": "Solicite Seu Orçamento Gratuito",
-    "subtitle": "Conte-nos sobre a viagem dos seus sonhos. Nossos especialistas criarão um itinerário em 24 horas.",
+    "subtitle": "Conte o que você quer viver e quando chega. Um especialista local envia em 24 horas um roteiro privado com preço.",
     "name": "Seu Nome Completo",
     "email": "E-mail",
     "destination": "Destino de Interesse",
     "travelers": "Número de Viajantes",
     "message": "Conte-nos sobre a viagem dos seus sonhos...",
-    "send": "Enviar Solicitação",
+    "send": "Receber meu roteiro com preço",
     "sending": "Enviando...",
-    "success": "Obrigado! Entraremos em contato em até 24 horas.",
+    "success": "Recebido! Escrevemos para você em até 24 horas.",
     "directCall": "Chamada Direta & WhatsApp",
     "emailAddress": "Endereço de E-mail",
     "headquarters": "Sede Equador (HQ)",
@@ -131,7 +131,10 @@
     "optExpress": "⚡ Saída Express (< 48h / Amanhã)",
     "opt1to4weeks": "Próximas 2–4 semanas",
     "opt1to3months": "Próximos 1–3 meses",
-    "optFlexible": "Datas flexíveis / Explorando"
+    "optFlexible": "Datas flexíveis / Explorando",
+    "arrivalDate": "Data aproximada de chegada",
+    "messagePlaceholder": "Ex.: lua de mel, 8 dias, queremos nadar com leões-marinhos e ver o Cotopaxi.",
+    "another": "Enviar outra solicitação"
   },
   "tour": {
     "overview": "Resumo",
@@ -386,18 +389,5 @@
       "private": "Tours 100% privados com guia naturalista",
       "whatsapp": "Fale conosco no WhatsApp"
     }
-  },
-  "quickQuote": {
-    "title": "Receba o orçamento da sua viagem privada em 24 horas",
-    "subtitle": "Conte-nos quem você é e quando viaja. Um especialista local responde com um roteiro com preço.",
-    "name": "Seu nome",
-    "email": "Seu e-mail",
-    "dates": "Datas da viagem (ou «flexíveis»)",
-    "button": "Quero meu orçamento grátis",
-    "sending": "Enviando…",
-    "success": "Obrigado! Um especialista local responderá em até 24 horas.",
-    "error": "Algo deu errado. Escreva-nos pelo",
-    "nameError": "Digite seu nome.",
-    "emailError": "Digite um e-mail válido."
   }
 }

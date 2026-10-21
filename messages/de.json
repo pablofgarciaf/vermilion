@@ -100,15 +100,15 @@
   "contact": {
     "badge": "Lassen Sie Uns Planen",
     "title": "Kostenloses Angebot Anfordern",
-    "subtitle": "Erzählen Sie uns von Ihrer Traumreise. Unsere Spezialisten erstellen innerhalb von 24 Stunden ein Angebot.",
+    "subtitle": "Sagen Sie uns, was Sie erleben möchten und wann Sie ankommen. Ein lokaler Experte schickt Ihnen innerhalb von 24 Stunden eine private Reiseroute mit Preis.",
     "name": "Vollständiger Name",
     "email": "E-Mail-Adresse",
     "destination": "Gewünschtes Reiseziel",
     "travelers": "Anzahl der Reisenden",
     "message": "Erzählen Sie uns von Ihrer Traumreise...",
-    "send": "Anfrage Absenden",
+    "send": "Reiseroute mit Preis erhalten",
     "sending": "Wird gesendet...",
-    "success": "Vielen Dank! Wir melden uns innerhalb von 24 Stunden.",
+    "success": "Erhalten! Wir melden uns innerhalb von 24 Stunden.",
     "directCall": "Direktanruf & WhatsApp",
     "emailAddress": "E-Mail-Adresse",
     "headquarters": "Hauptsitz Ecuador (HQ)",
@@ -131,7 +131,10 @@
     "optExpress": "⚡ Express-Abreise (< 48 Std. / Morgen)",
     "opt1to4weeks": "Nächste 2–4 Wochen",
     "opt1to3months": "Nächste 1–3 Monate",
-    "optFlexible": "Flexible Termine / In Planung"
+    "optFlexible": "Flexible Termine / In Planung",
+    "arrivalDate": "Ungefähres Ankunftsdatum",
+    "messagePlaceholder": "Z. B. Flitterwochen, 8 Tage, mit Seelöwen schwimmen und den Cotopaxi sehen.",
+    "another": "Weitere Anfrage senden"
   },
   "tour": {
     "overview": "Übersicht",
@@ -386,18 +389,5 @@
       "private": "100 % private Touren mit Naturführer",
       "whatsapp": "Schreiben Sie uns auf WhatsApp"
     }
-  },
-  "quickQuote": {
-    "title": "Ihr Angebot für eine Privatreise innerhalb von 24 Stunden",
-    "subtitle": "Sagen Sie uns, wer Sie sind und wann Sie reisen. Ein lokaler Experte antwortet mit einer Reiseroute samt Preis.",
-    "name": "Ihr Name",
-    "email": "Ihre E-Mail",
-    "dates": "Reisedaten (oder „flexibel“)",
-    "button": "Kostenloses Angebot anfordern",
-    "sending": "Wird gesendet…",
-    "success": "Danke! Ein lokaler Experte antwortet Ihnen innerhalb von 24 Stunden.",
-    "error": "Etwas ist schiefgelaufen. Schreiben Sie uns über",
-    "nameError": "Bitte geben Sie Ihren Namen ein.",
-    "emailError": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
   }
 }

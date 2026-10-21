@@ -56,7 +56,7 @@ export function ContactSection() {
     phone: '',
     destination: 'Galapagos Islands',
     travelers: '2 Travelers',
-    timeline: 'flexible',
+    arrivalDate: '',
     message: '',
   });
 
@@ -126,7 +126,7 @@ export function ContactSection() {
           customerPhone: formData.phone,
           destination: formData.destination,
           guestsCount: formData.travelers,
-          timeline: formData.timeline,
+          travelDates: formData.arrivalDate || 'Flexible',
           message: formData.message,
           locale,
         }),
@@ -155,8 +155,8 @@ export function ContactSection() {
           customerPhone: formData.phone,
           destination: formData.destination,
           guestsCount: formData.travelers,
-          travelDates: formData.timeline === 'express' ? '⚡ Salida Relámpago (< 48h)' : formData.timeline,
-          message: formData.timeline ? `[Plazo: ${formData.timeline}]\n${formData.message}` : formData.message,
+          travelDates: formData.arrivalDate || 'Flexible',
+          message: formData.message,
         });
         trackGenerateLead({ method: 'contact_form', placement: 'home_contact_fallback', item: formData.destination });
         setSubmitted(true);
@@ -303,12 +303,12 @@ export function ContactSection() {
                     phone: '',
                     destination: 'Galapagos Islands',
                     travelers: '2 Travelers',
-                    timeline: 'flexible',
+                    arrivalDate: '',
                     message: ''
                   });
                 }}
               >
-                Submit another request
+                {t('another')}
               </Button>
             </div>
           ) : (
@@ -318,9 +318,6 @@ export function ContactSection() {
                   <MessageSquare className="w-5 h-5 text-emerald-600" />
                   <span>{t('send')}</span>
                 </h3>
-                <span className="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full">
-                  {t('noCommitment')}
-                </span>
               </div>
 
               {errors.submit && (
@@ -446,22 +443,18 @@ export function ContactSection() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label htmlFor="contact-timeline" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 flex items-center gap-1.5">
-                    <span>{t('timeline')}</span>
+                  <label htmlFor="contact-arrival" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                    {t('arrivalDate')}
                   </label>
-                  <select
-                    id="contact-timeline"
-                    aria-label={t('timeline')}
-                    value={formData.timeline}
-                    onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
+                  <input
+                    id="contact-arrival"
+                    type="date"
+                    min={new Date().toISOString().slice(0, 10)}
+                    value={formData.arrivalDate}
+                    onChange={(e) => setFormData({ ...formData, arrivalDate: e.target.value })}
                     suppressHydrationWarning
                     className="w-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 cursor-pointer"
-                  >
-                    <option value="express">{t('optExpress')}</option>
-                    <option value="1-4weeks">{t('opt1to4weeks')}</option>
-                    <option value="1-3months">{t('opt1to3months')}</option>
-                    <option value="flexible">{t('optFlexible')}</option>
-                  </select>
+                  />
                 </div>
               </div>
 
@@ -472,7 +465,7 @@ export function ContactSection() {
                 <textarea
                   id="contact-message"
                   rows={4}
-                  placeholder="Tell us about dates, interests, preferences..."
+                  placeholder={t('messagePlaceholder')}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   suppressHydrationWarning

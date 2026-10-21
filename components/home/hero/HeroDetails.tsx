@@ -107,20 +107,20 @@ export function getStandardTemplateHTML(slide: SlideData, locale: string): strin
     </div>
 
     <div class="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-      <h2 class="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+      <h2 class="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-[32px] lg:text-[43px] xl:text-[58px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
         <span class="notranslate hero-slider-title-text">${title}</span>
       </h2>
     </div>
 
     <div class="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-      <h3 class="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+      <h3 class="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-[32px] lg:text-[43px] xl:text-[58px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
         <span class="notranslate hero-slider-title-gold">${title2}</span>
       </h3>
     </div>
 
     <div class="h-auto mt-3 md:mt-4 flex flex-col items-center text-center md:items-start md:text-left w-full max-w-lg mx-auto md:mx-0">
       <div class="desc flex flex-col items-center text-center md:items-start md:text-left w-full">
-        <p class="hero-desc-text text-[16px] sm:text-[17px] lg:text-[18px] text-white/90 leading-relaxed max-w-lg font-medium text-center md:text-left mx-auto md:mx-0" style="text-shadow: 0px 1px 3px rgba(0,0,0,0.8);">
+        <p class="hero-desc-text text-[16px] sm:text-[17px] md:text-[15px] lg:text-[16px] text-white/90 leading-relaxed max-w-lg font-medium text-center md:text-left mx-auto md:mx-0" style="text-shadow: 0px 1px 3px rgba(0,0,0,0.8);">
           ${desc}
         </p>
       </div>
@@ -168,13 +168,13 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                 </a>
 
                 {/* Titular SEO visible (45-65 caracteres, 8 idiomas). Sin clases .title-*: GSAP no lo toca. */}
-                <h1 className="font-serif font-bold text-white text-[28px] sm:text-[34px] md:text-[38px] lg:text-[44px] leading-[1.08] tracking-tight mb-3 max-w-xl [text-shadow:0_2px_14px_rgba(0,0,0,0.85)]">
+                <h1 className="font-serif font-bold text-white text-[28px] sm:text-[34px] md:text-[34px] lg:text-[40px] leading-[1.08] tracking-tight mb-3 max-w-xl [text-shadow:0_2px_14px_rgba(0,0,0,0.85)]">
                   {h1Text}
                 </h1>
 
                 {/* Para quien es y desde cuanto */}
                 <div className="welcome-headline mb-3 space-y-1.5 text-center md:text-left max-w-lg mx-auto md:mx-0">
-                  <p className="text-[15px] sm:text-base md:text-lg font-medium text-white/95 leading-snug [text-shadow:0_1px_8px_rgba(0,0,0,0.9)]">
+                  <p className="text-[15px] sm:text-base md:text-[15px] lg:text-base font-medium text-white/95 leading-snug [text-shadow:0_1px_8px_rgba(0,0,0,0.9)]">
                     {heroText.audience}
                   </p>
                   <p className="text-sm sm:text-base font-bold text-[#F3D27A] tracking-wide [text-shadow:0_1px_8px_rgba(0,0,0,0.9)]">
@@ -208,21 +208,21 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
 
                 {/* Line 1 (title - h2 tour slide title) */}
                 <div className="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-                  <h2 className="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+                  <h2 className="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-[32px] lg:text-[43px] xl:text-[58px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
                     <span className="notranslate hero-slider-title-text"></span>
                   </h2>
                 </div>
 
                 {/* Line 2 (title2 - h3 tour slide subtitle) */}
                 <div className="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-                  <h3 className="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+                  <h3 className="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-[32px] lg:text-[43px] xl:text-[58px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
                     <span className="notranslate hero-slider-title-gold"></span>
                   </h3>
                 </div>
 
                 <div className="h-auto mt-3 md:mt-4 flex flex-col items-center text-center md:items-start md:text-left w-full max-w-lg mx-auto md:mx-0">
                   <div className="desc flex flex-col items-center text-center md:items-start md:text-left w-full">
-                    <p className="hero-desc-text text-[16px] sm:text-[17px] lg:text-[18px] text-white/90 leading-relaxed max-w-lg drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] font-medium text-center md:text-left mx-auto md:mx-0"></p>
+                    <p className="hero-desc-text text-[16px] sm:text-[17px] md:text-[15px] lg:text-[16px] text-white/90 leading-relaxed max-w-lg drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] font-medium text-center md:text-left mx-auto md:mx-0"></p>
                   </div>
                 </div>
               </>

@@ -100,15 +100,15 @@
   "contact": {
     "badge": "开始规划您的旅程",
     "title": "索取免费定制报价",
-    "subtitle": "告诉我们您梦想中的探险之旅，我们的专家将在24小时内为您设计私人定制行程。",
+    "subtitle": "告诉我们您想体验什么以及抵达时间，当地专家会在24小时内发送带价格的私人行程。",
     "name": "您的姓名",
     "email": "电子邮件地址",
     "destination": "感兴趣的目的地",
     "travelers": "出行人数",
     "message": "告诉我们您梦想中的探险...",
-    "send": "发送报价请求",
+    "send": "获取带价格的行程",
     "sending": "正在发送...",
-    "success": "谢谢您！我们将在24小时内与您联系。",
+    "success": "已收到！我们会在24小时内联系您。",
     "directCall": "电话与 WhatsApp 直连",
     "emailAddress": "电子邮件地址",
     "headquarters": "厄瓜多尔总部 (HQ)",
@@ -131,7 +131,10 @@
     "optExpress": "⚡ 极速出发（48小时内 / 明日启程）",
     "opt1to4weeks": "未来2–4周内",
     "opt1to3months": "未来1–3个月内",
-    "optFlexible": "行程灵活 / 正在规划"
+    "optFlexible": "行程灵活 / 正在规划",
+    "arrivalDate": "大致抵达日期",
+    "messagePlaceholder": "例如：蜜月，8天，想和海狮一起游泳并看科多帕希火山。",
+    "another": "再提交一个请求"
   },
   "tour": {
     "overview": "概览",
@@ -386,18 +389,5 @@
       "private": "100% 私人团，配自然学家向导",
       "whatsapp": "通过 WhatsApp 联系我们"
     }
-  },
-  "quickQuote": {
-    "title": "24小时内收到您的私人行程报价",
-    "subtitle": "告诉我们您是谁以及出行时间，当地专家会回复带价格的行程方案。",
-    "name": "您的姓名",
-    "email": "您的邮箱",
-    "dates": "出行日期（或填“灵活”）",
-    "button": "获取免费报价",
-    "sending": "发送中…",
-    "success": "谢谢！当地专家将在24小时内回复您。",
-    "error": "出错了，请通过以下方式联系我们：",
-    "nameError": "请输入您的姓名。",
-    "emailError": "请输入有效的邮箱地址。"
   }
 }
