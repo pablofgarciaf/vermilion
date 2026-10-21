@@ -16,6 +16,7 @@ import { ConsentManager } from '@/components/privacy/ConsentManager';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { WhatsAppClickTracker } from '@/components/analytics/WhatsAppClickTracker';
 
+import { allSocialUrls } from '@/data/socialLinks';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -233,9 +234,7 @@ export default async function RootLayout({
         ],
         sameAs: [
           'https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html',
-          'https://www.instagram.com/vermilionsouthamericanroutes/',
-          'https://www.tiktok.com/@vermilionroutes',
-          'https://www.facebook.com/VermilionSouthAmericanRoutes',
+          ...allSocialUrls(['instagram', 'tiktok', 'facebook', 'youtube']),
         ],
       },
       {

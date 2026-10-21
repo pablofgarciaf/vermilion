@@ -213,6 +213,7 @@ const TRANSLATIONS: Record<string, Record<string, string>> = {
 
 import { BrandLogo } from '@/components/ui/BrandLogo';
 
+import { socialUrl } from '@/data/socialLinks';
 export function Footer() {
   const { settings } = useSettings();
   const locale = useLocale();
@@ -290,7 +291,7 @@ export function Footer() {
 
             <div className="flex items-center gap-2.5 pt-2 flex-wrap">
               <a
-                href={settings?.contact?.facebook || 'https://www.facebook.com/VermilionSouthAmericanRoutes'}
+                href={socialUrl('facebook', locale, settings?.contact?.facebook)}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
@@ -299,7 +300,7 @@ export function Footer() {
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href={settings?.contact?.instagram || 'https://www.instagram.com/vermilionsouthamericanroutes/'}
+                href={socialUrl('instagram', locale, settings?.contact?.instagram)}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
@@ -308,7 +309,7 @@ export function Footer() {
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href={settings?.contact?.tiktok || 'https://www.tiktok.com/@vermilionroutes'}
+                href={socialUrl('tiktok', locale, settings?.contact?.tiktok)}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
@@ -320,7 +321,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.youtube.com/@VermilionSouthAmericanRoutes"
+                href={socialUrl('youtube', locale)}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"

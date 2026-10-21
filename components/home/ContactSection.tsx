@@ -9,6 +9,7 @@ import { trackGenerateLead } from '@/lib/analytics/trackLead';
 import { useTranslations, useLocale } from 'next-intl';
 import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle, Zap, Instagram, Facebook, Youtube, MessageCircle } from 'lucide-react';
 
+import { socialUrl } from '@/data/socialLinks';
 const EXPRESS_BANNER_I18N: Record<string, { title: string; desc: string }> = {
   es: {
     title: 'Especialistas en Viajes Relámpago (Salidas en 24h)',
@@ -253,16 +254,16 @@ export function ContactSection() {
                 {locale === 'es' ? 'Contactanos' : locale === 'fr' ? 'Nous Contacter' : locale === 'de' ? 'Kontaktieren Sie uns' : locale === 'it' ? 'Contattaci' : locale === 'pt' ? 'Entre em contato' : locale === 'ja' ? 'お問い合わせ' : locale === 'zh' ? '联系我们' : 'Contact Us'}
               </span>
               <div className="flex items-center gap-2 flex-wrap">
-                <a href="https://www.instagram.com/vermilionsouthamericanroutes/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Instagram" title="Follow us on Instagram">
+                <a href={socialUrl('instagram', locale)} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Instagram" title="Follow us on Instagram">
                   <Instagram className="w-5 h-5" />
                 </a>
-                <a href="https://www.facebook.com/VermilionSouthAmericanRoutes/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Facebook" title="Follow us on Facebook">
+                <a href={socialUrl('facebook', locale)} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Facebook" title="Follow us on Facebook">
                   <Facebook className="w-5 h-5" />
                 </a>
-                <a href="https://www.youtube.com/@VermilionSouthAmericanRoutes" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="YouTube" title="Subscribe on YouTube">
+                <a href={socialUrl('youtube', locale)} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="YouTube" title="Subscribe on YouTube">
                   <Youtube className="w-5 h-5" />
                 </a>
-                <a href="https://www.tiktok.com/@vermilionroutes" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="TikTok" title="Follow us on TikTok">
+                <a href={socialUrl('tiktok', locale)} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="TikTok" title="Follow us on TikTok">
                   <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.68v13.67a2.4 2.4 0 0 1-2.4 2.4 2.4 2.4 0 0 1-2.4-2.4 2.4 2.4 0 0 1 2.4-2.4c.31 0 .62.04.92.13V9.4a5.9 5.9 0 0 0-.92-.08 5.9 5.9 0 0 0-5.9 5.9 5.9 5.9 0 0 0 5.9 5.9 5.9 5.9 0 0 0 5.9-5.9V8.3a7.68 7.68 0 0 0 4.58 1.52v-3.66a4.5 4.5 0 0 1-.41-.02z"/>
                   </svg>
