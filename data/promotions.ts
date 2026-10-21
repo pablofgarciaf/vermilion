@@ -33,6 +33,8 @@ export interface Promotion {
   lastDay: string;
   /** Icono decorativo del banner. */
   emoji: string;
+  /** 'led': en la marquesina parpadea en color tomate para llamar la atención. */
+  marqueeStyle?: 'led';
 }
 
 export const PROMOTIONS: Promotion[] = [
@@ -41,10 +43,11 @@ export const PROMOTIONS: Promotion[] = [
     messageKey: 'halloween',
     startsAt: '2026-10-19T00:00:00-05:00',
     endsAt: '2026-11-01T00:00:00-05:00',
-    discountRate: 0.05,
+    discountRate: 0.10,
     valueAdds: [],
     lastDay: '2026-10-31',
     emoji: '🎃',
+    marqueeStyle: 'led',
   },
   {
     id: 'black-friday-2026',

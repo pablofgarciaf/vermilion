@@ -17,7 +17,7 @@ interface PromoBannerProps {
 const PHONE_DISPLAY = '+593 96 003 9156';
 const PHONE_TEL = '+593960039156';
 
-type Item = { key: string; node: React.ReactNode; href?: string; external?: boolean; strong?: boolean };
+type Item = { key: string; node: React.ReactNode; href?: string; external?: boolean; strong?: boolean; led?: boolean };
 
 /**
  * Barra superior única de la web (sustituye a la antigua franja verde de contacto).
@@ -40,6 +40,7 @@ export function PromoBanner({ promo, collapsed = false }: PromoBannerProps) {
       key: 'offer',
       href: `/${locale}/tours`,
       strong: true,
+      led: promo.marqueeStyle === 'led',
       node: (
         <>
           {t('banner', { name, pct, date: formatPromoLastDay(promo, locale) })}{' '}
@@ -62,7 +63,7 @@ export function PromoBanner({ promo, collapsed = false }: PromoBannerProps) {
       {items.map((it) => (
         <li
           key={it.key}
-          className={`flex shrink-0 items-center whitespace-nowrap ${it.strong ? 'font-semibold text-[#E7C46A]' : ''}`}
+          className={`flex shrink-0 items-center whitespace-nowrap ${it.led ? 'vr-led font-bold' : it.strong ? 'font-semibold text-[#E7C46A]' : ''}`}
         >
           {it.href ? (
             it.external ? (

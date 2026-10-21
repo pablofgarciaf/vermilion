@@ -9,8 +9,8 @@ const halloween = PROMOTIONS.find((p) => p.id === 'halloween-2026')!;
 const blackFriday = PROMOTIONS.find((p) => p.id === 'black-friday-2026')!;
 
 describe('Promociones por festivos', () => {
-  it('respeta los máximos aprobados por el dueño (5 % Halloween, 10 % Black Friday)', () => {
-    expect(halloween.discountRate).toBe(0.05);
+  it('respeta los máximos aprobados por el dueño (10 % Halloween, 10 % Black Friday)', () => {
+    expect(halloween.discountRate).toBe(0.10);
     expect(blackFriday.discountRate).toBe(0.10);
     for (const p of PROMOTIONS) expect(p.discountRate).toBeLessThanOrEqual(0.10);
   });
@@ -57,18 +57,18 @@ describe('Promociones por festivos', () => {
   it('aplica el descuento real sobre el precio actual, sin precio "antes"', () => {
     const p = calculateTourPrice(1000, 2, 0, null, false, halloween);
     expect(p.subtotal).toBe(2000);
-    expect(p.promoDiscountAmount).toBe(100);
-    expect(p.total).toBe(1900);
+    expect(p.promoDiscountAmount).toBe(200);
+    expect(p.total).toBe(1800);
     expect(p.promoId).toBe('halloween-2026');
-    expect(promoPrice(1790, halloween)).toBe(1700);
+    expect(promoPrice(1790, halloween)).toBe(1611);
   });
 
   it('no se acumula con el descuento de grupo: gana el mayor', () => {
-    // 4 personas = 5 % de grupo, igual que Halloween: se queda el de grupo, sin sumar.
+    // 4 personas = 5 % de grupo; Halloween (10 %) es mayor: se aplica solo la promo, sin sumar.
     const g4 = calculateTourPrice(1000, 4, 0, null, false, halloween);
-    expect(g4.groupDiscountAmount).toBe(200);
-    expect(g4.promoDiscountAmount).toBe(0);
-    expect(g4.total).toBe(3800);
+    expect(g4.groupDiscountAmount).toBe(0);
+    expect(g4.promoDiscountAmount).toBe(400);
+    expect(g4.total).toBe(3600);
     // 4 personas en Black Friday: 10 % de promo en lugar del 5 % de grupo.
     const bf4 = calculateTourPrice(1000, 4, 0, null, false, blackFriday);
     expect(bf4.groupDiscountAmount).toBe(0);

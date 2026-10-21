@@ -6,6 +6,7 @@ import { getLocalizedText } from '@/utils/i18nHelper';
 import { SlideData } from '@/types';
 import { DESTINATIONS } from '@/data/destinationsData';
 import WaterRippleImage from '@/components/ui/WaterRippleImage';
+import { HERO_CARD } from './heroCardsConfig';
 
 interface HeroThumbnailsProps {
   slidesData: SlideData[];
@@ -120,8 +121,9 @@ export function HeroThumbnails({ slidesData, locale }: HeroThumbnailsProps) {
             <div
               className={`card card-${idx} absolute top-0 left-0 shadow-2xl overflow-hidden ${idx === 0
                 ? 'w-full h-full inset-0 z-10 opacity-100'
-                : 'w-[104px] h-[150px] opacity-0 bg-zinc-800'
+                : 'opacity-0 bg-zinc-800'
                 }`}
+              style={idx === 0 ? undefined : { width: HERO_CARD.width, height: HERO_CARD.height }}
             >
               {idx === 0 ? (
                 /* Slide 0: una sola foto segun el ancho, pintada desde el HTML con prioridad alta.
@@ -154,7 +156,7 @@ export function HeroThumbnails({ slidesData, locale }: HeroThumbnailsProps) {
                       loading="lazy"
                       unoptimized
                       className="object-cover hidden md:block"
-                      sizes="104px"
+                      sizes={`${HERO_CARD.width}px`}
                     />
                   )}
                   <DeferredSlideImages slide={slide} alt={alt} />
@@ -186,13 +188,16 @@ export function HeroThumbnails({ slidesData, locale }: HeroThumbnailsProps) {
               />
             </div>
 
-            <div className={`card-content card-content-${idx} absolute left-0 top-0 text-white w-[104px] h-[150px] pointer-events-none opacity-0`}>
-              <div className="absolute bottom-2.5 left-2.5 right-2.5 text-left">
-                <span className="block text-[9.5px] font-oswald font-semibold tracking-wider uppercase leading-tight drop-shadow-md notranslate text-white">
+            <div
+              className={`card-content card-content-${idx} absolute left-0 top-0 text-white pointer-events-none opacity-0`}
+              style={{ width: HERO_CARD.width, height: HERO_CARD.height }}
+            >
+              <div className="absolute text-left" style={{ bottom: HERO_CARD.padding, left: HERO_CARD.padding, right: HERO_CARD.padding }}>
+                <span style={{ fontSize: HERO_CARD.titleSize }} className="block font-oswald font-semibold tracking-wider uppercase leading-tight drop-shadow-md notranslate text-white">
                   {getLocalizedText(slide.title, locale)}
                 </span>
                 {slide.title2 && (
-                  <p className="text-[11px] font-oswald font-bold tracking-wide uppercase text-emerald-300 drop-shadow notranslate mt-0.5">
+                  <p style={{ fontSize: HERO_CARD.subtitleSize }} className="font-oswald font-bold tracking-wide uppercase text-emerald-300 drop-shadow notranslate mt-0.5">
                     {getLocalizedText(slide.title2, locale)}
                   </p>
                 )}

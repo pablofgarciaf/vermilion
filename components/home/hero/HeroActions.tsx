@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowRight, MessageCircle } from 'lucide-react';
-import { HeroPromoChip } from '@/components/promotions/HeroPromoChip';
 
 interface HeroActionsProps {
   exploreLabel: string;
@@ -16,11 +15,6 @@ export function HeroActions({ exploreLabel, planLabel }: HeroActionsProps) {
       id="hero-action-buttons"
       className="absolute inset-x-0 bottom-[75px] sm:bottom-[80px] md:bottom-[65px] lg:bottom-[70px] xl:bottom-[75px] md:inset-x-auto md:left-[30px] lg:left-[60px] z-30 flex flex-col items-center md:items-start gap-3 px-4 pointer-events-auto"
     >
-      {/* Oferta vigente con fecha de fin: nace vacía y solo aparece si hay promo activa. */}
-      {/* En móvil el texto del hero ocupa todo el alto: ahí la oferta ya va en la barra superior. */}
-      <div className="hidden md:block">
-        <HeroPromoChip />
-      </div>
       <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2.5 sm:gap-3.5">
       <button
         suppressHydrationWarning

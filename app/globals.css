@@ -570,6 +570,18 @@ body {
 /* ── Marquesina de anuncios (components/promotions/PromoBanner.tsx) ──
    Dos pistas idénticas desplazándose -100% dan un bucle sin saltos.
    Se pausa con hover o foco; con reduced-motion queda quieta y se desliza a mano. */
+/* Oferta destacada en la marquesina: parpadeo lento tipo LED en color tomate.
+   Ciclo de 1,4 s (muy por debajo de 3 destellos por segundo) y quieto con prefers-reduced-motion. */
+@keyframes vr-led {
+  0%, 100% { color: #ff6a3d; text-shadow: 0 0 6px rgba(255, 99, 71, 0.95), 0 0 16px rgba(255, 99, 71, 0.6); }
+  50% { color: #b8462a; text-shadow: none; }
+}
+.vr-led { color: #ff6a3d; animation: vr-led 1.4s ease-in-out infinite; }
+.vr-led a { color: inherit; }
+@media (prefers-reduced-motion: reduce) {
+  .vr-led { animation: none; text-shadow: 0 0 6px rgba(255, 99, 71, 0.8); }
+}
+
 @keyframes vr-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-100%); }

@@ -4,6 +4,7 @@ import { SlideData } from '@/types';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getStandardTemplateHTML } from './HeroDetails';
 import { isBotOrCrawler } from '@/utils/isBot';
+import { HERO_CARD, HERO_VISIBLE_CARDS } from './heroCardsConfig';
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -26,14 +27,12 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
     let detailsEven = true;
     let offsetTop = 200;
     let offsetLeft = 700;
-    // Tarjetas al ~72 % del tamaño original y solo 4 visibles a la derecha (el resto entra al avanzar).
-    const cardWidth = 104;
-    const cardHeight = 150;
-    const gap = 14;
-    const VISIBLE_CARDS = 4;
-    const RIGHT_MARGIN = 40;
+    // Tamaño y número de tarjetas visibles: se cambian en ./heroCardsConfig.ts
+    const cardWidth = HERO_CARD.width;
+    const cardHeight = HERO_CARD.height;
+    const gap = HERO_CARD.gap;
     const cardsLeft = (width: number) =>
-      Math.max(width - (VISIBLE_CARDS * cardWidth + (VISIBLE_CARDS - 1) * gap) - RIGHT_MARGIN, 650);
+      Math.max(width - (HERO_VISIBLE_CARDS * cardWidth + (HERO_VISIBLE_CARDS - 1) * gap) - HERO_CARD.rightMargin, 650);
     const numberSize = 50;
     const ease = "sine.inOut";
     let transitioning = false;
