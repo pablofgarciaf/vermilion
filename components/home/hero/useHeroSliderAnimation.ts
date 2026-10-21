@@ -26,9 +26,14 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
     let detailsEven = true;
     let offsetTop = 200;
     let offsetLeft = 700;
-    const cardWidth = 144;
-    const cardHeight = 208;
-    const gap = 20;
+    // Tarjetas al ~72 % del tamaño original y solo 4 visibles a la derecha (el resto entra al avanzar).
+    const cardWidth = 104;
+    const cardHeight = 150;
+    const gap = 14;
+    const VISIBLE_CARDS = 4;
+    const RIGHT_MARGIN = 40;
+    const cardsLeft = (width: number) =>
+      Math.max(width - (VISIBLE_CARDS * cardWidth + (VISIBLE_CARDS - 1) * gap) - RIGHT_MARGIN, 650);
     const numberSize = 50;
     const ease = "sine.inOut";
     let transitioning = false;
@@ -64,7 +69,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
         const width = container.clientWidth || window.innerWidth;
 
         offsetTop = height - cardHeight - 65;
-        offsetLeft = Math.max(width - 830, 650);
+        offsetLeft = cardsLeft(width);
 
         const [active, ...rest] = order;
         (window as any).__activeSlideIdx = active;
@@ -99,7 +104,7 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
         const width = container.clientWidth || window.innerWidth;
 
         offsetTop = height - cardHeight - 65;
-        offsetLeft = Math.max(width - 830, 650);
+        offsetLeft = cardsLeft(width);
 
         const [active, ...rest] = order;
         (window as any).__activeSlideIdx = active;

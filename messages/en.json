@@ -240,7 +240,9 @@
     "transferSummary": "Hello Vermilion Routes! I was chatting with Pyro on your website about: \"{topics}\". Can a travel advisor help me?",
     "closeChat": "Close chat",
     "sendMessage": "Send message",
-    "openMenu": "Open travel assistant"
+    "openMenu": "Open travel assistant",
+    "voiceStart": "Dictate by voice",
+    "voiceStop": "Stop dictation"
   },
   "adminTiktok": {
     "title": "TikTok integration",

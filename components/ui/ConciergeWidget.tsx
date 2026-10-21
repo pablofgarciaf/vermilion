@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 
 import { useLocale, useTranslations } from 'next-intl';
+import { VoiceInputButton } from '@/components/ui/VoiceInputButton';
 import { isBotOrCrawler } from '@/utils/isBot';
 import { ChatMarkdown } from '@/components/ui/ChatMarkdown';
 import { setChatPanelOpen } from '@/hooks/useChatPanelOpen';
@@ -513,6 +514,13 @@ export function ConciergeWidget() {
               suppressHydrationWarning
               className="flex-1 bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-500 text-xs sm:text-sm rounded-xl px-3 py-2.5 focus:outline-none focus:border-amber-500 transition-colors"
               disabled={isLoading}
+            />
+            <VoiceInputButton
+              locale={locale}
+              disabled={isLoading}
+              labelStart={t('concierge.voiceStart')}
+              labelStop={t('concierge.voiceStop')}
+              onText={(text) => setInputMessage((prev) => (prev ? `${prev} ${text}` : text))}
             />
             <button
               type="submit"

@@ -240,7 +240,9 @@
     "transferSummary": "您好，Vermilion Routes！我刚才在网站上和 Pyro 聊到：“{topics}”。可以请顾问帮我吗？",
     "closeChat": "关闭聊天",
     "sendMessage": "发送消息",
-    "openMenu": "打开旅行助手"
+    "openMenu": "打开旅行助手",
+    "voiceStart": "语音输入",
+    "voiceStop": "停止语音输入"
   },
   "adminTiktok": {
     "title": "TikTok 集成",

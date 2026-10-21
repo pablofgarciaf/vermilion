@@ -240,7 +240,9 @@
     "transferSummary": "こんにちは、Vermilion Routes さん。ウェブサイトで Pyro と「{topics}」について話していました。担当者に相談できますか？",
     "closeChat": "チャットを閉じる",
     "sendMessage": "メッセージを送信",
-    "openMenu": "旅行アシスタントを開く"
+    "openMenu": "旅行アシスタントを開く",
+    "voiceStart": "音声で入力",
+    "voiceStop": "音声入力を停止"
   },
   "adminTiktok": {
     "title": "TikTok 連携",

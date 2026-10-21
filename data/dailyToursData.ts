@@ -225,10 +225,12 @@ export const dailyTours: Tour[] = [
     price: 85,
     price3Star: 85,
     price4Star: 85,
-    imageUrl: '/images/tours/16-9/papallacta-laguna-16-9.webp',
-    mobileImage: '/images/tours/16-9/papallacta-laguna-16-9.webp',
-    desktopImage: '/images/tours/16-9/papallacta-laguna-16-9.webp',
+    imageUrl: '/images/tours/16-9/papallacta-lagunas-paramo-16-9.webp',
+    mobileImage: '/images/tours/9-16/papallacta-laguna-paramo-9-16.webp',
+    desktopImage: '/images/tours/16-9/papallacta-lagunas-paramo-16-9.webp',
     gallery: [
+      '/images/tours/16-9/papallacta-lagunas-paramo-16-9.webp',
+      '/images/tours/16-9/papallacta-lagunas-paramo-2-16-9.webp',
       '/images/tours/16-9/papallacta-laguna-16-9.webp',
       '/images/tours/16-9/antisana-16-9.webp'
     ],

@@ -25,12 +25,17 @@ export function CombinedExperienceSection() {
 
   const tripAdvisorUrl = 'https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html';
 
+  // Se avanza de 2 en 2: en móvil se ven 2 reseñas apiladas; en escritorio, 4 (2x2).
+  const STEP = 2;
+  const pages = Math.max(1, Math.ceil(total / STEP));
+  const page = Math.floor(currentIndex / STEP) + 1;
+
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + total) % total);
+    setCurrentIndex((prev) => (prev - STEP + pages * STEP) % (pages * STEP));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % total);
+    setCurrentIndex((prev) => (prev + STEP) % (pages * STEP));
   };
 
   useEffect(() => {
@@ -187,7 +192,7 @@ export function CombinedExperienceSection() {
                   <div
                     key={`${rev.id}-${currentIndex}-${offset}`}
                     className={`bg-white dark:bg-zinc-900/90 backdrop-blur-xl p-5 sm:p-4.5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs hover:shadow-md transition-all duration-300 flex-col justify-between space-y-3 relative group animate-fade-in ${
-                      offset > 0 ? 'hidden sm:flex' : 'flex'
+                      offset > 1 ? 'hidden sm:flex' : 'flex'
                     }`}
                   >
                     <Quote className="w-5 h-5 text-emerald-100 dark:text-emerald-950/80 absolute top-3.5 right-3.5 pointer-events-none group-hover:text-emerald-200 transition-colors" />
@@ -289,23 +294,11 @@ export function CombinedExperienceSection() {
               })}
             </div>
 
-            {/* Mobile Carousel Controls: 1 review at a time with indicator & navigation */}
+            {/* Controles en móvil: 2 reseñas por vista, contador de páginas sin puntos */}
             <div className="flex sm:hidden items-center justify-between pt-3 px-1">
               <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">
-                {currentIndex + 1} / {total}
+                {page} / {pages}
               </span>
-              <div className="flex items-center gap-1.5 py-1">
-                {reviews.map((_, dotIdx) => (
-                  <span
-                    key={dotIdx}
-                    className={`h-1.5 rounded-full transition-all duration-300 block ${
-                      dotIdx === currentIndex
-                        ? 'w-4 bg-emerald-600 dark:bg-emerald-400'
-                        : 'w-1.5 bg-zinc-300 dark:bg-zinc-700'
-                    }`}
-                  />
-                ))}
-              </div>
               <div className="flex items-center gap-2">
                 <button
                   onClick={handlePrev}

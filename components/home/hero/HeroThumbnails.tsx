@@ -120,7 +120,7 @@ export function HeroThumbnails({ slidesData, locale }: HeroThumbnailsProps) {
             <div
               className={`card card-${idx} absolute top-0 left-0 shadow-2xl overflow-hidden ${idx === 0
                 ? 'w-full h-full inset-0 z-10 opacity-100'
-                : 'w-[144px] h-[208px] opacity-0 bg-zinc-800'
+                : 'w-[104px] h-[150px] opacity-0 bg-zinc-800'
                 }`}
             >
               {idx === 0 ? (
@@ -154,7 +154,7 @@ export function HeroThumbnails({ slidesData, locale }: HeroThumbnailsProps) {
                       loading="lazy"
                       unoptimized
                       className="object-cover hidden md:block"
-                      sizes="144px"
+                      sizes="104px"
                     />
                   )}
                   <DeferredSlideImages slide={slide} alt={alt} />
@@ -186,13 +186,13 @@ export function HeroThumbnails({ slidesData, locale }: HeroThumbnailsProps) {
               />
             </div>
 
-            <div className={`card-content card-content-${idx} absolute left-0 top-0 text-white w-[144px] h-[208px] pointer-events-none opacity-0`}>
-              <div className="absolute bottom-4 left-4 right-4 text-left">
-                <span className="block text-xs font-oswald font-semibold tracking-wider uppercase leading-tight drop-shadow-md notranslate text-white">
+            <div className={`card-content card-content-${idx} absolute left-0 top-0 text-white w-[104px] h-[150px] pointer-events-none opacity-0`}>
+              <div className="absolute bottom-2.5 left-2.5 right-2.5 text-left">
+                <span className="block text-[9.5px] font-oswald font-semibold tracking-wider uppercase leading-tight drop-shadow-md notranslate text-white">
                   {getLocalizedText(slide.title, locale)}
                 </span>
                 {slide.title2 && (
-                  <p className="text-sm font-oswald font-bold tracking-wide uppercase text-emerald-300 drop-shadow notranslate mt-0.5">
+                  <p className="text-[11px] font-oswald font-bold tracking-wide uppercase text-emerald-300 drop-shadow notranslate mt-0.5">
                     {getLocalizedText(slide.title2, locale)}
                   </p>
                 )}

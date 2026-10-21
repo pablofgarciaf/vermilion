@@ -240,7 +240,9 @@
     "transferSummary": "Bonjour Vermilion Routes ! Je discutais avec Pyro sur votre site à propos de : \"{topics}\". Un conseiller peut-il m'aider ?",
     "closeChat": "Fermer le chat",
     "sendMessage": "Envoyer le message",
-    "openMenu": "Ouvrir l'assistant de voyage"
+    "openMenu": "Ouvrir l'assistant de voyage",
+    "voiceStart": "Dicter à la voix",
+    "voiceStop": "Arrêter la dictée"
   },
   "adminTiktok": {
     "title": "Intégration TikTok",

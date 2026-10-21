@@ -1343,9 +1343,9 @@ const multiDayTours: Tour[] = [
     price: 2200,
     price3Star: 2200,
     price4Star: 2600,
-    imageUrl: '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
-    mobileImage: '/images/tours/9-16/galapagos-lobo-marino-9-16.webp',
-    desktopImage: '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
+    imageUrl: '/images/tours/16-9/galapagos-piquero-patas-azules-roca-4-3.webp',
+    mobileImage: '/images/tours/9-16/galapagos-piquero-patas-azules-9-16.webp',
+    desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-roca-4-3.webp',
     gallery: [
       '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
       '/images/tours/16-9/isabela-island-16-9.webp',
