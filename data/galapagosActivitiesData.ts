@@ -1,4 +1,3 @@
-import { LocalizedString } from '@/utils/i18nHelper';
 
 export type GalapagosIslandId =
   | 'all'
@@ -27,6 +26,7 @@ export type GalapagosCategoryId =
 export type GalapagosSeasonId = 'all-year' | 'warm' | 'cool';
 
 export interface GalapagosActivity {
+  isIconic?: boolean;
   id: string;
   name: Record<string, string>;
   shortDescription: Record<string, string>;
@@ -861,9 +861,21 @@ export const MONTH_NAMES: { month: number; name: Record<string, string> }[] = [
   { month: 12, name: { es: 'Diciembre', en: 'December', fr: 'Décembre', de: 'Dezember', it: 'Dicembre', pt: 'Dezembro', ja: '12月', zh: '12月' } }
 ];
 
+export const ICONIC_GALAPAGOS_ACTIVITY_IDS: string[] = [
+  "pz-deep-snorkel",
+  "is-tintoreras-islet",
+  "sc-tortoises-highlands",
+  "sc-las-grietas",
+  "is-sierra-negra-volcano",
+  "sc-la-loberia",
+  "sn-frigatebirds-boobies",
+  "sc-kicker-rock-leon-dormido"
+];
+
 export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
   {
     "id": "sc-tortoises-highlands",
+    "isIconic": true,
     "name": {
       "es": "Encuentro con Tortugas Gigantes en Estado Silvestre (Rancho Primicias / El Chato)",
       "en": "Wild Giant Tortoise Sanctuary (Primicias / El Chato Ranch)",
@@ -971,7 +983,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "半日（約3〜4時間）",
       "zh": "半天（约3-4小时）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp",
+    "imageUrl": "/images/destinations/galapagos/galapagos-giant-tortoise-grazing-santa-cruz.webp",
     "keyWildlife": [
       {
         "es": "Tortuga Gigante de Galápagos (Chelonoidis porteri)",
@@ -1146,7 +1158,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "約1.5時間",
       "zh": "约1.5小时"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-isabela-island-16-9.webp",
+    "imageUrl": "/images/destinations/galapagos/galapagos-panoramic-view-los-gemelos-craters.webp",
     "keyWildlife": [
       {
         "es": "Pinzón Carpintero (Camarhynchus pallidus)",
@@ -1195,6 +1207,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
   },
   {
     "id": "sc-las-grietas",
+    "isIconic": true,
     "name": {
       "es": "Snorkel en el Cañón Volcánico de Las Grietas",
       "en": "Las Grietas Volcanic Canyon Snorkeling",
@@ -1764,7 +1777,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "終日（ボートダイブ2本＋航海）",
       "zh": "全天（2次出海船潜 + 航海巡游）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-las-grietas-16-9.webp",
+    "imageUrl": "/images/destinations/galapagos/galapagos-panoramic-view-galapagos-bay-turquoise-water.webp",
     "keyWildlife": [
       {
         "es": "Tiburón Martillo Común (Sphyrna lewini)",
@@ -1919,7 +1932,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "約2.5時間",
       "zh": "约2.5小时"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-baltra-island-16-9.webp",
+    "imageUrl": "/images/destinations/galapagos/galapagos-brown-pelican-flight-mangroves.webp",
     "keyWildlife": [
       {
         "es": "Tortuga Marina Verde del Pacífico (Chelonia mydas)",
@@ -1978,6 +1991,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
   },
   {
     "id": "is-tintoreras-islet",
+    "isIconic": true,
     "name": {
       "es": "Islote Tintoreras: Snorkel con Pingüinos y Canales de Tiburones",
       "en": "Tintoreras Islet: Shark Crevices & Galapagos Penguin Snorkel",
@@ -2459,6 +2473,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
   },
   {
     "id": "is-sierra-negra-volcano",
+    "isIconic": true,
     "name": {
       "es": "Trekking a la Caldera del Volcán Sierra Negra y Fumarolas de Volcán Chico",
       "en": "Sierra Negra Caldera & Volcán Chico Fumaroles Trekking",
@@ -2715,7 +2730,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "自由（約1.5〜2時間）",
       "zh": "自由灵活（约1.5-2小时）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-lobo-marino-16-9.webp",
+    "imageUrl": "/images/destinations/galapagos/galapagos-coastal-landscape-turquoise-bay.webp",
     "keyWildlife": [
       {
         "es": "Lobo Marino de Galápagos (Zalophus wollebaeki)",
@@ -2867,7 +2882,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "約1.5〜2時間",
       "zh": "约1.5-2小时"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp",
+    "imageUrl": "/images/destinations/galapagos/SAN-CRISTOBAL-GALAPAGOS-2.jpg",
     "keyWildlife": [
       {
         "es": "Lagartija de Lava de San Cristóbal (Microlophus bivittatus)",
@@ -3019,7 +3034,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "約3時間",
       "zh": "约3小时"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-isabela-island-16-9.webp",
+    "imageUrl": "/images/tours/9-16/tijeretas-hill-9-16.webp",
     "keyWildlife": [
       {
         "es": "Fragata Real (Fregata magnificens)",
@@ -3078,6 +3093,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
   },
   {
     "id": "sc-la-loberia",
+    "isIconic": true,
     "name": {
       "es": "Santuario de Lobos Marinos en Playa La Lobería y Acantilados",
       "en": "La Lobería Beach & Sea Lion Colony Coastal Sanctuary",
@@ -3181,7 +3197,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "約2.5〜3時間",
       "zh": "约2.5-3小时"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-lobo-marino-16-9.webp",
+    "imageUrl": "/images/tours/9-16/galapagos-loberia-9-16.webp",
     "keyWildlife": [
       {
         "es": "Lobo Marino de Galápagos (Zalophus wollebaeki)",
@@ -3240,6 +3256,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
   },
   {
     "id": "sc-kicker-rock-leon-dormido",
+    "isIconic": true,
     "name": {
       "es": "Circunnavegación y Snorkel en León Dormido (Kicker Rock) con Tiburones Galápagos",
       "en": "Kicker Rock (León Dormido) Shark Snorkel & Circumnavigation",
@@ -3342,7 +3359,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "終日（約7時間、無人ビーチ上陸付き）",
       "zh": "全天（约7小时，含私密荒岛沙滩登陆）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-lobo-marino-16-9.webp",
+    "imageUrl": "/images/tours/16-9/galapagos-snorkeling-16-9.webp",
     "keyWildlife": [
       {
         "es": "Tiburón de Galápagos (Carcharhinus galapagensis)",
@@ -3654,7 +3671,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "終日（サンクリストバル発着ヨットツアー）",
       "zh": "全天（圣克里斯托巴尔岛往返探险游艇）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-lobo-marino-16-9.webp",
+    "imageUrl": "/images/destinations/galapagos/galapagos-brown-pelican-soaring-over-turquoise-water.webp",
     "keyWildlife": [
       {
         "es": "Albatros Ondulado de Galápagos (Phoebastria irrorata)",
@@ -3814,7 +3831,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "終日（サンタクルス島発着ヨットクルーズ）",
       "zh": "全天（圣克鲁斯岛出发豪华探险游艇巡航）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-isabela-island-16-9.webp",
+    "imageUrl": "/images/tours/9-16/galapagos-isabela-islote-turquesa-9-16.webp",
     "keyWildlife": [
       {
         "es": "Pingüino de Galápagos (Spheniscus mendiculus)",
@@ -3873,6 +3890,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
   },
   {
     "id": "sn-frigatebirds-boobies",
+    "isIconic": true,
     "name": {
       "es": "Senderismo entre Colonias de Fragatas con Buche Rojo y Danza de Piqueros Patas Azules",
       "en": "North Seymour Frigatebird Colonies & Blue-Footed Booby Mating Dance",
@@ -4196,6 +4214,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
   },
   {
     "id": "pz-deep-snorkel",
+    "isIconic": true,
     "name": {
       "es": "Snorkel en Aguas Cristalinas de Isla Pinzón (Tortugas Verdes y Tiburones de Arrecife)",
       "en": "Pinzón Island Deep Snorkel (Sea Turtles & Reef Sharks Sanctuary)",
@@ -4300,7 +4319,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "終日（サンタクルス発ヨットツアー）",
       "zh": "全天（圣克鲁斯出发探险游艇巡航）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-las-grietas-16-9.webp",
+    "imageUrl": "/images/tours/9-16/tortuga-marina-galapagos-slider-4k.webp",
     "keyWildlife": [
       {
         "es": "Tortuga Marina Verde del Pacífico",
@@ -4456,7 +4475,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "終日（サンタクルス発ヨットツアー）",
       "zh": "全天（圣克鲁斯出发探险游艇巡航）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-isabela-island-16-9.webp",
+    "imageUrl": "/images/destinations/galapagos/galapagos-land-iguana-portrait.webp",
     "keyWildlife": [
       {
         "es": "Iguana Terrestre Amarilla de Plaza Sur",
@@ -4617,7 +4636,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "終日（サンタクルス発ヨットツアー）",
       "zh": "全天（圣克鲁斯出发探险游艇巡航）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-las-grietas-16-9.webp",
+    "imageUrl": "/images/tours/16-9/galapagos-focas-16-9.webp",
     "keyWildlife": [
       {
         "es": "Tiburón Martillo (Sphyrna lewini)",
@@ -4777,7 +4796,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "約1.5時間",
       "zh": "约1.5小时"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-isabela-island-16-9.webp",
+    "imageUrl": "/images/destinations/galapagos/galapagos-giant-tortoise-highlands-reserve.webp",
     "keyWildlife": [
       {
         "es": "Lechuza de Galápagos (Tyto alba punctatissima)",
@@ -4917,7 +4936,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "約4〜5時間",
       "zh": "约4-5小时"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-isabela-island-16-9.1.webp",
+    "imageUrl": "/images/tours/9-16/galapagos-flamenco-rosa-reflejo-9-16.webp",
     "keyWildlife": [
       {
         "es": "Iguana Terrestre de Galápagos (Conolophus subcristatus)",
@@ -5067,7 +5086,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "約3時間",
       "zh": "约3小时"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-isabela-island-16-9.webp",
+    "imageUrl": "/images/tours/16-9/isabela-island-16-9.1.webp",
     "keyWildlife": [
       {
         "es": "Tortuga Gigante Silvestre de Isabela",
@@ -5217,7 +5236,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "約4時間（ヨット停泊時）",
       "zh": "约4小时（巡航游艇停泊上岸）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-isabela-island-16-9.2.webp",
+    "imageUrl": "/images/tours/16-9/marine-iguana-galapagos.webp",
     "keyWildlife": [
       {
         "es": "Iguana Terrestre Gigante de Isabela",
@@ -5377,7 +5396,7 @@ export const GALAPAGOS_ACTIVITIES: GalapagosActivity[] = [
       "ja": "終日（遠洋航海型ヨットツアー）",
       "zh": "全天（远航探险游艇专属巡航）"
     },
-    "imageUrl": "/images/tours/16-9/galapagos-piquero-patas-azules-16-9.1.webp",
+    "imageUrl": "/images/tours/16-9/piquero-galapagos-slider-4k.webp",
     "keyWildlife": [
       {
         "es": "Piquero de Patas Rojas (Sula sula)",

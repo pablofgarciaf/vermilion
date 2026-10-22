@@ -241,7 +241,7 @@ export function ConciergeWidget() {
       {/* FLOATING CONCIERGE BUTTON */}
       <div
         className={`fixed left-3 z-50 flex-col items-start sm:left-6 ${
-          withTabBar ? 'hidden md:flex md:bottom-6' : 'flex bottom-[84px] sm:bottom-24'
+          withTabBar ? 'hidden md:flex md:bottom-6' : 'flex bottom-[84px] sm:bottom-24 md:bottom-6'
         }`}
       >
         {/* POPOVER SELECTION MENU */}

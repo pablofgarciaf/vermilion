@@ -17,6 +17,7 @@ const TripAdvisorReviews = dynamic(
 import { Button } from '@/components/ui/Button';
 import { ExpeditionFacts } from '@/components/tours/ExpeditionFacts';
 import { DownloadPDFButton } from '@/components/tours/DownloadPDFButton';
+import { TourBespokeTrustCard } from '@/components/tours/TourBespokeTrustCard';
 import { TourPriceSummary } from '@/components/tours/TourPriceSummary';
 import { PromoTourNotice } from '@/components/promotions/PromoTourNotice';
 import { isPromoEligible } from '@/lib/promotions';
@@ -392,7 +393,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
             </div>
 
             {/* COLUMNA DERECHA */}
-            <div className="lg:col-span-6 flex flex-col h-full">
+            <div className="lg:col-span-6 flex flex-col h-full space-y-6">
               <TourGallery
                 images={galleryImages}
                 title={title}
@@ -407,6 +408,12 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                   className="w-full sm:w-auto"
                 />
               </TourGallery>
+
+              <TourBespokeTrustCard
+                locale={locale}
+                tourId={tour.id}
+                tourTitle={title}
+              />
             </div>
 
           </div>

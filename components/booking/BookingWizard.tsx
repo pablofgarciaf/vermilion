@@ -1967,20 +1967,6 @@ export function BookingWizard() {
               affiliateRef={affiliateRef}
               payCtaLabel={payCtaLabel}
             />
-            {selectedTours.length > 0 && (
-              <AskBeforeBooking
-                className="mt-4"
-                tourId={selectedTours.map((t) => t.id).join(',')}
-                tourTitle={selectionTitle}
-                tierLabel={tierLabel}
-                date={date || null}
-                adults={adults}
-                children={children}
-                contact={contactInfo}
-                placement="booking_page"
-                stacked
-              />
-            )}
           </div>
         </div>
 

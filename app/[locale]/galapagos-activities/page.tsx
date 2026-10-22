@@ -1,20 +1,10 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { getSeoAlternates, SUPPORTED_SEO_LOCALES } from '@/utils/seoHelper';
 import { GalapagosActivitiesExplorer } from '@/components/tours/GalapagosActivitiesExplorer';
-import { GALAPAGOS_ACTIVITIES, BASE_TOURS_GALAPAGOS } from '@/data/galapagosActivitiesData';
-import {
-  Compass,
-  Sparkles,
-  MapPin,
-  Calendar,
-  CheckCircle2,
-  ShieldCheck,
-  ChevronRight,
-  HelpCircle
-} from 'lucide-react';
+import { GALAPAGOS_ACTIVITIES } from '@/data/galapagosActivitiesData';
+import { ChevronRight } from 'lucide-react';
 
 export async function generateStaticParams() {
   return SUPPORTED_SEO_LOCALES.map((locale) => ({ locale }));

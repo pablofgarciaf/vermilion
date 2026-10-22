@@ -248,16 +248,6 @@ export function NavbarWithReservations() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1 font-sans">
-            {/* Botón principal de captación, a la izquierda del menú: abre el formulario por pasos */}
-            <button
-              type="button"
-              onClick={() => openPlanTrip()}
-              data-lead-placement="header_plan_trip"
-              className="group mr-2 inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-red-600 to-red-500 px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-widest text-white shadow-lg shadow-red-900/30 ring-1 ring-white/20 transition-all hover:scale-[1.03] hover:from-red-500 hover:to-red-400 active:scale-95"
-            >
-              <Sparkles className="w-4 h-4 transition-transform group-hover:rotate-12" />
-              {tPlan('cta')}
-            </button>
             {navLinks.map((link) => {
               const isActive = (pathname === link.href) || (link.href !== `/${locale}` && pathname.startsWith(link.href));
               if (link.hasDropdown) {
@@ -354,6 +344,17 @@ export function NavbarWithReservations() {
                     />
                   )}
                 </div>
+
+                {/* Botón principal "Planifica tu viaje" a la DERECHA */}
+                <button
+                  type="button"
+                  onClick={() => openPlanTrip()}
+                  data-lead-placement="header_plan_trip"
+                  className="group inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-red-600 to-red-500 px-4 py-2 text-[11px] font-extrabold uppercase tracking-widest text-white shadow-lg shadow-red-900/30 ring-1 ring-white/20 transition-all hover:scale-[1.03] hover:from-red-500 hover:to-red-400 active:scale-95 cursor-pointer"
+                >
+                  <Sparkles className="w-3.5 h-3.5 transition-transform group-hover:rotate-12" />
+                  <span>{tPlan('cta')}</span>
+                </button>
 
                 <button
                   onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}

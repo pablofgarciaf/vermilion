@@ -29,7 +29,7 @@ export function WhatsAppButton() {
   // Sin barra (ficha de tour, reserva), sube por encima de la barra de reserva propia.
   const position = showsMobileTabBar(pathname)
     ? 'hidden md:flex md:bottom-6'
-    : 'flex bottom-[84px] sm:bottom-24';
+    : 'flex bottom-[84px] sm:bottom-24 md:bottom-6';
 
   const href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(t('defaultMessage'))}`;
 
