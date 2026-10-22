@@ -493,5 +493,12 @@
     "finalTitle": "准备好前往加拉帕戈斯了吗？",
     "finalSubtitle": "告诉我们您的日期，24小时内我们将发送带价格的私人行程。",
     "navLabel": "加拉帕戈斯"
+  },
+  "tabBar": {
+    "ai": "助手",
+    "plan": "规划行程",
+    "reservations": "我的预订",
+    "whatsapp": "WhatsApp",
+    "ariaLabel": "快速导航"
   }
 }

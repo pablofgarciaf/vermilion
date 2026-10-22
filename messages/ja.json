@@ -493,5 +493,12 @@
     "finalTitle": "ガラパゴスへ出発しませんか？",
     "finalSubtitle": "日程をお知らせいただければ、24時間以内に料金付きのプライベート旅程をお送りします。",
     "navLabel": "ガラパゴス"
+  },
+  "tabBar": {
+    "ai": "アシスタント",
+    "plan": "旅を計画",
+    "reservations": "予約",
+    "whatsapp": "WhatsApp",
+    "ariaLabel": "クイックナビ"
   }
 }

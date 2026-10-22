@@ -493,5 +493,12 @@
     "finalTitle": "Prêt pour les Galápagos ?",
     "finalSubtitle": "Donnez-nous vos dates et sous 24 heures nous vous envoyons un itinéraire privé chiffré.",
     "navLabel": "Galápagos"
+  },
+  "tabBar": {
+    "ai": "Assistant",
+    "plan": "Planifier",
+    "reservations": "Réservations",
+    "whatsapp": "WhatsApp",
+    "ariaLabel": "Navigation rapide"
   }
 }

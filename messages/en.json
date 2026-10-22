@@ -493,5 +493,12 @@
     "finalTitle": "Ready for Galápagos?",
     "finalSubtitle": "Tell us your dates and within 24 hours we'll send you a private, priced itinerary.",
     "navLabel": "Galápagos"
+  },
+  "tabBar": {
+    "ai": "Assistant",
+    "plan": "Plan trip",
+    "reservations": "Bookings",
+    "whatsapp": "WhatsApp",
+    "ariaLabel": "Quick navigation"
   }
 }

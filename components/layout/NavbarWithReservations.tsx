@@ -34,6 +34,7 @@ import { BrandLogo } from '@/components/ui/BrandLogo';
 import { PromoBanner } from '@/components/promotions/PromoBanner';
 import { useActivePromotion } from '@/hooks/useActivePromotion';
 import { openPlanTrip } from '@/data/planTrip';
+import { OPEN_RESERVATIONS_EVENT } from '@/data/mobileTabBar';
 
 // Dynamic imports
 const AffiliateClubModal = dynamic(
@@ -103,7 +104,16 @@ export function NavbarWithReservations() {
     };
     window.addEventListener('scroll', handleScroll);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Botón "Reservas" de la barra inferior (móvil): abre el menú con "Mis reservas" desplegado.
+    const handleOpenReservations = () => {
+      setMobileMenuOpen(true);
+      setReservationModalOpen(true);
+    };
+    window.addEventListener(OPEN_RESERVATIONS_EVENT, handleOpenReservations);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener(OPEN_RESERVATIONS_EVENT, handleOpenReservations);
+    };
   }, []);
 
   const navLinks = [
@@ -237,6 +247,16 @@ export function NavbarWithReservations() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1 font-sans">
+            {/* Botón principal de captación, a la izquierda del menú: abre el formulario por pasos */}
+            <button
+              type="button"
+              onClick={() => openPlanTrip()}
+              data-lead-placement="header_plan_trip"
+              className="group mr-2 inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-red-600 to-red-500 px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-widest text-white shadow-lg shadow-red-900/30 ring-1 ring-white/20 transition-all hover:scale-[1.03] hover:from-red-500 hover:to-red-400 active:scale-95"
+            >
+              <Sparkles className="w-4 h-4 transition-transform group-hover:rotate-12" />
+              {tPlan('cta')}
+            </button>
             {navLinks.map((link) => {
               const isActive = (pathname === link.href) || (link.href !== `/${locale}` && pathname.startsWith(link.href));
               if (link.hasDropdown) {
@@ -306,16 +326,6 @@ export function NavbarWithReservations() {
           <div className="hidden md:flex items-center gap-3">
             {mounted && (
               <div className="flex items-center gap-3 animate-in fade-in duration-700">
-                {/* Botón principal de captación: abre el formulario por pasos */}
-                <button
-                  type="button"
-                  onClick={() => openPlanTrip()}
-                  data-lead-placement="header_plan_trip"
-                  className="group inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-r from-red-600 to-red-500 px-4 py-2.5 text-[11px] font-extrabold uppercase tracking-widest text-white shadow-lg shadow-red-900/30 ring-1 ring-white/20 transition-all hover:scale-[1.03] hover:from-red-500 hover:to-red-400 active:scale-95"
-                >
-                  <Sparkles className="w-4 h-4 transition-transform group-hover:rotate-12" />
-                  {tPlan('cta')}
-                </button>
                 {/* MIS RESERVAS Button */}
                 <div className="relative">
                   <button

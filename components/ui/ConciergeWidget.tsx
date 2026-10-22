@@ -22,6 +22,8 @@ import { VoiceInputButton } from '@/components/ui/VoiceInputButton';
 import { isBotOrCrawler } from '@/utils/isBot';
 import { ChatMarkdown } from '@/components/ui/ChatMarkdown';
 import { setChatPanelOpen } from '@/hooks/useChatPanelOpen';
+import { usePathname } from 'next/navigation';
+import { showsMobileTabBar } from '@/data/mobileTabBar';
 import { trackGenerateLead } from '@/lib/analytics/trackLead';
 
 interface ChatMessage {
@@ -35,6 +37,8 @@ interface ChatMessage {
 export function ConciergeWidget() {
   const locale = useLocale();
   const t = useTranslations();
+  // En móvil, donde hay barra inferior tipo app, Pyro se abre desde ella y el botón flotante se oculta.
+  const withTabBar = showsMobileTabBar(usePathname());
   const GREETINGS_BY_LOCALE: Record<string, string> = {
     es: '¡Hola! Soy **Pyro**, tu Especialista de Viajes en Vermilion Routes.\n\nEstoy aquí para ayudarte a diseñar y personalizar tu viaje por **Ecuador Continental y las Islas Galápagos**.\n\n¿En qué destino o fechas te gustaría comenzar a planificar?',
     en: 'Hello! I am **Pyro**, Lead Travel Specialist at Vermilion Routes.\n\nI am here to assist you in designing and customizing your journey across **Mainland Ecuador and the Galápagos Islands**.\n\nWhat destinations or travel dates do you have in mind to get started?',
@@ -235,7 +239,11 @@ export function ConciergeWidget() {
   return (
     <>
       {/* FLOATING CONCIERGE BUTTON */}
-      <div className="fixed bottom-4 left-3 z-50 flex flex-col items-start sm:bottom-6 sm:left-6">
+      <div
+        className={`fixed left-3 z-50 flex-col items-start sm:left-6 ${
+          withTabBar ? 'hidden md:flex md:bottom-6' : 'flex bottom-[84px] sm:bottom-24'
+        }`}
+      >
         {/* POPOVER SELECTION MENU */}
         {isOpenMenu && !isOpenChat && (
           <div className="mb-4 w-80 sm:w-96 bg-zinc-900/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl shadow-2xl p-4 text-white animate-in fade-in slide-in-from-bottom-4 duration-200">

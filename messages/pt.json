@@ -493,5 +493,12 @@
     "finalTitle": "Pronto para Galápagos?",
     "finalSubtitle": "Conte suas datas e em 24 horas enviamos um roteiro privado com preço.",
     "navLabel": "Galápagos"
+  },
+  "tabBar": {
+    "ai": "Assistente",
+    "plan": "Planejar",
+    "reservations": "Reservas",
+    "whatsapp": "WhatsApp",
+    "ariaLabel": "Navegação rápida"
   }
 }

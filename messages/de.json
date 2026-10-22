@@ -493,5 +493,12 @@
     "finalTitle": "Bereit für Galápagos?",
     "finalSubtitle": "Nennen Sie uns Ihre Termine – innerhalb von 24 Stunden erhalten Sie eine private Reiseroute mit Preis.",
     "navLabel": "Galápagos"
+  },
+  "tabBar": {
+    "ai": "Assistent",
+    "plan": "Planen",
+    "reservations": "Buchungen",
+    "whatsapp": "WhatsApp",
+    "ariaLabel": "Schnellnavigation"
   }
 }

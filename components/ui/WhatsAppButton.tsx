@@ -4,6 +4,7 @@ import React from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useChatPanelOpen } from '@/hooks/useChatPanelOpen';
+import { showsMobileTabBar } from '@/data/mobileTabBar';
 
 const PHONE_NUMBER = '593960039156';
 
@@ -24,6 +25,12 @@ export function WhatsAppButton() {
 
   if (INTERNAL_PATH.test(pathname) || conciergeOpen) return null;
 
+  // Con barra inferior tipo app (móvil), WhatsApp ya está en la barra: aquí solo desde md.
+  // Sin barra (ficha de tour, reserva), sube por encima de la barra de reserva propia.
+  const position = showsMobileTabBar(pathname)
+    ? 'hidden md:flex md:bottom-6'
+    : 'flex bottom-[84px] sm:bottom-24';
+
   const href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(t('defaultMessage'))}`;
 
   return (
@@ -32,7 +39,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       data-lead-placement="floating_button"
-      className="group fixed bottom-4 right-3 z-50 flex h-12 w-12 items-center sm:bottom-6 sm:right-6 sm:h-14 sm:w-14 justify-center rounded-full border-2 border-white/30 bg-[#25D366] text-white shadow-2xl shadow-emerald-900/40 transition-transform duration-300 hover:scale-110 active:scale-95"
+      className={`group fixed right-3 z-50 ${position} h-12 w-12 items-center sm:right-6 sm:h-14 sm:w-14 justify-center rounded-full border-2 border-white/30 bg-[#25D366] text-white shadow-2xl shadow-emerald-900/40 transition-transform duration-300 hover:scale-110 active:scale-95`}
       aria-label={t('ariaLabel')}
     >
       <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
