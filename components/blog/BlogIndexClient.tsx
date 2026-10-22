@@ -53,7 +53,7 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
     setErrorMessage('');
 
     try {
-      const response = await fetch('/api/newsletter/subscribe', {
+      const response = await fetch('/api/leads/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),

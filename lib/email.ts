@@ -461,6 +461,8 @@ export interface NewLeadNotification {
   guestsCount?: string;
   message?: string;
   locale?: string;
+  /** Página del tour que le interesó (se enlaza en el acuse al viajero). Solo URLs de vermilionroutes.com. */
+  tourUrl?: string;
   createdAt: string;
 }
 
@@ -655,11 +657,16 @@ export const sendLeadAcknowledgementEmail = async (lead: NewLeadNotification): P
   if (!isRealEmail(lead.customerEmail)) return { sent: false, reason: 'no_valid_recipient' };
 
   const copy = getLeadCopy(lead.locale);
+  // Solo enlaces a nuestra propia web: el acuse nunca debe servir para mandar enlaces de terceros.
+  const tourLink = lead.tourUrl && /^https:\/\/www\.vermilionroutes\.com\/[a-z]{2}\/tours\/[a-z0-9-]+$/i.test(lead.tourUrl)
+    ? lead.tourUrl
+    : '';
   const html = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#042f2e;color:#ffffff;padding:32px;border-radius:12px;">
       <h1 style="font-family:'Times New Roman',serif;color:#2dd4bf;font-weight:normal;font-size:26px;margin:0 0 20px 0;">Vermilion Routes</h1>
       <p style="font-size:16px;margin:0 0 12px 0;">${escapeHtml(copy.greeting(firstNameOf(lead.customerName)))}</p>
       <p style="font-size:15px;line-height:1.6;color:#ccfbf1;margin:0 0 24px 0;">${escapeHtml(copy.body)}</p>
+      ${tourLink ? `<p style="margin:0 0 20px 0;"><a href="${escapeHtml(tourLink)}" style="color:#2dd4bf;font-size:15px;font-weight:bold;">📄 ${escapeHtml(lead.tourTitle || tourLink)}</a></p>` : ''}
       <a href="https://wa.me/${COMPANY_WHATSAPP}" style="display:inline-block;padding:12px 22px;background:#16a34a;color:#ffffff;text-decoration:none;border-radius:8px;font-weight:bold;">💬 ${escapeHtml(copy.whatsapp)}</a>
       <p style="margin-top:28px;color:#99f6e4;font-size:13px;">${escapeHtml(copy.signoff)}<br>+593 96 003 9156 · info@vermilionroutes.com</p>
     </div>`;

@@ -255,7 +255,7 @@ export function useCrmData() {
               const customerName = raw.customerName || raw.name || (raw.email ? raw.email.split('@')[0] : 'Prospecto Web');
               const customerEmail = raw.customerEmail || raw.email || '';
               const isVolcano = String(raw.tourId || '').includes('volcano') || String(raw.tourName || '').includes('Volcanes');
-              const estBudget = Number(raw.estimatedBudget) || (isVolcano ? 1100 : 1790);
+              const estBudget = Number(raw.estimatedBudget) || 0;
               const dest = raw.destination || (isVolcano ? 'Andes & Volcanes' : 'Galapagos');
               const status: LeadStatus = (raw.status as LeadStatus) || 'new';
 
@@ -275,7 +275,9 @@ export function useCrmData() {
                 notes: raw.notes || `Interés en: ${raw.tourName || raw.tourId || 'Expedición'}`,
                 observations: raw.observations || [],
                 source: raw.source || 'web_lead',
-                interest: raw.source === 'pdf_download'
+                interest: raw.source === 'lead_magnet'
+                  ? 'Pidió la guía PDF Ecuador & Galápagos (banner de la web)'
+                  : raw.source === 'pdf_download'
                   ? `Descargó el itinerario en PDF: ${raw.tourName || raw.tourId || 'tour'}`
                   : (raw.notes || `Interés en: ${raw.tourName || raw.tourId || 'Expedición'}`),
                 requestDetails: raw.source === 'pdf_download' ? '' : (raw.message || ''),
