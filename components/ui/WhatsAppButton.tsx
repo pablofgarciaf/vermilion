@@ -12,9 +12,9 @@ const INTERNAL_PATH = /\/(admin|cpanel|affiliates|operator|auth)(\/|$)/;
 
 /**
  * Botón flotante de WhatsApp, global (montado en app/[locale]/layout.tsx).
- * Va apilado JUSTO ENCIMA del lanzador del concierge (móvil: bottom-4 right-3, 48px;
- * desde sm: bottom-6 right-6, 56px) y se oculta
- * mientras el menú o el chat del concierge están abiertos, para no solaparse.
+ * Abajo a la derecha (el asistente de IA va abajo a la izquierda y el botón
+ * "Planifica tu viaje" en el centro en móvil). Se oculta mientras el chat del
+ * concierge está abierto, para no solaparse.
  * El evento generate_lead del clic lo lanza WhatsAppClickTracker (data-lead-placement).
  */
 export function WhatsAppButton() {
@@ -32,7 +32,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       data-lead-placement="floating_button"
-      className="group fixed bottom-[76px] right-3 z-50 flex h-12 w-12 items-center sm:bottom-24 sm:right-6 sm:h-14 sm:w-14 justify-center rounded-full border-2 border-white/30 bg-[#25D366] text-white shadow-2xl shadow-emerald-900/40 transition-transform duration-300 hover:scale-110 active:scale-95"
+      className="group fixed bottom-4 right-3 z-50 flex h-12 w-12 items-center sm:bottom-6 sm:right-6 sm:h-14 sm:w-14 justify-center rounded-full border-2 border-white/30 bg-[#25D366] text-white shadow-2xl shadow-emerald-900/40 transition-transform duration-300 hover:scale-110 active:scale-95"
       aria-label={t('ariaLabel')}
     >
       <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">

@@ -235,7 +235,7 @@ export function ConciergeWidget() {
   return (
     <>
       {/* FLOATING CONCIERGE BUTTON */}
-      <div className="fixed bottom-4 right-3 z-50 flex flex-col items-end sm:bottom-6 sm:right-6">
+      <div className="fixed bottom-4 left-3 z-50 flex flex-col items-start sm:bottom-6 sm:left-6">
         {/* POPOVER SELECTION MENU */}
         {isOpenMenu && !isOpenChat && (
           <div className="mb-4 w-80 sm:w-96 bg-zinc-900/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl shadow-2xl p-4 text-white animate-in fade-in slide-in-from-bottom-4 duration-200">
@@ -330,12 +330,12 @@ export function ConciergeWidget() {
             aria-label={t('concierge.openMenu')}
           >
             {/* Tooltip on hover */}
-            <div className="absolute right-[68px] top-1/2 -translate-y-1/2 bg-zinc-950/95 backdrop-blur-md text-white text-xs font-semibold px-3.5 py-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none shadow-2xl border border-amber-500/40 flex items-center gap-2 translate-x-2 group-hover:translate-x-0 z-50">
+            <div className="absolute left-[68px] top-1/2 -translate-y-1/2 bg-zinc-950/95 backdrop-blur-md text-white text-xs font-semibold px-3.5 py-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none shadow-2xl border border-amber-500/40 flex items-center gap-2 -translate-x-2 group-hover:translate-x-0 z-50">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               <span className="text-zinc-100 font-medium tracking-wide">
                 {TOOLTIP_TEXT[locale] || TOOLTIP_TEXT.en}
               </span>
-              <span className="absolute -right-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-zinc-950 border-t border-r border-amber-500/40 rotate-45" />
+              <span className="absolute -left-1 top-1/2 -translate-y-1/2 w-2 h-2 bg-zinc-950 border-b border-l border-amber-500/40 rotate-45" />
             </div>
 
             {/* Pulsing Aura */}
@@ -357,7 +357,7 @@ export function ConciergeWidget() {
 
       {/* INTERACTIVE AI CONCIERGE CHAT DRAWER */}
       {isOpenChat && (
-        <div className="fixed bottom-4 right-4 z-50 w-[92vw] sm:w-[420px] h-[600px] max-h-[85vh] bg-zinc-950 text-white rounded-2xl shadow-2xl border border-zinc-800 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-300">
+        <div className="fixed bottom-4 left-4 z-50 w-[92vw] sm:w-[420px] h-[600px] max-h-[85vh] bg-zinc-950 text-white rounded-2xl shadow-2xl border border-zinc-800 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-6 duration-300">
           {/* CHAT HEADER */}
           <div className="bg-gradient-to-r from-zinc-900 via-zinc-900 to-amber-950/60 p-3.5 border-b border-zinc-800 flex items-center justify-between">
             <div className="flex items-center gap-3">
