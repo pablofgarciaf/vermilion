@@ -61,8 +61,39 @@ import {
   RunSheetDay,
   PassengerProfile,
   GenealogyNode,
-  WhatsAppTemplate
+  WhatsAppTemplate,
+  LeadEmailDelivery
 } from '@/types/crm';
+
+/** De dónde llegó el lead (panel interno, solo en español). */
+const LEAD_SOURCE_LABEL: Record<string, string> = {
+  pdf_download: 'Descargó PDF',
+  plan_trip: 'Planifica tu viaje',
+  ai_concierge: 'Chat con Pyro',
+  contact_form: 'Formulario de contacto',
+  tour_inquiry: 'Consulta de tour',
+  landing_popup: 'Popup de la web',
+  affiliate_referral: 'Referido de afiliado',
+  web_lead: 'Web',
+};
+
+const EMAIL_BADGE: Record<LeadEmailDelivery | 'unknown', { text: string; cls: string }> = {
+  sent: { text: 'correo enviado', cls: 'bg-emerald-500/20 text-emerald-200' },
+  failed: { text: 'correo FALLÓ', cls: 'bg-red-500/25 text-red-200' },
+  not_configured: { text: 'correo sin configurar', cls: 'bg-red-500/25 text-red-200' },
+  no_recipient: { text: 'sin correo válido', cls: 'bg-amber-500/20 text-amber-200' },
+  none: { text: 'no se envía correo', cls: 'bg-zinc-500/25 text-zinc-200' },
+  unknown: { text: 'correo sin registro', cls: 'bg-zinc-500/25 text-zinc-300' },
+};
+
+function EmailBadge({ label, value }: { label: string; value?: LeadEmailDelivery }) {
+  const b = EMAIL_BADGE[value || 'unknown'];
+  return (
+    <span className={`rounded-md px-2 py-0.5 text-[10px] font-semibold ${b.cls}`}>
+      {label}: {b.text}
+    </span>
+  );
+}
 
 export function AdminCrmDashboard() {
   const locale = useLocale();
@@ -910,7 +941,7 @@ export function AdminCrmDashboard() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar prospecto o correo..."
-                  className="pl-9 pr-4 py-1.5 bg-[#0F1E2E] border border-emerald-900/50 rounded-xl text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500"
+                  className="pl-9 pr-4 py-1.5 bg-[#0F1E2E] border border-emerald-900/50 rounded-xl text-xs text-white placeholder:text-zinc-400 focus:outline-none focus:border-amber-500"
                 />
               </div>
             </div>
@@ -918,9 +949,9 @@ export function AdminCrmDashboard() {
             {/* Lead Table View */}
             <div className="overflow-x-auto rounded-2xl border border-emerald-900/40 bg-[#0F1E2E]">
               <table className="w-full text-left text-xs text-zinc-300">
-                <thead className="bg-[#060D08] border-b border-emerald-900/40 text-[10px] uppercase tracking-wider text-zinc-500">
+                <thead className="bg-[#060D08] border-b border-emerald-900/40 text-[11px] uppercase tracking-wider text-zinc-300">
                   <tr>
-                    <th className="p-4 font-bold">Pasajero</th>
+                    <th className="p-4 font-bold">Pasajero · Qué pidió</th>
                     <th className="p-4 font-bold">Teléfono</th>
                     <th className="p-4 font-bold">Tour / Destino</th>
                     <th className="p-4 font-bold">Valor</th>
@@ -950,17 +981,45 @@ export function AdminCrmDashboard() {
                     .filter(l => l.customerName.toLowerCase().includes(searchQuery.toLowerCase()) || l.customerEmail.toLowerCase().includes(searchQuery.toLowerCase()))
                     .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
                     .map((l) => (
-                      <tr key={l.id} className="hover:bg-white/5 transition-colors group">
-                        <td className="p-4">
+                      <tr key={l.id} className="hover:bg-white/5 transition-colors group align-top">
+                        <td className="p-4 max-w-[340px]">
                           <p className="font-bold text-white text-sm">{l.customerName}</p>
-                          <p className="text-[10px] text-zinc-500">{l.customerEmail}</p>
+                          <p className="text-xs text-zinc-200 break-all">{l.customerEmail || 'Sin correo'}</p>
+                          {!l.isBooking && (
+                            <>
+                              <p className="mt-2 text-xs font-semibold text-amber-200 leading-snug">
+                                {l.interest || l.notes || 'Sin detalle de lo que pidió'}
+                              </p>
+                              {l.requestDetails && (
+                                <p className="mt-1 text-[11px] text-zinc-300 leading-snug">{l.requestDetails}</p>
+                              )}
+                              <div className="mt-2 flex flex-wrap gap-1.5">
+                                <span className="rounded-md bg-sky-500/15 px-2 py-0.5 text-[10px] font-semibold text-sky-200">
+                                  {LEAD_SOURCE_LABEL[l.source || ''] || 'Web'}
+                                </span>
+                                <EmailBadge label="Cliente" value={l.emailStatus?.customer} />
+                                <EmailBadge label="Equipo" value={l.emailStatus?.team} />
+                              </div>
+                              {l.createdAt && (
+                                <p className="mt-1.5 text-[10px] text-zinc-400">
+                                  Llegó: {new Date(l.createdAt).toLocaleString('es-EC', { dateStyle: 'medium', timeStyle: 'short' })}
+                                </p>
+                              )}
+                            </>
+                          )}
                         </td>
-                        <td className="p-4 font-mono text-[11px]">{l.customerPhone || 'N/A'}</td>
+                        <td className="p-4 font-mono text-xs text-zinc-100">{l.customerPhone || 'Sin teléfono'}</td>
                         <td className="p-4">
-                          <span className="bg-black/40 px-2 py-1 rounded text-[10px] font-mono text-zinc-400">{l.destination}</span>
+                          <span className="inline-block bg-emerald-500/15 px-2 py-1 rounded text-[11px] font-semibold text-emerald-100">{l.destination}</span>
+                          {l.guestsText && <p className="mt-1.5 text-[11px] text-zinc-300">{l.guestsText}</p>}
                         </td>
-                        <td className="p-4 font-bold text-amber-400">${l.estimatedBudget.toLocaleString('en-US')}</td>
-                        <td className="p-4 text-[10px] text-zinc-400">{l.travelDates || 'Por definir'}</td>
+                        <td className="p-4 font-bold text-amber-400">
+                          {l.estimatedBudget ? `$${l.estimatedBudget.toLocaleString('en-US')}` : '—'}
+                          {!l.isBooking && l.source === 'pdf_download' && (
+                            <p className="mt-1 text-[10px] font-normal text-zinc-400">precio del tour</p>
+                          )}
+                        </td>
+                        <td className="p-4 text-xs text-zinc-200">{l.travelDates || 'Por definir'}</td>
                         <td className="p-4">
                           <select
                             value={l.status}
@@ -1555,28 +1614,57 @@ export function AdminCrmDashboard() {
               </button>
             </div>
 
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3 text-xs max-h-[65vh] overflow-y-auto">
+              {/* Lo primero: qué pidió y cómo contactarlo */}
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-1.5">
+                <span className="text-amber-200 text-[11px] font-bold block">QUÉ PIDIÓ</span>
+                <p className="text-white font-semibold text-sm leading-snug">
+                  {selectedLeadForProfile.interest || selectedLeadForProfile.notes || 'Sin detalle'}
+                </p>
+                {selectedLeadForProfile.requestDetails && (
+                  <p className="text-zinc-200 leading-snug">{selectedLeadForProfile.requestDetails}</p>
+                )}
+                <p className="text-zinc-200">
+                  Destino: <strong className="text-white">{selectedLeadForProfile.destination}</strong>
+                  {' · '}Fechas: <strong className="text-white">{selectedLeadForProfile.travelDates || 'Por definir'}</strong>
+                  {selectedLeadForProfile.guestsText && <>{' · '}Viajeros: <strong className="text-white">{selectedLeadForProfile.guestsText}</strong></>}
+                </p>
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  <span className="rounded-md bg-sky-500/15 px-2 py-0.5 text-[10px] font-semibold text-sky-200">
+                    {LEAD_SOURCE_LABEL[selectedLeadForProfile.source || ''] || 'Web'}
+                  </span>
+                  <EmailBadge label="Cliente" value={selectedLeadForProfile.emailStatus?.customer} />
+                  <EmailBadge label="Equipo" value={selectedLeadForProfile.emailStatus?.team} />
+                </div>
+              </div>
+
               <div className="p-3 rounded-xl bg-black/40 border border-emerald-950 space-y-1">
-                <span className="text-zinc-500 text-[10px] font-mono block">RESTRICCIONES ALIMENTICIAS & ALERGIAS:</span>
+                <span className="text-zinc-300 text-[11px] font-bold block">CONTACTO</span>
+                <p className="text-white break-all">{selectedLeadForProfile.customerEmail || 'Sin correo'}</p>
+                <p className="text-white">{selectedLeadForProfile.customerPhone || 'Sin teléfono'}</p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-black/40 border border-emerald-950 space-y-1">
+                <span className="text-zinc-300 text-[11px] font-bold block">RESTRICCIONES ALIMENTICIAS & ALERGIAS:</span>
                 <p className="text-amber-300 font-bold">
-                  {selectedLeadForProfile.passengerDetails?.dietaryRestrictions || 'Ninguna registrada'}
+                  {selectedLeadForProfile.passengerDetails?.dietaryRestrictions || 'Sin dato'}
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div className="p-3 rounded-xl bg-black/40 border border-emerald-950">
-                  <span className="text-zinc-500 text-[10px] font-mono block">NACIONALIDAD / PASAPORTE:</span>
-                  <p className="text-white font-bold">{selectedLeadForProfile.passengerDetails?.nationality || selectedLeadForProfile.country || 'USA'}</p>
+                  <span className="text-zinc-300 text-[11px] font-bold block">NACIONALIDAD / PASAPORTE:</span>
+                  <p className="text-white font-bold">{selectedLeadForProfile.passengerDetails?.nationality || selectedLeadForProfile.country || 'Sin dato'}</p>
                 </div>
                 <div className="p-3 rounded-xl bg-black/40 border border-emerald-950">
-                  <span className="text-zinc-500 text-[10px] font-mono block">TALLA SOMBRERO MONTECRISTI:</span>
-                  <p className="text-emerald-400 font-bold">{selectedLeadForProfile.passengerDetails?.hatSize || '58 (M)'}</p>
+                  <span className="text-zinc-300 text-[11px] font-bold block">TALLA SOMBRERO MONTECRISTI:</span>
+                  <p className="text-emerald-300 font-bold">{selectedLeadForProfile.passengerDetails?.hatSize || 'Sin dato'}</p>
                 </div>
               </div>
 
               <div className="p-3 rounded-xl bg-black/40 border border-emerald-950">
-                <span className="text-zinc-500 text-[10px] font-mono block">NIVEL DE CONDICIÓN FÍSICA:</span>
-                <p className="text-white font-bold uppercase">{selectedLeadForProfile.passengerDetails?.fitnessLevel || 'Moderado'}</p>
+                <span className="text-zinc-300 text-[11px] font-bold block">NIVEL DE CONDICIÓN FÍSICA:</span>
+                <p className="text-white font-bold uppercase">{selectedLeadForProfile.passengerDetails?.fitnessLevel || 'Sin dato'}</p>
               </div>
             </div>
 

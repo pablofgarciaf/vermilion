@@ -6,6 +6,8 @@ import { leadsRepository } from '@/lib/services/DatabaseService';
 import { BookingRequest } from '@/types';
 import { notifyNewLead } from '@/lib/email';
 import { triggerN8nWebhook } from '@/lib/n8n';
+import { toLeadEmailStatus } from '@/lib/crm/leadEmailStatus';
+import { getAdminDb } from '@/lib/firebaseAdmin';
 
 export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
   // 🛡️ Honeypot Trap Detection (Python Bot / Automated Form Spammer Neutralizer)
@@ -71,7 +73,7 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
   // Avisos DESPUÉS de responder al viajero: un fallo de correo o de n8n nunca
   // hace fallar el guardado del lead ni retrasa la respuesta del formulario.
   runAfterResponse(async () => {
-    await notifyNewLead(
+    const emailResult = await notifyNewLead(
       {
         leadId: bookingId,
         source: tourId === 'general-inquiry' ? 'contact_form' : `tour:${tourId}`,
@@ -88,6 +90,13 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
       },
       { acknowledgeCustomer: true }
     );
+    // Deja constancia en la solicitud para que el CRM muestre si salió el correo.
+    // Con la cuenta de servicio: las reglas no dejan actualizar 'bookings' sin sesión de admin.
+    try {
+      await getAdminDb().collection('bookings').doc(bookingId).update({ emailStatus: toLeadEmailStatus(emailResult) });
+    } catch (err) {
+      console.warn('[leads] No se pudo guardar el estado del correo:', err instanceof Error ? err.message : err);
+    }
     await triggerN8nWebhook({
       event: 'lead.created',
       bookingId,

@@ -17,7 +17,7 @@ import {
 } from '@/data/planTrip';
 import { trackGenerateLead } from '@/lib/analytics/trackLead';
 import { useActivePromotion } from '@/hooks/useActivePromotion';
-import { loadVisitorContact, saveVisitorContact } from '@/lib/visitorContact';
+import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
 const TOTAL_STEPS = 4;
 
@@ -79,7 +79,7 @@ export function PlanTripModal() {
       lastFocus.current = document.activeElement as HTMLElement | null;
       setOrigin(detail);
       // Rellena nombre, correo y teléfono con lo que el visitante ya escribió antes en esta web.
-      const known = loadVisitorContact();
+      const known = getStoredUserProfile();
       setForm((f) => {
         const base = status === 'done' ? EMPTY : f;
         return {
@@ -153,7 +153,7 @@ export function PlanTripModal() {
       });
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error('lead_failed');
-      saveVisitorContact({ name: form.name.trim(), email: form.email.trim(), phone: form.phone.trim() });
+      saveStoredUserProfile({ name: form.name.trim(), email: form.email.trim(), phone: form.phone.trim() });
       trackGenerateLead({ method: 'contact_form', placement: 'plan_trip_modal', item: dest?.leadValue });
       setStatus('done');
     } catch {

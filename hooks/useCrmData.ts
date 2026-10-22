@@ -109,8 +109,26 @@ const INITIAL_GENEALOGY: GenealogyNode = {
   children: [],
 };
 
+/** Origen legible de una solicitud web guardada en `bookings`. */
+function inquirySource(raw: Record<string, any>): string {
+  if (raw.tourId === 'ai-concierge-lead') return 'ai_concierge';
+  if (String(raw.tourTitle || '').startsWith('Plan my trip')) return 'plan_trip';
+  if (raw.tourId && raw.tourId !== 'general-inquiry') return 'tour_inquiry';
+  return 'contact_form';
+}
+
+/** Frase corta de lo que pidió el cliente en una solicitud web. */
+function inquiryInterest(raw: Record<string, any>, source: string): string {
+  const dest = raw.destination ? String(raw.destination) : '';
+  if (source === 'ai_concierge') return `Conversó con Pyro (IA)${dest ? ` sobre ${dest}` : ''}`;
+  if (source === 'plan_trip') return `Pidió propuesta a medida${dest ? `: ${dest}` : ''}`;
+  if (source === 'tour_inquiry') return `Consulta por el tour: ${raw.tourTitle || raw.tourId}`;
+  return `Formulario de contacto${dest ? `: ${dest}` : ''}`;
+}
+
 /** Convierte una solicitud guardada en `bookings` al formato de lead del CRM. */
 function bookingToInquiryLead(id: string, raw: Record<string, any>): CrmLead {
+  const source = inquirySource(raw);
   const createdAt = typeof raw.createdAt === 'string'
     ? raw.createdAt
     : (raw.createdAt?.toDate ? raw.createdAt.toDate().toISOString() : new Date().toISOString());
@@ -129,8 +147,12 @@ function bookingToInquiryLead(id: string, raw: Record<string, any>): CrmLead {
     assignedOperatorName: raw.assignedOperatorName || '',
     notes: [raw.tourTitle, raw.message].filter(Boolean).join(' — '),
     observations: raw.observations || [],
-    source: raw.tourId === 'ai-concierge-lead' ? 'ai_concierge' : 'contact_form',
+    source,
     sourceCollection: 'bookings',
+    interest: inquiryInterest(raw, source),
+    requestDetails: raw.message ? String(raw.message) : '',
+    guestsText: raw.guestsCount ? String(raw.guestsCount) : '',
+    emailStatus: raw.emailStatus,
     createdAt,
     updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : createdAt,
   };
@@ -253,6 +275,12 @@ export function useCrmData() {
                 notes: raw.notes || `Interés en: ${raw.tourName || raw.tourId || 'Expedición'}`,
                 observations: raw.observations || [],
                 source: raw.source || 'web_lead',
+                interest: raw.source === 'pdf_download'
+                  ? `Descargó el itinerario en PDF: ${raw.tourName || raw.tourId || 'tour'}`
+                  : (raw.notes || `Interés en: ${raw.tourName || raw.tourId || 'Expedición'}`),
+                requestDetails: raw.source === 'pdf_download' ? '' : (raw.message || ''),
+                // La descarga del PDF no envía ningún correo (ni al cliente ni al equipo).
+                emailStatus: raw.emailStatus || (raw.source === 'pdf_download' ? { team: 'none', customer: 'none' } : undefined),
                 affiliateReferralCode: raw.affiliateReferralCode || raw.affiliateCode || '',
                 createdAt: typeof raw.createdAt === 'string' ? raw.createdAt : (raw.createdAt?.toDate ? raw.createdAt.toDate().toISOString() : new Date().toISOString()),
                 updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : new Date().toISOString(),

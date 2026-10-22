@@ -4,6 +4,8 @@ import { generateConciergeReply, ChatMessage } from '@/lib/ai-providers';
 import { BookingRepository } from '@/lib/services/DatabaseService';
 import { notifyNewLead } from '@/lib/email';
 import { triggerN8nWebhook } from '@/lib/n8n';
+import { toLeadEmailStatus } from '@/lib/crm/leadEmailStatus';
+import { getAdminDb } from '@/lib/firebaseAdmin';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_fake', {
@@ -82,7 +84,7 @@ export async function POST(req: NextRequest) {
             .map((m) => `• ${String(m.content).slice(0, 400)}`)
             .join('\n');
           runAfterResponse(async () => {
-            await notifyNewLead(
+            const emailResult = await notifyNewLead(
               {
                 leadId: savedLeadId,
                 source: 'ai_concierge',
@@ -99,6 +101,11 @@ export async function POST(req: NextRequest) {
               },
               { acknowledgeCustomer: false }
             );
+            try {
+              await getAdminDb().collection('bookings').doc(savedLeadId).update({ emailStatus: toLeadEmailStatus(emailResult) });
+            } catch (err) {
+              console.warn('[concierge] No se pudo guardar el estado del correo:', err instanceof Error ? err.message : err);
+            }
             await triggerN8nWebhook({
               event: 'ai_concierge.lead_captured',
               bookingId: savedLeadId,

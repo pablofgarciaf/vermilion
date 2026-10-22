@@ -71,8 +71,27 @@ export interface CrmLead {
   sourceCollection?: 'leads' | 'bookings';
   affiliateReferralCode?: string;
   passengerDetails?: PassengerProfile;
+  /** Qué pidió el cliente, en una frase legible (tour del PDF, mensaje del formulario, etc.). */
+  interest?: string;
+  /** Detalle de la solicitud tal como llegó (días, presupuesto, contacto preferido…). */
+  requestDetails?: string;
+  /** Viajeros tal como los escribió el cliente ("2 adults, 0 children"). */
+  guestsText?: string;
+  /** Correos automáticos de esta solicitud. Ausente = no se registró (solicitudes antiguas). */
+  emailStatus?: LeadEmailStatus;
   createdAt: string;
   updatedAt: string;
+}
+
+/** 'sent' enviado · 'failed' falló · 'not_configured' correo sin configurar · 'no_recipient' sin correo válido · 'none' este canal no envía correo. */
+export type LeadEmailDelivery = 'sent' | 'failed' | 'not_configured' | 'no_recipient' | 'none';
+
+export interface LeadEmailStatus {
+  /** Aviso al equipo (info@). */
+  team: LeadEmailDelivery;
+  /** Acuse automático al cliente. */
+  customer: LeadEmailDelivery;
+  checkedAt?: string;
 }
 
 export type BookingStatus =
