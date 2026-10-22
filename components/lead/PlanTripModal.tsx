@@ -17,6 +17,7 @@ import {
 } from '@/data/planTrip';
 import { trackGenerateLead } from '@/lib/analytics/trackLead';
 import { useActivePromotion } from '@/hooks/useActivePromotion';
+import { loadVisitorContact, saveVisitorContact } from '@/lib/visitorContact';
 
 const TOTAL_STEPS = 4;
 
@@ -77,7 +78,18 @@ export function PlanTripModal() {
       const detail = (e as CustomEvent<PlanTripDetail>).detail || {};
       lastFocus.current = document.activeElement as HTMLElement | null;
       setOrigin(detail);
-      setForm((f) => ({ ...(status === 'done' ? EMPTY : f), destination: detail.destination ?? (status === 'done' ? null : f.destination) }));
+      // Rellena nombre, correo y teléfono con lo que el visitante ya escribió antes en esta web.
+      const known = loadVisitorContact();
+      setForm((f) => {
+        const base = status === 'done' ? EMPTY : f;
+        return {
+          ...base,
+          name: base.name || known.name || '',
+          email: base.email || known.email || '',
+          phone: base.phone || known.phone || '',
+          destination: detail.destination ?? (status === 'done' ? null : f.destination),
+        };
+      });
       if (status === 'done') setStatus('idle');
       setStep(detail.destination ? 2 : 1);
       setError(null);
@@ -141,6 +153,7 @@ export function PlanTripModal() {
       });
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error('lead_failed');
+      saveVisitorContact({ name: form.name.trim(), email: form.email.trim(), phone: form.phone.trim() });
       trackGenerateLead({ method: 'contact_form', placement: 'plan_trip_modal', item: dest?.leadValue });
       setStatus('done');
     } catch {
@@ -325,9 +338,9 @@ export function PlanTripModal() {
                 <fieldset className="space-y-4">
                   <legend className="font-serif text-xl font-bold text-zinc-900 dark:text-white">{t('q4')}</legend>
                   <div className="grid sm:grid-cols-2 gap-3">
-                    <input type="text" autoComplete="name" placeholder={t('name')} aria-label={t('name')} value={form.name} onChange={(e) => set('name', e.target.value)} className={field} />
-                    <input type="email" autoComplete="email" placeholder={t('email')} aria-label={t('email')} value={form.email} onChange={(e) => set('email', e.target.value)} className={field} />
-                    <input type="tel" autoComplete="tel" placeholder={t('phone')} aria-label={t('phone')} value={form.phone} onChange={(e) => set('phone', e.target.value)} className={`${field} sm:col-span-2`} />
+                    <input type="text" name="name" autoComplete="name" autoCapitalize="words" placeholder={t('name')} aria-label={t('name')} value={form.name} onChange={(e) => set('name', e.target.value)} className={field} />
+                    <input type="email" name="email" autoComplete="email" inputMode="email" placeholder={t('email')} aria-label={t('email')} value={form.email} onChange={(e) => set('email', e.target.value)} className={field} />
+                    <input type="tel" name="tel" autoComplete="tel" inputMode="tel" placeholder={t('phone')} aria-label={t('phone')} value={form.phone} onChange={(e) => set('phone', e.target.value)} className={`${field} sm:col-span-2`} />
                   </div>
                   <div className="space-y-2">
                     <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">{t('contactPref')}</p>

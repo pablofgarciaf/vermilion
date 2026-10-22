@@ -4,9 +4,6 @@ import { SlideData } from '@/types';
 import { useTranslations } from 'next-intl';
 import { FULL_DAY_FROM_PRICE, MULTI_DAY_FROM_PRICE } from '@/data/startingPrices';
 
-const TRIPADVISOR_URL =
-  'https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html';
-
 interface HeroDetailsProps {
   initialData: SlideData;
   locale: string;
@@ -133,8 +130,6 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
   const h1Text = H1_HEADLINES[locale] || H1_HEADLINES.en;
   const t = useTranslations('homeFunnel.hero');
   const heroText = {
-    trustBadge: t('trustBadge'),
-    trustAria: t('trustAria'),
     audience: t('audience'),
     priceLine: t('priceLine', { fullDay: FULL_DAY_FROM_PRICE, multiDay: MULTI_DAY_FROM_PRICE }),
   };
@@ -155,18 +150,6 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
             {isWelcomeSlide ? (
               /* ── BIENVENIDA EXCLUSIVA (Centrada en móvil, a la izquierda en desktop) ── */
               <div className="welcome-container flex flex-col items-center text-center md:items-start md:text-left w-full">
-                {/* Prueba de confianza visible desde el primer frame */}
-                <a
-                  href={TRIPADVISOR_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={heroText.trustAria}
-                  className="pointer-events-auto inline-flex items-center gap-2 mb-3 px-3.5 py-1.5 rounded-full bg-black/55 backdrop-blur-md border border-emerald-400/40 text-white text-xs sm:text-sm font-semibold shadow-lg hover:border-emerald-300 transition-colors"
-                >
-                  <span aria-hidden="true" className="text-amber-400 tracking-tight">★★★★★</span>
-                  <span>{heroText.trustBadge}</span>
-                </a>
-
                 {/* Titular SEO visible (45-65 caracteres, 8 idiomas). Sin clases .title-*: GSAP no lo toca. */}
                 <h1 className="font-serif font-bold text-white text-[28px] sm:text-[34px] md:text-[34px] lg:text-[40px] leading-[1.08] tracking-tight mb-3 max-w-xl [text-shadow:0_2px_14px_rgba(0,0,0,0.85)]">
                   {h1Text}
