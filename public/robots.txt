@@ -5,6 +5,22 @@ User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: Perplexity-User
+User-agent: DuckDuckBot
+User-agent: DuckAssistBot
+User-agent: YandexBot
+User-agent: Amazonbot
+User-agent: MistralAI-User
+User-agent: Bytespider
+User-agent: YouBot
+User-agent: Diffbot
+User-agent: Slurp
+User-agent: Baiduspider
+User-agent: Yeti
+User-agent: SeznamBot
+User-agent: Qwantbot
 Allow: /
 
 User-agent: OAI-SearchBot

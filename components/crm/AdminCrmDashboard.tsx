@@ -951,7 +951,8 @@ export function AdminCrmDashboard() {
               <table className="w-full text-left text-xs text-zinc-300">
                 <thead className="bg-[#060D08] border-b border-emerald-900/40 text-[11px] uppercase tracking-wider text-zinc-300">
                   <tr>
-                    <th className="p-4 font-bold">Pasajero · Qué pidió</th>
+                    <th className="p-4 font-bold">Qué pidió</th>
+                    <th className="p-4 font-bold">Pasajero</th>
                     <th className="p-4 font-bold">Teléfono</th>
                     <th className="p-4 font-bold">Tour / Destino</th>
                     <th className="p-4 font-bold">Valor</th>
@@ -982,12 +983,10 @@ export function AdminCrmDashboard() {
                     .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
                     .map((l) => (
                       <tr key={l.id} className="hover:bg-white/5 transition-colors group align-top">
-                        <td className="p-4 max-w-[340px]">
-                          <p className="font-bold text-white text-sm">{l.customerName}</p>
-                          <p className="text-xs text-zinc-200 break-all">{l.customerEmail || 'Sin correo'}</p>
+                        <td className="p-4 min-w-[260px] max-w-[340px]">
                           {!l.isBooking && (
                             <>
-                              <p className="mt-2 text-xs font-semibold text-amber-200 leading-snug">
+                              <p className="text-xs font-semibold text-amber-200 leading-snug">
                                 {l.interest || l.notes || 'Sin detalle de lo que pidió'}
                               </p>
                               {l.requestDetails && (
@@ -1007,6 +1006,11 @@ export function AdminCrmDashboard() {
                               )}
                             </>
                           )}
+                          {l.isBooking && <p className="text-xs font-semibold text-emerald-200">Reserva confirmada</p>}
+                        </td>
+                        <td className="p-4">
+                          <p className="font-bold text-white text-sm">{l.customerName}</p>
+                          <p className="text-xs text-zinc-200 break-all">{l.customerEmail || 'Sin correo'}</p>
                         </td>
                         <td className="p-4 font-mono text-xs text-zinc-100">{l.customerPhone || 'Sin teléfono'}</td>
                         <td className="p-4">
@@ -1056,7 +1060,7 @@ export function AdminCrmDashboard() {
                     ))}
                   {leads.length === 0 && bookings.length === 0 && (
                     <tr>
-                      <td colSpan={7} className="p-8 text-center text-zinc-500">No hay leads en el pipeline.</td>
+                      <td colSpan={8} className="p-8 text-center text-zinc-500">No hay leads en el pipeline.</td>
                     </tr>
                   )}
                 </tbody>

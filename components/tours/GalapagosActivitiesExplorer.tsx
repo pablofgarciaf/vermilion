@@ -40,6 +40,9 @@ interface GalapagosActivitiesExplorerProps {
   showHeroBanner?: boolean;
 }
 
+const SELECT_CLS =
+  'min-w-0 flex-1 sm:flex-none rounded-xl border border-zinc-300 dark:border-white/10 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-sm font-semibold text-zinc-800 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500';
+
 export function GalapagosActivitiesExplorer({
   locale,
   initialBaseTourId = 'none',
@@ -913,178 +916,70 @@ export function GalapagosActivitiesExplorer({
       </div>
 
       {/* ── 3. FILTROS RÁPIDOS: TEMPORADA, MES, ISLA, CATEGORÍA & BÚSQUEDA ──── */}
-      <div className="bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-white/10 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
-        {/* Top Filter Bar: Search + Reset */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-zinc-100 dark:border-white/10 pb-4">
-          <div className="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
-            <Filter className="w-4 h-4" />
-            <span>Filtros Rápidos</span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="relative min-w-[260px] sm:min-w-[320px]">
-              <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={UI.searchPlaceholder}
-                className="w-full pl-10 pr-8 py-2 rounded-2xl text-xs bg-zinc-100 dark:bg-white/5 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 dark:hover:text-white"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
-
-            {(selectedSeason !== 'all' || selectedMonth !== 'all' || selectedIsland !== 'all' || selectedCategory !== 'all' || searchQuery) && (
-              <button
-                onClick={() => {
-                  setSelectedSeason('all');
-                  setSelectedMonth('all');
-                  setSelectedIsland('all');
-                  setSelectedCategory('all');
-                  setSearchQuery('');
-                }}
-                className="text-xs text-rose-500 hover:underline font-semibold shrink-0"
-              >
-                {UI.resetFilters}
+      <div className="bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-white/10 rounded-2xl p-3 sm:p-4 shadow-md">
+        {/* Todos los filtros en una sola fila con listas desplegables */}
+        <div className="flex flex-wrap lg:flex-nowrap items-center gap-2">
+          <Filter className="w-4 h-4 text-emerald-600 shrink-0 hidden sm:block" />
+          <select
+            aria-label={UI.seasonTitle}
+            value={selectedMonth !== 'all' ? `m${selectedMonth}` : selectedSeason}
+            onChange={(e) => {
+              const v = e.target.value;
+              if (v.startsWith('m')) { setSelectedSeason('all'); setSelectedMonth(Number(v.slice(1))); }
+              else { setSelectedSeason(v as 'all' | 'warm' | 'cool'); setSelectedMonth('all'); }
+            }}
+            className={SELECT_CLS}
+          >
+            <option value="all">{UI.seasonAll}</option>
+            <option value="warm">☀️ {UI.seasonWarm}</option>
+            <option value="cool">🌊 {UI.seasonCool}</option>
+            {MONTH_NAMES.map((m) => (
+              <option key={m.month} value={`m${m.month}`}>{m.name[locale] || m.name.en || m.name.es}</option>
+            ))}
+          </select>
+          <select
+            aria-label={UI.islandTitle}
+            value={selectedIsland}
+            onChange={(e) => setSelectedIsland(e.target.value as GalapagosIslandId)}
+            className={SELECT_CLS}
+          >
+            {GALAPAGOS_ISLANDS.map((island) => (
+              <option key={island.id} value={island.id}>{island.icon} {island.name[locale] || island.name.en || island.name.es}</option>
+            ))}
+          </select>
+          <select
+            aria-label={UI.categoryTitle}
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value as GalapagosCategoryId)}
+            className={SELECT_CLS}
+          >
+            {GALAPAGOS_CATEGORIES.map((cat) => (
+              <option key={cat.id} value={cat.id}>{cat.icon} {cat.name[locale] || cat.name.en || cat.name.es}</option>
+            ))}
+          </select>
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={UI.searchPlaceholder}
+              className="w-full pl-9 pr-8 py-2 rounded-xl text-sm bg-zinc-100 dark:bg-white/5 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+            {searchQuery && (
+              <button onClick={() => setSearchQuery('')} aria-label="Clear" className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700 dark:hover:text-white">
+                <X className="w-3.5 h-3.5" />
               </button>
             )}
           </div>
-        </div>
-
-        {/* Season & Month Tabs */}
-        <div className="space-y-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block mr-2">
-              Temporada:
-            </span>
+          {(selectedSeason !== 'all' || selectedMonth !== 'all' || selectedIsland !== 'all' || selectedCategory !== 'all' || searchQuery) && (
             <button
-              onClick={() => {
-                setSelectedSeason('all');
-                setSelectedMonth('all');
-              }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                selectedSeason === 'all' && selectedMonth === 'all'
-                  ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-white/10'
-              }`}
+              onClick={() => { setSelectedSeason('all'); setSelectedMonth('all'); setSelectedIsland('all'); setSelectedCategory('all'); setSearchQuery(''); }}
+              className="text-xs text-rose-600 hover:underline font-semibold shrink-0 px-1"
             >
-              {UI.seasonAll}
+              {UI.resetFilters}
             </button>
-            <button
-              onClick={() => {
-                setSelectedSeason('warm');
-                setSelectedMonth('all');
-              }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                selectedSeason === 'warm'
-                  ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-white/10'
-              }`}
-            >
-              ☀️ {UI.seasonWarm}
-            </button>
-            <button
-              onClick={() => {
-                setSelectedSeason('cool');
-                setSelectedMonth('all');
-              }}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
-                selectedSeason === 'cool'
-                  ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-white/10'
-              }`}
-            >
-              🌊 {UI.seasonCool}
-            </button>
-          </div>
-
-          {/* Month selector */}
-          <div className="flex flex-wrap gap-1 items-center pt-1">
-            <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block mr-2">
-              Mes:
-            </span>
-            {MONTH_NAMES.map((m) => {
-              const isMonthSelected = selectedMonth === m.month;
-              const monthLabel = m.name[locale] || m.name.en || m.name.es;
-
-              return (
-                <button
-                  key={m.month}
-                  onClick={() => setSelectedMonth(isMonthSelected ? 'all' : m.month)}
-                  className={`py-1 px-2.5 rounded-lg text-xs font-semibold text-center transition-all ${
-                    isMonthSelected
-                      ? 'bg-emerald-600 text-white font-bold shadow'
-                      : 'bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/30'
-                  }`}
-                >
-                  {monthLabel}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Islands Chips */}
-        <div className="space-y-2 pt-2 border-t border-zinc-100 dark:border-white/5">
-          <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block">
-            {UI.islandTitle}:
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {GALAPAGOS_ISLANDS.map((island) => {
-              const isIslandSelected = selectedIsland === island.id;
-              const islandName = island.name[locale] || island.name.en || island.name.es;
-
-              return (
-                <button
-                  key={island.id}
-                  onClick={() => setSelectedIsland(island.id)}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                    isIslandSelected
-                      ? 'bg-emerald-600 text-white font-bold shadow ring-2 ring-emerald-500/20'
-                      : 'bg-zinc-100 dark:bg-white/5 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-white/10'
-                  }`}
-                >
-                  <span>{island.icon}</span>
-                  <span>{islandName}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Categories Chips */}
-        <div className="space-y-2 pt-2 border-t border-zinc-100 dark:border-white/5">
-          <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider block">
-            {UI.categoryTitle}:
-          </span>
-          <div className="flex flex-wrap gap-1.5">
-            {GALAPAGOS_CATEGORIES.map((cat) => {
-              const isCatSelected = selectedCategory === cat.id;
-              const catName = cat.name[locale] || cat.name.en || cat.name.es;
-
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
-                    isCatSelected
-                      ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-bold shadow'
-                      : 'bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-white/10'
-                  }`}
-                >
-                  <span>{cat.icon}</span>
-                  <span>{catName}</span>
-                </button>
-              );
-            })}
-          </div>
+          )}
         </div>
       </div>
 
