@@ -129,6 +129,7 @@ export function PlanTripModal() {
     setStatus('sending');
     const dest = PLAN_TRIP_DESTINATIONS.find((d) => d.id === form.destination);
     const message = [
+      origin.notes || '',
       `Días: ${form.days || '-'}`,
       `Presupuesto por persona: ${form.budget || '-'}`,
       `Contacto preferido: ${form.contact}`,

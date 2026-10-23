@@ -13,6 +13,8 @@ export interface PlanTripDetail {
   /** Tour desde el que se abre (se envía con el lead). */
   tourId?: string;
   tourTitle?: string;
+  /** Resumen extra para el equipo (p. ej. actividades elegidas y sugerencia comercial). */
+  notes?: string;
   /** Destino preseleccionado. */
   destination?: PlanTripDestination;
 }

@@ -1,4 +1,5 @@
 'use client';
+import { openPlanTrip } from '@/data/planTrip';
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Image from 'next/image';
@@ -82,6 +83,21 @@ export function GalapagosActivitiesExplorer({
       window.removeEventListener('resize', checkScrollState);
     };
   }, []);
+
+  // Carrusel automático e infinito: avanza solo y al llegar al final vuelve al inicio.
+  const [carouselPaused, setCarouselPaused] = useState(false);
+  useEffect(() => {
+    if (carouselPaused) return;
+    const id = setInterval(() => {
+      const el = carouselRef.current;
+      if (!el) return;
+      const card = el.firstElementChild as HTMLElement | null;
+      const step = card ? card.offsetWidth + 16 : el.clientWidth * 0.8;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 8) el.scrollTo({ left: 0, behavior: 'smooth' });
+      else el.scrollBy({ left: step, behavior: 'smooth' });
+    }, 3500);
+    return () => clearInterval(id);
+  }, [carouselPaused]);
 
   const scrollCarousel = (direction: 'left' | 'right') => {
     if (!carouselRef.current) return;
@@ -570,6 +586,34 @@ export function GalapagosActivitiesExplorer({
     return GALAPAGOS_ACTIVITIES.filter((a) => selectedActivityIds.includes(a.id));
   }, [selectedActivityIds]);
 
+  // ── Resumen para el equipo: qué tour + qué actividades, y sugerencia comercial ──
+  const leadSummary = useMemo(() => {
+    const hasBase = selectedBaseTour.id !== 'none';
+    const baseName = hasBase ? (selectedBaseTour.name.es || selectedBaseTour.name.en) : 'Diseño libre (sin tour base)';
+    const included = selectedActivitiesList.filter((a) => selectedBaseTour.includedActivityIds.includes(a.id));
+    const extras = selectedActivitiesList.filter((a) => !selectedBaseTour.includedActivityIds.includes(a.id));
+    const nm = (a: GalapagosActivity) => a.name.es || a.name.en;
+    const lines = [`Tour base: ${baseName}`];
+    if (extras.length) lines.push(`Actividades extra: ${extras.map(nm).join(', ')}`);
+    if (included.length) lines.push(`Ya incluidas en el tour: ${included.map(nm).join(', ')}`);
+    let tip = '';
+    if (hasBase && extras.length === 0) tip = 'Quiere el tour tal cual: cerrar rápido ofreciendo 1 actividad extra de regalo.';
+    else if (hasBase && extras.length <= 2) tip = `Quiere el tour + ${extras.length} extra(s): ofrecer las extras gratis para cerrar la venta.`;
+    else if (hasBase) tip = `Quiere el tour + ${extras.length} extras: ofrecer 10-15 % de descuento en las extras.`;
+    else tip = 'Sin tour base: proponer el tour que cubra más de estas actividades y cotizar el resto como extras.';
+    lines.push(`Sugerencia para cerrar: ${tip}`);
+    return lines.join(' | ');
+  }, [selectedBaseTour, selectedActivitiesList]);
+
+  const requestProposal = () => {
+    openPlanTrip({
+      destination: 'galapagos',
+      tourId: selectedBaseTour.id !== 'none' ? selectedBaseTour.id : undefined,
+      tourTitle: `Galápagos a medida: ${selectedBaseTour.id !== 'none' ? (selectedBaseTour.name.es || selectedBaseTour.name.en) : 'diseño libre'}`,
+      notes: leadSummary,
+    });
+  };
+
   // ── WhatsApp Message Builder ──────────────────────────────────────────────
   const whatsappUrl = useMemo(() => {
     const baseTourName = selectedBaseTour.id !== 'none'
@@ -666,7 +710,6 @@ export function GalapagosActivitiesExplorer({
           <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
             <button
               onClick={() => scrollCarousel('left')}
-              disabled={!canScrollLeft}
               aria-label="Anterior"
               className="w-10 h-10 rounded-full border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 flex items-center justify-center text-zinc-700 dark:text-zinc-200 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 disabled:opacity-30 disabled:pointer-events-none transition-all active:scale-95 shadow-sm"
             >
@@ -674,7 +717,6 @@ export function GalapagosActivitiesExplorer({
             </button>
             <button
               onClick={() => scrollCarousel('right')}
-              disabled={!canScrollRight}
               aria-label="Siguiente"
               className="w-10 h-10 rounded-full border border-zinc-200 dark:border-white/10 bg-white dark:bg-zinc-900 flex items-center justify-center text-zinc-700 dark:text-zinc-200 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 disabled:opacity-30 disabled:pointer-events-none transition-all active:scale-95 shadow-sm"
             >
@@ -686,6 +728,10 @@ export function GalapagosActivitiesExplorer({
         {/* Carousel Container: 4 cards visible at a time on desktop (lg), snap scroll */}
         <div
           ref={carouselRef}
+          onMouseEnter={() => setCarouselPaused(true)}
+          onMouseLeave={() => setCarouselPaused(false)}
+          onTouchStart={() => setCarouselPaused(true)}
+          onTouchEnd={() => setTimeout(() => setCarouselPaused(false), 4000)}
           className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-none pb-4 pt-1 px-1 -mx-1"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
@@ -807,119 +853,21 @@ export function GalapagosActivitiesExplorer({
         </div>
       </section>
 
-      {/* ── 2. SELECCIÓN DE TOUR BASE (LÓGICA CLAVE DE VIAJE) ───────────────── */}
-      <div className="bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-white/10 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-zinc-100 dark:border-white/10 pb-5">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest">
-              <Compass className="w-4 h-4" />
-              <span>{UI.baseTourTitle}</span>
-            </div>
-            <p className="text-xs text-zinc-600 dark:text-zinc-400 max-w-2xl">
-              {UI.baseTourDesc}
-            </p>
-          </div>
-
-          {/* Toggle Switch */}
-          {selectedBaseTour.id !== 'none' && (
-            <button
-              onClick={() => setHideIncludedActivities(!hideIncludedActivities)}
-              className="inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-zinc-100 dark:bg-white/5 border border-zinc-300 dark:border-white/10 text-xs font-semibold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-white/10 transition-all text-left"
-            >
-              <div
-                className={`w-10 h-5 rounded-full transition-colors relative flex items-center p-0.5 ${
-                  hideIncludedActivities ? 'bg-emerald-600' : 'bg-zinc-400 dark:bg-zinc-600'
-                }`}
-              >
-                <div
-                  className={`w-4 h-4 rounded-full bg-white transition-transform ${
-                    hideIncludedActivities ? 'translate-x-5' : 'translate-x-0'
-                  }`}
-                />
-              </div>
-              <span>{hideIncludedActivities ? UI.hideIncludedLabel : UI.showAllLabel}</span>
-            </button>
-          )}
-        </div>
-
-        {/* Base Tours Options Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {BASE_TOURS_GALAPAGOS.map((tour) => {
-            const isSelected = selectedBaseTourId === tour.id;
-            const tourName = tour.name[locale] || tour.name.en || tour.name.es;
-            const tourBadge = tour.badge[locale] || tour.badge.en || tour.badge.es;
-            const tourDesc = tour.description[locale] || tour.description.en || tour.description.es;
-
-            return (
-              <button
-                key={tour.id}
-                onClick={() => setSelectedBaseTourId(tour.id)}
-                className={`p-5 rounded-2xl text-left border-2 transition-all flex flex-col justify-between space-y-3 relative group ${
-                  isSelected
-                    ? 'border-emerald-500 bg-emerald-500/10 dark:bg-emerald-950/40 shadow-md ring-2 ring-emerald-500/20'
-                    : 'border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-zinc-950/50 hover:border-emerald-500/40'
-                }`}
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span
-                      className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
-                        isSelected
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-zinc-200 dark:bg-white/10 text-zinc-700 dark:text-zinc-300'
-                      }`}
-                    >
-                      {tourBadge}
-                    </span>
-                    {isSelected && (
-                      <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                    )}
-                  </div>
-                  <h4 className="font-serif text-base font-bold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                    {tourName}
-                  </h4>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-3 leading-relaxed">
-                    {tourDesc}
-                  </p>
-                </div>
-
-                <div className="pt-2 border-t border-zinc-200/50 dark:border-white/5 flex items-center justify-between text-[11px] font-semibold text-emerald-700 dark:text-emerald-400">
-                  <span>
-                    {tour.includedActivityIds.length > 0
-                      ? `${tour.includedActivityIds.length} incluidas`
-                      : 'Diseño Libre'}
-                  </span>
-                  <span className="text-zinc-500">{tour.duration[locale] || tour.duration.en}</span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        {selectedBaseTour.id !== 'none' && (
-          <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-zinc-800 dark:text-zinc-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-              <span>
-                <strong>{selectedBaseTour.name[locale] || selectedBaseTour.name.es}</strong>:{' '}
-                {selectedBaseTour.includedActivityIds.length} actividades garantizadas en tu ruta base.
-                {hideIncludedActivities
-                  ? ' Mostrando abajo solo las actividades opcionales para personalizar tu viaje.'
-                  : ' Las actividades incluidas se muestran destacadas en verde.'}
-              </span>
-            </div>
-            <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 shrink-0">
-              {filteredActivities.length} disponibles
-            </span>
-          </div>
-        )}
-      </div>
-
       {/* ── 3. FILTROS RÁPIDOS: TEMPORADA, MES, ISLA, CATEGORÍA & BÚSQUEDA ──── */}
       <div className="bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-white/10 rounded-2xl p-3 sm:p-4 shadow-md">
         {/* Todos los filtros en una sola fila con listas desplegables */}
         <div className="flex flex-wrap lg:flex-nowrap items-center gap-2">
           <Filter className="w-4 h-4 text-emerald-600 shrink-0 hidden sm:block" />
+          <select
+            aria-label="Tour base"
+            value={selectedBaseTourId}
+            onChange={(e) => setSelectedBaseTourId(e.target.value)}
+            className={SELECT_CLS}
+          >
+            {BASE_TOURS_GALAPAGOS.map((tour) => (
+              <option key={tour.id} value={tour.id}>{tour.name[locale] || tour.name.en || tour.name.es}</option>
+            ))}
+          </select>
           <select
             aria-label={UI.seasonTitle}
             value={selectedMonth !== 'all' ? `m${selectedMonth}` : selectedSeason}
@@ -1152,7 +1100,7 @@ export function GalapagosActivitiesExplorer({
 
       {/* ── 5. BARRA / DRAWER FLOTANTE DE SELECCIÓN ─────────────────────────── */}
       {selectedActivityIds.length > 0 && (
-        <div className="fixed bottom-5 left-4 right-4 max-w-4xl mx-auto z-40 animate-in fade-in slide-in-from-bottom-5 duration-300">
+        <div className="fixed bottom-[88px] md:bottom-5 left-4 right-4 max-w-4xl mx-auto z-40 animate-in fade-in slide-in-from-bottom-5 duration-300">
           <div className="bg-zinc-950/95 backdrop-blur-xl border border-emerald-500/40 text-white p-4 sm:p-5 rounded-3xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3 w-full md:w-auto">
               <div className="w-11 h-11 rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg border border-emerald-500/40 shrink-0">
@@ -1176,14 +1124,22 @@ export function GalapagosActivitiesExplorer({
             </div>
 
             <div className="flex items-center gap-2 w-full md:w-auto shrink-0">
+              <button
+                type="button"
+                onClick={requestProposal}
+                className="flex-1 md:flex-none px-5 py-3 rounded-2xl bg-gradient-to-r from-red-600 to-red-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg active:scale-95 transition-all text-center flex items-center justify-center gap-2"
+              >
+                <Sparkles className="w-4 h-4 shrink-0" />
+                <span>{UI.quoteExpeditionCTA}</span>
+              </button>
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 md:flex-none px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/40 active:scale-95 transition-all text-center flex items-center justify-center gap-2"
+                aria-label="WhatsApp"
+                className="px-4 py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/40 active:scale-95 transition-all text-center flex items-center justify-center gap-2"
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />
-                <span>{UI.quoteExpeditionCTA}</span>
               </a>
               <button
                 onClick={() => setSelectedActivityIds([])}
