@@ -73,6 +73,8 @@ export interface CrmLead {
   passengerDetails?: PassengerProfile;
   /** Qué pidió el cliente, en una frase legible (tour del PDF, mensaje del formulario, etc.). */
   interest?: string;
+  /** Idioma de la página desde la que llegó (es, en, fr…). */
+  locale?: string;
   /** Detalle de la solicitud tal como llegó (días, presupuesto, contacto preferido…). */
   requestDetails?: string;
   /** Viajeros tal como los escribió el cliente ("2 adults, 0 children"). */

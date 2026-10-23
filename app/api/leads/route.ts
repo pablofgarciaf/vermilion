@@ -9,7 +9,7 @@ import { triggerN8nWebhook } from '@/lib/n8n';
 import { toLeadEmailStatus } from '@/lib/crm/leadEmailStatus';
 import { getAdminDb } from '@/lib/firebaseAdmin';
 
-export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
+export const POST = withValidation(leadSchema, async (req, _ctx, body) => {
   // 🛡️ Honeypot Trap Detection (Python Bot / Automated Form Spammer Neutralizer)
   if (body._hp_trap || body.website_url) {
     console.warn('[SECURITY] Bot / Python spam script trapped via Honeypot. Request neutralised silently.');
@@ -65,9 +65,11 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
     status: 'pending',
     createdAt,
   };
+  const country = (req.headers.get('x-vercel-ip-country') || '').slice(0, 2);
+  const leadLocale = sanitizeText(body.locale || '').slice(0, 5);
 
   // Persist lead in Firestore using centralized DatabaseService DAL
-  const bookingId = await leadsRepository.create(bookingPayload);
+  const bookingId = await leadsRepository.create({ ...bookingPayload, ...(country ? { country } : {}), ...(leadLocale ? { locale: leadLocale } : {}) } as typeof bookingPayload);
   const locale = sanitizeText(body.locale || '').slice(0, 5) || undefined;
 
   // Avisos DESPUÉS de responder al viajero: un fallo de correo o de n8n nunca

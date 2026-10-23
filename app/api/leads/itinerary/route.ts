@@ -56,6 +56,8 @@ export async function POST(req: Request) {
     status: 'new',
     source: 'pdf_download',
     locale,
+    // País aproximado por IP (cabecera de Vercel); vacío en local.
+    country: (req.headers.get('x-vercel-ip-country') || '').slice(0, 2),
     notes: `Descargó el itinerario en PDF de "${tourName}" (${locale}).`,
     createdAt,
   });

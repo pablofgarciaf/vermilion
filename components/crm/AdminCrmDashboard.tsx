@@ -64,6 +64,7 @@ import {
   WhatsAppTemplate,
   LeadEmailDelivery
 } from '@/types/crm';
+import { followUpMailto } from '@/lib/crm/followUpDraft';
 
 /** De dónde llegó el lead (panel interno, solo en español). */
 const LEAD_SOURCE_LABEL: Record<string, string> = {
@@ -85,6 +86,19 @@ const EMAIL_BADGE: Record<LeadEmailDelivery | 'unknown', { text: string; cls: st
   none: { text: 'no se envía correo', cls: 'bg-zinc-500/25 text-zinc-200' },
   unknown: { text: 'correo sin registro', cls: 'bg-zinc-500/25 text-zinc-300' },
 };
+
+const LOCALE_LABEL: Record<string, string> = {
+  es: 'Español', en: 'Inglés', fr: 'Francés', de: 'Alemán', it: 'Italiano', pt: 'Portugués', ja: 'Japonés', zh: 'Chino',
+};
+
+function countryName(code?: string): string {
+  if (!code || code.length !== 2) return 'sin dato';
+  try {
+    return new Intl.DisplayNames(['es'], { type: 'region' }).of(code.toUpperCase()) || code;
+  } catch {
+    return code;
+  }
+}
 
 function EmailBadge({ label, value }: { label: string; value?: LeadEmailDelivery }) {
   const b = EMAIL_BADGE[value || 'unknown'];
@@ -998,7 +1012,26 @@ export function AdminCrmDashboard() {
                                 </span>
                                 <EmailBadge label="Cliente" value={l.emailStatus?.customer} />
                                 <EmailBadge label="Equipo" value={l.emailStatus?.team} />
+                                <span className="rounded-md bg-violet-500/20 px-2 py-0.5 text-[10px] font-semibold text-violet-100">
+                                  Idioma: {LOCALE_LABEL[l.locale || ''] || 'sin dato'}
+                                </span>
+                                <span className="rounded-md bg-violet-500/20 px-2 py-0.5 text-[10px] font-semibold text-violet-100">
+                                  País: {countryName(l.country)}
+                                </span>
                               </div>
+                              {l.customerEmail && (
+                                <a
+                                  href={followUpMailto({
+                                    name: l.customerName,
+                                    email: l.customerEmail,
+                                    locale: l.locale,
+                                    items: leads.filter((x) => x.customerEmail && x.customerEmail === l.customerEmail).map((x) => x.interest || '').filter(Boolean),
+                                  })}
+                                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-amber-400 px-3 py-1.5 text-[11px] font-extrabold text-zinc-950 hover:bg-amber-300"
+                                >
+                                  ✉ Escribirle (borrador listo)
+                                </a>
+                              )}
                               {l.createdAt && (
                                 <p className="mt-1.5 text-[10px] text-zinc-400">
                                   Llegó: {new Date(l.createdAt).toLocaleString('es-EC', { dateStyle: 'medium', timeStyle: 'short' })}
