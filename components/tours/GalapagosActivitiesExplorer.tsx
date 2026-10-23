@@ -897,7 +897,7 @@ export function GalapagosActivitiesExplorer({
                     sizes="(max-width: 640px) 85vw, (max-width: 1024px) 45vw, 25vw"
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/95 via-zinc-950/45 to-transparent top-[45%]" />
                 </div>
 
                 {/* Top Badges */}

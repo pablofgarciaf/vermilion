@@ -129,3 +129,12 @@ Todo agente que agregue, edite o revise páginas, rutas o componentes en este pr
 - **Formato:** una variable por línea, `NOMBRE="valor"`, sin espacios en el nombre. Nunca escribas claves a mano como `tiktok client key xxxx`: no son variables y el código no las ve.
 
 
+
+---
+
+# 🖼️ REGLA DE IMÁGENES: SIN PELÍCULAS OSCURAS (pedido del dueño)
+- **Prohibido** poner capas oscuras (`bg-black/xx`, `bg-zinc-950/xx`, degradados) sobre una imagen entera. Una foto se muestra limpia.
+- Solo se permite un degradado **en la franja donde hay texto encima** (p. ej. el tercio inferior de una tarjeta) y siempre que el dueño no haya pedido otra cosa.
+- Si el dueño pide expresamente una película o filtro, se aplica; si no, no.
+- La barra de menú va **transparente sobre el hero** en las páginas con hero a pantalla completa (ver `ConditionalNavbar.tsx`); al crear una página con hero, añadirla ahí.
+- Prohibido en textos de venta: "gratis" junto a videollamada y "sin compromiso" (nadie cobra una videollamada).

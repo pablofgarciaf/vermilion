@@ -64,7 +64,7 @@ import {
   WhatsAppTemplate,
   LeadEmailDelivery
 } from '@/types/crm';
-import { followUpMailto } from '@/lib/crm/followUpDraft';
+import { buildFollowUpDraft } from '@/lib/crm/followUpDraft';
 
 /** De dónde llegó el lead (panel interno, solo en español). */
 const LEAD_SOURCE_LABEL: Record<string, string> = {
@@ -183,6 +183,7 @@ export function AdminCrmDashboard() {
   // Quotation Generator State
   const [quoteTour, setQuoteTour] = useState('Galapagos Luxury Island Hopping');
   const [quotePax, setQuotePax] = useState(2);
+  const [replyDraft, setReplyDraft] = useState<{ email: string; name: string; subject: string; body: string } | null>(null);
   const [quoteTier, setQuoteTier] = useState<'comfort' | 'premium'>('premium');
   const [quotePrivateFlight, setQuotePrivateFlight] = useState(false);
   const [quoteDiscount, setQuoteDiscount] = useState(10); // 10% embajador
@@ -1020,17 +1021,22 @@ export function AdminCrmDashboard() {
                                 </span>
                               </div>
                               {l.customerEmail && (
-                                <a
-                                  href={followUpMailto({
-                                    name: l.customerName,
-                                    email: l.customerEmail,
-                                    locale: l.locale,
-                                    items: leads.filter((x) => x.customerEmail && x.customerEmail === l.customerEmail).map((x) => x.interest || '').filter(Boolean),
-                                  })}
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const input = {
+                                      name: l.customerName,
+                                      email: l.customerEmail,
+                                      locale: l.locale,
+                                      items: leads.filter((x) => x.customerEmail && x.customerEmail === l.customerEmail).map((x) => x.interest || '').filter(Boolean),
+                                    };
+                                    const d = buildFollowUpDraft(input);
+                                    setReplyDraft({ email: l.customerEmail, name: l.customerName, subject: d.subject, body: d.body });
+                                  }}
                                   className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-amber-400 px-3 py-1.5 text-[11px] font-extrabold text-zinc-950 hover:bg-amber-300"
                                 >
-                                  ✉ Escribirle (borrador listo)
-                                </a>
+                                  ✉ Ver y editar respuesta
+                                </button>
                               )}
                               {l.createdAt && (
                                 <p className="mt-1.5 text-[10px] text-zinc-400">
@@ -1710,6 +1716,40 @@ export function AdminCrmDashboard() {
             >
               Cerrar Ficha
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* ── MODAL: RESPUESTA AL LEAD (se lee, se edita y luego se abre en el correo) ── */}
+      {replyDraft && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          onClick={(e) => { if (e.target === e.currentTarget) setReplyDraft(null); }}
+        >
+          <div className="w-full max-w-2xl bg-[#0F1E2E] border border-amber-500/40 rounded-3xl p-6 space-y-3 shadow-2xl max-h-[92vh] overflow-y-auto">
+            <div className="flex items-start justify-between">
+              <div>
+                <span className="text-[11px] font-bold text-amber-300 uppercase">Respuesta para {replyDraft.name}</span>
+                <p className="text-sm text-white break-all">{replyDraft.email}</p>
+              </div>
+              <button onClick={() => setReplyDraft(null)} className="text-zinc-300 hover:text-white text-sm">✕</button>
+            </div>
+            <label className="block text-xs text-zinc-300">Asunto
+              <input value={replyDraft.subject} onChange={(e) => setReplyDraft({ ...replyDraft, subject: e.target.value })} className="mt-1 w-full rounded-xl bg-black/40 border border-emerald-900/50 px-3 py-2 text-sm text-white" />
+            </label>
+            <label className="block text-xs text-zinc-300">Mensaje (puedes cambiarlo)
+              <textarea value={replyDraft.body} onChange={(e) => setReplyDraft({ ...replyDraft, body: e.target.value })} rows={14} className="mt-1 w-full rounded-xl bg-black/40 border border-emerald-900/50 px-3 py-2 text-sm text-white leading-relaxed" />
+            </label>
+            <div className="flex flex-wrap gap-2 pt-1">
+              <a
+                href={`mailto:${encodeURIComponent(replyDraft.email)}?subject=${encodeURIComponent(replyDraft.subject)}&body=${encodeURIComponent(replyDraft.body)}`}
+                className="rounded-xl bg-amber-400 px-4 py-2 text-xs font-extrabold text-zinc-950 hover:bg-amber-300"
+              >
+                ✉ Abrir en mi correo para enviar
+              </a>
+              <button onClick={() => navigator.clipboard?.writeText(replyDraft.body)} className="rounded-xl bg-white/10 px-4 py-2 text-xs font-bold text-white hover:bg-white/20">Copiar mensaje</button>
+              <button onClick={() => setReplyDraft(null)} className="rounded-xl bg-white/10 px-4 py-2 text-xs font-bold text-zinc-200 hover:bg-white/20">Cerrar</button>
+            </div>
           </div>
         </div>
       )}
