@@ -64,3 +64,4 @@ firebase-service-account.json
 *-preview.jpg
 scripts/tiktok/grabacion/
 followup_drafts/
+__pycache__/
