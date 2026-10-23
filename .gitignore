@@ -63,3 +63,4 @@ firebase-service-account.json
 *.webm
 *-preview.jpg
 scripts/tiktok/grabacion/
+followup_drafts/
