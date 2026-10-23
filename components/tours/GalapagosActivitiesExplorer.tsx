@@ -42,7 +42,18 @@ interface GalapagosActivitiesExplorerProps {
 }
 
 const SELECT_CLS =
-  'min-w-0 flex-1 sm:flex-none rounded-xl border border-zinc-300 dark:border-white/10 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-sm font-semibold text-zinc-800 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500';
+  'min-w-0 rounded-xl border border-zinc-300 dark:border-white/10 bg-zinc-100 dark:bg-zinc-800 px-3 py-2 text-sm font-semibold text-zinc-800 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500';
+
+const EXTRA_UI: Record<string, Record<string, string>> = {
+  es: { title: 'Arma tu viaje a Galápagos', desc: 'Elige un tour base y mira qué actividades ya incluye y cuáles puedes sumar. Filtra por época, isla o tipo de actividad.', tour: 'Tour base', season: 'Época del año', island: 'Isla', category: 'Tipo de actividad', search: 'Buscar', incTitle: 'Incluidas en tu tour', incDesc: 'Estas actividades ya forman parte del tour que elegiste.', extTitle: 'Actividades que puedes añadir', extDesc: 'No están en el tour: añade las que quieras y te las cotizamos.' },
+  en: { title: 'Build your Galápagos trip', desc: 'Pick a base tour to see which activities it already includes and which ones you can add. Filter by season, island or activity type.', tour: 'Base tour', season: 'Time of year', island: 'Island', category: 'Activity type', search: 'Search', incTitle: 'Included in your tour', incDesc: 'These activities are already part of the tour you chose.', extTitle: 'Activities you can add', extDesc: 'Not in the tour: add the ones you like and we will quote them.' },
+  fr: { title: 'Composez votre voyage aux Galápagos', desc: "Choisissez un circuit de base pour voir les activités incluses et celles à ajouter. Filtrez par saison, île ou type d'activité.", tour: 'Circuit de base', season: 'Période', island: 'Île', category: "Type d'activité", search: 'Rechercher', incTitle: 'Incluses dans votre circuit', incDesc: 'Ces activités font déjà partie du circuit choisi.', extTitle: 'Activités à ajouter', extDesc: 'Hors circuit : ajoutez celles que vous aimez et nous vous les chiffrons.' },
+  de: { title: 'Planen Sie Ihre Galápagos-Reise', desc: 'Wählen Sie eine Basis-Tour und sehen Sie, was enthalten ist und was Sie hinzufügen können. Filtern nach Jahreszeit, Insel oder Aktivität.', tour: 'Basis-Tour', season: 'Jahreszeit', island: 'Insel', category: 'Aktivitätsart', search: 'Suchen', incTitle: 'In Ihrer Tour enthalten', incDesc: 'Diese Aktivitäten sind bereits Teil Ihrer Tour.', extTitle: 'Aktivitäten zum Hinzufügen', extDesc: 'Nicht in der Tour: fügen Sie hinzu, was Ihnen gefällt – wir kalkulieren es.' },
+  it: { title: 'Costruisci il tuo viaggio alle Galápagos', desc: "Scegli un tour base per vedere le attività incluse e quelle da aggiungere. Filtra per stagione, isola o tipo di attività.", tour: 'Tour base', season: 'Periodo', island: 'Isola', category: 'Tipo di attività', search: 'Cerca', incTitle: 'Incluse nel tuo tour', incDesc: 'Queste attività fanno già parte del tour scelto.', extTitle: 'Attività che puoi aggiungere', extDesc: 'Non sono nel tour: aggiungi quelle che ti piacciono e te le quotiamo.' },
+  pt: { title: 'Monte sua viagem a Galápagos', desc: 'Escolha um tour base e veja o que já está incluído e o que você pode adicionar. Filtre por época, ilha ou tipo de atividade.', tour: 'Tour base', season: 'Época do ano', island: 'Ilha', category: 'Tipo de atividade', search: 'Buscar', incTitle: 'Incluídas no seu tour', incDesc: 'Estas atividades já fazem parte do tour escolhido.', extTitle: 'Atividades que você pode adicionar', extDesc: 'Fora do tour: adicione as que quiser e nós cotamos.' },
+  ja: { title: 'ガラパゴス旅行をつくる', desc: 'ベースツアーを選ぶと、含まれる体験と追加できる体験がわかります。時期・島・種類で絞り込めます。', tour: 'ベースツアー', season: '時期', island: '島', category: '体験の種類', search: '検索', incTitle: 'ツアーに含まれる体験', incDesc: '選んだツアーにすでに含まれています。', extTitle: '追加できる体験', extDesc: 'ツアー外です。ご希望のものを追加すればお見積りします。' },
+  zh: { title: '定制您的加拉帕戈斯之旅', desc: '选择基础行程，即可看到已包含和可添加的活动。可按季节、岛屿或活动类型筛选。', tour: '基础行程', season: '季节', island: '岛屿', category: '活动类型', search: '搜索', incTitle: '行程已包含', incDesc: '这些活动已包含在您选择的行程中。', extTitle: '可添加的活动', extDesc: '不在行程内：添加您喜欢的，我们为您报价。' },
+};
 
 export function GalapagosActivitiesExplorer({
   locale,
@@ -500,6 +511,8 @@ export function GalapagosActivitiesExplorer({
     return dict[locale] || dict.en;
   }, [locale]);
 
+  const TX = EXTRA_UI[locale] || EXTRA_UI.en;
+
   // ── Selected Base Tour Object ──────────────────────────────────────────────
   const selectedBaseTour = useMemo(() => {
     return BASE_TOURS_GALAPAGOS.find((t) => t.id === selectedBaseTourId) || BASE_TOURS_GALAPAGOS[0];
@@ -517,9 +530,7 @@ export function GalapagosActivitiesExplorer({
     return GALAPAGOS_ACTIVITIES.filter((activity) => {
       // 1. Base Tour logic:
       const isIncludedInBase = selectedBaseTour.includedActivityIds.includes(activity.id);
-      if (selectedBaseTour.id !== 'none' && hideIncludedActivities && isIncludedInBase) {
-        return false;
-      }
+      void isIncludedInBase; // las incluidas se muestran en su propia sección, no se ocultan
 
       // 2. Season logic:
       if (selectedSeason !== 'all') {
@@ -628,6 +639,123 @@ export function GalapagosActivitiesExplorer({
 
     return `https://wa.me/593994048458?text=${message}`;
   }, [selectedBaseTour, selectedActivitiesList, locale]);
+
+  const includedList = filteredActivities.filter((a) => selectedBaseTour.includedActivityIds.includes(a.id));
+  const extraList = filteredActivities.filter((a) => !selectedBaseTour.includedActivityIds.includes(a.id));
+
+  const renderCompactCard = (activity: GalapagosActivity) => {
+              const isIncludedInBase = selectedBaseTour.includedActivityIds.includes(activity.id);
+              const isSelected = selectedActivityIds.includes(activity.id);
+              const name = activity.name[locale] || activity.name.en || activity.name.es;
+              const shortDesc = activity.shortDescription[locale] || activity.shortDescription.en || activity.shortDescription.es;
+              const islandName = activity.islandName[locale] || activity.islandName.en || activity.islandName.es;
+              const categoryName = activity.categoryName[locale] || activity.categoryName.en || activity.categoryName.es;
+              const duration = activity.duration[locale] || activity.duration.en || activity.duration.es;
+
+              return (
+                <div
+                  key={`compact-${activity.id}`}
+                  className={`rounded-2xl overflow-hidden border transition-all duration-200 flex flex-col sm:flex-row group ${
+                    isIncludedInBase
+                      ? 'bg-emerald-500/5 dark:bg-emerald-950/20 border-emerald-500/30'
+                      : isSelected
+                      ? 'bg-emerald-50/80 dark:bg-emerald-950/30 border-emerald-500 shadow-md ring-2 ring-emerald-500/20'
+                      : 'bg-white dark:bg-zinc-900/60 border-zinc-200 dark:border-white/10 hover:border-emerald-500/40 shadow-sm hover:shadow'
+                  }`}
+                >
+                  {/* Left Compact Thumbnail */}
+                  <div
+                    onClick={() => setActiveModalActivity(activity)}
+                    className="relative w-full sm:w-40 md:w-44 h-40 sm:h-auto min-h-[140px] shrink-0 cursor-pointer overflow-hidden"
+                  >
+                    <Image
+                      src={activity.imageUrl}
+                      alt={name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 180px"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent sm:hidden" />
+                    <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold text-white border border-white/10">
+                      {islandName}
+                    </span>
+                  </div>
+
+                  {/* Right Content Panel */}
+                  <div className="p-4 flex flex-col justify-between flex-1 min-w-0 space-y-2.5">
+                    <div className="space-y-1.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 truncate">
+                          {categoryName}
+                        </span>
+                        <span className="text-[11px] text-zinc-500 shrink-0 flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          <span>{duration}</span>
+                        </span>
+                      </div>
+
+                      <h4
+                        onClick={() => setActiveModalActivity(activity)}
+                        className="font-serif text-sm sm:text-base font-bold text-zinc-900 dark:text-white cursor-pointer hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors line-clamp-1"
+                      >
+                        {name}
+                      </h4>
+
+                      <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2 leading-relaxed">
+                        {shortDesc}
+                      </p>
+
+                      {activity.keyWildlife && activity.keyWildlife.length > 0 && (
+                        <div className="flex flex-wrap gap-1 pt-0.5">
+                          {activity.keyWildlife.slice(0, 2).map((w, i) => (
+                            <span
+                              key={i}
+                              className="text-[10px] px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-300 font-medium"
+                            >
+                              🐾 {w[locale] || w.es || w.en}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Action Row */}
+                    <div className="pt-2 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between gap-2">
+                      <button
+                        onClick={() => setActiveModalActivity(activity)}
+                        className="text-xs font-semibold text-zinc-500 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center gap-1 transition-colors"
+                      >
+                        <Eye className="w-3.5 h-3.5" />
+                        <span>{UI.activityDetails}</span>
+                      </button>
+
+                      {isIncludedInBase ? (
+                        <span className="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 font-bold text-xs flex items-center gap-1 border border-emerald-500/30">
+                          <Check className="w-3.5 h-3.5" />
+                          <span>{UI.includedState}</span>
+                        </span>
+                      ) : isSelected ? (
+                        <button
+                          onClick={() => toggleActivitySelection(activity.id)}
+                          className="px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-sm flex items-center gap-1 active:scale-95 transition-all"
+                        >
+                          <Check className="w-3.5 h-3.5" />
+                          <span>{UI.selectedState}</span>
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => toggleActivitySelection(activity.id)}
+                          className="px-3.5 py-1.5 rounded-xl bg-zinc-900 hover:bg-emerald-600 dark:bg-white/10 dark:hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1 active:scale-95 transition-all"
+                        >
+                          <Plus className="w-3.5 h-3.5" />
+                          <span>{UI.addCompact}</span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+  };
 
   return (
     <div className="w-full space-y-12">
@@ -854,20 +982,28 @@ export function GalapagosActivitiesExplorer({
       </section>
 
       {/* ── 3. FILTROS RÁPIDOS: TEMPORADA, MES, ISLA, CATEGORÍA & BÚSQUEDA ──── */}
+      <div className="space-y-1">
+        <h3 className="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white">{TX.title}</h3>
+        <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-3xl">{TX.desc}</p>
+      </div>
       <div className="bg-white dark:bg-zinc-900/70 border border-zinc-200 dark:border-white/10 rounded-2xl p-3 sm:p-4 shadow-md">
         {/* Todos los filtros en una sola fila con listas desplegables */}
-        <div className="flex flex-wrap lg:flex-nowrap items-center gap-2">
-          <Filter className="w-4 h-4 text-emerald-600 shrink-0 hidden sm:block" />
+        <div className="flex flex-col lg:flex-row lg:items-end gap-3">
+          <label className="flex flex-col gap-1 min-w-0 lg:flex-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">{TX.tour}</span>
           <select
             aria-label="Tour base"
             value={selectedBaseTourId}
             onChange={(e) => setSelectedBaseTourId(e.target.value)}
-            className={SELECT_CLS}
+            className={SELECT_CLS + " w-full"}
           >
             {BASE_TOURS_GALAPAGOS.map((tour) => (
               <option key={tour.id} value={tour.id}>{tour.name[locale] || tour.name.en || tour.name.es}</option>
             ))}
           </select>
+          </label>
+          <label className="flex flex-col gap-1 min-w-0 lg:flex-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">{TX.season}</span>
           <select
             aria-label={UI.seasonTitle}
             value={selectedMonth !== 'all' ? `m${selectedMonth}` : selectedSeason}
@@ -876,7 +1012,7 @@ export function GalapagosActivitiesExplorer({
               if (v.startsWith('m')) { setSelectedSeason('all'); setSelectedMonth(Number(v.slice(1))); }
               else { setSelectedSeason(v as 'all' | 'warm' | 'cool'); setSelectedMonth('all'); }
             }}
-            className={SELECT_CLS}
+            className={SELECT_CLS + " w-full"}
           >
             <option value="all">{UI.seasonAll}</option>
             <option value="warm">☀️ {UI.seasonWarm}</option>
@@ -885,27 +1021,36 @@ export function GalapagosActivitiesExplorer({
               <option key={m.month} value={`m${m.month}`}>{m.name[locale] || m.name.en || m.name.es}</option>
             ))}
           </select>
+          </label>
+          <label className="flex flex-col gap-1 min-w-0 lg:flex-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">{TX.island}</span>
           <select
             aria-label={UI.islandTitle}
             value={selectedIsland}
             onChange={(e) => setSelectedIsland(e.target.value as GalapagosIslandId)}
-            className={SELECT_CLS}
+            className={SELECT_CLS + " w-full"}
           >
             {GALAPAGOS_ISLANDS.map((island) => (
               <option key={island.id} value={island.id}>{island.icon} {island.name[locale] || island.name.en || island.name.es}</option>
             ))}
           </select>
+          </label>
+          <label className="flex flex-col gap-1 min-w-0 lg:flex-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">{TX.category}</span>
           <select
             aria-label={UI.categoryTitle}
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value as GalapagosCategoryId)}
-            className={SELECT_CLS}
+            className={SELECT_CLS + " w-full"}
           >
             {GALAPAGOS_CATEGORIES.map((cat) => (
               <option key={cat.id} value={cat.id}>{cat.icon} {cat.name[locale] || cat.name.en || cat.name.es}</option>
             ))}
           </select>
-          <div className="relative flex-1 min-w-[200px]">
+          </label>
+          <label className="flex flex-col gap-1 min-w-0 lg:flex-1">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500">{TX.search}</span>
+          <div className="relative">
             <Search className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
@@ -920,6 +1065,7 @@ export function GalapagosActivitiesExplorer({
               </button>
             )}
           </div>
+          </label>
           {(selectedSeason !== 'all' || selectedMonth !== 'all' || selectedIsland !== 'all' || selectedCategory !== 'all' || searchQuery) && (
             <button
               onClick={() => { setSelectedSeason('all'); setSelectedMonth('all'); setSelectedIsland('all'); setSelectedCategory('all'); setSearchQuery(''); }}
@@ -979,121 +1125,25 @@ export function GalapagosActivitiesExplorer({
             </button>
           </div>
         ) : (
-          /* Compact Luxury Cards Grid: 2 columns on desktop for space-efficiency */
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {filteredActivities.map((activity) => {
-              const isIncludedInBase = selectedBaseTour.includedActivityIds.includes(activity.id);
-              const isSelected = selectedActivityIds.includes(activity.id);
-              const name = activity.name[locale] || activity.name.en || activity.name.es;
-              const shortDesc = activity.shortDescription[locale] || activity.shortDescription.en || activity.shortDescription.es;
-              const islandName = activity.islandName[locale] || activity.islandName.en || activity.islandName.es;
-              const categoryName = activity.categoryName[locale] || activity.categoryName.en || activity.categoryName.es;
-              const duration = activity.duration[locale] || activity.duration.en || activity.duration.es;
-
-              return (
-                <div
-                  key={`compact-${activity.id}`}
-                  className={`rounded-2xl overflow-hidden border transition-all duration-200 flex flex-col sm:flex-row group ${
-                    isIncludedInBase
-                      ? 'bg-emerald-500/5 dark:bg-emerald-950/20 border-emerald-500/30'
-                      : isSelected
-                      ? 'bg-emerald-50/80 dark:bg-emerald-950/30 border-emerald-500 shadow-md ring-2 ring-emerald-500/20'
-                      : 'bg-white dark:bg-zinc-900/60 border-zinc-200 dark:border-white/10 hover:border-emerald-500/40 shadow-sm hover:shadow'
-                  }`}
-                >
-                  {/* Left Compact Thumbnail */}
-                  <div
-                    onClick={() => setActiveModalActivity(activity)}
-                    className="relative w-full sm:w-40 md:w-44 h-40 sm:h-auto min-h-[140px] shrink-0 cursor-pointer overflow-hidden"
-                  >
-                    <Image
-                      src={activity.imageUrl}
-                      alt={name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, 180px"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent sm:hidden" />
-                    <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] font-bold text-white border border-white/10">
-                      {islandName}
-                    </span>
-                  </div>
-
-                  {/* Right Content Panel */}
-                  <div className="p-4 flex flex-col justify-between flex-1 min-w-0 space-y-2.5">
-                    <div className="space-y-1.5">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 truncate">
-                          {categoryName}
-                        </span>
-                        <span className="text-[11px] text-zinc-500 shrink-0 flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          <span>{duration}</span>
-                        </span>
-                      </div>
-
-                      <h4
-                        onClick={() => setActiveModalActivity(activity)}
-                        className="font-serif text-sm sm:text-base font-bold text-zinc-900 dark:text-white cursor-pointer hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors line-clamp-1"
-                      >
-                        {name}
-                      </h4>
-
-                      <p className="text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2 leading-relaxed">
-                        {shortDesc}
-                      </p>
-
-                      {activity.keyWildlife && activity.keyWildlife.length > 0 && (
-                        <div className="flex flex-wrap gap-1 pt-0.5">
-                          {activity.keyWildlife.slice(0, 2).map((w, i) => (
-                            <span
-                              key={i}
-                              className="text-[10px] px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-white/5 text-zinc-600 dark:text-zinc-300 font-medium"
-                            >
-                              🐾 {w[locale] || w.es || w.en}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Action Row */}
-                    <div className="pt-2 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between gap-2">
-                      <button
-                        onClick={() => setActiveModalActivity(activity)}
-                        className="text-xs font-semibold text-zinc-500 hover:text-emerald-600 dark:hover:text-emerald-400 flex items-center gap-1 transition-colors"
-                      >
-                        <Eye className="w-3.5 h-3.5" />
-                        <span>{UI.activityDetails}</span>
-                      </button>
-
-                      {isIncludedInBase ? (
-                        <span className="px-3 py-1 rounded-xl bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 font-bold text-xs flex items-center gap-1 border border-emerald-500/30">
-                          <Check className="w-3.5 h-3.5" />
-                          <span>{UI.includedState}</span>
-                        </span>
-                      ) : isSelected ? (
-                        <button
-                          onClick={() => toggleActivitySelection(activity.id)}
-                          className="px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-sm flex items-center gap-1 active:scale-95 transition-all"
-                        >
-                          <Check className="w-3.5 h-3.5" />
-                          <span>{UI.selectedState}</span>
-                        </button>
-                      ) : (
-                        <button
-                          onClick={() => toggleActivitySelection(activity.id)}
-                          className="px-3.5 py-1.5 rounded-xl bg-zinc-900 hover:bg-emerald-600 dark:bg-white/10 dark:hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1 active:scale-95 transition-all"
-                        >
-                          <Plus className="w-3.5 h-3.5" />
-                          <span>{UI.addCompact}</span>
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="space-y-8">
+            {selectedBaseTour.id !== 'none' && includedList.length > 0 && (
+              <div className="space-y-3">
+                <h4 className="font-serif text-lg font-bold text-emerald-700 dark:text-emerald-400">
+                  ✓ {TX.incTitle} ({includedList.length})
+                </h4>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400">{TX.incDesc}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{includedList.map(renderCompactCard)}</div>
+              </div>
+            )}
+            {extraList.length > 0 && (
+              <div className="space-y-3">
+                <h4 className="font-serif text-lg font-bold text-zinc-900 dark:text-white">
+                  {selectedBaseTour.id !== 'none' ? TX.extTitle : UI.catalogTitle} ({extraList.length})
+                </h4>
+                {selectedBaseTour.id !== 'none' && <p className="text-xs text-zinc-600 dark:text-zinc-400">{TX.extDesc}</p>}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">{extraList.map(renderCompactCard)}</div>
+              </div>
+            )}
           </div>
         )}
       </section>

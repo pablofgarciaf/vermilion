@@ -183,7 +183,7 @@ export function AdminCrmDashboard() {
   // Quotation Generator State
   const [quoteTour, setQuoteTour] = useState('Galapagos Luxury Island Hopping');
   const [quotePax, setQuotePax] = useState(2);
-  const [quoteTier, setQuoteTier] = useState<'comfort' | 'premium' | 'luxury'>('premium');
+  const [quoteTier, setQuoteTier] = useState<'comfort' | 'premium'>('premium');
   const [quotePrivateFlight, setQuotePrivateFlight] = useState(false);
   const [quoteDiscount, setQuoteDiscount] = useState(10); // 10% embajador
 
@@ -203,7 +203,7 @@ export function AdminCrmDashboard() {
   };
 
   // Base Prices for Quoter
-  const quoteBasePrice = quoteTier === 'comfort' ? 3800 : quoteTier === 'premium' ? 5900 : 8900;
+  const quoteBasePrice = quoteTier === 'comfort' ? 3800 : 5900;
   const flightAddon = quotePrivateFlight ? 1200 * quotePax : 0;
   const quoteSubtotal = (quoteBasePrice * quotePax) + flightAddon;
   const quoteDiscountAmount = (quoteSubtotal * quoteDiscount) / 100;
@@ -1574,9 +1574,8 @@ export function AdminCrmDashboard() {
                     onChange={(e) => setQuoteTier(e.target.value as any)}
                     className="w-full bg-black/60 border border-emerald-900/50 rounded-xl p-2 text-white"
                   >
-                    <option value="comfort">Comfort Boutique (3*)</option>
-                    <option value="premium">Premium Relais & Châteaux (4*)</option>
-                    <option value="luxury">Luxury Grand Cruise (5*)</option>
+                    <option value="comfort">Vermilion Club (3★)</option>
+                    <option value="premium">Vermilion VIP (4★)</option>
                   </select>
                 </div>
               </div>
