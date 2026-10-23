@@ -159,7 +159,7 @@ export function TripAdvisorReviews({
   const touchEndX = useRef<number | null>(null);
 
   // Se avanza de 2 en 2: en móvil se ven 2 reseñas apiladas; en escritorio, 4 (2x2).
-  const STEP = 2;
+  const STEP = 4; // igual a las tarjetas visibles: 1-4, luego 5-8
   const pages = Math.max(1, Math.ceil(total / STEP));
   const page = Math.floor(currentIndex / STEP) + 1;
 
