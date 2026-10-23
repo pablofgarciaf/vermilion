@@ -97,8 +97,27 @@ def to_dt(v):
     return None
 
 
+PROPER = {"ecuador", "galápagos", "galapagos", "andes", "amazonía", "amazonia", "quito", "cotopaxi", "quilotoa",
+          "isabela", "santa", "cruz", "san", "cristóbal", "cristobal", "pacífico", "pacifico", "otavalo", "baños",
+          "mindo", "papallacta", "cuenca", "guayaquil", "vermilion"}
+
+
+def sentence_case_es(t: str) -> str:
+    """'De Los Andes Al Encanto De Galápagos' -> 'De los Andes al encanto de Galápagos' (solo títulos en español)."""
+    if re.search(r"\b(The|And|With|Of|Ultimate|Tour)\b", t):
+        return t  # título en inglés: se deja tal cual
+    out = []
+    for i, w in enumerate(re.split(r"(\s+)", t)):
+        if not w or w.isspace():
+            out.append(w)
+            continue
+        bare = re.sub(r"[.,:;]", "", w.lower())
+        out.append(w[:1].upper() + w[1:].lower() if (i == 0 or bare in PROPER) else w.lower())
+    return "".join(out)
+
+
 def clean_item(s: str) -> str:
-    return re.sub(r"^Descargó el itinerario en PDF:\s*", "", s or "", flags=re.I).strip()
+    return sentence_case_es(re.sub(r"^Descargó el itinerario en PDF:\s*", "", s or "", flags=re.I).strip())
 
 
 def join_list(items, word):

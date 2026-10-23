@@ -11,8 +11,24 @@ export interface FollowUpInput {
   items: string[];
 }
 
+const PROPER = new Set(['ecuador', 'galápagos', 'galapagos', 'andes', 'amazonía', 'amazonia', 'quito', 'cotopaxi', 'quilotoa', 'isabela', 'santa', 'cruz', 'san', 'cristóbal', 'cristobal', 'pacífico', 'pacifico', 'otavalo', 'baños', 'mindo', 'papallacta', 'cuenca', 'guayaquil', 'vermilion']);
+
+/** "De Los Andes Al Encanto De Galápagos" -> "De los Andes al encanto de Galápagos" (solo títulos en español). */
+export function titleToSentenceCase(t: string): string {
+  if (/\b(The|And|With|Of|Ultimate|Tour)\b/.test(t)) return t; // título en inglés: se deja tal cual
+  return t
+    .split(/(\s+)/)
+    .map((w, i) => {
+      if (/^\s+$/.test(w) || w === '') return w;
+      const bare = w.toLowerCase().replace(/[.,:;]/g, '');
+      if (i === 0 || PROPER.has(bare)) return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+      return w.toLowerCase();
+    })
+    .join('');
+}
+
 const clean = (s: string) =>
-  s.replace(/^Descargó el itinerario en PDF:\s*/i, '').replace(/^Pidió /i, '').trim();
+  titleToSentenceCase(s.replace(/^Descargó el itinerario en PDF:\s*/i, '').replace(/^Pidió /i, '').trim());
 
 function firstName(name: string): string {
   const n = (name || '').trim().split(/\s+/)[0] || '';
