@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { mockTours } from '@/data/mock';
 import { BLOG_POSTS } from '@/data/blogData';
 import { DESTINATIONS } from '@/data/destinationsData';
+import { ACTIVITY_PAGES } from '@/data/galapagosActivityPages';
 
 const BASE_URL = 'https://www.vermilionroutes.com';
 const LOCALES = ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'];
@@ -52,6 +53,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: isHome ? 'daily' : isCatalogOrBlog ? 'daily' : isLegal ? 'monthly' : 'weekly',
         priority: isHome ? 1.0 : isCatalogOrBlog ? 0.9 : isLegal ? 0.5 : 0.8,
         alternates: getLanguageAlternates(page),
+      });
+    }
+  }
+
+  // 1b. Páginas propias de actividades de Galápagos
+  for (const act of ACTIVITY_PAGES) {
+    const actPath = `/galapagos-activities/${act.slug}`;
+    for (const locale of LOCALES) {
+      sitemapEntries.push({
+        url: `${BASE_URL}/${locale}${actPath}`,
+        lastModified: LAST_CATALOG_UPDATE,
+        changeFrequency: 'monthly',
+        priority: 0.7,
+        alternates: getLanguageAlternates(actPath),
       });
     }
   }
