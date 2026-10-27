@@ -1,5 +1,6 @@
 'use client';
 import { openPlanTrip } from '@/data/planTrip';
+import { ACTIVITY_PAGES, ACTIVITY_PAGE_UI } from '@/data/galapagosActivityPages';
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import Image from 'next/image';
@@ -1332,6 +1333,15 @@ export function GalapagosActivitiesExplorer({
                 >
                   {UI.modalClose}
                 </button>
+
+                {ACTIVITY_PAGES.find((p) => p.activityId === activeModalActivity.id) && (
+                  <a
+                    href={`/${locale}/galapagos-activities/${ACTIVITY_PAGES.find((p) => p.activityId === activeModalActivity.id)!.slug}`}
+                    className="w-full sm:w-auto px-5 py-2.5 rounded-2xl border border-emerald-600/40 text-emerald-700 dark:text-emerald-400 text-xs font-bold text-center hover:bg-emerald-50 dark:hover:bg-emerald-950/30 transition-all"
+                  >
+                    {ACTIVITY_PAGE_UI[locale]?.guide || ACTIVITY_PAGE_UI.en.guide} →
+                  </a>
+                )}
 
                 {selectedBaseTour.includedActivityIds.includes(activeModalActivity.id) ? (
                   <span className="w-full sm:w-auto px-6 py-2.5 rounded-2xl bg-emerald-600/20 text-emerald-700 dark:text-emerald-400 font-bold text-xs text-center border border-emerald-500/30">

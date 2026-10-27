@@ -40,9 +40,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!data) return {};
   const { entry, activity } = data;
   const name = noParens(pick(activity.name, locale));
-  const cut = name.length <= 40 ? name : name.slice(0, 40).replace(/\s+\S*$/, '').replace(/[\s,:;–-]+$/, '');
-  const title = `${cut} | Vermilion Routes`;
-  const description = shorten(pick(activity.shortDescription, locale), 155);
+  const islandName = pick(activity.islandName, locale);
+  const brand = ' | Vermilion Routes';
+  const cutAt = (n: number) => (name.length <= n ? name : name.slice(0, n).replace(/\s+\S*$/, '').replace(/[\s,:;–-]+$/, ''));
+  // Título de 50-60 caracteres: se prueba con cortes cada vez más largos y, si hace falta, con la isla.
+  let title = `${cutAt(40)}${brand}`;
+  for (const n of [40, 42, 44, 46, 48]) {
+    const base = cutAt(n);
+    const candidates = [`${base}${brand}`, `${base} · ${islandName}${brand}`];
+    const hit = candidates.find((c) => c.length >= 50 && c.length <= 60);
+    if (hit) { title = hit; break; }
+  }
+  // Descripción de 120-155 caracteres: resumen + dato útil (época y duración) si hace falta.
+  const uiMeta = ACTIVITY_PAGE_UI[locale] || ACTIVITY_PAGE_UI.en;
+  let description = pick(activity.shortDescription, locale).trim();
+  if (description.length < 120) {
+    const extra = ` ${uiMeta.duration}: ${pick(activity.duration, locale)}. ${uiMeta.island}: ${islandName}.`;
+    description = `${description}${description.endsWith('.') ? '' : '.'}${extra}`;
+  }
+  if (description.length > 155) {
+    description = description.slice(0, 154).replace(/\s+\S*$/, '').replace(/[\s,;:–-]+$/, '') + '…';
+  }
   const url = `${BASE}/${locale}/galapagos-activities/${slug}`;
   const image = `${BASE}${entry.image}`;
   return {
