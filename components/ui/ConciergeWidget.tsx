@@ -24,7 +24,7 @@ import { ChatMarkdown } from '@/components/ui/ChatMarkdown';
 import { setChatPanelOpen } from '@/hooks/useChatPanelOpen';
 import { usePathname } from 'next/navigation';
 import { showsMobileTabBar } from '@/data/mobileTabBar';
-import { trackGenerateLead } from '@/lib/analytics/trackLead';
+import { trackGenerateLead, trackWhatsAppClick } from '@/lib/analytics/trackLead';
 
 interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
@@ -230,7 +230,7 @@ export function ConciergeWidget() {
   const transferChatToWhatsApp = () => {
     const lastUserMsgs = messages.filter((m) => m.role === 'user').map((m) => m.content).join(' | ');
     const summary = t('concierge.transferSummary', { topics: (lastUserMsgs || 'Ecuador & Galápagos').slice(0, 500) });
-    trackGenerateLead({ method: 'whatsapp', placement: 'concierge_transfer' });
+    trackWhatsAppClick('concierge_transfer');
     window.open(getWhatsAppLink(summary), '_blank', 'noopener,noreferrer');
   };
 

@@ -1239,6 +1239,21 @@ export function BookingWizard() {
       }
     } catch (e) {
       console.warn('Failed to save pending booking in wizard', e);
+      // Respaldo por servidor: la intención de reserva debe quedar en el CRM aunque falle el navegador.
+      fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tourId: 'general-inquiry',
+          tourTitle: tourTitleStr,
+          customerName: resolvedContact.name,
+          customerEmail: resolvedContact.email,
+          customerPhone: resolvedContact.phone || '',
+          travelDates: date || 'To be confirmed',
+          guestsCount: `${adults} Adults, ${children} Children`,
+          message: `Reserva iniciada, pendiente de pago (${bookingRef}). Importe: ${pricing.total} USD.`,
+        }),
+      }).catch((err) => console.error('[BookingWizard] respaldo de reserva pendiente no enviado:', err));
     }
 
     const queryParams = new URLSearchParams({

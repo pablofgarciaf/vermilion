@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Mail, MessageCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { WHATSAPP_NUMBER, isPlausiblePhone } from '@/data/bookingTerms';
+import { trackFormSubmit } from '@/lib/analytics/trackLead';
 
 export interface AskBeforeBookingProps {
   tourId: string;
@@ -24,14 +25,6 @@ export interface AskBeforeBookingProps {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-function trackLead(method: 'whatsapp' | 'quote_email', placement: string, tourId: string) {
-  if (typeof window === 'undefined') return;
-  try {
-    window.gtag?.('event', 'generate_lead', { method, placement, tour_id: tourId });
-  } catch {
-    /* la analítica nunca debe romper el formulario */
-  }
-}
 
 /**
  * Vía secundaria para quien todavía no quiere pagar: WhatsApp con el viaje ya descrito
@@ -102,7 +95,7 @@ export function AskBeforeBooking({
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus('sent');
-      trackLead('quote_email', placement, tourId);
+      trackFormSubmit({ method: 'quote_email', placement, item: tourId });
     } catch (err) {
       console.error('[AskBeforeBooking] quote request failed', err instanceof Error ? err.message : err);
       setStatus('error');
@@ -123,7 +116,6 @@ export function AskBeforeBooking({
           target="_blank"
           rel="noopener noreferrer"
           data-lead-placement={`${placement}_ask`}
-          onClick={() => trackLead('whatsapp', placement, tourId)}
           className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#25D366] px-3 py-2.5 text-sm font-bold text-white shadow-sm transition hover:brightness-105"
         >
           <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />

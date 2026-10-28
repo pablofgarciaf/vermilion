@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { trackGenerateLead } from '@/lib/analytics/trackLead';
+import { trackWhatsAppClick } from '@/lib/analytics/trackLead';
 
 const WHATSAPP_LINK = 'a[href*="wa.me/"], a[href*="api.whatsapp.com/"], a[href^="whatsapp:"]';
 
@@ -18,13 +18,12 @@ export function WhatsAppClickTracker() {
       const target = event.target as Element | null;
       const link = target?.closest?.(WHATSAPP_LINK) as HTMLAnchorElement | null;
       if (!link) return;
+      // Los botones del propio CRM/paneles no son clics de clientes.
+      if (/\/(admin|operator|affiliates|auth)(\/|$)/.test(window.location.pathname)) return;
 
       // /es/tours/galapagos-cruise -> "tours"; /es -> "home"
       const section = window.location.pathname.split('/').filter(Boolean)[1] || 'home';
-      trackGenerateLead({
-        method: 'whatsapp',
-        placement: link.dataset.leadPlacement || section,
-      });
+      trackWhatsAppClick(link.dataset.leadPlacement || section);
     };
 
     document.addEventListener('click', onClick, { capture: true });

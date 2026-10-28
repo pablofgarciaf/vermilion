@@ -13,6 +13,12 @@ const { mockAddDoc, mockCollection } = vi.hoisted(() => ({
   mockCollection: vi.fn(() => ({})),
 }));
 
+vi.mock('@/lib/firebaseAdmin', () => ({
+  getAdminDb: () => {
+    throw new Error('admin SDK disabled in tests');
+  },
+}));
+
 vi.mock('@/lib/firebase', () => ({
   db: {},
 }));

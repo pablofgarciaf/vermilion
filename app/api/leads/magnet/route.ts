@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { runAfterResponse } from '@/lib/runAfterResponse';
-import { db } from '@/lib/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { saveLead } from '@/lib/crm/leadStore';
 import { sendLeadMagnetEmail, notifyNewLead } from '@/lib/email';
 
 export async function POST(req: NextRequest) {
@@ -26,22 +25,18 @@ export async function POST(req: NextRequest) {
 
     const normalizedEmail = email.trim().toLowerCase();
     const createdAt = new Date().toISOString();
-    let leadId = 'lead_magnet_sin_guardar';
 
-    if (db) {
-      try {
-        const ref = await addDoc(collection(db, 'leads'), {
-          email: normalizedEmail,
-          locale: locale || 'en',
-          source: 'lead_magnet',
-          createdAt,
-          downloaded: false,
-        });
-        leadId = ref.id;
-      } catch (dbErr) {
-        console.warn('Firestore lead save notice:', dbErr);
-      }
-    }
+    // El lead va al CRM ANTES de responder. Si no se puede guardar, se responde error (no "ok").
+    const leadId = await saveLead({
+      customerEmail: normalizedEmail,
+      customerName: '',
+      email: normalizedEmail,
+      source: 'lead_magnet',
+      tourId: 'lead-magnet-galapagos-guide-2026',
+      tourTitle: 'Guía PDF Ecuador & Galápagos',
+      locale: locale || 'en',
+      downloaded: false,
+    });
 
     // Aviso al equipo tras responder (el viajero ya recibe la guía: sin acuse extra).
     runAfterResponse(() =>

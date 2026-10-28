@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { Mail, CheckCircle2, AlertCircle, Download } from 'lucide-react';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
-import { trackGenerateLead } from '@/lib/analytics/trackLead';
+import { trackFormSubmit } from '@/lib/analytics/trackLead';
 
 export function LeadMagnetBanner() {
   const locale = useLocale();
@@ -142,7 +142,7 @@ export function LeadMagnetBanner() {
       const data = await res.json();
       if (res.ok && data.success) {
         saveStoredUserProfile({ email: email.trim() });
-        trackGenerateLead({ method: 'lead_magnet', placement: 'lead_magnet_banner' });
+        trackFormSubmit({ method: 'lead_magnet', placement: 'lead_magnet_banner' });
         setStatus('success');
       } else {
         setErrorMsg(data.error || t.sendError);

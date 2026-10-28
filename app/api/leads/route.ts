@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { runAfterResponse } from '@/lib/runAfterResponse';
 import { withValidation } from '@/lib/apiHandler';
 import { leadSchema, sanitizeText, isValidPhone } from '@/lib/validation';
-import { leadsRepository } from '@/lib/services/DatabaseService';
+import { saveWebInquiry } from '@/lib/crm/leadStore';
 import { BookingRequest } from '@/types';
 import { notifyNewLead } from '@/lib/email';
 import { triggerN8nWebhook } from '@/lib/n8n';
@@ -69,7 +69,8 @@ export const POST = withValidation(leadSchema, async (req, _ctx, body) => {
   const leadLocale = sanitizeText(body.locale || '').slice(0, 5);
 
   // Persist lead in Firestore using centralized DatabaseService DAL
-  const bookingId = await leadsRepository.create({ ...bookingPayload, ...(country ? { country } : {}), ...(leadLocale ? { locale: leadLocale } : {}) } as typeof bookingPayload);
+  // Si no se puede guardar, el error sube y la ruta responde error (nunca "ok" sin registrar el lead).
+  const bookingId = await saveWebInquiry({ ...bookingPayload, ...(country ? { country } : {}), ...(leadLocale ? { locale: leadLocale } : {}) } as typeof bookingPayload);
   const locale = sanitizeText(body.locale || '').slice(0, 5) || undefined;
 
   // Avisos DESPUÉS de responder al viajero: un fallo de correo o de n8n nunca

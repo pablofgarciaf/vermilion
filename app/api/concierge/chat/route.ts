@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { runAfterResponse } from '@/lib/runAfterResponse';
 import { generateConciergeReply, ChatMessage } from '@/lib/ai-providers';
-import { BookingRepository } from '@/lib/services/DatabaseService';
+import { saveWebInquiry } from '@/lib/crm/leadStore';
+import { randomUUID } from 'crypto';
 import { notifyNewLead } from '@/lib/email';
 import { triggerN8nWebhook } from '@/lib/n8n';
 import { toLeadEmailStatus } from '@/lib/crm/leadEmailStatus';
@@ -18,7 +19,9 @@ export async function POST(req: NextRequest) {
     const messages: ChatMessage[] = body.messages || [];
     const provider: string | undefined = body.provider;
     const locale: string = body.locale || 'en';
-    const sessionId: string = body.sessionId || 'anonymous_session';
+    // Un id por conversación (nunca compartido), validado porque se usa como id de documento.
+    const rawSessionId = typeof body.sessionId === 'string' ? body.sessionId : '';
+    const sessionId: string = /^[A-Za-z0-9_-]{8,80}$/.test(rawSessionId) ? rawSessionId : `anon-${randomUUID()}`;
 
     if (!Array.isArray(messages) || messages.length === 0) {
       return NextResponse.json(
@@ -35,17 +38,18 @@ export async function POST(req: NextRequest) {
       { role: 'assistant', content: conciergeResponse.message, providerUsed: conciergeResponse.providerUsed }
     ];
 
+    // Transcripción en el CRM (chat_sessions, vía Admin SDK). Un fallo se registra con nombre y no corta la respuesta.
     try {
-      const { db } = await import('@/lib/firebase');
-      const { doc, setDoc, serverTimestamp } = await import('firebase/firestore');
-      await setDoc(doc(db, 'chat_sessions', sessionId), {
+      await getAdminDb().collection('chat_sessions').doc(sessionId).set({
         sessionId,
         locale,
+        source: 'web_concierge',
         messages: finalMessages,
-        lastUpdated: serverTimestamp()
+        messageCount: finalMessages.length,
+        lastUpdated: new Date().toISOString(),
       }, { merge: true });
-    } catch (err) {
-      console.warn('Failed to save chat to Firebase:', err);
+    } catch (err: any) {
+      console.error('[ConciergeChat] no se pudo guardar chat_sessions:', err?.name, err?.message);
     }
 
     let leadSubmitted = false;
@@ -70,7 +74,7 @@ export async function POST(req: NextRequest) {
             createdAt: new Date().toISOString(),
           };
 
-          leadId = await BookingRepository.create(bookingPayload);
+          leadId = await saveWebInquiry({ ...bookingPayload, chatSessionId: sessionId, source: 'web_concierge' });
           leadSubmitted = true;
 
           // Aviso al equipo tras responder. SIN acuse al viajero: aquí el email lo extrae

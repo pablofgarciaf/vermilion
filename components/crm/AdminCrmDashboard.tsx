@@ -53,6 +53,7 @@ import { auth, db } from '@/lib/firebase';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useCrmData } from '@/hooks/useCrmData';
+import { CrmActivityPanel } from '@/components/crm/CrmActivityPanel';
 import {
   SystemUser,
   CrmLead,
@@ -1392,6 +1393,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 7: CONCIERGE WHATSAPP ────────────────────────────────────── */}
         {activeTab === 'concierge' && (
           <div className="space-y-6">
+            <CrmActivityPanel />
             <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <h4 className="font-serif text-lg font-bold text-white">Plantillas de Concierge Rápido para WhatsApp</h4>
               <p className="text-xs text-zinc-400">Atención personalizada inmediata con un solo clic.</p>

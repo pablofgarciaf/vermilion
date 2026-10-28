@@ -320,20 +320,8 @@ export function useCrmData() {
                 refCode.toUpperCase().includes('TEST') ||
                 String(raw.customerName || '').toLowerCase().includes('test customer');
 
-              if (isTest) {
-                import('firebase/firestore').then(({ deleteDoc, doc: fDoc }) => {
-                  deleteDoc(fDoc(db, 'bookings', d.id)).catch(() => {});
-                });
-                return;
-              }
-
-              // Deduplicate so duplicate documents with same refCode don't collide
-              if (seenCodes.has(refCode)) {
-                import('firebase/firestore').then(({ deleteDoc, doc: fDoc }) => {
-                  deleteDoc(fDoc(db, 'bookings', d.id)).catch(() => {});
-                });
-                return;
-              }
+              // Registros de prueba y duplicados: se OCULTAN en el CRM; nunca se borran desde el navegador.
+              if (isTest || seenCodes.has(refCode)) return;
               seenCodes.add(refCode);
 
               const amount = Number(raw.paidAmount || raw.amountPaid || raw.totalAmount || 0);

@@ -1,12 +1,18 @@
 /**
- * Evento de conversión `generate_lead` (GA4) y `Lead` (Meta Pixel).
+ * Medición de leads para GA4, Meta Pixel y Google Tag Manager.
  *
- * Respeta el ConsentManager (components/privacy/ConsentManager.tsx): solo se envía
- * si el visitante ACEPTÓ las cookies opcionales. El banner promete que, si las rechaza,
- * "no activamos analítica, anuncios ni Meta Pixel", así que no mandamos ni pings sin cookies.
+ * - GA4 (gtag): evento `generate_lead` con el método y el lugar del clic o del envío.
+ * - Meta Pixel: evento `Lead`.
+ * - GTM (capa de datos): eventos `vr_form_submit` (formulario enviado con éxito) y
+ *   `vr_whatsapp_click` (clic en WhatsApp). Son los que el contenedor GTM-TDQXQ738
+ *   usa para disparar la conversión de Google Ads y las etiquetas de WhatsApp.
+ *
+ * Todo respeta el ConsentManager (components/privacy/ConsentManager.tsx): si el visitante
+ * RECHAZÓ las cookies opcionales, no se envía nada. Con el banner el consentimiento se
+ * guarda en localStorage con el valor 'accepted'.
  */
 
-export type LeadMethod = 'contact_form' | 'lead_magnet' | 'ai_concierge' | 'whatsapp';
+export type LeadMethod = 'contact_form' | 'quote_email' | 'lead_magnet' | 'ai_concierge' | 'whatsapp';
 
 export interface LeadEventParams {
   method: LeadMethod;
@@ -27,8 +33,19 @@ function hasAnalyticsConsent(): boolean {
   }
 }
 
+function canTrack(): boolean {
+  return typeof window !== 'undefined' && hasAnalyticsConsent();
+}
+
+/** Añade un evento a la capa de datos que lee GTM. */
+function pushToDataLayer(payload: Record<string, unknown>): void {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(payload);
+}
+
+/** Clic en un enlace de WhatsApp: GA4 `generate_lead` + Meta `Lead` + evento GTM. */
 export function trackGenerateLead({ method, placement, item }: LeadEventParams): void {
-  if (typeof window === 'undefined' || !hasAnalyticsConsent()) return;
+  if (!canTrack()) return;
 
   try {
     window.gtag?.('event', 'generate_lead', {
@@ -41,4 +58,72 @@ export function trackGenerateLead({ method, placement, item }: LeadEventParams):
   } catch {
     // La analítica nunca debe romper un envío de formulario ni un clic.
   }
+}
+
+/**
+ * Registro del clic en el CRM (servidor). Es propio del sitio: no usa cookies ni guarda datos
+ * personales (solo dónde se pulsó, la página y el idioma), así que no depende del banner.
+ */
+function sendWhatsAppClickToCrm(placement: string): void {
+  try {
+    const body = JSON.stringify({
+      type: 'whatsapp_click',
+      placement,
+      page: window.location.pathname,
+      locale: document.documentElement.lang || '',
+    });
+    const sent =
+      typeof navigator !== 'undefined' &&
+      typeof navigator.sendBeacon === 'function' &&
+      navigator.sendBeacon('/api/analytics/click', new Blob([body], { type: 'application/json' }));
+    if (!sent) {
+      fetch('/api/analytics/click', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+        keepalive: true,
+      }).catch(() => {});
+    }
+  } catch {
+    // Un fallo de registro nunca debe bloquear el enlace a WhatsApp.
+  }
+}
+
+/** Clic en WhatsApp (enlace wa.me o window.open). Lo usa WhatsAppClickTracker y los botones con window.open. */
+export function trackWhatsAppClick(placement: string): void {
+  sendWhatsAppClickToCrm(placement);
+  if (!canTrack()) return;
+
+  try {
+    pushToDataLayer({
+      event: 'vr_whatsapp_click',
+      lead_source: placement,
+      page_location: window.location.href,
+    });
+  } catch {
+    // ignorar
+  }
+  trackGenerateLead({ method: 'whatsapp', placement });
+}
+
+/**
+ * Formulario enviado CON ÉXITO (la respuesta del servidor fue correcta).
+ * Llamarlo solo tras confirmar el envío, nunca al pulsar el botón.
+ * GTM dispara la conversión de Google Ads con el evento `vr_form_submit`.
+ */
+export function trackFormSubmit({ method, placement, item }: LeadEventParams): void {
+  if (!canTrack()) return;
+
+  try {
+    pushToDataLayer({
+      event: 'vr_form_submit',
+      lead_method: method,
+      lead_source: placement || method,
+      form_item: item,
+      page_location: window.location.href,
+    });
+  } catch {
+    // ignorar
+  }
+  trackGenerateLead({ method, placement, item });
 }

@@ -11,7 +11,7 @@ import { DownloadPDFButton } from './DownloadPDFButton';
 import { useSettings } from '@/hooks/useSettings';
 import { useLocale, useTranslations } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { trackGenerateLead } from '@/lib/analytics/trackLead';
+import { trackWhatsAppClick } from '@/lib/analytics/trackLead';
 import { ExpeditionFacts } from '@/components/tours/ExpeditionFacts';
 
 
@@ -90,7 +90,7 @@ export function TourModal({ tour, isOpen, onClose }: TourModalProps) {
     const phoneNumber = rawNumber.replace(/[^0-9]/g, '') || '593960039156';
     const titleText = getLocalizedText(tour.title, locale);
     const message = encodeURIComponent(`Hello Vermilion Routes, I am interested in booking the "${titleText}" tour.`);
-    trackGenerateLead({ method: 'whatsapp', placement: 'tour_modal', item: titleText });
+    trackWhatsAppClick('tour_modal');
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
   };
 
