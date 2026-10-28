@@ -78,12 +78,13 @@ export default function robots(): MetadataRoute.Robots {
           'Pinterestbot',
           'Slackbot',
           'Slackbot-LinkExpanding',
+          'Googlebot-Image', 'Bingbot', 'msnbot', 'DuckDuckBot', 'YandexBot', 'Baiduspider', 'Slurp', 'BraveBot', 'Bravebot', 'OAI-SearchBot', 'Claude-SearchBot', 'Claude-User', 'Claude-Web', 'Applebot-Extended', 'Perplexity-User', 'DeepSeekBot', 'GrokBot', 'xAI-Bot', 'KimiBot', 'MoonshotBot', 'MistralAI-User', 'cohere-ai', 'YouBot', 'Meta-ExternalAgent', 'FacebookBot', 'Amazonbot', 'Bytespider', 'PhindBot', 'DuckAssistBot',
         ],
         allow: '/',
         disallow: privateDisallow,
       },
       {
-        userAgent: ['HTTrack', 'Wget', 'Scrapy'],
+        userAgent: ['HTTrack', 'WebCopier', 'WebReaper', 'WebZIP', 'SiteSnagger', 'Teleport', 'TeleportPro', 'Offline Explorer', 'SiteSucker', 'Wget', 'Scrapy', 'MJ12bot', 'Cyotek WebCopy'],
         disallow: '/',
       },
       {
