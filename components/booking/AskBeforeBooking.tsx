@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Mail, MessageCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { WHATSAPP_NUMBER, isPlausiblePhone } from '@/data/bookingTerms';
-import { trackFormSubmit } from '@/lib/analytics/trackLead';
+import { trackQuoteFormSubmitted } from '@/lib/analytics/trackLead';
 
 export interface AskBeforeBookingProps {
   tourId: string;
@@ -95,7 +95,7 @@ export function AskBeforeBooking({
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       setStatus('sent');
-      trackFormSubmit({ method: 'quote_email', placement, item: tourId });
+      trackQuoteFormSubmitted({ method: 'quote_email', placement, item: tourId });
     } catch (err) {
       console.error('[AskBeforeBooking] quote request failed', err instanceof Error ? err.message : err);
       setStatus('error');

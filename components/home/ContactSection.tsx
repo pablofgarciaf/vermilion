@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { createBookingInFirestore } from '@/lib/bookings';
 import { filterPhoneInput, isValidEmail, isValidPhone, sanitizeText } from '@/lib/validation';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
-import { trackFormSubmit } from '@/lib/analytics/trackLead';
+import { trackQuoteFormSubmitted } from '@/lib/analytics/trackLead';
 import { useTranslations, useLocale } from 'next-intl';
 import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle, Zap, Instagram, Facebook, Youtube, MessageCircle } from 'lucide-react';
 
@@ -142,7 +142,7 @@ export function ContactSection() {
         email: formData.email,
         phone: formData.phone,
       });
-      trackFormSubmit({ method: 'contact_form', placement: 'home_contact', item: formData.destination });
+      trackQuoteFormSubmitted({ method: 'contact_form', placement: 'home_contact', item: formData.destination });
       setSubmitted(true);
     } catch (err: any) {
       console.warn('API /api/leads contact submission failed, falling back to direct Firestore:', err);
@@ -158,7 +158,7 @@ export function ContactSection() {
           travelDates: formData.arrivalDate || 'Flexible',
           message: formData.message,
         });
-        trackFormSubmit({ method: 'contact_form', placement: 'home_contact_fallback', item: formData.destination });
+        trackQuoteFormSubmitted({ method: 'contact_form', placement: 'home_contact_fallback', item: formData.destination });
         setSubmitted(true);
       } catch (fallbackErr: any) {
         console.error('Contact form submission error:', fallbackErr);

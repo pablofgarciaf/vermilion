@@ -3,9 +3,9 @@
  *
  * - GA4 (gtag): evento `generate_lead` con el método y el lugar del clic o del envío.
  * - Meta Pixel: evento `Lead`.
- * - GTM (capa de datos): eventos `vr_form_submit` (formulario enviado con éxito) y
- *   `vr_whatsapp_click` (clic en WhatsApp). Son los que el contenedor GTM-TDQXQ738
- *   usa para disparar la conversión de Google Ads y las etiquetas de WhatsApp.
+ * - GTM (capa de datos): eventos `quote_form_submitted` (formulario de cotización enviado con
+ *   éxito), `vr_form_submit` (otros formularios con éxito) y `vr_whatsapp_click` (clic en WhatsApp).
+ *   GTM usa `quote_form_submitted` para la conversión de Google Ads de cotizaciones.
  *
  * Todo respeta el ConsentManager (components/privacy/ConsentManager.tsx): si el visitante
  * RECHAZÓ las cookies opcionales, no se envía nada. Con el banner el consentimiento se
@@ -106,17 +106,16 @@ export function trackWhatsAppClick(placement: string): void {
   trackGenerateLead({ method: 'whatsapp', placement });
 }
 
-/**
- * Formulario enviado CON ÉXITO (la respuesta del servidor fue correcta).
- * Llamarlo solo tras confirmar el envío, nunca al pulsar el botón.
- * GTM dispara la conversión de Google Ads con el evento `vr_form_submit`.
- */
-export function trackFormSubmit({ method, placement, item }: LeadEventParams): void {
+/** Empuja a la capa de datos un formulario enviado CON ÉXITO y lo registra en GA4/Meta. */
+function trackSuccessfulForm(
+  eventName: 'vr_form_submit' | 'quote_form_submitted',
+  { method, placement, item }: LeadEventParams,
+): void {
   if (!canTrack()) return;
 
   try {
     pushToDataLayer({
-      event: 'vr_form_submit',
+      event: eventName,
       lead_method: method,
       lead_source: placement || method,
       form_item: item,
@@ -126,4 +125,21 @@ export function trackFormSubmit({ method, placement, item }: LeadEventParams): v
     // ignorar
   }
   trackGenerateLead({ method, placement, item });
+}
+
+/**
+ * Formulario de cotización enviado CON ÉXITO (la respuesta del servidor fue correcta).
+ * Llamarlo solo tras confirmar el envío, nunca al pulsar el botón.
+ * GTM dispara la conversión de Google Ads con el evento `quote_form_submitted`.
+ */
+export function trackQuoteFormSubmitted(params: LeadEventParams): void {
+  trackSuccessfulForm('quote_form_submitted', params);
+}
+
+/**
+ * Otros formularios enviados con éxito (guía PDF, banner, modal de Galápagos...).
+ * Evento `vr_form_submit`.
+ */
+export function trackFormSubmit(params: LeadEventParams): void {
+  trackSuccessfulForm('vr_form_submit', params);
 }

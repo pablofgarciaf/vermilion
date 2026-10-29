@@ -143,8 +143,8 @@ export default async function RootLayout({
   const gaPrimaryId = process.env.NEXT_PUBLIC_GA_ID || 'G-D8ZNLYMCB0';
   const gaSecondaryId = process.env.NEXT_PUBLIC_GA_SECONDARY_ID || 'G-0YLF960DJG';
   const gaIds = Array.from(new Set([gaPrimaryId, gaSecondaryId].filter(Boolean)));
-  // Contenedores de GTM además del configurado en NEXT_PUBLIC_GTM_ID (sin duplicar).
-  const extraGtmIds = ['GTM-TDQXQ738', 'GTM-WCCPTDVG'].filter((id) => id !== process.env.NEXT_PUBLIC_GTM_ID);
+  // Los únicos contenedores de GTM que pidió el cliente. Fijos en código (no dependen de variables de entorno).
+  const gtmContainerIds = ['GTM-TDQXQ738', 'GTM-WCCPTDVG'];
 
   const jsonLdData = {
     '@context': 'https://schema.org',
@@ -273,18 +273,7 @@ export default async function RootLayout({
       </head>
       <body className="paper-bg text-zinc-900 dark:text-zinc-50 font-sans antialiased selection:bg-emerald-600 selection:text-white flex flex-col min-h-screen" suppressHydrationWarning>
         {/* Google Tag Manager (noscript) */}
-        {process.env.NEXT_PUBLIC_GTM_ID && (
-          <noscript>
-            <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            />
-          </noscript>
-        )}
-
-        {extraGtmIds.map((gtmId) => (
+        {gtmContainerIds.map((gtmId) => (
           <noscript key={gtmId}>
             <iframe
               src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
@@ -296,17 +285,6 @@ export default async function RootLayout({
         ))}
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
-          {/* Google Tag Manager */}
-          {process.env.NEXT_PUBLIC_GTM_ID && (
-            <Script id="google-tag-manager" strategy="afterInteractive">
-              {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${process.env.NEXT_PUBLIC_GTM_ID}');`}
-            </Script>
-          )}
-
           <Script id="google-consent-default" strategy="afterInteractive">
             {`
               window.dataLayer = window.dataLayer || [];
@@ -323,7 +301,8 @@ export default async function RootLayout({
               ${gaIds.map((id) => `gtag('config', '${id}', { anonymize_ip: true });`).join('\n              ')}
             `}
           </Script>
-          {extraGtmIds.map((gtmId) => (
+          {/* Google Tag Manager: se carga después del consentimiento por defecto (denegado) */}
+          {gtmContainerIds.map((gtmId) => (
             <Script key={gtmId} id={`google-tag-manager-${gtmId}`} strategy="afterInteractive">
               {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
