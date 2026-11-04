@@ -2498,11 +2498,11 @@ const multiDayTours: Tour[] = [
     description: {
       en: '6-day overland journey traversing the Avenue of the Volcanoes, adventure town of Baños, Pailón del Diablo (Devil\'s Cauldron) waterfall, Pastaza canyon, Puyo rainforest biopark, and Quilotoa turquoise crater lake.',
       es: 'Recorrido de 6 días por la Avenida de los Volcanes, Baños de Agua Santa, la cascada Pailón del Diablo, bioparque en Puyo y el cráter Quilotoa.',
-      zh: '6日陆地景观之旅，沿着火山大道前进，游览冒险小镇巴尼奥斯、恶魔之咽瀑布、帕斯塔萨峡谷、普约雨林公园与基洛托阿翡翠火山湖。'
+      zh: '6日陆地景观之旅，沿着火山大道前进，游览冒险小镇巴尼奥斯、恶魔之锅大瀑布、帕斯塔萨峡谷、普约雨林公园与基洛托阿翡翠火山湖。'
     },
     highlights: [
       { en: 'Avenue of the Volcanoes & Baños de Agua Santa', es: 'Avenida de los Volcanes y Baños de Agua Santa', zh: '火山大道与巴尼奥斯小镇' },
-      { en: 'Pailón del Diablo (Devil\'s Cauldron) Mega Waterfall Hike', es: 'Caminata a la Cascada Pailón del Diablo (Devil\'s Cauldron)', zh: '恶魔之咽瀑布徒步' },
+      { en: 'Pailón del Diablo (Devil\'s Cauldron) Mega Waterfall Hike', es: 'Caminata a la Cascada Pailón del Diablo (Devil\'s Cauldron)', zh: '恶魔之锅瀑布徒步' },
       { en: 'Puyo Amazon Rainforest & Yanacocha Biopark', es: 'Selva de Puyo y Bioparque Yanacocha', zh: '普约雨林与亚纳科查生物公园' },
       { en: 'Hola Vida Waterfall & Kichwa Community', es: 'Cascada Hola Vida y comunidad Kichwa', zh: '奥拉维达瀑布与奇瓦文化' },
       { en: 'Quilotoa Emerald Crater Lake & Tigua Art', es: 'Laguna de Quilotoa y Pinturas de Tigua', zh: '基洛托阿翡翠火山湖' }
@@ -2827,7 +2827,7 @@ const multiDayTours: Tour[] = [
       it: 'L\'Odissea Definitiva: Ecuador e Galapagos',
       pt: 'A Odisséia Definitiva: Equador e Galápagos',
       ja: '究極のエクアドル＆ガラパゴスの旅',
-      zh: '厄瓜多尔与加拉帕戈斯终极奥德赛'
+      zh: '从安第斯山脉到加拉帕戈斯的顶级魅力之旅'
     },
     destination: 'Ecuador & Galapagos',
     duration: {
@@ -3097,7 +3097,7 @@ const multiDayTours: Tour[] = [
       it: 'Viaggio Maestro: Dall\'Ecuador Continentale alle Galapagos',
       pt: 'Jornada Mestra: Do Equador Continental a Galápagos',
       ja: 'エクアドル本土からガラパゴスへのマスタージャーニー',
-      zh: '大师之旅：从厄瓜多尔大陆到加拉帕戈斯'
+      zh: '厄瓜多尔与加拉帕戈斯精华之旅：魔幻与冒险'
     },
     destination: 'Ecuador & Galapagos',
     duration: {
@@ -3143,15 +3143,15 @@ const multiDayTours: Tour[] = [
     description: {
       en: '11-day master journey connecting mainland Ecuador (Quito, Avenue of Volcanoes, Baños Pailón del Diablo (Devil\'s Cauldron), Puyo Amazon Rainforest, Quilotoa Crater Lake) with Galápagos Islands (Santa Cruz highlands, giant tortoises, Isabela full-day with Tintoreras & flamingos, La Lobería and Las Grietas canyon).',
       es: 'Travesía de 11 días conectando los Andes, Baños, la Amazonía y Quilotoa con las maravillas volcánicas, tortugas gigantes y playas de Galápagos.',
-      zh: '11日经典联合行程，将厄瓜多尔大陆（基多、巴尼奥斯恶魔之咽、普约亚马逊、基洛托阿）与加拉帕戈斯群岛（圣克鲁斯、伊莎贝拉、蒂恩托雷拉斯、拉斯格里塔斯）完美融合。'
+      zh: '11天探索之旅，串联安第斯山脉、巴尼奥斯、亚马逊雨林和基洛托阿火山湖，随后前往加拉帕戈斯，探索壮丽的火山奇观、巨型陆龟和迷人的海滩。'
     },
     highlights: [
-      { en: 'Avenue of the Volcanoes & Baños Pailón del Diablo (Devil\'s Cauldron)', es: 'Avenida de los Volcanes y Baños Pailón del Diablo (Devil\'s Cauldron)', zh: '火山大道与巴尼奥斯恶魔之咽' },
-      { en: 'Puyo Amazon Rainforest & Kichwa Community', es: 'Selva Amazónica de Puyo y Comunidad Kichwa', zh: '普约亚马逊雨林与奇瓦社区' },
-      { en: 'Quilotoa Emerald Volcanic Crater Lake', es: 'Laguna del Cráter de Quilotoa', zh: '基洛托阿翡翠火山湖' },
-      { en: 'Santa Cruz Highlands & Giant Tortoises', es: 'Tierras Altas de Santa Cruz y Tortugas Gigantes', zh: '圣克鲁斯高地与巨龟保护区' },
-      { en: 'Isabela Island, Flamingo Lagoon & Tintoreras', es: 'Isla Isabela, Laguna de Flamingos y Tintoreras', zh: '伊莎贝拉岛、火烈鸟与蒂恩托雷拉斯' },
-      { en: 'Las Grietas Crystal-Clear Volcanic Chasm', es: 'Cañón Volcánico de Las Grietas', zh: '拉斯格里塔斯火山峡谷潜水' }
+      { en: 'Avenue of the Volcanoes & Baños Pailón del Diablo (Devil\'s Cauldron)', es: 'Avenida de los Volcanes y Baños Pailón del Diablo (Devil\'s Cauldron)', zh: '火山大道与巴尼奥斯恶魔之锅瀑布' },
+      { en: 'Puyo Amazon Rainforest & Kichwa Community', es: 'Selva Amazónica de Puyo y Comunidad Kichwa', zh: '普约原始亚马逊雨林与克丘亚原住民村落' },
+      { en: 'Quilotoa Emerald Volcanic Crater Lake', es: 'Laguna del Cráter de Quilotoa', zh: '基洛托阿翡翠火山湖与安第斯传统农庄（荷兰猪 / Cuy）' },
+      { en: 'Santa Cruz Highlands & Giant Tortoises', es: 'Tierras Altas de Santa Cruz y Tortugas Gigantes', zh: '圣克鲁斯高地与野生象龟群保护区' },
+      { en: 'Isabela Island, Flamingo Lagoon & Tintoreras', es: 'Isla Isabela, Laguna de Flamingos y Tintoreras', zh: '伊莎贝拉岛、火烈鸟泻湖与蒂恩托雷拉斯石礁浮潜' },
+      { en: 'Las Grietas Crystal-Clear Volcanic Chasm', es: 'Cañón Volcánico de Las Grietas', zh: '拉斯格里塔斯火山峡谷天然清潭潜水' }
     ],
     inclusions: [
       { en: 'Airport assistance and private transfers', es: 'Asistencia en aeropuerto y traslados privados' },

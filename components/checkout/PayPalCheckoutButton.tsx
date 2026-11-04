@@ -35,6 +35,7 @@ const PAYPAL_I18N: Record<string, {
   errorInitiating: string;
   defaultTravelerName: string;
   trustCopy: string;
+  protectionBadge: string;
   paypalHeading: string;
   cardHeading: string;
   error: string;
@@ -46,8 +47,9 @@ const PAYPAL_I18N: Record<string, {
     errorProcessing: 'Error al procesar el pago con PayPal.',
     errorInitiating: 'Error al iniciar la orden en PayPal.',
     defaultTravelerName: 'Viajero Distinguido',
-    trustCopy: '🔒 Procesado vía PayPal Holdings, Inc. • Datos financieros 100% encriptados y privados.',
-    cardHeading: 'Pagar con Tarjeta de Débito o Crédito (Visa, Mastercard, Amex):',
+    protectionBadge: '🛡️ Garantía Oficial PayPal Buyer Protection (180 Días): Reserva 100% protegida contra fraude, estafas o incumplimiento.',
+    trustCopy: '🔒 Procesado vía PayPal Holdings, Inc. • Cifrado bancario 256-bit. Acepta Visa, Mastercard, American Express, Discover, Diners Club, JCB y UnionPay.',
+    cardHeading: 'Pagar con Tarjeta Internacional (Visa, Mastercard, Amex, Discover, Diners, JCB, UnionPay):',
     paypalHeading: 'Pagar con tu saldo o cuenta de PayPal:',
     error: 'Ocurrió un error en el pago.',
   },
@@ -58,10 +60,89 @@ const PAYPAL_I18N: Record<string, {
     errorProcessing: 'Error processing payment with PayPal.',
     errorInitiating: 'Error initiating PayPal order.',
     defaultTravelerName: 'Valued Traveler',
-    trustCopy: '🔒 Processed via PayPal Holdings, Inc. • Financial data is 100% encrypted & private.',
-    cardHeading: 'Pay with Debit or Credit Card (Visa, Mastercard, Amex):',
+    protectionBadge: '🛡️ Official PayPal Buyer Protection (180 Days): 100% fraud-proof, dispute-backed & anti-scam guaranteed.',
+    trustCopy: '🔒 Processed via PayPal Holdings, Inc. • 256-bit bank encryption. Accepts Visa, Mastercard, American Express, Discover, Diners Club, JCB & UnionPay.',
+    cardHeading: 'Pay with International Debit or Credit Card (Visa, Mastercard, Amex, Discover, Diners, JCB, UnionPay):',
     paypalHeading: 'Pay with your PayPal account or balance:',
     error: 'An error occurred during payment.',
+  },
+  fr: {
+    sslEncrypted: 'Chiffrement SSL 256 bits',
+    confirming: 'Confirmation du paiement sécurisé PayPal...',
+    payWithPayPal: 'Payer avec PayPal / Carte Internationale',
+    errorProcessing: 'Erreur lors du traitement du paiement PayPal.',
+    errorInitiating: 'Erreur lors de l\'initialisation PayPal.',
+    defaultTravelerName: 'Voyageur Distingué',
+    protectionBadge: '🛡️ Protection des Achats PayPal (180 Jours) : Réservation 100% couverte contre la fraude et les litiges.',
+    trustCopy: '🔒 Traité via PayPal Holdings, Inc. • Chiffrement 256 bits. Accepte Visa, Mastercard, Amex, Discover, Diners, JCB et UnionPay.',
+    cardHeading: 'Payer par Carte Bancaire (Visa, Mastercard, Amex, Discover, Diners, JCB, UnionPay) :',
+    paypalHeading: 'Payer avec votre compte PayPal :',
+    error: 'Une erreur est survenue lors du paiement.',
+  },
+  de: {
+    sslEncrypted: '256-Bit-SSL-Verschlüsselung',
+    confirming: 'Sichere PayPal-Zahlung wird bestätigt...',
+    payWithPayPal: 'Mit PayPal / Internationaler Karte zahlen',
+    errorProcessing: 'Fehler bei der PayPal-Verarbeitung.',
+    errorInitiating: 'Fehler beim Starten der PayPal-Bestellung.',
+    defaultTravelerName: 'Geschätzter Reisender',
+    protectionBadge: '🛡️ Offizieller PayPal-Käuferschutz (180 Tage): 100% abgesichert gegen Betrug und Ausfall.',
+    trustCopy: '🔒 Über PayPal Holdings, Inc. verarbeitet • 256-Bit-Verschlüsselung. Akzeptiert Visa, Mastercard, Amex, Discover, Diners, JCB & UnionPay.',
+    cardHeading: 'Mit Debit- oder Kreditkarte zahlen (Visa, Mastercard, Amex, Discover, Diners, JCB, UnionPay):',
+    paypalHeading: 'Mit PayPal-Guthaben oder -Konto zahlen:',
+    error: 'Bei der Zahlung ist ein Fehler aufgetreten.',
+  },
+  it: {
+    sslEncrypted: 'Crittografia SSL a 256 bit',
+    confirming: 'Conferma del pagamento sicuro con PayPal...',
+    payWithPayPal: 'Paga con PayPal / Carta Internazionale',
+    errorProcessing: 'Errore durante l\'elaborazione del pagamento PayPal.',
+    errorInitiating: 'Errore durante l\'avvio dell\'ordine PayPal.',
+    defaultTravelerName: 'Viaggiatore Pregiato',
+    protectionBadge: '🛡️ Protezione Acquisti PayPal Ufficiale (180 Giorni): Prenotazione protetta al 100% contro le frodi.',
+    trustCopy: '🔒 Elaborato tramite PayPal Holdings, Inc. • Crittografia a 256 bit. Accetta Visa, Mastercard, Amex, Discover, Diners, JCB e UnionPay.',
+    cardHeading: 'Paga con Carta Internazionale (Visa, Mastercard, Amex, Discover, Diners, JCB, UnionPay):',
+    paypalHeading: 'Paga con il tuo conto PayPal:',
+    error: 'Si è verificato un errore durante il pagamento.',
+  },
+  pt: {
+    sslEncrypted: 'Criptografia SSL de 256 bits',
+    confirming: 'Confirmando pagamento seguro com PayPal...',
+    payWithPayPal: 'Pagar com PayPal / Cartão Internacional',
+    errorProcessing: 'Erro ao processar pagamento com PayPal.',
+    errorInitiating: 'Erro ao iniciar pedido no PayPal.',
+    defaultTravelerName: 'Viajante Ilustre',
+    protectionBadge: '🛡️ Proteção ao Comprador PayPal (180 Dias): Reserva 100% protegida contra fraudes e golpes.',
+    trustCopy: '🔒 Processado via PayPal Holdings, Inc. • Criptografia de 256 bits. Aceita Visa, Mastercard, Amex, Discover, Diners, JCB e UnionPay.',
+    cardHeading: 'Pagar com Cartão Internacional (Visa, Mastercard, Amex, Discover, Diners, JCB, UnionPay):',
+    paypalHeading: 'Pagar com sua conta PayPal:',
+    error: 'Ocorreu um erro durante o pagamento.',
+  },
+  ja: {
+    sslEncrypted: '256ビットSSL暗号化',
+    confirming: 'PayPal安全決済を確認中...',
+    payWithPayPal: 'PayPal / 国際クレジットカードで支払う',
+    errorProcessing: 'PayPal決済処理中にエラーが発生しました。',
+    errorInitiating: 'PayPal注文の開始中にエラーが発生しました。',
+    defaultTravelerName: '大切なお客様',
+    protectionBadge: '🛡️ PayPal公式買い手保護制度（180日間）：詐欺やトラブルから100%保護された安心の公式決済。',
+    trustCopy: '🔒 PayPal Holdings, Inc.公式処理 • 256ビット暗号化。Visa、Mastercard、American Express、Discover、Diners Club、JCB、銀聯(UnionPay)に対応。',
+    cardHeading: '国際クレジットカードまたはデビットカードで支払う（Visa、Mastercard、Amex、JCB、銀聯 等）：',
+    paypalHeading: 'PayPal残高またはアカウントで支払う：',
+    error: 'お支払い中にエラーが発生しました。',
+  },
+  zh: {
+    sslEncrypted: '256位SSL银行级加密',
+    confirming: '正在确认 PayPal 官方安全支付...',
+    payWithPayPal: '使用 PayPal / 国际双币卡安全支付',
+    errorProcessing: '处理 PayPal 支付时出错。',
+    errorInitiating: '发起 PayPal 订单时出错。',
+    defaultTravelerName: '尊贵旅客',
+    protectionBadge: '🛡️ PayPal 官方买家保障计划（180天全程无忧保障）：100%防欺诈与未履约纠纷退款机制保障出行。',
+    trustCopy: '🔒 由 PayPal Holdings, Inc. 官方加密处理 • 256位银行级加密，全面支持 Visa、Mastercard、American Express (运通)、Discover、Diners Club、JCB 以及 银联 (UnionPay)。',
+    cardHeading: '使用国际信用卡或借记卡支付（支持 Visa、Mastercard、Amex、JCB、银联 等）：',
+    paypalHeading: '使用 PayPal 账户或余额支付：',
+    error: '支付过程中发生错误。',
   },
 };
 
@@ -202,6 +283,16 @@ export function PayPalCheckoutButton({
         <span className="text-[11px] font-mono text-emerald-700 dark:text-emerald-400 font-bold">
           USD ${(amount || 0).toLocaleString('en-US')}
         </span>
+      </div>
+
+      {/* Distintivo de Confianza Máxima: Seguro Antiestafas y Protección al Comprador PayPal */}
+      <div className="p-3 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/40 text-emerald-900 dark:text-emerald-200 text-xs flex items-start gap-2 shadow-xs">
+        <span className="shrink-0 text-sm">🛡️</span>
+        <div className="space-y-0.5">
+          <p className="font-bold text-[11px] leading-tight text-emerald-950 dark:text-emerald-100">
+            {t.protectionBadge}
+          </p>
+        </div>
       </div>
 
       {isCapturing ? (

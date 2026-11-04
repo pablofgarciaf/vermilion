@@ -16,11 +16,13 @@ import {
 } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
+import { getItineraryDayTitle, getItineraryDayDescription } from '@/data/itineraryTranslations';
 import { isBotOrCrawler } from '@/utils/isBot';
 
 interface TourItineraryProps {
   itinerary: ItineraryDay[];
   tourTitle?: string;
+  tourId?: string;
 }
 
 const ITINERARY_PREFIX: Record<string, string> = {
@@ -133,7 +135,7 @@ function removeRepeatedDayPrefix(title: string, day: number, locale: string): st
   return title.replace(prefixPattern, '').trim();
 }
 
-export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
+export function TourItinerary({ itinerary, tourTitle, tourId }: TourItineraryProps) {
   const [activeDay, setActiveDay] = useState<number>(1);
   const [isHovered, setIsHovered] = useState(false);
   const locale = useLocale();
@@ -155,9 +157,19 @@ export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
   }
 
   const currentItem = itinerary.find((item) => item.day === activeDay) || itinerary[0];
-  const dayTitle = getLocalizedText(currentItem.title, locale);
+  const dictTitle = getItineraryDayTitle(tourId, currentItem.day, locale);
+  const rawTitle = currentItem.title && typeof currentItem.title === 'object' && currentItem.title[locale]
+    ? currentItem.title[locale]
+    : (dictTitle || getLocalizedText(currentItem.title, locale));
+  const dayTitle = rawTitle;
   const dayTitleWithoutPrefix = removeRepeatedDayPrefix(dayTitle, currentItem.day, locale);
-  const dayDesc = getLocalizedText(currentItem.description, locale);
+
+  const dictDesc = getItineraryDayDescription(tourId, currentItem.day, locale);
+  const rawDesc = currentItem.description && typeof currentItem.description === 'object' && currentItem.description[locale]
+    ? currentItem.description[locale]
+    : (dictDesc || getLocalizedText(currentItem.description, locale));
+  const dayDesc = rawDesc;
+
   const dayMeals = currentItem.meals ? getLocalizedText(currentItem.meals, locale) : '';
   const dayAcc = currentItem.accommodation ? getLocalizedText(currentItem.accommodation, locale) : '';
   const dayTrans = currentItem.transportation ? getLocalizedText(currentItem.transportation, locale) : '';

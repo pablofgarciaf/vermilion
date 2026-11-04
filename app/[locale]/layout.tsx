@@ -143,8 +143,8 @@ export default async function RootLayout({
   const gaPrimaryId = process.env.NEXT_PUBLIC_GA_ID || 'G-D8ZNLYMCB0';
   const gaSecondaryId = process.env.NEXT_PUBLIC_GA_SECONDARY_ID || 'G-0YLF960DJG';
   const gaIds = Array.from(new Set([gaPrimaryId, gaSecondaryId].filter(Boolean)));
-  // Los únicos contenedores de GTM que pidió el cliente. Fijos en código (no dependen de variables de entorno).
-  const gtmContainerIds = ['GTM-TDQXQ738', 'GTM-WCCPTDVG'];
+  // Contenedor único de GTM oficial: GTM-TDQXQ738 (evita duplicidades y conflictos en Tag Assistant)
+  const gtmContainerIds = ['GTM-TDQXQ738'];
 
   const jsonLdData = {
     '@context': 'https://schema.org',

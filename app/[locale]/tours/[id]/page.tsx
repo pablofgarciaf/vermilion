@@ -445,7 +445,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
           </div>
 
           {tour.itinerary && tour.itinerary.length > 0 && (
-            <TourItinerary itinerary={tour.itinerary} tourTitle={shortTourName} />
+            <TourItinerary itinerary={tour.itinerary} tourTitle={shortTourName} tourId={tour.id} />
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-6 border-t border-zinc-200 dark:border-zinc-800">

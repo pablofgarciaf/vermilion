@@ -1292,14 +1292,14 @@ export default function CheckoutPaymentPage() {
 
                 <BookingTrustPanel />
 
-                <div className="pt-3 border-t border-stone-100 dark:border-white/5 flex items-center justify-between text-[11px] text-stone-500 dark:text-zinc-400">
-                  <div className="flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>PayPal Holdings, Inc.</span>
+                <div className="pt-3 border-t border-stone-100 dark:border-white/5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-500 dark:text-zinc-400">
+                  <div className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>PayPal 180-Day Buyer Protection</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Lock className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>SSL 256-Bit Encryption</span>
+                    <Lock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>Visa • MC • Amex • Discover • Diners • JCB • UnionPay</span>
                   </div>
                 </div>
               </div>
