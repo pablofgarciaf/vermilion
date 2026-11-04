@@ -229,14 +229,14 @@ const multiDayTours: Tour[] = [
         zh: '酒店前台免费提供安全保险箱服务'
       },
       {
-        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
-        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
-        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
-        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
-        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
-        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
-        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
-        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
+        en: 'Autobús Lobito Eco-Shuttle (Airport – Itabaca Channel – Airport): The exclusive official ground transport on Baltra Island, engineered to safeguard the delicate ecosystem and eliminate environmental pollution through certified native transit',
+        es: 'Autobús Lobito (Aeropuerto – Canal de Itabaca – Aeropuerto): El único transporte terrestre autorizado en la Isla Baltra, una experiencia nativa protegida que garantiza la conservación ambiental y elimina la contaminación vehicular',
+        fr: 'Navette écologique Autobús Lobito (Aéroport – Canal d\'Itabaca – Aéroport) : L\'unique moyen de transport terrestre sur l\'île de Baltra, garantissant la protection absolue de l\'écosystème insulaire contre la pollution',
+        de: 'Autobús Lobito Öko-Shuttle (Flughafen – Itabaca-Kanal – Flughafen): Das einzige zugelassene Landtransportmittel auf Baltra, das aktiven Umweltschutz gewährleistet und Schadstoffemissionen im Nationalpark eliminiert',
+        it: 'Navetta ecologica Autobús Lobito (Aeroporto – Canale di Itabaca – Aeroporto): L\'unico trasporto su terra dell\'isola Baltra, esperienza nativa che garantisce la protezione ambientale ed elimina le emissioni inquinanti',
+        pt: 'Ônibus ecológico Lobito (Aeroporto – Canal de Itabaca – Aeroporto): O único transporte terrestre autorizado na Ilha Baltra, experiência nativa que assegura a preservação ambiental e elimina a poluição',
+        ja: 'アウトブス・ロビト（Autobús Lobito）環境保全シャトル（空港 – イタバカ運河 – 空港）：バルトラ島唯一の公式陸上交通。国立公園の環境汚染を防ぎ、固有の生態系を守る持続可能な移動体験',
+        zh: 'Lobito 环保官方生态巴士（Autobús Lobito：机场 – 伊塔巴卡运河 – 机场）：巴尔特拉岛唯一官方陆路交通，也是独具特色的海岛原生体验，严格实行生态限行保护以根除尾气污染'
       },
       {
         en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
@@ -572,14 +572,14 @@ const multiDayTours: Tour[] = [
           zh: '包含早餐'
         },
         transportation: {
-          en: 'Island ground transfer, Baltra airport shuttle, domestic flight & private Quito transfer',
-          es: 'Transporte en isla, bus Lobito, vuelo doméstico y traslado privado en Quito',
-          fr: 'Transport terrestre sur l\'île, navette aéroport, vol intérieur et transfert privé à Quito',
-          de: 'Insel-Transfer, Shuttlebus, Inlandsflug & privater Transfer in Quito',
-          it: 'Trasferimento sull\'isola, navetta, volo nazionale e transfer privato a Quito',
-          pt: 'Transporte na ilha, ônibus shuttle, voo doméstico e traslado privado em Quito',
-          ja: '島内陸上送迎、空港シャトル、国内線フライト＆キト市内専用送迎',
-          zh: '岛上陆路接驳、机场专线巴士、国内航班及基多市内专车'
+          en: 'Island ground transfer, Autobús Lobito ecological shuttle (exclusive island transport), domestic flight & private Quito transfer',
+          es: 'Transporte en isla, Autobús Lobito ecológico (único transporte de la isla para protección ambiental), vuelo doméstico y traslado privado en Quito',
+          fr: 'Transport terrestre sur l\'île, navette écologique Autobús Lobito (transport exclusif protecteur de l\'écosystème), vol intérieur et transfert privé à Quito',
+          de: 'Insel-Transfer, Autobús Lobito Öko-Shuttle (exklusiver Inseltransport zum Umweltschutz), Inlandsflug & privater Transfer in Quito',
+          it: 'Trasferimento sull\'isola, navetta ecologica Autobús Lobito (trasporto esclusivo ecologico), volo nazionale e transfer privato a Quito',
+          pt: 'Transporte na ilha, ônibus ecológico Lobito (transporte exclusivo para proteção ambiental), voo doméstico e traslado privado em Quito',
+          ja: '島内陸上送迎、環境保全シャトル「Autobús Lobito」（島内唯一の公認移動）、国内線フライト＆キト市内専用送迎',
+          zh: '岛上陆路接驳、Autobús Lobito 生态专线巴士（巴尔特拉岛唯一环保接驳）、国内航班及基多市内专车'
         },
       },
       {
@@ -867,14 +867,14 @@ const multiDayTours: Tour[] = [
         zh: '酒店前台免费提供安全保险箱服务'
       },
       {
-        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
-        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
-        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
-        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
-        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
-        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
-        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
-        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
+        en: 'Autobús Lobito Eco-Shuttle (Airport – Itabaca Channel – Airport): The exclusive official ground transport on Baltra Island, engineered to safeguard the delicate ecosystem and eliminate environmental pollution through certified native transit',
+        es: 'Autobús Lobito (Aeropuerto – Canal de Itabaca – Aeropuerto): El único transporte terrestre autorizado en la Isla Baltra, una experiencia nativa protegida que garantiza la conservación ambiental y elimina la contaminación vehicular',
+        fr: 'Navette écologique Autobús Lobito (Aéroport – Canal d\'Itabaca – Aéroport) : L\'unique moyen de transport terrestre sur l\'île de Baltra, garantissant la protection absolue de l\'écosystème insulaire contre la pollution',
+        de: 'Autobús Lobito Öko-Shuttle (Flughafen – Itabaca-Kanal – Flughafen): Das einzige zugelassene Landtransportmittel auf Baltra, das aktiven Umweltschutz gewährleistet und Schadstoffemissionen im Nationalpark eliminiert',
+        it: 'Navetta ecologica Autobús Lobito (Aeroporto – Canale di Itabaca – Aeroporto): L\'unico trasporto su terra dell\'isola Baltra, esperienza nativa che garantisce la protezione ambientale ed elimina le emissioni inquinanti',
+        pt: 'Ônibus ecológico Lobito (Aeroporto – Canal de Itabaca – Aeroporto): O único transporte terrestre autorizado na Ilha Baltra, experiência nativa que assegura a preservação ambiental e elimina a poluição',
+        ja: 'アウトブス・ロビト（Autobús Lobito）環境保全シャトル（空港 – イタバカ運河 – 空港）：バルトラ島唯一の公式陸上交通。国立公園の環境汚染を防ぎ、固有の生態系を守る持続可能な移動体験',
+        zh: 'Lobito 环保官方生态巴士（Autobús Lobito：机场 – 伊塔巴卡运河 – 机场）：巴尔特拉岛唯一官方陆路交通，也是独具特色的海岛原生体验，严格实行生态限行保护以根除尾气污染'
       },
       {
         en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
@@ -1254,14 +1254,14 @@ const multiDayTours: Tour[] = [
           zh: '包含早餐'
         },
         transportation: {
-          en: 'Island ground transfer, Baltra shuttle, domestic flight & private Quito transfer',
-          es: 'Transporte en isla, bus Lobito, vuelo doméstico y traslado privado en Quito',
-          fr: 'Transport terrestre sur l\'île, navette aéroport, vol intérieur et transfert privé à Quito',
-          de: 'Insel-Transfer, Shuttlebus, Inlandsflug & privater Transfer in Quito',
-          it: 'Trasferimento sull\'isola, navetta, volo nazionale e transfer privato a Quito',
-          pt: 'Transporte na ilha, ônibus shuttle, voo doméstico e traslado privado em Quito',
-          ja: '島内陸上送迎、空港シャトル、国内線フライト＆キト市内専用送迎',
-          zh: '岛上陆路接驳、机场专线巴士、国内航班及基多市内专车'
+          en: 'Island ground transfer, Autobús Lobito ecological shuttle (exclusive island transport), domestic flight & private Quito transfer',
+          es: 'Transporte en isla, Autobús Lobito ecológico (único transporte de la isla para protección ambiental), vuelo doméstico y traslado privado en Quito',
+          fr: 'Transport terrestre sur l\'île, navette écologique Autobús Lobito (transport exclusif protecteur de l\'écosystème), vol intérieur et transfert privé à Quito',
+          de: 'Insel-Transfer, Autobús Lobito Öko-Shuttle (exklusiver Inseltransport zum Umweltschutz), Inlandsflug & privater Transfer in Quito',
+          it: 'Trasferimento sull\'isola, navetta ecologica Autobús Lobito (trasporto esclusivo ecologico), volo nazionale e transfer privato a Quito',
+          pt: 'Transporte na ilha, ônibus ecológico Lobito (transporte exclusivo para proteção ambiental), voo doméstico e traslado privado em Quito',
+          ja: '島内陸上送迎、環境保全シャトル「Autobús Lobito」（島内唯一の公認移動）、国内線フライト＆キト市内専用送迎',
+          zh: '岛上陆路接驳、Autobús Lobito 生态专线巴士（巴尔特拉岛唯一环保接驳）、国内航班及基多市内专车'
         },
       },
       {
@@ -1558,14 +1558,14 @@ const multiDayTours: Tour[] = [
         zh: '酒店前台免费提供安全保险箱服务'
       },
       {
-        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
-        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
-        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
-        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
-        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
-        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
-        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
-        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
+        en: 'Autobús Lobito Eco-Shuttle (Airport – Itabaca Channel – Airport): The exclusive official ground transport on Baltra Island, engineered to safeguard the delicate ecosystem and eliminate environmental pollution through certified native transit',
+        es: 'Autobús Lobito (Aeropuerto – Canal de Itabaca – Aeropuerto): El único transporte terrestre autorizado en la Isla Baltra, una experiencia nativa protegida que garantiza la conservación ambiental y elimina la contaminación vehicular',
+        fr: 'Navette écologique Autobús Lobito (Aéroport – Canal d\'Itabaca – Aéroport) : L\'unique moyen de transport terrestre sur l\'île de Baltra, garantissant la protection absolue de l\'écosystème insulaire contre la pollution',
+        de: 'Autobús Lobito Öko-Shuttle (Flughafen – Itabaca-Kanal – Flughafen): Das einzige zugelassene Landtransportmittel auf Baltra, das aktiven Umweltschutz gewährleistet und Schadstoffemissionen im Nationalpark eliminiert',
+        it: 'Navetta ecologica Autobús Lobito (Aeroporto – Canale di Itabaca – Aeroporto): L\'unico trasporto su terra dell\'isola Baltra, esperienza nativa che garantisce la protezione ambientale ed elimina le emissioni inquinanti',
+        pt: 'Ônibus ecológico Lobito (Aeroporto – Canal de Itabaca – Aeroporto): O único transporte terrestre autorizado na Ilha Baltra, experiência nativa que assegura a preservação ambiental e elimina a poluição',
+        ja: 'アウトブス・ロビト（Autobús Lobito）環境保全シャトル（空港 – イタバカ運河 – 空港）：バルトラ島唯一の公式陸上交通。国立公園の環境汚染を防ぎ、固有の生態系を守る持続可能な移動体験',
+        zh: 'Lobito 环保官方生态巴士（Autobús Lobito：机场 – 伊塔巴卡运河 – 机场）：巴尔特拉岛唯一官方陆路交通，也是独具特色的海岛原生体验，严格实行生态限行保护以根除尾气污染'
       },
       {
         en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
