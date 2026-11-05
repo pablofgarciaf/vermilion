@@ -4,6 +4,7 @@ import { leadSchema, sanitizeText, isValidPhone } from '@/lib/validation';
 import { leadsRepository } from '@/lib/services/DatabaseService';
 import { BookingRequest } from '@/types';
 import { notifyNewLead, sendLeadMagnetEmail } from '@/lib/email';
+import { syncLeadToHubSpot } from '@/lib/hubspot';
 
 export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
   // 🛡️ Honeypot Trap Detection (Python Bot / Automated Form Spammer Neutralizer)
@@ -93,6 +94,19 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
       console.error('[LeadMagnetEmail Error]', err)
     );
   }
+
+  // 🚀 Sincronización automática con HubSpot CRM
+  syncLeadToHubSpot({
+    email: customerEmail,
+    firstname: customerName,
+    phone: customerPhone,
+    destination,
+    travelDates,
+    guestsCount,
+    message,
+    leadSource: tourId.includes('lead-magnet') ? 'Lead Magnet Guide' : 'Web Lead Form',
+    locale: leadLocale,
+  }).catch((err) => console.error('[HubSpot Sync Error]', err));
 
   // Trigger n8n webhook if configured
   let webhookTriggered = false;

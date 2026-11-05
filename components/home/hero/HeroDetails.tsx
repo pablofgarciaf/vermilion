@@ -99,27 +99,9 @@ export function getStandardTemplateHTML(slide: SlideData, locale: string): strin
   const title = getLocalizedText(slide.title, locale);
   const title2 = getLocalizedText(slide.title2, locale);
   const desc = getLocalizedText(slide.description, locale);
+  const badges = SPLASH_TEXTS[locale] || SPLASH_TEXTS.en;
 
   return `
-    <a
-      href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="pointer-events-auto hidden md:inline-flex items-center gap-2 px-3.5 py-1.5 mb-2 rounded-full bg-black/60 hover:bg-emerald-950/90 backdrop-blur-md border border-emerald-500/50 hover:border-emerald-400 text-white transition-all shadow-xl hover:shadow-emerald-950/60 group cursor-pointer"
-    >
-      <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-      <div class="flex items-center gap-0.5 text-emerald-400">
-        <svg class="w-2.5 h-2.5 fill-emerald-400 text-emerald-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <svg class="w-2.5 h-2.5 fill-emerald-400 text-emerald-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <svg class="w-2.5 h-2.5 fill-emerald-400 text-emerald-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <svg class="w-2.5 h-2.5 fill-emerald-400 text-emerald-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <svg class="w-2.5 h-2.5 fill-emerald-400 text-emerald-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      </div>
-      <span class="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-emerald-200 group-hover:text-white transition-colors">
-        TripAdvisor 5.0 (52 Verified Reviews) • Mintur #1793215456001 • 100% Deposit Protection Guarantee
-      </span>
-    </a>
-
     <div class="h-auto mb-1.5 pt-6 sm:pt-8 md:pt-0">
       <div class="text text-white font-medium tracking-widest uppercase text-base md:text-sm pt-1 relative flex flex-col items-center text-center md:items-start md:text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
         <div class="w-8 h-[2px] bg-white rounded-full mb-2 mx-auto md:mx-0"></div>
@@ -139,11 +121,41 @@ export function getStandardTemplateHTML(slide: SlideData, locale: string): strin
       </h3>
     </div>
 
-    <div class="h-auto mt-3 md:mt-4 flex flex-col items-center text-center md:items-start md:text-left w-full max-w-lg mx-auto md:mx-0">
+    <div class="h-auto mt-2 md:mt-3 flex flex-col items-center text-center md:items-start md:text-left w-full max-w-lg mx-auto md:mx-0">
       <div class="desc flex flex-col items-center text-center md:items-start md:text-left w-full">
-        <p class="hero-desc-text text-[17px] sm:text-[19px] lg:text-[20px] text-white/95 leading-relaxed font-medium text-center md:text-left mx-auto md:mx-0" style="text-shadow: 0px 1px 3px rgba(0,0,0,0.8);">
+        <p class="hero-desc-text text-[16px] sm:text-[18px] lg:text-[19px] text-white/95 leading-relaxed font-medium text-center md:text-left mx-auto md:mx-0" style="text-shadow: 0px 1px 3px rgba(0,0,0,0.8);">
           ${desc}
         </p>
+      </div>
+
+      <!-- 3 VIP Badges Cluster under Description -->
+      <div class="slide-trust-badges mt-3.5 mb-2 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs sm:text-sm font-semibold mx-auto md:mx-0">
+        <a
+          href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 shadow-xl hover:border-amber-300 transition-colors pointer-events-auto"
+        >
+          <div class="flex items-center gap-0.5 text-amber-400">
+            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="text-zinc-300">|</span>
+          <span class="tracking-tight text-[11px] sm:text-xs">${badges.rating}</span>
+        </a>
+
+        <div class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-xs shadow-xl">
+          <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>${badges.mintur}</span>
+        </div>
+
+        <div class="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-cyan-500/40 text-cyan-300 text-[10px] sm:text-xs shadow-xl">
+          <svg class="w-3.5 h-3.5 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>${badges.depositGuarantee}</span>
+        </div>
       </div>
     </div>
   `;
@@ -164,7 +176,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
           <div
             key={id}
             id={id}
-            className={`absolute left-0 w-full px-4 sm:px-6 md:px-0 md:w-auto md:left-[30px] lg:left-[60px] top-[145px] sm:top-[160px] md:top-[105px] lg:top-[115px] xl:top-[125px] flex flex-col items-center text-center md:items-start md:text-left pointer-events-none max-w-xl ${opacityClass}`}
+            className={`absolute left-0 w-full px-4 sm:px-6 md:px-0 md:w-auto md:left-[30px] lg:left-[60px] top-[135px] sm:top-[145px] md:top-[90px] lg:top-[100px] xl:top-[110px] flex flex-col items-center text-center md:items-start md:text-left pointer-events-none max-w-xl ${opacityClass}`}
           >
             {isWelcomeSlide ? (
               /* ── BIENVENIDA EXCLUSIVA (Centrada en móvil, a la izquierda en desktop) ── */
@@ -268,24 +280,6 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
             ) : (
               /* ── MOLDE ESTÁNDAR (Con clases estándar para GSAP, vacío en inicio) ── */
               <>
-                {/* TripAdvisor Rating Badge Pill (Visible on Desktop) */}
-                <a
-                  href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pointer-events-auto hidden md:inline-flex items-center gap-2 px-3.5 py-1.5 mb-2 rounded-full bg-black/60 hover:bg-emerald-950/90 backdrop-blur-md border border-emerald-500/50 hover:border-emerald-400 text-white transition-all shadow-xl hover:shadow-emerald-950/60 group cursor-pointer"
-                >
-                  <Award className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <div className="flex items-center gap-0.5 text-emerald-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-2.5 h-2.5 fill-emerald-400 text-emerald-400" />
-                    ))}
-                  </div>
-                  <span className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-emerald-200 group-hover:text-white transition-colors">
-                    TripAdvisor 5.0 (52 Verified Reviews) • Mintur #1793215456001 • 100% Deposit Protection Guarantee
-                  </span>
-                </a>
-
                 {/* Destino Subtítulo */}
                 <div className="h-auto mb-1.5 pt-6 sm:pt-8 md:pt-0">
                   <div className="text text-white font-medium tracking-widest uppercase text-base md:text-sm pt-1 relative flex flex-col items-center text-center md:items-start md:text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
@@ -308,9 +302,37 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                   </h3>
                 </div>
 
-                <div className="h-auto mt-3 md:mt-4 flex flex-col items-center text-center md:items-start md:text-left w-full max-w-lg mx-auto md:mx-0">
+                <div className="h-auto mt-2 md:mt-3 flex flex-col items-center text-center md:items-start md:text-left w-full max-w-lg mx-auto md:mx-0">
                   <div className="desc flex flex-col items-center text-center md:items-start md:text-left w-full">
-                    <p className="hero-desc-text text-[17px] sm:text-[19px] lg:text-[20px] text-white/95 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] font-medium text-center md:text-left mx-auto md:mx-0"></p>
+                    <p className="hero-desc-text text-[16px] sm:text-[18px] lg:text-[19px] text-white/95 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] font-medium text-center md:text-left mx-auto md:mx-0"></p>
+                  </div>
+
+                  {/* 3 VIP Badges Cluster under Description */}
+                  <div className="slide-trust-badges mt-3.5 mb-2 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs sm:text-sm font-semibold mx-auto md:mx-0">
+                    <a
+                      href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 shadow-xl hover:border-amber-300 transition-colors pointer-events-auto"
+                    >
+                      <div className="flex items-center gap-0.5 text-amber-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                        ))}
+                      </div>
+                      <span className="text-zinc-300">|</span>
+                      <span className="tracking-tight text-[11px] sm:text-xs">{welcomeText.rating}</span>
+                    </a>
+
+                    <div className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-xs shadow-xl">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>{welcomeText.mintur}</span>
+                    </div>
+
+                    <div className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-cyan-500/40 text-cyan-300 text-[10px] sm:text-xs shadow-xl">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                      <span>{welcomeText.depositGuarantee}</span>
+                    </div>
                   </div>
                 </div>
               </>
