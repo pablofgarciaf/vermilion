@@ -260,10 +260,24 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable} ${oswald.variable} scroll-smooth`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        {/* Google Tag Manager (Head script - required by Tag Assistant to connect) */}
+        {gtmContainerIds.map((gtmId) => (
+          <script
+            key={gtmId}
+            dangerouslySetInnerHTML={{
+              __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');`,
+            }}
+          />
+        ))}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://tagassistant.google.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
         <script
           type="application/ld+json"
@@ -298,18 +312,9 @@ export default async function RootLayout({
               });
               gtag('js', new Date());
               ${gaIds.map((id) => `gtag('config', '${id}', { anonymize_ip: true });`).join('\n              ')}
+              gtag('config', 'AW-18067067368');
             `}
           </Script>
-          {/* Google Tag Manager: se carga después del consentimiento por defecto (denegado) */}
-          {gtmContainerIds.map((gtmId) => (
-            <Script key={gtmId} id={`google-tag-manager-${gtmId}`} strategy="afterInteractive">
-              {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','${gtmId}');`}
-            </Script>
-          ))}
           {gaIds.map((id) => (
             <Script
               key={id}

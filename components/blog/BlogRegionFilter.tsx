@@ -169,16 +169,20 @@ export function BlogRegionFilter({ locale }: { locale: string }) {
 
     allSections.forEach((el) => {
       const sectionRegion = el.getAttribute('data-region-section');
-      if (sectionRegion === regionId || sectionRegion === 'general') {
+      // When a region is picked: ONLY show that region (plus optional intro if marked general before any region)
+      // Hide all other regions strictly.
+      if (sectionRegion === regionId) {
         el.style.display = '';
-        if (!firstMatch && sectionRegion === regionId) firstMatch = el;
+        if (!firstMatch) firstMatch = el;
       } else {
         el.style.display = 'none';
       }
     });
 
     if (firstMatch) {
-      (firstMatch as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const yOffset = -120; // Ensure sticky header and navbar don't overlap the title
+      const y = (firstMatch as HTMLElement).getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 

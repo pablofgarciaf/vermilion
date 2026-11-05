@@ -15,7 +15,7 @@ import {
   type PlanTripDetail,
   validatePlanTripContact,
 } from '@/data/planTrip';
-import { trackGenerateLead } from '@/lib/analytics/trackLead';
+import { trackGenerateLead, trackQuoteFormSubmitted } from '@/lib/analytics/trackLead';
 import { useActivePromotion } from '@/hooks/useActivePromotion';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
@@ -155,7 +155,23 @@ export function PlanTripModal() {
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error('lead_failed');
       saveStoredUserProfile({ name: form.name.trim(), email: form.email.trim(), phone: form.phone.trim() });
-      trackGenerateLead({ method: 'contact_form', placement: 'plan_trip_modal', item: dest?.leadValue });
+      trackQuoteFormSubmitted({ method: 'contact_form', placement: 'plan_trip_modal', item: dest?.leadValue });
+      
+      // Google Ads Conversion Event dispatch for Tag Assistant & Google Ads
+      if (typeof window !== 'undefined') {
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({
+          event: 'quote_form_submitted',
+          form_name: 'plan_trip_modal',
+          destination: dest?.leadValue,
+          currency: 'USD',
+        });
+        (window as any).gtag?.('event', 'conversion', {
+          send_to: 'AW-18067067368',
+          event_category: 'lead',
+          event_label: dest?.leadValue || 'trip_quote',
+        });
+      }
       setStatus('done');
     } catch {
       setStatus('idle');
