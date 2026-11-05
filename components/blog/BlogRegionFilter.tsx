@@ -180,9 +180,9 @@ export function BlogRegionFilter({ locale }: { locale: string }) {
     });
 
     if (firstMatch) {
-      const yOffset = -120; // Ensure sticky header and navbar don't overlap the title
+      const yOffset = -180; // Ensure sticky filter bar and navbar leave generous clearance above title
       const y = (firstMatch as HTMLElement).getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
     }
   };
 

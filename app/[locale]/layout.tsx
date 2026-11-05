@@ -260,6 +260,27 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${playfair.variable} ${oswald.variable} scroll-smooth`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        {/* DataLayer & Google Consent Initialization (Immediately in Head for Tag Assistant & Google Ads) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                ad_storage: 'granted',
+                ad_user_data: 'granted',
+                ad_personalization: 'granted',
+                analytics_storage: 'granted',
+                functionality_storage: 'granted',
+                security_storage: 'granted'
+              });
+              gtag('js', new Date());
+              ${gaIds.map((id) => `gtag('config', '${id}', { anonymize_ip: true });`).join('\n              ')}
+              gtag('config', 'AW-18067067368');
+            `,
+          }}
+        />
+
         {/* Google Tag Manager (Head script - required by Tag Assistant to connect) */}
         {gtmContainerIds.map((gtmId) => (
           <script
@@ -298,28 +319,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         ))}
 
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
-          <Script id="google-consent-default" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('consent', 'default', {
-                ad_storage: 'denied',
-                ad_user_data: 'denied',
-                ad_personalization: 'denied',
-                analytics_storage: 'denied',
-                functionality_storage: 'granted',
-                security_storage: 'granted'
-              });
-              gtag('js', new Date());
-              ${gaIds.map((id) => `gtag('config', '${id}', { anonymize_ip: true });`).join('\n              ')}
-              gtag('config', 'AW-18067067368');
-            `}
-          </Script>
           {gaIds.map((id) => (
             <Script
               key={id}
               src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
-              strategy="lazyOnload"
+              strategy="afterInteractive"
             />
           ))}
           {/* Ahrefs Web Analytics: clave del proyecto vermilionroutes.com en NEXT_PUBLIC_AHREFS_KEY */}

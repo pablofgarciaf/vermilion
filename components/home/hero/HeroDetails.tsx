@@ -181,34 +181,6 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
             {isWelcomeSlide ? (
               /* ── BIENVENIDA EXCLUSIVA (Centrada en móvil, a la izquierda en desktop) ── */
               <div className="welcome-container flex flex-col items-center text-center md:items-start md:text-left w-full">
-                {/* VIP Fiduciary Badges Cluster */}
-                <div className="welcome-badge mb-2.5 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs sm:text-sm font-semibold mx-auto md:mx-0 md:ml-[35px] lg:ml-[45px] xl:ml-[55px]">
-                  <a
-                    href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 shadow-xl hover:border-amber-300 transition-colors pointer-events-auto"
-                  >
-                    <div className="flex items-center gap-0.5 text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <span className="text-zinc-300">|</span>
-                    <span className="tracking-tight text-[11px] sm:text-xs">{welcomeText.rating}</span>
-                  </a>
-
-                  <div className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-xs shadow-xl">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>{welcomeText.mintur}</span>
-                  </div>
-
-                  <div className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-cyan-500/40 text-cyan-300 text-[10px] sm:text-xs shadow-xl">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span>{welcomeText.depositGuarantee}</span>
-                  </div>
-                </div>
-
                 {/* "ALL YOU NEED IS" Vibrant Oswald Decorative Brand Art */}
                 <div aria-hidden="true" className="welcome-title flex flex-col items-center justify-center md:items-start mb-2.5 select-none pointer-events-none">
                   <span className="flex gap-2 sm:gap-3 md:gap-4 font-oswald font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[68px] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] [text-shadow:0_3px_10px_rgba(0,0,0,0.9)]">
@@ -267,7 +239,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                 </div>
 
                 {/* 4 Worlds Pills */}
-                <div className="welcome-worlds flex flex-wrap items-center justify-center md:justify-start gap-2 text-white/90 font-medium tracking-[0.18em] uppercase text-[10px] sm:text-xs drop-shadow-md pt-2 border-t border-white/15 max-w-lg mx-auto md:mx-0">
+                <div className="welcome-worlds flex flex-wrap items-center justify-center md:justify-start gap-2 text-white/90 font-medium tracking-[0.18em] uppercase text-[10px] sm:text-xs drop-shadow-md pt-2 border-t border-white/15 max-w-lg mx-auto md:mx-0 mb-3.5">
                   <span className="px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[0]}</span>
                   <span className="w-1 h-1 rounded-full bg-emerald-400" />
                   <span className="px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[1]}</span>
@@ -275,6 +247,34 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                   <span className="px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[2]}</span>
                   <span className="w-1 h-1 rounded-full bg-emerald-400" />
                   <span className="px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[3]}</span>
+                </div>
+
+                {/* VIP Fiduciary Badges Cluster - Under text & Above Buttons */}
+                <div className="welcome-badge flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs sm:text-sm font-semibold mx-auto md:mx-0">
+                  <a
+                    href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 shadow-xl hover:border-amber-300 transition-colors pointer-events-auto"
+                  >
+                    <div className="flex items-center gap-0.5 text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <span className="text-zinc-300">|</span>
+                    <span className="tracking-tight text-[11px] sm:text-xs">{welcomeText.rating}</span>
+                  </a>
+
+                  <div className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-xs shadow-xl">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                    <span>{welcomeText.mintur}</span>
+                  </div>
+
+                  <div className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-cyan-500/40 text-cyan-300 text-[10px] sm:text-xs shadow-xl">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    <span>{welcomeText.depositGuarantee}</span>
+                  </div>
                 </div>
               </div>
             ) : (

@@ -712,14 +712,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               if (trimmed.startsWith('## ')) {
                 return (
-                  <h2 key={idx} {...sectionAttr} className="scroll-mt-28 text-2xl sm:text-3xl font-bold font-serif text-zinc-900 dark:text-white pt-6 pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                  <h2 key={idx} {...sectionAttr} className="scroll-mt-52 text-2xl sm:text-3xl font-bold font-serif text-zinc-900 dark:text-white pt-12 pb-2 border-b border-zinc-200 dark:border-zinc-800">
                     {trimmed.replace('## ', '')}
                   </h2>
                 );
               }
               if (trimmed.startsWith('### ')) {
                 return (
-                  <h3 key={idx} {...sectionAttr} className="scroll-mt-28 text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400 pt-4 pb-1">
+                  <h3 key={idx} {...sectionAttr} className="scroll-mt-48 text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400 pt-8 pb-1">
                     {trimmed.replace('### ', '')}
                   </h3>
                 );
