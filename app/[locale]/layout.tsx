@@ -140,8 +140,8 @@ export default async function RootLayout({
   const { locale } = await params;
   const messages = await getMessages();
 
-  // Solo Google Analytics activo oficial: G-D8ZNLYMCB0
-  const gaIds = ['G-D8ZNLYMCB0'];
+  // Google Analytics 4 activo oficial: G-0YLF960DJG (reemplaza G-D8ZNLYMCB0)
+  const gaIds = ['G-0YLF960DJG'];
   // Contenedor GTM activo oficial: GTM-WCCPTDVG (GTM-TDQXQ738 eliminado)
   const gtmContainerIds = ['GTM-WCCPTDVG'];
 
