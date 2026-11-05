@@ -276,10 +276,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-emerald-950 via-[#032118] to-[#021812] dark:from-black dark:via-zinc-950 dark:to-black text-zinc-100 pt-16 pb-8 border-t border-emerald-900/80 dark:border-zinc-900">
+    <footer className="bg-gradient-to-b from-emerald-950 via-[#032118] to-[#021812] dark:from-black dark:via-zinc-950 dark:to-black text-zinc-100 pt-10 pb-6 border-t border-emerald-900/80 dark:border-zinc-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-emerald-900/60">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8 pb-8 border-b border-emerald-900/60">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-5">
             <a href={`/${locale}`} aria-label="Vermilion Routes Home" className="flex items-center gap-3">
@@ -503,13 +503,6 @@ export function Footer() {
                 </a>
               </p>
               <p className="flex items-center gap-2 text-zinc-300">
-                <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="text-zinc-400 text-[11px]">{t.officeReservations}</span>
-                <a href={`tel:${EC_OFFICE_PHONE.replace(/[^0-9+]/g, '')}`} className="hover:text-emerald-300 transition-colors">
-                  {EC_OFFICE_PHONE}
-                </a>
-              </p>
-              <p className="flex items-center gap-2 text-zinc-300">
                 <Mail className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <a href="mailto:info@vermilionroutes.com" className="hover:text-emerald-300 transition-colors">
                   <span>info</span>
@@ -517,47 +510,23 @@ export function Footer() {
                   <span>vermilionroutes.com</span>
                 </a>
               </p>
-
-              {/* Bilingual operators notice */}
-              <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-[11px] text-zinc-300 leading-snug">
-                <p>{t.bilingualOperators}</p>
-              </div>
-
-              {/* Sedes Oficiales Internacionales */}
-              <div className="pt-2 space-y-2">
-                <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-[11px] leading-snug">
-                  <div className="flex items-center gap-1.5 font-semibold text-emerald-300 mb-1">
-                    <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>{t.hqEcuador}</span>
-                  </div>
-                  <p className="text-zinc-300 pl-5">
-                    Monteserrín, De los Lirios N45-206 y Julio Arellano, Tercer Piso, Quito (CP 170124)
-                  </p>
-                </div>
-
-                <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-[11px] leading-snug">
-                  <div className="flex items-center gap-1.5 font-semibold text-emerald-300 mb-1">
-                    <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>{t.officeSpain}</span>
-                  </div>
-                  <p className="text-zinc-300 pl-5">
-                    Calle Seco 3, 28007 Madrid, España
-                  </p>
-                </div>
-              </div>
+              <p className="flex items-center gap-2 text-zinc-400 text-[11px] pt-1">
+                <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>Quito: Monteserrín N45-206 · Madrid: C. Seco 3</span>
+              </p>
             </div>
           </div>
         </div>
 
         {/* Payment Methods */}
-        <div className="py-10 border-b border-emerald-900/60 space-y-6">
+        <div className="py-6 border-b border-emerald-900/60 space-y-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <span className="text-xs uppercase font-semibold text-emerald-400 tracking-wider flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 {t.paymentVerified}
               </span>
-              <p className="font-serif text-xl sm:text-2xl font-bold text-white mt-1">
+              <p className="font-serif text-lg sm:text-xl font-bold text-white mt-1">
                 {t.paymentHeading}
               </p>
               <p className="text-xs text-zinc-300 max-w-2xl mt-1">
@@ -582,7 +551,7 @@ export function Footer() {
         </div>
 
         {/* Guarantees & Badges */}
-        <div className="py-8 grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-emerald-900/60 dark:border-zinc-900 text-xs text-zinc-200">
+        <div className="py-5 grid grid-cols-1 md:grid-cols-3 gap-3 border-b border-emerald-900/60 dark:border-zinc-900 text-xs text-zinc-200">
           <a
             href={TRIPADVISOR_URL}
             target="_blank"
