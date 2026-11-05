@@ -2,7 +2,6 @@ import { GoogleGenAI } from '@google/genai';
 import { db } from './firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { mockTours } from '@/data/mock';
-import { FULL_DAY_FROM_PRICE } from '@/data/startingPrices';
 
 export interface ChatMessage {
   role: 'system' | 'user' | 'assistant';
@@ -434,7 +433,7 @@ function generateFallbackConciergeReply(
       } else if (lastUserMsg.includes('galapagos') || lastUserMsg.includes('tortuga') || lastUserMsg.includes('crucer') || lastUserMsg.includes('isla')) {
         reply = `¡Navegar por las **Islas Galápagos** y nadar con tortugas marinas y leones marinos es una vivencia inigualable!\n\nNuestras expediciones recomendadas con cupos garantizados son:\n👉 [Ecuador & Galápagos 11 Días](/${locale}/tours/ecuador-galapagos-11days) (Desde $3,850 USD) — Incluye Quito, volcanes, Amazonía y crucero en Galápagos.\n👉 [Galápagos 7 Días Crucero & Expedición](/${locale}/tours/galapagos-7days) (Desde $2,890 USD)\n\n¿Tienes fechas tentativas o prefieres consultar disponibilidad inmediata por [WhatsApp VIP](https://wa.me/593960039156?text=Hola,%20quisiera%20consultar%20disponibilidad%20para%20Galapagos)?`;
       } else if (lastUserMsg.includes('precio') || lastUserMsg.includes('costo') || lastUserMsg.includes('cotiz')) {
-        reply = `Nuestras expediciones a medida van desde excursiones privadas de 1 día (desde ${'$'}${FULL_DAY_FROM_PRICE} USD) hasta travesías de 12 días con guías naturalistas y yates boutique.\n\nPuedes explorar todos los precios aquí: [Ver Catálogo de Expediciones](/${locale}/tours) o pedir tu cotización gratis en [Diseñar Itinerario a Medida](/${locale}/booking).\n\n¿Deseas que un asesor te asista en tiempo real por [WhatsApp VIP (+593 96 003 9156)](https://wa.me/593960039156)?`;
+        reply = `Nuestras expediciones a medida van desde excursiones privadas de 1 día (desde $130 USD) hasta travesías de 12 días con guías naturalistas y yates boutique.\n\nPuedes explorar todos los precios aquí: [Ver Catálogo de Expediciones](/${locale}/tours) o armar tu presupuesto en [Diseñar Itinerario a Medida](/${locale}/booking).\n\n¿Deseas que un asesor te asista en tiempo real por [WhatsApp VIP (+593 96 003 9156)](https://wa.me/593960039156)?`;
       } else {
         reply = `¡Hola! Soy **Pyro**, Especialista en Expediciones y Concierge VIP en Vermilion Routes.\n\nDiseñamos viajes privados y a medida por **Ecuador Continental y las Islas Galápagos** con salidas garantizadas todo el año y confirmación en 24 horas.\n\n¿Te atrae más la fauna marina de 👉 [Islas Galápagos](/${locale}/tours?destination=galapagos) o la magia de los Andes y 👉 [Bosque de Mindo](/${locale}/tours/mindo-cloud-forest)?`;
       }
@@ -470,7 +469,7 @@ function generateFallbackConciergeReply(
       } else if (lastUserMsg.includes('galapagos') || lastUserMsg.includes('turtle') || lastUserMsg.includes('cruise') || lastUserMsg.includes('island')) {
         reply = `Snorkeling with sea turtles and marine iguanas in the **Galapagos Islands** is truly an unforgettable adventure!\n\nOur top-rated expeditions with guaranteed departures are:\n👉 [Ecuador & Galapagos 11 Days](/${locale}/tours/ecuador-galapagos-11days) (From $3,850 USD) — The Avenue of Volcanoes, Amazon & Galapagos Cruise.\n👉 [Galapagos Unveiled 7 Days Cruise](/${locale}/tours/galapagos-7days) (From $2,890 USD)\n\nDo you have tentative dates, or would you like us to check real-time yacht availability on [VIP WhatsApp](https://wa.me/593960039156?text=Hello,%20checking%20Galapagos%20availability)?`;
       } else if (lastUserMsg.includes('price') || lastUserMsg.includes('cost') || lastUserMsg.includes('quote')) {
-        reply = `Our private bespoke expeditions range from day tours (from ${'$'}${FULL_DAY_FROM_PRICE} USD) to 12-day complete journeys with private naturalist guides and luxury yacht cabins.\n\nYou can explore all itineraries here: [View Expeditions Catalog](/${locale}/tours) or customize your trip in [Bespoke Journey Planner](/${locale}/booking).\n\nWould you like an immediate proposal on [VIP WhatsApp (+593 96 003 9156)](https://wa.me/593960039156)?`;
+        reply = `Our private bespoke expeditions range from day tours (from $130 USD) to 12-day complete journeys with private naturalist guides and luxury yacht cabins.\n\nYou can explore all itineraries here: [View Expeditions Catalog](/${locale}/tours) or customize your trip in [Bespoke Journey Planner](/${locale}/booking).\n\nWould you like an immediate proposal on [VIP WhatsApp (+593 96 003 9156)](https://wa.me/593960039156)?`;
       } else {
         reply = `Hello! I am **Pyro**, Lead Expedition Specialist & VIP Concierge at Vermilion Routes.\n\nWe craft private, bespoke journeys through **Mainland Ecuador and the Galapagos Islands**, backed by TripAdvisor Travelers' Choice 2026 excellence and 24-hour express confirmations.\n\nAre you looking to explore the marine wildlife of 👉 [Galapagos Islands](/${locale}/tours?destination=galapagos) or the lush Andean nature in 👉 [Mindo Cloud Forest](/${locale}/tours/mindo-cloud-forest)?`;
       }

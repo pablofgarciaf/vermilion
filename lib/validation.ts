@@ -113,9 +113,7 @@ export const leadSchema = z.object({
   guestsCount: z.string().optional(),
   travelers: z.string().optional(),
   message: z.string().optional(),
-  timeline: z.string().optional(),
-  /** Idioma de la página desde la que se envió (para el acuse de recibo). */
-  locale: z.string().max(10).optional(),
+  locale: z.string().optional(),
   _hp_trap: z.string().optional(),
   website_url: z.string().optional(),
 }).superRefine((data, ctx) => {
@@ -187,7 +185,7 @@ export const paypalCreateOrderSchema = z.object({
   }),
   clientPhone: z.string().optional(),
   amount: z.number().positive(),
-  bookingRef: z.string().optional().transform(v => (v && v.trim().length >= 2 ? v.trim() : `VR-${Date.now().toString(36).toUpperCase()}`)),
+  bookingRef: z.string().min(2),
   affiliateCode: z.string().optional(),
   travelDate: z.string().optional(),
   guestsCount: z.string().optional(),
@@ -206,7 +204,7 @@ export type PaypalCreateOrderInput = z.infer<typeof paypalCreateOrderSchema>;
 
 export const paypalCaptureOrderSchema = z.object({
   orderId: z.string().min(3),
-  bookingRef: z.string().optional().transform(v => (v && v.trim().length >= 2 ? v.trim() : `VR-${Date.now().toString(36).toUpperCase()}`)),
+  bookingRef: z.string().min(2),
   tourId: z.string().optional(),
   tourTitle: z.string().optional(),
   clientName: z.string().optional(),

@@ -26,7 +26,7 @@ export function getSeoAlternates(path: string, currentLocale: string) {
   };
 }
 
-export const DEFAULT_OG_IMAGE = `${BASE_CANONICAL_URL}/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp`;
+export const DEFAULT_OG_IMAGE = `${BASE_CANONICAL_URL}/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp`;
 
 const OG_LOCALES: Record<string, string> = {
   es: 'es_LA',
@@ -53,11 +53,6 @@ interface BuildOpenGraphInput {
 
 /**
  * Open Graph completo y consistente con el canonical.
- *
- * Next.js REEMPLAZA el objeto `openGraph` del layout cuando una pagina define el suyo
- * (no lo fusiona campo a campo), asi que cada pagina debe entregar url, siteName, type,
- * locale e images. Esta funcion garantiza que `og:url` sea siempre igual al canonical,
- * que es lo que auditan Ahrefs y Screaming Frog.
  */
 export function buildOpenGraph({
   locale,
@@ -89,7 +84,6 @@ export function buildOpenGraph({
 
 const CJK_CHAR = /[぀-ヿ㐀-鿿]/;
 const SENTENCE_END = /[.!?。！？…]$/;
-// En escritura latina exige espacio tras el punto (no parte "1.5" ni "24/7."); en CJK no hay espacios.
 const SENTENCE_SPLIT = /(?<=[.!?])\s+|(?<=[。！？])/;
 
 function terminateSentence(text: string): string {
@@ -106,9 +100,6 @@ function truncateAtWord(text: string, max: number): string {
 
 /**
  * Compone una meta description dentro del rango recomendado (120-155 caracteres)
- * a partir de varias frases en orden de prioridad, sin modificar los datos de origen.
- * Anade frases completas mientras quepan; si la primera frase por si sola excede el
- * maximo, la recorta en un limite de palabra.
  */
 export function fitMetaDescription(
   parts: Array<string | undefined | null>,
@@ -139,11 +130,6 @@ export function fitMetaDescription(
   return truncateAtWord(out, max);
 }
 
-/**
- * Cierre de marca localizado. En chino y japones una frase de 40-70 caracteres es
- * completa pero queda por debajo del minimo que auditan Ahrefs/Screaming Frog;
- * esta cola la lleva al rango sin repetir contenido.
- */
 const BRAND_META_TAIL: Record<string, string> = {
   es: 'Vermilion Routes: expediciones privadas a medida en Ecuador y Galápagos con asistencia personal 24/7.',
   en: 'Vermilion Routes: private bespoke expeditions in Ecuador and the Galapagos with personal 24/7 support.',
@@ -155,7 +141,6 @@ const BRAND_META_TAIL: Record<string, string> = {
   zh: 'Vermilion Routes 专注于厄瓜多尔与加拉帕戈斯的私人定制探险旅程。支持灵活调整行程、透明报价，并提供全天候 24/7 专属服务。行程由本地专家团队设计，每一步均配有向导与后勤保障。',
 };
 
-/** Devuelve la descripcion intacta si ya cumple el rango; si es corta le anade la cola de marca. */
 export function withBrandTail(description: string, locale: string): string {
   const clean = description.replace(/\s+/g, ' ').trim();
   if (clean.length >= 110 && clean.length <= 155) return clean;

@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { getItineraryDayTitle, getItineraryDayDescription } from '@/data/itineraryTranslations';
 import { isBotOrCrawler } from '@/utils/isBot';
 
 interface TourItineraryProps {
@@ -135,7 +134,7 @@ function removeRepeatedDayPrefix(title: string, day: number, locale: string): st
   return title.replace(prefixPattern, '').trim();
 }
 
-export function TourItinerary({ itinerary, tourTitle, tourId }: TourItineraryProps) {
+export function TourItinerary({ itinerary, tourTitle }: TourItineraryProps) {
   const [activeDay, setActiveDay] = useState<number>(1);
   const [isHovered, setIsHovered] = useState(false);
   const locale = useLocale();
@@ -157,19 +156,9 @@ export function TourItinerary({ itinerary, tourTitle, tourId }: TourItineraryPro
   }
 
   const currentItem = itinerary.find((item) => item.day === activeDay) || itinerary[0];
-  const dictTitle = getItineraryDayTitle(tourId, currentItem.day, locale);
-  const rawTitle = currentItem.title && typeof currentItem.title === 'object' && currentItem.title[locale]
-    ? currentItem.title[locale]
-    : (dictTitle || getLocalizedText(currentItem.title, locale));
-  const dayTitle = rawTitle;
+  const dayTitle = getLocalizedText(currentItem.title, locale);
   const dayTitleWithoutPrefix = removeRepeatedDayPrefix(dayTitle, currentItem.day, locale);
-
-  const dictDesc = getItineraryDayDescription(tourId, currentItem.day, locale);
-  const rawDesc = currentItem.description && typeof currentItem.description === 'object' && currentItem.description[locale]
-    ? currentItem.description[locale]
-    : (dictDesc || getLocalizedText(currentItem.description, locale));
-  const dayDesc = rawDesc;
-
+  const dayDesc = getLocalizedText(currentItem.description, locale);
   const dayMeals = currentItem.meals ? getLocalizedText(currentItem.meals, locale) : '';
   const dayAcc = currentItem.accommodation ? getLocalizedText(currentItem.accommodation, locale) : '';
   const dayTrans = currentItem.transportation ? getLocalizedText(currentItem.transportation, locale) : '';
@@ -206,7 +195,7 @@ export function TourItinerary({ itinerary, tourTitle, tourId }: TourItineraryPro
     if (combined.includes('amazon') || combined.includes('puyo') || combined.includes('selva') || combined.includes('cuyabeno') || combined.includes('rainforest')) return '/images/tours/16-9/amazon-river-16-9.webp';
     if (combined.includes('mitad del mundo') || combined.includes('intiñan') || combined.includes('intinan') || combined.includes('equatorial') || combined.includes('ecuatorial')) return '/images/tours/16-9/mitad-del-mundo-16-9.webp';
     if (combined.includes('quito') || combined.includes('san francisco') || combined.includes('colonial') || combined.includes('plaza grande') || combined.includes('compañía') || combined.includes('compania')) return '/images/tours/16-9/quito-colonial-16-9.webp';
-    if (combined.includes('isabela') || combined.includes('tintoreras') || combined.includes('sierra negra')) return '/images/tours/16-9/galapagos-tintoreras16-9.webp';
+    if (combined.includes('isabela') || combined.includes('tintoreras') || combined.includes('sierra negra')) return '/images/tours/16-9/isabela-island-16-9.webp';
     if (combined.includes('tortuga') || combined.includes('santa cruz') || combined.includes('charles darwin')) return '/images/tours/16-9/galapagos-tortuga-gigante-16-9.1.webp';
     if (combined.includes('grietas') || combined.includes('puerto ayora')) return '/images/tours/16-9/galapagos-las-grietas-16-9.webp';
     if (combined.includes('baltra')) return '/images/tours/16-9/galapagos-tortuga-bay-16-9.1.webp';

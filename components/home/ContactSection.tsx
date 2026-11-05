@@ -5,49 +5,68 @@ import { Button } from '@/components/ui/Button';
 import { createBookingInFirestore } from '@/lib/bookings';
 import { filterPhoneInput, isValidEmail, isValidPhone, sanitizeText } from '@/lib/validation';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
-import { trackQuoteFormSubmitted } from '@/lib/analytics/trackLead';
 import { useTranslations, useLocale } from 'next-intl';
-import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle, Zap, Instagram, Facebook, Youtube, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, AlertCircle } from 'lucide-react';
+import {
+  US_CONCIERGE_PHONE,
+  EC_WHATSAPP_PHONE,
+} from '@/data/bookingTerms';
 
-import { socialUrl } from '@/data/socialLinks';
-const EXPRESS_BANNER_I18N: Record<string, { title: string; desc: string }> = {
-  es: {
-    title: 'Especialistas en Viajes Relámpago (Salidas en 24h)',
-    desc: '¿Quieres viajar mañana? Gracias a nuestro equipo permanente en Quito y Galápagos, coordinamos tus vuelos internos, permisos de parque, yate privado y hotel boutique en menos de 24 horas.',
-  },
+const CONTACT_CHANNELS_I18N: Record<string, { usLine: string; usDesc: string; ecWhatsApp: string; bilingualNotice: string }> = {
   en: {
-    title: 'Express Expeditions Specialist (24h Departures)',
-    desc: 'Want to travel tomorrow? Thanks to our resident operations team in Quito and Galapagos, we coordinate domestic flights, park permits, private yachts, and boutique hotels in under 24 hours.',
+    usLine: 'US Direct Line / SMS Concierge',
+    usDesc: 'Direct traveler care & support',
+    ecWhatsApp: 'Ecuador Operations & WhatsApp 24/7',
+    bilingualNotice: 'Our Ecuador tour leaders are 100% bilingual in English with official tourism licenses, backed by dedicated care in the US.',
+  },
+  es: {
+    usLine: 'Línea Directa EE.UU. / SMS Concierge',
+    usDesc: 'Atención y divulgación directa al viajero',
+    ecWhatsApp: 'Operaciones Ecuador & WhatsApp 24/7',
+    bilingualNotice: 'Nuestros operadores en Ecuador son 100% bilingües en inglés con licencia turística oficial y soporte de atención en EE.UU.',
   },
   fr: {
-    title: 'Spécialistes des Expéditions Express (Départs en 24h)',
-    desc: 'Vous souhaitez voyager demain ? Grâce à notre équipe sur place à Quito et aux Galápagos, nous organisons vos vols intérieurs, permis, yachts privés et hôtels boutique en moins de 24 heures.',
+    usLine: 'Ligne Directe États-Unis / SMS',
+    usDesc: 'Assistance dédiée aux voyageurs',
+    ecWhatsApp: 'Opérations Équateur & WhatsApp 24/7',
+    bilingualNotice: 'Nos opérateurs en Équateur sont 100% bilingues en anglais avec licence touristique officielle et support aux États-Unis.',
   },
   de: {
-    title: 'Spezialisten für Express-Abreisen (Abflug in 24h)',
-    desc: 'Möchten Sie morgen reisen? Dank unseres Teams in Quito und auf Galapagos koordinieren wir Inlandsflüge, Nationalpark-Genehmigungen, Privatyachten und Boutique-Hotels in unter 24 Stunden.',
+    usLine: 'USA Direktleitung / SMS-Concierge',
+    usDesc: 'Dedizierte Betreuung & Reiseservice',
+    ecWhatsApp: 'Ecuador-Zentrale & WhatsApp 24/7',
+    bilingualNotice: 'Unsere Expeditionsleiter in Ecuador sind zu 100% zweisprachig (Englisch) mit offizieller Lizenz und Betreuungsservice in den USA.',
   },
   it: {
-    title: 'Specialisti in Viaggi Express (Partenze in 24h)',
-    desc: 'Vuoi viaggiare domani? Grazie al nostro team operativo a Quito e alle Galápagos, coordiniamo voli interni, permessi del parco, yacht privati e boutique hotel in meno di 24 ore.',
+    usLine: 'Linea Diretta USA / SMS Concierge',
+    usDesc: 'Assistenza diretta ai viaggiatori',
+    ecWhatsApp: 'Operazioni Ecuador & WhatsApp 24/7',
+    bilingualNotice: 'I nostri operatori in Ecuador sono al 100% bilingui in inglese con licenza turistica ufficiale e supporto dedicato negli Stati Uniti.',
   },
   pt: {
-    title: 'Especialistas em Viagens Express (Saídas em 24h)',
-    desc: 'Quer viajar amanhã? Graças à nossa equipe residente em Quito e Galápagos, coordenamos seus voos internos, permissões do parque, iates particulares e hotéis boutique em menos de 24 horas.',
+    usLine: 'Linha Direta EUA / SMS Concierge',
+    usDesc: 'Atendimento direto ao viajante',
+    ecWhatsApp: 'Operações Equador & WhatsApp 24/7',
+    bilingualNotice: 'Nossos operadores no Equador são 100% bilíngues em inglês com licença turística oficial e suporte dedicado nos Estados Unidos.',
   },
   ja: {
-    title: '緊急即時出発スペシャリスト（24時間以内の出発対応）',
-    desc: '明日出発をご希望ですか？キトとガラパゴス諸島に常駐する専任チームが、国内線航空券、国立公園入場許可証、専用クルーズ船、ブティックホテルを24時間以内に手配完了いたします。',
+    usLine: '米国直通ライン / SMSコンシェルジュ',
+    usDesc: '専任旅行者サポート＆お問い合わせ',
+    ecWhatsApp: 'エクアドル現地運営＆WhatsApp 24/7',
+    bilingualNotice: 'エクアドルの現地オペレーターは全員、公認観光ライセンスを保持する英語完全対応ガイドであり、米国サポートデスクと連携しています。',
   },
   zh: {
-    title: '极速出行专家（支持24小时内闪电启程）',
-    desc: '计划明天启程？得益于我们在基多与加拉帕戈斯群岛的在地常驻团队，我们能在24小时内为您统筹厄瓜多尔境内航班、国家公园通行许可、私家游艇与精品度假酒店。',
+    usLine: '美国直拨专线 / SMS专属礼宾',
+    usDesc: '专属旅行关怀与咨询支持',
+    ecWhatsApp: '厄瓜多尔运营总部 & WhatsApp 24/7',
+    bilingualNotice: '我们在厄瓜多尔的探险领队与运营团队均持有官方旅游从业执照且具备100%流利英语双语能力，并配备美国本土专属客服团队。',
   },
 };
 
 export function ContactSection() {
   const t = useTranslations('contact');
   const locale = useLocale();
+  const cc = CONTACT_CHANNELS_I18N[locale] || CONTACT_CHANNELS_I18N['en'];
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -56,7 +75,6 @@ export function ContactSection() {
     phone: '',
     destination: 'Galapagos Islands',
     travelers: '2 Travelers',
-    arrivalDate: '',
     message: '',
   });
 
@@ -126,9 +144,7 @@ export function ContactSection() {
           customerPhone: formData.phone,
           destination: formData.destination,
           guestsCount: formData.travelers,
-          travelDates: formData.arrivalDate || 'Flexible',
           message: formData.message,
-          locale,
         }),
       });
 
@@ -142,7 +158,6 @@ export function ContactSection() {
         email: formData.email,
         phone: formData.phone,
       });
-      trackQuoteFormSubmitted({ method: 'contact_form', placement: 'home_contact', item: formData.destination });
       setSubmitted(true);
     } catch (err: any) {
       console.warn('API /api/leads contact submission failed, falling back to direct Firestore:', err);
@@ -155,10 +170,8 @@ export function ContactSection() {
           customerPhone: formData.phone,
           destination: formData.destination,
           guestsCount: formData.travelers,
-          travelDates: formData.arrivalDate || 'Flexible',
           message: formData.message,
         });
-        trackQuoteFormSubmitted({ method: 'contact_form', placement: 'home_contact_fallback', item: formData.destination });
         setSubmitted(true);
       } catch (fallbackErr: any) {
         console.error('Contact form submission error:', fallbackErr);
@@ -171,9 +184,9 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-zinc-200 dark:border-zinc-800/60 scroll-mt-20">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         {/* Left Col Info */}
-        <div className="lg:col-span-5 space-y-6">
+        <div className="lg:col-span-5 space-y-8">
           <div className="space-y-3">
             <span className="text-emerald-600 text-xs font-bold uppercase tracking-wider block">
               {t('badge')}
@@ -186,97 +199,91 @@ export function ContactSection() {
             </p>
           </div>
 
-          {/* Contact Cards Grid 2 Col */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Phone */}
+          <div className="space-y-4">
+            {/* Ecuador Operations & WhatsApp 24/7 */}
             <a
-              href="tel:+593960039156"
-              className="p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
+              href={`https://wa.me/${EC_WHATSAPP_PHONE.replace(/[^0-9]/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
             >
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 group-hover:scale-110 transition-transform">
-                  <Phone className="w-4 h-4" />
-                </div>
-                <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">{t('directCall')}</span>
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+                <Phone className="w-5 h-5" />
               </div>
-              <p className="font-semibold text-zinc-900 dark:text-white text-sm leading-snug group-hover:text-emerald-600 transition-colors">
-                +593 96 003 9156
-              </p>
+              <div>
+                <span className="text-xs text-zinc-400 font-medium block">{cc.ecWhatsApp}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white text-sm group-hover:text-emerald-600 transition-colors">
+                  {EC_WHATSAPP_PHONE}
+                </span>
+              </div>
             </a>
 
-            {/* Email */}
+            {/* US Direct Line / SMS Concierge */}
+            <a
+              href={`tel:${US_CONCIERGE_PHONE.replace(/[^0-9+]/g, '')}`}
+              className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-amber-500/50 hover:shadow-md transition-all group"
+            >
+              <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform">
+                <Phone className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xs text-zinc-400 font-medium block">{cc.usLine}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white text-sm group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                  {US_CONCIERGE_PHONE}
+                </span>
+              </div>
+            </a>
+
+            {/* Official Email */}
             <a
               href="mailto:info@vermilionroutes.com"
-              className="p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
+              className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
             >
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 group-hover:scale-110 transition-transform">
-                  <Mail className="w-4 h-4" />
-                </div>
-                <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">{t('emailAddress')}</span>
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+                <Mail className="w-5 h-5" />
               </div>
-              <p className="font-semibold text-zinc-900 dark:text-white text-sm leading-snug group-hover:text-emerald-600 transition-colors">
-                <span>info</span>
-                <span className="text-emerald-600 font-bold">&#64;</span>
-                <span>vermilionroutes.com</span>
-              </p>
+              <div>
+                <span className="text-xs text-zinc-400 font-medium block">{t('emailAddress')}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white text-sm group-hover:text-emerald-600 transition-colors">
+                  <span>info</span>
+                  <span className="text-emerald-600 font-bold">&#64;</span>
+                  <span>vermilionroutes.com</span>
+                </span>
+              </div>
             </a>
 
-            {/* Sede Ecuador */}
-            <div className="col-span-1 sm:col-span-2 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">{t('headquartersEcuador')}</span>
-              </div>
-              <p className="font-semibold text-zinc-900 dark:text-white text-sm leading-snug">
-                {t('addressEcuador')}
-              </p>
+            {/* Bilingual Team & US Support Notice */}
+            <div className="p-3 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/40 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
+              <span className="font-bold text-emerald-700 dark:text-emerald-400">✓ </span>
+              {cc.bilingualNotice}
             </div>
 
-            {/* Sede España */}
-            <div className="col-span-1 sm:col-span-2 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0">
-                  <MapPin className="w-4 h-4" />
-                </div>
-                <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide">{t('officeSpain')}</span>
+            {/* Sede Ecuador (HQ) */}
+            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
+                <MapPin className="w-5 h-5" />
               </div>
-              <p className="font-semibold text-zinc-900 dark:text-white text-sm leading-snug">
-                {t('addressSpain')}
-              </p>
+              <div>
+                <span className="text-xs text-zinc-400 font-medium block">{t('headquartersEcuador')}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white text-sm block leading-snug">
+                  {t('addressEcuador')}
+                </span>
+              </div>
             </div>
 
-            {/* Social Media Card - Full Width */}
-            <div className="col-span-1 sm:col-span-2 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
-              <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wide block mb-3">
-                {locale === 'es' ? 'Contactanos' : locale === 'fr' ? 'Nous Contacter' : locale === 'de' ? 'Kontaktieren Sie uns' : locale === 'it' ? 'Contattaci' : locale === 'pt' ? 'Entre em contato' : locale === 'ja' ? 'お問い合わせ' : locale === 'zh' ? '联系我们' : 'Contact Us'}
-              </span>
-              <div className="flex items-center gap-2 flex-wrap">
-                <a href={socialUrl('instagram', locale)} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Instagram" title="Follow us on Instagram">
-                  <Instagram className="w-5 h-5" />
-                </a>
-                <a href={socialUrl('facebook', locale)} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="Facebook" title="Follow us on Facebook">
-                  <Facebook className="w-5 h-5" />
-                </a>
-                <a href={socialUrl('youtube', locale)} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="YouTube" title="Subscribe on YouTube">
-                  <Youtube className="w-5 h-5" />
-                </a>
-                <a href={socialUrl('tiktok', locale)} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="TikTok" title="Follow us on TikTok">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.68v13.67a2.4 2.4 0 0 1-2.4 2.4 2.4 2.4 0 0 1-2.4-2.4 2.4 2.4 0 0 1 2.4-2.4c.31 0 .62.04.92.13V9.4a5.9 5.9 0 0 0-.92-.08 5.9 5.9 0 0 0-5.9 5.9 5.9 5.9 0 0 0 5.9 5.9 5.9 5.9 0 0 0 5.9-5.9V8.3a7.68 7.68 0 0 0 4.58 1.52v-3.66a4.5 4.5 0 0 1-.41-.02z"/>
-                  </svg>
-                </a>
-                <a href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-green-600 flex items-center justify-center text-white hover:scale-110 transition-transform shadow-md" aria-label="TripAdvisor" title="Review us on TripAdvisor">
-                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2.4c1.8 0 3.4.6 4.7 1.6-1.2.8-2.9 1.4-4.7 1.4s-3.5-.6-4.7-1.4C8.6 5 10.2 4.4 12 4.4zM6.8 9.2c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2S3.6 14.2 3.6 12.4s1.4-3.2 3.2-3.2zm10.4 0c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2-3.2-1.4-3.2-3.2 1.4-3.2 3.2-3.2zm-10.4 1.6c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zm10.4 0c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zM12 11.5c.8 0 1.5.4 1.7 1.1-.5.3-1.1.4-1.7.4s-1.2-.1-1.7-.4c.2-.7.9-1.1 1.7-1.1z" />
-                  </svg>
-                </a>
+            {/* Sede España (Coral Tour) */}
+            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
+                <MapPin className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xs text-zinc-400 font-medium block">{t('officeSpain')}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white text-sm block leading-snug">
+                  {t('addressSpain')}
+                </span>
               </div>
             </div>
           </div>
-
         </div>
 
         {/* Right Col Form */}
@@ -303,12 +310,11 @@ export function ContactSection() {
                     phone: '',
                     destination: 'Galapagos Islands',
                     travelers: '2 Travelers',
-                    arrivalDate: '',
                     message: ''
                   });
                 }}
               >
-                {t('another')}
+                Submit another request
               </Button>
             </div>
           ) : (
@@ -316,8 +322,11 @@ export function ContactSection() {
               <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800/50">
                 <h3 className="font-serif font-bold text-xl text-zinc-900 dark:text-white flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-emerald-600" />
-                  <span>{t('send')}</span>
+                  <span>{t('title')}</span>
                 </h3>
+                <span className="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full">
+                  {t('noCommitment')}
+                </span>
               </div>
 
               {errors.submit && (
@@ -381,7 +390,7 @@ export function ContactSection() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="space-y-1.5">
                   <label htmlFor="contact-phone" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">{t('phone')}</label>
                   <input
@@ -422,9 +431,7 @@ export function ContactSection() {
                     <option value="Full Day Excursions">{t('optFullDay')}</option>
                   </select>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label htmlFor="contact-travelers" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">{t('travelers')}</label>
                   <select
@@ -441,21 +448,6 @@ export function ContactSection() {
                     <option value="6+ Travelers">{t('opt6plus')}</option>
                   </select>
                 </div>
-
-                <div className="space-y-1.5">
-                  <label htmlFor="contact-arrival" className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-                    {t('arrivalDate')}
-                  </label>
-                  <input
-                    id="contact-arrival"
-                    type="date"
-                    min={new Date().toISOString().slice(0, 10)}
-                    value={formData.arrivalDate}
-                    onChange={(e) => setFormData({ ...formData, arrivalDate: e.target.value })}
-                    suppressHydrationWarning
-                    className="w-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 cursor-pointer"
-                  />
-                </div>
               </div>
 
               <div className="space-y-1.5">
@@ -465,7 +457,7 @@ export function ContactSection() {
                 <textarea
                   id="contact-message"
                   rows={4}
-                  placeholder={t('messagePlaceholder')}
+                  placeholder="Tell us about dates, interests, preferences..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   suppressHydrationWarning
@@ -493,17 +485,6 @@ export function ContactSection() {
             </form>
           )}
         </div>
-      </div>
-
-      {/* Express Banner - Full Width */}
-      <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-500/15 via-emerald-500/5 to-teal-500/10 border border-emerald-500/30 text-zinc-900 dark:text-zinc-100 shadow-sm space-y-1.5 mt-8">
-        <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-xs uppercase tracking-wider">
-          <Zap className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 animate-pulse" />
-          <span>{(EXPRESS_BANNER_I18N[locale] || EXPRESS_BANNER_I18N.en).title}</span>
-        </div>
-        <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed font-light">
-          {(EXPRESS_BANNER_I18N[locale] || EXPRESS_BANNER_I18N.en).desc}
-        </p>
       </div>
     </section>
   );

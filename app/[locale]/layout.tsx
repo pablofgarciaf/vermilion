@@ -140,11 +140,10 @@ export default async function RootLayout({
   const { locale } = await params;
   const messages = await getMessages();
 
-  const gaPrimaryId = process.env.NEXT_PUBLIC_GA_ID || 'G-D8ZNLYMCB0';
-  const gaSecondaryId = process.env.NEXT_PUBLIC_GA_SECONDARY_ID || 'G-0YLF960DJG';
-  const gaIds = Array.from(new Set([gaPrimaryId, gaSecondaryId].filter(Boolean)));
-  // Contenedor único de GTM oficial: GTM-TDQXQ738 (evita duplicidades y conflictos en Tag Assistant)
-  const gtmContainerIds = ['GTM-TDQXQ738'];
+  // Solo Google Analytics activo oficial: G-D8ZNLYMCB0
+  const gaIds = ['G-D8ZNLYMCB0'];
+  // Contenedor GTM activo oficial: GTM-WCCPTDVG (GTM-TDQXQ738 eliminado)
+  const gtmContainerIds = ['GTM-WCCPTDVG'];
 
   const jsonLdData = {
     '@context': 'https://schema.org',

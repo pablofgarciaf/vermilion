@@ -3,12 +3,9 @@
 import React from 'react';
 import { PricingDetails } from '@/lib/pricing';
 import { Tour } from '@/types';
-import { Users, Info, ArrowRight, Wallet, CalendarDays, Ticket, Sparkles } from 'lucide-react';
-import { useLocale, useTranslations } from 'next-intl';
+import { Users, Info, ArrowRight, Wallet, CalendarDays, Ticket, Sparkles, ShieldCheck, Award, Phone, CheckCircle2 } from 'lucide-react';
+import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
-import { BookingTrustPanel } from './BookingTrustPanel';
-import { canPayDeposit, depositAmount, formatUsd } from '@/data/bookingTerms';
-import { getPromotionById, isDayTrip } from '@/lib/promotions';
 
 interface PriceCalculatorProps {
   tours: Tour[];
@@ -20,9 +17,7 @@ interface PriceCalculatorProps {
   step: number;
   affiliateRef?: string | null;
   isProcessing?: boolean;
-  tier?: 'standard' | 'firstClass' | 'vip'; // <-- ¡Agregado para arreglar el error TS2304!
-  /** Texto del botón de pago ("Reservar con el 30% · $X"); si falta, se usa el genérico. */
-  payCtaLabel?: string;
+  tier?: 'club' | 'vip';
 }
 
 const PRICE_CALC_I18N: Record<string, {
@@ -42,17 +37,18 @@ const PRICE_CALC_I18N: Record<string, {
   btnPay: string;
   btnComplete: string;
   noChargeNotice: string;
-  btnProcessing: string; // <-- ¡Agregado para arreglar el error TS2353!
-  perPersonShort: string;
-  eachShort?: string;
+  btnProcessing: string;
+  trustTripAdvisor?: string;
+  trustMintur?: string;
+  trustDeposit?: string;
+  trustReassurance?: string;
+  conciergeHelpNotice?: string;
 }> = {
   es: {
     emptyTitle: 'Resumen de Reserva',
     emptySubtitle: 'Selecciona una expedición para ver el desglose de tarifas.',
     summaryTitle: 'Resumen de tu Viaje',
     adultsLabel: 'Adultos',
-    perPersonShort: 'persona',
-    eachShort: 'c/u',
     singleSupplement: '+ 50% Recargo Viajero Solo (Ocupación individual)',
     childrenLabel: 'Niños (Descuento -20%)',
     subtotal: 'Subtotal',
@@ -66,14 +62,17 @@ const PRICE_CALC_I18N: Record<string, {
     btnComplete: 'Completar Datos Requeridos',
     noChargeNotice: 'No se realizará ningún cargo aún.',
     btnProcessing: 'Procesando tu reserva...',
+    trustTripAdvisor: 'TripAdvisor 5.0 (52 Reseñas Verificadas)',
+    trustMintur: 'Licencia Mintur #1793215456001',
+    trustDeposit: '100% Deposit Protection Guarantee',
+    trustReassurance: 'Antes de pagar: Puedes congelar el precio o promoción actual con total certeza. Incluye Garantía Médica con devolución íntegra ante emergencias.',
+    conciergeHelpNotice: 'Concierge: EE.UU. +1 (302) 204-1881 • WhatsApp EC +593 99 404 8458',
   },
   en: {
     emptyTitle: 'Booking Summary',
     emptySubtitle: 'Select an expedition to view the complete price breakdown.',
     summaryTitle: 'Your Expedition Summary',
     adultsLabel: 'Adults',
-    perPersonShort: 'guest',
-    eachShort: 'each',
     singleSupplement: '+ 50% Single Traveler Supplement (Single occupancy)',
     childrenLabel: 'Children (-20% discount)',
     subtotal: 'Subtotal',
@@ -87,14 +86,17 @@ const PRICE_CALC_I18N: Record<string, {
     btnComplete: 'Complete Required Fields',
     noChargeNotice: 'No payment will be charged yet.',
     btnProcessing: 'Processing...',
+    trustTripAdvisor: 'TripAdvisor 5.0 (52 Verified Reviews)',
+    trustMintur: 'Official Mintur License #1793215456001',
+    trustDeposit: '100% Deposit Protection Guarantee',
+    trustReassurance: 'Before paying: Lock in the current rate or promo with full confidence. Includes Medical Guarantee with full refunds for verifiable emergencies.',
+    conciergeHelpNotice: 'Concierge: US +1 (302) 204-1881 • WhatsApp EC +593 99 404 8458',
   },
   fr: {
     emptyTitle: 'Résumé de Réservation',
     emptySubtitle: 'Sélectionnez une expédition pour afficher le détail des tarifs.',
     summaryTitle: 'Résumé de votre Voyage',
     adultsLabel: 'Adultes',
-    perPersonShort: 'voyageur',
-    eachShort: 'chacun',
     singleSupplement: '+ 50% Supplément Voyageur Solo (Occupation individuelle)',
     childrenLabel: 'Enfants (Remise -20%)',
     subtotal: 'Sous-total',
@@ -114,8 +116,6 @@ const PRICE_CALC_I18N: Record<string, {
     emptySubtitle: 'Wählen Sie eine Expedition aus, um die Preisübersicht anzuzeigen.',
     summaryTitle: 'Ihre Reiseübersicht',
     adultsLabel: 'Erwachsene',
-    perPersonShort: 'Gast',
-    eachShort: 'je',
     singleSupplement: '+ 50% Einzelreisenden-Zuschlag (Einzelbelegung)',
     childrenLabel: 'Kinder (-20% Rabatt)',
     subtotal: 'Zwischensumme',
@@ -135,8 +135,6 @@ const PRICE_CALC_I18N: Record<string, {
     emptySubtitle: 'Seleziona una spedizione per visualizzare il dettaglio dei prezzi.',
     summaryTitle: 'Riepilogo del tuo Viaggio',
     adultsLabel: 'Adulti',
-    perPersonShort: 'ospite',
-    eachShort: 'cad.',
     singleSupplement: '+ 50% Supplemento Singola (Occupazione individuale)',
     childrenLabel: 'Bambini (Sconto -20%)',
     subtotal: 'Subtotale',
@@ -145,7 +143,7 @@ const PRICE_CALC_I18N: Record<string, {
     totalToPay: 'Totale da Pagare',
     pendingSteps: 'Passaggi obbligatori prima di proseguire:',
     step2Date: 'Passaggio 4: Seleziona la data del viaggio',
-    step4Contact: 'Passaggio 5: Inserisci nome ed email di contacto',
+    step4Contact: 'Passaggio 5: Inserisci nome ed email di contatto',
     btnPay: 'Procedi al Pagamento Sicuro',
     btnComplete: 'Completa i Dati Richiesti',
     noChargeNotice: 'Nessun addebito verrà effettuato adesso.',
@@ -156,8 +154,6 @@ const PRICE_CALC_I18N: Record<string, {
     emptySubtitle: 'Selecione uma expedição para visualizar o detalhamento das tarifas.',
     summaryTitle: 'Resumo da sua Viagem',
     adultsLabel: 'Adultos',
-    perPersonShort: 'viajante',
-    eachShort: 'cada',
     singleSupplement: '+ 50% Suplemento de Viajante Individual (Ocupação individual)',
     childrenLabel: 'Crianças (Desconto -20%)',
     subtotal: 'Subtotal',
@@ -177,8 +173,6 @@ const PRICE_CALC_I18N: Record<string, {
     emptySubtitle: '料金の内訳を表示するには遠征ツアーを選択してください。',
     summaryTitle: 'ご旅程とお見積りサマリー',
     adultsLabel: '大人',
-    perPersonShort: '名',
-    eachShort: '単価',
     singleSupplement: '+ 50% 1名様参加追加代金 (シングル利用)',
     childrenLabel: 'お子様 (20%割引)',
     subtotal: '小計',
@@ -198,8 +192,6 @@ const PRICE_CALC_I18N: Record<string, {
     emptySubtitle: '请选择专属探险路线以查看完整费用明细。',
     summaryTitle: '您的专属行程明细',
     adultsLabel: '成人',
-    perPersonShort: '人',
-    eachShort: '单价',
     singleSupplement: '+ 50% 单人差价附加费 (单人单房)',
     childrenLabel: '儿童 (享20%减免)',
     subtotal: '费用小计',
@@ -237,12 +229,9 @@ export function PriceCalculator({
   step,
   affiliateRef,
   isProcessing = false,
-  tier = 'standard', // <-- Valor por defecto agregado
-  payCtaLabel,
+  tier = 'club'
 }: PriceCalculatorProps) {
   const locale = useLocale();
-  const tb = useTranslations('bookingConversion');
-  const tPromo = useTranslations('promotions');
   const t = PRICE_CALC_I18N[locale] || PRICE_CALC_I18N['en'];
 
   if (!tours || tours.length === 0) {
@@ -261,8 +250,6 @@ export function PriceCalculator({
   const hasAffiliateDiscount = !!affiliateRef;
   const affiliateDiscountAmount = hasAffiliateDiscount ? Number((pricing.total * 0.10).toFixed(2)) : 0;
   const finalPayableTotal = Number((pricing.total - affiliateDiscountAmount).toFixed(2));
-  const depositAllowed = canPayDeposit(date);
-  const depositNow = depositAmount(finalPayableTotal);
 
   const formatAmount = (val: number) => {
     return (val % 1 !== 0 || val < 10)
@@ -271,33 +258,30 @@ export function PriceCalculator({
   };
 
   return (
-    <div className="lux-panel bg-white dark:bg-zinc-900 rounded-3xl p-6 sm:p-8 border border-zinc-200/90 dark:border-zinc-800 shadow-xl">
+    <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 sm:p-8 border border-zinc-200/90 dark:border-zinc-800 shadow-xl sticky top-28">
       <h3 className="font-serif text-xl font-bold text-zinc-900 dark:text-white mb-6">
         {t.summaryTitle}
       </h3>
 
       <div className="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
         {tours.map(tour => {
-          const isDailyTour = isDayTrip(tour);
+          const isDailyTour = tour.durationDays === 1 || (typeof tour.duration === 'object' && String(tour.duration.en || '').includes('1 DAY'));
           const displayedPrice = tier === 'vip' && !isDailyTour
             ? tour.price4Star || Math.round((tour.price3Star || tour.price || 1050) * 1.2)
             : tour.price3Star || tour.price || 1050;
 
           return (
-            <div key={tour.id} className="flex gap-4 items-start bg-zinc-50 dark:bg-zinc-800/30 p-2.5 rounded-2xl border border-zinc-100 dark:border-zinc-800">
-              <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
-                <img src={tour.imageUrl} alt={getLocalizedText(tour.title, locale)} width={56} height={56} className="w-full h-full object-cover" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className="font-bold text-sm text-zinc-900 dark:text-white pr-2 leading-snug truncate">{getLocalizedText(tour.title, locale)}</h4>
-                <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 flex items-center justify-between gap-2">
-                  <span className="truncate">{getLocalizedText(tour.duration, locale)}</span>
-                  <span className="font-semibold text-xs text-emerald-700 dark:text-emerald-400 whitespace-nowrap">
-                    ${formatAmount(displayedPrice)} USD <span className="font-normal text-[10px] text-zinc-400">/ {t.perPersonShort || 'pers.'}</span>
-                  </span>
-                </div>
-              </div>
+          <div key={tour.id} className="flex gap-4 items-start bg-zinc-50 dark:bg-zinc-800/30 p-2.5 rounded-2xl border border-zinc-100 dark:border-zinc-800">
+            <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 bg-zinc-100 dark:bg-zinc-800">
+              <img src={tour.imageUrl} alt={getLocalizedText(tour.title, locale)} width={56} height={56} className="w-full h-full object-cover" />
             </div>
+            <div className="flex-1">
+              <h4 className="font-bold text-sm text-zinc-900 dark:text-white pr-2 leading-snug">{getLocalizedText(tour.title, locale)}</h4>              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 flex items-center justify-between">
+                <span>{getLocalizedText(tour.duration, locale)}</span>
+                <span className="font-semibold text-zinc-900 dark:text-white">${formatAmount(displayedPrice)}</span>
+              </p>
+            </div>
+          </div>
           );
         })}
 
@@ -314,38 +298,44 @@ export function PriceCalculator({
       <div className="space-y-3 pt-6 border-t border-zinc-100 dark:border-zinc-800/80 mb-6" suppressHydrationWarning>
         {pricing.adultsCount > 0 && (
           <div className="flex justify-between text-sm">
-            <span className="text-zinc-600 dark:text-zinc-300 font-medium">
-              {pricing.adultsCount} {t.adultsLabel} {pricing.adultsCount > 1 ? `($${formatAmount(pricing.basePricePerAdult)} ${t.eachShort || 'c/u'})` : ''}
+            <span className="text-zinc-500 dark:text-zinc-400">
+              {t.adultsLabel} ({pricing.adultsCount} x ${formatAmount(pricing.basePricePerAdult)})
             </span>
-            <span className="font-semibold text-zinc-900 dark:text-white">
-              ${formatAmount(pricing.adultsTotal - (pricing.singleSupplementApplied ? (pricing.singleSupplementAmount || 0) : 0))} USD
+            <span className="font-medium text-zinc-900 dark:text-white">
+              ${formatAmount(pricing.adultsTotal - (pricing.singleSupplementApplied ? (pricing.singleSupplementAmount || 0) : 0))}
+            </span>
+          </div>
+        )}
+        
+        {pricing.singleSupplementApplied && (
+          <div className="flex justify-between text-sm mt-2 pt-2 border-t border-zinc-100/50 dark:border-zinc-800/50">
+            <span className="text-amber-700 dark:text-amber-400 font-semibold">{t.singleSupplement}</span>
+            <span className="font-bold text-amber-700 dark:text-amber-400">
+              +${formatAmount(pricing.singleSupplementAmount || 0)}
             </span>
           </div>
         )}
 
         {pricing.singleSupplementApplied && (
-          <div className="flex justify-between text-sm mt-1.5 pt-1.5 border-t border-zinc-100/60 dark:border-zinc-800/60">
-            <span className="text-amber-700 dark:text-amber-400 font-medium text-xs">{t.singleSupplement}</span>
+          <div className="flex justify-between text-sm mt-2 pt-2 border-t border-zinc-100/50 dark:border-zinc-800/50">
+            <span className="text-amber-700 dark:text-amber-400 font-semibold">{t.singleSupplement}</span>
             <span className="font-bold text-amber-700 dark:text-amber-400">
-              +${formatAmount(pricing.singleSupplementAmount || 0)} USD
+              +${formatAmount(pricing.singleSupplementAmount || 0)}
             </span>
           </div>
         )}
 
         {pricing.childrenCount > 0 && (
-          <div className="flex justify-between text-sm mt-1.5">
-            <span className="text-zinc-600 dark:text-zinc-300 font-medium">{pricing.childrenCount} {t.childrenLabel}</span>
-            <span className="font-semibold text-zinc-900 dark:text-white">${formatAmount(pricing.childrenTotal)} USD</span>
+          <div className="flex justify-between text-sm">
+            <span className="text-zinc-500 dark:text-zinc-400">{t.childrenLabel} ({pricing.childrenCount} x ${formatAmount(pricing.basePricePerChild)})</span>
+            <span className="font-medium text-zinc-900 dark:text-white">${formatAmount(pricing.childrenTotal)}</span>
           </div>
         )}
 
-        {/* Solo mostrar la fila de Subtotal si hay múltiples conceptos (ej. adultos + niños, suplemento individual, o más de 1 tour) para no duplicar el valor */}
-        {(pricing.childrenCount > 0 || pricing.singleSupplementApplied || tours.length > 1) && (
-          <div className="flex justify-between text-sm pt-2 border-t border-zinc-100 dark:border-zinc-800">
-            <span className="text-zinc-900 dark:text-white font-bold">{t.subtotal}</span>
-            <span className="font-bold text-zinc-900 dark:text-white">${formatAmount(pricing.subtotal)} USD</span>
-          </div>
-        )}
+        <div className="flex justify-between text-sm pt-2">
+          <span className="text-zinc-900 dark:text-white font-medium">{t.subtotal}</span>
+          <span className="font-medium text-zinc-900 dark:text-white">${formatAmount(pricing.subtotal)}</span>
+        </div>
 
         {pricing.groupDiscountAmount > 0 && (
           <div className="flex justify-between text-sm text-emerald-600 dark:text-emerald-400 font-medium bg-emerald-50 dark:bg-emerald-950/30 p-2 rounded-lg mt-2">
@@ -356,24 +346,6 @@ export function PriceCalculator({
             <span>-${formatAmount(pricing.groupDiscountAmount)}</span>
           </div>
         )}
-
-        {/* Promo de festivo (data/promotions.ts): descuento real ya restado del total */}
-        {(() => {
-          const promo = getPromotionById(pricing.promoId);
-          if (!promo || !(pricing.promoDiscountAmount && pricing.promoDiscountAmount > 0)) return null;
-          const name = tPromo(`items.${promo.messageKey}.name`);
-          return (
-            <div className="mt-2 space-y-1 rounded-lg bg-amber-50 p-2 text-sm font-medium text-amber-800 dark:bg-amber-950/30 dark:text-amber-200" data-promo={promo.id}>
-              <div className="flex justify-between">
-                <span className="flex items-center gap-1.5">
-                  <Ticket className="w-3.5 h-3.5" />
-                  {tPromo('summaryLine', { name, pct: Math.round(promo.discountRate * 100) })}
-                </span>
-                <span>-${formatAmount(pricing.promoDiscountAmount)}</span>
-              </div>
-            </div>
-          );
-        })()}
 
         {/* 10% Affiliate Referral Discount Display */}
         {hasAffiliateDiscount && (
@@ -392,42 +364,57 @@ export function PriceCalculator({
           <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-wider mb-1">{t.totalToPay}</p>
           <div className="flex items-center gap-1">
             <span className="text-sm font-semibold text-zinc-400">USD</span>
-            <span className="lux-amount text-3xl font-bold text-emerald-600 dark:text-emerald-400">
+            <span className="text-3xl font-bold text-emerald-600 dark:text-emerald-400">
               ${formatAmount(finalPayableTotal)}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Plan de pago: el 30% hoy y el resto 30 días antes (o el total si se sale antes) */}
-      {finalPayableTotal > 0 && (
-        <div className="-mt-4 mb-6 rounded-2xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/70 dark:bg-emerald-950/30 p-3.5 text-sm" suppressHydrationWarning>
-          {depositAllowed ? (
-            <>
-              <p className="font-bold text-emerald-900 dark:text-emerald-200">{tb('payTodayTitle')}</p>
-              <div className="mt-1.5 flex justify-between gap-3 text-zinc-700 dark:text-zinc-300">
-                <span>{tb('payToday')}</span>
-                <strong className="text-emerald-700 dark:text-emerald-300">${formatUsd(depositNow)} USD</strong>
-              </div>
-              <div className="flex justify-between gap-3 text-zinc-600 dark:text-zinc-400">
-                <span>{tb('payLater')}</span>
-                <span>${formatUsd(Number((finalPayableTotal - depositNow).toFixed(2)))} USD</span>
-              </div>
-            </>
-          ) : (
-            <p className="text-zinc-700 dark:text-zinc-300">{tb('fullDueNow')}</p>
-          )}
+      {/* Fiduciary Pre-Payment Badges & Guarantee Callout */}
+      <div className="mb-6 p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-500/30 space-y-2.5">
+        <div className="flex flex-wrap items-center justify-between gap-1.5 text-[10px] sm:text-[11px] font-bold text-stone-800 dark:text-zinc-200">
+          <a
+            href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-amber-700 dark:text-amber-300 hover:underline"
+          >
+            <Award className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+            <span>{t.trustTripAdvisor || 'TripAdvisor 5.0 (52 Verified Reviews)'}</span>
+          </a>
+          <span className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400">
+            <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
+            <span>{t.trustMintur || 'Licencia Mintur #1793215456001'}</span>
+          </span>
+          <span className="flex items-center gap-1 text-teal-700 dark:text-teal-400">
+            <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+            <span>{t.trustDeposit || '100% Deposit Protection Guarantee'}</span>
+          </span>
         </div>
-      )}
+
+        <p className="text-[11px] text-stone-600 dark:text-zinc-300 leading-snug">
+          {t.trustReassurance || 'Antes de pagar: Puedes congelar el precio o promoción actual con total certeza. Incluye Garantía Médica con devolución íntegra ante emergencias.'}
+        </p>
+
+        <div className="pt-2 border-t border-amber-200/60 dark:border-amber-500/20 flex flex-wrap items-center justify-between gap-2 text-[10px] text-stone-500 dark:text-zinc-400">
+          <span className="flex items-center gap-1 font-semibold text-stone-700 dark:text-zinc-200">
+            <Phone className="w-3 h-3 text-blue-600 dark:text-blue-400 shrink-0" />
+            <span>{t.conciergeHelpNotice || 'Concierge: EE.UU. +1 (302) 204-1881 • WhatsApp EC +593 99 404 8458'}</span>
+          </span>
+          <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-medium">100% Bilingüe</span>
+        </div>
+      </div>
 
       <button
         type="button"
         onClick={onContinue}
         disabled={isProcessing}
-        className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all duration-300 border-none ${isProcessing
+        className={`w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold text-xs sm:text-sm uppercase tracking-wider shadow-lg transition-all duration-300 border-none ${
+          isProcessing
             ? 'bg-zinc-900 dark:bg-zinc-950 border border-emerald-500/40 text-emerald-400 cursor-wait shadow-emerald-950/40'
             : 'bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white shadow-emerald-900/30 hover:scale-[1.02] active:scale-95 group cursor-pointer'
-          }`}
+        }`}
       >
         {isProcessing ? (
           <div className="flex items-center justify-center gap-2.5 py-0.5">
@@ -436,7 +423,7 @@ export function PriceCalculator({
           </div>
         ) : (
           <>
-            <span>{payCtaLabel || t.btnPay}</span>
+            <span>{t.btnPay}</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </>
         )}
@@ -445,23 +432,7 @@ export function PriceCalculator({
       <p className="text-[11px] text-zinc-400 text-center mt-4 flex items-center justify-center gap-1">
         <Info className="w-3 h-3" /> {t.noChargeNotice}
       </p>
-
-      <BookingTrustPanel className="mt-4" />
-
-      {/* Asistencia VIP discreta antes de pagar (sin overlays invasivos) */}
-      <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/60 text-center">
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
-          {locale === 'es' ? '¿Deseas personalizar algún detalle antes de pagar?' : (locale === 'en' ? 'Need bespoke adjustments before confirming?' : (locale === 'fr' ? 'Besoin d’ajustements avant de réserver ?' : (locale === 'de' ? 'Benötigen Sie individuelle Anpassungen vor der Buchung?' : (locale === 'it' ? 'Desideri personalizzazioni prima di confermare?' : (locale === 'pt' ? 'Precisa de ajustes personalizados antes de pagar?' : (locale === 'ja' ? 'ご予約前のカスタマイズ相談' : '预订前需要个性化调整？'))))))}{' '}
-          <a
-            href="https://wa.me/593994048458?text=Hola%20Vermilion%20Routes,%20deseo%20asistencia%20personalizada%20con%20mi%20reserva"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-0.5"
-          >
-            <span>WhatsApp Concierge ↗</span>
-          </a>
-        </p>
-      </div>
     </div>
   );
 }
+

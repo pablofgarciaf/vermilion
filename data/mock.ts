@@ -7,12 +7,12 @@ const multiDayTours: Tour[] = [
     id: 'galapagos-6days',
     code: '1.1',
     title: {
-      en: 'Galapagos Encounter: 6-Day Expedition',
-      es: 'Encuentro Galápagos: 6 Días De Magia',
-      fr: 'Rencontre aux Galápagos: 6 Jours Merveilleux',
-      de: 'Galapagos Entdeckung: 6 Tage Magie',
-      it: 'Incontro alle Galapagos: 6 Giorni di Magia',
-      pt: 'Encontro em Galápagos: 6 Dias de Magia',
+      en: 'Galapagos Encounter: 6-Day Expedition (With Quito Transfers)',
+      es: 'Encuentro Galápagos: 6 Días De Magia (Con Transfers UIO)',
+      fr: 'Rencontre aux Galápagos: 6 Jours Merveilleux (Transferts UIO Inclus)',
+      de: 'Galapagos Entdeckung: 6 Tage Magie (Inkl. Quito-Transfers)',
+      it: 'Incontro alle Galapagos: 6 Giorni di Magia (Con Trasferimenti UIO)',
+      pt: 'Encontro em Galápagos: 6 Dias de Magia (Com Transfers UIO)',
       ja: 'ガラパゴス諸島 6日間の驚異（キト送迎付き）',
       zh: '加拉帕戈斯群岛6日奇妙之旅（含基多接送机）'
     },
@@ -31,16 +31,18 @@ const multiDayTours: Tour[] = [
     price: 1790,
     price3Star: 1790,
     price4Star: 2199,
-    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
-    mobileImage: '/images/tours/9-16/galapagos-tortuga-gigante-el-chato-9-16.webp',
-    desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
+    imageUrl: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
+    mobileImage: '/images/tours/9-16/galapagos-piquero-patas-azules-9-16.webp',
+    desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
     gallery: [
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
       '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
       '/images/tours/16-9/marine-iguana-galapagos.webp',
-      '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
+      '/images/tours/16-9/galapagos-puerto-ayora-16-9.webp',
+      '/images/tours/16-9/galapagos-snorkeling-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 32,
@@ -229,14 +231,14 @@ const multiDayTours: Tour[] = [
         zh: '酒店前台免费提供安全保险箱服务'
       },
       {
-        en: 'Autobús Lobito Eco-Shuttle (Airport – Itabaca Channel – Airport): The exclusive official ground transport on Baltra Island, engineered to safeguard the delicate ecosystem and eliminate environmental pollution through certified native transit',
-        es: 'Autobús Lobito (Aeropuerto – Canal de Itabaca – Aeropuerto): El único transporte terrestre autorizado en la Isla Baltra, una experiencia nativa protegida que garantiza la conservación ambiental y elimina la contaminación vehicular',
-        fr: 'Navette écologique Autobús Lobito (Aéroport – Canal d\'Itabaca – Aéroport) : L\'unique moyen de transport terrestre sur l\'île de Baltra, garantissant la protection absolue de l\'écosystème insulaire contre la pollution',
-        de: 'Autobús Lobito Öko-Shuttle (Flughafen – Itabaca-Kanal – Flughafen): Das einzige zugelassene Landtransportmittel auf Baltra, das aktiven Umweltschutz gewährleistet und Schadstoffemissionen im Nationalpark eliminiert',
-        it: 'Navetta ecologica Autobús Lobito (Aeroporto – Canale di Itabaca – Aeroporto): L\'unico trasporto su terra dell\'isola Baltra, esperienza nativa che garantisce la protezione ambientale ed elimina le emissioni inquinanti',
-        pt: 'Ônibus ecológico Lobito (Aeroporto – Canal de Itabaca – Aeroporto): O único transporte terrestre autorizado na Ilha Baltra, experiência nativa que assegura a preservação ambiental e elimina a poluição',
-        ja: 'アウトブス・ロビト（Autobús Lobito）環境保全シャトル（空港 – イタバカ運河 – 空港）：バルトラ島唯一の公式陸上交通。国立公園の環境汚染を防ぎ、固有の生態系を守る持続可能な移動体験',
-        zh: 'Lobito 环保官方生态巴士（Autobús Lobito：机场 – 伊塔巴卡运河 – 机场）：巴尔特拉岛唯一官方陆路交通，也是独具特色的海岛原生体验，严格实行生态限行保护以根除尾气污染'
+        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
+        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
+        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
+        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
+        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
+        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
+        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
+        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
       },
       {
         en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
@@ -572,14 +574,14 @@ const multiDayTours: Tour[] = [
           zh: '包含早餐'
         },
         transportation: {
-          en: 'Island ground transfer, Autobús Lobito ecological shuttle (exclusive island transport), domestic flight & private Quito transfer',
-          es: 'Transporte en isla, Autobús Lobito ecológico (único transporte de la isla para protección ambiental), vuelo doméstico y traslado privado en Quito',
-          fr: 'Transport terrestre sur l\'île, navette écologique Autobús Lobito (transport exclusif protecteur de l\'écosystème), vol intérieur et transfert privé à Quito',
-          de: 'Insel-Transfer, Autobús Lobito Öko-Shuttle (exklusiver Inseltransport zum Umweltschutz), Inlandsflug & privater Transfer in Quito',
-          it: 'Trasferimento sull\'isola, navetta ecologica Autobús Lobito (trasporto esclusivo ecologico), volo nazionale e transfer privato a Quito',
-          pt: 'Transporte na ilha, ônibus ecológico Lobito (transporte exclusivo para proteção ambiental), voo doméstico e traslado privado em Quito',
-          ja: '島内陸上送迎、環境保全シャトル「Autobús Lobito」（島内唯一の公認移動）、国内線フライト＆キト市内専用送迎',
-          zh: '岛上陆路接驳、Autobús Lobito 生态专线巴士（巴尔特拉岛唯一环保接驳）、国内航班及基多市内专车'
+          en: 'Island ground transfer, Baltra airport shuttle, domestic flight & private Quito transfer',
+          es: 'Transporte en isla, bus Lobito, vuelo doméstico y traslado privado en Quito',
+          fr: 'Transport terrestre sur l\'île, navette aéroport, vol intérieur et transfert privé à Quito',
+          de: 'Insel-Transfer, Shuttlebus, Inlandsflug & privater Transfer in Quito',
+          it: 'Trasferimento sull\'isola, navetta, volo nazionale e transfer privato a Quito',
+          pt: 'Transporte na ilha, ônibus shuttle, voo doméstico e traslado privado em Quito',
+          ja: '島内陸上送迎、空港シャトル、国内線フライト＆キト市内専用送迎',
+          zh: '岛上陆路接驳、机场专线巴士、国内航班及基多市内专车'
         },
       },
       {
@@ -634,12 +636,12 @@ const multiDayTours: Tour[] = [
     id: 'galapagos-7days',
     code: '1.2',
     title: {
-      en: 'Galapagos Explorer: 7-Day Island Expedition',
-      es: 'Expedición Galápagos: 7 Días De Aventura',
-      fr: 'Expédition Galápagos: 7 Jours d\'Aventure',
-      de: 'Galapagos Entdecker: 7 Tage Inselabenteuer',
-      it: 'Spedizione Galapagos: 7 Giorni di Avventura',
-      pt: 'Expedição Galápagos: 7 Dias de Aventura',
+      en: 'Galapagos Explorer: 7-Day Island Expedition (With Quito Transfers)',
+      es: 'Expedición Galápagos: 7 Días De Aventura (Con Transfers UIO)',
+      fr: 'Expédition Galápagos: 7 Jours d\'Aventure (Transferts UIO Inclus)',
+      de: 'Galapagos Entdecker: 7 Tage Inselabenteuer (Inkl. Quito-Transfers)',
+      it: 'Spedizione Galapagos: 7 Giorni di Avventura (Con Trasferimenti UIO)',
+      pt: 'Expedição Galápagos: 7 Dias de Aventura (Com Transfers UIO)',
       ja: 'ガラパゴス探検：7日間のアイランドアドベンチャー（キト送迎付き）',
       zh: '加拉帕戈斯探索者：7日海岛深度探险（含基多接送机）'
     },
@@ -658,16 +660,17 @@ const multiDayTours: Tour[] = [
     price: 2050,
     price3Star: 2050,
     price4Star: 2399,
-    imageUrl: '/images/tours/16-9/galapagos-iguana-marina-cabeza-16-9.webp',
-    mobileImage: '/images/tours/9-16/galapagos-iguana-marina-perfil-vertical.webp',
-    desktopImage: '/images/tours/16-9/galapagos-iguana-marina-cabeza-16-9.webp',
+    imageUrl: '/images/tours/16-9/marine-iguana-galapagos.webp',
+    mobileImage: '/images/tours/9-16/marine-iguana-galapagos-web.webp',
+    desktopImage: '/images/tours/16-9/marine-iguana-galapagos.webp',
     gallery: [
       '/images/tours/16-9/marine-iguana-galapagos.webp',
-      '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
       '/images/tours/16-9/galapagos-isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
       '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
+      '/images/tours/16-9/galapagos-snorkeling-16-9.webp',
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp'
     ],
     rating: 5,
@@ -867,14 +870,14 @@ const multiDayTours: Tour[] = [
         zh: '酒店前台免费提供安全保险箱服务'
       },
       {
-        en: 'Autobús Lobito Eco-Shuttle (Airport – Itabaca Channel – Airport): The exclusive official ground transport on Baltra Island, engineered to safeguard the delicate ecosystem and eliminate environmental pollution through certified native transit',
-        es: 'Autobús Lobito (Aeropuerto – Canal de Itabaca – Aeropuerto): El único transporte terrestre autorizado en la Isla Baltra, una experiencia nativa protegida que garantiza la conservación ambiental y elimina la contaminación vehicular',
-        fr: 'Navette écologique Autobús Lobito (Aéroport – Canal d\'Itabaca – Aéroport) : L\'unique moyen de transport terrestre sur l\'île de Baltra, garantissant la protection absolue de l\'écosystème insulaire contre la pollution',
-        de: 'Autobús Lobito Öko-Shuttle (Flughafen – Itabaca-Kanal – Flughafen): Das einzige zugelassene Landtransportmittel auf Baltra, das aktiven Umweltschutz gewährleistet und Schadstoffemissionen im Nationalpark eliminiert',
-        it: 'Navetta ecologica Autobús Lobito (Aeroporto – Canale di Itabaca – Aeroporto): L\'unico trasporto su terra dell\'isola Baltra, esperienza nativa che garantisce la protezione ambientale ed elimina le emissioni inquinanti',
-        pt: 'Ônibus ecológico Lobito (Aeroporto – Canal de Itabaca – Aeroporto): O único transporte terrestre autorizado na Ilha Baltra, experiência nativa que assegura a preservação ambiental e elimina a poluição',
-        ja: 'アウトブス・ロビト（Autobús Lobito）環境保全シャトル（空港 – イタバカ運河 – 空港）：バルトラ島唯一の公式陸上交通。国立公園の環境汚染を防ぎ、固有の生態系を守る持続可能な移動体験',
-        zh: 'Lobito 环保官方生态巴士（Autobús Lobito：机场 – 伊塔巴卡运河 – 机场）：巴尔特拉岛唯一官方陆路交通，也是独具特色的海岛原生体验，严格实行生态限行保护以根除尾气污染'
+        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
+        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
+        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
+        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
+        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
+        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
+        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
+        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
       },
       {
         en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
@@ -1254,14 +1257,14 @@ const multiDayTours: Tour[] = [
           zh: '包含早餐'
         },
         transportation: {
-          en: 'Island ground transfer, Autobús Lobito ecological shuttle (exclusive island transport), domestic flight & private Quito transfer',
-          es: 'Transporte en isla, Autobús Lobito ecológico (único transporte de la isla para protección ambiental), vuelo doméstico y traslado privado en Quito',
-          fr: 'Transport terrestre sur l\'île, navette écologique Autobús Lobito (transport exclusif protecteur de l\'écosystème), vol intérieur et transfert privé à Quito',
-          de: 'Insel-Transfer, Autobús Lobito Öko-Shuttle (exklusiver Inseltransport zum Umweltschutz), Inlandsflug & privater Transfer in Quito',
-          it: 'Trasferimento sull\'isola, navetta ecologica Autobús Lobito (trasporto esclusivo ecologico), volo nazionale e transfer privato a Quito',
-          pt: 'Transporte na ilha, ônibus ecológico Lobito (transporte exclusivo para proteção ambiental), voo doméstico e traslado privado em Quito',
-          ja: '島内陸上送迎、環境保全シャトル「Autobús Lobito」（島内唯一の公認移動）、国内線フライト＆キト市内専用送迎',
-          zh: '岛上陆路接驳、Autobús Lobito 生态专线巴士（巴尔特拉岛唯一环保接驳）、国内航班及基多市内专车'
+          en: 'Island ground transfer, Baltra shuttle, domestic flight & private Quito transfer',
+          es: 'Transporte en isla, bus Lobito, vuelo doméstico y traslado privado en Quito',
+          fr: 'Transport terrestre sur l\'île, navette aéroport, vol intérieur et transfert privé à Quito',
+          de: 'Insel-Transfer, Shuttlebus, Inlandsflug & privater Transfer in Quito',
+          it: 'Trasferimento sull\'isola, navetta, volo nazionale e transfer privato a Quito',
+          pt: 'Transporte na ilha, ônibus shuttle, voo doméstico e traslado privado em Quito',
+          ja: '島内陸上送迎、空港シャトル、国内線フライト＆キト市内専用送迎',
+          zh: '岛上陆路接驳、机场专线巴士、国内航班及基多市内专车'
         },
       },
       {
@@ -1316,12 +1319,12 @@ const multiDayTours: Tour[] = [
     id: 'galapagos-8days',
     code: '1.3',
     title: {
-      en: 'Galapagos Grand Odyssey: 8-Day 3-Island Expedition',
-      es: 'Gran Odisea Galápagos: 8 Días y 3 Islas',
-      fr: 'Grande Odyssée aux Galápagos: 8 Jours et 3 Îles',
-      de: 'Galapagos Grand Odyssee: 8 Tage & 3 Inseln',
-      it: 'Grande Odissea alle Galapagos: 8 Giorni e 3 Isole',
-      pt: 'Grande Odisseia em Galápagos: 8 Dias e 3 Ilhas',
+      en: 'Galapagos Grand Odyssey: 8-Day 3-Island Expedition (With Quito Transfers)',
+      es: 'Gran Odisea Galápagos: 8 Días y 3 Islas (Con Transfers UIO)',
+      fr: 'Grande Odyssée aux Galápagos: 8 Jours et 3 Îles (Transferts UIO Inclus)',
+      de: 'Galapagos Grand Odyssee: 8 Tage & 3 Inseln (Inkl. Quito-Transfers)',
+      it: 'Grande Odissea alle Galapagos: 8 Giorni e 3 Isole (Con Trasferimenti UIO)',
+      pt: 'Grande Odisseia em Galápagos: 8 Dias e 3 Ilhas (Com Transfers UIO)',
       ja: 'ガラパゴス諸島 壮大なオデッセイ：8日間 3島巡礼（キト送迎付き）',
       zh: '加拉帕戈斯盛大史诗：8日三岛大跨越（含基多接送机）'
     },
@@ -1340,16 +1343,18 @@ const multiDayTours: Tour[] = [
     price: 2200,
     price3Star: 2200,
     price4Star: 2600,
-    imageUrl: '/images/tours/16-9/galapagos-piquero-patas-azules-roca-4-3.webp',
-    mobileImage: '/images/tours/9-16/galapagos-tortuga-bay-9-16.webp',
-    desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-roca-4-3.webp',
+    imageUrl: '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
+    mobileImage: '/images/tours/9-16/galapagos-lobo-marino-9-16.webp',
+    desktopImage: '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
     gallery: [
       '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
+      '/images/tours/16-9/isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/galapagos-las-grietas-16-9.webp',
-      '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+      '/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
       '/images/tours/16-9/marine-iguana-galapagos.webp',
+      '/images/tours/16-9/galapagos-snorkeling-16-9.webp'
     ],
     rating: 5,
     reviewsCount: 42,
@@ -1558,14 +1563,14 @@ const multiDayTours: Tour[] = [
         zh: '酒店前台免费提供安全保险箱服务'
       },
       {
-        en: 'Autobús Lobito Eco-Shuttle (Airport – Itabaca Channel – Airport): The exclusive official ground transport on Baltra Island, engineered to safeguard the delicate ecosystem and eliminate environmental pollution through certified native transit',
-        es: 'Autobús Lobito (Aeropuerto – Canal de Itabaca – Aeropuerto): El único transporte terrestre autorizado en la Isla Baltra, una experiencia nativa protegida que garantiza la conservación ambiental y elimina la contaminación vehicular',
-        fr: 'Navette écologique Autobús Lobito (Aéroport – Canal d\'Itabaca – Aéroport) : L\'unique moyen de transport terrestre sur l\'île de Baltra, garantissant la protection absolue de l\'écosystème insulaire contre la pollution',
-        de: 'Autobús Lobito Öko-Shuttle (Flughafen – Itabaca-Kanal – Flughafen): Das einzige zugelassene Landtransportmittel auf Baltra, das aktiven Umweltschutz gewährleistet und Schadstoffemissionen im Nationalpark eliminiert',
-        it: 'Navetta ecologica Autobús Lobito (Aeroporto – Canale di Itabaca – Aeroporto): L\'unico trasporto su terra dell\'isola Baltra, esperienza nativa che garantisce la protezione ambientale ed elimina le emissioni inquinanti',
-        pt: 'Ônibus ecológico Lobito (Aeroporto – Canal de Itabaca – Aeroporto): O único transporte terrestre autorizado na Ilha Baltra, experiência nativa que assegura a preservação ambiental e elimina a poluição',
-        ja: 'アウトブス・ロビト（Autobús Lobito）環境保全シャトル（空港 – イタバカ運河 – 空港）：バルトラ島唯一の公式陸上交通。国立公園の環境汚染を防ぎ、固有の生態系を守る持続可能な移動体験',
-        zh: 'Lobito 环保官方生态巴士（Autobús Lobito：机场 – 伊塔巴卡运河 – 机场）：巴尔特拉岛唯一官方陆路交通，也是独具特色的海岛原生体验，严格实行生态限行保护以根除尾气污染'
+        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
+        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
+        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
+        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
+        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
+        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
+        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
+        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
       },
       {
         en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
@@ -2094,6 +2099,7 @@ const multiDayTours: Tour[] = [
       '/images/tours/16-9/laguna-quilotoa-16-9.webp',
       '/images/tours/16-9/pailon-del-diablo-16-9.webp',
       '/images/tours/16-9/amazon-river-16-9.webp',
+      '/images/tours/16-9/puyo-yanacocha-16-9.webp',
       '/images/tours/16-9/quito-colonial-16-9.webp',
       '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp'
     ],
@@ -2498,11 +2504,11 @@ const multiDayTours: Tour[] = [
     description: {
       en: '6-day overland journey traversing the Avenue of the Volcanoes, adventure town of Baños, Pailón del Diablo (Devil\'s Cauldron) waterfall, Pastaza canyon, Puyo rainforest biopark, and Quilotoa turquoise crater lake.',
       es: 'Recorrido de 6 días por la Avenida de los Volcanes, Baños de Agua Santa, la cascada Pailón del Diablo, bioparque en Puyo y el cráter Quilotoa.',
-      zh: '6日陆地景观之旅，沿着火山大道前进，游览冒险小镇巴尼奥斯、恶魔之锅大瀑布、帕斯塔萨峡谷、普约雨林公园与基洛托阿翡翠火山湖。'
+      zh: '6日陆地景观之旅，沿着火山大道前进，游览冒险小镇巴尼奥斯、恶魔之咽瀑布、帕斯塔萨峡谷、普约雨林公园与基洛托阿翡翠火山湖。'
     },
     highlights: [
       { en: 'Avenue of the Volcanoes & Baños de Agua Santa', es: 'Avenida de los Volcanes y Baños de Agua Santa', zh: '火山大道与巴尼奥斯小镇' },
-      { en: 'Pailón del Diablo (Devil\'s Cauldron) Mega Waterfall Hike', es: 'Caminata a la Cascada Pailón del Diablo (Devil\'s Cauldron)', zh: '恶魔之锅瀑布徒步' },
+      { en: 'Pailón del Diablo (Devil\'s Cauldron) Mega Waterfall Hike', es: 'Caminata a la Cascada Pailón del Diablo (Devil\'s Cauldron)', zh: '恶魔之咽瀑布徒步' },
       { en: 'Puyo Amazon Rainforest & Yanacocha Biopark', es: 'Selva de Puyo y Bioparque Yanacocha', zh: '普约雨林与亚纳科查生物公园' },
       { en: 'Hola Vida Waterfall & Kichwa Community', es: 'Cascada Hola Vida y comunidad Kichwa', zh: '奥拉维达瀑布与奇瓦文化' },
       { en: 'Quilotoa Emerald Crater Lake & Tigua Art', es: 'Laguna de Quilotoa y Pinturas de Tigua', zh: '基洛托阿翡翠火山湖' }
@@ -2641,7 +2647,7 @@ const multiDayTours: Tour[] = [
     price3Star: 1490,
     price4Star: 2090,
     imageUrl: '/images/tours/16-9/quito-colonial-16-9.webp',
-    mobileImage: '/images/tours/9-16/quito-la-compania-retablo-9-16.webp',
+    mobileImage: '/images/tours/9-16/quito-centro-historico.webp',
     desktopImage: '/images/tours/16-9/quito-colonial-16-9.webp',
     gallery: [
       '/images/tours/16-9/quito-colonial-16-9.webp',
@@ -2827,7 +2833,7 @@ const multiDayTours: Tour[] = [
       it: 'L\'Odissea Definitiva: Ecuador e Galapagos',
       pt: 'A Odisséia Definitiva: Equador e Galápagos',
       ja: '究極のエクアドル＆ガラパゴスの旅',
-      zh: '从安第斯山脉到加拉帕戈斯的顶级魅力之旅'
+      zh: '厄瓜多尔与加拉帕戈斯终极奥德赛'
     },
     destination: 'Ecuador & Galapagos',
     duration: {
@@ -2848,7 +2854,9 @@ const multiDayTours: Tour[] = [
     mobileImage: '/images/tours/9-16/galapagos-piquero-patas-azules-9-16.webp',
     desktopImage: '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
     gallery: [
+      '/images/tours/16-9/galapagos-snorkeling-16-9.webp',
       '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp',
+      '/images/tours/16-9/isabela-island-16-9.webp',
       '/images/tours/16-9/galapagos-tintoreras16-9.webp',
       '/images/tours/16-9/cotopaxi-volcano-16-9.webp',
       '/images/tours/16-9/laguna-quilotoa-16-9.webp',
@@ -3097,7 +3105,7 @@ const multiDayTours: Tour[] = [
       it: 'Viaggio Maestro: Dall\'Ecuador Continentale alle Galapagos',
       pt: 'Jornada Mestra: Do Equador Continental a Galápagos',
       ja: 'エクアドル本土からガラパゴスへのマスタージャーニー',
-      zh: '厄瓜多尔与加拉帕戈斯精华之旅：魔幻与冒险'
+      zh: '大师之旅：从厄瓜多尔大陆到加拉帕戈斯'
     },
     destination: 'Ecuador & Galapagos',
     duration: {
@@ -3114,9 +3122,9 @@ const multiDayTours: Tour[] = [
     price: 2290,
     price3Star: 2290,
     price4Star: 2450,
-    imageUrl: '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
-    mobileImage: '/images/tours/9-16/galapagos-flamenco-rosa-reflejo-9-16.webp',
-    desktopImage: '/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+    imageUrl: '/images/tours/16-9/galapagos-snorkeling-16-9.webp',
+    mobileImage: '/images/tours/9-16/galapagos-snorkeling-9-16.webp',
+    desktopImage: '/images/tours/16-9/galapagos-snorkeling-16-9.webp',
     gallery: [
       '/images/tours/16-9/galapagos-piquero-patas-azules-16-9.webp',
       '/images/tours/16-9/galapagos-tortuga-bay-16-9.webp',
@@ -3143,15 +3151,15 @@ const multiDayTours: Tour[] = [
     description: {
       en: '11-day master journey connecting mainland Ecuador (Quito, Avenue of Volcanoes, Baños Pailón del Diablo (Devil\'s Cauldron), Puyo Amazon Rainforest, Quilotoa Crater Lake) with Galápagos Islands (Santa Cruz highlands, giant tortoises, Isabela full-day with Tintoreras & flamingos, La Lobería and Las Grietas canyon).',
       es: 'Travesía de 11 días conectando los Andes, Baños, la Amazonía y Quilotoa con las maravillas volcánicas, tortugas gigantes y playas de Galápagos.',
-      zh: '11天探索之旅，串联安第斯山脉、巴尼奥斯、亚马逊雨林和基洛托阿火山湖，随后前往加拉帕戈斯，探索壮丽的火山奇观、巨型陆龟和迷人的海滩。'
+      zh: '11日经典联合行程，将厄瓜多尔大陆（基多、巴尼奥斯恶魔之咽、普约亚马逊、基洛托阿）与加拉帕戈斯群岛（圣克鲁斯、伊莎贝拉、蒂恩托雷拉斯、拉斯格里塔斯）完美融合。'
     },
     highlights: [
-      { en: 'Avenue of the Volcanoes & Baños Pailón del Diablo (Devil\'s Cauldron)', es: 'Avenida de los Volcanes y Baños Pailón del Diablo (Devil\'s Cauldron)', zh: '火山大道与巴尼奥斯恶魔之锅瀑布' },
-      { en: 'Puyo Amazon Rainforest & Kichwa Community', es: 'Selva Amazónica de Puyo y Comunidad Kichwa', zh: '普约原始亚马逊雨林与克丘亚原住民村落' },
-      { en: 'Quilotoa Emerald Volcanic Crater Lake', es: 'Laguna del Cráter de Quilotoa', zh: '基洛托阿翡翠火山湖与安第斯传统农庄（荷兰猪 / Cuy）' },
-      { en: 'Santa Cruz Highlands & Giant Tortoises', es: 'Tierras Altas de Santa Cruz y Tortugas Gigantes', zh: '圣克鲁斯高地与野生象龟群保护区' },
-      { en: 'Isabela Island, Flamingo Lagoon & Tintoreras', es: 'Isla Isabela, Laguna de Flamingos y Tintoreras', zh: '伊莎贝拉岛、火烈鸟泻湖与蒂恩托雷拉斯石礁浮潜' },
-      { en: 'Las Grietas Crystal-Clear Volcanic Chasm', es: 'Cañón Volcánico de Las Grietas', zh: '拉斯格里塔斯火山峡谷天然清潭潜水' }
+      { en: 'Avenue of the Volcanoes & Baños Pailón del Diablo (Devil\'s Cauldron)', es: 'Avenida de los Volcanes y Baños Pailón del Diablo (Devil\'s Cauldron)', zh: '火山大道与巴尼奥斯恶魔之咽' },
+      { en: 'Puyo Amazon Rainforest & Kichwa Community', es: 'Selva Amazónica de Puyo y Comunidad Kichwa', zh: '普约亚马逊雨林与奇瓦社区' },
+      { en: 'Quilotoa Emerald Volcanic Crater Lake', es: 'Laguna del Cráter de Quilotoa', zh: '基洛托阿翡翠火山湖' },
+      { en: 'Santa Cruz Highlands & Giant Tortoises', es: 'Tierras Altas de Santa Cruz y Tortugas Gigantes', zh: '圣克鲁斯高地与巨龟保护区' },
+      { en: 'Isabela Island, Flamingo Lagoon & Tintoreras', es: 'Isla Isabela, Laguna de Flamingos y Tintoreras', zh: '伊莎贝拉岛、火烈鸟与蒂恩托雷拉斯' },
+      { en: 'Las Grietas Crystal-Clear Volcanic Chasm', es: 'Cañón Volcánico de Las Grietas', zh: '拉斯格里塔斯火山峡谷潜水' }
     ],
     inclusions: [
       { en: 'Airport assistance and private transfers', es: 'Asistencia en aeropuerto y traslados privados' },
@@ -3302,7 +3310,7 @@ const multiDayTours: Tour[] = [
           en: 'After breakfast, enjoy a free day in Santa Cruz Island.\n\nThis day can be used to relax at the hotel, explore Puerto Ayora independently, visit local shops and restaurants, or simply enjoy the island at your own pace.\n\nOptional excursions and activities can be arranged upon request, depending on availability and local conditions.',
           es: 'Día libre en Santa Cruz para disfrutar de Puerto Ayora, Playa Tortuga Bay o tours opcionales.'
         },
-        image: '/images/tours/16-9/galapagos-tortuga-bay-16-9.1.webp',
+        image: '/images/tours/16-9/galapagos-puerto-ayora-16-9.webp',
         accommodation: { en: 'Santa Cruz Island – Puerto Ayora', es: 'Isla Santa Cruz – Puerto Ayora' },
         meals: { en: 'Breakfast', es: 'Desayuno' }
       },

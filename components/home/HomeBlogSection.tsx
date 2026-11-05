@@ -8,7 +8,6 @@ import { BookOpen, ArrowRight, Clock, Play, Sparkles } from 'lucide-react';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 
-import { socialUrl } from '@/data/socialLinks';
 const VIDEO_GUIDES = [
   {
     id: 'YF8ZJuV3NGo',
@@ -261,7 +260,7 @@ export function HomeBlogSection() {
                 src={post.imageUrl}
                 alt={getLocalizedText(post.title, locale)}
                 fill
-                quality={80}
+                quality={100}
                 sizes="(max-width: 768px) 85vw, (max-width: 1200px) 33vw, 400px"
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
               />
@@ -378,7 +377,7 @@ export function HomeBlogSection() {
 
         <div className="sm:hidden pt-2 flex justify-center border-t border-zinc-800">
           <a
-            href={socialUrl('youtube', locale)}
+            href="https://www.youtube.com/@VermilionSouthAmericanRoutes"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-emerald-600/50 bg-emerald-950/40 text-emerald-400 text-xs font-bold uppercase tracking-wider transition-all shadow-md active:scale-95"

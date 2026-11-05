@@ -5,28 +5,27 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import { useSearchParams, useRouter } from 'next/navigation';
-import {
-  Users,
-  Video,
-  Compass,
-  Calendar,
-  CheckCircle2,
-  Clock,
-  DollarSign,
-  Send,
-  Plus,
-  Gift,
-  Filter,
-  Search,
-  ShieldCheck,
-  TrendingUp,
-  UserPlus,
-  ArrowUpRight,
-  ChevronRight,
-  AlertCircle,
-  Eye,
-  Phone,
-  Mail,
+import { 
+  Users, 
+  Compass, 
+  Calendar, 
+  CheckCircle2, 
+  Clock, 
+  DollarSign, 
+  Send, 
+  Plus, 
+  Gift, 
+  Filter, 
+  Search, 
+  ShieldCheck, 
+  TrendingUp, 
+  UserPlus, 
+  ArrowUpRight, 
+  ChevronRight, 
+  AlertCircle, 
+  Eye, 
+  Phone, 
+  Mail, 
   Award,
   Sparkles,
   Layers,
@@ -53,62 +52,16 @@ import { auth, db } from '@/lib/firebase';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useCrmData } from '@/hooks/useCrmData';
-import { CrmActivityPanel } from '@/components/crm/CrmActivityPanel';
-import {
-  SystemUser,
-  CrmLead,
-  CrmBooking,
-  UserRole,
-  RunSheetDay,
+import { 
+  SystemUser, 
+  CrmLead, 
+  CrmBooking, 
+  UserRole, 
+  RunSheetDay, 
   PassengerProfile,
   GenealogyNode,
-  WhatsAppTemplate,
-  LeadEmailDelivery
+  WhatsAppTemplate 
 } from '@/types/crm';
-import { buildFollowUpDraft } from '@/lib/crm/followUpDraft';
-
-/** De dónde llegó el lead (panel interno, solo en español). */
-const LEAD_SOURCE_LABEL: Record<string, string> = {
-  pdf_download: 'Descargó PDF',
-  plan_trip: 'Planifica tu viaje',
-  ai_concierge: 'Chat con Pyro',
-  contact_form: 'Formulario de contacto',
-  tour_inquiry: 'Consulta de tour',
-  landing_popup: 'Popup de la web',
-  affiliate_referral: 'Referido de afiliado',
-  web_lead: 'Web',
-};
-
-const EMAIL_BADGE: Record<LeadEmailDelivery | 'unknown', { text: string; cls: string }> = {
-  sent: { text: 'correo enviado', cls: 'bg-emerald-500/20 text-emerald-200' },
-  failed: { text: 'correo FALLÓ', cls: 'bg-red-500/25 text-red-200' },
-  not_configured: { text: 'correo sin configurar', cls: 'bg-red-500/25 text-red-200' },
-  no_recipient: { text: 'sin correo válido', cls: 'bg-amber-500/20 text-amber-200' },
-  none: { text: 'no se envía correo', cls: 'bg-zinc-500/25 text-zinc-200' },
-  unknown: { text: 'correo sin registro', cls: 'bg-zinc-500/25 text-zinc-300' },
-};
-
-const LOCALE_LABEL: Record<string, string> = {
-  es: 'Español', en: 'Inglés', fr: 'Francés', de: 'Alemán', it: 'Italiano', pt: 'Portugués', ja: 'Japonés', zh: 'Chino',
-};
-
-function countryName(code?: string): string {
-  if (!code || code.length !== 2) return 'sin dato';
-  try {
-    return new Intl.DisplayNames(['es'], { type: 'region' }).of(code.toUpperCase()) || code;
-  } catch {
-    return code;
-  }
-}
-
-function EmailBadge({ label, value }: { label: string; value?: LeadEmailDelivery }) {
-  const b = EMAIL_BADGE[value || 'unknown'];
-  return (
-    <span className={`rounded-md px-2 py-0.5 text-[10px] font-semibold ${b.cls}`}>
-      {label}: {b.text}
-    </span>
-  );
-}
 
 export function AdminCrmDashboard() {
   const locale = useLocale();
@@ -124,8 +77,6 @@ export function AdminCrmDashboard() {
     waTemplates,
     genealogy,
     updateLeadStatus,
-    addLeadObservation,
-    updateBookingStatus,
     assignOperatorToBooking,
     signalTripCompleted,
     approveAndPayCommission,
@@ -144,9 +95,9 @@ export function AdminCrmDashboard() {
   type CrmTab = 'overview' | 'sales' | 'operations' | 'amenities' | 'finance' | 'genealogy' | 'concierge' | 'team';
   const [activeTab, setActiveTab] = useState<CrmTab>(
     tabParam === 'operations' ? 'operations' :
-      tabParam === 'sales' ? 'sales' :
-        tabParam === 'finance' ? 'finance' :
-          tabParam === 'amenities' ? 'amenities' : 'overview'
+    tabParam === 'sales' ? 'sales' :
+    tabParam === 'finance' ? 'finance' :
+    tabParam === 'amenities' ? 'amenities' : 'overview'
   );
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
@@ -156,7 +107,7 @@ export function AdminCrmDashboard() {
     operations: 'Operaciones & Run-Sheet',
     amenities: 'Amenities VIP Pakari',
     finance: 'Finanzas & Liquidaciones',
-    genealogy: 'Red MLM ',
+    genealogy: 'Red MLM & Piscinas',
     concierge: 'WhatsApp Concierge',
     team: 'Equipo & Roles',
   };
@@ -184,28 +135,12 @@ export function AdminCrmDashboard() {
   // Quotation Generator State
   const [quoteTour, setQuoteTour] = useState('Galapagos Luxury Island Hopping');
   const [quotePax, setQuotePax] = useState(2);
-  const [replyDraft, setReplyDraft] = useState<{ email: string; name: string; subject: string; body: string } | null>(null);
-  const [quoteTier, setQuoteTier] = useState<'comfort' | 'premium'>('premium');
+  const [quoteTier, setQuoteTier] = useState<'comfort' | 'premium' | 'luxury'>('premium');
   const [quotePrivateFlight, setQuotePrivateFlight] = useState(false);
   const [quoteDiscount, setQuoteDiscount] = useState(10); // 10% embajador
 
-  // New Observation State
-  const [newObs, setNewObs] = useState<Record<string, string>>({});
-  const [obsModalLead, setObsModalLead] = useState<CrmLead | null>(null);
-  const handleAddObservation = async (leadId: string) => {
-    const text = newObs[leadId];
-    if (!text || !text.trim()) return;
-    await addLeadObservation(
-      leadId,
-      text.trim(),
-      currentUser?.email || 'admin@vermilionroutes.com',
-      currentUser?.displayName || currentUser?.email || 'Admin'
-    );
-    setNewObs((prev) => ({ ...prev, [leadId]: '' }));
-  };
-
   // Base Prices for Quoter
-  const quoteBasePrice = quoteTier === 'comfort' ? 3800 : 5900;
+  const quoteBasePrice = quoteTier === 'comfort' ? 3800 : quoteTier === 'premium' ? 5900 : 8900;
   const flightAddon = quotePrivateFlight ? 1200 * quotePax : 0;
   const quoteSubtotal = (quoteBasePrice * quotePax) + flightAddon;
   const quoteDiscountAmount = (quoteSubtotal * quoteDiscount) / 100;
@@ -247,7 +182,7 @@ export function AdminCrmDashboard() {
   }, []);
 
   const handleLogout = async () => {
-    if (auth) await signOut(auth).catch(() => { });
+    if (auth) await signOut(auth).catch(() => {});
     router.replace(`/${locale}`);
   };
 
@@ -295,22 +230,6 @@ export function AdminCrmDashboard() {
     setPayoutReference('');
   };
 
-  // Close Modals on Escape
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setShowQuoterModal(false);
-        setShowNewUserModal(false);
-        setPayoutModalTarget(null);
-        setObsModalLead(null);
-        setSelectedLeadForProfile(null);
-        setSelectedBookingForRunSheet(null);
-      }
-    };
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
-  }, []);
-
   // Financial Summary Aggregations
   const totalGMV = bookings.reduce((acc, b) => acc + (b.totalAmount || b.paidAmount || 0), 0);
   const totalCollected = bookings.reduce((acc, b) => acc + (b.paidAmount || b.totalAmount || 0), 0);
@@ -322,13 +241,13 @@ export function AdminCrmDashboard() {
 
 
   return (
-    <div className="h-screen overflow-hidden bg-[#07110B] text-zinc-100 flex flex-col md:flex-row">
-
+    <div className="min-h-screen bg-[#07110B] text-zinc-100 flex flex-col md:flex-row">
+      
       {/* ── MOBILE TOP BAR (< md) ──────────────────────────── */}
       <header className="flex md:hidden items-center justify-between px-4 py-3 bg-[#060D08] border-b border-emerald-950/80 sticky top-0 z-30 shadow-xl">
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-sm">
-            <div className="w-full h-full bg-[#0B1622] rounded-[10px] flex items-center justify-center">
+            <div className="w-full h-full bg-[#07130C] rounded-[10px] flex items-center justify-center">
               <Image src="/icon.png" alt="Vermilion" width={20} height={20} className="object-contain" />
             </div>
           </div>
@@ -357,7 +276,7 @@ export function AdminCrmDashboard() {
           <div className="flex items-center justify-between pb-4 border-b border-emerald-950/80">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-sm">
-                <div className="w-full h-full bg-[#0B1622] rounded-[10px] flex items-center justify-center">
+                <div className="w-full h-full bg-[#07130C] rounded-[10px] flex items-center justify-center">
                   <Image src="/icon.png" alt="Vermilion" width={20} height={20} className="object-contain" />
                 </div>
               </div>
@@ -381,17 +300,37 @@ export function AdminCrmDashboard() {
           <div className="mt-4 p-3 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-[10px] text-zinc-400 font-mono uppercase tracking-wider">Tu Rol Autorizado</span>
-              <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider ${userRole === 'super' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+              <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider ${
+                userRole === 'super' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
                 userRole === 'admin' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
-                  userRole === 'operator' ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30' :
-                    'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                }`}>
+                userRole === 'operator' ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30' :
+                'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+              }`}>
                 {userRole}
               </span>
             </div>
             <p className="text-xs font-semibold text-white truncate">
               {currentUser?.email || 'pablofgarciaf@gmail.com'}
             </p>
+            {userRole === 'super' && (
+              <div className="pt-2 border-t border-emerald-950/60">
+                <label className="text-[9px] text-zinc-500 uppercase tracking-widest block mb-1">
+                  👁️ Simular Vista de Rol:
+                </label>
+                <select
+                  value={activeRoleView}
+                  onChange={(e) => setActiveRoleView(e.target.value as UserRole)}
+                  className="w-full bg-[#0B1A12] border border-emerald-800/50 rounded-lg text-[10px] text-zinc-300 py-1.5 px-2 focus:outline-none focus:border-amber-500"
+                >
+                  <option value="super">Super Admin (Todas las 8 Áreas)</option>
+                  <option value="admin">Admin Operativo (Gestión Total)</option>
+                  <option value="operator">Operador / Guía (Run-Sheet & Amenities)</option>
+                  <option value="sales">Comercial / Ventas (Pipeline & Cotizador)</option>
+                  <option value="financial">Finanzas (P&L & Dispersión de Pagos)</option>
+                  <option value="concierge">Concierge (Pakari & WhatsApp)</option>
+                </select>
+              </div>
+            )}
           </div>
 
           <nav className="mt-5 space-y-1.5 flex-1">
@@ -402,10 +341,11 @@ export function AdminCrmDashboard() {
             {canAccess('overview') && (
               <button
                 onClick={() => { setActiveTab('overview'); setMobileNavOpen(false); }}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'overview'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'overview'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <TrendingUp className="w-4 h-4" />
@@ -418,10 +358,11 @@ export function AdminCrmDashboard() {
             {canAccess('sales') && (
               <button
                 onClick={() => { setActiveTab('sales'); setMobileNavOpen(false); }}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'sales'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'sales'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <Briefcase className="w-4 h-4" />
@@ -436,10 +377,11 @@ export function AdminCrmDashboard() {
             {canAccess('operations') && (
               <button
                 onClick={() => { setActiveTab('operations'); setMobileNavOpen(false); }}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'operations'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'operations'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <Compass className="w-4 h-4" />
@@ -454,10 +396,11 @@ export function AdminCrmDashboard() {
             {canAccess('amenities') && (
               <button
                 onClick={() => { setActiveTab('amenities'); setMobileNavOpen(false); }}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'amenities'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'amenities'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <Gift className="w-4 h-4" />
@@ -470,10 +413,11 @@ export function AdminCrmDashboard() {
             {canAccess('finance') && (
               <button
                 onClick={() => { setActiveTab('finance'); setMobileNavOpen(false); }}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'finance'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'finance'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <DollarSign className="w-4 h-4" />
@@ -488,14 +432,15 @@ export function AdminCrmDashboard() {
             {canAccess('genealogy') && (
               <button
                 onClick={() => { setActiveTab('genealogy'); setMobileNavOpen(false); }}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'genealogy'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'genealogy'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <Network className="w-4 h-4" />
-                  <span>Red MLM </span>
+                  <span>Red MLM & Piscinas</span>
                 </div>
                 <span className="text-[10px] text-zinc-500 font-mono">10-3-2</span>
               </button>
@@ -504,10 +449,11 @@ export function AdminCrmDashboard() {
             {canAccess('concierge') && (
               <button
                 onClick={() => { setActiveTab('concierge'); setMobileNavOpen(false); }}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'concierge'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'concierge'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <MessageSquare className="w-4 h-4" />
@@ -520,10 +466,11 @@ export function AdminCrmDashboard() {
             {canAccess('team') && (
               <button
                 onClick={() => { setActiveTab('team'); setMobileNavOpen(false); }}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'team'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'team'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <Users className="w-4 h-4" />
@@ -532,22 +479,16 @@ export function AdminCrmDashboard() {
                 <span className="text-[10px] text-zinc-500 font-mono">{users.length}</span>
               </button>
             )}
-
-            {(activeRoleView === 'super' || activeRoleView === 'admin') && (
-              <Link
-                href={`/${locale}/admin/tiktok`}
-                className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all text-zinc-300 hover:bg-white/5 hover:text-white"
-              >
-                <div className="flex items-center gap-3">
-                  <Video className="w-4 h-4" />
-                  <span>TikTok</span>
-                </div>
-                <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500" />
-              </Link>
-            )}
           </nav>
 
           <div className="pt-4 border-t border-emerald-950/80 space-y-2 mt-6">
+            <Link
+              href={`/${locale}`}
+              className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-zinc-300 flex items-center justify-between"
+            >
+              <span>Ver Sitio Web</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </Link>
             <button
               onClick={handleLogout}
               className="w-full py-2.5 px-3 rounded-xl bg-rose-950/40 hover:bg-rose-900/50 text-xs text-rose-400 flex items-center justify-center gap-2 transition-colors cursor-pointer"
@@ -562,11 +503,11 @@ export function AdminCrmDashboard() {
       {/* ── 1. SIDEBAR DE NAVEGACIÓN DINÁMICO RBAC (DESKTOP) ──────────────────────────── */}
       <aside className="hidden md:flex md:w-72 bg-[#060D08] border-r border-emerald-950/60 p-5 flex-col justify-between shrink-0 shadow-2xl z-20">
         <div className="space-y-6">
-
+          
           {/* Brand Header */}
           <div className="flex items-center gap-3 pb-5 border-b border-emerald-950/80">
             <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/10">
-              <div className="w-full h-full bg-[#0B1622] rounded-[14px] flex items-center justify-center">
+              <div className="w-full h-full bg-[#07130C] rounded-[14px] flex items-center justify-center">
                 <Image src="/icon.png" alt="Vermilion" width={26} height={26} className="object-contain" />
               </div>
             </div>
@@ -584,17 +525,39 @@ export function AdminCrmDashboard() {
           <div className="p-3.5 rounded-2xl bg-emerald-950/30 border border-emerald-900/40 space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-[10px] text-zinc-400 font-mono uppercase tracking-wider">Tu Rol Autorizado</span>
-              <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider ${userRole === 'super' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+              <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider ${
+                userRole === 'super' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
                 userRole === 'admin' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
-                  userRole === 'operator' ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30' :
-                    'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                }`}>
+                userRole === 'operator' ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30' :
+                'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+              }`}>
                 {userRole}
               </span>
             </div>
             <p className="text-xs font-semibold text-white truncate">
               {currentUser?.email || 'pablofgarciaf@gmail.com'}
             </p>
+
+            {/* Simulador de Rol (Exclusivo para Super Admin) */}
+            {userRole === 'super' && (
+              <div className="pt-2 border-t border-emerald-950/60">
+                <label className="text-[9px] text-zinc-500 uppercase tracking-widest block mb-1">
+                  👁️ Simular Vista de Rol:
+                </label>
+                <select
+                  value={activeRoleView}
+                  onChange={(e) => setActiveRoleView(e.target.value as UserRole)}
+                  className="w-full bg-[#0B1A12] border border-emerald-800/50 rounded-lg text-[10px] text-zinc-300 py-1 px-2 focus:outline-none focus:border-amber-500"
+                >
+                  <option value="super">Super Admin (Todas las 8 Áreas)</option>
+                  <option value="admin">Admin Operativo (Gestión Total)</option>
+                  <option value="operator">Operador / Guía (Run-Sheet & Amenities)</option>
+                  <option value="sales">Comercial / Ventas (Pipeline & Cotizador)</option>
+                  <option value="financial">Finanzas (P&L & Dispersión de Pagos)</option>
+                  <option value="concierge">Concierge (Pakari & WhatsApp)</option>
+                </select>
+              </div>
+            )}
           </div>
 
           {/* Navigation Links (Filtered by RBAC) */}
@@ -606,10 +569,11 @@ export function AdminCrmDashboard() {
             {canAccess('overview') && (
               <button
                 onClick={() => setActiveTab('overview')}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'overview'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'overview'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <TrendingUp className="w-4 h-4" />
@@ -622,10 +586,11 @@ export function AdminCrmDashboard() {
             {canAccess('sales') && (
               <button
                 onClick={() => setActiveTab('sales')}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'sales'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'sales'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <Briefcase className="w-4 h-4" />
@@ -640,10 +605,11 @@ export function AdminCrmDashboard() {
             {canAccess('operations') && (
               <button
                 onClick={() => setActiveTab('operations')}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'operations'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'operations'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <Compass className="w-4 h-4" />
@@ -658,10 +624,11 @@ export function AdminCrmDashboard() {
             {canAccess('amenities') && (
               <button
                 onClick={() => setActiveTab('amenities')}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'amenities'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'amenities'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <Gift className="w-4 h-4" />
@@ -674,10 +641,11 @@ export function AdminCrmDashboard() {
             {canAccess('finance') && (
               <button
                 onClick={() => setActiveTab('finance')}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'finance'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'finance'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <DollarSign className="w-4 h-4" />
@@ -692,14 +660,15 @@ export function AdminCrmDashboard() {
             {canAccess('genealogy') && (
               <button
                 onClick={() => setActiveTab('genealogy')}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'genealogy'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'genealogy'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <Network className="w-4 h-4" />
-                  <span>Red MLM </span>
+                  <span>Red MLM & Piscinas</span>
                 </div>
                 <span className="text-[10px] text-zinc-500 font-mono">10-3-2</span>
               </button>
@@ -708,10 +677,11 @@ export function AdminCrmDashboard() {
             {canAccess('concierge') && (
               <button
                 onClick={() => setActiveTab('concierge')}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'concierge'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'concierge'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <MessageSquare className="w-4 h-4" />
@@ -724,10 +694,11 @@ export function AdminCrmDashboard() {
             {canAccess('team') && (
               <button
                 onClick={() => setActiveTab('team')}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${activeTab === 'team'
-                  ? 'bg-amber-500 text-black shadow-lg font-bold'
-                  : 'text-zinc-300 hover:bg-white/5 hover:text-white'
-                  }`}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                  activeTab === 'team'
+                    ? 'bg-amber-500 text-black shadow-lg font-bold'
+                    : 'text-zinc-300 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 <div className="flex items-center gap-2.5">
                   <Users className="w-4 h-4" />
@@ -736,24 +707,18 @@ export function AdminCrmDashboard() {
                 <span className="text-[10px] text-zinc-500 font-mono">{users.length}</span>
               </button>
             )}
-
-            {(activeRoleView === 'super' || activeRoleView === 'admin') && (
-              <Link
-                href={`/${locale}/admin/tiktok`}
-                className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-zinc-300 hover:bg-white/5 hover:text-white"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Video className="w-4 h-4" />
-                  <span>TikTok</span>
-                </div>
-                <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500" />
-              </Link>
-            )}
           </nav>
         </div>
 
         {/* Sidebar Footer */}
         <div className="pt-4 border-t border-emerald-950/80 space-y-2">
+          <Link
+            href={`/${locale}`}
+            className="w-full py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-zinc-400 hover:text-white transition-colors flex items-center justify-between"
+          >
+            <span>Ver Sitio Web</span>
+            <ExternalLink className="w-3.5 h-3.5" />
+          </Link>
           <button
             onClick={handleLogout}
             className="w-full py-2 px-3 rounded-xl bg-rose-950/30 hover:bg-rose-900/40 text-xs text-rose-400 flex items-center justify-center gap-2 transition-colors cursor-pointer"
@@ -765,12 +730,15 @@ export function AdminCrmDashboard() {
       </aside>
 
       {/* ── 2. ÁREA DE TRABAJO PRINCIPAL (MAIN VIEWPORT) ───────────────────── */}
-      <main className="flex-1 p-6 md:p-8 overflow-y-auto max-h-screen space-y-6 relative">
+      <main className="flex-1 px-6 md:px-8 pb-6 md:pb-8 pt-0 overflow-y-auto max-h-screen relative">
 
         {/* Top Navbar in Viewport */}
-        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 pt-2 border-b border-emerald-950/60 sticky top-0 bg-[#07110B] z-20">
+        <header 
+          className="sticky top-0 z-[60] -mx-6 md:-mx-8 px-6 md:px-8 pt-5 pb-4 mb-6 border-b border-emerald-950/60 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-4"
+          style={{ backgroundColor: '#07110B' }}
+        >
           <div>
-            <h1 className="font-serif text-2xl md:text-3xl font-bold text-white tracking-tight flex items-center gap-3">
+            <h1 className="font-serif text-2xl md:text-3xl font-bold text-white tracking-tight flex items-center gap-2">
               {activeTab === 'overview' && 'Tablero Ejecutivo & Inteligencia de Negocio'}
               {activeTab === 'sales' && 'Pipeline Comercial & Fichas de Pasajeros'}
               {activeTab === 'operations' && 'Control Operativo en Ruta & Run-Sheets'}
@@ -813,7 +781,7 @@ export function AdminCrmDashboard() {
           <div className="space-y-6">
             {/* KPI Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-5 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-2">
+              <div className="p-5 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-2">
                 <span className="text-zinc-400 text-xs font-mono uppercase tracking-wider block">Volumen Bruto (GMV)</span>
                 <h3 className="font-serif text-3xl font-extrabold text-white tracking-tight">
                   ${totalGMV.toLocaleString('en-US')} <span className="text-xs font-normal text-emerald-400">USD</span>
@@ -821,7 +789,7 @@ export function AdminCrmDashboard() {
                 <p className="text-[11px] text-zinc-400">Total expediciones confirmadas en el periodo</p>
               </div>
 
-              <div className="p-5 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-2">
+              <div className="p-5 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-2">
                 <span className="text-zinc-400 text-xs font-mono uppercase tracking-wider block">Cobrado en Cuenta</span>
                 <h3 className="font-serif text-3xl font-extrabold text-emerald-400 tracking-tight">
                   ${totalCollected.toLocaleString('en-US')} <span className="text-xs font-normal text-zinc-400">USD</span>
@@ -829,7 +797,7 @@ export function AdminCrmDashboard() {
                 <p className="text-[11px] text-zinc-400">{Math.round((totalCollected / (totalGMV || 1)) * 100)}% de recaudación efectiva</p>
               </div>
 
-              <div className="p-5 rounded-3xl bg-[#0F1E2E]/80 border border-amber-900/40 shadow-xl space-y-2">
+              <div className="p-5 rounded-3xl bg-[#0B1A12]/80 border border-amber-900/40 shadow-xl space-y-2">
                 <span className="text-amber-300 text-xs font-mono uppercase tracking-wider block">Utilidad Neta P&L</span>
                 <h3 className="font-serif text-3xl font-extrabold text-[#D4AF37] tracking-tight">
                   ${netOperatingProfit.toLocaleString('en-US')} <span className="text-xs font-normal text-amber-200">USD</span>
@@ -837,7 +805,7 @@ export function AdminCrmDashboard() {
                 <p className="text-[11px] text-amber-400/80">Margen neto corporativo promedio: <strong>{avgMargin}%</strong></p>
               </div>
 
-              <div className="p-5 rounded-3xl bg-[#0F1E2E]/80 border border-teal-900/40 shadow-xl space-y-2">
+              <div className="p-5 rounded-3xl bg-[#0B1A12]/80 border border-teal-900/40 shadow-xl space-y-2">
                 <span className="text-teal-300 text-xs font-mono uppercase tracking-wider block">Tours en Operación</span>
                 <h3 className="font-serif text-3xl font-extrabold text-teal-400 tracking-tight">
                   {bookings.filter(b => b.status === 'in_operation').length} <span className="text-xs font-normal text-zinc-400">viajes</span>
@@ -848,7 +816,7 @@ export function AdminCrmDashboard() {
 
             {/* Próximas Salidas & Alertas Operativas */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 p-6 rounded-3xl bg-[#0F1E2E]/60 border border-emerald-950/80 space-y-4">
+              <div className="lg:col-span-2 p-6 rounded-3xl bg-[#0B1A12]/60 border border-emerald-950/80 space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-amber-400" />
@@ -877,8 +845,9 @@ export function AdminCrmDashboard() {
 
                       <div className="text-right shrink-0">
                         <span className="text-sm font-extrabold text-white block">${(b.totalAmount || b.paidAmount || 0).toLocaleString('en-US')} USD</span>
-                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full inline-block mt-1 ${b.status === 'in_operation' ? 'bg-teal-500/20 text-teal-300' : 'bg-amber-500/20 text-amber-300'
-                          }`}>
+                        <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full inline-block mt-1 ${
+                          b.status === 'in_operation' ? 'bg-teal-500/20 text-teal-300' : 'bg-amber-500/20 text-amber-300'
+                        }`}>
                           {b.status}
                         </span>
                       </div>
@@ -888,7 +857,7 @@ export function AdminCrmDashboard() {
               </div>
 
               {/* Top Embajadores Widget */}
-              <div className="p-6 rounded-3xl bg-[#0F1E2E]/60 border border-emerald-950/80 space-y-4">
+              <div className="p-6 rounded-3xl bg-[#0B1A12]/60 border border-emerald-950/80 space-y-4">
                 <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
                   <Award className="w-4 h-4 text-amber-400" />
                   <span>Top Embajadores del Mes</span>
@@ -925,7 +894,7 @@ export function AdminCrmDashboard() {
                 </div>
 
                 <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-[11px] text-amber-300 leading-snug">
-                  ✨ Las 3 Fondos Globales de utilidades acumulan <strong>${(totalGMV * 0.06).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD</strong> (6% de volumen de venta) para el fondo global.
+                  ✨ Las 3 Piscinas Globales de utilidades acumulan <strong>${(totalGMV * 0.06).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD</strong> (6% de volumen de venta) para el fondo global.
                 </div>
               </div>
             </div>
@@ -941,7 +910,7 @@ export function AdminCrmDashboard() {
                 <select
                   value={destinationFilter}
                   onChange={(e) => setDestinationFilter(e.target.value)}
-                  className="bg-[#0F1E2E] border border-emerald-900/50 rounded-xl px-3 py-1.5 text-xs text-white"
+                  className="bg-[#0B1A12] border border-emerald-900/50 rounded-xl px-3 py-1.5 text-xs text-white"
                 >
                   <option value="all">Todos los Destinos</option>
                   <option value="Galapagos">Galápagos</option>
@@ -957,154 +926,136 @@ export function AdminCrmDashboard() {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Buscar prospecto o correo..."
-                  className="pl-9 pr-4 py-1.5 bg-[#0F1E2E] border border-emerald-900/50 rounded-xl text-xs text-white placeholder:text-zinc-400 focus:outline-none focus:border-amber-500"
+                  className="pl-9 pr-4 py-1.5 bg-[#0B1A12] border border-emerald-900/50 rounded-xl text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-amber-500"
                 />
               </div>
             </div>
 
-            {/* Lead Table View */}
-            <div className="overflow-x-auto rounded-2xl border border-emerald-900/40 bg-[#0F1E2E]">
-              <table className="w-full text-left text-xs text-zinc-300">
-                <thead className="bg-[#060D08] border-b border-emerald-900/40 text-[11px] uppercase tracking-wider text-zinc-300">
-                  <tr>
-                    <th className="p-4 font-bold">Qué pidió</th>
-                    <th className="p-4 font-bold">Pasajero</th>
-                    <th className="p-4 font-bold">Teléfono</th>
-                    <th className="p-4 font-bold">Tour / Destino</th>
-                    <th className="p-4 font-bold">Valor</th>
-                    <th className="p-4 font-bold">Fecha Viaje</th>
-                    <th className="p-4 font-bold">Estado</th>
-                    <th className="p-4 font-bold text-center">Acciones</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-emerald-900/20">
-                  {[
-                    ...leads.map(l => ({ ...l, isBooking: false })),
-                    ...bookings.map(b => ({
-                      id: b.id,
-                      customerName: b.customerName,
-                      customerEmail: b.customerEmail,
-                      customerPhone: b.customerPhone,
-                      destination: b.destination,
-                      estimatedBudget: b.totalAmount,
-                      travelDates: `${b.travelStartDate} al ${b.travelEndDate}`,
-                      status: 'won',
-                      observations: b.notes ? [{ text: b.notes, authorEmail: 'Sistema', createdAt: b.createdAt }] : [],
-                      isBooking: true,
-                      bookingCode: b.bookingCode
-                    } as any))
-                  ]
-                    .filter(l => destinationFilter === 'all' || l.destination === destinationFilter)
-                    .filter(l => l.customerName.toLowerCase().includes(searchQuery.toLowerCase()) || l.customerEmail.toLowerCase().includes(searchQuery.toLowerCase()))
-                    .sort((a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime())
-                    .map((l) => (
-                      <tr key={l.id} className="hover:bg-white/5 transition-colors group align-top">
-                        <td className="p-4 min-w-[260px] max-w-[340px]">
-                          {!l.isBooking && (
-                            <>
-                              <p className="text-xs font-semibold text-amber-200 leading-snug">
-                                {l.interest || l.notes || 'Sin detalle de lo que pidió'}
-                              </p>
-                              {l.requestDetails && (
-                                <p className="mt-1 text-[11px] text-zinc-300 leading-snug">{l.requestDetails}</p>
-                              )}
-                              <div className="mt-2 flex flex-wrap gap-1.5">
-                                <span className="rounded-md bg-sky-500/15 px-2 py-0.5 text-[10px] font-semibold text-sky-200">
-                                  {LEAD_SOURCE_LABEL[l.source || ''] || 'Web'}
-                                </span>
-                                <EmailBadge label="Cliente" value={l.emailStatus?.customer} />
-                                <EmailBadge label="Equipo" value={l.emailStatus?.team} />
-                                <span className="rounded-md bg-violet-500/20 px-2 py-0.5 text-[10px] font-semibold text-violet-100">
-                                  Idioma: {LOCALE_LABEL[l.locale || ''] || 'sin dato'}
-                                </span>
-                                <span className="rounded-md bg-violet-500/20 px-2 py-0.5 text-[10px] font-semibold text-violet-100">
-                                  País: {countryName(l.country)}
-                                </span>
-                              </div>
-                              {l.customerEmail && (
-                                <button
-                                  type="button"
-                                  onClick={() => {
-                                    const input = {
-                                      name: l.customerName,
-                                      email: l.customerEmail,
-                                      locale: l.locale,
-                                      items: leads.filter((x) => x.customerEmail && x.customerEmail === l.customerEmail).map((x) => x.interest || '').filter(Boolean),
-                                    };
-                                    const d = buildFollowUpDraft(input);
-                                    setReplyDraft({ email: l.customerEmail, name: l.customerName, subject: d.subject, body: d.body });
-                                  }}
-                                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-amber-400 px-3 py-1.5 text-[11px] font-extrabold text-zinc-950 hover:bg-amber-300"
-                                >
-                                  ✉ Ver y editar respuesta
-                                </button>
-                              )}
-                              {l.createdAt && (
-                                <p className="mt-1.5 text-[10px] text-zinc-400">
-                                  Llegó: {new Date(l.createdAt).toLocaleString('es-EC', { dateStyle: 'medium', timeStyle: 'short' })}
-                                </p>
-                              )}
-                            </>
-                          )}
-                          {l.isBooking && <p className="text-xs font-semibold text-emerald-200">Reserva confirmada</p>}
-                        </td>
-                        <td className="p-4">
-                          <p className="font-bold text-white text-sm">{l.customerName}</p>
-                          <p className="text-xs text-zinc-200 break-all">{l.customerEmail || 'Sin correo'}</p>
-                        </td>
-                        <td className="p-4 font-mono text-xs text-zinc-100">{l.customerPhone || 'Sin teléfono'}</td>
-                        <td className="p-4">
-                          <span className="inline-block bg-emerald-500/15 px-2 py-1 rounded text-[11px] font-semibold text-emerald-100">{l.destination}</span>
-                          {l.guestsText && <p className="mt-1.5 text-[11px] text-zinc-300">{l.guestsText}</p>}
-                        </td>
-                        <td className="p-4 font-bold text-amber-400">
-                          {l.estimatedBudget ? `$${l.estimatedBudget.toLocaleString('en-US')}` : '—'}
-                          {!l.isBooking && l.source === 'pdf_download' && (
-                            <p className="mt-1 text-[10px] font-normal text-zinc-400">precio del tour</p>
-                          )}
-                        </td>
-                        <td className="p-4 text-xs text-zinc-200">{l.travelDates || 'Por definir'}</td>
-                        <td className="p-4">
-                          <select
-                            value={l.status}
-                            onChange={(e) => updateLeadStatus(l.id, e.target.value as any)}
-                            disabled={l.isBooking}
-                            className="bg-black/40 border border-emerald-900/50 rounded text-xs text-white px-2 py-1 focus:border-amber-500 focus:outline-none disabled:opacity-50"
-                          >
-                            <option value="new">Nuevos</option>
-                            <option value="contacted">Contactados</option>
-                            <option value="itinerary_sent">Cotización</option>
-                            <option value="won">Ganadas (Bookings)</option>
-                            <option value="lost">Perdida</option>
-                          </select>
-                        </td>
-                        <td className="p-4">
-                          <div className="flex items-center justify-center gap-2">
-                            <button
-                              onClick={() => setObsModalLead(l)}
-                              className="p-1.5 rounded bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors tooltip-trigger"
-                              title="Observaciones & Historial"
-                            >
-                              <MessageSquare className="w-4 h-4" />
-                            </button>
-                            <button
-                              onClick={() => setSelectedLeadForProfile(l)}
-                              className="p-1.5 rounded bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 transition-colors tooltip-trigger"
-                              title="Ver Ficha 360"
-                            >
-                              <Eye className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  {leads.length === 0 && bookings.length === 0 && (
-                    <tr>
-                      <td colSpan={8} className="p-8 text-center text-zinc-500">No hay leads en el pipeline.</td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+            {/* Kanban Columns Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {/* Column 1: Nuevos */}
+              <div className="p-4 rounded-3xl bg-[#060D08] border border-emerald-950/80 space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-emerald-950">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400">1. Nuevos Leads</span>
+                  <span className="w-5 h-5 rounded-full bg-amber-500/20 text-amber-400 text-[10px] flex items-center justify-center font-bold">
+                    {leads.filter(l => l.status === 'new').length}
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {leads.filter(l => l.status === 'new').map((l) => (
+                    <div key={l.id} className="p-4 rounded-2xl bg-[#0B1A12] border border-emerald-900/30 space-y-2 hover:border-amber-500/50 transition-colors">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono text-zinc-400">{l.destination}</span>
+                        <span className="text-[10px] text-amber-400 font-bold">${l.estimatedBudget.toLocaleString('en-US')}</span>
+                      </div>
+                      <h4 className="text-xs font-bold text-white">{l.customerName}</h4>
+                      <p className="text-[11px] text-zinc-400 line-clamp-2">{l.notes}</p>
+                      
+                      <div className="pt-2 border-t border-emerald-950 flex items-center justify-between">
+                        <button
+                          onClick={() => setSelectedLeadForProfile(l)}
+                          className="text-[10px] text-emerald-400 hover:underline flex items-center gap-1 cursor-pointer"
+                        >
+                          <Eye className="w-3 h-3" /> Ficha 360°
+                        </button>
+                        <button
+                          onClick={() => updateLeadStatus(l.id, 'contacted')}
+                          className="px-2 py-1 rounded bg-amber-500 text-black text-[10px] font-bold cursor-pointer hover:bg-amber-400"
+                        >
+                          Contactar →
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 2: Contactados */}
+              <div className="p-4 rounded-3xl bg-[#060D08] border border-emerald-950/80 space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-emerald-950">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">2. Contactados</span>
+                  <span className="w-5 h-5 rounded-full bg-blue-500/20 text-blue-400 text-[10px] flex items-center justify-center font-bold">
+                    {leads.filter(l => l.status === 'contacted').length}
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {leads.filter(l => l.status === 'contacted').map((l) => (
+                    <div key={l.id} className="p-4 rounded-2xl bg-[#0B1A12] border border-emerald-900/30 space-y-2">
+                      <span className="text-[10px] font-mono text-zinc-400">{l.destination}</span>
+                      <h4 className="text-xs font-bold text-white">{l.customerName}</h4>
+                      <p className="text-[11px] text-zinc-400">{l.customerEmail}</p>
+                      <button
+                        onClick={() => updateLeadStatus(l.id, 'itinerary_sent')}
+                        className="w-full py-1.5 rounded bg-blue-600 text-white text-[10px] font-bold mt-2 cursor-pointer"
+                      >
+                        Enviar Cotización →
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 3: Cotización Enviada */}
+              <div className="p-4 rounded-3xl bg-[#060D08] border border-emerald-950/80 space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-emerald-950">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-purple-400">3. Cotización Enviada</span>
+                  <span className="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-[10px] flex items-center justify-center font-bold">
+                    {leads.filter(l => l.status === 'itinerary_sent' || l.status === 'negotiation').length}
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {leads.filter(l => l.status === 'itinerary_sent' || l.status === 'negotiation').map((l) => (
+                    <div key={l.id} className="p-4 rounded-2xl bg-[#0B1A12] border border-purple-900/30 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-mono text-purple-300">En Negociación</span>
+                        <span className="text-[10px] text-white font-bold">${l.estimatedBudget.toLocaleString('en-US')}</span>
+                      </div>
+                      <h4 className="text-xs font-bold text-white">{l.customerName}</h4>
+                      <button
+                        onClick={() => setSelectedLeadForProfile(l)}
+                        className="text-[10px] text-zinc-400 hover:underline flex items-center gap-1"
+                      >
+                        <Eye className="w-3 h-3" /> Ver Requerimientos VIP
+                      </button>
+                      <button
+                        onClick={() => updateLeadStatus(l.id, 'won')}
+                        className="w-full py-1.5 rounded bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[10px] font-bold mt-2 cursor-pointer"
+                      >
+                        ✓ Cerrar Venta Ganada
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Column 4: Ventas Ganadas */}
+              <div className="p-4 rounded-3xl bg-[#060D08] border border-emerald-950/80 space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-emerald-950">
+                  <span className="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">4. Ganadas (Bookings)</span>
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] flex items-center justify-center font-bold">
+                    {leads.filter(l => l.status === 'won').length}
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {leads.filter(l => l.status === 'won').map((l) => (
+                    <div key={l.id} className="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-500/30 space-y-2">
+                      <span className="text-[10px] font-mono text-emerald-400">Listo para Run-Sheet</span>
+                      <h4 className="text-xs font-bold text-white">{l.customerName}</h4>
+                      <p className="text-[10px] text-zinc-400">${l.estimatedBudget.toLocaleString('en-US')} USD</p>
+                      <button
+                        onClick={() => setActiveTab('operations')}
+                        className="text-[10px] text-[#D4AF37] hover:underline block pt-1 font-bold"
+                      >
+                        Ver en Operaciones →
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         )}
@@ -1123,7 +1074,7 @@ export function AdminCrmDashboard() {
 
             <div className="space-y-4">
               {bookings.map((booking, idx) => (
-                <div key={`${booking.id || booking.bookingCode || 'op'}-${idx}`} className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
+                <div key={`${booking.id || booking.bookingCode || 'op'}-${idx}`} className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-emerald-950">
                     <div>
                       <div className="flex items-center gap-2">
@@ -1149,23 +1100,18 @@ export function AdminCrmDashboard() {
                         <span>Ver Hoja de Ruta (Run-Sheet)</span>
                       </button>
 
-                      <div className="flex flex-col gap-1 items-end">
-                        <span className="text-[9px] text-zinc-500 uppercase tracking-widest block">Estado Operativo</span>
-                        <select
-                          value={booking.status || 'deposit_confirmed'}
-                          onChange={(e) => updateBookingStatus(booking.id, e.target.value as any)}
-                          className={`border rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:ring-1 focus:ring-amber-500 transition-colors ${booking.status === 'completed' ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-400' :
-                            booking.status === 'in_operation' ? 'bg-amber-950/40 border-amber-500/50 text-amber-400' :
-                              'bg-[#0F1E2E] border-emerald-900/50'
-                            }`}
+                      {booking.status !== 'completed' ? (
+                        <button
+                          onClick={() => signalTripCompleted(booking.id, booking.assignedOperatorName || 'Operador')}
+                          className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer"
                         >
-                          <option value="deposit_confirmed">Confirmado / Por Contactar</option>
-                          <option value="fully_paid">Pasajero Contactado / Listo</option>
-                          <option value="in_operation">Pasajero Recibido / En Ruta</option>
-                          <option value="completed">Expedición Finalizada</option>
-                          <option value="cancelled">Cancelado</option>
-                        </select>
-                      </div>
+                          ✓ Señalar Viaje Realizado
+                        </button>
+                      ) : (
+                        <span className="px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 font-mono text-xs font-bold border border-emerald-500/30">
+                          Expedición Culminada
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -1175,16 +1121,17 @@ export function AdminCrmDashboard() {
                       <div key={day.dayNumber} className="p-3.5 rounded-2xl bg-black/40 border border-emerald-900/30 space-y-1.5">
                         <div className="flex items-center justify-between">
                           <span className="text-[10px] font-mono text-[#D4AF37] font-bold">Día {day.dayNumber} · {day.date}</span>
-                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${day.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' :
+                          <span className={`text-[10px] font-mono px-2 py-0.5 rounded-full ${
+                            day.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' :
                             day.status === 'in_progress' ? 'bg-amber-500/20 text-amber-400' :
-                              'bg-zinc-800 text-zinc-400'
-                            }`}>
+                            'bg-zinc-800 text-zinc-400'
+                          }`}>
                             {day.status}
                           </span>
                         </div>
                         <h5 className="text-xs font-bold text-white">{day.title}</h5>
                         <p className="text-[11px] text-zinc-400 leading-snug">{day.activitiesSummary}</p>
-
+                        
                         <div className="pt-2 border-t border-emerald-950/60 flex items-center justify-between text-[10px] text-zinc-400">
                           <span>Chofer: <strong className="text-white">{day.driverName || 'N/A'}</strong> ({day.vehiclePlate || 'S/P'})</span>
                           <span>Pick-up: <strong className="text-teal-400">{day.pickupTime || 'Por coordinar'}</strong></span>
@@ -1201,7 +1148,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 4: AMENITIES VIP PAKARI ───────────────────────────────────── */}
         {activeTab === 'amenities' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-gradient-to-r from-stone-900 via-[#0F1E2E] to-stone-950 border border-amber-500/30 shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+            <div className="p-6 rounded-3xl bg-gradient-to-r from-stone-900 via-[#0B1A12] to-stone-950 border border-amber-500/30 shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-6">
               <div>
                 <span className="text-xs font-mono uppercase tracking-widest text-[#D4AF37] font-bold block mb-1">
                   Experiencia Gastronómica & Regalos de Autor
@@ -1220,7 +1167,7 @@ export function AdminCrmDashboard() {
             </div>
 
             {/* Amenities Orders Table */}
-            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <h4 className="font-serif text-base font-bold text-white">Órdenes de Amenidad por Despachar</h4>
 
               <div className="space-y-3">
@@ -1258,7 +1205,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 5: FINANZAS & P&L ─────────────────────────────────────────── */}
         {activeTab === 'finance' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <h4 className="font-serif text-lg font-bold text-white">Matriz de Rentabilidad (P&L) por Expedición</h4>
 
               <div className="overflow-x-auto">
@@ -1327,7 +1274,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 6: RED MLM & GENEALOGÍA ───────────────────────────────────── */}
         {activeTab === 'genealogy' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="font-serif text-lg font-bold text-white">Árbol Genealógico & Supervisión Unilevel</h4>
@@ -1359,9 +1306,9 @@ export function AdminCrmDashboard() {
                 {/* Level 1 Children */}
                 <div className="pl-6 border-l-2 border-amber-500/30 space-y-3">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-500 block">Nivel 1 (Hijos Directos — 3% Comisión Padre)</span>
-
+                  
                   {genealogy.children?.map((child) => (
-                    <div key={child.username} className="p-3.5 rounded-xl bg-[#0F1E2E] border border-emerald-900/40 space-y-2">
+                    <div key={child.username} className="p-3.5 rounded-xl bg-[#0B1A12] border border-emerald-900/40 space-y-2">
                       <div className="flex items-center justify-between">
                         <div>
                           <h5 className="text-xs font-bold text-white">@{child.username} ({child.name})</h5>
@@ -1393,8 +1340,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 7: CONCIERGE WHATSAPP ────────────────────────────────────── */}
         {activeTab === 'concierge' && (
           <div className="space-y-6">
-            <CrmActivityPanel />
-            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <h4 className="font-serif text-lg font-bold text-white">Plantillas de Concierge Rápido para WhatsApp</h4>
               <p className="text-xs text-zinc-400">Atención personalizada inmediata con un solo clic.</p>
 
@@ -1409,7 +1355,7 @@ export function AdminCrmDashboard() {
                         <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
                       </div>
                       <h5 className="text-xs font-bold text-white mt-1">{template.title}</h5>
-                      <p className="text-[11px] text-zinc-400 mt-2 bg-[#0F1E2E] p-3 rounded-xl font-mono leading-relaxed border border-emerald-950">
+                      <p className="text-[11px] text-zinc-400 mt-2 bg-[#0B1A12] p-3 rounded-xl font-mono leading-relaxed border border-emerald-950">
                         {template.body}
                       </p>
                     </div>
@@ -1434,7 +1380,7 @@ export function AdminCrmDashboard() {
         {/* ── TAB 8: EQUIPO & ROLES ─────────────────────────────────────────── */}
         {activeTab === 'team' && (
           <div className="space-y-6">
-            <div className="p-6 rounded-3xl bg-[#0F1E2E]/80 border border-emerald-900/40 shadow-xl space-y-4">
+            <div className="p-6 rounded-3xl bg-[#0B1A12]/80 border border-emerald-900/40 shadow-xl space-y-4">
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="font-serif text-lg font-bold text-white">Directorio de Personal Corporativo</h4>
@@ -1447,10 +1393,11 @@ export function AdminCrmDashboard() {
                   <div key={u.id} className="p-4 rounded-2xl bg-black/40 border border-emerald-900/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider ${u.role === 'super' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase tracking-wider ${
+                          u.role === 'super' ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' :
                           u.role === 'operator' ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30' :
-                            'bg-blue-500/20 text-blue-400 border border-blue-500/30'
-                          }`}>
+                          'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                        }`}>
                           {u.role}
                         </span>
                         <h4 className="text-xs font-bold text-white">{u.name}</h4>
@@ -1471,74 +1418,10 @@ export function AdminCrmDashboard() {
 
       </main>
 
-      {/* ── MODAL: OBSERVACIONES DE LEADS ────────────────────────────────────── */}
-      {obsModalLead && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-          onClick={(e) => { if (e.target === e.currentTarget) setObsModalLead(null); }}
-        >
-          <div className="w-full max-w-lg bg-[#0F1E2E] border border-emerald-900/50 rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col max-h-[90vh]">
-            <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
-              <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-emerald-400" />
-                <span>Observaciones & Historial</span>
-              </h3>
-              <button onClick={() => setObsModalLead(null)} className="text-zinc-400 hover:text-white text-xs">
-                ✕ Cerrar
-              </button>
-            </div>
-
-            <div className="py-4 flex-1 overflow-y-auto space-y-3">
-              <p className="text-xs text-emerald-400 mb-2">Lead: <strong className="text-white">{obsModalLead.customerName}</strong></p>
-
-              {obsModalLead.observations && obsModalLead.observations.length > 0 ? (
-                obsModalLead.observations.map((obs, i) => (
-                  <div key={i} className="bg-black/40 p-3 rounded-xl border border-white/5 space-y-1">
-                    <p className="text-sm text-zinc-200">{obs.text}</p>
-                    <div className="flex justify-between items-center text-[10px] text-zinc-500 pt-1 border-t border-emerald-950/40">
-                      <span className="font-mono text-amber-400">{obs.authorName || obs.authorEmail}</span>
-                      <span>{new Date(obs.createdAt).toLocaleString()}</span>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="text-sm text-zinc-500 italic text-center py-6">No hay observaciones previas.</p>
-              )}
-            </div>
-
-            <div className="pt-4 border-t border-emerald-950 flex flex-col gap-3">
-              <textarea
-                placeholder="Añadir nueva observación..."
-                value={newObs[obsModalLead.id] || ''}
-                onChange={(e) => setNewObs({ ...newObs, [obsModalLead.id]: e.target.value })}
-                className="w-full bg-black/40 border border-emerald-900/50 rounded-xl px-3 py-2 text-sm text-white placeholder:text-zinc-600 focus:border-amber-500 focus:outline-none min-h-[80px]"
-              />
-              <div className="flex justify-end gap-2">
-                <button
-                  onClick={() => setObsModalLead(null)}
-                  className="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold transition-colors"
-                >
-                  Cancelar
-                </button>
-                <button
-                  onClick={() => handleAddObservation(obsModalLead.id)}
-                  className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors"
-                >
-                  Guardar Observación
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ── MODAL: COTIZADOR RÁPIDO VIP DE TOURS ─────────────────────────────── */}
       {showQuoterModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-          onClick={(e) => { if (e.target === e.currentTarget) setShowQuoterModal(false); }}
-        >
-          <div className="w-full max-w-lg bg-[#0F1E2E] border border-[#D4AF37]/50 rounded-3xl p-6 sm:p-8 space-y-5 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="w-full max-w-lg bg-[#0B1A12] border border-[#D4AF37]/50 rounded-3xl p-6 sm:p-8 space-y-5 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <h3 className="font-serif text-lg font-bold text-white flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-amber-400" />
@@ -1582,8 +1465,9 @@ export function AdminCrmDashboard() {
                     onChange={(e) => setQuoteTier(e.target.value as any)}
                     className="w-full bg-black/60 border border-emerald-900/50 rounded-xl p-2 text-white"
                   >
-                    <option value="comfort">Vermilion Club (3★)</option>
-                    <option value="premium">Vermilion VIP (4★)</option>
+                    <option value="comfort">Comfort Boutique (3*)</option>
+                    <option value="premium">Premium Relais & Châteaux (4*)</option>
+                    <option value="luxury">Luxury Grand Cruise (5*)</option>
                   </select>
                 </div>
               </div>
@@ -1643,11 +1527,8 @@ export function AdminCrmDashboard() {
 
       {/* ── MODAL: FICHA 360° DEL PASAJERO ─────────────────────────────────── */}
       {selectedLeadForProfile && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-          onClick={(e) => { if (e.target === e.currentTarget) setSelectedLeadForProfile(null); }}
-        >
-          <div className="w-full max-w-md bg-[#0F1E2E] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="w-full max-w-md bg-[#0B1A12] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <div>
                 <span className="text-[10px] font-mono text-amber-400 uppercase">Ficha 360° Pasajero</span>
@@ -1658,57 +1539,28 @@ export function AdminCrmDashboard() {
               </button>
             </div>
 
-            <div className="space-y-3 text-xs max-h-[65vh] overflow-y-auto">
-              {/* Lo primero: qué pidió y cómo contactarlo */}
-              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 space-y-1.5">
-                <span className="text-amber-200 text-[11px] font-bold block">QUÉ PIDIÓ</span>
-                <p className="text-white font-semibold text-sm leading-snug">
-                  {selectedLeadForProfile.interest || selectedLeadForProfile.notes || 'Sin detalle'}
-                </p>
-                {selectedLeadForProfile.requestDetails && (
-                  <p className="text-zinc-200 leading-snug">{selectedLeadForProfile.requestDetails}</p>
-                )}
-                <p className="text-zinc-200">
-                  Destino: <strong className="text-white">{selectedLeadForProfile.destination}</strong>
-                  {' · '}Fechas: <strong className="text-white">{selectedLeadForProfile.travelDates || 'Por definir'}</strong>
-                  {selectedLeadForProfile.guestsText && <>{' · '}Viajeros: <strong className="text-white">{selectedLeadForProfile.guestsText}</strong></>}
-                </p>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  <span className="rounded-md bg-sky-500/15 px-2 py-0.5 text-[10px] font-semibold text-sky-200">
-                    {LEAD_SOURCE_LABEL[selectedLeadForProfile.source || ''] || 'Web'}
-                  </span>
-                  <EmailBadge label="Cliente" value={selectedLeadForProfile.emailStatus?.customer} />
-                  <EmailBadge label="Equipo" value={selectedLeadForProfile.emailStatus?.team} />
-                </div>
-              </div>
-
+            <div className="space-y-3 text-xs">
               <div className="p-3 rounded-xl bg-black/40 border border-emerald-950 space-y-1">
-                <span className="text-zinc-300 text-[11px] font-bold block">CONTACTO</span>
-                <p className="text-white break-all">{selectedLeadForProfile.customerEmail || 'Sin correo'}</p>
-                <p className="text-white">{selectedLeadForProfile.customerPhone || 'Sin teléfono'}</p>
-              </div>
-
-              <div className="p-3 rounded-xl bg-black/40 border border-emerald-950 space-y-1">
-                <span className="text-zinc-300 text-[11px] font-bold block">RESTRICCIONES ALIMENTICIAS & ALERGIAS:</span>
+                <span className="text-zinc-500 text-[10px] font-mono block">RESTRICCIONES ALIMENTICIAS & ALERGIAS:</span>
                 <p className="text-amber-300 font-bold">
-                  {selectedLeadForProfile.passengerDetails?.dietaryRestrictions || 'Sin dato'}
+                  {selectedLeadForProfile.passengerDetails?.dietaryRestrictions || 'Ninguna registrada'}
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-2">
                 <div className="p-3 rounded-xl bg-black/40 border border-emerald-950">
-                  <span className="text-zinc-300 text-[11px] font-bold block">NACIONALIDAD / PASAPORTE:</span>
-                  <p className="text-white font-bold">{selectedLeadForProfile.passengerDetails?.nationality || selectedLeadForProfile.country || 'Sin dato'}</p>
+                  <span className="text-zinc-500 text-[10px] font-mono block">NACIONALIDAD / PASAPORTE:</span>
+                  <p className="text-white font-bold">{selectedLeadForProfile.passengerDetails?.nationality || selectedLeadForProfile.country || 'USA'}</p>
                 </div>
                 <div className="p-3 rounded-xl bg-black/40 border border-emerald-950">
-                  <span className="text-zinc-300 text-[11px] font-bold block">TALLA SOMBRERO MONTECRISTI:</span>
-                  <p className="text-emerald-300 font-bold">{selectedLeadForProfile.passengerDetails?.hatSize || 'Sin dato'}</p>
+                  <span className="text-zinc-500 text-[10px] font-mono block">TALLA SOMBRERO MONTECRISTI:</span>
+                  <p className="text-emerald-400 font-bold">{selectedLeadForProfile.passengerDetails?.hatSize || '58 (M)'}</p>
                 </div>
               </div>
 
               <div className="p-3 rounded-xl bg-black/40 border border-emerald-950">
-                <span className="text-zinc-300 text-[11px] font-bold block">NIVEL DE CONDICIÓN FÍSICA:</span>
-                <p className="text-white font-bold uppercase">{selectedLeadForProfile.passengerDetails?.fitnessLevel || 'Sin dato'}</p>
+                <span className="text-zinc-500 text-[10px] font-mono block">NIVEL DE CONDICIÓN FÍSICA:</span>
+                <p className="text-white font-bold uppercase">{selectedLeadForProfile.passengerDetails?.fitnessLevel || 'Moderado'}</p>
               </div>
             </div>
 
@@ -1722,47 +1574,10 @@ export function AdminCrmDashboard() {
         </div>
       )}
 
-      {/* ── MODAL: RESPUESTA AL LEAD (se lee, se edita y luego se abre en el correo) ── */}
-      {replyDraft && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-          onClick={(e) => { if (e.target === e.currentTarget) setReplyDraft(null); }}
-        >
-          <div className="w-full max-w-2xl bg-[#0F1E2E] border border-amber-500/40 rounded-3xl p-6 space-y-3 shadow-2xl max-h-[92vh] overflow-y-auto">
-            <div className="flex items-start justify-between">
-              <div>
-                <span className="text-[11px] font-bold text-amber-300 uppercase">Respuesta para {replyDraft.name}</span>
-                <p className="text-sm text-white break-all">{replyDraft.email}</p>
-              </div>
-              <button onClick={() => setReplyDraft(null)} className="text-zinc-300 hover:text-white text-sm">✕</button>
-            </div>
-            <label className="block text-xs text-zinc-300">Asunto
-              <input value={replyDraft.subject} onChange={(e) => setReplyDraft({ ...replyDraft, subject: e.target.value })} className="mt-1 w-full rounded-xl bg-black/40 border border-emerald-900/50 px-3 py-2 text-sm text-white" />
-            </label>
-            <label className="block text-xs text-zinc-300">Mensaje (puedes cambiarlo)
-              <textarea value={replyDraft.body} onChange={(e) => setReplyDraft({ ...replyDraft, body: e.target.value })} rows={14} className="mt-1 w-full rounded-xl bg-black/40 border border-emerald-900/50 px-3 py-2 text-sm text-white leading-relaxed" />
-            </label>
-            <div className="flex flex-wrap gap-2 pt-1">
-              <a
-                href={`mailto:${encodeURIComponent(replyDraft.email)}?subject=${encodeURIComponent(replyDraft.subject)}&body=${encodeURIComponent(replyDraft.body)}`}
-                className="rounded-xl bg-amber-400 px-4 py-2 text-xs font-extrabold text-zinc-950 hover:bg-amber-300"
-              >
-                ✉ Abrir en mi correo para enviar
-              </a>
-              <button onClick={() => navigator.clipboard?.writeText(replyDraft.body)} className="rounded-xl bg-white/10 px-4 py-2 text-xs font-bold text-white hover:bg-white/20">Copiar mensaje</button>
-              <button onClick={() => setReplyDraft(null)} className="rounded-xl bg-white/10 px-4 py-2 text-xs font-bold text-zinc-200 hover:bg-white/20">Cerrar</button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ── MODAL: RUN-SHEET COMPLETO ───────────────────────────────────────── */}
       {selectedBookingForRunSheet && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-          onClick={(e) => { if (e.target === e.currentTarget) setSelectedBookingForRunSheet(null); }}
-        >
-          <div className="w-full max-w-2xl bg-[#0F1E2E] border border-teal-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="w-full max-w-2xl bg-[#0B1A12] border border-teal-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <div>
                 <span className="text-[10px] font-mono text-teal-400 uppercase">Run-Sheet Operativo</span>
@@ -1781,7 +1596,7 @@ export function AdminCrmDashboard() {
                     <span className="text-[10px] font-mono text-teal-400">{day.date}</span>
                   </div>
                   <p className="text-xs text-zinc-300 leading-relaxed">{day.activitiesSummary}</p>
-
+                  
                   <div className="grid grid-cols-2 gap-2 pt-2 border-t border-emerald-950/60 text-[11px] text-zinc-400">
                     <div>Chofer: <strong className="text-white">{day.driverName}</strong> ({day.driverPhone})</div>
                     <div>Vehículo: <strong className="text-white">{day.vehiclePlate}</strong></div>
@@ -1812,11 +1627,8 @@ export function AdminCrmDashboard() {
 
       {/* ── MODAL: DISPERSAR PAGO DE COMISIÓN ───────────────────────────────── */}
       {payoutModalTarget && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-          onClick={(e) => { if (e.target === e.currentTarget) setPayoutModalTarget(null); }}
-        >
-          <div className="w-full max-w-md bg-[#0F1E2E] border border-amber-500/50 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="w-full max-w-md bg-[#0B1A12] border border-amber-500/50 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <h3 className="font-serif text-lg font-bold text-white">Dispersión de Pago Bancario</h3>
               <button onClick={() => setPayoutModalTarget(null)} className="text-zinc-400 hover:text-white text-xs">
@@ -1874,11 +1686,8 @@ export function AdminCrmDashboard() {
 
       {/* ── MODAL: NUEVO COLABORADOR / USUARIO ──────────────────────────────── */}
       {showNewUserModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
-          onClick={(e) => { if (e.target === e.currentTarget) setShowNewUserModal(false); }}
-        >
-          <div className="w-full max-w-md bg-[#0F1E2E] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="w-full max-w-md bg-[#0B1A12] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <h3 className="font-serif text-lg font-bold text-white">Alta de Personal Corporativo</h3>
               <button onClick={() => setShowNewUserModal(false)} className="text-zinc-400 hover:text-white text-xs">

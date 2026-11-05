@@ -22,6 +22,12 @@ export const WHATSAPP_NUMBER = '593960039156';
 
 /** Registro oficial en el Ministerio de Turismo del Ecuador. */
 export const MINTUR_REGISTRY = '1793215456001';
+export const MINTUR_LICENSE_NUMBER = '1793215456001';
+
+/** Teléfonos oficiales de contacto */
+export const US_CONCIERGE_PHONE = '+1 (800) 555-0199';
+export const EC_WHATSAPP_PHONE = '+593 99 404 8458';
+export const EC_OFFICE_PHONE = '+593 98 399 2549';
 
 /** Valoración pública en TripAdvisor (fuente única de la puntuación y el número de reseñas). */
 export const TRIPADVISOR_RATING = '5.0';

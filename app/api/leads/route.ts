@@ -1,15 +1,11 @@
 import { NextResponse } from 'next/server';
-import { runAfterResponse } from '@/lib/runAfterResponse';
 import { withValidation } from '@/lib/apiHandler';
 import { leadSchema, sanitizeText, isValidPhone } from '@/lib/validation';
-import { saveWebInquiry } from '@/lib/crm/leadStore';
+import { leadsRepository } from '@/lib/services/DatabaseService';
 import { BookingRequest } from '@/types';
-import { notifyNewLead } from '@/lib/email';
-import { triggerN8nWebhook } from '@/lib/n8n';
-import { toLeadEmailStatus } from '@/lib/crm/leadEmailStatus';
-import { getAdminDb } from '@/lib/firebaseAdmin';
+import { notifyNewLead, sendLeadMagnetEmail } from '@/lib/email';
 
-export const POST = withValidation(leadSchema, async (req, _ctx, body) => {
+export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
   // 🛡️ Honeypot Trap Detection (Python Bot / Automated Form Spammer Neutralizer)
   if (body._hp_trap || body.website_url) {
     console.warn('[SECURITY] Bot / Python spam script trapped via Honeypot. Request neutralised silently.');
@@ -37,9 +33,7 @@ export const POST = withValidation(leadSchema, async (req, _ctx, body) => {
       : 'Galapagos / Mainland Ecuador';
   const destination = sanitizeText(resolvedDestStr);
 
-  const timeline = sanitizeText(body.timeline || '');
-  const rawDates = sanitizeText(body.travelDates || body.date || 'Flexible');
-  const travelDates = timeline ? `${timeline} | ${rawDates}` : rawDates;
+  const travelDates = sanitizeText(body.travelDates || body.date || 'Flexible');
   const guestsCount = sanitizeText(body.guestsCount || body.travelers || '2 Travelers');
   const message = sanitizeText(body.message || '');
 
@@ -65,53 +59,91 @@ export const POST = withValidation(leadSchema, async (req, _ctx, body) => {
     status: 'pending',
     createdAt,
   };
-  const country = (req.headers.get('x-vercel-ip-country') || '').slice(0, 2);
-  const leadLocale = sanitizeText(body.locale || '').slice(0, 5);
 
   // Persist lead in Firestore using centralized DatabaseService DAL
-  // Si no se puede guardar, el error sube y la ruta responde error (nunca "ok" sin registrar el lead).
-  const bookingId = await saveWebInquiry({ ...bookingPayload, ...(country ? { country } : {}), ...(leadLocale ? { locale: leadLocale } : {}) } as typeof bookingPayload);
-  const locale = sanitizeText(body.locale || '').slice(0, 5) || undefined;
+  const bookingId = await leadsRepository.create(bookingPayload);
 
-  // Avisos DESPUÉS de responder al viajero: un fallo de correo o de n8n nunca
-  // hace fallar el guardado del lead ni retrasa la respuesta del formulario.
-  runAfterResponse(async () => {
-    const emailResult = await notifyNewLead(
-      {
-        leadId: bookingId,
-        source: tourId === 'general-inquiry' ? 'contact_form' : `tour:${tourId}`,
-        customerName,
-        customerEmail,
-        customerPhone,
-        tourTitle,
-        destination,
-        travelDates,
-        guestsCount,
-        message,
-        locale,
-        createdAt,
-      },
-      { acknowledgeCustomer: true }
-    );
-    // Deja constancia en la solicitud para que el CRM muestre si salió el correo.
-    // Con la cuenta de servicio: las reglas no dejan actualizar 'bookings' sin sesión de admin.
-    try {
-      await getAdminDb().collection('bookings').doc(bookingId).update({ emailStatus: toLeadEmailStatus(emailResult) });
-    } catch (err) {
-      console.warn('[leads] No se pudo guardar el estado del correo:', err instanceof Error ? err.message : err);
-    }
-    await triggerN8nWebhook({
-      event: 'lead.created',
-      bookingId,
+  // 📧 Dispatch instant notification to admin team & traveler acknowledgment
+  const leadLocale = (body.locale as string) || 'en';
+  notifyNewLead(
+    {
+      leadId: bookingId,
+      customerName,
+      customerEmail,
+      customerPhone,
+      tourTitle,
+      destination,
+      travelDates,
+      guestsCount,
+      message,
+      source: tourId.includes('lead-magnet') ? 'lead_magnet_galapagos_guide' : 'web_lead_form',
+      locale: leadLocale,
       createdAt,
-      source: 'vermilion-routes-web',
-      lead: { id: bookingId, ...bookingPayload },
-    });
-  });
+    },
+    { acknowledgeCustomer: true }
+  ).catch((err) => console.error('[LeadEmail Error]', err));
+
+  // If this is a Lead Magnet request, also send the official guide download email
+  if (
+    tourId.includes('lead-magnet') ||
+    (message && message.toLowerCase().includes('lead magnet')) ||
+    (tourTitle && tourTitle.toLowerCase().includes('guide'))
+  ) {
+    sendLeadMagnetEmail(customerEmail, leadLocale).catch((err) =>
+      console.error('[LeadMagnetEmail Error]', err)
+    );
+  }
+
+  // Trigger n8n webhook if configured
+  let webhookTriggered = false;
+  let webhookError: string | null = null;
+  const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
+
+  if (n8nWebhookUrl) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 sec timeout
+
+      const webhookPayload = {
+        event: 'lead.created',
+        bookingId,
+        createdAt,
+        source: 'vermilion-routes-web',
+        lead: {
+          id: bookingId,
+          ...bookingPayload,
+        },
+      };
+
+      const webhookRes = await fetch(n8nWebhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'User-Agent': 'VermilionRoutes-API/1.0',
+        },
+        body: JSON.stringify(webhookPayload),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (webhookRes.ok) {
+        webhookTriggered = true;
+      } else {
+        webhookError = `n8n webhook responded with status ${webhookRes.status}`;
+        console.warn('[n8n Webhook Warning]', webhookError);
+      }
+    } catch (err: any) {
+      webhookError = err.name === 'AbortError' ? 'n8n webhook timeout' : err.message;
+      console.warn('[n8n Webhook Error]', webhookError);
+    }
+  }
 
   return NextResponse.json({
     success: true,
     bookingId,
     message: 'Lead captured successfully and stored in Firestore.',
+    webhookTriggered,
+    webhookError,
   });
 });

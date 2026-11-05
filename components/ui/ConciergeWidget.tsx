@@ -72,10 +72,104 @@ export function ConciergeWidget() {
     zh: '在线咨询！WhatsApp 与专属顾问',
   };
 
+  const LUXURY_CONCIERGE_I18N: Record<string, {
+    title: string;
+    subtitle: string;
+    responseGuarantee: string;
+    whatsappBtn: string;
+    smsBtn: string;
+    aiBtn: string;
+    waMessage: string;
+    smsMessage: string;
+  }> = {
+    en: {
+      title: 'Have questions about Galapagos?',
+      subtitle: 'Text our Expedition Designers (US SMS / WhatsApp)',
+      responseGuarantee: '⚡ Response under 15 min',
+      whatsappBtn: 'WhatsApp',
+      smsBtn: 'US SMS',
+      aiBtn: 'AI Concierge',
+      waMessage: 'Hello Vermilion Routes! I have a question about Galapagos expeditions and private cabin availability.',
+      smsMessage: 'Hello Vermilion Routes! I have a question about Galapagos expeditions and private cabin availability.',
+    },
+    es: {
+      title: '¿Preguntas sobre Galápagos?',
+      subtitle: 'Escribe a nuestros Diseñadores (SMS / WhatsApp)',
+      responseGuarantee: '⚡ Respuesta en < 15 min',
+      whatsappBtn: 'WhatsApp',
+      smsBtn: 'SMS Directo',
+      aiBtn: 'Concierge AI',
+      waMessage: '¡Hola Vermilion Routes! Tengo consultas sobre expediciones a Galápagos y disponibilidad de cabinas.',
+      smsMessage: '¡Hola Vermilion Routes! Tengo consultas sobre expediciones a Galápagos y disponibilidad de cabinas.',
+    },
+    fr: {
+      title: 'Des questions sur les Galápagos ?',
+      subtitle: 'Écrivez à nos concepteurs (SMS / WhatsApp)',
+      responseGuarantee: '⚡ Réponse en < 15 min',
+      whatsappBtn: 'WhatsApp',
+      smsBtn: 'SMS Direct',
+      aiBtn: 'Concierge IA',
+      waMessage: 'Bonjour Vermilion Routes ! J\'ai des questions sur les expéditions aux Galápagos et les disponibilités.',
+      smsMessage: 'Bonjour Vermilion Routes ! J\'ai des questions sur les expéditions aux Galápagos et les disponibilités.',
+    },
+    de: {
+      title: 'Fragen zu Galápagos?',
+      subtitle: 'Schreiben Sie unseren Designern (SMS / WhatsApp)',
+      responseGuarantee: '⚡ Antwort in < 15 Min.',
+      whatsappBtn: 'WhatsApp',
+      smsBtn: 'SMS',
+      aiBtn: 'KI-Concierge',
+      waMessage: 'Hallo Vermilion Routes! Ich habe eine Frage zu Galápagos-Expeditionen und verfügbaren Kabinen.',
+      smsMessage: 'Hallo Vermilion Routes! Ich habe eine Frage zu Galápagos-Expeditionen und verfügbaren Kabinen.',
+    },
+    it: {
+      title: 'Domande sulle Galápagos?',
+      subtitle: 'Scrivi ai nostri Expedition Designer (SMS / WhatsApp)',
+      responseGuarantee: '⚡ Risposta in < 15 min',
+      whatsappBtn: 'WhatsApp',
+      smsBtn: 'SMS Diretto',
+      aiBtn: 'Concierge AI',
+      waMessage: 'Buongiorno Vermilion Routes! Ho delle domande sulle spedizioni alle Galapagos e disponibilità cabine.',
+      smsMessage: 'Buongiorno Vermilion Routes! Ho delle domande sulle spedizioni alle Galapagos e disponibilità cabine.',
+    },
+    pt: {
+      title: 'Dúvidas sobre Galápagos?',
+      subtitle: 'Fale com nossos Designers (SMS / WhatsApp)',
+      responseGuarantee: '⚡ Resposta em < 15 min',
+      whatsappBtn: 'WhatsApp',
+      smsBtn: 'SMS Direto',
+      aiBtn: 'Concierge IA',
+      waMessage: 'Olá Vermilion Routes! Tenho dúvidas sobre as expedições em Galápagos e disponibilidade de cabinas.',
+      smsMessage: 'Olá Vermilion Routes! Tenho dúvidas sobre as expedições em Galápagos e disponibilidade de cabinas.',
+    },
+    ja: {
+      title: 'ガラパゴス旅行についてのご質問？',
+      subtitle: '遠征デザイナーに直接連絡（SMS / WhatsApp）',
+      responseGuarantee: '⚡ 15分以内の回答保証',
+      whatsappBtn: 'WhatsApp',
+      smsBtn: 'SMS送信',
+      aiBtn: 'AIコンシェルジュ',
+      waMessage: 'Vermilion Routes ご担当者様、ガラパゴス遠征ツアーと客室の空き状況について質問があります。',
+      smsMessage: 'Vermilion Routes ご担当者様、ガラパゴス遠征ツアーと客室の空き状況について質問があります。',
+    },
+    zh: {
+      title: '关于加拉帕戈斯行程有疑问？',
+      subtitle: '直接联络探险定制专家（短信 / WhatsApp）',
+      responseGuarantee: '⚡ 承诺 15 分钟内快速回复',
+      whatsappBtn: 'WhatsApp',
+      smsBtn: '短信咨询',
+      aiBtn: 'AI 礼宾顾问',
+      waMessage: '您好 Vermilion Routes！我想咨询加拉帕戈斯群岛探险航线及游艇舱位余位。',
+      smsMessage: '您好 Vermilion Routes！我想咨询加拉帕戈斯群岛探险航线及游艇舱位余位。',
+    },
+  };
+
   const defaultGreeting = GREETINGS_BY_LOCALE[locale] || GREETINGS_BY_LOCALE.en;
+  const conciergeCopy = LUXURY_CONCIERGE_I18N[locale] || LUXURY_CONCIERGE_I18N.en;
 
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenChat, setIsOpenChat] = useState(false);
+  const [isCalloutVisible, setIsCalloutVisible] = useState(true);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -327,6 +421,72 @@ export function ConciergeWidget() {
               <span className="text-zinc-500">{t('concierge.responseTime')}</span>
             </div>
           </div>
+        )}
+
+        {/* PERSISTENT LUXURY CONCIERGE CALLOUT (US SMS / WhatsApp / Guaranteed < 15 min) */}
+        {!isOpenChat && !isOpenMenu && isCalloutVisible && (
+          <aside
+            aria-label="Expedition Concierge Direct Line"
+            className="mb-3 max-w-[calc(100vw-2.5rem)] sm:max-w-[340px] bg-zinc-950/95 backdrop-blur-xl border border-amber-500/40 rounded-2xl shadow-2xl p-3.5 text-white animate-in fade-in slide-in-from-bottom-3 duration-300 relative group"
+          >
+            {/* Close button for callout */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsCalloutVisible(false);
+              }}
+              className="absolute top-2 right-2 text-zinc-400 hover:text-white p-1 rounded-md hover:bg-zinc-800 transition-colors cursor-pointer"
+              aria-label="Dismiss callout"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+
+            <div className="pr-5 space-y-1">
+              <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-[10px] font-bold tracking-wider text-emerald-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>{conciergeCopy.responseGuarantee}</span>
+              </div>
+              <h4 className="font-serif text-xs sm:text-sm font-bold text-amber-100 leading-snug">
+                {conciergeCopy.title}
+              </h4>
+              <p className="text-[11px] text-zinc-300 leading-tight">
+                {conciergeCopy.subtitle}
+              </p>
+            </div>
+
+            {/* Quick action buttons */}
+            <div className="mt-3 flex items-center gap-2 pt-2.5 border-t border-zinc-800/80">
+              <a
+                href={`https://wa.me/593994048458?text=${encodeURIComponent(conciergeCopy.waMessage)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 py-1.5 px-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold flex items-center justify-center gap-1 shadow-md transition-all active:scale-95"
+              >
+                <MessageCircle className="w-3.5 h-3.5" />
+                <span>{conciergeCopy.whatsappBtn}</span>
+              </a>
+
+              <a
+                href={`sms:+593994048458?body=${encodeURIComponent(conciergeCopy.smsMessage)}`}
+                className="flex-1 py-1.5 px-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-100 text-[11px] font-bold flex items-center justify-center gap-1 border border-zinc-700 transition-all active:scale-95"
+              >
+                <Phone className="w-3.5 h-3.5 text-amber-400" />
+                <span>{conciergeCopy.smsBtn}</span>
+              </a>
+
+              <button
+                onClick={() => {
+                  setIsOpenMenu(false);
+                  setIsOpenChat(true);
+                }}
+                className="py-1.5 px-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 text-[11px] font-bold flex items-center justify-center gap-1 shadow-md transition-all active:scale-95 cursor-pointer"
+                aria-label="Open AI Concierge"
+              >
+                <Bot className="w-3.5 h-3.5" />
+                <span>{conciergeCopy.aiBtn}</span>
+              </button>
+            </div>
+          </aside>
         )}
 
         {/* TRIGGER BUTTON WITH HOVER TOOLTIP & POINTER */}

@@ -24,196 +24,212 @@ import { useLocale } from 'next-intl';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 
+import {
+  TRIPADVISOR_REVIEW_COUNT,
+  TRIPADVISOR_URL,
+  MINTUR_LICENSE_NUMBER,
+  US_CONCIERGE_PHONE,
+  EC_WHATSAPP_PHONE,
+  EC_OFFICE_PHONE,
+} from '@/data/bookingTerms';
+
 const TRANSLATIONS: Record<string, Record<string, string>> = {
   en: {
     topDestinations: "Top Destinations", galapagos: "Galapagos Islands", ecuador: "Mainland Ecuador", fullDay: "Full Day Excursions", amazon: "Ecuadorian Amazon", volcanoes: "Avenue of Volcanoes",
-    company: "Company", about: "About Us", packages: "Tour Packages", galapagosActivities: "Galápagos Activities", contact: "Contact Specialist",
+    company: "Company", about: "About Us", packages: "Tour Packages", contact: "Contact Specialist",
     updates: "Get Travel Updates", subscribeText: "Subscribe to receive seasonal Galapagos premium cruise promotions and curated travel guides.", emailPlaceholder: "Your email address", subscribeBtn: "Subscribe",
     licensed: "Fully Licensed & Certified Tour Operator in Ecuador & Galapagos", support: "24/7 Dedicated Trip Specialist Support En Route", secure: "Secure Bookings & 100% Satisfaction Guarantee",
     privacy: "Privacy Policy", terms: "Terms of Service",
     footerDescription: "Premier boutique tour operator specializing in custom-crafted premium travel itineraries across Ecuador and Galapagos's most iconic wonders.",
-    paymentVerified: "Verified & Secure Payment Architecture",
-    paymentHeading: "Official PayPal Buyer Protection & Global Cards",
-    paymentDesc: "All bookings are protected under the 180-Day PayPal Buyer Protection anti-fraud guarantee. We accept Visa, Mastercard, American Express, Discover, Diners Club, JCB and UnionPay, alongside Citibank USA wire transfers and Zelle.",
-    badgeStripe: "PayPal 180-Day Protection",
+    paymentVerified: "Verified & Secure Payment Methods",
+    paymentHeading: "Secure Checkout & Encrypted Payments",
+    paymentDesc: "We accept secure encrypted card payments via Stripe, official Citibank (USA) wire transfers, Zelle payments, and Banco Produbanco. Official guarantee and certified travel vouchers.",
+    badgeStripe: "Stripe Payments",
     badgeCitibank: "Citibank USA & Zelle",
-    badgeSSL: "All Major Cards • 256-Bit SSL",
-    cancellationPolicy: "Cancellation & Refund Policy",
+    badgeSSL: "SSL 256-Bit Encrypted",
+    affiliateProgram: "Affiliate Program",
     officeReservations: "Office / Reservations:",
     hqEcuador: "Ecuador Headquarters (HQ)",
     officeSpain: "Spain Branch (Coral Tour)",
     internationalLanguages: "International / Languages:",
-    featuredExperiences: "Featured Experiences",
-    expCouples: "Galapagos Anniversary Trips",
-    expFamily: "Family-Friendly Ecuador",
-    expWildlife: "Wildlife Photography Expeditions"
+    usConcierge: "US Direct Line / SMS:",
+    bilingualOperators: "Our Ecuador tour leaders are 100% bilingual in English with official tourism licenses, backed by dedicated care in the US.",
+    sealTripAdvisor: "TripAdvisor 5.0 (52 Verified Reviews)",
+    sealMintur: "Official Mintur License #1793215456001",
+    sealDepositGuarantee: "100% Deposit Protection Guarantee"
   },
   es: {
     topDestinations: "Destinos Principales", galapagos: "Islas Galápagos", ecuador: "Ecuador Continental", fullDay: "Excursiones Full Day", amazon: "Amazonía Ecuatoriana", volcanoes: "Avenida de los Volcanes",
-    company: "Empresa", about: "Sobre Nosotros", packages: "Paquetes Turísticos", galapagosActivities: "Actividades en Galápagos", contact: "Contactar Especialista",
+    company: "Empresa", about: "Sobre Nosotros", packages: "Paquetes Turísticos", contact: "Contactar Especialista",
     updates: "Recibe Novedades", subscribeText: "Suscríbete para recibir promociones de cruceros y guías de viaje seleccionadas.", emailPlaceholder: "Tu correo", subscribeBtn: "Suscribirse",
     licensed: "Operador Turístico Certificado en Ecuador y Galápagos", support: "Soporte Especializado 24/7 Durante el Viaje", secure: "Reservas Seguras y Satisfacción Garantizada al 100%",
     privacy: "Política de Privacidad", terms: "Términos de Servicio",
     footerDescription: "Operador turístico boutique especializado en itinerarios de viaje premium a medida a través de las maravillas más icónicas de Ecuador y Galápagos.",
-    paymentVerified: "Pasarela y Métodos de Pago Seguros",
-    paymentHeading: "Protección Oficial PayPal (180 Días) y Tarjetas Globales",
-    paymentDesc: "Todas las reservas cuentan con el seguro de protección al comprador PayPal de 180 días contra estafas y cancelaciones. Aceptamos Visa, Mastercard, American Express, Discover, Diners Club, JCB y UnionPay, transferencias Citibank USA y Zelle.",
-    badgeStripe: "Seguro PayPal 180 Días",
+    paymentVerified: "Métodos de Pago Verificados y Seguros",
+    paymentHeading: "Pago Seguro y Encriptado",
+    paymentDesc: "Aceptamos pagos directos y encriptados con tarjeta mediante Stripe, transferencias oficiales vía Citibank (EE.UU.), transferencias Zelle y Banco Produbanco. Garantía oficial y comprobantes certificados.",
+    badgeStripe: "Pagos con Stripe",
     badgeCitibank: "Citibank EE.UU. & Zelle",
-    badgeSSL: "Todas las Tarjetas • Cifrado SSL",
-    cancellationPolicy: "Políticas de Cancelación y Reembolsos",
+    badgeSSL: "Encriptación SSL de 256 Bits",
+    affiliateProgram: "Programa de Afiliados",
     officeReservations: "Oficina / Reservas:",
     hqEcuador: "Sede Ecuador (HQ)",
     officeSpain: "Sede España (Coral Tour)",
     internationalLanguages: "Internacional / Idiomas:",
-    featuredExperiences: "Experiencias Destacadas",
-    expCouples: "Aniversario en Galápagos",
-    expFamily: "Ecuador en Familia",
-    expWildlife: "Fotografía de Vida Silvestre"
+    usConcierge: "Línea Directa EE.UU. / SMS:",
+    bilingualOperators: "Nuestros operadores en Ecuador son 100% bilingües en inglés con licencia turística oficial y soporte de atención en EE.UU.",
+    sealTripAdvisor: "TripAdvisor 5.0 (52 Verified Reviews)",
+    sealMintur: "Licencia Oficial Mintur #1793215456001",
+    sealDepositGuarantee: "100% Deposit Protection Guarantee"
   },
   fr: {
     topDestinations: "Meilleures Destinations", galapagos: "Îles Galapagos", ecuador: "Équateur Continental", fullDay: "Excursions Full Day", amazon: "Amazonie Équatorienne", volcanoes: "Avenue des Volcans",
-    company: "Entreprise", about: "À Propos", packages: "Forfaits", galapagosActivities: "Activités aux Galápagos", contact: "Contacter un Spécialiste",
+    company: "Entreprise", about: "À Propos", packages: "Forfaits", contact: "Contacter un Spécialiste",
     updates: "Actualités", subscribeText: "Abonnez-vous pour recevoir des promotions de croisières et des guides de voyage.", emailPlaceholder: "Votre e-mail", subscribeBtn: "S'abonner",
     licensed: "Voyagiste Certifié en Équateur et aux Galapagos", support: "Assistance Spécialisée 24/7", secure: "Réservations Sécurisées et Satisfaction Garantie",
     privacy: "Confidentialité", terms: "Conditions",
     footerDescription: "Voyagiste boutique de premier ordre spécialisé dans les itinéraires de voyage haut de gamme sur mesure à travers l'Équateur et les Galapagos.",
     paymentVerified: "Moyens de Paiement Vérifiés & Sécurisés",
-    paymentHeading: "Protection des Achats PayPal (180 Jours) et Cartes Globales",
-    paymentDesc: "Toutes les réservations bénéficient de la protection des acheteurs PayPal pendant 180 jours contre la fraude. Nous acceptons Visa, Mastercard, American Express, Discover, Diners Club, JCB et UnionPay, ainsi que les virements Citibank USA et Zelle.",
-    badgeStripe: "Garantie PayPal 180 Jours",
+    paymentHeading: "Paiement Sécurisé & Crypté",
+    paymentDesc: "Nous acceptons les paiements sécurisés par carte via Stripe, virements Citibank (USA), Zelle et Produbanco. Garantie officielle et bons de voyage certifiés.",
+    badgeStripe: "Paiements Stripe",
     badgeCitibank: "Citibank USA & Zelle",
-    badgeSSL: "Toutes Cartes • SSL 256 Bits",
-    cancellationPolicy: "Politique d'Annulation et Remboursement",
+    badgeSSL: "Crypté SSL 256 Bits",
+    affiliateProgram: "Programme d'Affiliation",
     officeReservations: "Bureau / Réservations:",
     hqEcuador: "Siège Équateur (HQ)",
     officeSpain: "Filiale Espagne (Coral Tour)",
     internationalLanguages: "International / Langues:",
-    featuredExperiences: "Expériences Vedettes",
-    expCouples: "Anniversaire aux Galápagos",
-    expFamily: "Équateur en Famille",
-    expWildlife: "Photographie de Faune Sauvage"
+    usConcierge: "Ligne Directe USA / SMS :",
+    bilingualOperators: "Nos opérateurs en Équateur sont 100% bilingues en anglais avec licence touristique officielle et support aux États-Unis.",
+    sealTripAdvisor: "TripAdvisor 5.0 (52 Avis Vérifiés)",
+    sealMintur: "Licence Officielle Mintur #1793215456001",
+    sealDepositGuarantee: "Garantie de Dépôt Protégé à 100%"
   },
   de: {
     topDestinations: "Top-Reiseziele", galapagos: "Galapagos-Inseln", ecuador: "Ecuador Festland", fullDay: "Tagesausflüge (Full Day)", amazon: "Ecuadorianischer Amazonas", volcanoes: "Straße der Vulkane",
-    company: "Unternehmen", about: "Über Uns", packages: "Reisepakete", galapagosActivities: "Aktivitäten auf Galápagos", contact: "Kontaktieren",
+    company: "Unternehmen", about: "Über Uns", packages: "Reisepakete", contact: "Kontaktieren",
     updates: "Reise-Updates", subscribeText: "Abonnieren Sie, um Kreuzfahrt-Angebote und Reiseführer zu erhalten.", emailPlaceholder: "Ihre E-Mail", subscribeBtn: "Abonnieren",
     licensed: "Zertifizierter Reiseveranstalter in Ecuador & Galapagos", support: "24/7 Spezialisten-Support auf der Reise", secure: "Sichere Buchungen & 100% Zufriedenheitsgarantie",
     privacy: "Datenschutzerklärung", terms: "Nutzungsbedingungen",
     footerDescription: "Boutique-Reiseveranstalter, spezialisiert auf maßgeschneiderte Premium-Reiserouten zu den kultigsten Wunderwelten von Ecuador und Galapagos.",
     paymentVerified: "Verifizierte & Sichere Zahlungsmethoden",
-    paymentHeading: "Offizieller PayPal-Käuferschutz (180 Tage) & Weltweite Karten",
-    paymentDesc: "Alle Buchungen sind durch den 180-tägigen PayPal-Käuferschutz gegen Betrug abgesichert. Wir akzeptieren Visa, Mastercard, American Express, Discover, Diners Club, JCB und UnionPay sowie Citibank USA Überweisungen und Zelle.",
-    badgeStripe: "PayPal 180-Tage-Schutz",
+    paymentHeading: "Sicherer & Verschlüsselter Checkout",
+    paymentDesc: "Wir akzeptieren sichere Kartenzahlungen über Stripe, offizielle Citibank (USA) Überweisungen, Zelle und Produbanco. Offizielle Garantie und Reisezertifikate.",
+    badgeStripe: "Stripe-Zahlungen",
     badgeCitibank: "Citibank USA & Zelle",
-    badgeSSL: "Alle Karten • 256-Bit-SSL",
-    cancellationPolicy: "Stornierungs- und Rückerstattungsrichtlinien",
+    badgeSSL: "SSL 256-Bit-Verschlüsselung",
+    affiliateProgram: "Partnerprogramm",
     officeReservations: "Büro / Reservierungen:",
     hqEcuador: "Hauptsitz Ecuador (HQ)",
     officeSpain: "Niederlassung Spanien (Coral Tour)",
     internationalLanguages: "International / Sprachen:",
-    featuredExperiences: "Besondere Erlebnisse",
-    expCouples: "Jubiläumsreisen auf Galápagos",
-    expFamily: "Ecuador für Familien",
-    expWildlife: "Wildtier-Fotografie-Expeditionen"
+    usConcierge: "USA Direktleitung / SMS:",
+    bilingualOperators: "Unsere Expeditionsleiter in Ecuador sind zu 100% zweisprachig (Englisch) mit offizieller Lizenz und Betreuungsservice in den USA.",
+    sealTripAdvisor: "TripAdvisor 5.0 (52 Verifizierte Bewertungen)",
+    sealMintur: "Offizielle Mintur-Lizenz #1793215456001",
+    sealDepositGuarantee: "100% Anzahlungsschutz-Garantie"
   },
   it: {
     topDestinations: "Destinazioni Top", galapagos: "Isole Galapagos", ecuador: "Ecuador Continentale", fullDay: "Escursioni Full Day", amazon: "Amazzonia Ecuadoriana", volcanoes: "Viale dei Vulcani",
-    company: "Azienda", about: "Chi Siamo", packages: "Pacchetti", galapagosActivities: "Attività alle Galápagos", contact: "Contatta",
+    company: "Azienda", about: "Chi Siamo", packages: "Pacchetti", contact: "Contatta",
     updates: "Aggiornamenti", subscribeText: "Iscriviti per ricevere promozioni per crociere e guide di viaggio.", emailPlaceholder: "La tua email", subscribeBtn: "Iscriviti",
     licensed: "Tour Operator Certificato in Ecuador e Galapagos", support: "Assistenza Specializzata 24/7", secure: "Prenotazioni Sicure e Soddisfazione Garantita",
     privacy: "Privacy", terms: "Termini",
     footerDescription: "Tour operator boutique di alto livello specializzato in itinerari di viaggio premium su misura attraverso le meraviglie di Ecuador e Galapagos.",
     paymentVerified: "Metodi di Pagamento Verificati e Sicuri",
-    paymentHeading: "Protezione Ufficiale Acquisti PayPal (180 Giorni) & Carte Globali",
-    paymentDesc: "Tutte le prenotazioni sono coperte dalla garanzia di protezione acquirenti PayPal di 180 giorni contro le frodi. Accettiamo Visa, Mastercard, American Express, Discover, Diners Club, JCB e UnionPay, bonifici Citibank USA e Zelle.",
-    badgeStripe: "Protezione PayPal 180 Giorni",
+    paymentHeading: "Pagamento Sicuro e Crittografato",
+    paymentDesc: "Accettiamo pagamenti sicuri con carta tramite Stripe, bonifici ufficiali Citibank (USA), Zelle e Produbanco. Garanzia ufficiale e voucher certificati.",
+    badgeStripe: "Pagamenti Stripe",
     badgeCitibank: "Citibank USA & Zelle",
-    badgeSSL: "Tutte le Carte • Crittografia SSL",
-    cancellationPolicy: "Politica di Cancellazione e Rimborso",
+    badgeSSL: "Crittografia SSL a 256 Bit",
+    affiliateProgram: "Programma di Affiliazione",
     officeReservations: "Ufficio / Prenotazioni:",
     hqEcuador: "Sede Ecuador (HQ)",
     officeSpain: "Sede Spagna (Coral Tour)",
     internationalLanguages: "Internazionale / Lingue:",
-    featuredExperiences: "Esperienze in Evidenza",
-    expCouples: "Anniversario alle Galápagos",
-    expFamily: "Ecuador in Famiglia",
-    expWildlife: "Spedizioni di Fotografia Naturalistica"
+    usConcierge: "Linea Diretta USA / SMS:",
+    bilingualOperators: "I nostri operatori in Ecuador sono al 100% bilingui in inglese con licenza turistica ufficiale e supporto dedicato negli Stati Uniti.",
+    sealTripAdvisor: "TripAdvisor 5.0 (52 Recensioni Verificate)",
+    sealMintur: "Licenza Ufficiale Mintur #1793215456001",
+    sealDepositGuarantee: "Garanzia Protezione Deposito al 100%"
   },
   pt: {
     topDestinations: "Principais Destinos", galapagos: "Ilhas Galápagos", ecuador: "Equador Continental", fullDay: "Excursões Full Day", amazon: "Amazônia Equatoriana", volcanoes: "Avenida dos Vulcões",
-    company: "Empresa", about: "Sobre Nós", packages: "Pacotes", galapagosActivities: "Atividades em Galápagos", contact: "Contatar",
+    company: "Empresa", about: "Sobre Nós", packages: "Pacotes", contact: "Contatar",
     updates: "Atualizaciones", subscribeText: "Inscreva-se para receber promoções de cruzeiros e guias de viagem.", emailPlaceholder: "Seu e-mail", subscribeBtn: "Inscrever-se",
     licensed: "Operador Turístico Certificado no Equador e Galápagos", support: "Suporte Especializado 24/7", secure: "Reservas Seguras e 100% de Satisfação Garantida",
     privacy: "Privacidade", terms: "Termos",
     footerDescription: "Operador turístico boutique especializado em itinerários de viagem premium sob medida pelas maravilhas mais icônicas do Equador e Galápagos.",
     paymentVerified: "Métodos de Pagamento Verificados e Seguros",
-    paymentHeading: "Proteção Oficial ao Comprador PayPal (180 Dias) & Cartões Globais",
-    paymentDesc: "Todas as reservas contam com a proteção ao comprador PayPal de 180 dias contra golpes e fraudes. Aceitamos Visa, Mastercard, American Express, Discover, Diners Club, JCB e UnionPay, transferências Citibank EUA e Zelle.",
-    badgeStripe: "Garantia PayPal 180 Dias",
+    paymentHeading: "Checkout Seguro e Criptografado",
+    paymentDesc: "Aceitamos pagamentos seguros com cartão via Stripe, transferências Citibank (EUA), Zelle e Produbanco. Garantia oficial e vouchers certificados.",
+    badgeStripe: "Pagamentos Stripe",
     badgeCitibank: "Citibank EUA & Zelle",
-    badgeSSL: "Todos os Cartões • SSL 256 Bits",
-    cancellationPolicy: "Política de Cancelamento e Reembolso",
+    badgeSSL: "Criptografia SSL de 256 Bits",
+    affiliateProgram: "Programa de Afiliados",
     officeReservations: "Escritório / Reservas:",
     hqEcuador: "Sede Equador (HQ)",
     officeSpain: "Sede Espanha (Coral Tour)",
     internationalLanguages: "Internacional / Idiomas:",
-    featuredExperiences: "Experiências em Destaque",
-    expCouples: "Aniversário em Galápagos",
-    expFamily: "Equador em Família",
-    expWildlife: "Expedições de Fotografia de Vida Selvagem"
+    usConcierge: "Linha Direta EUA / SMS:",
+    bilingualOperators: "Nossos operadores no Equador são 100% bilíngues em inglês com licença turística oficial e suporte dedicado nos Estados Unidos.",
+    sealTripAdvisor: "TripAdvisor 5.0 (52 Avaliações Verificadas)",
+    sealMintur: "Licença Oficial Mintur #1793215456001",
+    sealDepositGuarantee: "Garantia de Depósito 100% Protegido"
   },
   ja: {
     topDestinations: "人気の目的地", galapagos: "ガラパゴス諸島", ecuador: "エクアドル本土", fullDay: "日帰りツアー（Full Day）", amazon: "エクアドル・アマゾン", volcanoes: "火山の道",
-    company: "会社概要", about: "私たちについて", packages: "ツアープラン", galapagosActivities: "ガラパゴスのアクティビティ", contact: "連絡する",
+    company: "会社概要", about: "私たちについて", packages: "ツアープラン", contact: "連絡する",
     updates: "最新情報", subscribeText: "クルーズのプロモーションや旅行ガイドを受け取るために購読してください。", emailPlaceholder: "メールアドレス", subscribeBtn: "購読する",
     licensed: "エクアドルとガラパゴスの認定旅行会社", support: "24時間365日の専門家サポート", secure: "安全な予約と100%の満足保証",
     privacy: "プライバシーポリシー", terms: "利用規約",
     footerDescription: "エクアドルとガラパゴスの象徴的な見どころを巡るオーダーメイドのプレミアム旅行を専門とするブティック旅行会社です。",
     paymentVerified: "認証済み安全な決済方法",
-    paymentHeading: "PayPal公式買い手保護（180日間保証）＆ 主要国際カード対応",
-    paymentDesc: "すべてのツアー予約は詐欺や未履行に対する180日間のPayPal公式買い手保護制度で守られています。Visa、Mastercard、American Express、Discover、Diners Club、JCB、銀聯（UnionPay）、米国Citibank送金およびZelleに対応。",
-    badgeStripe: "PayPal 180日間保護",
+    paymentHeading: "安全な暗号化チェックアウト＆決済",
+    paymentDesc: "Stripeによる安全な暗号化カード決済、米国Citibank公式送金、Zelle、Produbanco銀行送金に対応。公式保証および正規旅行バウチャーを発行します。",
+    badgeStripe: "Stripe カード決済",
     badgeCitibank: "米国シティバンク & Zelle",
-    badgeSSL: "全主要国際カード対応・SSL暗号化",
-    cancellationPolicy: "キャンセル・返金ポリシー",
+    badgeSSL: "256ビット SSL 暗号化保護",
+    affiliateProgram: "アフィリエイト・プログラム",
     officeReservations: "オフィス / 予約:",
     hqEcuador: "エクアドル本社 (HQ)",
     officeSpain: "スペイン支社 (Coral Tour)",
     internationalLanguages: "グローバル / 言語を選択:",
-    featuredExperiences: "注目の体験",
-    expCouples: "ガラパゴス記念日旅行",
-    expFamily: "ファミリー向けエクアドル",
-    expWildlife: "野生動物フォトグラフィー遠征"
+    usConcierge: "米国直通ライン / SMS:",
+    bilingualOperators: "エクアドルの現地オペレーターは全員、公認観光ライセンスを保持する英語完全対応ガイドであり、米国サポートデスクと連携しています。",
+    sealTripAdvisor: "TripAdvisor 5.0 (52件の認証済みレビュー)",
+    sealMintur: "エクアドル観光省公式認定 #1793215456001",
+    sealDepositGuarantee: "100%手付金保護保証制度"
   },
   zh: {
     topDestinations: "热门目的地", galapagos: "加拉帕戈斯群岛", ecuador: "厄瓜多尔大陆", fullDay: "全天一日游", amazon: "厄瓜多尔亚马逊", volcanoes: "火山大道",
-    company: "公司信息", about: "关于我们", packages: "旅游套餐", galapagosActivities: "加拉帕戈斯活动", contact: "联系专家",
+    company: "公司信息", about: "关于我们", packages: "旅游套餐", contact: "联系专家",
     updates: "获取旅游更新", subscribeText: "订阅以接收游轮促销活动和精选旅游指南。", emailPlaceholder: "您的电子邮箱", subscribeBtn: "订阅",
     licensed: "厄瓜多尔和加拉帕戈斯的认证旅行社", support: "24/7 专业旅行支持", secure: "安全预订和100%满意保证",
     privacy: "隐私政策", terms: "服务条款",
     footerDescription: "精品旅行社，专注于在厄瓜多尔和加拉帕戈斯群岛打造定制的尊享精品旅行行程。",
-    paymentVerified: "官方权威认证安全支付体系",
-    paymentHeading: "官方 PayPal 180天买家全额保障与全球主流银行卡支持",
-    paymentDesc: "所有行程均受 PayPal 180天买家保护与防欺诈机制全面保障。支持 Visa、Mastercard、American Express (运通)、Discover、Diners Club、JCB 及 银联 (UnionPay)，并支持美国花旗银行（Citibank）官方电汇与 Zelle 支付。",
-    badgeStripe: "PayPal 180天全额保障",
+    paymentVerified: "官方权威认证安全支付方式",
+    paymentHeading: "全流程 256 位银行级安全加密支付",
+    paymentDesc: "支持通过 Stripe 进行安全银行卡支付、美国花旗银行（Citibank）官方电汇、Zelle 以及厄瓜多尔 Produbanco 银行转账。提供官方合同担保与正规旅行凭据。",
+    badgeStripe: "Stripe 国际银行卡支付",
     badgeCitibank: "美国花旗银行 & Zelle",
-    badgeSSL: "支持全球双币卡 • 256位SSL加密",
-    cancellationPolicy: "取消与退款政策",
+    badgeSSL: "256位 SSL 顶级加密",
+    affiliateProgram: "联盟伙伴计划",
     officeReservations: "办公室 / 预订专线:",
     hqEcuador: "厄瓜多尔总部 (HQ)",
     officeSpain: "西班牙分部 (Coral Tour)",
     internationalLanguages: "国际多语言切换:",
-    featuredExperiences: "精选体验",
-    expCouples: "加拉帕戈斯纪念日之旅",
-    expFamily: "厄瓜多尔亲子游",
-    expWildlife: "野生动物摄影探险"
+    usConcierge: "美国直拨专线 / SMS:",
+    bilingualOperators: "我们在厄瓜多尔的探险领队与运营团队均持有官方旅游从业执照且具备100%流利英语双语能力，并配备美国本土专属客服团队。",
+    sealTripAdvisor: "TripAdvisor 5.0 (52条真实认证好评)",
+    sealMintur: "厄瓜多尔旅游部官方特许执照 #1793215456001",
+    sealDepositGuarantee: "100%定金与付款信托保护保证"
   }
 };
 
 import { BrandLogo } from '@/components/ui/BrandLogo';
 
-import { socialUrl } from '@/data/socialLinks';
 export function Footer() {
   const { settings } = useSettings();
   const locale = useLocale();
@@ -260,7 +276,7 @@ export function Footer() {
           <div className="lg:col-span-2 space-y-5">
             <a href={`/${locale}`} aria-label="Vermilion Routes Home" className="flex items-center gap-3">
               <div className="relative w-[160px] h-[40px] md:w-[220px] md:h-[55px] shrink-0">
-                <Image quality={95}
+                <Image
                   src="/logo_blanco.png"
                   alt="Vermilion Routes"
                   width={220}
@@ -291,7 +307,7 @@ export function Footer() {
 
             <div className="flex items-center gap-2.5 pt-2 flex-wrap">
               <a
-                href={socialUrl('facebook', locale, settings?.contact?.facebook)}
+                href={settings?.contact?.facebook || 'https://www.facebook.com/VermilionSouthAmericanRoutes'}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
@@ -300,7 +316,7 @@ export function Footer() {
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href={socialUrl('instagram', locale, settings?.contact?.instagram)}
+                href={settings?.contact?.instagram || 'https://www.instagram.com/vermilionsouthamericanroutes/'}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
@@ -309,7 +325,7 @@ export function Footer() {
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href={socialUrl('tiktok', locale, settings?.contact?.tiktok)}
+                href={settings?.contact?.tiktok || 'https://www.tiktok.com/@vermilionsaroutes'}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
@@ -321,7 +337,7 @@ export function Footer() {
                 </svg>
               </a>
               <a
-                href={socialUrl('youtube', locale)}
+                href="https://www.youtube.com/@VermilionSouthAmericanRoutes"
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
@@ -376,27 +392,6 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-
-            <p className="font-serif font-semibold text-sm text-white tracking-wide pt-2">
-              {t.featuredExperiences}
-            </p>
-            <ul className="space-y-2.5 text-sm text-zinc-300">
-              <li>
-                <a href={`/${locale}/couples-anniversary-galapagos`} className="hover:text-white transition-colors">
-                  {t.expCouples}
-                </a>
-              </li>
-              <li>
-                <a href={`/${locale}/family-friendly-ecuador`} className="hover:text-white transition-colors">
-                  {t.expFamily}
-                </a>
-              </li>
-              <li>
-                <a href={`/${locale}/wildlife-photography-expeditions`} className="hover:text-white transition-colors">
-                  {t.expWildlife}
-                </a>
-              </li>
-            </ul>
           </div>
 
           {/* Company */}
@@ -416,11 +411,6 @@ export function Footer() {
               <li>
                 <a href={`/${locale}/tours`} className="hover:text-white transition-colors">
                   {t.packages}
-                </a>
-              </li>
-              <li>
-                <a href={`/${locale}/galapagos-activities`} className="hover:text-white transition-colors">
-                  {t.galapagosActivities}
                 </a>
               </li>
               <li>
@@ -493,15 +483,22 @@ export function Footer() {
               <p className="flex items-center gap-2 text-zinc-300">
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span className="text-zinc-400 text-[11px]">WhatsApp 24/7:</span>
-                <a href="tel:+593960039156" className="hover:text-emerald-300 transition-colors">
-                  +593 96 003 9156
+                <a href={`tel:${EC_WHATSAPP_PHONE.replace(/[^0-9+]/g, '')}`} className="hover:text-emerald-300 transition-colors">
+                  {EC_WHATSAPP_PHONE}
+                </a>
+              </p>
+              <p className="flex items-center gap-2 text-zinc-300">
+                <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span className="text-zinc-400 text-[11px]">{t.usConcierge}</span>
+                <a href={`tel:${US_CONCIERGE_PHONE.replace(/[^0-9+]/g, '')}`} className="hover:text-amber-300 transition-colors font-semibold text-amber-300/90">
+                  {US_CONCIERGE_PHONE}
                 </a>
               </p>
               <p className="flex items-center gap-2 text-zinc-300">
                 <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span className="text-zinc-400 text-[11px]">{t.officeReservations}</span>
-                <a href="tel:+593994048458" className="hover:text-emerald-300 transition-colors">
-                  +593 99 404 8458
+                <a href={`tel:${EC_OFFICE_PHONE.replace(/[^0-9+]/g, '')}`} className="hover:text-emerald-300 transition-colors">
+                  {EC_OFFICE_PHONE}
                 </a>
               </p>
               <p className="flex items-center gap-2 text-zinc-300">
@@ -512,6 +509,11 @@ export function Footer() {
                   <span>vermilionroutes.com</span>
                 </a>
               </p>
+
+              {/* Bilingual operators notice */}
+              <div className="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-[11px] text-zinc-300 leading-snug">
+                <p>{t.bilingualOperators}</p>
+              </div>
 
               {/* Sedes Oficiales Internacionales */}
               <div className="pt-2 space-y-2">
@@ -569,22 +571,41 @@ export function Footer() {
         </div>
 
         {/* Guarantees & Badges */}
-        <div className="py-8 flex flex-wrap justify-between items-center gap-4 border-b border-emerald-900/60 dark:border-zinc-900 text-xs text-zinc-200">
-          <a href="/patente%20turismo.pdf" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-1 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 px-4 py-2.5 rounded-2xl hover:bg-emerald-900/60 dark:hover:bg-zinc-800/50 transition-colors cursor-pointer">
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 dark:text-amber-400" />
-              <span className="text-white font-medium">{t.licensed}</span>
+        <div className="py-8 grid grid-cols-1 md:grid-cols-3 gap-4 border-b border-emerald-900/60 dark:border-zinc-900 text-xs text-zinc-200">
+          <a
+            href={TRIPADVISOR_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 bg-emerald-900/40 dark:bg-zinc-900/50 hover:bg-emerald-900/60 border border-emerald-800/60 dark:border-zinc-800 p-3.5 rounded-2xl transition-all group"
+          >
+            <div className="w-9 h-9 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
+              <Award className="w-5 h-5 text-amber-400" />
             </div>
-            <span className="text-[10px] text-emerald-400/80 dark:text-zinc-500 font-mono">Reg. No: 1793215456001 &bull; Ministerio de Turismo EC</span>
+            <div>
+              <span className="text-white font-bold block">{t.sealTripAdvisor}</span>
+              <span className="text-[10px] text-emerald-400/80 font-mono">TripAdvisor Travelers' Choice Winner</span>
+            </div>
           </a>
-          <div className="flex items-center gap-2 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 px-4 py-2.5 rounded-2xl">
-            <Award className="w-4 h-4 text-emerald-400 dark:text-amber-400" />
-            <span className="text-white font-medium">{t.support}</span>
+
+          <div className="flex items-center gap-3 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 p-3.5 rounded-2xl">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-5 h-5 text-emerald-400 dark:text-amber-400" />
+            </div>
+            <div>
+              <span className="text-white font-bold block">{t.sealMintur}</span>
+              <span className="text-[10px] text-emerald-400/80 dark:text-zinc-500 font-mono">Ministerio de Turismo del Ecuador</span>
+            </div>
           </div>
-          <a href="/Ruc.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 px-4 py-2.5 rounded-2xl hover:bg-emerald-900/60 dark:hover:bg-zinc-800/50 transition-colors cursor-pointer">
-            <Sparkles className="w-4 h-4 text-emerald-400 dark:text-amber-400" />
-            <span className="text-white font-medium">{t.secure}</span>
-          </a>
+
+          <div className="flex items-center gap-3 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 p-3.5 rounded-2xl">
+            <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
+              <Sparkles className="w-5 h-5 text-amber-400" />
+            </div>
+            <div>
+              <span className="text-white font-bold block">{t.sealDepositGuarantee}</span>
+              <span className="text-[10px] text-emerald-400/80 dark:text-zinc-500 font-mono">Fiduciary Protection &amp; Flexible Refund</span>
+            </div>
+          </div>
         </div>
 
         {/* International Language Hub - 8 Supported Locales */}
@@ -630,19 +651,12 @@ export function Footer() {
             <a href={`/${locale}/terms`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
               {t.terms}
             </a>
-            {/* Reabre el aviso de cookies (sustituye a la píldora flotante): retirar el consentimiento debe ser tan fácil como darlo */}
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new Event('vr-open-consent'))}
-              className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60"
-            >
-              Cookies
-            </button>
             <a
-              href={`/${locale}/cancellation`}
+              href={`/${locale}#affiliate`}
+              onClick={(e) => handleAnchorClick(e, 'affiliate')}
               className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60 cursor-pointer"
             >
-              {t.cancellationPolicy}
+              {t.affiliateProgram}
             </a>
           </div>
         </div>

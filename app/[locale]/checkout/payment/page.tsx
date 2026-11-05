@@ -28,7 +28,9 @@ import {
   Award,
   Clock,
   Globe2,
-  Info
+  Info,
+  Phone,
+  Star
 } from 'lucide-react';
 import Image from 'next/image';
 import { TravelVoucherModal } from '@/components/booking/TravelVoucherModal';
@@ -36,15 +38,12 @@ import { mockTours } from '@/data/mock';
 import { generateBookingCode } from '@/lib/bookings';
 import { getAffiliateByCode } from '@/lib/affiliates';
 import { getStoredAffiliateRef, isBookingCode } from '@/components/affiliates/AffiliateTracker';
-import { useLocale, useTranslations } from 'next-intl';
-import { getPromotionById, isPromotionLive } from '@/lib/promotions';
+import { useLocale } from 'next-intl';
 import { getStoredUserProfile } from '@/lib/userProfile';
 import { PayPalCheckoutButton } from '@/components/checkout/PayPalCheckoutButton';
 import { generateTravelVoucherPDF } from '@/lib/voucherPdfGenerator';
 import { db } from '@/lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
-import { DEPOSIT_RATE, canPayDeposit } from '@/data/bookingTerms';
-import { BookingTrustPanel } from '@/components/booking/BookingTrustPanel';
 
 // ─────────────────────────────────────────────
 // 8-LANGUAGE DICTIONARY FOR CHECKOUT & PAYMENT
@@ -59,6 +58,126 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     pt: 'Pagamento Seguro SSL',
     ja: 'SSL安全暗号化決済',
     zh: 'SSL安全加密支付',
+  },
+  prePaymentAssuranceTitle: {
+    en: 'Before You Pay: Fiduciary Trust & 100% Protection',
+    es: 'Antes de Pagar: Garantía Fiduciaria y Flexibilidad Total',
+    fr: 'Avant de Payer : Confiance Fiduciaire et Garantie Totale',
+    de: 'Vor Ihrer Zahlung: Treuhandvertrauen & 100% Schutz',
+    it: 'Prima di Pagare: Tutela Fiduciaria e Garanzia Totale',
+    pt: 'Antes de Pagar: Confiança Fiduciária e Garantia Total',
+    ja: 'お支払い前のご案内：万全の信頼と100%保護保証',
+    zh: '支付前须知：信托保障与全额安全承诺',
+  },
+  prePaymentBadge: {
+    en: 'Official Fiduciary Protection',
+    es: 'Protección Fiduciaria Oficial',
+    fr: 'Protection Fiduciaire Officielle',
+    de: 'Offizieller Treuhandschutz',
+    it: 'Protezione Fiduciaria Ufficiale',
+    pt: 'Proteção Fiduciária Oficial',
+    ja: '公式信託保護制度',
+    zh: '官方信托保护准则',
+  },
+  prePaymentFreezeTitle: {
+    en: 'Verification & Price Freeze Guarantee',
+    es: 'Verificación y Congelación de Precio',
+    fr: 'Vérification et Gel du Tarif',
+    de: 'Prüfung & Preisgarantie',
+    it: 'Verifica e Blocco Tariffa',
+    pt: 'Verificação e Congelamento de Tarifa',
+    ja: '予約内容の確認および料金据え置き保証',
+    zh: '行程核对与特惠锁价保证',
+  },
+  prePaymentFreezeText: {
+    en: 'Before paying: Ensure every detail of your journey is thoroughly attended to. We are entirely at your service for any questions. You can freeze the current price or promotion with your booking, with full certainty that your journey will exceed 100% of your expectations.',
+    es: 'Antes de pagar: Verifica que cada detalle de tu viaje esté atendido a profundidad. Cualquier pregunta estamos a tu servicio. Puedes congelar el precio o la promoción actual con tu reserva con la total certeza de que el viaje cumplirá al 100% tus expectativas.',
+    fr: 'Avant de payer : Assurez-vous que chaque détail de votre voyage est pris en compte avec le plus grand soin. Notre équipe est à votre entière disposition. Vous pouvez geler le tarif ou la promotion en cours avec votre réservation, avec la certitude absolue que ce voyage répondra à 100% à vos attentes.',
+    de: 'Vor Ihrer Zahlung: Vergewissern Sie sich, dass jedes Detail Ihrer Reise sorgfältig abgestimmt ist. Unser Concierge-Team steht Ihnen jederzeit zur Verfügung. Sichern Sie sich den aktuellen Preis oder Rabatt mit Ihrer Buchung – in der Gewissheit, dass Ihre Reise Ihre Erwartungen zu 100% erfüllt.',
+    it: 'Prima di pagare: Verifica che ogni dettaglio del tuo viaggio sia curato a fondo. Il nostro team è a tua completa disposizione. Puoi bloccare la tariffa o la promozione attuale con la tua prenotazione, con la certezza assoluta che il viaggio soddisferà al 100% le tue aspettative.',
+    pt: 'Antes de pagar: Verifique se cada detalhe da sua viagem foi planejado com profundidade. Nossa equipe está à sua inteira disposição. Você pode congelar a tarifa ou promoção atual com sua reserva, com a certeza total de que sua viagem superará 100% de suas expectativas.',
+    ja: 'お支払い前に：旅のすべての詳細がお客様のご希望に沿っているかご確認ください。ご質問がございましたら専任コンシェルジュがお応えいたします。現在の限定価格や特典を予約確定で確保し、100%ご期待以上の体験をお約束いたします。',
+    zh: '支付前须知：请确认您行程的每一处细节均已得到周密安排。我们的礼宾团队随时待命为您解答任何疑问。您可通过当前预订锁定当期特惠价格，我们承诺为您带来100%符合乃至超越预期的卓越体验。',
+  },
+  prePaymentMedicalGuaranteeTitle: {
+    en: 'Medical Guarantee & Refund Flexibility',
+    es: 'Garantía Médica y Flexibilidad de Retorno',
+    fr: 'Garantie Médicale et Flexibilité de Remboursement',
+    de: 'Medizinische Garantie & Rückerstattungs-Flexibilität',
+    it: 'Garanzia Medica e Flessibilità di Rimborso',
+    pt: 'Garantia Médica e Flexibilidade de Reembolso',
+    ja: '医療保証および柔軟な返金規定',
+    zh: '医疗特殊保障与透明退款机制',
+  },
+  prePaymentMedicalGuarantee: {
+    en: 'Medical Guarantee and Flexibility: In the event of illness or a verifiable medical emergency, your funds are returned pursuant to our protection policies: 100% of the paid amount is refunded, excluding only non-refundable gateway fees withheld by the credit card processor (and if the processor waives commission, 100% is returned in full). All managed with absolute transparency through your card or PayPal.',
+    es: 'Garantía Médica y Flexibilidad: Si te enfermas o surge una emergencia demostrable, tu dinero es devuelto conforme a nuestras políticas de protección: se reembolsa el 100% de lo pagado excepto únicamente las tarifas no reembolsables retenidas por la pasarela de tarjeta de crédito (y si la entidad procesadora no retiene comisión, se devuelve íntegramente todo). Todo gestionado con total transparencia a través de tu tarjeta o PayPal.',
+    fr: 'Garantie Médicale et Flexibilité : En cas de maladie ou d\'urgence médicale avérée, vos fonds vous sont restitués selon nos politiques de protection : 100% des montants versés sont remboursés, à la seule exception des frais non remboursables retenus par la passerelle de carte bancaire (si la passerelle ne retient aucune commission, la totalité est intégralement restituée). Tout est géré en toute transparence via votre carte ou PayPal.',
+    de: 'Medizinische Garantie und Flexibilität: Bei Krankheit oder einem nachweisbaren Notfall wird Ihr Geld gemäß unseren Schutzrichtlinien zurückerstattet: 100% des gezahlten Betrags werden erstattet, abzüglich lediglich der nicht erstattungsfähigen Gebühren des Kreditkarten-Zahlungsdienstleisters (behält der Abwickler keine Gebühr ein, wird der volle Betrag zu 100% erstattet). Alles transparent abgewickelt über Ihre Karte oder PayPal.',
+    it: 'Garanzia Medica e Flessibilità: In caso di malattia o emergenza medica documentabile, il tuo denaro viene restituito in conformità alle nostre politiche di tutela: viene rimborsato il 100% di quanto pagato, escluse unicamente le commissioni non rimborsabili trattenute dal circuito della carta di credito (se la piattaforma non trattiene commissioni, viene restituito l\'intero importo). Il tutto gestito con trasparenza totale tramite carta o PayPal.',
+    pt: 'Garantia Médica e Flexibilidade: Em caso de enfermidade ou emergência médica comprovável, seu dinheiro é devolvido em conformidade com nossas políticas de proteção: reembolsa-se 100% do valor pago, exceto exclusivamente as taxas não reembolsáveis retidas pela operadora de cartão de crédito (e se a processadora não retiver comissão, devolve-se integralmente tudo). Tudo gerenciado com total transparência via cartão ou PayPal.',
+    ja: '医療保証と柔軟な対応：病気や証明可能な緊急事態が発生した場合、当社の保護ポリシーに基づき全額返金されます。お支払いいただいた金額の100%を返金いたします（クレジットカード決済会社が差し引く返金不可手数料のみ除外され、決済会社の手数料がない場合は全額全額返還されます）。クレジットカードまたはPayPalを通じて完全に透明に手続きされます。',
+    zh: '医疗保障与退改灵活性：若遇突发疾病或经证实的不可抗力紧急情况，您的款项将依我们的旅行者保护政策全额退还：扣除信用卡支付网关不可退还的手续费后，全额退还100%已付款项（若支付网关未扣除手续费，则原路全额退款）。所有流程均通过您的银行卡或PayPal以完全透明的方式处理。',
+  },
+  usConciergeTitle: {
+    en: 'US Direct Line / SMS Concierge',
+    es: 'Línea Directa EE.UU. / SMS Concierge',
+    fr: 'Ligne Directe États-Unis / SMS Conciergerie',
+    de: 'USA Direktleitung / SMS-Concierge',
+    it: 'Linea Diretta USA / SMS Concierge',
+    pt: 'Linha Direta EUA / SMS Concierge',
+    ja: '米国直通ライン / SMSコンシェルジュ',
+    zh: '美国直拨热线 / SMS专属礼宾',
+  },
+  ecWhatsAppTitle: {
+    en: 'WhatsApp Concierge 24/7 (Ecuador)',
+    es: 'WhatsApp Concierge 24/7 Oficial (Ecuador)',
+    fr: 'WhatsApp Conciergerie 24/7 (Équateur)',
+    de: 'WhatsApp Concierge 24/7 (Ecuador)',
+    it: 'WhatsApp Concierge 24/7 (Ecuador)',
+    pt: 'WhatsApp Concierge 24/7 (Equador)',
+    ja: 'WhatsApp現地公式直通24/7（エクアドル）',
+    zh: 'WhatsApp官方直联礼宾24/7（厄瓜多尔）',
+  },
+  bilingualOperatorsNotice: {
+    en: 'Our Ecuador expedition leaders and operators are 100% bilingual in English with official tourism licenses, supported by dedicated outreach and concierge care in the United States.',
+    es: 'Nuestros operadores en Ecuador son 100% bilingües en inglés con licencia turística oficial, y contamos con soporte de divulgación y atención en EE.UU.',
+    fr: 'Nos opérateurs en Équateur sont 100% bilingues en anglais avec licence touristique officielle, et nous disposons d\'un support d\'assistance aux États-Unis.',
+    de: 'Unsere Expeditionsleiter in Ecuador sind zu 100% zweisprachig (Englisch) mit offizieller Tourismuslizenz und verfügen über einen eigenen Betreuungsdienst in den USA.',
+    it: 'I nostri operatori in Ecuador sono al 100% bilingui in inglese con licenza turistica ufficiale, e offriamo assistenza e supporto negli Stati Uniti.',
+    pt: 'Nossos operadores no Equador são 100% bilíngues em inglês com licença turística oficial, contando com suporte e atendimento nos Estados Unidos.',
+    ja: 'エクアドルの現地オペレーターは全員、公認観光ライセンスを保持する英語・スペイン語の完全バイリンガルであり、米国国内のサポートデスクとも連携しています。',
+    zh: '我们在厄瓜多尔的探险领队与运营团队均持有官方旅游从业执照且具备100%流利英语双语能力，并配备美国本土专属联络与客户服务团队。',
+  },
+  sealTripAdvisor: {
+    en: 'TripAdvisor 5.0 (52 Verified Reviews)',
+    es: 'TripAdvisor 5.0 (52 Verified Reviews)',
+    fr: 'TripAdvisor 5.0 (52 Avis Vérifiés)',
+    de: 'TripAdvisor 5.0 (52 Verifizierte Bewertungen)',
+    it: 'TripAdvisor 5.0 (52 Recensioni Verificate)',
+    pt: 'TripAdvisor 5.0 (52 Avaliações Verificadas)',
+    ja: 'TripAdvisor 5.0 (52件の認証済みレビュー)',
+    zh: 'TripAdvisor 5.0 (52条真实认证好评)',
+  },
+  sealMintur: {
+    en: 'Official Mintur License #1793215456001',
+    es: 'Licencia Oficial Mintur #1793215456001',
+    fr: 'Licence Officielle Mintur #1793215456001',
+    de: 'Offizielle Mintur-Lizenz #1793215456001',
+    it: 'Licenza Ufficiale Mintur #1793215456001',
+    pt: 'Licença Oficial Mintur #1793215456001',
+    ja: 'エクアドル観光省公式認定 #1793215456001',
+    zh: '厄瓜多尔旅游部官方特许执照 #1793215456001',
+  },
+  sealDepositGuarantee: {
+    en: '100% Deposit Protection Guarantee',
+    es: '100% Deposit Protection Guarantee',
+    fr: 'Garantie de Dépôt Protégé à 100%',
+    de: '100% Anzahlungsschutz-Garantie',
+    it: 'Garanzia Protezione Deposito al 100%',
+    pt: 'Garantia de Depósito 100% Protegido',
+    ja: '100%手付金保護保証制度',
+    zh: '100%定金与付款信托保护保证',
   },
   luxuryExpeditions: {
     en: 'Bespoke Nature Expeditions',
@@ -100,7 +219,7 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     ja: '国際銀行振込',
     zh: '国际银行电汇',
   },
-  checkoutHeaderTitle: {
+    checkoutHeaderTitle: {
     en: 'Complete Your Expedition Payment',
     es: 'Completa el Pago de tu Expedición',
     fr: 'Finalisez le Paiement de votre Expédition',
@@ -249,76 +368,6 @@ const CHECKOUT_I18N: Record<string, Record<string, string>> = {
     pt: 'Aplicar',
     ja: '適用',
     zh: '使用',
-  },
-  fullPayment: {
-    en: 'Full Payment',
-    es: 'Pago Completo',
-    fr: 'Paiement Intégral',
-    de: 'Vollständige Zahlung',
-    it: 'Pagamento Completo',
-    pt: 'Pagamento Integral',
-    ja: '全額支払い',
-    zh: '全额支付',
-  },
-  depositPayment: {
-    en: 'Reservation Deposit (min. 30%)',
-    es: 'Depósito de Reserva (mín. 30%)',
-    fr: 'Acompte de Réservation (min. 30%)',
-    de: 'Reservierungsanzahlung (min. 30%)',
-    it: 'Deposito di Prenotazione (min. 30%)',
-    pt: 'Depósito de Reserva (mín. 30%)',
-    ja: '予約デポジット（最低30%）',
-    zh: '预订定金（最低30%）',
-  },
-  depositMin: {
-    en: 'Minimum deposit',
-    es: 'Depósito mínimo',
-    fr: 'Acompte minimum',
-    de: 'Mindestanzahlung',
-    it: 'Deposito minimo',
-    pt: 'Depósito mínimo',
-    ja: '最低デポジット',
-    zh: '最低定金',
-  },
-  depositCustom: {
-    en: 'Custom amount (USD)',
-    es: 'Monto personalizado (USD)',
-    fr: 'Montant personnalisé (USD)',
-    de: 'Individueller Betrag (USD)',
-    it: 'Importo personalizzato (USD)',
-    pt: 'Valor personalizado (USD)',
-    ja: 'カスタム金額（USD）',
-    zh: '自定义金额（美元）',
-  },
-  depositInvalid: {
-    en: 'Amount must be between',
-    es: 'El monto debe estar entre',
-    fr: 'Le montant doit être entre',
-    de: 'Der Betrag muss zwischen',
-    it: 'L\'importo deve essere tra',
-    pt: 'O valor deve estar entre',
-    ja: '金額は以下の範囲内でなければなりません',
-    zh: '金额必须在以下范围内',
-  },
-  remainingBalance: {
-    en: 'Remaining balance due before travel',
-    es: 'Saldo pendiente antes del viaje',
-    fr: 'Solde restant dû avant le voyage',
-    de: 'Restbetrag fällig vor der Reise',
-    it: 'Saldo rimanente dovuto prima del viaggio',
-    pt: 'Saldo restante devido antes da viagem',
-    ja: '旅行前に支払う残額',
-    zh: '旅行前应付余额',
-  },
-  cancellationLink: {
-    en: 'Cancellation Policy',
-    es: 'Política de Cancelación',
-    fr: 'Politique d\'Annulation',
-    de: 'Stornierungsrichtlinien',
-    it: 'Politica di Cancellazione',
-    pt: 'Política de Cancelamento',
-    ja: 'キャンセルポリシー',
-    zh: '取消政策',
   },
   codeInvalid: {
     en: 'Ambassador code invalid or expired.',
@@ -720,12 +769,7 @@ export default function CheckoutPaymentPage() {
   const amountStr = searchParams.get('amount') || '500';
   const type = searchParams.get('type') || 'deposit';
   const initialRef = searchParams.get('ref') || '';
-  const [ref, setRef] = useState<string>(() => {
-    if (initialRef && initialRef.startsWith('R-2026-') && !initialRef.includes('-751')) {
-      return initialRef;
-    }
-    return `R-2026-1.1-${Math.floor(1000 + Math.random() * 9000)}`;
-  });
+  const [ref, setRef] = useState(initialRef.includes('-751') ? '' : initialRef);
   const travelDate = searchParams.get('date') || '';
   const travelersParam = searchParams.get('travelers') || searchParams.get('guestsCount') || '';
   const adultsParam = searchParams.get('adults') || '';
@@ -798,30 +842,8 @@ export default function CheckoutPaymentPage() {
   const [hpTrap, setHpTrap] = useState(''); // Off-screen honeypot field for Python bot defense
 
   const initialAmount = Number(amountStr) || 500;
-  // Promo de festivo: el importe llega ya rebajado desde la reserva. Aquí se
-  // revalida por fecha: si caducó, o si hay código de embajador (no acumulable),
-  // se devuelve al precio sin promo antes de aplicar cualquier otro descuento.
-  const tPromo = useTranslations('promotions');
-  const promoFromUrl = getPromotionById(searchParams.get('promo'));
-  const promoSavingsFromUrl = promoFromUrl ? Math.max(0, Number(searchParams.get('promosavings')) || 0) : 0;
-  const amountWithoutPromo = Number((initialAmount + promoSavingsFromUrl).toFixed(2));
-  const promoActive = !!promoFromUrl && promoSavingsFromUrl > 0 && isPromotionLive(promoFromUrl) && !discountApplied;
-  const promoExpired = !!promoFromUrl && promoSavingsFromUrl > 0 && !isPromotionLive(promoFromUrl);
-  const finalAmount = discountApplied
-    ? Number((amountWithoutPromo * 0.9).toFixed(2))
-    : (promoActive ? initialAmount : amountWithoutPromo);
-  const discountSavings = discountApplied ? Number((amountWithoutPromo - finalAmount).toFixed(2)) : 0;
-
-  // Deposit vs Full Payment
-  // Si viene de la reserva con el 30% (type=deposit) y aún faltan más de 30 días, se preselecciona el depósito.
-  const [paymentMode, setPaymentMode] = useState<'full' | 'deposit'>(
-    searchParams.get('type') === 'deposit' && canPayDeposit(travelDate) ? 'deposit' : 'full'
-  );
-  const minimumDeposit = Number((finalAmount * DEPOSIT_RATE).toFixed(2));
-  const [customDepositAmount, setCustomDepositAmount] = useState<string>(minimumDeposit.toString());
-  const depositValue = Number(customDepositAmount) || minimumDeposit;
-  const isDepositValid = depositValue >= minimumDeposit && depositValue <= finalAmount;
-  const payableAmount = paymentMode === 'full' ? finalAmount : (isDepositValid ? depositValue : minimumDeposit);
+  const finalAmount = discountApplied ? Number((initialAmount * 0.9).toFixed(2)) : initialAmount;
+  const discountSavings = discountApplied ? Number((initialAmount - finalAmount).toFixed(2)) : 0;
 
   const matchedTour = mockTours.find((t) => t.id === tourId || t.title.en === tourTitle) || mockTours[0];
 
@@ -831,13 +853,13 @@ export default function CheckoutPaymentPage() {
     if (!clientName && stored.name) setClientName(stored.name);
 
     // Guarantee ref format R-[year]-[tourCode]-[sequential] (starts at 80)
-    const affCode = searchParams.get('affiliateCode') || searchParams.get('vid') || getStoredAffiliateRef();
-    if (!ref || !ref.startsWith('R-2026-') || ref.includes('-751') || ref.length > 20) {
+    if (!ref || !ref.startsWith('R-2026-') || ref.includes('-751')) {
+      const affCode = searchParams.get('affiliateCode') || searchParams.get('vid') || getStoredAffiliateRef();
       generateBookingCode(tourId, affCode || undefined).then((newCode) => {
-        if (newCode) setRef(newCode);
+        setRef(newCode);
       });
     }
-  }, [tourId, searchParams, email, clientName]);
+  }, [tourId, ref, searchParams, email, clientName]);
 
   // Auto-detect affiliate referral code from URL or Storage/Cookie
   useEffect(() => {
@@ -950,8 +972,6 @@ export default function CheckoutPaymentPage() {
           transferRef: transferRef || 'Wire transfer registration',
           affiliateCode: discountApplied ? discountCode : undefined,
           discountApplied,
-          promoId: promoActive && promoFromUrl ? promoFromUrl.id : null,
-          promoDiscountAmount: promoActive ? promoSavingsFromUrl : 0,
           createdAt: new Date().toISOString(),
         }, { merge: true });
         console.log('✅ [CLIENT FIRESTORE] Wire transfer booking saved:', activeRef);
@@ -1000,39 +1020,40 @@ export default function CheckoutPaymentPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] dark:bg-[#0B1622] text-stone-900 dark:text-white py-4 sm:py-6 px-3 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-[#FAF9F5] dark:bg-[#07130C] text-stone-900 dark:text-white py-4 sm:py-6 px-3 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
       {/* Background ambient glows */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/5 dark:bg-emerald-600/10 rounded-full blur-[140px]" />
         <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-amber-500/5 dark:bg-amber-500/5 rounded-full blur-[120px]" />
       </div>
 
-      <div className={`w-full mx-auto relative z-10 transition-all ${isPaid
-        ? 'max-w-xl my-6 bg-white dark:bg-zinc-900/90 border border-stone-200 dark:border-emerald-500/20 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-xl space-y-6 text-stone-900 dark:text-white'
-        : 'max-w-[96%] xl:max-w-7xl 2xl:max-w-[1440px] space-y-3.5'
-        }`}>
-
+      <div className={`w-full mx-auto relative z-10 transition-all ${
+        isPaid 
+          ? 'max-w-xl my-6 bg-white dark:bg-zinc-900/90 border border-stone-200 dark:border-emerald-500/20 rounded-3xl p-6 sm:p-8 shadow-xl backdrop-blur-xl space-y-6 text-stone-900 dark:text-white' 
+          : 'max-w-[96%] xl:max-w-7xl 2xl:max-w-[1440px] space-y-3.5'
+      }`}>
+        
         {/* Top Header for Paid State */}
         {isPaid && (
           <div className="flex items-center justify-between border-b border-stone-200 dark:border-white/10 pb-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-                <Compass className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-              </div>
-              <div>
-                <span className="font-serif font-bold tracking-widest uppercase text-xs text-stone-900 dark:text-zinc-100 block">
-                  VERMILION ROUTES
-                </span>
-                <span className="text-[10px] text-emerald-700 dark:text-emerald-400/80 uppercase tracking-wider block font-medium">
-                  {t('luxuryExpeditions')}
-                </span>
-              </div>
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+              <Compass className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             </div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-semibold">
-              <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-              <span>{t('secureSsl')}</span>
+            <div>
+              <span className="font-serif font-bold tracking-widest uppercase text-xs text-stone-900 dark:text-zinc-100 block">
+                VERMILION ROUTES
+              </span>
+              <span className="text-[10px] text-emerald-700 dark:text-emerald-400/80 uppercase tracking-wider block font-medium">
+                {t('luxuryExpeditions')}
+              </span>
             </div>
           </div>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-semibold">
+            <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+            <span>{t('secureSsl')}</span>
+          </div>
+        </div>
         )}
 
         {isPaid ? (
@@ -1040,18 +1061,20 @@ export default function CheckoutPaymentPage() {
              SUCCESS SCREEN (PAID OR PENDING PAYMENT)
              ───────────────────────────────────────────── */
           <div className="text-center py-6 space-y-5 animate-fade-in">
-            <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg border ${receiptSubmitted
-              ? 'bg-amber-50 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/40 shadow-amber-900/10'
-              : 'bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/40 shadow-emerald-900/10'
-              }`}>
+            <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto shadow-lg border ${
+              receiptSubmitted
+                ? 'bg-amber-50 dark:bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-200 dark:border-amber-500/40 shadow-amber-900/10'
+                : 'bg-emerald-50 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/40 shadow-emerald-900/10'
+            }`}>
               {receiptSubmitted ? <Clock className="w-8 h-8" /> : <CheckCircle2 className="w-8 h-8" />}
             </div>
 
             <div className="space-y-1">
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${receiptSubmitted
-                ? 'bg-amber-50 dark:bg-amber-950/80 border-amber-200 dark:border-amber-500/40 text-amber-800 dark:text-amber-300'
-                : 'bg-emerald-50 dark:bg-emerald-950/80 border-emerald-200 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300'
-                }`}>
+              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border ${
+                receiptSubmitted
+                  ? 'bg-amber-50 dark:bg-amber-950/80 border-amber-200 dark:border-amber-500/40 text-amber-800 dark:text-amber-300'
+                  : 'bg-emerald-50 dark:bg-emerald-950/80 border-emerald-200 dark:border-emerald-500/40 text-emerald-800 dark:text-emerald-300'
+              }`}>
                 {receiptSubmitted ? <Clock className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
                 <span>{receiptSubmitted ? 'Espera de pago' : 'Pago Confirmado'}</span>
               </span>
@@ -1091,7 +1114,7 @@ export default function CheckoutPaymentPage() {
               </button>
 
               <a
-                href={`https://wa.me/593960039156?text=${encodeURIComponent(
+                href={`https://wa.me/593994048458?text=${encodeURIComponent(
                   `Hola Vermilion Routes, he registrado mi reserva para "${tourTitle}" (Ref: ${ref}). Método: ${receiptSubmitted ? 'Transferencia Bancaria Internacional' : 'PayPal'}.`
                 )}`}
                 target="_blank"
@@ -1113,84 +1136,194 @@ export default function CheckoutPaymentPage() {
           </div>
         ) : (
           <>
-            {/* ── CABECERA PRINCIPAL REDISEÑADA ── */}
-            <header className="bg-white dark:bg-zinc-900/95 backdrop-blur-md border border-stone-200 dark:border-white/10 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-stone-900 dark:text-white">
-
-              {/* 1. Marca a la izquierda con Referencia dinámica */}
-              <div className="flex items-center gap-3 shrink-0">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
-                  <Compass className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            {/* ── NAVBAR CHIKITITO VIP (Compact Top Bar) ── */}
+            <header className="bg-white dark:bg-zinc-900/95 backdrop-blur-md border border-stone-200 dark:border-white/10 rounded-2xl p-3 sm:p-4 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3 text-stone-900 dark:text-white">
+              {/* Brand + Tour Details */}
+              <div className="flex items-center gap-3 w-full md:w-auto min-w-0 justify-between md:justify-start">
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+                    <Compass className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  </div>
+                  <div>
+                    <span className="font-serif font-black tracking-widest uppercase text-xs text-stone-900 dark:text-white block leading-tight">
+                      VERMILION ROUTES
+                    </span>
+                    <span className="text-[10px] text-emerald-700 dark:text-emerald-400/90 uppercase tracking-wider block font-semibold leading-tight">
+                      {t('luxuryExpeditions')}
+                    </span>
+                  </div>
                 </div>
-                <div>
-                  <span className="font-serif font-black tracking-widest uppercase text-xs text-stone-900 dark:text-white block leading-tight">
-                    VERMILION ROUTES
-                  </span>
-                  <span className="font-mono text-[11px] font-bold text-emerald-700 dark:text-emerald-400 block leading-tight mt-1">
-                    Ref: {ref || 'R-2026-1.2-80'}
-                  </span>
+
+                <div className="hidden sm:block h-7 w-px bg-stone-200 dark:bg-white/10 shrink-0" />
+
+                {/* Tour snippet */}
+                <div className="min-w-0 flex-1 sm:flex-initial">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[11px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-zinc-950 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800 shrink-0">
+                      Ref: {ref}
+                    </span>
+                    <h1 className="text-xs sm:text-sm font-serif font-bold text-stone-900 dark:text-white truncate max-w-[200px] sm:max-w-[320px] lg:max-w-[420px]" title={tourTitle}>
+                      {tourTitle}
+                    </h1>
+                  </div>
+                  <div className="flex items-center gap-3 text-[11px] text-stone-500 dark:text-zinc-400 pt-0.5">
+                    {travelDate && (
+                      <span className="inline-flex items-center gap-1 font-medium">
+                        <Calendar className="w-3 h-3 text-emerald-600" />
+                        {travelDate}
+                      </span>
+                    )}
+                    <span className="inline-flex items-center gap-1 font-medium">
+                      <Users className="w-3 h-3 text-emerald-600" />
+                      {getTravelersText()}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => router.push(`/${locale}/booking?tourid=${tourId}&date=${travelDate}&adults=${adultsParam || '2'}&children=${childrenParam || '0'}`)}
+                      className="inline-flex items-center gap-1 text-stone-500 hover:text-emerald-700 dark:text-zinc-400 dark:hover:text-emerald-400 underline transition-colors cursor-pointer ml-1"
+                    >
+                      <ArrowLeft className="w-3 h-3" />
+                      <span className="hidden sm:inline">{t('backToModify')}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div className="hidden md:block h-10 w-px bg-stone-200 dark:bg-white/10 shrink-0" />
-
-              {/* 2. Título completo, Fecha, Viajeros y Precio Integrado */}
-              <div className="flex-1 min-w-0">
-                <h1 className="text-sm sm:text-base font-serif font-bold text-stone-900 dark:text-white leading-snug truncate" title={tourTitle}>
-                  {tourTitle}
-                </h1>
-
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone-600 dark:text-zinc-300 pt-1.5">
-                  {travelDate && (
-                    <span className="inline-flex items-center gap-1.5 font-medium">
-                      <Calendar className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                      <span>{travelDate}</span>
+              {/* Price in strictly USD & SSL Badge */}
+              <div className="flex items-center justify-between md:justify-end gap-4 w-full md:w-auto border-t md:border-t-0 border-stone-100 dark:border-white/5 pt-2.5 md:pt-0">
+                <div className="text-left md:text-right">
+                  <div className="flex items-baseline md:justify-end gap-1" suppressHydrationWarning>
+                    <span className="text-[10px] sm:text-[11px] font-semibold text-stone-500 dark:text-zinc-400 uppercase tracking-wider mr-1">
+                      {t('totalToPay')}:
                     </span>
-                  )}
-                  <span className="inline-flex items-center gap-1.5 font-medium">
-                    <Users className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                    <span>{getTravelersText()}</span>
-                  </span>
-                  <span className="text-stone-300 dark:text-zinc-700">•</span>
-                  <span className="inline-flex items-baseline gap-1 font-bold text-stone-900 dark:text-white">
-                    <span className="text-emerald-600 dark:text-emerald-400 text-[11px] mr-0.5">$</span>
-                    <span className="text-sm sm:text-base font-black text-emerald-700 dark:text-emerald-400 tracking-tight">
+                    <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400">$</span>
+                    <span className="text-2xl sm:text-3xl font-black text-stone-900 dark:text-white tracking-tight">
                       {formatPrice(finalAmount)}
                     </span>
-                    <span className="text-[10px] text-stone-500 dark:text-zinc-400 font-semibold ml-1">USD</span>
-                    <span className="text-[10px] text-emerald-700 dark:text-emerald-400/80 font-normal ml-1">
-                      ({t('taxesIncluded')})
+                    <span className="text-xs font-bold text-stone-600 dark:text-zinc-400">
+                      USD
                     </span>
+                  </div>
+                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 block font-medium">
+                    {t('taxesIncluded')}
                   </span>
                 </div>
-                {promoFromUrl && promoActive && (
-                  <p className="pt-1.5 text-xs font-semibold text-amber-700 dark:text-amber-300" data-promo={promoFromUrl.id}>
-                    {tPromo('summaryLine', { name: tPromo(`items.${promoFromUrl.messageKey}.name`), pct: Math.round(promoFromUrl.discountRate * 100) })}
-                    {' '}−${formatPrice(promoSavingsFromUrl)}
-                  </p>
-                )}
-                {promoFromUrl && promoExpired && (
-                  <p className="pt-1.5 text-xs text-stone-500 dark:text-zinc-400">
-                    {tPromo('expired', { name: tPromo(`items.${promoFromUrl.messageKey}.name`) })}
-                  </p>
-                )}
-              </div>
 
-              {/* 3. Botón Volver a modificar mi reserva (reemplaza al SSL) */}
-              <div className="shrink-0 w-full md:w-auto flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => router.push(`/${locale}/booking?tourid=${tourId}&date=${travelDate}&adults=${adultsParam || '2'}&children=${childrenParam || '0'}`)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-100 dark:bg-zinc-800/90 hover:bg-stone-200 dark:hover:bg-zinc-700 border border-stone-200 dark:border-zinc-700 text-stone-800 dark:text-zinc-200 text-xs font-semibold transition-all hover:scale-[1.02] active:scale-95 cursor-pointer shadow-sm"
-                >
-                  <ArrowLeft className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>{t('backToModify')}</span>
-                </button>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[11px] font-semibold shrink-0">
+                  <Lock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span className="hidden sm:inline">{t('secureSsl')}</span>
+                  <span className="sm:hidden">SSL 256-Bit</span>
+                </div>
               </div>
-
             </header>
+
+            {/* ── BLOQUE REASEGURADOR FIDUCIARIO "ANTES DE PAGAR" (PRE-PAYMENT ASSURANCE) ── */}
+            <section
+              aria-label="Fiduciary Pre-Payment Assurance"
+              className="bg-gradient-to-br from-amber-500/[0.08] via-emerald-500/[0.05] to-teal-500/[0.07] dark:from-amber-400/[0.06] dark:via-zinc-900/90 dark:to-emerald-950/40 border border-amber-300/60 dark:border-amber-500/30 rounded-3xl p-5 sm:p-7 shadow-lg shadow-amber-950/5 space-y-5"
+            >
+              {/* Header con Badges Fiduciarios Mandatorios */}
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-amber-200/50 dark:border-amber-500/20">
+                <div className="flex items-center gap-3">
+                  <div className="w-11 h-11 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center shrink-0 shadow-xs">
+                    <ShieldCheck className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] sm:text-[11px] uppercase font-bold tracking-widest text-amber-700 dark:text-amber-400 block">
+                      {t('prePaymentBadge')}
+                    </span>
+                    <h2 className="font-serif font-bold text-base sm:text-lg text-stone-900 dark:text-white">
+                      {t('prePaymentAssuranceTitle')}
+                    </h2>
+                  </div>
+                </div>
+
+                {/* Sellos Fiduciarios Mandatorios */}
+                <div className="flex flex-wrap items-center gap-2">
+                  <a
+                    href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-zinc-900 border border-amber-300 dark:border-amber-500/40 text-stone-800 dark:text-amber-300 text-[11px] font-bold shadow-xs hover:border-amber-400 hover:scale-[1.02] transition-all cursor-pointer"
+                  >
+                    <Award className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                    <div className="flex items-center gap-0.5 text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-2.5 h-2.5 fill-amber-500 text-amber-500" />
+                      ))}
+                    </div>
+                    <span>{t('sealTripAdvisor')}</span>
+                  </a>
+
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-zinc-900 border border-emerald-300 dark:border-emerald-500/40 text-stone-800 dark:text-emerald-300 text-[11px] font-bold shadow-xs">
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <span>{t('sealMintur')}</span>
+                  </div>
+
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-zinc-900 border border-teal-300 dark:border-teal-500/40 text-stone-800 dark:text-teal-300 text-[11px] font-bold shadow-xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 shrink-0" />
+                    <span>{t('sealDepositGuarantee')}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mensajes Reaseguradores Mandatorios (Verificación & Congelación + Garantía Médica) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-[13px] leading-relaxed">
+                <div className="p-4 rounded-2xl bg-white/85 dark:bg-zinc-950/70 border border-amber-200/70 dark:border-amber-500/25 space-y-2">
+                  <div className="flex items-center gap-2 font-bold text-stone-900 dark:text-white">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <span>{t('prePaymentFreezeTitle')}</span>
+                  </div>
+                  <p className="text-stone-700 dark:text-zinc-300">
+                    {t('prePaymentFreezeText')}
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-white/85 dark:bg-zinc-950/70 border border-teal-200/70 dark:border-teal-500/25 space-y-2">
+                  <div className="flex items-center gap-2 font-bold text-stone-900 dark:text-white">
+                    <ShieldCheck className="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0" />
+                    <span>{t('prePaymentMedicalGuaranteeTitle')}</span>
+                  </div>
+                  <p className="text-stone-700 dark:text-zinc-300">
+                    {t('prePaymentMedicalGuarantee')}
+                  </p>
+                </div>
+              </div>
+
+              {/* Canales de Contacto Directo & Aviso de Operadores Bilingües */}
+              <div className="pt-3 border-t border-amber-200/40 dark:border-amber-500/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+                <div className="flex items-center gap-2 text-stone-700 dark:text-zinc-300 text-[11px] sm:text-xs">
+                  <Globe2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                  <span>{t('bilingualOperatorsNotice')}</span>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0 flex-wrap justify-end">
+                  <a
+                    href="tel:+13022041881"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-zinc-900 border border-stone-300 dark:border-zinc-700 text-stone-900 dark:text-zinc-100 font-bold hover:border-emerald-500 transition-colors shadow-2xs text-[11px] active:scale-95"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                    <span>{t('usConciergeTitle')}: +1 (302) 204-1881</span>
+                  </a>
+
+                  <a
+                    href={`https://wa.me/593994048458?text=${encodeURIComponent(
+                      `Hola Vermilion Routes, estoy en el checkout del tour "${tourTitle}" (Ref: ${ref || 'Web'}). Deseo asistencia directa antes de pagar.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all shadow-xs text-[11px] active:scale-95"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>{t('ecWhatsAppTitle')}: +593 99 404 8458</span>
+                  </a>
+                </div>
+              </div>
+            </section>
+
             {/* LAS 2 COLUMNAS (50% / 50% en pantallas grandes) */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-
+              
               {/* ── COLUMNA 1: PAYPAL / TARJETA INTERNACIONAL ── */}
               <div className="bg-white dark:bg-zinc-950/70 border border-stone-200 dark:border-white/10 rounded-3xl p-5 sm:p-7 space-y-5 shadow-sm relative overflow-hidden">
                 <div className="flex items-center justify-between pb-3 border-b border-stone-100 dark:border-white/5">
@@ -1199,16 +1332,16 @@ export default function CheckoutPaymentPage() {
                       <CreditCard className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="font-serif font-bold text-lg sm:text-xl text-stone-900 dark:text-white">
+                      <h3 className="font-serif font-bold text-base text-stone-900 dark:text-white">
                         {t('tabPaypalCard')}
                       </h3>
-                      <span className="text-xs text-stone-500 dark:text-zinc-400 block">
-                        {t('confirmacionInmediata')} • {t('cifrado256Bit')}
+                      <span className="text-[11px] text-stone-500 dark:text-zinc-400 block">
+                        Confirmación Inmediata • Cifrado 256-Bit
                       </span>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-500/30 text-blue-800 dark:text-blue-300 text-[10px] font-bold uppercase tracking-wider">
-                    {t('recomendado')}
+                    Recomendado
                   </span>
                 </div>
 
@@ -1216,60 +1349,10 @@ export default function CheckoutPaymentPage() {
                   {t('paypalNotice')}
                 </p>
 
-                {/* Payment Mode: Full vs Deposit */}
-                <div className="space-y-3 p-4 bg-stone-50 dark:bg-zinc-900/60 border border-stone-200 dark:border-white/10 rounded-2xl">
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setPaymentMode('full')}
-                      className={`flex-1 px-3 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${paymentMode === 'full' ? 'bg-emerald-600 text-white shadow-md' : 'bg-white dark:bg-zinc-800 text-stone-600 dark:text-zinc-300 border border-stone-200 dark:border-zinc-700 hover:border-emerald-400'}`}
-                    >
-                      {t('fullPayment')} — ${formatPrice(finalAmount)}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => { setPaymentMode('deposit'); setCustomDepositAmount(minimumDeposit.toString()); }}
-                      className={`flex-1 px-3 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${paymentMode === 'deposit' ? 'bg-amber-500 text-stone-950 shadow-md' : 'bg-white dark:bg-zinc-800 text-stone-600 dark:text-zinc-300 border border-stone-200 dark:border-zinc-700 hover:border-amber-400'}`}
-                    >
-                      {t('depositPayment')}
-                    </button>
-                  </div>
-
-                  {paymentMode === 'deposit' && (
-                    <div className="space-y-2 pt-1">
-                      <div className="flex items-center gap-2">
-                        <label className="text-[11px] text-stone-500 dark:text-zinc-400 font-medium shrink-0">{t('depositCustom')}:</label>
-                        <div className="relative flex-1">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-stone-400 font-bold">$</span>
-                          <input
-                            type="number"
-                            min={minimumDeposit}
-                            max={finalAmount}
-                            step="0.01"
-                            value={customDepositAmount}
-                            onChange={(e) => setCustomDepositAmount(e.target.value)}
-                            className={`w-full pl-7 pr-3 py-2 rounded-lg text-sm font-bold border ${isDepositValid ? 'border-emerald-300 dark:border-emerald-600 focus:ring-emerald-500' : 'border-rose-300 dark:border-rose-600 focus:ring-rose-500'} bg-white dark:bg-zinc-800 text-stone-900 dark:text-white focus:outline-none focus:ring-2`}
-                          />
-                        </div>
-                      </div>
-                      {!isDepositValid && (
-                        <p className="text-[10px] text-rose-500 font-medium flex items-center gap-1">
-                          <AlertCircle className="w-3 h-3" />
-                          {t('depositInvalid')} ${formatPrice(minimumDeposit)} – ${formatPrice(finalAmount)} USD
-                        </p>
-                      )}
-                      <div className="flex justify-between text-[11px] text-stone-500 dark:text-zinc-400 pt-1 border-t border-stone-100 dark:border-white/5">
-                        <span>{t('depositMin')}: <strong className="text-stone-700 dark:text-zinc-200">${formatPrice(minimumDeposit)} USD</strong></span>
-                        <span>{t('remainingBalance')}: <strong className="text-amber-600 dark:text-amber-400">${formatPrice(finalAmount - payableAmount)} USD</strong></span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
                 {/* PayPal Official SDK Buttons */}
                 <div className="pt-2">
                   <PayPalCheckoutButton
-                    amount={payableAmount}
+                    amount={finalAmount}
                     bookingRef={ref}
                     tourId={tourId}
                     tourTitle={tourTitle}
@@ -1290,16 +1373,14 @@ export default function CheckoutPaymentPage() {
                   />
                 </div>
 
-                <BookingTrustPanel />
-
-                <div className="pt-3 border-t border-stone-100 dark:border-white/5 flex flex-wrap items-center justify-between gap-2 text-[11px] text-stone-500 dark:text-zinc-400">
-                  <div className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-medium">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                    <span>PayPal 180-Day Buyer Protection</span>
+                <div className="pt-3 border-t border-stone-100 dark:border-white/5 flex items-center justify-between text-[11px] text-stone-500 dark:text-zinc-400">
+                  <div className="flex items-center gap-1">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>PayPal Holdings, Inc.</span>
                   </div>
                   <div className="flex items-center gap-1">
-                    <Lock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                    <span>Visa • MC • Amex • Discover • Diners • JCB • UnionPay</span>
+                    <Lock className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>SSL 256-Bit Encryption</span>
                   </div>
                 </div>
               </div>
@@ -1312,242 +1393,316 @@ export default function CheckoutPaymentPage() {
                       <Building2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
                     </div>
                     <div>
-                      <h3 className="font-serif font-bold text-lg sm:text-xl text-stone-900 dark:text-white">
+                      <h3 className="font-serif font-bold text-base text-stone-900 dark:text-white">
                         {t('tabBankTitle')}
                       </h3>
-                      <span className="text-xs text-stone-500 dark:text-zinc-400 block">
-                        {t('cuentasOficiales')}
+                      <span className="text-[11px] text-stone-500 dark:text-zinc-400 block">
+                        Cuentas Oficiales • Sin recargo de pasarela
                       </span>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold uppercase tracking-wider">
-                    {t('directo')}
+                    Directo
                   </span>
                 </div>
 
-                {/* 1. LAS TRES OPCIONES EN UNA SOLA LÍNEA */}
-                <div className="grid grid-cols-3 gap-2">
-                  {/* Opción US */}
-                  <button
-                    type="button"
-                    onClick={() => setOpenBankCard(openBankCard === 'usa' ? null : 'usa')}
-                    className={`flex flex-col items-center justify-center p-2 sm:p-3 rounded-2xl border text-center transition-all cursor-pointer ${openBankCard === 'usa'
-                      ? 'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 ring-2 ring-emerald-500/30 font-bold'
-                      : 'border-stone-200 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900/60 hover:border-emerald-500/50 text-stone-700 dark:text-zinc-300'
-                      }`}
-                  >
-                    <span className="text-xs font-bold text-stone-900 dark:text-white block">US</span>
-                    <span className="text-[11px] font-semibold leading-tight mt-0.5 line-clamp-1">USA (USD)</span>
-                    <span className="text-[9px] text-stone-500 dark:text-zinc-400 block truncate">Citi bank</span>
-                  </button>
-
-                  {/* Opción EC */}
-                  <button
-                    type="button"
-                    onClick={() => setOpenBankCard(openBankCard === 'ecuador' ? null : 'ecuador')}
-                    className={`flex flex-col items-center justify-center p-2 sm:p-3 rounded-2xl border text-center transition-all cursor-pointer ${openBankCard === 'ecuador'
-                      ? 'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 ring-2 ring-emerald-500/30 font-bold'
-                      : 'border-stone-200 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900/60 hover:border-emerald-500/50 text-stone-700 dark:text-zinc-300'
-                      }`}
-                  >
-                    <span className="text-xs font-bold text-stone-900 dark:text-white block">EC</span>
-                    <span className="text-[11px] font-semibold leading-tight mt-0.5 line-clamp-1">Ecuador (USD)</span>
-                    <span className="text-[9px] text-stone-500 dark:text-zinc-400 block truncate">Produbanco</span>
-                  </button>
-
-                  {/* Opción ES */}
-                  <button
-                    type="button"
-                    onClick={() => setOpenBankCard(openBankCard === 'spain' ? null : 'spain')}
-                    className={`flex flex-col items-center justify-center p-2 sm:p-3 rounded-2xl border text-center transition-all cursor-pointer ${openBankCard === 'spain'
-                      ? 'border-emerald-500 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 ring-2 ring-emerald-500/30 font-bold'
-                      : 'border-stone-200 dark:border-zinc-800 bg-stone-50/50 dark:bg-zinc-900/60 hover:border-emerald-500/50 text-stone-700 dark:text-zinc-300'
-                      }`}
-                  >
-                    <span className="text-xs font-bold text-stone-900 dark:text-white block">ES</span>
-                    <span className="text-[11px] font-semibold leading-tight mt-0.5 line-clamp-1">España (EUR)</span>
-                    <span className="text-[9px] text-stone-500 dark:text-zinc-400 block truncate">SEPA</span>
-                  </button>
+                <div className="p-3 bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-500/20 rounded-xl text-xs space-y-1">
+                  <p className="text-stone-700 dark:text-zinc-200 font-medium">
+                    1. Elige una de nuestras cuentas oficiales abajo para ver los datos bancarios.
+                  </p>
+                  <p className="text-stone-700 dark:text-zinc-200">
+                    2. En el concepto, coloca tu Referencia: <strong className="font-mono text-emerald-700 dark:text-emerald-300 bg-white dark:bg-zinc-900 px-1.5 py-0.5 rounded border border-emerald-300 dark:border-emerald-800">{ref}</strong>
+                  </p>
                 </div>
 
-                {/* 2. SECCIÓN INFERIOR DINÁMICA */}
-                {openBankCard === null ? (
-                  <div className="p-4 sm:p-5 border border-stone-200 dark:border-zinc-800 rounded-2xl space-y-3 bg-stone-50/50 dark:bg-zinc-900/40 animate-fade-in">
-                    <div className="text-center">
-                      <p className="font-bold text-sm sm:text-base text-emerald-700 dark:text-emerald-400">
-                        {t('deseasPagarTransferencia')}
-                      </p>
-                    </div>
-                    <div className="p-3 bg-white dark:bg-zinc-950/80 border border-stone-200 dark:border-zinc-800/80 rounded-xl text-left text-xs space-y-1.5 font-medium">
-                      <p className="text-stone-800 dark:text-zinc-200">
-                        {t('elegeUnaCuenta')}
-                      </p>
-                      <p className="text-stone-800 dark:text-zinc-200">
-                        {t('enElConcepto')} <strong className="font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-zinc-900 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800/80 font-bold">{ref || 'R-2026-1.2-80'}</strong>
-                      </p>
-                    </div>
-                    <p className="text-xs text-center text-stone-500 dark:text-zinc-400">
-                      {t('haceClickCualquiera')}
-                    </p>
+                {/* 3 Cuentas Bancarias Oficiales en Acordeón */}
+                <div className="space-y-2.5">
+                  
+                  {/* CUENTA 1: USA (USD) Citi bank */}
+                  <div className={`border rounded-2xl overflow-hidden transition-all ${openBankCard === 'usa' ? 'border-emerald-500 bg-emerald-50/20 dark:bg-zinc-900 shadow-sm ring-1 ring-emerald-500/30' : 'border-stone-200 dark:border-white/10 bg-white dark:bg-zinc-900/60 hover:border-emerald-400'}`}>
+                    <button
+                      type="button"
+                      onClick={() => setOpenBankCard(openBankCard === 'usa' ? null : 'usa')}
+                      className="w-full flex items-center justify-between p-3.5 text-left cursor-pointer transition-colors"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-xl">🇺🇸</span>
+                        <div>
+                          <span className="text-xs font-bold text-stone-900 dark:text-white block">
+                            USA (USD) • Citi bank (Florida)
+                          </span>
+                          <span className="text-[10px] text-stone-500 dark:text-zinc-400">
+                            ACH / Domestic Wire / Zelle
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
+                          USD
+                        </span>
+                        {openBankCard === 'usa' ? <ChevronUp className="w-4 h-4 text-emerald-600" /> : <ChevronDown className="w-4 h-4 text-stone-400" />}
+                      </div>
+                    </button>
+
+                    {openBankCard === 'usa' && (
+                      <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 animate-fade-in">
+                        <div className="flex justify-between items-center pt-2">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">Checking Account:</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('9119836186', 'us_acc')}
+                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            9119836186 {copiedKey === 'us_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">Account Holder:</span>
+                          <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium">Medardo Sanchez</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">Routing (ACH):</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('063100277', 'us_ach')}
+                            className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            063100277 {copiedKey === 'us_ach' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-stone-400" />}
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">Routing (Wire):</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('021000089', 'us_wire')}
+                            className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            021000089 {copiedKey === 'us_wire' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-stone-400" />}
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">Zelle Transfer:</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('*gsanchez@plustelesmart.com.ec', 'us_zelle')}
+                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer font-sans"
+                          >
+                            *gsanchez@plustelesmart.com.ec {copiedKey === 'us_zelle' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-stone-400" />}
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                ) : (
-                  <div className="space-y-4 animate-fade-in">
-                    <div className="p-4 bg-stone-50 dark:bg-zinc-900/80 border border-stone-200 dark:border-zinc-800 rounded-2xl text-xs space-y-2">
-                      {openBankCard === 'usa' && (
-                        <div className="space-y-2 font-mono text-[11px]">
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Checking Account:</span>
-                            <button type="button" onClick={() => handleCopy('9119836186', 'us_acc')} className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer">
-                              9119836186 {copiedKey === 'us_acc' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Account Holder:</span>
-                            <span className="text-stone-900 dark:text-white font-sans font-bold">Medardo Sanchez</span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Routing (ACH):</span>
-                            <button type="button" onClick={() => handleCopy('063100277', 'us_ach')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
-                              063100277 {copiedKey === 'us_ach' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Routing (Wire):</span>
-                            <button type="button" onClick={() => handleCopy('021000089', 'us_wire')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
-                              021000089 {copiedKey === 'us_wire' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Zelle Transfer:</span>
-                            <button type="button" onClick={() => handleCopy('*gsanchez@plustelesmart.com.ec', 'us_zelle')} className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer font-sans text-xs">
-                              *gsanchez@plustelesmart.com.ec {copiedKey === 'us_zelle' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                        </div>
-                      )}
 
-                      {openBankCard === 'ecuador' && (
-                        <div className="space-y-2 font-mono text-[11px]">
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Cuenta Corriente:</span>
-                            <button type="button" onClick={() => handleCopy('27059152821', 'pro_acc')} className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer">
-                              27059152821 {copiedKey === 'pro_acc' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Beneficiario:</span>
-                            <span className="text-stone-900 dark:text-white font-sans font-bold">Agencia de Viajes Vermilion</span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">RUC:</span>
-                            <button type="button" onClick={() => handleCopy('1793215456001', 'pro_ruc')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
-                              1793215456001 {copiedKey === 'pro_ruc' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">SWIFT:</span>
-                            <button type="button" onClick={() => handleCopy('PRODECEQXXX', 'pro_swift')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
-                              PRODECEQXXX {copiedKey === 'pro_swift' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
+                  {/* CUENTA 2: ECUADOR (USD) Banco Produbanco */}
+                  <div className={`border rounded-2xl overflow-hidden transition-all ${openBankCard === 'ecuador' ? 'border-emerald-500 bg-emerald-50/20 dark:bg-zinc-900 shadow-sm ring-1 ring-emerald-500/30' : 'border-stone-200 dark:border-white/10 bg-white dark:bg-zinc-900/60 hover:border-emerald-400'}`}>
+                    <button
+                      type="button"
+                      onClick={() => setOpenBankCard(openBankCard === 'ecuador' ? null : 'ecuador')}
+                      className="w-full flex items-center justify-between p-3.5 text-left cursor-pointer transition-colors"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-xl">🇪🇨</span>
+                        <div>
+                          <span className="text-xs font-bold text-stone-900 dark:text-white block">
+                            Ecuador (USD) • Produbanco
+                          </span>
+                          <span className="text-[10px] text-stone-500 dark:text-zinc-400">
+                            Cuenta Corriente / SWIFT
+                          </span>
                         </div>
-                      )}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
+                          USD
+                        </span>
+                        {openBankCard === 'ecuador' ? <ChevronUp className="w-4 h-4 text-emerald-600" /> : <ChevronDown className="w-4 h-4 text-stone-400" />}
+                      </div>
+                    </button>
 
-                      {openBankCard === 'spain' && (
-                        <div className="space-y-2 font-mono text-[11px]">
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">IBAN SEPA:</span>
-                            <button type="button" onClick={() => handleCopy('ES4021000418450200051192', 'es_iban')} className="text-emerald-600 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer text-[10px]">
-                              ES40 2100 0418 4502 0005 1192 {copiedKey === 'es_iban' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
-                            </button>
+                    {openBankCard === 'ecuador' && (
+                      <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 animate-fade-in">
+                        <div className="flex justify-between items-center pt-2">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">Cuenta Corriente:</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('27059152821', 'pro_acc')}
+                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            27059152821 {copiedKey === 'pro_acc' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400 dark:text-zinc-500" />}
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">Beneficiario:</span>
+                          <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium truncate max-w-[200px]">Agencia de Viajes Vermilion</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">RUC:</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('1793215456001', 'pro_ruc')}
+                            className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            1793215456001 {copiedKey === 'pro_ruc' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-stone-400" />}
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">SWIFT:</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('PRODECEQXXX', 'pro_swift')}
+                            className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            PRODECEQXXX {copiedKey === 'pro_swift' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-stone-400" />}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* CUENTA 3: ESPAÑA / EUROPA (EUR) CaixaBank SEPA */}
+                  <div className={`border rounded-2xl overflow-hidden transition-all ${openBankCard === 'spain' ? 'border-emerald-500 bg-emerald-50/20 dark:bg-zinc-900 shadow-sm ring-1 ring-emerald-500/30' : 'border-stone-200 dark:border-white/10 bg-white dark:bg-zinc-900/60 hover:border-emerald-400'}`}>
+                    <button
+                      type="button"
+                      onClick={() => setOpenBankCard(openBankCard === 'spain' ? null : 'spain')}
+                      className="w-full flex items-center justify-between p-3.5 text-left cursor-pointer transition-colors"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-xl">🇪🇸</span>
+                        <div>
+                          <span className="text-xs font-bold text-stone-900 dark:text-white block">
+                            España / Europa (EUR) • SEPA
+                          </span>
+                          <span className="text-[10px] text-stone-500 dark:text-zinc-400">
+                            Sede Asociada Madrid (Coral Tour)
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-[9px] font-bold text-blue-800 dark:text-blue-300">
+                          EUR
+                        </span>
+                        {openBankCard === 'spain' ? <ChevronUp className="w-4 h-4 text-emerald-600" /> : <ChevronDown className="w-4 h-4 text-stone-400" />}
+                      </div>
+                    </button>
+
+                    {openBankCard === 'spain' && (
+                      <div className="p-3.5 pt-0 border-t border-stone-100 dark:border-white/5 space-y-1.5 font-mono text-[11px] text-stone-700 dark:text-zinc-300 animate-fade-in">
+                        <div className="flex justify-between items-center pt-2">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">IBAN SEPA:</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('ES4021000418450200051192', 'es_iban')}
+                            className="text-emerald-700 dark:text-emerald-400 font-bold hover:underline flex items-center gap-1 cursor-pointer text-[10px]"
+                          >
+                            ES40 2100 0418 4502 0005 1192 {copiedKey === 'es_iban' ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-stone-400" />}
+                          </button>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">Beneficiario:</span>
+                          <span className="text-stone-900 dark:text-white font-sans text-[11px] font-medium truncate max-w-[200px]">Coral Tour Operador España</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-stone-500 dark:text-zinc-500 font-sans">BIC / SWIFT:</span>
+                          <button
+                            type="button"
+                            onClick={() => handleCopy('CAIXESBBXXX', 'es_bic')}
+                            className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer"
+                          >
+                            CAIXESBBXXX {copiedKey === 'es_bic' ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-stone-400" />}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                </div>
+
+                {/* ── SECCIÓN DE SUBIDA DE COMPROBANTE: SOLO VISIBLE SI UNA CUENTA ESTÁ ABIERTA ── */}
+                {openBankCard !== null ? (
+                  <form onSubmit={handleSubmitWireRegistration} className="space-y-3 pt-3 border-t border-stone-200 dark:border-white/10 animate-fade-in">
+                    
+                    {/* Honeypot trap */}
+                    <div className="sr-only opacity-0 h-0 w-0 pointer-events-none absolute -left-[9999px]" aria-hidden="true">
+                      <label htmlFor="website_url_hp">Website URL</label>
+                      <input
+                        id="website_url_hp"
+                        type="text"
+                        name="_hp_trap"
+                        value={hpTrap}
+                        onChange={(e) => setHpTrap(e.target.value)}
+                        tabIndex={-1}
+                        autoComplete="off"
+                      />
+                    </div>
+
+                    <h4 className="font-bold text-stone-900 dark:text-white text-xs flex items-center gap-1.5">
+                      <Upload className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span>{t('uploadOptional')}</span>
+                    </h4>
+
+                    {/* File Dropzone */}
+                    <div className="border-2 border-dashed border-stone-300 dark:border-zinc-700 hover:border-emerald-600 dark:hover:border-emerald-500 rounded-2xl p-4 text-center transition-all bg-stone-50/60 dark:bg-zinc-950/60 cursor-pointer relative">
+                      <input
+                        type="file"
+                        accept="image/*,.pdf"
+                        onChange={handleFileChange}
+                        className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                      />
+                      {previewUrl ? (
+                        <div className="space-y-2">
+                          <div className="relative w-28 h-20 mx-auto rounded-lg overflow-hidden border border-stone-300 dark:border-zinc-700">
+                            <Image src={previewUrl} alt="Receipt Preview" fill className="object-cover" />
                           </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">Beneficiario:</span>
-                            <span className="text-stone-900 dark:text-white font-sans font-bold">Coral Tour Operador España</span>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <span className="text-stone-500 dark:text-zinc-400 font-sans">BIC / SWIFT:</span>
-                            <button type="button" onClick={() => handleCopy('CAIXESBBXXX', 'es_bic')} className="text-stone-900 dark:text-white font-bold hover:underline flex items-center gap-1 cursor-pointer">
-                              CAIXESBBXXX {copiedKey === 'es_bic' ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-stone-400 dark:text-zinc-500" />}
-                            </button>
-                          </div>
+                          <p className="text-emerald-700 dark:text-emerald-400 font-medium text-xs">
+                            {bankReceipt?.name} ({Math.round((bankReceipt?.size || 0) / 1024)} KB)
+                          </p>
+                          <span className="text-[10px] text-stone-500 dark:text-zinc-500">Haz clic para cambiar archivo</span>
+                        </div>
+                      ) : (
+                        <div className="space-y-1 py-2">
+                          <Upload className="w-6 h-6 text-emerald-600 dark:text-emerald-500 mx-auto" />
+                          <p className="text-xs text-stone-800 dark:text-zinc-200 font-semibold">
+                            {t('uploadDragText')}
+                          </p>
+                          <p className="text-[10px] text-stone-500 dark:text-zinc-500">Formatos JPG, PNG, PDF hasta 10MB</p>
                         </div>
                       )}
                     </div>
 
-                    {/* Formulario de subida de comprobante */}
-                    <form onSubmit={handleSubmitWireRegistration} className="space-y-3 pt-3 border-t border-stone-200 dark:border-white/10 animate-fade-in">
-                      {/* Honeypot trap */}
-                      <div className="sr-only opacity-0 h-0 w-0 pointer-events-none absolute -left-[9999px]" aria-hidden="true">
-                        <label htmlFor="website_url_hp">Website URL</label>
-                        <input
-                          id="website_url_hp"
-                          type="text"
-                          name="_hp_trap"
-                          value={hpTrap}
-                          onChange={(e) => setHpTrap(e.target.value)}
-                          tabIndex={-1}
-                          autoComplete="off"
-                        />
-                      </div>
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={t('refOptionalPlaceholder')}
+                        value={transferRef}
+                        onChange={(e) => setTransferRef(e.target.value)}
+                        className="w-full px-3.5 py-2.5 bg-white dark:bg-zinc-950 border border-stone-300 dark:border-zinc-800 rounded-xl text-xs text-stone-900 dark:text-white placeholder-stone-400 dark:placeholder-zinc-600 focus:outline-none focus:border-emerald-600 dark:focus:border-emerald-500"
+                      />
+                    </div>
 
-                      <h4 className="font-bold text-stone-900 dark:text-white text-xs flex items-center gap-1.5">
-                        <Upload className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                        <span>{t('uploadOptional')}</span>
-                      </h4>
-
-                      <div className="border-2 border-dashed border-stone-300 dark:border-zinc-700 hover:border-emerald-600 dark:hover:border-emerald-500 rounded-2xl p-4 text-center transition-all bg-stone-50/60 dark:bg-zinc-950/60 cursor-pointer relative">
-                        <input type="file" accept="image/*,.pdf" onChange={handleFileChange} className="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
-                        {previewUrl ? (
-                          <div className="space-y-2">
-                            <div className="relative w-28 h-20 mx-auto rounded-lg overflow-hidden border border-stone-300 dark:border-zinc-700">
-                              <Image src={previewUrl} alt="Receipt Preview" fill sizes="112px" className="object-cover" />
-                            </div>
-                            <p className="text-emerald-700 dark:text-emerald-400 font-medium text-xs">
-                              {bankReceipt?.name} ({Math.round((bankReceipt?.size || 0) / 1024)} KB)
-                            </p>
-                            <span className="text-[10px] text-stone-500 dark:text-zinc-500">Haz clic para cambiar archivo</span>
-                          </div>
-                        ) : (
-                          <div className="space-y-1 py-2">
-                            <Upload className="w-6 h-6 text-emerald-600 dark:text-emerald-500 mx-auto" />
-                            <p className="text-xs text-stone-800 dark:text-zinc-200 font-semibold">
-                              {t('uploadDragText')}
-                            </p>
-                            <p className="text-[10px] text-stone-500 dark:text-zinc-500">Formatos JPG, PNG, PDF hasta 10MB</p>
-                          </div>
-                        )}
-                      </div>
-
-                      <div>
-                        <input
-                          type="text"
-                          placeholder={t('refOptionalPlaceholder')}
-                          value={transferRef}
-                          onChange={(e) => setTransferRef(e.target.value)}
-                          className="w-full px-3.5 py-2.5 bg-white dark:bg-zinc-950 border border-stone-300 dark:border-zinc-800 rounded-xl text-xs text-stone-900 dark:text-white placeholder-stone-400 dark:placeholder-zinc-600 focus:outline-none focus:border-emerald-600 dark:focus:border-emerald-500"
-                        />
-                      </div>
-
-                      <button
-                        type="submit"
-                        disabled={isProcessing}
-                        className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/20 transition-all duration-300 hover:scale-[1.01] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none"
-                      >
-                        {isProcessing ? (
-                          <>
-                            <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            <span>Registrando Reserva...</span>
-                          </>
-                        ) : (
-                          <>
-                            <Clock className="w-4 h-4 shrink-0 group-hover:-translate-y-0.5 transition-transform text-amber-300" />
-                            <span>{t('btnSubmitWire')}</span>
-                            <ArrowRight className="w-4 h-4 hidden sm:block shrink-0 group-hover:translate-x-1 transition-transform" />
-                          </>
-                        )}
-                      </button>
-                    </form>
+                    <button
+                      type="submit"
+                      disabled={isProcessing}
+                      className="w-full flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/20 transition-all duration-300 hover:scale-[1.01] active:scale-95 group disabled:opacity-50 disabled:hover:scale-100 cursor-pointer border-none"
+                    >
+                      {isProcessing ? (
+                        <>
+                          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                          <span>Registrando Reserva...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Clock className="w-4 h-4 shrink-0 group-hover:-translate-y-0.5 transition-transform text-amber-300" />
+                          <span>{t('btnSubmitWire')}</span>
+                          <ArrowRight className="w-4 h-4 hidden sm:block shrink-0 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                ) : (
+                  <div className="p-3.5 bg-stone-50 dark:bg-zinc-900/50 border border-stone-200 dark:border-white/5 rounded-2xl text-center text-xs text-stone-600 dark:text-zinc-400 space-y-1">
+                    <span className="block font-medium text-emerald-700 dark:text-emerald-400">👆 ¿Deseas pagar por transferencia?</span>
+                    <span className="block text-[11px]">Haz clic en cualquiera de las 3 cuentas arriba para ver los números de cuenta oficiales y adjuntar tu comprobante de pago.</span>
                   </div>
                 )}
               </div>
@@ -1556,52 +1711,74 @@ export default function CheckoutPaymentPage() {
 
             {/* Support & Trust Footer */}
             <div className="w-full pt-4 space-y-4 max-w-3xl mx-auto">
-              {/* WhatsApp Concierge */}
-              <div className="text-center space-y-2">
+              {/* Direct Concierge Channels */}
+              <div className="text-center space-y-2.5">
                 <p className="text-xs font-medium text-stone-500 dark:text-zinc-400">
                   {t('conciergeHelp')}
                 </p>
-                <a
-                  href={`https://wa.me/593960039156?text=${encodeURIComponent(
-                    `Hola Vermilion Routes, estoy en el checkout del tour "${tourTitle}" (Ref: ${ref || 'Web'}). Deseo asistencia personalizada.`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-emerald-600/30 dark:border-emerald-500/40 bg-emerald-50/80 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-bold text-xs transition-all hover:scale-[1.02] active:scale-95 shadow-xs"
-                >
-                  <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span>WhatsApp Concierge 24/7 Oficial</span>
-                </a>
-              </div>
+                <div className="flex flex-wrap items-center justify-center gap-2.5">
+                  <a
+                    href="tel:+13022041881"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-blue-600/30 dark:border-blue-500/40 bg-blue-50/80 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-blue-800 dark:text-blue-300 font-bold text-xs transition-all hover:scale-[1.02] active:scale-95 shadow-xs"
+                  >
+                    <Phone className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
+                    <span>{t('usConciergeTitle')}: +1 (302) 204-1881</span>
+                  </a>
 
-              {/* Trust Badges */}
-              <div className="pt-3 border-t border-stone-200 dark:border-zinc-800/80">
-                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pb-2 text-[11px] font-semibold text-stone-600 dark:text-zinc-400">
-                  <div className="flex items-center gap-1.5">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                    <span>Pago Seguro SSL</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                    <span>RUC Oficial 1793215456001</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
-                    <span>TripAdvisor Travelers Choice</span>
-                  </div>
-                  <a href={`/${locale}/cancellation`} className="flex items-center gap-1.5 hover:text-emerald-500 transition-colors">
-                    <FileText className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-                    <span className="underline underline-offset-2">{CHECKOUT_I18N.cancellationLink?.[locale] || 'Cancellation Policy'}</span>
+                  <a
+                    href={`https://wa.me/593994048458?text=${encodeURIComponent(
+                      `Hola Vermilion Routes, estoy en el checkout del tour "${tourTitle}" (Ref: ${ref || 'Web'}). Deseo asistencia personalizada.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-emerald-600/30 dark:border-emerald-500/40 bg-emerald-50/80 dark:bg-emerald-950/40 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-bold text-xs transition-all hover:scale-[1.02] active:scale-95 shadow-xs"
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <span>{t('ecWhatsAppTitle')}: +593 99 404 8458</span>
                   </a>
                 </div>
 
+                <p className="text-[11px] text-stone-500 dark:text-zinc-400 max-w-xl mx-auto pt-1">
+                  {t('bilingualOperatorsNotice')}
+                </p>
+              </div>
+
+              {/* Fiduciary Mandated Trust Badges */}
+              <div className="pt-3 border-t border-stone-200 dark:border-zinc-800/80">
+                <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 pb-2 text-[11px] font-semibold text-stone-600 dark:text-zinc-400">
+                  <a
+                    href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 hover:text-amber-600 transition-colors"
+                  >
+                    <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                    <span>{t('sealTripAdvisor')}</span>
+                  </a>
+
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>{t('sealMintur')}</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
+                    <span>{t('sealDepositGuarantee')}</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span>SSL 256-Bit Encrypted</span>
+                  </div>
+                </div>
+                
                 <p className="text-[10px] text-stone-400 dark:text-zinc-500 text-center leading-relaxed">
                   {t('termsAgreement')}
                 </p>
               </div>
             </div>
           </>
-        )}
+      )}
 
       </div>
 

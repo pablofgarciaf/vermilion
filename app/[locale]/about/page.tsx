@@ -89,8 +89,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       }[locale] || 'en_US',
       images: [
         {
-          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
-          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
+          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp',
           width: 1200,
           height: 630,
           type: 'image/jpeg',
@@ -105,7 +105,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       creator: '@vermilionroutes',
       title,
       description,
-      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp'],
+      images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp'],
     },
   };
 }
@@ -404,7 +404,7 @@ export default async function AboutPage({ params }: PageProps) {
       "telephone": "+593960039156",
       "email": "info@vermilionroutes.com",
       "url": "https://www.vermilionroutes.com",
-      "image": "https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp",
+      "image": "https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-16-9.webp",
       "address": [
         {
           "@type": "PostalAddress",
@@ -530,9 +530,9 @@ export default async function AboutPage({ params }: PageProps) {
           <div className="lg:col-span-6">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 group">
               <div className="aspect-[4/3] relative">
-                <Image quality={85}
-                  src="/images/tours/16-9/viajeros-vermilion-grupo-quito-16-9.webp"
-                  alt="Vermilion Routes travelers in Quito's historic center"
+                <Image quality={100}
+                  src="/images/tours/16-9/galapagos-lobo-marino-16-9.webp"
+                  alt="Sea Lions and Naturalist Guide in Galapagos"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
