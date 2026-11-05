@@ -12,6 +12,7 @@ import { LeadMagnetBanner } from '@/components/home/LeadMagnetBanner';
 import { BlogTourBookingShowcase } from '@/components/blog/BlogTourBookingShowcase';
 import { BlogAuthorBio } from '@/components/blog/BlogAuthorBio';
 import { BlogGalleryButton } from '@/components/blog/BlogGalleryButton';
+import { BlogRegionFilter } from '@/components/blog/BlogRegionFilter';
 import { DestinationKey } from '@/lib/destinationGallery';
 import {
   Calendar,
@@ -607,13 +608,38 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </aside>
         )}
 
+        {/* Regional Filter Bar for Region-Based Guides */}
+        {(slug === 'best-time-to-visit-ecuador' || post.tags.some(t => ['Andes', 'Amazon', 'Galapagos', 'Pacific Coast'].includes(t))) && (
+          <BlogRegionFilter locale={locale} />
+        )}
+
         {/* Article Body */}
         <div className="space-y-8 text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed">
           {(() => {
             let imgCount = 0;
+            let currentRegion = 'general';
+
             return contentText.split('\n\n').map((paragraph, idx) => {
               const trimmed = paragraph.trim();
               if (!trimmed) return null;
+
+              // Check if paragraph defines a new H2 region section
+              if (trimmed.startsWith('## ')) {
+                const headingLower = trimmed.toLowerCase();
+                if (headingLower.includes('ande') || headingLower.includes('sierra')) {
+                  currentRegion = 'andes';
+                } else if (headingLower.includes('amazon') || headingLower.includes('oriente') || headingLower.includes('selva')) {
+                  currentRegion = 'amazon';
+                } else if (headingLower.includes('pacific') || headingLower.includes('coast') || headingLower.includes('costa')) {
+                  currentRegion = 'coast';
+                } else if (headingLower.includes('galápago') || headingLower.includes('galapago') || headingLower.includes('isla')) {
+                  currentRegion = 'galapagos';
+                } else {
+                  currentRegion = 'general';
+                }
+              }
+
+              const sectionAttr = { 'data-region-section': currentRegion };
 
               {/* Inline Markdown Image: ![caption](/path/to/image.webp) in Magazine Style */ }
               if (trimmed.startsWith('![') && trimmed.includes('](')) {
@@ -627,6 +653,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   return (
                     <div
                       key={idx}
+                      {...sectionAttr}
                       className="my-8 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-center bg-white/70 dark:bg-zinc-900/60 p-5 sm:p-7 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-xl transition-all"
                     >
                       {/* Image Column */}
@@ -685,14 +712,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
               if (trimmed.startsWith('## ')) {
                 return (
-                  <h2 key={idx} className="text-2xl sm:text-3xl font-bold font-serif text-zinc-900 dark:text-white pt-6 pb-2 border-b border-zinc-200 dark:border-zinc-800">
+                  <h2 key={idx} {...sectionAttr} className="text-2xl sm:text-3xl font-bold font-serif text-zinc-900 dark:text-white pt-6 pb-2 border-b border-zinc-200 dark:border-zinc-800">
                     {trimmed.replace('## ', '')}
                   </h2>
                 );
               }
               if (trimmed.startsWith('### ')) {
                 return (
-                  <h3 key={idx} className="text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400 pt-4 pb-1">
+                  <h3 key={idx} {...sectionAttr} className="text-xl sm:text-2xl font-bold text-emerald-800 dark:text-emerald-400 pt-4 pb-1">
                     {trimmed.replace('### ', '')}
                   </h3>
                 );
@@ -703,7 +730,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 const restText = lines.slice(1).join('\n').trim();
 
                 return (
-                  <div key={idx} className="space-y-3 pt-3">
+                  <div key={idx} {...sectionAttr} className="space-y-3 pt-3">
                     <h4 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white pt-2 pb-1 border-l-4 border-emerald-600 pl-3">
                       {headingText}
                     </h4>
@@ -722,7 +749,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 // Solo el primer elemento conserva el "* " inicial; quitar un "*" a los demás rompía la **negrita**.
                 const items = trimmed.split('\n* ').map((i, k) => (k === 0 ? i.replace(/^\*\s+/, '') : i));
                 return (
-                  <ul key={idx} className="space-y-2 list-disc list-inside pl-2 text-zinc-700 dark:text-zinc-300">
+                  <ul key={idx} {...sectionAttr} className="space-y-2 list-disc list-inside pl-2 text-zinc-700 dark:text-zinc-300">
                     {items.map((it, iIdx) => (
                       <li
                         key={iIdx}
@@ -738,6 +765,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 return (
                   <div
                     key={idx}
+                    {...sectionAttr}
                     className="space-y-2 pl-2 text-zinc-700 dark:text-zinc-300"
                     dangerouslySetInnerHTML={{
                       __html: parseMarkdown(trimmed.replace(/\n/g, '<br />'), locale)
@@ -760,7 +788,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   );
 
                   return (
-                    <div key={idx} className="my-8 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-md bg-white dark:bg-zinc-900/80">
+                    <div key={idx} {...sectionAttr} className="my-8 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-md bg-white dark:bg-zinc-900/80">
                       <table className="w-full text-left text-xs sm:text-sm">
                         <thead className="bg-emerald-50 dark:bg-emerald-950/60 border-b border-zinc-200 dark:border-zinc-800 text-emerald-900 dark:text-emerald-300 uppercase tracking-wider font-bold">
                           <tr>
@@ -786,11 +814,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 }
               }
               if (trimmed.startsWith('---')) {
-                return <hr key={idx} className="border-zinc-200 dark:border-zinc-800 my-6" />;
+                return <hr key={idx} {...sectionAttr} className="border-zinc-200 dark:border-zinc-800 my-6" />;
               }
               return (
                 <p
                   key={idx}
+                  {...sectionAttr}
                   className="leading-relaxed font-normal text-zinc-600 dark:text-zinc-300"
                   dangerouslySetInnerHTML={{
                     __html: parseMarkdown(trimmed, locale)
@@ -867,15 +896,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Author Bio & E-E-A-T Verified Authority */}
         <BlogAuthorBio locale={locale} />
 
-        {/* Interactive Blog Tour Booking Showcase */}
-        <BlogTourBookingShowcase
-          primaryTour={relatedTour}
-          complementaryTours={complementaryTours}
-          articleTitle={articleTitle}
-          destinationName={destinationName}
-          locale={locale}
-        />
-
         {/* Destinos que trata este articulo: enlace inverso para que el
             articulo y la ficha del lugar se refuercen en buscadores. */}
         {(() => {
@@ -905,6 +925,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         {/* Lead Magnet: Free Packing Guide Download */}
         <LeadMagnetBanner />
+        </div>
+
+        {/* Full-width Luxury Showcase Container (+20% width to let tour cards and buttons breathe) */}
+        <div className="max-w-6xl mx-auto px-2 sm:px-4">
+          <BlogTourBookingShowcase
+            primaryTour={relatedTour}
+            complementaryTours={complementaryTours}
+            articleTitle={articleTitle}
+            destinationName={destinationName}
+            locale={locale}
+          />
         </div>
 
 
