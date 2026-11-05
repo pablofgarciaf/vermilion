@@ -208,7 +208,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const articleTitle = getLocalizedText(post.title, locale);
   // Un título (## o ###) pegado con un solo salto de línea a su lista o párrafo se separa,
   // y una lista pegada a un párrafo también: si no, el bloque entero se pintaba como título.
-  const contentText = separateMarkdownBlocks(locale === 'es' ? post.content.es : post.content.en);
+  const contentText = separateMarkdownBlocks(
+    (post.content as Record<string, string>)[locale] ?? post.content.en
+  );
 
   const blogJsonLd: any = {
     '@context': 'https://schema.org',
