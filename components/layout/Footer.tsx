@@ -276,370 +276,347 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-emerald-950 via-[#032118] to-[#021812] dark:from-black dark:via-zinc-950 dark:to-black text-zinc-100 pt-10 pb-6 border-t border-emerald-900/80 dark:border-zinc-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8 pb-8 border-b border-emerald-900/60">
-          {/* Brand Col */}
-          <div className="lg:col-span-2 space-y-5">
-            <a href={`/${locale}`} aria-label="Vermilion Routes Home" className="flex items-center gap-3">
-              <div className="relative w-[160px] h-[40px] md:w-[220px] md:h-[55px] shrink-0">
-                <Image
-                  src="/logo_blanco.png"
-                  alt="Vermilion Routes"
-                  width={220}
-                  height={55}
-                  className="w-auto h-full object-contain drop-shadow-md"
-                />
-              </div>
+    <footer className="bg-gradient-to-b from-emerald-950 via-[#032118] to-[#021812] dark:from-black dark:via-zinc-950 dark:to-black text-zinc-100 pt-8 pb-6 border-t border-emerald-900/80 dark:border-zinc-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        
+        {/* ── FRANJA SUPERIOR: MENÚ HORIZONTAL Y DESTINOS (ESTILO INTERSTATE) ── */}
+        <div className="pb-5 border-b border-emerald-900/60 dark:border-zinc-800 space-y-2.5">
+          {/* Fila 1: Menú Principal */}
+          <nav aria-label="Footer Navigation" className="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-2 text-xs sm:text-sm font-semibold text-zinc-300">
+            <a href={`/${locale}`} className="hover:text-emerald-400 transition-colors">
+              {locale === 'es' ? 'Inicio' : 'Home'}
             </a>
-
-            <p className="text-zinc-200 text-sm leading-relaxed max-w-sm">
-              {(() => {
-                const custom: any = settings?.footer?.description;
-                if (custom && typeof custom === 'object') {
-                  return getLocalizedText(custom, locale) || t.footerDescription;
-                }
-                if (typeof custom === 'string') {
-                  const str = custom as string;
-                  if (str.includes('Premier boutique') || str.includes('South America specialists') || str.includes('tour operator')) {
-                    return t.footerDescription;
-                  }
-                  if (str.trim().length > 0) {
-                    return str;
-                  }
-                }
-                return t.footerDescription;
-              })()}
-            </p>
-
-            <div className="flex items-center gap-2.5 pt-2 flex-wrap">
-              <a
-                href={settings?.contact?.facebook || 'https://www.facebook.com/VermilionSouthAmericanRoutes'}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a
-                href={settings?.contact?.instagram || 'https://www.instagram.com/vermilionsouthamericanroutes/'}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a
-                href={settings?.contact?.tiktok || 'https://www.tiktok.com/@vermilionsaroutes'}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
-                aria-label="TikTok"
-                title="TikTok Vermilion Routes"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
-                </svg>
-              </a>
-              <a
-                href="https://www.youtube.com/@VermilionSouthAmericanRoutes"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all hover:scale-105 active:scale-95"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-4 h-4" />
-              </a>
-              <a
-                href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                className="w-9 h-9 rounded-xl bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-amber-400 transition-all hover:scale-105 active:scale-95"
-                aria-label="TripAdvisor"
-                title="TripAdvisor Vermilion Routes"
-              >
-                <svg className="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2.4c1.8 0 3.4.6 4.7 1.6-1.2.8-2.9 1.4-4.7 1.4s-3.5-.6-4.7-1.4C8.6 5 10.2 4.4 12 4.4zM6.8 9.2c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2S3.6 14.2 3.6 12.4s1.4-3.2 3.2-3.2zm10.4 0c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2-3.2-1.4-3.2-3.2 1.4-3.2 3.2-3.2zm-10.4 1.6c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zm10.4 0c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zM12 11.5c.8 0 1.5.4 1.7 1.1-.5.3-1.1.4-1.7.4s-1.2-.1-1.7-.4c.2-.7.9-1.1 1.7-1.1z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          {/* Destinations */}
-          <div className="space-y-4">
-            <p className="font-serif font-semibold text-lg text-white tracking-wide">
-              {t.topDestinations}
-            </p>
-            <ul className="space-y-2.5 text-sm text-zinc-300">
-              <li>
-                <a href={`/${locale}/tours#galapagos`} className="hover:text-white transition-colors">
-                  {t.galapagos}
-                </a>
-              </li>
-              <li>
-                <a href={`/${locale}/tours#continental`} className="hover:text-white transition-colors">
-                  {t.ecuador}
-                </a>
-              </li>
-              <li>
-                <a href={`/${locale}/tours#diarios`} className="hover:text-white transition-colors">
-                  {t.fullDay}
-                </a>
-              </li>
-              <li>
-                <a href={`/${locale}/tours#continental`} className="hover:text-white transition-colors">
-                  {t.amazon}
-                </a>
-              </li>
-              <li>
-                <a href={`/${locale}/tours#continental`} className="hover:text-white transition-colors">
-                  {t.volcanoes}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div className="space-y-4">
-            <p className="font-serif font-semibold text-lg text-white tracking-wide">
-              {t.company}
-            </p>
-            <ul className="space-y-2.5 text-sm text-zinc-300">
-              <li>
-                <a
-                  href={`/${locale}/about`}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  {t.about}
-                </a>
-              </li>
-              <li>
-                <a href={`/${locale}/tours`} className="hover:text-white transition-colors">
-                  {t.packages}
-                </a>
-              </li>
-              <li>
-                <a href={`/${locale}/blog`} className="hover:text-white transition-colors">
-                  Blog &amp; Travel Guides
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/${locale}#contact`}
-                  onClick={(e) => handleAnchorClick(e, 'contact')}
-                  className="hover:text-white transition-colors cursor-pointer"
-                >
-                  {t.contact}
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter / Quick Contact */}
-          <div className="space-y-4">
-            <p className="font-serif font-semibold text-lg text-white tracking-wide">
-              {t.updates}
-            </p>
-            <p className="text-xs text-zinc-300 leading-relaxed">
-              {t.subscribeText}
-            </p>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (newsletterEmail.trim()) {
-                  saveStoredUserProfile({ email: newsletterEmail.trim() });
-                  alert(locale === 'es' ? '¡Gracias! Has sido registrado como Cliente Premium. Pronto recibirás nuestras mejores ofertas.' : 'Thank you! You have been registered as a Premium Client. You will receive our best offers soon.');
-                }
-              }}
-              className="space-y-2"
-            >
-              <div className="relative">
-                <label htmlFor="footer-newsletter-email" className="sr-only">
-                  {t.emailPlaceholder || "Email"}
-                </label>
-                <input
-                  type="email"
-                  id="footer-newsletter-email"
-                  name="email"
-                  autoComplete="email"
-                  inputMode="email"
-                  value={newsletterEmail}
-                  onChange={(e) => {
-                    setNewsletterEmail(e.target.value);
-                    saveStoredUserProfile({ email: e.target.value });
-                  }}
-                  aria-label={t.emailPlaceholder || "Email"}
-                  placeholder={t.emailPlaceholder}
-                  suppressHydrationWarning
-                  className="w-full bg-emerald-950/80 dark:bg-zinc-900/80 border border-emerald-800/80 dark:border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-emerald-400 dark:focus:border-amber-400 focus:ring-1 focus:ring-emerald-400 dark:focus:ring-amber-400"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-emerald-900/30 transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer"
-                suppressHydrationWarning
-              >
-                <Send className="w-3.5 h-3.5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-                <span>{t.subscribeBtn}</span>
-              </button>
-            </form>
-
-            <div className="pt-2 space-y-2 text-xs text-zinc-200">
-              <p className="flex items-center gap-2 text-zinc-300">
-                <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span className="text-zinc-400 text-[11px]">WhatsApp 24/7:</span>
-                <a href={`tel:${EC_WHATSAPP_PHONE.replace(/[^0-9+]/g, '')}`} className="hover:text-emerald-300 transition-colors">
-                  {EC_WHATSAPP_PHONE}
-                </a>
-              </p>
-              <p className="flex items-center gap-2 text-zinc-300">
-                <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                <span className="text-zinc-400 text-[11px]">{t.usConcierge}</span>
-                <a href={`tel:${US_CONCIERGE_PHONE.replace(/[^0-9+]/g, '')}`} className="hover:text-amber-300 transition-colors font-semibold text-amber-300/90">
-                  {US_CONCIERGE_PHONE}
-                </a>
-              </p>
-              <p className="flex items-center gap-2 text-zinc-300">
-                <Mail className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <a href="mailto:info@vermilionroutes.com" className="hover:text-emerald-300 transition-colors">
-                  <span>info</span>
-                  <span className="text-emerald-400 font-bold">&#64;</span>
-                  <span>vermilionroutes.com</span>
-                </a>
-              </p>
-              <p className="flex items-center gap-2 text-zinc-400 text-[11px] pt-1">
-                <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>Quito: Monteserrín N45-206 · Madrid: C. Seco 3</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Payment Methods */}
-        <div className="py-6 border-b border-emerald-900/60 space-y-4">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <span className="text-xs uppercase font-semibold text-emerald-400 tracking-wider flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                {t.paymentVerified}
-              </span>
-              <p className="font-serif text-lg sm:text-xl font-bold text-white mt-1">
-                {t.paymentHeading}
-              </p>
-              <p className="text-xs text-zinc-300 max-w-2xl mt-1">
-                {t.paymentDesc}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300">
-                {t.badgePayPal}
-              </span>
-              <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300">
-                {t.badgeCitibank}
-              </span>
-              <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300">
-                {t.badgeProdubanco}
-              </span>
-              <span className="px-3 py-1.5 rounded-xl bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 text-xs font-semibold text-emerald-300 dark:text-amber-400">
-                {t.badgeSSL}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Guarantees & Badges */}
-        <div className="py-5 grid grid-cols-1 md:grid-cols-3 gap-3 border-b border-emerald-900/60 dark:border-zinc-900 text-xs text-zinc-200">
-          <a
-            href={TRIPADVISOR_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-emerald-900/40 dark:bg-zinc-900/50 hover:bg-emerald-900/60 border border-emerald-800/60 dark:border-zinc-800 p-3.5 rounded-2xl transition-all group"
-          >
-            <div className="w-9 h-9 rounded-xl bg-amber-400/20 text-amber-400 flex items-center justify-center shrink-0">
-              <Award className="w-5 h-5 text-amber-400" />
-            </div>
-            <div>
-              <span className="text-white font-bold block">{t.sealTripAdvisor}</span>
-              <span className="text-[10px] text-emerald-400/80 font-mono">TripAdvisor Travelers' Choice Winner</span>
-            </div>
-          </a>
-
-          <div className="flex items-center gap-3 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 p-3.5 rounded-2xl">
-            <div className="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-5 h-5 text-emerald-400 dark:text-amber-400" />
-            </div>
-            <div>
-              <span className="text-white font-bold block">{t.sealMintur}</span>
-              <span className="text-[10px] text-emerald-400/80 dark:text-zinc-500 font-mono">Ministerio de Turismo del Ecuador</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 bg-emerald-900/40 dark:bg-zinc-900/50 border border-emerald-800/60 dark:border-zinc-800 p-3.5 rounded-2xl">
-            <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
-              <Sparkles className="w-5 h-5 text-amber-400" />
-            </div>
-            <div>
-              <span className="text-white font-bold block">{t.sealDepositGuarantee}</span>
-              <span className="text-[10px] text-emerald-400/80 dark:text-zinc-500 font-mono">Fiduciary Protection &amp; Flexible Refund</span>
-            </div>
-          </div>
-        </div>
-
-        {/* International Language Hub - 8 Supported Locales */}
-        <div className="py-6 border-b border-emerald-900/60 dark:border-zinc-900 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <span className="text-[11px] uppercase tracking-wider font-semibold text-emerald-400/90 flex items-center gap-1.5">
-            <Globe className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{t.internationalLanguages}</span>
-          </span>
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-            {[
-              { code: 'en', label: 'English', flag: '/flags/us.svg' },
-              { code: 'es', label: 'Español', flag: '/flags/es.svg' },
-              { code: 'fr', label: 'Français', flag: '/flags/fr.svg' },
-              { code: 'de', label: 'Deutsch', flag: '/flags/de.svg' },
-              { code: 'pt', label: 'Português', flag: '/flags/pt.svg' },
-              { code: 'it', label: 'Italiano', flag: '/flags/it.svg' },
-              { code: 'ja', label: '日本語', flag: '/flags/jp.svg' },
-              { code: 'zh', label: '中文', flag: '/flags/cn.svg' },
-            ].map((lang) => (
-              <a
-                key={lang.code}
-                href={`/${lang.code}`}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
-                  locale === lang.code
-                    ? 'bg-emerald-600 text-white font-bold shadow-xs'
-                    : 'bg-emerald-950/40 hover:bg-emerald-900/60 text-zinc-300 hover:text-white border border-emerald-800/40'
-                }`}
-              >
-                <img src={lang.flag} alt={lang.label} width={16} height={12} className="w-3.5 h-2.5 object-cover rounded-[1px]" />
-                <span>{lang.label}</span>
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-zinc-300">
-          <p>{getLocalizedText(settings?.footer?.copyright, locale) || `© ${new Date().getFullYear()} Agencia de Viajes Vermilion (RUC 1711992808001). All Rights Reserved.`}</p>
-          <div className="flex gap-6">
-            <a href={`/${locale}/privacy-policy`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
-              {t.privacy}
+            <a href={`/${locale}/about`} className="hover:text-emerald-400 transition-colors">
+              {t.about}
             </a>
-            <a href={`/${locale}/terms`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
-              {t.terms}
+            <a href={`/${locale}/tours`} className="hover:text-emerald-400 transition-colors">
+              {t.packages}
             </a>
-            <a
-              href={`/${locale}#affiliate`}
-              onClick={(e) => handleAnchorClick(e, 'affiliate')}
-              className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60 cursor-pointer"
-            >
+            <a href={`/${locale}/blog`} className="hover:text-emerald-400 transition-colors">
+              Blog &amp; Travel Guides
+            </a>
+            <a href={`/${locale}#contact`} onClick={(e) => handleAnchorClick(e, 'contact')} className="hover:text-emerald-400 transition-colors">
+              {t.contact}
+            </a>
+            <a href={`/${locale}#affiliate`} onClick={(e) => handleAnchorClick(e, 'affiliate')} className="hover:text-emerald-400 transition-colors">
               {t.affiliateProgram}
             </a>
+          </nav>
+
+          {/* Fila 2: Destinos Clave */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-1.5 text-xs text-zinc-400 font-medium">
+            <span className="text-emerald-500 font-bold uppercase tracking-wider text-[11px]">
+              {t.topDestinations}:
+            </span>
+            <a href={`/${locale}/tours#galapagos`} className="hover:text-white transition-colors">
+              {t.galapagos}
+            </a>
+            <span className="text-zinc-600 hidden sm:inline">·</span>
+            <a href={`/${locale}/tours#continental`} className="hover:text-white transition-colors">
+              {t.ecuador}
+            </a>
+            <span className="text-zinc-600 hidden sm:inline">·</span>
+            <a href={`/${locale}/tours#diarios`} className="hover:text-white transition-colors">
+              {t.fullDay}
+            </a>
+            <span className="text-zinc-600 hidden sm:inline">·</span>
+            <a href={`/${locale}/tours#continental`} className="hover:text-white transition-colors">
+              {t.amazon}
+            </a>
+            <span className="text-zinc-600 hidden sm:inline">·</span>
+            <a href={`/${locale}/tours#continental`} className="hover:text-white transition-colors">
+              {t.volcanoes}
+            </a>
           </div>
         </div>
+
+        {/* ── BLOQUE PRINCIPAL EN 3 COLUMNAS (1. MARCA/SELLOS | 2. ATENCIÓN/PAGOS | 3. NOVEDADES/LEGAL) ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+          
+          {/* COLUMNA 1: MARCA Y SELLOS OFICIALES (4 cols) */}
+          <div className="lg:col-span-4 space-y-4">
+            <div className="flex flex-col sm:flex-row lg:flex-col items-start gap-4 justify-between">
+              <div>
+                <a href={`/${locale}`} aria-label="Vermilion Routes Home" className="inline-block">
+                  <div className="relative w-[180px] h-[45px] shrink-0">
+                    <Image
+                      src="/logo_blanco.png"
+                      alt="Vermilion Routes"
+                      width={220}
+                      height={55}
+                      className="w-auto h-full object-contain drop-shadow-md"
+                    />
+                  </div>
+                </a>
+
+                <p className="text-zinc-300 text-xs sm:text-[13px] leading-relaxed mt-2.5 max-w-sm">
+                  {(() => {
+                    const custom: any = settings?.footer?.description;
+                    if (custom && typeof custom === 'object') {
+                      return getLocalizedText(custom, locale) || t.footerDescription;
+                    }
+                    if (typeof custom === 'string' && custom.trim().length > 0) {
+                      return custom;
+                    }
+                    return t.footerDescription;
+                  })()}
+                </p>
+              </div>
+
+              {/* Redes Sociales: 5 Canales Oficiales */}
+              <div className="flex items-center gap-2 pt-1 flex-wrap">
+                <a
+                  href="https://www.youtube.com/@VermilionSouthAmericanRoutes"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="w-8 h-8 rounded-lg bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all active:scale-95"
+                  aria-label="YouTube"
+                  title="YouTube Vermilion Routes"
+                >
+                  <Youtube className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href={TRIPADVISOR_URL}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="w-8 h-8 rounded-lg bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-amber-400 transition-all active:scale-95"
+                  aria-label="TripAdvisor"
+                  title="TripAdvisor Vermilion Routes"
+                >
+                  <svg className="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2.4c1.8 0 3.4.6 4.7 1.6-1.2.8-2.9 1.4-4.7 1.4s-3.5-.6-4.7-1.4C8.6 5 10.2 4.4 12 4.4zM6.8 9.2c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2S3.6 14.2 3.6 12.4s1.4-3.2 3.2-3.2zm10.4 0c1.8 0 3.2 1.4 3.2 3.2s-1.4 3.2-3.2 3.2-3.2-1.4-3.2-3.2 1.4-3.2 3.2-3.2zm-10.4 1.6c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zm10.4 0c-.9 0-1.6.7-1.6 1.6s.7 1.6 1.6 1.6 1.6-.7 1.6-1.6-.7-1.6-1.6-1.6zM12 11.5c.8 0 1.5.4 1.7 1.1-.5.3-1.1.4-1.7.4s-1.2-.1-1.7-.4c.2-.7.9-1.1 1.7-1.1z" />
+                  </svg>
+                </a>
+                <a
+                  href={settings?.contact?.instagram || 'https://www.instagram.com/vermilionsouthamericanroutes/'}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="w-8 h-8 rounded-lg bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all active:scale-95"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href={settings?.contact?.tiktok || 'https://www.tiktok.com/@vermilionsaroutes'}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="w-8 h-8 rounded-lg bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all active:scale-95"
+                  aria-label="TikTok"
+                  title="TikTok Vermilion Routes"
+                >
+                  <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z" />
+                  </svg>
+                </a>
+                <a
+                  href={settings?.contact?.facebook || 'https://www.facebook.com/VermilionSouthAmericanRoutes'}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="w-8 h-8 rounded-lg bg-emerald-900/50 hover:bg-emerald-600 hover:text-white border border-emerald-800/60 flex items-center justify-center text-zinc-200 transition-all active:scale-95"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Sub-Columna: 3 Sellos Fiduciarios Verticales Compactos */}
+            <div className="pt-2 grid grid-cols-1 gap-2 text-xs">
+              <a
+                href={TRIPADVISOR_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2.5 p-2 rounded-xl bg-emerald-900/30 dark:bg-zinc-900/60 border border-emerald-800/40 hover:border-amber-400/60 transition-colors"
+              >
+                <Award className="w-4 h-4 text-amber-400 shrink-0" />
+                <div className="leading-tight">
+                  <span className="text-white font-bold block text-[11px]">{t.sealTripAdvisor}</span>
+                  <span className="text-[10px] text-amber-300/80">TripAdvisor Travelers' Choice Winner</span>
+                </div>
+              </a>
+
+              <div className="flex items-center gap-2.5 p-2 rounded-xl bg-emerald-900/30 dark:bg-zinc-900/60 border border-emerald-800/40">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                <div className="leading-tight">
+                  <span className="text-white font-bold block text-[11px]">{t.sealMintur}</span>
+                  <span className="text-[10px] text-emerald-300/80">Ministerio de Turismo del Ecuador</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 p-2 rounded-xl bg-emerald-900/30 dark:bg-zinc-900/60 border border-emerald-800/40">
+                <Sparkles className="w-4 h-4 text-cyan-400 shrink-0" />
+                <div className="leading-tight">
+                  <span className="text-white font-bold block text-[11px]">{t.sealDepositGuarantee}</span>
+                  <span className="text-[10px] text-cyan-300/80">Fiduciary Protection &amp; Flexible Refund</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* COLUMNA 2: GARANTÍA, ATENCIÓN 24/7 Y PAGO SEGURO (CAJA INTERSTATE) (4 cols) */}
+          <div className="lg:col-span-4 bg-emerald-950/60 dark:bg-zinc-900/80 border border-emerald-800/60 dark:border-zinc-800 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl">
+            <div>
+              <p className="text-xs uppercase tracking-wider font-bold text-emerald-400 flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>{locale === 'es' ? 'Garantía y Atención 24/7' : 'Warranty & 24/7 Concierge'}</span>
+              </p>
+              
+              <div className="mt-2.5 space-y-2 text-xs text-zinc-300">
+                <p className="flex items-center gap-2">
+                  <Phone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <span className="text-zinc-400 text-[11px]">WhatsApp 24/7:</span>
+                  <a href={`tel:${EC_WHATSAPP_PHONE.replace(/[^0-9+]/g, '')}`} className="font-semibold text-white hover:text-emerald-300 transition-colors">
+                    {EC_WHATSAPP_PHONE}
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span className="text-zinc-400 text-[11px]">{t.usConcierge}</span>
+                  <a href={`tel:${US_CONCIERGE_PHONE.replace(/[^0-9+]/g, '')}`} className="font-semibold text-amber-300 hover:text-amber-200 transition-colors">
+                    {US_CONCIERGE_PHONE}
+                  </a>
+                </p>
+                <p className="flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <a href="mailto:info@vermilionroutes.com" className="hover:text-emerald-300 transition-colors">
+                    <span>info</span>
+                    <span className="text-emerald-400 font-bold">&#64;</span>
+                    <span>vermilionroutes.com</span>
+                  </a>
+                </p>
+                <p className="flex items-start gap-2 text-zinc-400 text-[11px] pt-0.5">
+                  <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <span>Quito: Monteserrín N45-206 · Madrid: C. Seco 3</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Separador sutil */}
+            <div className="border-t border-emerald-900/60 dark:border-zinc-800 pt-3 space-y-2">
+              <span className="text-[11px] uppercase tracking-wider font-bold text-zinc-300 flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>{t.paymentHeading}</span>
+              </span>
+              <p className="text-[11px] text-zinc-400 leading-tight">
+                {t.paymentDesc}
+              </p>
+              {/* Badges Chips */}
+              <div className="flex items-center gap-1.5 flex-wrap pt-1">
+                <span className="px-2 py-0.5 rounded-md bg-emerald-900/50 border border-emerald-800/60 text-[10px] font-semibold text-emerald-300">
+                  {t.badgePayPal}
+                </span>
+                <span className="px-2 py-0.5 rounded-md bg-emerald-900/50 border border-emerald-800/60 text-[10px] font-semibold text-emerald-300">
+                  {t.badgeCitibank}
+                </span>
+                <span className="px-2 py-0.5 rounded-md bg-emerald-900/50 border border-emerald-800/60 text-[10px] font-semibold text-emerald-300">
+                  {t.badgeProdubanco}
+                </span>
+                <span className="px-2 py-0.5 rounded-md bg-emerald-900/50 border border-emerald-800/60 text-[10px] font-semibold text-amber-300">
+                  {t.badgeSSL}
+                </span>
+              </div>
+            </div>
+
+            {/* Botón Acción Rápida tipo Interstate */}
+            <a
+              href="https://wa.me/593994048458?text=Hola%20Vermilion%20Routes,%20deseo%20planificar%20un%20viaje%20a%20medida"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.01] active:scale-95 transition-all text-center"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span>{locale === 'es' ? 'Escribir a Especialista 24/7' : 'Chat with Specialist 24/7'}</span>
+            </a>
+          </div>
+
+          {/* COLUMNA 3: SUSCRIPCIÓN COMPACTA Y LEGALES (4 cols) */}
+          <div className="lg:col-span-4 space-y-5">
+            {/* Caja de Suscripción */}
+            <div className="bg-emerald-950/40 dark:bg-zinc-900/50 border border-emerald-800/50 dark:border-zinc-800 rounded-2xl p-4 sm:p-5 space-y-3">
+              <p className="font-serif font-bold text-base text-white tracking-wide">
+                {t.updates}
+              </p>
+              <p className="text-xs text-zinc-300 leading-relaxed">
+                {t.subscribeText}
+              </p>
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (newsletterEmail.trim()) {
+                    saveStoredUserProfile({ email: newsletterEmail.trim() });
+                    alert(locale === 'es' ? '¡Gracias! Has sido registrado como Cliente VIP. Pronto recibirás nuestras mejores promociones.' : 'Thank you! You have been registered as a VIP Client.');
+                  }
+                }}
+                className="space-y-2"
+              >
+                <div className="relative">
+                  <label htmlFor="footer-newsletter-email" className="sr-only">
+                    {t.emailPlaceholder || "Email"}
+                  </label>
+                  <input
+                    type="email"
+                    id="footer-newsletter-email"
+                    name="email"
+                    autoComplete="email"
+                    inputMode="email"
+                    value={newsletterEmail}
+                    onChange={(e) => {
+                      setNewsletterEmail(e.target.value);
+                      saveStoredUserProfile({ email: e.target.value });
+                    }}
+                    aria-label={t.emailPlaceholder || "Email"}
+                    placeholder={t.emailPlaceholder}
+                    suppressHydrationWarning
+                    className="w-full bg-emerald-950/90 dark:bg-zinc-900/90 border border-emerald-800/80 dark:border-zinc-800 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:scale-[1.01] active:scale-95 transition-all cursor-pointer"
+                  suppressHydrationWarning
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>{t.subscribeBtn}</span>
+                </button>
+              </form>
+            </div>
+
+            {/* Enlaces Legales en Columna 3 */}
+            <div className="p-3.5 rounded-xl bg-emerald-950/20 dark:bg-zinc-900/40 border border-emerald-900/40 space-y-1.5 text-xs text-zinc-400">
+              <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wider block mb-1">
+                {locale === 'es' ? 'Políticas y Legal' : 'Policies & Legal'}
+              </span>
+              <div className="flex flex-wrap gap-x-4 gap-y-1">
+                <a href={`/${locale}/privacy-policy`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
+                  {t.privacy}
+                </a>
+                <a href={`/${locale}/terms`} className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60">
+                  {t.terms}
+                </a>
+                <a
+                  href={`/${locale}#affiliate`}
+                  onClick={(e) => handleAnchorClick(e, 'affiliate')}
+                  className="hover:text-white transition-colors underline underline-offset-4 decoration-emerald-600/60 cursor-pointer"
+                >
+                  {t.affiliateProgram}
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* ── BARRA INFERIOR DELGADA (COPYRIGHT) ── */}
+        <div className="pt-4 border-t border-emerald-900/60 dark:border-zinc-800 flex flex-col sm:flex-row justify-between items-center gap-2 text-[11px] text-zinc-400">
+          <p>
+            {getLocalizedText(settings?.footer?.copyright, locale) || `© ${new Date().getFullYear()} Agencia de Viajes Vermilion Cia. Ltda. (RUC 1711992808001). All Rights Reserved.`}
+          </p>
+          <p className="text-[10px] text-zinc-500">
+            {locale === 'es' ? 'Plataforma oficial para expediciones en Galápagos y Ecuador' : 'Official bespoke expedition platform for Galapagos & Ecuador'}
+          </p>
+        </div>
+
       </div>
     </footer>
   );
