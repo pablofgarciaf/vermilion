@@ -745,6 +745,46 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   />
                 );
               }
+              if (trimmed.startsWith('|') && trimmed.includes('\n|')) {
+                const lines = trimmed.split('\n').filter((l) => l.trim().startsWith('|'));
+                if (lines.length >= 2) {
+                  const headers = lines[0]
+                    .split('|')
+                    .map((c) => c.trim())
+                    .filter(Boolean);
+                  const dataRows = lines.slice(2).map((row) =>
+                    row
+                      .split('|')
+                      .map((c) => c.trim())
+                      .filter(Boolean)
+                  );
+
+                  return (
+                    <div key={idx} className="my-8 overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-md bg-white dark:bg-zinc-900/80">
+                      <table className="w-full text-left text-xs sm:text-sm">
+                        <thead className="bg-emerald-50 dark:bg-emerald-950/60 border-b border-zinc-200 dark:border-zinc-800 text-emerald-900 dark:text-emerald-300 uppercase tracking-wider font-bold">
+                          <tr>
+                            {headers.map((h, hIdx) => (
+                              <th key={hIdx} className="px-4 py-3 sm:px-6">
+                                {h}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800 text-zinc-700 dark:text-zinc-300">
+                          {dataRows.map((r, rIdx) => (
+                            <tr key={rIdx} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
+                              {r.map((cell, cIdx) => (
+                                <td key={cIdx} className="px-4 py-3.5 sm:px-6" dangerouslySetInnerHTML={{ __html: parseMarkdown(cell, locale) }} />
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  );
+                }
+              }
               if (trimmed.startsWith('---')) {
                 return <hr key={idx} className="border-zinc-200 dark:border-zinc-800 my-6" />;
               }
