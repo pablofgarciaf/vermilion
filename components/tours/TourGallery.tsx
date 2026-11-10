@@ -13,7 +13,6 @@ interface TourGalleryProps {
   tourId?: string;
   destination?: string;
   emphasizeFirst?: boolean;
-  children?: React.ReactNode;
 }
 
 const VIEW_PHOTOS_I18N: Record<string, string> = {
@@ -27,9 +26,15 @@ const VIEW_PHOTOS_I18N: Record<string, string> = {
   zh: '+ 查看照片',
 };
 
-export function TourGallery({ images, title, tourId, destination, emphasizeFirst = false, children }: TourGalleryProps) {
+export function TourGallery({ images, title, tourId, destination, emphasizeFirst = false }: TourGalleryProps) {
   const locale = useLocale();
   const [isDestinationModalOpen, setIsDestinationModalOpen] = useState(false);
+
+  useEffect(() => {
+    const open = () => setIsDestinationModalOpen(true);
+    window.addEventListener(OPEN_PHOTOS_EVENT, open);
+    return () => window.removeEventListener(OPEN_PHOTOS_EVENT, open);
+  }, []);
 
   // De-duplicate and filter out 9-16 vertical images in the tour page gallery
   const uniqueImages = React.useMemo(() => {
@@ -108,7 +113,7 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
         {/* Main Big Photo (Left/Top) with Layered Crossfade */}
         <div
           onClick={() => setActiveImageIndex(selectedMainIndex)}
-          className={`relative h-72 md:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-200 dark:bg-zinc-800 shadow-md ${emphasizeFirst ? 'md:h-[520px]' : 'md:h-[420px]'}`}
+          className={`relative h-72 md:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-zinc-200 dark:bg-zinc-800 shadow-md md:h-[420px]`}
         >
           {/* Base Previous Layer (during crossfade) */}
           {previousImage && previousImage !== currentImage && (
@@ -172,9 +177,9 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
         </div>
 
         {/* Desktop Side Shifting Photos (conveyor belt slider) */}
-        <div className="hidden md:block relative h-[420px] overflow-hidden rounded-2xl">
+        <div className="hidden md:block relative md:h-[420px] overflow-hidden rounded-2xl">
           <div
-            className="flex flex-col gap-2 transition-transform duration-700 ease-in-out"
+            className="absolute inset-x-0 top-0 flex flex-col gap-2 transition-transform duration-700 ease-in-out"
             style={{ transform: `translateY(-${((selectedMainIndex + 1) % uniqueImages.length) * 142}px)` }}
           >
             {[...uniqueImages, ...uniqueImages].map((img, idx) => {
@@ -230,18 +235,6 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
         </div>
       </div>
 
-      {/* ── BOTONES: VER FOTOS Y DESCARGAR ITINERARIO ── */}
-      <div className="flex flex-wrap items-center justify-end gap-3 border-t border-zinc-200/60 dark:border-zinc-800/60 pt-3">
-        <button
-          type="button"
-          onClick={() => setIsDestinationModalOpen(true)}
-          className="flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
-        >
-          <Camera className="w-4 h-4" />
-          <span>{VIEW_PHOTOS_I18N[locale] || VIEW_PHOTOS_I18N['en']}</span>
-        </button>
-        {children}
-      </div>
 
       {/* Lightbox Modal */}
       {activeImageIndex !== null && (
@@ -313,5 +306,19 @@ export function TourGallery({ images, title, tourId, destination, emphasizeFirst
         destination={destination as any}
       />
     </div>
+  );
+}
+export const OPEN_PHOTOS_EVENT = 'vermilion:open-photos';
+
+export function OpenPhotosButton({ locale }: { locale: string }) {
+  return (
+    <button
+      type="button"
+      onClick={() => window.dispatchEvent(new Event(OPEN_PHOTOS_EVENT))}
+      className="flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2 text-sm font-medium text-white shadow-sm transition-all hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+    >
+      <Camera className="w-4 h-4" />
+      <span>{VIEW_PHOTOS_I18N[locale] || VIEW_PHOTOS_I18N['en']}</span>
+    </button>
   );
 }

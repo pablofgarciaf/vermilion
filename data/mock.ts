@@ -58,12 +58,12 @@ const multiDayTours: Tour[] = [
       zh: '跳岛精华探险与基多专属接送'
     },
     description: {
-      en: 'Comprehensive 6-day Galápagos journey featuring private airport transfers in Quito, Santa Cruz highlands, giant tortoises at Primicias Ranch, full-day Isabela Island speedboat excursion with Tintoreras snorkeling and flamingo lagoon, and coastal exploration at La Lobería, Punta Estrada and Las Grietas.',
-      es: 'Experiencia integral de 6 días con traslados privados en Quito, tierras altas de Santa Cruz, tortugas gigantes en Rancho Primicias, excursión de día completo en lancha rápida a Isla Isabela con snorkel en Tintoreras y laguna de flamingos, y relax en Las Grietas y La Lobería.',
-      fr: 'Circuit complet de 6 jours comprenant transferts privés à Quito, hauts plateaux de Santa Cruz, tortues géantes au Rancho Primicias, excursion d\'une journée à l\'île Isabela avec snorkeling à Tintoreras et flamants roses, et Las Grietas.',
-      de: 'Umfassende 6-tägige Galapagos-Reise mit privaten Quito-Flughafentransfers, Santa Cruz Hochland, Riesenschildkröten auf der Primicias Ranch, Ganztagesausflug nach Isabela mit Tintoreras-Schnorcheln und Flamingos sowie Las Grietas.',
-      it: 'Viaggio completo di 6 giorni alle Galapagos con trasferimenti privati a Quito, alture di Santa Cruz, tartarughe giganti al Rancho Primicias, escursione di una giornata a Isabela con snorkeling a Tintoreras e fenicotteri, e Las Grietas.',
-      pt: 'Viagem completa de 6 dias em Galápagos com transfers privados em Quito, terras altas de Santa Cruz, tartarugas gigantes no Rancho Primicias, excursão de dia inteiro a Isabela com snorkel em Tintoreras e flamingos, e Las Grietas.',
+      en: 'Comprehensive 6-day Galápagos journey: private Quito transfers, Santa Cruz highlands, giant tortoises, Isabela day trip with Tintoreras snorkeling and flamingos, La Lobería and Las Grietas.',
+      es: 'Viaje integral de 6 días: traslados privados en Quito, tierras altas de Santa Cruz, tortugas gigantes, excursión a Isabela con snorkel en Tintoreras y flamingos, La Lobería y Las Grietas.',
+      fr: 'Circuit complet de 6 jours : transferts privés à Quito, hauts plateaux de Santa Cruz, tortues géantes, excursion à Isabela avec snorkeling à Tintoreras et flamants roses, et Las Grietas.',
+      de: '6-tägige Galapagos-Reise: private Quito-Transfers, Santa Cruz Hochland, Riesenschildkröten, Tagesausflug nach Isabela mit Tintoreras-Schnorcheln und Flamingos sowie Las Grietas.',
+      it: 'Viaggio completo di 6 giorni: trasferimenti privati a Quito, alture di Santa Cruz, tartarughe giganti, escursione a Isabela con snorkeling a Tintoreras e fenicotteri, e Las Grietas.',
+      pt: 'Viagem completa de 6 dias: transfers privados em Quito, terras altas de Santa Cruz, tartarugas gigantes, excursão a Isabela com snorkel em Tintoreras e flamingos, e Las Grietas.',
       ja: 'キト空港専用送迎、サンタクルス島高地の双子坑、プリミシアス牧場の野生ゾウガメ、イサベラ島への終日スピードボートツアー（ティントレラスのシュノーケリング＆フラミンゴ）、ラス・グリエタス火山峡谷を巡る充実の6日間。',
       zh: '包含基多私人机场往返接送的加拉帕戈斯6日精选行程：游览圣克鲁斯高地双子坑与普里米西亚野生巨龟保护区，乘快艇全日探秘伊莎贝拉岛并在蒂恩托雷拉斯浮潜观赏海龟、海狮与企鹅，探索拉洛贝里亚与拉斯格里塔斯火山峡谷。'
     },
@@ -121,14 +121,14 @@ const multiDayTours: Tour[] = [
     ],
     inclusions: [
       {
-        en: 'Accommodation at the hotel of your choice in Santa Cruz (3★ or 4★)',
-        es: 'Alojamiento en el hotel seleccionado en Santa Cruz (3★ o 4★)',
-        fr: 'Hébergement à l\'hôtel de votre choix à Santa Cruz (3★ ou 4★)',
-        de: 'Unterkunft im gewählten Hotel auf Santa Cruz (3★ oder 4★)',
-        it: 'Sistemazione nell\'hotel prescelto a Santa Cruz (3★ o 4★)',
-        pt: 'Hospedagem no hotel de sua escolha em Santa Cruz (3★ ou 4★)',
-        ja: 'サンタクルス島の厳選ホテル宿泊（3★または4★）',
-        zh: '圣克鲁斯岛自选精品酒店住宿（3星级或4星级）'
+        en: 'Accommodation at the hotel of your choice in Santa Cruz (Club or VIP)',
+        es: 'Alojamiento en el hotel seleccionado en Santa Cruz (Club o VIP)',
+        fr: 'Hébergement à l\'hôtel de votre choix à Santa Cruz (Club ou VIP)',
+        de: 'Unterkunft im gewählten Hotel auf Santa Cruz (Club oder VIP)',
+        it: 'Sistemazione nell\'hotel prescelto a Santa Cruz (Club o VIP)',
+        pt: 'Hospedagem no hotel de sua escolha em Santa Cruz (Club ou VIP)',
+        ja: 'サンタクルス島の厳選ホテル宿泊（Club または VIP）',
+        zh: '圣克鲁斯岛自选精品酒店住宿（Club 或 VIP）'
       },
       {
         en: 'Private airport transfers in Quito (Arrival & Departure)',
@@ -141,14 +141,14 @@ const multiDayTours: Tour[] = [
         zh: '基多国际机场私人专车接送（抵达与出发）'
       },
       {
-        en: 'Buffet breakfast at 4★ hotels / Continental breakfast at 3★ hotels',
-        es: 'Desayuno buffet en hoteles 4★ / Desayuno continental en hoteles 3★',
-        fr: 'Petit-déjeuner buffet en hôtel 4★ / continental en hôtel 3★',
-        de: 'Frühstücksbuffet in 4★-Hotels / Kontinentales Frühstück in 3★-Hotels',
-        it: 'Colazione a buffet in hotel 4★ / Continentale in hotel 3★',
-        pt: 'Café da manhã buffet em hotéis 4★ / Continental em hotéis 3★',
-        ja: '4★ホテルのビュッフェ朝食 / 3★ホテルのコンチネンタル朝食',
-        zh: '4星级酒店自助早餐 / 3星级酒店欧陆式早餐'
+        en: 'Buffet breakfast at VIP hotels / Continental breakfast at Club hotels',
+        es: 'Desayuno buffet en hoteles VIP / Desayuno continental en hoteles Club',
+        fr: 'Petit-déjeuner buffet en hôtel VIP / continental en hôtel Club',
+        de: 'Frühstücksbuffet in VIP-Hotels / Kontinentales Frühstück in Club-Hotels',
+        it: 'Colazione a buffet in hotel VIP / Continentale in hotel Club',
+        pt: 'Café da manhã buffet em hotéis VIP / Continental em hotéis Club',
+        ja: 'VIP ホテルのビュッフェ朝食 / Club ホテルのコンチネンタル朝食',
+        zh: 'VIP 酒店自助早餐 / Club 酒店欧陆式早餐'
       },
       {
         en: 'Set-menu lunches according to the itinerary',
@@ -318,14 +318,14 @@ const multiDayTours: Tour[] = [
         },
         image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
         accommodation: {
-          en: 'Hotel in Quito (Selected category 3★ or 4★)',
-          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
-          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
-          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
-          it: 'Hotel a Quito (Categoria 3★ o 4★)',
-          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
-          ja: 'キト市内の厳選ホテル（3★または4★）',
-          zh: '基多精选酒店（3星级或4星级）'
+          en: 'Hotel in Quito (Selected category Club or VIP)',
+          es: 'Hotel en Quito (Categoría seleccionada Club o VIP)',
+          fr: 'Hôtel à Quito (Catégorie Club ou VIP)',
+          de: 'Hotel in Quito (Kategorie Club oder VIP)',
+          it: 'Hotel a Quito (Categoria Club o VIP)',
+          pt: 'Hotel em Quito (Categoria Club ou VIP)',
+          ja: 'キト市内の厳選ホテル（Club または VIP）',
+          zh: '基多精选酒店（Club 或 VIP）'
         },
         meals: {
           en: 'Not included / at leisure',
@@ -554,14 +554,14 @@ const multiDayTours: Tour[] = [
         },
         image: '/images/tours/16-9/galapagos-baltra-island-16-9.webp',
         accommodation: {
-          en: 'Hotel in Quito (Selected category 3★ or 4★)',
-          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
-          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
-          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
-          it: 'Hotel a Quito (Categoria 3★ o 4★)',
-          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
-          ja: 'キト市内の厳選ホテル（3★または4★）',
-          zh: '基多精选酒店（3星级或4星级）'
+          en: 'Hotel in Quito (Selected category Club or VIP)',
+          es: 'Hotel en Quito (Categoría seleccionada Club o VIP)',
+          fr: 'Hôtel à Quito (Catégorie Club ou VIP)',
+          de: 'Hotel in Quito (Kategorie Club oder VIP)',
+          it: 'Hotel a Quito (Categoria Club o VIP)',
+          pt: 'Hotel em Quito (Categoria Club ou VIP)',
+          ja: 'キト市内の厳選ホテル（Club または VIP）',
+          zh: '基多精选酒店（Club 或 VIP）'
         },
         meals: {
           en: 'Breakfast',
@@ -687,12 +687,12 @@ const multiDayTours: Tour[] = [
       zh: '多岛跳岛探险与游艇巡航'
     },
     description: {
-      en: 'Unforgettable 7-day journey connecting Quito private transfers, Santa Cruz highlands & giant tortoises, an overnight stay on Isabela Island with Tintoreras & flamingo lagoon, Las Grietas canyon, and a full-day navigable yacht excursion to Santa Fe or Pinzón Island.',
-      es: 'Inolvidable viaje de 7 días que conecta traslados privados en Quito, tierras altas de Santa Cruz, noche en Isla Isabela con Tintoreras y laguna de flamingos, cañón de Las Grietas y navegación de día completo en yate a Santa Fe o Pinzón.',
-      fr: 'Voyage inoubliable de 7 jours reliant les transferts privés à Quito, les hauts plateaux de Santa Cruz, une nuit sur l\'île Isabela avec Tintoreras et flamants roses, Las Grietas et une excursion navigable d\'une journée en yacht vers Santa Fe ou Pinzón.',
-      de: 'Unvergessliche 7-tägige Reise mit privaten Quito-Transfers, Santa Cruz Hochland, Übernachtung auf der Insel Isabela mit Tintoreras & Flamingo-Lagune, Las Grietas und ganztägigem Yachtausflug zur Insel Santa Fe oder Pinzón.',
-      it: 'Indimenticabile viaggio di 7 giorni con trasferimenti privati a Quito, alture di Santa Cruz, pernottamento a Isabela con Tintoreras e fenicotteri, canyon di Las Grietas ed escursione in yacht a Santa Fe o Pinzón.',
-      pt: 'Inesquecível viagem de 7 dias combinando traslados privados em Quito, terras altas de Santa Cruz, pernoite na Ilha Isabela com Tintoreras e flamingos, cânion de Las Grietas e navegação de dia inteiro a Santa Fe ou Pinzón.',
+      en: 'Unforgettable 7-day journey: private Quito transfers, Santa Cruz highlands & giant tortoises, overnight on Isabela with Tintoreras & flamingos, Las Grietas, and a yacht trip to Santa Fe or Pinzón.',
+      es: 'Inolvidable viaje de 7 días: traslados privados en Quito, tierras altas de Santa Cruz, noche en Isabela con Tintoreras y flamingos, cañón de Las Grietas y yate a Santa Fe o Pinzón.',
+      fr: 'Voyage inoubliable de 7 jours : transferts privés à Quito, hauts plateaux de Santa Cruz, nuit à Isabela avec Tintoreras et flamants roses, Las Grietas et yacht vers Santa Fe ou Pinzón.',
+      de: 'Unvergessliche 7-tägige Reise: private Quito-Transfers, Santa Cruz Hochland, Übernachtung auf Isabela mit Tintoreras & Flamingos, Las Grietas und Yachtausflug zu Santa Fe oder Pinzón.',
+      it: 'Indimenticabile viaggio di 7 giorni: trasferimenti privati a Quito, alture di Santa Cruz, notte a Isabela con Tintoreras e fenicotteri, canyon di Las Grietas e yacht a Santa Fe o Pinzón.',
+      pt: 'Inesquecível viagem de 7 dias: traslados privados em Quito, terras altas de Santa Cruz, pernoite em Isabela com Tintoreras e flamingos, cânion Las Grietas e iate a Santa Fe ou Pinzón.',
       ja: 'キト専用送迎、サンタクルス島の巨亀と双子坑、イサベラ島での宿泊とティントレラスのシュノーケリング、ラス・グリエタス、そしてサンタフェ島またはピンソン島への終日ヨットクルーズを含む贅沢な7日間。',
       zh: '7日经典海岛探险，包含基多私人机场接送、圣克鲁斯高地巨龟保护区、伊莎贝拉岛过夜体验（蒂恩托雷拉斯群礁浮潜与火烈鸟泻湖）、拉斯格里塔斯火山峡谷，以及前往圣菲岛或平松岛的全天出海游艇巡航。'
     },
@@ -750,14 +750,14 @@ const multiDayTours: Tour[] = [
     ],
     inclusions: [
       {
-        en: 'Accommodation at the hotel of your choice in Santa Cruz (3★ or 4★)',
-        es: 'Alojamiento en el hotel seleccionado en Santa Cruz (3★ o 4★)',
-        fr: 'Hébergement à l\'hôtel de votre choix à Santa Cruz (3★ ou 4★)',
-        de: 'Unterkunft im gewählten Hotel auf Santa Cruz (3★ oder 4★)',
-        it: 'Sistemazione nell\'hotel prescelto a Santa Cruz (3★ o 4★)',
-        pt: 'Hospedagem no hotel de sua escolha em Santa Cruz (3★ ou 4★)',
-        ja: 'サンタクルス島の厳選ホテル宿泊（3★または4★）',
-        zh: '圣克鲁斯岛自选精品酒店住宿（3星级或4星级）'
+        en: 'Accommodation at the hotel of your choice in Santa Cruz (Club or VIP)',
+        es: 'Alojamiento en el hotel seleccionado en Santa Cruz (Club o VIP)',
+        fr: 'Hébergement à l\'hôtel de votre choix à Santa Cruz (Club ou VIP)',
+        de: 'Unterkunft im gewählten Hotel auf Santa Cruz (Club oder VIP)',
+        it: 'Sistemazione nell\'hotel prescelto a Santa Cruz (Club o VIP)',
+        pt: 'Hospedagem no hotel de sua escolha em Santa Cruz (Club ou VIP)',
+        ja: 'サンタクルス島の厳選ホテル宿泊（Club または VIP）',
+        zh: '圣克鲁斯岛自选精品酒店住宿（Club 或 VIP）'
       },
       {
         en: 'Accommodation at Hostal Tintorera in Isabela Island',
@@ -780,14 +780,14 @@ const multiDayTours: Tour[] = [
         zh: '基多国际机场私人专车接送（抵达与出发）'
       },
       {
-        en: 'Buffet breakfast at 4★ hotels / Continental breakfast at 3★ hotels',
-        es: 'Desayuno buffet en hoteles 4★ / Desayuno continental en hoteles 3★',
-        fr: 'Petit-déjeuner buffet en hôtel 4★ / continental en hôtel 3★',
-        de: 'Frühstücksbuffet in 4★-Hotels / Kontinentales Frühstück in 3★-Hotels',
-        it: 'Colazione a buffet in hotel 4★ / Continentale in hotel 3★',
-        pt: 'Café da manhã buffet em hotéis 4★ / Continental em hotéis 3★',
-        ja: '4★ホテルのビュッフェ朝食 / 3★ホテルのコンチネンタル朝食',
-        zh: '4星级酒店自助早餐 / 3星级酒店欧陆式早餐'
+        en: 'Buffet breakfast at VIP hotels / Continental breakfast at Club hotels',
+        es: 'Desayuno buffet en hoteles VIP / Desayuno continental en hoteles Club',
+        fr: 'Petit-déjeuner buffet en hôtel VIP / continental en hôtel Club',
+        de: 'Frühstücksbuffet in VIP-Hotels / Kontinentales Frühstück in Club-Hotels',
+        it: 'Colazione a buffet in hotel VIP / Continentale in hotel Club',
+        pt: 'Café da manhã buffet em hotéis VIP / Continental em hotéis Club',
+        ja: 'VIP ホテルのビュッフェ朝食 / Club ホテルのコンチネンタル朝食',
+        zh: 'VIP 酒店自助早餐 / Club 酒店欧陆式早餐'
       },
       {
         en: 'Set-menu lunches according to the itinerary',
@@ -957,14 +957,14 @@ const multiDayTours: Tour[] = [
         },
         image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
         accommodation: {
-          en: 'Hotel in Quito (Selected category 3★ or 4★)',
-          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
-          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
-          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
-          it: 'Hotel a Quito (Categoria 3★ o 4★)',
-          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
-          ja: 'キト市内の厳選ホテル（3★または4★）',
-          zh: '基多精选酒店（3星级或4星级）'
+          en: 'Hotel in Quito (Selected category Club or VIP)',
+          es: 'Hotel en Quito (Categoría seleccionada Club o VIP)',
+          fr: 'Hôtel à Quito (Catégorie Club ou VIP)',
+          de: 'Hotel in Quito (Kategorie Club oder VIP)',
+          it: 'Hotel a Quito (Categoria Club o VIP)',
+          pt: 'Hotel em Quito (Categoria Club ou VIP)',
+          ja: 'キト市内の厳選ホテル（Club または VIP）',
+          zh: '基多精选酒店（Club 或 VIP）'
         },
         meals: {
           en: 'Not included / at leisure',
@@ -1237,14 +1237,14 @@ const multiDayTours: Tour[] = [
         },
         image: '/images/tours/16-9/galapagos-baltra-island-16-9.webp',
         accommodation: {
-          en: 'Hotel in Quito (Selected category 3★ or 4★)',
-          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
-          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
-          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
-          it: 'Hotel a Quito (Categoria 3★ o 4★)',
-          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
-          ja: 'キト市内の厳選ホテル（3★または4★）',
-          zh: '基多精选酒店（3星级或4星级）'
+          en: 'Hotel in Quito (Selected category Club or VIP)',
+          es: 'Hotel en Quito (Categoría seleccionada Club o VIP)',
+          fr: 'Hôtel à Quito (Catégorie Club ou VIP)',
+          de: 'Hotel in Quito (Kategorie Club oder VIP)',
+          it: 'Hotel a Quito (Categoria Club o VIP)',
+          pt: 'Hotel em Quito (Categoria Club ou VIP)',
+          ja: 'キト市内の厳選ホテル（Club または VIP）',
+          zh: '基多精选酒店（Club 或 VIP）'
         },
         meals: {
           en: 'Breakfast',
@@ -1370,12 +1370,12 @@ const multiDayTours: Tour[] = [
       zh: '三岛深度探索与尊享游艇巡航'
     },
     description: {
-      en: 'The ultimate 8-day expedition across 3 major islands (Santa Cruz, Isabela, and San Cristóbal) combined with private Quito airport transfers. Discover giant tortoises, Tintoreras Islet, Las Grietas, full-day yacht snorkeling at Santa Fe or Pinzón, and San Cristóbal’s Interpretation Center, Tijeretas Hill and La Lobería.',
-      es: 'La expedición definitiva de 8 días a través de 3 islas principales (Santa Cruz, Isabela y San Cristóbal) con traslados privados en Quito. Tortugas gigantes, Islote Tintoreras, Las Grietas, navegación en yate a Santa Fe o Pinzón, Centro de Interpretación, Cerro Tijeretas y La Lobería.',
-      fr: 'L\'expédition ultime de 8 jours à travers 3 îles majeures (Santa Cruz, Isabela et San Cristóbal) avec transferts privés à Quito. Tortues géantes, îlot Tintoreras, Las Grietas, yacht vers Santa Fe ou Pinzón, Centre d\'interprétation, Cerro Tijeretas et La Lobería.',
-      de: 'Die ultimative 8-tägige Expedition über 3 Hauptinseln (Santa Cruz, Isabela und San Cristóbal) mit privaten Quito-Transfers. Riesenschildkröten, Tintoreras, Las Grietas, Yachtkreuzfahrt nach Santa Fe oder Pinzón, Interpretationszentrum und Tijeretas-Hügel.',
-      it: 'L\'espedizione definitiva di 8 giorni attraverso 3 isole principali (Santa Cruz, Isabela e San Cristóbal) con trasferimenti privati a Quito. Tartarughe giganti, isolotto Tintoreras, Las Grietas, yacht a Santa Fe o Pinzón, Centro di Interpretazione e Cerro Tijeretas.',
-      pt: 'A expedição definitiva de 8 dias através de 3 ilhas principais (Santa Cruz, Isabela e San Cristóbal) com traslados privados em Quito. Tartarugas gigantes, Ilhote Tintoreras, Las Grietas, iate para Santa Fe ou Pinzón, Centro de Interpretação e Cerro Tijeretas.',
+      en: '8-day expedition across 3 islands (Santa Cruz, Isabela, San Cristóbal) with private Quito transfers: giant tortoises, Tintoreras, Las Grietas, yacht trip to Santa Fe or Pinzón, and Tijeretas Hill.',
+      es: 'Expedición de 8 días por 3 islas (Santa Cruz, Isabela y San Cristóbal) con traslados privados en Quito: tortugas gigantes, Tintoreras, Las Grietas, yate a Santa Fe o Pinzón y Cerro Tijeretas.',
+      fr: 'Expédition de 8 jours sur 3 îles (Santa Cruz, Isabela, San Cristóbal) avec transferts privés à Quito : tortues géantes, Tintoreras, Las Grietas, yacht vers Santa Fe ou Pinzón et Cerro Tijeretas.',
+      de: '8-tägige Expedition über 3 Inseln (Santa Cruz, Isabela, San Cristóbal) mit privaten Quito-Transfers: Riesenschildkröten, Tintoreras, Las Grietas, Yachtfahrt nach Santa Fe oder Pinzón.',
+      it: 'Spedizione di 8 giorni su 3 isole (Santa Cruz, Isabela, San Cristóbal) con trasferimenti privati a Quito: tartarughe giganti, Tintoreras, Las Grietas, yacht a Santa Fe o Pinzón e Cerro Tijeretas.',
+      pt: 'Expedição de 8 dias por 3 ilhas (Santa Cruz, Isabela e San Cristóbal) com traslados privados em Quito: tartarugas gigantes, Tintoreras, Las Grietas, iate a Santa Fe ou Pinzón e Cerro Tijeretas.',
       ja: 'キトの専用送迎に加え、サンタクルス、イサベラ、サンクリストバルの主要3島を網羅する究極の8日間。野生ゾウガメ、ティントレラスの溶岩水路、ラス・グリエタス、サンタフェまたはピンソン島への終日ヨット、サンクリストバル島の解説センター、ティヘレタスの丘、ラ・ロベリアを探訪。',
       zh: '跨越三座主要岛屿（圣克鲁斯岛、伊莎贝拉岛和圣克里斯托巴尔岛）的8日终极探险，配备基多私人机场接送：探秘高地野生巨龟、蒂恩托雷拉斯石礁浮潜、拉斯格里塔斯峡谷、圣菲/平松全天出海游艇巡航，以及圣克里斯托巴尔岛解读中心、军舰鸟丘与拉洛贝里亚海狮沙滩。'
     },
@@ -1433,14 +1433,14 @@ const multiDayTours: Tour[] = [
     ],
     inclusions: [
       {
-        en: 'Accommodation at the hotel of your choice in Santa Cruz (3★ or 4★)',
-        es: 'Alojamiento en el hotel seleccionado en Santa Cruz (3★ o 4★)',
-        fr: 'Hébergement à l\'hôtel de votre choix à Santa Cruz (3★ ou 4★)',
-        de: 'Unterkunft im gewählten Hotel auf Santa Cruz (3★ oder 4★)',
-        it: 'Sistemazione nell\'hotel prescelto a Santa Cruz (3★ o 4★)',
-        pt: 'Hospedagem no hotel de sua escolha em Santa Cruz (3★ ou 4★)',
-        ja: 'サンタクルス島の厳選ホテル宿泊（3★または4★）',
-        zh: '圣克鲁斯岛自选精品酒店住宿（3星级或4星级）'
+        en: 'Accommodation at the hotel of your choice in Santa Cruz (Club or VIP)',
+        es: 'Alojamiento en el hotel seleccionado en Santa Cruz (Club o VIP)',
+        fr: 'Hébergement à l\'hôtel de votre choix à Santa Cruz (Club ou VIP)',
+        de: 'Unterkunft im gewählten Hotel auf Santa Cruz (Club oder VIP)',
+        it: 'Sistemazione nell\'hotel prescelto a Santa Cruz (Club o VIP)',
+        pt: 'Hospedagem no hotel de sua escolha em Santa Cruz (Club ou VIP)',
+        ja: 'サンタクルス島の厳選ホテル宿泊（Club または VIP）',
+        zh: '圣克鲁斯岛自选精品酒店住宿（Club 或 VIP）'
       },
       {
         en: 'Accommodation at Hostal Tintorera in Isabela Island',
@@ -1473,14 +1473,14 @@ const multiDayTours: Tour[] = [
         zh: '基多国际机场私人专车接送（抵达与出发）'
       },
       {
-        en: 'Buffet breakfast at 4★ hotels / Continental breakfast at 3★ hotels',
-        es: 'Desayuno buffet en hoteles 4★ / Desayuno continental en hoteles 3★',
-        fr: 'Petit-déjeuner buffet en hôtel 4★ / continental en hôtel 3★',
-        de: 'Frühstücksbuffet in 4★-Hotels / Kontinentales Frühstück in 3★-Hotels',
-        it: 'Colazione a buffet in hotel 4★ / Continentale in hotel 3★',
-        pt: 'Café da manhã buffet em hotéis 4★ / Continental em hotéis 3★',
-        ja: '4★ホテルのビュッフェ朝食 / 3★ホテルのコンチネンタル朝食',
-        zh: '4星级酒店自助早餐 / 3星级酒店欧陆式早餐'
+        en: 'Buffet breakfast at VIP hotels / Continental breakfast at Club hotels',
+        es: 'Desayuno buffet en hoteles VIP / Desayuno continental en hoteles Club',
+        fr: 'Petit-déjeuner buffet en hôtel VIP / continental en hôtel Club',
+        de: 'Frühstücksbuffet in VIP-Hotels / Kontinentales Frühstück in Club-Hotels',
+        it: 'Colazione a buffet in hotel VIP / Continentale in hotel Club',
+        pt: 'Café da manhã buffet em hotéis VIP / Continental em hotéis Club',
+        ja: 'VIP ホテルのビュッフェ朝食 / Club ホテルのコンチネンタル朝食',
+        zh: 'VIP 酒店自助早餐 / Club 酒店欧陆式早餐'
       },
       {
         en: 'Set-menu lunches according to the itinerary',
@@ -1650,14 +1650,14 @@ const multiDayTours: Tour[] = [
         },
         image: '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp',
         accommodation: {
-          en: 'Hotel in Quito (Selected category 3★ or 4★)',
-          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
-          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
-          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
-          it: 'Hotel a Quito (Categoria 3★ o 4★)',
-          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
-          ja: 'キト市内の厳選ホテル（3★または4★）',
-          zh: '基多精选酒店（3星级或4星级）'
+          en: 'Hotel in Quito (Selected category Club or VIP)',
+          es: 'Hotel en Quito (Categoría seleccionada Club o VIP)',
+          fr: 'Hôtel à Quito (Catégorie Club ou VIP)',
+          de: 'Hotel in Quito (Kategorie Club oder VIP)',
+          it: 'Hotel a Quito (Categoria Club o VIP)',
+          pt: 'Hotel em Quito (Categoria Club ou VIP)',
+          ja: 'キト市内の厳選ホテル（Club または VIP）',
+          zh: '基多精选酒店（Club 或 VIP）'
         },
         meals: {
           en: 'Not included / at leisure',
@@ -1984,14 +1984,14 @@ const multiDayTours: Tour[] = [
         },
         image: '/images/tours/16-9/galapagos-lobo-marino-16-9.webp',
         accommodation: {
-          en: 'Hotel in Quito (Selected category 3★ or 4★)',
-          es: 'Hotel en Quito (Categoría seleccionada 3★ o 4★)',
-          fr: 'Hôtel à Quito (Catégorie 3★ ou 4★)',
-          de: 'Hotel in Quito (Kategorie 3★ oder 4★)',
-          it: 'Hotel a Quito (Categoria 3★ o 4★)',
-          pt: 'Hotel em Quito (Categoria 3★ ou 4★)',
-          ja: 'キト市内の厳選ホテル（3★または4★）',
-          zh: '基多精选酒店（3星级或4星级）'
+          en: 'Hotel in Quito (Selected category Club or VIP)',
+          es: 'Hotel en Quito (Categoría seleccionada Club o VIP)',
+          fr: 'Hôtel à Quito (Catégorie Club ou VIP)',
+          de: 'Hotel in Quito (Kategorie Club oder VIP)',
+          it: 'Hotel a Quito (Categoria Club o VIP)',
+          pt: 'Hotel em Quito (Categoria Club ou VIP)',
+          ja: 'キト市内の厳選ホテル（Club または VIP）',
+          zh: '基多精选酒店（Club 或 VIP）'
         },
         meals: {
           en: 'Breakfast',
@@ -2117,7 +2117,7 @@ const multiDayTours: Tour[] = [
       zh: '安第斯与亚马逊经典穿越'
     },
     description: {
-      en: '8-day overland journey connecting Quito Historic Center, Equator Line, Papallacta thermal springs, Tena Amazon lodge with motorized canoe, Yanacocha rescue biopark, Baños waterfalls & Pailón del Diablo (Devil\'s Cauldron), and Quilotoa Crater Lake.',
+      en: '8-day overland journey: Quito Historic Center, Equator Line, Papallacta hot springs, Tena Amazon lodge, Yanacocha biopark, Baños waterfalls, Pailón del Diablo (Devil\'s Cauldron) and Quilotoa.',
       es: 'Travesía de 8 días que conecta el Quito colonial, aguas termales de Papallacta, selva amazónica de Tena, cascadas de Baños y el cráter Quilotoa.',
       zh: '8日私人全景之旅，涵盖基多历史中心、赤道纪念碑、帕帕亚克塔温泉、特纳亚马逊雨林精品木屋、动力木舟、普约亚纳科查生物公园、巴尼奥斯恶魔之咽瀑布与基洛托阿火山湖。'
     },
@@ -2132,9 +2132,9 @@ const multiDayTours: Tour[] = [
       { en: 'Airport assistance and private transfers', es: 'Asistencia en aeropuerto y traslados privados' },
       { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado (vehículos 4x4 o buses turísticos)' },
       { en: 'Professional English-speaking guide', es: 'Guía profesional bilingüe' },
-      { en: 'Accommodation at 3* or 4* hotels according to selection', es: 'Alojamiento en hoteles 3★ o 4★ según plan' },
+      { en: 'Accommodation at Club or VIP hotels according to selection', es: 'Alojamiento en hoteles Club o VIP según plan' },
       { en: 'Daily breakfast, plus lunches and dinners in Amazon as specified', es: 'Desayunos diarios, y comidas en Amazonía según itinerario' },
-      { en: 'Entrances: La Compañía, Intiñan, Papallacta, Yanacocha, Pailón del Diablo (Devil\'s Cauldron), Ilinizas (Quilotoa)', es: 'Entradas: La Compañía, Intiñan, Papallacta, Yanacocha, Pailón del Diablo (Devil\'s Cauldron), Quilotoa' }
+      { en: 'Entrances: La Compañía, Intiñan, Papallacta, Yanacocha, Pailón del Diablo (Devil\'s Cauldron), Quilotoa', es: 'Entradas: La Compañía, Intiñan, Papallacta, Yanacocha, Pailón del Diablo (Devil\'s Cauldron), Quilotoa' }
     ],
     exclusions: [
       { en: 'Personal expenses and optional activities in Baños', es: 'Gastos personales y actividades opcionales en Baños' },
@@ -2317,7 +2317,7 @@ const multiDayTours: Tour[] = [
       zh: '雨林木屋沉浸探险'
     },
     description: {
-      en: '7-day immersive journey uniting Quito colonial heritage, Equator line, Papallacta thermal springs, Tena jungle lodge, motorized canoe expeditions, Kichwa cultural encounter, and Paikawe Amazon reserve giant fish lagoon.',
+      en: '7-day immersive journey: Quito colonial heritage, Equator line, Papallacta hot springs, Tena jungle lodge, motorized canoes, Kichwa cultural encounter and Paikawe Amazon giant fish lagoon.',
       es: 'Inmersión de 7 días entre el patrimonio histórico de Quito, relajación en Papallacta, expedición en la selva de Tena y fauna de la Reserva Paikawe.',
       zh: '7日沉浸式探险，结合基多殖民文化遗产、赤道线、帕帕亚克塔温泉、特纳雨林木屋、动力木舟、奇瓦文化体验、派卡韦亚马逊保护区巨型鱼类观赏。'
     },
@@ -2332,7 +2332,7 @@ const multiDayTours: Tour[] = [
       { en: 'Airport reception and private transfers', es: 'Recepción en aeropuerto y traslados privados' },
       { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
       { en: 'Professional English-speaking guide', es: 'Guía profesional bilingüe' },
-      { en: 'Accommodation (6 nights in 3* or 4* hotels / Amazon lodge)', es: 'Alojamiento (6 noches en hoteles 3★ o 4★ / Lodge amazónico)' },
+      { en: 'Accommodation (6 nights in Club or VIP hotels / Amazon lodge)', es: 'Alojamiento (6 noches en hoteles Club o VIP / Lodge amazónico)' },
       { en: 'Meals: Daily breakfast, plus lunch and dinner at Amazon lodge', es: 'Comidas: Desayunos diarios, almuerzo y cena en lodge' },
       { en: 'Entrances: La Compañía, Intiñan, Papallacta, Rescue Center, Paikawe', es: 'Entradas: La Compañía, Intiñan, Papallacta, Centro de Rescate, Paikawe' }
     ],
@@ -2502,7 +2502,7 @@ const multiDayTours: Tour[] = [
       zh: '安第斯山脉与瀑布速览'
     },
     description: {
-      en: '6-day overland journey traversing the Avenue of the Volcanoes, adventure town of Baños, Pailón del Diablo (Devil\'s Cauldron) waterfall, Pastaza canyon, Puyo rainforest biopark, and Quilotoa turquoise crater lake.',
+      en: '6-day overland journey along the Avenue of the Volcanoes: Baños adventure town, Pailón del Diablo (Devil\'s Cauldron) waterfall, Pastaza canyon, Puyo rainforest biopark and Quilotoa lake.',
       es: 'Recorrido de 6 días por la Avenida de los Volcanes, Baños de Agua Santa, la cascada Pailón del Diablo, bioparque en Puyo y el cráter Quilotoa.',
       zh: '6日陆地景观之旅，沿着火山大道前进，游览冒险小镇巴尼奥斯、恶魔之咽瀑布、帕斯塔萨峡谷、普约雨林公园与基洛托阿翡翠火山湖。'
     },
@@ -2517,7 +2517,7 @@ const multiDayTours: Tour[] = [
       { en: 'Airport assistance and private transfers', es: 'Asistencia en aeropuerto y traslados privados' },
       { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
       { en: 'Professional English-speaking guide', es: 'Guía profesional bilingüe' },
-      { en: 'Accommodation (5 nights in 3* or 4* hotels)', es: 'Alojamiento (5 noches en hoteles 3★ o 4★)' },
+      { en: 'Accommodation (5 nights in Club or VIP hotels)', es: 'Alojamiento (5 noches en hoteles Club o VIP)' },
       { en: 'Daily breakfast and specified lunch in Puyo', es: 'Desayunos diarios y almuerzo incluido en Puyo' },
       { en: 'Entrances: Pailón del Diablo (Devil\'s Cauldron), Yanacocha, Hola Vida, Quilotoa', es: 'Entradas: Pailón del Diablo (Devil\'s Cauldron), Yanacocha, Hola Vida, Quilotoa' }
     ],
@@ -2672,7 +2672,7 @@ const multiDayTours: Tour[] = [
       zh: '厄瓜多尔陆地旗舰纵贯线'
     },
     description: {
-      en: 'Discover the Best of Ecuador in 8 Days: Quito Historic Center, Otavalo market, Cuicocha lake, Mitad del Mundo, Baños waterfalls & Pailón del Diablo (Devil\'s Cauldron), Chimborazo Volcano (6,310m), Ingapirca Inca ruins, Colonial Cuenca, Cajas National Park lakes, and finishing in coastal Guayaquil.',
+      en: '8-day Ecuador highlights: Quito, Otavalo market, Cuicocha lake, Mitad del Mundo, Baños waterfalls, Pailón del Diablo, Chimborazo (6,310m), Ingapirca, Cuenca, Cajas lakes and Guayaquil.',
       es: 'El gran circuito ecuatoriano de 8 días: Quito colonial, mercado de Otavalo, cascadas de Baños, Chimborazo, Ingapirca, Cuenca colonial y Guayaquil.',
       zh: '8日厄瓜多尔陆地旗舰探险，连接基多、奥塔瓦洛印第安集市、库伊科查湖、巴尼奥斯恶魔之咽、钦博拉索火山（6310米）、因加皮尔卡印加遗址、昆卡世界遗产城、卡哈斯国家公园与瓜亚基尔港。'
     },
@@ -2688,9 +2688,9 @@ const multiDayTours: Tour[] = [
       { en: 'Airport assistance and private transfers', es: 'Asistencia en aeropuerto y traslados privados' },
       { en: 'Private transportation throughout the itinerary', es: 'Transporte privado durante todo el itinerario' },
       { en: 'Professional English-speaking guide', es: 'Guía profesional bilingüe' },
-      { en: '7 nights of accommodation (3* or 4* hotels)', es: '7 noches de alojamiento (hoteles 3★ o 4★)' },
+      { en: '7 nights of accommodation (Club or VIP hotels)', es: '7 noches de alojamiento (hoteles Club o VIP)' },
       { en: 'Daily breakfast', es: 'Desayunos diarios' },
-      { en: 'Entrance fees: Cuicocha, La Compañía, Intiñan, Pailón del Diablo (Devil\'s Cauldron), Chimborazo, Ingapirca, Cajas', es: 'Entradas: Cuicocha, La Compañía, Intiñan, Pailón del Diablo (Devil\'s Cauldron), Chimborazo, Ingapirca, Cajas' }
+      { en: 'Entries: Cuicocha, La Compañía, Intiñan, Pailón del Diablo (Devil\'s Cauldron), Chimborazo, Ingapirca, Cajas', es: 'Entradas: Cuicocha, La Compañía, Intiñan, Pailón del Diablo (Devil\'s Cauldron), Chimborazo, Ingapirca, Cajas' }
     ],
     exclusions: [
       { en: 'Meals not specified', es: 'Comidas no especificadas' },
@@ -2877,7 +2877,7 @@ const multiDayTours: Tour[] = [
       zh: '大陆雨林与海岛巅峰12日游'
     },
     description: {
-      en: '12-day flagship expedition: Quito colonial city & Equator, Papallacta thermal springs, Tena Amazon lodge with motorized canoe & caiman lagoon, Paikawe giant fish reserve, Santa Cruz highlands & giant tortoises, Isabela Island flamingo lagoon & Tintoreras snorkeling, Las Grietas, and full-day yacht cruise to Santa Fe or Pinzón Island.',
+      en: '12-day flagship: Quito & Equator, Papallacta hot springs, Tena Amazon lodge, Paikawe fish reserve, Santa Cruz tortoises, Isabela flamingos & Tintoreras, Las Grietas, yacht to Santa Fe or Pinzón.',
       es: 'Expedición insignia de 12 días: combina Quito colonial y Amazonía de Tena con 6 días de exploración insular, fauna y playas en Galápagos.',
       zh: '12日顶级奢华联合探险，涵盖基多历史名城、赤道线、帕帕亚克塔温泉、特纳亚马逊木屋、派卡韦保护区巨鱼、加拉帕戈斯圣克鲁斯、伊莎贝拉岛、蒂恩托雷拉斯石礁、拉斯格里塔斯及圣菲岛/平松岛全天游艇巡航。'
     },
@@ -2895,7 +2895,7 @@ const multiDayTours: Tour[] = [
       { en: 'Private transportation on mainland and Galápagos transfers', es: 'Transporte privado en continente y traslados en Galápagos' },
       { en: 'Plane Ticket (Quito – Baltra – Quito)', es: 'Boleto aéreo Quito – Baltra – Quito' },
       { en: 'Professional English-speaking guides and Level III Naturalists', es: 'Guías profesionales y Naturalistas Nivel III' },
-      { en: '11 nights accommodation (hotels 3* or 4* / Amazon lodge / Galápagos hotels)', es: '11 noches de alojamiento (hoteles 3★ o 4★ / Lodge amazónico / Hoteles Galápagos)' },
+      { en: '11 nights accommodation (hotels Club or VIP / Amazon lodge / Galápagos hotels)', es: '11 noches de alojamiento (hoteles Club o VIP / Lodge amazónico / Hoteles Galápagos)' },
       { en: 'Daily breakfast, lunches and dinners as specified', es: 'Desayunos diarios, almuerzos y cenas según itinerario' },
       { en: 'Snorkeling equipment for organized boat excursions', es: 'Equipo de snorkel para excursiones en barco' },
       { en: 'All entrance fees: La Compañía, Intiñan, Papallacta, Paikawe, Galápagos sites', es: 'Todas las entradas según programa' }
@@ -3149,7 +3149,7 @@ const multiDayTours: Tour[] = [
       zh: '海陆经典联合全景游'
     },
     description: {
-      en: '11-day master journey connecting mainland Ecuador (Quito, Avenue of Volcanoes, Baños Pailón del Diablo (Devil\'s Cauldron), Puyo Amazon Rainforest, Quilotoa Crater Lake) with Galápagos Islands (Santa Cruz highlands, giant tortoises, Isabela full-day with Tintoreras & flamingos, La Lobería and Las Grietas canyon).',
+      en: '11-day master journey: Quito, Avenue of Volcanoes, Baños, Pailón del Diablo, Puyo Amazon, Quilotoa, then Galápagos: Santa Cruz tortoises, Isabela Tintoreras & flamingos, La Lobería and Las Grietas.',
       es: 'Travesía de 11 días conectando los Andes, Baños, la Amazonía y Quilotoa con las maravillas volcánicas, tortugas gigantes y playas de Galápagos.',
       zh: '11日经典联合行程，将厄瓜多尔大陆（基多、巴尼奥斯恶魔之咽、普约亚马逊、基洛托阿）与加拉帕戈斯群岛（圣克鲁斯、伊莎贝拉、蒂恩托雷拉斯、拉斯格里塔斯）完美融合。'
     },
@@ -3166,7 +3166,7 @@ const multiDayTours: Tour[] = [
       { en: 'Private transportation throughout mainland Ecuador', es: 'Transporte privado en Ecuador continental' },
       { en: 'Plane Ticket (Quito – Baltra – Quito)', es: 'Boleto aéreo Quito – Baltra – Quito' },
       { en: 'Professional English-speaking guides and Level III Naturalists', es: 'Guías profesionales bilingües y Naturalistas Nivel III' },
-      { en: '10 nights accommodation (3* or 4* hotels in mainland & Galápagos)', es: '10 noches de alojamiento (hoteles 3★ o 4★ en continente y Galápagos)' },
+      { en: '10 nights accommodation (Club or VIP hotels in mainland & Galápagos)', es: '10 noches de alojamiento (hoteles Club o VIP en continente y Galápagos)' },
       { en: 'Daily breakfast, plus specified lunches in Puyo and Isabela', es: 'Desayunos diarios, y almuerzos incluidos en Puyo e Isabela' },
       { en: 'Entrances: Pailón del Diablo (Devil\'s Cauldron), Yanacocha, Hola Vida, Quilotoa, Galápagos sites', es: 'Todas las entradas según itinerario' }
     ],

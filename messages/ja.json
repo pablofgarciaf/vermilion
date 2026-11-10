@@ -327,6 +327,18 @@
     "barPerPerson": "/ 1名",
     "whatsappAria": "WhatsAppで質問する"
   },
+  "tourItinerary": {
+    "kicker": "旅の記録",
+    "headingWithTour": "詳細旅程: {tour}",
+    "headingDefault": "日別遠征ジャーナル",
+    "dayLabel": "{day}日目",
+    "highlights": "本日のハイライト",
+    "meals": "食事",
+    "stay": "宿泊",
+    "transport": "移動手段",
+    "activity": "アクティビティ",
+    "altitude": "標高"
+  },
   "expeditionFacts": {
     "title": "探検の概要",
     "activity": "体力レベル",

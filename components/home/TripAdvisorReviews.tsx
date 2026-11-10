@@ -286,6 +286,15 @@ export function TripAdvisorReviews({
               </p>
             </div>
 
+            <a
+              href={TRIPADVISOR_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TripAdvisor"
+              className="relative z-10 mt-auto inline-block w-fit"
+            >
+              <Image src="/logo_blanco.png" alt="Vermilion Routes" width={200} height={72} className="w-[200px] h-auto" />
+            </a>
             <div className="flex flex-wrap items-center gap-2 relative z-10 pt-4 mt-auto border-t border-emerald-700/50">
               <div className="flex items-center gap-1.5 text-emerald-200 font-bold text-xs bg-emerald-950/40 px-3 py-1.5 rounded-xl border border-emerald-700/50">
                 <ShieldCheck className="w-3.5 h-3.5" />

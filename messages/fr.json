@@ -327,6 +327,18 @@
     "barPerPerson": "/ pers.",
     "whatsappAria": "Demander sur WhatsApp"
   },
+  "tourItinerary": {
+    "kicker": "Carnet de voyage",
+    "headingWithTour": "Itinéraire : {tour}",
+    "headingDefault": "Journal d’expédition jour par jour",
+    "dayLabel": "Jour {day}",
+    "highlights": "Points forts du jour",
+    "meals": "Repas",
+    "stay": "Hébergement",
+    "transport": "Transport",
+    "activity": "Activité",
+    "altitude": "Altitude"
+  },
   "expeditionFacts": {
     "title": "L’expédition en un coup d’œil",
     "activity": "Activité physique",

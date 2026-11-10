@@ -10,7 +10,9 @@ import { getAdminDb } from '@/lib/firebaseAdmin';
  * Los tokens se guardan en Firestore `integrations/tiktok`, que las reglas no exponen al cliente.
  */
 
+/** video.upload = bandeja (borrador); video.publish = publicación directa (requiere aprobación de TikTok). */
 export const TIKTOK_SCOPES = ['user.info.basic', 'video.upload'] as const;
+// video.publish (publicación directa) se añade aquí solo cuando TikTok lo tenga aprobado en el portal.
 const AUTHORIZE_URL = 'https://www.tiktok.com/v2/auth/authorize/';
 const API = 'https://open.tiktokapis.com';
 const DEFAULT_REDIRECT = 'https://www.vermilionroutes.com/api/tiktok/callback';
@@ -167,6 +169,66 @@ export function initInboxUpload(accessToken: string, size: number) {
       source_info: { source: 'FILE_UPLOAD', video_size: size, chunk_size: chunkSize, total_chunk_count: totalChunks },
     }),
   }).then((d) => ({ publishId: d.publish_id, uploadUrl: d.upload_url, chunkSize, totalChunks }));
+}
+
+// ------------------------------------------------------------------ publicación directa (video.publish)
+
+export type TikTokPrivacyLevel = 'PUBLIC_TO_EVERYONE' | 'MUTUAL_FOLLOW_FRIENDS' | 'FOLLOWER_OF_CREATOR' | 'SELF_ONLY';
+
+export interface DirectPostOptions {
+  title: string;
+  privacyLevel: TikTokPrivacyLevel;
+  /** Solo true cuando TikTok ya aprobó la auditoría de la app. Sin ella, únicamente SELF_ONLY. */
+  appAudited?: boolean;
+  disableComment?: boolean;
+  disableDuet?: boolean;
+  disableStitch?: boolean;
+}
+
+export const DIRECT_POST_MAX_TITLE = 2200;
+export const TERMINAL_PUBLISH_STATUSES = ['PUBLISH_COMPLETE', 'SEND_TO_USER_INBOX', 'FAILED'] as const;
+
+export function isTerminalPublishStatus(status: string) {
+  return (TERMINAL_PUBLISH_STATUSES as readonly string[]).includes(status);
+}
+
+/** Construye post_info validando la privacidad: sin auditoría, la publicación solo puede ser privada. */
+function buildPostInfo(opts: DirectPostOptions) {
+  if (opts.privacyLevel !== 'SELF_ONLY' && !opts.appAudited) {
+    throw new Error('privacy_requires_audit');
+  }
+  return {
+    title: opts.title.slice(0, DIRECT_POST_MAX_TITLE),
+    privacy_level: opts.privacyLevel,
+    disable_comment: opts.disableComment ?? false,
+    disable_duet: opts.disableDuet ?? false,
+    disable_stitch: opts.disableStitch ?? false,
+  };
+}
+
+/** Inicia publicación directa subiendo el archivo por partes (source FILE_UPLOAD). Luego hay que hacer PUT de cada parte. */
+export function initDirectPostFile(accessToken: string, size: number, opts: DirectPostOptions) {
+  const postInfo = buildPostInfo(opts);
+  const { chunkSize, totalChunks } = planChunks(size);
+  return apiCall<{ publish_id: string; upload_url: string }>('/v2/post/publish/video/init/', accessToken, {
+    method: 'POST',
+    body: JSON.stringify({
+      post_info: postInfo,
+      source_info: { source: 'FILE_UPLOAD', video_size: size, chunk_size: chunkSize, total_chunk_count: totalChunks },
+    }),
+  }).then((d) => ({ publishId: d.publish_id, uploadUrl: d.upload_url, chunkSize, totalChunks }));
+}
+
+/** Inicia publicación directa desde una URL pública (source PULL_FROM_URL). El dominio debe estar verificado en TikTok. */
+export function initDirectPostFromUrl(accessToken: string, videoUrl: string, opts: DirectPostOptions) {
+  const postInfo = buildPostInfo(opts);
+  return apiCall<{ publish_id: string }>('/v2/post/publish/video/init/', accessToken, {
+    method: 'POST',
+    body: JSON.stringify({
+      post_info: postInfo,
+      source_info: { source: 'PULL_FROM_URL', video_url: videoUrl },
+    }),
+  }).then((d) => ({ publishId: d.publish_id }));
 }
 
 export function fetchPublishStatus(accessToken: string, publishId: string) {

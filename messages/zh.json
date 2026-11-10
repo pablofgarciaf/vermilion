@@ -327,6 +327,18 @@
     "barPerPerson": "/ 人",
     "whatsappAria": "通过 WhatsApp 咨询"
   },
+  "tourItinerary": {
+    "kicker": "旅行日志",
+    "headingWithTour": "详细行程: {tour}",
+    "headingDefault": "每日探险日志",
+    "dayLabel": "第{day}天",
+    "highlights": "每日亮点",
+    "meals": "餐食",
+    "stay": "住宿",
+    "transport": "交通",
+    "activity": "活动",
+    "altitude": "海拔"
+  },
   "expeditionFacts": {
     "title": "探险技术档案",
     "activity": "体力要求",

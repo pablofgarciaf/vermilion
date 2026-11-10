@@ -15,6 +15,23 @@ import { mockTours } from '@/data/mock';
 
 const TOURS_COLLECTION = 'tours';
 
+/** Textos que siempre vienen del código (mock.ts), nunca de Firestore. */
+const TEXT_FIELDS = [
+  'title', 'titleEs', 'destination', 'duration', 'durationEs', 'category', 'categoryEs',
+  'description', 'descriptionEs', 'shortDescription', 'shortDescriptionEs',
+  'highlights', 'highlightsEs', 'inclusions', 'inclusionsEs', 'exclusions', 'exclusionsEs',
+] as const;
+
+function textFromMock(mockTour: Tour | undefined): Partial<Tour> {
+  const out: Record<string, unknown> = {};
+  if (!mockTour) return out as Partial<Tour>;
+  for (const k of TEXT_FIELDS) {
+    const v = (mockTour as unknown as Record<string, unknown>)[k];
+    if (v !== undefined) out[k] = v;
+  }
+  return out as Partial<Tour>;
+}
+
 function withTimeout<T>(promise: Promise<T>, ms: number = 3500): Promise<T> {
   return Promise.race([
     promise,
@@ -144,6 +161,7 @@ export async function getToursFromFirestore(): Promise<Tour[]> {
         tours.push({
           ...mockTour,
           ...data,
+          ...textFromMock(mockTour),
           id: docSnap.id,
           price: mockTour?.price || data.price,
           price3Star: mockTour?.price3Star || mockTour?.price || data.price3Star || data.price,
@@ -180,6 +198,7 @@ export async function getTourByIdFromFirestore(id: string, fallbackTour?: Tour):
       return {
         ...fallback,
         ...data,
+        ...textFromMock(fallback),
         id: docSnap.id,
         price: fallback?.price || data.price,
         price3Star: fallback?.price3Star || fallback?.price || data.price3Star || data.price,
