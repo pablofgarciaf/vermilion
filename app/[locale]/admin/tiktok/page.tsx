@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { AlertCircle, ArrowLeft, CheckCircle2, Loader2, LogOut, UploadCloud } from 'lucide-react';
 import { auth } from '@/lib/firebase';
+import { TikTokAvatar } from '@/components/admin/TikTokAvatar';
 
 /**
  * Panel de TikTok: conectar la cuenta (Login Kit, permiso user.info.basic) y enviar videos
@@ -252,19 +253,7 @@ export default function TikTokAdminPage() {
                 </h2>
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                   <div className="flex min-w-0 flex-1 items-center gap-4">
-                  {profile.avatarUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={profile.avatarUrl}
-                      alt={profile.displayName}
-                      width={56}
-                      height={56}
-                      referrerPolicy="no-referrer"
-                      className="h-14 w-14 rounded-full border border-white/10 object-cover"
-                    />
-                  ) : (
-                    <div className="h-14 w-14 rounded-full bg-white/10" aria-hidden="true" />
-                  )}
+                  <TikTokAvatar key={profile.avatarUrl || 'logo'} src={profile.avatarUrl || null} name={profile.displayName} />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-lg font-semibold text-white">{profile.displayName}</p>
                     <p className="text-xs text-zinc-300">

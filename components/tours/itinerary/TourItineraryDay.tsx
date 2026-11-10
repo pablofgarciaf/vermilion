@@ -38,14 +38,14 @@ export function TourItineraryDay({
 
   return (
     <li
-      className={`relative pl-12 pb-14 last:pb-0 transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none md:grid md:grid-cols-2 md:gap-x-0 md:pl-0 ${
+      className={`relative pl-12 pb-14 last:pb-0 md:pb-0 md:mb-14 md:last:mb-0 transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none md:grid md:grid-cols-2 md:gap-x-0 md:pl-0 ${
         revealed
           ? 'opacity-100 translate-y-0 md:translate-x-0'
           : `pointer-events-none opacity-0 translate-y-6 ${hiddenShift}`
       }`}
     >
       {/* Nodo del día: va después de la línea en el DOM, así queda por encima sin z-index */}
-      <span className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white text-xs font-bold shadow-sm md:left-1/2 md:-translate-x-1/2">
+      <span className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-white text-xs font-bold shadow-sm md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
         {dayNumber}
       </span>
 
@@ -80,10 +80,10 @@ export function TourItineraryDay({
         <TourItineraryChips items={chips} />
       </div>
 
-      {/* Miniatura 4:3 de ~280px, centrada en su lado del zigzag */}
+      {/* Miniatura: 4:3 en móvil; en escritorio ocupa la altura del bloque de texto (grid stretch) */}
       {image && (
         <div
-          className={`relative mt-5 md:mt-0 aspect-[4/3] w-[17.5rem] max-w-full overflow-hidden rounded-2xl border border-zinc-200/80 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 md:row-start-1 md:mx-auto ${imageColumn}`}
+          className={`relative mt-5 md:mt-0 aspect-[4/3] md:aspect-auto md:self-stretch md:min-h-56 w-[17.5rem] max-w-full overflow-hidden rounded-2xl border border-zinc-200/80 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 md:row-start-1 md:mx-auto ${imageColumn}`}
         >
           <Image
             src={image}

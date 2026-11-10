@@ -131,16 +131,6 @@ const multiDayTours: Tour[] = [
         zh: '圣克鲁斯岛自选精品酒店住宿（Club 或 VIP）'
       },
       {
-        en: 'Private airport transfers in Quito (Arrival & Departure)',
-        es: 'Traslados privados en aeropuerto de Quito (Llegada y Salida)',
-        fr: 'Transferts privés aéroport de Quito (Arrivée et Départ)',
-        de: 'Private Flughafentransfers in Quito (Ankunft & Abreise)',
-        it: 'Trasferimenti privati aeroporto di Quito (Arrivo e Partenza)',
-        pt: 'Traslados privados no aeroporto de Quito (Chegada e Partida)',
-        ja: 'キト空港専用プライベート送迎（到着＆出発）',
-        zh: '基多国际机场私人专车接送（抵达与出发）'
-      },
-      {
         en: 'Buffet breakfast at VIP hotels / Continental breakfast at Club hotels',
         es: 'Desayuno buffet en hoteles VIP / Desayuno continental en hoteles Club',
         fr: 'Petit-déjeuner buffet en hôtel VIP / continental en hôtel Club',
@@ -161,6 +151,16 @@ const multiDayTours: Tour[] = [
         zh: '行程中规划的指定套餐午餐'
       },
       {
+        en: 'Private airport transfers in Quito (Arrival & Departure)',
+        es: 'Traslados privados en aeropuerto de Quito (Llegada y Salida)',
+        fr: 'Transferts privés aéroport de Quito (Arrivée et Départ)',
+        de: 'Private Flughafentransfers in Quito (Ankunft & Abreise)',
+        it: 'Trasferimenti privati aeroporto di Quito (Arrivo e Partenza)',
+        pt: 'Traslados privados no aeroporto de Quito (Chegada e Partida)',
+        ja: 'キト空港専用プライベート送迎（到着＆出発）',
+        zh: '基多国际机场私人专车接送（抵达与出发）'
+      },
+      {
         en: 'Domestic Flight Ticket (Quito – Baltra – Quito)',
         es: 'Boleto aéreo doméstico (Quito – Baltra – Quito)',
         fr: 'Billet d\'avion intérieur (Quito – Baltra – Quito)',
@@ -169,16 +169,6 @@ const multiDayTours: Tour[] = [
         pt: 'Passagem aérea doméstica (Quito – Baltra – Quito)',
         ja: '国内線往復航空券（キト – バルトラ – キト）',
         zh: '厄瓜多尔境内往返机票（基多 – 巴尔特拉 – 基多）'
-      },
-      {
-        en: 'All guided visits to the islands according to the itinerary',
-        es: 'Todas las visitas guiadas a las islas según el itinerario',
-        fr: 'Toutes les visites guidées des îles selon l\'itinéraire',
-        de: 'Alle geführten Inselbesuche gemäß Reiseroute',
-        it: 'Tutte le visite guidate alle isole secondo l\'itinerario',
-        pt: 'Todas as visitas guiadas às ilhas de acordo com o itinerário',
-        ja: '旅程に記載されたすべてのガイド付き島内観光',
-        zh: '行程规划的所有受保护海岛导览游览'
       },
       {
         en: 'Airport reception and departure assistance at Galápagos airports',
@@ -199,6 +189,36 @@ const multiDayTours: Tour[] = [
         pt: 'Transporte terrestre e marítimo completo',
         ja: '全行程における陸上および海上移動交通',
         zh: '全程专车陆路与快艇海上交通'
+      },
+      {
+        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
+        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
+        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
+        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
+        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
+        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
+        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
+        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
+      },
+      {
+        en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
+        es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros',
+        fr: 'Taxe de quai d\'Isabela: 5,00 USD nationaux / 10,00 USD étrangers',
+        de: 'Isabela-Dockgebühr: USD 5,00 für Ecuadorianer / USD 10,00 für Ausländer',
+        it: 'Tassa portuale di Isabela: 5,00 USD ecuadoriani / 10,00 USD stranieri',
+        pt: 'Taxa de cais de Isabela: USD 5,00 nacionais / USD 10,00 estrangeiros',
+        ja: 'イサベラ島入港税：エクアドル国籍 USD 5.00 / 外国人 USD 10.00',
+        zh: '伊莎贝拉岛码头税：厄瓜多尔公民 5 美元 / 外国游客 10 美元'
+      },
+      {
+        en: 'All guided visits to the islands according to the itinerary',
+        es: 'Todas las visitas guiadas a las islas según el itinerario',
+        fr: 'Toutes les visites guidées des îles selon l\'itinéraire',
+        de: 'Alle geführten Inselbesuche gemäß Reiseroute',
+        it: 'Tutte le visite guidate alle isole secondo l\'itinerario',
+        pt: 'Todas as visitas guiadas às ilhas de acordo com o itinerário',
+        ja: '旅程に記載されたすべてのガイド付き島内観光',
+        zh: '行程规划的所有受保护海岛导览游览'
       },
       {
         en: 'Level III Certified Naturalist Guides (Spanish / English)',
@@ -229,26 +249,6 @@ const multiDayTours: Tour[] = [
         pt: 'Cofres de segurança na recepção do hotel',
         ja: 'ホテルフロントのセーフティボックス利用可能',
         zh: '酒店前台免费提供安全保险箱服务'
-      },
-      {
-        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
-        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
-        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
-        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
-        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
-        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
-        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
-        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
-      },
-      {
-        en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
-        es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros',
-        fr: 'Taxe de quai d\'Isabela: 5,00 USD nationaux / 10,00 USD étrangers',
-        de: 'Isabela-Dockgebühr: USD 5,00 für Ecuadorianer / USD 10,00 für Ausländer',
-        it: 'Tassa portuale di Isabela: 5,00 USD ecuadoriani / 10,00 USD stranieri',
-        pt: 'Taxa de cais de Isabela: USD 5,00 nacionais / USD 10,00 estrangeiros',
-        ja: 'イサベラ島入港税：エクアドル国籍 USD 5.00 / 外国人 USD 10.00',
-        zh: '伊莎贝拉岛码头税：厄瓜多尔公民 5 美元 / 外国游客 10 美元'
       }
     ],
     exclusions: [
@@ -770,16 +770,6 @@ const multiDayTours: Tour[] = [
         zh: '伊莎贝拉岛廷托雷拉客栈住宿'
       },
       {
-        en: 'Private airport transfers in Quito (Arrival & Departure)',
-        es: 'Traslados privados en aeropuerto de Quito (Llegada y Salida)',
-        fr: 'Transferts privés aéroport de Quito (Arrivée et Départ)',
-        de: 'Private Flughafentransfers in Quito (Ankunft & Abreise)',
-        it: 'Trasferimenti privati aeroporto di Quito (Arrivo e Partenza)',
-        pt: 'Traslados privados no aeroporto de Quito (Chegada e Partida)',
-        ja: 'キト空港専用プライベート送迎（到着＆出発）',
-        zh: '基多国际机场私人专车接送（抵达与出发）'
-      },
-      {
         en: 'Buffet breakfast at VIP hotels / Continental breakfast at Club hotels',
         es: 'Desayuno buffet en hoteles VIP / Desayuno continental en hoteles Club',
         fr: 'Petit-déjeuner buffet en hôtel VIP / continental en hôtel Club',
@@ -800,6 +790,16 @@ const multiDayTours: Tour[] = [
         zh: '行程中规划的指定套餐午餐'
       },
       {
+        en: 'Private airport transfers in Quito (Arrival & Departure)',
+        es: 'Traslados privados en aeropuerto de Quito (Llegada y Salida)',
+        fr: 'Transferts privés aéroport de Quito (Arrivée et Départ)',
+        de: 'Private Flughafentransfers in Quito (Ankunft & Abreise)',
+        it: 'Trasferimenti privati aeroporto di Quito (Arrivo e Partenza)',
+        pt: 'Traslados privados no aeroporto de Quito (Chegada e Partida)',
+        ja: 'キト空港専用プライベート送迎（到着＆出発）',
+        zh: '基多国际机场私人专车接送（抵达与出发）'
+      },
+      {
         en: 'Domestic Flight Ticket (Quito – Baltra – Quito)',
         es: 'Boleto aéreo doméstico (Quito – Baltra – Quito)',
         fr: 'Billet d\'avion intérieur (Quito – Baltra – Quito)',
@@ -808,16 +808,6 @@ const multiDayTours: Tour[] = [
         pt: 'Passagem aérea doméstica (Quito – Baltra – Quito)',
         ja: '国内線往復航空券（キト – バルトラ – キト）',
         zh: '厄瓜多尔境内往返机票（基多 – 巴尔特拉 – 基多）'
-      },
-      {
-        en: 'All guided visits to the islands according to the itinerary',
-        es: 'Todas las visitas guiadas a las islas según el itinerario',
-        fr: 'Toutes les visites guidées des îles selon l\'itinéraire',
-        de: 'Alle geführten Inselbesuche gemäß Reiseroute',
-        it: 'Tutte le visite guidate alle isole secondo l\'itinerario',
-        pt: 'Todas as visitas guiadas às ilhas de acordo com o itinerário',
-        ja: '旅程に記載されたすべてのガイド付き島内観光',
-        zh: '行程规划的所有受保护海岛导览游览'
       },
       {
         en: 'Airport reception and departure assistance at Galápagos airports',
@@ -838,6 +828,36 @@ const multiDayTours: Tour[] = [
         pt: 'Transporte terrestre e marítimo completo',
         ja: '全行程における陸上および海上移動交通',
         zh: '全程专车陆路与快艇海上交通'
+      },
+      {
+        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
+        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
+        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
+        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
+        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
+        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
+        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
+        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
+      },
+      {
+        en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
+        es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros',
+        fr: 'Taxe de quai d\'Isabela: 5,00 USD nationaux / 10,00 USD étrangers',
+        de: 'Isabela-Dockgebühr: USD 5,00 für Ecuadorianer / USD 10,00 für Ausländer',
+        it: 'Tassa portuale di Isabela: 5,00 USD ecuadoriani / 10,00 USD stranieri',
+        pt: 'Taxa de cais de Isabela: USD 5,00 nacionais / USD 10,00 estrangeiros',
+        ja: 'イサベラ島入港税：エクアドル国籍 USD 5.00 / 外国人 USD 10.00',
+        zh: '伊莎贝拉岛码头税：厄瓜多尔公民 5 美元 / 外国游客 10 美元'
+      },
+      {
+        en: 'All guided visits to the islands according to the itinerary',
+        es: 'Todas las visitas guiadas a las islas según el itinerario',
+        fr: 'Toutes les visites guidées des îles selon l\'itinéraire',
+        de: 'Alle geführten Inselbesuche gemäß Reiseroute',
+        it: 'Tutte le visite guidate alle isole secondo l\'itinerario',
+        pt: 'Todas as visitas guiadas às ilhas de acordo com o itinerário',
+        ja: '旅程に記載されたすべてのガイド付き島内観光',
+        zh: '行程规划的所有受保护海岛导览游览'
       },
       {
         en: 'Level III Certified Naturalist Guides (Spanish / English)',
@@ -868,26 +888,6 @@ const multiDayTours: Tour[] = [
         pt: 'Cofres de segurança na recepção do hotel',
         ja: 'ホテルフロントのセーフティボックス利用可能',
         zh: '酒店前台免费提供安全保险箱服务'
-      },
-      {
-        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
-        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
-        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
-        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
-        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
-        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
-        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
-        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
-      },
-      {
-        en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
-        es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros',
-        fr: 'Taxe de quai d\'Isabela: 5,00 USD nationaux / 10,00 USD étrangers',
-        de: 'Isabela-Dockgebühr: USD 5,00 für Ecuadorianer / USD 10,00 für Ausländer',
-        it: 'Tassa portuale di Isabela: 5,00 USD ecuadoriani / 10,00 USD stranieri',
-        pt: 'Taxa de cais de Isabela: USD 5,00 nacionais / USD 10,00 estrangeiros',
-        ja: 'イサベラ島入港税：エクアドル国籍 USD 5.00 / 外国人 USD 10.00',
-        zh: '伊莎贝拉岛码头税：厄瓜多尔公民 5 美元 / 外国游客 10 美元'
       }
     ],
     exclusions: [
@@ -1463,16 +1463,6 @@ const multiDayTours: Tour[] = [
         zh: '圣克里斯托巴尔岛阿尔加罗博斯酒店住宿'
       },
       {
-        en: 'Private airport transfers in Quito (Arrival & Departure)',
-        es: 'Traslados privados en aeropuerto de Quito (Llegada y Salida)',
-        fr: 'Transferts privés aéroport de Quito (Arrivée et Départ)',
-        de: 'Private Flughafentransfers in Quito (Ankunft & Abreise)',
-        it: 'Trasferimenti privati aeroporto di Quito (Arrivo e Partenza)',
-        pt: 'Traslados privados no aeroporto de Quito (Chegada e Partida)',
-        ja: 'キト空港専用プライベート送迎（到着＆出発）',
-        zh: '基多国际机场私人专车接送（抵达与出发）'
-      },
-      {
         en: 'Buffet breakfast at VIP hotels / Continental breakfast at Club hotels',
         es: 'Desayuno buffet en hoteles VIP / Desayuno continental en hoteles Club',
         fr: 'Petit-déjeuner buffet en hôtel VIP / continental en hôtel Club',
@@ -1493,6 +1483,16 @@ const multiDayTours: Tour[] = [
         zh: '行程中规划的指定套餐午餐'
       },
       {
+        en: 'Private airport transfers in Quito (Arrival & Departure)',
+        es: 'Traslados privados en aeropuerto de Quito (Llegada y Salida)',
+        fr: 'Transferts privés aéroport de Quito (Arrivée et Départ)',
+        de: 'Private Flughafentransfers in Quito (Ankunft & Abreise)',
+        it: 'Trasferimenti privati aeroporto di Quito (Arrivo e Partenza)',
+        pt: 'Traslados privados no aeroporto de Quito (Chegada e Partida)',
+        ja: 'キト空港専用プライベート送迎（到着＆出発）',
+        zh: '基多国际机场私人专车接送（抵达与出发）'
+      },
+      {
         en: 'Domestic Flight Ticket (Quito – Baltra / San Cristóbal – Quito)',
         es: 'Boleto aéreo doméstico (Quito – Baltra / San Cristóbal – Quito)',
         fr: 'Billet d\'avion intérieur (Quito – Baltra / San Cristóbal – Quito)',
@@ -1501,16 +1501,6 @@ const multiDayTours: Tour[] = [
         pt: 'Passagem aérea doméstica (Quito – Baltra / San Cristóbal – Quito)',
         ja: '国内線オープンジョー航空券（キト – バルトラ / サンクリストバル – キト）',
         zh: '厄瓜多尔境内缺口往返机票（基多 – 巴尔特拉 / 圣克里斯托巴尔 – 基多）'
-      },
-      {
-        en: 'All guided visits to the islands according to the itinerary',
-        es: 'Todas las visitas guiadas a las islas según el itinerario',
-        fr: 'Toutes les visites guidées des îles selon l\'itinéraire',
-        de: 'Alle geführten Inselbesuche gemäß Reiseroute',
-        it: 'Tutte le visite guidate alle isole secondo l\'itinerario',
-        pt: 'Todas as visitas guiadas às ilhas de acordo com o itinerário',
-        ja: '旅程に記載されたすべてのガイド付き島内観光',
-        zh: '行程规划的所有受保护海岛导览游览'
       },
       {
         en: 'Airport reception and departure assistance at Galápagos airports',
@@ -1531,6 +1521,36 @@ const multiDayTours: Tour[] = [
         pt: 'Transporte terrestre e marítimo completo',
         ja: '全行程における陸上および海上移動交通',
         zh: '全程专车陆路与快艇海上交通'
+      },
+      {
+        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
+        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
+        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
+        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
+        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
+        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
+        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
+        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
+      },
+      {
+        en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
+        es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros',
+        fr: 'Taxe de quai d\'Isabela: 5,00 USD nationaux / 10,00 USD étrangers',
+        de: 'Isabela-Dockgebühr: USD 5,00 für Ecuadorianer / USD 10,00 für Ausländer',
+        it: 'Tassa portuale di Isabela: 5,00 USD ecuadoriani / 10,00 USD stranieri',
+        pt: 'Taxa de cais de Isabela: USD 5,00 nacionais / USD 10,00 estrangeiros',
+        ja: 'イサベラ島入港税：エクアドル国籍 USD 5.00 / 外国人 USD 10.00',
+        zh: '伊莎贝拉岛码头税：厄瓜多尔公民 5 美元 / 外国游客 10 美元'
+      },
+      {
+        en: 'All guided visits to the islands according to the itinerary',
+        es: 'Todas las visitas guiadas a las islas según el itinerario',
+        fr: 'Toutes les visites guidées des îles selon l\'itinéraire',
+        de: 'Alle geführten Inselbesuche gemäß Reiseroute',
+        it: 'Tutte le visite guidate alle isole secondo l\'itinerario',
+        pt: 'Todas as visitas guiadas às ilhas de acordo com o itinerário',
+        ja: '旅程に記載されたすべてのガイド付き島内観光',
+        zh: '行程规划的所有受保护海岛导览游览'
       },
       {
         en: 'Level III Certified Naturalist Guides (Spanish / English)',
@@ -1561,26 +1581,6 @@ const multiDayTours: Tour[] = [
         pt: 'Cofres de segurança na recepção do hotel',
         ja: 'ホテルフロントのセーフティボックス利用可能',
         zh: '酒店前台免费提供安全保险箱服务'
-      },
-      {
-        en: 'Lobito Airport Shuttle Bus: Airport – Itabaca Channel – Airport',
-        es: 'Autobús Lobito: Aeropuerto – Canal de Itabaca – Aeropuerto',
-        fr: 'Navette aéroport Lobito: Aéroport – Canal d\'Itabaca – Aéroport',
-        de: 'Lobito Flughafen-Shuttlebus: Flughafen – Itabaca-Kanal – Flughafen',
-        it: 'Bus navetta Lobito: Aeroporto – Canale di Itabaca – Aeroporto',
-        pt: 'Ônibus shuttle Lobito: Aeroporto – Canal de Itabaca – Aeroporto',
-        ja: 'ロビト空港シャトルバス：空港 – イタバカ運河 – 空港',
-        zh: 'Lobito机场穿梭接驳巴士：机场 – 伊塔巴卡运河 – 机场'
-      },
-      {
-        en: 'Isabela Dock Fee: USD 5.00 for Ecuadorian nationals; USD 10.00 for foreign visitors',
-        es: 'Tasa de muelle de Isabela: USD 5.00 nacionales / USD 10.00 extranjeros',
-        fr: 'Taxe de quai d\'Isabela: 5,00 USD nationaux / 10,00 USD étrangers',
-        de: 'Isabela-Dockgebühr: USD 5,00 für Ecuadorianer / USD 10,00 für Ausländer',
-        it: 'Tassa portuale di Isabela: 5,00 USD ecuadoriani / 10,00 USD stranieri',
-        pt: 'Taxa de cais de Isabela: USD 5,00 nacionais / USD 10,00 estrangeiros',
-        ja: 'イサベラ島入港税：エクアドル国籍 USD 5.00 / 外国人 USD 10.00',
-        zh: '伊莎贝拉岛码头税：厄瓜多尔公民 5 美元 / 外国游客 10 美元'
       }
     ],
     exclusions: [
@@ -2129,11 +2129,11 @@ const multiDayTours: Tour[] = [
       { en: 'Quilotoa Emerald Crater Lake & Tigua Art', es: 'Laguna de Quilotoa y Arte de Tigua', zh: '基洛托阿翡翠火山湖与蒂瓜艺术' }
     ],
     inclusions: [
+      { en: 'Accommodation at Club or VIP hotels according to selection', es: 'Alojamiento en hoteles Club o VIP según plan' },
+      { en: 'Daily breakfast, plus lunches and dinners in Amazon as specified', es: 'Desayunos diarios, y comidas en Amazonía según itinerario' },
       { en: 'Airport assistance and private transfers', es: 'Asistencia en aeropuerto y traslados privados' },
       { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado (vehículos 4x4 o buses turísticos)' },
       { en: 'Professional English-speaking guide', es: 'Guía profesional bilingüe' },
-      { en: 'Accommodation at Club or VIP hotels according to selection', es: 'Alojamiento en hoteles Club o VIP según plan' },
-      { en: 'Daily breakfast, plus lunches and dinners in Amazon as specified', es: 'Desayunos diarios, y comidas en Amazonía según itinerario' },
       { en: 'Entrances: La Compañía, Intiñan, Papallacta, Yanacocha, Pailón del Diablo (Devil\'s Cauldron), Quilotoa', es: 'Entradas: La Compañía, Intiñan, Papallacta, Yanacocha, Pailón del Diablo (Devil\'s Cauldron), Quilotoa' }
     ],
     exclusions: [
@@ -2329,11 +2329,11 @@ const multiDayTours: Tour[] = [
       { en: 'Misahuallí & Paikawe Giant Fish Reserve Lagoon', es: 'Misahuallí y Laguna de Peces Gigantes de Paikawe', zh: '米萨瓦利与派卡韦巨鱼保护区' }
     ],
     inclusions: [
+      { en: 'Accommodation (6 nights in Club or VIP hotels / Amazon lodge)', es: 'Alojamiento (6 noches en hoteles Club o VIP / Lodge amazónico)' },
+      { en: 'Meals: Daily breakfast, plus lunch and dinner at Amazon lodge', es: 'Comidas: Desayunos diarios, almuerzo y cena en lodge' },
       { en: 'Airport reception and private transfers', es: 'Recepción en aeropuerto y traslados privados' },
       { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
       { en: 'Professional English-speaking guide', es: 'Guía profesional bilingüe' },
-      { en: 'Accommodation (6 nights in Club or VIP hotels / Amazon lodge)', es: 'Alojamiento (6 noches en hoteles Club o VIP / Lodge amazónico)' },
-      { en: 'Meals: Daily breakfast, plus lunch and dinner at Amazon lodge', es: 'Comidas: Desayunos diarios, almuerzo y cena en lodge' },
       { en: 'Entrances: La Compañía, Intiñan, Papallacta, Rescue Center, Paikawe', es: 'Entradas: La Compañía, Intiñan, Papallacta, Centro de Rescate, Paikawe' }
     ],
     exclusions: [
@@ -2514,11 +2514,11 @@ const multiDayTours: Tour[] = [
       { en: 'Quilotoa Emerald Crater Lake & Tigua Art', es: 'Laguna de Quilotoa y Pinturas de Tigua', zh: '基洛托阿翡翠火山湖' }
     ],
     inclusions: [
+      { en: 'Accommodation (5 nights in Club or VIP hotels)', es: 'Alojamiento (5 noches en hoteles Club o VIP)' },
+      { en: 'Daily breakfast and specified lunch in Puyo', es: 'Desayunos diarios y almuerzo incluido en Puyo' },
       { en: 'Airport assistance and private transfers', es: 'Asistencia en aeropuerto y traslados privados' },
       { en: 'Private transportation (4x4 vehicles or tourist buses)', es: 'Transporte privado' },
       { en: 'Professional English-speaking guide', es: 'Guía profesional bilingüe' },
-      { en: 'Accommodation (5 nights in Club or VIP hotels)', es: 'Alojamiento (5 noches en hoteles Club o VIP)' },
-      { en: 'Daily breakfast and specified lunch in Puyo', es: 'Desayunos diarios y almuerzo incluido en Puyo' },
       { en: 'Entrances: Pailón del Diablo (Devil\'s Cauldron), Yanacocha, Hola Vida, Quilotoa', es: 'Entradas: Pailón del Diablo (Devil\'s Cauldron), Yanacocha, Hola Vida, Quilotoa' }
     ],
     exclusions: [
@@ -2685,11 +2685,11 @@ const multiDayTours: Tour[] = [
       { en: 'Cajas National Park Lakes & Guayaquil Port', es: 'Parque Nacional Cajas y Puerto de Guayaquil', zh: '卡哈斯国家公园与瓜亚基尔港' }
     ],
     inclusions: [
+      { en: '7 nights of accommodation (Club or VIP hotels)', es: '7 noches de alojamiento (hoteles Club o VIP)' },
+      { en: 'Daily breakfast', es: 'Desayunos diarios' },
       { en: 'Airport assistance and private transfers', es: 'Asistencia en aeropuerto y traslados privados' },
       { en: 'Private transportation throughout the itinerary', es: 'Transporte privado durante todo el itinerario' },
       { en: 'Professional English-speaking guide', es: 'Guía profesional bilingüe' },
-      { en: '7 nights of accommodation (Club or VIP hotels)', es: '7 noches de alojamiento (hoteles Club o VIP)' },
-      { en: 'Daily breakfast', es: 'Desayunos diarios' },
       { en: 'Entries: Cuicocha, La Compañía, Intiñan, Pailón del Diablo (Devil\'s Cauldron), Chimborazo, Ingapirca, Cajas', es: 'Entradas: Cuicocha, La Compañía, Intiñan, Pailón del Diablo (Devil\'s Cauldron), Chimborazo, Ingapirca, Cajas' }
     ],
     exclusions: [
@@ -2891,14 +2891,14 @@ const multiDayTours: Tour[] = [
       { en: 'Full-Day Yacht Cruise to Santa Fe or Pinzón Island', es: 'Navegación en Yate a Isla Santa Fe o Pinzón', zh: '圣菲岛或平松岛全天游艇巡航' }
     ],
     inclusions: [
+      { en: '11 nights accommodation (hotels Club or VIP / Amazon lodge / Galápagos hotels)', es: '11 noches de alojamiento (hoteles Club o VIP / Lodge amazónico / Hoteles Galápagos)' },
+      { en: 'Daily breakfast, lunches and dinners as specified', es: 'Desayunos diarios, almuerzos y cenas según itinerario' },
       { en: 'Airport assistance and all private transfers', es: 'Asistencia en aeropuertos y traslados privados' },
       { en: 'Private transportation on mainland and Galápagos transfers', es: 'Transporte privado en continente y traslados en Galápagos' },
       { en: 'Plane Ticket (Quito – Baltra – Quito)', es: 'Boleto aéreo Quito – Baltra – Quito' },
       { en: 'Professional English-speaking guides and Level III Naturalists', es: 'Guías profesionales y Naturalistas Nivel III' },
-      { en: '11 nights accommodation (hotels Club or VIP / Amazon lodge / Galápagos hotels)', es: '11 noches de alojamiento (hoteles Club o VIP / Lodge amazónico / Hoteles Galápagos)' },
-      { en: 'Daily breakfast, lunches and dinners as specified', es: 'Desayunos diarios, almuerzos y cenas según itinerario' },
-      { en: 'Snorkeling equipment for organized boat excursions', es: 'Equipo de snorkel para excursiones en barco' },
-      { en: 'All entrance fees: La Compañía, Intiñan, Papallacta, Paikawe, Galápagos sites', es: 'Todas las entradas según programa' }
+      { en: 'All entrance fees: La Compañía, Intiñan, Papallacta, Paikawe, Galápagos sites', es: 'Todas las entradas según programa' },
+      { en: 'Snorkeling equipment for organized boat excursions', es: 'Equipo de snorkel para excursiones en barco' }
     ],
     exclusions: [
       { en: 'Galápagos National Park entrance fee: USD 200.00 foreign / USD 6.00 national', es: 'Entrada al Parque Nacional Galápagos: USD 200.00 extranjeros / USD 6.00 nacionales' },
@@ -3162,12 +3162,12 @@ const multiDayTours: Tour[] = [
       { en: 'Las Grietas Crystal-Clear Volcanic Chasm', es: 'Cañón Volcánico de Las Grietas', zh: '拉斯格里塔斯火山峡谷潜水' }
     ],
     inclusions: [
+      { en: '10 nights accommodation (Club or VIP hotels in mainland & Galápagos)', es: '10 noches de alojamiento (hoteles Club o VIP en continente y Galápagos)' },
+      { en: 'Daily breakfast, plus specified lunches in Puyo and Isabela', es: 'Desayunos diarios, y almuerzos incluidos en Puyo e Isabela' },
       { en: 'Airport assistance and private transfers', es: 'Asistencia en aeropuerto y traslados privados' },
       { en: 'Private transportation throughout mainland Ecuador', es: 'Transporte privado en Ecuador continental' },
       { en: 'Plane Ticket (Quito – Baltra – Quito)', es: 'Boleto aéreo Quito – Baltra – Quito' },
       { en: 'Professional English-speaking guides and Level III Naturalists', es: 'Guías profesionales bilingües y Naturalistas Nivel III' },
-      { en: '10 nights accommodation (Club or VIP hotels in mainland & Galápagos)', es: '10 noches de alojamiento (hoteles Club o VIP en continente y Galápagos)' },
-      { en: 'Daily breakfast, plus specified lunches in Puyo and Isabela', es: 'Desayunos diarios, y almuerzos incluidos en Puyo e Isabela' },
       { en: 'Entrances: Pailón del Diablo (Devil\'s Cauldron), Yanacocha, Hola Vida, Quilotoa, Galápagos sites', es: 'Todas las entradas según itinerario' }
     ],
     exclusions: [

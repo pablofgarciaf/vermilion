@@ -35,12 +35,12 @@ export function TourItinerary({ itinerary, tourTitle, tourId }: TourItineraryPro
 
       <ol ref={listRef} className="relative pt-2">
         {/* Línea de tiempo: pista y relleno que sigue la lectura (aria-hidden, decorativo) */}
-        <span aria-hidden="true" className="pointer-events-none absolute top-2 bottom-0 left-4 w-px -translate-x-1/2 bg-emerald-200 dark:bg-emerald-900 md:left-1/2" />
+        <span aria-hidden="true" className="pointer-events-none absolute top-2 left-4 w-px -translate-x-1/2 bg-emerald-200 dark:bg-emerald-900 md:left-1/2" style={{ bottom: 'var(--timeline-end, 0px)' }} />
         <span
           ref={fillRef}
           aria-hidden="true"
-          className="pointer-events-none absolute top-2 bottom-0 left-4 w-px -translate-x-1/2 origin-top bg-emerald-600 md:left-1/2"
-          style={{ transform: 'scaleY(0)' }}
+          className="pointer-events-none absolute top-2 left-4 w-px -translate-x-1/2 origin-top bg-emerald-600 md:left-1/2"
+          style={{ transform: 'scaleY(0)', bottom: 'var(--timeline-end, 0px)' }}
         />
         {itinerary.map((item, index) => {
           const { title, description } = resolveDayText(item, tourId, locale);

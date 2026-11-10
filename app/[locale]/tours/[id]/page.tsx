@@ -453,9 +453,9 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                   <Check className="w-5 h-5 text-emerald-600" />
                   <span>{getLocalizedText('What is Included?', locale)}</span>
                 </h3>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
+                <ul className="columns-1 sm:columns-2 gap-x-8 text-xs sm:text-sm text-zinc-700 dark:text-zinc-300">
                   {tour.inclusions.map((inc, i) => (
-                    <li key={i} className="flex items-start gap-2">
+                    <li key={i} className="mb-2.5 flex break-inside-avoid items-start gap-2">
                       <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <span>{getLocalizedText(inc, locale)}</span>
                     </li>
