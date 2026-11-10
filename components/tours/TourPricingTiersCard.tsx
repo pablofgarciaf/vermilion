@@ -35,11 +35,11 @@ const TIERS_CARD_I18N: Record<string, {
     premiumVip: 'Premium VIP',
     from: 'Desde',
     perGuest: 'persona',
-    clubHotel: 'Hotelería 3★ Boutique certificada',
+    clubHotel: 'Hotelería Boutique certificada',
     clubBreakfast: 'Desayuno continental diario',
     clubGuide: 'Guía naturalista privado y logística terrestre',
     btnClub: 'Personalizar Vermilion Club (Cotización)',
-    vipHotel: 'Hotelería 4★ Boutique de confort superior',
+    vipHotel: 'Hotelería Boutique de confort superior',
     vipBreakfast: 'Desayunos buffet gourmet e itinerario flexible',
     vipConcierge: 'Asistencia Concierge 24/7 & Amenidades VIP',
     btnVip: 'Personalizar Vermilion VIP (Cotización)',
@@ -53,11 +53,11 @@ const TIERS_CARD_I18N: Record<string, {
     premiumVip: 'Premium VIP',
     from: 'Starting From',
     perGuest: 'guest',
-    clubHotel: 'Certified 3★ Boutique Hotels',
+    clubHotel: 'Certified Boutique Hotels',
     clubBreakfast: 'Daily continental breakfast',
     clubGuide: 'Private naturalist guide & land logistics',
     btnClub: 'Customize Vermilion Club (Free Quote)',
-    vipHotel: 'Superior 4★ Boutique Hotels',
+    vipHotel: 'Superior Boutique Hotels',
     vipBreakfast: 'Gourmet buffet breakfast & flexible pace',
     vipConcierge: '24/7 Concierge Support & VIP Amenities',
     btnVip: 'Customize Vermilion VIP (Free Quote)',
@@ -71,11 +71,11 @@ const TIERS_CARD_I18N: Record<string, {
     premiumVip: 'Premium VIP',
     from: 'À partir de',
     perGuest: 'personne',
-    clubHotel: 'Hôtels 3★ Boutique certifiés',
+    clubHotel: 'Hôtels Boutique certifiés',
     clubBreakfast: 'Petit-déjeuner continental quotidien',
     clubGuide: 'Guide naturaliste privé & logistique terrestre',
     btnClub: 'Personnaliser Vermilion Club (Devis gratuit)',
-    vipHotel: 'Hôtels 4★ Boutique de confort supérieur',
+    vipHotel: 'Hôtels Boutique de confort supérieur',
     vipBreakfast: 'Petit-déjeuner buffet gourmet & rythme flexible',
     vipConcierge: 'Conciergerie 24/7 & commodités VIP',
     btnVip: 'Personnaliser Vermilion VIP (Devis gratuit)',
@@ -89,11 +89,11 @@ const TIERS_CARD_I18N: Record<string, {
     premiumVip: 'Premium VIP',
     from: 'Ab',
     perGuest: 'Person',
-    clubHotel: 'Zertifizierte 3★ Boutique-Hotels',
+    clubHotel: 'Zertifizierte Boutique-Hotels',
     clubBreakfast: 'Tägliches kontinentales Frühstück',
     clubGuide: 'Privater Naturführer & Landlogistik',
     btnClub: 'Vermilion Club anpassen (Kostenlos)',
-    vipHotel: 'Gehobene 4★ Boutique-Hotels',
+    vipHotel: 'Gehobene Boutique-Hotels',
     vipBreakfast: 'Gourmet-Frühstücksbuffet & flexibles Tempo',
     vipConcierge: '24/7 Concierge-Betreuung & VIP-Ausstattung',
     btnVip: 'Vermilion VIP anpassen (Kostenlos)',
@@ -107,11 +107,11 @@ const TIERS_CARD_I18N: Record<string, {
     premiumVip: 'Premium VIP',
     from: 'Da',
     perGuest: 'persona',
-    clubHotel: 'Hotel Boutique 3★ certificati',
+    clubHotel: 'Hotel Boutique certificati',
     clubBreakfast: 'Colazione continentale giornaliera',
     clubGuide: 'Guida naturalista privata & logistica terrestre',
     btnClub: 'Personalizza Vermilion Club (Preventivo)',
-    vipHotel: 'Hotel Boutique 4★ di comfort superiore',
+    vipHotel: 'Hotel Boutique di comfort superiore',
     vipBreakfast: 'Colazione a buffet gourmet & ritmo flessibile',
     vipConcierge: 'Assistenza Concierge 24/7 & Servizi VIP',
     btnVip: 'Personalizza Vermilion VIP (Preventivo)',
@@ -125,11 +125,11 @@ const TIERS_CARD_I18N: Record<string, {
     premiumVip: 'Premium VIP',
     from: 'A partir de',
     perGuest: 'pessoa',
-    clubHotel: 'Hotéis Boutique 3★ certificados',
+    clubHotel: 'Hotéis Boutique certificados',
     clubBreakfast: 'Café da manhã continental diário',
     clubGuide: 'Guia naturalista privativo & logística terrestre',
     btnClub: 'Personalizar Vermilion Club (Cotação)',
-    vipHotel: 'Hotéis Boutique 4★ de conforto superior',
+    vipHotel: 'Hotéis Boutique de conforto superior',
     vipBreakfast: 'Café da manhã buffet gourmet & ritmo flexível',
     vipConcierge: 'Suporte Concierge 24/7 & Amenidades VIP',
     btnVip: 'Personalizar Vermilion VIP (Cotação)',
@@ -161,11 +161,11 @@ const TIERS_CARD_I18N: Record<string, {
     premiumVip: '尊贵VIP',
     from: '起价',
     perGuest: '位旅客',
-    clubHotel: '甄选3★精品设计酒店',
+    clubHotel: '甄选 精品设计酒店',
     clubBreakfast: '每日提供精致欧式早餐',
     clubGuide: '专属私人自然向导及全程陆路接送',
     btnClub: '定制 Vermilion Club（免费报价）',
-    vipHotel: '高奢4★精品度假酒店',
+    vipHotel: '高奢 精品度假酒店',
     vipBreakfast: '奢享美馔自助早餐与灵活节奏',
     vipConcierge: '24/7全天候礼宾助理与VIP定制礼遇',
     btnVip: '定制 Vermilion VIP（免费报价）',
@@ -215,7 +215,7 @@ export function TourPricingTiersCard({ tour }: TourPricingTiersCardProps) {
 
       {/* Side-by-Side 2-Column Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Vermilion Club (Confort 3★) */}
+        {/* Vermilion Club (Confort ) */}
         <div
           onClick={() => handleSelectTier('club')}
           className={`rounded-2xl p-6 border-2 transition-all cursor-pointer flex flex-col justify-between space-y-5 relative overflow-hidden ${
@@ -228,7 +228,7 @@ export function TourPricingTiersCard({ tour }: TourPricingTiersCardProps) {
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200">
                 <Hotel className="w-3.5 h-3.5" />
-                <span>Vermilion Club (3★)</span>
+                <span>Vermilion Club</span>
               </span>
               <span className="text-[11px] font-semibold text-zinc-500">{tc.comfort}</span>
             </div>
@@ -272,7 +272,7 @@ export function TourPricingTiersCard({ tour }: TourPricingTiersCardProps) {
           </button>
         </div>
 
-        {/* Vermilion VIP (Premium 4★) */}
+        {/* Vermilion VIP (Premium ) */}
         <div
           onClick={() => handleSelectTier('vip')}
           className={`rounded-2xl p-6 border-2 transition-all cursor-pointer flex flex-col justify-between space-y-5 relative overflow-hidden ${
@@ -285,7 +285,7 @@ export function TourPricingTiersCard({ tour }: TourPricingTiersCardProps) {
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-amber-500 to-amber-600 text-stone-950 shadow-md">
                 <Sparkles className="w-3.5 h-3.5 fill-stone-950" />
-                <span>Vermilion VIP (4★)</span>
+                <span>Vermilion VIP</span>
               </span>
               <span className="text-[11px] font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">{tc.premiumVip}</span>
             </div>

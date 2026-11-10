@@ -16,14 +16,14 @@ interface TourSubNavProps {
 }
 
 const SUBNAV_I18N: Record<string, { reviews: string; club: string; vip: string; book: string; contact: string; whatsapp: string; call: string }> = {
-  es: { reviews: 'opiniones verificadas', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Reservar', contact: 'Contacto', whatsapp: 'WhatsApp', call: 'Llamar' },
-  en: { reviews: 'verified reviews', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Book', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Call' },
-  fr: { reviews: 'avis vérifiés', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Réserver', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Appeler' },
-  de: { reviews: 'verifizierte Bewertungen', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Buchen', contact: 'Kontakt', whatsapp: 'WhatsApp', call: 'Anrufen' },
-  it: { reviews: 'recensioni verificate', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Prenota', contact: 'Contatto', whatsapp: 'WhatsApp', call: 'Chiama' },
-  pt: { reviews: 'avaliações verificadas', club: 'Club (3★)', vip: 'VIP (4★)', book: 'Reservar', contact: 'Contato', whatsapp: 'WhatsApp', call: 'Ligar' },
-  ja: { reviews: '認証済みレビュー', club: 'Club (3★)', vip: 'VIP (4★)', book: '予約する', contact: '連絡先', whatsapp: 'WhatsApp', call: '電話' },
-  zh: { reviews: '条真实住客点评', club: 'Club (3★)', vip: 'VIP (4★)', book: '预订', contact: '联系我们', whatsapp: 'WhatsApp', call: '拨打电话' },
+  es: { reviews: 'opiniones verificadas', club: 'Club', vip: 'VIP', book: 'Reservar', contact: 'Contacto', whatsapp: 'WhatsApp', call: 'Llamar' },
+  en: { reviews: 'verified reviews', club: 'Club', vip: 'VIP', book: 'Book', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Call' },
+  fr: { reviews: 'avis vérifiés', club: 'Club', vip: 'VIP', book: 'Réserver', contact: 'Contact', whatsapp: 'WhatsApp', call: 'Appeler' },
+  de: { reviews: 'verifizierte Bewertungen', club: 'Club', vip: 'VIP', book: 'Buchen', contact: 'Kontakt', whatsapp: 'WhatsApp', call: 'Anrufen' },
+  it: { reviews: 'recensioni verificate', club: 'Club', vip: 'VIP', book: 'Prenota', contact: 'Contatto', whatsapp: 'WhatsApp', call: 'Chiama' },
+  pt: { reviews: 'avaliações verificadas', club: 'Club', vip: 'VIP', book: 'Reservar', contact: 'Contato', whatsapp: 'WhatsApp', call: 'Ligar' },
+  ja: { reviews: '認証済みレビュー', club: 'Club', vip: 'VIP', book: '予約する', contact: '連絡先', whatsapp: 'WhatsApp', call: '電話' },
+  zh: { reviews: '条真实住客点评', club: 'Club', vip: 'VIP', book: '预订', contact: '联系我们', whatsapp: 'WhatsApp', call: '拨打电话' },
 };
 
 export function TourSubNav({ title, duration, tour, locale }: TourSubNavProps) {
