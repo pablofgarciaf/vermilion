@@ -516,5 +516,49 @@
     "reservations": "Réservations",
     "whatsapp": "WhatsApp",
     "ariaLabel": "Navigation rapide"
+  },
+  "consent": {
+    "title": "Cookies et confidentialité",
+    "bodyOptIn": "Nous n’utilisons les cookies de suivi que si vous les acceptez. Sinon, nous n’enregistrons aucun identifiant de visiteur ; nous comptons seulement les clics de façon anonyme. Les cookies techniques nécessaires restent actifs.",
+    "bodyNotice": "Nous utilisons des cookies techniques nécessaires et, si vous acceptez, des cookies de suivi pour mesurer les campagnes performantes. Vous pouvez les refuser dès maintenant : aucun identifiant ne sera enregistré.",
+    "accept": "Accepter les cookies",
+    "reject": "Refuser les cookies optionnels",
+    "policy": "Voir la politique de confidentialité"
+  },
+  "socialRedirect": {
+    "whatsappPrefill": "Bonjour Vermilion Routes ! J’ai vu votre contenu et j’aimerais des informations sur vos expéditions."
+  },
+  "crmVisitors": {
+    "openButton": "Données des visiteurs",
+    "title": "Données des visiteurs",
+    "description": "Clics TikTok et Facebook vers WhatsApp des visiteurs ayant accepté les cookies de suivi. L’identifiant est anonyme et ne contient aucune donnée personnelle.",
+    "searchPlaceholder": "Rechercher…",
+    "exportCsv": "Exporter en CSV",
+    "refresh": "Actualiser",
+    "close": "Fermer",
+    "loading": "Chargement des visiteurs…",
+    "error": "Impossible de charger les données : {error}",
+    "empty": "Aucun visiteur ayant consenti n’est encore enregistré.",
+    "noResults": "Aucun enregistrement ne correspond à votre recherche.",
+    "count": "{count} enregistrements",
+    "colDate": "Date",
+    "colChannel": "Canal",
+    "colVideo": "Vidéo",
+    "colCampaign": "Campagne",
+    "colPage": "Page",
+    "colLocale": "Langue",
+    "colCountry": "Pays",
+    "colVisitor": "ID anonyme",
+    "networkError": "Impossible de joindre le serveur."
+  },
+  "privacyCookies": {
+    "title": "8. Liens TikTok et Facebook et cookies de suivi",
+    "intro": "Lorsque vous arrivez sur WhatsApp depuis un lien TikTok ou Facebook, nous pouvons enregistrer l’origine de la visite pour mesurer nos campagnes. Nous ne conservons des données de visiteur qu’avec votre consentement, dans ce cadre :",
+    "item1": "Cookie de choix : conserve pendant 180 jours votre acceptation ou refus des cookies optionnels.",
+    "item2": "Cookie visiteur (identifiant anonyme aléatoire, HttpOnly, SameSite=Lax) : expire après 90 jours. Il n’est créé que si vous acceptez.",
+    "item3": "Données enregistrées uniquement avec consentement : canal, vidéo, campagne, page, langue, pays (code à 2 lettres), date et heure, et identifiant anonyme. Nous ne stockons ni téléphone, ni nom, ni e-mail, ni adresse IP complète : l’IP ne sert qu’à déduire le pays, puis elle est supprimée.",
+    "item4": "Si vous refusez, ou si votre navigateur envoie Global Privacy Control, aucun identifiant n’est enregistré : le clic est seulement ajouté à un compteur anonyme par canal et par jour, sans cookies.",
+    "regions": "Selon votre pays, le consentement est demandé avant l’activation du suivi (Union européenne, Royaume-Uni, Suisse, Norvège, Islande et Liechtenstein). Dans le reste du monde, vous pouvez refuser dès le premier instant.",
+    "rights": "Vous pouvez modifier votre choix à tout moment via le lien « Cookies » du pied de page et exercer vos droits comme indiqué à la section 7."
   }
 }

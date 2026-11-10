@@ -516,5 +516,49 @@
     "reservations": "Bookings",
     "whatsapp": "WhatsApp",
     "ariaLabel": "Quick navigation"
+  },
+  "consent": {
+    "title": "Cookies and privacy",
+    "bodyOptIn": "We use tracking cookies only if you accept them. If you do not, we store no visitor identifiers; we only count clicks anonymously. Necessary technical cookies stay active.",
+    "bodyNotice": "We use necessary technical cookies and, if you accept, tracking cookies to measure which campaigns work. You can reject them right now: we will not store any identifier.",
+    "accept": "Accept cookies",
+    "reject": "Reject optional cookies",
+    "policy": "View privacy policy"
+  },
+  "socialRedirect": {
+    "whatsappPrefill": "Hi Vermilion Routes! I saw your content and would like information about your expeditions."
+  },
+  "crmVisitors": {
+    "openButton": "Visitor data",
+    "title": "Visitor data",
+    "description": "TikTok and Facebook clicks to WhatsApp from visitors who accepted tracking cookies. The identifier is anonymous and holds no personal data.",
+    "searchPlaceholder": "Search…",
+    "exportCsv": "Export CSV",
+    "refresh": "Refresh",
+    "close": "Close",
+    "loading": "Loading visitors…",
+    "error": "Could not load data: {error}",
+    "empty": "No visitors with consent recorded yet.",
+    "noResults": "No records match your search.",
+    "count": "{count} records",
+    "colDate": "Date",
+    "colChannel": "Channel",
+    "colVideo": "Video",
+    "colCampaign": "Campaign",
+    "colPage": "Page",
+    "colLocale": "Language",
+    "colCountry": "Country",
+    "colVisitor": "Anonymous ID",
+    "networkError": "Could not connect to the server."
+  },
+  "privacyCookies": {
+    "title": "8. TikTok and Facebook links and tracking cookies",
+    "intro": "When you reach WhatsApp from a TikTok or Facebook link, we may record where the visit came from to measure campaigns. We only store visitor data with your consent, within this scope:",
+    "item1": "Choice cookie: stores whether you accepted or rejected optional cookies for 180 days.",
+    "item2": "Visitor cookie (random anonymous identifier, HttpOnly, SameSite=Lax): expires after 90 days. It is only created if you accept.",
+    "item3": "Data recorded only with consent: channel, video, campaign, page, language, country (2-letter code), date and time, and the anonymous identifier. We do not store phone number, name, email or the full IP address: the IP is only used to derive the country and is then discarded.",
+    "item4": "If you reject, or your browser sends Global Privacy Control, no identifier is stored: the click is only added to an anonymous daily counter per channel, without cookies.",
+    "regions": "Depending on your country, consent is requested before tracking is enabled (European Union, United Kingdom, Switzerland, Norway, Iceland and Liechtenstein). Elsewhere you can reject tracking from the first moment.",
+    "rights": "You can change your choice at any time with the “Cookies” link in the footer and exercise your rights as described in section 7."
   }
 }

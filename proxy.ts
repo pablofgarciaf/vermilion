@@ -176,6 +176,12 @@ export default function proxy(req: NextRequest) {
     return NextResponse.redirect(`https://www.vermilionroutes.com${pathname}${search}`, 301);
   }
 
+  // Enlaces de TikTok y Facebook (/go/[channel]): la ruta responde directamente con un 302 a
+  // WhatsApp. Se excluyen del prefijo de idioma de next-intl para no añadir un salto extra.
+  if (pathname === '/go' || pathname.startsWith('/go/')) {
+    return NextResponse.next();
+  }
+
   // Rutas canónicas de afiliados y administración permitidas en todos los dominios autorizados
 
   // --------------------------------------------------------------------------

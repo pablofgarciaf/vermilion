@@ -53,6 +53,7 @@ import { auth, db } from '@/lib/firebase';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useCrmData } from '@/hooks/useCrmData';
+import { VisitorDataPanel } from './VisitorDataPanel';
 import { 
   SystemUser, 
   CrmLead, 
@@ -67,6 +68,7 @@ import {
 export function AdminCrmDashboard() {
   const locale = useLocale();
   const tNav = useTranslations('adminNav');
+  const tVisitors = useTranslations('crmVisitors');
   const isEs = locale === 'es';
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -102,6 +104,9 @@ export function AdminCrmDashboard() {
     tabParam === 'amenities' ? 'amenities' : 'overview'
   );
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  // Datos de visitantes (TikTok/Facebook con consentimiento): solo super y admin.
+  const [showVisitors, setShowVisitors] = useState(false);
+  const canSeeVisitors = activeRoleView === 'super' || activeRoleView === 'admin';
 
   const tabLabels: Record<CrmTab, string> = {
     overview: 'Tablero Ejecutivo (BI)',
@@ -782,6 +787,17 @@ export function AdminCrmDashboard() {
           </div>
 
           <div className="flex items-center gap-3">
+            {canSeeVisitors && (
+              <button
+                type="button"
+                onClick={() => setShowVisitors((open) => !open)}
+                aria-expanded={showVisitors}
+                className="px-4 py-2.5 rounded-xl border border-emerald-900/60 bg-emerald-950/50 text-emerald-200 font-bold uppercase tracking-wider text-xs flex items-center gap-2 hover:bg-emerald-900/60 transition-all cursor-pointer"
+              >
+                <Users className="w-4 h-4" />
+                <span>{tVisitors('openButton')}</span>
+              </button>
+            )}
             {activeTab === 'sales' && (
               <button
                 onClick={() => setShowQuoterModal(true)}
@@ -803,6 +819,12 @@ export function AdminCrmDashboard() {
             )}
           </div>
         </header>
+
+        {canSeeVisitors && showVisitors && (
+          <div className="mb-6">
+            <VisitorDataPanel onClose={() => setShowVisitors(false)} />
+          </div>
+        )}
 
         {/* ── TAB 1: TABLERO EJECUTIVO (BI) ─────────────────────────────────── */}
         {activeTab === 'overview' && (

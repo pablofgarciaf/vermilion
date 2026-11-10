@@ -516,5 +516,49 @@
     "reservations": "Reservas",
     "whatsapp": "WhatsApp",
     "ariaLabel": "Navegación rápida"
+  },
+  "consent": {
+    "title": "Cookies y privacidad",
+    "bodyOptIn": "Usamos cookies de seguimiento solo si las aceptas. Si no lo haces, no guardamos identificadores de visitante; solo contamos clics de forma anónima. Las cookies técnicas necesarias siguen activas.",
+    "bodyNotice": "Usamos cookies técnicas necesarias y, si lo aceptas, cookies de seguimiento para medir qué campañas funcionan. Puedes rechazarlas desde ahora: no guardaremos ningún identificador.",
+    "accept": "Aceptar cookies",
+    "reject": "Rechazar cookies opcionales",
+    "policy": "Ver política de privacidad"
+  },
+  "socialRedirect": {
+    "whatsappPrefill": "¡Hola Vermilion Routes! Vi su contenido y quisiera información sobre sus expediciones."
+  },
+  "crmVisitors": {
+    "openButton": "Datos de visitantes",
+    "title": "Datos de visitantes",
+    "description": "Clics de TikTok y Facebook hacia WhatsApp de visitantes que aceptaron cookies de seguimiento. El identificador es anónimo y no contiene datos personales.",
+    "searchPlaceholder": "Buscar…",
+    "exportCsv": "Exportar CSV",
+    "refresh": "Actualizar",
+    "close": "Cerrar",
+    "loading": "Cargando visitantes…",
+    "error": "No se pudieron cargar los datos: {error}",
+    "empty": "Todavía no hay visitantes con consentimiento registrado.",
+    "noResults": "Ningún registro coincide con la búsqueda.",
+    "count": "{count} registros",
+    "colDate": "Fecha",
+    "colChannel": "Canal",
+    "colVideo": "Video",
+    "colCampaign": "Campaña",
+    "colPage": "Página",
+    "colLocale": "Idioma",
+    "colCountry": "País",
+    "colVisitor": "ID anónimo",
+    "networkError": "No se pudo conectar con el servidor."
+  },
+  "privacyCookies": {
+    "title": "8. Enlaces de TikTok y Facebook y cookies de seguimiento",
+    "intro": "Cuando llegas a WhatsApp desde un enlace de TikTok o Facebook, podemos registrar el origen de la visita para medir campañas. Solo guardamos datos de visitante con tu consentimiento, con este alcance:",
+    "item1": "Cookie de elección: guarda si aceptaste o rechazaste las cookies opcionales durante 180 días.",
+    "item2": "Cookie de visitante (identificador anónimo aleatorio, HttpOnly, SameSite=Lax): caduca a los 90 días. Solo se crea si aceptas.",
+    "item3": "Datos registrados solo con consentimiento: canal, video, campaña, página, idioma, país (código de 2 letras), fecha y hora, e identificador anónimo. No guardamos teléfono, nombre, correo electrónico ni la dirección IP completa: la IP solo sirve para obtener el país y se descarta.",
+    "item4": "Si rechazas, o tu navegador envía Global Privacy Control, no se guarda ningún identificador: el clic solo suma a un contador anónimo por canal y día, sin cookies.",
+    "regions": "Según tu país, el consentimiento se pide antes de activar el seguimiento (Unión Europea, Reino Unido, Suiza, Noruega, Islandia y Liechtenstein). En el resto del mundo puedes rechazarlo desde el primer momento.",
+    "rights": "Puedes cambiar tu elección en cualquier momento con el enlace «Cookies» del pie de página y ejercer tus derechos como indica la sección 7."
   }
 }

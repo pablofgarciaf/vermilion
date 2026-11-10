@@ -516,5 +516,49 @@
     "reservations": "予約",
     "whatsapp": "WhatsApp",
     "ariaLabel": "クイックナビ"
+  },
+  "consent": {
+    "title": "Cookie とプライバシー",
+    "bodyOptIn": "追跡 Cookie は、同意いただいた場合にのみ使用します。同意がない場合、訪問者の識別子は保存せず、クリック数を匿名で集計するだけです。必要な技術的 Cookie は引き続き有効です。",
+    "bodyNotice": "必要な技術的 Cookie を使用し、同意いただいた場合は施策の効果測定のために追跡 Cookie を使用します。今すぐ拒否することもでき、その場合は識別子を一切保存しません。",
+    "accept": "Cookie を許可",
+    "reject": "任意の Cookie を拒否",
+    "policy": "プライバシーポリシーを見る"
+  },
+  "socialRedirect": {
+    "whatsappPrefill": "こんにちは、Vermilion Routes さん！投稿を拝見しました。エクスペディションについて詳しく知りたいです。"
+  },
+  "crmVisitors": {
+    "openButton": "訪問者データ",
+    "title": "訪問者データ",
+    "description": "追跡 Cookie に同意した訪問者による、TikTok・Facebook から WhatsApp へのクリックです。識別子は匿名で、個人データは含まれません。",
+    "searchPlaceholder": "検索…",
+    "exportCsv": "CSV を書き出す",
+    "refresh": "更新",
+    "close": "閉じる",
+    "loading": "訪問者を読み込み中…",
+    "error": "データを読み込めませんでした: {error}",
+    "empty": "同意済みの訪問者はまだ記録されていません。",
+    "noResults": "検索に一致する記録はありません。",
+    "count": "{count} 件",
+    "colDate": "日時",
+    "colChannel": "チャネル",
+    "colVideo": "動画",
+    "colCampaign": "キャンペーン",
+    "colPage": "ページ",
+    "colLocale": "言語",
+    "colCountry": "国",
+    "colVisitor": "匿名ID",
+    "networkError": "サーバーに接続できませんでした。"
+  },
+  "privacyCookies": {
+    "title": "8. TikTok・Facebook のリンクと追跡 Cookie",
+    "intro": "TikTok または Facebook のリンクから WhatsApp に移動した場合、キャンペーンの効果を測るために訪問の経路を記録することがあります。訪問者データは、以下の範囲で同意をいただいた場合にのみ保存します。",
+    "item1": "選択 Cookie：任意 Cookie を許可したか拒否したかを 180 日間保存します。",
+    "item2": "訪問者 Cookie（ランダムな匿名識別子、HttpOnly、SameSite=Lax）：90 日後に失効します。同意いただいた場合にのみ作成されます。",
+    "item3": "同意をいただいた場合にのみ記録するデータ：チャネル、動画、キャンペーン、ページ、言語、国（2 文字のコード）、日時、匿名識別子。電話番号、氏名、メールアドレス、IP アドレスの全体は保存しません。IP アドレスは国の判定にのみ使用し、その後破棄します。",
+    "item4": "拒否された場合、またはブラウザが Global Privacy Control を送信している場合、識別子は一切保存しません。クリックは、チャネルごと・日ごとの匿名カウンターに加算されるだけで、Cookie は使用しません。",
+    "regions": "お住まいの国・地域により、追跡を有効にする前に同意をお願いします（欧州連合、英国、スイス、ノルウェー、アイスランド、リヒテンシュタイン）。それ以外の地域では、最初から拒否することができます。",
+    "rights": "フッターの「Cookie」リンクからいつでも選択を変更でき、第 7 項に従って権利を行使できます。"
   }
 }

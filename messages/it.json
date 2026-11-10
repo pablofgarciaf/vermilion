@@ -516,5 +516,49 @@
     "reservations": "Prenotazioni",
     "whatsapp": "WhatsApp",
     "ariaLabel": "Navigazione rapida"
+  },
+  "consent": {
+    "title": "Cookie e privacy",
+    "bodyOptIn": "Usiamo i cookie di tracciamento solo se li accetti. In caso contrario non salviamo identificativi di visitatore e contiamo i clic solo in forma anonima. I cookie tecnici necessari restano attivi.",
+    "bodyNotice": "Usiamo cookie tecnici necessari e, se accetti, cookie di tracciamento per misurare le campagne. Puoi rifiutarli subito: non salveremo alcun identificativo.",
+    "accept": "Accetta cookie",
+    "reject": "Rifiuta cookie opzionali",
+    "policy": "Vedi la privacy policy"
+  },
+  "socialRedirect": {
+    "whatsappPrefill": "Ciao Vermilion Routes! Ho visto il vostro contenuto e vorrei informazioni sulle vostre spedizioni."
+  },
+  "crmVisitors": {
+    "openButton": "Dati visitatori",
+    "title": "Dati visitatori",
+    "description": "Clic da TikTok e Facebook verso WhatsApp di visitatori che hanno accettato i cookie di tracciamento. L’identificativo è anonimo e non contiene dati personali.",
+    "searchPlaceholder": "Cerca…",
+    "exportCsv": "Esporta CSV",
+    "refresh": "Aggiorna",
+    "close": "Chiudi",
+    "loading": "Caricamento visitatori…",
+    "error": "Impossibile caricare i dati: {error}",
+    "empty": "Nessun visitatore con consenso registrato finora.",
+    "noResults": "Nessun record corrisponde alla ricerca.",
+    "count": "{count} record",
+    "colDate": "Data",
+    "colChannel": "Canale",
+    "colVideo": "Video",
+    "colCampaign": "Campagna",
+    "colPage": "Pagina",
+    "colLocale": "Lingua",
+    "colCountry": "Paese",
+    "colVisitor": "ID anonimo",
+    "networkError": "Impossibile connettersi al server."
+  },
+  "privacyCookies": {
+    "title": "8. Link di TikTok e Facebook e cookie di tracciamento",
+    "intro": "Quando raggiungi WhatsApp da un link di TikTok o Facebook, possiamo registrare la provenienza della visita per misurare le campagne. Conserviamo dati del visitatore solo con il tuo consenso, nei limiti seguenti:",
+    "item1": "Cookie di scelta: memorizza per 180 giorni se hai accettato o rifiutato i cookie opzionali.",
+    "item2": "Cookie visitatore (identificativo anonimo casuale, HttpOnly, SameSite=Lax): scade dopo 90 giorni. Viene creato solo se accetti.",
+    "item3": "Dati registrati solo con consenso: canale, video, campagna, pagina, lingua, paese (codice a 2 lettere), data e ora, e identificativo anonimo. Non conserviamo telefono, nome, e-mail né l’indirizzo IP completo: l’IP serve solo a ricavare il paese e viene poi eliminato.",
+    "item4": "Se rifiuti, o il tuo browser invia Global Privacy Control, non viene salvato alcun identificativo: il clic si aggiunge solo a un contatore anonimo giornaliero per canale, senza cookie.",
+    "regions": "A seconda del paese, il consenso viene richiesto prima di attivare il tracciamento (Unione Europea, Regno Unito, Svizzera, Norvegia, Islanda e Liechtenstein). Nel resto del mondo puoi rifiutarlo fin dal primo momento.",
+    "rights": "Puoi cambiare la tua scelta in qualsiasi momento con il link «Cookie» nel piè di pagina ed esercitare i tuoi diritti come indicato nella sezione 7."
   }
 }

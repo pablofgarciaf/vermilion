@@ -516,5 +516,49 @@
     "reservations": "Buchungen",
     "whatsapp": "WhatsApp",
     "ariaLabel": "Schnellnavigation"
+  },
+  "consent": {
+    "title": "Cookies und Datenschutz",
+    "bodyOptIn": "Wir verwenden Tracking-Cookies nur, wenn Sie zustimmen. Andernfalls speichern wir keine Besucherkennungen; Klicks zählen wir nur anonym. Notwendige technische Cookies bleiben aktiv.",
+    "bodyNotice": "Wir verwenden notwendige technische Cookies und, wenn Sie zustimmen, Tracking-Cookies, um Kampagnen zu messen. Sie können jetzt ablehnen: Dann speichern wir keine Kennung.",
+    "accept": "Cookies akzeptieren",
+    "reject": "Optionale Cookies ablehnen",
+    "policy": "Datenschutzerklärung ansehen"
+  },
+  "socialRedirect": {
+    "whatsappPrefill": "Hallo Vermilion Routes! Ich habe Ihren Inhalt gesehen und möchte Informationen zu Ihren Expeditionen."
+  },
+  "crmVisitors": {
+    "openButton": "Besucherdaten",
+    "title": "Besucherdaten",
+    "description": "Klicks von TikTok und Facebook zu WhatsApp von Besuchern, die Tracking-Cookies akzeptiert haben. Die Kennung ist anonym und enthält keine personenbezogenen Daten.",
+    "searchPlaceholder": "Suchen…",
+    "exportCsv": "CSV exportieren",
+    "refresh": "Aktualisieren",
+    "close": "Schließen",
+    "loading": "Besucher werden geladen…",
+    "error": "Daten konnten nicht geladen werden: {error}",
+    "empty": "Noch keine Besucher mit Einwilligung erfasst.",
+    "noResults": "Keine Einträge entsprechen der Suche.",
+    "count": "{count} Einträge",
+    "colDate": "Datum",
+    "colChannel": "Kanal",
+    "colVideo": "Video",
+    "colCampaign": "Kampagne",
+    "colPage": "Seite",
+    "colLocale": "Sprache",
+    "colCountry": "Land",
+    "colVisitor": "Anonyme ID",
+    "networkError": "Verbindung zum Server nicht möglich."
+  },
+  "privacyCookies": {
+    "title": "8. TikTok- und Facebook-Links und Tracking-Cookies",
+    "intro": "Wenn Sie über einen TikTok- oder Facebook-Link zu WhatsApp gelangen, können wir die Herkunft des Besuchs erfassen, um Kampagnen zu messen. Besucherdaten speichern wir nur mit Ihrer Einwilligung und im folgenden Umfang:",
+    "item1": "Auswahl-Cookie: speichert 180 Tage lang, ob Sie optionale Cookies akzeptiert oder abgelehnt haben.",
+    "item2": "Besucher-Cookie (zufällige anonyme Kennung, HttpOnly, SameSite=Lax): läuft nach 90 Tagen ab. Es wird nur erstellt, wenn Sie zustimmen.",
+    "item3": "Nur mit Einwilligung erfasste Daten: Kanal, Video, Kampagne, Seite, Sprache, Land (2-stelliger Code), Datum und Uhrzeit sowie die anonyme Kennung. Wir speichern weder Telefonnummer, Name, E-Mail-Adresse noch die vollständige IP-Adresse: Die IP dient nur der Ermittlung des Landes und wird danach verworfen.",
+    "item4": "Wenn Sie ablehnen oder Ihr Browser Global Privacy Control sendet, wird keine Kennung gespeichert: Der Klick wird nur einem anonymen Tageszähler pro Kanal hinzugefügt, ohne Cookies.",
+    "regions": "Je nach Land wird Ihre Einwilligung vor Aktivierung des Trackings eingeholt (Europäische Union, Vereinigtes Königreich, Schweiz, Norwegen, Island und Liechtenstein). Weltweit können Sie das Tracking von Anfang an ablehnen.",
+    "rights": "Sie können Ihre Auswahl jederzeit über den Link „Cookies“ im Fußbereich ändern und Ihre Rechte gemäß Abschnitt 7 ausüben."
   }
 }

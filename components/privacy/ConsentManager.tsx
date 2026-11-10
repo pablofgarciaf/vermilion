@@ -1,7 +1,10 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { setConsentCookie, type ConsentRegion } from '@/lib/consent/constants';
 
+/** 'essential' se mantiene por compatibilidad con la clave guardada en localStorage. */
 type ConsentChoice = 'accepted' | 'essential';
 
 type ConsentManagerProps = {
@@ -22,80 +25,6 @@ declare global {
 
 const STORAGE_KEY = 'vr_privacy_consent_v1';
 
-const copy: Record<string, {
-  title: string;
-  body: string;
-  accept: string;
-  essential: string;
-  manage: string;
-  policy: string;
-}> = {
-  es: {
-    title: 'Cookies y privacidad',
-    body: 'Puedes aceptar cookies opcionales para mejorar la web o rechazarlas. Si las rechazas, no activamos analítica, anuncios, Meta Pixel ni Clarity; solo queda lo técnico necesario para que el sitio funcione.',
-    accept: 'Aceptar cookies',
-    essential: 'Rechazar cookies opcionales',
-    manage: 'Cookies',
-    policy: 'Ver política de privacidad',
-  },
-  en: {
-    title: 'Cookies and privacy',
-    body: 'You can accept optional cookies to improve the website or reject them. If you reject them, we do not enable analytics, ads, Meta Pixel, or Clarity; only the technical essentials remain.',
-    accept: 'Accept cookies',
-    essential: 'Reject optional cookies',
-    manage: 'Cookies',
-    policy: 'View privacy policy',
-  },
-  fr: {
-    title: 'Cookies et confidentialité',
-    body: 'Vous pouvez accepter les cookies optionnels pour améliorer le site ou les refuser. En cas de refus, nous n’activons pas l’analyse, les annonces, Meta Pixel ni Clarity.',
-    accept: 'Accepter les cookies',
-    essential: 'Refuser les cookies optionnels',
-    manage: 'Cookies',
-    policy: 'Voir la politique de confidentialité',
-  },
-  de: {
-    title: 'Cookies und Datenschutz',
-    body: 'Sie können optionale Cookies zur Verbesserung der Website akzeptieren oder ablehnen. Bei Ablehnung aktivieren wir keine Analyse, Anzeigen, Meta Pixel oder Clarity.',
-    accept: 'Cookies akzeptieren',
-    essential: 'Optionale Cookies ablehnen',
-    manage: 'Cookies',
-    policy: 'Datenschutz ansehen',
-  },
-  zh: {
-    title: 'Cookie 与隐私',
-    body: '您可以接受可选 Cookie 来改进网站，也可以拒绝它们。拒绝后，我们不会启用分析、广告、Meta Pixel 或 Clarity，只保留网站运行所需的技术项目。',
-    accept: '接受 Cookie',
-    essential: '拒绝可选 Cookie',
-    manage: 'Cookies',
-    policy: '查看隐私政策',
-  },
-  it: {
-    title: 'Cookie e privacy',
-    body: 'Puoi accettare i cookie opzionali per migliorare il sito oppure rifiutarli. Se li rifiuti, non attiviamo analisi, annunci, Meta Pixel o Clarity.',
-    accept: 'Accetta cookie',
-    essential: 'Rifiuta cookie opzionali',
-    manage: 'Cookies',
-    policy: 'Vedi privacy policy',
-  },
-  pt: {
-    title: 'Cookies e privacidade',
-    body: 'Pode aceitar cookies opcionais para melhorar o site ou rejeitá-los. Se rejeitar, não ativamos análise, anúncios, Meta Pixel ou Clarity.',
-    accept: 'Aceitar cookies',
-    essential: 'Rejeitar cookies opcionais',
-    manage: 'Cookies',
-    policy: 'Ver política de privacidade',
-  },
-  ja: {
-    title: 'Cookie とプライバシー',
-    body: 'サイト改善のために任意 Cookie を許可するか拒否できます。拒否した場合、分析、広告、Meta Pixel、Clarity は有効にしません。',
-    accept: 'Cookie を許可',
-    essential: '任意 Cookie を拒否',
-    manage: 'Cookies',
-    policy: 'プライバシーポリシー',
-  },
-};
-
 function ensureGtag() {
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function gtagShim(...args: unknown[]) {
@@ -112,9 +41,35 @@ function loadExternalScript(id: string, src: string) {
   document.head.appendChild(script);
 }
 
+function readSavedChoice(): ConsentChoice | null {
+  try {
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    return saved === 'accepted' || saved === 'essential' ? saved : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Región (UE/Reino Unido/Suiza/EEE o resto del mundo) y Global Privacy Control desde el servidor. */
+async function fetchConsentContext(locale: string): Promise<{ region: ConsentRegion; gpc: boolean }> {
+  try {
+    const res = await fetch(`/api/consent/context?locale=${encodeURIComponent(locale)}`, { cache: 'no-store' });
+    const json = (await res.json()) as { region?: string; gpc?: boolean };
+    return { region: json.region === 'notice' ? 'notice' : 'optin', gpc: json.gpc === true };
+  } catch {
+    // Si no se puede saber el país, se aplica la regla más estricta (consentimiento previo).
+    return { region: 'optin', gpc: false };
+  }
+}
+
+function browserSendsGpc(): boolean {
+  return (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
+}
+
 export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: ConsentManagerProps) {
+  const t = useTranslations('consent');
   const [visible, setVisible] = useState(false);
-  const t = useMemo(() => copy[locale] || copy.en, [locale]);
+  const [region, setRegion] = useState<ConsentRegion>('optin');
   const policyHref = `/${locale}/privacy-policy`;
 
   const applyConsent = useCallback((choice: ConsentChoice) => {
@@ -165,68 +120,95 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
     }
   }, [clarityProjectId, gaId, metaPixelId]);
 
-  useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY) as ConsentChoice | null;
+  const saveChoice = useCallback((choice: ConsentChoice, source: 'user' | 'gpc', regionUsed: ConsentRegion) => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, choice);
+      window.localStorage.setItem(`${STORAGE_KEY}_record`, JSON.stringify({
+        choice,
+        source,
+        region: regionUsed,
+        updatedAt: new Date().toISOString(),
+        version: 2,
+      }));
+    } catch {
+      // Sin almacenamiento local el consentimiento vale solo para esta visita.
+    }
+    setConsentCookie(choice === 'accepted' ? 'accepted' : 'rejected');
+    applyConsent(choice);
+    setVisible(false);
+  }, [applyConsent]);
 
-    if (saved === 'accepted' || saved === 'essential') {
+  useEffect(() => {
+    const saved = readSavedChoice();
+    if (saved) {
+      setConsentCookie(saved === 'accepted' ? 'accepted' : 'rejected');
       applyConsent(saved);
       return;
     }
 
-    setVisible(true);
-  }, [applyConsent]);
+    let cancelled = false;
+    fetchConsentContext(locale).then(({ region: detected, gpc }) => {
+      if (cancelled) return;
+      setRegion(detected);
+      // Global Privacy Control se trata como rechazo: no se muestra el aviso y no se guarda nada.
+      if (gpc || browserSendsGpc()) {
+        saveChoice('essential', 'gpc', detected);
+        return;
+      }
+      setVisible(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [applyConsent, locale, saveChoice]);
 
-  const saveChoice = (choice: ConsentChoice) => {
-    window.localStorage.setItem(STORAGE_KEY, choice);
-    window.localStorage.setItem(`${STORAGE_KEY}_record`, JSON.stringify({
-      choice,
-      updatedAt: new Date().toISOString(),
-      version: 1,
-    }));
-    applyConsent(choice);
-    setVisible(false);
-  };
-
-  // Tras elegir no queda ningún botón flotante: el enlace "Cookies" del pie
-  // (Footer.tsx) dispara este evento para volver a abrir el aviso.
+  // Tras elegir no queda ningún botón flotante: el enlace "Cookies" del pie (Footer.tsx) dispara
+  // este evento para volver a abrir el aviso.
   useEffect(() => {
-    const open = () => setVisible(true);
+    const open = () => {
+      fetchConsentContext(locale).then(({ region: detected }) => {
+        setRegion(detected);
+        setVisible(true);
+      });
+    };
     window.addEventListener('vr-open-consent', open);
     return () => window.removeEventListener('vr-open-consent', open);
-  }, []);
+  }, [locale]);
 
   if (!visible) return null;
+
+  const body = region === 'optin' ? t('bodyOptIn') : t('bodyNotice');
 
   return (
     // Franja compacta abajo: no tapa la galería ni el contenido. Las dos opciones tienen
     // exactamente el mismo estilo (mismo peso visual), como exige el consentimiento libre.
     <section
-      aria-label={t.title}
+      aria-label={t('title')}
       className="fixed inset-x-0 bottom-0 z-[80] border-t border-white/10 bg-zinc-950/95 text-white shadow-[0_-8px_30px_rgba(0,0,0,0.35)] backdrop-blur-md"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-2.5 px-4 py-3 md:flex-row md:items-center md:gap-6">
         <p className="text-xs leading-snug text-zinc-200 md:text-[13px]">
-          <span className="font-semibold text-white">{t.title}.</span>{' '}
-          {t.body}{' '}
+          <span className="font-semibold text-white">{t('title')}.</span>{' '}
+          {body}{' '}
           <a href={policyHref} className="font-semibold text-emerald-300 underline underline-offset-2 hover:text-emerald-200">
-            {t.policy}
+            {t('policy')}
           </a>
         </p>
         <div className="grid shrink-0 grid-cols-2 gap-2 md:flex">
           <button
             type="button"
-            onClick={() => saveChoice('essential')}
+            onClick={() => saveChoice('essential', 'user', region)}
             className="min-h-10 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 md:whitespace-nowrap"
           >
-            {t.essential}
+            {t('reject')}
           </button>
           <button
             type="button"
-            onClick={() => saveChoice('accepted')}
+            onClick={() => saveChoice('accepted', 'user', region)}
             className="min-h-10 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/20 md:whitespace-nowrap"
           >
-            {t.accept}
+            {t('accept')}
           </button>
         </div>
       </div>

@@ -516,5 +516,49 @@
     "reservations": "我的预订",
     "whatsapp": "WhatsApp",
     "ariaLabel": "快速导航"
+  },
+  "consent": {
+    "title": "Cookie 与隐私",
+    "bodyOptIn": "只有在您同意后，我们才会使用追踪 Cookie。如果不同意，我们不会保存访客标识，只会匿名统计点击次数。必要的技术 Cookie 仍然有效。",
+    "bodyNotice": "我们使用必要的技术 Cookie；如果您同意，还会使用追踪 Cookie 来衡量推广效果。您现在即可拒绝，拒绝后不会保存任何标识。",
+    "accept": "接受 Cookie",
+    "reject": "拒绝可选 Cookie",
+    "policy": "查看隐私政策"
+  },
+  "socialRedirect": {
+    "whatsappPrefill": "您好，Vermilion Routes！我看到了你们的内容，想了解你们的探险行程。"
+  },
+  "crmVisitors": {
+    "openButton": "访客数据",
+    "title": "访客数据",
+    "description": "来自已接受追踪 Cookie 的访客、从 TikTok 和 Facebook 点击进入 WhatsApp 的记录。标识符是匿名的，不包含个人数据。",
+    "searchPlaceholder": "搜索…",
+    "exportCsv": "导出 CSV",
+    "refresh": "刷新",
+    "close": "关闭",
+    "loading": "正在加载访客…",
+    "error": "无法加载数据：{error}",
+    "empty": "暂无已同意的访客记录。",
+    "noResults": "没有符合搜索条件的记录。",
+    "count": "{count} 条记录",
+    "colDate": "时间",
+    "colChannel": "渠道",
+    "colVideo": "视频",
+    "colCampaign": "活动",
+    "colPage": "页面",
+    "colLocale": "语言",
+    "colCountry": "国家",
+    "colVisitor": "匿名 ID",
+    "networkError": "无法连接到服务器。"
+  },
+  "privacyCookies": {
+    "title": "8. TikTok 与 Facebook 链接及追踪 Cookie",
+    "intro": "当您通过 TikTok 或 Facebook 链接进入 WhatsApp 时，我们可能会记录访问来源以衡量推广效果。只有在您同意的情况下，我们才会保存访客数据，范围如下：",
+    "item1": "选择 Cookie：保存您是否接受或拒绝可选 Cookie 的选择，期限 180 天。",
+    "item2": "访客 Cookie（随机匿名标识符，HttpOnly，SameSite=Lax）：90 天后过期。仅在您同意后创建。",
+    "item3": "仅在获得同意时记录的数据：渠道、视频、活动、页面、语言、国家（2 位代码）、日期和时间，以及匿名标识符。我们不保存电话、姓名、电子邮箱或完整 IP 地址：IP 仅用于判断国家，随后即被丢弃。",
+    "item4": "如果您拒绝，或您的浏览器发送了 Global Privacy Control 信号，则不保存任何标识符：点击仅计入按渠道和日期统计的匿名计数器，不使用 Cookie。",
+    "regions": "根据您所在的国家或地区，在启用追踪前会先征求同意（欧盟、英国、瑞士、挪威、冰岛和列支敦士登）。其他地区的用户可从一开始就拒绝。",
+    "rights": "您可随时通过页脚的“Cookie”链接更改选择，并按第 7 节所述行使您的权利。"
   }
 }

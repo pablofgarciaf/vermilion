@@ -2,7 +2,8 @@ import React from 'react';
 import { Metadata } from 'next';
 import { getSeoAlternates, buildOpenGraph, withBrandTail } from '@/utils/seoHelper';
 import { RelatedPagesNav } from '@/components/seo/RelatedPagesNav';
-import { ShieldCheck, Mail, Phone, MapPin, Building, Lock, FileText, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Mail, Phone, MapPin, Building, Lock, FileText, CheckCircle2, Cookie } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -40,6 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function PrivacyPolicyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const tCookies = await getTranslations({ locale, namespace: 'privacyCookies' });
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 pt-28 pb-20 px-4 sm:px-6 lg:px-8 font-sans selection:bg-emerald-500 selection:text-white">
       <div className="max-w-4xl mx-auto space-y-10">
@@ -218,6 +220,24 @@ export default async function PrivacyPolicyPage({ params }: { params: Promise<{ 
             <p>
               Depending on your location, you may also have rights under Ecuador&apos;s Organic Law on Personal Data Protection, the EU/UK GDPR, United States state privacy laws, or similar privacy rules. We will evaluate verified requests according to the law that applies to your relationship with Vermilion.
             </p>
+          </section>
+
+
+          {/* Section 8 */}
+          <section className="space-y-3 bg-zinc-900/40 border border-zinc-800/80 rounded-2xl p-6">
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <Cookie className="w-4 h-4 text-emerald-400" />
+              {tCookies('title')}
+            </h3>
+            <p>{tCookies('intro')}</p>
+            <ul className="space-y-1.5 list-disc list-inside text-zinc-300 pl-2">
+              <li>{tCookies('item1')}</li>
+              <li>{tCookies('item2')}</li>
+              <li>{tCookies('item3')}</li>
+              <li>{tCookies('item4')}</li>
+            </ul>
+            <p>{tCookies('regions')}</p>
+            <p>{tCookies('rights')}</p>
           </section>
 
         </div>
