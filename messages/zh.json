@@ -245,6 +245,9 @@
     "voiceStart": "语音输入",
     "voiceStop": "停止语音输入"
   },
+  "adminNav": {
+    "tiktok": "TikTok"
+  },
   "adminTiktok": {
     "title": "TikTok 集成",
     "subtitle": "连接 Vermilion Routes 的 TikTok 账号，并将行程视频发送到其草稿箱。",

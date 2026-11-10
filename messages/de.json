@@ -245,6 +245,9 @@
     "voiceStart": "Per Sprache diktieren",
     "voiceStop": "Diktat beenden"
   },
+  "adminNav": {
+    "tiktok": "TikTok"
+  },
   "adminTiktok": {
     "title": "TikTok-Integration",
     "subtitle": "Verbinde das TikTok-Konto von Vermilion Routes und sende Tour-Videos in seine Entwürfe.",

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { 
   Users, 
@@ -46,7 +46,8 @@ import {
   Sliders,
   Share2,
   Menu,
-  X
+  X,
+  Video
 } from 'lucide-react';
 import { auth, db } from '@/lib/firebase';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
@@ -65,6 +66,7 @@ import {
 
 export function AdminCrmDashboard() {
   const locale = useLocale();
+  const tNav = useTranslations('adminNav');
   const isEs = locale === 'es';
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -479,6 +481,19 @@ export function AdminCrmDashboard() {
                 <span className="text-[10px] text-zinc-500 font-mono">{users.length}</span>
               </button>
             )}
+
+            {(activeRoleView === 'super' || activeRoleView === 'admin') && (
+              <Link
+                href={`/${locale}/admin/tiktok`}
+                className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs font-semibold transition-all text-zinc-300 hover:bg-white/5 hover:text-white"
+              >
+                <div className="flex items-center gap-3">
+                  <Video className="w-4 h-4" />
+                  <span>{tNav('tiktok')}</span>
+                </div>
+                <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500" />
+              </Link>
+            )}
           </nav>
 
           <div className="pt-4 border-t border-emerald-950/80 space-y-2 mt-6">
@@ -501,8 +516,8 @@ export function AdminCrmDashboard() {
       )}
 
       {/* ── 1. SIDEBAR DE NAVEGACIÓN DINÁMICO RBAC (DESKTOP) ──────────────────────────── */}
-      <aside className="hidden md:flex md:w-72 bg-[#060D08] border-r border-emerald-950/60 p-5 flex-col justify-between shrink-0 shadow-2xl z-20">
-        <div className="space-y-6">
+      <aside className="hidden md:flex md:w-72 h-screen overflow-hidden bg-[#060D08] border-r border-emerald-950/60 p-5 flex-col shrink-0 shadow-2xl z-20">
+        <div className="flex flex-col flex-1 min-h-0 space-y-6">
           
           {/* Brand Header */}
           <div className="flex items-center gap-3 pb-5 border-b border-emerald-950/80">
@@ -561,7 +576,7 @@ export function AdminCrmDashboard() {
           </div>
 
           {/* Navigation Links (Filtered by RBAC) */}
-          <nav className="space-y-1">
+          <nav className="space-y-1 flex-1 min-h-0 overflow-y-auto pr-1">
             <span className="text-[9px] font-mono uppercase tracking-widest text-zinc-500 px-3 block mb-2">
               Módulos Departamentales
             </span>
@@ -707,11 +722,24 @@ export function AdminCrmDashboard() {
                 <span className="text-[10px] text-zinc-500 font-mono">{users.length}</span>
               </button>
             )}
+
+            {(activeRoleView === 'super' || activeRoleView === 'admin') && (
+              <Link
+                href={`/${locale}/admin/tiktok`}
+                className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-zinc-300 hover:bg-white/5 hover:text-white"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Video className="w-4 h-4" />
+                  <span>{tNav('tiktok')}</span>
+                </div>
+                <ArrowUpRight className="w-3.5 h-3.5 text-zinc-500" />
+              </Link>
+            )}
           </nav>
         </div>
 
         {/* Sidebar Footer */}
-        <div className="pt-4 border-t border-emerald-950/80 space-y-2">
+        <div className="shrink-0 pt-4 border-t border-emerald-950/80 space-y-2">
           <Link
             href={`/${locale}`}
             className="w-full py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-xs text-zinc-400 hover:text-white transition-colors flex items-center justify-between"

@@ -245,6 +245,9 @@
     "voiceStart": "Ditar por voz",
     "voiceStop": "Parar ditado"
   },
+  "adminNav": {
+    "tiktok": "TikTok"
+  },
   "adminTiktok": {
     "title": "Integração com o TikTok",
     "subtitle": "Conecte a conta do TikTok da Vermilion Routes e envie vídeos de passeios para os rascunhos.",

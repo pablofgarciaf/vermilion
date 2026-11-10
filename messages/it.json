@@ -245,6 +245,9 @@
     "voiceStart": "Detta a voce",
     "voiceStop": "Interrompi dettatura"
   },
+  "adminNav": {
+    "tiktok": "TikTok"
+  },
   "adminTiktok": {
     "title": "Integrazione TikTok",
     "subtitle": "Collega l’account TikTok di Vermilion Routes e invia video dei tour alle sue bozze.",

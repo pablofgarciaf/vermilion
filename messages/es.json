@@ -245,6 +245,9 @@
     "voiceStart": "Dictar por voz",
     "voiceStop": "Detener dictado"
   },
+  "adminNav": {
+    "tiktok": "TikTok"
+  },
   "adminTiktok": {
     "title": "Integración con TikTok",
     "subtitle": "Conecta la cuenta de TikTok de Vermilion Routes y envía videos de tours a sus borradores.",

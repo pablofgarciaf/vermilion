@@ -245,6 +245,9 @@
     "voiceStart": "音声で入力",
     "voiceStop": "音声入力を停止"
   },
+  "adminNav": {
+    "tiktok": "TikTok"
+  },
   "adminTiktok": {
     "title": "TikTok 連携",
     "subtitle": "Vermilion Routes の TikTok アカウントを連携し、ツアー動画を下書きに送信します。",
