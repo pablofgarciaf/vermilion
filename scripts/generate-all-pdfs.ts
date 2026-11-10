@@ -5,7 +5,7 @@ import { mockTours } from '../data/mock';
 import { dailyTours } from '../data/dailyToursData';
 import { Tour } from '../types';
 
-const outputDir = path.resolve('C:/Users/pablo/Desktop/vermilion-pdfs');
+const outputDir = path.resolve('C:/Users/pablo/hermes/projects/vermilion/tours-pdf');
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
@@ -38,6 +38,8 @@ function safeAddImage(doc: any, imgData: string | null, format: string, x: numbe
   }
 }
 
+let PDF_FAMILY = 'helvetica';
+
 const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
   es: {
     itineraryTitle: "Itinerario Oficial y Guía de Viaje 2026",
@@ -64,7 +66,79 @@ const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
     galapagosChapterTitle: "CAPÍTULO II: ISLAS GALÁPAGOS — EXPEDICIÓN MARINA",
     andesChapterTitle: "CAPÍTULO I: REGIÓN ANDINA Y AMAZONÍA",
     conciergeTitle: "CONCIERGE 24/7 WHATSAPP Y RESERVAS PERSONALIZADAS",
-    conciergeDesc: "Escribe a +593 96 003 9156 para personalizar fechas, mejorar hoteles o solicitar guías privados."
+    conciergeDesc: "Escribe a +593 96 003 9156 para personalizar fechas, mejorar hoteles o solicitar guías privados.",
+    dayProgram: "PROGRAMA DE EXCURSIÓN",
+    dayFree: "LOGÍSTICA / DÍA LIBRE",
+    oneDay: "1 DÍA (FULL DAY)",
+    sevenDays: "7 DÍAS",
+    dailyCat: "Excursión Full-Day",
+    privateCat: "Expedición Privada"
+  },
+  en: {
+    itineraryTitle: "Official Itinerary & Travel Guide 2026",
+    duration: "Duration",
+    destination: "Destination",
+    category: "Category",
+    pricing: "Rate Options per Person",
+    hotel3star: "3* Comfort Hotels",
+    hotel4star: "4* Luxury / Premium Hotels",
+    fixedPrice: "Official Rate per Person (Private Tour)",
+    fixedPriceSub: "Includes Private Transport and Certified Bilingual Guide (Spanish / English)",
+    dayByDay: "Detailed Day-by-Day Itinerary",
+    highlights: "Tour Highlights",
+    day: "Day",
+    meals: "Meals",
+    accommodation: "Accommodation",
+    transport: "Transport",
+    activity: "Activity",
+    durationLabel: "Duration",
+    inclusions: "The Program Includes",
+    exclusions: "The Program Does Not Include",
+    importantNotes: "Important Travel Notes",
+    footerText: "Vermilion South American Routes • Certified Tour Operator • Quito, Ecuador",
+    galapagosChapterTitle: "CHAPTER II: GALÁPAGOS ISLANDS — MARINE EXPEDITION",
+    andesChapterTitle: "CHAPTER I: ANDEAN REGION & AMAZON",
+    conciergeTitle: "24/7 CONCIERGE ON WHATSAPP & PERSONALIZED BOOKINGS",
+    conciergeDesc: "Write to +593 96 003 9156 to customize dates, upgrade hotels or request private guides.",
+    dayProgram: "TOUR PROGRAM",
+    dayFree: "LOGISTICS / FREE DAY",
+    oneDay: "1 DAY (FULL DAY)",
+    sevenDays: "7 DAYS",
+    dailyCat: "Full-Day Excursion",
+    privateCat: "Private Expedition"
+  },
+  zh: {
+    itineraryTitle: "官方行程与旅行指南 2026",
+    duration: "时长",
+    destination: "目的地",
+    category: "类别",
+    pricing: "每人价格选项",
+    hotel3star: "3星舒适酒店",
+    hotel4star: "4星豪华/高端酒店",
+    fixedPrice: "每人官方价格（私人团）",
+    fixedPriceSub: "包含私人交通及认证双语导游（西班牙语 / 英语）",
+    dayByDay: "逐日详细行程",
+    highlights: "行程亮点",
+    day: "第",
+    meals: "用餐",
+    accommodation: "住宿",
+    transport: "交通",
+    activity: "活动",
+    durationLabel: "时长",
+    inclusions: "行程包含",
+    exclusions: "行程不包含",
+    importantNotes: "重要旅行须知",
+    footerText: "Vermilion South American Routes • 认证旅游运营商 • 厄瓜多尔，基多",
+    galapagosChapterTitle: "第二章：加拉帕戈斯群岛 — 海洋探险",
+    andesChapterTitle: "第一章：安第斯地区与亚马逊",
+    conciergeTitle: "24/7 WHATSAPP 礼宾服务与个性化预订",
+    conciergeDesc: "请致电 +593 96 003 9156，定制日期、升级酒店或预订私人导游。",
+    dayProgram: "行程安排",
+    dayFree: "后勤安排 / 自由日",
+    oneDay: "1 天（全天）",
+    sevenDays: "7 天",
+    dailyCat: "全天游览",
+    privateCat: "私人探险团"
   }
 };
 
@@ -115,7 +189,7 @@ function drawHeaderBand(doc: any, logoBase64: string | null, pageWidth: number, 
   doc.rect(cX + 1.1, cY0 - 2.3, 1.6, 2.0, 'F');
   doc.setFillColor(27, 67, 50);
   doc.circle(cX + 1.9, cY0 - 0.7, 0.25, 'F');
-  doc.setFont('helvetica', 'normal');
+  doc.setFont(PDF_FAMILY, 'normal');
   doc.setFontSize(7.6);
   doc.setTextColor(30, 41, 59);
   doc.text('+(593) 96-003-9156', cX + 5.5, cY0);
@@ -127,7 +201,7 @@ function drawHeaderBand(doc: any, logoBase64: string | null, pageWidth: number, 
   doc.setLineWidth(0.28);
   doc.line(cX + 0.3, cY0 + cGap - 2.8, cX + 1.9, cY0 + cGap - 1.4);
   doc.line(cX + 3.5, cY0 + cGap - 2.8, cX + 1.9, cY0 + cGap - 1.4);
-  doc.setFont('helvetica', 'normal');
+  doc.setFont(PDF_FAMILY, 'normal');
   doc.setFontSize(7.6);
   doc.setTextColor(30, 41, 59);
   doc.text('info@vermilionroutes.com', cX + 5.5, cY0 + cGap);
@@ -139,20 +213,29 @@ function drawHeaderBand(doc: any, logoBase64: string | null, pageWidth: number, 
   doc.setLineWidth(0.22);
   doc.line(cX, cY0 + (cGap * 2) - 1.4, cX + 3.8, cY0 + (cGap * 2) - 1.4);
   doc.line(cX + 1.9, cY0 + (cGap * 2) - 3.3, cX + 1.9, cY0 + (cGap * 2) + 0.5);
-  doc.setFont('helvetica', 'normal');
+  doc.setFont(PDF_FAMILY, 'normal');
   doc.setFontSize(7.6);
   doc.setTextColor(30, 41, 59);
   doc.text('www.vermilionroutes.com', cX + 5.5, cY0 + (cGap * 2));
 }
 
+const CJK_FONT_PATH = 'C:/Users/pablo/hermes/projects/vermilion/tours-pdf/_fonts/simsun-subset.ttf';
+function registerCjkFont(doc: any) {
+  const b64 = fs.readFileSync(CJK_FONT_PATH).toString('base64');
+  doc.addFileToVFS('cjk.ttf', b64);
+  doc.addFont('cjk.ttf', 'cjk', 'normal');
+  doc.addFont('cjk.ttf', 'cjk', 'bold');
+}
+
 function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
-  const t = PDF_TRANSLATIONS['es'];
+  const t = PDF_TRANSLATIONS[locale] || PDF_TRANSLATIONS['es'];
+  PDF_FAMILY = locale === 'zh' ? 'cjk' : 'helvetica';
   const isDailyTour = tour.durationDays === 1 || dailyTours.some(d => d.id === tour.id);
 
   const title = getLocalized(tour.title, locale);
   const destination = getLocalized(tour.destination, locale) || 'Ecuador';
-  const duration = getLocalized(tour.duration, locale) || (isDailyTour ? '1 DÍA (FULL DAY)' : '7 DÍAS');
-  const category = getLocalized(tour.category, locale) || (isDailyTour ? 'Excursión Full-Day' : 'Expedición Privada');
+  const duration = getLocalized(tour.duration, locale) || (isDailyTour ? t.oneDay : t.sevenDays);
+  const category = getLocalized(tour.category, locale) || (isDailyTour ? t.dailyCat : t.privateCat);
   const description = getLocalized(tour.description, locale);
 
   const price3Star = tour.price3Star ?? tour.price;
@@ -166,6 +249,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
   const gallery = tour.gallery || [];
 
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  if (locale === 'zh') registerCjkFont(doc);
   const pageWidth = 210;
   const pageHeight = 297;
   const marginX = 14;
@@ -219,7 +303,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     doc.rect(0, yPos + 44, pageWidth, 26, 'F');
     doc.setGState(new (doc as any).GState({ opacity: 1.0 }));
 
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(12.5);
     doc.setTextColor(255, 255, 255);
     doc.text(title.toUpperCase(), marginX, yPos + 53);
@@ -231,7 +315,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     const b2Text = `[ ${category.toUpperCase()} ]`;
     const b3Text = isDailyTour ? '[ 1 DÍA (FULL DAY) ]' : `[ ${duration.toUpperCase()} ]`;
 
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(7.2);
     let badgeX = marginX;
     [b1Text, b2Text, b3Text].forEach((bText) => {
@@ -251,7 +335,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
 
     yPos += coverHeight + 7;
   } else {
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(15);
     doc.setTextColor(2, 44, 34);
     doc.text(title.toUpperCase(), marginX, yPos + 6);
@@ -265,7 +349,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     doc.setLineWidth(0.8);
     doc.roundedRect(marginX, yPos, contentWidth, 16, 2, 2, 'FD');
 
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(8.5);
     doc.setTextColor(22, 101, 52);
     doc.text(t.fixedPrice.toUpperCase(), marginX + 6, yPos + 5.8);
@@ -274,7 +358,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     doc.setTextColor(6, 95, 70);
     doc.text(`$${singlePrice} USD`, marginX + 6, yPos + 12.5);
 
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(PDF_FAMILY, 'normal');
     doc.setFontSize(7.8);
     doc.setTextColor(71, 85, 105);
     doc.text(t.fixedPriceSub, pageWidth - marginRight - 6, yPos + 9.5, { align: 'right' });
@@ -285,7 +369,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     doc.setFillColor(240, 253, 244);
     doc.setDrawColor(167, 243, 208);
     doc.roundedRect(marginX, yPos, cardWidth, cardHeight, 2, 2, 'FD');
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(8);
     doc.setTextColor(22, 101, 52);
     doc.text(t.hotel3star.toUpperCase(), marginX + 6, yPos + 5.5);
@@ -297,7 +381,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     doc.setFillColor(250, 245, 255);
     doc.setDrawColor(233, 213, 255);
     doc.roundedRect(card2X, yPos, cardWidth, cardHeight, 2, 2, 'FD');
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(8);
     doc.setTextColor(126, 34, 206);
     doc.text(t.hotel4star.toUpperCase(), card2X + 6, yPos + 5.5);
@@ -309,7 +393,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
 
   // Description
   if (description) {
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(PDF_FAMILY, 'normal');
     doc.setFontSize(9.0);
     const paddingX = 6;
     const descTextWidth = contentWidth - (paddingX * 2);
@@ -324,7 +408,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     doc.setLineWidth(0.3);
     doc.rect(marginX, yPos, contentWidth, descBoxHeight, 'D');
 
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(PDF_FAMILY, 'normal');
     doc.setFontSize(9.0);
     doc.setTextColor(51, 65, 85);
     doc.text(splitDesc, marginX + paddingX + 1, yPos + 5.8);
@@ -334,7 +418,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
   // Highlights (1-day tours)
   if (isDailyTour && highlights.length > 0) {
     checkPageBreak(25);
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(10.5);
     doc.setTextColor(6, 78, 59);
     doc.text(t.highlights.toUpperCase(), marginX, yPos);
@@ -343,7 +427,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     doc.line(marginX, yPos + 2, marginX + contentWidth, yPos + 2);
     yPos += 7;
 
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(PDF_FAMILY, 'normal');
     doc.setFontSize(9.0);
     highlights.forEach((h) => {
       const hText = getLocalized(h, locale);
@@ -352,7 +436,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
       checkPageBreak(hHeight);
       doc.setFillColor(16, 185, 129);
       doc.circle(marginX + 2.5, yPos + 2, 1.8, 'F');
-      doc.setFont('helvetica', 'normal');
+      doc.setFont(PDF_FAMILY, 'normal');
       doc.setFontSize(9.0);
       doc.setTextColor(30, 41, 59);
       doc.text(splitH, marginX + 7, yPos + 3);
@@ -364,7 +448,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
   // Itinerary
   if (itinerary.length > 0) {
     checkPageBreak(15);
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(11);
     doc.setTextColor(6, 78, 59);
     doc.text(t.dayByDay.toUpperCase(), marginX, yPos);
@@ -404,7 +488,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
         doc.setFillColor(236, 253, 245);
         doc.setDrawColor(167, 243, 208);
         doc.roundedRect(marginX, yPos, contentWidth, 16, 2, 2, 'FD');
-        doc.setFont('helvetica', 'bold');
+        doc.setFont(PDF_FAMILY, 'bold');
         doc.setFontSize(10);
         doc.setTextColor(6, 78, 59);
         doc.text(t.galapagosChapterTitle.toUpperCase(), marginX + 6, yPos + 10);
@@ -412,7 +496,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
       }
 
       if (isDailyTour || isFunctional) {
-        doc.setFont('helvetica', 'normal');
+        doc.setFont(PDF_FAMILY, 'normal');
         doc.setFontSize(9.0);
         const splitDayDesc = doc.splitTextToSize(rawDayDesc, contentWidth - 14);
         const blockHeight = 16 + (splitDayDesc.length * 4.2) + (dayMeals ? 5 : 0);
@@ -423,16 +507,16 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
         doc.setDrawColor(203, 213, 225);
         doc.roundedRect(marginX, yPos, contentWidth, blockHeight, 2, 2, 'FD');
 
-        doc.setFont('helvetica', 'bold');
+        doc.setFont(PDF_FAMILY, 'bold');
         doc.setFontSize(8.5);
         doc.setTextColor(71, 85, 105);
-        doc.text(`${t.day.toUpperCase()} ${dayItem.day} • [ ${isDailyTour ? 'PROGRAMA DE EXCURSIÓN' : 'LOGÍSTICA / DÍA LIBRE'} ]`, marginX + 6, yPos + 6);
+        doc.text(`${t.day.toUpperCase()} ${dayItem.day} • [ ${isDailyTour ? t.dayProgram : t.dayFree} ]`, marginX + 6, yPos + 6);
 
         doc.setFontSize(10);
         doc.setTextColor(15, 23, 42);
         doc.text(dayTitle, marginX + 6, yPos + 12);
 
-        doc.setFont('helvetica', 'normal');
+        doc.setFont(PDF_FAMILY, 'normal');
         doc.setFontSize(9.0);
         doc.setTextColor(51, 65, 85);
         let descY = yPos + 17;
@@ -440,7 +524,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
         descY += (splitDayDesc.length * 4.2);
 
         if (dayMeals || dayTrans || dayAct) {
-          doc.setFont('helvetica', 'bold');
+          doc.setFont(PDF_FAMILY, 'bold');
           doc.setFontSize(8.2);
           doc.setTextColor(71, 85, 105);
           const metaParts: string[] = [];
@@ -464,7 +548,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
           ? rawText.split(/\n\s*\n|\r\n\r\n|\n/).map(p => p.trim()).filter(Boolean)
           : [rawText];
 
-        doc.setFont('helvetica', 'normal');
+        doc.setFont(PDF_FAMILY, 'normal');
         doc.setFontSize(9.0);
         const wrappedParagraphs = paragraphs.map(p => doc.splitTextToSize(p, textWidth));
         const totalDescLines = wrappedParagraphs.reduce((acc, lines) => acc + lines.length, 0);
@@ -491,19 +575,19 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
             doc.roundedRect(imgX, yPos, imageWidth, blockHeight, 2, 2, 'D');
           }
 
-          doc.setFont('helvetica', 'bold');
+          doc.setFont(PDF_FAMILY, 'bold');
           doc.setFontSize(8.5);
           doc.setTextColor(6, 78, 59);
           doc.text(`${t.day.toUpperCase()} ${dayItem.day}`, textX, yPos + 5.5);
 
-          doc.setFont('helvetica', 'bold');
+          doc.setFont(PDF_FAMILY, 'bold');
           doc.setFontSize(10);
           doc.setTextColor(15, 23, 42);
           const splitTitle = doc.splitTextToSize(dayTitle, textWidth);
           doc.text(splitTitle, textX, yPos + 11);
           let descY = yPos + 11 + (splitTitle.length * 4.6);
 
-          doc.setFont('helvetica', 'normal');
+          doc.setFont(PDF_FAMILY, 'normal');
           doc.setFontSize(9.0);
           doc.setTextColor(51, 65, 85);
           for (const paraLines of wrappedParagraphs) {
@@ -512,42 +596,42 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
           }
 
           if (dayAcc) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(PDF_FAMILY, 'bold');
             doc.setFontSize(8.2);
             doc.setTextColor(15, 23, 42);
             doc.text(`${t.accommodation}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(PDF_FAMILY, 'normal');
             doc.setTextColor(71, 85, 105);
             doc.text(dayAcc, textX + 18, descY);
             descY += 4.6;
           }
           if (dayTrans) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(PDF_FAMILY, 'bold');
             doc.setFontSize(8.2);
             doc.setTextColor(15, 23, 42);
             doc.text(`${t.transport}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(PDF_FAMILY, 'normal');
             doc.setTextColor(71, 85, 105);
             const splitTrans = doc.splitTextToSize(dayTrans, textWidth - 18);
             doc.text(splitTrans, textX + 18, descY);
             descY += (splitTrans.length * 3.8);
           }
           if (dayMeals) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(PDF_FAMILY, 'bold');
             doc.setFontSize(8.2);
             doc.setTextColor(15, 23, 42);
             doc.text(`${t.meals}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(PDF_FAMILY, 'normal');
             doc.setTextColor(71, 85, 105);
             doc.text(dayMeals, textX + 14, descY);
             descY += 4.6;
           }
           if (dayAct) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(PDF_FAMILY, 'bold');
             doc.setFontSize(8.2);
             doc.setTextColor(15, 23, 42);
             doc.text(`${t.activity}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(PDF_FAMILY, 'normal');
             doc.setTextColor(71, 85, 105);
             const splitAct = doc.splitTextToSize(dayAct, textWidth - 16);
             doc.text(splitAct, textX + 16, descY);
@@ -564,19 +648,19 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
             doc.roundedRect(imgX, yPos, imageWidth, blockHeight, 2, 2, 'D');
           }
 
-          doc.setFont('helvetica', 'bold');
+          doc.setFont(PDF_FAMILY, 'bold');
           doc.setFontSize(8.5);
           doc.setTextColor(6, 78, 59);
           doc.text(`${t.day.toUpperCase()} ${dayItem.day}`, textX, yPos + 5.5);
 
-          doc.setFont('helvetica', 'bold');
+          doc.setFont(PDF_FAMILY, 'bold');
           doc.setFontSize(10);
           doc.setTextColor(15, 23, 42);
           const splitTitle = doc.splitTextToSize(dayTitle, textWidth);
           doc.text(splitTitle, textX, yPos + 11);
           let descY = yPos + 11 + (splitTitle.length * 4.6);
 
-          doc.setFont('helvetica', 'normal');
+          doc.setFont(PDF_FAMILY, 'normal');
           doc.setFontSize(9.0);
           doc.setTextColor(51, 65, 85);
           for (const paraLines of wrappedParagraphs) {
@@ -585,42 +669,42 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
           }
 
           if (dayAcc) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(PDF_FAMILY, 'bold');
             doc.setFontSize(8.2);
             doc.setTextColor(15, 23, 42);
             doc.text(`${t.accommodation}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(PDF_FAMILY, 'normal');
             doc.setTextColor(71, 85, 105);
             doc.text(dayAcc, textX + 18, descY);
             descY += 4.6;
           }
           if (dayTrans) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(PDF_FAMILY, 'bold');
             doc.setFontSize(8.2);
             doc.setTextColor(15, 23, 42);
             doc.text(`${t.transport}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(PDF_FAMILY, 'normal');
             doc.setTextColor(71, 85, 105);
             const splitTrans = doc.splitTextToSize(dayTrans, textWidth - 18);
             doc.text(splitTrans, textX + 18, descY);
             descY += (splitTrans.length * 3.8);
           }
           if (dayMeals) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(PDF_FAMILY, 'bold');
             doc.setFontSize(8.2);
             doc.setTextColor(15, 23, 42);
             doc.text(`${t.meals}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(PDF_FAMILY, 'normal');
             doc.setTextColor(71, 85, 105);
             doc.text(dayMeals, textX + 14, descY);
             descY += 4.6;
           }
           if (dayAct) {
-            doc.setFont('helvetica', 'bold');
+            doc.setFont(PDF_FAMILY, 'bold');
             doc.setFontSize(8.2);
             doc.setTextColor(15, 23, 42);
             doc.text(`${t.activity}: `, textX, descY);
-            doc.setFont('helvetica', 'normal');
+            doc.setFont(PDF_FAMILY, 'normal');
             doc.setTextColor(71, 85, 105);
             const splitAct = doc.splitTextToSize(dayAct, textWidth - 16);
             doc.text(splitAct, textX + 16, descY);
@@ -636,7 +720,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
   if (inclusions.length > 0 || exclusions.length > 0) {
     checkPageBreak(35);
     yPos += 3;
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(10.5);
     doc.setTextColor(6, 78, 59);
     doc.text(t.inclusions.toUpperCase(), marginX, yPos);
@@ -645,7 +729,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     doc.line(marginX, yPos + 2, marginX + contentWidth, yPos + 2);
     yPos += 7;
 
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(PDF_FAMILY, 'normal');
     doc.setFontSize(9.0);
     inclusions.forEach((inc) => {
       const incText = getLocalized(inc, locale);
@@ -659,7 +743,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
       doc.line(marginX + 1.5, yPos + 2, marginX + 2.3, yPos + 2.8);
       doc.line(marginX + 2.3, yPos + 2.8, marginX + 3.5, yPos + 1.1);
 
-      doc.setFont('helvetica', 'normal');
+      doc.setFont(PDF_FAMILY, 'normal');
       doc.setFontSize(9.0);
       doc.setTextColor(30, 41, 59);
       doc.text(splitInc, marginX + 7, yPos + 3);
@@ -669,7 +753,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
     if (exclusions.length > 0) {
       yPos += 3;
       checkPageBreak(25);
-      doc.setFont('helvetica', 'bold');
+      doc.setFont(PDF_FAMILY, 'bold');
       doc.setFontSize(10.5);
       doc.setTextColor(6, 78, 59);
       doc.text(t.exclusions.toUpperCase(), marginX, yPos);
@@ -678,7 +762,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
       doc.line(marginX, yPos + 2, marginX + contentWidth, yPos + 2);
       yPos += 7;
 
-      doc.setFont('helvetica', 'normal');
+      doc.setFont(PDF_FAMILY, 'normal');
       doc.setFontSize(9.0);
       exclusions.forEach((exc) => {
         const excText = getLocalized(exc, locale);
@@ -692,7 +776,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
         doc.line(marginX + 1.6, yPos + 1.1, marginX + 3.4, yPos + 2.9);
         doc.line(marginX + 3.4, yPos + 1.1, marginX + 1.6, yPos + 2.9);
 
-        doc.setFont('helvetica', 'normal');
+        doc.setFont(PDF_FAMILY, 'normal');
         doc.setFontSize(9.0);
         doc.setTextColor(100, 116, 139);
         doc.text(splitExc, marginX + 7, yPos + 3);
@@ -705,7 +789,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
   if (galleryImagesBase64.length > 0) {
     checkPageBreak(65);
     yPos += 5;
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(PDF_FAMILY, 'bold');
     doc.setFontSize(10.5);
     doc.setTextColor(6, 78, 59);
     doc.text("ANEXO FOTOGRÁFICO — DESTINOS Y LUGARES DESTACADOS", marginX, yPos);
@@ -752,11 +836,11 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
   doc.setFillColor(236, 253, 245);
   doc.setDrawColor(167, 243, 208);
   doc.roundedRect(marginX, yPos, contentWidth, 20, 2, 2, 'FD');
-  doc.setFont('helvetica', 'bold');
+  doc.setFont(PDF_FAMILY, 'bold');
   doc.setFontSize(9);
   doc.setTextColor(6, 78, 59);
   doc.text(t.conciergeTitle, marginX + 6, yPos + 7);
-  doc.setFont('helvetica', 'normal');
+  doc.setFont(PDF_FAMILY, 'normal');
   doc.setFontSize(8);
   doc.setTextColor(51, 65, 85);
   doc.text(t.conciergeDesc, marginX + 6, yPos + 13.5);
@@ -772,7 +856,7 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
       safeAddImage(doc, logoBase64, 'PNG', (pageWidth - wmWidth) / 2, (pageHeight - wmHeight) / 2, wmWidth, wmHeight);
       doc.setGState(new (doc as any).GState({ opacity: 1.0 }));
     }
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(PDF_FAMILY, 'normal');
     doc.setFontSize(7.5);
     doc.setTextColor(148, 163, 184);
     doc.text(t.footerText, marginX, pageHeight - 7);
@@ -784,19 +868,20 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
 
 async function main() {
   const allTours = mockTours;
-  console.log(`Generating ${allTours.length} official PDFs to ${outputDir}...`);
-
-  for (const tour of allTours) {
-    const title = getLocalized(tour.title, 'es');
-    const cleanFilename = title.replace(/[^a-zA-Z0-9]/g, '-').replace(/-+/g, '-');
-    const filePath = path.join(outputDir, `Vermilion-Routes-${cleanFilename}.pdf`);
-
-    const pdfBuffer = buildPDFForTour(tour, 'es');
-    fs.writeFileSync(filePath, pdfBuffer);
-    console.log(`✅ Generated: ${path.basename(filePath)} (${(pdfBuffer.length / 1024).toFixed(1)} KB)`);
+  for (const loc of ['es', 'en']) {
+    const dir = path.join(outputDir, loc);
+    fs.mkdirSync(dir, { recursive: true });
+    console.log(`Generating ${allTours.length} PDFs [${loc}] to ${dir}...`);
+    for (const tour of allTours) {
+      const cleanFilename = getLocalized(tour.title, 'es').replace(/[^a-zA-Z0-9]/g, '-').replace(/-+/g, '-');
+      const filePath = path.join(dir, `Vermilion-Routes-${cleanFilename}.pdf`);
+      const pdfBuffer = buildPDFForTour(tour, loc);
+      fs.writeFileSync(filePath, pdfBuffer);
+      console.log(`✅ [${loc}] ${path.basename(filePath)} (${(pdfBuffer.length / 1024).toFixed(1)} KB)`);
+    }
   }
-
-  console.log(`\n🎉 All ${allTours.length} PDFs generated successfully in ${outputDir}!`);
+  console.log(`
+🎉 Done: ${allTours.length} tours x 3 languages in ${outputDir}`);
   process.exit(0);
 }
 

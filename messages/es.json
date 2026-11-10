@@ -327,6 +327,18 @@
     "barPerPerson": "/ persona",
     "whatsappAria": "Preguntar por WhatsApp"
   },
+  "tourItinerary": {
+    "kicker": "Bitácora de Viaje",
+    "headingWithTour": "Itinerario: {tour}",
+    "headingDefault": "Diario de Expedición Día a Día",
+    "dayLabel": "Día {day}",
+    "highlights": "Puntos clave del día",
+    "meals": "Comidas",
+    "stay": "Alojamiento",
+    "transport": "Transporte",
+    "activity": "Actividad",
+    "altitude": "Altitud"
+  },
   "expeditionFacts": {
     "title": "Ficha técnica de expedición",
     "activity": "Actividad física",

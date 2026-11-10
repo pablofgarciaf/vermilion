@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { notFound, redirect } from 'next/navigation';
 import { getToursFromFirestore, getTourByIdFromFirestore } from '@/lib/tours';
-import { TourGallery } from '@/components/tours/TourGallery';
+import { TourGallery, OpenPhotosButton } from '@/components/tours/TourGallery';
 import { TourItinerary } from '@/components/tours/TourItinerary';
 import { TourSubNav } from '@/components/tours/TourSubNav';
 import { ReservationBannerWrapper } from '@/components/reservations/ReservationBannerWrapper';
@@ -332,6 +332,11 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                 )}
               </div>
 
+              <div className="flex flex-wrap items-center justify-center gap-3 pt-6">
+                <OpenPhotosButton locale={locale} />
+                <DownloadPDFButton tour={tour} variant="outline" size="sm" className="w-full sm:w-auto" />
+              </div>
+
               {/* Contenedor de Botones (Empujado al final con mt-auto, ahora estilizados y limpios) */}
               <div className="mt-auto pt-8 lg:pt-10 pb-2 space-y-4">
                 <TourPriceSummary priceFrom={priceClub} galapagosFees={galapagosFees} />
@@ -400,14 +405,7 @@ export default async function TourDetailPage({ params }: TourDetailPageProps) {
                 tourId={tour.id}
                 destination={tour.destination}
                 emphasizeFirst={/galapagos/i.test(dest || '')}
-              >
-                <DownloadPDFButton
-                  tour={tour}
-                  variant="outline"
-                  size="sm"
-                  className="w-full sm:w-auto"
-                />
-              </TourGallery>
+              />
 
               <TourBespokeTrustCard
                 locale={locale}

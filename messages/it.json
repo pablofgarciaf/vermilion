@@ -327,6 +327,18 @@
     "barPerPerson": "/ persona",
     "whatsappAria": "Chiedi su WhatsApp"
   },
+  "tourItinerary": {
+    "kicker": "Diario di viaggio",
+    "headingWithTour": "Itinerario: {tour}",
+    "headingDefault": "Diario di spedizione giorno per giorno",
+    "dayLabel": "Giorno {day}",
+    "highlights": "Punti salienti del giorno",
+    "meals": "Pasti",
+    "stay": "Alloggio",
+    "transport": "Trasporto",
+    "activity": "Attività",
+    "altitude": "Altitudine"
+  },
   "expeditionFacts": {
     "title": "La spedizione in breve",
     "activity": "Attività fisica",

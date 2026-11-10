@@ -341,7 +341,7 @@ export function TourModal({ tour, isOpen, onClose }: TourModalProps) {
                     className="border-l-2 border-emerald-600 pl-4 py-1"
                   >
                     <h3 className="font-serif text-lg font-bold text-zinc-900 dark:text-white mb-2">{t('experienceSummary')}</h3>
-                    <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed text-sm md:text-base first-letter:font-serif first-letter:text-4xl first-letter:font-bold first-letter:float-left first-letter:mr-2.5 first-letter:text-emerald-700 dark:first-letter:text-emerald-400 first-letter:leading-none">
+                    <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed text-sm md:text-base dark:">
                       {tourDescriptionText}
                     </p>
                   </motion.div>
