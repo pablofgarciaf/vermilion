@@ -5,6 +5,7 @@ import { CONSENT_COOKIE, VISITOR_COOKIE, VISITOR_COOKIE_MAX_AGE } from '@/lib/co
 import { normalizeCountry } from '@/lib/consent/regions';
 import { readServerConsent } from '@/lib/consent/serverConsent';
 import {
+  buildTourPageUrl,
   buildWhatsAppUrl,
   getWhatsAppPrefill,
   isSocialChannel,
@@ -24,7 +25,8 @@ function logRecordError(err: unknown) {
 
 /**
  * Página de redirección para TikTok y Facebook: /go/tiktok?video=...&campaign=...&lang=...
- * Registra el origen y responde 302 a WhatsApp.
+ * Registra el origen y responde 302: TikTok a la página de tours (en el idioma del video) y
+ * Facebook a WhatsApp.
  *
  * - Sin consentimiento (o con Global Privacy Control): solo suma el clic a los contadores
  *   anónimos, sin cookies ni registro individual. Si había un identificador anterior, se borra.
@@ -43,7 +45,10 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ chan
   const country = normalizeCountry(req.headers.get('x-vercel-ip-country'));
   const page = `/go/${channel}`;
 
-  const target = buildWhatsAppUrl(await getWhatsAppPrefill(locale));
+  const target =
+    channel === 'tiktok'
+      ? buildTourPageUrl(req.nextUrl.origin, locale, { video, campaign })
+      : buildWhatsAppUrl(await getWhatsAppPrefill(locale));
   const res = NextResponse.redirect(target, 302);
   res.headers.set('Cache-Control', 'no-store');
   res.headers.set('X-Robots-Tag', 'noindex, nofollow');

@@ -69,8 +69,26 @@ describe('GET /go/[channel]', () => {
     expect(store.size).toBe(0);
   });
 
-  it('sin consentimiento: 302 a WhatsApp con el número de TikTok/Facebook, sin cookies ni registro', async () => {
-    const res = await call('tiktok', '?video=abc123&campaign=black-friday&lang=es');
+  it('TikTok: 302 a la página de tours en el idioma del video, con utm en minúsculas', async () => {
+    const res = await call('tiktok', '?video=ABC123&campaign=Black%20Friday&lang=en');
+    expect(res.status).toBe(302);
+    const location = new URL(res.headers.get('location') || '');
+    expect(location.origin + location.pathname).toBe('http://localhost:3005/en/tours');
+    expect(location.searchParams.get('utm_source')).toBe('tiktok');
+    expect(location.searchParams.get('utm_medium')).toBe('social');
+    expect(location.searchParams.get('utm_campaign')).toBe('black-friday');
+    expect(location.searchParams.get('utm_content')).toBe('abc123');
+    expect(res.headers.get('set-cookie')).toBeNull();
+  });
+
+  it('TikTok en español: lleva a /es/tours', async () => {
+    const res = await call('tiktok', '?video=abc123&lang=es');
+    const location = new URL(res.headers.get('location') || '');
+    expect(location.pathname).toBe('/es/tours');
+  });
+
+  it('Facebook sin consentimiento: 302 a WhatsApp con el número, sin cookies ni registro', async () => {
+    const res = await call('facebook', '?video=abc123&campaign=black-friday&lang=es');
     expect(res.status).toBe(302);
     const location = new URL(res.headers.get('location') || '');
     expect(location.origin + location.pathname).toBe('https://wa.me/593983992549');
@@ -152,7 +170,7 @@ describe('GET /go/[channel]', () => {
   });
 
   it('elige el idioma del mensaje desde Accept-Language cuando no hay lang válido', async () => {
-    const res = await call('tiktok', '', { 'accept-language': 'ja-JP,ja;q=0.9,en;q=0.8' });
+    const res = await call('facebook', '', { 'accept-language': 'ja-JP,ja;q=0.9,en;q=0.8' });
     const text = new URL(res.headers.get('location') || '').searchParams.get('text') || '';
     expect(text).toContain('Vermilion Routes');
     expect(text).toContain('こんにちは');

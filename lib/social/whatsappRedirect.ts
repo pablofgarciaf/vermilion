@@ -72,3 +72,20 @@ export async function getWhatsAppPrefill(locale: SupportedLocale): Promise<strin
 export function buildWhatsAppUrl(text: string): string {
   return `https://wa.me/${SOCIAL_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 }
+
+/**
+ * Página de tours en el idioma del video (TikTok). Los parámetros utm van en minúsculas
+ * para que el seguimiento del CRM distinga el origen sin mezclar mayúsculas.
+ */
+export function buildTourPageUrl(
+  origin: string,
+  locale: SupportedLocale,
+  params: { video: string | null; campaign: string | null },
+): string {
+  const url = new URL(`/${locale}/tours`, origin);
+  url.searchParams.set('utm_source', 'tiktok');
+  url.searchParams.set('utm_medium', 'social');
+  if (params.campaign) url.searchParams.set('utm_campaign', params.campaign.toLowerCase().replace(/\s+/g, '-'));
+  if (params.video) url.searchParams.set('utm_content', params.video.toLowerCase());
+  return url.toString();
+}
