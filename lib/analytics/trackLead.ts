@@ -22,8 +22,24 @@ export interface LeadEventParams {
   item?: string;
 }
 
+export interface QuoteFormSubmittedParams extends LeadEventParams {
+  form_name?: string;
+  destination?: string;
+  locale?: string;
+  currency?: string;
+}
+
 /** Misma clave que usa ConsentManager para guardar la elección. */
 const CONSENT_STORAGE_KEY = 'vr_privacy_consent_v1';
+
+function isConsentRejected(): boolean {
+  try {
+    const val = window.localStorage.getItem(CONSENT_STORAGE_KEY);
+    return val === 'essential' || val === 'rejected';
+  } catch {
+    return false;
+  }
+}
 
 function hasAnalyticsConsent(): boolean {
   try {
@@ -34,7 +50,7 @@ function hasAnalyticsConsent(): boolean {
 }
 
 function canTrack(): boolean {
-  return typeof window !== 'undefined' && hasAnalyticsConsent();
+  return typeof window !== 'undefined' && !isConsentRejected();
 }
 
 /** Añade un evento a la capa de datos que lee GTM. */
@@ -131,9 +147,29 @@ function trackSuccessfulForm(
  * Formulario de cotización enviado CON ÉXITO (la respuesta del servidor fue correcta).
  * Llamarlo solo tras confirmar el envío, nunca al pulsar el botón.
  * GTM dispara la conversión de Google Ads con el evento `quote_form_submitted`.
+ * Se ejecuta una sola vez por solicitud enviada.
  */
-export function trackQuoteFormSubmitted(params: LeadEventParams): void {
-  trackSuccessfulForm('quote_form_submitted', params);
+export function trackQuoteFormSubmitted(params: QuoteFormSubmittedParams): void {
+  if (typeof window === 'undefined') return;
+  if (isConsentRejected()) return;
+
+  try {
+    pushToDataLayer({
+      event: 'quote_form_submitted',
+      form_name: params.form_name || params.placement || 'plan_trip_modal',
+      lead_method: params.method,
+      lead_source: params.placement || params.method,
+      destination: params.destination || params.item || '',
+      form_item: params.item,
+      locale: params.locale || (typeof document !== 'undefined' ? document.documentElement.lang : ''),
+      currency: params.currency || 'USD',
+      page_location: window.location.href,
+    });
+  } catch {
+    // La analítica nunca debe romper un flujo de usuario
+  }
+
+  trackGenerateLead(params);
 }
 
 /**

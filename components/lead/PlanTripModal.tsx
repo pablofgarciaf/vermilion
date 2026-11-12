@@ -155,23 +155,16 @@ export function PlanTripModal() {
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error('lead_failed');
       saveStoredUserProfile({ name: form.name.trim(), email: form.email.trim(), phone: form.phone.trim() });
-      trackQuoteFormSubmitted({ method: 'contact_form', placement: 'plan_trip_modal', item: dest?.leadValue });
-      
-      // Google Ads Conversion Event dispatch for Tag Assistant & Google Ads
-      if (typeof window !== 'undefined') {
-        (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push({
-          event: 'quote_form_submitted',
-          form_name: 'plan_trip_modal',
-          destination: dest?.leadValue,
-          currency: 'USD',
-        });
-        (window as any).gtag?.('event', 'conversion', {
-          send_to: 'AW-18067067368',
-          event_category: 'lead',
-          event_label: dest?.leadValue || 'trip_quote',
-        });
-      }
+      // Único disparo de conversión para Google Tag Manager (GTM-WCCPTDVG), Google Ads, GA4 y Meta
+      trackQuoteFormSubmitted({
+        method: 'contact_form',
+        placement: 'plan_trip_modal',
+        form_name: 'plan_trip_modal',
+        item: dest?.leadValue,
+        destination: dest?.leadValue,
+        locale,
+        currency: 'USD',
+      });
       setStatus('done');
     } catch {
       setStatus('idle');

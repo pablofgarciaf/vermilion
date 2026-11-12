@@ -1578,39 +1578,98 @@ export function AdminCrmDashboard() {
       {/* ── MODAL: FICHA 360° DEL PASAJERO ─────────────────────────────────── */}
       {selectedLeadForProfile && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="w-full max-w-md bg-[#0B1A12] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl">
+          <div className="w-full max-w-lg bg-[#0B1A12] border border-emerald-800/60 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-emerald-950">
               <div>
-                <span className="text-[10px] font-mono text-amber-400 uppercase">Ficha 360° Pasajero</span>
-                <h3 className="font-serif text-lg font-bold text-white">{selectedLeadForProfile.customerName}</h3>
+                <span className="text-[10px] font-mono text-amber-400 uppercase tracking-wider">Ficha 360° Pasajero & Solicitud</span>
+                <h3 className="font-serif text-xl font-bold text-white">{selectedLeadForProfile.customerName}</h3>
               </div>
-              <button onClick={() => setSelectedLeadForProfile(null)} className="text-zinc-400 hover:text-white text-xs">
-                ✕
+              <button onClick={() => setSelectedLeadForProfile(null)} className="text-zinc-400 hover:text-white text-xs p-1">
+                <X className="w-5 h-5" />
               </button>
             </div>
 
+            {/* Datos de Contacto */}
             <div className="space-y-3 text-xs">
-              <div className="p-3 rounded-xl bg-black/40 border border-emerald-950 space-y-1">
-                <span className="text-zinc-500 text-[10px] font-mono block">RESTRICCIONES ALIMENTICIAS & ALERGIAS:</span>
-                <p className="text-amber-300 font-bold">
-                  {selectedLeadForProfile.passengerDetails?.dietaryRestrictions || 'Ninguna registrada'}
-                </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <a
+                  href={`mailto:${selectedLeadForProfile.customerEmail}`}
+                  className="p-3 rounded-xl bg-black/40 border border-emerald-950 hover:border-emerald-700 transition-colors flex items-center gap-2 text-zinc-200"
+                >
+                  <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <div className="truncate">
+                    <span className="text-zinc-500 text-[10px] font-mono block">CORREO:</span>
+                    <span className="font-semibold truncate block">{selectedLeadForProfile.customerEmail || 'No registrado'}</span>
+                  </div>
+                </a>
+                <a
+                  href={selectedLeadForProfile.customerPhone ? `https://wa.me/${selectedLeadForProfile.customerPhone.replace(/\D/g, '')}` : '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-xl bg-black/40 border border-emerald-950 hover:border-emerald-700 transition-colors flex items-center gap-2 text-zinc-200"
+                >
+                  <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <div className="truncate">
+                    <span className="text-zinc-500 text-[10px] font-mono block">WHATSAPP / TEL:</span>
+                    <span className="font-semibold truncate block">{selectedLeadForProfile.customerPhone || 'No registrado'}</span>
+                  </div>
+                </a>
               </div>
 
-              <div className="grid grid-cols-2 gap-2">
-                <div className="p-3 rounded-xl bg-black/40 border border-emerald-950">
-                  <span className="text-zinc-500 text-[10px] font-mono block">NACIONALIDAD / PASAPORTE:</span>
-                  <p className="text-white font-bold">{selectedLeadForProfile.passengerDetails?.nationality || selectedLeadForProfile.country || 'USA'}</p>
+              {/* Información del Viaje Solicitado */}
+              <div className="p-3 rounded-xl bg-black/40 border border-emerald-950 space-y-2">
+                <span className="text-amber-400 text-[10px] font-mono uppercase block font-bold">Detalles del Viaje Solicitado</span>
+                <div className="grid grid-cols-2 gap-2 text-zinc-300">
+                  <div>
+                    <span className="text-zinc-500 text-[10px] block">Destino:</span>
+                    <span className="font-bold text-white">{selectedLeadForProfile.destination || 'Por definir'}</span>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500 text-[10px] block">Fechas:</span>
+                    <span className="font-bold text-white">{selectedLeadForProfile.travelDates || 'Flexible'}</span>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500 text-[10px] block">Viajeros:</span>
+                    <span className="font-bold text-white">{selectedLeadForProfile.passengersCount || 1} personas</span>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500 text-[10px] block">Presupuesto Est.:</span>
+                    <span className="font-bold text-emerald-400">
+                      {selectedLeadForProfile.estimatedBudget ? `$${selectedLeadForProfile.estimatedBudget.toLocaleString()} USD` : 'A medida'}
+                    </span>
+                  </div>
                 </div>
-                <div className="p-3 rounded-xl bg-black/40 border border-emerald-950">
-                  <span className="text-zinc-500 text-[10px] font-mono block">TALLA SOMBRERO MONTECRISTI:</span>
-                  <p className="text-emerald-400 font-bold">{selectedLeadForProfile.passengerDetails?.hatSize || '58 (M)'}</p>
-                </div>
+                {(selectedLeadForProfile.interest || selectedLeadForProfile.notes) && (
+                  <div className="pt-2 border-t border-emerald-950/60">
+                    <span className="text-zinc-500 text-[10px] block">Mensaje / Requerimientos:</span>
+                    <p className="text-zinc-300 text-xs italic mt-0.5">{selectedLeadForProfile.interest || selectedLeadForProfile.notes}</p>
+                  </div>
+                )}
               </div>
 
-              <div className="p-3 rounded-xl bg-black/40 border border-emerald-950">
-                <span className="text-zinc-500 text-[10px] font-mono block">NIVEL DE CONDICIÓN FÍSICA:</span>
-                <p className="text-white font-bold uppercase">{selectedLeadForProfile.passengerDetails?.fitnessLevel || 'Moderado'}</p>
+              {/* Preferencias y Amenities de Campo */}
+              <div className="p-3 rounded-xl bg-black/40 border border-emerald-950 space-y-2">
+                <span className="text-zinc-400 text-[10px] font-mono uppercase block font-bold">Preferencias & Concierge</span>
+                <div className="grid grid-cols-2 gap-2">
+                  <div>
+                    <span className="text-zinc-500 text-[10px] font-mono block">RESTRICCIONES ALIMENTICIAS:</span>
+                    <p className="text-amber-300 font-bold">
+                      {selectedLeadForProfile.passengerDetails?.dietaryRestrictions || 'Ninguna registrada'}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500 text-[10px] font-mono block">PAÍS / PASAPORTE:</span>
+                    <p className="text-white font-bold">{selectedLeadForProfile.passengerDetails?.nationality || selectedLeadForProfile.country || 'No especificado'}</p>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500 text-[10px] font-mono block">TALLA SOMBRERO:</span>
+                    <p className="text-emerald-400 font-bold">{selectedLeadForProfile.passengerDetails?.hatSize || 'Pendiente toma de talla'}</p>
+                  </div>
+                  <div>
+                    <span className="text-zinc-500 text-[10px] font-mono block">CONDICIÓN FÍSICA:</span>
+                    <p className="text-white font-bold uppercase">{selectedLeadForProfile.passengerDetails?.fitnessLevel || 'Estándar'}</p>
+                  </div>
+                </div>
               </div>
             </div>
 

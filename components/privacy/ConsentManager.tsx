@@ -93,6 +93,12 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
         }
       });
 
+      // Notificar a dataLayer para que GTM registre el evento de consentimiento aceptado
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'cookie_consent_accepted',
+      });
+
       if (metaPixelId && !window.fbq) {
         loadExternalScript('vr-meta-pixel', 'https://connect.facebook.net/en_US/fbevents.js');
         window.fbq = function fbqShim(...args: unknown[]) {
@@ -116,6 +122,10 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
         ad_user_data: 'denied',
         ad_personalization: 'denied',
         analytics_storage: 'denied',
+      });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'cookie_consent_rejected',
       });
     }
   }, [clarityProjectId, gaId, metaPixelId]);
