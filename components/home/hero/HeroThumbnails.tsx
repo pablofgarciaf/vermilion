@@ -59,7 +59,7 @@ function DeferredSlideImages({ slide, alt }: { slide: SlideData; alt: string }) 
           fill
           loading="lazy"
           unoptimized
-          className="object-cover object-center md:hidden"
+          className="object-cover object-top md:hidden"
           sizes="100vw"
         />
       )}
@@ -141,7 +141,7 @@ export function HeroThumbnails({ slidesData, locale }: HeroThumbnailsProps) {
                     fetchPriority="high"
                     loading="eager"
                     decoding="async"
-                    className="absolute inset-0 w-full h-full object-cover object-center md:object-top"
+                    className="absolute inset-0 w-full h-full object-cover object-top"
                   />
                 </picture>
               ) : (

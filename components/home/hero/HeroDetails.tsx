@@ -102,7 +102,7 @@ export function getStandardTemplateHTML(slide: SlideData, locale: string): strin
   const badges = SPLASH_TEXTS[locale] || SPLASH_TEXTS.en;
 
   return `
-    <div class="h-auto mb-1.5 pt-6 sm:pt-8 md:pt-0">
+    <div class="h-auto mb-1.5 pt-0">
       <div class="text text-white font-medium tracking-widest uppercase text-base md:text-sm pt-1 relative flex flex-col items-center text-center md:items-start md:text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
         <div class="w-8 h-[2px] bg-white rounded-full mb-2 mx-auto md:mx-0"></div>
         <span class="notranslate">${place}</span>
@@ -176,7 +176,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
           <div
             key={id}
             id={id}
-            className={`absolute left-0 w-full px-4 sm:px-6 md:px-0 md:w-auto md:left-[30px] lg:left-[60px] top-[135px] sm:top-[145px] md:top-[90px] lg:top-[100px] xl:top-[110px] flex flex-col items-center text-center md:items-start md:text-left pointer-events-none max-w-xl ${opacityClass}`}
+            className={`absolute left-0 w-full px-4 sm:px-6 md:px-0 md:w-auto md:left-[30px] lg:left-[60px] bottom-[195px] md:bottom-auto md:top-[90px] lg:top-[100px] xl:top-[110px] flex flex-col items-center text-center md:items-start md:text-left pointer-events-none max-w-xl ${opacityClass}`}
           >
             {isWelcomeSlide ? (
               /* ── BIENVENIDA EXCLUSIVA (Centrada en móvil, a la izquierda en desktop) ── */
@@ -238,15 +238,15 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                   </p>
                 </div>
 
-                {/* 4 Worlds Pills */}
+                {/* 4 Worlds Pills (Pacífico oculto en móviles para ahorrar una línea) */}
                 <div className="welcome-worlds flex flex-wrap items-center justify-center md:justify-start gap-2 text-white/90 font-medium tracking-[0.18em] uppercase text-[10px] sm:text-xs drop-shadow-md pt-2 border-t border-white/15 max-w-lg mx-auto md:mx-0 mb-3.5">
                   <span className="px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[0]}</span>
                   <span className="w-1 h-1 rounded-full bg-emerald-400" />
                   <span className="px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[1]}</span>
                   <span className="w-1 h-1 rounded-full bg-emerald-400" />
                   <span className="px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[2]}</span>
-                  <span className="w-1 h-1 rounded-full bg-emerald-400" />
-                  <span className="px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[3]}</span>
+                  <span className="hidden md:inline-block w-1 h-1 rounded-full bg-emerald-400" />
+                  <span className="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[3]}</span>
                 </div>
 
                 {/* VIP Fiduciary Badges Cluster - Under text & Above Buttons */}
@@ -281,7 +281,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
               /* ── MOLDE ESTÁNDAR (Con clases estándar para GSAP, vacío en inicio) ── */
               <>
                 {/* Destino Subtítulo */}
-                <div className="h-auto mb-1.5 pt-6 sm:pt-8 md:pt-0">
+                <div className="h-auto mb-1.5 pt-0">
                   <div className="text text-white font-medium tracking-widest uppercase text-base md:text-sm pt-1 relative flex flex-col items-center text-center md:items-start md:text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                     <div className="w-8 h-[2px] bg-white rounded-full mb-2 mx-auto md:mx-0" />
                     <span className="notranslate"></span>

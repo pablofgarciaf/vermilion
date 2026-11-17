@@ -9,12 +9,12 @@ interface HeroActionsProps {
 
 export function HeroActions({ exploreLabel, planLabel }: HeroActionsProps) {
   {/* 🎨 AJUSTE POSICIÓN BOTONES HERO:
-      - En Celular: bottom-[55px] sm:bottom-[65px] (cambia 55px para subir o bajar los botones en móvil)
-      - En Escritorio: md:top-[calc(50%+148px)] md:left-[30px] lg:left-[60px] (cambia 148px para subir/bajar en desktop) */}
+      - En Celular: bottom-[78px] sm:bottom-[82px] (elevado para librar el botón flotante de Planificar de la barra inferior)
+      - En Escritorio: md:bottom-[22px] lg:bottom-[25px] xl:bottom-[28px] md:left-[95px] lg:left-[125px] xl:left-[145px] */}
   return (
     <div
       id="hero-action-buttons"
-      className="absolute inset-x-0 bottom-[20px] sm:bottom-[24px] md:bottom-[22px] lg:bottom-[25px] xl:bottom-[28px] md:inset-x-auto md:left-[95px] lg:left-[125px] xl:left-[145px] z-30 flex flex-col items-center md:items-start gap-3 px-4 pointer-events-auto"
+      className="absolute inset-x-0 bottom-[85px] sm:bottom-[89px] md:bottom-[22px] lg:bottom-[25px] xl:bottom-[28px] md:inset-x-auto md:left-[95px] lg:left-[125px] xl:left-[145px] z-30 flex flex-col items-center md:items-start gap-3 px-4 pointer-events-auto"
     >
       <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2.5 sm:gap-3.5">
       <button

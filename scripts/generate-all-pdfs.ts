@@ -4,143 +4,25 @@ import { jsPDF } from 'jspdf';
 import { mockTours } from '../data/mock';
 import { dailyTours } from '../data/dailyToursData';
 import { Tour } from '../types';
+import { PDF_TRANSLATIONS } from './pdf/pdf-translations';
+import {
+  PdfImage, ImageUsage, loadPdfImage, drawImageCover, safeAddImage,
+  COVER_IMAGE_OPTS, DAY_IMAGE_OPTS, LOGO_IMAGE_OPTS,
+} from './pdf/pdf-images';
+import { createCtx, drawSectionTitle, drawTwoColumnList, drawLines } from './pdf/pdf-layout';
+import { drawDayBlock, drawCardDayBlock } from './pdf/pdf-days';
 
-const outputDir = path.resolve('C:/Users/pablo/hermes/projects/vermilion/tours-pdf');
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir, { recursive: true });
+// Salida: por defecto la carpeta de produccion. Para pruebas usar PDF_OUTPUT_DIR.
+const DEFAULT_OUTPUT_DIR = 'C:/Users/pablo/hermes/projects/vermilion/tours-pdf';
+const OUTPUT_DIR = path.resolve(process.env.PDF_OUTPUT_DIR || DEFAULT_OUTPUT_DIR);
+const CJK_FONT_PATH = 'C:/Users/pablo/hermes/projects/vermilion/tours-pdf/_fonts/simsun-subset.ttf';
+
+function registerCjkFont(doc: any) {
+  const b64 = fs.readFileSync(CJK_FONT_PATH).toString('base64');
+  doc.addFileToVFS('cjk.ttf', b64);
+  doc.addFont('cjk.ttf', 'cjk', 'normal');
+  doc.addFont('cjk.ttf', 'cjk', 'bold');
 }
-
-function loadLocalImageAsBase64(relativeOrPublicPath: string): string | null {
-  try {
-    let cleanPath = relativeOrPublicPath;
-    if (cleanPath.startsWith('/')) {
-      cleanPath = path.join('public', cleanPath.slice(1));
-    }
-    const fullPath = path.resolve(cleanPath);
-    if (fs.existsSync(fullPath)) {
-      const buffer = fs.readFileSync(fullPath);
-      const isPng = fullPath.toLowerCase().endsWith('.png');
-      const mime = isPng ? 'image/png' : 'image/jpeg';
-      return `data:${mime};base64,${buffer.toString('base64')}`;
-    }
-  } catch (err) {
-    // ignore
-  }
-  return null;
-}
-
-function safeAddImage(doc: any, imgData: string | null, format: string, x: number, y: number, w: number, h: number) {
-  if (!imgData || typeof imgData !== 'string' || !imgData.startsWith('data:')) return;
-  try {
-    doc.addImage(imgData, format, x, y, w, h);
-  } catch (err) {
-    // ignore image error in Node
-  }
-}
-
-let PDF_FAMILY = 'helvetica';
-
-const PDF_TRANSLATIONS: Record<string, Record<string, string>> = {
-  es: {
-    itineraryTitle: "Itinerario Oficial y Guía de Viaje 2026",
-    duration: "Duración",
-    destination: "Destino",
-    category: "Categoría",
-    pricing: "Opciones de Tarifa por Persona",
-    hotel3star: "Hoteles 3* Confort",
-    hotel4star: "Hoteles 4* Lujo / Premium",
-    fixedPrice: "Tarifa Oficial por Persona (Tour Privado)",
-    fixedPriceSub: "Incluye Transporte Privado y Guía Bilingüe Certificado (Español / Inglés)",
-    dayByDay: "Itinerario Detallado Día por Día",
-    highlights: "Puntos Destacados del Tour",
-    day: "Día",
-    meals: "Comidas",
-    accommodation: "Hospedaje",
-    transport: "Transporte",
-    activity: "Actividad",
-    durationLabel: "Duración",
-    inclusions: "El Programa Incluye",
-    exclusions: "El Programa No Incluye",
-    importantNotes: "Notas Importantes de Viaje",
-    footerText: "Vermilion South American Routes • Operador Turístico Certificado • Quito, Ecuador",
-    galapagosChapterTitle: "CAPÍTULO II: ISLAS GALÁPAGOS — EXPEDICIÓN MARINA",
-    andesChapterTitle: "CAPÍTULO I: REGIÓN ANDINA Y AMAZONÍA",
-    conciergeTitle: "CONCIERGE 24/7 WHATSAPP Y RESERVAS PERSONALIZADAS",
-    conciergeDesc: "Escribe a +593 96 003 9156 para personalizar fechas, mejorar hoteles o solicitar guías privados.",
-    dayProgram: "PROGRAMA DE EXCURSIÓN",
-    dayFree: "LOGÍSTICA / DÍA LIBRE",
-    oneDay: "1 DÍA (FULL DAY)",
-    sevenDays: "7 DÍAS",
-    dailyCat: "Excursión Full-Day",
-    privateCat: "Expedición Privada"
-  },
-  en: {
-    itineraryTitle: "Official Itinerary & Travel Guide 2026",
-    duration: "Duration",
-    destination: "Destination",
-    category: "Category",
-    pricing: "Rate Options per Person",
-    hotel3star: "3* Comfort Hotels",
-    hotel4star: "4* Luxury / Premium Hotels",
-    fixedPrice: "Official Rate per Person (Private Tour)",
-    fixedPriceSub: "Includes Private Transport and Certified Bilingual Guide (Spanish / English)",
-    dayByDay: "Detailed Day-by-Day Itinerary",
-    highlights: "Tour Highlights",
-    day: "Day",
-    meals: "Meals",
-    accommodation: "Accommodation",
-    transport: "Transport",
-    activity: "Activity",
-    durationLabel: "Duration",
-    inclusions: "The Program Includes",
-    exclusions: "The Program Does Not Include",
-    importantNotes: "Important Travel Notes",
-    footerText: "Vermilion South American Routes • Certified Tour Operator • Quito, Ecuador",
-    galapagosChapterTitle: "CHAPTER II: GALÁPAGOS ISLANDS — MARINE EXPEDITION",
-    andesChapterTitle: "CHAPTER I: ANDEAN REGION & AMAZON",
-    conciergeTitle: "24/7 CONCIERGE ON WHATSAPP & PERSONALIZED BOOKINGS",
-    conciergeDesc: "Write to +593 96 003 9156 to customize dates, upgrade hotels or request private guides.",
-    dayProgram: "TOUR PROGRAM",
-    dayFree: "LOGISTICS / FREE DAY",
-    oneDay: "1 DAY (FULL DAY)",
-    sevenDays: "7 DAYS",
-    dailyCat: "Full-Day Excursion",
-    privateCat: "Private Expedition"
-  },
-  zh: {
-    itineraryTitle: "官方行程与旅行指南 2026",
-    duration: "时长",
-    destination: "目的地",
-    category: "类别",
-    pricing: "每人价格选项",
-    hotel3star: "3星舒适酒店",
-    hotel4star: "4星豪华/高端酒店",
-    fixedPrice: "每人官方价格（私人团）",
-    fixedPriceSub: "包含私人交通及认证双语导游（西班牙语 / 英语）",
-    dayByDay: "逐日详细行程",
-    highlights: "行程亮点",
-    day: "第",
-    meals: "用餐",
-    accommodation: "住宿",
-    transport: "交通",
-    activity: "活动",
-    durationLabel: "时长",
-    inclusions: "行程包含",
-    exclusions: "行程不包含",
-    importantNotes: "重要旅行须知",
-    footerText: "Vermilion South American Routes • 认证旅游运营商 • 厄瓜多尔，基多",
-    galapagosChapterTitle: "第二章：加拉帕戈斯群岛 — 海洋探险",
-    andesChapterTitle: "第一章：安第斯地区与亚马逊",
-    conciergeTitle: "24/7 WHATSAPP 礼宾服务与个性化预订",
-    conciergeDesc: "请致电 +593 96 003 9156，定制日期、升级酒店或预订私人导游。",
-    dayProgram: "行程安排",
-    dayFree: "后勤安排 / 自由日",
-    oneDay: "1 天（全天）",
-    sevenDays: "7 天",
-    dailyCat: "全天游览",
-    privateCat: "私人探险团"
-  }
-};
 
 function getLocalized(obj: any, locale: string = 'es'): string {
   if (!obj) return '';
@@ -161,75 +43,23 @@ function isGalapagosRegion(title: string, desc: string): boolean {
   return /galápagos|galapagos|baltra|santa cruz|isabela|san cristóbal|san cristobal|tintoreras/i.test(combined);
 }
 
-function drawHeaderBand(doc: any, logoBase64: string | null, pageWidth: number, marginX: number) {
-  const headerH = 28;
-  doc.setFillColor(27, 67, 50);
-  doc.rect(0, 0, pageWidth, 3.5, 'F');
-  doc.setFillColor(255, 255, 255);
-  doc.rect(0, 3.5, pageWidth, headerH - 3.5, 'F');
-  doc.setDrawColor(226, 232, 240);
-  doc.setLineWidth(0.3);
-  doc.line(0, headerH, pageWidth, headerH);
-
-  if (logoBase64) {
-    const logoW = 46;
-    const logoH = 15;
-    const logoY = 3.5 + ((headerH - 3.5 - logoH) / 2);
-    safeAddImage(doc, logoBase64, 'PNG', marginX, logoY, logoW, logoH);
+// Asigna a cada dia SU foto: primero la del itinerario; si no tiene (o ya se uso), la de la galeria
+// en la misma posicion. Nunca se repite una foto dentro del PDF ni se usa la portada como relleno.
+async function assignDayImages(itinerary: any[], gallery: string[], usage: ImageUsage): Promise<(PdfImage | null)[]> {
+  const result: (PdfImage | null)[] = itinerary.map(() => null);
+  for (let i = 0; i < itinerary.length; i++) {
+    const own = itinerary[i]?.image;
+    if (own) result[i] = usage.claim(await loadPdfImage(own, DAY_IMAGE_OPTS));
   }
-
-  const cX = 142;
-  const cY0 = 9.0;
-  const cGap = 6.2;
-
-  // Phone
-  doc.setFillColor(27, 67, 50);
-  doc.roundedRect(cX, cY0 - 3.0, 3.8, 3.8, 0.7, 0.7, 'F');
-  doc.setFillColor(255, 255, 255);
-  doc.rect(cX + 1.1, cY0 - 2.3, 1.6, 2.0, 'F');
-  doc.setFillColor(27, 67, 50);
-  doc.circle(cX + 1.9, cY0 - 0.7, 0.25, 'F');
-  doc.setFont(PDF_FAMILY, 'normal');
-  doc.setFontSize(7.6);
-  doc.setTextColor(30, 41, 59);
-  doc.text('+(593) 96-003-9156', cX + 5.5, cY0);
-
-  // Email
-  doc.setFillColor(27, 67, 50);
-  doc.roundedRect(cX, cY0 + cGap - 3.0, 3.8, 3.0, 0.5, 0.5, 'F');
-  doc.setDrawColor(255, 255, 255);
-  doc.setLineWidth(0.28);
-  doc.line(cX + 0.3, cY0 + cGap - 2.8, cX + 1.9, cY0 + cGap - 1.4);
-  doc.line(cX + 3.5, cY0 + cGap - 2.8, cX + 1.9, cY0 + cGap - 1.4);
-  doc.setFont(PDF_FAMILY, 'normal');
-  doc.setFontSize(7.6);
-  doc.setTextColor(30, 41, 59);
-  doc.text('info@vermilionroutes.com', cX + 5.5, cY0 + cGap);
-
-  // Web
-  doc.setFillColor(27, 67, 50);
-  doc.circle(cX + 1.9, cY0 + (cGap * 2) - 1.4, 1.9, 'F');
-  doc.setDrawColor(255, 255, 255);
-  doc.setLineWidth(0.22);
-  doc.line(cX, cY0 + (cGap * 2) - 1.4, cX + 3.8, cY0 + (cGap * 2) - 1.4);
-  doc.line(cX + 1.9, cY0 + (cGap * 2) - 3.3, cX + 1.9, cY0 + (cGap * 2) + 0.5);
-  doc.setFont(PDF_FAMILY, 'normal');
-  doc.setFontSize(7.6);
-  doc.setTextColor(30, 41, 59);
-  doc.text('www.vermilionroutes.com', cX + 5.5, cY0 + (cGap * 2));
+  for (let i = 0; i < itinerary.length; i++) {
+    if (!result[i] && gallery[i]) result[i] = usage.claim(await loadPdfImage(gallery[i], DAY_IMAGE_OPTS));
+  }
+  return result;
 }
 
-const CJK_FONT_PATH = 'C:/Users/pablo/hermes/projects/vermilion/tours-pdf/_fonts/simsun-subset.ttf';
-function registerCjkFont(doc: any) {
-  const b64 = fs.readFileSync(CJK_FONT_PATH).toString('base64');
-  doc.addFileToVFS('cjk.ttf', b64);
-  doc.addFont('cjk.ttf', 'cjk', 'normal');
-  doc.addFont('cjk.ttf', 'cjk', 'bold');
-}
-
-function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
+export async function buildPDFForTour(tour: Tour, locale: string = 'es'): Promise<Buffer> {
   const t = PDF_TRANSLATIONS[locale] || PDF_TRANSLATIONS['es'];
-  PDF_FAMILY = locale === 'zh' ? 'cjk' : 'helvetica';
+  const family = locale === 'zh' ? 'cjk' : 'helvetica';
   const isDailyTour = tour.durationDays === 1 || dailyTours.some(d => d.id === tour.id);
 
   const title = getLocalized(tour.title, locale);
@@ -242,85 +72,53 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
   const price4Star = tour.price4Star ?? Math.round((price3Star ?? 0) * 1.15);
   const singlePrice = tour.price || 89;
 
-  const itinerary = tour.itinerary || [];
+  const itinerary: any[] = tour.itinerary || [];
   const highlights = tour.highlights || [];
   const inclusions = tour.inclusions || [];
   const exclusions = tour.exclusions || [];
-  const gallery = tour.gallery || [];
+  const gallery: string[] = (tour.gallery || []).filter(Boolean);
 
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
   if (locale === 'zh') registerCjkFont(doc);
-  const pageWidth = 210;
-  const pageHeight = 297;
-  const marginX = 14;
+
+  const logo = await loadPdfImage('/logo_inicio.png', LOGO_IMAGE_OPTS);
+  const ctx = createCtx(doc, family, logo);
+  const { pageWidth, pageHeight, marginX, contentWidth } = ctx;
   const marginRight = 14;
-  const contentWidth = pageWidth - marginX - marginRight; // 182mm
-  let yPos = 0;
 
-  const logoBase64 = loadLocalImageAsBase64('/logo_inicio.png');
-  const coverImgPath = tour.desktopImage || tour.imageUrl || '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp';
-  const coverBase64 = loadLocalImageAsBase64(coverImgPath);
+  const usage = new ImageUsage();
+  const coverPath = tour.desktopImage || tour.imageUrl || '/images/tours/16-9/quito-iglesia-de-san-francisco-16-9.webp';
+  const cover = await loadPdfImage(coverPath, COVER_IMAGE_OPTS);
+  usage.mark(cover); // la portada cuenta como usada: ningun dia la repite
+  const dayImages = await assignDayImages(itinerary, gallery, usage);
 
-  const dayImagesBase64: (string | null)[] = [];
-  for (let i = 0; i < itinerary.length; i++) {
-    const imgUrl = gallery[i] || gallery[i % gallery.length] || coverImgPath;
-    dayImagesBase64.push(loadLocalImageAsBase64(imgUrl));
-  }
-
-  const galleryImagesBase64: { url: string; b64: string | null }[] = [];
-  for (const gUrl of gallery) {
-    if (gUrl) {
-      const b64 = loadLocalImageAsBase64(gUrl);
-      if (b64) {
-        galleryImagesBase64.push({ url: gUrl, b64 });
-      }
-    }
-  }
-
-  doc.setFillColor(250, 249, 246);
-  doc.rect(0, 0, pageWidth, pageHeight, 'F');
-  drawHeaderBand(doc, logoBase64, pageWidth, marginX);
-  yPos = 32;
-
-  const checkPageBreak = (neededHeight: number) => {
-    if (yPos + neededHeight > pageHeight - 16) {
-      doc.addPage();
-      doc.setFillColor(250, 249, 246);
-      doc.rect(0, 0, pageWidth, pageHeight, 'F');
-      drawHeaderBand(doc, logoBase64, pageWidth, marginX);
-      yPos = 35;
-      return true;
-    }
-    return false;
-  };
-
-  // Hero Cover
-  if (coverBase64 && coverBase64.startsWith('data:')) {
+  // Portada
+  if (cover) {
     const coverHeight = 70;
-    safeAddImage(doc, coverBase64, 'JPEG', 0, yPos, pageWidth, coverHeight);
+    drawImageCover(doc, cover, 0, ctx.y, pageWidth, coverHeight);
     doc.setFillColor(0, 0, 0);
     doc.setGState(new (doc as any).GState({ opacity: 0.72 }));
-    doc.rect(0, yPos + 44, pageWidth, 26, 'F');
+    doc.rect(0, ctx.y + 44, pageWidth, 26, 'F');
     doc.setGState(new (doc as any).GState({ opacity: 1.0 }));
 
-    doc.setFont(PDF_FAMILY, 'bold');
+    doc.setFont(family, 'bold');
     doc.setFontSize(12.5);
     doc.setTextColor(255, 255, 255);
-    doc.text(title.toUpperCase(), marginX, yPos + 53);
+    doc.text(title.toUpperCase(), marginX, ctx.y + 53);
 
-    const bY = yPos + 59;
+    const bY = ctx.y + 59;
     const badgeHeight = 6.8;
     const badgePaddingX = 4;
-    const b1Text = `[ ${destination.toUpperCase()} ]`;
-    const b2Text = `[ ${category.toUpperCase()} ]`;
-    const b3Text = isDailyTour ? '[ 1 DÍA (FULL DAY) ]' : `[ ${duration.toUpperCase()} ]`;
-
-    doc.setFont(PDF_FAMILY, 'bold');
+    const badges = [
+      `[ ${destination.toUpperCase()} ]`,
+      `[ ${category.toUpperCase()} ]`,
+      isDailyTour ? '[ 1 DÍA (FULL DAY) ]' : `[ ${duration.toUpperCase()} ]`,
+    ];
+    doc.setFont(family, 'bold');
     doc.setFontSize(7.2);
     let badgeX = marginX;
-    [b1Text, b2Text, b3Text].forEach((bText) => {
-      const textW = doc.getTextWidth(bText);
-      const bW = textW + (badgePaddingX * 2);
+    badges.forEach((bText) => {
+      const bW = doc.getTextWidth(bText) + (badgePaddingX * 2);
       doc.setFillColor(30, 41, 59);
       doc.setGState(new (doc as any).GState({ opacity: 0.78 }));
       doc.roundedRect(badgeX, bY, bW, badgeHeight, 1.8, 1.8, 'F');
@@ -332,134 +130,105 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
       doc.text(bText, badgeX + badgePaddingX, bY + 4.6);
       badgeX += bW + 2.8;
     });
-
-    yPos += coverHeight + 7;
+    ctx.y += coverHeight + 7;
   } else {
-    doc.setFont(PDF_FAMILY, 'bold');
+    doc.setFont(family, 'bold');
     doc.setFontSize(15);
     doc.setTextColor(2, 44, 34);
-    doc.text(title.toUpperCase(), marginX, yPos + 6);
-    yPos += 14;
+    doc.text(title.toUpperCase(), marginX, ctx.y + 6);
+    ctx.y += 14;
   }
 
-  // Price
+  // Precio
   if (isDailyTour) {
     doc.setFillColor(240, 253, 244);
     doc.setDrawColor(16, 185, 129);
     doc.setLineWidth(0.8);
-    doc.roundedRect(marginX, yPos, contentWidth, 16, 2, 2, 'FD');
-
-    doc.setFont(PDF_FAMILY, 'bold');
+    doc.roundedRect(marginX, ctx.y, contentWidth, 16, 2, 2, 'FD');
+    doc.setFont(family, 'bold');
     doc.setFontSize(8.5);
     doc.setTextColor(22, 101, 52);
-    doc.text(t.fixedPrice.toUpperCase(), marginX + 6, yPos + 5.8);
-
+    doc.text(t.fixedPrice.toUpperCase(), marginX + 6, ctx.y + 5.8);
     doc.setFontSize(12.5);
     doc.setTextColor(6, 95, 70);
-    doc.text(`$${singlePrice} USD`, marginX + 6, yPos + 12.5);
-
-    doc.setFont(PDF_FAMILY, 'normal');
+    doc.text(`$${singlePrice} USD`, marginX + 6, ctx.y + 12.5);
+    doc.setFont(family, 'normal');
     doc.setFontSize(7.8);
     doc.setTextColor(71, 85, 105);
-    doc.text(t.fixedPriceSub, pageWidth - marginRight - 6, yPos + 9.5, { align: 'right' });
-    yPos += 22;
+    doc.text(t.fixedPriceSub, pageWidth - marginRight - 6, ctx.y + 9.5, { align: 'right' });
+    ctx.y += 22;
   } else {
     const cardWidth = (contentWidth - 6) / 2;
     const cardHeight = 17;
     doc.setFillColor(240, 253, 244);
     doc.setDrawColor(167, 243, 208);
-    doc.roundedRect(marginX, yPos, cardWidth, cardHeight, 2, 2, 'FD');
-    doc.setFont(PDF_FAMILY, 'bold');
+    doc.roundedRect(marginX, ctx.y, cardWidth, cardHeight, 2, 2, 'FD');
+    doc.setFont(family, 'bold');
     doc.setFontSize(8);
     doc.setTextColor(22, 101, 52);
-    doc.text(t.hotel3star.toUpperCase(), marginX + 6, yPos + 5.5);
+    doc.text(t.hotel3star.toUpperCase(), marginX + 6, ctx.y + 5.5);
     doc.setFontSize(12);
     doc.setTextColor(4, 120, 87);
-    doc.text(`$${price3Star} USD`, marginX + 6, yPos + 12.5);
+    doc.text(`$${price3Star} USD`, marginX + 6, ctx.y + 12.5);
 
     const card2X = marginX + cardWidth + 6;
     doc.setFillColor(250, 245, 255);
     doc.setDrawColor(233, 213, 255);
-    doc.roundedRect(card2X, yPos, cardWidth, cardHeight, 2, 2, 'FD');
-    doc.setFont(PDF_FAMILY, 'bold');
+    doc.roundedRect(card2X, ctx.y, cardWidth, cardHeight, 2, 2, 'FD');
+    doc.setFont(family, 'bold');
     doc.setFontSize(8);
     doc.setTextColor(126, 34, 206);
-    doc.text(t.hotel4star.toUpperCase(), card2X + 6, yPos + 5.5);
+    doc.text(t.hotel4star.toUpperCase(), card2X + 6, ctx.y + 5.5);
     doc.setFontSize(12);
-    doc.setTextColor(126, 34, 206);
-    doc.text(`$${price4Star} USD`, card2X + 6, yPos + 12.5);
-    yPos += cardHeight + 8;
+    doc.text(`$${price4Star} USD`, card2X + 6, ctx.y + 12.5);
+    ctx.y += cardHeight + 8;
   }
 
-  // Description
+  // Descripcion
   if (description) {
-    doc.setFont(PDF_FAMILY, 'normal');
+    doc.setFont(family, 'normal');
     doc.setFontSize(9.0);
     const paddingX = 6;
-    const descTextWidth = contentWidth - (paddingX * 2);
-    const splitDesc = doc.splitTextToSize(description, descTextWidth);
+    const splitDesc: string[] = doc.splitTextToSize(description, contentWidth - paddingX * 2);
     const descBoxHeight = (splitDesc.length * 4.2) + 9;
-
     doc.setFillColor(255, 255, 255);
-    doc.rect(marginX, yPos, contentWidth, descBoxHeight, 'F');
+    doc.rect(marginX, ctx.y, contentWidth, descBoxHeight, 'F');
     doc.setFillColor(16, 185, 129);
-    doc.rect(marginX, yPos, 2.5, descBoxHeight, 'F');
+    doc.rect(marginX, ctx.y, 2.5, descBoxHeight, 'F');
     doc.setDrawColor(226, 232, 240);
     doc.setLineWidth(0.3);
-    doc.rect(marginX, yPos, contentWidth, descBoxHeight, 'D');
-
-    doc.setFont(PDF_FAMILY, 'normal');
-    doc.setFontSize(9.0);
+    doc.rect(marginX, ctx.y, contentWidth, descBoxHeight, 'D');
     doc.setTextColor(51, 65, 85);
-    doc.text(splitDesc, marginX + paddingX + 1, yPos + 5.8);
-    yPos += descBoxHeight + 8;
+    drawLines(doc, splitDesc, marginX + paddingX + 1, ctx.y + 5.8, 4.2);
+    ctx.y += descBoxHeight + 8;
   }
 
-  // Highlights (1-day tours)
+  // Highlights (tours de 1 dia)
   if (isDailyTour && highlights.length > 0) {
-    checkPageBreak(25);
-    doc.setFont(PDF_FAMILY, 'bold');
-    doc.setFontSize(10.5);
-    doc.setTextColor(6, 78, 59);
-    doc.text(t.highlights.toUpperCase(), marginX, yPos);
-    doc.setDrawColor(167, 243, 208);
-    doc.setLineWidth(0.8);
-    doc.line(marginX, yPos + 2, marginX + contentWidth, yPos + 2);
-    yPos += 7;
-
-    doc.setFont(PDF_FAMILY, 'normal');
+    ctx.ensure(25);
+    drawSectionTitle(ctx, t.highlights.toUpperCase(), 10.5, 7);
+    doc.setFont(family, 'normal');
     doc.setFontSize(9.0);
     highlights.forEach((h) => {
-      const hText = getLocalized(h, locale);
-      const splitH = doc.splitTextToSize(hText, contentWidth - 12);
-      const hHeight = (splitH.length * 4.2) + 2;
-      checkPageBreak(hHeight);
+      const lines: string[] = doc.splitTextToSize(getLocalized(h, locale), contentWidth - 12);
+      const hHeight = (lines.length * 4.2) + 2;
+      ctx.ensure(hHeight);
       doc.setFillColor(16, 185, 129);
-      doc.circle(marginX + 2.5, yPos + 2, 1.8, 'F');
-      doc.setFont(PDF_FAMILY, 'normal');
-      doc.setFontSize(9.0);
+      doc.circle(marginX + 2.5, ctx.y + 2, 1.8, 'F');
       doc.setTextColor(30, 41, 59);
-      doc.text(splitH, marginX + 7, yPos + 3);
-      yPos += hHeight;
+      drawLines(doc, lines, marginX + 7, ctx.y + 3, 4.2);
+      ctx.y += hHeight;
     });
-    yPos += 4;
+    ctx.y += 4;
   }
 
-  // Itinerary
+  // Itinerario dia por dia
   if (itinerary.length > 0) {
-    checkPageBreak(15);
-    doc.setFont(PDF_FAMILY, 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(6, 78, 59);
-    doc.text(t.dayByDay.toUpperCase(), marginX, yPos);
-    doc.setDrawColor(167, 243, 208);
-    doc.setLineWidth(0.8);
-    doc.line(marginX, yPos + 2, marginX + contentWidth, yPos + 2);
-    yPos += 9;
+    ctx.ensure(15);
+    drawSectionTitle(ctx, t.dayByDay.toUpperCase(), 11, 9);
 
     let mainDayIndex = 0;
     let currentRegionIsGalapagos = false;
-
     const hasAndes = itinerary.some(d => {
       const tText = getLocalized(d.title, locale).toLowerCase();
       const dText = getLocalized(d.description, locale).toLowerCase();
@@ -476,387 +245,120 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
       const dayAcc = dayItem.accommodation ? getLocalized(dayItem.accommodation, locale) : '';
       const dayTrans = dayItem.transportation ? getLocalized(dayItem.transportation, locale) : '';
       const dayAct = dayItem.activity ? getLocalized(dayItem.activity, locale) : '';
-      const dayImgBase64 = dayImagesBase64[i];
 
       const isFunctional = isFunctionalDay(dayTitle, rawDayDesc);
       const isGalapagos = isGalapagosRegion(dayTitle, rawDayDesc);
 
       if (isMultiRegionCombo && isGalapagos && !currentRegionIsGalapagos) {
         currentRegionIsGalapagos = true;
-        checkPageBreak(22);
-        yPos += 3;
+        ctx.ensure(22);
+        ctx.y += 3;
         doc.setFillColor(236, 253, 245);
         doc.setDrawColor(167, 243, 208);
-        doc.roundedRect(marginX, yPos, contentWidth, 16, 2, 2, 'FD');
-        doc.setFont(PDF_FAMILY, 'bold');
+        doc.roundedRect(marginX, ctx.y, contentWidth, 16, 2, 2, 'FD');
+        doc.setFont(family, 'bold');
         doc.setFontSize(10);
         doc.setTextColor(6, 78, 59);
-        doc.text(t.galapagosChapterTitle.toUpperCase(), marginX + 6, yPos + 10);
-        yPos += 22;
+        doc.text(t.galapagosChapterTitle.toUpperCase(), marginX + 6, ctx.y + 10);
+        ctx.y += 22;
       }
 
       if (isDailyTour || isFunctional) {
-        doc.setFont(PDF_FAMILY, 'normal');
-        doc.setFontSize(9.0);
-        const splitDayDesc = doc.splitTextToSize(rawDayDesc, contentWidth - 14);
-        const blockHeight = 16 + (splitDayDesc.length * 4.2) + (dayMeals ? 5 : 0);
-
-        checkPageBreak(blockHeight + 4);
-
-        doc.setFillColor(255, 255, 255);
-        doc.setDrawColor(203, 213, 225);
-        doc.roundedRect(marginX, yPos, contentWidth, blockHeight, 2, 2, 'FD');
-
-        doc.setFont(PDF_FAMILY, 'bold');
-        doc.setFontSize(8.5);
-        doc.setTextColor(71, 85, 105);
-        doc.text(`${t.day.toUpperCase()} ${dayItem.day} • [ ${isDailyTour ? t.dayProgram : t.dayFree} ]`, marginX + 6, yPos + 6);
-
-        doc.setFontSize(10);
-        doc.setTextColor(15, 23, 42);
-        doc.text(dayTitle, marginX + 6, yPos + 12);
-
-        doc.setFont(PDF_FAMILY, 'normal');
-        doc.setFontSize(9.0);
-        doc.setTextColor(51, 65, 85);
-        let descY = yPos + 17;
-        doc.text(splitDayDesc, marginX + 6, descY);
-        descY += (splitDayDesc.length * 4.2);
-
-        if (dayMeals || dayTrans || dayAct) {
-          doc.setFont(PDF_FAMILY, 'bold');
-          doc.setFontSize(8.2);
-          doc.setTextColor(71, 85, 105);
-          const metaParts: string[] = [];
-          if (dayTrans) metaParts.push(`TRANSPORT: ${dayTrans}`);
-          if (dayMeals) metaParts.push(`MEALS: ${dayMeals}`);
-          if (dayAct) metaParts.push(`DURATION: ${dayAct}`);
-          doc.text(metaParts.join('  •  '), marginX + 6, descY + 2);
-        }
-
-        yPos += blockHeight + 6;
+        const metaParts: string[] = [];
+        if (dayTrans) metaParts.push(`${t.transport.toUpperCase()}: ${dayTrans}`);
+        if (dayMeals) metaParts.push(`${t.meals.toUpperCase()}: ${dayMeals}`);
+        if (dayAct) metaParts.push(`${t.activity.toUpperCase()}: ${dayAct}`);
+        drawCardDayBlock(
+          ctx,
+          `${t.day.toUpperCase()} ${dayItem.day} • [ ${isDailyTour ? t.dayProgram : t.dayFree} ]`,
+          dayTitle,
+          rawDayDesc,
+          metaParts.join('  •  '),
+        );
       } else {
-        const isEven = (mainDayIndex % 2 === 0);
+        const imageOnLeft = mainDayIndex % 2 === 0;
         mainDayIndex++;
-
-        const imageWidth = 52;
-        const gap = 6;
-        const textWidth = contentWidth - imageWidth - gap; // 124mm
-
-        const rawText = rawDayDesc.trim();
-        const paragraphs = rawText.includes('\n')
-          ? rawText.split(/\n\s*\n|\r\n\r\n|\n/).map(p => p.trim()).filter(Boolean)
-          : [rawText];
-
-        doc.setFont(PDF_FAMILY, 'normal');
-        doc.setFontSize(9.0);
-        const wrappedParagraphs = paragraphs.map(p => doc.splitTextToSize(p, textWidth));
-        const totalDescLines = wrappedParagraphs.reduce((acc, lines) => acc + lines.length, 0);
-
-        let metadataHeight = 0;
-        if (dayAcc) metadataHeight += 4.6;
-        if (dayTrans) metadataHeight += 4.6;
-        if (dayMeals) metadataHeight += 4.6;
-        if (dayAct) metadataHeight += 4.6;
-
-        const textBlockHeight = 18 + (totalDescLines * 4.2) + (paragraphs.length * 2.6) + metadataHeight;
-        const blockHeight = Math.max(textBlockHeight, 52);
-
-        checkPageBreak(blockHeight + 8);
-
-        if (isEven) {
-          const imgX = marginX; // 14mm
-          const textX = marginX + imageWidth + gap; // 72mm
-
-          if (dayImgBase64 && dayImgBase64.startsWith('data:')) {
-            safeAddImage(doc, dayImgBase64, 'JPEG', imgX, yPos, imageWidth, blockHeight);
-            doc.setDrawColor(226, 232, 240);
-            doc.setLineWidth(0.3);
-            doc.roundedRect(imgX, yPos, imageWidth, blockHeight, 2, 2, 'D');
-          }
-
-          doc.setFont(PDF_FAMILY, 'bold');
-          doc.setFontSize(8.5);
-          doc.setTextColor(6, 78, 59);
-          doc.text(`${t.day.toUpperCase()} ${dayItem.day}`, textX, yPos + 5.5);
-
-          doc.setFont(PDF_FAMILY, 'bold');
-          doc.setFontSize(10);
-          doc.setTextColor(15, 23, 42);
-          const splitTitle = doc.splitTextToSize(dayTitle, textWidth);
-          doc.text(splitTitle, textX, yPos + 11);
-          let descY = yPos + 11 + (splitTitle.length * 4.6);
-
-          doc.setFont(PDF_FAMILY, 'normal');
-          doc.setFontSize(9.0);
-          doc.setTextColor(51, 65, 85);
-          for (const paraLines of wrappedParagraphs) {
-            doc.text(paraLines, textX, descY);
-            descY += (paraLines.length * 4.2) + 2.6;
-          }
-
-          if (dayAcc) {
-            doc.setFont(PDF_FAMILY, 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.accommodation}: `, textX, descY);
-            doc.setFont(PDF_FAMILY, 'normal');
-            doc.setTextColor(71, 85, 105);
-            doc.text(dayAcc, textX + 18, descY);
-            descY += 4.6;
-          }
-          if (dayTrans) {
-            doc.setFont(PDF_FAMILY, 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.transport}: `, textX, descY);
-            doc.setFont(PDF_FAMILY, 'normal');
-            doc.setTextColor(71, 85, 105);
-            const splitTrans = doc.splitTextToSize(dayTrans, textWidth - 18);
-            doc.text(splitTrans, textX + 18, descY);
-            descY += (splitTrans.length * 3.8);
-          }
-          if (dayMeals) {
-            doc.setFont(PDF_FAMILY, 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.meals}: `, textX, descY);
-            doc.setFont(PDF_FAMILY, 'normal');
-            doc.setTextColor(71, 85, 105);
-            doc.text(dayMeals, textX + 14, descY);
-            descY += 4.6;
-          }
-          if (dayAct) {
-            doc.setFont(PDF_FAMILY, 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.activity}: `, textX, descY);
-            doc.setFont(PDF_FAMILY, 'normal');
-            doc.setTextColor(71, 85, 105);
-            const splitAct = doc.splitTextToSize(dayAct, textWidth - 16);
-            doc.text(splitAct, textX + 16, descY);
-            descY += (splitAct.length * 3.8);
-          }
-        } else {
-          const textX = marginX; // 14mm
-          const imgX = marginX + textWidth + gap; // 144mm
-
-          if (dayImgBase64 && dayImgBase64.startsWith('data:')) {
-            safeAddImage(doc, dayImgBase64, 'JPEG', imgX, yPos, imageWidth, blockHeight);
-            doc.setDrawColor(226, 232, 240);
-            doc.setLineWidth(0.3);
-            doc.roundedRect(imgX, yPos, imageWidth, blockHeight, 2, 2, 'D');
-          }
-
-          doc.setFont(PDF_FAMILY, 'bold');
-          doc.setFontSize(8.5);
-          doc.setTextColor(6, 78, 59);
-          doc.text(`${t.day.toUpperCase()} ${dayItem.day}`, textX, yPos + 5.5);
-
-          doc.setFont(PDF_FAMILY, 'bold');
-          doc.setFontSize(10);
-          doc.setTextColor(15, 23, 42);
-          const splitTitle = doc.splitTextToSize(dayTitle, textWidth);
-          doc.text(splitTitle, textX, yPos + 11);
-          let descY = yPos + 11 + (splitTitle.length * 4.6);
-
-          doc.setFont(PDF_FAMILY, 'normal');
-          doc.setFontSize(9.0);
-          doc.setTextColor(51, 65, 85);
-          for (const paraLines of wrappedParagraphs) {
-            doc.text(paraLines, textX, descY);
-            descY += (paraLines.length * 4.2) + 2.6;
-          }
-
-          if (dayAcc) {
-            doc.setFont(PDF_FAMILY, 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.accommodation}: `, textX, descY);
-            doc.setFont(PDF_FAMILY, 'normal');
-            doc.setTextColor(71, 85, 105);
-            doc.text(dayAcc, textX + 18, descY);
-            descY += 4.6;
-          }
-          if (dayTrans) {
-            doc.setFont(PDF_FAMILY, 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.transport}: `, textX, descY);
-            doc.setFont(PDF_FAMILY, 'normal');
-            doc.setTextColor(71, 85, 105);
-            const splitTrans = doc.splitTextToSize(dayTrans, textWidth - 18);
-            doc.text(splitTrans, textX + 18, descY);
-            descY += (splitTrans.length * 3.8);
-          }
-          if (dayMeals) {
-            doc.setFont(PDF_FAMILY, 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.meals}: `, textX, descY);
-            doc.setFont(PDF_FAMILY, 'normal');
-            doc.setTextColor(71, 85, 105);
-            doc.text(dayMeals, textX + 14, descY);
-            descY += 4.6;
-          }
-          if (dayAct) {
-            doc.setFont(PDF_FAMILY, 'bold');
-            doc.setFontSize(8.2);
-            doc.setTextColor(15, 23, 42);
-            doc.text(`${t.activity}: `, textX, descY);
-            doc.setFont(PDF_FAMILY, 'normal');
-            doc.setTextColor(71, 85, 105);
-            const splitAct = doc.splitTextToSize(dayAct, textWidth - 16);
-            doc.text(splitAct, textX + 16, descY);
-            descY += (splitAct.length * 3.8);
-          }
-        }
-        yPos += blockHeight + 8;
+        drawDayBlock(ctx, {
+          day: dayItem.day,
+          title: dayTitle,
+          desc: rawDayDesc,
+          meals: dayMeals,
+          accommodation: dayAcc,
+          transport: dayTrans,
+          activity: dayAct,
+          img: dayImages[i],
+        }, imageOnLeft, t);
       }
     }
   }
 
-  // Inclusions & Exclusions
+  // Incluye / No incluye (dos columnas)
   if (inclusions.length > 0 || exclusions.length > 0) {
-    checkPageBreak(35);
-    yPos += 3;
-    doc.setFont(PDF_FAMILY, 'bold');
-    doc.setFontSize(10.5);
-    doc.setTextColor(6, 78, 59);
-    doc.text(t.inclusions.toUpperCase(), marginX, yPos);
-    doc.setDrawColor(167, 243, 208);
-    doc.setLineWidth(0.8);
-    doc.line(marginX, yPos + 2, marginX + contentWidth, yPos + 2);
-    yPos += 7;
-
-    doc.setFont(PDF_FAMILY, 'normal');
-    doc.setFontSize(9.0);
-    inclusions.forEach((inc) => {
-      const incText = getLocalized(inc, locale);
-      const splitInc = doc.splitTextToSize(incText, contentWidth - 10);
-      const itemHeight = (splitInc.length * 4.3) + 2.5;
-      checkPageBreak(itemHeight);
-      doc.setFillColor(16, 185, 129);
-      doc.circle(marginX + 2.5, yPos + 2, 2.0, 'F');
-      doc.setDrawColor(255, 255, 255);
-      doc.setLineWidth(0.5);
-      doc.line(marginX + 1.5, yPos + 2, marginX + 2.3, yPos + 2.8);
-      doc.line(marginX + 2.3, yPos + 2.8, marginX + 3.5, yPos + 1.1);
-
-      doc.setFont(PDF_FAMILY, 'normal');
-      doc.setFontSize(9.0);
-      doc.setTextColor(30, 41, 59);
-      doc.text(splitInc, marginX + 7, yPos + 3);
-      yPos += itemHeight;
-    });
-
+    ctx.ensure(35);
+    ctx.y += 3;
+    drawSectionTitle(ctx, t.inclusions.toUpperCase(), 10.5, 7);
+    drawTwoColumnList(ctx, inclusions.map((x: any) => getLocalized(x, locale)), 'include');
     if (exclusions.length > 0) {
-      yPos += 3;
-      checkPageBreak(25);
-      doc.setFont(PDF_FAMILY, 'bold');
-      doc.setFontSize(10.5);
-      doc.setTextColor(6, 78, 59);
-      doc.text(t.exclusions.toUpperCase(), marginX, yPos);
-      doc.setDrawColor(167, 243, 208);
-      doc.setLineWidth(0.8);
-      doc.line(marginX, yPos + 2, marginX + contentWidth, yPos + 2);
-      yPos += 7;
+      ctx.y += 6;
+      ctx.ensure(25);
+      drawSectionTitle(ctx, t.exclusions.toUpperCase(), 10.5, 7);
+      drawTwoColumnList(ctx, exclusions.map((x: any) => getLocalized(x, locale)), 'exclude');
+    }
+  }
 
-      doc.setFont(PDF_FAMILY, 'normal');
-      doc.setFontSize(9.0);
-      exclusions.forEach((exc) => {
-        const excText = getLocalized(exc, locale);
-        const splitExc = doc.splitTextToSize(excText, contentWidth - 10);
-        const itemHeight = (splitExc.length * 4.3) + 2.5;
-        checkPageBreak(itemHeight);
-        doc.setFillColor(225, 29, 72);
-        doc.circle(marginX + 2.5, yPos + 2, 2.0, 'F');
-        doc.setDrawColor(255, 255, 255);
-        doc.setLineWidth(0.5);
-        doc.line(marginX + 1.6, yPos + 1.1, marginX + 3.4, yPos + 2.9);
-        doc.line(marginX + 3.4, yPos + 1.1, marginX + 1.6, yPos + 2.9);
-
-        doc.setFont(PDF_FAMILY, 'normal');
-        doc.setFontSize(9.0);
-        doc.setTextColor(100, 116, 139);
-        doc.text(splitExc, marginX + 7, yPos + 3);
-        yPos += itemHeight;
+  // Anexo fotografico: solo fotos que aun no aparecen en el PDF
+  const annex: PdfImage[] = [];
+  for (const g of gallery) {
+    const img = usage.claim(await loadPdfImage(g, DAY_IMAGE_OPTS));
+    if (img) annex.push(img);
+  }
+  if (annex.length > 0) {
+    ctx.ensure(65);
+    ctx.y += 5;
+    drawSectionTitle(ctx, t.annexTitle || 'ANEXO FOTOGRÁFICO — DESTINOS Y LUGARES DESTACADOS', 10.5, 8);
+    const colWidth = (contentWidth - 6) / 2;
+    const colHeight = 50;
+    for (let k = 0; k < annex.length; k += 2) {
+      ctx.ensure(colHeight + 6);
+      [annex[k], annex[k + 1]].forEach((img, col) => {
+        if (!img) return;
+        const x = marginX + col * (colWidth + 6);
+        doc.setFillColor(241, 245, 249);
+        doc.roundedRect(x, ctx.y, colWidth, colHeight, 1.5, 1.5, 'F');
+        drawImageCover(doc, img, x, ctx.y, colWidth, colHeight);
+        doc.setDrawColor(203, 213, 225);
+        doc.setLineWidth(0.2);
+        doc.roundedRect(x, ctx.y, colWidth, colHeight, 1.5, 1.5, 'D');
       });
+      ctx.y += colHeight + 5;
     }
   }
 
-  // Visual Appendix / Gallery
-  if (galleryImagesBase64.length > 0) {
-    checkPageBreak(65);
-    yPos += 5;
-    doc.setFont(PDF_FAMILY, 'bold');
-    doc.setFontSize(10.5);
-    doc.setTextColor(6, 78, 59);
-    doc.text("ANEXO FOTOGRÁFICO — DESTINOS Y LUGARES DESTACADOS", marginX, yPos);
-    doc.setDrawColor(167, 243, 208);
-    doc.setLineWidth(0.8);
-    doc.line(marginX, yPos + 2, marginX + contentWidth, yPos + 2);
-    yPos += 8;
-
-    const colWidth = (contentWidth - 6) / 2; // 88mm
-    const colHeight = 50; // 50mm height
-
-    for (let gIdx = 0; gIdx < galleryImagesBase64.length; gIdx += 2) {
-      checkPageBreak(colHeight + 6);
-
-      const img1 = galleryImagesBase64[gIdx];
-      const img2 = galleryImagesBase64[gIdx + 1];
-
-      if (img1 && img1.b64) {
-        doc.setFillColor(241, 245, 249);
-        doc.roundedRect(marginX, yPos, colWidth, colHeight, 1.5, 1.5, 'F');
-        safeAddImage(doc, img1.b64, 'JPEG', marginX, yPos, colWidth, colHeight);
-        doc.setDrawColor(203, 213, 225);
-        doc.setLineWidth(0.2);
-        doc.roundedRect(marginX, yPos, colWidth, colHeight, 1.5, 1.5, 'D');
-      }
-
-      if (img2 && img2.b64) {
-        const x2 = marginX + colWidth + 6;
-        doc.setFillColor(241, 245, 249);
-        doc.roundedRect(x2, yPos, colWidth, colHeight, 1.5, 1.5, 'F');
-        safeAddImage(doc, img2.b64, 'JPEG', x2, yPos, colWidth, colHeight);
-        doc.setDrawColor(203, 213, 225);
-        doc.setLineWidth(0.2);
-        doc.roundedRect(x2, yPos, colWidth, colHeight, 1.5, 1.5, 'D');
-      }
-
-      yPos += colHeight + 5;
-    }
-  }
-
-  // Concierge Badge
-  checkPageBreak(28);
-  yPos += 5;
+  // Concierge
+  ctx.ensure(28);
+  ctx.y += 5;
   doc.setFillColor(236, 253, 245);
   doc.setDrawColor(167, 243, 208);
-  doc.roundedRect(marginX, yPos, contentWidth, 20, 2, 2, 'FD');
-  doc.setFont(PDF_FAMILY, 'bold');
+  doc.roundedRect(marginX, ctx.y, contentWidth, 20, 2, 2, 'FD');
+  doc.setFont(family, 'bold');
   doc.setFontSize(9);
   doc.setTextColor(6, 78, 59);
-  doc.text(t.conciergeTitle, marginX + 6, yPos + 7);
-  doc.setFont(PDF_FAMILY, 'normal');
+  doc.text(t.conciergeTitle, marginX + 6, ctx.y + 7);
+  doc.setFont(family, 'normal');
   doc.setFontSize(8);
   doc.setTextColor(51, 65, 85);
-  doc.text(t.conciergeDesc, marginX + 6, yPos + 13.5);
+  doc.text(t.conciergeDesc, marginX + 6, ctx.y + 13.5);
 
-  // Footer & Watermark
+  // Pie y marca de agua
   const totalPages = doc.getNumberOfPages();
   for (let p = 1; p <= totalPages; p++) {
     doc.setPage(p);
-    if (logoBase64 && logoBase64.startsWith('data:')) {
+    if (logo) {
       doc.setGState(new (doc as any).GState({ opacity: 0.05 }));
-      const wmWidth = 100;
-      const wmHeight = 40;
-      safeAddImage(doc, logoBase64, 'PNG', (pageWidth - wmWidth) / 2, (pageHeight - wmHeight) / 2, wmWidth, wmHeight);
+      safeAddImage(doc, logo, (pageWidth - 100) / 2, (pageHeight - 40) / 2, 100, 40);
       doc.setGState(new (doc as any).GState({ opacity: 1.0 }));
     }
-    doc.setFont(PDF_FAMILY, 'normal');
+    doc.setFont(family, 'normal');
     doc.setFontSize(7.5);
     doc.setTextColor(148, 163, 184);
     doc.text(t.footerText, marginX, pageHeight - 7);
@@ -866,22 +368,28 @@ function buildPDFForTour(tour: Tour, locale: string = 'es'): Uint8Array {
   return Buffer.from(doc.output('arraybuffer'));
 }
 
+// Filtros opcionales para pruebas: PDF_LOCALES=en  PDF_TOUR_IDS=galapagos-8days,ecuador-fantastic-8days
+const LOCALES = (process.env.PDF_LOCALES || 'es,en').split(',').map(s => s.trim()).filter(Boolean);
+const ONLY_IDS = process.env.PDF_TOUR_IDS
+  ? new Set(process.env.PDF_TOUR_IDS.split(',').map(s => s.trim()))
+  : null;
+
 async function main() {
-  const allTours = mockTours;
-  for (const loc of ['es', 'en']) {
-    const dir = path.join(outputDir, loc);
+  const tours = ONLY_IDS ? mockTours.filter(tour => ONLY_IDS.has(tour.id)) : mockTours;
+  fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  for (const loc of LOCALES) {
+    const dir = path.join(OUTPUT_DIR, loc);
     fs.mkdirSync(dir, { recursive: true });
-    console.log(`Generating ${allTours.length} PDFs [${loc}] to ${dir}...`);
-    for (const tour of allTours) {
+    console.log(`Generating ${tours.length} PDFs [${loc}] to ${dir}...`);
+    for (const tour of tours) {
       const cleanFilename = getLocalized(tour.title, 'es').replace(/[^a-zA-Z0-9]/g, '-').replace(/-+/g, '-');
       const filePath = path.join(dir, `Vermilion-Routes-${cleanFilename}.pdf`);
-      const pdfBuffer = buildPDFForTour(tour, loc);
+      const pdfBuffer = await buildPDFForTour(tour, loc);
       fs.writeFileSync(filePath, pdfBuffer);
-      console.log(`✅ [${loc}] ${path.basename(filePath)} (${(pdfBuffer.length / 1024).toFixed(1)} KB)`);
+      console.log(`[${loc}] ${path.basename(filePath)} (${(pdfBuffer.length / 1024).toFixed(1)} KB)`);
     }
   }
-  console.log(`
-🎉 Done: ${allTours.length} tours x 3 languages in ${outputDir}`);
+  console.log(`Done: ${tours.length} tours x ${LOCALES.length} languages in ${OUTPUT_DIR}`);
   process.exit(0);
 }
 
