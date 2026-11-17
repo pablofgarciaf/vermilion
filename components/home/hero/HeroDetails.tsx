@@ -176,7 +176,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
           <div
             key={id}
             id={id}
-            className={`absolute left-0 w-full px-4 sm:px-6 md:px-0 md:w-auto md:left-[30px] lg:left-[60px] bottom-[195px] md:bottom-auto md:top-[90px] lg:top-[100px] xl:top-[110px] flex flex-col items-center text-center md:items-start md:text-left pointer-events-none max-w-xl ${opacityClass}`}
+            className={`absolute left-0 w-full px-4 sm:px-6 md:px-0 md:w-auto md:left-[30px] lg:left-[60px] bottom-[220px] md:bottom-auto md:top-[70px] lg:top-[80px] xl:top-[88px] flex flex-col items-center text-center md:items-start md:text-left pointer-events-none max-w-xl ${opacityClass}`}
           >
             {isWelcomeSlide ? (
               /* ── BIENVENIDA EXCLUSIVA (Centrada en móvil, a la izquierda en desktop) ── */

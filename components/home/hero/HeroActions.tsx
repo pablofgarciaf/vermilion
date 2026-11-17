@@ -14,7 +14,7 @@ export function HeroActions({ exploreLabel, planLabel }: HeroActionsProps) {
   return (
     <div
       id="hero-action-buttons"
-      className="absolute inset-x-0 bottom-[85px] sm:bottom-[89px] md:bottom-[22px] lg:bottom-[25px] xl:bottom-[28px] md:inset-x-auto md:left-[95px] lg:left-[125px] xl:left-[145px] z-30 flex flex-col items-center md:items-start gap-3 px-4 pointer-events-auto"
+      className="absolute inset-x-0 bottom-[85px] sm:bottom-[89px] md:bottom-[18px] lg:bottom-[20px] xl:bottom-[22px] md:inset-x-auto md:left-[95px] lg:left-[125px] xl:left-[145px] z-30 flex flex-col items-center md:items-start gap-3 px-4 pointer-events-auto"
     >
       <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2.5 sm:gap-3.5">
       <button
