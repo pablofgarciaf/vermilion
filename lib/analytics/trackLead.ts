@@ -64,6 +64,13 @@ export function trackGenerateLead({ method, placement, item }: LeadEventParams):
   if (!canTrack()) return;
 
   try {
+    pushToDataLayer({
+      event: 'generate_lead',
+      lead_method: method,
+      lead_source: placement || method,
+      ...(item ? { form_item: item } : {}),
+      page_location: window.location.href,
+    });
     window.gtag?.('event', 'generate_lead', {
       method,
       lead_source: placement || method,

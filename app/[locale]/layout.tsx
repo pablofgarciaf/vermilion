@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
           secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
           width: 1200,
           height: 630,
-          type: 'image/jpeg',
+          type: 'image/webp',
           alt: 'Giant Tortoises Galapagos Island – Vermilion Routes Bespoke Nature Travel',
         },
       ],
@@ -95,13 +95,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: t('description') || defaultDescription,
       images: ['https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp'],
     },
-    verification: {
-      google: googleVerifications.length > 1
-        ? googleVerifications
-        : googleVerifications.length === 1
-        ? googleVerifications[0]
-        : 'google-site-verification-vermilion',
-    },
+    ...(googleVerifications.length > 0
+      ? {
+          verification: {
+            google: googleVerifications.length > 1
+              ? googleVerifications
+              : googleVerifications[0],
+          },
+        }
+      : {}),
     other: {
       ...(process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION
         ? { 'facebook-domain-verification': process.env.NEXT_PUBLIC_FACEBOOK_DOMAIN_VERIFICATION }
@@ -267,10 +269,10 @@ export default async function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('consent', 'default', {
-                ad_storage: 'granted',
-                ad_user_data: 'granted',
-                ad_personalization: 'granted',
-                analytics_storage: 'granted',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                analytics_storage: 'denied',
                 functionality_storage: 'granted',
                 security_storage: 'granted'
               });
