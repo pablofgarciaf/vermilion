@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     }
 
     const clicks = eventsSnap.docs
-      .map((d) => d.data() as { type?: string; placement?: string; page?: string; locale?: string; createdAt?: string })
+      .map((d) => d.data() as { type?: string; placement?: string; page?: string; locale?: string; createdAt?: string; campaign?: string; source?: string; ad?: string; gclid?: string })
       .filter((e) => e.type === 'whatsapp_click');
 
     const sessionsSnap = await adminDb.collection('chat_sessions').orderBy('lastUpdated', 'desc').limit(30).get();
@@ -101,6 +101,10 @@ export async function GET(req: NextRequest) {
           placement: c.placement || 'unknown',
           page: c.page || '',
           locale: c.locale || '',
+          campaign: c.campaign || null,
+          source: c.source || null,
+          ad: c.ad || null,
+          gclid: c.gclid || null,
           createdAt: c.createdAt || null,
         })),
       },

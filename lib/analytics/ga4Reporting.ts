@@ -16,8 +16,8 @@ export type Ga4Report = {
 };
 
 const ANALYTICS_SCOPE = 'https://www.googleapis.com/auth/analytics.readonly';
-// Propiedad de Vermilion. Puede sobrescribirse en cada entorno sin exponer credenciales.
-const DEFAULT_GA4_PROPERTY_ID = '522629994';
+// Propiedad de Vermilion (nueva oficial). Puede sobrescribirse en cada entorno sin exponer credenciales.
+const DEFAULT_GA4_PROPERTY_ID = '565980829';
 
 function numberAt(row: GaRow, index: number): number {
   return Number(row.metricValues?.[index]?.value || 0);

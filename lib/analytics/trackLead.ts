@@ -123,11 +123,16 @@ export function trackCommercialFunnel({ step, placement, item, value, currency =
  */
 function sendWhatsAppClickToCrm(placement: string): void {
   try {
+    const searchParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null;
     const body = JSON.stringify({
       type: 'whatsapp_click',
       placement,
-      page: window.location.pathname,
-      locale: document.documentElement.lang || '',
+      page: typeof window !== 'undefined' ? window.location.pathname : '',
+      locale: typeof document !== 'undefined' ? document.documentElement.lang : '',
+      campaign: searchParams?.get('utm_campaign') || undefined,
+      source: searchParams?.get('utm_source') || undefined,
+      ad: searchParams?.get('utm_content') || undefined,
+      gclid: searchParams?.get('gclid') || undefined,
     });
     const sent =
       typeof navigator !== 'undefined' &&

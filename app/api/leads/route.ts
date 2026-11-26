@@ -64,6 +64,12 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
     createdAt,
     marketingConsent: hasMarketingConsent,
     ...(hasMarketingConsent ? { marketingConsentAt: createdAt, marketingConsentSource: 'plan_trip_form' } : {}),
+    ...(body.utm_source ? { utm_source: sanitizeText(body.utm_source) } : {}),
+    ...(body.utm_medium ? { utm_medium: sanitizeText(body.utm_medium) } : {}),
+    ...(body.utm_campaign ? { utm_campaign: sanitizeText(body.utm_campaign) } : {}),
+    ...(body.utm_content ? { utm_content: sanitizeText(body.utm_content) } : {}),
+    ...(body.utm_term ? { utm_term: sanitizeText(body.utm_term) } : {}),
+    ...(body.gclid ? { gclid: sanitizeText(body.gclid) } : {}),
   };
 
   // Persist lead in Firestore using centralized DatabaseService DAL

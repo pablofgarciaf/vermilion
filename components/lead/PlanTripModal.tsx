@@ -153,6 +153,14 @@ export function PlanTripModal() {
           message,
           locale,
           marketingConsent: form.marketingConsent,
+          ...(typeof window !== 'undefined' ? {
+            utm_source: new URLSearchParams(window.location.search).get('utm_source') || undefined,
+            utm_medium: new URLSearchParams(window.location.search).get('utm_medium') || undefined,
+            utm_campaign: new URLSearchParams(window.location.search).get('utm_campaign') || undefined,
+            utm_content: new URLSearchParams(window.location.search).get('utm_content') || undefined,
+            utm_term: new URLSearchParams(window.location.search).get('utm_term') || undefined,
+            gclid: new URLSearchParams(window.location.search).get('gclid') || undefined,
+          } : {}),
         }),
       });
       const data = await res.json();

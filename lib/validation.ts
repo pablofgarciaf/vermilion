@@ -115,6 +115,12 @@ export const leadSchema = z.object({
   message: z.string().optional(),
   locale: z.string().optional(),
   marketingConsent: z.boolean().optional(),
+  utm_source: z.string().optional(),
+  utm_medium: z.string().optional(),
+  utm_campaign: z.string().optional(),
+  utm_term: z.string().optional(),
+  utm_content: z.string().optional(),
+  gclid: z.string().optional(),
   _hp_trap: z.string().optional(),
   website_url: z.string().optional(),
 }).superRefine((data, ctx) => {

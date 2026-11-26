@@ -52,11 +52,12 @@ export const PROMOTIONS: Promotion[] = [
   {
     id: 'black-friday-2026',
     messageKey: 'blackFriday',
-    startsAt: '2026-11-27T00:00:00-05:00',
-    endsAt: '2026-12-01T00:00:00-05:00',
-    discountRate: 0.10,
+    startsAt: '2026-11-26T00:00:00-05:00',
+    endsAt: '2026-12-02T00:00:00-05:00',
+    discountRate: 0.15,
     valueAdds: [],
-    lastDay: '2026-11-30',
+    lastDay: '2026-12-01',
     emoji: '🛍️',
+    marqueeStyle: 'led',
   },
 ];

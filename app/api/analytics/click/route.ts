@@ -27,9 +27,23 @@ export async function POST(req: NextRequest) {
     typeof body.placement === 'string' && PLACEMENT_RE.test(body.placement) ? body.placement : 'unknown';
   const page = typeof body.page === 'string' ? body.page.slice(0, PATH_MAX) : '';
   const locale = typeof body.locale === 'string' ? body.locale.slice(0, 8) : '';
+  const campaign = typeof body.campaign === 'string' ? body.campaign.slice(0, 100) : undefined;
+  const source = typeof body.source === 'string' ? body.source.slice(0, 100) : undefined;
+  const ad = typeof body.ad === 'string' ? body.ad.slice(0, 100) : undefined;
+  const gclid = typeof body.gclid === 'string' ? body.gclid.slice(0, 100) : undefined;
 
   try {
-    await recordWhatsAppClick({ placement, page, locale, event: {} });
+    await recordWhatsAppClick({
+      placement,
+      page,
+      locale,
+      event: {
+        ...(campaign ? { campaign } : {}),
+        ...(source ? { source } : {}),
+        ...(ad ? { ad } : {}),
+        ...(gclid ? { gclid } : {}),
+      },
+    });
   } catch (err: any) {
     console.error('[WhatsAppClick] no se pudo guardar el clic:', err?.name, err?.message);
     return new NextResponse(null, { status: 500 });
