@@ -15,6 +15,7 @@ import { ConciergeWidgetLazy } from '@/components/ui/ConciergeWidgetLazy';
 import { ConsentManager } from '@/components/privacy/ConsentManager';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { WhatsAppClickTracker } from '@/components/analytics/WhatsAppClickTracker';
+import { DeviceVisitTracker } from '@/components/analytics/DeviceVisitTracker';
 
 import { allSocialUrls } from '@/data/socialLinks';
 import { PlanTripModal } from '@/components/lead/PlanTripModal';
@@ -142,8 +143,8 @@ export default async function RootLayout({
   const { locale } = await params;
   const messages = await getMessages();
 
-  // Google Analytics 4 activo oficial: G-0YLF960DJG (reemplaza G-D8ZNLYMCB0)
-  const gaIds = ['G-0YLF960DJG'];
+  // Google Analytics 4 activo oficial: G-TTL8J3N88S (nuevo limpio) y G-0YLF960DJG
+  const gaIds = Array.from(new Set([process.env.NEXT_PUBLIC_GA_ID, 'G-TTL8J3N88S', 'G-0YLF960DJG'].filter(Boolean))) as string[];
   // Contenedor GTM activo oficial: GTM-WCCPTDVG (GTM-TDQXQ738 eliminado)
   const gtmContainerIds = ['GTM-WCCPTDVG'];
 
@@ -346,6 +347,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <PlanTripModal />
                 <ConciergeWidgetLazy />
                 <WhatsAppClickTracker />
+                <DeviceVisitTracker />
                 <Suspense fallback={null}>
                   <AffiliateTracker />
                 </Suspense>

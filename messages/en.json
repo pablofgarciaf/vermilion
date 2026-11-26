@@ -447,6 +447,7 @@
     "email": "Email",
     "phone": "Phone with country code (optional)",
     "contactPref": "I prefer to be contacted by",
+    "marketingConsent": "I agree to receive personalised follow-up and updates from Vermilion Routes. I can withdraw at any time.",
     "contactOpts": {
       "email": "Email",
       "call": "Phone call",

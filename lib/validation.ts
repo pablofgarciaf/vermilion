@@ -114,6 +114,7 @@ export const leadSchema = z.object({
   travelers: z.string().optional(),
   message: z.string().optional(),
   locale: z.string().optional(),
+  marketingConsent: z.boolean().optional(),
   _hp_trap: z.string().optional(),
   website_url: z.string().optional(),
 }).superRefine((data, ctx) => {

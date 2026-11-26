@@ -154,6 +154,8 @@ function bookingToInquiryLead(id: string, raw: Record<string, any>): CrmLead {
     requestDetails: raw.message ? String(raw.message) : '',
     guestsText: raw.guestsCount ? String(raw.guestsCount) : '',
     emailStatus: raw.emailStatus,
+    marketingConsent: raw.marketingConsent === true,
+    marketingConsentAt: typeof raw.marketingConsentAt === 'string' ? raw.marketingConsentAt : undefined,
     createdAt,
     updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : createdAt,
   };
@@ -253,6 +255,7 @@ export function useCrmData() {
             const list: CrmLead[] = [];
             snap.forEach((d) => {
               const raw = d.data() as any;
+              if (raw.archived) return;
               const customerName = raw.customerName || raw.name || (raw.email ? raw.email.split('@')[0] : 'Prospecto Web');
               const customerEmail = raw.customerEmail || raw.email || '';
               const isVolcano = String(raw.tourId || '').includes('volcano') || String(raw.tourName || '').includes('Volcanes');
@@ -285,6 +288,8 @@ export function useCrmData() {
                 requestDetails: raw.source === 'pdf_download' ? '' : (raw.message || ''),
                 // La descarga del PDF no envía ningún correo (ni al cliente ni al equipo).
                 emailStatus: raw.emailStatus || (raw.source === 'pdf_download' ? { team: 'none', customer: 'none' } : undefined),
+                marketingConsent: raw.marketingConsent === true,
+                marketingConsentAt: typeof raw.marketingConsentAt === 'string' ? raw.marketingConsentAt : undefined,
                 affiliateReferralCode: raw.affiliateReferralCode || raw.affiliateCode || '',
                 createdAt: typeof raw.createdAt === 'string' ? raw.createdAt : (raw.createdAt?.toDate ? raw.createdAt.toDate().toISOString() : new Date().toISOString()),
                 updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : new Date().toISOString(),
@@ -305,6 +310,7 @@ export function useCrmData() {
 
             snap.forEach((d) => {
               const raw = d.data() as any;
+              if (raw.archived) return;
 
               // Solicitudes de la web: van al pipeline de leads, no a reservas/finanzas,
               // y nunca entran en la purga automática de abajo.
@@ -403,6 +409,19 @@ export function useCrmData() {
       }
     }
   }, [patchLead]);
+
+  // No borra datos ni PII: los oculta del pipeline y deja trazabilidad para recuperación.
+  const archiveLead = useCallback(async (leadId: string) => {
+    const updates = { archived: true, archivedAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+    setLeadsCollection((previous) => previous.filter((lead) => lead.id !== leadId));
+    setWebInquiries((previous) => previous.filter((lead) => lead.id !== leadId));
+    if (!db) return;
+    try {
+      await updateDoc(doc(db, inquiryIdsRef.current.has(leadId) ? 'bookings' : 'leads', leadId), updates);
+    } catch (error) {
+      console.warn('Could not archive lead in firestore:', error);
+    }
+  }, []);
 
   // Add Lead Observation
   const addLeadObservation = useCallback(async (leadId: string, text: string, authorEmail: string, authorName: string) => {
@@ -605,6 +624,7 @@ export function useCrmData() {
     genealogy,
     loading,
     updateLeadStatus,
+    archiveLead,
     updateBookingStatus,
     addLeadObservation,
     assignOperatorToBooking,

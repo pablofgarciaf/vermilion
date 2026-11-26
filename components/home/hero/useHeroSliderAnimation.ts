@@ -31,8 +31,9 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
     const cardWidth = HERO_CARD.width;
     const cardHeight = HERO_CARD.height;
     const gap = HERO_CARD.gap;
-    const cardsLeft = (width: number) =>
-      Math.max(width - (HERO_VISIBLE_CARDS * cardWidth + (HERO_VISIBLE_CARDS - 1) * gap) - HERO_CARD.rightMargin, 650);
+    const cardsLeft = (width: number) => HERO_VISIBLE_CARDS === 0
+      ? width + HERO_CARD.rightMargin
+      : Math.max(width - (HERO_VISIBLE_CARDS * cardWidth + (HERO_VISIBLE_CARDS - 1) * gap) - HERO_CARD.rightMargin, 650);
     const numberSize = 50;
     const ease = "sine.inOut";
     let transitioning = false;
@@ -97,8 +98,9 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
           set(getCardContent(i), { x, y: offsetTop, opacity: 1 });
         });
 
-        const controlsY = offsetTop + cardHeight + 14;
-        set("#pagination", { top: controlsY, left: offsetLeft });
+        const controlsY = HERO_VISIBLE_CARDS === 0 ? height - 60 : offsetTop + cardHeight + 14;
+        const controlsLeft = HERO_VISIBLE_CARDS === 0 ? Math.max(width - 620, 24) : offsetLeft;
+        set("#pagination", { top: controlsY, left: controlsLeft });
         if (width >= 768) {
 
         }
@@ -126,8 +128,9 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
         const detailsActive = detailsEven ? "#details-even" : "#details-odd";
         const detailsInactive = detailsEven ? "#details-odd" : "#details-even";
 
-        const controlsY = offsetTop + cardHeight + 14;
-        set("#pagination", { top: controlsY, left: offsetLeft, y: 0, opacity: 1, zIndex: 60 });
+        const controlsY = HERO_VISIBLE_CARDS === 0 ? height - 60 : offsetTop + cardHeight + 14;
+        const controlsLeft = HERO_VISIBLE_CARDS === 0 ? Math.max(width - 620, 24) : offsetLeft;
+        set("#pagination", { top: controlsY, left: controlsLeft, y: 0, opacity: 1, zIndex: 60 });
 
         set(`${detailsActive} .text`, { y: 0 });
         set(`${detailsActive} .title-1`, { y: 0 });

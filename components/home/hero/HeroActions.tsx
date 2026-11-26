@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, MessageCircle } from 'lucide-react';
 import { openPlanTrip } from '@/data/planTrip';
+import { trackCommercialFunnel } from '@/lib/analytics/trackLead';
 
 interface HeroActionsProps {
   exploreLabel: string;
@@ -21,6 +22,7 @@ export function HeroActions({ exploreLabel, planLabel }: HeroActionsProps) {
         suppressHydrationWarning
         className="w-[270px] sm:w-auto px-6 py-4 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-bold uppercase tracking-wider text-xs md:text-[12.5px] md:px-5 md:py-3.5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-red-900/40 hover:scale-[1.02] active:scale-95 cursor-pointer text-center shrink-0 group border-none"
         onClick={() => {
+          trackCommercialFunnel({ step: 'hero_explore', placement: 'home_hero_primary' });
           const el = document.getElementById('destinations');
           if (el) el.scrollIntoView({ behavior: 'smooth' });
         }}
@@ -33,6 +35,7 @@ export function HeroActions({ exploreLabel, planLabel }: HeroActionsProps) {
         suppressHydrationWarning
         className="w-[270px] sm:w-auto px-6 py-4 bg-black/60 hover:bg-black/80 text-white font-bold uppercase tracking-wider text-xs md:text-[12.5px] md:px-5 md:py-3.5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 border border-emerald-500/30 hover:border-emerald-500/60 active:scale-95 cursor-pointer backdrop-blur-md shadow-lg text-center shrink-0 group"
         onClick={() => {
+          trackCommercialFunnel({ step: 'hero_plan', placement: 'home_hero_secondary' });
           openPlanTrip();
         }}
       >

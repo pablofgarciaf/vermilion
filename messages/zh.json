@@ -447,6 +447,7 @@
     "email": "邮箱",
     "phone": "电话（含国家区号，选填）",
     "contactPref": "我希望通过以下方式联系",
+    "marketingConsent": "我同意接收Vermilion Routes的个性化跟进与最新信息，并可随时撤回同意。",
     "contactOpts": {
       "email": "邮件",
       "call": "电话",

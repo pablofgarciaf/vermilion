@@ -44,6 +44,7 @@ import { PayPalCheckoutButton } from '@/components/checkout/PayPalCheckoutButton
 import { generateTravelVoucherPDF } from '@/lib/voucherPdfGenerator';
 import { db } from '@/lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
+import { trackCommercialFunnel } from '@/lib/analytics/trackLead';
 
 // ─────────────────────────────────────────────
 // 8-LANGUAGE DICTIONARY FOR CHECKOUT & PAYMENT
@@ -963,8 +964,10 @@ export default function CheckoutPaymentPage() {
           guestsCount: travelersStr,
           passengersCount: parseInt(travelersParam) || parseInt(adultsParam) || 1,
           destination: matchedTour?.destination || 'Ecuador & Galápagos',
-          amountPaid: finalAmount,
-          paidAmount: finalAmount,
+          // Una transferencia registrada no es dinero recibido: el CRM solo
+          // reconoce ingreso después de la verificación administrativa.
+          amountPaid: 0,
+          paidAmount: 0,
           totalAmount: finalAmount,
           paymentMethod: 'payoneer_wire',
           paymentStatus: 'pending_payment',
@@ -1011,9 +1014,10 @@ export default function CheckoutPaymentPage() {
       setIsPaid(true);
     } catch (err: any) {
       console.warn('[Payoneer transfer register notice]', err);
-      // Graceful fallback for demo simulation
-      setReceiptSubmitted(true);
-      setIsPaid(true);
+      // No mostrar una reserva como registrada si el servidor no pudo hacerlo.
+      // El viajero conserva el formulario y puede reintentar sin una falsa confirmación.
+      setReceiptSubmitted(false);
+      setIsPaid(false);
     } finally {
       setIsProcessing(false);
     }
@@ -1369,6 +1373,12 @@ export default function CheckoutPaymentPage() {
                       setRef(confirmedRef);
                       setReceiptSubmitted(false);
                       setIsPaid(true);
+                      trackCommercialFunnel({
+                        step: 'payment_completed',
+                        placement: 'paypal_checkout',
+                        item: tourId,
+                        value: finalAmount,
+                      });
                     }}
                   />
                 </div>

@@ -18,6 +18,7 @@ import { getAffiliateByCode, AffiliateAccount } from '@/lib/affiliates';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
 import { generateBookingCode } from '@/lib/bookings';
 import { useLuxury } from '@/components/providers/LuxuryThemeProvider';
+import { trackCommercialFunnel } from '@/lib/analytics/trackLead';
 const BOOKING_SUBNAV_I18N: Record<string, { defaultTitle: string; estimatedTotal: string; support: string; waPrefix: string }> = {
   es: {
     defaultTitle: 'Expedición a Medida en Ecuador & Galápagos',
@@ -1096,6 +1097,12 @@ export function BookingWizard() {
       children: String(children),
       travelers: String(totalTravelers),
       isDailyTour: isDaily ? 'true' : 'false',
+    });
+    trackCommercialFunnel({
+      step: 'booking_checkout',
+      placement: 'booking_wizard',
+      item: selectedTours.map((tour) => tour.id).join(','),
+      value: pricing.total,
     });
     window.location.href = `/${locale}/checkout/payment?${queryParams.toString()}`;
   };

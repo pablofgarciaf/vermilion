@@ -447,6 +447,7 @@
     "email": "E-Mail",
     "phone": "Telefon mit Ländervorwahl (optional)",
     "contactPref": "Ich bevorzuge Kontakt per",
+    "marketingConsent": "Ich stimme personalisierten Informationen und Neuigkeiten von Vermilion Routes zu. Ich kann diese Einwilligung jederzeit widerrufen.",
     "contactOpts": {
       "email": "E-Mail",
       "call": "Anruf",

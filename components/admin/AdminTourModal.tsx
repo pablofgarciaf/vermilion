@@ -8,13 +8,12 @@ import {
   Sparkles,
   X,
   Upload,
-  Trash2,
   Image as ImageIcon,
   Loader2,
-  Plus,
   AlertCircle,
   CheckCircle2
 } from 'lucide-react';
+import { TourGalleryEditor } from './TourGalleryEditor';
 
 interface AdminTourModalProps {
   isOpen: boolean;
@@ -435,108 +434,15 @@ export function AdminTourModal({
               )}
             </div>
 
-            {/* GALLERY IMAGES UPLOAD SECTION */}
-            <div className="space-y-3 glass-input/70 p-6 rounded-2xl border border-zinc-800">
-              <div className="flex items-center justify-between">
-                <label className="text-zinc-700 dark:text-zinc-300 font-semibold uppercase tracking-wider flex items-center gap-2">
-                  <Plus className="w-4 h-4 text-emerald-400" />
-                  <span>Tour Gallery Photos</span>
-                </label>
-                <span className="text-[10px] text-zinc-500">
-                  {(formData.gallery || []).length} photos added
-                </span>
-              </div>
-
-              {/* Gallery File Upload or Add URL */}
-              <div className="flex items-center justify-between gap-2 pb-2">
-                <span className="text-xs text-zinc-600 dark:text-zinc-400 font-semibold">Upload file or add URL:</span>
-                <button
-                  type="button"
-                  onClick={() => setFormData(prev => ({ ...prev, gallery: [...(prev.gallery || []), ''] }))}
-                  className="px-2.5 py-1 bg-emerald-600/20 hover:bg-emerald-600 border border-emerald-500/30 text-emerald-400 hover:text-zinc-900 dark:text-white rounded-lg text-xs font-semibold transition-all"
-                >
-                  + Add Image URL
-                </button>
-              </div>
-
-              <div
-                onDragOver={(e) => {
-                  e.preventDefault();
-                  setIsDraggingGallery(true);
-                }}
-                onDragLeave={() => setIsDraggingGallery(false)}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  setIsDraggingGallery(false);
-                  if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-                    handleGalleryImageUpload(e.dataTransfer.files);
-                  }
-                }}
-                className={`border-2 border-dashed rounded-xl p-3 text-center transition-colors relative cursor-pointer ${isDraggingGallery
-                    ? 'border-emerald-500 bg-emerald-950/30'
-                    : 'border-zinc-800 bg-zinc-900/50 hover:border-zinc-700'
-                  }`}
-              >
-                <input
-                  type="file"
-                  multiple
-                  accept="image/jpeg,image/png,image/webp,image/avif"
-                  onChange={(e) => {
-                    if (e.target.files && e.target.files.length > 0) {
-                      handleGalleryImageUpload(e.target.files);
-                    }
-                  }}
-                  className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                />
-                <div className="flex items-center justify-center gap-2 text-zinc-600 dark:text-zinc-400">
-                  {galleryUploadProgress !== null ? (
-                    <div className="flex items-center gap-2 text-emerald-400">
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span className="font-semibold">Uploading to Gallery {galleryUploadProgress}%</span>
-                    </div>
-                  ) : (
-                    <>
-                      <Upload className="w-4 h-4 text-emerald-400 shrink-0" />
-                      <span className="text-xs">
-                        Upload gallery image to Firebase Storage (Drag & Drop or Click)
-                      </span>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* Bento Grid Gallery */}
-              {formData.gallery && formData.gallery.length > 0 && (
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
-                  {formData.gallery.map((imgUrl, idx) => {
-                    // Make the first image span 2 columns and 2 rows for a bento box feel
-                    const isFeatured = idx === 0;
-                    return (
-                      <div 
-                        key={`${imgUrl}-${idx}`} 
-                        className={`relative group rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 ${isFeatured ? 'col-span-2 row-span-2 aspect-square' : 'aspect-square'}`}
-                      >
-                        <img src={imgUrl} alt={`Gallery ${idx + 1}`} width={300} height={200} className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-start justify-end p-2 backdrop-blur-sm pointer-events-none">
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleRemoveGalleryImage(idx);
-                            }}
-                            className="p-3 bg-rose-600 hover:bg-rose-500 text-white rounded-xl shadow-lg transform scale-90 group-hover:scale-100 transition-all pointer-events-auto relative z-50 cursor-pointer"
-                            title="Remove image"
-                          >
-                            <Trash2 className="w-5 h-5" />
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-
-            </div>
+            <TourGalleryEditor
+              formData={formData}
+              setFormData={setFormData}
+              isDragging={isDraggingGallery}
+              setIsDragging={setIsDraggingGallery}
+              uploadProgress={galleryUploadProgress}
+              onUpload={handleGalleryImageUpload}
+              onRemove={handleRemoveGalleryImage}
+            />
 
             <div className="space-y-1">
               <label className="block text-zinc-600 dark:text-zinc-400 font-semibold uppercase tracking-wider">

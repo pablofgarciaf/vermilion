@@ -29,6 +29,20 @@ export interface QuoteFormSubmittedParams extends LeadEventParams {
   currency?: string;
 }
 
+/**
+ * Señales de avance del embudo B2C. No contienen nombre, correo ni teléfono:
+ * sirven para detectar dónde se pierde una intención comercial antes del lead.
+ */
+export type CommercialFunnelStep = 'hero_explore' | 'hero_plan' | 'booking_checkout' | 'payment_completed';
+
+export interface CommercialFunnelParams {
+  step: CommercialFunnelStep;
+  placement: string;
+  item?: string;
+  value?: number;
+  currency?: string;
+}
+
 /** Misma clave que usa ConsentManager para guardar la elección. */
 const CONSENT_STORAGE_KEY = 'vr_privacy_consent_v1';
 
@@ -80,6 +94,26 @@ export function trackGenerateLead({ method, placement, item }: LeadEventParams):
     window.fbq?.('track', 'Lead', { content_name: item || method, content_category: method });
   } catch {
     // La analítica nunca debe romper un envío de formulario ni un clic.
+  }
+}
+
+/** Registra un paso comercial sin convertir un clic en un lead ni almacenar PII. */
+export function trackCommercialFunnel({ step, placement, item, value, currency = 'USD' }: CommercialFunnelParams): void {
+  if (!canTrack()) return;
+
+  try {
+    const payload = {
+      event: 'vr_b2c_funnel',
+      funnel_step: step,
+      placement,
+      ...(item ? { item_name: item } : {}),
+      ...(typeof value === 'number' ? { value, currency } : {}),
+      page_location: window.location.href,
+    };
+    pushToDataLayer(payload);
+    window.gtag?.('event', 'vr_b2c_funnel', payload);
+  } catch {
+    // La medición no debe impedir que el visitante continúe hacia la reserva.
   }
 }
 

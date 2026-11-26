@@ -144,6 +144,10 @@ export interface BookingRequest {
     direccionFiscal?: string;
   };
   locale?: string;
+  /** Opt-in comercial separado del consentimiento técnico de cookies. */
+  marketingConsent?: boolean;
+  marketingConsentAt?: string;
+  marketingConsentSource?: string;
 }
 
 

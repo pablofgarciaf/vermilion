@@ -33,6 +33,7 @@ type Form = {
   email: string;
   phone: string;
   contact: (typeof PLAN_TRIP_CONTACT)[number];
+  marketingConsent: boolean;
 };
 
 const EMPTY: Form = {
@@ -47,6 +48,7 @@ const EMPTY: Form = {
   email: '',
   phone: '',
   contact: 'email',
+  marketingConsent: false,
 };
 
 /**
@@ -150,6 +152,7 @@ export function PlanTripModal() {
           guestsCount: `${form.adults} adults, ${form.children} children`,
           message,
           locale,
+          marketingConsent: form.marketingConsent,
         }),
       });
       const data = await res.json();
@@ -341,6 +344,10 @@ export function PlanTripModal() {
                       ))}
                     </div>
                   </div>
+                  <label className="flex items-start gap-2.5 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300 cursor-pointer">
+                    <input type="checkbox" checked={form.marketingConsent} onChange={(e) => set('marketingConsent', e.target.checked)} className="mt-0.5 w-4 h-4 accent-emerald-600" />
+                    <span>{t('marketingConsent')}</span>
+                  </label>
                 </fieldset>
               )}
 

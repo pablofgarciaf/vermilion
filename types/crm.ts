@@ -81,8 +81,13 @@ export interface CrmLead {
   guestsText?: string;
   /** Correos automáticos de esta solicitud. Ausente = no se registró (solicitudes antiguas). */
   emailStatus?: LeadEmailStatus;
+  /** Opt-in explícito para campañas; distinto del consentimiento de cookies. */
+  marketingConsent?: boolean;
+  marketingConsentAt?: string;
   createdAt: string;
   updatedAt: string;
+  /** Eliminación desde el tablero: se archiva para no destruir el historial comercial. */
+  archived?: boolean;
 }
 
 /** 'sent' enviado · 'failed' falló · 'not_configured' correo sin configurar · 'no_recipient' sin correo válido · 'none' este canal no envía correo. */

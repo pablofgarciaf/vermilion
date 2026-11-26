@@ -447,6 +447,7 @@
     "email": "メールアドレス",
     "phone": "電話番号（国番号付き・任意）",
     "contactPref": "希望する連絡方法",
+    "marketingConsent": "Vermilion Routesからの個別案内と最新情報の受信に同意します。いつでも同意を撤回できます。",
     "contactOpts": {
       "email": "メール",
       "call": "電話",

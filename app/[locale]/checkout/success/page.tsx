@@ -21,6 +21,7 @@ import { mockTours } from '@/data/mock';
 import { TravelVoucherModal } from '@/components/booking/TravelVoucherModal';
 import { useLocale } from 'next-intl';
 import { getStoredUserProfile, saveStoredUserProfile } from '@/lib/userProfile';
+import { trackCommercialFunnel } from '@/lib/analytics/trackLead';
 
 export default function CheckoutSuccessPage() {
   const searchParams = useSearchParams();
@@ -79,6 +80,20 @@ export default function CheckoutSuccessPage() {
       })
         .then((res) => res.json())
         .then((data) => {
+          if (!data.success || data.booking?.paymentStatus !== 'paid') {
+            const paymentParams = new URLSearchParams({
+              tourId: tourIdParam,
+              tourTitle: tourTitleParam,
+              ref: refParam,
+              name: initialName,
+              email: initialEmail,
+              amount: amountParam,
+              date: dateParam,
+              guests: guestsParam,
+            });
+            window.location.replace(`/${locale}/checkout/payment?${paymentParams.toString()}`);
+            return;
+          }
           if (data.booking) {
             const b = data.booking;
             setClientDetails({
@@ -96,9 +111,20 @@ export default function CheckoutSuccessPage() {
                 phone: b.customerPhone,
               });
             }
+            if (b.paymentStatus === 'paid') {
+              trackCommercialFunnel({
+                step: 'payment_completed',
+                placement: 'stripe_checkout',
+                item: b.tourId || tourIdParam,
+                value: Number(b.amountPaid) || undefined,
+              });
+            }
           }
         })
-        .catch((e) => console.warn('[checkout/success] verify-session notice:', e));
+        .catch((e) => {
+          console.warn('[checkout/success] verify-session notice:', e);
+          window.location.replace(`/${locale}/checkout/payment`);
+        });
     }
   }, [sessionId, refParam]);
 

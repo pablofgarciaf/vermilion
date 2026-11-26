@@ -13,7 +13,10 @@
  *  HERO_VISIBLE_CARDS = cuántas tarjetas se ven a la derecha del hero.
  */
 export const HERO_CARD_SCALE = 0.85;
-export const HERO_VISIBLE_CARDS = 4;
+// Las miniaturas distraían del mensaje comercial y competían con los CTA. El
+// slider y su navegación se conservan; en escritorio las imágenes inactivas
+// quedan fuera del viewport hasta que pasan a ser el fondo principal.
+export const HERO_VISIBLE_CARDS = 0;
 
 const BASE_WIDTH = 144;
 const BASE_HEIGHT = 208;

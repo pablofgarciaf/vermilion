@@ -447,6 +447,7 @@
     "email": "Correo electrónico",
     "phone": "Teléfono con prefijo (opcional)",
     "contactPref": "Prefiero que me contacten por",
+    "marketingConsent": "Acepto recibir seguimiento personalizado y novedades de Vermilion Routes. Puedo retirarlo cuando quiera.",
     "contactOpts": {
       "email": "Correo",
       "call": "Llamada",

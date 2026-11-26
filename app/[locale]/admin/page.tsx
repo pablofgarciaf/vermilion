@@ -5,7 +5,7 @@ import { auth, db } from '@/lib/firebase';
 import { onAuthStateChanged, signOut, User } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { AdminLoginForm } from '@/components/admin/AdminLoginForm';
-import { AdminCrmDashboard } from '@/components/crm/AdminCrmDashboard';
+import { EnterpriseDashboard } from '@/components/admin/EnterpriseDashboard';
 
 import Link from 'next/link';
 import { ShieldAlert } from 'lucide-react';
@@ -145,7 +145,7 @@ export default function AdminCrmPage() {
           </div>
         }
       >
-        <AdminCrmDashboard />
+      <EnterpriseDashboard />
       </Suspense>
     );
   }

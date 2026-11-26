@@ -1,0 +1,10356 @@
+/**
+ * 🗺️ VERMILION ROUTES — DESTINATION IMAGES CATALOGUE
+ * 
+ * Auto-generated catalog containing 321 curated images categorized by destination:
+ * - Galapagos (Islands, wildlife, marine sanctuary, snorkeling, beaches)
+ * - Ecuador Continental (Quito, Cuenca, Avenue of Volcanoes, Cotopaxi, Quilotoa)
+ * - Amazonia (Yasuni, Cuyabeno, rainforest, lodges, indigenous culture)
+ * - Peru (Cusco, Machu Picchu, Sacred Valley, Lake Titicaca, Lima)
+ * - Generales / Branding (UI assets, brand logos, tour cards, guides)
+ * 
+ * Total images: 321
+ */
+
+export type DestinationCategory = 'galapagos' | 'ecuador-continental' | 'amazonia' | 'peru' | 'generales';
+
+export interface DestinationImageItem {
+  id: string;
+  filename: string;
+  url: string;
+  destination: DestinationCategory;
+  destinationName: {
+    es: string;
+    en: string;
+  };
+  region: string;
+  title: {
+    es: string;
+    en: string;
+  };
+  alt: {
+    es: string;
+    en: string;
+  };
+  tags: string[];
+  width: number | null;
+  height: number | null;
+  sizeBytes: number;
+  isThumbnail: boolean;
+  thumbnailDimensions: string | null;
+  baseOriginalFilename: string;
+  originalWpPath: string;
+}
+
+export const DESTINATION_IMAGES: DestinationImageItem[] = [
+  {
+    "id": "dest_img_001",
+    "filename": "loading.svg",
+    "url": "/images/destinations/generales/loading.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: loading",
+      "en": "Vermilion Routes: loading"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: loading.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 773,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "loading.svg",
+    "originalWpPath": "wp-content/plugins/bdthemes-element-pack/assets/images/loading.svg"
+  },
+  {
+    "id": "dest_img_002",
+    "filename": "fa-brands-400.svg",
+    "url": "/images/destinations/generales/fa-brands-400.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: fa brands 400",
+      "en": "Vermilion Routes: fa brands 400"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: fa-brands-400.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 749223,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fa-brands-400.svg",
+    "originalWpPath": "wp-content/plugins/elementor/assets/lib/font-awesome/webfonts/fa-brands-400.svg"
+  },
+  {
+    "id": "dest_img_003",
+    "filename": "fa-regular-400.svg",
+    "url": "/images/destinations/generales/fa-regular-400.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: fa regular 400",
+      "en": "Vermilion Routes: fa regular 400"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: fa-regular-400.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 144714,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fa-regular-400.svg",
+    "originalWpPath": "wp-content/plugins/elementor/assets/lib/font-awesome/webfonts/fa-regular-400.svg"
+  },
+  {
+    "id": "dest_img_004",
+    "filename": "fa-solid-900.svg",
+    "url": "/images/destinations/generales/fa-solid-900.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: fa solid 900",
+      "en": "Vermilion Routes: fa solid 900"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: fa-solid-900.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 918991,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fa-solid-900.svg",
+    "originalWpPath": "wp-content/plugins/elementor/assets/lib/font-awesome/webfonts/fa-solid-900.svg"
+  },
+  {
+    "id": "dest_img_005",
+    "filename": "button-loading.svg",
+    "url": "/images/destinations/generales/button-loading.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: button loading",
+      "en": "Vermilion Routes: button loading"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: button-loading.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 558,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "button-loading.svg",
+    "originalWpPath": "wp-content/plugins/tourmaster/images/button-loading.svg"
+  },
+  {
+    "id": "dest_img_006",
+    "filename": "payment-step-gradient.png",
+    "url": "/images/destinations/generales/payment-step-gradient.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: payment step gradient",
+      "en": "Vermilion Routes: payment step gradient"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: payment-step-gradient.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 43,
+    "height": 243,
+    "sizeBytes": 4310,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "payment-step-gradient.png",
+    "originalWpPath": "wp-content/plugins/tourmaster/images/payment-step-gradient.png"
+  },
+  {
+    "id": "dest_img_007",
+    "filename": "payment-step-separator.png",
+    "url": "/images/destinations/generales/payment-step-separator.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: payment step separator",
+      "en": "Vermilion Routes: payment step separator"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: payment-step-separator.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 25,
+    "height": 95,
+    "sizeBytes": 3484,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "payment-step-separator.png",
+    "originalWpPath": "wp-content/plugins/tourmaster/images/payment-step-separator.png"
+  },
+  {
+    "id": "dest_img_008",
+    "filename": "ribbon-corner-shadow.png",
+    "url": "/images/destinations/generales/ribbon-corner-shadow.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: ribbon corner shadow",
+      "en": "Vermilion Routes: ribbon corner shadow"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: ribbon-corner-shadow.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 10,
+    "height": 10,
+    "sizeBytes": 173,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "ribbon-corner-shadow.png",
+    "originalWpPath": "wp-content/plugins/tourmaster/images/ribbon-corner-shadow.png"
+  },
+  {
+    "id": "dest_img_009",
+    "filename": "single-tour-gradient.png",
+    "url": "/images/destinations/generales/single-tour-gradient.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: single tour gradient",
+      "en": "Vermilion Routes: single tour gradient"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: single-tour-gradient.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 49,
+    "height": 303,
+    "sizeBytes": 4625,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "single-tour-gradient.png",
+    "originalWpPath": "wp-content/plugins/tourmaster/images/single-tour-gradient.png"
+  },
+  {
+    "id": "dest_img_010",
+    "filename": "single-tour-top-gradient.png",
+    "url": "/images/destinations/generales/single-tour-top-gradient.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: single tour top gradient",
+      "en": "Vermilion Routes: single tour top gradient"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: single-tour-top-gradient.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 33,
+    "height": 278,
+    "sizeBytes": 3906,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "single-tour-top-gradient.png",
+    "originalWpPath": "wp-content/plugins/tourmaster/images/single-tour-top-gradient.png"
+  },
+  {
+    "id": "dest_img_011",
+    "filename": "tour-category-item-gradient.png",
+    "url": "/images/destinations/generales/tour-category-item-gradient.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: tour category item gradient",
+      "en": "Vermilion Routes: tour category item gradient"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: tour-category-item-gradient.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 14,
+    "height": 195,
+    "sizeBytes": 1952,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "tour-category-item-gradient.png",
+    "originalWpPath": "wp-content/plugins/tourmaster/images/tour-category-item-gradient.png"
+  },
+  {
+    "id": "dest_img_012",
+    "filename": "ElegantIcons.svg",
+    "url": "/images/destinations/generales/ElegantIcons.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: ElegantIcons",
+      "en": "Vermilion Routes: ElegantIcons"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: ElegantIcons.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 277297,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "ElegantIcons.svg",
+    "originalWpPath": "wp-content/plugins/tourmaster/plugins/elegant-font/ElegantIcons.svg"
+  },
+  {
+    "id": "dest_img_013",
+    "filename": "Flaticon.svg",
+    "url": "/images/destinations/generales/Flaticon.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: Flaticon",
+      "en": "Vermilion Routes: Flaticon"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: Flaticon.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 3188,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "Flaticon.svg",
+    "originalWpPath": "wp-content/plugins/tourmaster/plugins/flaticon/Flaticon.svg"
+  },
+  {
+    "id": "dest_img_014",
+    "filename": "loading.gif",
+    "url": "/images/destinations/generales/loading.gif",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: loading",
+      "en": "Vermilion Routes: loading"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: loading.gif",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 32,
+    "height": 32,
+    "sizeBytes": 4178,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "loading.gif",
+    "originalWpPath": "wp-content/plugins/tourmaster/plugins/lightgallery/skin-lightgallery/loading.gif"
+  },
+  {
+    "id": "dest_img_015",
+    "filename": "video-play.png",
+    "url": "/images/destinations/generales/video-play.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: video play",
+      "en": "Vermilion Routes: video play"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: video-play.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 64,
+    "height": 64,
+    "sizeBytes": 4526,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "video-play.png",
+    "originalWpPath": "wp-content/plugins/tourmaster/plugins/lightgallery/skin-lightgallery/video-play.png"
+  },
+  {
+    "id": "dest_img_016",
+    "filename": "vimeo-play.png",
+    "url": "/images/destinations/generales/vimeo-play.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: vimeo play",
+      "en": "Vermilion Routes: vimeo play"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: vimeo-play.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 84,
+    "height": 118,
+    "sizeBytes": 5428,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "vimeo-play.png",
+    "originalWpPath": "wp-content/plugins/tourmaster/plugins/lightgallery/skin-lightgallery/vimeo-play.png"
+  },
+  {
+    "id": "dest_img_017",
+    "filename": "youtube-play.png",
+    "url": "/images/destinations/generales/youtube-play.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: youtube play",
+      "en": "Vermilion Routes: youtube play"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: youtube-play.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 84,
+    "height": 120,
+    "sizeBytes": 5177,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "youtube-play.png",
+    "originalWpPath": "wp-content/plugins/tourmaster/plugins/lightgallery/skin-lightgallery/youtube-play.png"
+  },
+  {
+    "id": "dest_img_018",
+    "filename": "fullscreen-exit.svg",
+    "url": "/images/destinations/generales/fullscreen-exit.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: fullscreen exit",
+      "en": "Vermilion Routes: fullscreen exit"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: fullscreen-exit.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 546,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fullscreen-exit.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/fullscreen-exit.svg"
+  },
+  {
+    "id": "dest_img_019",
+    "filename": "fullscreen.svg",
+    "url": "/images/destinations/generales/fullscreen.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: fullscreen",
+      "en": "Vermilion Routes: fullscreen"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: fullscreen.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 542,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fullscreen.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/fullscreen.svg"
+  },
+  {
+    "id": "dest_img_020",
+    "filename": "the7-check-circle-fill.svg",
+    "url": "/images/destinations/generales/the7-check-circle-fill.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: the7 check circle fill",
+      "en": "Vermilion Routes: the7 check circle fill"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: the7-check-circle-fill.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 594,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "the7-check-circle-fill.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/the7-check-circle-fill.svg"
+  },
+  {
+    "id": "dest_img_021",
+    "filename": "the7-chevron-down.svg",
+    "url": "/images/destinations/generales/the7-chevron-down.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: the7 chevron down",
+      "en": "Vermilion Routes: the7 chevron down"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: the7-chevron-down.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 579,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "the7-chevron-down.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/the7-chevron-down.svg"
+  },
+  {
+    "id": "dest_img_022",
+    "filename": "the7-chevron-left.svg",
+    "url": "/images/destinations/generales/the7-chevron-left.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: the7 chevron left",
+      "en": "Vermilion Routes: the7 chevron left"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: the7-chevron-left.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 649,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "the7-chevron-left.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/the7-chevron-left.svg"
+  },
+  {
+    "id": "dest_img_023",
+    "filename": "the7-chevron-right.svg",
+    "url": "/images/destinations/generales/the7-chevron-right.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: the7 chevron right",
+      "en": "Vermilion Routes: the7 chevron right"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: the7-chevron-right.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 643,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "the7-chevron-right.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/the7-chevron-right.svg"
+  },
+  {
+    "id": "dest_img_024",
+    "filename": "the7-chevron-side.svg",
+    "url": "/images/destinations/generales/the7-chevron-side.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: the7 chevron side",
+      "en": "Vermilion Routes: the7 chevron side"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: the7-chevron-side.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 578,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "the7-chevron-side.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/the7-chevron-side.svg"
+  },
+  {
+    "id": "dest_img_025",
+    "filename": "the7-exclamation-circle-fill.svg",
+    "url": "/images/destinations/generales/the7-exclamation-circle-fill.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: the7 exclamation circle fill",
+      "en": "Vermilion Routes: the7 exclamation circle fill"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: the7-exclamation-circle-fill.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 612,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "the7-exclamation-circle-fill.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/the7-exclamation-circle-fill.svg"
+  },
+  {
+    "id": "dest_img_026",
+    "filename": "the7-share-fill.svg",
+    "url": "/images/destinations/generales/the7-share-fill.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: the7 share fill",
+      "en": "Vermilion Routes: the7 share fill"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: the7-share-fill.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 687,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "the7-share-fill.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/the7-share-fill.svg"
+  },
+  {
+    "id": "dest_img_027",
+    "filename": "x-lg.svg",
+    "url": "/images/destinations/generales/x-lg.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: x lg",
+      "en": "Vermilion Routes: x lg"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: x-lg.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 320,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "x-lg.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/x-lg.svg"
+  },
+  {
+    "id": "dest_img_028",
+    "filename": "zoom-in.svg",
+    "url": "/images/destinations/generales/zoom-in.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: zoom in",
+      "en": "Vermilion Routes: zoom in"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: zoom-in.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 553,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "zoom-in.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/zoom-in.svg"
+  },
+  {
+    "id": "dest_img_029",
+    "filename": "zoom-out.svg",
+    "url": "/images/destinations/generales/zoom-out.svg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: zoom out",
+      "en": "Vermilion Routes: zoom out"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: zoom-out.svg",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": null,
+    "height": null,
+    "sizeBytes": 506,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "zoom-out.svg",
+    "originalWpPath": "wp-content/themes/dt-the7/images/zoom-out.svg"
+  },
+  {
+    "id": "dest_img_030",
+    "filename": "blogvolcan1.jpg",
+    "url": "/images/destinations/ecuador-continental/blogvolcan1.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Avenida de los Volcanes",
+    "title": {
+      "es": "Ecuador Continental: Avenida de los Volcanes - blogvolcan1",
+      "en": "Continental Ecuador: Avenida de los Volcanes - blogvolcan1"
+    },
+    "alt": {
+      "es": "Volcanes majestuosos de la cordillera andina ecuatoriana",
+      "en": "Highland destination and scenic landscapes of Ecuador in Avenida de los Volcanes"
+    },
+    "tags": [
+      "volcanes",
+      "andes",
+      "cotopaxi",
+      "chimborazo"
+    ],
+    "width": 1920,
+    "height": 1080,
+    "sizeBytes": 390715,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "blogvolcan1.jpg",
+    "originalWpPath": "wp-content/uploads/2020/10/blogvolcan1.jpg"
+  },
+  {
+    "id": "dest_img_031",
+    "filename": "16as-01-2-300x195.jpg",
+    "url": "/images/destinations/peru/16as-01-2-300x195.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - 16as 01 2",
+      "en": "Peru: Perú - 16as 01 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 15550,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-01-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-01-2-300x195.jpg"
+  },
+  {
+    "id": "dest_img_032",
+    "filename": "16as-01-2-768x498.jpg",
+    "url": "/images/destinations/peru/16as-01-2-768x498.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - 16as 01 2",
+      "en": "Peru: Perú - 16as 01 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 100465,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-01-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-01-2-768x498.jpg"
+  },
+  {
+    "id": "dest_img_033",
+    "filename": "16as-01-2.jpg",
+    "url": "/images/destinations/peru/16as-01-2.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - 16as 01 2",
+      "en": "Peru: Machu Picchu - 16as 01 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 143690,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-01-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-01-2.jpg"
+  },
+  {
+    "id": "dest_img_034",
+    "filename": "16as-02-300x195.jpg",
+    "url": "/images/destinations/peru/16as-02-300x195.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - 16as 02",
+      "en": "Peru: Perú - 16as 02"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 16850,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-02-300x195.jpg"
+  },
+  {
+    "id": "dest_img_035",
+    "filename": "16as-02-768x498.jpg",
+    "url": "/images/destinations/peru/16as-02-768x498.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - 16as 02",
+      "en": "Peru: Perú - 16as 02"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 95851,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-02-768x498.jpg"
+  },
+  {
+    "id": "dest_img_036",
+    "filename": "16as-02.jpg",
+    "url": "/images/destinations/peru/16as-02.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - 16as 02",
+      "en": "Peru: Machu Picchu - 16as 02"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 135247,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-02.jpg"
+  },
+  {
+    "id": "dest_img_037",
+    "filename": "16as-07-1-300x195.jpg",
+    "url": "/images/destinations/galapagos/16as-07-1-300x195.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 07 1",
+      "en": "Galapagos: Islas Galápagos - 16as 07 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 10202,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-07-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-07-1-300x195.jpg"
+  },
+  {
+    "id": "dest_img_038",
+    "filename": "16as-07-1-768x498.jpg",
+    "url": "/images/destinations/galapagos/16as-07-1-768x498.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 07 1",
+      "en": "Galapagos: Islas Galápagos - 16as 07 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 45848,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-07-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-07-1-768x498.jpg"
+  },
+  {
+    "id": "dest_img_039",
+    "filename": "16as-07-1.jpg",
+    "url": "/images/destinations/galapagos/16as-07-1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 07 1",
+      "en": "Galapagos: Islas Galápagos - 16as 07 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 57815,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-07-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-07-1.jpg"
+  },
+  {
+    "id": "dest_img_040",
+    "filename": "16as-08-300x195.jpg",
+    "url": "/images/destinations/galapagos/16as-08-300x195.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 08",
+      "en": "Galapagos: Islas Galápagos - 16as 08"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 14140,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-08-300x195.jpg"
+  },
+  {
+    "id": "dest_img_041",
+    "filename": "16as-08-768x498.jpg",
+    "url": "/images/destinations/galapagos/16as-08-768x498.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 08",
+      "en": "Galapagos: Islas Galápagos - 16as 08"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 75396,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-08-768x498.jpg"
+  },
+  {
+    "id": "dest_img_042",
+    "filename": "16as-08.jpg",
+    "url": "/images/destinations/galapagos/16as-08.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - 16as 08",
+      "en": "Galapagos: Isla Santa Cruz - 16as 08"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 103403,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-08.jpg"
+  },
+  {
+    "id": "dest_img_043",
+    "filename": "16as-09-1-300x195.jpg",
+    "url": "/images/destinations/galapagos/16as-09-1-300x195.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 09 1",
+      "en": "Galapagos: Islas Galápagos - 16as 09 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 22560,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-09-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-09-1-300x195.jpg"
+  },
+  {
+    "id": "dest_img_044",
+    "filename": "16as-09-1-768x498.jpg",
+    "url": "/images/destinations/galapagos/16as-09-1-768x498.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 09 1",
+      "en": "Galapagos: Islas Galápagos - 16as 09 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 116664,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-09-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-09-1-768x498.jpg"
+  },
+  {
+    "id": "dest_img_045",
+    "filename": "16as-09-1.jpg",
+    "url": "/images/destinations/galapagos/16as-09-1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Isabela",
+    "title": {
+      "es": "Galápagos: Isla Isabela - 16as 09 1",
+      "en": "Galapagos: Isla Isabela - 16as 09 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Isabela)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Isabela"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 155705,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-09-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-09-1.jpg"
+  },
+  {
+    "id": "dest_img_046",
+    "filename": "16as-10-1-300x195.jpg",
+    "url": "/images/destinations/galapagos/16as-10-1-300x195.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 10 1",
+      "en": "Galapagos: Islas Galápagos - 16as 10 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 16191,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-10-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-10-1-300x195.jpg"
+  },
+  {
+    "id": "dest_img_047",
+    "filename": "16as-10-1-768x498.jpg",
+    "url": "/images/destinations/galapagos/16as-10-1-768x498.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 10 1",
+      "en": "Galapagos: Islas Galápagos - 16as 10 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 80964,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-10-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-10-1-768x498.jpg"
+  },
+  {
+    "id": "dest_img_048",
+    "filename": "16as-10-1.jpg",
+    "url": "/images/destinations/galapagos/16as-10-1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - 16as 10 1",
+      "en": "Galapagos: Isla Santa Cruz - 16as 10 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 109014,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-10-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-10-1.jpg"
+  },
+  {
+    "id": "dest_img_049",
+    "filename": "16as-11-1-300x195.jpg",
+    "url": "/images/destinations/galapagos/16as-11-1-300x195.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 11 1",
+      "en": "Galapagos: Islas Galápagos - 16as 11 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 10530,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-11-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-11-1-300x195.jpg"
+  },
+  {
+    "id": "dest_img_050",
+    "filename": "16as-11-1-768x498.jpg",
+    "url": "/images/destinations/galapagos/16as-11-1-768x498.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 16as 11 1",
+      "en": "Galapagos: Islas Galápagos - 16as 11 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 48487,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-11-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-11-1-768x498.jpg"
+  },
+  {
+    "id": "dest_img_051",
+    "filename": "16as-11-1.jpg",
+    "url": "/images/destinations/galapagos/16as-11-1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Isabela",
+    "title": {
+      "es": "Galápagos: Isla Isabela - 16as 11 1",
+      "en": "Galapagos: Isla Isabela - 16as 11 1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Isabela)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Isabela"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 62305,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-11-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-11-1.jpg"
+  },
+  {
+    "id": "dest_img_052",
+    "filename": "16as-12-1-300x195.jpg",
+    "url": "/images/destinations/generales/16as-12-1-300x195.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Rutas Combinadas",
+    "title": {
+      "es": "Vermilion Routes: 16as 12 1",
+      "en": "Vermilion Routes: 16as 12 1"
+    },
+    "alt": {
+      "es": "Ruta Combinada: Centro Histórico de Quito y lobo marino en Galápagos",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "quito",
+      "galapagos",
+      "combined",
+      "tour-card"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 15355,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-12-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-12-1-300x195.jpg"
+  },
+  {
+    "id": "dest_img_053",
+    "filename": "16as-12-1-768x498.jpg",
+    "url": "/images/destinations/generales/16as-12-1-768x498.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Rutas Combinadas",
+    "title": {
+      "es": "Vermilion Routes: 16as 12 1",
+      "en": "Vermilion Routes: 16as 12 1"
+    },
+    "alt": {
+      "es": "Ruta Combinada: Centro Histórico de Quito y lobo marino en Galápagos",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "quito",
+      "galapagos",
+      "combined",
+      "tour-card"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 78327,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-12-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-12-1-768x498.jpg"
+  },
+  {
+    "id": "dest_img_054",
+    "filename": "16as-12-1.jpg",
+    "url": "/images/destinations/generales/16as-12-1.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Rutas Combinadas",
+    "title": {
+      "es": "Vermilion Routes: 16as 12 1",
+      "en": "Vermilion Routes: 16as 12 1"
+    },
+    "alt": {
+      "es": "Ruta Combinada: Centro Histórico de Quito y lobo marino en Galápagos",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "quito",
+      "galapagos",
+      "combined",
+      "tour-card"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 104486,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-12-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-12-1.jpg"
+  },
+  {
+    "id": "dest_img_055",
+    "filename": "16as-12-300x195.jpg",
+    "url": "/images/destinations/amazonia/16as-12-300x195.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - 16as 12",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - 16as 12"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 15355,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-12.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-12-300x195.jpg"
+  },
+  {
+    "id": "dest_img_056",
+    "filename": "16as-12.jpg",
+    "url": "/images/destinations/amazonia/16as-12.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - 16as 12",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - 16as 12"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 104486,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-12.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-12.jpg"
+  },
+  {
+    "id": "dest_img_057",
+    "filename": "16as-13-1-300x195.jpg",
+    "url": "/images/destinations/generales/16as-13-1-300x195.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Rutas Combinadas",
+    "title": {
+      "es": "Vermilion Routes: 16as 13 1",
+      "en": "Vermilion Routes: 16as 13 1"
+    },
+    "alt": {
+      "es": "Ruta Combinada: Nevado andino y pingüinos de Galápagos en roca volcánica",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "andes",
+      "galapagos",
+      "snow-waterfalls",
+      "tour-card"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 15705,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-13-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-13-1-300x195.jpg"
+  },
+  {
+    "id": "dest_img_058",
+    "filename": "16as-13-1-768x498.jpg",
+    "url": "/images/destinations/generales/16as-13-1-768x498.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Rutas Combinadas",
+    "title": {
+      "es": "Vermilion Routes: 16as 13 1",
+      "en": "Vermilion Routes: 16as 13 1"
+    },
+    "alt": {
+      "es": "Ruta Combinada: Nevado andino y pingüinos de Galápagos en roca volcánica",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "andes",
+      "galapagos",
+      "snow-waterfalls",
+      "tour-card"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 89073,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-13-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-13-1-768x498.jpg"
+  },
+  {
+    "id": "dest_img_059",
+    "filename": "16as-13-1.jpg",
+    "url": "/images/destinations/generales/16as-13-1.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Rutas Combinadas",
+    "title": {
+      "es": "Vermilion Routes: 16as 13 1",
+      "en": "Vermilion Routes: 16as 13 1"
+    },
+    "alt": {
+      "es": "Ruta Combinada: Nevado andino y pingüinos de Galápagos en roca volcánica",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "andes",
+      "galapagos",
+      "snow-waterfalls",
+      "tour-card"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 121892,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-13-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-13-1.jpg"
+  },
+  {
+    "id": "dest_img_060",
+    "filename": "16as-13-300x195.jpg",
+    "url": "/images/destinations/amazonia/16as-13-300x195.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - 16as 13",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - 16as 13"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 15705,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-13.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-13-300x195.jpg"
+  },
+  {
+    "id": "dest_img_061",
+    "filename": "16as-13-768x498.jpg",
+    "url": "/images/destinations/amazonia/16as-13-768x498.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - 16as 13",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - 16as 13"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 89073,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-13.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-13-768x498.jpg"
+  },
+  {
+    "id": "dest_img_062",
+    "filename": "16as-13.jpg",
+    "url": "/images/destinations/amazonia/16as-13.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - 16as 13",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - 16as 13"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 121892,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-13.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-13.jpg"
+  },
+  {
+    "id": "dest_img_063",
+    "filename": "16as-14-1-300x195.jpg",
+    "url": "/images/destinations/amazonia/16as-14-1-300x195.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía y Andes",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía y Andes - 16as 14 1",
+      "en": "Ecuadorian Amazon: Amazonía y Andes - 16as 14 1"
+    },
+    "alt": {
+      "es": "Expedición Andes y Amazonía: Aventura en cascada y encuentro comunitario",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía y Andes)"
+    },
+    "tags": [
+      "cascada",
+      "comunidad-indigena",
+      "amazonia",
+      "tour-card"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 20998,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-14-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-14-1-300x195.jpg"
+  },
+  {
+    "id": "dest_img_064",
+    "filename": "16as-14-1-768x498.jpg",
+    "url": "/images/destinations/amazonia/16as-14-1-768x498.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía y Andes",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía y Andes - 16as 14 1",
+      "en": "Ecuadorian Amazon: Amazonía y Andes - 16as 14 1"
+    },
+    "alt": {
+      "es": "Expedición Andes y Amazonía: Aventura en cascada y encuentro comunitario",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía y Andes)"
+    },
+    "tags": [
+      "cascada",
+      "comunidad-indigena",
+      "amazonia",
+      "tour-card"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 127834,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-14-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-14-1-768x498.jpg"
+  },
+  {
+    "id": "dest_img_065",
+    "filename": "16as-14-1.jpg",
+    "url": "/images/destinations/amazonia/16as-14-1.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía y Andes",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía y Andes - 16as 14 1",
+      "en": "Ecuadorian Amazon: Amazonía y Andes - 16as 14 1"
+    },
+    "alt": {
+      "es": "Expedición Andes y Amazonía: Aventura en cascada y encuentro comunitario",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía y Andes)"
+    },
+    "tags": [
+      "cascada",
+      "comunidad-indigena",
+      "amazonia",
+      "tour-card"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 179114,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-14-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-14-1.jpg"
+  },
+  {
+    "id": "dest_img_066",
+    "filename": "16as-14-300x195.jpg",
+    "url": "/images/destinations/amazonia/16as-14-300x195.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - 16as 14",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - 16as 14"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 20998,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-14.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-14-300x195.jpg"
+  },
+  {
+    "id": "dest_img_067",
+    "filename": "16as-14-768x498.jpg",
+    "url": "/images/destinations/amazonia/16as-14-768x498.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - 16as 14",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - 16as 14"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 127834,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-14.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-14-768x498.jpg"
+  },
+  {
+    "id": "dest_img_068",
+    "filename": "16as-14.jpg",
+    "url": "/images/destinations/amazonia/16as-14.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - 16as 14",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - 16as 14"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 179114,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-14.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/16as-14.jpg"
+  },
+  {
+    "id": "dest_img_069",
+    "filename": "20151108_070417.jpg",
+    "url": "/images/destinations/ecuador-continental/20151108_070417.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Volcán Cotopaxi",
+    "title": {
+      "es": "Ecuador Continental: Volcán Cotopaxi - 20151108 070417",
+      "en": "Continental Ecuador: Volcán Cotopaxi - 20151108 070417"
+    },
+    "alt": {
+      "es": "Grietas glaciares en el Volcán Cotopaxi, Ecuador",
+      "en": "Highland destination and scenic landscapes of Ecuador in Volcán Cotopaxi"
+    },
+    "tags": [
+      "glaciar",
+      "volcanes",
+      "cotopaxi",
+      "senderismo"
+    ],
+    "width": 607,
+    "height": 1080,
+    "sizeBytes": 149760,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "20151108_070417.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/20151108_070417.jpg"
+  },
+  {
+    "id": "dest_img_070",
+    "filename": "20151228_114455-2.jpg",
+    "url": "/images/destinations/ecuador-continental/20151228_114455-2.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Avenida de los Volcanes",
+    "title": {
+      "es": "Ecuador Continental: Avenida de los Volcanes - 20151228 114455 2",
+      "en": "Continental Ecuador: Avenida de los Volcanes - 20151228 114455 2"
+    },
+    "alt": {
+      "es": "Cabalgata en la Avenida de los Volcanes, Andes ecuatorianos",
+      "en": "Highland destination and scenic landscapes of Ecuador in Avenida de los Volcanes"
+    },
+    "tags": [
+      "cabalgata",
+      "andes",
+      "machachi",
+      "aventura"
+    ],
+    "width": 1080,
+    "height": 608,
+    "sizeBytes": 137219,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "20151228_114455-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/20151228_114455-2.jpg"
+  },
+  {
+    "id": "dest_img_071",
+    "filename": "20160805_145853-2.jpg",
+    "url": "/images/destinations/ecuador-continental/20160805_145853-2.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Laguna del Quilotoa",
+    "title": {
+      "es": "Ecuador Continental: Laguna del Quilotoa - 20160805 145853 2",
+      "en": "Continental Ecuador: Laguna del Quilotoa - 20160805 145853 2"
+    },
+    "alt": {
+      "es": "Kayak en la laguna del cráter del Quilotoa, Ecuador",
+      "en": "Highland destination and scenic landscapes of Ecuador in Laguna del Quilotoa"
+    },
+    "tags": [
+      "kayak",
+      "quilotoa",
+      "crater",
+      "aventura"
+    ],
+    "width": 1080,
+    "height": 1921,
+    "sizeBytes": 363513,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "20160805_145853-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/20160805_145853-2.jpg"
+  },
+  {
+    "id": "dest_img_072",
+    "filename": "20170406_104637-2.jpg",
+    "url": "/images/destinations/ecuador-continental/20170406_104637-2.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Baños de Agua Santa",
+    "title": {
+      "es": "Ecuador Continental: Baños de Agua Santa - 20170406 104637 2",
+      "en": "Continental Ecuador: Baños de Agua Santa - 20170406 104637 2"
+    },
+    "alt": {
+      "es": "Aventura bajo cascada en Baños, Ecuador",
+      "en": "Highland destination and scenic landscapes of Ecuador in Baños de Agua Santa"
+    },
+    "tags": [
+      "cascadas",
+      "aventura",
+      "banos",
+      "turismo"
+    ],
+    "width": 1080,
+    "height": 1920,
+    "sizeBytes": 574457,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "20170406_104637-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/20170406_104637-2.jpg"
+  },
+  {
+    "id": "dest_img_073",
+    "filename": "20170406_104916-2.jpg",
+    "url": "/images/destinations/ecuador-continental/20170406_104916-2.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Baños de Agua Santa",
+    "title": {
+      "es": "Ecuador Continental: Baños de Agua Santa - 20170406 104916 2",
+      "en": "Continental Ecuador: Baños de Agua Santa - 20170406 104916 2"
+    },
+    "alt": {
+      "es": "Cascada natural en ruta de las cascadas Baños, Ecuador",
+      "en": "Highland destination and scenic landscapes of Ecuador in Baños de Agua Santa"
+    },
+    "tags": [
+      "cascadas",
+      "banos",
+      "naturaleza"
+    ],
+    "width": 1080,
+    "height": 1920,
+    "sizeBytes": 575778,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "20170406_104916-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/20170406_104916-2.jpg"
+  },
+  {
+    "id": "dest_img_074",
+    "filename": "9f7e990d-city-28835-16731d00575-2-1024x576.jpg",
+    "url": "/images/destinations/galapagos/9f7e990d-city-28835-16731d00575-2-1024x576.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 9f7e990d city 28835 16731d00575 2",
+      "en": "Galapagos: Islas Galápagos - 9f7e990d city 28835 16731d00575 2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 1024,
+    "height": 576,
+    "sizeBytes": 99850,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x576",
+    "baseOriginalFilename": "9f7e990d-city-28835-16731d00575-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/9f7e990d-city-28835-16731d00575-2-1024x576.jpg"
+  },
+  {
+    "id": "dest_img_075",
+    "filename": "9f7e990d-city-28835-16731d00575-2-300x169.jpg",
+    "url": "/images/destinations/galapagos/9f7e990d-city-28835-16731d00575-2-300x169.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 9f7e990d city 28835 16731d00575 2",
+      "en": "Galapagos: Islas Galápagos - 9f7e990d city 28835 16731d00575 2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 300,
+    "height": 169,
+    "sizeBytes": 12466,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x169",
+    "baseOriginalFilename": "9f7e990d-city-28835-16731d00575-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/9f7e990d-city-28835-16731d00575-2-300x169.jpg"
+  },
+  {
+    "id": "dest_img_076",
+    "filename": "9f7e990d-city-28835-16731d00575-2-768x432.jpg",
+    "url": "/images/destinations/galapagos/9f7e990d-city-28835-16731d00575-2-768x432.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 9f7e990d city 28835 16731d00575 2",
+      "en": "Galapagos: Islas Galápagos - 9f7e990d city 28835 16731d00575 2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 768,
+    "height": 432,
+    "sizeBytes": 61239,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x432",
+    "baseOriginalFilename": "9f7e990d-city-28835-16731d00575-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/9f7e990d-city-28835-16731d00575-2-768x432.jpg"
+  },
+  {
+    "id": "dest_img_077",
+    "filename": "9f7e990d-city-28835-16731d00575-2.jpg",
+    "url": "/images/destinations/galapagos/9f7e990d-city-28835-16731d00575-2.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - 9f7e990d city 28835 16731d00575 2",
+      "en": "Galapagos: Islas Galápagos - 9f7e990d city 28835 16731d00575 2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 1366,
+    "height": 768,
+    "sizeBytes": 134368,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "9f7e990d-city-28835-16731d00575-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/9f7e990d-city-28835-16731d00575-2.jpg"
+  },
+  {
+    "id": "dest_img_078",
+    "filename": "banklogos-300x102.png",
+    "url": "/images/destinations/generales/banklogos-300x102.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: banklogos",
+      "en": "Vermilion Routes: banklogos"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: banklogos-300x102.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 300,
+    "height": 102,
+    "sizeBytes": 6670,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x102",
+    "baseOriginalFilename": "banklogos.png",
+    "originalWpPath": "wp-content/uploads/2023/08/banklogos-300x102.png"
+  },
+  {
+    "id": "dest_img_079",
+    "filename": "banklogos.png",
+    "url": "/images/destinations/generales/banklogos.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: banklogos",
+      "en": "Vermilion Routes: banklogos"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: banklogos.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 574,
+    "height": 195,
+    "sizeBytes": 8965,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banklogos.png",
+    "originalWpPath": "wp-content/uploads/2023/08/banklogos.png"
+  },
+  {
+    "id": "dest_img_080",
+    "filename": "banner_aboutus-2.jpg",
+    "url": "/images/destinations/generales/banner_aboutus-2.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Vermilion Routes",
+    "title": {
+      "es": "Vermilion Routes: banner aboutus 2",
+      "en": "Vermilion Routes: banner aboutus 2"
+    },
+    "alt": {
+      "es": "Banner corporativo de Vermilion South American Routes",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "about-us",
+      "branding",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 920,
+    "sizeBytes": 227814,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner_aboutus-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/banner_aboutus-2.jpg"
+  },
+  {
+    "id": "dest_img_081",
+    "filename": "basilica-voto-nacional-centro-quito-ecuador-768x512.jpg",
+    "url": "/images/destinations/ecuador-continental/basilica-voto-nacional-centro-quito-ecuador-768x512.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito",
+    "title": {
+      "es": "Ecuador Continental: Quito - basilica voto nacional centro quito ecuador",
+      "en": "Continental Ecuador: Quito - basilica voto nacional centro quito ecuador"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Quito)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 512,
+    "sizeBytes": 91158,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x512",
+    "baseOriginalFilename": "basilica-voto-nacional-centro-quito-ecuador.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/basilica-voto-nacional-centro-quito-ecuador-768x512.jpg"
+  },
+  {
+    "id": "dest_img_082",
+    "filename": "blog1-1024x589.jpg",
+    "url": "/images/destinations/peru/blog1-1024x589.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco - Sacsayhuamán",
+    "title": {
+      "es": "Perú: Cusco - Sacsayhuamán - blog1",
+      "en": "Peru: Cusco - Sacsayhuamán - blog1"
+    },
+    "alt": {
+      "es": "Escenario de filmación de película en las ruinas de Sacsayhuamán, Cusco",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco - Sacsayhuamán"
+    },
+    "tags": [
+      "cusco",
+      "cine",
+      "transformers",
+      "peru"
+    ],
+    "width": 1024,
+    "height": 589,
+    "sizeBytes": 79038,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x589",
+    "baseOriginalFilename": "blog1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog1-1024x589.jpg"
+  },
+  {
+    "id": "dest_img_083",
+    "filename": "blog1-300x173.jpg",
+    "url": "/images/destinations/peru/blog1-300x173.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco - Sacsayhuamán",
+    "title": {
+      "es": "Perú: Cusco - Sacsayhuamán - blog1",
+      "en": "Peru: Cusco - Sacsayhuamán - blog1"
+    },
+    "alt": {
+      "es": "Escenario de filmación de película en las ruinas de Sacsayhuamán, Cusco",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco - Sacsayhuamán"
+    },
+    "tags": [
+      "cusco",
+      "cine",
+      "transformers",
+      "peru"
+    ],
+    "width": 300,
+    "height": 173,
+    "sizeBytes": 12352,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x173",
+    "baseOriginalFilename": "blog1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog1-300x173.jpg"
+  },
+  {
+    "id": "dest_img_084",
+    "filename": "blog1-768x442.jpg",
+    "url": "/images/destinations/peru/blog1-768x442.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco - Sacsayhuamán",
+    "title": {
+      "es": "Perú: Cusco - Sacsayhuamán - blog1",
+      "en": "Peru: Cusco - Sacsayhuamán - blog1"
+    },
+    "alt": {
+      "es": "Escenario de filmación de película en las ruinas de Sacsayhuamán, Cusco",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco - Sacsayhuamán"
+    },
+    "tags": [
+      "cusco",
+      "cine",
+      "transformers",
+      "peru"
+    ],
+    "width": 768,
+    "height": 442,
+    "sizeBytes": 52773,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x442",
+    "baseOriginalFilename": "blog1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog1-768x442.jpg"
+  },
+  {
+    "id": "dest_img_085",
+    "filename": "blog1.jpg",
+    "url": "/images/destinations/peru/blog1.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco - Sacsayhuamán",
+    "title": {
+      "es": "Perú: Cusco - Sacsayhuamán - blog1",
+      "en": "Peru: Cusco - Sacsayhuamán - blog1"
+    },
+    "alt": {
+      "es": "Escenario de filmación de película en las ruinas de Sacsayhuamán, Cusco",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco - Sacsayhuamán"
+    },
+    "tags": [
+      "cusco",
+      "cine",
+      "transformers",
+      "peru"
+    ],
+    "width": 1080,
+    "height": 621,
+    "sizeBytes": 84532,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "blog1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog1.jpg"
+  },
+  {
+    "id": "dest_img_086",
+    "filename": "blog3.jpg",
+    "url": "/images/destinations/galapagos/blog3.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - blog3",
+      "en": "Galapagos: Isla Santa Cruz - blog3"
+    },
+    "alt": {
+      "es": "Tortuga gigante de Galápagos con grupo de viajeros en Santa Cruz",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "tortuga-gigante",
+      "santa-cruz",
+      "fauna",
+      "galapagos"
+    ],
+    "width": 801,
+    "height": 821,
+    "sizeBytes": 174124,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "blog3.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog3.jpg"
+  },
+  {
+    "id": "dest_img_087",
+    "filename": "blog4.jpg",
+    "url": "/images/destinations/amazonia/blog4.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - blog4",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - blog4"
+    },
+    "alt": {
+      "es": "Rana arborícola de ojos rojos sobre flor tropical en la Amazonía",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "rana-arboricola",
+      "biodiversidad",
+      "selva",
+      "fauna"
+    ],
+    "width": 1080,
+    "height": 720,
+    "sizeBytes": 52307,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "blog4.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog4.jpg"
+  },
+  {
+    "id": "dest_img_088",
+    "filename": "blog6-1024x787.jpg",
+    "url": "/images/destinations/amazonia/blog6-1024x787.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía - Reserva Cuyabeno",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía - Reserva Cuyabeno - blog6",
+      "en": "Ecuadorian Amazon: Amazonía - Reserva Cuyabeno - blog6"
+    },
+    "alt": {
+      "es": "Tortugas charapa descansando en tronco sobre laguna en la Amazonía",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía - Reserva Cuyabeno)"
+    },
+    "tags": [
+      "tortugas-charapa",
+      "rio",
+      "amazonia",
+      "cuyabeno"
+    ],
+    "width": 1024,
+    "height": 787,
+    "sizeBytes": 181790,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x787",
+    "baseOriginalFilename": "blog6.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog6-1024x787.jpg"
+  },
+  {
+    "id": "dest_img_089",
+    "filename": "blog6-300x231.jpg",
+    "url": "/images/destinations/amazonia/blog6-300x231.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía - Reserva Cuyabeno",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía - Reserva Cuyabeno - blog6",
+      "en": "Ecuadorian Amazon: Amazonía - Reserva Cuyabeno - blog6"
+    },
+    "alt": {
+      "es": "Tortugas charapa descansando en tronco sobre laguna en la Amazonía",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía - Reserva Cuyabeno)"
+    },
+    "tags": [
+      "tortugas-charapa",
+      "rio",
+      "amazonia",
+      "cuyabeno"
+    ],
+    "width": 300,
+    "height": 231,
+    "sizeBytes": 21591,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x231",
+    "baseOriginalFilename": "blog6.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog6-300x231.jpg"
+  },
+  {
+    "id": "dest_img_090",
+    "filename": "blog6-768x590.jpg",
+    "url": "/images/destinations/amazonia/blog6-768x590.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía - Reserva Cuyabeno",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía - Reserva Cuyabeno - blog6",
+      "en": "Ecuadorian Amazon: Amazonía - Reserva Cuyabeno - blog6"
+    },
+    "alt": {
+      "es": "Tortugas charapa descansando en tronco sobre laguna en la Amazonía",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía - Reserva Cuyabeno)"
+    },
+    "tags": [
+      "tortugas-charapa",
+      "rio",
+      "amazonia",
+      "cuyabeno"
+    ],
+    "width": 768,
+    "height": 590,
+    "sizeBytes": 115475,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x590",
+    "baseOriginalFilename": "blog6.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog6-768x590.jpg"
+  },
+  {
+    "id": "dest_img_091",
+    "filename": "blog6.jpg",
+    "url": "/images/destinations/amazonia/blog6.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía - Reserva Cuyabeno",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía - Reserva Cuyabeno - blog6",
+      "en": "Ecuadorian Amazon: Amazonía - Reserva Cuyabeno - blog6"
+    },
+    "alt": {
+      "es": "Tortugas charapa descansando en tronco sobre laguna en la Amazonía",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía - Reserva Cuyabeno)"
+    },
+    "tags": [
+      "tortugas-charapa",
+      "rio",
+      "amazonia",
+      "cuyabeno"
+    ],
+    "width": 1405,
+    "height": 1080,
+    "sizeBytes": 304749,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "blog6.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blog6.jpg"
+  },
+  {
+    "id": "dest_img_092",
+    "filename": "bloggala1.jpg",
+    "url": "/images/destinations/galapagos/bloggala1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - bloggala1",
+      "en": "Galapagos: Islas Galápagos - bloggala1"
+    },
+    "alt": {
+      "es": "Paisaje insular y fauna única en las Islas Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna",
+      "paisaje",
+      "islas"
+    ],
+    "width": 1920,
+    "height": 1080,
+    "sizeBytes": 479300,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "bloggala1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/bloggala1.jpg"
+  },
+  {
+    "id": "dest_img_093",
+    "filename": "blogquito1.jpg",
+    "url": "/images/destinations/ecuador-continental/blogquito1.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito Centro Histórico",
+    "title": {
+      "es": "Ecuador Continental: Quito Centro Histórico - blogquito1",
+      "en": "Continental Ecuador: Quito Centro Histórico - blogquito1"
+    },
+    "alt": {
+      "es": "Centro Histórico colonial de Quito, Patrimonio de la Humanidad",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito Centro Histórico"
+    },
+    "tags": [
+      "quito",
+      "patrimonio",
+      "colonial",
+      "arquitectura"
+    ],
+    "width": 1920,
+    "height": 1080,
+    "sizeBytes": 359360,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "blogquito1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blogquito1.jpg"
+  },
+  {
+    "id": "dest_img_094",
+    "filename": "blogvermi1.jpg",
+    "url": "/images/destinations/generales/blogvermi1.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Vermilion Routes",
+    "title": {
+      "es": "Vermilion Routes: blogvermi1",
+      "en": "Vermilion Routes: blogvermi1"
+    },
+    "alt": {
+      "es": "Experiencias de viaje exclusivas con Vermilion South American Routes",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "viajes",
+      "experiencias"
+    ],
+    "width": 1920,
+    "height": 1080,
+    "sizeBytes": 480744,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "blogvermi1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/blogvermi1.jpg"
+  },
+  {
+    "id": "dest_img_095",
+    "filename": "Captura-de-Pantalla-2023-05-30-a-las-16.33.03-2.jpg",
+    "url": "/images/destinations/galapagos/Captura-de-Pantalla-2023-05-30-a-las-16.33.03-2.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla San Cristóbal - León Dormido",
+    "title": {
+      "es": "Galápagos: Isla San Cristóbal - León Dormido - Captura de Pantalla 2023 05 30 a las 16.33.03 2",
+      "en": "Galapagos: Isla San Cristóbal - León Dormido - Captura de Pantalla 2023 05 30 a las 16.33.03 2"
+    },
+    "alt": {
+      "es": "Yate de expedición frente al León Dormido (Kicker Rock), Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla San Cristóbal - León Dormido"
+    },
+    "tags": [
+      "kicker-rock",
+      "snorkel",
+      "yate",
+      "galapagos"
+    ],
+    "width": 930,
+    "height": 1622,
+    "sizeBytes": 199864,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "Captura-de-Pantalla-2023-05-30-a-las-16.33.03-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/Captura-de-Pantalla-2023-05-30-a-las-16.33.03-2.jpg"
+  },
+  {
+    "id": "dest_img_096",
+    "filename": "Captura-de-Pantalla-2023-05-30-a-las-17.06.45-2.jpg",
+    "url": "/images/destinations/amazonia/Captura-de-Pantalla-2023-05-30-a-las-17.06.45-2.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - Captura de Pantalla 2023 05 30 a las 17.06.45 2",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - Captura de Pantalla 2023 05 30 a las 17.06.45 2"
+    },
+    "alt": {
+      "es": "Intercambio cultural con comunidad indígena en la Amazonía ecuatoriana",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "cultura",
+      "comunidad-indigena",
+      "selva",
+      "danza"
+    ],
+    "width": 864,
+    "height": 1180,
+    "sizeBytes": 158627,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "Captura-de-Pantalla-2023-05-30-a-las-17.06.45-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/Captura-de-Pantalla-2023-05-30-a-las-17.06.45-2.jpg"
+  },
+  {
+    "id": "dest_img_097",
+    "filename": "Captura-de-Pantalla-2023-05-30-a-las-17.08.00-2.jpg",
+    "url": "/images/destinations/amazonia/Captura-de-Pantalla-2023-05-30-a-las-17.08.00-2.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - Captura de Pantalla 2023 05 30 a las 17.08.00 2",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - Captura de Pantalla 2023 05 30 a las 17.08.00 2"
+    },
+    "alt": {
+      "es": "Ceremonia de bienvenida y pintura facial en comunidad amazónica",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "cultura",
+      "tradiciones",
+      "selva",
+      "indigenas"
+    ],
+    "width": 1080,
+    "height": 1416,
+    "sizeBytes": 232376,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "Captura-de-Pantalla-2023-05-30-a-las-17.08.00-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/Captura-de-Pantalla-2023-05-30-a-las-17.08.00-2.jpg"
+  },
+  {
+    "id": "dest_img_098",
+    "filename": "cropped-redbird-1-150x150.png",
+    "url": "/images/destinations/generales/cropped-redbird-1-150x150.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: cropped redbird 1",
+      "en": "Vermilion Routes: cropped redbird 1"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: cropped-redbird-1-150x150.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 150,
+    "height": 150,
+    "sizeBytes": 5630,
+    "isThumbnail": true,
+    "thumbnailDimensions": "150x150",
+    "baseOriginalFilename": "cropped-redbird-1.png",
+    "originalWpPath": "wp-content/uploads/2023/08/cropped-redbird-1-150x150.png"
+  },
+  {
+    "id": "dest_img_099",
+    "filename": "cropped-redbird-1-300x300.png",
+    "url": "/images/destinations/generales/cropped-redbird-1-300x300.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: cropped redbird 1",
+      "en": "Vermilion Routes: cropped redbird 1"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: cropped-redbird-1-300x300.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 300,
+    "height": 300,
+    "sizeBytes": 12548,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x300",
+    "baseOriginalFilename": "cropped-redbird-1.png",
+    "originalWpPath": "wp-content/uploads/2023/08/cropped-redbird-1-300x300.png"
+  },
+  {
+    "id": "dest_img_100",
+    "filename": "cuzco32-2-1024x667.jpg",
+    "url": "/images/destinations/peru/cuzco32-2-1024x667.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco",
+    "title": {
+      "es": "Perú: Cusco - cuzco32 2",
+      "en": "Peru: Cusco - cuzco32 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Cusco)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 1024,
+    "height": 667,
+    "sizeBytes": 107060,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x667",
+    "baseOriginalFilename": "cuzco32-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/cuzco32-2-1024x667.jpg"
+  },
+  {
+    "id": "dest_img_101",
+    "filename": "cuzco32-2-300x195.jpg",
+    "url": "/images/destinations/peru/cuzco32-2-300x195.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco",
+    "title": {
+      "es": "Perú: Cusco - cuzco32 2",
+      "en": "Peru: Cusco - cuzco32 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Cusco)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 13902,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "cuzco32-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/cuzco32-2-300x195.jpg"
+  },
+  {
+    "id": "dest_img_102",
+    "filename": "cuzco32-2-768x500.jpg",
+    "url": "/images/destinations/peru/cuzco32-2-768x500.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco",
+    "title": {
+      "es": "Perú: Cusco - cuzco32 2",
+      "en": "Peru: Cusco - cuzco32 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Cusco)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 500,
+    "sizeBytes": 67382,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x500",
+    "baseOriginalFilename": "cuzco32-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/cuzco32-2-768x500.jpg"
+  },
+  {
+    "id": "dest_img_103",
+    "filename": "cuzco32-2.jpg",
+    "url": "/images/destinations/peru/cuzco32-2.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco",
+    "title": {
+      "es": "Perú: Cusco - cuzco32 2",
+      "en": "Peru: Cusco - cuzco32 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Cusco)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 1080,
+    "height": 703,
+    "sizeBytes": 124356,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "cuzco32-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/cuzco32-2.jpg"
+  },
+  {
+    "id": "dest_img_104",
+    "filename": "disparo-vertical-fascinante-montana-machu-picchu-dia-nublado-2.jpg",
+    "url": "/images/destinations/peru/disparo-vertical-fascinante-montana-machu-picchu-dia-nublado-2.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - disparo vertical fascinante montana machu picchu dia nublado 2",
+      "en": "Peru: Machu Picchu - disparo vertical fascinante montana machu picchu dia nublado 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 717,
+    "height": 1080,
+    "sizeBytes": 154036,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "disparo-vertical-fascinante-montana-machu-picchu-dia-nublado-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/disparo-vertical-fascinante-montana-machu-picchu-dia-nublado-2.jpg"
+  },
+  {
+    "id": "dest_img_105",
+    "filename": "IMG_20220106_190947-1-2.jpg",
+    "url": "/images/destinations/galapagos/IMG_20220106_190947-1-2.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - IMG 20220106 190947 1 2",
+      "en": "Galapagos: Islas Galápagos - IMG 20220106 190947 1 2"
+    },
+    "alt": {
+      "es": "Viajero descansando en la playa junto a un lobo marino en Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "fauna",
+      "lobo-marino",
+      "playa",
+      "galapagos"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 143428,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20220106_190947-1-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/IMG_20220106_190947-1-2.jpg"
+  },
+  {
+    "id": "dest_img_106",
+    "filename": "IMG_20220808_123817-2.jpg",
+    "url": "/images/destinations/ecuador-continental/IMG_20220808_123817-2.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Parque Nacional Cotopaxi",
+    "title": {
+      "es": "Ecuador Continental: Parque Nacional Cotopaxi - IMG 20220808 123817 2",
+      "en": "Continental Ecuador: Parque Nacional Cotopaxi - IMG 20220808 123817 2"
+    },
+    "alt": {
+      "es": "Grupo de viajeros en el Parque Nacional Cotopaxi con bandera de Ecuador",
+      "en": "Highland destination and scenic landscapes of Ecuador in Parque Nacional Cotopaxi"
+    },
+    "tags": [
+      "cotopaxi",
+      "paramo",
+      "volcanes",
+      "andes"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 103781,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20220808_123817-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/IMG_20220808_123817-2.jpg"
+  },
+  {
+    "id": "dest_img_107",
+    "filename": "IMG_20220811_110844-135x300.jpg",
+    "url": "/images/destinations/amazonia/IMG_20220811_110844-135x300.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - IMG 20220811 110844",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - IMG 20220811 110844"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 135,
+    "height": 300,
+    "sizeBytes": 10139,
+    "isThumbnail": true,
+    "thumbnailDimensions": "135x300",
+    "baseOriginalFilename": "IMG_20220811_110844.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/IMG_20220811_110844-135x300.jpg"
+  },
+  {
+    "id": "dest_img_108",
+    "filename": "IMG_20220811_110844-461x1024.jpg",
+    "url": "/images/destinations/amazonia/IMG_20220811_110844-461x1024.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - IMG 20220811 110844",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - IMG 20220811 110844"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 461,
+    "height": 1024,
+    "sizeBytes": 88867,
+    "isThumbnail": true,
+    "thumbnailDimensions": "461x1024",
+    "baseOriginalFilename": "IMG_20220811_110844.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/IMG_20220811_110844-461x1024.jpg"
+  },
+  {
+    "id": "dest_img_109",
+    "filename": "IMG_20220811_110844.jpg",
+    "url": "/images/destinations/amazonia/IMG_20220811_110844.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - IMG 20220811 110844",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - IMG 20220811 110844"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 486,
+    "height": 1080,
+    "sizeBytes": 106827,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20220811_110844.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/IMG_20220811_110844.jpg"
+  },
+  {
+    "id": "dest_img_110",
+    "filename": "IMG_20230405_114530-2.jpg",
+    "url": "/images/destinations/amazonia/IMG_20230405_114530-2.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - IMG 20230405 114530 2",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - IMG 20230405 114530 2"
+    },
+    "alt": {
+      "es": "Grupo de viajeros con comunidad indígena amazónica de Ecuador",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "comunidad",
+      "cultura",
+      "selva",
+      "indigenas"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 195172,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230405_114530-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/IMG_20230405_114530-2.jpg"
+  },
+  {
+    "id": "dest_img_111",
+    "filename": "IMG_20230405_121100-2.jpg",
+    "url": "/images/destinations/amazonia/IMG_20230405_121100-2.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - IMG 20230405 121100 2",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - IMG 20230405 121100 2"
+    },
+    "alt": {
+      "es": "Danza tradicional con comunidad nativa en la Amazonía",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "danza",
+      "comunidad",
+      "amazonia",
+      "selva"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 173353,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230405_121100-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/IMG_20230405_121100-2.jpg"
+  },
+  {
+    "id": "dest_img_112",
+    "filename": "IMG_20230610_130350-e1692337076427-270x300.jpg",
+    "url": "/images/destinations/amazonia/IMG_20230610_130350-e1692337076427-270x300.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - IMG 20230610 130350 e1692337076427",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - IMG 20230610 130350 e1692337076427"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 270,
+    "height": 300,
+    "sizeBytes": 25199,
+    "isThumbnail": true,
+    "thumbnailDimensions": "270x300",
+    "baseOriginalFilename": "IMG_20230610_130350-e1692337076427.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/IMG_20230610_130350-e1692337076427-270x300.jpg"
+  },
+  {
+    "id": "dest_img_113",
+    "filename": "IMG_20230610_130350-e1692337076427.jpg",
+    "url": "/images/destinations/amazonia/IMG_20230610_130350-e1692337076427.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - IMG 20230610 130350 e1692337076427",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - IMG 20230610 130350 e1692337076427"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 485,
+    "height": 538,
+    "sizeBytes": 72805,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230610_130350-e1692337076427.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/IMG_20230610_130350-e1692337076427.jpg"
+  },
+  {
+    "id": "dest_img_114",
+    "filename": "inca-2-300x195.jpg",
+    "url": "/images/destinations/peru/inca-2-300x195.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - inca 2",
+      "en": "Peru: Perú - inca 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 24790,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "inca-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/inca-2-300x195.jpg"
+  },
+  {
+    "id": "dest_img_115",
+    "filename": "inca-2-768x498.jpg",
+    "url": "/images/destinations/peru/inca-2-768x498.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - inca 2",
+      "en": "Peru: Perú - inca 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 117133,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "inca-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/inca-2-768x498.jpg"
+  },
+  {
+    "id": "dest_img_116",
+    "filename": "inca-2.jpg",
+    "url": "/images/destinations/peru/inca-2.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - inca 2",
+      "en": "Peru: Perú - inca 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 149157,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "inca-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/inca-2.jpg"
+  },
+  {
+    "id": "dest_img_117",
+    "filename": "lgk-300x225.jpg",
+    "url": "/images/destinations/ecuador-continental/lgk-300x225.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - lgk",
+      "en": "Continental Ecuador: Ecuador Continental - lgk"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 225,
+    "sizeBytes": 16783,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x225",
+    "baseOriginalFilename": "lgk.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/lgk-300x225.jpg"
+  },
+  {
+    "id": "dest_img_118",
+    "filename": "lgk-768x576.jpg",
+    "url": "/images/destinations/ecuador-continental/lgk-768x576.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - lgk",
+      "en": "Continental Ecuador: Ecuador Continental - lgk"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 576,
+    "sizeBytes": 76413,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x576",
+    "baseOriginalFilename": "lgk.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/lgk-768x576.jpg"
+  },
+  {
+    "id": "dest_img_119",
+    "filename": "lgk.jpg",
+    "url": "/images/destinations/ecuador-continental/lgk.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - lgk",
+      "en": "Continental Ecuador: Ecuador Continental - lgk"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 800,
+    "height": 600,
+    "sizeBytes": 88821,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "lgk.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/lgk.jpg"
+  },
+  {
+    "id": "dest_img_120",
+    "filename": "logo_cafe-300x125.png",
+    "url": "/images/destinations/generales/logo_cafe-300x125.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: logo cafe",
+      "en": "Vermilion Routes: logo cafe"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: logo_cafe-300x125.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 300,
+    "height": 125,
+    "sizeBytes": 8020,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x125",
+    "baseOriginalFilename": "logo_cafe.png",
+    "originalWpPath": "wp-content/uploads/2023/08/logo_cafe-300x125.png"
+  },
+  {
+    "id": "dest_img_121",
+    "filename": "logo_cafe.png",
+    "url": "/images/destinations/generales/logo_cafe.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: logo cafe",
+      "en": "Vermilion Routes: logo cafe"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: logo_cafe.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 500,
+    "height": 209,
+    "sizeBytes": 10883,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "logo_cafe.png",
+    "originalWpPath": "wp-content/uploads/2023/08/logo_cafe.png"
+  },
+  {
+    "id": "dest_img_122",
+    "filename": "logo_vermilion-01-300x125.png",
+    "url": "/images/destinations/generales/logo_vermilion-01-300x125.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: logo vermilion 01",
+      "en": "Vermilion Routes: logo vermilion 01"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: logo_vermilion-01-300x125.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 300,
+    "height": 125,
+    "sizeBytes": 8114,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x125",
+    "baseOriginalFilename": "logo_vermilion-01.png",
+    "originalWpPath": "wp-content/uploads/2023/08/logo_vermilion-01-300x125.png"
+  },
+  {
+    "id": "dest_img_123",
+    "filename": "logo_vermilion-01.png",
+    "url": "/images/destinations/generales/logo_vermilion-01.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: logo vermilion 01",
+      "en": "Vermilion Routes: logo vermilion 01"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: logo_vermilion-01.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 500,
+    "height": 209,
+    "sizeBytes": 11200,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "logo_vermilion-01.png",
+    "originalWpPath": "wp-content/uploads/2023/08/logo_vermilion-01.png"
+  },
+  {
+    "id": "dest_img_124",
+    "filename": "mujer-turista-pone-focas-playa-2.jpg",
+    "url": "/images/destinations/galapagos/mujer-turista-pone-focas-playa-2.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - mujer turista pone focas playa 2",
+      "en": "Galapagos: Islas Galápagos - mujer turista pone focas playa 2"
+    },
+    "alt": {
+      "es": "Turista fotografiada en playa de Galápagos con colonia de lobos marinos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "fauna",
+      "lobo-marino",
+      "playa",
+      "galapagos"
+    ],
+    "width": 1080,
+    "height": 810,
+    "sizeBytes": 85994,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "mujer-turista-pone-focas-playa-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/mujer-turista-pone-focas-playa-2.jpg"
+  },
+  {
+    "id": "dest_img_125",
+    "filename": "nv-300x225.jpg",
+    "url": "/images/destinations/ecuador-continental/nv-300x225.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nv",
+      "en": "Continental Ecuador: Ecuador Continental - nv"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 225,
+    "sizeBytes": 13136,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x225",
+    "baseOriginalFilename": "nv.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/nv-300x225.jpg"
+  },
+  {
+    "id": "dest_img_126",
+    "filename": "nv-768x576.jpg",
+    "url": "/images/destinations/ecuador-continental/nv-768x576.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nv",
+      "en": "Continental Ecuador: Ecuador Continental - nv"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 576,
+    "sizeBytes": 50372,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x576",
+    "baseOriginalFilename": "nv.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/nv-768x576.jpg"
+  },
+  {
+    "id": "dest_img_127",
+    "filename": "nv.jpg",
+    "url": "/images/destinations/ecuador-continental/nv.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nv",
+      "en": "Continental Ecuador: Ecuador Continental - nv"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 800,
+    "height": 600,
+    "sizeBytes": 54673,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nv.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/nv.jpg"
+  },
+  {
+    "id": "dest_img_128",
+    "filename": "piquero-1.jpg",
+    "url": "/images/destinations/galapagos/piquero-1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - piquero 1",
+      "en": "Galapagos: Islas Galápagos - piquero 1"
+    },
+    "alt": {
+      "es": "Piquero de patas azules en primer plano en las Islas Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "piquero-patas-azules",
+      "fauna",
+      "aves",
+      "galapagos"
+    ],
+    "width": 1920,
+    "height": 1080,
+    "sizeBytes": 166523,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "piquero-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/piquero-1.jpg"
+  },
+  {
+    "id": "dest_img_129",
+    "filename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-1024x683.jpg",
+    "url": "/images/destinations/ecuador-continental/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-1024x683.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito",
+    "title": {
+      "es": "Ecuador Continental: Quito - plaza san francisco casco antiguo quito ecuador 1 2",
+      "en": "Continental Ecuador: Quito - plaza san francisco casco antiguo quito ecuador 1 2"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Quito)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 683,
+    "sizeBytes": 108570,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x683",
+    "baseOriginalFilename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-1024x683.jpg"
+  },
+  {
+    "id": "dest_img_130",
+    "filename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-1536x1024.jpg",
+    "url": "/images/destinations/ecuador-continental/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-1536x1024.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito",
+    "title": {
+      "es": "Ecuador Continental: Quito - plaza san francisco casco antiguo quito ecuador 1 2",
+      "en": "Continental Ecuador: Quito - plaza san francisco casco antiguo quito ecuador 1 2"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Quito)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1536,
+    "height": 1024,
+    "sizeBytes": 213227,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1536x1024",
+    "baseOriginalFilename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-1536x1024.jpg"
+  },
+  {
+    "id": "dest_img_131",
+    "filename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-300x200.jpg",
+    "url": "/images/destinations/ecuador-continental/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-300x200.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito",
+    "title": {
+      "es": "Ecuador Continental: Quito - plaza san francisco casco antiguo quito ecuador 1 2",
+      "en": "Continental Ecuador: Quito - plaza san francisco casco antiguo quito ecuador 1 2"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Quito)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 200,
+    "sizeBytes": 12753,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x200",
+    "baseOriginalFilename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-300x200.jpg"
+  },
+  {
+    "id": "dest_img_132",
+    "filename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-768x512.jpg",
+    "url": "/images/destinations/ecuador-continental/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-768x512.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito",
+    "title": {
+      "es": "Ecuador Continental: Quito - plaza san francisco casco antiguo quito ecuador 1 2",
+      "en": "Continental Ecuador: Quito - plaza san francisco casco antiguo quito ecuador 1 2"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Quito)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 512,
+    "sizeBytes": 65003,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x512",
+    "baseOriginalFilename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2-768x512.jpg"
+  },
+  {
+    "id": "dest_img_133",
+    "filename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg",
+    "url": "/images/destinations/ecuador-continental/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito",
+    "title": {
+      "es": "Ecuador Continental: Quito - plaza san francisco casco antiguo quito ecuador 1 2",
+      "en": "Continental Ecuador: Quito - plaza san francisco casco antiguo quito ecuador 1 2"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Quito)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1620,
+    "height": 1080,
+    "sizeBytes": 250277,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/plaza-san-francisco-casco-antiguo-quito-ecuador-1-2.jpg"
+  },
+  {
+    "id": "dest_img_134",
+    "filename": "quito1.jpg",
+    "url": "/images/destinations/amazonia/quito1.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - quito1",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - quito1"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 978,
+    "height": 568,
+    "sizeBytes": 86043,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "quito1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/quito1.jpg"
+  },
+  {
+    "id": "dest_img_135",
+    "filename": "quito2.jpg",
+    "url": "/images/destinations/ecuador-continental/quito2.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito",
+    "title": {
+      "es": "Ecuador Continental: Quito - quito2",
+      "en": "Continental Ecuador: Quito - quito2"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Quito)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 517,
+    "height": 568,
+    "sizeBytes": 58726,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "quito2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/quito2.jpg"
+  },
+  {
+    "id": "dest_img_136",
+    "filename": "redbird-1-150x150.png",
+    "url": "/images/destinations/generales/redbird-1-150x150.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: redbird 1",
+      "en": "Vermilion Routes: redbird 1"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: redbird-1-150x150.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 150,
+    "height": 150,
+    "sizeBytes": 5447,
+    "isThumbnail": true,
+    "thumbnailDimensions": "150x150",
+    "baseOriginalFilename": "redbird-1.png",
+    "originalWpPath": "wp-content/uploads/2023/08/redbird-1-150x150.png"
+  },
+  {
+    "id": "dest_img_137",
+    "filename": "redbird-1-265x300.png",
+    "url": "/images/destinations/generales/redbird-1-265x300.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: redbird 1",
+      "en": "Vermilion Routes: redbird 1"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: redbird-1-265x300.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 265,
+    "height": 300,
+    "sizeBytes": 10621,
+    "isThumbnail": true,
+    "thumbnailDimensions": "265x300",
+    "baseOriginalFilename": "redbird-1.png",
+    "originalWpPath": "wp-content/uploads/2023/08/redbird-1-265x300.png"
+  },
+  {
+    "id": "dest_img_138",
+    "filename": "redbird-1.png",
+    "url": "/images/destinations/generales/redbird-1.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: redbird 1",
+      "en": "Vermilion Routes: redbird 1"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: redbird-1.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 698,
+    "height": 791,
+    "sizeBytes": 25082,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "redbird-1.png",
+    "originalWpPath": "wp-content/uploads/2023/08/redbird-1.png"
+  },
+  {
+    "id": "dest_img_139",
+    "filename": "SAN-CRISTOBAL-GALAPAGOS-2-1024x683.jpg",
+    "url": "/images/destinations/galapagos/SAN-CRISTOBAL-GALAPAGOS-2-1024x683.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla San Cristóbal",
+    "title": {
+      "es": "Galápagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2",
+      "en": "Galapagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla San Cristóbal)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla San Cristóbal"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 1024,
+    "height": 683,
+    "sizeBytes": 148082,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x683",
+    "baseOriginalFilename": "SAN-CRISTOBAL-GALAPAGOS-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/SAN-CRISTOBAL-GALAPAGOS-2-1024x683.jpg"
+  },
+  {
+    "id": "dest_img_140",
+    "filename": "SAN-CRISTOBAL-GALAPAGOS-2-1536x1024.jpg",
+    "url": "/images/destinations/galapagos/SAN-CRISTOBAL-GALAPAGOS-2-1536x1024.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla San Cristóbal",
+    "title": {
+      "es": "Galápagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2",
+      "en": "Galapagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla San Cristóbal)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla San Cristóbal"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 1536,
+    "height": 1024,
+    "sizeBytes": 288069,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1536x1024",
+    "baseOriginalFilename": "SAN-CRISTOBAL-GALAPAGOS-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/SAN-CRISTOBAL-GALAPAGOS-2-1536x1024.jpg"
+  },
+  {
+    "id": "dest_img_141",
+    "filename": "SAN-CRISTOBAL-GALAPAGOS-2-300x200.jpg",
+    "url": "/images/destinations/galapagos/SAN-CRISTOBAL-GALAPAGOS-2-300x200.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla San Cristóbal",
+    "title": {
+      "es": "Galápagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2",
+      "en": "Galapagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla San Cristóbal)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla San Cristóbal"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 300,
+    "height": 200,
+    "sizeBytes": 14712,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x200",
+    "baseOriginalFilename": "SAN-CRISTOBAL-GALAPAGOS-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/SAN-CRISTOBAL-GALAPAGOS-2-300x200.jpg"
+  },
+  {
+    "id": "dest_img_142",
+    "filename": "SAN-CRISTOBAL-GALAPAGOS-2-768x512.jpg",
+    "url": "/images/destinations/galapagos/SAN-CRISTOBAL-GALAPAGOS-2-768x512.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla San Cristóbal",
+    "title": {
+      "es": "Galápagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2",
+      "en": "Galapagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla San Cristóbal)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla San Cristóbal"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 768,
+    "height": 512,
+    "sizeBytes": 86245,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x512",
+    "baseOriginalFilename": "SAN-CRISTOBAL-GALAPAGOS-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/SAN-CRISTOBAL-GALAPAGOS-2-768x512.jpg"
+  },
+  {
+    "id": "dest_img_143",
+    "filename": "SAN-CRISTOBAL-GALAPAGOS-2.jpg",
+    "url": "/images/destinations/galapagos/SAN-CRISTOBAL-GALAPAGOS-2.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla San Cristóbal",
+    "title": {
+      "es": "Galápagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2",
+      "en": "Galapagos: Isla San Cristóbal - SAN CRISTOBAL GALAPAGOS 2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla San Cristóbal)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla San Cristóbal"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 1620,
+    "height": 1080,
+    "sizeBytes": 333433,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "SAN-CRISTOBAL-GALAPAGOS-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/SAN-CRISTOBAL-GALAPAGOS-2.jpg"
+  },
+  {
+    "id": "dest_img_144",
+    "filename": "sublogos-300x100.png",
+    "url": "/images/destinations/generales/sublogos-300x100.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: sublogos",
+      "en": "Vermilion Routes: sublogos"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: sublogos-300x100.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 300,
+    "height": 100,
+    "sizeBytes": 7009,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x100",
+    "baseOriginalFilename": "sublogos.png",
+    "originalWpPath": "wp-content/uploads/2023/08/sublogos-300x100.png"
+  },
+  {
+    "id": "dest_img_145",
+    "filename": "sublogos.png",
+    "url": "/images/destinations/generales/sublogos.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: sublogos",
+      "en": "Vermilion Routes: sublogos"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: sublogos.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 600,
+    "height": 200,
+    "sizeBytes": 14475,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "sublogos.png",
+    "originalWpPath": "wp-content/uploads/2023/08/sublogos.png"
+  },
+  {
+    "id": "dest_img_146",
+    "filename": "thumbnails_01-2-300x225.jpg",
+    "url": "/images/destinations/peru/thumbnails_01-2-300x225.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - thumbnails 01 2",
+      "en": "Peru: Perú - thumbnails 01 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 225,
+    "sizeBytes": 17296,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x225",
+    "baseOriginalFilename": "thumbnails_01-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/thumbnails_01-2-300x225.jpg"
+  },
+  {
+    "id": "dest_img_147",
+    "filename": "thumbnails_01-2-768x576.jpg",
+    "url": "/images/destinations/peru/thumbnails_01-2-768x576.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - thumbnails 01 2",
+      "en": "Peru: Perú - thumbnails 01 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 576,
+    "sizeBytes": 99170,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x576",
+    "baseOriginalFilename": "thumbnails_01-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/thumbnails_01-2-768x576.jpg"
+  },
+  {
+    "id": "dest_img_148",
+    "filename": "thumbnails_01-2.jpg",
+    "url": "/images/destinations/peru/thumbnails_01-2.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - thumbnails 01 2",
+      "en": "Peru: Perú - thumbnails 01 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 800,
+    "height": 600,
+    "sizeBytes": 124376,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "thumbnails_01-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/thumbnails_01-2.jpg"
+  },
+  {
+    "id": "dest_img_149",
+    "filename": "thumbnails_02-2-300x225.jpg",
+    "url": "/images/destinations/peru/thumbnails_02-2-300x225.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - thumbnails 02 2",
+      "en": "Peru: Perú - thumbnails 02 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 225,
+    "sizeBytes": 16402,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x225",
+    "baseOriginalFilename": "thumbnails_02-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/thumbnails_02-2-300x225.jpg"
+  },
+  {
+    "id": "dest_img_150",
+    "filename": "thumbnails_02-2-768x576.jpg",
+    "url": "/images/destinations/peru/thumbnails_02-2-768x576.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - thumbnails 02 2",
+      "en": "Peru: Perú - thumbnails 02 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 576,
+    "sizeBytes": 80850,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x576",
+    "baseOriginalFilename": "thumbnails_02-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/thumbnails_02-2-768x576.jpg"
+  },
+  {
+    "id": "dest_img_151",
+    "filename": "thumbnails_02-2.jpg",
+    "url": "/images/destinations/peru/thumbnails_02-2.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco",
+    "title": {
+      "es": "Perú: Cusco - thumbnails 02 2",
+      "en": "Peru: Cusco - thumbnails 02 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Cusco)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 800,
+    "height": 600,
+    "sizeBytes": 95111,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "thumbnails_02-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/thumbnails_02-2.jpg"
+  },
+  {
+    "id": "dest_img_152",
+    "filename": "thumbnails_03-2-768x576.jpg",
+    "url": "/images/destinations/peru/thumbnails_03-2-768x576.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - thumbnails 03 2",
+      "en": "Peru: Perú - thumbnails 03 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 576,
+    "sizeBytes": 94128,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x576",
+    "baseOriginalFilename": "thumbnails_03-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/thumbnails_03-2-768x576.jpg"
+  },
+  {
+    "id": "dest_img_153",
+    "filename": "transfcusco1.jpg",
+    "url": "/images/destinations/amazonia/transfcusco1.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - transfcusco1",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - transfcusco1"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 1920,
+    "height": 1080,
+    "sizeBytes": 487167,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "transfcusco1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/transfcusco1.jpg"
+  },
+  {
+    "id": "dest_img_154",
+    "filename": "transformers-2-1536x864.jpg",
+    "url": "/images/destinations/peru/transformers-2-1536x864.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco",
+    "title": {
+      "es": "Perú: Cusco - transformers 2",
+      "en": "Peru: Cusco - transformers 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Cusco)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 1536,
+    "height": 864,
+    "sizeBytes": 88406,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1536x864",
+    "baseOriginalFilename": "transformers-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/transformers-2-1536x864.jpg"
+  },
+  {
+    "id": "dest_img_155",
+    "filename": "transformers-2-300x169.jpg",
+    "url": "/images/destinations/peru/transformers-2-300x169.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco",
+    "title": {
+      "es": "Perú: Cusco - transformers 2",
+      "en": "Peru: Cusco - transformers 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Cusco)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 169,
+    "sizeBytes": 9485,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x169",
+    "baseOriginalFilename": "transformers-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/transformers-2-300x169.jpg"
+  },
+  {
+    "id": "dest_img_156",
+    "filename": "transformers-2-768x432.jpg",
+    "url": "/images/destinations/peru/transformers-2-768x432.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco",
+    "title": {
+      "es": "Perú: Cusco - transformers 2",
+      "en": "Peru: Cusco - transformers 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Cusco)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 432,
+    "sizeBytes": 34221,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x432",
+    "baseOriginalFilename": "transformers-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/transformers-2-768x432.jpg"
+  },
+  {
+    "id": "dest_img_157",
+    "filename": "transformers-2.jpg",
+    "url": "/images/destinations/peru/transformers-2.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco",
+    "title": {
+      "es": "Perú: Cusco - transformers 2",
+      "en": "Peru: Cusco - transformers 2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Cusco)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 1920,
+    "height": 1080,
+    "sizeBytes": 119329,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "transformers-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/transformers-2.jpg"
+  },
+  {
+    "id": "dest_img_158",
+    "filename": "volc-1.jpg",
+    "url": "/images/destinations/ecuador-continental/volc-1.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Avenida de los Volcanes",
+    "title": {
+      "es": "Ecuador Continental: Avenida de los Volcanes - volc 1",
+      "en": "Continental Ecuador: Avenida de los Volcanes - volc 1"
+    },
+    "alt": {
+      "es": "Erupción volcánica nocturna en la Avenida de los Volcanes, Ecuador",
+      "en": "Highland destination and scenic landscapes of Ecuador in Avenida de los Volcanes"
+    },
+    "tags": [
+      "volcan-tungurahua",
+      "erupcion",
+      "andes",
+      "ecuador"
+    ],
+    "width": 884,
+    "height": 1080,
+    "sizeBytes": 33501,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "volc-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/08/volc-1.jpg"
+  },
+  {
+    "id": "dest_img_159",
+    "filename": "whitebird-2.png",
+    "url": "/images/destinations/generales/whitebird-2.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: whitebird 2",
+      "en": "Vermilion Routes: whitebird 2"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: whitebird-2.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 1092,
+    "height": 1244,
+    "sizeBytes": 16074,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "whitebird-2.png",
+    "originalWpPath": "wp-content/uploads/2023/08/whitebird-2.png"
+  },
+  {
+    "id": "dest_img_160",
+    "filename": "16as-03-300x195.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-03-300x195.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 03",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 03"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 12581,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-03-300x195.jpg"
+  },
+  {
+    "id": "dest_img_161",
+    "filename": "16as-03-768x498.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-03-768x498.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 03",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 03"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 61546,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-03-768x498.jpg"
+  },
+  {
+    "id": "dest_img_162",
+    "filename": "16as-03.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-03.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 03",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 03"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 80646,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-03.jpg"
+  },
+  {
+    "id": "dest_img_163",
+    "filename": "16as-04-300x195.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-04-300x195.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 04",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 04"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 16031,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-04-300x195.jpg"
+  },
+  {
+    "id": "dest_img_164",
+    "filename": "16as-04-768x498.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-04-768x498.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 04",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 04"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 98115,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-04-768x498.jpg"
+  },
+  {
+    "id": "dest_img_165",
+    "filename": "16as-04.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-04.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 04",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 04"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 136830,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-04.jpg"
+  },
+  {
+    "id": "dest_img_166",
+    "filename": "16as-05-300x195.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-05-300x195.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 05",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 05"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 22544,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-05-300x195.jpg"
+  },
+  {
+    "id": "dest_img_167",
+    "filename": "16as-05-768x498.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-05-768x498.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 05",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 05"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 143014,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-05-768x498.jpg"
+  },
+  {
+    "id": "dest_img_168",
+    "filename": "16as-05.jpg",
+    "url": "/images/destinations/amazonia/16as-05.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - 16as 05",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - 16as 05"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 202369,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "16as-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-05.jpg"
+  },
+  {
+    "id": "dest_img_169",
+    "filename": "16as-06-300x195.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-06-300x195.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 06",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 06"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 14783,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "16as-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-06-300x195.jpg"
+  },
+  {
+    "id": "dest_img_170",
+    "filename": "16as-06-768x498.jpg",
+    "url": "/images/destinations/ecuador-continental/16as-06-768x498.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - 16as 06",
+      "en": "Continental Ecuador: Ecuador Continental - 16as 06"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 88219,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "16as-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/16as-06-768x498.jpg"
+  },
+  {
+    "id": "dest_img_171",
+    "filename": "20150711_174329.jpg",
+    "url": "/images/destinations/peru/20150711_174329.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco - Tambomachay",
+    "title": {
+      "es": "Perú: Cusco - Tambomachay - 20150711 174329",
+      "en": "Peru: Cusco - Tambomachay - 20150711 174329"
+    },
+    "alt": {
+      "es": "Baños del Inca en Tambomachay cerca de Cusco, Perú",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco - Tambomachay"
+    },
+    "tags": [
+      "arqueologia",
+      "incas",
+      "cusco",
+      "peru"
+    ],
+    "width": 607,
+    "height": 1080,
+    "sizeBytes": 153141,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "20150711_174329.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/20150711_174329.jpg"
+  },
+  {
+    "id": "dest_img_172",
+    "filename": "20170209_114713.jpg",
+    "url": "/images/destinations/ecuador-continental/20170209_114713.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Baños de Agua Santa",
+    "title": {
+      "es": "Ecuador Continental: Baños de Agua Santa - 20170209 114713",
+      "en": "Continental Ecuador: Baños de Agua Santa - 20170209 114713"
+    },
+    "alt": {
+      "es": "Canyoning en cascadas de Baños de Agua Santa, Ecuador",
+      "en": "Highland destination and scenic landscapes of Ecuador in Baños de Agua Santa"
+    },
+    "tags": [
+      "cascadas",
+      "canyoning",
+      "aventura",
+      "banos"
+    ],
+    "width": 608,
+    "height": 1080,
+    "sizeBytes": 193116,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "20170209_114713.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/20170209_114713.jpg"
+  },
+  {
+    "id": "dest_img_173",
+    "filename": "20170210_095548.jpg",
+    "url": "/images/destinations/ecuador-continental/20170210_095548.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Papallacta / Andes",
+    "title": {
+      "es": "Ecuador Continental: Papallacta / Andes - 20170210 095548",
+      "en": "Continental Ecuador: Papallacta / Andes - 20170210 095548"
+    },
+    "alt": {
+      "es": "Laguna andina y nevado en la cordillera de los Andes, Ecuador",
+      "en": "Highland destination and scenic landscapes of Ecuador in Papallacta / Andes"
+    },
+    "tags": [
+      "lagunas",
+      "paramo",
+      "antisana",
+      "paisaje"
+    ],
+    "width": 1080,
+    "height": 608,
+    "sizeBytes": 126425,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "20170210_095548.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/20170210_095548.jpg"
+  },
+  {
+    "id": "dest_img_174",
+    "filename": "20170406_104637.jpg",
+    "url": "/images/destinations/ecuador-continental/20170406_104637.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Baños de Agua Santa",
+    "title": {
+      "es": "Ecuador Continental: Baños de Agua Santa - 20170406 104637",
+      "en": "Continental Ecuador: Baños de Agua Santa - 20170406 104637"
+    },
+    "alt": {
+      "es": "Aventura bajo cascada en Baños, Ecuador",
+      "en": "Highland destination and scenic landscapes of Ecuador in Baños de Agua Santa"
+    },
+    "tags": [
+      "cascadas",
+      "aventura",
+      "banos",
+      "turismo"
+    ],
+    "width": 608,
+    "height": 1080,
+    "sizeBytes": 191776,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "20170406_104637.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/20170406_104637.jpg"
+  },
+  {
+    "id": "dest_img_175",
+    "filename": "46808819-1662-4c26-860e-88289f00d7ec.jpg",
+    "url": "/images/destinations/amazonia/46808819-1662-4c26-860e-88289f00d7ec.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Puyo - Cascada Hola Vida",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Puyo - Cascada Hola Vida - 46808819 1662 4c26 860e 88289f00d7ec",
+      "en": "Ecuadorian Amazon: Puyo - Cascada Hola Vida - 46808819 1662 4c26 860e 88289f00d7ec"
+    },
+    "alt": {
+      "es": "Viajeros de Vermilion Routes en la Cascada Hola Vida, Puyo, Amazonía",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Puyo - Cascada Hola Vida)"
+    },
+    "tags": [
+      "cascada",
+      "puyo",
+      "amazonia",
+      "selva",
+      "testimonios"
+    ],
+    "width": 810,
+    "height": 1080,
+    "sizeBytes": 248992,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "46808819-1662-4c26-860e-88289f00d7ec.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/46808819-1662-4c26-860e-88289f00d7ec.jpg"
+  },
+  {
+    "id": "dest_img_176",
+    "filename": "banner-01.jpg",
+    "url": "/images/destinations/peru/banner-01.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco - Sacsayhuamán",
+    "title": {
+      "es": "Perú: Cusco - Sacsayhuamán - banner 01",
+      "en": "Peru: Cusco - Sacsayhuamán - banner 01"
+    },
+    "alt": {
+      "es": "Murallas ciclópeas de Sacsayhuamán en Cusco, Perú",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco - Sacsayhuamán"
+    },
+    "tags": [
+      "sacsayhuaman",
+      "incas",
+      "cusco",
+      "peru",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 309402,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner-01.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/banner-01.jpg"
+  },
+  {
+    "id": "dest_img_177",
+    "filename": "banner-02.jpg",
+    "url": "/images/destinations/generales/banner-02.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Rutas Combinadas",
+    "title": {
+      "es": "Vermilion Routes: banner 02",
+      "en": "Vermilion Routes: banner 02"
+    },
+    "alt": {
+      "es": "Rutas combinadas: Moray en Perú, lobos marinos en Galápagos y Quito colonial",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "peru",
+      "galapagos",
+      "ecuador",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 275808,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/banner-02.jpg"
+  },
+  {
+    "id": "dest_img_178",
+    "filename": "banner-03.jpg",
+    "url": "/images/destinations/ecuador-continental/banner-03.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito - Plaza San Francisco",
+    "title": {
+      "es": "Ecuador Continental: Quito - Plaza San Francisco - banner 03",
+      "en": "Continental Ecuador: Quito - Plaza San Francisco - banner 03"
+    },
+    "alt": {
+      "es": "Plaza de San Francisco en el Centro Histórico de Quito al anochecer",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito - Plaza San Francisco"
+    },
+    "tags": [
+      "quito",
+      "san-francisco",
+      "centro-historico",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 220728,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/banner-03.jpg"
+  },
+  {
+    "id": "dest_img_179",
+    "filename": "banner-04.jpg",
+    "url": "/images/destinations/ecuador-continental/banner-04.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Volcán Chimborazo",
+    "title": {
+      "es": "Ecuador Continental: Volcán Chimborazo - banner 04",
+      "en": "Continental Ecuador: Volcán Chimborazo - banner 04"
+    },
+    "alt": {
+      "es": "Volcán Chimborazo, el punto más cercano al sol desde el centro de la Tierra",
+      "en": "Highland destination and scenic landscapes of Ecuador in Volcán Chimborazo"
+    },
+    "tags": [
+      "chimborazo",
+      "paramo",
+      "andes",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 257606,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/banner-04.jpg"
+  },
+  {
+    "id": "dest_img_180",
+    "filename": "banner-05.jpg",
+    "url": "/images/destinations/peru/banner-05.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - banner 05",
+      "en": "Peru: Machu Picchu - banner 05"
+    },
+    "alt": {
+      "es": "Panorámica de la ciudadela inca de Machu Picchu, Perú",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "machu-picchu",
+      "maravilla-del-mundo",
+      "incas",
+      "peru",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 324106,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/banner-05.jpg"
+  },
+  {
+    "id": "dest_img_181",
+    "filename": "banner-06.jpg",
+    "url": "/images/destinations/amazonia/banner-06.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Parque Nacional Yasuní",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Parque Nacional Yasuní - banner 06",
+      "en": "Ecuadorian Amazon: Parque Nacional Yasuní - banner 06"
+    },
+    "alt": {
+      "es": "Árbol ceibo milenario en el corazón del Parque Nacional Yasuní, Amazonía",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Parque Nacional Yasuní)"
+    },
+    "tags": [
+      "arbol-ceibo",
+      "selva-virgen",
+      "yasuni",
+      "amazonia",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 350223,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/banner-06.jpg"
+  },
+  {
+    "id": "dest_img_182",
+    "filename": "banner-08.jpg",
+    "url": "/images/destinations/galapagos/banner-08.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Española / Bahía Gardner",
+    "title": {
+      "es": "Galápagos: Isla Española / Bahía Gardner - banner 08",
+      "en": "Galapagos: Isla Española / Bahía Gardner - banner 08"
+    },
+    "alt": {
+      "es": "Playa de arena blanca con colonia de lobos marinos en Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Española / Bahía Gardner"
+    },
+    "tags": [
+      "bahia-gardner",
+      "playa-blanca",
+      "lobos-marinos",
+      "galapagos",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 123964,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/banner-08.jpg"
+  },
+  {
+    "id": "dest_img_183",
+    "filename": "banner-09.jpg",
+    "url": "/images/destinations/galapagos/banner-09.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - banner 09",
+      "en": "Galapagos: Islas Galápagos - banner 09"
+    },
+    "alt": {
+      "es": "Iguana marina de Galápagos descansando en la orilla del mar",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "iguana-marina",
+      "playa",
+      "fauna-endemica",
+      "galapagos",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 126904,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner-09.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/banner-09.jpg"
+  },
+  {
+    "id": "dest_img_184",
+    "filename": "banner-10.jpg",
+    "url": "/images/destinations/galapagos/banner-10.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - banner 10",
+      "en": "Galapagos: Islas Galápagos - banner 10"
+    },
+    "alt": {
+      "es": "Tortuga marina nadando en arrecife de coral en Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "tortuga-marina",
+      "arrecife",
+      "snorkel",
+      "galapagos",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 176896,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "banner-10.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/banner-10.jpg"
+  },
+  {
+    "id": "dest_img_185",
+    "filename": "comb1.jpg",
+    "url": "/images/destinations/peru/comb1.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - comb1",
+      "en": "Peru: Machu Picchu - comb1"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 426,
+    "height": 568,
+    "sizeBytes": 45237,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "comb1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/comb1.jpg"
+  },
+  {
+    "id": "dest_img_186",
+    "filename": "comb2.jpg",
+    "url": "/images/destinations/peru/comb2.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - comb2",
+      "en": "Peru: Machu Picchu - comb2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 426,
+    "height": 568,
+    "sizeBytes": 44734,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "comb2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/comb2.jpg"
+  },
+  {
+    "id": "dest_img_187",
+    "filename": "comb3.jpg",
+    "url": "/images/destinations/peru/comb3.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - comb3",
+      "en": "Peru: Machu Picchu - comb3"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 544,
+    "height": 568,
+    "sizeBytes": 83256,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "comb3.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/comb3.jpg"
+  },
+  {
+    "id": "dest_img_188",
+    "filename": "comb4.jpg",
+    "url": "/images/destinations/galapagos/comb4.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - comb4",
+      "en": "Galapagos: Islas Galápagos - comb4"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 556,
+    "height": 568,
+    "sizeBytes": 58585,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "comb4.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/comb4.jpg"
+  },
+  {
+    "id": "dest_img_189",
+    "filename": "comb5.jpg",
+    "url": "/images/destinations/galapagos/comb5.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - comb5",
+      "en": "Galapagos: Islas Galápagos - comb5"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 319,
+    "height": 568,
+    "sizeBytes": 42332,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "comb5.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/comb5.jpg"
+  },
+  {
+    "id": "dest_img_190",
+    "filename": "comb6.jpg",
+    "url": "/images/destinations/galapagos/comb6.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - comb6",
+      "en": "Galapagos: Islas Galápagos - comb6"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 444,
+    "height": 568,
+    "sizeBytes": 52436,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "comb6.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/comb6.jpg"
+  },
+  {
+    "id": "dest_img_191",
+    "filename": "comb7.jpg",
+    "url": "/images/destinations/amazonia/comb7.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - comb7",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - comb7"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 484,
+    "height": 568,
+    "sizeBytes": 76495,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "comb7.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/comb7.jpg"
+  },
+  {
+    "id": "dest_img_192",
+    "filename": "comb8.jpg",
+    "url": "/images/destinations/amazonia/comb8.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - comb8",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - comb8"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 385,
+    "height": 568,
+    "sizeBytes": 86114,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "comb8.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/comb8.jpg"
+  },
+  {
+    "id": "dest_img_193",
+    "filename": "comb9.jpg",
+    "url": "/images/destinations/amazonia/comb9.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - comb9",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - comb9"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 480,
+    "height": 568,
+    "sizeBytes": 37284,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "comb9.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/comb9.jpg"
+  },
+  {
+    "id": "dest_img_194",
+    "filename": "ecu1.jpg",
+    "url": "/images/destinations/ecuador-continental/ecu1.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - ecu1",
+      "en": "Continental Ecuador: Ecuador Continental - ecu1"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 534,
+    "height": 568,
+    "sizeBytes": 67956,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "ecu1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/ecu1.jpg"
+  },
+  {
+    "id": "dest_img_195",
+    "filename": "ecu2.jpg",
+    "url": "/images/destinations/ecuador-continental/ecu2.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - ecu2",
+      "en": "Continental Ecuador: Ecuador Continental - ecu2"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 863,
+    "height": 568,
+    "sizeBytes": 142063,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "ecu2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/ecu2.jpg"
+  },
+  {
+    "id": "dest_img_196",
+    "filename": "ecu3.jpg",
+    "url": "/images/destinations/amazonia/ecu3.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - ecu3",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - ecu3"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 996,
+    "height": 568,
+    "sizeBytes": 184274,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "ecu3.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/ecu3.jpg"
+  },
+  {
+    "id": "dest_img_197",
+    "filename": "ecu5.jpg",
+    "url": "/images/destinations/ecuador-continental/ecu5.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - ecu5",
+      "en": "Continental Ecuador: Ecuador Continental - ecu5"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 925,
+    "height": 568,
+    "sizeBytes": 113691,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "ecu5.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/ecu5.jpg"
+  },
+  {
+    "id": "dest_img_198",
+    "filename": "ecu6.jpg",
+    "url": "/images/destinations/ecuador-continental/ecu6.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - ecu6",
+      "en": "Continental Ecuador: Ecuador Continental - ecu6"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 430,
+    "height": 568,
+    "sizeBytes": 69875,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "ecu6.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/ecu6.jpg"
+  },
+  {
+    "id": "dest_img_199",
+    "filename": "fascinante-vista-machu-picchu-cubierta-nubes.jpg",
+    "url": "/images/destinations/peru/fascinante-vista-machu-picchu-cubierta-nubes.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - fascinante vista machu picchu cubierta nubes",
+      "en": "Peru: Machu Picchu - fascinante vista machu picchu cubierta nubes"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 1080,
+    "height": 717,
+    "sizeBytes": 102688,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fascinante-vista-machu-picchu-cubierta-nubes.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fascinante-vista-machu-picchu-cubierta-nubes.jpg"
+  },
+  {
+    "id": "dest_img_200",
+    "filename": "fotos_optional-01.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-01.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 01",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 01"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 973,
+    "height": 569,
+    "sizeBytes": 136929,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-01.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-01.jpg"
+  },
+  {
+    "id": "dest_img_201",
+    "filename": "fotos_optional-02.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-02.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 02",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 02"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 522,
+    "height": 568,
+    "sizeBytes": 59389,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-02.jpg"
+  },
+  {
+    "id": "dest_img_202",
+    "filename": "fotos_optional-03.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-03.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 03",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 03"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 978,
+    "height": 568,
+    "sizeBytes": 92015,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-03.jpg"
+  },
+  {
+    "id": "dest_img_203",
+    "filename": "fotos_optional-04.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-04.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 04",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 04"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 519,
+    "height": 569,
+    "sizeBytes": 95527,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-04.jpg"
+  },
+  {
+    "id": "dest_img_204",
+    "filename": "fotos_optional-05.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-05.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 05",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 05"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 978,
+    "height": 568,
+    "sizeBytes": 120417,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-05.jpg"
+  },
+  {
+    "id": "dest_img_205",
+    "filename": "fotos_optional-06.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-06.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 06",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 06"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 521,
+    "height": 567,
+    "sizeBytes": 69035,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-06.jpg"
+  },
+  {
+    "id": "dest_img_206",
+    "filename": "fotos_optional-07.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-07.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 07",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 07"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 970,
+    "height": 567,
+    "sizeBytes": 193165,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-07.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-07.jpg"
+  },
+  {
+    "id": "dest_img_207",
+    "filename": "fotos_optional-08.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-08.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 08",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 08"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 521,
+    "height": 568,
+    "sizeBytes": 51752,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-08.jpg"
+  },
+  {
+    "id": "dest_img_208",
+    "filename": "fotos_optional-09.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-09.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 09",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 09"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 974,
+    "height": 568,
+    "sizeBytes": 85755,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-09.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-09.jpg"
+  },
+  {
+    "id": "dest_img_209",
+    "filename": "fotos_optional-10.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-10.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 10",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 10"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 518,
+    "height": 564,
+    "sizeBytes": 88058,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-10.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-10.jpg"
+  },
+  {
+    "id": "dest_img_210",
+    "filename": "fotos_optional-11.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-11.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 11",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 11"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 978,
+    "height": 569,
+    "sizeBytes": 105316,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-11.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-11.jpg"
+  },
+  {
+    "id": "dest_img_211",
+    "filename": "fotos_optional-12.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-12.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 12",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 12"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 520,
+    "height": 567,
+    "sizeBytes": 67861,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-12.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-12.jpg"
+  },
+  {
+    "id": "dest_img_212",
+    "filename": "fotos_optional-13.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-13.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 13",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 13"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 978,
+    "height": 568,
+    "sizeBytes": 103458,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-13.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-13.jpg"
+  },
+  {
+    "id": "dest_img_213",
+    "filename": "fotos_optional-14.jpg",
+    "url": "/images/destinations/amazonia/fotos_optional-14.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - fotos optional 14",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - fotos optional 14"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 521,
+    "height": 568,
+    "sizeBytes": 73933,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "fotos_optional-14.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/fotos_optional-14.jpg"
+  },
+  {
+    "id": "dest_img_214",
+    "filename": "gal1.jpg",
+    "url": "/images/destinations/galapagos/gal1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - gal1",
+      "en": "Galapagos: Islas Galápagos - gal1"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 852,
+    "height": 568,
+    "sizeBytes": 52390,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gal1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/gal1.jpg"
+  },
+  {
+    "id": "dest_img_215",
+    "filename": "gal2.jpg",
+    "url": "/images/destinations/galapagos/gal2.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - gal2",
+      "en": "Galapagos: Islas Galápagos - gal2"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Islas Galápagos)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 327,
+    "height": 568,
+    "sizeBytes": 18158,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gal2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/gal2.jpg"
+  },
+  {
+    "id": "dest_img_216",
+    "filename": "gal3.jpg",
+    "url": "/images/destinations/galapagos/gal3.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Isabela",
+    "title": {
+      "es": "Galápagos: Isla Isabela - gal3",
+      "en": "Galapagos: Isla Isabela - gal3"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Isabela)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Isabela"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 757,
+    "height": 568,
+    "sizeBytes": 64543,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gal3.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/gal3.jpg"
+  },
+  {
+    "id": "dest_img_217",
+    "filename": "gal4.jpg",
+    "url": "/images/destinations/galapagos/gal4.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Isabela",
+    "title": {
+      "es": "Galápagos: Isla Isabela - gal4",
+      "en": "Galapagos: Isla Isabela - gal4"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Isabela)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Isabela"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 453,
+    "height": 568,
+    "sizeBytes": 56028,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gal4.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/gal4.jpg"
+  },
+  {
+    "id": "dest_img_218",
+    "filename": "gal5.jpg",
+    "url": "/images/destinations/galapagos/gal5.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Isabela",
+    "title": {
+      "es": "Galápagos: Isla Isabela - gal5",
+      "en": "Galapagos: Isla Isabela - gal5"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Isabela)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Isabela"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 852,
+    "height": 568,
+    "sizeBytes": 103370,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gal5.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/gal5.jpg"
+  },
+  {
+    "id": "dest_img_219",
+    "filename": "gal6.jpg",
+    "url": "/images/destinations/galapagos/gal6.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Isabela",
+    "title": {
+      "es": "Galápagos: Isla Isabela - gal6",
+      "en": "Galapagos: Isla Isabela - gal6"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Isabela)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Isabela"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 321,
+    "height": 568,
+    "sizeBytes": 56463,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gal6.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/gal6.jpg"
+  },
+  {
+    "id": "dest_img_220",
+    "filename": "gal7.jpg",
+    "url": "/images/destinations/galapagos/gal7.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - gal7",
+      "en": "Galapagos: Isla Santa Cruz - gal7"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 852,
+    "height": 568,
+    "sizeBytes": 85940,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gal7.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/gal7.jpg"
+  },
+  {
+    "id": "dest_img_221",
+    "filename": "gal8.jpg",
+    "url": "/images/destinations/galapagos/gal8.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - gal8",
+      "en": "Galapagos: Isla Santa Cruz - gal8"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 501,
+    "height": 568,
+    "sizeBytes": 94300,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gal8.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/gal8.jpg"
+  },
+  {
+    "id": "dest_img_222",
+    "filename": "galatoursopt-01.jpg",
+    "url": "/images/destinations/galapagos/galatoursopt-01.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - galatoursopt 01",
+      "en": "Galapagos: Isla Santa Cruz - galatoursopt 01"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 978,
+    "height": 568,
+    "sizeBytes": 88805,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "galatoursopt-01.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/galatoursopt-01.jpg"
+  },
+  {
+    "id": "dest_img_223",
+    "filename": "galatoursopt-02.jpg",
+    "url": "/images/destinations/galapagos/galatoursopt-02.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - galatoursopt 02",
+      "en": "Galapagos: Isla Santa Cruz - galatoursopt 02"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 521,
+    "height": 567,
+    "sizeBytes": 45197,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "galatoursopt-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/galatoursopt-02.jpg"
+  },
+  {
+    "id": "dest_img_224",
+    "filename": "galatoursopt-03.jpg",
+    "url": "/images/destinations/galapagos/galatoursopt-03.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - galatoursopt 03",
+      "en": "Galapagos: Isla Santa Cruz - galatoursopt 03"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 978,
+    "height": 568,
+    "sizeBytes": 127077,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "galatoursopt-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/galatoursopt-03.jpg"
+  },
+  {
+    "id": "dest_img_225",
+    "filename": "galatoursopt-04.jpg",
+    "url": "/images/destinations/galapagos/galatoursopt-04.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - galatoursopt 04",
+      "en": "Galapagos: Isla Santa Cruz - galatoursopt 04"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 522,
+    "height": 567,
+    "sizeBytes": 49373,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "galatoursopt-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/galatoursopt-04.jpg"
+  },
+  {
+    "id": "dest_img_226",
+    "filename": "galatoursopt-05.jpg",
+    "url": "/images/destinations/galapagos/galatoursopt-05.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - galatoursopt 05",
+      "en": "Galapagos: Isla Santa Cruz - galatoursopt 05"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 979,
+    "height": 567,
+    "sizeBytes": 99739,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "galatoursopt-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/galatoursopt-05.jpg"
+  },
+  {
+    "id": "dest_img_227",
+    "filename": "galatoursopt-06.jpg",
+    "url": "/images/destinations/galapagos/galatoursopt-06.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - galatoursopt 06",
+      "en": "Galapagos: Isla Santa Cruz - galatoursopt 06"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 521,
+    "height": 568,
+    "sizeBytes": 52128,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "galatoursopt-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/galatoursopt-06.jpg"
+  },
+  {
+    "id": "dest_img_228",
+    "filename": "galatoursopt-07.jpg",
+    "url": "/images/destinations/galapagos/galatoursopt-07.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - galatoursopt 07",
+      "en": "Galapagos: Isla Santa Cruz - galatoursopt 07"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 978,
+    "height": 568,
+    "sizeBytes": 150812,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "galatoursopt-07.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/galatoursopt-07.jpg"
+  },
+  {
+    "id": "dest_img_229",
+    "filename": "galatoursopt-08.jpg",
+    "url": "/images/destinations/galapagos/galatoursopt-08.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - galatoursopt 08",
+      "en": "Galapagos: Isla Santa Cruz - galatoursopt 08"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Santa Cruz)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 521,
+    "height": 567,
+    "sizeBytes": 55212,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "galatoursopt-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/galatoursopt-08.jpg"
+  },
+  {
+    "id": "dest_img_230",
+    "filename": "imgbanner-01.jpg",
+    "url": "/images/destinations/ecuador-continental/imgbanner-01.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Laguna del Quilotoa",
+    "title": {
+      "es": "Ecuador Continental: Laguna del Quilotoa - imgbanner 01",
+      "en": "Continental Ecuador: Laguna del Quilotoa - imgbanner 01"
+    },
+    "alt": {
+      "es": "Laguna turquesa en el cráter del volcán Quilotoa, Andes ecuatorianos",
+      "en": "Highland destination and scenic landscapes of Ecuador in Laguna del Quilotoa"
+    },
+    "tags": [
+      "quilotoa",
+      "crater",
+      "laguna-turquesa",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 213431,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "imgbanner-01.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/imgbanner-01.jpg"
+  },
+  {
+    "id": "dest_img_231",
+    "filename": "imgbanner-02.jpg",
+    "url": "/images/destinations/galapagos/imgbanner-02.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - imgbanner 02",
+      "en": "Galapagos: Islas Galápagos - imgbanner 02"
+    },
+    "alt": {
+      "es": "Islote volcánico poblado de lobos marinos y aves en Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos"
+    },
+    "tags": [
+      "fauna",
+      "lobos-marinos",
+      "aves-marinas",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 228136,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "imgbanner-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/imgbanner-02.jpg"
+  },
+  {
+    "id": "dest_img_232",
+    "filename": "imgbanner-03.jpg",
+    "url": "/images/destinations/galapagos/imgbanner-03.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz - Las Grietas",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - Las Grietas - imgbanner 03",
+      "en": "Galapagos: Isla Santa Cruz - Las Grietas - imgbanner 03"
+    },
+    "alt": {
+      "es": "Fisura volcánica de aguas cristalinas en Las Grietas, Santa Cruz, Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz - Las Grietas"
+    },
+    "tags": [
+      "las-grietas",
+      "santa-cruz",
+      "snorkel",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 193472,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "imgbanner-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/imgbanner-03.jpg"
+  },
+  {
+    "id": "dest_img_233",
+    "filename": "imgbanner-04.jpg",
+    "url": "/images/destinations/peru/imgbanner-04.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Lago Titicaca - Islas de los Uros",
+    "title": {
+      "es": "Perú: Lago Titicaca - Islas de los Uros - imgbanner 04",
+      "en": "Peru: Lago Titicaca - Islas de los Uros - imgbanner 04"
+    },
+    "alt": {
+      "es": "Islas flotantes de los Uros y barcos de totora en el Lago Titicaca, Perú",
+      "en": "Historic heritage and archaeological landscapes of Peru in Lago Titicaca - Islas de los Uros"
+    },
+    "tags": [
+      "titicaca",
+      "uros",
+      "islas-flotantes",
+      "peru",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 353526,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "imgbanner-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/imgbanner-04.jpg"
+  },
+  {
+    "id": "dest_img_234",
+    "filename": "imgbanner-05.jpg",
+    "url": "/images/destinations/amazonia/imgbanner-05.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - imgbanner 05",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - imgbanner 05"
+    },
+    "alt": {
+      "es": "Aventura en la selva: cascadas, comunidad indígena y tubing fluvial",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "cascadas",
+      "comunidad-shuar",
+      "tubing",
+      "amazonia",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 279666,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "imgbanner-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/imgbanner-05.jpg"
+  },
+  {
+    "id": "dest_img_235",
+    "filename": "imgbanner-06.jpg",
+    "url": "/images/destinations/peru/imgbanner-06.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Cusco - Qorikancha",
+    "title": {
+      "es": "Perú: Cusco - Qorikancha - imgbanner 06",
+      "en": "Peru: Cusco - Qorikancha - imgbanner 06"
+    },
+    "alt": {
+      "es": "Templo del Sol Qorikancha y Convento de Santo Domingo iluminado en Cusco",
+      "en": "Historic heritage and archaeological landscapes of Peru in Cusco - Qorikancha"
+    },
+    "tags": [
+      "qorikancha",
+      "santo-domingo",
+      "templo-del-sol",
+      "cusco",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 168450,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "imgbanner-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/imgbanner-06.jpg"
+  },
+  {
+    "id": "dest_img_236",
+    "filename": "imgbanner-07.jpg",
+    "url": "/images/destinations/generales/imgbanner-07.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Rutas Combinadas",
+    "title": {
+      "es": "Vermilion Routes: imgbanner 07",
+      "en": "Vermilion Routes: imgbanner 07"
+    },
+    "alt": {
+      "es": "Combinado Ecuador: pingüinos de Galápagos, nevado andino y cabalgata en Quilotoa",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "pinguinos-galapagos",
+      "volcan-cotopaxi",
+      "quilotoa",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 258451,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "imgbanner-07.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/imgbanner-07.jpg"
+  },
+  {
+    "id": "dest_img_237",
+    "filename": "imgbanner-08.jpg",
+    "url": "/images/destinations/galapagos/imgbanner-08.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Islas Galápagos - Los Túneles",
+    "title": {
+      "es": "Galápagos: Islas Galápagos - Los Túneles - imgbanner 08",
+      "en": "Galapagos: Islas Galápagos - Los Túneles - imgbanner 08"
+    },
+    "alt": {
+      "es": "Buceo y snorkel en cuevas de lava submarinas en Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Islas Galápagos - Los Túneles"
+    },
+    "tags": [
+      "snorkel",
+      "los-tuneles",
+      "vida-marina",
+      "galapagos",
+      "banner"
+    ],
+    "width": 1920,
+    "height": 520,
+    "sizeBytes": 116877,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "imgbanner-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/imgbanner-08.jpg"
+  },
+  {
+    "id": "dest_img_238",
+    "filename": "IMG_20220531_100022.jpg",
+    "url": "/images/destinations/ecuador-continental/IMG_20220531_100022.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quito - Mitad del Mundo",
+    "title": {
+      "es": "Ecuador Continental: Quito - Mitad del Mundo - IMG 20220531 100022",
+      "en": "Continental Ecuador: Quito - Mitad del Mundo - IMG 20220531 100022"
+    },
+    "alt": {
+      "es": "Grupo de viajeros en el Museo Intiñán, Mitad del Mundo, Quito",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quito - Mitad del Mundo"
+    },
+    "tags": [
+      "quito",
+      "mitad-del-mundo",
+      "cultura",
+      "llama"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 159123,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20220531_100022.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20220531_100022.jpg"
+  },
+  {
+    "id": "dest_img_239",
+    "filename": "IMG_20220602_182009.jpg",
+    "url": "/images/destinations/galapagos/IMG_20220602_182009.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Isabela",
+    "title": {
+      "es": "Galápagos: Isla Isabela - IMG 20220602 182009",
+      "en": "Galapagos: Isla Isabela - IMG 20220602 182009"
+    },
+    "alt": {
+      "es": "Grupo de viajeros en las letras de Galápagos Isabela al atardecer",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Isabela"
+    },
+    "tags": [
+      "isla-isabela",
+      "playa",
+      "atardecer",
+      "galapagos"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 65026,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20220602_182009.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20220602_182009.jpg"
+  },
+  {
+    "id": "dest_img_240",
+    "filename": "IMG_20230125_152231.jpg",
+    "url": "/images/destinations/amazonia/IMG_20230125_152231.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía - Río Napo / Tena",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía - Río Napo / Tena - IMG 20230125 152231",
+      "en": "Ecuadorian Amazon: Amazonía - Río Napo / Tena - IMG 20230125 152231"
+    },
+    "alt": {
+      "es": "Tubing en río amazónico con guía nativo en la Amazonía ecuatoriana",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía - Río Napo / Tena)"
+    },
+    "tags": [
+      "tubing",
+      "rio-amazonico",
+      "aventura",
+      "selva"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 151108,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230125_152231.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20230125_152231.jpg"
+  },
+  {
+    "id": "dest_img_241",
+    "filename": "IMG_20230609_114913-2.jpg",
+    "url": "/images/destinations/ecuador-continental/IMG_20230609_114913-2.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Cotopaxi - Laguna Limpiopungo",
+    "title": {
+      "es": "Ecuador Continental: Cotopaxi - Laguna Limpiopungo - IMG 20230609 114913 2",
+      "en": "Continental Ecuador: Cotopaxi - Laguna Limpiopungo - IMG 20230609 114913 2"
+    },
+    "alt": {
+      "es": "Viajeros de Vermilion Routes en la Laguna de Limpiopungo, Cotopaxi",
+      "en": "Highland destination and scenic landscapes of Ecuador in Cotopaxi - Laguna Limpiopungo"
+    },
+    "tags": [
+      "cotopaxi",
+      "limpiopungo",
+      "laguna",
+      "testimonios"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 118366,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230609_114913-2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20230609_114913-2.jpg"
+  },
+  {
+    "id": "dest_img_242",
+    "filename": "IMG_20230610_130350-1.jpg",
+    "url": "/images/destinations/amazonia/IMG_20230610_130350-1.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - IMG 20230610 130350 1",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - IMG 20230610 130350 1"
+    },
+    "alt": {
+      "es": "Viajeros participando en baile tradicional amazónico con faldas de paja",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "danza",
+      "tradicion",
+      "selva",
+      "vestimenta-tipica"
+    ],
+    "width": 486,
+    "height": 1080,
+    "sizeBytes": 126947,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230610_130350-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20230610_130350-1.jpg"
+  },
+  {
+    "id": "dest_img_243",
+    "filename": "IMG_20230610_130537.jpg",
+    "url": "/images/destinations/amazonia/IMG_20230610_130537.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - IMG 20230610 130537",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - IMG 20230610 130537"
+    },
+    "alt": {
+      "es": "Danza festiva con la comunidad indígena de la selva ecuatoriana",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "danza",
+      "cultura",
+      "selva",
+      "puyo-tena"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 167261,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230610_130537.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20230610_130537.jpg"
+  },
+  {
+    "id": "dest_img_244",
+    "filename": "IMG_20230612_173039-1.jpg",
+    "url": "/images/destinations/galapagos/IMG_20230612_173039-1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz - Tierras Altas",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - Tierras Altas - IMG 20230612 173039 1",
+      "en": "Galapagos: Isla Santa Cruz - Tierras Altas - IMG 20230612 173039 1"
+    },
+    "alt": {
+      "es": "Viajeros observando una tortuga gigante en su hábitat natural, Santa Cruz",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz - Tierras Altas"
+    },
+    "tags": [
+      "tortuga-gigante",
+      "santa-cruz",
+      "fauna",
+      "galapagos"
+    ],
+    "width": 486,
+    "height": 1080,
+    "sizeBytes": 169005,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230612_173039-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20230612_173039-1.jpg"
+  },
+  {
+    "id": "dest_img_245",
+    "filename": "IMG_20230612_173214.jpg",
+    "url": "/images/destinations/galapagos/IMG_20230612_173214.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz - Tierras Altas",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - Tierras Altas - IMG 20230612 173214",
+      "en": "Galapagos: Isla Santa Cruz - Tierras Altas - IMG 20230612 173214"
+    },
+    "alt": {
+      "es": "Tortuga gigante de Galápagos alimentándose en la reserva natural",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz - Tierras Altas"
+    },
+    "tags": [
+      "tortuga-gigante",
+      "fauna",
+      "galapagos"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 162756,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230612_173214.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20230612_173214.jpg"
+  },
+  {
+    "id": "dest_img_246",
+    "filename": "IMG_20230612_174104-1.jpg",
+    "url": "/images/destinations/galapagos/IMG_20230612_174104-1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz - Tierras Altas",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - Tierras Altas - IMG 20230612 174104 1",
+      "en": "Galapagos: Isla Santa Cruz - Tierras Altas - IMG 20230612 174104 1"
+    },
+    "alt": {
+      "es": "Encuentro cercano con tortuga gigante en Santa Cruz, Galápagos",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz - Tierras Altas"
+    },
+    "tags": [
+      "tortuga-gigante",
+      "santa-cruz",
+      "galapagos"
+    ],
+    "width": 1080,
+    "height": 486,
+    "sizeBytes": 194048,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230612_174104-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20230612_174104-1.jpg"
+  },
+  {
+    "id": "dest_img_247",
+    "filename": "IMG_20230612_175122-1.jpg",
+    "url": "/images/destinations/galapagos/IMG_20230612_175122-1.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Santa Cruz - Tierras Altas",
+    "title": {
+      "es": "Galápagos: Isla Santa Cruz - Tierras Altas - IMG 20230612 175122 1",
+      "en": "Galapagos: Isla Santa Cruz - Tierras Altas - IMG 20230612 175122 1"
+    },
+    "alt": {
+      "es": "Tortuga gigante de Galápagos caminando por sendero de la reserva",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Santa Cruz - Tierras Altas"
+    },
+    "tags": [
+      "tortuga-gigante",
+      "fauna",
+      "galapagos"
+    ],
+    "width": 486,
+    "height": 1080,
+    "sizeBytes": 191240,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "IMG_20230612_175122-1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/IMG_20230612_175122-1.jpg"
+  },
+  {
+    "id": "dest_img_248",
+    "filename": "lagotiticaca-300x195.jpg",
+    "url": "/images/destinations/peru/lagotiticaca-300x195.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Lago Titicaca / Puno",
+    "title": {
+      "es": "Perú: Lago Titicaca / Puno - lagotiticaca",
+      "en": "Peru: Lago Titicaca / Puno - lagotiticaca"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Lago Titicaca / Puno)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Lago Titicaca / Puno"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 16707,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "lagotiticaca.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/lagotiticaca-300x195.jpg"
+  },
+  {
+    "id": "dest_img_249",
+    "filename": "lagotiticaca-768x498.jpg",
+    "url": "/images/destinations/peru/lagotiticaca-768x498.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Lago Titicaca / Puno",
+    "title": {
+      "es": "Perú: Lago Titicaca / Puno - lagotiticaca",
+      "en": "Peru: Lago Titicaca / Puno - lagotiticaca"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Lago Titicaca / Puno)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Lago Titicaca / Puno"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 85505,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "lagotiticaca.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/lagotiticaca-768x498.jpg"
+  },
+  {
+    "id": "dest_img_250",
+    "filename": "lagotiticaca.jpg",
+    "url": "/images/destinations/peru/lagotiticaca.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Lago Titicaca / Puno",
+    "title": {
+      "es": "Perú: Lago Titicaca / Puno - lagotiticaca",
+      "en": "Peru: Lago Titicaca / Puno - lagotiticaca"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Lago Titicaca / Puno)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Lago Titicaca / Puno"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 110236,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "lagotiticaca.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/lagotiticaca.jpg"
+  },
+  {
+    "id": "dest_img_251",
+    "filename": "logo_ecuador-300x202.png",
+    "url": "/images/destinations/generales/logo_ecuador-300x202.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: logo ecuador",
+      "en": "Vermilion Routes: logo ecuador"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: logo_ecuador-300x202.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 300,
+    "height": 202,
+    "sizeBytes": 8624,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x202",
+    "baseOriginalFilename": "logo_ecuador.png",
+    "originalWpPath": "wp-content/uploads/2023/09/logo_ecuador-300x202.png"
+  },
+  {
+    "id": "dest_img_252",
+    "filename": "logo_ecuador.png",
+    "url": "/images/destinations/generales/logo_ecuador.png",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "Branding & UI",
+    "title": {
+      "es": "Vermilion Routes: logo ecuador",
+      "en": "Vermilion Routes: logo ecuador"
+    },
+    "alt": {
+      "es": "Elemento gráfico de marca Vermilion Routes: logo_ecuador.png",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "branding",
+      "ui-element"
+    ],
+    "width": 409,
+    "height": 276,
+    "sizeBytes": 8758,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "logo_ecuador.png",
+    "originalWpPath": "wp-content/uploads/2023/09/logo_ecuador.png"
+  },
+  {
+    "id": "dest_img_253",
+    "filename": "machu-picchu-patrimonio-humanidad-unesco.jpg",
+    "url": "/images/destinations/peru/machu-picchu-patrimonio-humanidad-unesco.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - machu picchu patrimonio humanidad unesco",
+      "en": "Peru: Machu Picchu - machu picchu patrimonio humanidad unesco"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 720,
+    "height": 1080,
+    "sizeBytes": 210304,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "machu-picchu-patrimonio-humanidad-unesco.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/machu-picchu-patrimonio-humanidad-unesco.jpg"
+  },
+  {
+    "id": "dest_img_254",
+    "filename": "manager1-258x300.jpg",
+    "url": "/images/destinations/generales/manager1-258x300.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "General Vermilion",
+    "title": {
+      "es": "Vermilion Routes: manager1",
+      "en": "Vermilion Routes: manager1"
+    },
+    "alt": {
+      "es": "Imagen turística de Vermilion Routes",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "general",
+      "turismo",
+      "vermilion-routes"
+    ],
+    "width": 258,
+    "height": 300,
+    "sizeBytes": 16774,
+    "isThumbnail": true,
+    "thumbnailDimensions": "258x300",
+    "baseOriginalFilename": "manager1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/manager1-258x300.jpg"
+  },
+  {
+    "id": "dest_img_255",
+    "filename": "manager1-768x895.jpg",
+    "url": "/images/destinations/generales/manager1-768x895.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "General Vermilion",
+    "title": {
+      "es": "Vermilion Routes: manager1",
+      "en": "Vermilion Routes: manager1"
+    },
+    "alt": {
+      "es": "Imagen turística de Vermilion Routes",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "general",
+      "turismo",
+      "vermilion-routes"
+    ],
+    "width": 768,
+    "height": 895,
+    "sizeBytes": 113777,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x895",
+    "baseOriginalFilename": "manager1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/manager1-768x895.jpg"
+  },
+  {
+    "id": "dest_img_256",
+    "filename": "manager1.jpg",
+    "url": "/images/destinations/generales/manager1.jpg",
+    "destination": "generales",
+    "destinationName": {
+      "es": "Generales y Branding",
+      "en": "General & Branding"
+    },
+    "region": "General Vermilion",
+    "title": {
+      "es": "Vermilion Routes: manager1",
+      "en": "Vermilion Routes: manager1"
+    },
+    "alt": {
+      "es": "Imagen turística de Vermilion Routes",
+      "en": "Brand identity and multimedia resource of Vermilion South American Routes"
+    },
+    "tags": [
+      "general",
+      "turismo",
+      "vermilion-routes"
+    ],
+    "width": 824,
+    "height": 960,
+    "sizeBytes": 133604,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "manager1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/manager1.jpg"
+  },
+  {
+    "id": "dest_img_257",
+    "filename": "nrew-01-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-01-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 01",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 01"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 120061,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-01.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-01-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_258",
+    "filename": "nrew-01-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-01-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 01",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 01"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 13523,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-01.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-01-300x186.jpg"
+  },
+  {
+    "id": "dest_img_259",
+    "filename": "nrew-01-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-01-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 01",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 01"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 71058,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-01.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-01-768x475.jpg"
+  },
+  {
+    "id": "dest_img_260",
+    "filename": "nrew-01.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-01.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 01",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 01"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 178854,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-01.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-01.jpg"
+  },
+  {
+    "id": "dest_img_261",
+    "filename": "nrew-02-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-02-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 02",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 02"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 99191,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-02-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_262",
+    "filename": "nrew-02-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-02-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 02",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 02"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 13313,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-02-300x186.jpg"
+  },
+  {
+    "id": "dest_img_263",
+    "filename": "nrew-02-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-02-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 02",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 02"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 61713,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-02-768x475.jpg"
+  },
+  {
+    "id": "dest_img_264",
+    "filename": "nrew-02.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-02.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 02",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 02"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 137709,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-02.jpg"
+  },
+  {
+    "id": "dest_img_265",
+    "filename": "nrew-03-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-03-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 03",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 03"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 116932,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-03-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_266",
+    "filename": "nrew-03-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-03-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 03",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 03"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 15109,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-03-300x186.jpg"
+  },
+  {
+    "id": "dest_img_267",
+    "filename": "nrew-03-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-03-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 03",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 03"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 73555,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-03-768x475.jpg"
+  },
+  {
+    "id": "dest_img_268",
+    "filename": "nrew-03.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-03.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Baños de Agua Santa",
+    "title": {
+      "es": "Ecuador Continental: Baños de Agua Santa - nrew 03",
+      "en": "Continental Ecuador: Baños de Agua Santa - nrew 03"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Baños de Agua Santa)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Baños de Agua Santa"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 160761,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-03.jpg"
+  },
+  {
+    "id": "dest_img_269",
+    "filename": "nrew-04-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-04-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 04",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 04"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 75448,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-04-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_270",
+    "filename": "nrew-04-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-04-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 04",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 04"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 11438,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-04-300x186.jpg"
+  },
+  {
+    "id": "dest_img_271",
+    "filename": "nrew-04-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-04-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 04",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 04"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 47723,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-04-768x475.jpg"
+  },
+  {
+    "id": "dest_img_272",
+    "filename": "nrew-04.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-04.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Cotopaxi",
+    "title": {
+      "es": "Ecuador Continental: Cotopaxi - nrew 04",
+      "en": "Continental Ecuador: Cotopaxi - nrew 04"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Cotopaxi)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Cotopaxi"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 107025,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-04.jpg"
+  },
+  {
+    "id": "dest_img_273",
+    "filename": "nrew-05-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-05-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 05",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 05"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 159686,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-05-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_274",
+    "filename": "nrew-05-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-05-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 05",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 05"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 19741,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-05-300x186.jpg"
+  },
+  {
+    "id": "dest_img_275",
+    "filename": "nrew-05-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-05-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 05",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 05"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 101071,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-05-768x475.jpg"
+  },
+  {
+    "id": "dest_img_276",
+    "filename": "nrew-05.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-05.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Otavalo",
+    "title": {
+      "es": "Ecuador Continental: Otavalo - nrew 05",
+      "en": "Continental Ecuador: Otavalo - nrew 05"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Otavalo)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Otavalo"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 218235,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-05.jpg"
+  },
+  {
+    "id": "dest_img_277",
+    "filename": "nrew-06-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-06-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 06",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 06"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 143680,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-06-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_278",
+    "filename": "nrew-06-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-06-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 06",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 06"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 17309,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-06-300x186.jpg"
+  },
+  {
+    "id": "dest_img_279",
+    "filename": "nrew-06-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-06-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 06",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 06"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 87467,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-06-768x475.jpg"
+  },
+  {
+    "id": "dest_img_280",
+    "filename": "nrew-06.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-06.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 06",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 06"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 212291,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-06.jpg"
+  },
+  {
+    "id": "dest_img_281",
+    "filename": "nrew-07-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-07-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 07",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 07"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 205997,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-07.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-07-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_282",
+    "filename": "nrew-07-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-07-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 07",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 07"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 19079,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-07.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-07-300x186.jpg"
+  },
+  {
+    "id": "dest_img_283",
+    "filename": "nrew-07-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-07-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 07",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 07"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 121993,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-07.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-07-768x475.jpg"
+  },
+  {
+    "id": "dest_img_284",
+    "filename": "nrew-07.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-07.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 07",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 07"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 311546,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-07.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-07.jpg"
+  },
+  {
+    "id": "dest_img_285",
+    "filename": "nrew-08-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-08-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 08",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 08"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 146701,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-08-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_286",
+    "filename": "nrew-08-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-08-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 08",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 08"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 15821,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-08-300x186.jpg"
+  },
+  {
+    "id": "dest_img_287",
+    "filename": "nrew-08-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-08-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 08",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 08"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 87610,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-08-768x475.jpg"
+  },
+  {
+    "id": "dest_img_288",
+    "filename": "nrew-08.jpg",
+    "url": "/images/destinations/amazonia/nrew-08.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Parque Nacional Yasuní",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Parque Nacional Yasuní - nrew 08",
+      "en": "Ecuadorian Amazon: Parque Nacional Yasuní - nrew 08"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Parque Nacional Yasuní)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Parque Nacional Yasuní)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 217898,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-08.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-08.jpg"
+  },
+  {
+    "id": "dest_img_289",
+    "filename": "nrew-09-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-09-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 09",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 09"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 179106,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-09.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-09-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_290",
+    "filename": "nrew-09-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-09-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 09",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 09"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 18889,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-09.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-09-300x186.jpg"
+  },
+  {
+    "id": "dest_img_291",
+    "filename": "nrew-09-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-09-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 09",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 09"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 106745,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-09.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-09-768x475.jpg"
+  },
+  {
+    "id": "dest_img_292",
+    "filename": "nrew-09.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-09.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 09",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 09"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 271615,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-09.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-09.jpg"
+  },
+  {
+    "id": "dest_img_293",
+    "filename": "nrew-10-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-10-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 10",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 10"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 105809,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-10.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-10-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_294",
+    "filename": "nrew-10-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-10-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 10",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 10"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 11339,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-10.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-10-300x186.jpg"
+  },
+  {
+    "id": "dest_img_295",
+    "filename": "nrew-10-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-10-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 10",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 10"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 62780,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-10.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-10-768x475.jpg"
+  },
+  {
+    "id": "dest_img_296",
+    "filename": "nrew-10.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-10.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 10",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 10"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 157263,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-10.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-10.jpg"
+  },
+  {
+    "id": "dest_img_297",
+    "filename": "nrew-11-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-11-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 11",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 11"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 140508,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-11.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-11-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_298",
+    "filename": "nrew-11-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-11-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 11",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 11"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 16172,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-11.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-11-300x186.jpg"
+  },
+  {
+    "id": "dest_img_299",
+    "filename": "nrew-11-768x475.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-11-768x475.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 11",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 11"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 768,
+    "height": 475,
+    "sizeBytes": 84200,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x475",
+    "baseOriginalFilename": "nrew-11.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-11-768x475.jpg"
+  },
+  {
+    "id": "dest_img_300",
+    "filename": "nrew-11.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-11.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Quilotoa",
+    "title": {
+      "es": "Ecuador Continental: Quilotoa - nrew 11",
+      "en": "Continental Ecuador: Quilotoa - nrew 11"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Quilotoa)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Quilotoa"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 208624,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-11.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-11.jpg"
+  },
+  {
+    "id": "dest_img_301",
+    "filename": "nrew-12-1024x633.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-12-1024x633.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 12",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 12"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1024,
+    "height": 633,
+    "sizeBytes": 106729,
+    "isThumbnail": true,
+    "thumbnailDimensions": "1024x633",
+    "baseOriginalFilename": "nrew-12.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-12-1024x633.jpg"
+  },
+  {
+    "id": "dest_img_302",
+    "filename": "nrew-12-300x186.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-12-300x186.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Ecuador Continental",
+    "title": {
+      "es": "Ecuador Continental: Ecuador Continental - nrew 12",
+      "en": "Continental Ecuador: Ecuador Continental - nrew 12"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Ecuador Continental)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Ecuador Continental"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 300,
+    "height": 186,
+    "sizeBytes": 16317,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x186",
+    "baseOriginalFilename": "nrew-12.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-12-300x186.jpg"
+  },
+  {
+    "id": "dest_img_303",
+    "filename": "nrew-12.jpg",
+    "url": "/images/destinations/ecuador-continental/nrew-12.jpg",
+    "destination": "ecuador-continental",
+    "destinationName": {
+      "es": "Ecuador Continental",
+      "en": "Continental Ecuador"
+    },
+    "region": "Cuenca",
+    "title": {
+      "es": "Ecuador Continental: Cuenca - nrew 12",
+      "en": "Continental Ecuador: Cuenca - nrew 12"
+    },
+    "alt": {
+      "es": "Atracción turística de Ecuador Continental (Cuenca)",
+      "en": "Highland destination and scenic landscapes of Ecuador in Cuenca"
+    },
+    "tags": [
+      "ecuador-continental",
+      "andes",
+      "volcanes",
+      "cultura"
+    ],
+    "width": 1200,
+    "height": 742,
+    "sizeBytes": 140479,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "nrew-12.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/nrew-12.jpg"
+  },
+  {
+    "id": "dest_img_304",
+    "filename": "paracas-300x195.jpg",
+    "url": "/images/destinations/peru/paracas-300x195.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - paracas",
+      "en": "Peru: Perú - paracas"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 16026,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "paracas.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/paracas-300x195.jpg"
+  },
+  {
+    "id": "dest_img_305",
+    "filename": "paracas-768x498.jpg",
+    "url": "/images/destinations/peru/paracas-768x498.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - paracas",
+      "en": "Peru: Perú - paracas"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 78875,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "paracas.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/paracas-768x498.jpg"
+  },
+  {
+    "id": "dest_img_306",
+    "filename": "paracas.jpg",
+    "url": "/images/destinations/peru/paracas.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - paracas",
+      "en": "Peru: Perú - paracas"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 102171,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "paracas.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/paracas.jpg"
+  },
+  {
+    "id": "dest_img_307",
+    "filename": "per1.jpg",
+    "url": "/images/destinations/peru/per1.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - per1",
+      "en": "Peru: Machu Picchu - per1"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 951,
+    "height": 568,
+    "sizeBytes": 123016,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "per1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/per1.jpg"
+  },
+  {
+    "id": "dest_img_308",
+    "filename": "per2.jpg",
+    "url": "/images/destinations/peru/per2.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - per2",
+      "en": "Peru: Machu Picchu - per2"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 472,
+    "height": 568,
+    "sizeBytes": 69464,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "per2.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/per2.jpg"
+  },
+  {
+    "id": "dest_img_309",
+    "filename": "per3.jpg",
+    "url": "/images/destinations/peru/per3.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Machu Picchu",
+    "title": {
+      "es": "Perú: Machu Picchu - per3",
+      "en": "Peru: Machu Picchu - per3"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Machu Picchu)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Machu Picchu"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 914,
+    "height": 568,
+    "sizeBytes": 111204,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "per3.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/per3.jpg"
+  },
+  {
+    "id": "dest_img_310",
+    "filename": "peru1-02.jpg",
+    "url": "/images/destinations/peru/peru1-02.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - peru1 02",
+      "en": "Peru: Perú - peru1 02"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 1007,
+    "height": 566,
+    "sizeBytes": 137574,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "peru1-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/peru1-02.jpg"
+  },
+  {
+    "id": "dest_img_311",
+    "filename": "peru1-03.jpg",
+    "url": "/images/destinations/peru/peru1-03.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - peru1 03",
+      "en": "Peru: Perú - peru1 03"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 520,
+    "height": 568,
+    "sizeBytes": 93273,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "peru1-03.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/peru1-03.jpg"
+  },
+  {
+    "id": "dest_img_312",
+    "filename": "peru1-04.jpg",
+    "url": "/images/destinations/peru/peru1-04.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - peru1 04",
+      "en": "Peru: Perú - peru1 04"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 1008,
+    "height": 566,
+    "sizeBytes": 152921,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "peru1-04.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/peru1-04.jpg"
+  },
+  {
+    "id": "dest_img_313",
+    "filename": "peru1-05.jpg",
+    "url": "/images/destinations/peru/peru1-05.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - peru1 05",
+      "en": "Peru: Perú - peru1 05"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 522,
+    "height": 567,
+    "sizeBytes": 105049,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "peru1-05.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/peru1-05.jpg"
+  },
+  {
+    "id": "dest_img_314",
+    "filename": "peru1-06.jpg",
+    "url": "/images/destinations/peru/peru1-06.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - peru1 06",
+      "en": "Peru: Perú - peru1 06"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 978,
+    "height": 566,
+    "sizeBytes": 74027,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "peru1-06.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/peru1-06.jpg"
+  },
+  {
+    "id": "dest_img_315",
+    "filename": "peru1-07.jpg",
+    "url": "/images/destinations/peru/peru1-07.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - peru1 07",
+      "en": "Peru: Perú - peru1 07"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 521,
+    "height": 567,
+    "sizeBytes": 86623,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "peru1-07.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/peru1-07.jpg"
+  },
+  {
+    "id": "dest_img_316",
+    "filename": "peru3-300x195.jpg",
+    "url": "/images/destinations/peru/peru3-300x195.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - peru3",
+      "en": "Peru: Perú - peru3"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 300,
+    "height": 195,
+    "sizeBytes": 9664,
+    "isThumbnail": true,
+    "thumbnailDimensions": "300x195",
+    "baseOriginalFilename": "peru3.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/peru3-300x195.jpg"
+  },
+  {
+    "id": "dest_img_317",
+    "filename": "peru3-768x498.jpg",
+    "url": "/images/destinations/peru/peru3-768x498.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - peru3",
+      "en": "Peru: Perú - peru3"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 768,
+    "height": 498,
+    "sizeBytes": 43199,
+    "isThumbnail": true,
+    "thumbnailDimensions": "768x498",
+    "baseOriginalFilename": "peru3.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/peru3-768x498.jpg"
+  },
+  {
+    "id": "dest_img_318",
+    "filename": "peru3.jpg",
+    "url": "/images/destinations/peru/peru3.jpg",
+    "destination": "peru",
+    "destinationName": {
+      "es": "Perú",
+      "en": "Peru"
+    },
+    "region": "Perú",
+    "title": {
+      "es": "Perú: Perú - peru3",
+      "en": "Peru: Perú - peru3"
+    },
+    "alt": {
+      "es": "Destino turístico en Perú (Perú)",
+      "en": "Historic heritage and archaeological landscapes of Peru in Perú"
+    },
+    "tags": [
+      "peru",
+      "cultura-inca",
+      "andes",
+      "arqueologia"
+    ],
+    "width": 848,
+    "height": 550,
+    "sizeBytes": 53795,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "peru3.jpg",
+    "originalWpPath": "wp-content/uploads/2023/09/peru3.jpg"
+  },
+  {
+    "id": "dest_img_319",
+    "filename": "gala1-01.jpg",
+    "url": "/images/destinations/galapagos/gala1-01.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Isabela",
+    "title": {
+      "es": "Galápagos: Isla Isabela - gala1 01",
+      "en": "Galapagos: Isla Isabela - gala1 01"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Isabela)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Isabela"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 1009,
+    "height": 565,
+    "sizeBytes": 93455,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gala1-01.jpg",
+    "originalWpPath": "wp-content/uploads/2023/10/gala1-01.jpg"
+  },
+  {
+    "id": "dest_img_320",
+    "filename": "gala1-02.jpg",
+    "url": "/images/destinations/galapagos/gala1-02.jpg",
+    "destination": "galapagos",
+    "destinationName": {
+      "es": "Islas Galápagos",
+      "en": "Galapagos Islands"
+    },
+    "region": "Isla Isabela",
+    "title": {
+      "es": "Galápagos: Isla Isabela - gala1 02",
+      "en": "Galapagos: Isla Isabela - gala1 02"
+    },
+    "alt": {
+      "es": "Fauna y paisajes de las Islas Galápagos (Isla Isabela)",
+      "en": "Wildlife and volcanic landscapes of the Galapagos Islands in Isla Isabela"
+    },
+    "tags": [
+      "galapagos",
+      "fauna-marina",
+      "islas-encantadas",
+      "unesco",
+      "playas"
+    ],
+    "width": 521,
+    "height": 567,
+    "sizeBytes": 46077,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "gala1-02.jpg",
+    "originalWpPath": "wp-content/uploads/2023/10/gala1-02.jpg"
+  },
+  {
+    "id": "dest_img_321",
+    "filename": "imag1.jpg",
+    "url": "/images/destinations/amazonia/imag1.jpg",
+    "destination": "amazonia",
+    "destinationName": {
+      "es": "Amazonía Ecuatoriana",
+      "en": "Ecuadorian Amazon"
+    },
+    "region": "Amazonía Ecuatoriana",
+    "title": {
+      "es": "Amazonía Ecuatoriana: Amazonía Ecuatoriana - imag1",
+      "en": "Ecuadorian Amazon: Amazonía Ecuatoriana - imag1"
+    },
+    "alt": {
+      "es": "Expedición en la selva de la Amazonía ecuatoriana (Amazonía Ecuatoriana)",
+      "en": "Rainforest biodiversity and jungle expedition in the Ecuadorian Amazon (Amazonía Ecuatoriana)"
+    },
+    "tags": [
+      "amazonia",
+      "selva",
+      "biodiversidad",
+      "rainforest",
+      "ecuador"
+    ],
+    "width": 643,
+    "height": 568,
+    "sizeBytes": 55120,
+    "isThumbnail": false,
+    "thumbnailDimensions": null,
+    "baseOriginalFilename": "imag1.jpg",
+    "originalWpPath": "wp-content/uploads/2023/11/imag1.jpg"
+  }
+];
+
+/**
+ * Filter images by destination category
+ */
+export function getImagesByDestination(category: DestinationCategory, onlyOriginals = true): DestinationImageItem[] {
+  return DESTINATION_IMAGES.filter(img => 
+    img.destination === category && (!onlyOriginals || !img.isThumbnail)
+  );
+}
+
+/**
+ * Find image by filename
+ */
+export function getImageByFilename(filename: string): DestinationImageItem | undefined {
+  return DESTINATION_IMAGES.find(img => img.filename === filename);
+}
+
+/**
+ * Get hero banners for a destination
+ */
+export function getHeroBanners(category?: DestinationCategory): DestinationImageItem[] {
+  return DESTINATION_IMAGES.filter(img => {
+    const isBanner = img.filename.includes('banner') || (img.width && img.width >= 1900);
+    return isBanner && (!category || img.destination === category);
+  });
+}
+
+/**
+ * Get catalog statistics
+ */
+export function getCatalogStats() {
+  return {
+    total: DESTINATION_IMAGES.length,
+    originals: DESTINATION_IMAGES.filter(i => !i.isThumbnail).length,
+    thumbnails: DESTINATION_IMAGES.filter(i => i.isThumbnail).length,
+    byDestination: {
+      galapagos: DESTINATION_IMAGES.filter(i => i.destination === 'galapagos').length,
+      ecuadorContinental: DESTINATION_IMAGES.filter(i => i.destination === 'ecuador-continental').length,
+      amazonia: DESTINATION_IMAGES.filter(i => i.destination === 'amazonia').length,
+      peru: DESTINATION_IMAGES.filter(i => i.destination === 'peru').length,
+      generales: DESTINATION_IMAGES.filter(i => i.destination === 'generales').length,
+    }
+  };
+}
+
+export default DESTINATION_IMAGES;

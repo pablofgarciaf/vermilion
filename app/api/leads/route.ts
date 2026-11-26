@@ -46,6 +46,9 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
   }
 
   const createdAt = new Date().toISOString();
+  // Solo un checkbox explícito y voluntario habilita seguimiento comercial.
+  // El consentimiento de cookies por sí solo nunca se interpreta como permiso de contacto.
+  const hasMarketingConsent = body.marketingConsent === true;
 
   const bookingPayload: Omit<BookingRequest, 'id'> = {
     tourId,
@@ -59,6 +62,8 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
     message,
     status: 'pending',
     createdAt,
+    marketingConsent: hasMarketingConsent,
+    ...(hasMarketingConsent ? { marketingConsentAt: createdAt, marketingConsentSource: 'plan_trip_form' } : {}),
   };
 
   // Persist lead in Firestore using centralized DatabaseService DAL

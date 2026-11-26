@@ -61,7 +61,9 @@ firebase-service-account.json
 # Video generation output & recordings
 *.mp4
 *.webm
+*.mp3
 *-preview.jpg
+brag-output-*/
 scripts/tiktok/grabacion/
 followup_drafts/
 __pycache__/

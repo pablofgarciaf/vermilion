@@ -145,6 +145,7 @@ export function ConsentManager({ locale, gaId, metaPixelId, clarityProjectId }: 
     }
     setConsentCookie(choice === 'accepted' ? 'accepted' : 'rejected');
     applyConsent(choice);
+    window.dispatchEvent(new Event('vr-consent-changed'));
     setVisible(false);
   }, [applyConsent]);
 

@@ -27,10 +27,15 @@ export async function POST(req: NextRequest) {
       guestsCount = '2 Travelers',
       locale = 'en',
       affiliateCode: bodyAffiliateCode,
-      paymentMethod: bodyPaymentMethod,
     } = body;
 
     const stripeKey = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_RESTRICTED_KEY;
+    if (!sessionId || !sessionId.startsWith('cs_')) {
+      return NextResponse.json({ success: false, error: 'Se requiere una sesión de pago válida.' }, { status: 400 });
+    }
+    if (!stripeKey || stripeKey.includes('fake')) {
+      return NextResponse.json({ success: false, error: 'La verificación de pagos no está disponible.' }, { status: 503 });
+    }
     let resolvedEmail = clientEmail;
     let resolvedName = clientName;
     let resolvedPhone = clientPhone;
@@ -41,20 +46,21 @@ export async function POST(req: NextRequest) {
     let resolvedGuests = guestsCount;
     let resolvedRef = ref || `VR-${Date.now().toString().slice(-6)}`;
     let affiliateCode: string | undefined = bodyAffiliateCode || undefined;
-    let isWire = sessionId?.startsWith('wire_') || bodyPaymentMethod === 'bank_wire';
-    let paymentStatus: 'paid' | 'pending_verification' = isWire ? 'pending_verification' : 'paid';
-    let paymentMethod: 'card' | 'bank_wire' = isWire ? 'bank_wire' : 'card';
+    let paymentStatus: 'paid' | 'pending_verification' = 'pending_verification';
+    const paymentMethod: 'card' = 'card';
     let confirmationEmailSent = false;
 
-    // 1. If Stripe sessionId is present (cs_...) and stripeKey is configured
-    if (sessionId && sessionId.startsWith('cs_') && stripeKey && !stripeKey.includes('fake')) {
-      try {
-        const stripe = new Stripe(stripeKey, {
-          apiVersion: '2026-08-26.dahlia' as any,
-        });
-        const session = await stripe.checkout.sessions.retrieve(sessionId);
+    // La página de éxito nunca es fuente de verdad: Stripe debe confirmar el pago.
+    try {
+      const stripe = new Stripe(stripeKey, {
+        apiVersion: '2026-08-26.dahlia' as any,
+      });
+      const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-        if (session) {
+      if (session.payment_status !== 'paid') {
+        return NextResponse.json({ success: false, error: 'El pago todavía no está confirmado.' }, { status: 409 });
+      }
+
           resolvedAmount = (session.amount_total || 0) / 100;
           resolvedEmail = session.customer_details?.email || session.customer_email || resolvedEmail;
           resolvedName = session.metadata?.clientName || session.customer_details?.name || resolvedName || resolvedEmail.split('@')[0];
@@ -65,12 +71,10 @@ export async function POST(req: NextRequest) {
           resolvedGuests = session.metadata?.guestsCount || resolvedGuests;
           resolvedRef = session.metadata?.customLinkId || resolvedRef;
           affiliateCode = session.metadata?.affiliateCode || undefined;
-          paymentStatus = session.payment_status === 'paid' ? 'paid' : 'pending_verification';
-          paymentMethod = 'card';
-        }
-      } catch (stripeErr: any) {
-        console.warn('[verify-session] Stripe session retrieval notice:', stripeErr.message);
-      }
+      paymentStatus = 'paid';
+    } catch (stripeErr: any) {
+      console.warn('[verify-session] Stripe session retrieval notice:', stripeErr.message);
+      return NextResponse.json({ success: false, error: 'No se pudo verificar el pago con Stripe.' }, { status: 502 });
     }
 
     if (!resolvedName) {
@@ -128,13 +132,13 @@ export async function POST(req: NextRequest) {
           paymentMethod,
           paymentStatus,
           transferRef: sessionId || resolvedRef,
-          paymentProcessor: paymentMethod === 'card' ? 'stripe' : 'bank_wire',
+          paymentProcessor: 'stripe',
           paymentProcessorOrderId: sessionId || undefined,
           paymentProcessorTransactionId: sessionId || undefined,
           paymentVerificationStatus: 'unverified',
           affiliateCode,
           discountApplied: !!affiliateCode,
-          status: isWire ? 'pending' : 'confirmed',
+          status: 'confirmed',
         });
         console.log(`[verify-session] Booking ${resolvedRef} recorded in Firestore.`);
       } catch (dbErr: any) {
@@ -159,16 +163,16 @@ export async function POST(req: NextRequest) {
           customerPhone: resolvedPhone,
           passengersCount: paxNum,
           totalAmount: resolvedAmount,
-          paidAmount: isWire ? 0 : resolvedAmount,
+          paidAmount: resolvedAmount,
           directCosts: Math.round(resolvedAmount * 0.55),
-          status: isWire ? 'deposit_pending' : 'deposit_confirmed',
+          status: 'deposit_confirmed',
           travelStartDate: resolvedDate || '2026-09-18',
           travelEndDate: resolvedDate || '2026-09-22',
           assignedOperatorId: 'info@vermilionroutes.com',
           assignedOperatorName: 'Jairo Ludeña',
           affiliateId: affiliateCode || 'pablo.g',
           affiliateCommissionAmount: Number((resolvedAmount * 0.1).toFixed(2)),
-          affiliateCommissionStatus: isWire ? 'pending' : 'ready_for_review',
+          affiliateCommissionStatus: 'ready_for_review',
           operatorCommissionAmount: 150,
           operatorCommissionStatus: 'pending',
           paymentReference: sessionId || resolvedRef,
