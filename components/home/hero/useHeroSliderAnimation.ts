@@ -200,7 +200,8 @@ export function useHeroSliderAnimation(params: UseHeroSliderParams) {
         if (loopTimeline) loopTimeline.kill();
         set(".indicator", { x: -window.innerWidth });
 
-        const duration = isFirstSlide ? 5 : 4.5;
+        // Diapositiva de saludo / bienvenida dura 10 segundos, y cada plantilla subsiguiente dura 1 segundo más (5.5s)
+        const duration = isFirstSlide ? 10 : 5.5;
         isFirstSlide = false;
 
         loopTimeline = gsap.timeline({
