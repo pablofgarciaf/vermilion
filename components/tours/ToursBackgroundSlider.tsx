@@ -37,16 +37,28 @@ export function ToursBackgroundSlider() {
             }`}
           >
             {isLoaded && (
-              <Image
-                src={slide.desktopImage || slide.image}
-                alt="Vermilion Routes Expediciones a Medida en Ecuador y Galápagos"
-                fill
-                sizes="100vw"
-                className="object-cover"
-                priority={idx === 0}
-                fetchPriority={idx === 0 ? 'high' : 'low'}
-                quality={idx === 0 ? 75 : 60}
-              />
+              <>
+                <Image
+                  src={slide.mobileImage || slide.desktopImage || slide.image}
+                  alt="Vermilion Routes Expediciones a Medida en Ecuador y Galápagos"
+                  fill
+                  sizes="100vw"
+                  className="object-cover md:hidden"
+                  priority={idx === 0}
+                  fetchPriority={idx === 0 ? 'high' : 'low'}
+                  quality={idx === 0 ? 75 : 60}
+                />
+                <Image
+                  src={slide.desktopImage || slide.image}
+                  alt="Vermilion Routes Expediciones a Medida en Ecuador y Galápagos"
+                  fill
+                  sizes="100vw"
+                  className="hidden object-cover md:block"
+                  priority={idx === 0}
+                  fetchPriority={idx === 0 ? 'high' : 'low'}
+                  quality={idx === 0 ? 75 : 60}
+                />
+              </>
             )}
           </div>
         );

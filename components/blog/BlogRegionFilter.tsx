@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Compass, Mountain, Trees, Waves, Sparkles, Filter } from 'lucide-react';
+import { Compass, Mountain, Trees, Waves, Sparkles, Filter, ChevronDown } from 'lucide-react';
 
 export interface RegionFilterProps {
   locale: string;
@@ -141,6 +141,7 @@ const REGIONS_I18N: Record<string, {
 
 export function BlogRegionFilter({ locale }: { locale: string }) {
   const [activeRegion, setActiveRegion] = useState<string>('all');
+  const [mobileOpen, setMobileOpen] = useState(false);
   const t = REGIONS_I18N[locale] || REGIONS_I18N.en;
 
   const regions = [
@@ -153,6 +154,7 @@ export function BlogRegionFilter({ locale }: { locale: string }) {
 
   const handleSelect = (regionId: string) => {
     setActiveRegion(regionId);
+    setMobileOpen(false);
 
     if (typeof window === 'undefined') return;
 
@@ -194,8 +196,28 @@ export function BlogRegionFilter({ locale }: { locale: string }) {
           <span>{t.filterLabel}</span>
         </div>
 
+        <button
+          type="button"
+          onClick={() => setMobileOpen((value) => !value)}
+          aria-expanded={mobileOpen}
+          className="flex w-full items-center justify-between rounded-xl border border-emerald-500/20 bg-emerald-50/70 px-3 py-2 text-left text-xs font-semibold text-emerald-900 dark:bg-emerald-950/30 dark:text-emerald-200 sm:hidden"
+        >
+          <span className="flex items-center gap-2"><Compass className="h-3.5 w-3.5" />{regions.find((region) => region.id === activeRegion)?.label}</span>
+          <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${mobileOpen ? 'rotate-180' : ''}`} />
+        </button>
+        <div className={`grid w-full transition-all duration-300 sm:hidden ${mobileOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+          <div className="overflow-hidden">
+            <div className="mt-2 space-y-1 rounded-xl border border-emerald-500/15 bg-white/70 p-1.5 dark:bg-zinc-900/70">
+              {regions.map((r) => {
+                const Icon = r.icon;
+                return <button key={r.id} type="button" onClick={() => handleSelect(r.id)} className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-xs font-semibold transition ${activeRegion === r.id ? 'bg-emerald-600 text-white' : 'text-zinc-700 hover:bg-emerald-50 dark:text-zinc-300 dark:hover:bg-zinc-800'}`}><Icon className="h-3.5 w-3.5" />{r.label}</button>;
+              })}
+            </div>
+          </div>
+        </div>
+
         {/* Region Tabs */}
-        <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none">
+        <div className="hidden items-center gap-1.5 sm:flex sm:gap-2 sm:overflow-x-auto sm:pb-0 scrollbar-none">
           {regions.map((r) => {
             const Icon = r.icon;
             const isActive = activeRegion === r.id;

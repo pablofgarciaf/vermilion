@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { mockTours } from '@/data/mock';
 import { dailyTours } from '@/data/dailyToursData';
 import { ToursBackgroundSlider } from '@/components/tours/ToursBackgroundSlider';
+import { TourCategoryDropdown } from '@/components/tours/TourCategoryDropdown';
 import { StatsSection } from '@/components/home/StatsSection';
 import { TourCarousel } from '@/components/home/TourCarousel';
 import { getLocalizedText } from '@/utils/i18nHelper';
@@ -160,7 +161,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       viewItinerary: 'Ver Itinerario',
       viewFullItinerary: 'Ver Itinerario Completo',
       details: 'Detalles',
-      book: 'Consultar Disponibilidad 2026',
+      book: 'Consultar Disponibilidad',
       bookExpedition: 'Personalizar Mi Expedición',
       combinedTag: 'Andes + Galápagos VIP',
       from: 'Desde',
@@ -191,7 +192,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       viewItinerary: 'View Itinerary',
       viewFullItinerary: 'Full Itinerary',
       details: 'Details',
-      book: 'Check 2026 Availability',
+      book: 'Check Availability',
       bookExpedition: 'Customize My Expedition',
       combinedTag: 'Andes + Galapagos VIP',
       from: 'From',
@@ -222,7 +223,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       viewItinerary: 'Voir l’itinéraire',
       viewFullItinerary: 'Itinéraire complet',
       details: 'Détails',
-      book: 'Disponibilités 2026',
+      book: 'Disponibilités',
       bookExpedition: 'Personnaliser l’expédition',
       combinedTag: 'Andes + Galápagos VIP',
       from: 'À partir de',
@@ -253,7 +254,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       viewItinerary: 'Reiseroute ansehen',
       viewFullItinerary: 'Gesamte Reiseroute',
       details: 'Details',
-      book: 'Verfügbarkeit 2026 prüfen',
+      book: 'Verfügbarkeit prüfen',
       bookExpedition: 'Expedition anpassen',
       combinedTag: 'Anden + Galápagos VIP',
       from: 'Ab',
@@ -284,7 +285,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       viewItinerary: 'Vedi itinerario',
       viewFullItinerary: 'Itinerario completo',
       details: 'Dettagli',
-      book: 'Disponibilità 2026',
+      book: 'Disponibilità',
       bookExpedition: 'Personalizza Spedizione',
       combinedTag: 'Ande + Galápagos VIP',
       from: 'Da',
@@ -315,7 +316,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       viewItinerary: 'Ver Itinerário',
       viewFullItinerary: 'Ver Itinerário Completo',
       details: 'Detalhes',
-      book: 'Disponibilidade 2026',
+      book: 'Disponibilidade',
       bookExpedition: 'Personalizar Expedição',
       combinedTag: 'Andes + Galápagos VIP',
       from: 'A partir de',
@@ -346,7 +347,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       viewItinerary: '日程を見る',
       viewFullItinerary: '詳細日程を見る',
       details: '詳細',
-      book: '2026年の空き状況を確認',
+      book: '空き状況を確認',
       bookExpedition: '遠征ツアーをカスタマイズ',
       combinedTag: 'アンデス + ガラパゴス VIP',
       from: '料金',
@@ -377,7 +378,7 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
       viewItinerary: '查看行程',
       viewFullItinerary: '查看完整行程',
       details: '详情',
-      book: '查询2026年排期',
+      book: '查询排期',
       bookExpedition: '定制专属探险',
       combinedTag: '安第斯 + 加拉帕戈斯 VIP',
       from: '起价',
@@ -480,7 +481,16 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
               </p>
 
               {/* Quick anchors - MOVED DOWN */}
-              <div className="flex flex-wrap justify-center gap-3 pt-8">
+              <TourCategoryDropdown
+                label={({ es: 'Destinos', en: 'Destinations', fr: 'Destinations', de: 'Reiseziele', it: 'Destinazioni', pt: 'Destinos', ja: '目的地', zh: '目的地' } as Record<string, string>)[locale] || 'Destinations'}
+                options={[
+                  { href: '#galapagos', label: t.anchorGala },
+                  { href: '#continental', label: t.anchorCont },
+                  { href: '#combinados', label: t.anchorComb },
+                  { href: '#diarios', label: t.anchorDaily },
+                ]}
+              />
+              <div className="hidden flex-wrap justify-center gap-3 pt-8 md:flex">
                 <a href="#galapagos" aria-label={t.s1Title} className="px-6 py-2.5 rounded-full bg-zinc-900/60 backdrop-blur-md hover:bg-emerald-600/80 border border-white/10 hover:border-emerald-400/50 text-sm font-semibold text-white transition-all shadow-lg">
                   {t.anchorGala}
                 </a>
@@ -541,12 +551,20 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-72 w-full overflow-hidden block">
                     <Image quality={90}
-                      src={tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp'}
+                      src={tour.mobileImage || tour.imageUrl || '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp'}
                       alt={title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       loading="lazy"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 md:hidden"
+                    />
+                    <Image quality={90}
+                      src={tour.desktopImage || tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp'}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      loading="lazy"
+                      className="hidden object-cover group-hover:scale-105 transition-transform duration-700 md:block"
                     />
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent" />
                     <div className="absolute top-4 left-4 flex gap-2">
@@ -632,12 +650,20 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-56 w-full overflow-hidden block">
                     <Image quality={90}
-                      src={tour.imageUrl || '/images/tours/16-9/cotopaxi-volcano-16-9.webp'}
+                      src={tour.mobileImage || tour.imageUrl || '/images/tours/9-16/cotopaxi-9-16.webp'}
                       alt={title}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       loading="lazy"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 md:hidden"
+                    />
+                    <Image quality={90}
+                      src={tour.desktopImage || tour.imageUrl || '/images/tours/16-9/cotopaxi-volcano-16-9.webp'}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      loading="lazy"
+                      className="hidden object-cover group-hover:scale-105 transition-transform duration-700 md:block"
                     />
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent" />
                     <div className="absolute top-3 left-3">
@@ -715,12 +741,20 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-72 w-full overflow-hidden block">
                     <Image quality={100}
-                      src={tour.imageUrl || '/images/tours/16-9/galapagos-las-grietas-16-9.webp'}
+                      src={tour.mobileImage || tour.imageUrl || '/images/tours/9-16/galapagos-las-grietas-9-16.webp'}
                       alt={title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       loading="lazy"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 md:hidden"
+                    />
+                    <Image quality={100}
+                      src={tour.desktopImage || tour.imageUrl || '/images/tours/16-9/galapagos-las-grietas-16-9.webp'}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      loading="lazy"
+                      className="hidden object-cover group-hover:scale-105 transition-transform duration-700 md:block"
                     />
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-zinc-950/90 via-zinc-950/40 to-transparent" />
                     <div className="absolute top-4 left-4">

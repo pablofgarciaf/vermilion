@@ -32,7 +32,7 @@ export default function DestinationsHeroSection({ items, locale, labels, title, 
   return (
     <>
       {/* PORTADA */}
-      <section className="relative w-full h-[100svh] min-h-[580px] sm:min-h-[620px] md:min-h-[650px] overflow-hidden text-white">
+      <section className="relative w-full h-[100svh] min-h-[580px] sm:min-h-[620px] md:h-[72vh] md:min-h-[650px] overflow-hidden text-white">
         <DestinationsHeroBackground />
         <div className="absolute inset-0 flex flex-col justify-center max-w-5xl mx-auto px-6 z-10">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300 mb-4">

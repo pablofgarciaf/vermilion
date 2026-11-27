@@ -436,12 +436,20 @@ export default async function AboutPage({ params }: PageProps) {
       {/* HERO SECTION - CINEMATIC VIEWPORT IMPACT */}
       <section className="relative w-full h-[95svh] min-h-[580px] sm:min-h-[620px] md:min-h-[650px] overflow-hidden">        <div className="absolute inset-0 pointer-events-none">
         <Image quality={100}
-          src="/images/tours/16-9/galapagos-lobo-marino-16-9.webp"
+          src="/images/tours/9-16/galapagos-snorkeling-9-16.jpg"
           alt="Galapagos Seascape"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover md:hidden"
+        />
+        <Image quality={100}
+          src="/images/tours/16-9/galapagos-tortuga-gigante-16-9.jpg"
+          alt="Galapagos Seascape"
+          fill
+          priority
+          sizes="100vw"
+          className="hidden object-cover md:block"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
       </div>

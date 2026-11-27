@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { SlideData } from '@/types';
-import { Award, Star, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 interface HeroDetailsProps {
   initialData: SlideData;
@@ -13,93 +13,111 @@ const SPLASH_TEXTS: Record<string, {
   rating: string;
   mintur: string;
   depositGuarantee: string;
+  tailorMade: string;
   headline: string;
   subheadline: string;
   worlds: [string, string, string, string];
 }> = {
   es: {
-    rating: 'TripAdvisor 5.0 (52 Reseñas Verificadas)',
-    mintur: 'Licencia Oficial Mintur #1793215456001',
-    depositGuarantee: '100% Deposit Protection Guarantee',
-    headline: 'Los Mejores Tours Privados y a Medida de Ecuador & Galápagos',
+    rating: 'TripAdvisor · 52 reseñas',
+    mintur: 'Mintur #1793215456001',
+    depositGuarantee: 'Depósito protegido 100%',
+    tailorMade: 'Viajes a medida',
+    headline: 'Los Mejores Tours Privados en Ecuador y Galápagos',
     subheadline: 'Guías Nativos Certificados • Expediciones Exclusivas',
     worlds: ['Galápagos', 'Andes', 'Amazonas', 'Pacífico']
   },
   en: {
-    rating: 'TripAdvisor 5.0 (52 Verified Reviews)',
-    mintur: 'Official Mintur License #1793215456001',
-    depositGuarantee: '100% Deposit Protection Guarantee',
-    headline: 'The Best Private & Tailor-Made Tours in Ecuador & Galapagos',
+    rating: 'TripAdvisor · 52 reviews',
+    mintur: 'Mintur #1793215456001',
+    depositGuarantee: '100% deposit protected',
+    tailorMade: 'Tailor-made journeys',
+    headline: 'The Best Private Tours in\nEcuador & Galapagos',
     subheadline: 'Certified Native Guides • Exclusive Expeditions',
     worlds: ['Galapagos', 'Andes', 'Amazon', 'Pacific']
   },
   fr: {
-    rating: 'TripAdvisor 5.0 (52 Avis Vérifiés)',
-    mintur: 'Licence Officielle Mintur #1793215456001',
-    depositGuarantee: '100% Deposit Protection Guarantee',
-    headline: 'Les Meilleurs Circuits Privés & Sur Mesure en Équateur et Galapagos',
+    rating: 'TripAdvisor · 52 avis',
+    mintur: 'Mintur #1793215456001',
+    depositGuarantee: 'Acompte protégé à 100 %',
+    tailorMade: 'Voyages sur mesure',
+    headline: 'Les Meilleurs Circuits Privés en Équateur et Galapagos',
     subheadline: 'Guides Locaux Certifiés • Expéditions Exclusives',
     worlds: ['Galapagos', 'Andes', 'Amazonie', 'Pacifique']
   },
   de: {
-    rating: 'TripAdvisor 5.0 (52 Verifizierte Bewertungen)',
-    mintur: 'Offizielle Mintur-Lizenz #1793215456001',
-    depositGuarantee: '100% Anzahlungsschutz-Garantie',
-    headline: 'Die besten privaten & maßgeschneiderten Touren in Ecuador & Galapagos',
-    subheadline: 'Zertifizierte einheimische Guides • Exklusive Expeditionen',
+    rating: 'TripAdvisor · 52 Bewertungen',
+    mintur: 'Mintur #1793215456001',
+    depositGuarantee: 'Anzahlung 100 % geschützt',
+    tailorMade: 'Maßgeschneiderte Reisen',
+    headline: 'Die besten privaten Touren in Ecuador & Galapagos',
+    subheadline: 'Einheimische Guides • Exklusive Expeditionen',
     worlds: ['Galapagos', 'Anden', 'Amazonas', 'Pazifik']
   },
   it: {
-    rating: 'TripAdvisor 5.0 (52 Recensioni Verificate)',
-    mintur: 'Licenza Ufficiale Mintur #1793215456001',
-    depositGuarantee: 'Garanzia Deposito al 100%',
-    headline: 'I Migliori Tour Privati e su Misura in Ecuador e Galapagos',
+    rating: 'TripAdvisor · 52 recensioni',
+    mintur: 'Mintur #1793215456001',
+    depositGuarantee: 'Acconto protetto al 100%',
+    tailorMade: 'Viaggi su misura',
+    headline: 'I Migliori Tour Privati in\nEcuador e Galapagos',
     subheadline: 'Guide Locali Certificate • Spedizioni Esclusive',
     worlds: ['Galapagos', 'Ande', 'Amazzonia', 'Pacifico']
   },
   pt: {
-    rating: 'TripAdvisor 5.0 (52 Avaliações Verificadas)',
-    mintur: 'Licença Oficial Mintur #1793215456001',
-    depositGuarantee: 'Garantia de Depósito 100% Protegido',
-    headline: 'Os Melhores Passeios Privados e Sob Medida no Equador e Galápagos',
+    rating: 'TripAdvisor · 52 avaliações',
+    mintur: 'Mintur #1793215456001',
+    depositGuarantee: 'Depósito protegido 100%',
+    tailorMade: 'Viagens sob medida',
+    headline: 'Os Melhores Passeios Privados no Equador e Galápagos',
     subheadline: 'Guias Nativos Certificados • Expedições Exclusivas',
     worlds: ['Galápagos', 'Andes', 'Amazonas', 'Pacífico']
   },
   ja: {
-    rating: 'TripAdvisor 5.0 (52件の認証済みレビュー)',
+    rating: 'TripAdvisor · 52件のレビュー',
     mintur: 'エクアドル観光省公式認定 #1793215456001',
-    depositGuarantee: '100%手付金保護保証制度',
-    headline: 'エクアドル＆ガラパゴス最高のプライベート＆オーダーメイドツアー',
-    subheadline: '認定ネイティブガイド • 特別なプライベート探検',
+    depositGuarantee: '手付金を100%保護',
+    tailorMade: 'オーダーメイドの旅',
+    headline: 'エクアドルとガラパゴスの最高のプライベートツアー',
+    subheadline: '認定ネイティブガイド • 特別な探検',
     worlds: ['ガラパゴス', 'アンデス', 'アマゾン', '太平洋']
   },
   zh: {
-    rating: 'TripAdvisor 5.0 (52条真实认证好评)',
+    rating: 'TripAdvisor · 52条好评',
     mintur: '厄瓜多尔旅游部官方特许执照 #1793215456001',
-    depositGuarantee: '100%定金与付款信托保护保证',
-    headline: '厄瓜多尔与加拉帕戈斯顶级私人定制旅行',
-    subheadline: '专业持证本地向导 • 专属尊贵探险',
+    depositGuarantee: '定金100%保护',
+    tailorMade: '量身定制旅程',
+    headline: '厄瓜多尔与加拉帕戈斯顶级私人旅行',
+    subheadline: '专业持证本地向导 • 专属探险',
     worlds: ['加拉帕戈斯', '安第斯', '亚马逊', '太平洋']
   }
 };
 
 const H1_HEADLINES: Record<string, string> = {
-  es: 'Tours Privados y Expediciones a Medida en Ecuador y Galápagos',
-  en: 'Private & Bespoke Tours in Ecuador & Galapagos Islands',
-  fr: 'Circuits Privés et Voyages sur Mesure en Équateur et Galápagos',
-  de: 'Private & Maßgeschneiderte Reisen nach Ecuador & Galápagos',
-  it: 'Tour Privati e Viaggi su Misura in Ecuador e Galápagos',
-  pt: 'Tours Privados e Expedições sob Medida no Equador e Galápagos',
-  ja: 'エクアドル＆ガラパゴス諸島 プライベートオーダーメイド自然旅行',
-  zh: '厄瓜多尔与加拉帕戈斯群岛私人专属定制探险之旅',
+  es: 'Tours Privados por Ecuador y Galápagos',
+  en: 'Private Tours Across\nEcuador and Galapagos',
+  fr: 'Voyages Privés en Équateur et aux Galápagos',
+  de: 'Private Touren durch Ecuador und die Galápagos',
+  it: 'Viaggi Privati in\nEcuador e Galápagos',
+  pt: 'Viagens Privadas pelo Equador e Galápagos',
+  ja: 'エクアドルとガラパゴスを巡るプライベート旅行',
+  zh: '厄瓜多尔与加拉帕戈斯私人旅行体验',
 };
+
+export function getHeroCommercialCopy(locale: string) {
+  return SPLASH_TEXTS[locale] || SPLASH_TEXTS.en;
+}
 
 export function getStandardTemplateHTML(slide: SlideData, locale: string): string {
   const place = getLocalizedText(slide.place, locale);
-  const title = getLocalizedText(slide.title, locale);
-  const title2 = getLocalizedText(slide.title2, locale);
+  // El viaje y la propuesta comercial permanecen fijos; cada escena solo aporta
+  // su destino y una breve línea editorial. No se modifica heroData.
+  const heroCopy = getHeroCommercialCopy(locale);
+  // El molde que GSAP inyecta debe usar exactamente el mismo titular visual
+  // que el panel React. El H1 SEO vive solo en la bienvenida y no debe cambiar
+  // la altura del texto entre una escena y otra.
+  const title = heroCopy.headline;
+  const title2 = heroCopy.subheadline;
   const desc = getLocalizedText(slide.description, locale);
-  const badges = SPLASH_TEXTS[locale] || SPLASH_TEXTS.en;
 
   return `
     <div class="h-auto mb-1.5 pt-0">
@@ -109,60 +127,27 @@ export function getStandardTemplateHTML(slide: SlideData, locale: string): strin
       </div>
     </div>
 
-    <div class="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-      <h2 class="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left text-white" style="text-shadow: 0px 2px 4px rgba(0,0,0,0.8), 0px 0px 2px rgba(0,0,0,0.6);">
-        <span class="notranslate">${title}</span>
-      </h2>
+    <div class="h-auto mt-1 flex w-full max-w-[min(88vw,980px)] flex-col items-center text-center md:items-start md:text-left">
+    <h2 class="title-1 font-oswald font-extrabold text-[30px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px] uppercase leading-[1.04] tracking-tight whitespace-pre-line break-words m-0 p-0 text-center md:text-left text-white" style="text-shadow: 0px 2px 4px rgba(0,0,0,0.8), 0px 0px 2px rgba(0,0,0,0.6);"><span class="notranslate">${title}</span></h2>
     </div>
 
-    <div class="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-      <h3 class="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight text-white whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left" style="text-shadow: 0px 2px 4px rgba(0,0,0,0.8), 0px 0px 2px rgba(0,0,0,0.6);">
-        <span class="notranslate">${title2}</span>
-      </h3>
+    <div class="h-auto mt-2 flex w-full max-w-[min(88vw,760px)] flex-col items-center text-center md:items-start md:text-left">
+      <h3 class="title-2 font-sans font-semibold text-[15px] sm:text-[17px] md:text-[19px] lg:text-[21px] uppercase leading-snug tracking-wide text-emerald-200 whitespace-normal m-0 p-0 text-center md:text-left" style="text-shadow: 0px 2px 4px rgba(0,0,0,0.8), 0px 0px 2px rgba(0,0,0,0.6);"><span class="notranslate">${title2}</span></h3>
     </div>
 
     <div class="h-auto mt-2 md:mt-3 flex flex-col items-center text-center md:items-start md:text-left w-full max-w-lg mx-auto md:mx-0">
       <div class="desc flex flex-col items-center text-center md:items-start md:text-left w-full">
-        <p class="hero-desc-text text-[16px] sm:text-[18px] lg:text-[19px] text-white/95 leading-relaxed font-medium text-center md:text-left mx-auto md:mx-0" style="text-shadow: 0px 1px 3px rgba(0,0,0,0.8);">
+        <p class="hero-desc-text text-[16px] sm:text-[17px] lg:text-[18px] text-white/95 leading-snug font-medium text-center md:text-left mx-auto md:mx-0" style="text-shadow: 0px 1px 3px rgba(0,0,0,0.8);">
           ${desc}
         </p>
       </div>
 
-      <!-- 3 VIP Badges Cluster under Description -->
-      <div class="slide-trust-badges mt-3.5 mb-2 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs sm:text-sm font-semibold mx-auto md:mx-0">
-        <a
-          href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 shadow-xl hover:border-amber-300 transition-colors pointer-events-auto"
-        >
-          <div class="flex items-center gap-0.5 text-amber-400">
-            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <svg class="w-3 h-3 fill-amber-400 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <span class="text-zinc-300">|</span>
-          <span class="tracking-tight text-[11px] sm:text-xs">${badges.rating}</span>
-        </a>
-
-        <div class="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-xs shadow-xl">
-          <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-          <span>${badges.mintur}</span>
-        </div>
-
-        <div class="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-cyan-500/40 text-cyan-300 text-[10px] sm:text-xs shadow-xl">
-          <svg class="w-3.5 h-3.5 text-cyan-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-          <span>${badges.depositGuarantee}</span>
-        </div>
-      </div>
     </div>
   `;
 }
 
 export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
-  const welcomeText = SPLASH_TEXTS[locale] || SPLASH_TEXTS.en;
+  const welcomeText = getHeroCommercialCopy(locale);
   const h1Text = H1_HEADLINES[locale] || H1_HEADLINES.en;
 
   return (
@@ -176,7 +161,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
           <div
             key={id}
             id={id}
-            className={`absolute left-0 w-full px-4 sm:px-6 md:px-0 md:w-auto md:left-[30px] lg:left-[60px] bottom-[220px] md:bottom-auto md:top-[145px] lg:top-[150px] xl:top-[165px] flex flex-col items-center text-center md:items-start md:text-left pointer-events-none max-w-xl ${opacityClass}`}
+            className={`absolute left-0 w-full px-4 sm:px-6 md:px-0 md:w-auto md:left-[30px] lg:left-[60px] bottom-[145px] sm:bottom-[150px] md:bottom-auto md:top-[145px] lg:top-[150px] xl:top-[165px] flex flex-col items-center text-center md:items-start md:text-left pointer-events-none max-w-xl md:max-w-[980px] ${opacityClass}`}
           >
             {isWelcomeSlide ? (
               /* ── BIENVENIDA EXCLUSIVA (Centrada en móvil, a la izquierda en desktop) ── */
@@ -211,7 +196,7 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                 <h1 className="sr-only">{h1Text}</h1>
 
                 {/* Logo Glass Card - Centered under ALL YOU NEED IS */}
-                <div className="welcome-logo-card relative w-[230px] h-[78px] sm:w-[290px] sm:h-[98px] md:w-[340px] md:h-[112px] mb-3 bg-gradient-to-r from-emerald-950/45 via-cyan-900/35 to-emerald-950/45 backdrop-blur-lg rounded-full p-2.5 sm:p-3 border border-white/35 shadow-[0_12px_40px_rgba(0,0,0,0.75)] flex items-center justify-center mx-auto md:mx-0 md:ml-[82px] lg:ml-[95px] xl:ml-[105px]">
+                <div className="welcome-logo-card relative w-[230px] h-[78px] sm:w-[290px] sm:h-[98px] md:w-[340px] md:h-[112px] mb-3 flex items-center justify-center mx-auto md:mx-0 md:ml-[82px] lg:ml-[95px] xl:ml-[105px]">
                   <div className="relative w-full h-full flex items-center justify-center">
                     <Image
                       src="/logo_blanco.png"
@@ -249,33 +234,6 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                   <span className="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-white/10 backdrop-blur-sm">{welcomeText.worlds[3]}</span>
                 </div>
 
-                {/* VIP Fiduciary Badges Cluster - Under text & Above Buttons */}
-                <div className="welcome-badge flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs sm:text-sm font-semibold mx-auto md:mx-0">
-                  <a
-                    href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 shadow-xl hover:border-amber-300 transition-colors pointer-events-auto"
-                  >
-                    <div className="flex items-center gap-0.5 text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                    <span className="text-zinc-300">|</span>
-                    <span className="tracking-tight text-[11px] sm:text-xs">{welcomeText.rating}</span>
-                  </a>
-
-                  <div className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-xs shadow-xl">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                    <span>{welcomeText.mintur}</span>
-                  </div>
-
-                  <div className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-cyan-500/40 text-cyan-300 text-[10px] sm:text-xs shadow-xl">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                    <span>{welcomeText.depositGuarantee}</span>
-                  </div>
-                </div>
               </div>
             ) : (
               /* ── MOLDE ESTÁNDAR (Con clases estándar para GSAP, vacío en inicio) ── */
@@ -289,51 +247,25 @@ export function HeroDetails({ initialData, locale }: HeroDetailsProps) {
                 </div>
 
                 {/* Line 1 (title - h2 tour slide title) */}
-                <div className="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-                  <h2 className="title-1 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+                <div className="h-auto mt-1 flex w-full max-w-[min(88vw,980px)] flex-col items-center text-center md:items-start md:text-left">
+                  <h2 className="title-1 font-oswald font-extrabold text-[30px] sm:text-[36px] md:text-[40px] lg:text-[44px] xl:text-[48px] uppercase leading-[1.04] tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] whitespace-pre-line break-words m-0 p-0 text-center md:text-left">
                     <span className="notranslate"></span>
                   </h2>
                 </div>
 
                 {/* Line 2 (title2 - h3 tour slide subtitle) */}
-                <div className="h-auto md:min-h-[50px] lg:min-h-[60px] mt-1 flex flex-col items-center text-center md:items-start md:text-left">
-                  <h3 className="title-2 font-oswald font-extrabold text-[36px] sm:text-[46px] md:text-4xl lg:text-5xl xl:text-[64px] uppercase leading-[0.95] tracking-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] whitespace-normal md:whitespace-nowrap m-0 p-0 text-center md:text-left">
+                <div className="h-auto mt-2 flex w-full max-w-[min(88vw,760px)] flex-col items-center text-center md:items-start md:text-left">
+                  <h3 className="title-2 font-sans font-semibold text-[15px] sm:text-[17px] md:text-[19px] lg:text-[21px] uppercase leading-snug tracking-wide text-emerald-200 drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)] whitespace-normal m-0 p-0 text-center md:text-left">
                     <span className="notranslate"></span>
                   </h3>
                 </div>
 
                 <div className="h-auto mt-2 md:mt-3 flex flex-col items-center text-center md:items-start md:text-left w-full max-w-lg mx-auto md:mx-0">
                   <div className="desc flex flex-col items-center text-center md:items-start md:text-left w-full">
-                    <p className="hero-desc-text text-[16px] sm:text-[18px] lg:text-[19px] text-white/95 leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] font-medium text-center md:text-left mx-auto md:mx-0"></p>
+                    <p className="hero-desc-text text-[16px] sm:text-[17px] lg:text-[18px] text-white/95 leading-snug drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] font-medium text-center md:text-left mx-auto md:mx-0"></p>
                   </div>
 
                   {/* 3 VIP Badges Cluster under Description */}
-                  <div className="slide-trust-badges mt-3.5 mb-2 flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs sm:text-sm font-semibold mx-auto md:mx-0">
-                    <a
-                      href="https://www.tripadvisor.com/Attraction_Review-g294308-d26260308-Reviews-Vermilion_Routes-Quito_Pichincha_Province.html"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/40 text-amber-300 shadow-xl hover:border-amber-300 transition-colors pointer-events-auto"
-                    >
-                      <div className="flex items-center gap-0.5 text-amber-400">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                        ))}
-                      </div>
-                      <span className="text-zinc-300">|</span>
-                      <span className="tracking-tight text-[11px] sm:text-xs">{welcomeText.rating}</span>
-                    </a>
-
-                    <div className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-[10px] sm:text-xs shadow-xl">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                      <span>{welcomeText.mintur}</span>
-                    </div>
-
-                    <div className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-cyan-500/40 text-cyan-300 text-[10px] sm:text-xs shadow-xl">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                      <span>{welcomeText.depositGuarantee}</span>
-                    </div>
-                  </div>
                 </div>
               </>
             )}

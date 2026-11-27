@@ -11,6 +11,7 @@ import {
   US_CONCIERGE_PHONE,
   EC_WHATSAPP_PHONE,
 } from '@/data/bookingTerms';
+import { trackEngagement } from '@/lib/analytics/trackLead';
 
 const CONTACT_CHANNELS_I18N: Record<string, { usLine: string; usDesc: string; ecWhatsApp: string; bilingualNotice: string }> = {
   en: {
@@ -184,9 +185,9 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-10 md:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-zinc-200 dark:border-zinc-800/60 scroll-mt-20">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
         {/* Left Col Info */}
-        <div className="lg:col-span-5 space-y-8">
+        <div className="lg:col-span-5 flex flex-col gap-6">
           <div className="space-y-3">
             <span className="text-emerald-600 text-xs font-bold uppercase tracking-wider block">
               {t('badge')}
@@ -199,15 +200,15 @@ export function ContactSection() {
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 flex-1">
             {/* Ecuador Operations & WhatsApp 24/7 */}
             <a
               href={`https://wa.me/${EC_WHATSAPP_PHONE.replace(/[^0-9]/g, '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
+              className="min-h-[78px] flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
             >
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
@@ -221,9 +222,10 @@ export function ContactSection() {
             {/* US Direct Line / SMS Concierge */}
             <a
               href={`tel:${US_CONCIERGE_PHONE.replace(/[^0-9+]/g, '')}`}
-              className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-amber-500/50 hover:shadow-md transition-all group"
+              onClick={() => trackEngagement('phone_click', 'home_contact', 'us_concierge')}
+              className="min-h-[78px] flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-amber-500/50 hover:shadow-md transition-all group"
             >
-              <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform shrink-0">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
@@ -237,9 +239,10 @@ export function ContactSection() {
             {/* Official Email */}
             <a
               href="mailto:info@vermilionroutes.com"
-              className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
+              onClick={() => trackEngagement('email_click', 'home_contact', 'info_email')}
+              className="min-h-[78px] flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
             >
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
@@ -252,15 +255,9 @@ export function ContactSection() {
               </div>
             </a>
 
-            {/* Bilingual Team & US Support Notice */}
-            <div className="p-3 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200/60 dark:border-emerald-800/40 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
-              <span className="font-bold text-emerald-700 dark:text-emerald-400">✓ </span>
-              {cc.bilingualNotice}
-            </div>
-
             {/* Sede Ecuador (HQ) */}
-            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
+            <div className="min-h-[78px] flex items-start gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
@@ -272,8 +269,8 @@ export function ContactSection() {
             </div>
 
             {/* Sede España (Coral Tour) */}
-            <div className="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
+            <div className="min-h-[78px] flex items-start gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
@@ -287,7 +284,7 @@ export function ContactSection() {
         </div>
 
         {/* Right Col Form */}
-        <div className="lg:col-span-7 bg-white dark:bg-zinc-900/80 p-8 sm:p-10 rounded-3xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xl">
+        <div className="lg:col-span-7 h-full bg-white dark:bg-zinc-900/80 p-6 sm:p-8 rounded-3xl border border-zinc-200/80 dark:border-zinc-800/80 shadow-xl">
           {submitted ? (
             <div className="text-center py-12 space-y-4 animate-in fade-in duration-300">
               <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
@@ -318,7 +315,7 @@ export function ContactSection() {
               </Button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800/50">
                 <h3 className="font-serif font-bold text-xl text-zinc-900 dark:text-white flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-emerald-600" />
@@ -485,6 +482,10 @@ export function ContactSection() {
             </form>
           )}
         </div>
+      </div>
+      <div className="mt-8 rounded-2xl border border-emerald-200/70 bg-emerald-50/70 px-5 py-4 text-sm leading-relaxed text-zinc-700 dark:border-emerald-800/40 dark:bg-emerald-950/30 dark:text-zinc-300">
+        <span className="font-bold text-emerald-700 dark:text-emerald-400">✓ </span>
+        {cc.bilingualNotice}
       </div>
     </section>
   );
