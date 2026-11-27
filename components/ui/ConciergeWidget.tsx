@@ -170,6 +170,18 @@ export function ConciergeWidget() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isOpenChat, setIsOpenChat] = useState(false);
   const [isCalloutVisible, setIsCalloutVisible] = useState(true);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+
+  useEffect(() => {
+    const footer = document.getElementById('site-footer');
+    if (!footer) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsFooterVisible(entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -334,8 +346,10 @@ export function ConciergeWidget() {
     <>
       {/* FLOATING CONCIERGE BUTTON */}
       <div
-        className={`fixed left-3 z-50 flex-col items-start sm:left-6 ${
-          withTabBar ? 'hidden md:flex md:bottom-6' : 'flex bottom-[84px] sm:bottom-24 md:bottom-6'
+        className={`fixed left-3 z-50 hidden md:flex md:bottom-6 flex-col items-start sm:left-6 transition-all duration-300 ${
+          isFooterVisible
+            ? 'opacity-0 pointer-events-none translate-y-3'
+            : 'opacity-100 pointer-events-auto translate-y-0'
         }`}
       >
         {/* POPOVER SELECTION MENU */}

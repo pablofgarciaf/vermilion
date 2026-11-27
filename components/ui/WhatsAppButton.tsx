@@ -1,10 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useChatPanelOpen } from '@/hooks/useChatPanelOpen';
-import { showsMobileTabBar } from '@/data/mobileTabBar';
 
 const PHONE_NUMBER = '593960039156';
 
@@ -16,20 +15,26 @@ const INTERNAL_PATH = /\/(admin|cpanel|affiliates|operator|auth)(\/|$)/;
  * Abajo a la derecha (el asistente de IA va abajo a la izquierda y el botón
  * "Planifica tu viaje" en el centro en móvil). Se oculta mientras el chat del
  * concierge está abierto, para no solaparse.
- * El evento generate_lead del clic lo lanza WhatsAppClickTracker (data-lead-placement).
+ * En móvil se oculta (o usa la barra inferior). Al llegar al footer se desvanece suavemente.
  */
 export function WhatsAppButton() {
   const t = useTranslations('whatsapp');
   const pathname = usePathname() || '';
   const conciergeOpen = useChatPanelOpen();
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+
+  useEffect(() => {
+    const footer = document.getElementById('site-footer');
+    if (!footer) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsFooterVisible(entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   if (INTERNAL_PATH.test(pathname) || conciergeOpen) return null;
-
-  // Con barra inferior tipo app (móvil), WhatsApp ya está en la barra: aquí solo desde md.
-  // Sin barra (ficha de tour, reserva), sube por encima de la barra de reserva propia.
-  const position = showsMobileTabBar(pathname)
-    ? 'hidden md:flex md:bottom-6'
-    : 'flex bottom-[84px] sm:bottom-24 md:bottom-6';
 
   const href = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(t('defaultMessage'))}`;
 
@@ -39,7 +44,11 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       data-lead-placement="floating_button"
-      className={`group fixed right-3 z-50 ${position} h-12 w-12 items-center sm:right-6 sm:h-14 sm:w-14 justify-center rounded-full border-2 border-white/30 bg-[#25D366] text-white shadow-2xl shadow-emerald-900/40 transition-transform duration-300 hover:scale-110 active:scale-95`}
+      className={`group fixed right-3 z-50 hidden md:flex md:bottom-6 h-12 w-12 items-center sm:right-6 sm:h-14 sm:w-14 justify-center rounded-full border-2 border-white/30 bg-[#25D366] text-white shadow-2xl shadow-emerald-900/40 transition-all duration-300 hover:scale-110 active:scale-95 ${
+        isFooterVisible
+          ? 'opacity-0 pointer-events-none translate-y-3'
+          : 'opacity-100 pointer-events-auto translate-y-0'
+      }`}
       aria-label={t('ariaLabel')}
     >
       <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true">
