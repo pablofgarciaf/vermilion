@@ -6,6 +6,7 @@ import { notifyNewLead } from '@/lib/email';
 import { isValidEmail, isValidPhone, sanitizeText } from '@/lib/validation';
 import { toLeadEmailStatus } from '@/lib/crm/leadEmailStatus';
 import { getAdminDb } from '@/lib/firebaseAdmin';
+import { enforceRateLimit, PUBLIC_ITINERARY_LIMIT } from '@/lib/security/rateLimit';
 
 /**
  * Descarga del itinerario en PDF de un tour (LeadCaptureModal).
@@ -13,6 +14,9 @@ import { getAdminDb } from '@/lib/firebaseAdmin';
  * del tour y deja en el lead si cada correo salió (lo muestra el CRM).
  */
 export async function POST(req: Request) {
+  const limited = enforceRateLimit(req, PUBLIC_ITINERARY_LIMIT);
+  if (limited) return limited;
+
   let body: Record<string, unknown>;
   try {
     body = await req.json();

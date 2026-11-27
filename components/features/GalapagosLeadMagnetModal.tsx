@@ -379,7 +379,10 @@ const LEAD_MAGNET_I18N: Record<string, I18nContent> = {
 
 export function GalapagosLeadMagnetModal() {
   if (isBotOrCrawler()) return null;
+  return <GalapagosLeadMagnetModalContent />;
+}
 
+function GalapagosLeadMagnetModalContent() {
   const locale = useLocale();
   const t = LEAD_MAGNET_I18N[locale] || LEAD_MAGNET_I18N.en;
 

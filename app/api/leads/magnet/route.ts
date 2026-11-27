@@ -2,8 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { runAfterResponse } from '@/lib/runAfterResponse';
 import { saveLead } from '@/lib/crm/leadStore';
 import { sendLeadMagnetEmail, notifyNewLead } from '@/lib/email';
+import { enforceRateLimit, PUBLIC_EMAIL_LIMIT } from '@/lib/security/rateLimit';
 
 export async function POST(req: NextRequest) {
+  const limited = enforceRateLimit(req, PUBLIC_EMAIL_LIMIT);
+  if (limited) return limited;
+
   try {
     const body = await req.json();
     const { email, locale, _hp_trap, website_url } = body;

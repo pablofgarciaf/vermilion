@@ -43,6 +43,43 @@ export interface CommercialFunnelParams {
   currency?: string;
 }
 
+/**
+ * Interacciones de producto que no son todavía un lead. Nunca incluye PII y
+ * únicamente se envía a las plataformas de terceros con consentimiento.
+ */
+export type EngagementEvent =
+  | 'hero_impression'
+  | 'hero_slide_change'
+  | 'destination_category_click'
+  | 'tour_card_click'
+  | 'planner_started'
+  | 'planner_completed'
+  | 'email_click'
+  | 'phone_click'
+  | 'b2b_lead_submitted'
+  | 'official_help_click';
+
+export function trackEngagement(
+  eventName: EngagementEvent,
+  placement: string,
+  item?: string,
+): void {
+  if (!canTrack()) return;
+
+  try {
+    const payload = {
+      event: eventName,
+      placement,
+      ...(item ? { item_name: item } : {}),
+      page_location: window.location.href,
+    };
+    pushToDataLayer(payload);
+    window.gtag?.('event', eventName, payload);
+  } catch {
+    // La medición no puede bloquear la navegación ni una conversión.
+  }
+}
+
 /** Misma clave que usa ConsentManager para guardar la elección. */
 const CONSENT_STORAGE_KEY = 'vr_privacy_consent_v1';
 

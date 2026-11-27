@@ -4,8 +4,12 @@ import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 import { isValidEmail } from '@/lib/validation';
+import { enforceRateLimit, PUBLIC_EMAIL_LIMIT } from '@/lib/security/rateLimit';
 
 export async function POST(request: Request) {
+  const limited = enforceRateLimit(request, PUBLIC_EMAIL_LIMIT);
+  if (limited) return limited;
+
   try {
     const body = await request.json();
     const { email, affiliateId, _hp_trap, website_url } = body;

@@ -8,12 +8,16 @@ import { triggerN8nWebhook } from '@/lib/n8n';
 import { toLeadEmailStatus } from '@/lib/crm/leadEmailStatus';
 import { getAdminDb } from '@/lib/firebaseAdmin';
 import Stripe from 'stripe';
+import { enforceRateLimit, PUBLIC_CONCIERGE_LIMIT } from '@/lib/security/rateLimit';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_fake', {
   apiVersion: '2026-07-29.dahlia' as any,
 });
 
 export async function POST(req: NextRequest) {
+  const limited = enforceRateLimit(req, PUBLIC_CONCIERGE_LIMIT);
+  if (limited) return limited;
+
   try {
     const body = await req.json();
     const messages: ChatMessage[] = body.messages || [];

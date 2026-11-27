@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
-import { withValidation } from '@/lib/apiHandler';
+import { withValidation, type ApiHandlerContext } from '@/lib/apiHandler';
 import { leadSchema, sanitizeText, isValidPhone } from '@/lib/validation';
 import { leadsRepository } from '@/lib/services/DatabaseService';
 import { BookingRequest } from '@/types';
 import { notifyNewLead, sendLeadMagnetEmail } from '@/lib/email';
 import { syncLeadToHubSpot } from '@/lib/hubspot';
+import { enforceRateLimit, PUBLIC_LEAD_LIMIT } from '@/lib/security/rateLimit';
 
-export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
+const handlePost = withValidation(leadSchema, async (_req, _ctx, body) => {
   // 🛡️ Honeypot Trap Detection (Python Bot / Automated Form Spammer Neutralizer)
   if (body._hp_trap || body.website_url) {
     console.warn('[SECURITY] Bot / Python spam script trapped via Honeypot. Request neutralised silently.');
@@ -172,3 +173,9 @@ export const POST = withValidation(leadSchema, async (_req, _ctx, body) => {
     webhookError,
   });
 });
+
+export async function POST(req: Request, ctx: ApiHandlerContext = {}) {
+  const limited = enforceRateLimit(req, PUBLIC_LEAD_LIMIT);
+  if (limited) return limited;
+  return handlePost(req, ctx);
+}

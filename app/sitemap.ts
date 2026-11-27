@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { mockTours } from '@/data/mock';
 import { BLOG_POSTS } from '@/data/blogData';
+import { DESTINATIONS } from '@/data/destinationsData';
 
 const BASE_URL = 'https://www.vermilionroutes.com';
 const LOCALES = ['en', 'es', 'fr', 'de', 'zh', 'it', 'pt', 'ja'];
@@ -12,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
     '',
     '/about',
+    '/destinations',
     '/tours',
     '/blog',
     '/booking',
@@ -65,7 +67,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   }
 
-  // 3. All Blog Articles
+  // 4. Destination index and detail pages
+  for (const destination of DESTINATIONS) {
+    const destinationPath = `/destinations/${destination.slug}`;
+    for (const locale of LOCALES) {
+      sitemapEntries.push({
+        url: `${BASE_URL}/${locale}${destinationPath}`,
+        lastModified: LAST_CATALOG_UPDATE,
+        changeFrequency: 'weekly',
+        priority: 0.85,
+        alternates: getLanguageAlternates(destinationPath),
+      });
+    }
+  }
+
+  // 5. All Blog Articles
   for (const post of BLOG_POSTS) {
     const blogPath = `/blog/${post.slug}`;
     for (const locale of LOCALES) {

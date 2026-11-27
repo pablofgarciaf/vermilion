@@ -36,6 +36,7 @@ vi.mock('@/lib/email', () => ({ notifyNewLead: mockNotifyNewLead }));
 const flushAfterResponse = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 import { POST } from '@/app/api/leads/route';
+import { resetRateLimitBuckets } from '@/lib/security/rateLimit';
 
 // Global fetch mock for n8n webhook tests
 const mockFetch = vi.fn();
@@ -68,6 +69,7 @@ const VALID_LEAD = {
 describe('POST /api/leads', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    resetRateLimitBuckets();
 
     // Default: Firestore resolves with a fake document ID
     mockAddDoc.mockResolvedValue({ id: 'firestore-doc-abc123' });

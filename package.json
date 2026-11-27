@@ -14,7 +14,7 @@
     "build": "next build",
     "start": "next start",
     "clean": "rm -rf .next",
-    "lint": "eslint",
+    "lint": "eslint app components context data hooks i18n lib scripts types utils __tests__ tests",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
