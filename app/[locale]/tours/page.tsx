@@ -467,11 +467,6 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
         <div className="absolute inset-0 flex flex-col justify-center px-4 pt-28 pb-16 sm:px-6 sm:pt-32 lg:px-8">
           <div className="container mx-auto max-w-7xl">
             <div className="text-center max-w-3xl mx-auto space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900/50 backdrop-blur-md border border-white/10 text-emerald-300 text-xs font-bold uppercase tracking-widest shadow-xl">
-                <Compass className="w-3.5 h-3.5" />
-                <span>{t.heroBadge}</span>
-              </div>
-
               <h1 className="font-serif text-5xl sm:text-7xl font-light text-white tracking-tight leading-tight [text-shadow:0_2px_4px_rgba(0,0,0,0.85),0_4px_24px_rgba(0,0,0,0.75),0_0_60px_rgba(0,0,0,0.5)]">
                 {t.heroTitleP1}<span className="font-medium text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">{t.heroTitleP2}</span>
               </h1>

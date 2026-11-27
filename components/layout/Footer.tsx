@@ -21,7 +21,7 @@ const COPY: Record<string, FooterCopy> = {
 };
 
 function FooterColumn({ title, links }: { title: string; links: Array<{ label: string; href: string }> }) {
-  return <div><h2 className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">{title}</h2><ul className="mt-3 space-y-2 text-sm text-zinc-300">{links.map((link) => <li key={`${link.href}-${link.label}`}><a className="transition hover:text-white" href={link.href}>{link.label}</a></li>)}</ul></div>;
+  return <div><h2 className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">{title}</h2><ul className="mt-3 space-y-2 text-sm text-emerald-50/80">{links.map((link) => <li key={`${link.href}-${link.label}`}><a className="transition hover:text-white" href={link.href}>{link.label}</a></li>)}</ul></div>;
 }
 
 export function Footer() {
@@ -36,7 +36,7 @@ export function Footer() {
   const submitNewsletter = (event: React.FormEvent) => { event.preventDefault(); if (email.trim()) saveStoredUserProfile({ email: email.trim() }); };
   const localized = (es: string, en: string) => locale === 'es' ? es : en;
 
-  return <footer id="site-footer" className="border-t border-emerald-900/70 bg-[#041810] text-zinc-100"><div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
+  return <footer id="site-footer" className="border-t border-emerald-950 bg-[#02120c] text-zinc-100"><div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
     <div className="grid gap-10 lg:grid-cols-4">
       <div className="space-y-4"><a href={prefix} className="inline-block" aria-label="Vermilion Routes home"><Image src="/logo_blanco.png" alt="Vermilion Routes" width={210} height={54} className="h-auto w-[190px]" /></a><p className="max-w-xs text-sm leading-6 text-zinc-300 lg:hidden">{localized('Viajes privados y a medida por Ecuador y Galápagos, diseñados por especialistas locales.', 'Private, tailor-made journeys across Ecuador and the Galapagos, designed by local specialists.')}</p><div className="space-y-2 text-sm text-zinc-300"><a className="flex items-center gap-2 hover:text-white" href={`https://wa.me/${EC_WHATSAPP_PHONE.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-4 w-4 text-emerald-400" />WhatsApp Ecuador: {EC_WHATSAPP_PHONE}</a><a className="flex items-center gap-2 hover:text-white" href={`tel:${EC_OFFICE_PHONE.replace(/[^0-9+]/g, '')}`}><Phone className="h-4 w-4 text-emerald-400" />Ecuador: {EC_OFFICE_PHONE}</a><a className="flex items-center gap-2 hover:text-white" href={`tel:${US_CONCIERGE_PHONE.replace(/[^0-9+]/g, '')}`}><Phone className="h-4 w-4 text-emerald-400" />USA: {US_CONCIERGE_PHONE}</a><a className="flex items-center gap-2 hover:text-white" href="mailto:info@vermilionroutes.com"><Mail className="h-4 w-4 text-emerald-400" />info@vermilionroutes.com</a></div></div>
       <FooterColumn title={copy.explore} links={[{ label: 'Galápagos', href: `${prefix}/tours#galapagos` }, { label: localized('Ecuador continental', 'Mainland Ecuador'), href: `${prefix}/tours#continental` }, { label: 'Ecuador + Galápagos', href: `${prefix}/tours#combined` }, { label: 'Full Day', href: `${prefix}/tours#diarios` }, { label: localized('Amazonía', 'Amazon'), href: `${prefix}/tours#continental` }, { label: localized('Andes y volcanes', 'Andes & Volcanoes'), href: `${prefix}/tours#continental` }]} />

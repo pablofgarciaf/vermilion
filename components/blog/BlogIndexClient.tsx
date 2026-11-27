@@ -4,6 +4,7 @@ import React, { useMemo, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
+import { ChevronDown } from 'lucide-react';
 import { BLOG_POSTS } from '@/data/blogData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import type { BlogPost } from '@/data/blogData';
@@ -12,6 +13,7 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
   const t = useTranslations();
   const locale = useLocale();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [mobileCategoriesOpen, setMobileCategoriesOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [subscriptionStatus, setSubscriptionStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -45,6 +47,7 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
 
   const handleCategoryClick = useCallback((category: string | null) => {
     setSelectedCategory(category);
+    setMobileCategoriesOpen(false);
   }, []);
 
   const handleSubscribe = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
@@ -125,30 +128,28 @@ export function BlogIndexClient({ hideHeader }: { hideHeader?: boolean }) {
       {/* Category Filter */}
       <section className="space-y-4">
         <h2 className="text-lg font-semibold text-zinc-700 dark:text-zinc-300">{t('categories') || 'Categories'}</h2>
-        <div className="flex flex-wrap gap-2">
+        <div className="relative md:hidden">
           <button
-            onClick={() => handleCategoryClick(null)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-              selectedCategory === null
-                ? 'bg-emerald-600 text-white shadow-md'
-                : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-zinc-700'
-            }`}
+            type="button"
+            onClick={() => setMobileCategoriesOpen((value) => !value)}
+            aria-expanded={mobileCategoriesOpen}
+            className="flex w-full items-center justify-between rounded-xl border border-emerald-500/25 bg-emerald-950/10 px-4 py-3 text-left text-sm font-semibold text-zinc-900 dark:bg-emerald-950/30 dark:text-emerald-100"
           >
-            {t('all') || 'All'}
+            <span>{selectedCategory ? categories.find((category) => category.key === selectedCategory)?.label : (t('all') || 'All')}</span>
+            <ChevronDown className={`h-4 w-4 text-emerald-600 transition-transform duration-300 ${mobileCategoriesOpen ? 'rotate-180' : ''}`} />
           </button>
-          {categories.map(({ key, label }) => (
-            <button
-              key={key}
-              onClick={() => handleCategoryClick(key)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                selectedCategory === key
-                  ? 'bg-emerald-600 text-white shadow-md'
-                  : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-zinc-700'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
+          <div className={`grid transition-all duration-300 ${mobileCategoriesOpen ? 'mt-2 grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+            <div className="overflow-hidden">
+              <div className="max-h-72 space-y-1 overflow-y-auto rounded-xl border border-emerald-500/20 bg-white/95 p-2 shadow-lg dark:bg-zinc-900/95">
+                <button type="button" onClick={() => handleCategoryClick(null)} className={`w-full rounded-lg px-3 py-2 text-left text-sm font-medium ${selectedCategory === null ? 'bg-emerald-600 text-white' : 'text-zinc-800 hover:bg-emerald-50 dark:text-zinc-200 dark:hover:bg-zinc-800'}`}>{t('all') || 'All'}</button>
+                {categories.map(({ key, label }) => <button type="button" key={key} onClick={() => handleCategoryClick(key)} className={`w-full rounded-lg px-3 py-2 text-left text-sm font-medium ${selectedCategory === key ? 'bg-emerald-600 text-white' : 'text-zinc-800 hover:bg-emerald-50 dark:text-zinc-200 dark:hover:bg-zinc-800'}`}>{label}</button>)}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="hidden flex-wrap gap-2 md:flex">
+          <button onClick={() => handleCategoryClick(null)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selectedCategory === null ? 'bg-emerald-600 text-white shadow-md' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-zinc-700'}`}>{t('all') || 'All'}</button>
+          {categories.map(({ key, label }) => <button key={key} onClick={() => handleCategoryClick(key)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selectedCategory === key ? 'bg-emerald-600 text-white shadow-md' : 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-300 dark:hover:bg-zinc-700'}`}>{label}</button>)}
         </div>
       </section>
 

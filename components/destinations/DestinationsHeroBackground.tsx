@@ -4,7 +4,9 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { HERO_SLIDES_DATA } from '@/components/home/hero/heroData';
 
-const SLIDES = HERO_SLIDES_DATA.map((slide) => slide.desktopImage || slide.image).filter(Boolean);
+const SLIDES = HERO_SLIDES_DATA
+  .map((slide) => ({ desktop: slide.desktopImage || slide.image, mobile: slide.mobileImage || slide.desktopImage || slide.image }))
+  .filter((slide) => Boolean(slide.desktop));
 
 export function DestinationsHeroBackground() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -21,18 +23,14 @@ export function DestinationsHeroBackground() {
     <div className="absolute inset-0 z-0" aria-hidden="true">
       {SLIDES.map((src, index) => (
         <div
-          key={src}
+          key={src.desktop}
           className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === activeIndex ? 'opacity-100' : 'opacity-0'
             }`}
         >
-          <Image
-            src={src}
-            alt=""
-            fill
-            priority={index === 0}
-            sizes="100vw"
-            className="object-cover"
-          />
+          <>
+            <Image src={src.mobile} alt="" fill priority={index === 0} sizes="100vw" className="object-cover md:hidden" />
+            <Image src={src.desktop} alt="" fill priority={index === 0} sizes="100vw" className="hidden object-cover md:block" />
+          </>
         </div>
       ))}
       {/* Keep the gradient legible over the photos */}
