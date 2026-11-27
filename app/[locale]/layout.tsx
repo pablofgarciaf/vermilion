@@ -19,6 +19,7 @@ import { DeviceVisitTracker } from '@/components/analytics/DeviceVisitTracker';
 
 import { allSocialUrls } from '@/data/socialLinks';
 import { PlanTripModal } from '@/components/lead/PlanTripModal';
+import { FloatingPlanButton } from '@/components/ui/FloatingPlanButton';
 import { MobileTabBar } from '@/components/layout/MobileTabBar';
 const inter = Inter({
   subsets: ['latin'],
@@ -68,11 +69,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Vermilion Routes',
       images: [
         {
-          url: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
-          secureUrl: 'https://www.vermilionroutes.com/images/tours/16-9/galapagos-tortuga-gigante-rostro-16-9.webp',
+          url: 'https://www.vermilionroutes.com/og-image.jpg',
+          secureUrl: 'https://www.vermilionroutes.com/og-image.jpg',
           width: 1200,
           height: 630,
-          type: 'image/webp',
+          type: 'image/jpeg',
           alt: 'Giant Tortoises Galapagos Island – Vermilion Routes Bespoke Nature Travel',
         },
       ],
@@ -303,6 +304,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://tagassistant.google.com" />
         <link rel="dns-prefetch" href="https://images.unsplash.com" />
+        <meta property="og:image" content="https://www.vermilionroutes.com/og-image.jpg" />
+        <meta property="og:image:secure_url" content="https://www.vermilionroutes.com/og-image.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:image" content="https://www.vermilionroutes.com/og-image.jpg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
@@ -345,6 +352,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <MobileTabBar />
                 <WhatsAppButton />
                 <PlanTripModal />
+                <FloatingPlanButton />
                 <ConciergeWidgetLazy />
                 <WhatsAppClickTracker />
                 <DeviceVisitTracker />
