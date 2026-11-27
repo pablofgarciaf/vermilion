@@ -11,6 +11,7 @@ import { useActivePromotion } from '@/hooks/useActivePromotion';
 import { isPromoEligible, promoPrice } from '@/lib/promotions';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { TRIPADVISOR_RATING, TRIPADVISOR_REVIEW_COUNT } from '@/data/bookingTerms';
+import { trackEngagement } from '@/lib/analytics/trackLead';
 
 // Próxima salida sugerida: primer día del mes siguiente en el idioma del visitante.
 // No inventa una fecha concreta que después el cliente no encuentre en calendario;
@@ -101,19 +102,20 @@ export function TourCard({ tour, className = '', priority = false }: TourCardPro
   return (
     <Link
       href={`/${locale}/tours/${tour.id}`}
+      onClick={() => trackEngagement('tour_card_click', 'tour_card', tour.id)}
       aria-label={title}
       className={`group relative block w-full h-full min-h-[460px] md:min-h-[500px] bg-zinc-950 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1.5 border border-zinc-200/60 dark:border-zinc-800/80 select-none ${className}`}
       suppressHydrationWarning
     >
       {/* 🖼️ FOTO PRINCIPAL DE FONDO (Optimizada a tamaño de tarjeta, súper liviana) */}
       <Image
-        src={tour.mobileImage || tour.imageUrl || tour.desktopImage || '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp'}
+        src={tour.desktopImage || tour.imageUrl || tour.mobileImage || '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp'}
         alt={title || 'Tour Expedition'}
         fill
         priority={priority}
         quality={100}
         sizes="(max-width: 640px) 340px, (max-width: 1024px) 360px, 340px"
-        className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+        className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
         referrerPolicy="no-referrer"
       />
 

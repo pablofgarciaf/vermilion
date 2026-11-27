@@ -43,15 +43,17 @@ export default function DestinationsHeroSection({ items, locale, labels, title, 
           <p className="text-lg sm:text-xl text-zinc-200 max-w-3xl mb-8 sm:mb-10">{subtitle}</p>
 
           {/* Filtros + buscador dentro del hero */}
-          <DestinationsFilterBar
-            region={region}
-            setRegion={setRegion}
-            query={query}
-            setQuery={setQuery}
-            chips={chips}
-            labels={labels}
-            onDark
-          />
+          <div className="translate-y-6 sm:translate-y-8">
+            <DestinationsFilterBar
+              region={region}
+              setRegion={setRegion}
+              query={query}
+              setQuery={setQuery}
+              chips={chips}
+              labels={labels}
+              onDark
+            />
+          </div>
         </div>
         {/* Curva de transición estilo revista premium: disuelve el borde inferior
             de la imagen hacia el fondo claro de la sección de resultados */}

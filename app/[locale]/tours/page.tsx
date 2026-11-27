@@ -546,12 +546,12 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-72 w-full overflow-hidden block">
                     <Image quality={90}
-                      src={tour.mobileImage || tour.imageUrl || '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp'}
+                      src={tour.desktopImage || tour.imageUrl || tour.mobileImage || '/images/tours/9-16/galapagos-tortuga-gigante-9-16.webp'}
                       alt={title}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       loading="lazy"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 md:hidden"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-700 md:hidden"
                     />
                     <Image quality={90}
                       src={tour.desktopImage || tour.imageUrl || '/images/tours/16-9/galapagos-tortuga-gigante-16-9.2.webp'}
@@ -645,12 +645,12 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-56 w-full overflow-hidden block">
                     <Image quality={90}
-                      src={tour.mobileImage || tour.imageUrl || '/images/tours/9-16/cotopaxi-9-16.webp'}
+                      src={tour.desktopImage || tour.imageUrl || tour.mobileImage || '/images/tours/9-16/cotopaxi-9-16.webp'}
                       alt={title}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       loading="lazy"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 md:hidden"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-700 md:hidden"
                     />
                     <Image quality={90}
                       src={tour.desktopImage || tour.imageUrl || '/images/tours/16-9/cotopaxi-volcano-16-9.webp'}
@@ -736,12 +736,12 @@ export default async function ToursPage({ params }: { params: Promise<{ locale: 
                 >
                   <Link href={`/${locale}/tours/${tour.id}`} className="relative h-72 w-full overflow-hidden block">
                     <Image quality={100}
-                      src={tour.mobileImage || tour.imageUrl || '/images/tours/9-16/galapagos-las-grietas-9-16.webp'}
+                      src={tour.desktopImage || tour.imageUrl || tour.mobileImage || '/images/tours/9-16/galapagos-las-grietas-9-16.webp'}
                       alt={title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       loading="lazy"
-                      className="object-cover group-hover:scale-105 transition-transform duration-700 md:hidden"
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-700 md:hidden"
                     />
                     <Image quality={100}
                       src={tour.desktopImage || tour.imageUrl || '/images/tours/16-9/galapagos-las-grietas-16-9.webp'}

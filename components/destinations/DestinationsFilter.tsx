@@ -104,7 +104,7 @@ export function DestinationsFilterBar({ region, setRegion, query, setQuery, chip
     <div
       className={`flex flex-col md:flex-row md:items-center md:justify-between gap-4 rounded-2xl ${
         onDark
-          ? 'bg-emerald-950/80 backdrop-blur-xl border border-emerald-200/20 shadow-2xl p-4 sm:p-5'
+          ? 'bg-transparent md:bg-zinc-950/70 md:backdrop-blur-xl border-transparent md:border-white/20 shadow-none md:shadow-2xl p-0 md:p-4 lg:p-5'
           : ''
       }`}
     >
@@ -119,9 +119,9 @@ export function DestinationsFilterBar({ region, setRegion, query, setQuery, chip
               onClick={() => setRegion(r)}
               className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider border transition-colors ${
                 active
-                  ? 'bg-emerald-600 border-emerald-500 text-white shadow-lg shadow-emerald-950/40'
+                  ? 'bg-emerald-600/85 border-emerald-300/70 text-white shadow-lg shadow-emerald-950/40 backdrop-blur-md'
                   : onDark
-                  ? 'bg-emerald-900/45 border-emerald-100/30 text-emerald-50 hover:border-emerald-300 hover:bg-emerald-800/65'
+                  ? 'bg-white/10 border-white/30 text-white backdrop-blur-md hover:border-emerald-300 hover:bg-white/20'
                   : 'bg-white dark:bg-zinc-900 border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:border-emerald-500 hover:text-emerald-700 dark:hover:text-emerald-300'
               }`}
             >
@@ -141,7 +141,7 @@ export function DestinationsFilterBar({ region, setRegion, query, setQuery, chip
           placeholder={labels.search}
           className={`pl-10 pr-4 py-2.5 rounded-full text-sm w-full md:w-72 focus:outline-none transition-colors ${
             onDark
-              ? 'bg-emerald-900/45 border border-emerald-100/30 text-white placeholder-emerald-100/65 focus:border-emerald-300 focus:bg-emerald-800/65'
+              ? 'bg-white/10 border border-white/30 text-white placeholder-white/65 backdrop-blur-md focus:border-emerald-300 focus:bg-white/20'
               : 'bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 text-zinc-900 dark:text-white placeholder-zinc-400 focus:border-emerald-500'
           }`}
           aria-label={labels.search}
