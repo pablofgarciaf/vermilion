@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Mountain, TreePine, Waves } from 'lucide-react';
 
-import { DESTINATIONS, DESTINATION_UI } from '@/data/destinationsData';
+import { DESTINATIONS } from '@/data/destinationsData';
 import { getLocalizedText } from '@/utils/i18nHelper';
 import { getSeoAlternates, buildOpenGraph, fitMetaDescription, withBrandTail, SUPPORTED_SEO_LOCALES, BASE_CANONICAL_URL } from '@/utils/seoHelper';
 import DestinationsHeroSection from '@/components/destinations/DestinationsHeroSection';
@@ -17,37 +17,48 @@ export async function generateStaticParams() {
 
 const HEADINGS: Record<string, { title: string; subtitle: string }> = {
   es: {
-    title: 'Nuestros Destinos',
-    subtitle: 'Catorce lugares donde nuestra casa tiene ruta propia. Filtra por región o busca el que ya te llama.',
+    title: 'Ecuador y Galápagos: cuatro mundos por descubrir',
+    subtitle: 'Explora Galápagos, los Andes, la Amazonía y la costa del Pacífico con rutas privadas diseñadas a tu ritmo.',
   },
   en: {
-    title: 'Our Destinations',
-    subtitle: 'Fourteen places our house has its own route to. Filter by region or search for the one calling you.',
+    title: 'Ecuador and Galapagos: four worlds to discover',
+    subtitle: 'Explore the Galapagos, Andes, Amazon and Pacific coast through private routes designed around your pace.',
   },
   fr: {
-    title: 'Nos Destinations',
-    subtitle: 'Quatorze lieux où notre maison a sa propre route. Filtrez par région ou cherchez celui qui vous appelle.',
+    title: 'Équateur et Galápagos : quatre mondes à découvrir',
+    subtitle: 'Explorez les Galápagos, les Andes, l’Amazonie et la côte Pacifique avec des itinéraires privés à votre rythme.',
   },
   de: {
-    title: 'Unsere Reiseziele',
-    subtitle: 'Vierzehn Orte, zu denen unser Haus einen eigenen Weg hat. Filtern Sie nach Region oder suchen Sie das Ziel, das Sie ruft.',
+    title: 'Ecuador und Galápagos: vier Welten entdecken',
+    subtitle: 'Entdecken Sie Galápagos, Anden, Amazonas und Pazifikküste auf privaten Routen in Ihrem eigenen Tempo.',
   },
   it: {
-    title: 'Le Nostre Destinazioni',
-    subtitle: 'Quattordici luoghi dove la nostra casa ha una rotta propria. Filtra per regione o cerca quella che ti chiama.',
+    title: 'Ecuador e Galápagos: quattro mondi da scoprire',
+    subtitle: 'Esplora Galápagos, Ande, Amazzonia e costa del Pacifico con itinerari privati al tuo ritmo.',
   },
   pt: {
-    title: 'Nossos Destinos',
-    subtitle: 'Quatorze lugares onde nossa casa tem rota própria. Filtre por região ou busque aquele que já chama você.',
+    title: 'Equador e Galápagos: quatro mundos para descobrir',
+    subtitle: 'Explore Galápagos, Andes, Amazônia e costa do Pacífico em rotas privadas no seu ritmo.',
   },
   ja: {
-    title: '目的地一覧',
-    subtitle: '当社ならではのルートを持つ14の目的地。地域で絞り込むか、心惹かれる場所を検索してください。',
+    title: 'エクアドルとガラパゴス、四つの世界を発見',
+    subtitle: 'ガラパゴス、アンデス、アマゾン、太平洋岸を自分のペースで巡るプライベートルート。',
   },
   zh: {
-    title: '我们的目的地',
-    subtitle: '十四个我们拥有专属线路的目的地。按地区筛选，或搜索您心之所向的那一站。',
+    title: '厄瓜多尔与加拉帕戈斯：探索四个世界',
+    subtitle: '以适合自己的节奏，探索加拉帕戈斯、安第斯、亚马逊与太平洋海岸的私人路线。',
   },
+};
+
+const EYEBROWS: Record<string, string> = {
+  es: 'Elige tu próxima ruta',
+  en: 'Choose your next route',
+  fr: 'Choisissez votre prochaine route',
+  de: 'Wählen Sie Ihre nächste Route',
+  it: 'Scegli il tuo prossimo itinerario',
+  pt: 'Escolha sua próxima rota',
+  ja: '次の旅先を選ぶ',
+  zh: '选择你的下一条路线',
 };
 
 /** Frase complementaria para que la meta description alcance el rango 120-155 caracteres. */
@@ -125,7 +136,7 @@ export default async function DestinationsIndexPage({
       labels={labels}
       title={h.title}
       subtitle={h.subtitle}
-      eyebrow={getLocalizedText(DESTINATION_UI.allDestinations as any, locale)}
+      eyebrow={EYEBROWS[locale] || EYEBROWS.en}
     />
   );
 }

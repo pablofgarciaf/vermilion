@@ -23,7 +23,7 @@ interface Props {
 /**
  * Hero de la página /destinations: imagen de fondo a pantalla completa (detrás
  * del navbar transparente), título, y ahora también los filtros + buscador
- * flotando sobre la imagen en una tarjeta de vidrio (glass). La grilla de
+ * flotando sobre la imagen sin contenedor opaco. La grilla de
  * resultados se renderiza debajo, ya fuera del hero.
  */
 export default function DestinationsHeroSection({ items, locale, labels, title, subtitle, eyebrow }: Props) {
@@ -34,16 +34,17 @@ export default function DestinationsHeroSection({ items, locale, labels, title, 
       {/* PORTADA */}
       <section className="relative w-full h-[100svh] min-h-[580px] sm:min-h-[620px] md:h-[72vh] md:min-h-[650px] overflow-hidden text-white">
         <DestinationsHeroBackground />
-        <div className="absolute inset-0 flex flex-col justify-center max-w-5xl mx-auto px-6 z-10">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300 mb-4">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-5 sm:px-6">
+          <div className="w-full max-w-6xl text-center">
+          <span className="mx-auto mb-4 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-emerald-300">
             <MapPin className="w-3.5 h-3.5" />
             {eyebrow}
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4">{title}</h1>
-          <p className="text-lg sm:text-xl text-zinc-200 max-w-3xl mb-8 sm:mb-10">{subtitle}</p>
+          <h1 className="mb-4 font-serif text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">{title}</h1>
+          <p className="mx-auto mb-8 max-w-3xl text-lg text-zinc-200 sm:mb-10 sm:text-xl">{subtitle}</p>
 
           {/* Filtros + buscador dentro del hero */}
-          <div className="translate-y-6 sm:translate-y-8">
+          <div className="mx-auto w-full max-w-5xl translate-y-4 sm:translate-y-6">
             <DestinationsFilterBar
               region={region}
               setRegion={setRegion}
@@ -53,6 +54,7 @@ export default function DestinationsHeroSection({ items, locale, labels, title, 
               labels={labels}
               onDark
             />
+          </div>
           </div>
         </div>
         {/* Curva de transición estilo revista premium: disuelve el borde inferior
