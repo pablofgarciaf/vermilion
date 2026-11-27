@@ -28,6 +28,7 @@ interface Props {
  */
 export default function DestinationsHeroSection({ items, locale, labels, title, subtitle, eyebrow }: Props) {
   const { region, setRegion, query, setQuery, filtered, chips } = useDestinationsFilter(items);
+  const titleParts = title.split(': ');
 
   return (
     <>
@@ -40,7 +41,16 @@ export default function DestinationsHeroSection({ items, locale, labels, title, 
             <MapPin className="w-3.5 h-3.5" />
             {eyebrow}
           </span>
-          <h1 className="mb-4 font-serif text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">{title}</h1>
+          <h1 className="mb-4 font-serif text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+            {titleParts.length > 1 ? (
+              <>
+                <span className="block">{titleParts[0]}:</span>
+                <span className="block text-emerald-300">{titleParts.slice(1).join(': ')}</span>
+              </>
+            ) : (
+              title
+            )}
+          </h1>
           <p className="mx-auto mb-8 max-w-3xl text-lg text-zinc-200 sm:mb-10 sm:text-xl">{subtitle}</p>
 
           {/* Filtros + buscador dentro del hero */}
