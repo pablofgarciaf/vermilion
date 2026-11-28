@@ -200,13 +200,13 @@ export function ContactSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 flex-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
             {/* Ecuador Operations & WhatsApp 24/7 */}
             <a
               href={`https://wa.me/${EC_WHATSAPP_PHONE.replace(/[^0-9]/g, '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-h-[78px] flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
+              className="min-h-[92px] flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
             >
               <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
                 <Phone className="w-5 h-5" />
@@ -223,7 +223,7 @@ export function ContactSection() {
             <a
               href={`tel:${US_CONCIERGE_PHONE.replace(/[^0-9+]/g, '')}`}
               onClick={() => trackEngagement('phone_click', 'home_contact', 'us_concierge')}
-              className="min-h-[78px] flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-amber-500/50 hover:shadow-md transition-all group"
+              className="min-h-[92px] flex items-center gap-3 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-amber-500/50 hover:shadow-md transition-all group"
             >
               <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/50 flex items-center justify-center text-amber-600 dark:text-amber-400 group-hover:scale-110 transition-transform shrink-0">
                 <Phone className="w-5 h-5" />
@@ -240,23 +240,21 @@ export function ContactSection() {
             <a
               href="mailto:info@vermilionroutes.com"
               onClick={() => trackEngagement('email_click', 'home_contact', 'info_email')}
-              className="min-h-[78px] flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
+              className="min-h-[92px] grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-1 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm hover:border-emerald-500/50 hover:shadow-md transition-all group"
             >
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
+              <div className="row-span-1 w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 flex items-center justify-center text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform shrink-0">
                 <Mail className="w-5 h-5" />
               </div>
-              <div>
-                <span className="text-xs text-zinc-400 font-medium block">{t('emailAddress')}</span>
-                <span className="font-semibold text-zinc-900 dark:text-white text-sm group-hover:text-emerald-600 transition-colors">
-                  <span>info</span>
-                  <span className="text-emerald-600 font-bold">&#64;</span>
-                  <span>vermilionroutes.com</span>
-                </span>
-              </div>
+              <span className="min-w-0 text-xs text-zinc-400 font-medium block">{t('emailAddress')}</span>
+              <span className="col-span-2 min-w-0 font-semibold text-zinc-900 dark:text-white text-[13px] sm:text-sm whitespace-nowrap group-hover:text-emerald-600 transition-colors">
+                <span>info</span>
+                <span className="text-emerald-600 font-bold">&#64;</span>
+                <span>vermilionroutes.com</span>
+              </span>
             </a>
 
             {/* Sede Ecuador (HQ) */}
-            <div className="min-h-[78px] flex items-start gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+            <div className="sm:col-span-2 sm:order-5 min-h-[92px] flex items-start gap-3 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
               <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
                 <MapPin className="w-5 h-5" />
               </div>
@@ -269,7 +267,7 @@ export function ContactSection() {
             </div>
 
             {/* Sede España (Coral Tour) */}
-            <div className="min-h-[78px] flex items-start gap-3 p-3 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
+            <div className="sm:order-4 min-h-[92px] flex items-start gap-3 p-4 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm">
               <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 shrink-0 mt-0.5">
                 <MapPin className="w-5 h-5" />
               </div>
