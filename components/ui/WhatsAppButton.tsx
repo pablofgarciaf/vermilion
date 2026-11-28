@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useChatPanelOpen } from '@/hooks/useChatPanelOpen';
+import { useFooterVisibility } from '@/hooks/useFooterVisibility';
 
 const PHONE_NUMBER = '593960039156';
 
@@ -21,18 +22,7 @@ export function WhatsAppButton() {
   const t = useTranslations('whatsapp');
   const pathname = usePathname() || '';
   const conciergeOpen = useChatPanelOpen();
-  const [isFooterVisible, setIsFooterVisible] = useState(false);
-
-  useEffect(() => {
-    const footer = document.getElementById('site-footer');
-    if (!footer) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsFooterVisible(entry.isIntersecting),
-      { threshold: 0.05 }
-    );
-    observer.observe(footer);
-    return () => observer.disconnect();
-  }, []);
+  const isFooterVisible = useFooterVisibility();
 
   if (INTERNAL_PATH.test(pathname) || conciergeOpen) return null;
 
